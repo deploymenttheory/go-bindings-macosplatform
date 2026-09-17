@@ -18,11 +18,12 @@ var (
 	// @function MTLCoordinate2DMake @abstract Convenience function to create a 2D coordinate from 2 values.
 	_fnMTLCoordinate2DMake func(float32, float32) MTLSamplePosition
 	// @brief Returns all Metal devices in the system. @discussion On macOS and macCatalyst, this API will not cause the system to switch devices and leaves the decision about which GPU to use up to the application based on whatever criteria it deems appropriate. On iOS, tvOS and visionOS, this API returns an array containing the same device that MTLCreateSystemDefaultDevice would have returned, or an empty array if it would have failed.
-	_fnMTLCopyAllDevices func() unsafe.Pointer
+	_fnMTLCopyAllDevices func() objc.ID
 	// @brief Returns an NSArray of the current set of available Metal devices and installs a notification handler to be notified of any further changes (additions, removals, etc.).  The observer return value is retained by Metal and may be passed to MTLRemoveDeviceObserver() if the application no longer wishes to receive notifications. @note The observer out parameter is returned with a +1 retain count in addition to the retain mentioned above.
-	_fnMTLCopyAllDevicesWithObserver func(foundation.NSObjectProtocol, objc.Block) unsafe.Pointer
+	// Deprecated: Device notifications are not applicable on Apple Silicon
+	_fnMTLCopyAllDevicesWithObserver func(*objc.ID, objc.Block) objc.ID
 	// @brief Returns a reference to the preferred system default Metal device. @discussion On Mac OS X systems that support automatic graphics switching, calling this API to get a Metal device will cause the system to switch to the high power GPU.  On other systems that support more than one GPU it will return the GPU that is associated with the main display.
-	_fnMTLCreateSystemDefaultDevice               func() unsafe.Pointer
+	_fnMTLCreateSystemDefaultDevice               func() objc.ID
 	_fnMTLIOCompressionContextAppendData          func(unsafe.Pointer, unsafe.Pointer, uint)
 	_fnMTLIOCompressionContextDefaultChunkSize    func() uint
 	_fnMTLIOCreateCompressionContext              func(string, MTLIOCompressionMethod, uint) unsafe.Pointer
@@ -35,7 +36,8 @@ var (
 	_fnMTLRegionMake2D                            func(uint, uint, uint, uint) MTLRegion
 	_fnMTLRegionMake3D                            func(uint, uint, uint, uint, uint, uint) MTLRegion
 	// @brief Removes a previously installed observer for device change notifications.
-	_fnMTLRemoveDeviceObserver       func(foundation.NSObjectProtocol)
+	// Deprecated: Device notifications are not applicable on Apple Silicon
+	_fnMTLRemoveDeviceObserver       func(objc.ID)
 	_fnMTLSamplePositionMake         func(float32, float32) MTLSamplePosition
 	_fnMTLSizeMake                   func(uint, uint, uint) MTLSize
 	_fnMTLTextureSwizzleChannelsMake func(MTLTextureSwizzle, MTLTextureSwizzle, MTLTextureSwizzle, MTLTextureSwizzle) MTLTextureSwizzleChannels
@@ -56,12 +58,17 @@ func MTLCoordinate2DMake(x float32, y float32) MTLSamplePosition {
 }
 
 // @brief Returns all Metal devices in the system. @discussion On macOS and macCatalyst, this API will not cause the system to switch devices and leaves the decision about which GPU to use up to the application based on whatever criteria it deems appropriate. On iOS, tvOS and visionOS, this API returns an array containing the same device that MTLCreateSystemDefaultDevice would have returned, or an empty array if it would have failed.
-func MTLCopyAllDevices() unsafe.Pointer {
-	return _fnMTLCopyAllDevices()
+func MTLCopyAllDevices() *foundation.NSArray[MTLDevice] {
+	_ret := _fnMTLCopyAllDevices()
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[MTLDevice](_ret)
 }
 
 // @brief Returns an NSArray of the current set of available Metal devices and installs a notification handler to be notified of any further changes (additions, removals, etc.).  The observer return value is retained by Metal and may be passed to MTLRemoveDeviceObserver() if the application no longer wishes to receive notifications. @note The observer out parameter is returned with a +1 retain count in addition to the retain mentioned above.
-func MTLCopyAllDevicesWithObserver(observer foundation.NSObjectProtocol, handler func(objc.ID, *foundation.NSString)) unsafe.Pointer {
+// Deprecated: Device notifications are not applicable on Apple Silicon
+func MTLCopyAllDevicesWithObserver(observer *objc.ID, handler func(objc.ID, *foundation.NSString)) *foundation.NSArray[MTLDevice] {
 	var __block_handler objc.Block
 	if handler != nil {
 		__block_handler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 objc.ID) {
@@ -72,11 +79,15 @@ func MTLCopyAllDevicesWithObserver(observer foundation.NSObjectProtocol, handler
 		})
 		defer __block_handler.Release()
 	}
-	return _fnMTLCopyAllDevicesWithObserver(observer, __block_handler)
+	_ret := _fnMTLCopyAllDevicesWithObserver(observer, __block_handler)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[MTLDevice](_ret)
 }
 
 // @brief Returns a reference to the preferred system default Metal device. @discussion On Mac OS X systems that support automatic graphics switching, calling this API to get a Metal device will cause the system to switch to the high power GPU.  On other systems that support more than one GPU it will return the GPU that is associated with the main display.
-func MTLCreateSystemDefaultDevice() unsafe.Pointer {
+func MTLCreateSystemDefaultDevice() objc.ID {
 	return _fnMTLCreateSystemDefaultDevice()
 }
 
@@ -125,7 +136,8 @@ func MTLRegionMake3D(x uint, y uint, z uint, width uint, height uint, depth uint
 }
 
 // @brief Removes a previously installed observer for device change notifications.
-func MTLRemoveDeviceObserver(observer foundation.NSObjectProtocol) {
+// Deprecated: Device notifications are not applicable on Apple Silicon
+func MTLRemoveDeviceObserver(observer objc.ID) {
 	_fnMTLRemoveDeviceObserver(observer)
 }
 

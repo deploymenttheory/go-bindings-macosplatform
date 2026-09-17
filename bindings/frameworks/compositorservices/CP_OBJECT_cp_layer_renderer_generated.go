@@ -15,8 +15,6 @@ import (
 )
 
 // _cp_layer_renderer is an idiomatic wrapper over the Objective-C class CP_OBJECT_cp_layer_renderer.
-//
-// A type that provides the Metal types and timing information you need to draw your content.
 type _cp_layer_renderer struct {
 	objref.Handle
 }

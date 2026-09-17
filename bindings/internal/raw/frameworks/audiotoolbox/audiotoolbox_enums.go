@@ -285,19 +285,20 @@ func (e AURenderEventType) String() string {
 type AUReverbRoomType uint32
 
 const (
-	KReverbRoomType_SmallRoom     AUReverbRoomType = 0
-	KReverbRoomType_MediumRoom    AUReverbRoomType = 1
-	KReverbRoomType_LargeRoom     AUReverbRoomType = 2
-	KReverbRoomType_MediumHall    AUReverbRoomType = 3
-	KReverbRoomType_LargeHall     AUReverbRoomType = 4
-	KReverbRoomType_Plate         AUReverbRoomType = 5
-	KReverbRoomType_MediumChamber AUReverbRoomType = 6
-	KReverbRoomType_LargeChamber  AUReverbRoomType = 7
-	KReverbRoomType_Cathedral     AUReverbRoomType = 8
-	KReverbRoomType_LargeRoom2    AUReverbRoomType = 9
-	KReverbRoomType_MediumHall2   AUReverbRoomType = 10
-	KReverbRoomType_MediumHall3   AUReverbRoomType = 11
-	KReverbRoomType_LargeHall2    AUReverbRoomType = 12
+	KReverbRoomType_SmallRoom      AUReverbRoomType = 0
+	KReverbRoomType_MediumRoom     AUReverbRoomType = 1
+	KReverbRoomType_LargeRoom      AUReverbRoomType = 2
+	KReverbRoomType_MediumHall     AUReverbRoomType = 3
+	KReverbRoomType_LargeHall      AUReverbRoomType = 4
+	KReverbRoomType_Plate          AUReverbRoomType = 5
+	KReverbRoomType_MediumChamber  AUReverbRoomType = 6
+	KReverbRoomType_LargeChamber   AUReverbRoomType = 7
+	KReverbRoomType_Cathedral      AUReverbRoomType = 8
+	KReverbRoomType_LargeRoom2     AUReverbRoomType = 9
+	KReverbRoomType_MediumHall2    AUReverbRoomType = 10
+	KReverbRoomType_MediumHall3    AUReverbRoomType = 11
+	KReverbRoomType_LargeHall2     AUReverbRoomType = 12
+	KReverbRoomType_OutdoorGeneral AUReverbRoomType = 24
 )
 
 func (e AUReverbRoomType) String() string {
@@ -328,6 +329,8 @@ func (e AUReverbRoomType) String() string {
 		return "KReverbRoomType_MediumHall3"
 	case KReverbRoomType_LargeHall2:
 		return "KReverbRoomType_LargeHall2"
+	case KReverbRoomType_OutdoorGeneral:
+		return "KReverbRoomType_OutdoorGeneral"
 	default:
 		return fmt.Sprintf("AUReverbRoomType(%d)", int64(e))
 	}
@@ -2342,27 +2345,53 @@ func (e Qos_class_t) String() string {
 	}
 }
 
+type Task_shared_region_stubs_t uint8
+
+const (
+	TASK_SHARED_REGION_STUBS_DEV  Task_shared_region_stubs_t = 1
+	TASK_SHARED_REGION_STUBS_PROD Task_shared_region_stubs_t = 2
+)
+
+func (e Task_shared_region_stubs_t) String() string {
+	switch e {
+	case TASK_SHARED_REGION_STUBS_DEV:
+		return "TASK_SHARED_REGION_STUBS_DEV"
+	case TASK_SHARED_REGION_STUBS_PROD:
+		return "TASK_SHARED_REGION_STUBS_PROD"
+	default:
+		return fmt.Sprintf("Task_shared_region_stubs_t(%d)", int64(e))
+	}
+}
+
 type Virtual_memory_guard_exception_code_t uint32
 
 const (
-	KGUARD_EXC_DEALLOC_GAP                   Virtual_memory_guard_exception_code_t = 1
-	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        Virtual_memory_guard_exception_code_t = 2
-	KGUARD_EXC_RECLAIM_INDEX_FAILURE         Virtual_memory_guard_exception_code_t = 4
-	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    Virtual_memory_guard_exception_code_t = 8
-	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    Virtual_memory_guard_exception_code_t = 9
-	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         Virtual_memory_guard_exception_code_t = 10
-	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         Virtual_memory_guard_exception_code_t = 11
-	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  Virtual_memory_guard_exception_code_t = 12
-	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    Virtual_memory_guard_exception_code_t = 13
-	KGUARD_EXC_SEC_ACCESS_FAULT              Virtual_memory_guard_exception_code_t = 98
-	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        Virtual_memory_guard_exception_code_t = 99
-	KGUARD_EXC_SEC_COPY_DENIED               Virtual_memory_guard_exception_code_t = 100
-	KGUARD_EXC_SEC_SHARING_DENIED            Virtual_memory_guard_exception_code_t = 101
-	KGUARD_EXC_MTE_SYNC_FAULT                Virtual_memory_guard_exception_code_t = 200
-	KGUARD_EXC_MTE_ASYNC_USER_FAULT          Virtual_memory_guard_exception_code_t = 201
-	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          Virtual_memory_guard_exception_code_t = 202
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 203
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 204
+	KGUARD_EXC_DEALLOC_GAP                  Virtual_memory_guard_exception_code_t = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE       Virtual_memory_guard_exception_code_t = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE        Virtual_memory_guard_exception_code_t = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE   Virtual_memory_guard_exception_code_t = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE   Virtual_memory_guard_exception_code_t = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE        Virtual_memory_guard_exception_code_t = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE        Virtual_memory_guard_exception_code_t = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION Virtual_memory_guard_exception_code_t = 12
+	// Guard exception sent to a thread when a CoW defeatured map attempts to copy memory which is not permitted by system policy.
+	KGUARD_EXC_COW_DEFEATURED_COPY_DENIED Virtual_memory_guard_exception_code_t = 13
+	// Guard exception sent to a thread when it attempts to extract a given type of memory in a way which is not permitted for CoW defeatured maps.
+	KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED Virtual_memory_guard_exception_code_t = 14
+	// Guard exception sent to a thread when it attempts to copy-map a memory entry which was created for sharing by a CoW defeatured map.
+	KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED Virtual_memory_guard_exception_code_t = 15
+	KGUARD_EXC_COW_DEFEATURED_FIRST                    Virtual_memory_guard_exception_code_t = 13
+	KGUARD_EXC_COW_DEFEATURED_LAST                     Virtual_memory_guard_exception_code_t = 15
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY              Virtual_memory_guard_exception_code_t = 16
+	KGUARD_EXC_SEC_ACCESS_FAULT                        Virtual_memory_guard_exception_code_t = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT                  Virtual_memory_guard_exception_code_t = 99
+	KGUARD_EXC_SEC_COPY_DENIED                         Virtual_memory_guard_exception_code_t = 100
+	KGUARD_EXC_SEC_SHARING_DENIED                      Virtual_memory_guard_exception_code_t = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                          Virtual_memory_guard_exception_code_t = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT                    Virtual_memory_guard_exception_code_t = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT                    Virtual_memory_guard_exception_code_t = 202
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT           Virtual_memory_guard_exception_code_t = 203
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT           Virtual_memory_guard_exception_code_t = 204
 )
 
 func (e Virtual_memory_guard_exception_code_t) String() string {
@@ -2383,6 +2412,12 @@ func (e Virtual_memory_guard_exception_code_t) String() string {
 		return "KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE"
 	case KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION:
 		return "KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION"
+	case KGUARD_EXC_COW_DEFEATURED_COPY_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_COPY_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED"
 	case KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY:
 		return "KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY"
 	case KGUARD_EXC_SEC_ACCESS_FAULT:
@@ -3802,17 +3837,18 @@ const (
 )
 
 const (
-	KAudioUnitType_Effect            = 1635083896
-	KAudioUnitType_FormatConverter   = 1635083875
-	KAudioUnitType_Generator         = 1635084142
-	KAudioUnitType_MIDIProcessor     = 1635085673
-	KAudioUnitType_Mixer             = 1635085688
-	KAudioUnitType_MusicDevice       = 1635085685
-	KAudioUnitType_MusicEffect       = 1635085670
-	KAudioUnitType_OfflineEffect     = 1635086188
-	KAudioUnitType_Output            = 1635086197
-	KAudioUnitType_Panner            = 1635086446
-	KAudioUnitType_SpeechSynthesizer = 1635087216
+	KAudioUnitType_Effect                       = 1635083896
+	KAudioUnitType_FormatConverter              = 1635083875
+	KAudioUnitType_Generator                    = 1635084142
+	KAudioUnitType_HeadTrackingBinauralRenderer = 1635084404
+	KAudioUnitType_MIDIProcessor                = 1635085673
+	KAudioUnitType_Mixer                        = 1635085688
+	KAudioUnitType_MusicDevice                  = 1635085685
+	KAudioUnitType_MusicEffect                  = 1635085670
+	KAudioUnitType_OfflineEffect                = 1635086188
+	KAudioUnitType_Output                       = 1635086197
+	KAudioUnitType_Panner                       = 1635086446
+	KAudioUnitType_SpeechSynthesizer            = 1635087216
 )
 
 const (
@@ -4272,6 +4308,7 @@ const (
 	KReverb2Param_DecayTimeAtNyquist   = 5
 	KReverb2Param_DryWetMix            = 0
 	KReverb2Param_Gain                 = 1
+	KReverb2Param_LegacyMode           = 7
 	KReverb2Param_MaxDelayTime         = 3
 	KReverb2Param_MinDelayTime         = 2
 	KReverb2Param_RandomizeReflections = 6

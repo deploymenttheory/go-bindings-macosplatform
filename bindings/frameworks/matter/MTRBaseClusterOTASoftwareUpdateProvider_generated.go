@@ -59,7 +59,7 @@ func NewMTRBaseClusterOTASoftwareUpdateProviderWithDeviceEndpointIDQueue(device 
 	return mTRBaseClusterOTASoftwareUpdateProviderAdopt(_id)
 }
 
-// QueryImageWithParamsCompletion command QueryImage Determine availability of a new Software Image
+// QueryImageWithParamsCompletion command QueryImage Upon receipt, this command SHALL trigger an attempt to find an updated Software Image by the OTA Provider to match the OTA Requestor's constraints provided in the payload fields.
 //
 // QueryImageWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcosup *MTRBaseClusterOTASoftwareUpdateProvider) QueryImageWithParamsCompletion(ctx context.Context, params *MTROTASoftwareUpdateProviderClusterQueryImageParams) (result *MTROTASoftwareUpdateProviderClusterQueryImageResponseParams, err error) {
@@ -86,7 +86,7 @@ func (mbcosup *MTRBaseClusterOTASoftwareUpdateProvider) QueryImageWithParamsComp
 	}
 }
 
-// ApplyUpdateRequestWithParamsCompletion command ApplyUpdateRequest Determine next action to take for a downloaded Software Image
+// ApplyUpdateRequestWithParamsCompletion command ApplyUpdateRequest This command requests the specified version be installed on the device.
 //
 // ApplyUpdateRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcosup *MTRBaseClusterOTASoftwareUpdateProvider) ApplyUpdateRequestWithParamsCompletion(ctx context.Context, params *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams) (result *MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams, err error) {
@@ -113,7 +113,7 @@ func (mbcosup *MTRBaseClusterOTASoftwareUpdateProvider) ApplyUpdateRequestWithPa
 	}
 }
 
-// NotifyUpdateAppliedWithParamsCompletion command NotifyUpdateApplied Notify OTA Provider that an update was applied
+// NotifyUpdateAppliedWithParamsCompletion command NotifyUpdateApplied This command tells the Provider that the specified update has been applied.
 func (mbcosup *MTRBaseClusterOTASoftwareUpdateProvider) NotifyUpdateAppliedWithParamsCompletion(params *MTROTASoftwareUpdateProviderClusterNotifyUpdateAppliedParams, completion func(unsafe.Pointer)) {
 	defer runtime.KeepAlive(mbcosup)
 	defer runtime.KeepAlive(params)

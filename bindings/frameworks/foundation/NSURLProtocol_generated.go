@@ -16,8 +16,6 @@ import (
 )
 
 // URLProtocol is an idiomatic wrapper over the Objective-C class NSURLProtocol.
-//
-// An abstract class that handles the loading of protocol-specific URL data.
 type URLProtocol struct {
 	objref.Handle
 }
@@ -92,26 +90,26 @@ func (up *URLProtocol) WithScriptingProperties(scriptingProperties map[string]ob
 	return up
 }
 
-// StartLoading starts protocol-specific loading of a request. When this method is called, the protocol implementation should start loading a request.
+// StartLoading starts protocol-specific loading of the request. When this method is called, the protocol implementation should start loading a request.
 func (up *URLProtocol) StartLoading() {
 	defer runtime.KeepAlive(up)
 	objc.Send[objc.ID](objref.IDOf(up), objc.RegisterName("startLoading"))
 }
 
-// StopLoading stops protocol-specific loading of a request. When this method is called, the protocol implementation should end the work of loading a request. This could be in response to a cancel operation, so protocol implementations must be able to handle this call while a load is in progress.
+// StopLoading stops protocol-specific loading of the request. When this method is called, the protocol implementation should end the work of loading a request. This could be in response to a cancel operation, so protocol implementations must be able to handle this call while a load is in progress.
 func (up *URLProtocol) StopLoading() {
 	defer runtime.KeepAlive(up)
 	objc.Send[objc.ID](objref.IDOf(up), objc.RegisterName("stopLoading"))
 }
 
-// Request returns the NSURLRequest of the receiver.
+// Request returns the protocol's request.
 func (up *URLProtocol) Request() *URLRequest {
 	defer runtime.KeepAlive(up)
 	_r := objc.Send[objc.ID](objref.IDOf(up), objc.RegisterName("request"))
 	return URLRequestFromID(_r)
 }
 
-// CachedResponse returns the NSCachedURLResponse of the receiver.
+// CachedResponse returns the protocol's cached response.
 func (up *URLProtocol) CachedResponse() *CachedURLResponse {
 	defer runtime.KeepAlive(up)
 	_r := objc.Send[objc.ID](objref.IDOf(up), objc.RegisterName("cachedResponse"))

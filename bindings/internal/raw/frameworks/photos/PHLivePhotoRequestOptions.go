@@ -27,6 +27,8 @@ var (
 	_pHLivePhotoRequestOptionsSelSetNetworkAccessAllowed = objc.RegisterName("setNetworkAccessAllowed:")
 	_pHLivePhotoRequestOptionsSelProgressHandler         = objc.RegisterName("progressHandler")
 	_pHLivePhotoRequestOptionsSelSetProgressHandler      = objc.RegisterName("setProgressHandler:")
+	_pHLivePhotoRequestOptionsSelPreferHDR               = objc.RegisterName("preferHDR")
+	_pHLivePhotoRequestOptionsSelSetPreferHDR            = objc.RegisterName("setPreferHDR:")
 )
 
 func PHLivePhotoRequestOptionsFromID(id objc.ID) *PHLivePhotoRequestOptions {
@@ -74,4 +76,14 @@ func (o *PHLivePhotoRequestOptions) SetProgressHandler(progressHandler func(floa
 		defer __block_progressHandler.Release()
 	}
 	o.Ptr().Send(_pHLivePhotoRequestOptionsSelSetProgressHandler, __block_progressHandler)
+}
+
+// Request HDR image data if available (such as PQ/HLG formats). Off by default. For best results, only enable this when you intend to display an HDR experience in `PHLivePhotoView` — for example, when the view's `preferredImageDynamicRange` is greater than standard (SDR). Defaults to `NO`.
+func (o *PHLivePhotoRequestOptions) PreferHDR() bool {
+	_ret := objc.Send[bool](o.Ptr(), _pHLivePhotoRequestOptionsSelPreferHDR)
+	return _ret
+}
+
+func (o *PHLivePhotoRequestOptions) SetPreferHDR(preferHDR bool) {
+	o.Ptr().Send(_pHLivePhotoRequestOptionsSelSetPreferHDR, preferHDR)
 }

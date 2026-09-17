@@ -13,6 +13,7 @@ import (
 // An object representing counts for the different types of foreground app exits.
 //
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxforegroundexitdata
+// Deprecated: Use ForegroundTerminationMetric instead.
 type MXForegroundExitData struct {
 	foundation.NSObject
 }

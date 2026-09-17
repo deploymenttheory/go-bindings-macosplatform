@@ -12,8 +12,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A class that defines media formats and capture settings that capture devices support.
-//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avcapturedeviceformat
 type AVCaptureDeviceFormat struct {
 	foundation.NSObject
@@ -55,10 +53,13 @@ var (
 	_aVCaptureDeviceFormatSelVideoMinZoomFactorForCinematicVideo                          = objc.RegisterName("videoMinZoomFactorForCinematicVideo")
 	_aVCaptureDeviceFormatSelVideoMaxZoomFactorForCinematicVideo                          = objc.RegisterName("videoMaxZoomFactorForCinematicVideo")
 	_aVCaptureDeviceFormatSelVideoFrameRateRangeForCinematicVideo                         = objc.RegisterName("videoFrameRateRangeForCinematicVideo")
+	_aVCaptureDeviceFormatSelIsCinematicVideoMetadataCaptureSupported                     = objc.RegisterName("isCinematicVideoMetadataCaptureSupported")
 	_aVCaptureDeviceFormatSelVideoFieldOfViewForAspectRatioGeometricDistortionCorrected   = objc.RegisterName("videoFieldOfViewForAspectRatio:geometricDistortionCorrected:")
 	_aVCaptureDeviceFormatSelSupportedDynamicAspectRatios                                 = objc.RegisterName("supportedDynamicAspectRatios")
 	_aVCaptureDeviceFormatSelIsSmartFramingSupported                                      = objc.RegisterName("isSmartFramingSupported")
 	_aVCaptureDeviceFormatSelIsCameraLensSmudgeDetectionSupported                         = objc.RegisterName("isCameraLensSmudgeDetectionSupported")
+	_aVCaptureDeviceFormatSelIsContinuousAutoFocusTrackingSupported                       = objc.RegisterName("isContinuousAutoFocusTrackingSupported")
+	_aVCaptureDeviceFormatSelIsLowLightVideoNoiseReductionSupported                       = objc.RegisterName("isLowLightVideoNoiseReductionSupported")
 )
 
 func AVCaptureDeviceFormatFromID(id objc.ID) *AVCaptureDeviceFormat {
@@ -315,6 +316,12 @@ func (o *AVCaptureDeviceFormat) VideoFrameRateRangeForCinematicVideo() *AVFrameR
 	return AVFrameRateRangeFromID(_ret)
 }
 
+// Indicates whether the format supports Cinematic Video Metadata capture. This property returns `true` if the format supports capturing cinematic video metadata alongside video. The metadata enables post-capture cinematic video editing using the Cinematic framework.
+func (o *AVCaptureDeviceFormat) IsCinematicVideoMetadataCaptureSupported() bool {
+	_ret := objc.Send[bool](o.Ptr(), _aVCaptureDeviceFormatSelIsCinematicVideoMetadataCaptureSupported)
+	return _ret
+}
+
 // Indicates the horizontal field of view for an aspect ratio, either uncorrected or corrected for geometric distortion. A float indicating the field of view for the corresponding “AVCaptureAspectRatio“. Set “AVCaptureDevice/geometricDistortionCorrected“ to `true` to receive the field of view corrected for geometric distortion. If this device format does not support dynamic aspect ratio, this function returns `0`.
 func (o *AVCaptureDeviceFormat) VideoFieldOfViewForAspectRatioGeometricDistortionCorrected(aspectRatio *foundation.NSString, geometricDistortionCorrected bool) float32 {
 	_ret := objc.Send[float32](o.Ptr(), _aVCaptureDeviceFormatSelVideoFieldOfViewForAspectRatioGeometricDistortionCorrected, aspectRatio.Ptr(), geometricDistortionCorrected)
@@ -337,5 +344,15 @@ func (o *AVCaptureDeviceFormat) IsSmartFramingSupported() bool {
 
 func (o *AVCaptureDeviceFormat) IsCameraLensSmudgeDetectionSupported() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVCaptureDeviceFormatSelIsCameraLensSmudgeDetectionSupported)
+	return _ret
+}
+
+func (o *AVCaptureDeviceFormat) IsContinuousAutoFocusTrackingSupported() bool {
+	_ret := objc.Send[bool](o.Ptr(), _aVCaptureDeviceFormatSelIsContinuousAutoFocusTrackingSupported)
+	return _ret
+}
+
+func (o *AVCaptureDeviceFormat) IsLowLightVideoNoiseReductionSupported() bool {
+	_ret := objc.Send[bool](o.Ptr(), _aVCaptureDeviceFormatSelIsLowLightVideoNoiseReductionSupported)
 	return _ret
 }

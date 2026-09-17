@@ -17,7 +17,7 @@ import (
 
 // LivePhoto is an idiomatic wrapper over the Objective-C class PHLivePhoto.
 //
-// A displayable representation of a Live Photo—a picture that includes motion and sound from the moments just before and after its capture.
+// A displayable representation of a Live Photo.
 type LivePhoto struct {
 	objref.Handle
 }

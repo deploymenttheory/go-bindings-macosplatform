@@ -17,8 +17,6 @@ import (
 )
 
 // SyncEngine is an idiomatic wrapper over the Objective-C class CKSyncEngine.
-//
-// An object that manages the synchronization of local and remote record data.
 type SyncEngine struct {
 	objref.Handle
 }
@@ -165,7 +163,7 @@ func (se *SyncEngine) SendChangesWithOptions(ctx context.Context, options *SyncE
 	}
 }
 
-// CancelOperations cancels any in-progress or pending sync operations. The sync engine processes cancelation requests asynchronously, meaning it's possible for in-progress operations to complete even after this method returns.
+// CancelOperations cancels any in-progress or pending sync operations. The sync engine processes cancellation requests asynchronously, meaning it's possible for in-progress operations to complete even after this method returns.
 //
 // CancelOperations blocks until the operation completes or ctx is cancelled.
 func (se *SyncEngine) CancelOperations(ctx context.Context) error {

@@ -154,10 +154,6 @@
       "doc": "A type that identifies samples containing electrocardiogram data.",
       "url": "https://developer.apple.com/documentation/healthkit/hkelectrocardiogramtype"
     },
-    "HKElectrocardiogramVoltageMeasurement": {
-      "doc": "The voltage for all leads at a single point in time.",
-      "url": "https://developer.apple.com/documentation/healthkit/hkelectrocardiogramvoltagemeasurement"
-    },
     "HKFHIRResource": {
       "doc": "An object containing Fast Healthcare Interoperability Resources (FHIR) data.",
       "url": "https://developer.apple.com/documentation/healthkit/hkfhirresource"
@@ -212,6 +208,10 @@
     "HKLiveWorkoutDataSource": {
       "doc": "A data source that automatically provides live data from an active workout session.",
       "url": "https://developer.apple.com/documentation/healthkit/hkliveworkoutdatasource"
+    },
+    "HKLiveWorkoutZoneUpdate": {
+      "doc": "A structure that contains information about zone transitions during a live workout session.",
+      "url": "https://developer.apple.com/documentation/healthkit/hkliveworkoutzoneupdate"
     },
     "HKMedicationConcept": {
       "doc": "An object that describes a specific medication concept.",
@@ -837,6 +837,28 @@
         }
       }
     },
+    "HKCategoryValueMenopausalState": {
+      "doc": "A value that indicates the menopausal state at a recorded point in time.",
+      "url": "https://developer.apple.com/documentation/healthkit/hkcategoryvaluemenopausalstate",
+      "members": {
+        "HKCategoryValueMenopausalStateMenopause": {
+          "doc": "A value that indicates the person is in menopause at the sample date.",
+          "url": "https://developer.apple.com/documentation/healthkit/hkcategoryvaluemenopausalstate/menopause"
+        },
+        "HKCategoryValueMenopausalStateNone": {
+          "doc": "A value that indicates no menopausal state applies at the sample date.",
+          "url": "https://developer.apple.com/documentation/healthkit/hkcategoryvaluemenopausalstate/none"
+        },
+        "HKCategoryValueMenopausalStatePerimenopause": {
+          "doc": "A value that indicates the person is in perimenopause at the sample date.",
+          "url": "https://developer.apple.com/documentation/healthkit/hkcategoryvaluemenopausalstate/perimenopause"
+        },
+        "init(rawValue:)": {
+          "doc": "Initializes information about menopausal state.",
+          "url": "https://developer.apple.com/documentation/healthkit/hkcategoryvaluemenopausalstate/init(rawvalue:)"
+        }
+      }
+    },
     "HKCategoryValueMenstrualFlow": {
       "doc": "Categories that indicate the amount of menstrual flow for a given sample.",
       "url": "https://developer.apple.com/documentation/healthkit/hkcategoryvaluemenstrualflow",
@@ -1058,28 +1080,6 @@
         }
       }
     },
-    "HKElectrocardiogramClassification": {
-      "doc": "Classifications returned by Apple Watch’s ECG algorithm.",
-      "url": "https://developer.apple.com/documentation/healthkit/hkelectrocardiogramclassification"
-    },
-    "HKElectrocardiogramLead": {
-      "doc": "The lead used to record a voltage measurement.",
-      "url": "https://developer.apple.com/documentation/healthkit/hkelectrocardiogramlead"
-    },
-    "HKElectrocardiogramSymptomsStatus": {
-      "doc": "Values indicating whether the user entered a symptom when they recorded the ECG.",
-      "url": "https://developer.apple.com/documentation/healthkit/hkelectrocardiogramsymptomsstatus"
-    },
-    "HKErrorCode": {
-      "doc": "Error codes returned by HealthKit.",
-      "url": "https://developer.apple.com/documentation/healthkit/hkerrorcode",
-      "members": {
-        "HKNoError": {
-          "doc": "No error occurred.",
-          "url": "https://developer.apple.com/documentation/healthkit/hkerrorcode/hknoerror"
-        }
-      }
-    },
     "HKFitzpatrickSkinType": {
       "doc": "Categories representing the user’s skin type based on the Fitzpatrick scale.",
       "url": "https://developer.apple.com/documentation/healthkit/hkfitzpatrickskintype",
@@ -1113,12 +1113,6 @@
           "url": "https://developer.apple.com/documentation/healthkit/hkfitzpatrickskintype/vi"
         }
       }
-    },
-    "HKGAD7AssessmentAnswer": {
-      "url": "https://developer.apple.com/documentation/healthkit/hkgad7assessmentanswer"
-    },
-    "HKGAD7AssessmentRisk": {
-      "url": "https://developer.apple.com/documentation/healthkit/hkgad7assessmentrisk"
     },
     "HKHeartRateMotionContext": {
       "doc": "Values that indicate the user’s level of activity when the heart rate sample was measured.",
@@ -1266,12 +1260,6 @@
         }
       }
     },
-    "HKPHQ9AssessmentAnswer": {
-      "url": "https://developer.apple.com/documentation/healthkit/hkphq9assessmentanswer"
-    },
-    "HKPHQ9AssessmentRisk": {
-      "url": "https://developer.apple.com/documentation/healthkit/hkphq9assessmentrisk"
-    },
     "HKPhysicalEffortEstimationType": {
       "url": "https://developer.apple.com/documentation/healthkit/hkphysicaleffortestimationtype"
     },
@@ -1348,18 +1336,6 @@
           "url": "https://developer.apple.com/documentation/healthkit/hkqueryoptions/init(rawvalue:)"
         }
       }
-    },
-    "HKStateOfMindAssociation": {
-      "url": "https://developer.apple.com/documentation/healthkit/hkstateofmindassociation"
-    },
-    "HKStateOfMindKind": {
-      "url": "https://developer.apple.com/documentation/healthkit/hkstateofmindkind"
-    },
-    "HKStateOfMindLabel": {
-      "url": "https://developer.apple.com/documentation/healthkit/hkstateofmindlabel"
-    },
-    "HKStateOfMindValenceClassification": {
-      "url": "https://developer.apple.com/documentation/healthkit/hkstateofmindvalenceclassification"
     },
     "HKStatisticsOptions": {
       "doc": "Options for specifying the statistic to calculate.",
@@ -3992,8 +3968,12 @@
         "doc": "The view controller that presents HealthKit authorization sheets.",
         "url": "https://developer.apple.com/documentation/healthkit/hkhealthstore/authorizationviewcontrollerpresenter"
       },
+      "earliestAuthorizedSampleDate(for:)": {
+        "doc": "Returns the earliest date that the person permits your app to read samples for the given data types.",
+        "url": "https://developer.apple.com/documentation/healthkit/hkhealthstore/earliestauthorizedsampledate(for:)"
+      },
       "preferredWorkoutZoneConfiguration(for:)": {
-        "doc": "Returns someone’s preferred zone configuration for the specified quantity type.",
+        "doc": "Returns a person’s preferred zone configuration for a quantity type.",
         "url": "https://developer.apple.com/documentation/healthkit/hkhealthstore/preferredworkoutzoneconfiguration(for:)"
       },
       "requestAuthorization(toShare:read:)": {
@@ -4061,6 +4041,24 @@
         "url": "https://developer.apple.com/documentation/healthkit/hkliveworkoutdatasource/typestocollect"
       }
     },
+    "HKLiveWorkoutZoneUpdate": {
+      "currentZoneDuration": {
+        "doc": "A property that contains the zone duration just entered.",
+        "url": "https://developer.apple.com/documentation/healthkit/hkliveworkoutzoneupdate/currentzoneduration"
+      },
+      "lastSampleProcessedDate": {
+        "doc": "The timestamp of the most recent processed sample at the time of the update.",
+        "url": "https://developer.apple.com/documentation/healthkit/hkliveworkoutzoneupdate/lastsampleprocesseddate"
+      },
+      "previousZoneDuration": {
+        "doc": "A property that contains the zone duration that just completed.",
+        "url": "https://developer.apple.com/documentation/healthkit/hkliveworkoutzoneupdate/previouszoneduration"
+      },
+      "zoneGroup": {
+        "doc": "The zone group that contains the current duration data.",
+        "url": "https://developer.apple.com/documentation/healthkit/hkliveworkoutzoneupdate/zonegroup"
+      }
+    },
     "HKMedicationConcept": {
       "displayText": {
         "doc": "The display name for this medication.",
@@ -4113,8 +4111,8 @@
         "url": "https://developer.apple.com/documentation/healthkit/hkmedicationdoseevent/scheduleddate"
       },
       "scheduledDoseQuantity": {
-        "doc": "The quantity of the medication scheduled to be taken.",
-        "url": "https://developer.apple.com/documentation/healthkit/hkmedicationdoseevent/scheduleddosequantity-477ge"
+        "doc": "The dose quantity a person is expected to take based on their medication schedule.",
+        "url": "https://developer.apple.com/documentation/healthkit/hkmedicationdoseevent/scheduleddosequantity-7ffhr"
       },
       "unit": {
         "doc": "The unit that the system associates with the medication when the person logs the dose.",
@@ -4514,6 +4512,10 @@
         "doc": "An array of workout event objects.",
         "url": "https://developer.apple.com/documentation/healthkit/hkworkout/workoutevents"
       },
+      "zoneGroup(for:)": {
+        "doc": "Returns the current zone group for the specified quantity type.",
+        "url": "https://developer.apple.com/documentation/healthkit/hkworkout/zonegroup(for:)"
+      },
       "zoneGroupsByType": {
         "doc": "A property that contains a dictionary that maps quantity types to their zone groups for this workout.",
         "url": "https://developer.apple.com/documentation/healthkit/hkworkout/zonegroupsbytype"
@@ -4552,6 +4554,10 @@
         "doc": "An array of events associated with the containing workout and occurring during the activity’s duration.",
         "url": "https://developer.apple.com/documentation/healthkit/hkworkoutactivity/workoutevents"
       },
+      "zoneGroup(for:)": {
+        "doc": "Returns a zone group for the specified quantity type.",
+        "url": "https://developer.apple.com/documentation/healthkit/hkworkoutactivity/zonegroup(for:)"
+      },
       "zoneGroupsByType": {
         "doc": "A property that contains a dictionary that maps quantity types to their zone groups for this activity.",
         "url": "https://developer.apple.com/documentation/healthkit/hkworkoutactivity/zonegroupsbytype"
@@ -4575,7 +4581,7 @@
         "url": "https://developer.apple.com/documentation/healthkit/hkworkoutbuilder/metadata"
       },
       "setCustomZoneConfiguration(_:for:)": {
-        "doc": "Sets the zone configuration for the specified quantity type for this workout. In order to provide a custom workout zone configuration, this must be called before beginning collection on the builder. If a custom configuration is not provided, the user’s preferred workout zone configuration will be used for zone calculations.",
+        "doc": "Overrides the preferred zone configuration with a custom zone for the current workout.",
         "url": "https://developer.apple.com/documentation/healthkit/hkworkoutbuilder/setcustomzoneconfiguration(_:for:)"
       },
       "startDate": {
@@ -4595,7 +4601,7 @@
         "url": "https://developer.apple.com/documentation/healthkit/hkworkoutbuilder/zoneconfiguration(for:)"
       },
       "zoneGroup(for:)": {
-        "doc": "Returns the current zone group for the specified quantity type, including real-time duration calculations.",
+        "doc": "Returns the current zone group for the specified quantity type.",
         "url": "https://developer.apple.com/documentation/healthkit/hkworkoutbuilder/zonegroup(for:)"
       }
     },

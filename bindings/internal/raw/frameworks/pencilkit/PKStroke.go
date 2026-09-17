@@ -12,25 +12,28 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A structure that represents the paths, boundaries, and other properties of a stroke drawn on a canvas.
-//
 // Apple documentation: https://developer.apple.com/documentation/pencilkit/pkstroke
 type PKStroke struct {
 	foundation.NSObject
 }
 
 var (
-	_clsPKStroke                                             = _objcClass("PKStroke")
-	_pKStrokeSelInitWithInkStrokePathTransformMask           = objc.RegisterName("initWithInk:strokePath:transform:mask:")
-	_pKStrokeSelInitWithInkStrokePathTransformMaskRandomSeed = objc.RegisterName("initWithInk:strokePath:transform:mask:randomSeed:")
-	_pKStrokeSelInk                                          = objc.RegisterName("ink")
-	_pKStrokeSelTransform                                    = objc.RegisterName("transform")
-	_pKStrokeSelPath                                         = objc.RegisterName("path")
-	_pKStrokeSelMask                                         = objc.RegisterName("mask")
-	_pKStrokeSelRenderBounds                                 = objc.RegisterName("renderBounds")
-	_pKStrokeSelMaskedPathRanges                             = objc.RegisterName("maskedPathRanges")
-	_pKStrokeSelRandomSeed                                   = objc.RegisterName("randomSeed")
-	_pKStrokeSelRequiredContentVersion                       = objc.RegisterName("requiredContentVersion")
+	_clsPKStroke                                                                             = _objcClass("PKStroke")
+	_pKStrokeSelInitWithInkStrokePathTransformMask                                           = objc.RegisterName("initWithInk:strokePath:transform:mask:")
+	_pKStrokeSelInitWithInkStrokePathTransformMaskRandomSeed                                 = objc.RegisterName("initWithInk:strokePath:transform:mask:randomSeed:")
+	_pKStrokeSelInitWithInkStrokePathTransformMaskRandomSeedStrokeIDRenderGroupIDRenderState = objc.RegisterName("initWithInk:strokePath:transform:mask:randomSeed:strokeID:renderGroupID:renderState:")
+	_pKStrokeSelSubstrokeWithRange                                                           = objc.RegisterName("substrokeWithRange:")
+	_pKStrokeSelRequiredContentVersion                                                       = objc.RegisterName("requiredContentVersion")
+	_pKStrokeSelInk                                                                          = objc.RegisterName("ink")
+	_pKStrokeSelStrokeID                                                                     = objc.RegisterName("strokeID")
+	_pKStrokeSelTransform                                                                    = objc.RegisterName("transform")
+	_pKStrokeSelPath                                                                         = objc.RegisterName("path")
+	_pKStrokeSelMask                                                                         = objc.RegisterName("mask")
+	_pKStrokeSelRenderBounds                                                                 = objc.RegisterName("renderBounds")
+	_pKStrokeSelMaskedPathRanges                                                             = objc.RegisterName("maskedPathRanges")
+	_pKStrokeSelRandomSeed                                                                   = objc.RegisterName("randomSeed")
+	_pKStrokeSelRenderGroupID                                                                = objc.RegisterName("renderGroupID")
+	_pKStrokeSelRenderState                                                                  = objc.RegisterName("renderState")
 )
 
 func PKStrokeFromID(id objc.ID) *PKStroke {
@@ -59,6 +62,29 @@ func (o *PKStroke) InitWithInkStrokePathTransformMaskRandomSeed(ink *PKInk, stro
 	return PKStrokeFromID(_ret)
 }
 
+func (o *PKStroke) InitWithInkStrokePathTransformMaskRandomSeedStrokeIDRenderGroupIDRenderState(ink *PKInk, strokePath *PKStrokePath, transform corefoundation.CGAffineTransform, mask *appkit.NSBezierPath, randomSeed uint32, strokeID *foundation.NSUUID, renderGroupID *foundation.NSUUID, renderState *PKStrokeRenderState) *PKStroke {
+	_ret := objc.Send[objc.ID](o.Ptr(), _pKStrokeSelInitWithInkStrokePathTransformMaskRandomSeedStrokeIDRenderGroupIDRenderState, ink.Ptr(), strokePath.Ptr(), transform, mask.Ptr(), randomSeed, strokeID.Ptr(), renderGroupID.Ptr(), renderState.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return PKStrokeFromID(_ret)
+}
+
+// Returns a copy of the stroke containing the control points in the specified range. Maintains rendering information so the returned substroke renders the same as the corresponding portion of the receiver. The returned stroke may have a `renderState` set to maintain this information. @param range The range of control points in the receiver to copy to the returned stroke. @returns A new stroke containing only the control points within the specified range.
+func (o *PKStroke) SubstrokeWithRange(range_ *PKFloatRange) *PKStroke {
+	_ret := objc.Send[objc.ID](o.Ptr(), _pKStrokeSelSubstrokeWithRange, range_.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return PKStrokeFromID(_ret)
+}
+
+// The PencilKit version required to use this stroke.
+func (o *PKStroke) RequiredContentVersion() PKContentVersion {
+	_ret := objc.Send[PKContentVersion](o.Ptr(), _pKStrokeSelRequiredContentVersion)
+	return _ret
+}
+
 // The ink used to render this stroke.
 func (o *PKStroke) Ink() *PKInk {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKStrokeSelInk)
@@ -66,6 +92,15 @@ func (o *PKStroke) Ink() *PKInk {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return PKInkFromID(_ret)
+}
+
+// The unique identity of the stroke.
+func (o *PKStroke) StrokeID() *foundation.NSUUID {
+	_ret := objc.Send[objc.ID](o.Ptr(), _pKStrokeSelStrokeID)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSUUIDFromID(_ret)
 }
 
 // The affine transform of the stroke when rendered.
@@ -91,13 +126,13 @@ func (o *PKStroke) Mask() *appkit.NSBezierPath {
 	return appkit.NSBezierPathFromID(_ret)
 }
 
-// The bounds of the rendered stroke. This includes the width & ink of the stroke after the transform is applied.
+// The bounds of the rendered stroke, including its width and ink after the transform is applied.
 func (o *PKStroke) RenderBounds() corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _pKStrokeSelRenderBounds)
 	return _ret
 }
 
-// These are the parametric parameter ranges of points in `strokePath` that intersect the stroke's mask.
+// The parametric ranges of points in the stroke path that intersect the mask.
 func (o *PKStroke) MaskedPathRanges() *foundation.NSArray[*PKFloatRange] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKStrokeSelMaskedPathRanges)
 	if _ret != 0 {
@@ -112,8 +147,20 @@ func (o *PKStroke) RandomSeed() uint32 {
 	return _ret
 }
 
-// The PencilKit version required to use this stroke.
-func (o *PKStroke) RequiredContentVersion() PKContentVersion {
-	_ret := objc.Send[PKContentVersion](o.Ptr(), _pKStrokeSelRequiredContentVersion)
-	return _ret
+// A UUID that groups strokes for wet-ink compositing with compatible inks such as marker. Set this to the same value for a run of strokes to render them as if drawn while the previous stroke with the same ink was still wet.
+func (o *PKStroke) RenderGroupID() *foundation.NSUUID {
+	_ret := objc.Send[objc.ID](o.Ptr(), _pKStrokeSelRenderGroupID)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSUUIDFromID(_ret)
+}
+
+// The render details of the stroke, such as particle positioning. Uses default rendering when nil. This may be set on substrokes returned by `-substrokeWithRange:`.
+func (o *PKStroke) RenderState() *PKStrokeRenderState {
+	_ret := objc.Send[objc.ID](o.Ptr(), _pKStrokeSelRenderState)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return PKStrokeRenderStateFromID(_ret)
 }

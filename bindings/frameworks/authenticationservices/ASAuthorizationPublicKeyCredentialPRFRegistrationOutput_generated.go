@@ -15,8 +15,6 @@ import (
 )
 
 // AuthorizationPublicKeyCredentialPRFRegistrationOutput is an idiomatic wrapper over the Objective-C class ASAuthorizationPublicKeyCredentialPRFRegistrationOutput.
-//
-// A type to represent outputs of the web authentication PRF extension, when requesting them during a registration.
 type AuthorizationPublicKeyCredentialPRFRegistrationOutput struct {
 	objref.Handle
 }

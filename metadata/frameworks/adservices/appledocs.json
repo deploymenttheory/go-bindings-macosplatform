@@ -8,12 +8,6 @@
       "url": "https://developer.apple.com/documentation/adservices/aaattribution"
     }
   },
-  "enums": {
-    "AAAttributionErrorCode": {
-      "doc": "The error code that the parent class issues.",
-      "url": "https://developer.apple.com/documentation/adservices/aaattributionerrorcode"
-    }
-  },
   "methods": {
     "AAAttribution": {
       "+attributionTokenWithError:": {

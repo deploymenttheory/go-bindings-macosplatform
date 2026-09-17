@@ -73,14 +73,28 @@ func SCNErrorDomain() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
-func SCNGeometrySourceSemanticBoneIndices() uintptr {
+func SCNGeometrySourceSemanticBoneIndices() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNGeometrySourceSemanticBoneIndices")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func SCNGeometrySourceSemanticBoneWeights() uintptr {
+func SCNGeometrySourceSemanticBoneWeights() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNGeometrySourceSemanticBoneWeights")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SCNGeometrySourceSemanticColor() *foundation.NSString {
@@ -95,9 +109,16 @@ func SCNGeometrySourceSemanticColor() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
-func SCNGeometrySourceSemanticEdgeCrease() uintptr {
+func SCNGeometrySourceSemanticEdgeCrease() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNGeometrySourceSemanticEdgeCrease")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SCNGeometrySourceSemanticNormal() *foundation.NSString {
@@ -148,9 +169,16 @@ func SCNGeometrySourceSemanticVertex() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
-func SCNGeometrySourceSemanticVertexCrease() uintptr {
+func SCNGeometrySourceSemanticVertexCrease() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNGeometrySourceSemanticVertexCrease")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SCNHitTestBackFaceCullingKey() *foundation.NSString {
@@ -213,9 +241,16 @@ func SCNHitTestIgnoreChildNodesKey() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
-func SCNHitTestIgnoreHiddenNodesKey() uintptr {
+func SCNHitTestIgnoreHiddenNodesKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNHitTestIgnoreHiddenNodesKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SCNHitTestOptionCategoryBitMask() *foundation.NSString {
@@ -280,51 +315,100 @@ func SCNHitTestSortResultsKey() *foundation.NSString {
 
 // @constant SCNLightAttenuationEndKey The distance at which the attenuation ends (Omni or Spot light types only). Animatable as "attenuationEnd". Defaults to 0.
 // Deprecated: Use SCNLight.attenuationEndDistance instead
-func SCNLightAttenuationEndKey() uintptr {
+func SCNLightAttenuationEndKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNLightAttenuationEndKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant SCNLightAttenuationFalloffExponentKey Controls the attenuation between the start and end attenuation distances. 0 means a constant attenuation, 1 a linear attenuation and 2 a quadratic attenuation, but any positive value will work (Omni or Spot light types only). Animatable as "attenuationFalloffExponent". Defaults to 2.
 // Deprecated: Use SCNLight.attenuationFalloffExponent instead
-func SCNLightAttenuationFalloffExponentKey() uintptr {
+func SCNLightAttenuationFalloffExponentKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNLightAttenuationFalloffExponentKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @group Light Attributes @abstract Attributes affecting the lighting computations. @discussion These keys are deprecated in 10.10. Please use the properties of SCNLight instead. @constant SCNLightAttenuationStartKey The distance at which the attenuation starts (Omni or Spot light types only). Animatable as "attenuationStart". Defaults to 0.
 // Deprecated: Use SCNLight.attenuationStartDistance instead
-func SCNLightAttenuationStartKey() uintptr {
+func SCNLightAttenuationStartKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNLightAttenuationStartKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant SCNLightShadowFarClippingKey Specifies the maximal distance between the light and a visible surface to cast shadow on. If a surface is further from the light than this maximal distance, then the surface won't be shadowed. Animatable as "zFar". Defaults to 100.
 // Deprecated: Use SCNLight.zFar instead
-func SCNLightShadowFarClippingKey() uintptr {
+func SCNLightShadowFarClippingKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNLightShadowFarClippingKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant SCNLightShadowNearClippingKey Specifies the minimal distance between the light and the surface to cast shadow on. If a surface is closer to the light than this minimal distance, then the surface won't be shadowed. The near value must be different than zero. Animatable as "zNear". Defaults to 1.
 // Deprecated: Use SCNLight.zNear instead
-func SCNLightShadowNearClippingKey() uintptr {
+func SCNLightShadowNearClippingKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNLightShadowNearClippingKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant SCNLightSpotInnerAngleKey The angle in degrees between the spot direction and the lit element below which the lighting is at full strength. Animatable as "spotInnerAngle". Defaults to 0.
 // Deprecated: Use SCNLight.spotInnerAngle instead
-func SCNLightSpotInnerAngleKey() uintptr {
+func SCNLightSpotInnerAngleKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNLightSpotInnerAngleKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant SCNLightSpotOuterAngleKey The angle in degrees between the spot direction and the lit element after which the lighting is at zero strength. Animatable as "spotOuterAngle". Defaults to 45 degrees.
 // Deprecated: Use SCNLight.spotOuterAngle instead
-func SCNLightSpotOuterAngleKey() uintptr {
+func SCNLightSpotOuterAngleKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNLightSpotOuterAngleKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SCNLightTypeAmbient() *foundation.NSString {
@@ -540,89 +624,208 @@ func SCNNormalTransform() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
-func SCNParticlePropertyAngle() uintptr {
+func SCNParticlePropertyAngle() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNParticlePropertyAngle")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func SCNParticlePropertyAngularVelocity() uintptr {
+func SCNParticlePropertyAngularVelocity() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNParticlePropertyAngularVelocity")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func SCNParticlePropertyBounce() uintptr {
+func SCNParticlePropertyBounce() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNParticlePropertyBounce")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func SCNParticlePropertyCharge() uintptr {
+func SCNParticlePropertyCharge() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNParticlePropertyCharge")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func SCNParticlePropertyColor() uintptr {
+func SCNParticlePropertyColor() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNParticlePropertyColor")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func SCNParticlePropertyContactNormal() uintptr {
+func SCNParticlePropertyContactNormal() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNParticlePropertyContactNormal")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func SCNParticlePropertyContactPoint() uintptr {
+func SCNParticlePropertyContactPoint() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNParticlePropertyContactPoint")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func SCNParticlePropertyFrame() uintptr {
+func SCNParticlePropertyFrame() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNParticlePropertyFrame")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func SCNParticlePropertyFrameRate() uintptr {
+func SCNParticlePropertyFrameRate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNParticlePropertyFrameRate")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func SCNParticlePropertyFriction() uintptr {
+func SCNParticlePropertyFriction() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNParticlePropertyFriction")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func SCNParticlePropertyLife() uintptr {
+func SCNParticlePropertyLife() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNParticlePropertyLife")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func SCNParticlePropertyOpacity() uintptr {
+func SCNParticlePropertyOpacity() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNParticlePropertyOpacity")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func SCNParticlePropertyPosition() uintptr {
+func SCNParticlePropertyPosition() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNParticlePropertyPosition")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func SCNParticlePropertyRotationAxis() uintptr {
+func SCNParticlePropertyRotationAxis() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNParticlePropertyRotationAxis")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func SCNParticlePropertySize() uintptr {
+func SCNParticlePropertySize() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNParticlePropertySize")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func SCNParticlePropertyVelocity() uintptr {
+func SCNParticlePropertyVelocity() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNParticlePropertyVelocity")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func SCNPhysicsShapeKeepAsCompoundKey() uintptr {
+func SCNPhysicsShapeKeepAsCompoundKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNPhysicsShapeKeepAsCompoundKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SCNPhysicsShapeOptionCollisionMargin() *foundation.NSString {
@@ -637,59 +840,136 @@ func SCNPhysicsShapeOptionCollisionMargin() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
-func SCNPhysicsShapeScaleKey() uintptr {
+func SCNPhysicsShapeScaleKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNPhysicsShapeScaleKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func SCNPhysicsShapeTypeBoundingBox() uintptr {
+func SCNPhysicsShapeTypeBoundingBox() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNPhysicsShapeTypeBoundingBox")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func SCNPhysicsShapeTypeConcavePolyhedron() uintptr {
+func SCNPhysicsShapeTypeConcavePolyhedron() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNPhysicsShapeTypeConcavePolyhedron")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func SCNPhysicsShapeTypeConvexHull() uintptr {
+func SCNPhysicsShapeTypeConvexHull() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNPhysicsShapeTypeConvexHull")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func SCNPhysicsShapeTypeKey() uintptr {
+func SCNPhysicsShapeTypeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNPhysicsShapeTypeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func SCNPhysicsTestBackfaceCullingKey() uintptr {
+func SCNPhysicsTestBackfaceCullingKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNPhysicsTestBackfaceCullingKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func SCNPhysicsTestCollisionBitMaskKey() uintptr {
+func SCNPhysicsTestCollisionBitMaskKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNPhysicsTestCollisionBitMaskKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func SCNPhysicsTestSearchModeAll() uintptr {
+func SCNPhysicsTestSearchModeAll() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNPhysicsTestSearchModeAll")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func SCNPhysicsTestSearchModeAny() uintptr {
+func SCNPhysicsTestSearchModeAny() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNPhysicsTestSearchModeAny")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func SCNPhysicsTestSearchModeClosest() uintptr {
+func SCNPhysicsTestSearchModeClosest() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNPhysicsTestSearchModeClosest")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func SCNPhysicsTestSearchModeKey() uintptr {
+func SCNPhysicsTestSearchModeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNPhysicsTestSearchModeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant SCNViewOptionPreferLowPowerDevice Specifies if the renderer should prefer a low power Metal device. @discussion The value is a NSNumber wrapping a BOOL. Defaults to NO.
@@ -732,9 +1012,16 @@ func SCNPreferredRenderingAPIKey() *foundation.NSString {
 }
 
 // @group Semantic options @abstract Valid keys for the option parameter of setSemantic:forSymbol:options:
-func SCNProgramMappingChannelKey() uintptr {
+func SCNProgramMappingChannelKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNProgramMappingChannelKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SCNProjectionTransform() *foundation.NSString {
@@ -762,9 +1049,16 @@ func SCNSceneEndTimeAttributeKey() *foundation.NSString {
 }
 
 // @constant SCNSceneExportDestinationURL @abstract Specifies the final destination (as a NSURL) of the scene being exported. @discussion The destination URL is required if the scene is exported to a temporary directory and then moved to a final destination. This enables the exported document to get correct relative paths to referenced images.
-func SCNSceneExportDestinationURL() uintptr {
+func SCNSceneExportDestinationURL() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNSceneExportDestinationURL")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SCNSceneFrameRateAttributeKey() *foundation.NSString {
@@ -780,33 +1074,68 @@ func SCNSceneFrameRateAttributeKey() *foundation.NSString {
 }
 
 // @constant SCNSceneSourceAnimationImportPolicyDoNotPlay @abstract Only keep animations in the SCNSceneSource and don't add to the animatable elements of the scene.
-func SCNSceneSourceAnimationImportPolicyDoNotPlay() uintptr {
+func SCNSceneSourceAnimationImportPolicyDoNotPlay() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNSceneSourceAnimationImportPolicyDoNotPlay")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant SCNSceneSourceAnimationImportPolicyKey @abstract Pass one of the value below to specify what to do with loaded animations. @discussion See below for the description of each individual key. Defaults to SCNSceneSourceAnimationImportPolicyPlayRepeatedly. On 10.9 and before the behavior is SCNSceneSourceAnimationImportPolicyPlayUsingSceneTimeBase. For compatibility reason if the application was built on 10.9 or before the default behavior is SCNSceneSourceAnimationImportPolicyPlayUsingSceneTimeBase.
-func SCNSceneSourceAnimationImportPolicyKey() uintptr {
+func SCNSceneSourceAnimationImportPolicyKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNSceneSourceAnimationImportPolicyKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant SCNSceneSourceAnimationImportPolicyPlay @abstract Add animations to the scene and play them once (repeatCount set to 1).
-func SCNSceneSourceAnimationImportPolicyPlay() uintptr {
+func SCNSceneSourceAnimationImportPolicyPlay() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNSceneSourceAnimationImportPolicyPlay")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant SCNSceneSourceAnimationImportPolicyPlayRepeatedly @abstract Add animations to the scene and play them repeatedly (repeatCount set to infinity).
-func SCNSceneSourceAnimationImportPolicyPlayRepeatedly() uintptr {
+func SCNSceneSourceAnimationImportPolicyPlayRepeatedly() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNSceneSourceAnimationImportPolicyPlayRepeatedly")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant SCNSceneSourceAnimationImportPolicyPlayUsingSceneTimeBase @abstract Add animations to the scene and play them using the SCNView/SCNRenderer's scene time (usesSceneTimeBase set to YES)
-func SCNSceneSourceAnimationImportPolicyPlayUsingSceneTimeBase() uintptr {
+func SCNSceneSourceAnimationImportPolicyPlayUsingSceneTimeBase() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNSceneSourceAnimationImportPolicyPlayUsingSceneTimeBase")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The file's author. The corresponding value is an NSString.
@@ -1069,33 +1398,68 @@ func SCNSceneStartTimeAttributeKey() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
-func SCNSceneUpAxisAttributeKey() uintptr {
+func SCNSceneUpAxisAttributeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNSceneUpAxisAttributeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant SCNShaderModifierEntryPointFragment @abstract This is the last entry point in the fragment shader, where you can alter the final color returned by the shader. @discussion You can alter the final color by reading and writing to the output color via the output structure below. Structures available from the SCNShaderModifierEntryPointFragment entry point: | All the structures available from the SCNShaderModifierEntryPointSurface entry point | | Access: ReadOnly | Stages: Fragment shader only | struct SCNFramebuffer { |    float4 color; // Contents of the destination framebuffer corresponding to the fragment being processed | } _framebuffer;  // Available since macOS 13, iOS 16, tvOS 16 and watchOS 9. | | Access: ReadOnly | Stages: Fragment shader only | struct SCNShaderOutput { |    float4 color; | } _output; | | Access: ReadWrite | Stages: Fragment shader only Example: Inverse final color GLSL | _output.color.rgb = vec3(1.0) - _output.color.rgb; Metal Shading Language | _output.color.rgb = 1.0 - _output.color.rgb;
-func SCNShaderModifierEntryPointFragment() uintptr {
+func SCNShaderModifierEntryPointFragment() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNShaderModifierEntryPointFragment")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant SCNShaderModifierEntryPointGeometry @abstract This is the entry point to operate on the geometry vertices, for example deforming them. @discussion It operates entirely in the vertex shader stage. It's input is the geometry structure: Structures available from the SCNShaderModifierEntryPointGeometry entry point: | struct SCNShaderGeometry { |    float4 position; |    float3 normal; |    float4 tangent; |    float4 color; |    float2 texcoords[kSCNTexcoordCount]; | } _geometry; | | Access: ReadWrite | Stages: Vertex shader only kSCNTexcoordCount is a constant integer set to the number of texture coordinates used. All the geometric fields (position, normal and tangent) are in model space. You can use one of the provided automatic uniforms such as u_modelTransform or u_modelViewTransform if you want to operate in another space (but the results must stay in the model space, otherwise remaining computations won't be correct). The texture coordinates are the raw values found in the mesh, they have not been transformed yet by their optional contentsTransform. The contentsTransform if any is applied after the geometry shader modifier. Example: Simple sinusoidal deformation GLSL | uniform float Amplitude = 0.1; | | _geometry.position.xyz += _geometry.normal * (Amplitude * _geometry.position.y * _geometry.position.x) * sin(u_time); Metal Shading Language | #pragma arguments | float Amplitude; | | _geometry.position.xyz += _geometry.normal * (Amplitude * _geometry.position.y * _geometry.position.x) * sin(scn_frame.time);
-func SCNShaderModifierEntryPointGeometry() uintptr {
+func SCNShaderModifierEntryPointGeometry() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNShaderModifierEntryPointGeometry")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant SCNShaderModifierEntryPointLightingModel @abstract This is the entry point to provide custom lighting equation. The fragment will be called for each active light of the scene and will need to accumulate lighting contribution for the vertex or the fragment in the _lightingContribution structure, using the light structure given. Structures available from the SCNShaderModifierEntryPointLightingModel entry point: | All the structures available from the SCNShaderModifierEntryPointSurface entry point | | Access: ReadOnly | Stages: Vertex shader and fragment shader | struct SCNShaderLightingContribution { |    float3 ambient; |    float3 diffuse; |    float3 specular; | } _lightingContribution; | | Access: ReadWrite | Stages: Vertex shader and fragment shader | struct SCNShaderLight { |    float4 intensity; |    float3 direction; // Direction from the point on the surface toward the light (L) | } _light; | | Access: ReadOnly | Stages: Vertex shader and fragment shader Example: Wrap diffuse lighting GLSL | uniform float WrapFactor = 0.5; | | float dotProduct = (WrapFactor + max(0.0, dot(_surface.normal,_light.direction))) / (1 + WrapFactor); | _lightingContribution.diffuse += (dotProduct * _light.intensity.rgb); | vec3 halfVector = normalize(_light.direction + _surface.view); | dotProduct = max(0.0, pow(max(0.0, dot(_surface.normal, halfVector)), _surface.shininess)); | _lightingContribution.specular += (dotProduct * _light.intensity.rgb); Metal Shading Language | #pragma arguments | float WrapFactor; | | float dotProduct = (WrapFactor + max(0.0, dot(_surface.normal,_light.direction))) / (1 + WrapFactor); | _lightingContribution.diffuse += (dotProduct * _light.intensity.rgb); | float3 halfVector = normalize(_light.direction + _surface.view); | dotProduct = max(0.0, pow(max(0.0, dot(_surface.normal, halfVector)), _surface.shininess)); | _lightingContribution.specular += (dotProduct * _light.intensity.rgb);
-func SCNShaderModifierEntryPointLightingModel() uintptr {
+func SCNShaderModifierEntryPointLightingModel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNShaderModifierEntryPointLightingModel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant SCNShaderModifierEntryPointSurface @abstract This is the entry point to alter the surface representation of the material, before the lighting has taken place. Structures available from the SCNShaderModifierEntryPointSurface entry point: | struct SCNShaderSurface { |    float3 view;                       // Direction from the point on the surface toward the camera (V) |    float3 position;                   // Position of the fragment |    float3 normal;                     // Normal of the fragment (N) |    float3 geometryNormal;             // Geometric normal of the fragment (normal map is ignored) |    float3 tangent;                    // Tangent of the fragment |    float3 bitangent;                  // Bitangent of the fragment |    float4 ambient;                    // Ambient property of the fragment |    float2 ambientTexcoord;            // Ambient texture coordinates |    float4 diffuse;                    // Diffuse property of the fragment. Alpha contains the opacity. |    float2 diffuseTexcoord;            // Diffuse texture coordinates |    float4 specular;                   // Specular property of the fragment |    float2 specularTexcoord;           // Specular texture coordinates |    float4 emission;                   // Emission property of the fragment |    float2 emissionTexcoord;           // Emission texture coordinates |    float4 multiply;                   // Multiply property of the fragment |    float2 multiplyTexcoord;           // Multiply texture coordinates |    float4 transparent;                // Transparent property of the fragment |    float2 transparentTexcoord;        // Transparent texture coordinates |    float4 reflective;                 // Reflective property of the fragment |    float  metalness;                  // Metalness property of the fragment |    float2 metalnessTexcoord;          // Metalness texture coordinates |    float  roughness;                  // Roughness property of the fragment |    float2 roughnessTexcoord;          // Roughness texture coordinates |    float  clearCoat;                  // Clear Coat property of the fragment.           Available since macOS 10.15, iOS 13, tvOS 13 and watchOS 6. |    float2 clearCoatTexcoord;          // Clear Coat texture coordinates.                Available since macOS 10.15, iOS 13, tvOS 13 and watchOS 6. |    float  clearCoatRoughness;         // Clear Coat Roughness property of the fragment. Available since macOS 10.15, iOS 13, tvOS 13 and watchOS 6. |    float2 clearCoatRoughnessTexcoord; // Clear Coat Roughness texture coordinates.      Available since macOS 10.15, iOS 13, tvOS 13 and watchOS 6. |    float3 clearCoatNormal;            // Clear Coat Normal property of the fragment.    Available since macOS 10.15, iOS 13, tvOS 13 and watchOS 6. |    float2 clearCoatNormalTexcoord;    // Clear Coat Normnal texture coordinates.        Available since macOS 10.15, iOS 13, tvOS 13 and watchOS 6. |    float4 selfIllumination;           // Self Illumination property of the fragment.    Available since macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Available as `emission` in previous versions. |    float2 selfIlluminationTexcoord;   // Self Illumination texture coordinates.         Available since macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Available as `emissionTexcoord` in previous versions. |    float  ambientOcclusion;           // Ambient Occlusion property of the fragment.    Available since macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Available as `multiply` in previous versions. |    float2 ambientOcclusionTexcoord;   // Ambient Occlusion texture coordinates.         Available since macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Available as `multiplyTexcoord` in previous versions. |    float  shininess;                  // Shininess property of the fragment |    float  fresnel;                    // Fresnel property of the fragment | } _surface; | | Access: ReadWrite | Stages: Fragment shader only All geometric fields are in view space. All the other properties will be colors (texture have already been sampled at this stage) or floats. You can however do an extra sampling of standard textures if you want. In this case the naming pattern is u_<property>Texture. For example u_diffuseTexture or u_reflectiveTexture. Note that you have to be sure that the material do have a texture set for this property, otherwise you'll trigger a shader compilation error. Example: Procedural black and white stripes GLSL | uniform float Scale = 12.0; | uniform float Width = 0.25; | uniform float Blend = 0.3; | | vec2 position = fract(_surface.diffuseTexcoord * Scale); | float f1 = clamp(position.y / Blend, 0.0, 1.0); | float f2 = clamp((position.y - Width) / Blend, 0.0, 1.0); | f1 = f1 * (1.0 - f2); | f1 = f1 * f1 * 2.0 * (3. * 2. * f1); | _surface.diffuse = mix(vec4(1.0), vec4(0.0), f1); Metal Shading Language | #pragma arguments | float Scale; | float Width; | float Blend; | | float2 position = fract(_surface.diffuseTexcoord * Scale); | float f1 = clamp(position.y / Blend, 0.0, 1.0); | float f2 = clamp((position.y - Width) / Blend, 0.0, 1.0); | f1 = f1 * (1.0 - f2); | f1 = f1 * f1 * 2.0 * (3. * 2. * f1); | _surface.diffuse = mix(float4(1.0), float4(0.0), f1);
-func SCNShaderModifierEntryPointSurface() uintptr {
+func SCNShaderModifierEntryPointSurface() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNShaderModifierEntryPointSurface")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SCNVector3Zero() SCNVector3 {

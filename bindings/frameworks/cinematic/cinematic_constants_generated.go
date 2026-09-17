@@ -4,5 +4,12 @@
 
 package cinematic
 
-// CNCinematicErrorDomain returns the address of the symbol CNCinematicErrorDomain.
-func CNCinematicErrorDomain() uintptr { return _symbol("CNCinematicErrorDomain") }
+import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+)
+
+// CNCinematicErrorDomain returns the string constant CNCinematicErrorDomain, for use as a dictionary key or argument.
+func CNCinematicErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNCinematicErrorDomain")))
+}

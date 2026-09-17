@@ -1191,7 +1191,7 @@ func (sp *SavePanel) TagNames() []string {
 	return _mainthread0
 }
 
-// ShowsContentTypes reports whether `NSSavePanel`: Whether or not to show a control for selecting the type of the saved file. The control shows the types in `allowedContentTypes`. Default is `NO`. `NSOpenPanel`: Not used. - Note: If `allowedContentTypes` is empty, the control is not displayed.
+// ShowsContentTypes reports whether to show a popup list for selecting the type of the saved file. The popup list shows the localized description for the types in `allowedContentTypes`. To display a different description, implement the delegate method `-panel:displayNameForType:`. The default value is `NO`, do not show the content types. - Note: If `allowedContentTypes` is empty, the control is not displayed.
 func (sp *SavePanel) ShowsContentTypes() bool {
 	defer runtime.KeepAlive(sp)
 	var _mainthread0 bool

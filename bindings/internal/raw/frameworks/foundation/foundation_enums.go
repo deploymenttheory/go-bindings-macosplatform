@@ -67,17 +67,28 @@ func (e MDQuerySortOptionFlags) String() string {
 type NSActivityOptions uint64
 
 const (
-	NSActivityIdleDisplaySleepDisabled             NSActivityOptions = 1099511627776
-	NSActivityIdleSystemSleepDisabled              NSActivityOptions = 1048576
-	NSActivitySuddenTerminationDisabled            NSActivityOptions = 16384
-	NSActivityAutomaticTerminationDisabled         NSActivityOptions = 32768
-	NSActivityAnimationTrackingEnabled             NSActivityOptions = 35184372088832
-	NSActivityTrackingEnabled                      NSActivityOptions = 70368744177664
-	NSActivityUserInitiated                        NSActivityOptions = 16777215
+	// A flag to require the screen to stay powered on.
+	NSActivityIdleDisplaySleepDisabled NSActivityOptions = 1099511627776
+	// A flag to prevent idle sleep. This is negated by `NSActivityUserInitiatedAllowingIdleSystemSleep`.
+	NSActivityIdleSystemSleepDisabled NSActivityOptions = 1048576
+	// A flag to prevent sudden termination. This is included by `NSActivityUserInitiatedAllowingIdleSystemSleep`.
+	NSActivitySuddenTerminationDisabled NSActivityOptions = 16384
+	// A flag to prevent automatic termination. This is included by `NSActivityUserInitiatedAllowingIdleSystemSleep`.
+	NSActivityAutomaticTerminationDisabled NSActivityOptions = 32768
+	// A flag to track the activity with an animation signpost interval. Use this to track the timing of a user interaction by annotating the beginning and end of an activity using an animation signpost interval. This differs from `NSActivityTrackingEnabled` in the type of interval signposts the logging system emits. Use this when the interaction involves an animation.
+	NSActivityAnimationTrackingEnabled NSActivityOptions = 35184372088832
+	// A flag to track the activity with a signpost interval. Use this to track the timing of a user interaction by annotating the beginning and end of an activity using a signpost interval. This differs from `NSActivityAnimationTrackingEnabled` in the type of interval signposts the logging system emits. Use `NSActivityAnimationTrackingEnabled` when the interaction involves an animation.
+	NSActivityTrackingEnabled NSActivityOptions = 70368744177664
+	// A flag to indicate the app is performing a user-requested action. Examples of user initiated actions are exporting or downloading a user-specified file or dismissing a form sheet.
+	NSActivityUserInitiated NSActivityOptions = 16777215
+	// A flag to indicate the app is performing a user-requested action, but that the system can sleep on idle.
 	NSActivityUserInitiatedAllowingIdleSystemSleep NSActivityOptions = 15728639
-	NSActivityBackground                           NSActivityOptions = 255
-	NSActivityLatencyCritical                      NSActivityOptions = 1095216660480
-	NSActivityUserInteractive                      NSActivityOptions = 1095233437695
+	// A flag to indicate the app has initiated some kind of work, but not as the direct result of user request.
+	NSActivityBackground NSActivityOptions = 255
+	// A flag to indicate the activity requires the highest amount of timer and I/O precision available. Very few applications should need to use this constant.
+	NSActivityLatencyCritical NSActivityOptions = 1095216660480
+	// A flag to indicate the app is responding to user interaction. Examples of user-interactive actions include scrolling and interactively dismissing from a navigation controller.
+	NSActivityUserInteractive NSActivityOptions = 1095233437695
 )
 
 func (e NSActivityOptions) String() string {
@@ -121,31 +132,52 @@ func (e NSActivityOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Values representing alignment operations.
 type NSAlignmentOptions uint64
 
 const (
-	NSAlignMinXInward      NSAlignmentOptions = 1
-	NSAlignMinYInward      NSAlignmentOptions = 2
-	NSAlignMaxXInward      NSAlignmentOptions = 4
-	NSAlignMaxYInward      NSAlignmentOptions = 8
-	NSAlignWidthInward     NSAlignmentOptions = 16
-	NSAlignHeightInward    NSAlignmentOptions = 32
-	NSAlignMinXOutward     NSAlignmentOptions = 256
-	NSAlignMinYOutward     NSAlignmentOptions = 512
-	NSAlignMaxXOutward     NSAlignmentOptions = 1024
-	NSAlignMaxYOutward     NSAlignmentOptions = 2048
-	NSAlignWidthOutward    NSAlignmentOptions = 4096
-	NSAlignHeightOutward   NSAlignmentOptions = 8192
-	NSAlignMinXNearest     NSAlignmentOptions = 65536
-	NSAlignMinYNearest     NSAlignmentOptions = 131072
-	NSAlignMaxXNearest     NSAlignmentOptions = 262144
-	NSAlignMaxYNearest     NSAlignmentOptions = 524288
-	NSAlignWidthNearest    NSAlignmentOptions = 1048576
-	NSAlignHeightNearest   NSAlignmentOptions = 2097152
-	NSAlignRectFlipped     NSAlignmentOptions = 9223372036854775808
-	NSAlignAllEdgesInward  NSAlignmentOptions = 15
+	// Specifies that alignment of the minimum X coordinate should be to the nearest inward integral value.
+	NSAlignMinXInward NSAlignmentOptions = 1
+	// Specifies that alignment of the minimum Y coordinate should be to the nearest inward integral value.
+	NSAlignMinYInward NSAlignmentOptions = 2
+	// Specifies that alignment of the maximum X coordinate should be to the nearest inward integral value.
+	NSAlignMaxXInward NSAlignmentOptions = 4
+	// Specifies that alignment of the maximum Y coordinate should be to the nearest inward integral value.
+	NSAlignMaxYInward NSAlignmentOptions = 8
+	// Specifies that alignment of the width should be to the nearest inward integral value.
+	NSAlignWidthInward NSAlignmentOptions = 16
+	// Specifies that alignment of the height should be to the nearest inward integral value.
+	NSAlignHeightInward NSAlignmentOptions = 32
+	// Specifies that alignment of the minimum X coordinate should be to the nearest outward integral value.
+	NSAlignMinXOutward NSAlignmentOptions = 256
+	// Specifies that alignment of the minimum Y coordinate should be to the nearest outward integral value.
+	NSAlignMinYOutward NSAlignmentOptions = 512
+	// Specifies that alignment of the maximum X coordinate should be to the nearest outward integral value.
+	NSAlignMaxXOutward NSAlignmentOptions = 1024
+	// Specifies that alignment of the maximum Y coordinate should be to the nearest outward integral value.
+	NSAlignMaxYOutward NSAlignmentOptions = 2048
+	// Specifies that alignment of the width should be to the nearest outward integral value.
+	NSAlignWidthOutward NSAlignmentOptions = 4096
+	// Specifies that alignment of the height should be to the nearest outward integral value.
+	NSAlignHeightOutward NSAlignmentOptions = 8192
+	// Specifies that alignment of the minimum X coordinate should be to the nearest integral value.
+	NSAlignMinXNearest NSAlignmentOptions = 65536
+	// Specifies that alignment of the minimum Y coordinate should be to the nearest integral value.
+	NSAlignMinYNearest NSAlignmentOptions = 131072
+	// Specifies that alignment of the maximum X coordinate should be to the nearest integral value.
+	NSAlignMaxXNearest NSAlignmentOptions = 262144
+	// Specifies that alignment of the maximum Y coordinate should be to the nearest integral value.
+	NSAlignMaxYNearest NSAlignmentOptions = 524288
+	// Specifies that alignment of the width should be to the nearest integral value.
+	NSAlignWidthNearest NSAlignmentOptions = 1048576
+	// Specifies that alignment of the height should be to the nearest integral value.
+	NSAlignHeightNearest NSAlignmentOptions = 2097152
+	// This option should be included if the rectangle is in a flipped coordinate system. This allows 0.5 to be treated in a visually consistent way.
+	NSAlignRectFlipped NSAlignmentOptions = 9223372036854775808
+	// Aligns all edges inward. This is the same as `NSAlignMinXInward|NSAlignMaxXInward|NSAlignMinYInward|NSAlignMaxYInward`.
+	NSAlignAllEdgesInward NSAlignmentOptions = 15
+	// Aligns all edges outward. This is the same as `NSAlignMinXOutward|NSAlignMaxXOutward|NSAlignMinYOutward|NSAlignMaxYOutward`.
 	NSAlignAllEdgesOutward NSAlignmentOptions = 3840
+	// Aligns all edges to the nearest integral value. This is the same as `NSAlignMinXNearest|NSAlignMaxXNearest|NSAlignMinYNearest|NSAlignMaxYNearest`.
 	NSAlignAllEdgesNearest NSAlignmentOptions = 983040
 )
 
@@ -226,16 +258,27 @@ func (e NSAlignmentOptions) String() string {
 type NSAppleEventSendOptions uint64
 
 const (
-	NSAppleEventSendNoReply        NSAppleEventSendOptions = 1
-	NSAppleEventSendQueueReply     NSAppleEventSendOptions = 2
-	NSAppleEventSendWaitForReply   NSAppleEventSendOptions = 3
-	NSAppleEventSendNeverInteract  NSAppleEventSendOptions = 16
-	NSAppleEventSendCanInteract    NSAppleEventSendOptions = 32
+	// Sender doesn't want a reply to event.
+	NSAppleEventSendNoReply NSAppleEventSendOptions = 1
+	// Sender wants a reply but won't wait.
+	NSAppleEventSendQueueReply NSAppleEventSendOptions = 2
+	// Sender wants a reply and will wait.
+	NSAppleEventSendWaitForReply NSAppleEventSendOptions = 3
+	// Server should not interact with user.
+	NSAppleEventSendNeverInteract NSAppleEventSendOptions = 16
+	// Server may try to interact with user.
+	NSAppleEventSendCanInteract NSAppleEventSendOptions = 32
+	// Server should always interact with user where appropriate.
 	NSAppleEventSendAlwaysInteract NSAppleEventSendOptions = 48
+	// Interaction may switch layer.
 	NSAppleEventSendCanSwitchLayer NSAppleEventSendOptions = 64
-	NSAppleEventSendDontRecord     NSAppleEventSendOptions = 4096
-	NSAppleEventSendDontExecute    NSAppleEventSendOptions = 8192
-	NSAppleEventSendDontAnnotate   NSAppleEventSendOptions = 65536
+	// Don't record this event.
+	NSAppleEventSendDontRecord NSAppleEventSendOptions = 4096
+	// Don't execute this event; used for recording.
+	NSAppleEventSendDontExecute NSAppleEventSendOptions = 8192
+	// Don't automatically add any sandbox or other annotations to the event.
+	NSAppleEventSendDontAnnotate NSAppleEventSendOptions = 65536
+	// The default options: wait for reply and allow interaction.
 	NSAppleEventSendDefaultOptions NSAppleEventSendOptions = 35
 )
 
@@ -280,11 +323,12 @@ func (e NSAppleEventSendOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Options for enumerating attributes.
 type NSAttributedStringEnumerationOptions uint64
 
 const (
-	NSAttributedStringEnumerationReverse                          NSAttributedStringEnumerationOptions = 2
+	// Causes the enumeration to occur in reverse.
+	NSAttributedStringEnumerationReverse NSAttributedStringEnumerationOptions = 2
+	// If this option is supplied, the longest effective range computation is not performed; the blocks may be invoked with consecutive attribute runs that have the same value.
 	NSAttributedStringEnumerationLongestEffectiveRangeNotRequired NSAttributedStringEnumerationOptions = 1048576
 )
 
@@ -372,11 +416,12 @@ func (e NSAttributedStringMarkdownParsingFailurePolicy) String() string {
 	}
 }
 
-// These constants indicate whether background activity has been completed successfully or whether additional processing should be deferred until a more optimal time.
 type NSBackgroundActivityResult int64
 
 const (
+	// The activity has finished executing. If the activity repeats, the next invocation is scheduled by the system.
 	NSBackgroundActivityResultFinished NSBackgroundActivityResult = 1
+	// System conditions have changed since the time the activity began executing, and deferral of additional work is recommended.
 	NSBackgroundActivityResultDeferred NSBackgroundActivityResult = 2
 )
 
@@ -420,14 +465,17 @@ func (e NSBinarySearchingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Specifies display of file or storage byte counts. The display style is platform specific.
 type NSByteCountFormatterCountStyle int64
 
 const (
-	NSByteCountFormatterCountStyleFile    NSByteCountFormatterCountStyle = 0
-	NSByteCountFormatterCountStyleMemory  NSByteCountFormatterCountStyle = 1
+	// Specifies display of file byte counts. The actual behavior for this is platform-specific; in macOS 10.8, this uses the decimal style, but that may change over time.
+	NSByteCountFormatterCountStyleFile NSByteCountFormatterCountStyle = 0
+	// Specifies display of memory byte counts. The actual behavior for this is platform-specific; in macOS 10.8, this uses the binary style, but that may change over time.
+	NSByteCountFormatterCountStyleMemory NSByteCountFormatterCountStyle = 1
+	// Causes 1000 bytes to be shown as 1 KB. It is better to use `NSByteCountFormatterCountStyleFile` or `NSByteCountFormatterCountStyleMemory` in most cases.
 	NSByteCountFormatterCountStyleDecimal NSByteCountFormatterCountStyle = 2
-	NSByteCountFormatterCountStyleBinary  NSByteCountFormatterCountStyle = 3
+	// Causes 1024 bytes to be shown as 1 KB. It is better to use `NSByteCountFormatterCountStyleFile` or `NSByteCountFormatterCountStyleMemory` in most cases.
+	NSByteCountFormatterCountStyleBinary NSByteCountFormatterCountStyle = 3
 )
 
 func (e NSByteCountFormatterCountStyle) String() string {
@@ -445,22 +493,31 @@ func (e NSByteCountFormatterCountStyle) String() string {
 	}
 }
 
-// Specifies the units appropriate for the formatter to display. Specifying any units explicitly causes just those units to be used in showing the number.
 type NSByteCountFormatterUnits uint64
 
 const (
 	// This causes default units appropriate for the platform to be used. This is the default.
-	NSByteCountFormatterUseDefault    NSByteCountFormatterUnits = 0
-	NSByteCountFormatterUseBytes      NSByteCountFormatterUnits = 1
-	NSByteCountFormatterUseKB         NSByteCountFormatterUnits = 2
-	NSByteCountFormatterUseMB         NSByteCountFormatterUnits = 4
-	NSByteCountFormatterUseGB         NSByteCountFormatterUnits = 8
-	NSByteCountFormatterUseTB         NSByteCountFormatterUnits = 16
-	NSByteCountFormatterUsePB         NSByteCountFormatterUnits = 32
-	NSByteCountFormatterUseEB         NSByteCountFormatterUnits = 64
-	NSByteCountFormatterUseZB         NSByteCountFormatterUnits = 128
+	NSByteCountFormatterUseDefault NSByteCountFormatterUnits = 0
+	// Displays bytes in the formatter content.
+	NSByteCountFormatterUseBytes NSByteCountFormatterUnits = 1
+	// Displays kilobytes in the formatter content.
+	NSByteCountFormatterUseKB NSByteCountFormatterUnits = 2
+	// Displays megabytes in the formatter content.
+	NSByteCountFormatterUseMB NSByteCountFormatterUnits = 4
+	// Displays gigabytes in the formatter content.
+	NSByteCountFormatterUseGB NSByteCountFormatterUnits = 8
+	// Displays terabytes in the formatter content.
+	NSByteCountFormatterUseTB NSByteCountFormatterUnits = 16
+	// Displays petabytes in the formatter content.
+	NSByteCountFormatterUsePB NSByteCountFormatterUnits = 32
+	// Displays exabytes in the formatter content.
+	NSByteCountFormatterUseEB NSByteCountFormatterUnits = 64
+	// Displays zettabytes in the formatter content.
+	NSByteCountFormatterUseZB NSByteCountFormatterUnits = 128
+	// Displays yottabytes in the formatter content.
 	NSByteCountFormatterUseYBOrHigher NSByteCountFormatterUnits = 65280
-	NSByteCountFormatterUseAll        NSByteCountFormatterUnits = 65535
+	// Can use any unit in the formatter content.
+	NSByteCountFormatterUseAll NSByteCountFormatterUnits = 65535
 )
 
 func (e NSByteCountFormatterUnits) String() string {
@@ -504,11 +561,16 @@ func (e NSByteCountFormatterUnits) String() string {
 type NSCalculationError uint64
 
 const (
-	NSCalculationNoError         NSCalculationError = 0
+	// No error occurred.
+	NSCalculationNoError NSCalculationError = 0
+	// The number can't be represented in 38 significant digits.
 	NSCalculationLossOfPrecision NSCalculationError = 1
-	NSCalculationUnderflow       NSCalculationError = 2
-	NSCalculationOverflow        NSCalculationError = 3
-	NSCalculationDivideByZero    NSCalculationError = 4
+	// The number is too small to represent.
+	NSCalculationUnderflow NSCalculationError = 2
+	// The number is too large to represent.
+	NSCalculationOverflow NSCalculationError = 3
+	// The caller tried to divide by `0`.
+	NSCalculationDivideByZero NSCalculationError = 4
 )
 
 func (e NSCalculationError) String() string {
@@ -528,18 +590,25 @@ func (e NSCalculationError) String() string {
 	}
 }
 
-// The options for arithmetic operations involving calendars.
 type NSCalendarOptions uint64
 
 const (
-	NSCalendarWrapComponents                          NSCalendarOptions = 1
-	NSCalendarMatchStrictly                           NSCalendarOptions = 2
-	NSCalendarSearchBackwards                         NSCalendarOptions = 4
+	// Specifies that the components specified for an `NSDateComponents` object should be incremented and wrap around to zero/one on overflow, but should not cause higher units to be incremented.
+	NSCalendarWrapComponents NSCalendarOptions = 1
+	// Specifies that the operation should travel as far forward or backward as necessary looking for a match.
+	NSCalendarMatchStrictly NSCalendarOptions = 2
+	// Specifies that the operation should travel backwards to find the previous match before the given date.
+	NSCalendarSearchBackwards NSCalendarOptions = 4
+	// Specifies that, when there is no matching time before the end of the next instance of the next highest unit specified in the given `NSDateComponents` object, this method uses the previous existing value of the missing unit and preserves the lower units' values.
 	NSCalendarMatchPreviousTimePreservingSmallerUnits NSCalendarOptions = 256
-	NSCalendarMatchNextTimePreservingSmallerUnits     NSCalendarOptions = 512
-	NSCalendarMatchNextTime                           NSCalendarOptions = 1024
-	NSCalendarMatchFirst                              NSCalendarOptions = 4096
-	NSCalendarMatchLast                               NSCalendarOptions = 8192
+	// Specifies that, when there is no matching time before the end of the next instance of the next highest unit specified in the given `NSDateComponents` object, this method uses the next existing value of the missing unit and preserves the lower units' values.
+	NSCalendarMatchNextTimePreservingSmallerUnits NSCalendarOptions = 512
+	// Specifies that, when there is no matching time before the end of the next instance of the next highest unit specified in the given `NSDateComponents` object, this method uses the next existing value of the missing unit and does not preserve the lower units' values.
+	NSCalendarMatchNextTime NSCalendarOptions = 1024
+	// Specifies that, if there are two or more matching times, the operation should return the first occurrence.
+	NSCalendarMatchFirst NSCalendarOptions = 4096
+	// Specifies that, if there are two or more matching times, the operation should return the last occurrence.
+	NSCalendarMatchLast NSCalendarOptions = 8192
 )
 
 func (e NSCalendarOptions) String() string {
@@ -574,45 +643,76 @@ func (e NSCalendarOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Calendrical units such as year, month, day and hour.
 type NSCalendarUnit uint64
 
 const (
-	NSCalendarUnitEra               NSCalendarUnit = 2
-	NSCalendarUnitYear              NSCalendarUnit = 4
-	NSCalendarUnitMonth             NSCalendarUnit = 8
-	NSCalendarUnitDay               NSCalendarUnit = 16
-	NSCalendarUnitHour              NSCalendarUnit = 32
-	NSCalendarUnitMinute            NSCalendarUnit = 64
-	NSCalendarUnitSecond            NSCalendarUnit = 128
-	NSCalendarUnitWeekday           NSCalendarUnit = 512
-	NSCalendarUnitWeekdayOrdinal    NSCalendarUnit = 1024
-	NSCalendarUnitQuarter           NSCalendarUnit = 2048
-	NSCalendarUnitWeekOfMonth       NSCalendarUnit = 4096
-	NSCalendarUnitWeekOfYear        NSCalendarUnit = 8192
+	// Identifier for the era unit. The corresponding value is an `NSInteger`.
+	NSCalendarUnitEra NSCalendarUnit = 2
+	// Identifier for the year unit. The corresponding value is an `NSInteger`.
+	NSCalendarUnitYear NSCalendarUnit = 4
+	// Identifier for the month unit. The corresponding value is an `NSInteger`.
+	NSCalendarUnitMonth NSCalendarUnit = 8
+	// Identifier for the day unit. The corresponding value is an `NSInteger`.
+	NSCalendarUnitDay NSCalendarUnit = 16
+	// Identifier for the hour unit. The corresponding value is an `NSInteger`.
+	NSCalendarUnitHour NSCalendarUnit = 32
+	// Identifier for the minute unit. The corresponding value is an `NSInteger`.
+	NSCalendarUnitMinute NSCalendarUnit = 64
+	// Identifier for the second unit. The corresponding value is a `double`.
+	NSCalendarUnitSecond NSCalendarUnit = 128
+	// Identifier for the weekday unit. The corresponding value is an `NSInteger`. The weekday units are the numbers `1` through `N` (where for the Gregorian calendar `N`=`7` and `1` is Sunday).
+	NSCalendarUnitWeekday NSCalendarUnit = 512
+	// Identifier for the ordinal weekday unit. The corresponding value is an `NSInteger`. The weekday ordinal unit describes ordinal position within the month unit of the corresponding weekday unit. For example, in the Gregorian calendar a weekday ordinal unit of `2` for a weekday unit `3` indicates "the second Tuesday in the month".
+	NSCalendarUnitWeekdayOrdinal NSCalendarUnit = 1024
+	// Identifier for the quarter of the calendar. The corresponding value is an `NSInteger`. > Important: The `NSCalendarUnitQuarter` unit is largely unimplemented, and is not recommended for use.
+	NSCalendarUnitQuarter NSCalendarUnit = 2048
+	// Identifier for the week of the month calendar unit.
+	NSCalendarUnitWeekOfMonth NSCalendarUnit = 4096
+	// Identifier for the week of the year calendar unit.
+	NSCalendarUnitWeekOfYear NSCalendarUnit = 8192
+	// Identifier for the week-counting year unit.
 	NSCalendarUnitYearForWeekOfYear NSCalendarUnit = 16384
-	NSCalendarUnitNanosecond        NSCalendarUnit = 32768
-	NSCalendarUnitDayOfYear         NSCalendarUnit = 65536
-	NSCalendarUnitCalendar          NSCalendarUnit = 1048576
-	NSCalendarUnitTimeZone          NSCalendarUnit = 2097152
-	NSCalendarUnitIsLeapMonth       NSCalendarUnit = 1073741824
-	NSCalendarUnitIsRepeatedDay     NSCalendarUnit = 2147483648
-	NSEraCalendarUnit               NSCalendarUnit = 2
-	NSYearCalendarUnit              NSCalendarUnit = 4
-	NSMonthCalendarUnit             NSCalendarUnit = 8
-	NSDayCalendarUnit               NSCalendarUnit = 16
-	NSHourCalendarUnit              NSCalendarUnit = 32
-	NSMinuteCalendarUnit            NSCalendarUnit = 64
-	NSSecondCalendarUnit            NSCalendarUnit = 128
-	NSWeekCalendarUnit              NSCalendarUnit = 256
-	NSWeekdayCalendarUnit           NSCalendarUnit = 512
-	NSWeekdayOrdinalCalendarUnit    NSCalendarUnit = 1024
-	NSQuarterCalendarUnit           NSCalendarUnit = 2048
-	NSWeekOfMonthCalendarUnit       NSCalendarUnit = 4096
-	NSWeekOfYearCalendarUnit        NSCalendarUnit = 8192
+	// Identifier for the nanosecond unit.
+	NSCalendarUnitNanosecond NSCalendarUnit = 32768
+	NSCalendarUnitDayOfYear  NSCalendarUnit = 65536
+	// Identifier for the calendar of a date components object. The corresponding value is an `NSCalendar`.
+	NSCalendarUnitCalendar NSCalendarUnit = 1048576
+	// Identifier for the time zone of a date components object. The corresponding value is an `NSTimeZone`.
+	NSCalendarUnitTimeZone      NSCalendarUnit = 2097152
+	NSCalendarUnitIsLeapMonth   NSCalendarUnit = 1073741824
+	NSCalendarUnitIsRepeatedDay NSCalendarUnit = 2147483648
+	// Specifies the era unit. @deprecated Use `NSCalendarUnitEra` instead.
+	NSEraCalendarUnit NSCalendarUnit = 2
+	// Specifies the year unit. @deprecated Use `NSCalendarUnitYear` instead.
+	NSYearCalendarUnit NSCalendarUnit = 4
+	// Specifies the month unit. @deprecated Use `NSCalendarUnitMonth` instead.
+	NSMonthCalendarUnit NSCalendarUnit = 8
+	// Specifies the day unit. @deprecated Use `NSCalendarUnitDay` instead.
+	NSDayCalendarUnit NSCalendarUnit = 16
+	// Specifies the hour unit. @deprecated Use `NSCalendarUnitHour` instead.
+	NSHourCalendarUnit NSCalendarUnit = 32
+	// Specifies the minute unit. @deprecated Use `NSCalendarUnitMinute` instead.
+	NSMinuteCalendarUnit NSCalendarUnit = 64
+	// Specifies the second unit. @deprecated Use `NSCalendarUnitSecond` instead.
+	NSSecondCalendarUnit NSCalendarUnit = 128
+	// Specifies the week unit. Equal to `kCFCalendarUnitWeek`. @deprecated Use `NSCalendarUnitWeekOfMonth` or `NSCalendarUnitWeekOfYear` instead.
+	NSWeekCalendarUnit NSCalendarUnit = 256
+	// Specifies the weekday unit. @deprecated Use `NSCalendarUnitWeekday` instead.
+	NSWeekdayCalendarUnit NSCalendarUnit = 512
+	// Specifies the ordinal weekday unit. The weekday ordinal unit describes the ordinal position within the month of the corresponding weekday unit. For example, in the Gregorian calendar a weekday ordinal of 2 for a weekday of 3 indicates "the second Tuesday in the month". Equal to `kCFCalendarUnitWeekdayOrdinal`. @deprecated Use `NSCalendarUnitWeekdayOrdinal` instead.
+	NSWeekdayOrdinalCalendarUnit NSCalendarUnit = 1024
+	// Specifies the quarter unit. @deprecated Use `NSCalendarUnitQuarter` instead.
+	NSQuarterCalendarUnit NSCalendarUnit = 2048
+	// Specifies the week of the month calendar unit. @deprecated Use `NSCalendarUnitWeekOfMonth` instead.
+	NSWeekOfMonthCalendarUnit NSCalendarUnit = 4096
+	// Specifies the week of the year calendar unit. @deprecated Use `NSCalendarUnitWeekOfYear` instead.
+	NSWeekOfYearCalendarUnit NSCalendarUnit = 8192
+	// Specifies the year when the calendar is being interpreted as a week-based calendar. @deprecated Use `NSCalendarUnitYearForWeekOfYear` instead.
 	NSYearForWeekOfYearCalendarUnit NSCalendarUnit = 16384
-	NSCalendarCalendarUnit          NSCalendarUnit = 1048576
-	NSTimeZoneCalendarUnit          NSCalendarUnit = 2097152
+	// Specifies the calendar of the calendar. @deprecated Use `NSCalendarUnitCalendar` instead.
+	NSCalendarCalendarUnit NSCalendarUnit = 1048576
+	// Specifies the time zone of the calendar as an `NSTimeZone`. @deprecated Use `NSCalendarUnitTimeZone` instead.
+	NSTimeZoneCalendarUnit NSCalendarUnit = 2097152
 )
 
 func (e NSCalendarUnit) String() string {
@@ -749,13 +849,15 @@ func (e NSCollectionChangeType) String() string {
 	}
 }
 
-// Constants that describe the possible types of modifier for a comparison predicate.
 type NSComparisonPredicateModifier uint64
 
 const (
+	// A predicate to compare directly the left and right hand sides.
 	NSDirectPredicateModifier NSComparisonPredicateModifier = 0
-	NSAllPredicateModifier    NSComparisonPredicateModifier = 1
-	NSAnyPredicateModifier    NSComparisonPredicateModifier = 2
+	// A predicate to compare all entries in the destination of a to-many relationship.
+	NSAllPredicateModifier NSComparisonPredicateModifier = 1
+	// A predicate to match with any entry in the destination of a to-many relationship.
+	NSAnyPredicateModifier NSComparisonPredicateModifier = 2
 )
 
 func (e NSComparisonPredicateModifier) String() string {
@@ -771,13 +873,15 @@ func (e NSComparisonPredicateModifier) String() string {
 	}
 }
 
-// Constants that describe the possible types of string comparison for comparison predicates.
 type NSComparisonPredicateOptions uint64
 
 const (
-	NSCaseInsensitivePredicateOption      NSComparisonPredicateOptions = 1
+	// A case-insensitive predicate. You represent this option in a predicate format string using a `[c]` following a string operation (for example, `"NeXT" like[c] "next"`).
+	NSCaseInsensitivePredicateOption NSComparisonPredicateOptions = 1
+	// A diacritic-insensitive predicate. You represent this option in a predicate format string using a `[d]` following a string operation (for example, `"naïve" like[d] "naive"`).
 	NSDiacriticInsensitivePredicateOption NSComparisonPredicateOptions = 2
-	NSNormalizedPredicateOption           NSComparisonPredicateOptions = 4
+	// Indicates that the strings to be compared have been preprocessed; this supersedes other options and is intended as a performance optimization option.
+	NSNormalizedPredicateOption NSComparisonPredicateOptions = 4
 )
 
 func (e NSComparisonPredicateOptions) String() string {
@@ -797,12 +901,14 @@ func (e NSComparisonPredicateOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Constants that indicate sort order.
 type NSComparisonResult int64
 
 const (
-	NSOrderedAscending  NSComparisonResult = -1
-	NSOrderedSame       NSComparisonResult = 0
+	// The left operand is smaller than the right operand.
+	NSOrderedAscending NSComparisonResult = -1
+	// The two operands are equal.
+	NSOrderedSame NSComparisonResult = 0
+	// The left operand is greater than the right operand.
 	NSOrderedDescending NSComparisonResult = 1
 )
 
@@ -819,13 +925,15 @@ func (e NSComparisonResult) String() string {
 	}
 }
 
-// Constants that describe the possible types of a compound predicate.
 type NSCompoundPredicateType uint64
 
 const (
+	// A logical NOT predicate.
 	NSNotPredicateType NSCompoundPredicateType = 0
+	// A logical AND predicate.
 	NSAndPredicateType NSCompoundPredicateType = 1
-	NSOrPredicateType  NSCompoundPredicateType = 2
+	// A logical OR predicate.
+	NSOrPredicateType NSCompoundPredicateType = 2
 )
 
 func (e NSCompoundPredicateType) String() string {
@@ -841,10 +949,10 @@ func (e NSCompoundPredicateType) String() string {
 	}
 }
 
-// Options to modify the decoding algorithm used to decode Base64 encoded data.
 type NSDataBase64DecodingOptions uint64
 
 const (
+	// Modify the decoding algorithm so that it ignores unknown non-Base-64 bytes, including line ending characters.
 	NSDataBase64DecodingIgnoreUnknownCharacters NSDataBase64DecodingOptions = 1
 )
 
@@ -859,14 +967,17 @@ func (e NSDataBase64DecodingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Options for methods used to Base64 encode data.
 type NSDataBase64EncodingOptions uint64
 
 const (
-	NSDataBase64Encoding64CharacterLineLength     NSDataBase64EncodingOptions = 1
-	NSDataBase64Encoding76CharacterLineLength     NSDataBase64EncodingOptions = 2
+	// Set the maximum line length to 64 characters, after which a line ending is inserted.
+	NSDataBase64Encoding64CharacterLineLength NSDataBase64EncodingOptions = 1
+	// Set the maximum line length to 76 characters, after which a line ending is inserted.
+	NSDataBase64Encoding76CharacterLineLength NSDataBase64EncodingOptions = 2
+	// When a maximum line length is set, specify that the line ending to insert should include a carriage return.
 	NSDataBase64EncodingEndLineWithCarriageReturn NSDataBase64EncodingOptions = 16
-	NSDataBase64EncodingEndLineWithLineFeed       NSDataBase64EncodingOptions = 32
+	// When a maximum line length is set, specify that the line ending to insert should include a line feed.
+	NSDataBase64EncodingEndLineWithLineFeed NSDataBase64EncodingOptions = 32
 )
 
 func (e NSDataBase64EncodingOptions) String() string {
@@ -889,14 +1000,17 @@ func (e NSDataBase64EncodingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// An algorithm that indicates how to compress or decompress data.
 type NSDataCompressionAlgorithm int64
 
 const (
+	// The LZFSE compression algorithm, recommended for use on Apple platforms. LZFSE is the recommended compression algorithm if you don't have a specific reason to use another algorithm. Note that LZFSE is intended for use with Apple devices only. This algorithm generally compresses better than Zlib, but not as well as LZMA. It is generally slower than LZ4.
 	NSDataCompressionAlgorithmLZFSE NSDataCompressionAlgorithm = 0
-	NSDataCompressionAlgorithmLZ4   NSDataCompressionAlgorithm = 1
-	NSDataCompressionAlgorithmLZMA  NSDataCompressionAlgorithm = 2
-	NSDataCompressionAlgorithmZlib  NSDataCompressionAlgorithm = 3
+	// The LZ4 compression algorithm, recommended for fast compression. LZ4 is appropriate if compression speed is critical. LZ4 generally sacrifices compression ratio in order to achieve its greater speed.
+	NSDataCompressionAlgorithmLZ4 NSDataCompressionAlgorithm = 1
+	// The LZMA compression algorithm, recommended for high-compression ratio. LZMA is appropriate if compression ratio is critical and memory usage and compression speed are not a factor. LZMA is an order of magnitude slower for both compression and decompression than other algorithms. It can also use a very large amount of memory, so if you need to compress large amounts of data on embedded devices with limited memory you should probably avoid LZMA. Encoding uses LZMA level 6 only, but decompression works with any compression level.
+	NSDataCompressionAlgorithmLZMA NSDataCompressionAlgorithm = 2
+	// The zlib compression algorithm, recommended for cross-platform compression. Zlib is appropriate if you want a good balance between compression speed and compression ratio, but only if you need interoperability with non-Apple platforms. Otherwise, LZFSE is generally a better choice than Zlib. Encoding uses Zlib level 5 only, but decompression works with any compression level. It uses the raw DEFLATE format as described in IETF RFC 1951.
+	NSDataCompressionAlgorithmZlib NSDataCompressionAlgorithm = 3
 )
 
 func (e NSDataCompressionAlgorithm) String() string {
@@ -914,16 +1028,21 @@ func (e NSDataCompressionAlgorithm) String() string {
 	}
 }
 
-// Options for methods used to read data objects.
 type NSDataReadingOptions uint64
 
 const (
+	// A hint indicating the file should be mapped into virtual memory, if possible and safe.
 	NSDataReadingMappedIfSafe NSDataReadingOptions = 1
-	NSDataReadingUncached     NSDataReadingOptions = 2
+	// A hint indicating the file should not be stored in the file-system caches. For data being read once and discarded, this option can improve performance.
+	NSDataReadingUncached NSDataReadingOptions = 2
+	// Hint to map the file in if possible. This takes precedence over `NSDataReadingMappedIfSafe` if both are given.
 	NSDataReadingMappedAlways NSDataReadingOptions = 8
-	NSDataReadingMapped       NSDataReadingOptions = 1
-	NSMappedRead              NSDataReadingOptions = 1
-	NSUncachedRead            NSDataReadingOptions = 2
+	// Deprecated name for `NSDataReadingMappedIfSafe`.
+	NSDataReadingMapped NSDataReadingOptions = 1
+	// Deprecated name for `NSDataReadingMapped`.
+	NSMappedRead NSDataReadingOptions = 1
+	// Deprecated name for `NSDataReadingUncached`.
+	NSUncachedRead NSDataReadingOptions = 2
 )
 
 func (e NSDataReadingOptions) String() string {
@@ -952,12 +1071,13 @@ func (e NSDataReadingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Options for method used to search data objects.
 type NSDataSearchOptions uint64
 
 const (
+	// Search from the end of the data object.
 	NSDataSearchBackwards NSDataSearchOptions = 1
-	NSDataSearchAnchored  NSDataSearchOptions = 2
+	// Search is limited to start (or end, if searching backwards) of the data object. This option performs searching only on bytes at the beginning of the range (or the end when using `NSDataSearchBackwards`). No match at the beginning or end means nothing is found, even if a matching sequence of bytes occurs elsewhere in the data object.
+	NSDataSearchAnchored NSDataSearchOptions = 2
 )
 
 func (e NSDataSearchOptions) String() string {
@@ -974,18 +1094,25 @@ func (e NSDataSearchOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Options for methods used to write data objects.
 type NSDataWritingOptions uint64
 
 const (
-	NSDataWritingAtomic                                             NSDataWritingOptions = 1
-	NSDataWritingWithoutOverwriting                                 NSDataWritingOptions = 2
-	NSDataWritingFileProtectionNone                                 NSDataWritingOptions = 268435456
-	NSDataWritingFileProtectionComplete                             NSDataWritingOptions = 536870912
-	NSDataWritingFileProtectionCompleteUnlessOpen                   NSDataWritingOptions = 805306368
+	// An option to write data to an auxiliary file first and then replace the original file with the auxiliary file when the write completes. This option is equivalent to using a write method that takes the parameter `atomically` as `YES`.
+	NSDataWritingAtomic NSDataWritingOptions = 1
+	// An option that attempts to write data to a file and fails with an error if the destination file already exists. You can't combine this constant with `NSDataWritingAtomic` because atomic allows the system to overwrite the original file.
+	NSDataWritingWithoutOverwriting NSDataWritingOptions = 2
+	// An option to not encrypt the file when writing it out. The system doesn't store the file in an encrypted format and your app can access this file at boot time and while the device is unlocked.
+	NSDataWritingFileProtectionNone NSDataWritingOptions = 268435456
+	// An option to make the file accessible only while the device is unlocked. The system stores the file in an encrypted format and your app may only read or write to the file while the device is unlocked. At all other times, any attempts your app makes to read and write the file will fail.
+	NSDataWritingFileProtectionComplete NSDataWritingOptions = 536870912
+	// An option to allow the file to be accessible while the device is unlocked or the file is already open. Your app cannot open the file to read it or write to it when the device is locked, but your app can create new files with this class. If one of these files is open when the device is locked, your app can read and write to the opened file.
+	NSDataWritingFileProtectionCompleteUnlessOpen NSDataWritingOptions = 805306368
+	// An option to allow the file to be accessible after a user first unlocks the device. The app can read or write to the file while the device is unlocked, but while it's booting up, the file has the protection equivalent to `NSDataWritingFileProtectionComplete`.
 	NSDataWritingFileProtectionCompleteUntilFirstUserAuthentication NSDataWritingOptions = 1073741824
-	NSDataWritingFileProtectionMask                                 NSDataWritingOptions = 4026531840
-	NSAtomicWrite                                                   NSDataWritingOptions = 1
+	// An option the system uses when determining the file protection options that the system assigns to the data.
+	NSDataWritingFileProtectionMask NSDataWritingOptions = 4026531840
+	// An option that attempts to write data to an auxiliary file first and then exchange the files. @DeprecationSummary { Use `NSDataWritingAtomic` instead. }
+	NSAtomicWrite NSDataWritingOptions = 1
 )
 
 func (e NSDataWritingOptions) String() string {
@@ -1020,16 +1147,21 @@ func (e NSDataWritingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Constants for specifying how to represent quantities of time.
 type NSDateComponentsFormatterUnitsStyle int64
 
 const (
-	NSDateComponentsFormatterUnitsStylePositional  NSDateComponentsFormatterUnitsStyle = 0
+	// A style that uses the position of a unit of time to identify its value. This style is most commonly used for time values where the hour, minute, and second values are separated by colons. For example, one hour and ten minutes is displayed in the U.S. English locale as "1:10:00". > Note: This style may fall back to the behavior of `NSDateComponentsFormatterUnitsStyleAbbreviated` when attempting to display large time quantities.
+	NSDateComponentsFormatterUnitsStylePositional NSDateComponentsFormatterUnitsStyle = 0
+	// A style that uses the most abbreviated spelling for units of time. This style represents the shortest representation of units and quantities of time. For example, the quantity of 3 years, 9 months, 26 days, 19 hours, and 17 seconds is displayed in the U.S. English locale as "3y 9mo 26d 19h 17s".
 	NSDateComponentsFormatterUnitsStyleAbbreviated NSDateComponentsFormatterUnitsStyle = 1
-	NSDateComponentsFormatterUnitsStyleShort       NSDateComponentsFormatterUnitsStyle = 2
-	NSDateComponentsFormatterUnitsStyleFull        NSDateComponentsFormatterUnitsStyle = 3
-	NSDateComponentsFormatterUnitsStyleSpellOut    NSDateComponentsFormatterUnitsStyle = 4
-	NSDateComponentsFormatterUnitsStyleBrief       NSDateComponentsFormatterUnitsStyle = 5
+	// A style that uses a shortened spelling for units. For example, the quantity of 3 years, 9 months, 26 days, 19 hours, and 17 seconds is displayed in the U.S. English locale as "3 yrs, 9 mths, 26 days, 19 hr, 17 sec".
+	NSDateComponentsFormatterUnitsStyleShort NSDateComponentsFormatterUnitsStyle = 2
+	// A style that spells out the units of time, but not the quantities. For example, the quantity of 3 years, 9 months, 26 days, 19 hours, and 17 seconds is displayed in the U.S. English locale as "3 years, 9 months, 26 days, 19 hours, 17 seconds".
+	NSDateComponentsFormatterUnitsStyleFull NSDateComponentsFormatterUnitsStyle = 3
+	// A style that spells out the units and quantities of time. For example, the quantity of 3 years, 9 months, 26 days, 19 hours, and 17 seconds is displayed in the U.S. English locale as "three years, nine months, twenty-six days, nineteen hours, seventeen seconds".
+	NSDateComponentsFormatterUnitsStyleSpellOut NSDateComponentsFormatterUnitsStyle = 4
+	// A style that uses a shortened spelling for units of time that is shorter than `NSDateComponentsFormatterUnitsStyleShort`. For example, the quantity of 3 years, 9 months, 26 days, 19 hours, and 17 seconds is displayed in the U.S. English locale as "3yrs 9mths 26days 19hr 17sec".
+	NSDateComponentsFormatterUnitsStyleBrief NSDateComponentsFormatterUnitsStyle = 5
 )
 
 func (e NSDateComponentsFormatterUnitsStyle) String() string {
@@ -1051,18 +1183,23 @@ func (e NSDateComponentsFormatterUnitsStyle) String() string {
 	}
 }
 
-// Formatting constants for when values contain zeroes.
 type NSDateComponentsFormatterZeroFormattingBehavior uint64
 
 const (
-	// No formatting behavior. This behavior prevents the dropping of zero values or adding of zeroes for padding. For example, with hours, minutes, and seconds displayed, the abbreviated value for one hour and 10 seconds is “1h 0m 10s”.
-	NSDateComponentsFormatterZeroFormattingBehaviorNone         NSDateComponentsFormatterZeroFormattingBehavior = 0
-	NSDateComponentsFormatterZeroFormattingBehaviorDefault      NSDateComponentsFormatterZeroFormattingBehavior = 1
-	NSDateComponentsFormatterZeroFormattingBehaviorDropLeading  NSDateComponentsFormatterZeroFormattingBehavior = 2
-	NSDateComponentsFormatterZeroFormattingBehaviorDropMiddle   NSDateComponentsFormatterZeroFormattingBehavior = 4
+	// No formatting behavior. This behavior prevents the dropping of zero values or adding of zeroes for padding. For example, with hours, minutes, and seconds displayed, the abbreviated value for one hour and 10 seconds is "1h 0m 10s".
+	NSDateComponentsFormatterZeroFormattingBehaviorNone NSDateComponentsFormatterZeroFormattingBehavior = 0
+	// The default formatting behavior. When using positional units, this behavior drops leading zeroes but pads middle and trailing values with zeros as needed. For example, with hours, minutes, and seconds displayed, the value for one hour and 10 seconds is "1:00:10". For all other unit styles, this behavior drops all units whose values are 0. For example, when days, hours, minutes, and seconds are allowed, the abbreviated version of one hour and 10 seconds is displayed as "1h 10s".
+	NSDateComponentsFormatterZeroFormattingBehaviorDefault NSDateComponentsFormatterZeroFormattingBehavior = 1
+	// The drop leading zeroes formatting behavior. Units whose values are 0 are dropped starting at the beginning of the sequence. Units continue to be dropped until a non-zero value is encountered. For example, when days, hours, minutes, and seconds are allowed, the abbreviated version of ten minutes is displayed as "10m 0s".
+	NSDateComponentsFormatterZeroFormattingBehaviorDropLeading NSDateComponentsFormatterZeroFormattingBehavior = 2
+	// The drop middle zero units behavior. Units whose values are 0 are dropped from anywhere in the middle of a sequence. For example, when days, hours, minutes, and seconds are allowed, the abbreviated version of one hour, zero minutes, and five seconds is displayed as "0d 1h 5s".
+	NSDateComponentsFormatterZeroFormattingBehaviorDropMiddle NSDateComponentsFormatterZeroFormattingBehavior = 4
+	// The drop trailing zero units behavior. Units whose value is 0 are dropped starting at the end of the sequence. For example, when days, hours, minutes, and seconds are allowed, the abbreviated version of one hour is displayed as "0d 1h".
 	NSDateComponentsFormatterZeroFormattingBehaviorDropTrailing NSDateComponentsFormatterZeroFormattingBehavior = 8
-	NSDateComponentsFormatterZeroFormattingBehaviorDropAll      NSDateComponentsFormatterZeroFormattingBehavior = 14
-	NSDateComponentsFormatterZeroFormattingBehaviorPad          NSDateComponentsFormatterZeroFormattingBehavior = 65536
+	// The drop all zero units behavior. This behavior drops all units whose values are 0. For example, when days, hours, minutes, and seconds are allowed, the abbreviated version of one hour is displayed as "1h".
+	NSDateComponentsFormatterZeroFormattingBehaviorDropAll NSDateComponentsFormatterZeroFormattingBehavior = 14
+	// The add padding zeroes behavior. This behavior pads values with zeroes as appropriate. For example, consider the value of one hour formatted using the positional and abbreviated unit styles. When days, hours, minutes, and seconds are allowed, the value is displayed as "0d 1:00:00" using the positional style, and as "0d 1h 0m 0s" using the abbreviated style.
+	NSDateComponentsFormatterZeroFormattingBehaviorPad NSDateComponentsFormatterZeroFormattingBehavior = 65536
 )
 
 func (e NSDateComponentsFormatterZeroFormattingBehavior) String() string {
@@ -1091,13 +1228,15 @@ func (e NSDateComponentsFormatterZeroFormattingBehavior) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Constants that specify the behavior NSDateFormatter should exhibit.
 type NSDateFormatterBehavior uint64
 
 const (
+	// Specifies default formatting behavior.
 	NSDateFormatterBehaviorDefault NSDateFormatterBehavior = 0
-	NSDateFormatterBehavior10_0    NSDateFormatterBehavior = 1000
-	NSDateFormatterBehavior10_4    NSDateFormatterBehavior = 1040
+	// Specifies formatting behavior equivalent to that in OS X 10.0.
+	NSDateFormatterBehavior10_0 NSDateFormatterBehavior = 1000
+	// Specifies formatting behavior equivalent for OS X 10.4.
+	NSDateFormatterBehavior10_4 NSDateFormatterBehavior = 1040
 )
 
 func (e NSDateFormatterBehavior) String() string {
@@ -1113,15 +1252,19 @@ func (e NSDateFormatterBehavior) String() string {
 	}
 }
 
-// The following constants specify predefined format styles for dates and times.
 type NSDateFormatterStyle uint64
 
 const (
-	NSDateFormatterNoStyle     NSDateFormatterStyle = 0
-	NSDateFormatterShortStyle  NSDateFormatterStyle = 1
+	// Specifies no style. Equal to `kCFDateFormatterNoStyle`.
+	NSDateFormatterNoStyle NSDateFormatterStyle = 0
+	// Specifies a short style, typically numeric only, such as "11/23/37" or "3:30 PM". Equal to `kCFDateFormatterShortStyle`.
+	NSDateFormatterShortStyle NSDateFormatterStyle = 1
+	// Specifies a medium style, typically with abbreviated text, such as "Nov 23, 1937" or "3:30:32 PM". Equal to `kCFDateFormatterMediumStyle`.
 	NSDateFormatterMediumStyle NSDateFormatterStyle = 2
-	NSDateFormatterLongStyle   NSDateFormatterStyle = 3
-	NSDateFormatterFullStyle   NSDateFormatterStyle = 4
+	// Specifies a long style, typically with full text, such as "November 23, 1937" or "3:30:32 PM PST". Equal to `kCFDateFormatterLongStyle`.
+	NSDateFormatterLongStyle NSDateFormatterStyle = 3
+	// Specifies a full style with complete details, such as "Tuesday, April 12, 1952 AD" or "3:30:42 PM Pacific Standard Time". Equal to `kCFDateFormatterFullStyle`.
+	NSDateFormatterFullStyle NSDateFormatterStyle = 4
 )
 
 func (e NSDateFormatterStyle) String() string {
@@ -1141,15 +1284,19 @@ func (e NSDateFormatterStyle) String() string {
 	}
 }
 
-// Formatting styles for individual date and time values.
 type NSDateIntervalFormatterStyle uint64
 
 const (
-	NSDateIntervalFormatterNoStyle     NSDateIntervalFormatterStyle = 0
-	NSDateIntervalFormatterShortStyle  NSDateIntervalFormatterStyle = 1
+	// No style.
+	NSDateIntervalFormatterNoStyle NSDateIntervalFormatterStyle = 0
+	// A short style.
+	NSDateIntervalFormatterShortStyle NSDateIntervalFormatterStyle = 1
+	// A medium style.
 	NSDateIntervalFormatterMediumStyle NSDateIntervalFormatterStyle = 2
-	NSDateIntervalFormatterLongStyle   NSDateIntervalFormatterStyle = 3
-	NSDateIntervalFormatterFullStyle   NSDateIntervalFormatterStyle = 4
+	// A long style.
+	NSDateIntervalFormatterLongStyle NSDateIntervalFormatterStyle = 3
+	// A full style.
+	NSDateIntervalFormatterFullStyle NSDateIntervalFormatterStyle = 4
 )
 
 func (e NSDateIntervalFormatterStyle) String() string {
@@ -1169,11 +1316,12 @@ func (e NSDateIntervalFormatterStyle) String() string {
 	}
 }
 
-// Policies describing the action the coder should take when encountering decode failures.
 type NSDecodingFailurePolicy int64
 
 const (
-	NSDecodingFailurePolicyRaiseException    NSDecodingFailurePolicy = 0
+	// A failure policy that directs the coder to raise an exception. With this policy, the `NSCoder` raises an exception internally to propagate failure messages (and unwind the stack). This exception can be transformed into an `NSError` via any of the TopLevel decode APIs.
+	NSDecodingFailurePolicyRaiseException NSDecodingFailurePolicy = 0
+	// A failure policy that directs the coder to capture the failure as an error object. On decode failure, the `NSCoder` will capture the failure as an `NSError`, and prevent further decodes (by returning `0` / `nil` equivalent as appropriate). Use this policy if you know that all encoded objects use `failWithError:` to communicate decode failures and don't raise exceptions for error propagation.
 	NSDecodingFailurePolicySetErrorAndReturn NSDecodingFailurePolicy = 1
 )
 
@@ -1188,12 +1336,14 @@ func (e NSDecodingFailurePolicy) String() string {
 	}
 }
 
-// Options for enumerating the contents of directories.
 type NSDirectoryEnumerationOptions uint64
 
 const (
+	// An option to perform a shallow enumeration that doesn't descend into directories.
 	NSDirectoryEnumerationSkipsSubdirectoryDescendants NSDirectoryEnumerationOptions = 1
-	NSDirectoryEnumerationSkipsPackageDescendants      NSDirectoryEnumerationOptions = 2
+	// An option to treat packages like files and not descend into their contents.
+	NSDirectoryEnumerationSkipsPackageDescendants NSDirectoryEnumerationOptions = 2
+	// An option to skip hidden files.
 	NSDirectoryEnumerationSkipsHiddenFiles             NSDirectoryEnumerationOptions = 4
 	NSDirectoryEnumerationIncludesDirectoriesPostOrder NSDirectoryEnumerationOptions = 8
 	NSDirectoryEnumerationProducesRelativePathURLs     NSDirectoryEnumerationOptions = 16
@@ -1225,8 +1375,10 @@ func (e NSDirectoryEnumerationOptions) String() string {
 type NSDistributedNotificationOptions uint64
 
 const (
+	// When set, the notification is delivered immediately to all observers, regardless of their suspension behavior or suspension state.
 	NSDistributedNotificationDeliverImmediately NSDistributedNotificationOptions = 1
-	NSDistributedNotificationPostToAllSessions  NSDistributedNotificationOptions = 2
+	// When set, the notification is posted to all sessions. When not set, the notification is sent only to applications within the same login session as the posting task.
+	NSDistributedNotificationPostToAllSessions NSDistributedNotificationOptions = 2
 )
 
 func (e NSDistributedNotificationOptions) String() string {
@@ -1243,13 +1395,16 @@ func (e NSDistributedNotificationOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// The units supported by the NSEnergyFormatter class.
 type NSEnergyFormatterUnit int64
 
 const (
-	NSEnergyFormatterUnitJoule       NSEnergyFormatterUnit = 11
-	NSEnergyFormatterUnitKilojoule   NSEnergyFormatterUnit = 14
-	NSEnergyFormatterUnitCalorie     NSEnergyFormatterUnit = 1793
+	// The joule unit.
+	NSEnergyFormatterUnitJoule NSEnergyFormatterUnit = 11
+	// The kilojoule unit.
+	NSEnergyFormatterUnitKilojoule NSEnergyFormatterUnit = 14
+	// The calorie unit (chemistry "calories", abbreviated "cal").
+	NSEnergyFormatterUnitCalorie NSEnergyFormatterUnit = 1793
+	// The kilocalorie unit (kilocalories in general, abbreviated "kcal", or "C" in some locales when `isForFoodEnergyUse` is set to `YES`).
 	NSEnergyFormatterUnitKilocalorie NSEnergyFormatterUnit = 1794
 )
 
@@ -1292,23 +1447,35 @@ func (e NSEnumerationOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Defines the possible types of an expression.
 type NSExpressionType uint64
 
 const (
-	NSConstantValueExpressionType   NSExpressionType = 0
+	// An expression that always returns the same value.
+	NSConstantValueExpressionType NSExpressionType = 0
+	// An expression that always returns the parameter object itself.
 	NSEvaluatedObjectExpressionType NSExpressionType = 1
-	NSVariableExpressionType        NSExpressionType = 2
-	NSKeyPathExpressionType         NSExpressionType = 3
-	NSFunctionExpressionType        NSExpressionType = 4
-	NSUnionSetExpressionType        NSExpressionType = 5
-	NSIntersectSetExpressionType    NSExpressionType = 6
-	NSMinusSetExpressionType        NSExpressionType = 7
-	NSSubqueryExpressionType        NSExpressionType = 13
-	NSAggregateExpressionType       NSExpressionType = 14
-	NSAnyKeyExpressionType          NSExpressionType = 15
-	NSBlockExpressionType           NSExpressionType = 19
-	NSConditionalExpressionType     NSExpressionType = 20
+	// An expression that always returns whatever is stored at 'variable' in the bindings dictionary.
+	NSVariableExpressionType NSExpressionType = 2
+	// An expression that returns something that can be used as a key path.
+	NSKeyPathExpressionType NSExpressionType = 3
+	// An expression that returns the result of evaluating a symbol.
+	NSFunctionExpressionType NSExpressionType = 4
+	// An expression that returns the result of doing a unionSet: on two expressions that evaluate to flat collections (arrays or sets).
+	NSUnionSetExpressionType NSExpressionType = 5
+	// An expression that returns the result of doing an intersectSet: on two expressions that evaluate to flat collections (arrays or sets).
+	NSIntersectSetExpressionType NSExpressionType = 6
+	// An expression that returns the result of doing a minusSet: on two expressions that evaluate to flat collections (arrays or sets).
+	NSMinusSetExpressionType NSExpressionType = 7
+	// A subquery expression.
+	NSSubqueryExpressionType NSExpressionType = 13
+	// An aggregate expression.
+	NSAggregateExpressionType NSExpressionType = 14
+	// An expression that represents any key for a Spotlight query.
+	NSAnyKeyExpressionType NSExpressionType = 15
+	// A block expression.
+	NSBlockExpressionType NSExpressionType = 19
+	// A conditional expression that evaluates a predicate to determine which expression to return.
+	NSConditionalExpressionType NSExpressionType = 20
 )
 
 func (e NSExpressionType) String() string {
@@ -1344,14 +1511,17 @@ func (e NSExpressionType) String() string {
 	}
 }
 
-// Options to use when reading the contents or attributes of a file or directory.
 type NSFileCoordinatorReadingOptions uint64
 
 const (
-	NSFileCoordinatorReadingWithoutChanges                   NSFileCoordinatorReadingOptions = 1
-	NSFileCoordinatorReadingResolvesSymbolicLink             NSFileCoordinatorReadingOptions = 2
+	// Whether reading does _not_ trigger sending of -savePresentedItemChangesWithCompletionHandler: to certain NSFilePresenters in the system and waiting for those NSFilePresenters to respond. The default behavior during coordinated reading is to send -savePresentedItemChangesWithCompletionHandler: to NSFilePresenters. Specify this constant if your code does not need other objects to save changes first. If you do _not_ specify this constant, the -savePresentedItemChangesWithCompletionHandler: method of relevant file presenters is called before your code reads the item.
+	NSFileCoordinatorReadingWithoutChanges NSFileCoordinatorReadingOptions = 1
+	// Whether reading of an item that might be a symbolic link file causes the resolution of the link if it is. This affects the URL passed to the block passed to an invocation of one of the -coordinateReadingItemAtURL:... methods. Specify this constant if you want an item that might be a symbolic link to resolve to the file pointed to by that link (instead of to the link itself). When you use this option, the system provides the resolved URL to the accessor block in place of the original URL. This is not a valid option to use with -prepareForReadingItemsAtURLs:options:writingItemsAtURLs:options:error:byAccessor:.
+	NSFileCoordinatorReadingResolvesSymbolicLink NSFileCoordinatorReadingOptions = 2
+	// Whether the reading to be done will only attempt to get an item's metadata that is immediately available (name, modification date, tags, and other attributes), and not its contents. For ubiquitous items, specifying this option causes coordinated reads to be granted immediately (barring other coordinated readers or writers or file presenters on the same system preventing this) instead of waiting for any downloading of contents or additional metadata like conflicting versions or thumbnails. Attempting to read the item's contents during such a coordinated read may give unexpected results or fail.
 	NSFileCoordinatorReadingImmediatelyAvailableMetadataOnly NSFileCoordinatorReadingOptions = 4
-	NSFileCoordinatorReadingForUploading                     NSFileCoordinatorReadingOptions = 8
+	// Whether reading of an item is being done for the purpose of uploading. When using this option, NSFileCoordinator will create a temporary snapshot of the item being read and will relinquish its claim on the file once that snapshot is made to avoid blocking other coordinated writes during a potentially long upload. If the item at the URL being read is a directory (such as a document package), then the snapshot will be a new file that contains the zipped contents of that directory, and the URL passed to the accessor block will locate that file. When using this option, you may upload the document outside of the accessor block. However, you should open a file descriptor to the file or relocate the file within the accessor block before you do so, because NSFileCoordinator will unlink the file after the block returns, rendering it inaccessible via the URL.
+	NSFileCoordinatorReadingForUploading NSFileCoordinatorReadingOptions = 8
 )
 
 func (e NSFileCoordinatorReadingOptions) String() string {
@@ -1374,14 +1544,18 @@ func (e NSFileCoordinatorReadingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Options to use when changing the contents or attributes of a file or directory.
 type NSFileCoordinatorWritingOptions uint64
 
 const (
-	NSFileCoordinatorWritingForDeleting                    NSFileCoordinatorWritingOptions = 1
-	NSFileCoordinatorWritingForMoving                      NSFileCoordinatorWritingOptions = 2
-	NSFileCoordinatorWritingForMerging                     NSFileCoordinatorWritingOptions = 4
-	NSFileCoordinatorWritingForReplacing                   NSFileCoordinatorWritingOptions = 8
+	// Whether the writing to be done is actually the deletion of the item. This affects how the writing waits for previously scheduled coordinated reading and writing, how the writing causes subsequently scheduled reading and writing to wait, and what NSFilePresenter messaging is done. When this constant is specified, the file coordinator calls the -accommodatePresentedItemDeletionWithCompletionHandler: or -accommodatePresentedSubitemDeletionAtURL:completionHandler: method of relevant file presenters to give them a chance to make adjustments before the item is deleted. For example, Finder uses this when it's emptying the trash to give NSFilePresenters a chance to close documents before their files disappear, or would disappear if the files weren't still open.
+	NSFileCoordinatorWritingForDeleting NSFileCoordinatorWritingOptions = 1
+	// Whether the writing to be done is actually the moving or renaming of the item. This affects how the writing waits for previously scheduled coordinated reading and writing, how the writing causes subsequently scheduled reading and writing to wait, and what NSFilePresenter messaging is done. When specified for a directory item, the file coordinator waits for already running read and write operations of the directory's contents, which were themselves initiated through a file coordinator, to finish before moving the directory. Queued, but not executing, read and write operations on the directory's contents wait until the move operation finishes. This option has no effect when what's being moved is a plain file so you can use it in code that moves file system items without checking whether the items are files or directories. Any such check would invite a race condition anyway.
+	NSFileCoordinatorWritingForMoving NSFileCoordinatorWritingOptions = 2
+	// Whether coordinated writing triggers sending of -savePresentedItemChangesWithCompletionHandler: to certain NSFilePresenters in the system and waiting for those NSFilePresenters to respond. When this constant is specified, the file coordinator calls the -savePresentedItemChangesWithCompletionHandler: method of relevant file presenters to give them a chance to save their changes before your code makes its changes.
+	NSFileCoordinatorWritingForMerging NSFileCoordinatorWritingOptions = 4
+	// Whether the writing to be done is actually the replacement of the item with a different item. It causes the same behavior as NSFileCoordinatorWritingForDeleting except that when the item being written to is renamed or moved while the writer is being made to wait the item is considered to have been a different item, so the writer is not passed an updated URL to reflect the renaming or moving. Use this when the moving or creation of an item will replace any item that gets in its way. To avoid a race condition use it regardless of whether there is actually an item in the way before the writing begins. Don't use this when simply updating the contents of a file, even if the way you do that is writing the contents to another file and renaming it into place. This is not a valid option to use with -prepareForReadingItemsAtURLs:options:writingItemsAtURLs:options:error:byAccessor:. For example, NSDocument uses this for NSSaveAsOperation and NSSaveToOperation to announce that it is possibly overwriting an item with a brand new file or file package. This gives any NSFilePresenter of the overwritten item, including perhaps a different instance of NSDocument, perhaps in the same application, a chance to close itself before the item is overwritten. For another example, the most accurate and safe way to coordinate a move is to invoke -coordinateWritingItemAtURL:options:writingItemAtURL:options:error:byAccessor: using the NSFileCoordinatorWritingForMoving option with the source URL and NSFileCoordinatorWritingForReplacing with the destination URL.
+	NSFileCoordinatorWritingForReplacing NSFileCoordinatorWritingOptions = 8
+	// Whether the writing to be done will change the item's metadata only and not its contents. If the item being written to is ubiquitous, then changes to the item's contents during this coordinated write may not be preserved or fail. When using this option, changing metadata that is related to the item's contents is not supported for ubiquitous items and such changes may not be preserved. For example, changing the value of NSURLTagNamesKey is supported, but changing the value of NSURLContentModificationDateKey is not.
 	NSFileCoordinatorWritingContentIndependentMetadataOnly NSFileCoordinatorWritingOptions = 16
 )
 
@@ -1408,11 +1582,12 @@ func (e NSFileCoordinatorWritingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Options for specifying the behavior of file replacement operations.
 type NSFileManagerItemReplacementOptions uint64
 
 const (
-	NSFileManagerItemReplacementUsingNewMetadataOnly      NSFileManagerItemReplacementOptions = 1
+	// Only metadata from the new item is used, and metadata from the original item isn't preserved (default).
+	NSFileManagerItemReplacementUsingNewMetadataOnly NSFileManagerItemReplacementOptions = 1
+	// The backup item remains in place after a successful replacement.
 	NSFileManagerItemReplacementWithoutDeletingBackupItem NSFileManagerItemReplacementOptions = 2
 )
 
@@ -1482,8 +1657,10 @@ func (e NSFileManagerSupportedSyncControls) String() string {
 type NSFileManagerUnmountOptions uint64
 
 const (
+	// Specifies that all partitions on an unmountable disk should be unmounted. If the volume is on a partitioned disk, this option unmounts all volumes on that disk. Then, then the disk is ejected (if it is ejectable).
 	NSFileManagerUnmountAllPartitionsAndEjectDisk NSFileManagerUnmountOptions = 1
-	NSFileManagerUnmountWithoutUI                 NSFileManagerUnmountOptions = 2
+	// Specifies that no UI should accompany the unmount operation. If this option is not specified when calling `unmountVolumeAtURL:options:completionHandler:`, any needed UI will delay completion of the completion handler.
+	NSFileManagerUnmountWithoutUI NSFileManagerUnmountOptions = 2
 )
 
 func (e NSFileManagerUnmountOptions) String() string {
@@ -1521,10 +1698,10 @@ func (e NSFileManagerUploadLocalVersionConflictPolicy) String() string {
 	}
 }
 
-// Options for adding a new file version.
 type NSFileVersionAddingOptions uint64
 
 const (
+	// Whether +addVersionOfItemAtURL:withContentsOfURL:options:error: can move the new version contents file into the version store instead of copying it. Moving is much faster. See the comment for -temporaryDirectoryURLForNewVersionOfItemAtURL: for an example of when this useful.
 	NSFileVersionAddingByMoving NSFileVersionAddingOptions = 1
 )
 
@@ -1539,10 +1716,10 @@ func (e NSFileVersionAddingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Options for replacing a file version.
 type NSFileVersionReplacingOptions uint64
 
 const (
+	// Whether -replaceItemAtURL:options:error: must move the version's contents out of the version store instead of copying it. This is useful when you want to promote a version's contents to a separate file. You wouldn't use this to restore a version of a file.
 	NSFileVersionReplacingByMoving NSFileVersionReplacingOptions = 1
 )
 
@@ -1557,11 +1734,12 @@ func (e NSFileVersionReplacingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Reading options that can be set by the initWithURL:options:error: and readFromURL:options:error: methods.
 type NSFileWrapperReadingOptions uint64
 
 const (
-	NSFileWrapperReadingImmediate      NSFileWrapperReadingOptions = 1
+	// Whether the contents are read immediately, applied recursively in the case of directory file wrappers. If reading with this option succeeds then subsequent invocations of -fileWrappers, -regularFileContents, -symbolicLinkDestinationURL:, -serializedRepresentation, and, on Mac OS X, -[NSFileWrapper(NSExtensions) icon] sent to the receiver and all its descendant file wrappers won't fail. For performance NSFileWrapper may or may not immediately read the contents of some file packages immediately even when this option is chosen. For example, the contents of bundles (not all file packages are bundles) are immutable to the user so on Mac OS X NSFileWrapper may read the children of such a directory lazily. You can use this option to take a reasonable snapshot of a file or folder for writing later. For example, a Mac OS X application like TextEdit can use this option when creating new file wrappers to represent attachments that the user creates by copying and pasting or dragging and dropping from the Finder to a TextEdit document. You wouldn't use this option when reading a document file package because that would cause unnecessarily bad perfomance. For example, an application wouldn't use this option when creating file wrappers to represent attachments as it's opening a document stored in a file package.
+	NSFileWrapperReadingImmediate NSFileWrapperReadingOptions = 1
+	// Whether file mapping for regular file wrappers is disallowed. In Mac OS 10.6 and newer NSFileWrapper only ever memory maps files on internal drives, regardless of whether this option is used. It never memory maps files on external drives or network volumes. You can use this option to keep NSFileWrapper from memory mapping files at all, even ones on internal drives. This is useful if you want to make sure your application doesn't hold files open (mapped files are open files) and therefore prevent the user from ejecting DVDs, unmounting disk partitions, or unmounting disk images.
 	NSFileWrapperReadingWithoutMapping NSFileWrapperReadingOptions = 2
 )
 
@@ -1579,11 +1757,12 @@ func (e NSFileWrapperReadingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Writing options that can be set by the writeToURL:options:originalContentsURL:error: method.
 type NSFileWrapperWritingOptions uint64
 
 const (
-	NSFileWrapperWritingAtomic           NSFileWrapperWritingOptions = 1
+	// Whether writing is done atomically. You can use this option to ensure that, when overwriting a file package, the overwriting either completely succeeds or completely fails, with no possibility of leaving the file package in an inconsistent state. Because this option causes additional I/O, you shouldn't use it unnecessarily. For example, don't use this option in an override of `-[NSDocument writeToURL:ofType:error:]`, because `NSDocument` safe-saving is already done atomically.
+	NSFileWrapperWritingAtomic NSFileWrapperWritingOptions = 1
+	// Whether descendant file wrappers are sent -setFilename: if the writing succeeds. This is necessary when your application passes original contents URLs to -writeToURL:options:originalContentsURL:error:. Without using this and reusing child file wrappers properly subsequent invocations of -writeToURL:options:originalContentsURL:error: wouldn't be able to reliably create hard links in a new file package for performance because the record of names in the old file package would be out of date.
 	NSFileWrapperWritingWithNameUpdating NSFileWrapperWritingOptions = 2
 )
 
@@ -1601,16 +1780,21 @@ func (e NSFileWrapperWritingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// The formatting context for a formatter.
 type NSFormattingContext int64
 
 const (
-	NSFormattingContextUnknown             NSFormattingContext = 0
-	NSFormattingContextDynamic             NSFormattingContext = 1
-	NSFormattingContextStandalone          NSFormattingContext = 2
-	NSFormattingContextListItem            NSFormattingContext = 3
+	// The capitalization context to be used is unknown (this is the default value).
+	NSFormattingContextUnknown NSFormattingContext = 0
+	// The capitalization context is determined dynamically from the set {NSFormattingContextStandalone, NSFormattingContextBeginningOfSentence, NSFormattingContextMiddleOfSentence}. For example, if a date is placed at the beginning of a sentence, NSFormattingContextBeginningOfSentence is used to format the string automatically. When this context is used, the formatter will return a string proxy that works like a normal string in most cases. After returning from the formatter, the string in the string proxy is formatted by using NSFormattingContextUnknown. When the string proxy is used in stringWithFormat:, we can determine where the %@ is and then set the context accordingly. With the new context, the string in the string proxy will be formatted again and be put into the final string returned from stringWithFormat:.
+	NSFormattingContextDynamic NSFormattingContext = 1
+	// The capitalization context if a date or date symbol is to be formatted with capitalization appropriate for stand-alone usage such as an isolated name on a calendar page.
+	NSFormattingContextStandalone NSFormattingContext = 2
+	// The capitalization context if a date or date symbol is to be formatted with capitalization appropriate for a list or menu item.
+	NSFormattingContextListItem NSFormattingContext = 3
+	// The capitalization context if a date or date symbol is to be formatted with capitalization appropriate for the beginning of a sentence.
 	NSFormattingContextBeginningOfSentence NSFormattingContext = 4
-	NSFormattingContextMiddleOfSentence    NSFormattingContext = 5
+	// The capitalization context if a date or date symbol is to be formatted with capitalization appropriate for the middle of a sentence.
+	NSFormattingContextMiddleOfSentence NSFormattingContext = 5
 )
 
 func (e NSFormattingContext) String() string {
@@ -1632,13 +1816,15 @@ func (e NSFormattingContext) String() string {
 	}
 }
 
-// Specifies the width of the unit, determining the textual representation.
 type NSFormattingUnitStyle int64
 
 const (
-	NSFormattingUnitStyleShort  NSFormattingUnitStyle = 1
+	// The shortest spelling for a unit.
+	NSFormattingUnitStyleShort NSFormattingUnitStyle = 1
+	// The medium-length spelling for a unit.
 	NSFormattingUnitStyleMedium NSFormattingUnitStyle = 2
-	NSFormattingUnitStyleLong   NSFormattingUnitStyle = 3
+	// The long spelling for a unit.
+	NSFormattingUnitStyleLong NSFormattingUnitStyle = 3
 )
 
 func (e NSFormattingUnitStyle) String() string {
@@ -1944,12 +2130,14 @@ func (e NSGrammaticalPronounType) String() string {
 	}
 }
 
-// Cookie acceptance policies implemented by the NSHTTPCookieStorage class.
 type NSHTTPCookieAcceptPolicy uint64
 
 const (
-	NSHTTPCookieAcceptPolicyAlways                     NSHTTPCookieAcceptPolicy = 0
-	NSHTTPCookieAcceptPolicyNever                      NSHTTPCookieAcceptPolicy = 1
+	// Accept all cookies. This is the default cookie accept policy.
+	NSHTTPCookieAcceptPolicyAlways NSHTTPCookieAcceptPolicy = 0
+	// Reject all cookies.
+	NSHTTPCookieAcceptPolicyNever NSHTTPCookieAcceptPolicy = 1
+	// Accept cookies only from the main document domain.
 	NSHTTPCookieAcceptPolicyOnlyFromMainDocumentDomain NSHTTPCookieAcceptPolicy = 2
 )
 
@@ -1966,24 +2154,36 @@ func (e NSHTTPCookieAcceptPolicy) String() string {
 	}
 }
 
-// Options used to generate and parse ISO 8601 date representations.
 type NSISO8601DateFormatOptions uint64
 
 const (
-	NSISO8601DateFormatWithYear                     NSISO8601DateFormatOptions = 1
-	NSISO8601DateFormatWithMonth                    NSISO8601DateFormatOptions = 2
-	NSISO8601DateFormatWithWeekOfYear               NSISO8601DateFormatOptions = 4
-	NSISO8601DateFormatWithDay                      NSISO8601DateFormatOptions = 16
-	NSISO8601DateFormatWithTime                     NSISO8601DateFormatOptions = 32
-	NSISO8601DateFormatWithTimeZone                 NSISO8601DateFormatOptions = 64
-	NSISO8601DateFormatWithSpaceBetweenDateAndTime  NSISO8601DateFormatOptions = 128
-	NSISO8601DateFormatWithDashSeparatorInDate      NSISO8601DateFormatOptions = 256
-	NSISO8601DateFormatWithColonSeparatorInTime     NSISO8601DateFormatOptions = 512
+	// The date representation includes the year. The format for year is inferred based on whether or not the week of year option is specified. - If week of year is present, `YYYY` is used to display week dates. - If week of year is not present, `yyyy` is used by default.
+	NSISO8601DateFormatWithYear NSISO8601DateFormatOptions = 1
+	// The date representation includes the month. The format for month is `MM`.
+	NSISO8601DateFormatWithMonth NSISO8601DateFormatOptions = 2
+	// The date representation includes the week of the year. The format for week of year is `ww`, including the `W` prefix.
+	NSISO8601DateFormatWithWeekOfYear NSISO8601DateFormatOptions = 4
+	// The date representation includes the day. The format for day is inferred based on provided options: - If month is not present, day of year (`DDD`) is used. - If month is present, day of month (`dd`) is used. - If either weekOfMonth or weekOfYear is present, local day of week (`ee`) is used.
+	NSISO8601DateFormatWithDay NSISO8601DateFormatOptions = 16
+	// The date representation includes the time. The format for time is `HH:mm:ss`.
+	NSISO8601DateFormatWithTime NSISO8601DateFormatOptions = 32
+	// The date representation includes the timezone. The format for timezone is `ZZZZZ`.
+	NSISO8601DateFormatWithTimeZone NSISO8601DateFormatOptions = 64
+	// The date representation uses a space (` `) instead of `T` between the date and time.
+	NSISO8601DateFormatWithSpaceBetweenDateAndTime NSISO8601DateFormatOptions = 128
+	// The date representation uses the dash separator (`-`) in the date.
+	NSISO8601DateFormatWithDashSeparatorInDate NSISO8601DateFormatOptions = 256
+	// The date representation uses the colon separator (`:`) in the time.
+	NSISO8601DateFormatWithColonSeparatorInTime NSISO8601DateFormatOptions = 512
+	// The date representation uses the colon separator (`:`) in the time zone.
 	NSISO8601DateFormatWithColonSeparatorInTimeZone NSISO8601DateFormatOptions = 1024
 	NSISO8601DateFormatWithFractionalSeconds        NSISO8601DateFormatOptions = 2048
-	NSISO8601DateFormatWithFullDate                 NSISO8601DateFormatOptions = 275
-	NSISO8601DateFormatWithFullTime                 NSISO8601DateFormatOptions = 1632
-	NSISO8601DateFormatWithInternetDateTime         NSISO8601DateFormatOptions = 1907
+	// The date representation includes the year, month, and day. Equivalent to specifying `NSISO8601DateFormatWithYear`, `NSISO8601DateFormatWithMonth`, and `NSISO8601DateFormatWithDay`.
+	NSISO8601DateFormatWithFullDate NSISO8601DateFormatOptions = 275
+	// The date representation includes the hour, minute, and second.
+	NSISO8601DateFormatWithFullTime NSISO8601DateFormatOptions = 1632
+	// The format used for internet date times, according to the RFC 3339 standard. Equivalent to specifying `NSISO8601DateFormatWithFullDate`, `NSISO8601DateFormatWithFullTime`, `NSISO8601DateFormatWithDashSeparatorInDate`, `NSISO8601DateFormatWithColonSeparatorInTime`, and `NSISO8601DateFormatWithColonSeparatorInTimeZone`.
+	NSISO8601DateFormatWithInternetDateTime NSISO8601DateFormatOptions = 1907
 )
 
 func (e NSISO8601DateFormatOptions) String() string {
@@ -2036,18 +2236,25 @@ func (e NSISO8601DateFormatOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// A type that defines presentation intent for runs of characters for traits like emphasis, strikethrough, and code voice.
 type NSInlinePresentationIntent uint64
 
 const (
-	NSInlinePresentationIntentEmphasized         NSInlinePresentationIntent = 1
+	// An intent that represents an emphasized presentation.
+	NSInlinePresentationIntentEmphasized NSInlinePresentationIntent = 1
+	// An intent that represents a strongly emphasized presentation.
 	NSInlinePresentationIntentStronglyEmphasized NSInlinePresentationIntent = 2
-	NSInlinePresentationIntentCode               NSInlinePresentationIntent = 4
-	NSInlinePresentationIntentStrikethrough      NSInlinePresentationIntent = 32
-	NSInlinePresentationIntentSoftBreak          NSInlinePresentationIntent = 64
-	NSInlinePresentationIntentLineBreak          NSInlinePresentationIntent = 128
-	NSInlinePresentationIntentInlineHTML         NSInlinePresentationIntent = 256
-	NSInlinePresentationIntentBlockHTML          NSInlinePresentationIntent = 512
+	// An intent that represents a code voice presentation.
+	NSInlinePresentationIntentCode NSInlinePresentationIntent = 4
+	// An intent that represents a strikethrough presentation.
+	NSInlinePresentationIntentStrikethrough NSInlinePresentationIntent = 32
+	// An intent that represents a soft line break.
+	NSInlinePresentationIntentSoftBreak NSInlinePresentationIntent = 64
+	// An intent that represents a line break.
+	NSInlinePresentationIntentLineBreak NSInlinePresentationIntent = 128
+	// An intent that represents an inline HTML presentation.
+	NSInlinePresentationIntentInlineHTML NSInlinePresentationIntent = 256
+	// An intent that represents a block HTML presentation.
+	NSInlinePresentationIntentBlockHTML NSInlinePresentationIntent = 512
 )
 
 func (e NSInlinePresentationIntent) String() string {
@@ -2082,15 +2289,19 @@ func (e NSInlinePresentationIntent) String() string {
 	return strings.Join(parts, "|")
 }
 
-// The following constants are defined by NSPositionalSpecifier to specify an insertion position.
 type NSInsertionPosition uint64
 
 const (
-	NSPositionAfter     NSInsertionPosition = 0
-	NSPositionBefore    NSInsertionPosition = 1
+	// After the specified object.
+	NSPositionAfter NSInsertionPosition = 0
+	// Before the specified object.
+	NSPositionBefore NSInsertionPosition = 1
+	// At the beginning of the container.
 	NSPositionBeginning NSInsertionPosition = 2
-	NSPositionEnd       NSInsertionPosition = 3
-	NSPositionReplace   NSInsertionPosition = 4
+	// At the end of the container.
+	NSPositionEnd NSInsertionPosition = 3
+	// Replacing the specified object.
+	NSPositionReplace NSInsertionPosition = 4
 )
 
 func (e NSInsertionPosition) String() string {
@@ -2110,14 +2321,17 @@ func (e NSInsertionPosition) String() string {
 	}
 }
 
-// The error codes that describe problems with consuming data from an item provider.
 type NSItemProviderErrorCode int64
 
 const (
-	NSItemProviderUnknownError              NSItemProviderErrorCode = -1
-	NSItemProviderItemUnavailableError      NSItemProviderErrorCode = -1000
+	// An unknown error occurred.
+	NSItemProviderUnknownError NSItemProviderErrorCode = -1
+	// The item is unavailable.
+	NSItemProviderItemUnavailableError NSItemProviderErrorCode = -1000
+	// The item had an unexpected value class.
 	NSItemProviderUnexpectedValueClassError NSItemProviderErrorCode = -1100
-	NSItemProviderUnavailableCoercionError  NSItemProviderErrorCode = -1200
+	// The coercion of the item to the requested type was unavailable.
+	NSItemProviderUnavailableCoercionError NSItemProviderErrorCode = -1200
 )
 
 func (e NSItemProviderErrorCode) String() string {
@@ -2179,16 +2393,21 @@ func (e NSItemProviderRepresentationVisibility) String() string {
 	}
 }
 
-// Options used when creating Foundation objects from JSON data.
 type NSJSONReadingOptions uint64
 
 const (
-	NSJSONReadingMutableContainers         NSJSONReadingOptions = 1
-	NSJSONReadingMutableLeaves             NSJSONReadingOptions = 2
-	NSJSONReadingFragmentsAllowed          NSJSONReadingOptions = 4
-	NSJSONReadingJSON5Allowed              NSJSONReadingOptions = 8
+	// Specifies that arrays and dictionaries in the returned object are mutable.
+	NSJSONReadingMutableContainers NSJSONReadingOptions = 1
+	// Specifies that leaf strings in the JSON object graph are mutable.
+	NSJSONReadingMutableLeaves NSJSONReadingOptions = 2
+	// Specifies that the parser should allow top-level objects that are not an `NSArray` or `NSDictionary`.
+	NSJSONReadingFragmentsAllowed NSJSONReadingOptions = 4
+	// Specifies that reading serialized JSON data supports the JSON5 syntax.
+	NSJSONReadingJSON5Allowed NSJSONReadingOptions = 8
+	// Specifies that the parser assumes the top-level object is a dictionary, even without surrounding curly braces.
 	NSJSONReadingTopLevelDictionaryAssumed NSJSONReadingOptions = 16
-	NSJSONReadingAllowFragments            NSJSONReadingOptions = 4
+	// Specifies that the parser should allow top-level objects that are not an `NSArray` or `NSDictionary`. @DeprecationSummary { Use ``NSJSONReadingFragmentsAllowed`` instead. }
+	NSJSONReadingAllowFragments NSJSONReadingOptions = 4
 )
 
 func (e NSJSONReadingOptions) String() string {
@@ -2217,13 +2436,16 @@ func (e NSJSONReadingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Options for writing JSON data.
 type NSJSONWritingOptions uint64
 
 const (
-	NSJSONWritingPrettyPrinted          NSJSONWritingOptions = 1
-	NSJSONWritingSortedKeys             NSJSONWritingOptions = 2
-	NSJSONWritingFragmentsAllowed       NSJSONWritingOptions = 4
+	// Specifies that the JSON output uses whitespace and indentation to make the output more readable.
+	NSJSONWritingPrettyPrinted NSJSONWritingOptions = 1
+	// Specifies that the output sorts dictionary keys using `[NSLocale systemLocale]` and `NSNumericSearch`.
+	NSJSONWritingSortedKeys NSJSONWritingOptions = 2
+	// Specifies that the serializer should allow top-level objects that are not an `NSArray` or `NSDictionary`.
+	NSJSONWritingFragmentsAllowed NSJSONWritingOptions = 4
+	// Specifies that the serializer should not escape forward slashes (`/`).
 	NSJSONWritingWithoutEscapingSlashes NSJSONWritingOptions = 8
 )
 
@@ -2334,18 +2556,25 @@ func (e NSKeyValueSetMutationKind) String() string {
 	}
 }
 
-// The units supported by the NSLengthFormatter class.
 type NSLengthFormatterUnit int64
 
 const (
+	// The millimeter unit.
 	NSLengthFormatterUnitMillimeter NSLengthFormatterUnit = 8
+	// The centimeter unit.
 	NSLengthFormatterUnitCentimeter NSLengthFormatterUnit = 9
-	NSLengthFormatterUnitMeter      NSLengthFormatterUnit = 11
-	NSLengthFormatterUnitKilometer  NSLengthFormatterUnit = 14
-	NSLengthFormatterUnitInch       NSLengthFormatterUnit = 1281
-	NSLengthFormatterUnitFoot       NSLengthFormatterUnit = 1282
-	NSLengthFormatterUnitYard       NSLengthFormatterUnit = 1283
-	NSLengthFormatterUnitMile       NSLengthFormatterUnit = 1284
+	// The meter unit.
+	NSLengthFormatterUnitMeter NSLengthFormatterUnit = 11
+	// The kilometer unit.
+	NSLengthFormatterUnitKilometer NSLengthFormatterUnit = 14
+	// The inch unit.
+	NSLengthFormatterUnitInch NSLengthFormatterUnit = 1281
+	// The foot unit.
+	NSLengthFormatterUnitFoot NSLengthFormatterUnit = 1282
+	// The yard unit.
+	NSLengthFormatterUnitYard NSLengthFormatterUnit = 1283
+	// The mile unit.
+	NSLengthFormatterUnitMile NSLengthFormatterUnit = 1284
 )
 
 func (e NSLengthFormatterUnit) String() string {
@@ -2371,15 +2600,19 @@ func (e NSLengthFormatterUnit) String() string {
 	}
 }
 
-// Constants for linguistic tagger enumeration specifying which tokens to omit and whether to join names.
 type NSLinguisticTaggerOptions uint64
 
 const (
-	NSLinguisticTaggerOmitWords       NSLinguisticTaggerOptions = 1
+	// Omit tokens of type `NSLinguisticTagWord` (items considered to be words).
+	NSLinguisticTaggerOmitWords NSLinguisticTaggerOptions = 1
+	// Omit tokens of type `NSLinguisticTagPunctuation` (all punctuation).
 	NSLinguisticTaggerOmitPunctuation NSLinguisticTaggerOptions = 2
-	NSLinguisticTaggerOmitWhitespace  NSLinguisticTaggerOptions = 4
-	NSLinguisticTaggerOmitOther       NSLinguisticTaggerOptions = 8
-	NSLinguisticTaggerJoinNames       NSLinguisticTaggerOptions = 16
+	// Omit tokens of type `NSLinguisticTagWhitespace` (whitespace of all sorts).
+	NSLinguisticTaggerOmitWhitespace NSLinguisticTaggerOptions = 4
+	// Omit tokens of type `NSLinguisticTagOther` (non-linguistic items, such as symbols).
+	NSLinguisticTaggerOmitOther NSLinguisticTaggerOptions = 8
+	// Typically, multiple-word names will be returned as multiple tokens, following the standard tokenization practice of the tagger. If this option is set, then multiple-word names will be joined together and returned as a single token.
+	NSLinguisticTaggerJoinNames NSLinguisticTaggerOptions = 16
 )
 
 func (e NSLinguisticTaggerOptions) String() string {
@@ -2434,14 +2667,18 @@ func (e NSLinguisticTaggerUnit) String() string {
 	}
 }
 
-// The directions that a language may take across a page of text.
 type NSLocaleLanguageDirection uint64
 
 const (
-	NSLocaleLanguageDirectionUnknown     NSLocaleLanguageDirection = 0
+	// The language direction is unknown.
+	NSLocaleLanguageDirectionUnknown NSLocaleLanguageDirection = 0
+	// The language direction is from left to right.
 	NSLocaleLanguageDirectionLeftToRight NSLocaleLanguageDirection = 1
+	// The language direction is from right to left.
 	NSLocaleLanguageDirectionRightToLeft NSLocaleLanguageDirection = 2
+	// The language direction is from top to bottom.
 	NSLocaleLanguageDirectionTopToBottom NSLocaleLanguageDirection = 3
+	// The language direction is from bottom to top.
 	NSLocaleLanguageDirectionBottomToTop NSLocaleLanguageDirection = 4
 )
 
@@ -2462,13 +2699,14 @@ func (e NSLocaleLanguageDirection) String() string {
 	}
 }
 
-// Used to remove access rights to a mach port when the NSMachPort object is invalidated or destroyed.
 type NSMachPortOptions uint64
 
 const (
 	// Do not remove any send or receive rights.
-	NSMachPortDeallocateNone         NSMachPortOptions = 0
-	NSMachPortDeallocateSendRight    NSMachPortOptions = 1
+	NSMachPortDeallocateNone NSMachPortOptions = 0
+	// Deallocate the port's send right when the port is invalidated or destroyed.
+	NSMachPortDeallocateSendRight NSMachPortOptions = 1
+	// Deallocate the port's receive right when the port is invalidated or destroyed.
 	NSMachPortDeallocateReceiveRight NSMachPortOptions = 2
 )
 
@@ -2486,15 +2724,19 @@ func (e NSMachPortOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// The units supported by the NSMassFormatter class.
 type NSMassFormatterUnit int64
 
 const (
-	NSMassFormatterUnitGram     NSMassFormatterUnit = 11
+	// The gram unit.
+	NSMassFormatterUnitGram NSMassFormatterUnit = 11
+	// The kilogram unit.
 	NSMassFormatterUnitKilogram NSMassFormatterUnit = 14
-	NSMassFormatterUnitOunce    NSMassFormatterUnit = 1537
-	NSMassFormatterUnitPound    NSMassFormatterUnit = 1538
-	NSMassFormatterUnitStone    NSMassFormatterUnit = 1539
+	// The ounce unit.
+	NSMassFormatterUnitOunce NSMassFormatterUnit = 1537
+	// The pound unit.
+	NSMassFormatterUnitPound NSMassFormatterUnit = 1538
+	// The stone unit.
+	NSMassFormatterUnitStone NSMassFormatterUnit = 1539
 )
 
 func (e NSMassFormatterUnit) String() string {
@@ -2517,10 +2759,15 @@ func (e NSMassFormatterUnit) String() string {
 type NSMatchingFlags uint64
 
 const (
-	NSMatchingProgress      NSMatchingFlags = 1
-	NSMatchingCompleted     NSMatchingFlags = 2
-	NSMatchingHitEnd        NSMatchingFlags = 4
-	NSMatchingRequiredEnd   NSMatchingFlags = 8
+	// Set when the Block is called to report progress during a long-running match operation.
+	NSMatchingProgress NSMatchingFlags = 1
+	// Set when the Block is called after matching has completed.
+	NSMatchingCompleted NSMatchingFlags = 2
+	// Set when the current match operation reached the end of the search range.
+	NSMatchingHitEnd NSMatchingFlags = 4
+	// Set when the current match depended on the location of the end of the search range.
+	NSMatchingRequiredEnd NSMatchingFlags = 8
+	// Set when matching failed due to an internal error.
 	NSMatchingInternalError NSMatchingFlags = 16
 )
 
@@ -2547,14 +2794,18 @@ func (e NSMatchingFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-// The matching options constants specify the reporting, completion and matching rules to the expression matching methods. These constants are used by all methods that search for, or replace values, using a regular expression.
 type NSMatchingOptions uint64
 
 const (
-	NSMatchingReportProgress         NSMatchingOptions = 1
-	NSMatchingReportCompletion       NSMatchingOptions = 2
-	NSMatchingAnchored               NSMatchingOptions = 4
-	NSMatchingWithTransparentBounds  NSMatchingOptions = 8
+	// Call the Block periodically during long-running match operations. This option has no effect for methods other than `enumerateMatchesInString:options:range:usingBlock:`.
+	NSMatchingReportProgress NSMatchingOptions = 1
+	// Call the Block once after the completion of any matching. This option has no effect for methods other than `enumerateMatchesInString:options:range:usingBlock:`.
+	NSMatchingReportCompletion NSMatchingOptions = 2
+	// Specifies that matches are limited to those at the start of the search range.
+	NSMatchingAnchored NSMatchingOptions = 4
+	// Specifies that matching may examine parts of the string beyond the bounds of the search range, for purposes such as word boundary detection, lookahead, etc. This constant has no effect if the search range contains the entire string.
+	NSMatchingWithTransparentBounds NSMatchingOptions = 8
+	// Specifies that `^` and `$` will not automatically match the beginning and end of the search range, but will still match the beginning and end of the entire string. This constant has no effect if the search range contains the entire string.
 	NSMatchingWithoutAnchoringBounds NSMatchingOptions = 16
 )
 
@@ -2581,12 +2832,14 @@ func (e NSMatchingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Measurement formatter options.
 type NSMeasurementFormatterUnitOptions uint64
 
 const (
-	NSMeasurementFormatterUnitOptionsProvidedUnit           NSMeasurementFormatterUnitOptions = 1
-	NSMeasurementFormatterUnitOptionsNaturalScale           NSMeasurementFormatterUnitOptions = 2
+	// Ensures the formatter uses the provided unit even if it is not the preferred unit of the set locale.
+	NSMeasurementFormatterUnitOptionsProvidedUnit NSMeasurementFormatterUnitOptions = 1
+	// Makes the formatter show a natural scale (e.g. "12 kilometers" instead of "12000 meters"). Note that setting this option results in scaling within the unit system of the preferred unit of the locale. To scale within the unit system of the provided unit, combine with `NSMeasurementFormatterUnitOptionsProvidedUnit`.
+	NSMeasurementFormatterUnitOptionsNaturalScale NSMeasurementFormatterUnitOptions = 2
+	// Displays the temperature value without a unit (e.g. "90\u00B0" rather than "90\u00B0F" or "90\u00B0C").
 	NSMeasurementFormatterUnitOptionsTemperatureWithoutUnit NSMeasurementFormatterUnitOptions = 4
 )
 
@@ -2607,11 +2860,12 @@ func (e NSMeasurementFormatterUnitOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// These constants specify options for a network service.
 type NSNetServiceOptions uint64
 
 const (
-	NSNetServiceNoAutoRename         NSNetServiceOptions = 1
+	// Specifies that the network service should not rename itself in the event of a name collision.
+	NSNetServiceNoAutoRename NSNetServiceOptions = 1
+	// Specifies that a TCP listener should be started for both IPv4 and IPv6 on the port specified by this service. If the listening port can't be opened, the service calls its delegate's `-netService:didNotPublish:` method to report the error. The listener supports only TCP connections. If the service's type does not end with `_tcp`, publication fails with `NSNetServicesBadArgumentError`. Whenever a client connects to the listening socket, the service calls its delegate's `-netService:didAcceptConnectionWithInputStream:outputStream:` method with a pair of `NSStream` objects.
 	NSNetServiceListenForConnections NSNetServiceOptions = 2
 )
 
@@ -2629,18 +2883,26 @@ func (e NSNetServiceOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// These constants identify errors that can occur when accessing net services.
 type NSNetServicesError int64
 
 const (
-	NSNetServicesUnknownError                      NSNetServicesError = -72000
-	NSNetServicesCollisionError                    NSNetServicesError = -72001
-	NSNetServicesNotFoundError                     NSNetServicesError = -72002
-	NSNetServicesActivityInProgress                NSNetServicesError = -72003
-	NSNetServicesBadArgumentError                  NSNetServicesError = -72004
-	NSNetServicesCancelledError                    NSNetServicesError = -72005
-	NSNetServicesInvalidError                      NSNetServicesError = -72006
-	NSNetServicesTimeoutError                      NSNetServicesError = -72007
+	// An unknown error occurred.
+	NSNetServicesUnknownError NSNetServicesError = -72000
+	// The service could not be published because the name is already in use. The name could be in use locally or on another system.
+	NSNetServicesCollisionError NSNetServicesError = -72001
+	// The service could not be found on the network.
+	NSNetServicesNotFoundError NSNetServicesError = -72002
+	// The net service cannot process the request at this time. No additional information about the network state is known.
+	NSNetServicesActivityInProgress NSNetServicesError = -72003
+	// An invalid argument was used when creating the `NSNetService` object.
+	NSNetServicesBadArgumentError NSNetServicesError = -72004
+	// The client canceled the action.
+	NSNetServicesCancelledError NSNetServicesError = -72005
+	// The net service was improperly configured.
+	NSNetServicesInvalidError NSNetServicesError = -72006
+	// The net service has timed out.
+	NSNetServicesTimeoutError NSNetServicesError = -72007
+	// Missing required configuration for local network access. `NSBonjourServices` and `NSLocalNetworkUsageDescription` are required in Info.plist.
 	NSNetServicesMissingRequiredConfigurationError NSNetServicesError = -72008
 )
 
@@ -2669,12 +2931,14 @@ func (e NSNetServicesError) String() string {
 	}
 }
 
-// The constants that specify how notifications are coalesced.
 type NSNotificationCoalescing uint64
 
 const (
-	NSNotificationNoCoalescing       NSNotificationCoalescing = 0
-	NSNotificationCoalescingOnName   NSNotificationCoalescing = 1
+	// Do not coalesce notifications in the queue.
+	NSNotificationNoCoalescing NSNotificationCoalescing = 0
+	// Coalesce notifications with the same name.
+	NSNotificationCoalescingOnName NSNotificationCoalescing = 1
+	// Coalesce notifications with the same object (sender).
 	NSNotificationCoalescingOnSender NSNotificationCoalescing = 2
 )
 
@@ -2692,13 +2956,16 @@ func (e NSNotificationCoalescing) String() string {
 	return strings.Join(parts, "|")
 }
 
-// These constants specify the types of notification delivery suspension behaviors.
 type NSNotificationSuspensionBehavior uint64
 
 const (
-	NSNotificationSuspensionBehaviorDrop               NSNotificationSuspensionBehavior = 1
-	NSNotificationSuspensionBehaviorCoalesce           NSNotificationSuspensionBehavior = 2
-	NSNotificationSuspensionBehaviorHold               NSNotificationSuspensionBehavior = 3
+	// The server doesn't queue any notifications with this name and object until the notification center resumes notification delivery.
+	NSNotificationSuspensionBehaviorDrop NSNotificationSuspensionBehavior = 1
+	// The server only queues the last notification of the specified name and object; earlier notifications are dropped. In cover methods for which suspension behavior is not an explicit argument, `NSNotificationSuspensionBehaviorCoalesce` is the default.
+	NSNotificationSuspensionBehaviorCoalesce NSNotificationSuspensionBehavior = 2
+	// The server holds all matching notifications until the queue has been filled (queue size determined by the server), at which point the server may flush queued notifications.
+	NSNotificationSuspensionBehaviorHold NSNotificationSuspensionBehavior = 3
+	// The server will deliver notifications matching this registration irrespective of whether setSuspended:YES has been called. When a notification with this suspension behavior is matched, it has the effect of first flushing any queued notifications. The effect is somewhat as if setSuspended:NO were first called if the app is suspended, followed by the notification in question being delivered, followed by a transition back to the previous suspended or unsuspended state.
 	NSNotificationSuspensionBehaviorDeliverImmediately NSNotificationSuspensionBehavior = 4
 )
 
@@ -2717,13 +2984,15 @@ func (e NSNotificationSuspensionBehavior) String() string {
 	}
 }
 
-// These constants specify the behavior of a number formatter. These constants are returned by the defaultFormatterBehavior class method and the formatterBehavior property.
 type NSNumberFormatterBehavior uint64
 
 const (
+	// The number-formatter behavior set as the default for new instances. You can set the default formatter behavior with the class method \c setDefaultFormatterBehavior: .
 	NSNumberFormatterBehaviorDefault NSNumberFormatterBehavior = 0
-	NSNumberFormatterBehavior10_0    NSNumberFormatterBehavior = 1000
-	NSNumberFormatterBehavior10_4    NSNumberFormatterBehavior = 1040
+	// The number-formatter behavior as it existed prior to macOS 10.4.
+	NSNumberFormatterBehavior10_0 NSNumberFormatterBehavior = 1000
+	// The number-formatter behavior since macOS 10.4.
+	NSNumberFormatterBehavior10_4 NSNumberFormatterBehavior = 1040
 )
 
 func (e NSNumberFormatterBehavior) String() string {
@@ -2739,14 +3008,17 @@ func (e NSNumberFormatterBehavior) String() string {
 	}
 }
 
-// These constants are used to specify how numbers should be padded. These constants are used by the paddingPosition property.
 type NSNumberFormatterPadPosition uint64
 
 const (
+	// Specifies that the padding should occur before the prefix.
 	NSNumberFormatterPadBeforePrefix NSNumberFormatterPadPosition = 0
-	NSNumberFormatterPadAfterPrefix  NSNumberFormatterPadPosition = 1
+	// Specifies that the padding should occur after the prefix.
+	NSNumberFormatterPadAfterPrefix NSNumberFormatterPadPosition = 1
+	// Specifies that the padding should occur before the suffix.
 	NSNumberFormatterPadBeforeSuffix NSNumberFormatterPadPosition = 2
-	NSNumberFormatterPadAfterSuffix  NSNumberFormatterPadPosition = 3
+	// Specifies that the padding should occur after the suffix.
+	NSNumberFormatterPadAfterSuffix NSNumberFormatterPadPosition = 3
 )
 
 func (e NSNumberFormatterPadPosition) String() string {
@@ -2764,17 +3036,23 @@ func (e NSNumberFormatterPadPosition) String() string {
 	}
 }
 
-// These constants are used to specify how numbers should be rounded. These constants are used by the roundingMode property.
 type NSNumberFormatterRoundingMode uint64
 
 const (
-	NSNumberFormatterRoundCeiling  NSNumberFormatterRoundingMode = 0
-	NSNumberFormatterRoundFloor    NSNumberFormatterRoundingMode = 1
-	NSNumberFormatterRoundDown     NSNumberFormatterRoundingMode = 2
-	NSNumberFormatterRoundUp       NSNumberFormatterRoundingMode = 3
+	// Round towards positive infinity.
+	NSNumberFormatterRoundCeiling NSNumberFormatterRoundingMode = 0
+	// Round towards negative infinity.
+	NSNumberFormatterRoundFloor NSNumberFormatterRoundingMode = 1
+	// Round towards zero.
+	NSNumberFormatterRoundDown NSNumberFormatterRoundingMode = 2
+	// Round away from zero.
+	NSNumberFormatterRoundUp NSNumberFormatterRoundingMode = 3
+	// Round towards the nearest integer, or towards an even number if equidistant.
 	NSNumberFormatterRoundHalfEven NSNumberFormatterRoundingMode = 4
+	// Round towards the nearest integer, or towards zero if equidistant.
 	NSNumberFormatterRoundHalfDown NSNumberFormatterRoundingMode = 5
-	NSNumberFormatterRoundHalfUp   NSNumberFormatterRoundingMode = 6
+	// Round towards the nearest integer, or away from zero if equidistant.
+	NSNumberFormatterRoundHalfUp NSNumberFormatterRoundingMode = 6
 )
 
 func (e NSNumberFormatterRoundingMode) String() string {
@@ -2798,19 +3076,28 @@ func (e NSNumberFormatterRoundingMode) String() string {
 	}
 }
 
-// The predefined number format styles used by the numberStyle property.
 type NSNumberFormatterStyle uint64
 
 const (
-	NSNumberFormatterNoStyle                 NSNumberFormatterStyle = 0
-	NSNumberFormatterDecimalStyle            NSNumberFormatterStyle = 1
-	NSNumberFormatterCurrencyStyle           NSNumberFormatterStyle = 2
-	NSNumberFormatterPercentStyle            NSNumberFormatterStyle = 3
-	NSNumberFormatterScientificStyle         NSNumberFormatterStyle = 4
-	NSNumberFormatterSpellOutStyle           NSNumberFormatterStyle = 5
-	NSNumberFormatterOrdinalStyle            NSNumberFormatterStyle = 6
-	NSNumberFormatterCurrencyISOCodeStyle    NSNumberFormatterStyle = 8
-	NSNumberFormatterCurrencyPluralStyle     NSNumberFormatterStyle = 9
+	// An integer representation. For example, the number 1234.5678 is represented as 1235.
+	NSNumberFormatterNoStyle NSNumberFormatterStyle = 0
+	// A decimal style format. For example, in the en_US locale, the number 1234.5678 is represented as 1,234.568.
+	NSNumberFormatterDecimalStyle NSNumberFormatterStyle = 1
+	// A currency style format that uses the currency symbol defined by the number formatter locale. For example, in the en_US locale, the number 1234.5678 is represented as $1,234.57; in the fr_FR locale, the number 1234.5678 is represented as 1 234,57 EUR.
+	NSNumberFormatterCurrencyStyle NSNumberFormatterStyle = 2
+	// A percent style format. For example, in the en_US locale, the number 0.123 is represented as 12%.
+	NSNumberFormatterPercentStyle NSNumberFormatterStyle = 3
+	// A scientific style format. For example, in the en_US locale, the number 1234.5678 is represented as 1.2345678E3.
+	NSNumberFormatterScientificStyle NSNumberFormatterStyle = 4
+	// A style format in which numbers are spelled out in the language defined by the number formatter locale. For example, in the en_US locale, the number 1234.5678 is represented as one thousand two hundred thirty-four point five six seven eight; in the fr_FR locale, the number 1234.5678 is represented as mille deux cent trente-quatre virgule cinq six sept huit. This style is supported for most user locales. If this style doesn't support the number formatter locale, the en_US locale is used as a fallback.
+	NSNumberFormatterSpellOutStyle NSNumberFormatterStyle = 5
+	// An ordinal style format. For example, in the en_US locale, the number 3 is represented as 3rd; in the fr_FR locale, the number 3 is represented as 3e.
+	NSNumberFormatterOrdinalStyle NSNumberFormatterStyle = 6
+	// A currency style format that uses the ISO 4217 currency code defined by the number formatter locale. This style behaves like the currency style, except that the currency symbol is replaced by the corresponding ISO 4217 currency code. For example, in the en_US locale, the number 1234.5678 is represented as USD1,234.57; in the fr_FR locale, the number 1234.5678 is represented as 1 234,57 EUR.
+	NSNumberFormatterCurrencyISOCodeStyle NSNumberFormatterStyle = 8
+	// A currency style format that uses the pluralized denomination defined by the number formatter locale. This style behaves like the currency style, except that the currency symbol is replaced by the corresponding pluralized denomination. For example, in the en_US locale, the number 1234.5678 is represented as 1,234.57 US dollars; in the fr_FR locale, the number 1234.5678 is represented as 1 234,57 euros.
+	NSNumberFormatterCurrencyPluralStyle NSNumberFormatterStyle = 9
+	// An accounting currency style format that uses the currency symbol defined by the number formatter locale. This style behaves like the currency style, except that negative numbers representations are surrounded by parentheses rather than preceded by a negative symbol. For example, in the en_US locale, the number -1234.5678 is represented as ($1,234.57); in the fr_FR locale, the number -1234.5678 is represented as (1 234,57 EUR).
 	NSNumberFormatterCurrencyAccountingStyle NSNumberFormatterStyle = 10
 )
 
@@ -2841,14 +3128,18 @@ func (e NSNumberFormatterStyle) String() string {
 	}
 }
 
-// These constants let you prioritize the order in which operations execute.
 type NSOperationQueuePriority int64
 
 const (
-	NSOperationQueuePriorityVeryLow  NSOperationQueuePriority = -8
-	NSOperationQueuePriorityLow      NSOperationQueuePriority = -4
-	NSOperationQueuePriorityNormal   NSOperationQueuePriority = 0
-	NSOperationQueuePriorityHigh     NSOperationQueuePriority = 4
+	// Operations receive very low priority for execution.
+	NSOperationQueuePriorityVeryLow NSOperationQueuePriority = -8
+	// Operations receive low priority for execution.
+	NSOperationQueuePriorityLow NSOperationQueuePriority = -4
+	// Operations receive the normal priority for execution.
+	NSOperationQueuePriorityNormal NSOperationQueuePriority = 0
+	// Operations receive high priority for execution.
+	NSOperationQueuePriorityHigh NSOperationQueuePriority = 4
+	// Operations receive very high priority for execution.
 	NSOperationQueuePriorityVeryHigh NSOperationQueuePriority = 8
 )
 
@@ -2898,10 +3189,10 @@ func (e NSOrderedCollectionDifferenceCalculationOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Options for formatting person name components.
 type NSPersonNameComponentsFormatterOptions uint64
 
 const (
+	// Indicates that the formatter should format the component object's phoneticRepresentation components instead of its own components.
 	NSPersonNameComponentsFormatterPhonetic NSPersonNameComponentsFormatterOptions = 2
 )
 
@@ -2916,14 +3207,18 @@ func (e NSPersonNameComponentsFormatterOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// The formatting styles for person name components.
 type NSPersonNameComponentsFormatterStyle int64
 
 const (
-	NSPersonNameComponentsFormatterStyleDefault     NSPersonNameComponentsFormatterStyle = 0
-	NSPersonNameComponentsFormatterStyleShort       NSPersonNameComponentsFormatterStyle = 1
-	NSPersonNameComponentsFormatterStyleMedium      NSPersonNameComponentsFormatterStyle = 2
-	NSPersonNameComponentsFormatterStyleLong        NSPersonNameComponentsFormatterStyle = 3
+	// The default style, determined by the formatter.
+	NSPersonNameComponentsFormatterStyleDefault NSPersonNameComponentsFormatterStyle = 0
+	// Relies on user preferences and language defaults to display shortened form appropriate for display in space-constrained settings, e.g. C Darwin.
+	NSPersonNameComponentsFormatterStyleShort NSPersonNameComponentsFormatterStyle = 1
+	// The minimally necessary features for differentiation in a casual setting, e.g. Charles Darwin.
+	NSPersonNameComponentsFormatterStyleMedium NSPersonNameComponentsFormatterStyle = 2
+	// The fully-qualified name complete with all known components, e.g. Charles Robert Darwin, FRS.
+	NSPersonNameComponentsFormatterStyleLong NSPersonNameComponentsFormatterStyle = 3
+	// The maximally-abbreviated form of a name suitable for monograms, e.g. CRD.
 	NSPersonNameComponentsFormatterStyleAbbreviated NSPersonNameComponentsFormatterStyle = 4
 )
 
@@ -2944,24 +3239,35 @@ func (e NSPersonNameComponentsFormatterStyle) String() string {
 	}
 }
 
-// Defines the memory and personality options for an NSPointerFunctions object.
 type NSPointerFunctionsOptions uint64
 
 const (
+	// Use strong write-barriers to backing store; use garbage-collected memory on copy-in. This is the default memory value. As a special case, if you do not use garbage collection and specify this value in conjunction with `NSPointerFunctionsObjectPersonality` or `NSPointerFunctionsObjectPointerPersonality` then the `NSPointerFunctions` object uses `retain` and `release`. If you do not use garbage collection, and specify this value in conjunction with a valid non-object personality, it is the same as specifying `NSPointerFunctionsMallocMemory`.
 	NSPointerFunctionsStrongMemory NSPointerFunctionsOptions = 0
-	// Use weak read and write barriers; use garbage-collected memory on copyIn.
-	NSPointerFunctionsZeroingWeakMemory        NSPointerFunctionsOptions = 1
-	NSPointerFunctionsOpaqueMemory             NSPointerFunctionsOptions = 2
-	NSPointerFunctionsMallocMemory             NSPointerFunctionsOptions = 3
-	NSPointerFunctionsMachVirtualMemory        NSPointerFunctionsOptions = 4
-	NSPointerFunctionsWeakMemory               NSPointerFunctionsOptions = 5
-	NSPointerFunctionsObjectPersonality        NSPointerFunctionsOptions = 0
-	NSPointerFunctionsOpaquePersonality        NSPointerFunctionsOptions = 256
+	// Use weak read and write barriers; use garbage-collected memory on copyIn. If you do not use garbage collection, for object personalities, it will hold a non-retained object pointer.
+	NSPointerFunctionsZeroingWeakMemory NSPointerFunctionsOptions = 1
+	// Take no action when pointers are deleted. This is usually the preferred memory option for holding arbitrary pointers. The acquire function is only used for copy-in operations. This option is unlikely to be a good choice for objects.
+	NSPointerFunctionsOpaqueMemory NSPointerFunctionsOptions = 2
+	// Use `free()` on removal, `calloc()` on copy in.
+	NSPointerFunctionsMallocMemory NSPointerFunctionsOptions = 3
+	// Use Mach memory.
+	NSPointerFunctionsMachVirtualMemory NSPointerFunctionsOptions = 4
+	// Uses weak read and write barriers appropriate for ARC or GC. Using `NSPointerFunctionsWeakMemory` object references will turn to `NULL` on last release.
+	NSPointerFunctionsWeakMemory NSPointerFunctionsOptions = 5
+	// Use `hash` and `isEqual` methods for hashing and equality comparisons, use the `description` method for a description. This is the default personality value. As a special case, if you do not use garbage collection and specify this value in conjunction with `NSPointerFunctionsStrongMemory` then the `NSPointerFunctions` object uses `retain` and `release`.
+	NSPointerFunctionsObjectPersonality NSPointerFunctionsOptions = 0
+	// Use shifted pointer for the hash value and direct comparison to determine equality.
+	NSPointerFunctionsOpaquePersonality NSPointerFunctionsOptions = 256
+	// Use shifted pointer for the hash value and direct comparison to determine equality; use the `description` method for a description. As a special case, if you do not use garbage collection and specify this value in conjunction with `NSPointerFunctionsStrongMemory` then the `NSPointerFunctions` object uses `retain` and `release`.
 	NSPointerFunctionsObjectPointerPersonality NSPointerFunctionsOptions = 512
-	NSPointerFunctionsCStringPersonality       NSPointerFunctionsOptions = 768
-	NSPointerFunctionsStructPersonality        NSPointerFunctionsOptions = 1024
-	NSPointerFunctionsIntegerPersonality       NSPointerFunctionsOptions = 1280
-	NSPointerFunctionsCopyIn                   NSPointerFunctionsOptions = 65536
+	// Use a string hash and `strcmp`; C-string '`%s`' style description.
+	NSPointerFunctionsCStringPersonality NSPointerFunctionsOptions = 768
+	// Use a memory hash and `memcmp` (using a size function that you must set---see `sizeFunction`).
+	NSPointerFunctionsStructPersonality NSPointerFunctionsOptions = 1024
+	// Use unshifted value as hash and equality.
+	NSPointerFunctionsIntegerPersonality NSPointerFunctionsOptions = 1280
+	// Use the memory acquire function to allocate and copy items on input (see `acquireFunction`).
+	NSPointerFunctionsCopyIn NSPointerFunctionsOptions = 65536
 )
 
 func (e NSPointerFunctionsOptions) String() string {
@@ -3005,13 +3311,15 @@ func (e NSPointerFunctionsOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// The constants that specify when notifications are posted.
 type NSPostingStyle uint64
 
 const (
+	// The notification is posted at the end of the current notification callout or timer.
 	NSPostWhenIdle NSPostingStyle = 1
-	NSPostASAP     NSPostingStyle = 2
-	NSPostNow      NSPostingStyle = 3
+	// The notification is posted at the end of the current event processing cycle.
+	NSPostASAP NSPostingStyle = 2
+	// The notification is posted immediately after coalescing.
+	NSPostNow NSPostingStyle = 3
 )
 
 func (e NSPostingStyle) String() string {
@@ -3027,24 +3335,37 @@ func (e NSPostingStyle) String() string {
 	}
 }
 
-// Defines the type of comparison for a comparison predicate.
 type NSPredicateOperatorType uint64
 
 const (
-	NSLessThanPredicateOperatorType             NSPredicateOperatorType = 0
-	NSLessThanOrEqualToPredicateOperatorType    NSPredicateOperatorType = 1
-	NSGreaterThanPredicateOperatorType          NSPredicateOperatorType = 2
+	// A less-than predicate.
+	NSLessThanPredicateOperatorType NSPredicateOperatorType = 0
+	// A less-than-or-equal-to predicate.
+	NSLessThanOrEqualToPredicateOperatorType NSPredicateOperatorType = 1
+	// A greater-than predicate.
+	NSGreaterThanPredicateOperatorType NSPredicateOperatorType = 2
+	// A greater-than-or-equal-to predicate.
 	NSGreaterThanOrEqualToPredicateOperatorType NSPredicateOperatorType = 3
-	NSEqualToPredicateOperatorType              NSPredicateOperatorType = 4
-	NSNotEqualToPredicateOperatorType           NSPredicateOperatorType = 5
-	NSMatchesPredicateOperatorType              NSPredicateOperatorType = 6
-	NSLikePredicateOperatorType                 NSPredicateOperatorType = 7
-	NSBeginsWithPredicateOperatorType           NSPredicateOperatorType = 8
-	NSEndsWithPredicateOperatorType             NSPredicateOperatorType = 9
-	NSInPredicateOperatorType                   NSPredicateOperatorType = 10
-	NSCustomSelectorPredicateOperatorType       NSPredicateOperatorType = 11
-	NSContainsPredicateOperatorType             NSPredicateOperatorType = 99
-	NSBetweenPredicateOperatorType              NSPredicateOperatorType = 100
+	// An equal-to predicate.
+	NSEqualToPredicateOperatorType NSPredicateOperatorType = 4
+	// A not-equal-to predicate.
+	NSNotEqualToPredicateOperatorType NSPredicateOperatorType = 5
+	// A full regular expression matching predicate.
+	NSMatchesPredicateOperatorType NSPredicateOperatorType = 6
+	// A simple subset of the `MATCHES` predicate, similar in behavior to SQL `LIKE`.
+	NSLikePredicateOperatorType NSPredicateOperatorType = 7
+	// A begins-with predicate.
+	NSBeginsWithPredicateOperatorType NSPredicateOperatorType = 8
+	// An ends-with predicate.
+	NSEndsWithPredicateOperatorType NSPredicateOperatorType = 9
+	// A predicate to determine if the left hand side is in the right hand side. For strings, returns `YES` if the left hand side is a substring of the right hand side. For collections, returns `YES` if the left hand side is in the right hand side.
+	NSInPredicateOperatorType NSPredicateOperatorType = 10
+	// A predicate that uses a custom selector that takes a single argument and returns a `BOOL` value. The selector is invoked on the left hand side with the right hand side as the argument.
+	NSCustomSelectorPredicateOperatorType NSPredicateOperatorType = 11
+	// A predicate to determine if the left hand side contains the right hand side. Returns `YES` if `[lhs contains rhs]`; the left hand side must be an `NSExpression` object that evaluates to a collection.
+	NSContainsPredicateOperatorType NSPredicateOperatorType = 99
+	// A predicate to determine if the left hand side lies at or between bounds specified by the right hand side. The right hand side must be an array in which the first element sets the lower bound and the second element the upper, inclusive.
+	NSBetweenPredicateOperatorType NSPredicateOperatorType = 100
 )
 
 func (e NSPredicateOperatorType) String() string {
@@ -3168,13 +3489,16 @@ func (e NSPresentationIntentTableColumnAlignment) String() string {
 	}
 }
 
-// Values used to indicate the system’s thermal state.
 type NSProcessInfoThermalState int64
 
 const (
-	NSProcessInfoThermalStateNominal  NSProcessInfoThermalState = 0
-	NSProcessInfoThermalStateFair     NSProcessInfoThermalState = 1
-	NSProcessInfoThermalStateSerious  NSProcessInfoThermalState = 2
+	// The thermal state is within normal limits.
+	NSProcessInfoThermalStateNominal NSProcessInfoThermalState = 0
+	// The thermal state is slightly elevated. Reduce or defer background work, like prefetching content over the network or updating database indexes.
+	NSProcessInfoThermalStateFair NSProcessInfoThermalState = 1
+	// The thermal state is high. Reduce usage of resources that generate heat and consume battery. Reduce CPU and GPU usage, reduce the target framerate, and reduce the level of detail in rendered content.
+	NSProcessInfoThermalStateSerious NSProcessInfoThermalState = 2
+	// The thermal state is significantly impacting the performance of the system and the device needs to cool down. Reduce usage of the CPU, GPU, and I/O to the minimum level required for user interaction. If possible, stop using peripherals such as the camera, flash, microphone, and speaker.
 	NSProcessInfoThermalStateCritical NSProcessInfoThermalState = 3
 )
 
@@ -3193,12 +3517,14 @@ func (e NSProcessInfoThermalState) String() string {
 	}
 }
 
-// These constants are used to specify a property list serialization format.
 type NSPropertyListFormat uint64
 
 const (
-	NSPropertyListOpenStepFormat    NSPropertyListFormat = 1
-	NSPropertyListXMLFormat_v1_0    NSPropertyListFormat = 100
+	// Specifies the ASCII property list format inherited from the OpenStep APIs.
+	NSPropertyListOpenStepFormat NSPropertyListFormat = 1
+	// Specifies the XML property list format.
+	NSPropertyListXMLFormat_v1_0 NSPropertyListFormat = 100
+	// Specifies the binary property list format.
 	NSPropertyListBinaryFormat_v1_0 NSPropertyListFormat = 200
 )
 
@@ -3215,13 +3541,14 @@ func (e NSPropertyListFormat) String() string {
 	}
 }
 
-// These constants specify mutability options in property lists.
 type NSPropertyListMutabilityOptions uint64
 
 const (
 	// Causes the returned property list to contain immutable objects.
-	NSPropertyListImmutable                  NSPropertyListMutabilityOptions = 0
-	NSPropertyListMutableContainers          NSPropertyListMutabilityOptions = 1
+	NSPropertyListImmutable NSPropertyListMutabilityOptions = 0
+	// Causes the returned property list to have mutable containers but immutable leaves.
+	NSPropertyListMutableContainers NSPropertyListMutabilityOptions = 1
+	// Causes the returned property list to have mutable containers and mutable leaves.
 	NSPropertyListMutableContainersAndLeaves NSPropertyListMutabilityOptions = 2
 )
 
@@ -3239,15 +3566,19 @@ func (e NSPropertyListMutabilityOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Constants that indicate the nature and importance of work to the system.
 type NSQualityOfService int64
 
 const (
+	// The quality-of-service class for user-interactive tasks, such as animations, event handling, or updating your app's user interface.
 	NSQualityOfServiceUserInteractive NSQualityOfService = 33
-	NSQualityOfServiceUserInitiated   NSQualityOfService = 25
-	NSQualityOfServiceUtility         NSQualityOfService = 17
-	NSQualityOfServiceBackground      NSQualityOfService = 9
-	NSQualityOfServiceDefault         NSQualityOfService = -1
+	// The quality-of-service class for tasks that prevent the user from actively using your app.
+	NSQualityOfServiceUserInitiated NSQualityOfService = 25
+	// The quality-of-service class for tasks that the user does not track actively.
+	NSQualityOfServiceUtility NSQualityOfService = 17
+	// The quality-of-service class for maintenance or cleanup tasks that you create.
+	NSQualityOfServiceBackground NSQualityOfService = 9
+	// The default quality-of-service class.
+	NSQualityOfServiceDefault NSQualityOfService = -1
 )
 
 func (e NSQualityOfService) String() string {
@@ -3306,13 +3637,20 @@ func (e NSRectEdge) String() string {
 type NSRegularExpressionOptions uint64
 
 const (
-	NSRegularExpressionCaseInsensitive            NSRegularExpressionOptions = 1
+	// Match letters in the pattern independent of case.
+	NSRegularExpressionCaseInsensitive NSRegularExpressionOptions = 1
+	// Ignore whitespace and #-prefixed comments in the pattern.
 	NSRegularExpressionAllowCommentsAndWhitespace NSRegularExpressionOptions = 2
-	NSRegularExpressionIgnoreMetacharacters       NSRegularExpressionOptions = 4
-	NSRegularExpressionDotMatchesLineSeparators   NSRegularExpressionOptions = 8
-	NSRegularExpressionAnchorsMatchLines          NSRegularExpressionOptions = 16
-	NSRegularExpressionUseUnixLineSeparators      NSRegularExpressionOptions = 32
-	NSRegularExpressionUseUnicodeWordBoundaries   NSRegularExpressionOptions = 64
+	// Treat the entire pattern as a literal string.
+	NSRegularExpressionIgnoreMetacharacters NSRegularExpressionOptions = 4
+	// Allow `.` to match any character, including line separators.
+	NSRegularExpressionDotMatchesLineSeparators NSRegularExpressionOptions = 8
+	// Allow `^` and `$` to match the start and end of lines.
+	NSRegularExpressionAnchorsMatchLines NSRegularExpressionOptions = 16
+	// Treat only `\n` as a line separator (otherwise, all standard line separators are used).
+	NSRegularExpressionUseUnixLineSeparators NSRegularExpressionOptions = 32
+	// Use Unicode TR#29 to specify word boundaries (otherwise, traditional regular expression word boundaries are used).
+	NSRegularExpressionUseUnicodeWordBoundaries NSRegularExpressionOptions = 64
 )
 
 func (e NSRegularExpressionOptions) String() string {
@@ -3344,12 +3682,13 @@ func (e NSRegularExpressionOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// A type that represents the style to use when formatting relative dates, such as “1 week ago” or “last week”.
 type NSRelativeDateTimeFormatterStyle int64
 
 const (
+	// A numeric relative date style (e.g. "1 day ago", "2 days ago", "1 week ago", "in 1 week").
 	NSRelativeDateTimeFormatterStyleNumeric NSRelativeDateTimeFormatterStyle = 0
-	NSRelativeDateTimeFormatterStyleNamed   NSRelativeDateTimeFormatterStyle = 1
+	// A named relative date style (e.g. "yesterday", "2 days ago", "last week", "next week"). Falls back to the numeric style if no name is available.
+	NSRelativeDateTimeFormatterStyleNamed NSRelativeDateTimeFormatterStyle = 1
 )
 
 func (e NSRelativeDateTimeFormatterStyle) String() string {
@@ -3363,13 +3702,16 @@ func (e NSRelativeDateTimeFormatterStyle) String() string {
 	}
 }
 
-// A type that represents the style to use when formatting the units of relative dates.
 type NSRelativeDateTimeFormatterUnitsStyle int64
 
 const (
-	NSRelativeDateTimeFormatterUnitsStyleFull        NSRelativeDateTimeFormatterUnitsStyle = 0
-	NSRelativeDateTimeFormatterUnitsStyleSpellOut    NSRelativeDateTimeFormatterUnitsStyle = 1
-	NSRelativeDateTimeFormatterUnitsStyleShort       NSRelativeDateTimeFormatterUnitsStyle = 2
+	// The full units style (e.g. "2 months ago").
+	NSRelativeDateTimeFormatterUnitsStyleFull NSRelativeDateTimeFormatterUnitsStyle = 0
+	// The spelled-out units style (e.g. "two months ago").
+	NSRelativeDateTimeFormatterUnitsStyleSpellOut NSRelativeDateTimeFormatterUnitsStyle = 1
+	// The short units style (e.g. "2 mo. ago").
+	NSRelativeDateTimeFormatterUnitsStyleShort NSRelativeDateTimeFormatterUnitsStyle = 2
+	// The abbreviated units style (e.g. "2 mo. ago"). May give different results in languages other than English.
 	NSRelativeDateTimeFormatterUnitsStyleAbbreviated NSRelativeDateTimeFormatterUnitsStyle = 3
 )
 
@@ -3388,11 +3730,12 @@ func (e NSRelativeDateTimeFormatterUnitsStyle) String() string {
 	}
 }
 
-// These constants are used by relativePosition and relativePosition.
 type NSRelativePosition uint64
 
 const (
-	NSRelativeAfter  NSRelativePosition = 0
+	// After the base object.
+	NSRelativeAfter NSRelativePosition = 0
+	// Before the base object.
 	NSRelativeBefore NSRelativePosition = 1
 )
 
@@ -3407,13 +3750,16 @@ func (e NSRelativePosition) String() string {
 	}
 }
 
-// These constants specify rounding behaviors.
 type NSRoundingMode uint64
 
 const (
-	NSRoundPlain   NSRoundingMode = 0
-	NSRoundDown    NSRoundingMode = 1
-	NSRoundUp      NSRoundingMode = 2
+	// Round to the closest possible return value; when caught halfway between two positive numbers, round up; when caught between two negative numbers, round down.
+	NSRoundPlain NSRoundingMode = 0
+	// Round return values down.
+	NSRoundDown NSRoundingMode = 1
+	// Round return values up.
+	NSRoundUp NSRoundingMode = 2
+	// Round to the closest possible return value; when halfway between two possibilities, return the possibility whose last digit is even.
 	NSRoundBankers NSRoundingMode = 3
 )
 
@@ -3457,37 +3803,63 @@ func (e NSSaveOptions) String() string {
 	}
 }
 
-// The location of significant directories.
 type NSSearchPathDirectory uint64
 
 const (
-	NSApplicationDirectory          NSSearchPathDirectory = 1
-	NSDemoApplicationDirectory      NSSearchPathDirectory = 2
+	// Supported applications (`/Applications`).
+	NSApplicationDirectory NSSearchPathDirectory = 1
+	// Unsupported applications and demonstration versions.
+	NSDemoApplicationDirectory NSSearchPathDirectory = 2
+	// Developer applications (`/Developer/Applications`). Deprecated: As of Xcode 4.3, there is no longer a Developer Application directory directory; instead, Xcode.app is a self-contained application that gets installed in the user's Applications directory, by default, although it can be put anywhere.
 	NSDeveloperApplicationDirectory NSSearchPathDirectory = 3
-	NSAdminApplicationDirectory     NSSearchPathDirectory = 4
-	NSLibraryDirectory              NSSearchPathDirectory = 5
-	NSDeveloperDirectory            NSSearchPathDirectory = 6
-	NSUserDirectory                 NSSearchPathDirectory = 7
-	NSDocumentationDirectory        NSSearchPathDirectory = 8
-	NSDocumentDirectory             NSSearchPathDirectory = 9
-	NSCoreServiceDirectory          NSSearchPathDirectory = 10
+	// System and network administration applications.
+	NSAdminApplicationDirectory NSSearchPathDirectory = 4
+	// Various user-visible documentation, support, and configuration files (`/Library`).
+	NSLibraryDirectory NSSearchPathDirectory = 5
+	// Developer resources (`/Developer`). Deprecated: As of Xcode 4.3, there is no longer a Developer directory; instead, Xcode.app is a self-contained application that gets installed in the user's Applications directory, by default, although it can be put anywhere.
+	NSDeveloperDirectory NSSearchPathDirectory = 6
+	// User home directories (`/Users`).
+	NSUserDirectory NSSearchPathDirectory = 7
+	// Documentation.
+	NSDocumentationDirectory NSSearchPathDirectory = 8
+	// Document directory.
+	NSDocumentDirectory NSSearchPathDirectory = 9
+	// Core services (`System/Library/CoreServices`).
+	NSCoreServiceDirectory NSSearchPathDirectory = 10
+	// The user's autosaved documents (`Library/Autosave Information`).
 	NSAutosavedInformationDirectory NSSearchPathDirectory = 11
-	NSDesktopDirectory              NSSearchPathDirectory = 12
-	NSCachesDirectory               NSSearchPathDirectory = 13
-	NSApplicationSupportDirectory   NSSearchPathDirectory = 14
-	NSDownloadsDirectory            NSSearchPathDirectory = 15
-	NSInputMethodsDirectory         NSSearchPathDirectory = 16
-	NSMoviesDirectory               NSSearchPathDirectory = 17
-	NSMusicDirectory                NSSearchPathDirectory = 18
-	NSPicturesDirectory             NSSearchPathDirectory = 19
-	NSPrinterDescriptionDirectory   NSSearchPathDirectory = 20
-	NSSharedPublicDirectory         NSSearchPathDirectory = 21
-	NSPreferencePanesDirectory      NSSearchPathDirectory = 22
-	NSApplicationScriptsDirectory   NSSearchPathDirectory = 23
-	NSItemReplacementDirectory      NSSearchPathDirectory = 99
-	NSAllApplicationsDirectory      NSSearchPathDirectory = 100
-	NSAllLibrariesDirectory         NSSearchPathDirectory = 101
-	NSTrashDirectory                NSSearchPathDirectory = 102
+	// The user's desktop directory.
+	NSDesktopDirectory NSSearchPathDirectory = 12
+	// Discardable cache files (`Library/Caches`).
+	NSCachesDirectory NSSearchPathDirectory = 13
+	// Application support files (`Library/Application Support`).
+	NSApplicationSupportDirectory NSSearchPathDirectory = 14
+	// The user's downloads directory. The `NSDownloadsDirectory` flag only produces a path when you provide a `NSUserDomainMask`.
+	NSDownloadsDirectory NSSearchPathDirectory = 15
+	// Input Methods (`Library/Input Methods`).
+	NSInputMethodsDirectory NSSearchPathDirectory = 16
+	// The user's Movies directory (`~/Movies`).
+	NSMoviesDirectory NSSearchPathDirectory = 17
+	// The user's Music directory (`~/Music`).
+	NSMusicDirectory NSSearchPathDirectory = 18
+	// The user's Pictures directory (`~/Pictures`).
+	NSPicturesDirectory NSSearchPathDirectory = 19
+	// The system's PPDs directory (`Library/Printers/PPDs`).
+	NSPrinterDescriptionDirectory NSSearchPathDirectory = 20
+	// The user's Public sharing directory (`~/Public`).
+	NSSharedPublicDirectory NSSearchPathDirectory = 21
+	// The PreferencePanes directory for use with System Preferences (`Library/PreferencePanes`).
+	NSPreferencePanesDirectory NSSearchPathDirectory = 22
+	// The user scripts folder for the calling application (`~/Library/Application Scripts/<code-signing-id>`).
+	NSApplicationScriptsDirectory NSSearchPathDirectory = 23
+	// The constant used to create a temporary directory. Pass this constant to the `NSFileManager` method `URLForDirectory:inDomain:appropriateForURL:create:error:` in order to create a temporary directory.
+	NSItemReplacementDirectory NSSearchPathDirectory = 99
+	// All directories where applications can be stored.
+	NSAllApplicationsDirectory NSSearchPathDirectory = 100
+	// All directories where resources can be stored.
+	NSAllLibrariesDirectory NSSearchPathDirectory = 101
+	// The trash directory.
+	NSTrashDirectory NSSearchPathDirectory = 102
 )
 
 func (e NSSearchPathDirectory) String() string {
@@ -3551,15 +3923,19 @@ func (e NSSearchPathDirectory) String() string {
 	}
 }
 
-// Domain constants specifying base locations to use when you search for significant directories.
 type NSSearchPathDomainMask uint64
 
 const (
-	NSUserDomainMask    NSSearchPathDomainMask = 1
-	NSLocalDomainMask   NSSearchPathDomainMask = 2
+	// The user's home directory---the place to install user's personal items (`~`).
+	NSUserDomainMask NSSearchPathDomainMask = 1
+	// The place to install items available to everyone on this machine.
+	NSLocalDomainMask NSSearchPathDomainMask = 2
+	// The place to install items available on the network (`/Network`).
 	NSNetworkDomainMask NSSearchPathDomainMask = 4
-	NSSystemDomainMask  NSSearchPathDomainMask = 8
-	NSAllDomainsMask    NSSearchPathDomainMask = 65535
+	// A directory for system files provided by Apple (`/System`). This directory can't be modified.
+	NSSystemDomainMask NSSearchPathDomainMask = 8
+	// All domains. Includes all of the above and future items.
+	NSAllDomainsMask NSSearchPathDomainMask = 65535
 )
 
 func (e NSSearchPathDomainMask) String() string {
@@ -3612,12 +3988,18 @@ func (e NSSortOptions) String() string {
 type NSStreamEvent uint64
 
 const (
-	NSStreamEventNone              NSStreamEvent = 0
-	NSStreamEventOpenCompleted     NSStreamEvent = 1
+	// No event has occurred.
+	NSStreamEventNone NSStreamEvent = 0
+	// The open has completed successfully.
+	NSStreamEventOpenCompleted NSStreamEvent = 1
+	// The stream has bytes to be read.
 	NSStreamEventHasBytesAvailable NSStreamEvent = 2
+	// The stream can accept bytes for writing.
 	NSStreamEventHasSpaceAvailable NSStreamEvent = 4
-	NSStreamEventErrorOccurred     NSStreamEvent = 8
-	NSStreamEventEndEncountered    NSStreamEvent = 16
+	// An error has occurred on the stream.
+	NSStreamEventErrorOccurred NSStreamEvent = 8
+	// The end of the stream has been reached.
+	NSStreamEventEndEncountered NSStreamEvent = 16
 )
 
 func (e NSStreamEvent) String() string {
@@ -3643,18 +4025,25 @@ func (e NSStreamEvent) String() string {
 	return strings.Join(parts, "|")
 }
 
-// The type declared for the constants listed in doc:stream/stream_status_constants.
 type NSStreamStatus uint64
 
 const (
+	// The stream is not open for reading or writing. This status is returned before the underlying call to open a stream but after it's been created.
 	NSStreamStatusNotOpen NSStreamStatus = 0
+	// The stream is in the process of being opened for reading or for writing. For network streams, this status might include the time after the stream was opened, but while network DNS resolution is happening.
 	NSStreamStatusOpening NSStreamStatus = 1
-	NSStreamStatusOpen    NSStreamStatus = 2
+	// The stream is open, but no reading or writing is occurring.
+	NSStreamStatusOpen NSStreamStatus = 2
+	// Data is being read from the stream.
 	NSStreamStatusReading NSStreamStatus = 3
+	// Data is being written to the stream.
 	NSStreamStatusWriting NSStreamStatus = 4
-	NSStreamStatusAtEnd   NSStreamStatus = 5
-	NSStreamStatusClosed  NSStreamStatus = 6
-	NSStreamStatusError   NSStreamStatus = 7
+	// There is no more data to read, or no more data can be written to the stream.
+	NSStreamStatusAtEnd NSStreamStatus = 5
+	// The stream is closed.
+	NSStreamStatusClosed NSStreamStatus = 6
+	// The remote end of the connection can't be contacted, or the connection has been severed for some other reason.
+	NSStreamStatusError NSStreamStatus = 7
 )
 
 func (e NSStreamStatus) String() string {
@@ -3680,19 +4069,27 @@ func (e NSStreamStatus) String() string {
 	}
 }
 
-// These values represent the options available to many of the string classes’ search and comparison methods.
 type NSStringCompareOptions uint64
 
 const (
-	NSCaseInsensitiveSearch      NSStringCompareOptions = 1
-	NSLiteralSearch              NSStringCompareOptions = 2
-	NSBackwardsSearch            NSStringCompareOptions = 4
-	NSAnchoredSearch             NSStringCompareOptions = 8
-	NSNumericSearch              NSStringCompareOptions = 64
+	// A case-insensitive search.
+	NSCaseInsensitiveSearch NSStringCompareOptions = 1
+	// Exact character-by-character equivalence.
+	NSLiteralSearch NSStringCompareOptions = 2
+	// Search from end of source string.
+	NSBackwardsSearch NSStringCompareOptions = 4
+	// Search is limited to start (or end, if `NSBackwardsSearch`) of source string.
+	NSAnchoredSearch NSStringCompareOptions = 8
+	// Numbers within strings are compared using numeric value, that is, `Name2.txt` < `Name7.txt` < `Name25.txt`. Numeric comparison only applies to the numerals in the string, not other characters that would have meaning in a numeric representation such as a negative sign, a comma, or a decimal point. This option only applies to compare methods, not find.
+	NSNumericSearch NSStringCompareOptions = 64
+	// Search ignores diacritic marks. For example, 'o' is equal to 'o'.
 	NSDiacriticInsensitiveSearch NSStringCompareOptions = 128
-	NSWidthInsensitiveSearch     NSStringCompareOptions = 256
-	NSForcedOrderingSearch       NSStringCompareOptions = 512
-	NSRegularExpressionSearch    NSStringCompareOptions = 1024
+	// Search ignores width differences in characters that have full-width and half-width forms, as occurs in East Asian character sets. For example, with this option, the full-width Latin small letter 'a' (`U+FF41`) is equal to the basic Latin small letter 'a' (`U+0061`).
+	NSWidthInsensitiveSearch NSStringCompareOptions = 256
+	// Comparisons are forced to return either `NSOrderedAscending` or `NSOrderedDescending` if the strings are equivalent but not strictly equal. This option ensures reliable, reproducible results when sorting. For example, "aaa" is greater than "AAA" if `NSCaseInsensitiveSearch` is specified.
+	NSForcedOrderingSearch NSStringCompareOptions = 512
+	// The search string is treated as an ICU-compatible regular expression. If set, no other options can apply except `NSCaseInsensitiveSearch` and `NSAnchoredSearch`. You can use this option only with the `rangeOfString:` methods and `stringByReplacingOccurrencesOfString:withString:options:range:`.
+	NSRegularExpressionSearch NSStringCompareOptions = 1024
 )
 
 func (e NSStringCompareOptions) String() string {
@@ -3730,11 +4127,12 @@ func (e NSStringCompareOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Options for converting string encodings.
 type NSStringEncodingConversionOptions uint64
 
 const (
-	NSStringEncodingConversionAllowLossy             NSStringEncodingConversionOptions = 1
+	// Allows lossy conversion.
+	NSStringEncodingConversionAllowLossy NSStringEncodingConversionOptions = 1
+	// Specifies an external representation (with a byte-order mark, if necessary, to indicate endianness).
 	NSStringEncodingConversionExternalRepresentation NSStringEncodingConversionOptions = 2
 )
 
@@ -3752,7 +4150,6 @@ func (e NSStringEncodingConversionOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Constants to specify kinds of substrings and styles of enumeration.
 type NSStringEnumerationOptions uint64
 
 const (
@@ -3803,11 +4200,12 @@ func (e NSStringEnumerationOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Constants that specify the termination reason values that the system returns.
 type NSTaskTerminationReason int64
 
 const (
-	NSTaskTerminationReasonExit           NSTaskTerminationReason = 1
+	// The task exited normally.
+	NSTaskTerminationReasonExit NSTaskTerminationReason = 1
+	// The task exited due to an uncaught signal.
 	NSTaskTerminationReasonUncaughtSignal NSTaskTerminationReason = 2
 )
 
@@ -3822,18 +4220,25 @@ func (e NSTaskTerminationReason) String() string {
 	}
 }
 
-// These are passed to initWithObjectSpecifier:comparisonOperator:testObject: to specify the comparison operator.
 type NSTestComparisonOperation uint64
 
 const (
-	NSEqualToComparison              NSTestComparisonOperation = 0
-	NSLessThanOrEqualToComparison    NSTestComparisonOperation = 1
-	NSLessThanComparison             NSTestComparisonOperation = 2
+	// Tests for equality.
+	NSEqualToComparison NSTestComparisonOperation = 0
+	// Tests for less-than-or-equal-to.
+	NSLessThanOrEqualToComparison NSTestComparisonOperation = 1
+	// Tests for less-than.
+	NSLessThanComparison NSTestComparisonOperation = 2
+	// Tests for greater-than-or-equal-to.
 	NSGreaterThanOrEqualToComparison NSTestComparisonOperation = 3
-	NSGreaterThanComparison          NSTestComparisonOperation = 4
-	NSBeginsWithComparison           NSTestComparisonOperation = 5
-	NSEndsWithComparison             NSTestComparisonOperation = 6
-	NSContainsComparison             NSTestComparisonOperation = 7
+	// Tests for greater-than.
+	NSGreaterThanComparison NSTestComparisonOperation = 4
+	// Tests whether a string begins with another string.
+	NSBeginsWithComparison NSTestComparisonOperation = 5
+	// Tests whether a string ends with another string.
+	NSEndsWithComparison NSTestComparisonOperation = 6
+	// Tests whether a string contains another string.
+	NSContainsComparison NSTestComparisonOperation = 7
 )
 
 func (e NSTestComparisonOperation) String() string {
@@ -3862,18 +4267,31 @@ func (e NSTestComparisonOperation) String() string {
 type NSTextCheckingType uint64
 
 const (
-	NSTextCheckingTypeOrthography        NSTextCheckingType = 1
-	NSTextCheckingTypeSpelling           NSTextCheckingType = 2
-	NSTextCheckingTypeGrammar            NSTextCheckingType = 4
-	NSTextCheckingTypeDate               NSTextCheckingType = 8
-	NSTextCheckingTypeAddress            NSTextCheckingType = 16
-	NSTextCheckingTypeLink               NSTextCheckingType = 32
-	NSTextCheckingTypeQuote              NSTextCheckingType = 64
-	NSTextCheckingTypeDash               NSTextCheckingType = 128
-	NSTextCheckingTypeReplacement        NSTextCheckingType = 256
-	NSTextCheckingTypeCorrection         NSTextCheckingType = 512
-	NSTextCheckingTypeRegularExpression  NSTextCheckingType = 1024
-	NSTextCheckingTypePhoneNumber        NSTextCheckingType = 2048
+	// Language identification.
+	NSTextCheckingTypeOrthography NSTextCheckingType = 1
+	// Spell checking.
+	NSTextCheckingTypeSpelling NSTextCheckingType = 2
+	// Grammar checking.
+	NSTextCheckingTypeGrammar NSTextCheckingType = 4
+	// Date and time detection.
+	NSTextCheckingTypeDate NSTextCheckingType = 8
+	// Address detection.
+	NSTextCheckingTypeAddress NSTextCheckingType = 16
+	// Link detection.
+	NSTextCheckingTypeLink NSTextCheckingType = 32
+	// Smart quotes.
+	NSTextCheckingTypeQuote NSTextCheckingType = 64
+	// Smart dashes.
+	NSTextCheckingTypeDash NSTextCheckingType = 128
+	// Fixed replacements, such as copyright symbol for (c).
+	NSTextCheckingTypeReplacement NSTextCheckingType = 256
+	// Autocorrection.
+	NSTextCheckingTypeCorrection NSTextCheckingType = 512
+	// Regular expression matches.
+	NSTextCheckingTypeRegularExpression NSTextCheckingType = 1024
+	// Phone number detection.
+	NSTextCheckingTypePhoneNumber NSTextCheckingType = 2048
+	// Transit (e.g. flight) info detection.
 	NSTextCheckingTypeTransitInformation NSTextCheckingType = 4096
 )
 
@@ -3924,16 +4342,21 @@ func (e NSTextCheckingType) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Constants you use to specify a style when presenting time zone names.
 type NSTimeZoneNameStyle int64
 
 const (
-	NSTimeZoneNameStyleStandard            NSTimeZoneNameStyle = 0
-	NSTimeZoneNameStyleShortStandard       NSTimeZoneNameStyle = 1
-	NSTimeZoneNameStyleDaylightSaving      NSTimeZoneNameStyle = 2
+	// Specifies a standard name style. For example, "Central Standard Time" for Central Time.
+	NSTimeZoneNameStyleStandard NSTimeZoneNameStyle = 0
+	// Specifies a short name style. For example, "CST" for Central Time.
+	NSTimeZoneNameStyleShortStandard NSTimeZoneNameStyle = 1
+	// Specifies a daylight saving name style. For example, "Central Daylight Time" for Central Time.
+	NSTimeZoneNameStyleDaylightSaving NSTimeZoneNameStyle = 2
+	// Specifies a short daylight saving name style. For example, "CDT" for Central Time.
 	NSTimeZoneNameStyleShortDaylightSaving NSTimeZoneNameStyle = 3
-	NSTimeZoneNameStyleGeneric             NSTimeZoneNameStyle = 4
-	NSTimeZoneNameStyleShortGeneric        NSTimeZoneNameStyle = 5
+	// Specifies a generic name style. For example, "Central Time" for Central Time.
+	NSTimeZoneNameStyleGeneric NSTimeZoneNameStyle = 4
+	// Specifies a generic time zone name. For example, "CT" for Central Time.
+	NSTimeZoneNameStyleShortGeneric NSTimeZoneNameStyle = 5
 )
 
 func (e NSTimeZoneNameStyle) String() string {
@@ -3955,16 +4378,21 @@ func (e NSTimeZoneNameStyle) String() string {
 	}
 }
 
-// Options used when creating bookmark data.
 type NSURLBookmarkCreationOptions uint64
 
 const (
-	NSURLBookmarkCreationPreferFileIDResolution           NSURLBookmarkCreationOptions = 256
-	NSURLBookmarkCreationMinimalBookmark                  NSURLBookmarkCreationOptions = 512
-	NSURLBookmarkCreationSuitableForBookmarkFile          NSURLBookmarkCreationOptions = 1024
-	NSURLBookmarkCreationWithSecurityScope                NSURLBookmarkCreationOptions = 2048
+	// This option does nothing and has no effect on bookmark resolution.
+	NSURLBookmarkCreationPreferFileIDResolution NSURLBookmarkCreationOptions = 256
+	// Creates bookmark data with "less" information, which may be smaller but still be able to resolve in certain ways.
+	NSURLBookmarkCreationMinimalBookmark NSURLBookmarkCreationOptions = 512
+	// Specifies that the bookmark data includes the required properties for creating Finder alias files.
+	NSURLBookmarkCreationSuitableForBookmarkFile NSURLBookmarkCreationOptions = 1024
+	// Specifies that when creating a security-scoped bookmark, upon resolution, it provides a security-scoped URL allowing read/write access to a file-system resource.
+	NSURLBookmarkCreationWithSecurityScope NSURLBookmarkCreationOptions = 2048
+	// Specifies that when creating a security-scoped bookmark, upon resolution, it provides a security-scoped URL allowing read-only access to a file-system resource. This option is only meaningful when used along with `NSURLBookmarkCreationWithSecurityScope`.
 	NSURLBookmarkCreationSecurityScopeAllowOnlyReadAccess NSURLBookmarkCreationOptions = 4096
-	NSURLBookmarkCreationWithoutImplicitSecurityScope     NSURLBookmarkCreationOptions = 536870912
+	// Prevents inclusion of a bookmark's implicit ephemeral security scope, when creating one without security scope. Bookmarks that you create without security scope automatically carry implicit ephemeral security scope. This security scope is valid until reboot at the latest, and confers access to the resource to any other process that resolves the bookmark. Using this option prevents inclusion of this ephemeral security scope. When using this option, other processes can't call `startAccessingSecurityScopedResource` on the resolved URL.
+	NSURLBookmarkCreationWithoutImplicitSecurityScope NSURLBookmarkCreationOptions = 536870912
 )
 
 func (e NSURLBookmarkCreationOptions) String() string {
@@ -3993,13 +4421,16 @@ func (e NSURLBookmarkCreationOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Options used when resolving bookmark data.
 type NSURLBookmarkResolutionOptions uint64
 
 const (
-	NSURLBookmarkResolutionWithoutUI                     NSURLBookmarkResolutionOptions = 256
-	NSURLBookmarkResolutionWithoutMounting               NSURLBookmarkResolutionOptions = 512
-	NSURLBookmarkResolutionWithSecurityScope             NSURLBookmarkResolutionOptions = 1024
+	// Specifies that no UI feedback should accompany resolution of the bookmark data.
+	NSURLBookmarkResolutionWithoutUI NSURLBookmarkResolutionOptions = 256
+	// Specifies that no volume should be mounted during resolution of the bookmark data.
+	NSURLBookmarkResolutionWithoutMounting NSURLBookmarkResolutionOptions = 512
+	// Specifies that the security scope, applied to the bookmark when it was created, should be used during resolution of the bookmark data.
+	NSURLBookmarkResolutionWithSecurityScope NSURLBookmarkResolutionOptions = 1024
+	// Specifies that resolution doesn't implicitly start accessing the ephemeral security-scoped resource. Instead, call `startAccessingSecurityScopedResource` on the returned URL when ready to use the resource. Not applicable to security-scoped bookmarks.
 	NSURLBookmarkResolutionWithoutImplicitStartAccessing NSURLBookmarkResolutionOptions = 32768
 )
 
@@ -4023,13 +4454,15 @@ func (e NSURLBookmarkResolutionOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// These constants specify the caching strategy used by an NSCachedURLResponse object.
 type NSURLCacheStoragePolicy uint64
 
 const (
-	NSURLCacheStorageAllowed             NSURLCacheStoragePolicy = 0
+	// Storage in `NSURLCache` is allowed without restriction.
+	NSURLCacheStorageAllowed NSURLCacheStoragePolicy = 0
+	// Storage in `NSURLCache` is allowed; however storage should be restricted to memory only.
 	NSURLCacheStorageAllowedInMemoryOnly NSURLCacheStoragePolicy = 1
-	NSURLCacheStorageNotAllowed          NSURLCacheStoragePolicy = 2
+	// Storage in `NSURLCache` is not allowed in any fashion, either in memory or on disk.
+	NSURLCacheStorageNotAllowed NSURLCacheStoragePolicy = 2
 )
 
 func (e NSURLCacheStoragePolicy) String() string {
@@ -4045,13 +4478,16 @@ func (e NSURLCacheStoragePolicy) String() string {
 	}
 }
 
-// Constants that specify how long the credential will be kept.
 type NSURLCredentialPersistence uint64
 
 const (
-	NSURLCredentialPersistenceNone           NSURLCredentialPersistence = 0
-	NSURLCredentialPersistenceForSession     NSURLCredentialPersistence = 1
-	NSURLCredentialPersistencePermanent      NSURLCredentialPersistence = 2
+	// The credential should not be stored.
+	NSURLCredentialPersistenceNone NSURLCredentialPersistence = 0
+	// The credential should be stored only for this session.
+	NSURLCredentialPersistenceForSession NSURLCredentialPersistence = 1
+	// The credential should be stored in the keychain.
+	NSURLCredentialPersistencePermanent NSURLCredentialPersistence = 2
+	// The credential should be stored permanently in the keychain, and in addition should be distributed to other devices based on the owning Apple ID.
 	NSURLCredentialPersistenceSynchronizable NSURLCredentialPersistence = 3
 )
 
@@ -4099,14 +4535,17 @@ func (e NSURLErrorNetworkUnavailableReason) String() string {
 	}
 }
 
-// These following constants are defined by NSURLHandle and are returned by status.
 type NSURLHandleStatus uint64
 
 const (
-	NSURLHandleNotLoaded      NSURLHandleStatus = 0
-	NSURLHandleLoadSucceeded  NSURLHandleStatus = 1
+	// The resource data has not been loaded.
+	NSURLHandleNotLoaded NSURLHandleStatus = 0
+	// The resource data was successfully loaded.
+	NSURLHandleLoadSucceeded NSURLHandleStatus = 1
+	// The resource data is in the process of loading.
 	NSURLHandleLoadInProgress NSURLHandleStatus = 2
-	NSURLHandleLoadFailed     NSURLHandleStatus = 3
+	// The resource data failed to load.
+	NSURLHandleLoadFailed NSURLHandleStatus = 3
 )
 
 func (e NSURLHandleStatus) String() string {
@@ -4124,13 +4563,15 @@ func (e NSURLHandleStatus) String() string {
 	}
 }
 
-// Constants indicating the relationship between a directory and an item.
 type NSURLRelationship int64
 
 const (
+	// The directory contains the specified item.
 	NSURLRelationshipContains NSURLRelationship = 0
-	NSURLRelationshipSame     NSURLRelationship = 1
-	NSURLRelationshipOther    NSURLRelationship = 2
+	// The directory and the item are the same. This relationship occurs when the value of the `NSURLFileResourceIdentifierKey` is the same for the directory and item.
+	NSURLRelationshipSame NSURLRelationship = 1
+	// The directory does not contain the item and is not the same as the item.
+	NSURLRelationshipOther NSURLRelationship = 2
 )
 
 func (e NSURLRelationship) String() string {
@@ -4146,12 +4587,13 @@ func (e NSURLRelationship) String() string {
 	}
 }
 
-// The entities that can make a network request.
 type NSURLRequestAttribution uint64
 
 const (
+	// A developer-initiated network request. This is the default value. Use this for any purpose other than when the user explicitly accesses a link.
 	NSURLRequestAttributionDeveloper NSURLRequestAttribution = 0
-	NSURLRequestAttributionUser      NSURLRequestAttribution = 1
+	// The user explicitly directs the app to make a network request. Use this for URL requests that satisfy a user request to access an explicit, unmodified URL.
+	NSURLRequestAttributionUser NSURLRequestAttribution = 1
 )
 
 func (e NSURLRequestAttribution) String() string {
@@ -4165,17 +4607,23 @@ func (e NSURLRequestAttribution) String() string {
 	}
 }
 
-// The constants used to specify interaction with the cached responses.
 type NSURLRequestCachePolicy uint64
 
 const (
-	NSURLRequestUseProtocolCachePolicy                NSURLRequestCachePolicy = 0
-	NSURLRequestReloadIgnoringLocalCacheData          NSURLRequestCachePolicy = 1
+	// Use the caching logic defined in the protocol implementation, if any, for a particular URL load request. This is the default policy for URL load requests.
+	NSURLRequestUseProtocolCachePolicy NSURLRequestCachePolicy = 0
+	// The URL load should be loaded only from the originating source. No existing cache data should be used to satisfy a URL load request.
+	NSURLRequestReloadIgnoringLocalCacheData NSURLRequestCachePolicy = 1
+	// Ignore local cache data, and instruct proxies and other intermediates to disregard their caches so far as the protocol allows.
 	NSURLRequestReloadIgnoringLocalAndRemoteCacheData NSURLRequestCachePolicy = 4
-	NSURLRequestReloadIgnoringCacheData               NSURLRequestCachePolicy = 1
-	NSURLRequestReturnCacheDataElseLoad               NSURLRequestCachePolicy = 2
-	NSURLRequestReturnCacheDataDontLoad               NSURLRequestCachePolicy = 3
-	NSURLRequestReloadRevalidatingCacheData           NSURLRequestCachePolicy = 5
+	// Replaced by `NSURLRequestReloadIgnoringLocalCacheData`.
+	NSURLRequestReloadIgnoringCacheData NSURLRequestCachePolicy = 1
+	// Use existing cache data, regardless of age or expiration date, loading from originating source only if there is no cached data.
+	NSURLRequestReturnCacheDataElseLoad NSURLRequestCachePolicy = 2
+	// Use existing cache data, regardless of age or expiration date, and fail if no cached data is available. If there is no existing data in the cache corresponding to a URL load request, no attempt is made to load the data from the originating source, and the load is considered to have failed. This constant specifies a behavior that is similar to an "offline" mode.
+	NSURLRequestReturnCacheDataDontLoad NSURLRequestCachePolicy = 3
+	// Use cache data if the origin source can validate it; otherwise, load from the origin.
+	NSURLRequestReloadRevalidatingCacheData NSURLRequestCachePolicy = 5
 )
 
 func (e NSURLRequestCachePolicy) String() string {
@@ -4197,19 +4645,27 @@ func (e NSURLRequestCachePolicy) String() string {
 	}
 }
 
-// Constants that specify how a request uses network resources.
 type NSURLRequestNetworkServiceType uint64
 
 const (
-	NSURLNetworkServiceTypeDefault        NSURLRequestNetworkServiceType = 0
-	NSURLNetworkServiceTypeVoIP           NSURLRequestNetworkServiceType = 1
-	NSURLNetworkServiceTypeVideo          NSURLRequestNetworkServiceType = 2
-	NSURLNetworkServiceTypeBackground     NSURLRequestNetworkServiceType = 3
-	NSURLNetworkServiceTypeVoice          NSURLRequestNetworkServiceType = 4
+	// A service type for standard network traffic.
+	NSURLNetworkServiceTypeDefault NSURLRequestNetworkServiceType = 0
+	// A service type for VoIP traffic.
+	NSURLNetworkServiceTypeVoIP NSURLRequestNetworkServiceType = 1
+	// A service type for low-delay tolerant, very low-loss tolerant, inelastic flow, and constant packet rate connections.
+	NSURLNetworkServiceTypeVideo NSURLRequestNetworkServiceType = 2
+	// A service type for high-delay tolerant, high-loss tolerant, elastic flow, and variable size connections.
+	NSURLNetworkServiceTypeBackground NSURLRequestNetworkServiceType = 3
+	// A service type for low-delay tolerant, very low-loss tolerant, inelastic flow, and constant packet rate connections.
+	NSURLNetworkServiceTypeVoice NSURLRequestNetworkServiceType = 4
+	// A service type for medium-delay tolerant, elastic and inelastic flow, bursty, and long-lived connections.
 	NSURLNetworkServiceTypeResponsiveData NSURLRequestNetworkServiceType = 6
-	NSURLNetworkServiceTypeAVStreaming    NSURLRequestNetworkServiceType = 8
-	NSURLNetworkServiceTypeResponsiveAV   NSURLRequestNetworkServiceType = 9
-	NSURLNetworkServiceTypeCallSignaling  NSURLRequestNetworkServiceType = 11
+	// A service type for medium-delay tolerant, low-medium-loss tolerant, elastic flow, constant packet interval, and variable rate and size connections.
+	NSURLNetworkServiceTypeAVStreaming NSURLRequestNetworkServiceType = 8
+	// A service type for low-delay tolerant, low-to-medium-loss tolerant, elastic flow, variable packet interval, rate, size responsive and time-sensitive connections.
+	NSURLNetworkServiceTypeResponsiveAV NSURLRequestNetworkServiceType = 9
+	// A service for low-loss tolerant, inelastic flow, jitter tolerant, short but bursty rate, and variable size connections.
+	NSURLNetworkServiceTypeCallSignaling NSURLRequestNetworkServiceType = 11
 )
 
 func (e NSURLRequestNetworkServiceType) String() string {
@@ -4237,14 +4693,17 @@ func (e NSURLRequestNetworkServiceType) String() string {
 	}
 }
 
-// Constants passed by session or task delegates to the provided continuation block in response to an authentication challenge.
 type NSURLSessionAuthChallengeDisposition int64
 
 const (
-	NSURLSessionAuthChallengeUseCredential                 NSURLSessionAuthChallengeDisposition = 0
-	NSURLSessionAuthChallengePerformDefaultHandling        NSURLSessionAuthChallengeDisposition = 1
+	// Use the specified credential, which may be `nil`.
+	NSURLSessionAuthChallengeUseCredential NSURLSessionAuthChallengeDisposition = 0
+	// Use the default handling for the challenge as though this delegate method were not implemented. The provided credential parameter is ignored.
+	NSURLSessionAuthChallengePerformDefaultHandling NSURLSessionAuthChallengeDisposition = 1
+	// Cancel the entire request. The provided credential parameter is ignored.
 	NSURLSessionAuthChallengeCancelAuthenticationChallenge NSURLSessionAuthChallengeDisposition = 2
-	NSURLSessionAuthChallengeRejectProtectionSpace         NSURLSessionAuthChallengeDisposition = 3
+	// Reject this challenge, and call the authentication delegate method again with the next authentication protection space. The provided credential parameter is ignored. This disposition is only appropriate in fairly unusual situations. For example, a Windows server might use both `NSURLAuthenticationMethodNegotiate` and `NSURLAuthenticationMethodNTLM`. If your app can only handle NTLM, you would want to reject the Negotiate challenge, in order to then receive the queued NTLM challenge. However, most apps won't face this scenario, and if you cannot provide a credential for a certain authentication method, you should usually fall back to the `performDefaultHandling` disposition instead.
+	NSURLSessionAuthChallengeRejectProtectionSpace NSURLSessionAuthChallengeDisposition = 3
 )
 
 func (e NSURLSessionAuthChallengeDisposition) String() string {
@@ -4262,13 +4721,15 @@ func (e NSURLSessionAuthChallengeDisposition) String() string {
 	}
 }
 
-// The action to take on a delayed URL session task.
 type NSURLSessionDelayedRequestDisposition int64
 
 const (
+	// A disposition indicating that the task should proceed with the original request.
 	NSURLSessionDelayedRequestContinueLoading NSURLSessionDelayedRequestDisposition = 0
-	NSURLSessionDelayedRequestUseNewRequest   NSURLSessionDelayedRequestDisposition = 1
-	NSURLSessionDelayedRequestCancel          NSURLSessionDelayedRequestDisposition = 2
+	// A disposition indicating that the task should use a new request to perform the network load.
+	NSURLSessionDelayedRequestUseNewRequest NSURLSessionDelayedRequestDisposition = 1
+	// A disposition indicating that the task should be canceled.
+	NSURLSessionDelayedRequestCancel NSURLSessionDelayedRequestDisposition = 2
 )
 
 func (e NSURLSessionDelayedRequestDisposition) String() string {
@@ -4284,14 +4745,17 @@ func (e NSURLSessionDelayedRequestDisposition) String() string {
 	}
 }
 
-// Constants indicating how a data or upload session should proceed after receiving the initial headers.
 type NSURLSessionResponseDisposition int64
 
 const (
-	NSURLSessionResponseCancel         NSURLSessionResponseDisposition = 0
-	NSURLSessionResponseAllow          NSURLSessionResponseDisposition = 1
+	// Cancel the load. Using this disposition is equivalent to calling `cancel` on the task.
+	NSURLSessionResponseCancel NSURLSessionResponseDisposition = 0
+	// Allow the load operation to continue.
+	NSURLSessionResponseAllow NSURLSessionResponseDisposition = 1
+	// Convert the response for this request to use a download task. When used with the completion handler from `URLSession:dataTask:didReceiveResponse:completionHandler:`, this disposition converts the data task to a download task, resulting in the delegate's `URLSession:dataTask:didBecomeDownloadTask:` being called with the new download task that supersedes the current task.
 	NSURLSessionResponseBecomeDownload NSURLSessionResponseDisposition = 2
-	NSURLSessionResponseBecomeStream   NSURLSessionResponseDisposition = 3
+	// Convert the response for this request to use a stream task. When used with the completion handler from `URLSession:dataTask:didReceiveResponse:completionHandler:`, this disposition converts the task to a stream task, resulting in the delegate's `URLSession:dataTask:didBecomeStreamTask:` being called with the new stream task that supersedes the current task.
+	NSURLSessionResponseBecomeStream NSURLSessionResponseDisposition = 3
 )
 
 func (e NSURLSessionResponseDisposition) String() string {
@@ -4336,14 +4800,17 @@ func (e NSURLSessionTaskMetricsDomainResolutionProtocol) String() string {
 	}
 }
 
-// The manner in which a resource is fetched.
 type NSURLSessionTaskMetricsResourceFetchType int64
 
 const (
-	NSURLSessionTaskMetricsResourceFetchTypeUnknown     NSURLSessionTaskMetricsResourceFetchType = 0
+	// The manner in which the resource was fetched could not be determined.
+	NSURLSessionTaskMetricsResourceFetchTypeUnknown NSURLSessionTaskMetricsResourceFetchType = 0
+	// The resource was loaded over the network.
 	NSURLSessionTaskMetricsResourceFetchTypeNetworkLoad NSURLSessionTaskMetricsResourceFetchType = 1
-	NSURLSessionTaskMetricsResourceFetchTypeServerPush  NSURLSessionTaskMetricsResourceFetchType = 2
-	NSURLSessionTaskMetricsResourceFetchTypeLocalCache  NSURLSessionTaskMetricsResourceFetchType = 3
+	// The resource was pushed by the server to the client.
+	NSURLSessionTaskMetricsResourceFetchTypeServerPush NSURLSessionTaskMetricsResourceFetchType = 2
+	// The resource was retrieved from the local storage.
+	NSURLSessionTaskMetricsResourceFetchTypeLocalCache NSURLSessionTaskMetricsResourceFetchType = 3
 )
 
 func (e NSURLSessionTaskMetricsResourceFetchType) String() string {
@@ -4361,13 +4828,16 @@ func (e NSURLSessionTaskMetricsResourceFetchType) String() string {
 	}
 }
 
-// Constants for determining the current state of a task.
 type NSURLSessionTaskState int64
 
 const (
-	NSURLSessionTaskStateRunning   NSURLSessionTaskState = 0
+	// The task is currently being serviced by the session. A task in this state is subject to the request and resource timeouts specified in the session configuration object.
+	NSURLSessionTaskStateRunning NSURLSessionTaskState = 0
+	// The task was suspended by the app. No further processing takes place until the task is resumed. A task in this state is not subject to timeouts.
 	NSURLSessionTaskStateSuspended NSURLSessionTaskState = 1
+	// The task has received a cancel message. The delegate may or may not have received a `URLSession:task:didCompleteWithError:` message yet. A task in this state is not subject to timeouts.
 	NSURLSessionTaskStateCanceling NSURLSessionTaskState = 2
+	// The task has completed (without being canceled), and the task's delegate receives no further callbacks. If the task completed successfully, the task's `error` property is `nil`. Otherwise, it provides an error object that tells what went wrong. A task in this state is not subject to timeouts.
 	NSURLSessionTaskStateCompleted NSURLSessionTaskState = 3
 )
 
@@ -4386,23 +4856,35 @@ func (e NSURLSessionTaskState) String() string {
 	}
 }
 
-// A code that indicates why a WebSocket connection closed.
 type NSURLSessionWebSocketCloseCode int64
 
 const (
-	NSURLSessionWebSocketCloseCodeInvalid                   NSURLSessionWebSocketCloseCode = 0
-	NSURLSessionWebSocketCloseCodeNormalClosure             NSURLSessionWebSocketCloseCode = 1000
-	NSURLSessionWebSocketCloseCodeGoingAway                 NSURLSessionWebSocketCloseCode = 1001
-	NSURLSessionWebSocketCloseCodeProtocolError             NSURLSessionWebSocketCloseCode = 1002
-	NSURLSessionWebSocketCloseCodeUnsupportedData           NSURLSessionWebSocketCloseCode = 1003
-	NSURLSessionWebSocketCloseCodeNoStatusReceived          NSURLSessionWebSocketCloseCode = 1005
-	NSURLSessionWebSocketCloseCodeAbnormalClosure           NSURLSessionWebSocketCloseCode = 1006
-	NSURLSessionWebSocketCloseCodeInvalidFramePayloadData   NSURLSessionWebSocketCloseCode = 1007
-	NSURLSessionWebSocketCloseCodePolicyViolation           NSURLSessionWebSocketCloseCode = 1008
-	NSURLSessionWebSocketCloseCodeMessageTooBig             NSURLSessionWebSocketCloseCode = 1009
+	// A code that indicates the connection is still open.
+	NSURLSessionWebSocketCloseCodeInvalid NSURLSessionWebSocketCloseCode = 0
+	// A code that indicates normal connection closure.
+	NSURLSessionWebSocketCloseCodeNormalClosure NSURLSessionWebSocketCloseCode = 1000
+	// A code that indicates an endpoint is going away. This code indicates situations like a server going down or a browser having navigated away from a page.
+	NSURLSessionWebSocketCloseCodeGoingAway NSURLSessionWebSocketCloseCode = 1001
+	// A code that indicates an endpoint terminated the connection due to a protocol error.
+	NSURLSessionWebSocketCloseCodeProtocolError NSURLSessionWebSocketCloseCode = 1002
+	// A code that indicates an endpoint terminated the connection after receiving a type of data it can't accept. An endpoint that only accepts text may send this close code if it receives a binary message.
+	NSURLSessionWebSocketCloseCodeUnsupportedData NSURLSessionWebSocketCloseCode = 1003
+	// A reserved code that indicates an endpoint expected a status code and didn't receive one.
+	NSURLSessionWebSocketCloseCodeNoStatusReceived NSURLSessionWebSocketCloseCode = 1005
+	// A reserved code that indicates the connection closed without a close control frame.
+	NSURLSessionWebSocketCloseCodeAbnormalClosure NSURLSessionWebSocketCloseCode = 1006
+	// A code that indicates the server terminated the connection because it received data inconsistent with the message's type.
+	NSURLSessionWebSocketCloseCodeInvalidFramePayloadData NSURLSessionWebSocketCloseCode = 1007
+	// A code that indicates an endpoint terminated the connection because it received a message that violates its policy. This is a generic code for use when a more specific code is unavailable.
+	NSURLSessionWebSocketCloseCodePolicyViolation NSURLSessionWebSocketCloseCode = 1008
+	// A code that indicates an endpoint is terminating the connection because it received a message too big for it to process.
+	NSURLSessionWebSocketCloseCodeMessageTooBig NSURLSessionWebSocketCloseCode = 1009
+	// A code that indicates the client terminated the connection because the server didn't negotiate a required extension. RFC 6455 indicates the client should provide a close reason with a list of the needed extensions.
 	NSURLSessionWebSocketCloseCodeMandatoryExtensionMissing NSURLSessionWebSocketCloseCode = 1010
-	NSURLSessionWebSocketCloseCodeInternalServerError       NSURLSessionWebSocketCloseCode = 1011
-	NSURLSessionWebSocketCloseCodeTLSHandshakeFailure       NSURLSessionWebSocketCloseCode = 1015
+	// A code that indicates the server terminated the connection because it encountered an unexpected condition.
+	NSURLSessionWebSocketCloseCodeInternalServerError NSURLSessionWebSocketCloseCode = 1011
+	// A reserved code that indicates the connection closed due to the failure to perform a TLS handshake.
+	NSURLSessionWebSocketCloseCodeTLSHandshakeFailure NSURLSessionWebSocketCloseCode = 1015
 )
 
 func (e NSURLSessionWebSocketCloseCode) String() string {
@@ -4457,15 +4939,19 @@ func (e NSURLSessionWebSocketMessageType) String() string {
 	}
 }
 
-// These constants describe how the user notification was activated.
 // Deprecated: All NSUserNotifications API should be replaced with UserNotifications.frameworks API
 type NSUserNotificationActivationType int64
 
 const (
-	NSUserNotificationActivationTypeNone                    NSUserNotificationActivationType = 0
-	NSUserNotificationActivationTypeContentsClicked         NSUserNotificationActivationType = 1
-	NSUserNotificationActivationTypeActionButtonClicked     NSUserNotificationActivationType = 2
-	NSUserNotificationActivationTypeReplied                 NSUserNotificationActivationType = 3
+	// The user did not interact with the notification.
+	NSUserNotificationActivationTypeNone NSUserNotificationActivationType = 0
+	// The user clicked on the body of the notification.
+	NSUserNotificationActivationTypeContentsClicked NSUserNotificationActivationType = 1
+	// The user clicked the action button of the notification.
+	NSUserNotificationActivationTypeActionButtonClicked NSUserNotificationActivationType = 2
+	// The user replied to the notification.
+	NSUserNotificationActivationTypeReplied NSUserNotificationActivationType = 3
+	// The user clicked an additional action of the notification.
 	NSUserNotificationActivationTypeAdditionalActionClicked NSUserNotificationActivationType = 4
 )
 
@@ -4489,7 +4975,9 @@ func (e NSUserNotificationActivationType) String() string {
 type NSVolumeEnumerationOptions uint64
 
 const (
-	NSVolumeEnumerationSkipHiddenVolumes        NSVolumeEnumerationOptions = 2
+	// The enumeration skips hidden volumes.
+	NSVolumeEnumerationSkipHiddenVolumes NSVolumeEnumerationOptions = 2
+	// The enumeration produces file reference URLs rather than path-based URLs.
 	NSVolumeEnumerationProduceFileReferenceURLs NSVolumeEnumerationOptions = 4
 )
 
@@ -4507,15 +4995,19 @@ func (e NSVolumeEnumerationOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// NSWhoseSpecifier uses these constants to specify sub-elements within the collection of objects being tested that pass the specifier’s test.
 type NSWhoseSubelementIdentifier uint64
 
 const (
-	NSIndexSubelement  NSWhoseSubelementIdentifier = 0
-	NSEverySubelement  NSWhoseSubelementIdentifier = 1
+	// Select the subelement at a specific index.
+	NSIndexSubelement NSWhoseSubelementIdentifier = 0
+	// Select every subelement.
+	NSEverySubelement NSWhoseSubelementIdentifier = 1
+	// Select the middle subelement.
 	NSMiddleSubelement NSWhoseSubelementIdentifier = 2
+	// Select a random subelement.
 	NSRandomSubelement NSWhoseSubelementIdentifier = 3
-	NSNoSubelement     NSWhoseSubelementIdentifier = 4
+	// No subelement, only valid for the end subelement.
+	NSNoSubelement NSWhoseSubelementIdentifier = 4
 )
 
 func (e NSWhoseSubelementIdentifier) String() string {
@@ -4535,30 +5027,49 @@ func (e NSWhoseSubelementIdentifier) String() string {
 	}
 }
 
-// The type defined for the constants that specify the kind and subkind of DTD declaration represented by an NSXMLDTDNode object. You set the DTD-node kind using the doc:nsxmldtdnode/1806486-setdtdkind method.
 type NSXMLDTDNodeKind uint64
 
 const (
-	NSXMLEntityGeneralKind               NSXMLDTDNodeKind = 1
-	NSXMLEntityParsedKind                NSXMLDTDNodeKind = 2
-	NSXMLEntityUnparsedKind              NSXMLDTDNodeKind = 3
-	NSXMLEntityParameterKind             NSXMLDTDNodeKind = 4
-	NSXMLEntityPredefined                NSXMLDTDNodeKind = 5
-	NSXMLAttributeCDATAKind              NSXMLDTDNodeKind = 6
-	NSXMLAttributeIDKind                 NSXMLDTDNodeKind = 7
-	NSXMLAttributeIDRefKind              NSXMLDTDNodeKind = 8
-	NSXMLAttributeIDRefsKind             NSXMLDTDNodeKind = 9
-	NSXMLAttributeEntityKind             NSXMLDTDNodeKind = 10
-	NSXMLAttributeEntitiesKind           NSXMLDTDNodeKind = 11
-	NSXMLAttributeNMTokenKind            NSXMLDTDNodeKind = 12
-	NSXMLAttributeNMTokensKind           NSXMLDTDNodeKind = 13
-	NSXMLAttributeEnumerationKind        NSXMLDTDNodeKind = 14
-	NSXMLAttributeNotationKind           NSXMLDTDNodeKind = 15
+	// Identifies a general entity declaration.
+	NSXMLEntityGeneralKind NSXMLDTDNodeKind = 1
+	// Identifies a parsed entity declaration.
+	NSXMLEntityParsedKind NSXMLDTDNodeKind = 2
+	// Identifies an unparsed entity declaration.
+	NSXMLEntityUnparsedKind NSXMLDTDNodeKind = 3
+	// Identifies a parameter entity declaration.
+	NSXMLEntityParameterKind NSXMLDTDNodeKind = 4
+	// Identifies a predefined entity declaration.
+	NSXMLEntityPredefined NSXMLDTDNodeKind = 5
+	// Identifies an attribute-list declaration with a `CDATA` (character data) value type.
+	NSXMLAttributeCDATAKind NSXMLDTDNodeKind = 6
+	// Identifies an attribute-list declaration with an `ID` value type (per-document unique element name).
+	NSXMLAttributeIDKind NSXMLDTDNodeKind = 7
+	// Identifies an attribute-list declaration with an `IDREF` value type (refers to element `ID` type).
+	NSXMLAttributeIDRefKind NSXMLDTDNodeKind = 8
+	// Identifies an attribute-list declaration with an `IDREFS` value type (refers to multiple elements of `ID` type).
+	NSXMLAttributeIDRefsKind NSXMLDTDNodeKind = 9
+	// Identifies an attribute-list declaration with an `ENTITY` value type (refers to unparsed entity declared in document).
+	NSXMLAttributeEntityKind NSXMLDTDNodeKind = 10
+	// Identifies an attribute-list declaration with an `ENTITIES` value type (refers to multiple unparsed entities declared elsewhere in document).
+	NSXMLAttributeEntitiesKind NSXMLDTDNodeKind = 11
+	// Identifies an attribute-list declaration with a `NMTOKEN` value type (name token).
+	NSXMLAttributeNMTokenKind NSXMLDTDNodeKind = 12
+	// Identifies an attribute-list declaration with a `NMTOKENS` value type (multiple name tokens).
+	NSXMLAttributeNMTokensKind NSXMLDTDNodeKind = 13
+	// Identifies an attribute-list declaration with an enumeration value type (list of all possible values).
+	NSXMLAttributeEnumerationKind NSXMLDTDNodeKind = 14
+	// Identifies an attribute-list declaration with a `NOTATION` value type (name of declared notation).
+	NSXMLAttributeNotationKind NSXMLDTDNodeKind = 15
+	// Identifies an undefined element declaration.
 	NSXMLElementDeclarationUndefinedKind NSXMLDTDNodeKind = 16
-	NSXMLElementDeclarationEmptyKind     NSXMLDTDNodeKind = 17
-	NSXMLElementDeclarationAnyKind       NSXMLDTDNodeKind = 18
-	NSXMLElementDeclarationMixedKind     NSXMLDTDNodeKind = 19
-	NSXMLElementDeclarationElementKind   NSXMLDTDNodeKind = 20
+	// Identifies a declaration (`EMPTY`) of an empty element.
+	NSXMLElementDeclarationEmptyKind NSXMLDTDNodeKind = 17
+	// Identifies an `ANY` element declaration.
+	NSXMLElementDeclarationAnyKind NSXMLDTDNodeKind = 18
+	// Identifies a declaration of an element with mixed content (`(#PCDATA | child)`).
+	NSXMLElementDeclarationMixedKind NSXMLDTDNodeKind = 19
+	// Identifies a declaration of an element with child elements.
+	NSXMLElementDeclarationElementKind NSXMLDTDNodeKind = 20
 )
 
 func (e NSXMLDTDNodeKind) String() string {
@@ -4608,14 +5119,17 @@ func (e NSXMLDTDNodeKind) String() string {
 	}
 }
 
-// Type used to define the kind of document content.
 type NSXMLDocumentContentKind uint64
 
 const (
-	NSXMLDocumentXMLKind   NSXMLDocumentContentKind = 0
+	// The default type of document content type, which is XML.
+	NSXMLDocumentXMLKind NSXMLDocumentContentKind = 0
+	// The document output is XHTML. This is set automatically if the @c NSXMLDocumentTidyHTML option is set and NSXML detects HTML.
 	NSXMLDocumentXHTMLKind NSXMLDocumentContentKind = 1
-	NSXMLDocumentHTMLKind  NSXMLDocumentContentKind = 2
-	NSXMLDocumentTextKind  NSXMLDocumentContentKind = 3
+	// Outputs empty tags in HTML without a close tag, such as @c \<br\> .
+	NSXMLDocumentHTMLKind NSXMLDocumentContentKind = 2
+	// Outputs the string value of the document by extracting the string values from all text nodes.
+	NSXMLDocumentTextKind NSXMLDocumentContentKind = 3
 )
 
 func (e NSXMLDocumentContentKind) String() string {
@@ -4633,23 +5147,35 @@ func (e NSXMLDocumentContentKind) String() string {
 	}
 }
 
-// NSXMLNode declares the following constants of type NSXMLNodeKind for specifying a node’s kind in the initializer methods initWithKind: and initWithKind:options::
 type NSXMLNodeKind uint64
 
 const (
-	NSXMLInvalidKind               NSXMLNodeKind = 0
-	NSXMLDocumentKind              NSXMLNodeKind = 1
-	NSXMLElementKind               NSXMLNodeKind = 2
-	NSXMLAttributeKind             NSXMLNodeKind = 3
-	NSXMLNamespaceKind             NSXMLNodeKind = 4
+	// Indicates a node object created without a valid kind being specified (as returned by the @c kind property).
+	NSXMLInvalidKind NSXMLNodeKind = 0
+	// Specifies a document node.
+	NSXMLDocumentKind NSXMLNodeKind = 1
+	// Specifies an element node.
+	NSXMLElementKind NSXMLNodeKind = 2
+	// Specifies an attribute node.
+	NSXMLAttributeKind NSXMLNodeKind = 3
+	// Specifies a namespace node.
+	NSXMLNamespaceKind NSXMLNodeKind = 4
+	// Specifies a processing-instruction node.
 	NSXMLProcessingInstructionKind NSXMLNodeKind = 5
-	NSXMLCommentKind               NSXMLNodeKind = 6
-	NSXMLTextKind                  NSXMLNodeKind = 7
-	NSXMLDTDKind                   NSXMLNodeKind = 8
-	NSXMLEntityDeclarationKind     NSXMLNodeKind = 9
-	NSXMLAttributeDeclarationKind  NSXMLNodeKind = 10
-	NSXMLElementDeclarationKind    NSXMLNodeKind = 11
-	NSXMLNotationDeclarationKind   NSXMLNodeKind = 12
+	// Specifies a comment node.
+	NSXMLCommentKind NSXMLNodeKind = 6
+	// Specifies a text node.
+	NSXMLTextKind NSXMLNodeKind = 7
+	// Specifies a document-type declaration (DTD) node.
+	NSXMLDTDKind NSXMLNodeKind = 8
+	// Specifies an entity-declaration node.
+	NSXMLEntityDeclarationKind NSXMLNodeKind = 9
+	// Specifies an attribute-list declaration node.
+	NSXMLAttributeDeclarationKind NSXMLNodeKind = 10
+	// Specifies an element declaration node.
+	NSXMLElementDeclarationKind NSXMLNodeKind = 11
+	// Specifies a notation declaration node.
+	NSXMLNotationDeclarationKind NSXMLNodeKind = 12
 )
 
 func (e NSXMLNodeKind) String() string {
@@ -4685,39 +5211,64 @@ func (e NSXMLNodeKind) String() string {
 	}
 }
 
-// These constants are input and output options for all NSXMLNode objects (unless otherwise indicated), including NSXMLDocument objects. You can specify these options in the NSXMLNode methods initWithKind:options: and XMLStringWithOptions:.
 type NSXMLNodeOptions uint64
 
 const (
 	// No options are requested for this input or output action.
-	NSXMLNodeOptionsNone                        NSXMLNodeOptions = 0
-	NSXMLNodeIsCDATA                            NSXMLNodeOptions = 1
-	NSXMLNodeExpandEmptyElement                 NSXMLNodeOptions = 2
-	NSXMLNodeCompactEmptyElement                NSXMLNodeOptions = 4
-	NSXMLNodeUseSingleQuotes                    NSXMLNodeOptions = 8
-	NSXMLNodeUseDoubleQuotes                    NSXMLNodeOptions = 16
-	NSXMLNodeNeverEscapeContents                NSXMLNodeOptions = 32
-	NSXMLDocumentTidyHTML                       NSXMLNodeOptions = 512
-	NSXMLDocumentTidyXML                        NSXMLNodeOptions = 1024
-	NSXMLDocumentValidate                       NSXMLNodeOptions = 8192
-	NSXMLNodeLoadExternalEntitiesAlways         NSXMLNodeOptions = 16384
+	NSXMLNodeOptionsNone NSXMLNodeOptions = 0
+	// Specifies that a text node contains and is written out as a CDATA section.
+	NSXMLNodeIsCDATA NSXMLNodeOptions = 1
+	// This element should be expanded when empty, ie @c \<a\>\</a\> . This is the default.
+	NSXMLNodeExpandEmptyElement NSXMLNodeOptions = 2
+	// This element should contract when empty, ie @c \<a/\> .
+	NSXMLNodeCompactEmptyElement NSXMLNodeOptions = 4
+	// Use single quotes on this attribute or namespace.
+	NSXMLNodeUseSingleQuotes NSXMLNodeOptions = 8
+	// Use double quotes on this attribute or namespace. This is the default.
+	NSXMLNodeUseDoubleQuotes NSXMLNodeOptions = 16
+	// When generating a string representation of an XML document, don't escape the reserved characters '<' and '&' in Text nodes.
+	NSXMLNodeNeverEscapeContents NSXMLNodeOptions = 32
+	// Try to change HTML into valid XHTML.
+	NSXMLDocumentTidyHTML NSXMLNodeOptions = 512
+	// Try to change malformed XML into valid XML.
+	NSXMLDocumentTidyXML NSXMLNodeOptions = 1024
+	// Validate this document against its DTD.
+	NSXMLDocumentValidate NSXMLNodeOptions = 8192
+	// Load all external entities instead of just non-network ones.
+	NSXMLNodeLoadExternalEntitiesAlways NSXMLNodeOptions = 16384
+	// Load non-network external entities and external entities from URLs with the same domain, host, and port as the document.
 	NSXMLNodeLoadExternalEntitiesSameOriginOnly NSXMLNodeOptions = 32768
-	NSXMLNodeLoadExternalEntitiesNever          NSXMLNodeOptions = 524288
-	NSXMLDocumentXInclude                       NSXMLNodeOptions = 65536
-	NSXMLNodePrettyPrint                        NSXMLNodeOptions = 131072
-	NSXMLDocumentIncludeContentTypeDeclaration  NSXMLNodeOptions = 262144
-	NSXMLNodePreserveNamespaceOrder             NSXMLNodeOptions = 1048576
-	NSXMLNodePreserveAttributeOrder             NSXMLNodeOptions = 2097152
-	NSXMLNodePreserveEntities                   NSXMLNodeOptions = 4194304
-	NSXMLNodePreservePrefixes                   NSXMLNodeOptions = 8388608
-	NSXMLNodePreserveCDATA                      NSXMLNodeOptions = 16777216
-	NSXMLNodePreserveWhitespace                 NSXMLNodeOptions = 33554432
-	NSXMLNodePreserveDTD                        NSXMLNodeOptions = 67108864
-	NSXMLNodePreserveCharacterReferences        NSXMLNodeOptions = 134217728
-	NSXMLNodePromoteSignificantWhitespace       NSXMLNodeOptions = 268435456
-	NSXMLNodePreserveEmptyElements              NSXMLNodeOptions = 6
-	NSXMLNodePreserveQuotes                     NSXMLNodeOptions = 24
-	NSXMLNodePreserveAll                        NSXMLNodeOptions = 4293918750
+	// Load no external entities, even those that don't require network access.
+	NSXMLNodeLoadExternalEntitiesNever NSXMLNodeOptions = 524288
+	NSXMLDocumentXInclude              NSXMLNodeOptions = 65536
+	// Output this node with extra space for readability.
+	NSXMLNodePrettyPrint NSXMLNodeOptions = 131072
+	// Include a content type declaration for HTML or XHTML.
+	NSXMLDocumentIncludeContentTypeDeclaration NSXMLNodeOptions = 262144
+	// Preserve the order of namespaces.
+	NSXMLNodePreserveNamespaceOrder NSXMLNodeOptions = 1048576
+	// Preserve the order of attributes.
+	NSXMLNodePreserveAttributeOrder NSXMLNodeOptions = 2097152
+	// Entities should not be resolved on output.
+	NSXMLNodePreserveEntities NSXMLNodeOptions = 4194304
+	// Prefixes should not be chosen based on closest URI definition.
+	NSXMLNodePreservePrefixes NSXMLNodeOptions = 8388608
+	// CDATA should be preserved.
+	NSXMLNodePreserveCDATA NSXMLNodeOptions = 16777216
+	// Preserve non-content whitespace.
+	NSXMLNodePreserveWhitespace NSXMLNodeOptions = 33554432
+	// Preserve the DTD until it is modified.
+	NSXMLNodePreserveDTD NSXMLNodeOptions = 67108864
+	// Preserve character references.
+	NSXMLNodePreserveCharacterReferences NSXMLNodeOptions = 134217728
+	// When significant whitespace is encountered in the document, create Text nodes representing it rather than removing it. Has no effect if @c NSXMLNodePreserveWhitespace is also specified.
+	NSXMLNodePromoteSignificantWhitespace NSXMLNodeOptions = 268435456
+	// Remember whether an empty element was in expanded or contracted form.
+	NSXMLNodePreserveEmptyElements NSXMLNodeOptions = 6
+	// Remember whether an attribute used single or double quotes.
+	NSXMLNodePreserveQuotes NSXMLNodeOptions = 24
+	// Turn all preservation options on.
+	NSXMLNodePreserveAll NSXMLNodeOptions = 4293918750
 )
 
 func (e NSXMLNodeOptions) String() string {
@@ -4809,103 +5360,195 @@ func (e NSXMLNodeOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// The following error codes are defined by NSXMLParser. For error codes not listed here, see the <libxml/xmlerror.h> header file.
 type NSXMLParserError int64
 
 const (
-	NSXMLParserInternalError                         NSXMLParserError = 1
-	NSXMLParserOutOfMemoryError                      NSXMLParserError = 2
-	NSXMLParserDocumentStartError                    NSXMLParserError = 3
-	NSXMLParserEmptyDocumentError                    NSXMLParserError = 4
-	NSXMLParserPrematureDocumentEndError             NSXMLParserError = 5
-	NSXMLParserInvalidHexCharacterRefError           NSXMLParserError = 6
-	NSXMLParserInvalidDecimalCharacterRefError       NSXMLParserError = 7
-	NSXMLParserInvalidCharacterRefError              NSXMLParserError = 8
-	NSXMLParserInvalidCharacterError                 NSXMLParserError = 9
-	NSXMLParserCharacterRefAtEOFError                NSXMLParserError = 10
-	NSXMLParserCharacterRefInPrologError             NSXMLParserError = 11
-	NSXMLParserCharacterRefInEpilogError             NSXMLParserError = 12
-	NSXMLParserCharacterRefInDTDError                NSXMLParserError = 13
-	NSXMLParserEntityRefAtEOFError                   NSXMLParserError = 14
-	NSXMLParserEntityRefInPrologError                NSXMLParserError = 15
-	NSXMLParserEntityRefInEpilogError                NSXMLParserError = 16
-	NSXMLParserEntityRefInDTDError                   NSXMLParserError = 17
-	NSXMLParserParsedEntityRefAtEOFError             NSXMLParserError = 18
-	NSXMLParserParsedEntityRefInPrologError          NSXMLParserError = 19
-	NSXMLParserParsedEntityRefInEpilogError          NSXMLParserError = 20
-	NSXMLParserParsedEntityRefInInternalSubsetError  NSXMLParserError = 21
-	NSXMLParserEntityReferenceWithoutNameError       NSXMLParserError = 22
-	NSXMLParserEntityReferenceMissingSemiError       NSXMLParserError = 23
-	NSXMLParserParsedEntityRefNoNameError            NSXMLParserError = 24
-	NSXMLParserParsedEntityRefMissingSemiError       NSXMLParserError = 25
-	NSXMLParserUndeclaredEntityError                 NSXMLParserError = 26
-	NSXMLParserUnparsedEntityError                   NSXMLParserError = 28
-	NSXMLParserEntityIsExternalError                 NSXMLParserError = 29
-	NSXMLParserEntityIsParameterError                NSXMLParserError = 30
-	NSXMLParserUnknownEncodingError                  NSXMLParserError = 31
-	NSXMLParserEncodingNotSupportedError             NSXMLParserError = 32
-	NSXMLParserStringNotStartedError                 NSXMLParserError = 33
-	NSXMLParserStringNotClosedError                  NSXMLParserError = 34
-	NSXMLParserNamespaceDeclarationError             NSXMLParserError = 35
-	NSXMLParserEntityNotStartedError                 NSXMLParserError = 36
-	NSXMLParserEntityNotFinishedError                NSXMLParserError = 37
-	NSXMLParserLessThanSymbolInAttributeError        NSXMLParserError = 38
-	NSXMLParserAttributeNotStartedError              NSXMLParserError = 39
-	NSXMLParserAttributeNotFinishedError             NSXMLParserError = 40
-	NSXMLParserAttributeHasNoValueError              NSXMLParserError = 41
-	NSXMLParserAttributeRedefinedError               NSXMLParserError = 42
-	NSXMLParserLiteralNotStartedError                NSXMLParserError = 43
-	NSXMLParserLiteralNotFinishedError               NSXMLParserError = 44
-	NSXMLParserCommentNotFinishedError               NSXMLParserError = 45
-	NSXMLParserProcessingInstructionNotStartedError  NSXMLParserError = 46
+	// The parser object encountered an internal error.
+	NSXMLParserInternalError NSXMLParserError = 1
+	// The parser object ran out of memory.
+	NSXMLParserOutOfMemoryError NSXMLParserError = 2
+	// The parser object is unable to start parsing.
+	NSXMLParserDocumentStartError NSXMLParserError = 3
+	// The document is empty.
+	NSXMLParserEmptyDocumentError NSXMLParserError = 4
+	// The document ended unexpectedly.
+	NSXMLParserPrematureDocumentEndError NSXMLParserError = 5
+	// Invalid hexadecimal character reference encountered.
+	NSXMLParserInvalidHexCharacterRefError NSXMLParserError = 6
+	// Invalid decimal character reference encountered.
+	NSXMLParserInvalidDecimalCharacterRefError NSXMLParserError = 7
+	// Invalid character reference encountered.
+	NSXMLParserInvalidCharacterRefError NSXMLParserError = 8
+	// Invalid character encountered.
+	NSXMLParserInvalidCharacterError NSXMLParserError = 9
+	// Target of character reference cannot be found.
+	NSXMLParserCharacterRefAtEOFError NSXMLParserError = 10
+	// Invalid character found in the prolog.
+	NSXMLParserCharacterRefInPrologError NSXMLParserError = 11
+	// Invalid character found in the epilog.
+	NSXMLParserCharacterRefInEpilogError NSXMLParserError = 12
+	// Invalid character encountered in the DTD.
+	NSXMLParserCharacterRefInDTDError NSXMLParserError = 13
+	// Target of entity reference is not found.
+	NSXMLParserEntityRefAtEOFError NSXMLParserError = 14
+	// Invalid entity reference found in the prolog.
+	NSXMLParserEntityRefInPrologError NSXMLParserError = 15
+	// Invalid entity reference found in the epilog.
+	NSXMLParserEntityRefInEpilogError NSXMLParserError = 16
+	// Invalid entity reference found in the DTD.
+	NSXMLParserEntityRefInDTDError NSXMLParserError = 17
+	// Target of parsed entity reference is not found.
+	NSXMLParserParsedEntityRefAtEOFError NSXMLParserError = 18
+	// Target of parsed entity reference is not found in prolog.
+	NSXMLParserParsedEntityRefInPrologError NSXMLParserError = 19
+	// Target of parsed entity reference is not found in epilog.
+	NSXMLParserParsedEntityRefInEpilogError NSXMLParserError = 20
+	// Target of parsed entity reference is not found in internal subset.
+	NSXMLParserParsedEntityRefInInternalSubsetError NSXMLParserError = 21
+	// Entity reference is without name.
+	NSXMLParserEntityReferenceWithoutNameError NSXMLParserError = 22
+	// Entity reference is missing semicolon.
+	NSXMLParserEntityReferenceMissingSemiError NSXMLParserError = 23
+	// Parsed entity reference is without an entity name.
+	NSXMLParserParsedEntityRefNoNameError NSXMLParserError = 24
+	// Parsed entity reference is missing semicolon.
+	NSXMLParserParsedEntityRefMissingSemiError NSXMLParserError = 25
+	// Entity is not declared.
+	NSXMLParserUndeclaredEntityError NSXMLParserError = 26
+	// Cannot parse entity.
+	NSXMLParserUnparsedEntityError NSXMLParserError = 28
+	// Cannot parse external entity.
+	NSXMLParserEntityIsExternalError NSXMLParserError = 29
+	// Entity is a parameter.
+	NSXMLParserEntityIsParameterError NSXMLParserError = 30
+	// Document encoding is unknown.
+	NSXMLParserUnknownEncodingError NSXMLParserError = 31
+	// Document encoding is not supported.
+	NSXMLParserEncodingNotSupportedError NSXMLParserError = 32
+	// String is not started.
+	NSXMLParserStringNotStartedError NSXMLParserError = 33
+	// String is not closed.
+	NSXMLParserStringNotClosedError NSXMLParserError = 34
+	// Invalid namespace declaration encountered.
+	NSXMLParserNamespaceDeclarationError NSXMLParserError = 35
+	// Entity is not started.
+	NSXMLParserEntityNotStartedError NSXMLParserError = 36
+	// Entity is not finished.
+	NSXMLParserEntityNotFinishedError NSXMLParserError = 37
+	// Angle bracket is used in attribute.
+	NSXMLParserLessThanSymbolInAttributeError NSXMLParserError = 38
+	// Attribute is not started.
+	NSXMLParserAttributeNotStartedError NSXMLParserError = 39
+	// Attribute is not finished.
+	NSXMLParserAttributeNotFinishedError NSXMLParserError = 40
+	// Attribute doesn't contain a value.
+	NSXMLParserAttributeHasNoValueError NSXMLParserError = 41
+	// Attribute is redefined.
+	NSXMLParserAttributeRedefinedError NSXMLParserError = 42
+	// Literal is not started.
+	NSXMLParserLiteralNotStartedError NSXMLParserError = 43
+	// Literal is not finished.
+	NSXMLParserLiteralNotFinishedError NSXMLParserError = 44
+	// Comment is not finished.
+	NSXMLParserCommentNotFinishedError NSXMLParserError = 45
+	// Processing instruction is not started.
+	NSXMLParserProcessingInstructionNotStartedError NSXMLParserError = 46
+	// Processing instruction is not finished.
 	NSXMLParserProcessingInstructionNotFinishedError NSXMLParserError = 47
-	NSXMLParserNotationNotStartedError               NSXMLParserError = 48
-	NSXMLParserNotationNotFinishedError              NSXMLParserError = 49
-	NSXMLParserAttributeListNotStartedError          NSXMLParserError = 50
-	NSXMLParserAttributeListNotFinishedError         NSXMLParserError = 51
-	NSXMLParserMixedContentDeclNotStartedError       NSXMLParserError = 52
-	NSXMLParserMixedContentDeclNotFinishedError      NSXMLParserError = 53
-	NSXMLParserElementContentDeclNotStartedError     NSXMLParserError = 54
-	NSXMLParserElementContentDeclNotFinishedError    NSXMLParserError = 55
-	NSXMLParserXMLDeclNotStartedError                NSXMLParserError = 56
-	NSXMLParserXMLDeclNotFinishedError               NSXMLParserError = 57
-	NSXMLParserConditionalSectionNotStartedError     NSXMLParserError = 58
-	NSXMLParserConditionalSectionNotFinishedError    NSXMLParserError = 59
-	NSXMLParserExternalSubsetNotFinishedError        NSXMLParserError = 60
-	NSXMLParserDOCTYPEDeclNotFinishedError           NSXMLParserError = 61
-	NSXMLParserMisplacedCDATAEndStringError          NSXMLParserError = 62
-	NSXMLParserCDATANotFinishedError                 NSXMLParserError = 63
-	NSXMLParserMisplacedXMLDeclarationError          NSXMLParserError = 64
-	NSXMLParserSpaceRequiredError                    NSXMLParserError = 65
-	NSXMLParserSeparatorRequiredError                NSXMLParserError = 66
-	NSXMLParserNMTOKENRequiredError                  NSXMLParserError = 67
-	NSXMLParserNAMERequiredError                     NSXMLParserError = 68
-	NSXMLParserPCDATARequiredError                   NSXMLParserError = 69
-	NSXMLParserURIRequiredError                      NSXMLParserError = 70
-	NSXMLParserPublicIdentifierRequiredError         NSXMLParserError = 71
-	NSXMLParserLTRequiredError                       NSXMLParserError = 72
-	NSXMLParserGTRequiredError                       NSXMLParserError = 73
-	NSXMLParserLTSlashRequiredError                  NSXMLParserError = 74
-	NSXMLParserEqualExpectedError                    NSXMLParserError = 75
-	NSXMLParserTagNameMismatchError                  NSXMLParserError = 76
-	NSXMLParserUnfinishedTagError                    NSXMLParserError = 77
-	NSXMLParserStandaloneValueError                  NSXMLParserError = 78
-	NSXMLParserInvalidEncodingNameError              NSXMLParserError = 79
-	NSXMLParserCommentContainsDoubleHyphenError      NSXMLParserError = 80
-	NSXMLParserInvalidEncodingError                  NSXMLParserError = 81
-	NSXMLParserExternalStandaloneEntityError         NSXMLParserError = 82
-	NSXMLParserInvalidConditionalSectionError        NSXMLParserError = 83
-	NSXMLParserEntityValueRequiredError              NSXMLParserError = 84
-	NSXMLParserNotWellBalancedError                  NSXMLParserError = 85
-	NSXMLParserExtraContentError                     NSXMLParserError = 86
-	NSXMLParserInvalidCharacterInEntityError         NSXMLParserError = 87
-	NSXMLParserParsedEntityRefInInternalError        NSXMLParserError = 88
-	NSXMLParserEntityRefLoopError                    NSXMLParserError = 89
-	NSXMLParserEntityBoundaryError                   NSXMLParserError = 90
-	NSXMLParserInvalidURIError                       NSXMLParserError = 91
-	NSXMLParserURIFragmentError                      NSXMLParserError = 92
-	NSXMLParserNoDTDError                            NSXMLParserError = 94
-	NSXMLParserDelegateAbortedParseError             NSXMLParserError = 512
+	// Notation is not started.
+	NSXMLParserNotationNotStartedError NSXMLParserError = 48
+	// Notation is not finished.
+	NSXMLParserNotationNotFinishedError NSXMLParserError = 49
+	// Attribute list is not started.
+	NSXMLParserAttributeListNotStartedError NSXMLParserError = 50
+	// Attribute list is not finished.
+	NSXMLParserAttributeListNotFinishedError NSXMLParserError = 51
+	// Mixed content declaration is not started.
+	NSXMLParserMixedContentDeclNotStartedError NSXMLParserError = 52
+	// Mixed content declaration is not finished.
+	NSXMLParserMixedContentDeclNotFinishedError NSXMLParserError = 53
+	// Element content declaration is not started.
+	NSXMLParserElementContentDeclNotStartedError NSXMLParserError = 54
+	// Element content declaration is not finished.
+	NSXMLParserElementContentDeclNotFinishedError NSXMLParserError = 55
+	// XML declaration is not started.
+	NSXMLParserXMLDeclNotStartedError NSXMLParserError = 56
+	// XML declaration is not finished.
+	NSXMLParserXMLDeclNotFinishedError NSXMLParserError = 57
+	// Conditional section is not started.
+	NSXMLParserConditionalSectionNotStartedError NSXMLParserError = 58
+	// Conditional section is not finished.
+	NSXMLParserConditionalSectionNotFinishedError NSXMLParserError = 59
+	// External subset is not finished.
+	NSXMLParserExternalSubsetNotFinishedError NSXMLParserError = 60
+	// Document type declaration is not finished.
+	NSXMLParserDOCTYPEDeclNotFinishedError NSXMLParserError = 61
+	// Misplaced CDATA end string.
+	NSXMLParserMisplacedCDATAEndStringError NSXMLParserError = 62
+	// CDATA block is not finished.
+	NSXMLParserCDATANotFinishedError NSXMLParserError = 63
+	// Misplaced XML declaration.
+	NSXMLParserMisplacedXMLDeclarationError NSXMLParserError = 64
+	// Space is required.
+	NSXMLParserSpaceRequiredError NSXMLParserError = 65
+	// Separator is required.
+	NSXMLParserSeparatorRequiredError NSXMLParserError = 66
+	// Name token is required.
+	NSXMLParserNMTOKENRequiredError NSXMLParserError = 67
+	// Name is required.
+	NSXMLParserNAMERequiredError NSXMLParserError = 68
+	// CDATA is required.
+	NSXMLParserPCDATARequiredError NSXMLParserError = 69
+	// URI is required.
+	NSXMLParserURIRequiredError NSXMLParserError = 70
+	// Public identifier is required.
+	NSXMLParserPublicIdentifierRequiredError NSXMLParserError = 71
+	// Left angle bracket is required.
+	NSXMLParserLTRequiredError NSXMLParserError = 72
+	// Right angle bracket is required.
+	NSXMLParserGTRequiredError NSXMLParserError = 73
+	// Left angle bracket slash is required.
+	NSXMLParserLTSlashRequiredError NSXMLParserError = 74
+	// Equal sign expected.
+	NSXMLParserEqualExpectedError NSXMLParserError = 75
+	// Tag name mismatch.
+	NSXMLParserTagNameMismatchError NSXMLParserError = 76
+	// Unfinished tag found.
+	NSXMLParserUnfinishedTagError NSXMLParserError = 77
+	// Standalone value found.
+	NSXMLParserStandaloneValueError NSXMLParserError = 78
+	// Invalid encoding name found.
+	NSXMLParserInvalidEncodingNameError NSXMLParserError = 79
+	// Comment contains double hyphen.
+	NSXMLParserCommentContainsDoubleHyphenError NSXMLParserError = 80
+	// Invalid encoding.
+	NSXMLParserInvalidEncodingError NSXMLParserError = 81
+	// External standalone entity.
+	NSXMLParserExternalStandaloneEntityError NSXMLParserError = 82
+	// Invalid conditional section.
+	NSXMLParserInvalidConditionalSectionError NSXMLParserError = 83
+	// Entity value is required.
+	NSXMLParserEntityValueRequiredError NSXMLParserError = 84
+	// Document is not well balanced.
+	NSXMLParserNotWellBalancedError NSXMLParserError = 85
+	// Error in content found.
+	NSXMLParserExtraContentError NSXMLParserError = 86
+	// Invalid character in entity found.
+	NSXMLParserInvalidCharacterInEntityError NSXMLParserError = 87
+	// Internal error in parsed entity reference found.
+	NSXMLParserParsedEntityRefInInternalError NSXMLParserError = 88
+	// Entity reference loop encountered.
+	NSXMLParserEntityRefLoopError NSXMLParserError = 89
+	// Entity boundary error.
+	NSXMLParserEntityBoundaryError NSXMLParserError = 90
+	// Invalid URI specified.
+	NSXMLParserInvalidURIError NSXMLParserError = 91
+	// URI fragment.
+	NSXMLParserURIFragmentError NSXMLParserError = 92
+	// Missing DTD.
+	NSXMLParserNoDTDError NSXMLParserError = 94
+	// Delegate aborted parse.
+	NSXMLParserDelegateAbortedParseError NSXMLParserError = 512
 )
 
 func (e NSXMLParserError) String() string {
@@ -5101,14 +5744,17 @@ func (e NSXMLParserError) String() string {
 	}
 }
 
-// Defines the external entity resolving policy used by an NSXMLParser instance.
 type NSXMLParserExternalEntityResolvingPolicy uint64
 
 const (
-	NSXMLParserResolveExternalEntitiesNever          NSXMLParserExternalEntityResolvingPolicy = 0
-	NSXMLParserResolveExternalEntitiesNoNetwork      NSXMLParserExternalEntityResolvingPolicy = 1
+	// The parser should never resolve external entities.
+	NSXMLParserResolveExternalEntitiesNever NSXMLParserExternalEntityResolvingPolicy = 0
+	// The parser resolves external entities but does not load them over the network.
+	NSXMLParserResolveExternalEntitiesNoNetwork NSXMLParserExternalEntityResolvingPolicy = 1
+	// The parser resolves external entities only from the same origin as the original URL. Only applies to `NSXMLParser` instances initialized with `-initWithContentsOfURL:`.
 	NSXMLParserResolveExternalEntitiesSameOriginOnly NSXMLParserExternalEntityResolvingPolicy = 2
-	NSXMLParserResolveExternalEntitiesAlways         NSXMLParserExternalEntityResolvingPolicy = 3
+	// The parser always resolves external entities.
+	NSXMLParserResolveExternalEntitiesAlways NSXMLParserExternalEntityResolvingPolicy = 3
 )
 
 func (e NSXMLParserExternalEntityResolvingPolicy) String() string {
@@ -5126,10 +5772,10 @@ func (e NSXMLParserExternalEntityResolvingPolicy) String() string {
 	}
 }
 
-// Options that you can pass to a connection.
 type NSXPCConnectionOptions uint64
 
 const (
+	// Use this option if connecting to a service in the privileged Mach bootstrap (for example, a `launchd.plist` in `/Library/LaunchDaemons`).
 	NSXPCConnectionPrivileged NSXPCConnectionOptions = 4096
 )
 
@@ -5866,27 +6512,53 @@ func (e Qos_class_t) String() string {
 	}
 }
 
+type Task_shared_region_stubs_t uint8
+
+const (
+	TASK_SHARED_REGION_STUBS_DEV  Task_shared_region_stubs_t = 1
+	TASK_SHARED_REGION_STUBS_PROD Task_shared_region_stubs_t = 2
+)
+
+func (e Task_shared_region_stubs_t) String() string {
+	switch e {
+	case TASK_SHARED_REGION_STUBS_DEV:
+		return "TASK_SHARED_REGION_STUBS_DEV"
+	case TASK_SHARED_REGION_STUBS_PROD:
+		return "TASK_SHARED_REGION_STUBS_PROD"
+	default:
+		return fmt.Sprintf("Task_shared_region_stubs_t(%d)", int64(e))
+	}
+}
+
 type Virtual_memory_guard_exception_code_t uint32
 
 const (
-	KGUARD_EXC_DEALLOC_GAP                   Virtual_memory_guard_exception_code_t = 1
-	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        Virtual_memory_guard_exception_code_t = 2
-	KGUARD_EXC_RECLAIM_INDEX_FAILURE         Virtual_memory_guard_exception_code_t = 4
-	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    Virtual_memory_guard_exception_code_t = 8
-	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    Virtual_memory_guard_exception_code_t = 9
-	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         Virtual_memory_guard_exception_code_t = 10
-	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         Virtual_memory_guard_exception_code_t = 11
-	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  Virtual_memory_guard_exception_code_t = 12
-	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    Virtual_memory_guard_exception_code_t = 13
-	KGUARD_EXC_SEC_ACCESS_FAULT              Virtual_memory_guard_exception_code_t = 98
-	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        Virtual_memory_guard_exception_code_t = 99
-	KGUARD_EXC_SEC_COPY_DENIED               Virtual_memory_guard_exception_code_t = 100
-	KGUARD_EXC_SEC_SHARING_DENIED            Virtual_memory_guard_exception_code_t = 101
-	KGUARD_EXC_MTE_SYNC_FAULT                Virtual_memory_guard_exception_code_t = 200
-	KGUARD_EXC_MTE_ASYNC_USER_FAULT          Virtual_memory_guard_exception_code_t = 201
-	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          Virtual_memory_guard_exception_code_t = 202
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 203
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 204
+	KGUARD_EXC_DEALLOC_GAP                  Virtual_memory_guard_exception_code_t = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE       Virtual_memory_guard_exception_code_t = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE        Virtual_memory_guard_exception_code_t = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE   Virtual_memory_guard_exception_code_t = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE   Virtual_memory_guard_exception_code_t = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE        Virtual_memory_guard_exception_code_t = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE        Virtual_memory_guard_exception_code_t = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION Virtual_memory_guard_exception_code_t = 12
+	// Guard exception sent to a thread when a CoW defeatured map attempts to copy memory which is not permitted by system policy.
+	KGUARD_EXC_COW_DEFEATURED_COPY_DENIED Virtual_memory_guard_exception_code_t = 13
+	// Guard exception sent to a thread when it attempts to extract a given type of memory in a way which is not permitted for CoW defeatured maps.
+	KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED Virtual_memory_guard_exception_code_t = 14
+	// Guard exception sent to a thread when it attempts to copy-map a memory entry which was created for sharing by a CoW defeatured map.
+	KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED Virtual_memory_guard_exception_code_t = 15
+	KGUARD_EXC_COW_DEFEATURED_FIRST                    Virtual_memory_guard_exception_code_t = 13
+	KGUARD_EXC_COW_DEFEATURED_LAST                     Virtual_memory_guard_exception_code_t = 15
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY              Virtual_memory_guard_exception_code_t = 16
+	KGUARD_EXC_SEC_ACCESS_FAULT                        Virtual_memory_guard_exception_code_t = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT                  Virtual_memory_guard_exception_code_t = 99
+	KGUARD_EXC_SEC_COPY_DENIED                         Virtual_memory_guard_exception_code_t = 100
+	KGUARD_EXC_SEC_SHARING_DENIED                      Virtual_memory_guard_exception_code_t = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                          Virtual_memory_guard_exception_code_t = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT                    Virtual_memory_guard_exception_code_t = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT                    Virtual_memory_guard_exception_code_t = 202
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT           Virtual_memory_guard_exception_code_t = 203
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT           Virtual_memory_guard_exception_code_t = 204
 )
 
 func (e Virtual_memory_guard_exception_code_t) String() string {
@@ -5907,6 +6579,12 @@ func (e Virtual_memory_guard_exception_code_t) String() string {
 		return "KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE"
 	case KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION:
 		return "KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION"
+	case KGUARD_EXC_COW_DEFEATURED_COPY_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_COPY_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED"
 	case KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY:
 		return "KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY"
 	case KGUARD_EXC_SEC_ACCESS_FAULT:

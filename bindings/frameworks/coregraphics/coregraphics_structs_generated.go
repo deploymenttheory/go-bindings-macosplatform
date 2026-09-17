@@ -163,6 +163,8 @@ type CGPDFDictionary struct{}
 // A document that contains PDF (Portable Document Format) drawing information.
 type CGPDFDocument struct{}
 
+type CGPDFMarkedContentItem struct{}
+
 // An object representing content within a PDF document.
 type CGPDFObject struct{}
 
@@ -180,6 +182,8 @@ type CGPDFStream struct{}
 
 // A text string in a PDF document.
 type CGPDFString struct{}
+
+type CGPDFStructureElement struct{}
 
 // An opaque data type used to convert PostScript data to PDF data.
 type CGPSConverter struct{}
@@ -426,6 +430,13 @@ type CGPDFDocumentRef struct{ obj.Object }
 // it before using a returned handle; a nil handle's methods panic.
 func (h CGPDFDocumentRef) IsNil() bool { return h.Object == nil }
 
+// CGPDFMarkedContentItemRef is a handle for the opaque CGPDFMarkedContentItemRef type.
+type CGPDFMarkedContentItemRef struct{ obj.Object }
+
+// IsNil reports whether CGPDFMarkedContentItemRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CGPDFMarkedContentItemRef) IsNil() bool { return h.Object == nil }
+
 // CGPDFObjectRef is a handle for the opaque CGPDFObjectRef type.
 type CGPDFObjectRef struct{ obj.Object }
 
@@ -467,6 +478,13 @@ type CGPDFStringRef struct{ obj.Object }
 // IsNil reports whether CGPDFStringRef is a NULL handle (it wraps no object). Call
 // it before using a returned handle; a nil handle's methods panic.
 func (h CGPDFStringRef) IsNil() bool { return h.Object == nil }
+
+// CGPDFStructureElementRef is a handle for the opaque CGPDFStructureElementRef type.
+type CGPDFStructureElementRef struct{ obj.Object }
+
+// IsNil reports whether CGPDFStructureElementRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CGPDFStructureElementRef) IsNil() bool { return h.Object == nil }
 
 // CGPSConverterRef is a handle for the opaque CGPSConverterRef type.
 type CGPSConverterRef struct{ obj.Object }

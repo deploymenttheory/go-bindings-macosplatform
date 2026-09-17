@@ -12,6 +12,7 @@ import (
 // An object representing metrics about the condition of the cellular network.
 //
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxcellularconditionmetric
+// Deprecated: Use MetricResult instead.
 type MXCellularConditionMetric struct {
 	MXMetric
 }

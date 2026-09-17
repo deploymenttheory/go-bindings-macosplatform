@@ -106,3 +106,37 @@ func (c *Client) FetchInstalledExtensions(ctx context.Context) (result obj.Objec
 		return _zero, ctx.Err()
 	}
 }
+
+// MountSingleVolumeForResourceBundleIDOptions asynchronously mounts a single volume file system with a given resource.
+//
+// MountSingleVolumeForResourceBundleIDOptions blocks until the operation completes or ctx is cancelled.
+func (c *Client) MountSingleVolumeForResourceBundleIDOptions(ctx context.Context, resource *Resource, bundleID string, options []string) (result obj.Object, err error) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(resource)
+	type _result struct {
+		val obj.Object
+		err error
+	}
+	_ch := make(chan _result, 1)
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
+		var _o _result
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
+		_ch <- _o
+	})
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("mountSingleVolumeForResource:bundleID:options:completionHandler:"), objref.IDOf(resource), purego.NSString(bundleID), purego.SliceToNSArray(options, func(_v string) objc.ID { return purego.NSString(_v) }), _block)
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero obj.Object
+		return _zero, ctx.Err()
+	}
+}
+
+// OpenFileSystemExtensionsSettings reports whether opens the File System Extensions settings in System Settings.
+func (c *Client) OpenFileSystemExtensionsSettings() bool {
+	defer runtime.KeepAlive(c)
+	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("openFileSystemExtensionsSettings"))
+	return _r
+}

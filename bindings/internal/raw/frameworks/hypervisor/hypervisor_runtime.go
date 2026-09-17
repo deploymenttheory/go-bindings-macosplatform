@@ -134,6 +134,7 @@ func _loadLibrary() {
 		purego.RegisterLibFunc(&_hv_vcpu_get_pending_interrupt, _hypervisorLib, "hv_vcpu_get_pending_interrupt")
 	})
 	_register("hv_vcpu_get_reg", func() { purego.RegisterLibFunc(&_hv_vcpu_get_reg, _hypervisorLib, "hv_vcpu_get_reg") })
+	_register("hv_vcpu_get_serror", func() { purego.RegisterLibFunc(&_hv_vcpu_get_serror, _hypervisorLib, "hv_vcpu_get_serror") })
 	_register("hv_vcpu_get_simd_fp_reg", func() { purego.RegisterLibFunc(&_hv_vcpu_get_simd_fp_reg, _hypervisorLib, "hv_vcpu_get_simd_fp_reg") })
 	_register("hv_vcpu_get_sme_p_reg", func() { purego.RegisterLibFunc(&_hv_vcpu_get_sme_p_reg, _hypervisorLib, "hv_vcpu_get_sme_p_reg") })
 	_register("hv_vcpu_get_sme_state", func() { purego.RegisterLibFunc(&_hv_vcpu_get_sme_state, _hypervisorLib, "hv_vcpu_get_sme_state") })
@@ -151,11 +152,16 @@ func _loadLibrary() {
 	_register("hv_vcpu_get_vtimer_offset", func() {
 		purego.RegisterLibFunc(&_hv_vcpu_get_vtimer_offset, _hypervisorLib, "hv_vcpu_get_vtimer_offset")
 	})
+	_register("hv_vcpu_get_wait_for_interrupt_time", func() {
+		purego.RegisterLibFunc(&_hv_vcpu_get_wait_for_interrupt_time, _hypervisorLib, "hv_vcpu_get_wait_for_interrupt_time")
+	})
+	_register("hv_vcpu_invalidate_tlb", func() { purego.RegisterLibFunc(&_hv_vcpu_invalidate_tlb, _hypervisorLib, "hv_vcpu_invalidate_tlb") })
 	_register("hv_vcpu_run", func() { purego.RegisterLibFunc(&_hv_vcpu_run, _hypervisorLib, "hv_vcpu_run") })
 	_register("hv_vcpu_set_pending_interrupt", func() {
 		purego.RegisterLibFunc(&_hv_vcpu_set_pending_interrupt, _hypervisorLib, "hv_vcpu_set_pending_interrupt")
 	})
 	_register("hv_vcpu_set_reg", func() { purego.RegisterLibFunc(&_hv_vcpu_set_reg, _hypervisorLib, "hv_vcpu_set_reg") })
+	_register("hv_vcpu_set_serror", func() { purego.RegisterLibFunc(&_hv_vcpu_set_serror, _hypervisorLib, "hv_vcpu_set_serror") })
 	_register("hv_vcpu_set_simd_fp_reg", func() { purego.RegisterLibFunc(&_hv_vcpu_set_simd_fp_reg, _hypervisorLib, "hv_vcpu_set_simd_fp_reg") })
 	_register("hv_vcpu_set_sme_p_reg", func() { purego.RegisterLibFunc(&_hv_vcpu_set_sme_p_reg, _hypervisorLib, "hv_vcpu_set_sme_p_reg") })
 	_register("hv_vcpu_set_sme_state", func() { purego.RegisterLibFunc(&_hv_vcpu_set_sme_state, _hypervisorLib, "hv_vcpu_set_sme_state") })

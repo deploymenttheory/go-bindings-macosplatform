@@ -84,7 +84,7 @@ func (arto *AssetReaderTrackOutput) Track() *AssetTrack {
 	return AssetTrackFromID(_r)
 }
 
-// OutputSettings returns the output settings used by the receiver. The value of this property is an NSDictionary that contains values for keys as specified by either AVAudioSettings.h for audio tracks or AVVideoSettings.h for video tracks.  A value of nil indicates that the receiver will vend samples in their original format as stored in the target track.
+// OutputSettings returns the output settings used by the receiver. The value is a dictionary that contains values for audio and video settings keys. A value of `nil` indicates that the track output vends samples in their original format as stored in the target track. In that case, the track output skips decoding and returns the samples in decode order. A non-`nil` value causes the track output to decode the samples and return them in presentation order.
 func (arto *AssetReaderTrackOutput) OutputSettings() map[string]obj.Object {
 	defer runtime.KeepAlive(arto)
 	_r := objc.Send[objc.ID](objref.IDOf(arto), objc.RegisterName("outputSettings"))

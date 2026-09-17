@@ -47,6 +47,7 @@ func (o *NSUserAutomatorTask) ExecuteWithInputCompletionHandler(input NSSecureCo
 	o.Ptr().Send(_nSUserAutomatorTaskSelExecuteWithInputCompletionHandler, input, __block_handler)
 }
 
+// The variables required by the Automator workflow.
 func (o *NSUserAutomatorTask) Variables() *NSDictionary[*NSString, objc.ID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserAutomatorTaskSelVariables)
 	if _ret != 0 {

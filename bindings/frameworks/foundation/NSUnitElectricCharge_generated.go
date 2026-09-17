@@ -17,8 +17,6 @@ import (
 // UnitElectricCharge is an idiomatic wrapper over the Objective-C class NSUnitElectricCharge.
 //
 // It embeds [Dimension], promoting that type's methods.
-//
-// A unit of measure for electric charge.
 type UnitElectricCharge struct {
 	Dimension
 }

@@ -95,21 +95,21 @@ func (uut *UserUnixTask) ExecuteWithArgumentsCompletionHandler(arguments []strin
 	objc.Send[objc.ID](objref.IDOf(uut), objc.RegisterName("executeWithArguments:completionHandler:"), purego.SliceToNSArray(arguments, func(_v string) objc.ID { return purego.NSString(_v) }), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { handler(_b0) }))
 }
 
-// StandardInput returns the standard input.
+// StandardInput returns the standard input stream. Setting to `nil` will bind the stream to `/dev/null`. The default is `nil`.
 func (uut *UserUnixTask) StandardInput() *FileHandle {
 	defer runtime.KeepAlive(uut)
 	_r := objc.Send[objc.ID](objref.IDOf(uut), objc.RegisterName("standardInput"))
 	return FileHandleFromID(_r)
 }
 
-// StandardOutput returns the standard output.
+// StandardOutput returns the standard output stream. Setting to `nil` will bind the stream to `/dev/null`. The default is `nil`.
 func (uut *UserUnixTask) StandardOutput() *FileHandle {
 	defer runtime.KeepAlive(uut)
 	_r := objc.Send[objc.ID](objref.IDOf(uut), objc.RegisterName("standardOutput"))
 	return FileHandleFromID(_r)
 }
 
-// StandardError returns the standard error.
+// StandardError returns the standard error stream. Setting to `nil` will bind the stream to `/dev/null`. The default is `nil`.
 func (uut *UserUnixTask) StandardError() *FileHandle {
 	defer runtime.KeepAlive(uut)
 	_r := objc.Send[objc.ID](objref.IDOf(uut), objc.RegisterName("standardError"))

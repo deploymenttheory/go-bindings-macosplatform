@@ -32,7 +32,6 @@ func INStickerFromID(id objc.ID) *INSticker {
 	return o
 }
 
-// Creates an object that represents a sticker a person sends in a message. - Parameters: - type: The type of the sticker. - emoji: The single emoji character that the sticker represents.
 func (o *INSticker) InitWithTypeEmoji(type_ INStickerType, emoji *foundation.NSString) *INSticker {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNStickerSelInitWithTypeEmoji, type_, emoji.Ptr())
 	if _ret != 0 {

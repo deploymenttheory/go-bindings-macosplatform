@@ -6,8 +6,10 @@ package avfaudio
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -131,6 +133,19 @@ func (apn *AudioPlayerNode) PrepareWithFrameCount(frameCount uint32) {
 func (apn *AudioPlayerNode) Play() {
 	defer runtime.KeepAlive(apn)
 	objc.Send[objc.ID](objref.IDOf(apn), objc.RegisterName("play"))
+}
+
+// PlayAndReturnError start or resume playback immediately. equivalent to playAtTime:nil error:&error
+//
+// PlayAndReturnError returns an error if the operation did not succeed.
+func (apn *AudioPlayerNode) PlayAndReturnError() error {
+	defer runtime.KeepAlive(apn)
+	var _nsErr uintptr
+	objc.Send[bool](objref.IDOf(apn), objc.RegisterName("playAndReturnError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // PlayAtTime starts or resumes playback at a time you specify.

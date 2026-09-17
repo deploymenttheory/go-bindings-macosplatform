@@ -59,6 +59,7 @@ func (o *NSWhoseSpecifier) InitWithContainerClassDescriptionContainerSpecifierKe
 	return NSWhoseSpecifierFromID(_ret)
 }
 
+// The test used to qualify the objects.
 func (o *NSWhoseSpecifier) Test() *NSScriptWhoseTest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWhoseSpecifierSelTest)
 	if _ret != 0 {
@@ -71,6 +72,7 @@ func (o *NSWhoseSpecifier) SetTest(test *NSScriptWhoseTest) {
 	o.Ptr().Send(_nSWhoseSpecifierSelSetTest, test.Ptr())
 }
 
+// The identifier for the start subelement.
 func (o *NSWhoseSpecifier) StartSubelementIdentifier() NSWhoseSubelementIdentifier {
 	_ret := objc.Send[NSWhoseSubelementIdentifier](o.Ptr(), _nSWhoseSpecifierSelStartSubelementIdentifier)
 	return _ret
@@ -80,6 +82,7 @@ func (o *NSWhoseSpecifier) SetStartSubelementIdentifier(startSubelementIdentifie
 	o.Ptr().Send(_nSWhoseSpecifierSelSetStartSubelementIdentifier, startSubelementIdentifier)
 }
 
+// The index of the start subelement. Only used if `startSubelementIdentifier` is `NSIndexSubelement`.
 func (o *NSWhoseSpecifier) StartSubelementIndex() int {
 	_ret := objc.Send[int](o.Ptr(), _nSWhoseSpecifierSelStartSubelementIndex)
 	return _ret
@@ -89,6 +92,7 @@ func (o *NSWhoseSpecifier) SetStartSubelementIndex(startSubelementIndex int) {
 	o.Ptr().Send(_nSWhoseSpecifierSelSetStartSubelementIndex, startSubelementIndex)
 }
 
+// The identifier for the end subelement.
 func (o *NSWhoseSpecifier) EndSubelementIdentifier() NSWhoseSubelementIdentifier {
 	_ret := objc.Send[NSWhoseSubelementIdentifier](o.Ptr(), _nSWhoseSpecifierSelEndSubelementIdentifier)
 	return _ret
@@ -98,6 +102,7 @@ func (o *NSWhoseSpecifier) SetEndSubelementIdentifier(endSubelementIdentifier NS
 	o.Ptr().Send(_nSWhoseSpecifierSelSetEndSubelementIdentifier, endSubelementIdentifier)
 }
 
+// The index of the end subelement. Only used if `endSubelementIdentifier` is `NSIndexSubelement`.
 func (o *NSWhoseSpecifier) EndSubelementIndex() int {
 	_ret := objc.Send[int](o.Ptr(), _nSWhoseSpecifierSelEndSubelementIndex)
 	return _ret

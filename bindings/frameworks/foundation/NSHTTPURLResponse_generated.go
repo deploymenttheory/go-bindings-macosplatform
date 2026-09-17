@@ -18,8 +18,6 @@ import (
 // HTTPURLResponse is an idiomatic wrapper over the Objective-C class NSHTTPURLResponse.
 //
 // It embeds [URLResponse], promoting that type's methods.
-//
-// The metadata associated with the response to an HTTP protocol URL load request.
 type HTTPURLResponse struct {
 	URLResponse
 }
@@ -50,7 +48,7 @@ func hTTPURLResponseAdopt(id objc.ID) *HTTPURLResponse {
 	return x
 }
 
-// NewHTTPURLResponseWithURLStatusCodeHTTPVersionHeaderFields initializer for NSHTTPURLResponse objects. This API was introduced in Mac OS X 10.7.2 and iOS 5.0 and is not available prior to those releases.
+// NewHTTPURLResponseWithURLStatusCodeHTTPVersionHeaderFields initializes an HTTP URL response object with a status code, protocol version, and response headers. - Parameters: - url: The URL from which the response was generated. - statusCode: An HTTP status code. See [RFC 2616](http://www.ietf.org/rfc/rfc2616.txt) for details. - HTTPVersion: The version of the HTTP response as represented by the server. This is typically represented as `"HTTP/1.1"`. - headerFields: A dictionary representing the header keys and values of the server response. - Returns: An initialized `NSHTTPURLResponse` object, or `nil` if an error occurred during initialization.
 func NewHTTPURLResponseWithURLStatusCodeHTTPVersionHeaderFields(url string, statusCode int, httpVersion string, headerFields map[string]string) *HTTPURLResponse {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSHTTPURLResponse")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:statusCode:HTTPVersion:headerFields:"), rt.FileURL(url), statusCode, purego.NSString(httpVersion), rt.MapToDict(headerFields, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v string) objc.ID { return purego.NSString(_v) }))
@@ -69,7 +67,7 @@ func (hr *HTTPURLResponse) WithScriptingProperties(scriptingProperties map[strin
 	return hr
 }
 
-// ValueForHTTPHeaderField returns the value which corresponds to the given header field. Note that, in keeping with the HTTP RFC, HTTP header field names are case-insensitive.
+// ValueForHTTPHeaderField returns the value that corresponds to the given header field. In keeping with the HTTP RFC, HTTP header field names are case-insensitive. - Parameter field: The header field name to use for the lookup (case-insensitive). - Returns: The value associated with the given header field, or `nil` if there is no value associated with the given header field.
 func (hr *HTTPURLResponse) ValueForHTTPHeaderField(field string) string {
 	defer runtime.KeepAlive(hr)
 	_r := objc.Send[objc.ID](objref.IDOf(hr), objc.RegisterName("valueForHTTPHeaderField:"), purego.NSString(field))
@@ -79,14 +77,14 @@ func (hr *HTTPURLResponse) ValueForHTTPHeaderField(field string) string {
 	return purego.GoString(_r)
 }
 
-// StatusCode returns the HTTP status code of the receiver.
+// StatusCode returns the response's HTTP status code. See [RFC 2616](http://www.ietf.org/rfc/rfc2616.txt) for details.
 func (hr *HTTPURLResponse) StatusCode() int {
 	defer runtime.KeepAlive(hr)
 	_r := objc.Send[int](objref.IDOf(hr), objc.RegisterName("statusCode"))
 	return _r
 }
 
-// AllHeaderFields returns a dictionary containing all the HTTP header fields of the receiver. By examining this header dictionary, clients can see the "raw" header information which was reported to the protocol implementation by the HTTP server. This may be of use to sophisticated or special-purpose HTTP clients.
+// AllHeaderFields returns all HTTP header fields of the response. The value of this property is a dictionary that contains all the HTTP header fields received as part of the server's response. By examining this dictionary, clients can see the "raw" header information returned by the HTTP server. HTTP headers are case insensitive. To simplify your code, URL Loading System canonicalizes certain header field names into their standard form. For example, if the server sends a `content-length` header, it's automatically adjusted to be `Content-Length`. When using Swift, this property is a standard dictionary, so its keys are case-sensitive. To perform a case-insensitive header lookup, use the `valueForHTTPHeaderField:` method instead.
 func (hr *HTTPURLResponse) AllHeaderFields() obj.Object {
 	defer runtime.KeepAlive(hr)
 	_r := objc.Send[objc.ID](objref.IDOf(hr), objc.RegisterName("allHeaderFields"))

@@ -19,38 +19,43 @@ type AVCaptureConnection struct {
 }
 
 var (
-	_clsAVCaptureConnection                                         = _objcClass("AVCaptureConnection")
-	_aVCaptureConnectionSelConnectionWithInputPortsOutput           = objc.RegisterName("connectionWithInputPorts:output:")
-	_aVCaptureConnectionSelConnectionWithInputPortVideoPreviewLayer = objc.RegisterName("connectionWithInputPort:videoPreviewLayer:")
-	_aVCaptureConnectionSelInitWithInputPortsOutput                 = objc.RegisterName("initWithInputPorts:output:")
-	_aVCaptureConnectionSelInitWithInputPortVideoPreviewLayer       = objc.RegisterName("initWithInputPort:videoPreviewLayer:")
-	_aVCaptureConnectionSelIsVideoRotationAngleSupported            = objc.RegisterName("isVideoRotationAngleSupported:")
-	_aVCaptureConnectionSelInputPorts                               = objc.RegisterName("inputPorts")
-	_aVCaptureConnectionSelOutput                                   = objc.RegisterName("output")
-	_aVCaptureConnectionSelVideoPreviewLayer                        = objc.RegisterName("videoPreviewLayer")
-	_aVCaptureConnectionSelIsEnabled                                = objc.RegisterName("isEnabled")
-	_aVCaptureConnectionSelSetEnabled                               = objc.RegisterName("setEnabled:")
-	_aVCaptureConnectionSelIsActive                                 = objc.RegisterName("isActive")
-	_aVCaptureConnectionSelAudioChannels                            = objc.RegisterName("audioChannels")
-	_aVCaptureConnectionSelIsVideoMirroringSupported                = objc.RegisterName("isVideoMirroringSupported")
-	_aVCaptureConnectionSelIsVideoMirrored                          = objc.RegisterName("isVideoMirrored")
-	_aVCaptureConnectionSelSetVideoMirrored                         = objc.RegisterName("setVideoMirrored:")
-	_aVCaptureConnectionSelAutomaticallyAdjustsVideoMirroring       = objc.RegisterName("automaticallyAdjustsVideoMirroring")
-	_aVCaptureConnectionSelSetAutomaticallyAdjustsVideoMirroring    = objc.RegisterName("setAutomaticallyAdjustsVideoMirroring:")
-	_aVCaptureConnectionSelVideoRotationAngle                       = objc.RegisterName("videoRotationAngle")
-	_aVCaptureConnectionSelSetVideoRotationAngle                    = objc.RegisterName("setVideoRotationAngle:")
-	_aVCaptureConnectionSelIsVideoOrientationSupported              = objc.RegisterName("isVideoOrientationSupported")
-	_aVCaptureConnectionSelVideoOrientation                         = objc.RegisterName("videoOrientation")
-	_aVCaptureConnectionSelSetVideoOrientation                      = objc.RegisterName("setVideoOrientation:")
-	_aVCaptureConnectionSelIsVideoFieldModeSupported                = objc.RegisterName("isVideoFieldModeSupported")
-	_aVCaptureConnectionSelVideoFieldMode                           = objc.RegisterName("videoFieldMode")
-	_aVCaptureConnectionSelSetVideoFieldMode                        = objc.RegisterName("setVideoFieldMode:")
-	_aVCaptureConnectionSelIsVideoMinFrameDurationSupported         = objc.RegisterName("isVideoMinFrameDurationSupported")
-	_aVCaptureConnectionSelVideoMinFrameDuration                    = objc.RegisterName("videoMinFrameDuration")
-	_aVCaptureConnectionSelSetVideoMinFrameDuration                 = objc.RegisterName("setVideoMinFrameDuration:")
-	_aVCaptureConnectionSelIsVideoMaxFrameDurationSupported         = objc.RegisterName("isVideoMaxFrameDurationSupported")
-	_aVCaptureConnectionSelVideoMaxFrameDuration                    = objc.RegisterName("videoMaxFrameDuration")
-	_aVCaptureConnectionSelSetVideoMaxFrameDuration                 = objc.RegisterName("setVideoMaxFrameDuration:")
+	_clsAVCaptureConnection                                                   = _objcClass("AVCaptureConnection")
+	_aVCaptureConnectionSelConnectionWithInputPortsOutput                     = objc.RegisterName("connectionWithInputPorts:output:")
+	_aVCaptureConnectionSelConnectionWithInputPortVideoPreviewLayer           = objc.RegisterName("connectionWithInputPort:videoPreviewLayer:")
+	_aVCaptureConnectionSelInitWithInputPortsOutput                           = objc.RegisterName("initWithInputPorts:output:")
+	_aVCaptureConnectionSelInitWithInputPortVideoPreviewLayer                 = objc.RegisterName("initWithInputPort:videoPreviewLayer:")
+	_aVCaptureConnectionSelIsVideoRotationAngleSupported                      = objc.RegisterName("isVideoRotationAngleSupported:")
+	_aVCaptureConnectionSelInputPorts                                         = objc.RegisterName("inputPorts")
+	_aVCaptureConnectionSelOutput                                             = objc.RegisterName("output")
+	_aVCaptureConnectionSelVideoPreviewLayer                                  = objc.RegisterName("videoPreviewLayer")
+	_aVCaptureConnectionSelIsEnabled                                          = objc.RegisterName("isEnabled")
+	_aVCaptureConnectionSelSetEnabled                                         = objc.RegisterName("setEnabled:")
+	_aVCaptureConnectionSelIsActive                                           = objc.RegisterName("isActive")
+	_aVCaptureConnectionSelAudioChannels                                      = objc.RegisterName("audioChannels")
+	_aVCaptureConnectionSelIsVideoMirroringSupported                          = objc.RegisterName("isVideoMirroringSupported")
+	_aVCaptureConnectionSelIsVideoMirrored                                    = objc.RegisterName("isVideoMirrored")
+	_aVCaptureConnectionSelSetVideoMirrored                                   = objc.RegisterName("setVideoMirrored:")
+	_aVCaptureConnectionSelAutomaticallyAdjustsVideoMirroring                 = objc.RegisterName("automaticallyAdjustsVideoMirroring")
+	_aVCaptureConnectionSelSetAutomaticallyAdjustsVideoMirroring              = objc.RegisterName("setAutomaticallyAdjustsVideoMirroring:")
+	_aVCaptureConnectionSelVideoRotationAngle                                 = objc.RegisterName("videoRotationAngle")
+	_aVCaptureConnectionSelSetVideoRotationAngle                              = objc.RegisterName("setVideoRotationAngle:")
+	_aVCaptureConnectionSelIsVideoOrientationSupported                        = objc.RegisterName("isVideoOrientationSupported")
+	_aVCaptureConnectionSelVideoOrientation                                   = objc.RegisterName("videoOrientation")
+	_aVCaptureConnectionSelSetVideoOrientation                                = objc.RegisterName("setVideoOrientation:")
+	_aVCaptureConnectionSelIsVideoFieldModeSupported                          = objc.RegisterName("isVideoFieldModeSupported")
+	_aVCaptureConnectionSelVideoFieldMode                                     = objc.RegisterName("videoFieldMode")
+	_aVCaptureConnectionSelSetVideoFieldMode                                  = objc.RegisterName("setVideoFieldMode:")
+	_aVCaptureConnectionSelIsVideoMinFrameDurationSupported                   = objc.RegisterName("isVideoMinFrameDurationSupported")
+	_aVCaptureConnectionSelVideoMinFrameDuration                              = objc.RegisterName("videoMinFrameDuration")
+	_aVCaptureConnectionSelSetVideoMinFrameDuration                           = objc.RegisterName("setVideoMinFrameDuration:")
+	_aVCaptureConnectionSelIsVideoMaxFrameDurationSupported                   = objc.RegisterName("isVideoMaxFrameDurationSupported")
+	_aVCaptureConnectionSelVideoMaxFrameDuration                              = objc.RegisterName("videoMaxFrameDuration")
+	_aVCaptureConnectionSelSetVideoMaxFrameDuration                           = objc.RegisterName("setVideoMaxFrameDuration:")
+	_aVCaptureConnectionSelIsLowLightVideoNoiseReductionSupported             = objc.RegisterName("isLowLightVideoNoiseReductionSupported")
+	_aVCaptureConnectionSelAutomaticallyEnablesLowLightVideoNoiseReduction    = objc.RegisterName("automaticallyEnablesLowLightVideoNoiseReduction")
+	_aVCaptureConnectionSelSetAutomaticallyEnablesLowLightVideoNoiseReduction = objc.RegisterName("setAutomaticallyEnablesLowLightVideoNoiseReduction:")
+	_aVCaptureConnectionSelIsLowLightVideoNoiseReductionEnabled               = objc.RegisterName("isLowLightVideoNoiseReductionEnabled")
+	_aVCaptureConnectionSelSetLowLightVideoNoiseReductionEnabled              = objc.RegisterName("setLowLightVideoNoiseReductionEnabled:")
 )
 
 func AVCaptureConnectionFromID(id objc.ID) *AVCaptureConnection {
@@ -258,4 +263,30 @@ func (o *AVCaptureConnection) VideoMaxFrameDuration() coremedia.CMTime {
 
 func (o *AVCaptureConnection) SetVideoMaxFrameDuration(videoMaxFrameDuration coremedia.CMTime) {
 	o.Ptr().Send(_aVCaptureConnectionSelSetVideoMaxFrameDuration, videoMaxFrameDuration)
+}
+
+// Indicates whether the connection supports low light video noise reduction. This property returns `true` if the connection's source device's active format supports low light video noise reduction (see “AVCaptureDeviceFormat/isLowLightVideoNoiseReductionSupported“) and the connection's output supports the feature. This value reflects the active configuration and can change as the active format, video stabilization mode or auto video frame rate changes. See “automaticallyEnablesLowLightVideoNoiseReduction“ for a detailed discussion. This property is key-value observable.
+func (o *AVCaptureConnection) IsLowLightVideoNoiseReductionSupported() bool {
+	_ret := objc.Send[bool](o.Ptr(), _aVCaptureConnectionSelIsLowLightVideoNoiseReductionSupported)
+	return _ret
+}
+
+// Indicates whether the connection should automatically enable low light video noise reduction when the connection supports it. On a connection where “isLowLightVideoNoiseReductionSupported“ is `true`, the system can enable low light video noise reduction to improve video quality at the cost of additional power. This property defaults to `true` for movie file output connections. When “automaticallyEnablesLowLightVideoNoiseReduction“ is `true`, the connection sets “isLowLightVideoNoiseReductionEnabled“ to `true` automatically when the session configuration is committed and the connection supports the feature. For `AVCaptureMultiCamSession` configurations with multiple movie file outputs, automatic enablement is suppressed because the feature can only be active on one output at a time; in that case, set this property to `false` and control “isLowLightVideoNoiseReductionEnabled“ directly on the desired connection. Enabling the feature on more than one movie file output connection increases the session's `hardwareCost` and may result in an `AVCaptureSessionRuntimeErrorNotification`. Setting this property on a connection that does not support low light video noise reduction is permitted but has no effect. Clients can key-value observe “isLowLightVideoNoiseReductionEnabled“ to know when the connection has automatically changed the value.
+func (o *AVCaptureConnection) AutomaticallyEnablesLowLightVideoNoiseReduction() bool {
+	_ret := objc.Send[bool](o.Ptr(), _aVCaptureConnectionSelAutomaticallyEnablesLowLightVideoNoiseReduction)
+	return _ret
+}
+
+func (o *AVCaptureConnection) SetAutomaticallyEnablesLowLightVideoNoiseReduction(automaticallyEnablesLowLightVideoNoiseReduction bool) {
+	o.Ptr().Send(_aVCaptureConnectionSelSetAutomaticallyEnablesLowLightVideoNoiseReduction, automaticallyEnablesLowLightVideoNoiseReduction)
+}
+
+// Indicates whether low light video noise reduction is enabled for the current session. A `BOOL` indicating whether low light video noise reduction is enabled on the connection. To set this property directly, first set “automaticallyEnablesLowLightVideoNoiseReduction“ to `false`; setting this property while “automaticallyEnablesLowLightVideoNoiseReduction“ is `true` throws an `NSInvalidArgumentException`. This property may only be set to `true` if the connection's “isLowLightVideoNoiseReductionSupported“ property returns `true`, otherwise an `NSInvalidArgumentException` is thrown. This property is key-value observable.
+func (o *AVCaptureConnection) IsLowLightVideoNoiseReductionEnabled() bool {
+	_ret := objc.Send[bool](o.Ptr(), _aVCaptureConnectionSelIsLowLightVideoNoiseReductionEnabled)
+	return _ret
+}
+
+func (o *AVCaptureConnection) SetLowLightVideoNoiseReductionEnabled(lowLightVideoNoiseReductionEnabled bool) {
+	o.Ptr().Send(_aVCaptureConnectionSelSetLowLightVideoNoiseReductionEnabled, lowLightVideoNoiseReductionEnabled)
 }

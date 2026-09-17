@@ -103,9 +103,12 @@ func (o *PKShareablePassMetadata) SharingInstanceIdentifier() *foundation.NSStri
 	return foundation.NSStringFromID(_ret)
 }
 
-func (o *PKShareablePassMetadata) TemplateIdentifier() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _pKShareablePassMetadataSelTemplateIdentifier)
-	return _ret
+func (o *PKShareablePassMetadata) TemplateIdentifier() *foundation.NSString {
+	_ret := objc.Send[objc.ID](o.Ptr(), _pKShareablePassMetadataSelTemplateIdentifier)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSStringFromID(_ret)
 }
 
 func (o *PKShareablePassMetadata) CardTemplateIdentifier() *foundation.NSString {

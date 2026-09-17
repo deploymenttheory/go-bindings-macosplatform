@@ -93,9 +93,12 @@ func GCCurrentMicroGamepadSnapshotDataVersion() GCMicroGamepadSnapshotDataVersio
 	return *(*GCMicroGamepadSnapshotDataVersion)(unsafe.Pointer(ptr))
 }
 
-func GCHapticDurationInfinite() uintptr {
+func GCHapticDurationInfinite() float32 {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCHapticDurationInfinite")
-	return ptr
+	if ptr == 0 {
+		return 0
+	}
+	return *(*float32)(unsafe.Pointer(ptr))
 }
 
 func GCHapticsLocalityAll() *foundation.NSString {

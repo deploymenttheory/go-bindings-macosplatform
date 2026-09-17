@@ -41,9 +41,16 @@ func GKExchangeTimeoutNone() float64 {
 }
 
 // Deprecated: GKGameSession is deprecated, use real-time and turn-based matchmaking APIs instead.
-func GKGameSessionErrorDomain() uintptr {
+func GKGameSessionErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamekitLib, "GKGameSessionErrorDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Notification will be posted whenever authentication status changes.
@@ -73,9 +80,16 @@ func GKPlayerDidChangeNotificationName() *foundation.NSString {
 }
 
 // Deprecated methods that previously returned player IDs will return GKPlayerIDNoLongerAvailable instead.
-func GKPlayerIDNoLongerAvailable() uintptr {
+func GKPlayerIDNoLongerAvailable() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamekitLib, "GKPlayerIDNoLongerAvailable")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: No longer supported

@@ -53,6 +53,8 @@ var (
 	_nSMenuItemSelSetAllowsAutomaticKeyEquivalentMirroring    = objc.RegisterName("setAllowsAutomaticKeyEquivalentMirroring:")
 	_nSMenuItemSelImage                                       = objc.RegisterName("image")
 	_nSMenuItemSelSetImage                                    = objc.RegisterName("setImage:")
+	_nSMenuItemSelPreferredImageVisibility                    = objc.RegisterName("preferredImageVisibility")
+	_nSMenuItemSelSetPreferredImageVisibility                 = objc.RegisterName("setPreferredImageVisibility:")
 	_nSMenuItemSelState                                       = objc.RegisterName("state")
 	_nSMenuItemSelSetState                                    = objc.RegisterName("setState:")
 	_nSMenuItemSelOnStateImage                                = objc.RegisterName("onStateImage")
@@ -299,6 +301,7 @@ func (o *NSMenuItem) SetAllowsAutomaticKeyEquivalentMirroring(allowsAutomaticKey
 	o.Ptr().Send(_nSMenuItemSelSetAllowsAutomaticKeyEquivalentMirroring, allowsAutomaticKeyEquivalentMirroring)
 }
 
+// Set an image that is displayed next to the menu item's title. Note that in macOS 27 and later, AppKit determines the visibility of menu item images, and will typically hide images. Use the `preferredImageVisibility` property with the `.visible` constant to specify that an image should always be visible.
 func (o *NSMenuItem) Image() *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuItemSelImage)
 	if _ret != 0 {
@@ -307,8 +310,20 @@ func (o *NSMenuItem) Image() *NSImage {
 	return NSImageFromID(_ret)
 }
 
+// Set an image that is displayed next to the menu item's title. Note that in macOS 27 and later, AppKit determines the visibility of menu item images, and will typically hide images. Use the `preferredImageVisibility` property with the `.visible` constant to specify that an image should always be visible.
 func (o *NSMenuItem) SetImage(image *NSImage) {
 	o.Ptr().Send(_nSMenuItemSelSetImage, image.Ptr())
+}
+
+// A menu item's image visibility determines whether the item's image is displayed when the menu is open. The default visibility for an item's image is Automatic. With this value, AppKit determines whether the item's image is visible based on system configuration. If an item's image should be visible in all cases, regardless of macOS version or other settings, then set the image visibility to `.visible`.
+func (o *NSMenuItem) PreferredImageVisibility() NSMenuItemImageVisibility {
+	_ret := objc.Send[NSMenuItemImageVisibility](o.Ptr(), _nSMenuItemSelPreferredImageVisibility)
+	return _ret
+}
+
+// A menu item's image visibility determines whether the item's image is displayed when the menu is open. The default visibility for an item's image is Automatic. With this value, AppKit determines whether the item's image is visible based on system configuration. If an item's image should be visible in all cases, regardless of macOS version or other settings, then set the image visibility to `.visible`.
+func (o *NSMenuItem) SetPreferredImageVisibility(preferredImageVisibility NSMenuItemImageVisibility) {
+	o.Ptr().Send(_nSMenuItemSelSetPreferredImageVisibility, preferredImageVisibility)
 }
 
 func (o *NSMenuItem) State() int {

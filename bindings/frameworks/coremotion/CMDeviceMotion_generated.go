@@ -14,7 +14,7 @@ import (
 
 // DeviceMotion is an idiomatic wrapper over the Objective-C class CMDeviceMotion.
 //
-// It embeds [LogItem], promoting that type's methods.
+// DeviceMotion is an abstract base — you do not construct it directly. Construct one of [RecordedDeviceMotion] and pass it where a DeviceMotion is accepted.
 //
 // Encapsulated measurements of the attitude, rotation rate, and acceleration of a device.
 type DeviceMotion struct {
@@ -45,12 +45,6 @@ func deviceMotionAdopt(id objc.ID) *DeviceMotion {
 	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// NewDeviceMotion creates a new DeviceMotion.
-func NewDeviceMotion() *DeviceMotion {
-	_id := objc.Send[objc.ID](objc.ID(_class("CMDeviceMotion")), objc.RegisterName("new"))
-	return deviceMotionAdopt(_id)
 }
 
 // Attitude returns the attitude.
@@ -95,11 +89,25 @@ func (dm *DeviceMotion) Heading() float64 {
 	return _r
 }
 
+// HeadingAccuracy returns the heading accuracy.
+func (dm *DeviceMotion) HeadingAccuracy() float64 {
+	defer runtime.KeepAlive(dm)
+	_r := objc.Send[float64](objref.IDOf(dm), objc.RegisterName("headingAccuracy"))
+	return _r
+}
+
 // SensorLocation returns the sensor location.
 func (dm *DeviceMotion) SensorLocation() DeviceMotionSensorLocation {
 	defer runtime.KeepAlive(dm)
 	_r := objc.Send[DeviceMotionSensorLocation](objref.IDOf(dm), objc.RegisterName("sensorLocation"))
 	return _r
 }
+
+// isDeviceMotion marks DeviceMotion — and, by embedding promotion, its
+// subclasses — as a member of the DeviceMotion hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (dm *DeviceMotion) isDeviceMotion() {}
+
+var _ DeviceMotionProvider = (*DeviceMotion)(nil)
 
 var _ LogItemProvider = (*DeviceMotion)(nil)

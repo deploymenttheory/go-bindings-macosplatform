@@ -1433,6 +1433,22 @@ func CSSMOID_GivenName() CssmData {
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
+func CSSMOID_HYBRID_COMPOSITE_MLDSA87_RSA3072_WithSHA512() CssmData {
+	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_HYBRID_COMPOSITE_MLDSA87_RSA3072_WithSHA512")
+	if ptr == 0 {
+		return CssmData{}
+	}
+	return *(*CssmData)(unsafe.Pointer(ptr))
+}
+
+func CSSMOID_HYBRID_COMPOSITE_MLDSA87_RSA3072_WithSHA512_draft_13() CssmData {
+	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_HYBRID_COMPOSITE_MLDSA87_RSA3072_WithSHA512_draft_13")
+	if ptr == 0 {
+		return CssmData{}
+	}
+	return *(*CssmData)(unsafe.Pointer(ptr))
+}
+
 func CSSMOID_HoldInstructionCode() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_HoldInstructionCode")
 	if ptr == 0 {
@@ -4544,6 +4560,11 @@ func KSecCFErrorArchitecture() uintptr {
 	return ptr
 }
 
+func KSecCFErrorDetachedCertificates() uintptr {
+	ptr, _ := purego.Dlsym(_securityLib, "kSecCFErrorDetachedCertificates")
+	return ptr
+}
+
 func KSecCFErrorGuestAttributes() uintptr {
 	ptr, _ := purego.Dlsym(_securityLib, "kSecCFErrorGuestAttributes")
 	return ptr
@@ -4671,6 +4692,12 @@ func KSecCodeInfoChangedFiles() uintptr {
 	return ptr
 }
 
+// @const kSecCodeInfoChosenSignature Key in the dictionary returned by SecCodeCopySigningInformation. The value is a CFNumber containing the 1-based index of the signature slot that was selected for validation and information retrieval.
+func KSecCodeInfoChosenSignature() uintptr {
+	ptr, _ := purego.Dlsym(_securityLib, "kSecCodeInfoChosenSignature")
+	return ptr
+}
+
 func KSecCodeInfoDefaultDesignatedLightweightCodeRequirement() uintptr {
 	ptr, _ := purego.Dlsym(_securityLib, "kSecCodeInfoDefaultDesignatedLightweightCodeRequirement")
 	return ptr
@@ -4751,6 +4778,12 @@ func KSecCodeInfoRuntimeVersion() uintptr {
 	return ptr
 }
 
+// @const kSecCodeInfoSignerInfoSKID Key in the dictionary returned by SecCodeCopySigningInformation. The value is a CFData containing the Subject Key Identifier (SKID) of the leaf signing certificate. Useful for looking up detached certificates.
+func KSecCodeInfoSignerInfoSKID() uintptr {
+	ptr, _ := purego.Dlsym(_securityLib, "kSecCodeInfoSignerInfoSKID")
+	return ptr
+}
+
 func KSecCodeInfoSource() uintptr {
 	ptr, _ := purego.Dlsym(_securityLib, "kSecCodeInfoSource")
 	return ptr
@@ -4778,6 +4811,12 @@ func KSecCodeInfoTime() uintptr {
 
 func KSecCodeInfoTimestamp() uintptr {
 	ptr, _ := purego.Dlsym(_securityLib, "kSecCodeInfoTimestamp")
+	return ptr
+}
+
+// @const kSecCodeInfoTotalSignatures Key in the dictionary returned by SecCodeCopySigningInformation. The value is a CFNumber giving the total number of signature slots present on the code object (ranging from 1 to kSecCSMaxSignatures).
+func KSecCodeInfoTotalSignatures() uintptr {
+	ptr, _ := purego.Dlsym(_securityLib, "kSecCodeInfoTotalSignatures")
 	return ptr
 }
 

@@ -16,8 +16,6 @@ import (
 )
 
 // AccessibilityElement is an idiomatic wrapper over the Objective-C class NSAccessibilityElement.
-//
-// The basic infrastructure necessary for interacting with an assistive app.
 type AccessibilityElement struct {
 	objref.Handle
 }

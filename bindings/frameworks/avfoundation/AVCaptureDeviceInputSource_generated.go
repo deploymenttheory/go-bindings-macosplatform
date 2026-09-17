@@ -15,8 +15,6 @@ import (
 )
 
 // CaptureDeviceInputSource is an idiomatic wrapper over the Objective-C class AVCaptureDeviceInputSource.
-//
-// A distinct input source on a capture device.
 type CaptureDeviceInputSource struct {
 	objref.Handle
 }

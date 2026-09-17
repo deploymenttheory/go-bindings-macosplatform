@@ -130,6 +130,7 @@ func (o *NSOrderedSet[ObjectType]) InitWithCoder(coder *NSCoder) *NSOrderedSet[O
 	return NSOrderedSetFromID[ObjectType](_ret)
 }
 
+// The number of members in the set.
 func (o *NSOrderedSet[ObjectType]) Count() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSOrderedSetSelCount)
 	return _ret
@@ -332,16 +333,19 @@ func (o *NSOrderedSet[ObjectType]) DescriptionWithLocaleIndent(locale objc.ID, l
 	return NSStringFromID(_ret)
 }
 
+// The first object in the ordered set.
 func (o *NSOrderedSet[ObjectType]) FirstObject() ObjectType {
 	_ret := objc.Send[ObjectType](o.Ptr(), _nSOrderedSetSelFirstObject)
 	return _ret
 }
 
+// The last object in the ordered set.
 func (o *NSOrderedSet[ObjectType]) LastObject() ObjectType {
 	_ret := objc.Send[ObjectType](o.Ptr(), _nSOrderedSetSelLastObject)
 	return _ret
 }
 
+// An ordered set in the reverse order.
 func (o *NSOrderedSet[ObjectType]) ReversedOrderedSet() *NSOrderedSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelReversedOrderedSet)
 	if _ret != 0 {
@@ -350,6 +354,7 @@ func (o *NSOrderedSet[ObjectType]) ReversedOrderedSet() *NSOrderedSet[ObjectType
 	return NSOrderedSetFromID[ObjectType](_ret)
 }
 
+// A representation of the ordered set as an array. This returns a proxy object for the receiving ordered set, which acts like an immutable array. While you cannot mutate the ordered set through this proxy, mutations to the original ordered set will be reflected in the proxy and it will appear to change spontaneously, because a copy of the ordered set is not being made.
 func (o *NSOrderedSet[ObjectType]) Array() *NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelArray)
 	if _ret != 0 {
@@ -358,6 +363,7 @@ func (o *NSOrderedSet[ObjectType]) Array() *NSArray[ObjectType] {
 	return NSArrayFromID[ObjectType](_ret)
 }
 
+// A representation of the set containing the contents of the ordered set. This returns a proxy object for the receiving ordered set, which acts like an immutable set. While you cannot mutate the ordered set through this proxy, mutations to the original ordered set will be reflected in the proxy and it will appear to change spontaneously, because a copy of the ordered set is not being made.
 func (o *NSOrderedSet[ObjectType]) Set() *NSSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelSet)
 	if _ret != 0 {

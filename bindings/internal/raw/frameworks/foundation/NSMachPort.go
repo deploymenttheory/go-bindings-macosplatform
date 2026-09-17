@@ -71,6 +71,7 @@ func (o *NSMachPort) InitWithMachPortOptions(machPort uint32, f NSMachPortOption
 	return NSMachPortFromID(_ret)
 }
 
+// The Mach port used by the receiver.
 func (o *NSMachPort) MachPort() uint32 {
 	_ret := objc.Send[uint32](o.Ptr(), _nSMachPortSelMachPort)
 	return _ret

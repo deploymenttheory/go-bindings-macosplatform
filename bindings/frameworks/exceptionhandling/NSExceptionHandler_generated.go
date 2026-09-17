@@ -16,7 +16,7 @@ import (
 
 // ExceptionHandler is an idiomatic wrapper over the Objective-C class NSExceptionHandler.
 //
-// The NSExceptionHandler class provides facilities for monitoring and debugging exceptional conditions in Objective-C programs. It works by installing a special uncaught exception handler via the NSSetUncaughtExceptionHandler function. Consequently, to use the services of NSExceptionHandler, you must not install your own custom uncaught exception handler.
+// The NSExceptionHandler class provides facilities for monitoring and debugging exceptional conditions in Objective-C programs. It works by installing a special uncaught exception handler function. Consequently, to use the services of NSExceptionHandler, you must not install your own custom uncaught exception handler.
 type ExceptionHandler struct {
 	objref.Handle
 }

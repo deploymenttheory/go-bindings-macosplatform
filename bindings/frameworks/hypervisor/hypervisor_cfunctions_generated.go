@@ -690,6 +690,22 @@ func HvVcpuGetReg(vcpu uint64, reg Reg) (value uint64, err error) {
 	return _out0, nil
 }
 
+var _fnHvVcpuGetSerror func(uint64, unsafe.Pointer) int32
+
+// HvVcpuGetSerror reports an error if the Hypervisor framework function hv_vcpu_get_serror fails.
+func HvVcpuGetSerror(vcpu uint64) (pending bool, err error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnHvVcpuGetSerror == nil {
+		ebipurego.RegisterLibFunc(&_fnHvVcpuGetSerror, _lib, "hv_vcpu_get_serror")
+	}
+	var _out0 bool
+	_rc := _fnHvVcpuGetSerror(vcpu, unsafe.Pointer(&_out0))
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return false, _err
+	}
+	return _out0, nil
+}
+
 var _fnHvVcpuGetSimdFpReg func(uint64, SIMDFPReg, unsafe.Pointer) int32
 
 // HvVcpuGetSimdFpReg reports an error if the Hypervisor framework function hv_vcpu_get_simd_fp_reg fails.
@@ -861,6 +877,37 @@ func HvVcpuGetVtimerOffset(vcpu uint64) (vtimerOffset uint64, err error) {
 	return _out0, nil
 }
 
+var _fnHvVcpuGetWaitForInterruptTime func(uint64, unsafe.Pointer) int32
+
+// HvVcpuGetWaitForInterruptTime reports an error if the Hypervisor framework function hv_vcpu_get_wait_for_interrupt_time fails.
+func HvVcpuGetWaitForInterruptTime(vcpu uint64) (time_ uint64, err error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnHvVcpuGetWaitForInterruptTime == nil {
+		ebipurego.RegisterLibFunc(&_fnHvVcpuGetWaitForInterruptTime, _lib, "hv_vcpu_get_wait_for_interrupt_time")
+	}
+	var _out0 uint64
+	_rc := _fnHvVcpuGetWaitForInterruptTime(vcpu, unsafe.Pointer(&_out0))
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return 0, _err
+	}
+	return _out0, nil
+}
+
+var _fnHvVcpuInvalidateTlb func(uint64, TlbiOp, uint64) int32
+
+// HvVcpuInvalidateTlb reports an error if the Hypervisor framework function hv_vcpu_invalidate_tlb fails.
+func HvVcpuInvalidateTlb(vcpu uint64, op TlbiOp, param uint64) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnHvVcpuInvalidateTlb == nil {
+		ebipurego.RegisterLibFunc(&_fnHvVcpuInvalidateTlb, _lib, "hv_vcpu_invalidate_tlb")
+	}
+	_rc := _fnHvVcpuInvalidateTlb(vcpu, op, param)
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return _err
+	}
+	return nil
+}
+
 var _fnHvVcpuRun func(uint64) int32
 
 // HvVcpuRun reports an error if the Hypervisor framework function hv_vcpu_run fails.
@@ -900,6 +947,21 @@ func HvVcpuSetReg(vcpu uint64, reg Reg, value uint64) error {
 		ebipurego.RegisterLibFunc(&_fnHvVcpuSetReg, _lib, "hv_vcpu_set_reg")
 	}
 	_rc := _fnHvVcpuSetReg(vcpu, reg, value)
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnHvVcpuSetSerror func(uint64, bool) int32
+
+// HvVcpuSetSerror reports an error if the Hypervisor framework function hv_vcpu_set_serror fails.
+func HvVcpuSetSerror(vcpu uint64, pending bool) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnHvVcpuSetSerror == nil {
+		ebipurego.RegisterLibFunc(&_fnHvVcpuSetSerror, _lib, "hv_vcpu_set_serror")
+	}
+	_rc := _fnHvVcpuSetSerror(vcpu, pending)
 	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
 		return _err
 	}

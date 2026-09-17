@@ -52,6 +52,7 @@ func (o *NSSpellServer) Run() {
 	o.Ptr().Send(_nSSpellServerSelRun)
 }
 
+// The receiver's delegate.
 func (o *NSSpellServer) Delegate() NSSpellServerDelegate {
 	_ret := objc.Send[NSSpellServerDelegate](o.Ptr(), _nSSpellServerSelDelegate)
 	return _ret

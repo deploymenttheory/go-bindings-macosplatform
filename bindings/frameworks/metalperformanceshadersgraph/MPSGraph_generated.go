@@ -1421,6 +1421,17 @@ func (g *Graph) ScaledDotProductAttentionWithQueryTensorKeyTensorValueTensorScal
 	return GraphTensorFromID(_r)
 }
 
+// ScaledDotProductAttentionWithQueryTensorKeyTensorValueTensorDescriptorName creates a scaled dot product attention (SDPA) operation using a descriptor and returns the result tensor.
+func (g *Graph) ScaledDotProductAttentionWithQueryTensorKeyTensorValueTensorDescriptorName(queryTensor *GraphTensor, keyTensor *GraphTensor, valueTensor *GraphTensor, descriptor *GraphSDPADescriptor, name string) *GraphTensor {
+	defer runtime.KeepAlive(g)
+	defer runtime.KeepAlive(queryTensor)
+	defer runtime.KeepAlive(keyTensor)
+	defer runtime.KeepAlive(valueTensor)
+	defer runtime.KeepAlive(descriptor)
+	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("scaledDotProductAttentionWithQueryTensor:keyTensor:valueTensor:descriptor:name:"), objref.IDOf(queryTensor), objref.IDOf(keyTensor), objref.IDOf(valueTensor), objref.IDOf(descriptor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
 // PlaceholderWithShapeName creates a placeholder operation and returns the result tensor with the dataType of the placeholder tensor set to 32 bit float.
 func (g *Graph) PlaceholderWithShapeName(shape unsafe.Pointer, name string) *GraphTensor {
 	defer runtime.KeepAlive(g)

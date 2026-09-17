@@ -82,7 +82,6 @@ func (e MDQuerySortOptionFlags) String() string {
 	}
 }
 
-// An error that the app proxy flow encounters.
 type NEAppProxyFlowError int64
 
 const (
@@ -324,7 +323,6 @@ func (e NEFilterManagerError) String() string {
 	}
 }
 
-// A type for the grade or priority of the filter.
 type NEFilterManagerGrade int64
 
 const (
@@ -345,7 +343,6 @@ func (e NEFilterManagerGrade) String() string {
 	}
 }
 
-// The verdict returned by a packet handler indicating what the framework should do with a packet.
 type NEFilterPacketProviderVerdict int64
 
 const (
@@ -369,7 +366,6 @@ func (e NEFilterPacketProviderVerdict) String() string {
 	}
 }
 
-// A type that represents the kind of event indicated by a report.
 type NEFilterReportEvent int64
 
 const (
@@ -398,7 +394,6 @@ func (e NEFilterReportEvent) String() string {
 	}
 }
 
-// An enumeration that represents the frequency of filter report delivery.
 type NEFilterReportFrequency int64
 
 const (
@@ -427,7 +422,6 @@ func (e NEFilterReportFrequency) String() string {
 	}
 }
 
-// A type to represent network protocols used by routing rules.
 type NENetworkRuleProtocol int64
 
 const (
@@ -699,7 +693,6 @@ func (e NETrafficDirection) String() string {
 	}
 }
 
-// An error that the tunnel provider encounters.
 type NETunnelProviderError int64
 
 const (
@@ -861,7 +854,6 @@ func (e NEVPNConnectionError) String() string {
 	}
 }
 
-// Information about an error encountered while configuring or using a VPN.
 type NEVPNError int64
 
 const (
@@ -995,16 +987,6 @@ type NEVPNIKEv2DiffieHellmanGroup int64
 const (
 	// A value indicating the group is not a valid Diffie-Hellman group.
 	NEVPNIKEv2DiffieHellmanGroupInvalid NEVPNIKEv2DiffieHellmanGroup = 0
-	// @const NEVPNIKEv2DiffieHellmanGroup1 Diffie Hellman group 1 (768-bit MODP)
-	NEVPNIKEv2DiffieHellmanGroup1 NEVPNIKEv2DiffieHellmanGroup = 1
-	// @const NEVPNIKEv2DiffieHellmanGroup2 Diffie Hellman group 2 (1024-bit MODP)
-	NEVPNIKEv2DiffieHellmanGroup2 NEVPNIKEv2DiffieHellmanGroup = 2
-	// @const NEVPNIKEv2DiffieHellmanGroup5 Diffie Hellman group 5 (1536-bit MODP)
-	NEVPNIKEv2DiffieHellmanGroup5 NEVPNIKEv2DiffieHellmanGroup = 5
-	// Diffie Hellman group 14 (2048-bit modular exponential [MODP]).
-	NEVPNIKEv2DiffieHellmanGroup14 NEVPNIKEv2DiffieHellmanGroup = 14
-	// Diffie Hellman group 15 (3072-bit modular exponential [MODP]).
-	NEVPNIKEv2DiffieHellmanGroup15 NEVPNIKEv2DiffieHellmanGroup = 15
 	// Diffie Hellman group 16 (4096-bit modular exponential [MODP]).
 	NEVPNIKEv2DiffieHellmanGroup16 NEVPNIKEv2DiffieHellmanGroup = 16
 	// Diffie Hellman group 17 (6144-bit modular exponential [MODP]).
@@ -1027,16 +1009,6 @@ func (e NEVPNIKEv2DiffieHellmanGroup) String() string {
 	switch e {
 	case NEVPNIKEv2DiffieHellmanGroupInvalid:
 		return "NEVPNIKEv2DiffieHellmanGroupInvalid"
-	case NEVPNIKEv2DiffieHellmanGroup1:
-		return "NEVPNIKEv2DiffieHellmanGroup1"
-	case NEVPNIKEv2DiffieHellmanGroup2:
-		return "NEVPNIKEv2DiffieHellmanGroup2"
-	case NEVPNIKEv2DiffieHellmanGroup5:
-		return "NEVPNIKEv2DiffieHellmanGroup5"
-	case NEVPNIKEv2DiffieHellmanGroup14:
-		return "NEVPNIKEv2DiffieHellmanGroup14"
-	case NEVPNIKEv2DiffieHellmanGroup15:
-		return "NEVPNIKEv2DiffieHellmanGroup15"
 	case NEVPNIKEv2DiffieHellmanGroup16:
 		return "NEVPNIKEv2DiffieHellmanGroup16"
 	case NEVPNIKEv2DiffieHellmanGroup17:
@@ -1062,10 +1034,6 @@ func (e NEVPNIKEv2DiffieHellmanGroup) String() string {
 type NEVPNIKEv2EncryptionAlgorithm int64
 
 const (
-	// @const NEVPNIKEv2EncryptionAlgorithmDES Data Encryption Standard (DES)
-	NEVPNIKEv2EncryptionAlgorithmDES NEVPNIKEv2EncryptionAlgorithm = 1
-	// @const NEVPNIKEv2EncryptionAlgorithm3DES Triple Data Encryption Algorithm (aka 3DES)
-	NEVPNIKEv2EncryptionAlgorithm3DES NEVPNIKEv2EncryptionAlgorithm = 2
 	// Advanced Encryption Standard 256-bit (AES256).
 	NEVPNIKEv2EncryptionAlgorithmAES128 NEVPNIKEv2EncryptionAlgorithm = 3
 	// Advanced Encryption Standard 256 bit (AES256).
@@ -1080,10 +1048,6 @@ const (
 
 func (e NEVPNIKEv2EncryptionAlgorithm) String() string {
 	switch e {
-	case NEVPNIKEv2EncryptionAlgorithmDES:
-		return "NEVPNIKEv2EncryptionAlgorithmDES"
-	case NEVPNIKEv2EncryptionAlgorithm3DES:
-		return "NEVPNIKEv2EncryptionAlgorithm3DES"
 	case NEVPNIKEv2EncryptionAlgorithmAES128:
 		return "NEVPNIKEv2EncryptionAlgorithmAES128"
 	case NEVPNIKEv2EncryptionAlgorithmAES256:
@@ -1102,28 +1066,12 @@ func (e NEVPNIKEv2EncryptionAlgorithm) String() string {
 type NEVPNIKEv2IntegrityAlgorithm int64
 
 const (
-	// @const NEVPNIKEv2IntegrityAlgorithmSHA96 SHA-1 96 bit
-	NEVPNIKEv2IntegrityAlgorithmSHA96 NEVPNIKEv2IntegrityAlgorithm = 1
-	// @const NEVPNIKEv2IntegrityAlgorithmSHA160 SHA-1 160 bit
-	NEVPNIKEv2IntegrityAlgorithmSHA160 NEVPNIKEv2IntegrityAlgorithm = 2
-	// SHA-2 256-bit.
-	NEVPNIKEv2IntegrityAlgorithmSHA256 NEVPNIKEv2IntegrityAlgorithm = 3
-	// SHA-2 384-bit.
-	NEVPNIKEv2IntegrityAlgorithmSHA384 NEVPNIKEv2IntegrityAlgorithm = 4
 	// SHA-2 512-bit.
 	NEVPNIKEv2IntegrityAlgorithmSHA512 NEVPNIKEv2IntegrityAlgorithm = 5
 )
 
 func (e NEVPNIKEv2IntegrityAlgorithm) String() string {
 	switch e {
-	case NEVPNIKEv2IntegrityAlgorithmSHA96:
-		return "NEVPNIKEv2IntegrityAlgorithmSHA96"
-	case NEVPNIKEv2IntegrityAlgorithmSHA160:
-		return "NEVPNIKEv2IntegrityAlgorithmSHA160"
-	case NEVPNIKEv2IntegrityAlgorithmSHA256:
-		return "NEVPNIKEv2IntegrityAlgorithmSHA256"
-	case NEVPNIKEv2IntegrityAlgorithmSHA384:
-		return "NEVPNIKEv2IntegrityAlgorithmSHA384"
 	case NEVPNIKEv2IntegrityAlgorithmSHA512:
 		return "NEVPNIKEv2IntegrityAlgorithmSHA512"
 	default:
@@ -1168,6 +1116,8 @@ const (
 	NEVPNIKEv2TLSVersion1_1 NEVPNIKEv2TLSVersion = 2
 	// A value to use TLS version 1.2.
 	NEVPNIKEv2TLSVersion1_2 NEVPNIKEv2TLSVersion = 3
+	// @const NEVPNIKEv2TLSVersion1_3 TLS 1.3
+	NEVPNIKEv2TLSVersion1_3 NEVPNIKEv2TLSVersion = 4
 )
 
 func (e NEVPNIKEv2TLSVersion) String() string {
@@ -1180,6 +1130,8 @@ func (e NEVPNIKEv2TLSVersion) String() string {
 		return "NEVPNIKEv2TLSVersion1_1"
 	case NEVPNIKEv2TLSVersion1_2:
 		return "NEVPNIKEv2TLSVersion1_2"
+	case NEVPNIKEv2TLSVersion1_3:
+		return "NEVPNIKEv2TLSVersion1_3"
 	default:
 		return fmt.Sprintf("NEVPNIKEv2TLSVersion(%d)", int64(e))
 	}
@@ -2378,7 +2330,7 @@ func (e Nw_ip_version_t) String() string {
 }
 
 // @typedef nw_link_quality_t @abstract Link quality measurement is a representation of the expected capabilities of the link layer network attachment. Use this value to tune initial values for algorithms that can scale with the capabilities of the network. Do not use this value to gate connection attempts or to override adjustments that would be made based on actual network performance.
-type Nw_link_quality_t int32
+type Nw_link_quality_t uint8
 
 const (
 	// @const nw_link_quality_unknown No link quality measurement is available
@@ -2977,27 +2929,53 @@ func (e Qos_class_t) String() string {
 	}
 }
 
+type Task_shared_region_stubs_t uint8
+
+const (
+	TASK_SHARED_REGION_STUBS_DEV  Task_shared_region_stubs_t = 1
+	TASK_SHARED_REGION_STUBS_PROD Task_shared_region_stubs_t = 2
+)
+
+func (e Task_shared_region_stubs_t) String() string {
+	switch e {
+	case TASK_SHARED_REGION_STUBS_DEV:
+		return "TASK_SHARED_REGION_STUBS_DEV"
+	case TASK_SHARED_REGION_STUBS_PROD:
+		return "TASK_SHARED_REGION_STUBS_PROD"
+	default:
+		return fmt.Sprintf("Task_shared_region_stubs_t(%d)", int64(e))
+	}
+}
+
 type Virtual_memory_guard_exception_code_t uint32
 
 const (
-	KGUARD_EXC_DEALLOC_GAP                   Virtual_memory_guard_exception_code_t = 1
-	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        Virtual_memory_guard_exception_code_t = 2
-	KGUARD_EXC_RECLAIM_INDEX_FAILURE         Virtual_memory_guard_exception_code_t = 4
-	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    Virtual_memory_guard_exception_code_t = 8
-	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    Virtual_memory_guard_exception_code_t = 9
-	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         Virtual_memory_guard_exception_code_t = 10
-	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         Virtual_memory_guard_exception_code_t = 11
-	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  Virtual_memory_guard_exception_code_t = 12
-	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    Virtual_memory_guard_exception_code_t = 13
-	KGUARD_EXC_SEC_ACCESS_FAULT              Virtual_memory_guard_exception_code_t = 98
-	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        Virtual_memory_guard_exception_code_t = 99
-	KGUARD_EXC_SEC_COPY_DENIED               Virtual_memory_guard_exception_code_t = 100
-	KGUARD_EXC_SEC_SHARING_DENIED            Virtual_memory_guard_exception_code_t = 101
-	KGUARD_EXC_MTE_SYNC_FAULT                Virtual_memory_guard_exception_code_t = 200
-	KGUARD_EXC_MTE_ASYNC_USER_FAULT          Virtual_memory_guard_exception_code_t = 201
-	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          Virtual_memory_guard_exception_code_t = 202
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 203
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 204
+	KGUARD_EXC_DEALLOC_GAP                  Virtual_memory_guard_exception_code_t = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE       Virtual_memory_guard_exception_code_t = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE        Virtual_memory_guard_exception_code_t = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE   Virtual_memory_guard_exception_code_t = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE   Virtual_memory_guard_exception_code_t = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE        Virtual_memory_guard_exception_code_t = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE        Virtual_memory_guard_exception_code_t = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION Virtual_memory_guard_exception_code_t = 12
+	// Guard exception sent to a thread when a CoW defeatured map attempts to copy memory which is not permitted by system policy.
+	KGUARD_EXC_COW_DEFEATURED_COPY_DENIED Virtual_memory_guard_exception_code_t = 13
+	// Guard exception sent to a thread when it attempts to extract a given type of memory in a way which is not permitted for CoW defeatured maps.
+	KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED Virtual_memory_guard_exception_code_t = 14
+	// Guard exception sent to a thread when it attempts to copy-map a memory entry which was created for sharing by a CoW defeatured map.
+	KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED Virtual_memory_guard_exception_code_t = 15
+	KGUARD_EXC_COW_DEFEATURED_FIRST                    Virtual_memory_guard_exception_code_t = 13
+	KGUARD_EXC_COW_DEFEATURED_LAST                     Virtual_memory_guard_exception_code_t = 15
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY              Virtual_memory_guard_exception_code_t = 16
+	KGUARD_EXC_SEC_ACCESS_FAULT                        Virtual_memory_guard_exception_code_t = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT                  Virtual_memory_guard_exception_code_t = 99
+	KGUARD_EXC_SEC_COPY_DENIED                         Virtual_memory_guard_exception_code_t = 100
+	KGUARD_EXC_SEC_SHARING_DENIED                      Virtual_memory_guard_exception_code_t = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                          Virtual_memory_guard_exception_code_t = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT                    Virtual_memory_guard_exception_code_t = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT                    Virtual_memory_guard_exception_code_t = 202
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT           Virtual_memory_guard_exception_code_t = 203
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT           Virtual_memory_guard_exception_code_t = 204
 )
 
 func (e Virtual_memory_guard_exception_code_t) String() string {
@@ -3018,6 +2996,12 @@ func (e Virtual_memory_guard_exception_code_t) String() string {
 		return "KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE"
 	case KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION:
 		return "KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION"
+	case KGUARD_EXC_COW_DEFEATURED_COPY_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_COPY_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED"
 	case KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY:
 		return "KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY"
 	case KGUARD_EXC_SEC_ACCESS_FAULT:

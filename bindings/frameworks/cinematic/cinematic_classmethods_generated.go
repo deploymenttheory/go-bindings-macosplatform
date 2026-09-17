@@ -10,14 +10,22 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// CheckIfCinematicCompletionHandler check if asset is cinematic asynchronously.
+// CheckCinematicCapabilityForAssetCompletionHandler asynchronously checks the cinematic capability of an asset. The completionHandler returns: CNCinematicCapabilityNone if a cinematic metadata track is not present. CNCinematicCapabilityRenderable if the cinematic asset can be used without preprocessing CNCinematicCapabilityNeedsPreprocessing If cinematic asset needs preprocessing before it can be used For assets that need preprocessing use [CNAssetInfo preprocessAssetWithConfiguration:completionHandler:] before using the asset
+func CheckCinematicCapabilityForAssetCompletionHandler(asset obj.Object, completionHandler func(CinematicCapability)) {
+	defer runtime.KeepAlive(asset)
+	objc.Send[objc.ID](objc.ID(_class("CNAssetInfo")), objc.RegisterName("checkCinematicCapabilityForAsset:completionHandler:"), objref.IDOf(asset), objc.NewBlock(func(_ objc.Block, _b0 CinematicCapability) { completionHandler(_b0) }))
+}
+
+// CheckIfCinematicCompletionHandler asynchronously check if asset is cinematic. Only Cinematic assets containing a disparity track and a metadata track will return YES.
 func CheckIfCinematicCompletionHandler(asset obj.Object, completionHandler func(bool)) {
 	defer runtime.KeepAlive(asset)
 	objc.Send[objc.ID](objc.ID(_class("CNAssetInfo")), objc.RegisterName("checkIfCinematic:completionHandler:"), objref.IDOf(asset), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
@@ -47,6 +55,24 @@ func LoadFromAsset(ctx context.Context, asset obj.Object) (result *AssetInfo, er
 		var _zero *AssetInfo
 		return _zero, ctx.Err()
 	}
+}
+
+// ResourceStatusForVersions check status for a set of resources.
+func ResourceStatusForVersions(resourceVersions []*foundation.Number) ResourceStatus {
+	_r := objc.Send[ResourceStatus](objc.ID(_class("CNAssetInfo")), objc.RegisterName("resourceStatusForVersions:"), rt.SliceToNSSet(resourceVersions, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }))
+	return _r
+}
+
+// DownloadResourcesForVersionsTimeoutCompletionHandler downloads the resources required to render cinematic effects on assets Resources are device-wide and are cached once downloaded
+func DownloadResourcesForVersionsTimeoutCompletionHandler(resourceVersions []*foundation.Number, downloadTimeout float64, completionHandler func(unsafe.Pointer)) *foundation.Progress {
+	_r := objc.Send[objc.ID](objc.ID(_class("CNAssetInfo")), objc.RegisterName("downloadResourcesForVersions:timeout:completionHandler:"), rt.SliceToNSSet(resourceVersions, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), downloadTimeout, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+	return foundation.ProgressFromID(_r)
+}
+
+// DefaultResourceDownloadTimeout returns default timeout value for resource download for `+[CNAssetInfo downloadResourcesForVersions:timeout:completionHandler:]` `-[CNAssetInfo downloadResourcesWithTimeout:completionHandler:]`
+func DefaultResourceDownloadTimeout() float64 {
+	_r := objc.Send[float64](objc.ID(_class("CNAssetInfo")), objc.RegisterName("defaultResourceDownloadTimeout"))
+	return _r
 }
 
 // CheckIfContainsSpatialAudioCompletionHandler check if asset meets all the requirements to operate with Spatial Audio and its accompanying effects
@@ -111,6 +137,24 @@ func AccessibilityLabelForDetectionType(detectionType DetectionType) string {
 // DisparityInNormalizedRectSourceDisparityDetectionTypePriorDisparity determine the disparity to use to focus on the object in the rectangle. - Parameters: - disparityBuffer: A pixel buffer from the cinematic disparity track for the frame in which the object occurs. - normalizedRect: The rectangle within the disparity buffer where the object occurs, normalized such that (0.0, 0.0) is the top-left and (1.0, 1.0) is the bottom-right of the disparity buffer. - detectionType: The type of object expected within the rectangle. Pass `CNDetectionTypeUnknown` if unknown. - priorDisparity: The disparity of the object in the prior frame. This helps ensure the object is not mistaken for another that enters the same rectangle. Pass `NAN` if there is no known prior, such as in the first frame in which the object is being tracked.
 func DisparityInNormalizedRectSourceDisparityDetectionTypePriorDisparity(normalizedRect corefoundation.CGRect, sourceDisparity unsafe.Pointer, detectionType DetectionType, priorDisparity float32) float32 {
 	_r := objc.Send[float32](objc.ID(_class("CNDetection")), objc.RegisterName("disparityInNormalizedRect:sourceDisparity:detectionType:priorDisparity:"), normalizedRect, sourceDisparity, detectionType, priorDisparity)
+	return _r
+}
+
+// MinimumTileExtendRectForTileRectSourceRGBASize returns the minimum source rect that must be sampled to render tileRect without edge artifacts.
+func MinimumTileExtendRectForTileRectSourceRGBASize(tileRect corefoundation.CGRect, sourceRGBASize corefoundation.CGSize) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objc.ID(_class("CNImageRenderingSession")), objc.RegisterName("minimumTileExtendRectForTileRect:sourceRGBASize:"), tileRect, sourceRGBASize)
+	return _r
+}
+
+// IsRenderingVersionSupported checks if a given rendering version is supported on the current build
+func IsRenderingVersionSupported(renderingVersion int) bool {
+	_r := objc.Send[bool](objc.ID(_class("CNImageRenderingSessionConfiguration")), objc.RegisterName("isRenderingVersionSupported:"), renderingVersion)
+	return _r
+}
+
+// LatestRenderingVersion returns the version of the newest rendering algorithm
+func LatestRenderingVersion() int {
+	_r := objc.Send[int](objc.ID(_class("CNImageRenderingSessionConfiguration")), objc.RegisterName("latestRenderingVersion"))
 	return _r
 }
 

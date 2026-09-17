@@ -115,14 +115,14 @@ func (cc *CreateCommand) WithScriptingProperties(scriptingProperties map[string]
 	return cc
 }
 
-// CreateClassDescription returns the create class description.
+// CreateClassDescription returns the class description for the class that is to be created.
 func (cc *CreateCommand) CreateClassDescription() *ScriptClassDescription {
 	defer runtime.KeepAlive(cc)
 	_r := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("createClassDescription"))
 	return ScriptClassDescriptionFromID(_r)
 }
 
-// ResolvedKeyDictionary returns the resolved key dictionary.
+// ResolvedKeyDictionary returns the key dictionary with Apple event codes resolved to actual key names.
 func (cc *CreateCommand) ResolvedKeyDictionary() map[string]obj.Object {
 	defer runtime.KeepAlive(cc)
 	_r := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("resolvedKeyDictionary"))

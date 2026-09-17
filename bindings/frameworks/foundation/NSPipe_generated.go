@@ -16,8 +16,6 @@ import (
 )
 
 // Pipe is an idiomatic wrapper over the Objective-C class NSPipe.
-//
-// A one-way communications channel between related processes.
 type Pipe struct {
 	objref.Handle
 }
@@ -92,14 +90,14 @@ func (p *Pipe) WithScriptingProperties(scriptingProperties map[string]obj.Object
 	return p
 }
 
-// FileHandleForReading returns the file handle for reading.
+// FileHandleForReading returns the receiver's read file handle.
 func (p *Pipe) FileHandleForReading() *FileHandle {
 	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("fileHandleForReading"))
 	return FileHandleFromID(_r)
 }
 
-// FileHandleForWriting returns the file handle for writing.
+// FileHandleForWriting returns the receiver's write file handle.
 func (p *Pipe) FileHandleForWriting() *FileHandle {
 	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("fileHandleForWriting"))

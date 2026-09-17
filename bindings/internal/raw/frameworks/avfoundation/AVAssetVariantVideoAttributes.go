@@ -11,8 +11,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An object that defines the video attributes for an asset variant.
-//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avassetvariantvideoattributes
 type AVAssetVariantVideoAttributes struct {
 	foundation.NSObject

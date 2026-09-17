@@ -11,6 +11,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/rt"
@@ -100,6 +101,43 @@ func (sbvr *SampleBufferVideoRenderer) FlushWithRemovalOfDisplayedImage(ctx cont
 	}
 }
 
+// EnqueueSampleBuffer sends a sample buffer in order to render its contents.
+func (sbvr *SampleBufferVideoRenderer) EnqueueSampleBuffer(sampleBuffer obj.Object) {
+	defer runtime.KeepAlive(sbvr)
+	defer runtime.KeepAlive(sampleBuffer)
+	objc.Send[objc.ID](objref.IDOf(sbvr), objc.RegisterName("enqueueSampleBuffer:"), objref.IDOf(sampleBuffer))
+}
+
+// Flush instructs the receiver to discard pending enqueued sample buffers.
+func (sbvr *SampleBufferVideoRenderer) Flush() {
+	defer runtime.KeepAlive(sbvr)
+	objc.Send[objc.ID](objref.IDOf(sbvr), objc.RegisterName("flush"))
+}
+
+// RequestMediaDataWhenReadyOnQueueUsing instructs the target to invoke a client-supplied block repeatedly, at its convenience, in order to gather sample buffers for playback.
+//
+// RequestMediaDataWhenReadyOnQueueUsing blocks until the operation completes or ctx is cancelled.
+func (sbvr *SampleBufferVideoRenderer) RequestMediaDataWhenReadyOnQueueUsing(ctx context.Context, queue dispatch.Queue) error {
+	defer runtime.KeepAlive(sbvr)
+	_ch := make(chan error, 1)
+	_block := objc.NewBlock(func(_ objc.Block) {
+		_ch <- nil
+	})
+	objc.Send[objc.ID](objref.IDOf(sbvr), objc.RegisterName("requestMediaDataWhenReadyOnQueue:usingBlock:"), objc.ID(uintptr(queue.Ptr())), _block)
+	select {
+	case err := <-_ch:
+		return err
+	case <-ctx.Done():
+		return ctx.Err()
+	}
+}
+
+// StopRequestingMediaData cancels any current requestMediaDataWhenReadyOnQueue:usingBlock: call.
+func (sbvr *SampleBufferVideoRenderer) StopRequestingMediaData() {
+	defer runtime.KeepAlive(sbvr)
+	objc.Send[objc.ID](objref.IDOf(sbvr), objc.RegisterName("stopRequestingMediaData"))
+}
+
 // Status returns the ability of the video renderer to be used for enqueueing sample buffers. The value of this property is an AVQueuedSampleBufferRenderingStatus that indicates whether the receiver can be used for enqueueing and rendering sample buffers. When the value of this property is AVQueuedSampleBufferRenderingStatusFailed, clients can check the value of the error property to determine the failure. To resume rendering sample buffers using the video renderer after a failure, clients must first reset the status to AVQueuedSampleBufferRenderingStatusUnknown. This can be achieved by invoking -flush on the video renderer. This property is key value observable.
 func (sbvr *SampleBufferVideoRenderer) Status() QueuedSampleBufferRenderingStatus {
 	defer runtime.KeepAlive(sbvr)
@@ -121,14 +159,28 @@ func (sbvr *SampleBufferVideoRenderer) RequiresFlushToResumeDecoding() bool {
 	return _r
 }
 
-// CopyDisplayedPixelBuffer returns a retained reference to the pixel buffer currently displayed in the AVSampleBufferVideoRenderer's target. This will return NULL if the displayed pixel buffer is protected, no image is currently being displayed, or if the image is unavailable. This will return NULL if the rate is non-zero.  Clients must release the pixel buffer after use. Do not write to the returned CVPixelBuffer's attachments or pixel data.
+// IsReadyForMoreMediaData reports whether indicates the readiness of the receiver to accept more sample buffers. An object conforming to AVQueuedSampleBufferRendering keeps track of the occupancy levels of its internal queues for the benefit of clients that enqueue sample buffers from non-real-time sources -- i.e., clients that can supply sample buffers faster than they are consumed, and so need to decide when to hold back. Clients enqueueing sample buffers from non-real-time sources may hold off from generating or obtaining more sample buffers to enqueue when the value of readyForMoreMediaData is false. It is safe to call enqueueSampleBuffer: when readyForMoreMediaData is false, but it is a bad idea to enqueue sample buffers without bound. To help with control of the non-real-time supply of sample buffers, such clients can use -requestMediaDataWhenReadyOnQueue:usingBlock in order to specify a block that the receiver should invoke whenever it's ready for sample buffers to be appended. The value of readyForMoreMediaData will often change from false to true asynchronously, as previously supplied sample buffers are decoded and rendered. This property is not key value observable.
+func (sbvr *SampleBufferVideoRenderer) IsReadyForMoreMediaData() bool {
+	defer runtime.KeepAlive(sbvr)
+	_r := objc.Send[bool](objref.IDOf(sbvr), objc.RegisterName("isReadyForMoreMediaData"))
+	return _r
+}
+
+// HasSufficientMediaDataForReliablePlaybackStart reports whether the enqueued media data meets the renderer's preroll level. Clients should fetch the value of this property to learn if the renderer has had enough media data enqueued to start playback reliably. Starting playback when this property is false may prevent smooth playback following an immediate start.
+func (sbvr *SampleBufferVideoRenderer) HasSufficientMediaDataForReliablePlaybackStart() bool {
+	defer runtime.KeepAlive(sbvr)
+	_r := objc.Send[bool](objref.IDOf(sbvr), objc.RegisterName("hasSufficientMediaDataForReliablePlaybackStart"))
+	return _r
+}
+
+// CopyDisplayedPixelBuffer returns a retained reference to the pixel buffer currently displayed in the AVSampleBufferVideoRenderer's target. This will return NULL if the displayed pixel buffer is protected, no image is currently being displayed, or if the image is unavailable. This will return NULL if the rate is non-zero. Clients must release the pixel buffer after use. Do not write to the returned CVPixelBuffer's attachments or pixel data.
 func (sbvr *SampleBufferVideoRenderer) CopyDisplayedPixelBuffer() unsafe.Pointer {
 	defer runtime.KeepAlive(sbvr)
 	_r := objc.Send[unsafe.Pointer](objref.IDOf(sbvr), objc.RegisterName("copyDisplayedPixelBuffer"))
 	return _r
 }
 
-// ExpectMinimumUpcomingSampleBufferPresentationTime promises, for the purpose of enabling power optimizations, that future sample buffers will have PTS values no less than a specified lower-bound PTS. Only applicable for forward playback. Sending this message and later calling -enqueueSampleBuffer: with a buffer with a lower PTS has the potential to lead to dropping that later buffer. For best results, call -expectMinimumUpcomingSampleBufferPresentationTime: regularly, in between calls to -enqueueSampleBuffer:, to advance the lower-bound PTS. Messaging -flush resets such expectations. (For example, it's OK to make this expectation, then in response to a seek back, flush and then enqueue buffers with lower PTS values.)
+// ExpectMinimumUpcomingSampleBufferPresentationTime promises, for the purpose of enabling power optimizations, that future sample buffers will have PTS values no less than a specified lower-bound PTS. Only applicable for forward playback. Sending this message and later calling -enqueueSampleBuffer: with a buffer with a lower PTS has the potential to lead to dropping that later buffer. For best results, call -expectMinimumUpcomingSampleBufferPresentationTime: regularly, in between calls to -enqueueSampleBuffer:, to advance the lower-bound PTS. Messaging -flush resets such expectations. (For example, it's OK to make this expectation, then in response to a seek back, flush and then enqueue buffers with lower PTS values.) - Parameter minimumUpcomingPresentationTime: A lower bound on PTS values for buffers that will be passed to -enqueueSampleBuffer: in the future.
 func (sbvr *SampleBufferVideoRenderer) ExpectMinimumUpcomingSampleBufferPresentationTime(minimumUpcomingPresentationTime coremedia.CMTime) {
 	defer runtime.KeepAlive(sbvr)
 	objc.Send[objc.ID](objref.IDOf(sbvr), objc.RegisterName("expectMinimumUpcomingSampleBufferPresentationTime:"), minimumUpcomingPresentationTime)
@@ -153,7 +205,7 @@ func (sbvr *SampleBufferVideoRenderer) RecommendedPixelBufferAttributes() map[st
 	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// LoadVideoPerformanceMetricsWithCompletionHandler gathers a snapshot of the video performance metrics and calls the completion handler with the results. If there are no performance metrics available, the completion handler will be called with nil videoPerformanceMetrics.
+// LoadVideoPerformanceMetricsWithCompletionHandler gathers a snapshot of the video performance metrics and calls the completion handler with the results. If there are no performance metrics available, the completion handler will be called with nil videoPerformanceMetrics. - Parameter completionHandler: The handler to invoke with the video performance metrics.
 func (sbvr *SampleBufferVideoRenderer) LoadVideoPerformanceMetricsWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
 	defer runtime.KeepAlive(sbvr)
 	objc.Send[objc.ID](objref.IDOf(sbvr), objc.RegisterName("loadVideoPerformanceMetricsWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))

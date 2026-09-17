@@ -20,9 +20,11 @@ type FSClient struct {
 }
 
 var (
-	_clsFSClient                                              = _objcClass("FSClient")
-	_fSClientSelFetchInstalledExtensionsWithCompletionHandler = objc.RegisterName("fetchInstalledExtensionsWithCompletionHandler:")
-	_fSClientSelSharedInstance                                = objc.RegisterName("sharedInstance")
+	_clsFSClient                                                             = _objcClass("FSClient")
+	_fSClientSelFetchInstalledExtensionsWithCompletionHandler                = objc.RegisterName("fetchInstalledExtensionsWithCompletionHandler:")
+	_fSClientSelMountSingleVolumeForResourceBundleIDOptionsCompletionHandler = objc.RegisterName("mountSingleVolumeForResource:bundleID:options:completionHandler:")
+	_fSClientSelOpenFileSystemExtensionsSettings                             = objc.RegisterName("openFileSystemExtensionsSettings")
+	_fSClientSelSharedInstance                                               = objc.RegisterName("sharedInstance")
 )
 
 func FSClientFromID(id objc.ID) *FSClient {
@@ -48,6 +50,27 @@ func (o *FSClient) FetchInstalledExtensionsWithCompletionHandler(completionHandl
 		defer __block_completionHandler.Release()
 	}
 	o.Ptr().Send(_fSClientSelFetchInstalledExtensionsWithCompletionHandler, __block_completionHandler)
+}
+
+// Asynchronously mounts a single volume file system with a given resource.
+func (o *FSClient) MountSingleVolumeForResourceBundleIDOptionsCompletionHandler(resource *FSResource, bundleID *foundation.NSString, options *foundation.NSArray[*foundation.NSString], completionHandler func(*foundation.NSURL, unsafe.Pointer)) {
+	var __block_completionHandler objc.Block
+	if completionHandler != nil {
+		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completionHandler(foundation.NSURLFromID(blockParam0), blockParam1)
+		})
+		defer __block_completionHandler.Release()
+	}
+	o.Ptr().Send(_fSClientSelMountSingleVolumeForResourceBundleIDOptionsCompletionHandler, resource.Ptr(), bundleID.Ptr(), options.Ptr(), __block_completionHandler)
+}
+
+// Opens the File System Extensions settings in System Settings.
+func (o *FSClient) OpenFileSystemExtensionsSettings() bool {
+	_ret := objc.Send[bool](o.Ptr(), _fSClientSelOpenFileSystemExtensionsSettings)
+	return _ret
 }
 
 // The shared instance of the FSKit client class.

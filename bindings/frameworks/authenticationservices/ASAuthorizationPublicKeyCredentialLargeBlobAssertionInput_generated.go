@@ -15,8 +15,6 @@ import (
 )
 
 // AuthorizationPublicKeyCredentialLargeBlobAssertionInput is an idiomatic wrapper over the Objective-C class ASAuthorizationPublicKeyCredentialLargeBlobAssertionInput.
-//
-// A type that represents input for the binary large object extension in passkey assertion requests.
 type AuthorizationPublicKeyCredentialLargeBlobAssertionInput struct {
 	objref.Handle
 }

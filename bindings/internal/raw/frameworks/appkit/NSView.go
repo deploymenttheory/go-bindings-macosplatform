@@ -239,6 +239,7 @@ var (
 	_nSViewSelPageHeader                                                          = objc.RegisterName("pageHeader")
 	_nSViewSelPageFooter                                                          = objc.RegisterName("pageFooter")
 	_nSViewSelPrintJobTitle                                                       = objc.RegisterName("printJobTitle")
+	_nSViewSelBeginDraggingSessionWithItemsGestureSource                          = objc.RegisterName("beginDraggingSessionWithItems:gesture:source:")
 	_nSViewSelBeginDraggingSessionWithItemsEventSource                            = objc.RegisterName("beginDraggingSessionWithItems:event:source:")
 	_nSViewSelRegisterForDraggedTypes                                             = objc.RegisterName("registerForDraggedTypes:")
 	_nSViewSelUnregisterDraggedTypes                                              = objc.RegisterName("unregisterDraggedTypes")
@@ -253,6 +254,8 @@ var (
 	_nSViewSelRemoveGestureRecognizer                                             = objc.RegisterName("removeGestureRecognizer:")
 	_nSViewSelGestureRecognizers                                                  = objc.RegisterName("gestureRecognizers")
 	_nSViewSelSetGestureRecognizers                                               = objc.RegisterName("setGestureRecognizers:")
+	_nSViewSelExclusiveGestureBehavior                                            = objc.RegisterName("exclusiveGestureBehavior")
+	_nSViewSelSetExclusiveGestureBehavior                                         = objc.RegisterName("setExclusiveGestureBehavior:")
 	_nSViewSelAllowedTouchTypes                                                   = objc.RegisterName("allowedTouchTypes")
 	_nSViewSelSetAllowedTouchTypes                                                = objc.RegisterName("setAllowedTouchTypes:")
 	_nSViewSelSafeAreaInsets                                                      = objc.RegisterName("safeAreaInsets")
@@ -261,6 +264,10 @@ var (
 	_nSViewSelSafeAreaLayoutGuide                                                 = objc.RegisterName("safeAreaLayoutGuide")
 	_nSViewSelSafeAreaRect                                                        = objc.RegisterName("safeAreaRect")
 	_nSViewSelLayoutMarginsGuide                                                  = objc.RegisterName("layoutMarginsGuide")
+	_nSViewSelViewDidChangeEffectiveCornerRadii                                   = objc.RegisterName("viewDidChangeEffectiveCornerRadii")
+	_nSViewSelInvalidateCornerConfiguration                                       = objc.RegisterName("invalidateCornerConfiguration")
+	_nSViewSelCornerConfiguration                                                 = objc.RegisterName("cornerConfiguration")
+	_nSViewSelEffectiveCornerRadii                                                = objc.RegisterName("effectiveCornerRadii")
 	_nSViewSelPrefersCompactControlSizeMetrics                                    = objc.RegisterName("prefersCompactControlSizeMetrics")
 	_nSViewSelSetPrefersCompactControlSizeMetrics                                 = objc.RegisterName("setPrefersCompactControlSizeMetrics:")
 	_nSViewSelAddTrackingArea                                                     = objc.RegisterName("addTrackingArea:")
@@ -345,6 +352,8 @@ var (
 	_nSViewSelLayoutGuideForLayoutRegion                                          = objc.RegisterName("layoutGuideForLayoutRegion:")
 	_nSViewSelEdgeInsetsForLayoutRegion                                           = objc.RegisterName("edgeInsetsForLayoutRegion:")
 	_nSViewSelRectForLayoutRegion                                                 = objc.RegisterName("rectForLayoutRegion:")
+	_nSViewSelTextSelectionManager                                                = objc.RegisterName("textSelectionManager")
+	_nSViewSelSetTextSelectionManager                                             = objc.RegisterName("setTextSelectionManager:")
 	_nSViewSelRulerViewShouldMoveMarker                                           = objc.RegisterName("rulerView:shouldMoveMarker:")
 	_nSViewSelRulerViewWillMoveMarkerToLocation                                   = objc.RegisterName("rulerView:willMoveMarker:toLocation:")
 	_nSViewSelRulerViewDidMoveMarker                                              = objc.RegisterName("rulerView:didMoveMarker:")
@@ -2349,6 +2358,22 @@ func (o *NSView) PrintJobTitle() *foundation.NSString {
 	return _mainthread0
 }
 
+// Starts a gesture based dragging session with an array of `NSDraggingItems`. The frame property of each NSDraggingItem must be in the view's coordinate system. The images may animate (flock) from their initial layout into a system defined formation. Flocking may not be done immediately (see NSDraggingSession's flockOnBeginDrag). The visible area of the view is used as the clip rect. @returns If the drag begins, returns the dragging session. If the drag fails to begin, returns `nil`.
+func (o *NSView) BeginDraggingSessionWithItemsGestureSource(items *foundation.NSArray[*NSDraggingItem], gesture *NSGestureRecognizer, source NSDraggingSource) *NSDraggingSession {
+	var _mainthread0 *NSDraggingSession
+	purego.Main(func() {
+		_mainthread0 = func() *NSDraggingSession {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelBeginDraggingSessionWithItemsGestureSource, items.Ptr(), gesture.Ptr(), source)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSDraggingSessionFromID(_ret)
+		}()
+	})
+	return _mainthread0
+}
+
+// Starts a dragging session with an array of NSDraggingItems. The frame property of each NSDraggingItem must be in the view's coordinate system. The images may animate (flock) from their initial layout into a system defined formation. Flocking may or may not be done immediately (see NSDraggingSession's flockOnBeginDrag). The visible area of the view is used as the clip rect.
 func (o *NSView) BeginDraggingSessionWithItemsEventSource(items *foundation.NSArray[*NSDraggingItem], event *NSEvent, source NSDraggingSource) *NSDraggingSession {
 	var _mainthread0 *NSDraggingSession
 	purego.Main(func() {
@@ -2472,6 +2497,25 @@ func (o *NSView) SetGestureRecognizers(gestureRecognizers *foundation.NSArray[*N
 	})
 }
 
+// Declares whether gesture recognizers should be exclusive in this view and its subviews. When a view is set to `.exclusive`, and one or more of its gesture recognizers is active, a second input event will not activate any further gesture recognizers, unless that event hit tests to this view or its subviews. Defaults to `.inherit`.
+func (o *NSView) ExclusiveGestureBehavior() NSViewExclusiveGestureBehavior {
+	var _mainthread0 NSViewExclusiveGestureBehavior
+	purego.Main(func() {
+		_mainthread0 = func() NSViewExclusiveGestureBehavior {
+			_ret := objc.Send[NSViewExclusiveGestureBehavior](o.Ptr(), _nSViewSelExclusiveGestureBehavior)
+			return _ret
+		}()
+	})
+	return _mainthread0
+}
+
+// Declares whether gesture recognizers should be exclusive in this view and its subviews. When a view is set to `.exclusive`, and one or more of its gesture recognizers is active, a second input event will not activate any further gesture recognizers, unless that event hit tests to this view or its subviews. Defaults to `.inherit`.
+func (o *NSView) SetExclusiveGestureBehavior(exclusiveGestureBehavior NSViewExclusiveGestureBehavior) {
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetExclusiveGestureBehavior, exclusiveGestureBehavior)
+	})
+}
+
 func (o *NSView) AllowedTouchTypes() NSTouchTypeMask {
 	var _mainthread0 NSTouchTypeMask
 	purego.Main(func() {
@@ -2556,7 +2600,51 @@ func (o *NSView) LayoutMarginsGuide() *NSLayoutGuide {
 	return _mainthread0
 }
 
-// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+// Informs the view that its effective corner radii changed. This method should be overridden to apply the corner radii to the view as required.
+func (o *NSView) ViewDidChangeEffectiveCornerRadii() {
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelViewDidChangeEffectiveCornerRadii)
+	})
+}
+
+// Invalidates the corner configuration, causing both the configuration and its dependencies to be recomputed.
+func (o *NSView) InvalidateCornerConfiguration() {
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelInvalidateCornerConfiguration)
+	})
+}
+
+// Defines the corner styles (e.g., square, capsule, concentric, etc) for the view’s corners.
+func (o *NSView) CornerConfiguration() *NSViewCornerConfiguration {
+	var _mainthread0 *NSViewCornerConfiguration
+	purego.Main(func() {
+		_mainthread0 = func() *NSViewCornerConfiguration {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelCornerConfiguration)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewCornerConfigurationFromID(_ret)
+		}()
+	})
+	return _mainthread0
+}
+
+// The effective radius of each corner in the view, calculated based on the corner configuration (`cornerConfiguration`). This value is `nil` when the corner configuration is `nil`.
+func (o *NSView) EffectiveCornerRadii() *NSViewCornerRadii {
+	var _mainthread0 *NSViewCornerRadii
+	purego.Main(func() {
+		_mainthread0 = func() *NSViewCornerRadii {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelEffectiveCornerRadii)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewCornerRadiiFromID(_ret)
+		}()
+	})
+	return _mainthread0
+}
+
+// When this property is `YES`, any `NSControl`s in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to `NO`.
 func (o *NSView) PrefersCompactControlSizeMetrics() bool {
 	var _mainthread0 bool
 	purego.Main(func() {
@@ -2568,7 +2656,7 @@ func (o *NSView) PrefersCompactControlSizeMetrics() bool {
 	return _mainthread0
 }
 
-// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+// When this property is `YES`, any `NSControl`s in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to `NO`.
 func (o *NSView) SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) {
 	purego.Main(func() {
 		o.Ptr().Send(_nSViewSelSetPrefersCompactControlSizeMetrics, prefersCompactControlSizeMetrics)
@@ -3394,6 +3482,28 @@ func (o *NSView) RectForLayoutRegion(layoutRegion *NSViewLayoutRegion) corefound
 		}()
 	})
 	return _mainthread0
+}
+
+// The text selection manager for this view. Setting this property installs gesture recognizers and configures the view to handle text selection interactions. Setting it to `nil` removes text selection support. The default value is `nil`.
+func (o *NSView) TextSelectionManager() *NSTextSelectionManager {
+	var _mainthread0 *NSTextSelectionManager
+	purego.Main(func() {
+		_mainthread0 = func() *NSTextSelectionManager {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelTextSelectionManager)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTextSelectionManagerFromID(_ret)
+		}()
+	})
+	return _mainthread0
+}
+
+// The text selection manager for this view. Setting this property installs gesture recognizers and configures the view to handle text selection interactions. Setting it to `nil` removes text selection support. The default value is `nil`.
+func (o *NSView) SetTextSelectionManager(textSelectionManager *NSTextSelectionManager) {
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetTextSelectionManager, textSelectionManager.Ptr())
+	})
 }
 
 func (o *NSView) RulerViewShouldMoveMarker(ruler *NSRulerView, marker *NSRulerMarker) bool {

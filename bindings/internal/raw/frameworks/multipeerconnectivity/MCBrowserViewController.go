@@ -14,6 +14,7 @@ import (
 // The MCBrowserViewController class presents nearby devices to the user and enables the user to invite nearby devices to a session. To use this class in iOS or tvOS, call methods from the underlying UIViewController class (prepareForSegue:sender: and performSegueWithIdentifier:sender: for storyboards or presentViewController:animated:completion: and dismissViewControllerAnimated:completion: for nib-based views) to present and dismiss the view controller. In macOS, use the comparable NSViewController methods presentViewControllerAsSheet: and dismissViewController: instead.
 //
 // Apple documentation: https://developer.apple.com/documentation/multipeerconnectivity/mcbrowserviewcontroller
+// Deprecated: Use Network Framework instead
 type MCBrowserViewController struct {
 	appkit.NSViewController
 }
@@ -43,6 +44,7 @@ func MCBrowserViewControllerFromID(id objc.ID) *MCBrowserViewController {
 }
 
 // Initializes a browser view controller using the provided service type and session.
+// Deprecated: Use Network Framework instead
 func (o *MCBrowserViewController) InitWithServiceTypeSession(serviceType *foundation.NSString, session *MCSession) *MCBrowserViewController {
 	var _mainthread0 *MCBrowserViewController
 	purego.Main(func() {

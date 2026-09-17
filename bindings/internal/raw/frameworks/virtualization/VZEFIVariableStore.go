@@ -20,10 +20,18 @@ type VZEFIVariableStore struct {
 }
 
 var (
-	_clsVZEFIVariableStore                                           = _objcClass("VZEFIVariableStore")
-	_vZEFIVariableStoreSelInitWithURL                                = objc.RegisterName("initWithURL:")
-	_vZEFIVariableStoreSelInitCreatingVariableStoreAtURLOptionsError = objc.RegisterName("initCreatingVariableStoreAtURL:options:error:")
-	_vZEFIVariableStoreSelURL                                        = objc.RegisterName("URL")
+	_clsVZEFIVariableStore                                                 = _objcClass("VZEFIVariableStore")
+	_vZEFIVariableStoreSelInitWithURL                                      = objc.RegisterName("initWithURL:")
+	_vZEFIVariableStoreSelInitCreatingVariableStoreAtURLOptionsError       = objc.RegisterName("initCreatingVariableStoreAtURL:options:error:")
+	_vZEFIVariableStoreSelEnableSecureBootUsingDefaultPlatformKeyWithError = objc.RegisterName("enableSecureBootUsingDefaultPlatformKeyWithError:")
+	_vZEFIVariableStoreSelEnableSecureBootWithPlatformKeyError             = objc.RegisterName("enableSecureBootWithPlatformKey:error:")
+	_vZEFIVariableStoreSelDisableSecureBootWithError                       = objc.RegisterName("disableSecureBootWithError:")
+	_vZEFIVariableStoreSelResetSecureBootWithError                         = objc.RegisterName("resetSecureBootWithError:")
+	_vZEFIVariableStoreSelGetSecureBootEnabledError                        = objc.RegisterName("getSecureBootEnabled:error:")
+	_vZEFIVariableStoreSelEnrollDefaultSecureBootSignaturesWithError       = objc.RegisterName("enrollDefaultSecureBootSignaturesWithError:")
+	_vZEFIVariableStoreSelEnrollSecureBootSignaturesError                  = objc.RegisterName("enrollSecureBootSignatures:error:")
+	_vZEFIVariableStoreSelGetEnrolledSecureBootSignaturesWithError         = objc.RegisterName("getEnrolledSecureBootSignaturesWithError:")
+	_vZEFIVariableStoreSelURL                                              = objc.RegisterName("URL")
 )
 
 func VZEFIVariableStoreFromID(id objc.ID) *VZEFIVariableStore {
@@ -58,6 +66,90 @@ func (o *VZEFIVariableStore) InitCreatingVariableStoreAtURLOptionsError(url *fou
 	return VZEFIVariableStoreFromID(_ret), nil
 }
 
+// Enables Secure Boot with an Apple-managed Platform Key.
+func (o *VZEFIVariableStore) EnableSecureBootUsingDefaultPlatformKeyWithError() (bool, error) {
+	var _nsErr uintptr
+	_ret := objc.Send[bool](o.Ptr(), _vZEFIVariableStoreSelEnableSecureBootUsingDefaultPlatformKeyWithError, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
+	}
+	return _ret, nil
+}
+
+// Enables Secure Boot with a custom Platform Key.
+func (o *VZEFIVariableStore) EnableSecureBootWithPlatformKeyError(platformKey unsafe.Pointer) (bool, error) {
+	var _nsErr uintptr
+	_ret := objc.Send[bool](o.Ptr(), _vZEFIVariableStoreSelEnableSecureBootWithPlatformKeyError, platformKey, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
+	}
+	return _ret, nil
+}
+
+// Disables Secure Boot while preserving the existing configuration.
+func (o *VZEFIVariableStore) DisableSecureBootWithError() (bool, error) {
+	var _nsErr uintptr
+	_ret := objc.Send[bool](o.Ptr(), _vZEFIVariableStoreSelDisableSecureBootWithError, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
+	}
+	return _ret, nil
+}
+
+// Clears any previously applied Secure Boot configuration and disables Secure Boot.
+func (o *VZEFIVariableStore) ResetSecureBootWithError() (bool, error) {
+	var _nsErr uintptr
+	_ret := objc.Send[bool](o.Ptr(), _vZEFIVariableStoreSelResetSecureBootWithError, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
+	}
+	return _ret, nil
+}
+
+// Returns a Boolean value that indicates whether Secure Boot is in an enabled state in the variable store.
+func (o *VZEFIVariableStore) GetSecureBootEnabledError(enabled *bool) (bool, error) {
+	var _nsErr uintptr
+	_ret := objc.Send[bool](o.Ptr(), _vZEFIVariableStoreSelGetSecureBootEnabledError, enabled, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
+	}
+	return _ret, nil
+}
+
+// Enrolls the default signatures to Secure Boot databases.
+func (o *VZEFIVariableStore) EnrollDefaultSecureBootSignaturesWithError() (bool, error) {
+	var _nsErr uintptr
+	_ret := objc.Send[bool](o.Ptr(), _vZEFIVariableStoreSelEnrollDefaultSecureBootSignaturesWithError, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
+	}
+	return _ret, nil
+}
+
+// Enrolls the given signatures to Secure Boot databases.
+func (o *VZEFIVariableStore) EnrollSecureBootSignaturesError(signatures *VZEFISignatureDatabaseConfiguration) (bool, error) {
+	var _nsErr uintptr
+	_ret := objc.Send[bool](o.Ptr(), _vZEFIVariableStoreSelEnrollSecureBootSignaturesError, signatures.Ptr(), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
+	}
+	return _ret, nil
+}
+
+// Returns the currently enrolled Secure Boot signatures in the Key Exchange Key (KEK), allowed signature (db), and forbidden signature (dbx) databases.
+func (o *VZEFIVariableStore) GetEnrolledSecureBootSignaturesWithError() (*VZEFISignatureDatabaseConfiguration, error) {
+	var _nsErr uintptr
+	_ret := objc.Send[objc.ID](o.Ptr(), _vZEFIVariableStoreSelGetEnrolledSecureBootSignaturesWithError, unsafe.Pointer(&_nsErr))
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	if _nsErr != 0 {
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+	}
+	return VZEFISignatureDatabaseConfigurationFromID(_ret), nil
+}
+
+// The URL of the variable store on the local file system.
 func (o *VZEFIVariableStore) URL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZEFIVariableStoreSelURL)
 	if _ret != 0 {

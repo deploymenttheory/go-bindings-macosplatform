@@ -141,7 +141,7 @@ func (pnc *PersonNameComponents) WithScriptingProperties(scriptingProperties map
 	return pnc
 }
 
-// NamePrefix returns the name prefix.
+// NamePrefix returns pre-nominal letters denoting title, salutation, or honorific, e.g. Dr., Mr.
 func (pnc *PersonNameComponents) NamePrefix() string {
 	defer runtime.KeepAlive(pnc)
 	_r := objc.Send[objc.ID](objref.IDOf(pnc), objc.RegisterName("namePrefix"))
@@ -151,7 +151,7 @@ func (pnc *PersonNameComponents) NamePrefix() string {
 	return purego.GoString(_r)
 }
 
-// GivenName returns the given name.
+// GivenName returns name bestowed upon an individual by one's parents, e.g. Johnathan.
 func (pnc *PersonNameComponents) GivenName() string {
 	defer runtime.KeepAlive(pnc)
 	_r := objc.Send[objc.ID](objref.IDOf(pnc), objc.RegisterName("givenName"))
@@ -161,7 +161,7 @@ func (pnc *PersonNameComponents) GivenName() string {
 	return purego.GoString(_r)
 }
 
-// MiddleName returns the middle name.
+// MiddleName returns secondary given name chosen to differentiate those with the same first name, e.g. Maple.
 func (pnc *PersonNameComponents) MiddleName() string {
 	defer runtime.KeepAlive(pnc)
 	_r := objc.Send[objc.ID](objref.IDOf(pnc), objc.RegisterName("middleName"))
@@ -171,7 +171,7 @@ func (pnc *PersonNameComponents) MiddleName() string {
 	return purego.GoString(_r)
 }
 
-// FamilyName returns the family name.
+// FamilyName returns name passed from one generation to another to indicate lineage, e.g. Appleseed.
 func (pnc *PersonNameComponents) FamilyName() string {
 	defer runtime.KeepAlive(pnc)
 	_r := objc.Send[objc.ID](objref.IDOf(pnc), objc.RegisterName("familyName"))
@@ -181,7 +181,7 @@ func (pnc *PersonNameComponents) FamilyName() string {
 	return purego.GoString(_r)
 }
 
-// NameSuffix returns the name suffix.
+// NameSuffix returns post-nominal letters denoting degree, accreditation, or other honor, e.g. Esq., Jr., Ph.D.
 func (pnc *PersonNameComponents) NameSuffix() string {
 	defer runtime.KeepAlive(pnc)
 	_r := objc.Send[objc.ID](objref.IDOf(pnc), objc.RegisterName("nameSuffix"))
@@ -191,7 +191,7 @@ func (pnc *PersonNameComponents) NameSuffix() string {
 	return purego.GoString(_r)
 }
 
-// Nickname returns the nickname.
+// Nickname returns name substituted for the purposes of familiarity, e.g. "Johnny".
 func (pnc *PersonNameComponents) Nickname() string {
 	defer runtime.KeepAlive(pnc)
 	_r := objc.Send[objc.ID](objref.IDOf(pnc), objc.RegisterName("nickname"))
@@ -201,7 +201,7 @@ func (pnc *PersonNameComponents) Nickname() string {
 	return purego.GoString(_r)
 }
 
-// PhoneticRepresentation returns the phonetic representation.
+// PhoneticRepresentation returns the phonetic representation of the name components. Each element of the phonetic representation should correspond to an element of the original `NSPersonNameComponents` instance. The phonetic representation of the phonetic representation object itself will be ignored. `nil` by default; must be instantiated.
 func (pnc *PersonNameComponents) PhoneticRepresentation() *PersonNameComponents {
 	defer runtime.KeepAlive(pnc)
 	_r := objc.Send[objc.ID](objref.IDOf(pnc), objc.RegisterName("phoneticRepresentation"))

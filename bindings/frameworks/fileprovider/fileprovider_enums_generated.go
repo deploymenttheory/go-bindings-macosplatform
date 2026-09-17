@@ -9,7 +9,6 @@ import (
 	"strings"
 )
 
-// A mode indicating how the system handles user data when removing a domain.
 type FileProviderDomainRemovalMode int64
 
 const (
@@ -36,7 +35,6 @@ func (e FileProviderDomainRemovalMode) String() string {
 	}
 }
 
-// Modes that modify the system’s behavior while testing.
 // Bitmask — values may be combined with |.
 type FileProviderDomainTestingModes uint64
 
@@ -88,7 +86,6 @@ func (e FileProviderKnownFolders) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Options for disconnecting a domain from the extension.
 // Bitmask — values may be combined with |.
 type FileProviderManagerDisconnectionOptions uint64
 
@@ -989,7 +986,6 @@ func (e FileProviderDeleteItemOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// The error codes for the File Provider extension.
 type FileProviderErrorCode int64
 
 const (
@@ -999,7 +995,7 @@ const (
 	FileProviderErrorFilenameCollision FileProviderErrorCode = -1001
 	// The value of the sync anchor is too old, and the system must re-sync from scratch
 	FileProviderErrorSyncAnchorExpired FileProviderErrorCode = -1002
-	// An error indicating that the page is too old, and that the system must restart the enumeration operation from the beginning.
+	// The value of the page token is too old, and the system must re-sync from scratch
 	FileProviderErrorPageExpired FileProviderErrorCode = -1002
 	// The item has not been uploaded because it would push the account over quota
 	FileProviderErrorInsufficientQuota FileProviderErrorCode = -1003
@@ -1355,6 +1351,32 @@ func (e FileProviderModifyItemOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+type FileProviderNamespacePolicy int64
+
+const (
+	// Inherit the namespace policy of the parent folder.
+	FileProviderNamespacePolicyInherited FileProviderNamespacePolicy = 0
+	// Enumerate this folder lazily (i.e upon access) if it is dataless. Keep populate new items below this folder eagerly if it’s already on disk.
+	FileProviderNamespacePolicyMaterializeLazily FileProviderNamespacePolicy = 1
+	// Download this folder eagerly, make sure it’s always fully enumerated Keep downloading remote updates eagerly. Prevent eviction on low disk pressure and other triggers.
+	FileProviderNamespacePolicyMaterializeEagerly FileProviderNamespacePolicy = 2
+)
+
+// String returns the FileProviderNamespacePolicy constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FileProviderNamespacePolicy) String() string {
+	switch e {
+	case FileProviderNamespacePolicyInherited:
+		return "FileProviderNamespacePolicyInherited"
+	case FileProviderNamespacePolicyMaterializeLazily:
+		return "FileProviderNamespacePolicyMaterializeLazily"
+	case FileProviderNamespacePolicyMaterializeEagerly:
+		return "FileProviderNamespacePolicyMaterializeEagerly"
+	default:
+		return fmt.Sprintf("FileProviderNamespacePolicy(%d)", int64(e))
+	}
+}
+
 // The location where the operation takes place.
 type FileProviderTestingOperationSide uint64
 
@@ -1542,27 +1564,55 @@ func (e QosClass) String() string {
 	}
 }
 
+type TaskSharedRegionStubs uint8
+
+const (
+	TaskSharedRegionStubsDev  TaskSharedRegionStubs = 1
+	TaskSharedRegionStubsProd TaskSharedRegionStubs = 2
+)
+
+// String returns the TaskSharedRegionStubs constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TaskSharedRegionStubs) String() string {
+	switch e {
+	case TaskSharedRegionStubsDev:
+		return "TaskSharedRegionStubsDev"
+	case TaskSharedRegionStubsProd:
+		return "TaskSharedRegionStubsProd"
+	default:
+		return fmt.Sprintf("TaskSharedRegionStubs(%d)", int64(e))
+	}
+}
+
 type VirtualMemoryGuardExceptionCode uint32
 
 const (
-	KGUARD_EXC_DEALLOC_GAP                   VirtualMemoryGuardExceptionCode = 1
-	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        VirtualMemoryGuardExceptionCode = 2
-	KGUARD_EXC_RECLAIM_INDEX_FAILURE         VirtualMemoryGuardExceptionCode = 4
-	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    VirtualMemoryGuardExceptionCode = 8
-	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    VirtualMemoryGuardExceptionCode = 9
-	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         VirtualMemoryGuardExceptionCode = 10
-	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         VirtualMemoryGuardExceptionCode = 11
-	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  VirtualMemoryGuardExceptionCode = 12
-	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    VirtualMemoryGuardExceptionCode = 13
-	KGUARD_EXC_SEC_ACCESS_FAULT              VirtualMemoryGuardExceptionCode = 98
-	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        VirtualMemoryGuardExceptionCode = 99
-	KGUARD_EXC_SEC_COPY_DENIED               VirtualMemoryGuardExceptionCode = 100
-	KGUARD_EXC_SEC_SHARING_DENIED            VirtualMemoryGuardExceptionCode = 101
-	KGUARD_EXC_MTE_SYNC_FAULT                VirtualMemoryGuardExceptionCode = 200
-	KGUARD_EXC_MTE_ASYNC_USER_FAULT          VirtualMemoryGuardExceptionCode = 201
-	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          VirtualMemoryGuardExceptionCode = 202
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT VirtualMemoryGuardExceptionCode = 203
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT VirtualMemoryGuardExceptionCode = 204
+	KGUARD_EXC_DEALLOC_GAP                  VirtualMemoryGuardExceptionCode = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE       VirtualMemoryGuardExceptionCode = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE        VirtualMemoryGuardExceptionCode = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE   VirtualMemoryGuardExceptionCode = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE   VirtualMemoryGuardExceptionCode = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE        VirtualMemoryGuardExceptionCode = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE        VirtualMemoryGuardExceptionCode = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION VirtualMemoryGuardExceptionCode = 12
+	// Guard exception sent to a thread when a CoW defeatured map attempts to copy memory which is not permitted by system policy.
+	KGUARD_EXC_COW_DEFEATURED_COPY_DENIED VirtualMemoryGuardExceptionCode = 13
+	// Guard exception sent to a thread when it attempts to extract a given type of memory in a way which is not permitted for CoW defeatured maps.
+	KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED VirtualMemoryGuardExceptionCode = 14
+	// Guard exception sent to a thread when it attempts to copy-map a memory entry which was created for sharing by a CoW defeatured map.
+	KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED VirtualMemoryGuardExceptionCode = 15
+	KGUARD_EXC_COW_DEFEATURED_FIRST                    VirtualMemoryGuardExceptionCode = 13
+	KGUARD_EXC_COW_DEFEATURED_LAST                     VirtualMemoryGuardExceptionCode = 15
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY              VirtualMemoryGuardExceptionCode = 16
+	KGUARD_EXC_SEC_ACCESS_FAULT                        VirtualMemoryGuardExceptionCode = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT                  VirtualMemoryGuardExceptionCode = 99
+	KGUARD_EXC_SEC_COPY_DENIED                         VirtualMemoryGuardExceptionCode = 100
+	KGUARD_EXC_SEC_SHARING_DENIED                      VirtualMemoryGuardExceptionCode = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                          VirtualMemoryGuardExceptionCode = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT                    VirtualMemoryGuardExceptionCode = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT                    VirtualMemoryGuardExceptionCode = 202
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT           VirtualMemoryGuardExceptionCode = 203
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT           VirtualMemoryGuardExceptionCode = 204
 )
 
 // String returns the VirtualMemoryGuardExceptionCode constant's name, or its numeric form when the
@@ -1585,6 +1635,12 @@ func (e VirtualMemoryGuardExceptionCode) String() string {
 		return "KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE"
 	case KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION:
 		return "KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION"
+	case KGUARD_EXC_COW_DEFEATURED_COPY_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_COPY_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED"
 	case KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY:
 		return "KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY"
 	case KGUARD_EXC_SEC_ACCESS_FAULT:

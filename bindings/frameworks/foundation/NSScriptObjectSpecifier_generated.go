@@ -167,35 +167,35 @@ func (sos *ScriptObjectSpecifier) ObjectsByEvaluatingWithContainers(containers o
 	return obj.Wrap(_r)
 }
 
-// ChildSpecifier returns the child specifier.
+// ChildSpecifier returns the child specifier of this specifier.
 func (sos *ScriptObjectSpecifier) ChildSpecifier() *ScriptObjectSpecifier {
 	defer runtime.KeepAlive(sos)
 	_r := objc.Send[objc.ID](objref.IDOf(sos), objc.RegisterName("childSpecifier"))
 	return ScriptObjectSpecifierFromID(_r)
 }
 
-// ContainerSpecifier returns the container specifier.
+// ContainerSpecifier returns the container specifier of this specifier.
 func (sos *ScriptObjectSpecifier) ContainerSpecifier() *ScriptObjectSpecifier {
 	defer runtime.KeepAlive(sos)
 	_r := objc.Send[objc.ID](objref.IDOf(sos), objc.RegisterName("containerSpecifier"))
 	return ScriptObjectSpecifierFromID(_r)
 }
 
-// ContainerIsObjectBeingTested wraps the corresponding Objective-C method.
+// ContainerIsObjectBeingTested reports whether the container is the object currently being tested by an `NSWhoseSpecifier`.
 func (sos *ScriptObjectSpecifier) ContainerIsObjectBeingTested() bool {
 	defer runtime.KeepAlive(sos)
 	_r := objc.Send[bool](objref.IDOf(sos), objc.RegisterName("containerIsObjectBeingTested"))
 	return _r
 }
 
-// ContainerIsRangeContainerObject wraps the corresponding Objective-C method.
+// ContainerIsRangeContainerObject reports whether the container is the container for the current range specifier being evaluated.
 func (sos *ScriptObjectSpecifier) ContainerIsRangeContainerObject() bool {
 	defer runtime.KeepAlive(sos)
 	_r := objc.Send[bool](objref.IDOf(sos), objc.RegisterName("containerIsRangeContainerObject"))
 	return _r
 }
 
-// Key returns the key.
+// Key returns the name of the key in the container object to be accessed by this specifier.
 func (sos *ScriptObjectSpecifier) Key() string {
 	defer runtime.KeepAlive(sos)
 	_r := objc.Send[objc.ID](objref.IDOf(sos), objc.RegisterName("key"))
@@ -205,42 +205,42 @@ func (sos *ScriptObjectSpecifier) Key() string {
 	return purego.GoString(_r)
 }
 
-// ContainerClassDescription returns the container class description.
+// ContainerClassDescription returns the class description for the container.
 func (sos *ScriptObjectSpecifier) ContainerClassDescription() *ScriptClassDescription {
 	defer runtime.KeepAlive(sos)
 	_r := objc.Send[objc.ID](objref.IDOf(sos), objc.RegisterName("containerClassDescription"))
 	return ScriptClassDescriptionFromID(_r)
 }
 
-// KeyClassDescription returns the key class description.
+// KeyClassDescription returns the class description for the keyed objects.
 func (sos *ScriptObjectSpecifier) KeyClassDescription() *ScriptClassDescription {
 	defer runtime.KeepAlive(sos)
 	_r := objc.Send[objc.ID](objref.IDOf(sos), objc.RegisterName("keyClassDescription"))
 	return ScriptClassDescriptionFromID(_r)
 }
 
-// ObjectsByEvaluatingSpecifier returns the objects by evaluating specifier.
+// ObjectsByEvaluatingSpecifier returns the actual objects represented by this specifier.
 func (sos *ScriptObjectSpecifier) ObjectsByEvaluatingSpecifier() obj.Object {
 	defer runtime.KeepAlive(sos)
 	_r := objc.Send[objc.ID](objref.IDOf(sos), objc.RegisterName("objectsByEvaluatingSpecifier"))
 	return obj.Wrap(_r)
 }
 
-// EvaluationErrorNumber returns the evaluation error number.
+// EvaluationErrorNumber returns the error number from the most recent evaluation.
 func (sos *ScriptObjectSpecifier) EvaluationErrorNumber() int {
 	defer runtime.KeepAlive(sos)
 	_r := objc.Send[int](objref.IDOf(sos), objc.RegisterName("evaluationErrorNumber"))
 	return _r
 }
 
-// EvaluationErrorSpecifier returns the evaluation error specifier.
+// EvaluationErrorSpecifier returns the specifier in which an evaluation error occurred.
 func (sos *ScriptObjectSpecifier) EvaluationErrorSpecifier() *ScriptObjectSpecifier {
 	defer runtime.KeepAlive(sos)
 	_r := objc.Send[objc.ID](objref.IDOf(sos), objc.RegisterName("evaluationErrorSpecifier"))
 	return ScriptObjectSpecifierFromID(_r)
 }
 
-// Descriptor returns the descriptor.
+// Descriptor returns an Apple event descriptor that represents this specifier.
 func (sos *ScriptObjectSpecifier) Descriptor() *AppleEventDescriptor {
 	defer runtime.KeepAlive(sos)
 	_r := objc.Send[objc.ID](objref.IDOf(sos), objc.RegisterName("descriptor"))

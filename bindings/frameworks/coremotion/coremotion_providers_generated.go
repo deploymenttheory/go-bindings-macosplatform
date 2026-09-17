@@ -8,6 +8,12 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 )
 
+// DeviceMotionProvider is accepted wherever a CMDeviceMotion (or one of its subclasses) is expected.
+type DeviceMotionProvider interface {
+	objref.Object
+	isDeviceMotion()
+}
+
 // LogItemProvider is accepted wherever a CMLogItem (or one of its subclasses) is expected.
 type LogItemProvider interface {
 	objref.Object

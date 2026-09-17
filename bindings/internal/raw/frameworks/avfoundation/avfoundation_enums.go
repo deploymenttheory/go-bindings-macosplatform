@@ -8,7 +8,6 @@ import (
 	"strings"
 )
 
-// Values that indicate the state of an export session.
 type AVAssetExportSessionStatus int64
 
 const (
@@ -39,7 +38,6 @@ func (e AVAssetExportSessionStatus) String() string {
 	}
 }
 
-// Constants that indicate the result of an image generation request.
 type AVAssetImageGeneratorResult int64
 
 const (
@@ -61,7 +59,6 @@ func (e AVAssetImageGeneratorResult) String() string {
 	}
 }
 
-// Values that represent the possible states of an asset reader.
 type AVAssetReaderStatus int64
 
 const (
@@ -179,14 +176,18 @@ func (e AVAssetTrackGroupOutputHandling) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Values that indicate the state of an asset writer.
 type AVAssetWriterStatus int64
 
 const (
-	AVAssetWriterStatusUnknown   AVAssetWriterStatus = 0
-	AVAssetWriterStatusWriting   AVAssetWriterStatus = 1
+	// Indicates that the status of the asset writer is not currently known.
+	AVAssetWriterStatusUnknown AVAssetWriterStatus = 0
+	// Indicates that the asset writer is successfully writing samples to its output file.
+	AVAssetWriterStatusWriting AVAssetWriterStatus = 1
+	// Indicates that the asset writer has successfully written all samples following a call to finishWriting.
 	AVAssetWriterStatusCompleted AVAssetWriterStatus = 2
-	AVAssetWriterStatusFailed    AVAssetWriterStatus = 3
+	// Indicates that the asset writer can no longer write samples to its output file because of an error. The error is described by the value of the asset writer's error property.
+	AVAssetWriterStatusFailed AVAssetWriterStatus = 3
+	// Indicates that the asset writer can no longer write samples because writing was canceled with the cancelWriting method.
 	AVAssetWriterStatusCancelled AVAssetWriterStatus = 4
 )
 
@@ -204,6 +205,23 @@ func (e AVAssetWriterStatus) String() string {
 		return "AVAssetWriterStatusCancelled"
 	default:
 		return fmt.Sprintf("AVAssetWriterStatus(%d)", int64(e))
+	}
+}
+
+// Special value for the trackID property of AVAudioMixInputParameters.
+type AVAudioMixInputParametersTrackID int32
+
+const (
+	// Indicates that the specified input parameters should be applied to the mix of all audio tracks rather than to a single specific audio track. This is particularly useful for setting up volume ramps or an audio tap for streaming playback.
+	AVAudioMixInputParametersTrackMixID AVAudioMixInputParametersTrackID = 0
+)
+
+func (e AVAudioMixInputParametersTrackID) String() string {
+	switch e {
+	case AVAudioMixInputParametersTrackMixID:
+		return "AVAudioMixInputParametersTrackMixID"
+	default:
+		return fmt.Sprintf("AVAudioMixInputParametersTrackID(%d)", int64(e))
 	}
 }
 
@@ -267,7 +285,6 @@ func (e AVAuthorizationStatus) String() string {
 	}
 }
 
-// Animation options for a caption.
 type AVCaptionAnimation int64
 
 const (
@@ -286,7 +303,6 @@ func (e AVCaptionAnimation) String() string {
 	}
 }
 
-// Constants that indicate the status of a validator.
 type AVCaptionConversionValidatorStatus int64
 
 const (
@@ -311,11 +327,9 @@ func (e AVCaptionConversionValidatorStatus) String() string {
 	}
 }
 
-// Text decorations for caption text.
 type AVCaptionDecoration uint64
 
 const (
-	// No text decoration.
 	AVCaptionDecorationNone        AVCaptionDecoration = 0
 	AVCaptionDecorationUnderline   AVCaptionDecoration = 1
 	AVCaptionDecorationLineThrough AVCaptionDecoration = 2
@@ -339,7 +353,6 @@ func (e AVCaptionDecoration) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Font styles for caption text.
 type AVCaptionFontStyle int64
 
 const (
@@ -361,7 +374,6 @@ func (e AVCaptionFontStyle) String() string {
 	}
 }
 
-// Font weights for a caption.
 type AVCaptionFontWeight int64
 
 const (
@@ -383,7 +395,6 @@ func (e AVCaptionFontWeight) String() string {
 	}
 }
 
-// Constants that indicate the alignment of lines in a region.
 type AVCaptionRegionDisplayAlignment int64
 
 const (
@@ -405,7 +416,6 @@ func (e AVCaptionRegionDisplayAlignment) String() string {
 	}
 }
 
-// Constants that indicate the scrolling effects the system applies to a region.
 type AVCaptionRegionScroll int64
 
 const (
@@ -424,7 +434,6 @@ func (e AVCaptionRegionScroll) String() string {
 	}
 }
 
-// Constants that indicate the writing mode for a region.
 type AVCaptionRegionWritingMode int64
 
 const (
@@ -485,7 +494,6 @@ func (e AVCaptionRubyPosition) String() string {
 	}
 }
 
-// Text alignment options for a caption.
 type AVCaptionTextAlignment int64
 
 const (
@@ -513,7 +521,6 @@ func (e AVCaptionTextAlignment) String() string {
 	}
 }
 
-// The caption’s supported rendering policy options.
 type AVCaptionTextCombine int64
 
 const (
@@ -569,7 +576,6 @@ func (e AVCaptionUnitsType) String() string {
 	}
 }
 
-// An enumeration of auto focus systems.
 type AVCaptureAutoFocusSystem int64
 
 const (
@@ -588,6 +594,26 @@ func (e AVCaptureAutoFocusSystem) String() string {
 		return "AVCaptureAutoFocusSystemPhaseDetection"
 	default:
 		return fmt.Sprintf("AVCaptureAutoFocusSystem(%d)", int64(e))
+	}
+}
+
+type AVCaptureBroadcastVideoOutputDroppedFrameReplacementPolicy int64
+
+const (
+	// Repeat the previous frame as replacement. When a frame is dropped, the most recent successfully output frame is repeated at the expected presentation time. This is the default behavior and provides smoother visual continuity.
+	AVCaptureBroadcastVideoOutputDroppedFrameReplacementPolicyRepeatPreviousFrame AVCaptureBroadcastVideoOutputDroppedFrameReplacementPolicy = 0
+	// Insert a black frame as replacement. When a frame is dropped, a black frame is inserted at the expected presentation time. This maintains output timing continuity while providing a clear visual indication of the dropped frame.
+	AVCaptureBroadcastVideoOutputDroppedFrameReplacementPolicyBlackFrame AVCaptureBroadcastVideoOutputDroppedFrameReplacementPolicy = 1
+)
+
+func (e AVCaptureBroadcastVideoOutputDroppedFrameReplacementPolicy) String() string {
+	switch e {
+	case AVCaptureBroadcastVideoOutputDroppedFrameReplacementPolicyRepeatPreviousFrame:
+		return "AVCaptureBroadcastVideoOutputDroppedFrameReplacementPolicyRepeatPreviousFrame"
+	case AVCaptureBroadcastVideoOutputDroppedFrameReplacementPolicyBlackFrame:
+		return "AVCaptureBroadcastVideoOutputDroppedFrameReplacementPolicyBlackFrame"
+	default:
+		return fmt.Sprintf("AVCaptureBroadcastVideoOutputDroppedFrameReplacementPolicy(%d)", int64(e))
 	}
 }
 
@@ -620,7 +646,6 @@ func (e AVCaptureCameraLensSmudgeDetectionStatus) String() string {
 	}
 }
 
-// Constants that indicate the current Center Stage control mode.
 type AVCaptureCenterStageControlMode int64
 
 const (
@@ -687,7 +712,6 @@ func (e AVCaptureColorSpace) String() string {
 	}
 }
 
-// Constants that indicate the physical position of a capture device.
 type AVCaptureDevicePosition int64
 
 const (
@@ -709,7 +733,6 @@ func (e AVCaptureDevicePosition) String() string {
 	}
 }
 
-// Constants that indicate the transport control’s current mode of playback, if it has one.
 type AVCaptureDeviceTransportControlsPlaybackMode int64
 
 const (
@@ -728,7 +751,6 @@ func (e AVCaptureDeviceTransportControlsPlaybackMode) String() string {
 	}
 }
 
-// Constants that specify the exposure mode of a capture device.
 type AVCaptureExposureMode int64
 
 const (
@@ -753,7 +775,6 @@ func (e AVCaptureExposureMode) String() string {
 	}
 }
 
-// Constants that specify the flash modes of a capture device.
 type AVCaptureFlashMode int64
 
 const (
@@ -775,7 +796,6 @@ func (e AVCaptureFlashMode) String() string {
 	}
 }
 
-// Constants to specify the focus mode of a capture device.
 type AVCaptureFocusMode int64
 
 const (
@@ -797,7 +817,6 @@ func (e AVCaptureFocusMode) String() string {
 	}
 }
 
-// Constants that define the available microphone modes.
 type AVCaptureMicrophoneMode int64
 
 const (
@@ -844,7 +863,6 @@ func (e AVCaptureMultichannelAudioMode) String() string {
 	}
 }
 
-// Constants that define reasons for why the system dropped a frame.
 type AVCaptureOutputDataDroppedReason int64
 
 const (
@@ -869,7 +887,6 @@ func (e AVCaptureOutputDataDroppedReason) String() string {
 	}
 }
 
-// Constants that indicate whether the output is ready to receive capture requests.
 type AVCapturePhotoOutputCaptureReadiness int64
 
 const (
@@ -897,7 +914,6 @@ func (e AVCapturePhotoOutputCaptureReadiness) String() string {
 	}
 }
 
-// Constants that indicate how to prioritize photo quality relative to capture speed.
 type AVCapturePhotoQualityPrioritization int64
 
 const (
@@ -919,11 +935,9 @@ func (e AVCapturePhotoQualityPrioritization) String() string {
 	}
 }
 
-// A structure that defines the conditions in which to restrict camera switching.
 type AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions uint64
 
 const (
-	// Disallow switching to a fallback camera.
 	AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionNone                AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions = 0
 	AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionVideoZoomChanged    AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions = 1
 	AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionFocusModeChanged    AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions = 2
@@ -947,7 +961,6 @@ func (e AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions) 
 	return strings.Join(parts, "|")
 }
 
-// Constants that control when to allow a virtual device to switch its active primary constituent device.
 type AVCapturePrimaryConstituentDeviceSwitchingBehavior int64
 
 const (
@@ -972,7 +985,6 @@ func (e AVCapturePrimaryConstituentDeviceSwitchingBehavior) String() string {
 	}
 }
 
-// Constants that describe the capture device configuration user interfaces.
 type AVCaptureSystemUserInterface int64
 
 const (
@@ -1059,7 +1071,6 @@ func (e AVCaptureTimecodeSourceType) String() string {
 	}
 }
 
-// Constants to specify the capture device’s torch mode.
 type AVCaptureTorchMode int64
 
 const (
@@ -1111,7 +1122,6 @@ func (e AVCaptureVideoOrientation) String() string {
 	}
 }
 
-// Constants to specify the white balance mode of a capture device.
 type AVCaptureWhiteBalanceMode int64
 
 const (
@@ -1174,7 +1184,6 @@ func (e AVContentAuthorizationStatus) String() string {
 	}
 }
 
-// The status for a content key request.
 type AVContentKeyRequestStatus int64
 
 const (
@@ -1249,7 +1258,6 @@ func (e AVDelegatingPlaybackCoordinatorSeekOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Values indicating the general accuracy of a depth data map.
 type AVDepthDataAccuracy int64
 
 const (
@@ -1268,7 +1276,6 @@ func (e AVDepthDataAccuracy) String() string {
 	}
 }
 
-// Values indicating the overall quality of a depth data map.
 type AVDepthDataQuality int64
 
 const (
@@ -1287,7 +1294,6 @@ func (e AVDepthDataQuality) String() string {
 	}
 }
 
-// A structure that defines the errors that framework operations can generate.
 type AVError int64
 
 const (
@@ -1366,6 +1372,7 @@ const (
 	AVErrorToneMappingFailed                             AVError = -11885
 	AVErrorMediaExtensionDisabled                        AVError = -11886
 	AVErrorMediaExtensionConflict                        AVError = -11887
+	AVErrorNotEnoughSpaceForProVideoStorageReplenishment AVError = -11897
 )
 
 func (e AVError) String() string {
@@ -1520,6 +1527,8 @@ func (e AVError) String() string {
 		return "AVErrorMediaExtensionDisabled"
 	case AVErrorMediaExtensionConflict:
 		return "AVErrorMediaExtensionConflict"
+	case AVErrorNotEnoughSpaceForProVideoStorageReplenishment:
+		return "AVErrorNotEnoughSpaceForProVideoStorageReplenishment"
 	default:
 		return fmt.Sprintf("AVError(%d)", int64(e))
 	}
@@ -1616,6 +1625,27 @@ func (e AVKeyValueStatus) String() string {
 	}
 }
 
+// These constants are the possible playback modes returned by the property “mode” on AVMetricPlaybackModeSwitchEvent
+type AVMetricPlaybackMode int64
+
+const (
+	// Indicates that playback is local.
+	AVMetricPlaybackModeLocal AVMetricPlaybackMode = 0
+	// Indicates that playback is via AirPlay Video.
+	AVMetricPlaybackModeAirPlayVideo AVMetricPlaybackMode = 1
+)
+
+func (e AVMetricPlaybackMode) String() string {
+	switch e {
+	case AVMetricPlaybackModeLocal:
+		return "AVMetricPlaybackModeLocal"
+	case AVMetricPlaybackModeAirPlayVideo:
+		return "AVMetricPlaybackModeAirPlayVideo"
+	default:
+		return fmt.Sprintf("AVMetricPlaybackMode(%d)", int64(e))
+	}
+}
+
 // A structure that defines options to control the writing of a movie header to a destination URL.
 type AVMovieWritingOptions uint64
 
@@ -1637,7 +1667,6 @@ func (e AVMovieWritingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// The actions a player can take when it finishes playing.
 type AVPlayerActionAtItemEnd int64
 
 const (
@@ -1712,18 +1741,16 @@ func (e AVPlayerInterstitialEventAssetListResponseStatus) String() string {
 	}
 }
 
-// Constants that define restrictions on the playback of interstitial content.
 type AVPlayerInterstitialEventRestrictions uint64
 
 const (
-	// A value that indicates no restrictions on playback of primary or interstitial content.
+	// Indicates that the user may freely employ playback controls, as available, both within the primary content and in the interstitial content specified for the event.
 	AVPlayerInterstitialEventRestrictionNone AVPlayerInterstitialEventRestrictions = 0
 	// Indicates that seeking within the primary content from a date prior to the date of the event to a date subsequent to the date of the event is not permitted.
 	AVPlayerInterstitialEventRestrictionConstrainsSeekingForwardInPrimaryContent AVPlayerInterstitialEventRestrictions = 1
 	// Indicates that advancing the currentTime within an interstitial item, either by seeking ahead or by setting the playback rate to a value greater than the item's asset's preferredRate, is not permitted.
 	AVPlayerInterstitialEventRestrictionRequiresPlaybackAtPreferredRateForAdvancement AVPlayerInterstitialEventRestrictions = 4
-	// The default restriction policy.
-	AVPlayerInterstitialEventRestrictionDefaultPolicy AVPlayerInterstitialEventRestrictions = 0
+	AVPlayerInterstitialEventRestrictionDefaultPolicy                                 AVPlayerInterstitialEventRestrictions = 0
 )
 
 func (e AVPlayerInterstitialEventRestrictions) String() string {
@@ -1768,7 +1795,6 @@ func (e AVPlayerInterstitialEventSkippableEventState) String() string {
 	}
 }
 
-// Constants that specify how an event occupies time on an integrated timeline.
 type AVPlayerInterstitialEventTimelineOccupancy int64
 
 const (
@@ -1789,7 +1815,6 @@ func (e AVPlayerInterstitialEventTimelineOccupancy) String() string {
 	}
 }
 
-// Constants that specify the type of segment.
 type AVPlayerItemSegmentType int64
 
 const (
@@ -1808,7 +1833,6 @@ func (e AVPlayerItemSegmentType) String() string {
 	}
 }
 
-// The statuses for a player item.
 type AVPlayerItemStatus int64
 
 const (
@@ -1833,7 +1857,6 @@ func (e AVPlayerItemStatus) String() string {
 	}
 }
 
-// Constants that define the ordering of items in a player looper.
 type AVPlayerLooperItemOrdering int64
 
 const (
@@ -1852,7 +1875,6 @@ func (e AVPlayerLooperItemOrdering) String() string {
 	}
 }
 
-// Status constants that indicate whether a looper can successfully perform looping playback.
 type AVPlayerLooperStatus int64
 
 const (
@@ -1901,7 +1923,6 @@ func (e AVPlayerNetworkResourcePriority) String() string {
 	}
 }
 
-// Status values that indicate whether a player can successfully play media.
 type AVPlayerStatus int64
 
 const (
@@ -1926,7 +1947,6 @@ func (e AVPlayerStatus) String() string {
 	}
 }
 
-// Constants that indicate the state of playback control.
 type AVPlayerTimeControlStatus int64
 
 const (
@@ -1976,7 +1996,6 @@ func (e AVQueuedSampleBufferRenderingStatus) String() string {
 	}
 }
 
-// The modes that describe the buffer request direction.
 type AVSampleBufferRequestDirection int64
 
 const (
@@ -1998,7 +2017,6 @@ func (e AVSampleBufferRequestDirection) String() string {
 	}
 }
 
-// The modes in which a sample buffer generator processes a request.
 type AVSampleBufferRequestMode int64
 
 const (
@@ -2956,27 +2974,53 @@ func (e Qos_class_t) String() string {
 	}
 }
 
+type Task_shared_region_stubs_t uint8
+
+const (
+	TASK_SHARED_REGION_STUBS_DEV  Task_shared_region_stubs_t = 1
+	TASK_SHARED_REGION_STUBS_PROD Task_shared_region_stubs_t = 2
+)
+
+func (e Task_shared_region_stubs_t) String() string {
+	switch e {
+	case TASK_SHARED_REGION_STUBS_DEV:
+		return "TASK_SHARED_REGION_STUBS_DEV"
+	case TASK_SHARED_REGION_STUBS_PROD:
+		return "TASK_SHARED_REGION_STUBS_PROD"
+	default:
+		return fmt.Sprintf("Task_shared_region_stubs_t(%d)", int64(e))
+	}
+}
+
 type Virtual_memory_guard_exception_code_t uint32
 
 const (
-	KGUARD_EXC_DEALLOC_GAP                   Virtual_memory_guard_exception_code_t = 1
-	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        Virtual_memory_guard_exception_code_t = 2
-	KGUARD_EXC_RECLAIM_INDEX_FAILURE         Virtual_memory_guard_exception_code_t = 4
-	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    Virtual_memory_guard_exception_code_t = 8
-	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    Virtual_memory_guard_exception_code_t = 9
-	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         Virtual_memory_guard_exception_code_t = 10
-	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         Virtual_memory_guard_exception_code_t = 11
-	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  Virtual_memory_guard_exception_code_t = 12
-	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    Virtual_memory_guard_exception_code_t = 13
-	KGUARD_EXC_SEC_ACCESS_FAULT              Virtual_memory_guard_exception_code_t = 98
-	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        Virtual_memory_guard_exception_code_t = 99
-	KGUARD_EXC_SEC_COPY_DENIED               Virtual_memory_guard_exception_code_t = 100
-	KGUARD_EXC_SEC_SHARING_DENIED            Virtual_memory_guard_exception_code_t = 101
-	KGUARD_EXC_MTE_SYNC_FAULT                Virtual_memory_guard_exception_code_t = 200
-	KGUARD_EXC_MTE_ASYNC_USER_FAULT          Virtual_memory_guard_exception_code_t = 201
-	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          Virtual_memory_guard_exception_code_t = 202
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 203
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 204
+	KGUARD_EXC_DEALLOC_GAP                  Virtual_memory_guard_exception_code_t = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE       Virtual_memory_guard_exception_code_t = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE        Virtual_memory_guard_exception_code_t = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE   Virtual_memory_guard_exception_code_t = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE   Virtual_memory_guard_exception_code_t = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE        Virtual_memory_guard_exception_code_t = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE        Virtual_memory_guard_exception_code_t = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION Virtual_memory_guard_exception_code_t = 12
+	// Guard exception sent to a thread when a CoW defeatured map attempts to copy memory which is not permitted by system policy.
+	KGUARD_EXC_COW_DEFEATURED_COPY_DENIED Virtual_memory_guard_exception_code_t = 13
+	// Guard exception sent to a thread when it attempts to extract a given type of memory in a way which is not permitted for CoW defeatured maps.
+	KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED Virtual_memory_guard_exception_code_t = 14
+	// Guard exception sent to a thread when it attempts to copy-map a memory entry which was created for sharing by a CoW defeatured map.
+	KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED Virtual_memory_guard_exception_code_t = 15
+	KGUARD_EXC_COW_DEFEATURED_FIRST                    Virtual_memory_guard_exception_code_t = 13
+	KGUARD_EXC_COW_DEFEATURED_LAST                     Virtual_memory_guard_exception_code_t = 15
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY              Virtual_memory_guard_exception_code_t = 16
+	KGUARD_EXC_SEC_ACCESS_FAULT                        Virtual_memory_guard_exception_code_t = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT                  Virtual_memory_guard_exception_code_t = 99
+	KGUARD_EXC_SEC_COPY_DENIED                         Virtual_memory_guard_exception_code_t = 100
+	KGUARD_EXC_SEC_SHARING_DENIED                      Virtual_memory_guard_exception_code_t = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                          Virtual_memory_guard_exception_code_t = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT                    Virtual_memory_guard_exception_code_t = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT                    Virtual_memory_guard_exception_code_t = 202
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT           Virtual_memory_guard_exception_code_t = 203
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT           Virtual_memory_guard_exception_code_t = 204
 )
 
 func (e Virtual_memory_guard_exception_code_t) String() string {
@@ -2997,6 +3041,12 @@ func (e Virtual_memory_guard_exception_code_t) String() string {
 		return "KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE"
 	case KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION:
 		return "KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION"
+	case KGUARD_EXC_COW_DEFEATURED_COPY_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_COPY_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED"
 	case KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY:
 		return "KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY"
 	case KGUARD_EXC_SEC_ACCESS_FAULT:

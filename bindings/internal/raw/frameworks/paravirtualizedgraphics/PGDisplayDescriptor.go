@@ -30,8 +30,6 @@ var (
 	_pGDisplayDescriptorSelSetModeChangeHandler    = objc.RegisterName("setModeChangeHandler:")
 	_pGDisplayDescriptorSelNewFrameEventHandler    = objc.RegisterName("newFrameEventHandler")
 	_pGDisplayDescriptorSelSetNewFrameEventHandler = objc.RegisterName("setNewFrameEventHandler:")
-	_pGDisplayDescriptorSelCursorGlyphHandler      = objc.RegisterName("cursorGlyphHandler")
-	_pGDisplayDescriptorSelSetCursorGlyphHandler   = objc.RegisterName("setCursorGlyphHandler:")
 	_pGDisplayDescriptorSelCursorShowHandler       = objc.RegisterName("cursorShowHandler")
 	_pGDisplayDescriptorSelSetCursorShowHandler    = objc.RegisterName("setCursorShowHandler:")
 	_pGDisplayDescriptorSelCursorMoveHandler       = objc.RegisterName("cursorMoveHandler")
@@ -109,16 +107,6 @@ func (o *PGDisplayDescriptor) SetNewFrameEventHandler(newFrameEventHandler func(
 		defer __block_newFrameEventHandler.Release()
 	}
 	o.Ptr().Send(_pGDisplayDescriptorSelSetNewFrameEventHandler, __block_newFrameEventHandler)
-}
-
-// @property cursorGlyphHandler @abstract The block to invoke to handle cursor glyph updates. @discussion Handler invocation indicative of new cursor image for display.  If this block is not set, cursor will be precomposited in presented image.
-func (o *PGDisplayDescriptor) CursorGlyphHandler() objc.Block {
-	_ret := objc.Send[objc.Block](o.Ptr(), _pGDisplayDescriptorSelCursorGlyphHandler)
-	return _ret
-}
-
-func (o *PGDisplayDescriptor) SetCursorGlyphHandler(cursorGlyphHandler objc.Block) {
-	o.Ptr().Send(_pGDisplayDescriptorSelSetCursorGlyphHandler, cursorGlyphHandler)
 }
 
 // @property cursorShowHandler @abstract The block to invoke to handle cursor show/hide updates. @discussion Handler invocation indicative of hide/show of cursor glyph.  If this block is not set, cursor will be precomposited in presented image.

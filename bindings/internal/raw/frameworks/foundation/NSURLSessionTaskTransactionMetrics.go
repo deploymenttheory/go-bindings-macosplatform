@@ -9,8 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An object that encapsualtes the performance metrics collected by the URL Loading System during the execution of a session task.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsurlsessiontasktransactionmetrics
 type NSURLSessionTaskTransactionMetrics struct {
 	NSObject
@@ -66,6 +64,7 @@ func NSURLSessionTaskTransactionMetricsFromID(id objc.ID) *NSURLSessionTaskTrans
 	return o
 }
 
+// Creates a transaction metrics instance. You should never need to create your own “NSURLSessionTaskTransactionMetrics“ instances. The “NSURLSession“ creates task transaction metrics as part of the “NSURLSessionTaskMetrics“ instance that it delivers to the “NSURLSessionTaskDelegate“ delegate.
 // Deprecated: Not supported
 func (o *NSURLSessionTaskTransactionMetrics) Init() *NSURLSessionTaskTransactionMetrics {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelInit)
@@ -75,12 +74,14 @@ func (o *NSURLSessionTaskTransactionMetrics) Init() *NSURLSessionTaskTransaction
 	return NSURLSessionTaskTransactionMetricsFromID(_ret)
 }
 
+// Creates a new transaction metrics instance. You should never need to create your own “NSURLSessionTaskTransactionMetrics“ instances. The “NSURLSession“ creates task transaction metrics as part of the “NSURLSessionTaskMetrics“ instance that it delivers to the “NSURLSessionTaskDelegate“ delegate.
 // Deprecated: Not supported
 func NSURLSessionTaskTransactionMetricsNew() *NSURLSessionTaskTransactionMetrics {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLSessionTaskTransactionMetrics), _nSURLSessionTaskTransactionMetricsSelNew)
 	return NSURLSessionTaskTransactionMetricsFromID(_ret)
 }
 
+// Represents the transaction request.
 func (o *NSURLSessionTaskTransactionMetrics) Request() *NSURLRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelRequest)
 	if _ret != 0 {
@@ -89,6 +90,7 @@ func (o *NSURLSessionTaskTransactionMetrics) Request() *NSURLRequest {
 	return NSURLRequestFromID(_ret)
 }
 
+// Represents the transaction response. Can be `nil` if error occurred and no response was generated.
 func (o *NSURLSessionTaskTransactionMetrics) Response() *NSURLResponse {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelResponse)
 	if _ret != 0 {
@@ -97,6 +99,7 @@ func (o *NSURLSessionTaskTransactionMetrics) Response() *NSURLResponse {
 	return NSURLResponseFromID(_ret)
 }
 
+// The time when the user agent started fetching the resource, whether or not the resource was retrieved from the server or local resources. The following metrics will be set to `nil`, if a persistent connection was used or the resource was retrieved from local resources: `domainLookupStartDate`, `domainLookupEndDate`, `connectStartDate`, `connectEndDate`, `secureConnectionStartDate`, `secureConnectionEndDate`.
 func (o *NSURLSessionTaskTransactionMetrics) FetchStartDate() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelFetchStartDate)
 	if _ret != 0 {
@@ -105,6 +108,7 @@ func (o *NSURLSessionTaskTransactionMetrics) FetchStartDate() *NSDate {
 	return NSDateFromID(_ret)
 }
 
+// The time immediately before the user agent started the name lookup for the resource.
 func (o *NSURLSessionTaskTransactionMetrics) DomainLookupStartDate() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelDomainLookupStartDate)
 	if _ret != 0 {
@@ -113,6 +117,7 @@ func (o *NSURLSessionTaskTransactionMetrics) DomainLookupStartDate() *NSDate {
 	return NSDateFromID(_ret)
 }
 
+// The time after the name lookup was completed.
 func (o *NSURLSessionTaskTransactionMetrics) DomainLookupEndDate() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelDomainLookupEndDate)
 	if _ret != 0 {
@@ -121,6 +126,7 @@ func (o *NSURLSessionTaskTransactionMetrics) DomainLookupEndDate() *NSDate {
 	return NSDateFromID(_ret)
 }
 
+// The time immediately before the user agent started establishing the connection to the server. For example, this would correspond to the time immediately before the user agent started trying to establish the TCP connection.
 func (o *NSURLSessionTaskTransactionMetrics) ConnectStartDate() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelConnectStartDate)
 	if _ret != 0 {
@@ -129,6 +135,7 @@ func (o *NSURLSessionTaskTransactionMetrics) ConnectStartDate() *NSDate {
 	return NSDateFromID(_ret)
 }
 
+// If an encrypted connection was used, the time immediately before the user agent started the security handshake to secure the current connection. For example, this would correspond to the time immediately before the user agent started the TLS handshake. If an encrypted connection was not used, this attribute is set to `nil`.
 func (o *NSURLSessionTaskTransactionMetrics) SecureConnectionStartDate() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelSecureConnectionStartDate)
 	if _ret != 0 {
@@ -137,6 +144,7 @@ func (o *NSURLSessionTaskTransactionMetrics) SecureConnectionStartDate() *NSDate
 	return NSDateFromID(_ret)
 }
 
+// If an encrypted connection was used, the time immediately after the security handshake completed. If an encrypted connection was not used, this attribute is set to `nil`.
 func (o *NSURLSessionTaskTransactionMetrics) SecureConnectionEndDate() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelSecureConnectionEndDate)
 	if _ret != 0 {
@@ -145,6 +153,7 @@ func (o *NSURLSessionTaskTransactionMetrics) SecureConnectionEndDate() *NSDate {
 	return NSDateFromID(_ret)
 }
 
+// The time immediately after the user agent finished establishing the connection to the server, including completion of security-related and other handshakes.
 func (o *NSURLSessionTaskTransactionMetrics) ConnectEndDate() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelConnectEndDate)
 	if _ret != 0 {
@@ -153,6 +162,7 @@ func (o *NSURLSessionTaskTransactionMetrics) ConnectEndDate() *NSDate {
 	return NSDateFromID(_ret)
 }
 
+// The time immediately before the user agent started requesting the source, regardless of whether the resource was retrieved from the server or local resources.
 func (o *NSURLSessionTaskTransactionMetrics) RequestStartDate() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelRequestStartDate)
 	if _ret != 0 {
@@ -161,6 +171,7 @@ func (o *NSURLSessionTaskTransactionMetrics) RequestStartDate() *NSDate {
 	return NSDateFromID(_ret)
 }
 
+// The time immediately after the user agent finished requesting the source, regardless of whether the resource was retrieved from the server or local resources.
 func (o *NSURLSessionTaskTransactionMetrics) RequestEndDate() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelRequestEndDate)
 	if _ret != 0 {
@@ -169,6 +180,7 @@ func (o *NSURLSessionTaskTransactionMetrics) RequestEndDate() *NSDate {
 	return NSDateFromID(_ret)
 }
 
+// The time immediately after the user agent received the first byte of the response from the server or from local resources.
 func (o *NSURLSessionTaskTransactionMetrics) ResponseStartDate() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelResponseStartDate)
 	if _ret != 0 {
@@ -177,6 +189,7 @@ func (o *NSURLSessionTaskTransactionMetrics) ResponseStartDate() *NSDate {
 	return NSDateFromID(_ret)
 }
 
+// The time immediately after the user agent received the last byte of the resource.
 func (o *NSURLSessionTaskTransactionMetrics) ResponseEndDate() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelResponseEndDate)
 	if _ret != 0 {
@@ -185,6 +198,7 @@ func (o *NSURLSessionTaskTransactionMetrics) ResponseEndDate() *NSDate {
 	return NSDateFromID(_ret)
 }
 
+// The network protocol used to fetch the resource, as identified by the ALPN Protocol ID Identification Sequence [RFC7301]. E.g., h3, h2, http/1.1. When a proxy is configured AND a tunnel connection is established, then this attribute returns the value for the tunneled protocol.
 func (o *NSURLSessionTaskTransactionMetrics) NetworkProtocolName() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelNetworkProtocolName)
 	if _ret != 0 {
@@ -193,51 +207,61 @@ func (o *NSURLSessionTaskTransactionMetrics) NetworkProtocolName() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Whether a proxy connection was used to fetch the resource.
 func (o *NSURLSessionTaskTransactionMetrics) IsProxyConnection() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelIsProxyConnection)
 	return _ret
 }
 
+// Whether a persistent connection was used to fetch the resource.
 func (o *NSURLSessionTaskTransactionMetrics) IsReusedConnection() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelIsReusedConnection)
 	return _ret
 }
 
+// Indicates whether the resource was loaded, pushed or retrieved from the local cache.
 func (o *NSURLSessionTaskTransactionMetrics) ResourceFetchType() NSURLSessionTaskMetricsResourceFetchType {
 	_ret := objc.Send[NSURLSessionTaskMetricsResourceFetchType](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelResourceFetchType)
 	return _ret
 }
 
+// The number of bytes transferred for request header.
 func (o *NSURLSessionTaskTransactionMetrics) CountOfRequestHeaderBytesSent() int64 {
 	_ret := objc.Send[int64](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelCountOfRequestHeaderBytesSent)
 	return _ret
 }
 
+// The number of bytes transferred for request body. It includes protocol-specific framing, transfer encoding, and content encoding.
 func (o *NSURLSessionTaskTransactionMetrics) CountOfRequestBodyBytesSent() int64 {
 	_ret := objc.Send[int64](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelCountOfRequestBodyBytesSent)
 	return _ret
 }
 
+// The size of upload body data, file, or stream.
 func (o *NSURLSessionTaskTransactionMetrics) CountOfRequestBodyBytesBeforeEncoding() int64 {
 	_ret := objc.Send[int64](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelCountOfRequestBodyBytesBeforeEncoding)
 	return _ret
 }
 
+// The number of bytes transferred for response header.
 func (o *NSURLSessionTaskTransactionMetrics) CountOfResponseHeaderBytesReceived() int64 {
 	_ret := objc.Send[int64](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelCountOfResponseHeaderBytesReceived)
 	return _ret
 }
 
+// The number of bytes transferred for response body. It includes protocol-specific framing, transfer encoding, and content encoding.
 func (o *NSURLSessionTaskTransactionMetrics) CountOfResponseBodyBytesReceived() int64 {
 	_ret := objc.Send[int64](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelCountOfResponseBodyBytesReceived)
 	return _ret
 }
 
+// The size of data delivered to your delegate or completion handler.
 func (o *NSURLSessionTaskTransactionMetrics) CountOfResponseBodyBytesAfterDecoding() int64 {
 	_ret := objc.Send[int64](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelCountOfResponseBodyBytesAfterDecoding)
 	return _ret
 }
 
+// The IP address string of the local interface for the connection. For multipath protocols, this is the local address of the initial flow. If a connection was not used, this attribute is set to `nil`.
 func (o *NSURLSessionTaskTransactionMetrics) LocalAddress() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelLocalAddress)
 	if _ret != 0 {
@@ -246,6 +270,7 @@ func (o *NSURLSessionTaskTransactionMetrics) LocalAddress() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The port number of the local interface for the connection. For multipath protocols, this is the local port of the initial flow. If the app didn't use the connection, this value is `nil`.
 func (o *NSURLSessionTaskTransactionMetrics) LocalPort() *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelLocalPort)
 	if _ret != 0 {
@@ -254,6 +279,7 @@ func (o *NSURLSessionTaskTransactionMetrics) LocalPort() *NSNumber {
 	return NSNumberFromID(_ret)
 }
 
+// The IP address string of the remote interface for the connection. For multipath protocols, this is the remote address of the initial flow. If a connection was not used, this attribute is set to `nil`.
 func (o *NSURLSessionTaskTransactionMetrics) RemoteAddress() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelRemoteAddress)
 	if _ret != 0 {
@@ -262,6 +288,7 @@ func (o *NSURLSessionTaskTransactionMetrics) RemoteAddress() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The port number of the remote interface for the connection. For multipath protocols, this is the remote port of the initial flow. If the app didn't use the connection, this value is `nil`.
 func (o *NSURLSessionTaskTransactionMetrics) RemotePort() *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelRemotePort)
 	if _ret != 0 {
@@ -270,6 +297,7 @@ func (o *NSURLSessionTaskTransactionMetrics) RemotePort() *NSNumber {
 	return NSNumberFromID(_ret)
 }
 
+// The TLS protocol version the task negotiated with the endpoint for the connection. This value is a 2-byte sequence in host byte order. See `tls_protocol_version_t` in `Security/SecProtocolTypes.h` for possible values. If the task didn't negotiate an encrypted connection, this value is `nil`.
 func (o *NSURLSessionTaskTransactionMetrics) NegotiatedTLSProtocolVersion() *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelNegotiatedTLSProtocolVersion)
 	if _ret != 0 {
@@ -278,6 +306,7 @@ func (o *NSURLSessionTaskTransactionMetrics) NegotiatedTLSProtocolVersion() *NSN
 	return NSNumberFromID(_ret)
 }
 
+// The TLS cipher suite the task negotiated with the endpoint for the connection. This value is a 2-byte sequence in host byte order. See `tls_ciphersuite_t` in `Security/SecProtocolTypes.h` for possible values. If the task didn't negotiate an encrypted connection, this value is `nil`.
 func (o *NSURLSessionTaskTransactionMetrics) NegotiatedTLSCipherSuite() *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelNegotiatedTLSCipherSuite)
 	if _ret != 0 {
@@ -286,26 +315,31 @@ func (o *NSURLSessionTaskTransactionMetrics) NegotiatedTLSCipherSuite() *NSNumbe
 	return NSNumberFromID(_ret)
 }
 
+// Whether the connection is established over a cellular interface.
 func (o *NSURLSessionTaskTransactionMetrics) IsCellular() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelIsCellular)
 	return _ret
 }
 
+// Whether the connection is established over an expensive interface.
 func (o *NSURLSessionTaskTransactionMetrics) IsExpensive() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelIsExpensive)
 	return _ret
 }
 
+// Whether the connection is established over a constrained interface.
 func (o *NSURLSessionTaskTransactionMetrics) IsConstrained() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelIsConstrained)
 	return _ret
 }
 
+// Whether a multipath protocol is successfully negotiated for the connection.
 func (o *NSURLSessionTaskTransactionMetrics) IsMultipath() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelIsMultipath)
 	return _ret
 }
 
+// DNS protocol used for domain resolution.
 func (o *NSURLSessionTaskTransactionMetrics) DomainResolutionProtocol() NSURLSessionTaskMetricsDomainResolutionProtocol {
 	_ret := objc.Send[NSURLSessionTaskMetricsDomainResolutionProtocol](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelDomainResolutionProtocol)
 	return _ret

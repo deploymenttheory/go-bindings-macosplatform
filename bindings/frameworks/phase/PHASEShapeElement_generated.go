@@ -15,8 +15,6 @@ import (
 )
 
 // ShapeElement is an idiomatic wrapper over the Objective-C class PHASEShapeElement.
-//
-// An object that describes the characteristics of a physical surface.
 type ShapeElement struct {
 	objref.Handle
 }

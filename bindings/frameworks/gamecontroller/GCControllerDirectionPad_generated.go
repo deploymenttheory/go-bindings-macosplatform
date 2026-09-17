@@ -56,12 +56,6 @@ func (cdp *ControllerDirectionPad) WithValueChangedHandler(valueChangedHandler f
 	return cdp
 }
 
-// WithPreferredSystemGestureState sets the preferred state for handling input when the user binds the element to a system gesture.
-func (cdp *ControllerDirectionPad) WithPreferredSystemGestureState(preferredSystemGestureState SystemGestureState) *ControllerDirectionPad {
-	objc.Send[objc.ID](objref.IDOf(cdp), objc.RegisterName("setPreferredSystemGestureState:"), preferredSystemGestureState)
-	return cdp
-}
-
 // WithSfSymbolsName sets a system symbol for the element or the remapped element.
 func (cdp *ControllerDirectionPad) WithSfSymbolsName(sfSymbolsName string) *ControllerDirectionPad {
 	objc.Send[objc.ID](objref.IDOf(cdp), objc.RegisterName("setSfSymbolsName:"), purego.NSString(sfSymbolsName))
@@ -83,6 +77,12 @@ func (cdp *ControllerDirectionPad) WithUnmappedSfSymbolsName(unmappedSfSymbolsNa
 // WithUnmappedLocalizedName sets the element’s localized name, not the remapped name.
 func (cdp *ControllerDirectionPad) WithUnmappedLocalizedName(unmappedLocalizedName string) *ControllerDirectionPad {
 	objc.Send[objc.ID](objref.IDOf(cdp), objc.RegisterName("setUnmappedLocalizedName:"), purego.NSString(unmappedLocalizedName))
+	return cdp
+}
+
+// WithPreferredSystemGestureState sets the preferred state for handling input when the user binds the element to a system gesture.
+func (cdp *ControllerDirectionPad) WithPreferredSystemGestureState(preferredSystemGestureState SystemGestureState) *ControllerDirectionPad {
+	objc.Send[objc.ID](objref.IDOf(cdp), objc.RegisterName("setPreferredSystemGestureState:"), preferredSystemGestureState)
 	return cdp
 }
 

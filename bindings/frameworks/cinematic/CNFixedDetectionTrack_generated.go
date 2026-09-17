@@ -16,7 +16,7 @@ import (
 //
 // It embeds [DetectionTrack], promoting that type's methods.
 //
-// An object representing the fixed detection track.
+// A continuous detection track representing focus at a fixed disparity.
 type FixedDetectionTrack struct {
 	DetectionTrack
 }

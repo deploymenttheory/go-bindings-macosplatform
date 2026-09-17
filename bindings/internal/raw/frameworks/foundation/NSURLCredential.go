@@ -11,8 +11,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An authentication credential consisting of information specific to the type of credential and the type of persistent storage to use, if any.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsurlcredential
 type NSURLCredential struct {
 	NSObject
@@ -49,7 +47,7 @@ func (o *NSURLCredential) Persistence() NSURLCredentialPersistence {
 	return _ret
 }
 
-// @method initWithUser:password:persistence: @abstract Initialize a NSURLCredential with a user and password @param user the username @param password the password @param persistence enum that says to store per session, permanently or not at all @result The initialized NSURLCredential
+// Creates a URL credential instance initialized with a given user name and password, using a given persistence setting. - Parameter user: The user for the credential. - Parameter password: The password for `user`. - Parameter persistence: A value indicating whether the credential should be stored permanently, for the duration of the current session, or not at all.
 func (o *NSURLCredential) InitWithUserPasswordPersistence(user *NSString, password *NSString, persistence NSURLCredentialPersistence) *NSURLCredential {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLCredentialSelInitWithUserPasswordPersistence, user.Ptr(), password.Ptr(), persistence)
 	if _ret != 0 {
@@ -58,7 +56,7 @@ func (o *NSURLCredential) InitWithUserPasswordPersistence(user *NSString, passwo
 	return NSURLCredentialFromID(_ret)
 }
 
-// Creates a URL credential instance for internet password authentication with a given user name and password, using a given persistence setting.
+// Creates a new `NSURLCredential` with a user and password. - Parameter user: The user for the credential. - Parameter password: The password for `user`. - Parameter persistence: A value indicating whether the credential should be stored permanently, for the duration of the current session, or not at all. - Returns: The new autoreleased `NSURLCredential`.
 func NSURLCredentialCredentialWithUserPasswordPersistence(user *NSString, password *NSString, persistence NSURLCredentialPersistence) *NSURLCredential {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLCredential), _nSURLCredentialSelCredentialWithUserPasswordPersistence, user.Ptr(), password.Ptr(), persistence)
 	if _ret != 0 {
@@ -67,7 +65,7 @@ func NSURLCredentialCredentialWithUserPasswordPersistence(user *NSString, passwo
 	return NSURLCredentialFromID(_ret)
 }
 
-// @abstract Get the username @result The user string
+// The credential's user name.
 func (o *NSURLCredential) User() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLCredentialSelUser)
 	if _ret != 0 {
@@ -76,7 +74,7 @@ func (o *NSURLCredential) User() *NSString {
 	return NSStringFromID(_ret)
 }
 
-// @abstract Get the password @result The password string @discussion This method might actually attempt to retrieve the password from an external store, possible resulting in prompting, so do not call it unless needed.
+// The credential's password. You should only access this property if you need the actual password value. If you only need to know if there is a password, use `hasPassword`. Accessing this property may result in prompting the user for access.
 func (o *NSURLCredential) Password() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLCredentialSelPassword)
 	if _ret != 0 {
@@ -85,13 +83,13 @@ func (o *NSURLCredential) Password() *NSString {
 	return NSStringFromID(_ret)
 }
 
-// @abstract Find out if this credential has a password, without trying to get it @result YES if this credential has a password, otherwise NO @discussion If this credential's password is actually kept in an external store, the password method may return nil even if this method returns YES, since getting the password may fail, or the user may refuse access.
+// A Boolean value that indicates whether the credential has a password. This method does not attempt to retrieve the password. If this credential's password is stored in the user's keychain, the `password` property may return `nil` even if this method returns `YES` -- getting the password may fail, or the user may refuse access.
 func (o *NSURLCredential) HasPassword() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSURLCredentialSelHasPassword)
 	return _ret
 }
 
-// @method initWithIdentity:certificates:persistence: @abstract Initialize an NSURLCredential with an identity and array of at least 1 client certificates (SecCertificateRef) @param identity a SecIdentityRef object @param certArray an array containing at least one SecCertificateRef objects @param persistence enum that says to store per session, permanently or not at all @result the Initialized NSURLCredential
+// Creates a URL credential instance for resolving a client certificate authentication challenge. - Parameter identity: A `SecIdentityRef` object. - Parameter certArray: An array containing at least one `SecCertificateRef` objects, or `nil` if the server does not need any intermediate certificates to authenticate the client. - Parameter persistence: A value indicating whether the credential should be stored permanently, for the duration of the current session, or not at all.
 func (o *NSURLCredential) InitWithIdentityCertificatesPersistence(identity unsafe.Pointer, certArray *NSArray[objc.ID], persistence NSURLCredentialPersistence) *NSURLCredential {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLCredentialSelInitWithIdentityCertificatesPersistence, identity, certArray.Ptr(), persistence)
 	if _ret != 0 {
@@ -100,7 +98,7 @@ func (o *NSURLCredential) InitWithIdentityCertificatesPersistence(identity unsaf
 	return NSURLCredentialFromID(_ret)
 }
 
-// Creates a URL credential instance for resolving a client certificate authentication challenge.
+// Creates a new `NSURLCredential` with an identity and certificate array. - Parameter identity: A `SecIdentityRef` object. - Parameter certArray: An array containing at least one `SecCertificateRef` objects. - Parameter persistence: A value indicating whether the credential should be stored permanently, for the duration of the current session, or not at all. - Returns: The new autoreleased `NSURLCredential`.
 func NSURLCredentialCredentialWithIdentityCertificatesPersistence(identity unsafe.Pointer, certArray *NSArray[objc.ID], persistence NSURLCredentialPersistence) *NSURLCredential {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLCredential), _nSURLCredentialSelCredentialWithIdentityCertificatesPersistence, identity, certArray.Ptr(), persistence)
 	if _ret != 0 {
@@ -109,13 +107,13 @@ func NSURLCredentialCredentialWithIdentityCertificatesPersistence(identity unsaf
 	return NSURLCredentialFromID(_ret)
 }
 
-// @abstract Returns the SecIdentityRef of this credential, if it was created with a certificate and identity @result A SecIdentityRef or NULL if this is a username/password credential
+// The identity of this credential if it is a client certificate credential. This value is `nil` if the credential is not a client certificate credential.
 func (o *NSURLCredential) Identity() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSURLCredentialSelIdentity)
 	return _ret
 }
 
-// @abstract Returns an NSArray of SecCertificateRef objects representing the client certificate for this credential, if this credential was created with an identity and certificate. @result an NSArray of SecCertificateRef or NULL if this is a username/password credential
+// The intermediate certificates of the credential, if it is a client certificate credential. The certificates are `SecCertificateRef` objects. This value is `nil` if this is not a client certificate credential.
 func (o *NSURLCredential) Certificates() *NSArray[objc.ID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLCredentialSelCertificates)
 	if _ret != 0 {
@@ -124,7 +122,7 @@ func (o *NSURLCredential) Certificates() *NSArray[objc.ID] {
 	return NSArrayFromID[objc.ID](_ret)
 }
 
-// @method initWithTrust: @abstract Initialize a new NSURLCredential which specifies that the specified trust has been accepted. @result the Initialized NSURLCredential
+// Creates a URL credential instance for server trust authentication, initialized with an accepted trust. - Parameter trust: The accepted trust.
 func (o *NSURLCredential) InitWithTrust(trust unsafe.Pointer) *NSURLCredential {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLCredentialSelInitWithTrust, trust)
 	if _ret != 0 {
@@ -133,7 +131,7 @@ func (o *NSURLCredential) InitWithTrust(trust unsafe.Pointer) *NSURLCredential {
 	return NSURLCredentialFromID(_ret)
 }
 
-// Creates a URL credential instance for server trust authentication with a given accepted trust.
+// Creates a URL credential instance for server trust authentication with a given accepted trust. Before creating a server trust credential, it is the responsibility of the delegate of an “NSURLConnection“ instance or an “NSURLDownload“ instance to evaluate the trust. Do this by calling `SecTrustEvaluate`, passing it the trust obtained from the `serverTrust` method of the server's “NSURLProtectionSpace“ instance. If the trust is invalid, the authentication challenge should be cancelled with the “NSURLAuthenticationChallengeSender“ protocol's `cancelAuthenticationChallenge:` method. - Parameter trust: The accepted trust. - Returns: A new URL credential object, containing the accepted server trust.
 func NSURLCredentialCredentialForTrust(trust unsafe.Pointer) *NSURLCredential {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLCredential), _nSURLCredentialSelCredentialForTrust, trust)
 	if _ret != 0 {

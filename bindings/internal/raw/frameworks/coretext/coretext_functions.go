@@ -76,7 +76,7 @@ var (
 	_fnCTFontDescriptorGetTypeID                                       func() uint
 	_fnCTFontDescriptorMatchFontDescriptorsWithProgressHandler         func(unsafe.Pointer, unsafe.Pointer, objc.Block) bool
 	_fnCTFontDrawGlyphs                                                func(unsafe.Pointer, *uint16, *corefoundation.CGPoint, uint, unsafe.Pointer)
-	_fnCTFontDrawImageFromAdaptiveImageProviderAtPoint                 func(unsafe.Pointer, CTAdaptiveImageProviding, corefoundation.CGPoint, unsafe.Pointer)
+	_fnCTFontDrawImageFromAdaptiveImageProviderAtPoint                 func(unsafe.Pointer, objc.ID, corefoundation.CGPoint, unsafe.Pointer)
 	_fnCTFontGetAdvancesForGlyphs                                      func(unsafe.Pointer, CTFontOrientation, *uint16, *corefoundation.CGSize, int) float64
 	_fnCTFontGetAscent                                                 func(unsafe.Pointer) float64
 	_fnCTFontGetBoundingBox                                            func(unsafe.Pointer) corefoundation.CGRect
@@ -96,7 +96,7 @@ var (
 	_fnCTFontGetStringEncoding                                         func(unsafe.Pointer) uint
 	_fnCTFontGetSymbolicTraits                                         func(unsafe.Pointer) CTFontSymbolicTraits
 	_fnCTFontGetTypeID                                                 func() uint
-	_fnCTFontGetTypographicBoundsForAdaptiveImageProvider              func(unsafe.Pointer, CTAdaptiveImageProviding) corefoundation.CGRect
+	_fnCTFontGetTypographicBoundsForAdaptiveImageProvider              func(unsafe.Pointer, objc.ID) corefoundation.CGRect
 	_fnCTFontGetUIFontType                                             func(unsafe.Pointer) CTFontUIFontType
 	_fnCTFontGetUnderlinePosition                                      func(unsafe.Pointer) float64
 	_fnCTFontGetUnderlineThickness                                     func(unsafe.Pointer) float64
@@ -478,7 +478,7 @@ func CTFontDrawGlyphs(font unsafe.Pointer, glyphs *uint16, positions *corefounda
 	_fnCTFontDrawGlyphs(font, glyphs, positions, count, context_)
 }
 
-func CTFontDrawImageFromAdaptiveImageProviderAtPoint(font unsafe.Pointer, provider CTAdaptiveImageProviding, point corefoundation.CGPoint, context_ unsafe.Pointer) {
+func CTFontDrawImageFromAdaptiveImageProviderAtPoint(font unsafe.Pointer, provider objc.ID, point corefoundation.CGPoint, context_ unsafe.Pointer) {
 	_fnCTFontDrawImageFromAdaptiveImageProviderAtPoint(font, provider, point, context_)
 }
 
@@ -558,7 +558,7 @@ func CTFontGetTypeID() uint {
 	return _fnCTFontGetTypeID()
 }
 
-func CTFontGetTypographicBoundsForAdaptiveImageProvider(font unsafe.Pointer, provider CTAdaptiveImageProviding) corefoundation.CGRect {
+func CTFontGetTypographicBoundsForAdaptiveImageProvider(font unsafe.Pointer, provider objc.ID) corefoundation.CGRect {
 	return _fnCTFontGetTypographicBoundsForAdaptiveImageProvider(font, provider)
 }
 

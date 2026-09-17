@@ -72,6 +72,8 @@ var (
 	_cLLocationManagerSelSetHeadingFilter                                                  = objc.RegisterName("setHeadingFilter:")
 	_cLLocationManagerSelHeadingOrientation                                                = objc.RegisterName("headingOrientation")
 	_cLLocationManagerSelSetHeadingOrientation                                             = objc.RegisterName("setHeadingOrientation:")
+	_cLLocationManagerSelHeadingBody                                                       = objc.RegisterName("headingBody")
+	_cLLocationManagerSelSetHeadingBody                                                    = objc.RegisterName("setHeadingBody:")
 	_cLLocationManagerSelHeading                                                           = objc.RegisterName("heading")
 	_cLLocationManagerSelMaximumRegionMonitoringDistance                                   = objc.RegisterName("maximumRegionMonitoringDistance")
 	_cLLocationManagerSelMonitoredRegions                                                  = objc.RegisterName("monitoredRegions")
@@ -366,13 +368,24 @@ func (o *CLLocationManager) SetHeadingFilter(headingFilter unsafe.Pointer) {
 	o.Ptr().Send(_cLLocationManagerSelSetHeadingFilter, headingFilter)
 }
 
+// Deprecated: since macOS 27.0.
 func (o *CLLocationManager) HeadingOrientation() CLDeviceOrientation {
 	_ret := objc.Send[CLDeviceOrientation](o.Ptr(), _cLLocationManagerSelHeadingOrientation)
 	return _ret
 }
 
+// Deprecated: since macOS 27.0.
 func (o *CLLocationManager) SetHeadingOrientation(headingOrientation CLDeviceOrientation) {
 	o.Ptr().Send(_cLLocationManagerSelSetHeadingOrientation, headingOrientation)
+}
+
+func (o *CLLocationManager) HeadingBody() CLBodyIdentifiable {
+	_ret := objc.Send[CLBodyIdentifiable](o.Ptr(), _cLLocationManagerSelHeadingBody)
+	return _ret
+}
+
+func (o *CLLocationManager) SetHeadingBody(headingBody CLBodyIdentifiable) {
+	o.Ptr().Send(_cLLocationManagerSelSetHeadingBody, headingBody)
 }
 
 func (o *CLLocationManager) Heading() *CLHeading {

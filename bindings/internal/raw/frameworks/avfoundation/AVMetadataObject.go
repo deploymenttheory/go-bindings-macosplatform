@@ -74,7 +74,7 @@ func (o *AVMetadataObject) GroupID() int {
 	return _ret
 }
 
-// A unique identifier for each detected object type (face, body, hands, heads and salient objects) in a collection. Defaults to a value of -1 when invalid or not available. When used in conjunction with an “AVCaptureMetadataOutput“, each newly detected object that enters the scene is assigned a unique identifier. “objectID“s are never re-used as objects leave the picture and new ones enter. Objects that leave the picture and then re-enter are assigned a new “objectID“.
+// A unique identifier for each detected object type (face, body, hands, heads, salient objects and focus-tracked objects) in a collection. Defaults to a value of -1 when invalid or not available. When used in conjunction with an “AVCaptureMetadataOutput“, each newly detected object that enters the scene is assigned a unique identifier. “objectID“s are never re-used as objects leave the picture and new ones enter. Objects that leave the picture and then re-enter are assigned a new “objectID“. Focus-tracked objects are an exception. They retain the same “objectID“ when leaving and re-entering the picture.
 func (o *AVMetadataObject) ObjectID() int {
 	_ret := objc.Send[int](o.Ptr(), _aVMetadataObjectSelObjectID)
 	return _ret

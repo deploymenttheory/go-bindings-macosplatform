@@ -8,6 +8,7 @@ import (
 	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -48,10 +49,18 @@ func textTableBlockAdopt(id objc.ID) *TextTableBlock {
 }
 
 // NewTextTableBlockWithTableStartingRowRowSpanStartingColumnColumnSpan returns an initialized text table block.
-func NewTextTableBlockWithTableStartingRowRowSpanStartingColumnColumnSpan(table *TextTable, row int, rowSpan int, col int, colSpan int) *TextTableBlock {
+func NewTextTableBlockWithTableStartingRowRowSpanStartingColumnColumnSpan(table *TextTable, row int, rowSpan int, column int, columnSpan int) *TextTableBlock {
 	defer runtime.KeepAlive(table)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextTableBlock")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTable:startingRow:rowSpan:startingColumn:columnSpan:"), objref.IDOf(table), row, rowSpan, col, colSpan)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTable:startingRow:rowSpan:startingColumn:columnSpan:"), objref.IDOf(table), row, rowSpan, column, columnSpan)
+	return textTableBlockAdopt(_id)
+}
+
+// NewTextTableBlockWithCoder creates a new TextTableBlock.
+func NewTextTableBlockWithCoder(coder obj.Object) *TextTableBlock {
+	defer runtime.KeepAlive(coder)
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextTableBlock")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return textTableBlockAdopt(_id)
 }
 

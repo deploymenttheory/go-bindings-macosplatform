@@ -67,7 +67,7 @@ func NewMTRBaseClusterGeneralDiagnosticsWithDeviceEndpointQueue(device *MTRBaseD
 	return mTRBaseClusterGeneralDiagnosticsAdopt(_id)
 }
 
-// TestEventTriggerWithParamsCompletion command TestEventTrigger Provide a means for certification tests to trigger some test-plan-specific events
+// TestEventTriggerWithParamsCompletion command TestEventTrigger This command SHALL be supported to provide a means for certification tests to trigger some test-plan-specific events, necessary to assist in automation of device interactions for some certification test cases.
 func (mbcgd *MTRBaseClusterGeneralDiagnostics) TestEventTriggerWithParamsCompletion(params *MTRGeneralDiagnosticsClusterTestEventTriggerParams, completion func(unsafe.Pointer)) {
 	defer runtime.KeepAlive(mbcgd)
 	defer runtime.KeepAlive(params)

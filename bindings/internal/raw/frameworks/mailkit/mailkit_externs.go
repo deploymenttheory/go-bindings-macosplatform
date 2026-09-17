@@ -4,17 +4,36 @@
 package mailkit
 
 import (
+	"unsafe"
+
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/foundation"
 )
 
 // @brief Error domain and codes for extensions to report errors before message is delivered.
-func MEComposeSessionErrorDomain() uintptr {
+func MEComposeSessionErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mailkitLib, "MEComposeSessionErrorDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @brief Error domain and codes for extensions to report errors before message is delivered.
-func MEMessageSecurityErrorDomain() uintptr {
+func MEMessageSecurityErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mailkitLib, "MEMessageSecurityErrorDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }

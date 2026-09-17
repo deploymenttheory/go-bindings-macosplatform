@@ -359,6 +359,14 @@ func (bev *BackgroundExtensionView) WithGestureRecognizers(items ...GestureRecog
 	return bev
 }
 
+// WithExclusiveGestureBehavior sets declares whether gesture recognizers should be exclusive in this view and its subviews.
+func (bev *BackgroundExtensionView) WithExclusiveGestureBehavior(exclusiveGestureBehavior ViewExclusiveGestureBehavior) *BackgroundExtensionView {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setExclusiveGestureBehavior:"), exclusiveGestureBehavior)
+	})
+	return bev
+}
+
 // WithAllowedTouchTypes sets the allowed touch types.
 func (bev *BackgroundExtensionView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *BackgroundExtensionView {
 	purego.Main(func() {
@@ -420,6 +428,15 @@ func (bev *BackgroundExtensionView) WithHorizontalContentSizeConstraintActive(ho
 func (bev *BackgroundExtensionView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *BackgroundExtensionView {
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
+	return bev
+}
+
+// WithTextSelectionManager sets the text selection manager for this view.
+func (bev *BackgroundExtensionView) WithTextSelectionManager(textSelectionManager *TextSelectionManager) *BackgroundExtensionView {
+	defer runtime.KeepAlive(textSelectionManager)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setTextSelectionManager:"), objref.IDOf(textSelectionManager))
 	})
 	return bev
 }

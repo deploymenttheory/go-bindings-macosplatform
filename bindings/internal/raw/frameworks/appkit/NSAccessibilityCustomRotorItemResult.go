@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A target accessibility element that a custom rotor references.
+// @brief NSAccessibilityCustomRotorItemResults are the objects returned to assistive technologies that match a search parameter criteria.
 //
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsaccessibilitycustomrotoritemresult
 type NSAccessibilityCustomRotorItemResult struct {

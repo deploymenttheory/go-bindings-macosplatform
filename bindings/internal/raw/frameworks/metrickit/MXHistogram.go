@@ -13,6 +13,7 @@ import (
 // An object representing a histogram of data values of the same type of unit.
 //
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxhistogram
+// Deprecated: Use Histogram instead.
 type MXHistogram[UnitType purego.AnyObject] struct {
 	foundation.NSObject
 }

@@ -9,6 +9,114 @@ import (
 	"strings"
 )
 
+// An additional returned flag indicating whether a setting has been modified by the user.
+type ControllerHomeButtonSettingCustomizationStatus int64
+
+const (
+	// The user has not customized this setting.
+	ControllerHomeButtonSettingCustomizationDefault ControllerHomeButtonSettingCustomizationStatus = 0
+	// The user has customized this setting at least once.
+	ControllerHomeButtonSettingCustomizationUser ControllerHomeButtonSettingCustomizationStatus = 1
+)
+
+// String returns the ControllerHomeButtonSettingCustomizationStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ControllerHomeButtonSettingCustomizationStatus) String() string {
+	switch e {
+	case ControllerHomeButtonSettingCustomizationDefault:
+		return "ControllerHomeButtonSettingCustomizationDefault"
+	case ControllerHomeButtonSettingCustomizationUser:
+		return "ControllerHomeButtonSettingCustomizationUser"
+	default:
+		return fmt.Sprintf("ControllerHomeButtonSettingCustomizationStatus(%d)", int64(e))
+	}
+}
+
+// How the system responds to a press of the game controller Home button while your application is front-most.
+type ControllerHomeButtonSettingInAppAction int64
+
+const (
+	// The setting value could not be retrieved.
+	ControllerHomeButtonSettingInAppActionUnavailable ControllerHomeButtonSettingInAppAction = -1
+	// The system maintains its default handling regardless of your app’s preference.
+	ControllerHomeButtonSettingInAppActionDefault ControllerHomeButtonSettingInAppAction = 0
+	// The system defers its handling to your app’s preference.
+	ControllerHomeButtonSettingInAppActionDefer ControllerHomeButtonSettingInAppAction = 1
+	// System response to the game controller Home button press is disabled.
+	ControllerHomeButtonSettingInAppActionDisabled ControllerHomeButtonSettingInAppAction = 9223372036854775807
+)
+
+// String returns the ControllerHomeButtonSettingInAppAction constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ControllerHomeButtonSettingInAppAction) String() string {
+	switch e {
+	case ControllerHomeButtonSettingInAppActionUnavailable:
+		return "ControllerHomeButtonSettingInAppActionUnavailable"
+	case ControllerHomeButtonSettingInAppActionDefault:
+		return "ControllerHomeButtonSettingInAppActionDefault"
+	case ControllerHomeButtonSettingInAppActionDefer:
+		return "ControllerHomeButtonSettingInAppActionDefer"
+	case ControllerHomeButtonSettingInAppActionDisabled:
+		return "ControllerHomeButtonSettingInAppActionDisabled"
+	default:
+		return fmt.Sprintf("ControllerHomeButtonSettingInAppAction(%d)", int64(e))
+	}
+}
+
+// How the system responds to a press of the game controller Home button outside of contexts where an action of the front-most app takes priority.
+type ControllerHomeButtonSettingSystemAction int64
+
+const (
+	// The setting value could not be retrieved.
+	ControllerHomeButtonSettingSystemActionUnavailable ControllerHomeButtonSettingSystemAction = -1
+	// The controller home button system action performs some other action.
+	ControllerHomeButtonSettingSystemActionOther ControllerHomeButtonSettingSystemAction = 0
+	// The controller home button system action opens the current application.
+	ControllerHomeButtonSettingSystemActionOpenCurrentApplication ControllerHomeButtonSettingSystemAction = 1
+	// System response to the game controller Home button press is disabled.
+	ControllerHomeButtonSettingSystemActionDisabled ControllerHomeButtonSettingSystemAction = 9223372036854775807
+)
+
+// String returns the ControllerHomeButtonSettingSystemAction constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ControllerHomeButtonSettingSystemAction) String() string {
+	switch e {
+	case ControllerHomeButtonSettingSystemActionUnavailable:
+		return "ControllerHomeButtonSettingSystemActionUnavailable"
+	case ControllerHomeButtonSettingSystemActionOther:
+		return "ControllerHomeButtonSettingSystemActionOther"
+	case ControllerHomeButtonSettingSystemActionOpenCurrentApplication:
+		return "ControllerHomeButtonSettingSystemActionOpenCurrentApplication"
+	case ControllerHomeButtonSettingSystemActionDisabled:
+		return "ControllerHomeButtonSettingSystemActionDisabled"
+	default:
+		return fmt.Sprintf("ControllerHomeButtonSettingSystemAction(%d)", int64(e))
+	}
+}
+
+// A hint passed to -openControllerHomeButtonSettingsForActivity: to indicate the reason the app is requesting to open Settings.
+type ControllerHomeButtonSettingsCustomizationActivity int64
+
+const (
+	// Customize the system action.
+	ControllerHomeButtonSettingsCustomizeSystemActionActivity ControllerHomeButtonSettingsCustomizationActivity = 1
+	// Customize the in-app action.
+	ControllerHomeButtonSettingsCustomizeInAppActionActivity ControllerHomeButtonSettingsCustomizationActivity = 2
+)
+
+// String returns the ControllerHomeButtonSettingsCustomizationActivity constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ControllerHomeButtonSettingsCustomizationActivity) String() string {
+	switch e {
+	case ControllerHomeButtonSettingsCustomizeSystemActionActivity:
+		return "ControllerHomeButtonSettingsCustomizeSystemActionActivity"
+	case ControllerHomeButtonSettingsCustomizeInAppActionActivity:
+		return "ControllerHomeButtonSettingsCustomizeInAppActionActivity"
+	default:
+		return fmt.Sprintf("ControllerHomeButtonSettingsCustomizationActivity(%d)", int64(e))
+	}
+}
+
 // The possible values for controller player indices.
 type ControllerPlayerIndex int64
 
@@ -44,7 +152,6 @@ func (e ControllerPlayerIndex) String() string {
 	}
 }
 
-// A state that indicates whether a device’s battery has power and is charging.
 type DeviceBatteryState int64
 
 const (
@@ -71,7 +178,6 @@ func (e DeviceBatteryState) String() string {
 	}
 }
 
-// The possible modes of an adaptive trigger.
 type DualSenseAdaptiveTriggerMode int64
 
 const (
@@ -106,7 +212,6 @@ func (e DualSenseAdaptiveTriggerMode) String() string {
 	}
 }
 
-// The possible states of an adaptive trigger.
 type DualSenseAdaptiveTriggerStatus int64
 
 const (
@@ -165,16 +270,17 @@ func (e DualSenseAdaptiveTriggerStatus) String() string {
 	}
 }
 
-// A state for handling input when an element is part of a system gesture.
 type SystemGestureState int64
 
 const (
 	// System gesture recognizers will run before input is sent to app, this is the default state
 	SystemGestureStateEnabled SystemGestureState = 0
-	// Input is sent to app and processed by system gesture recognizers simultaneously
-	SystemGestureStateAlwaysReceive SystemGestureState = 1
-	// System gesture recognizers will not run at all. Input is passed directly to app
+	// System gesture recognizers will not run at all.  Input is passed directly to the app.
 	SystemGestureStateDisabled SystemGestureState = 2
+	// Input is sent to app and processed by system gesture recognizers simultaneously.  This is no longer recommended - prefer `.Disabled` instead.
+	//
+	// Deprecated: since macOS 27.0.
+	SystemGestureStateAlwaysReceive SystemGestureState = 1
 )
 
 // String returns the SystemGestureState constant's name, or its numeric form when the
@@ -183,16 +289,15 @@ func (e SystemGestureState) String() string {
 	switch e {
 	case SystemGestureStateEnabled:
 		return "SystemGestureStateEnabled"
-	case SystemGestureStateAlwaysReceive:
-		return "SystemGestureStateAlwaysReceive"
 	case SystemGestureStateDisabled:
 		return "SystemGestureStateDisabled"
+	case SystemGestureStateAlwaysReceive:
+		return "SystemGestureStateAlwaysReceive"
 	default:
 		return fmt.Sprintf("SystemGestureState(%d)", int64(e))
 	}
 }
 
-// The possible states of the user’s touch.
 type TouchState int64
 
 const (
@@ -1322,27 +1427,55 @@ func (e QosClass) String() string {
 	}
 }
 
+type TaskSharedRegionStubs uint8
+
+const (
+	TaskSharedRegionStubsDev  TaskSharedRegionStubs = 1
+	TaskSharedRegionStubsProd TaskSharedRegionStubs = 2
+)
+
+// String returns the TaskSharedRegionStubs constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TaskSharedRegionStubs) String() string {
+	switch e {
+	case TaskSharedRegionStubsDev:
+		return "TaskSharedRegionStubsDev"
+	case TaskSharedRegionStubsProd:
+		return "TaskSharedRegionStubsProd"
+	default:
+		return fmt.Sprintf("TaskSharedRegionStubs(%d)", int64(e))
+	}
+}
+
 type VirtualMemoryGuardExceptionCode uint32
 
 const (
-	KGUARD_EXC_DEALLOC_GAP                   VirtualMemoryGuardExceptionCode = 1
-	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        VirtualMemoryGuardExceptionCode = 2
-	KGUARD_EXC_RECLAIM_INDEX_FAILURE         VirtualMemoryGuardExceptionCode = 4
-	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    VirtualMemoryGuardExceptionCode = 8
-	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    VirtualMemoryGuardExceptionCode = 9
-	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         VirtualMemoryGuardExceptionCode = 10
-	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         VirtualMemoryGuardExceptionCode = 11
-	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  VirtualMemoryGuardExceptionCode = 12
-	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    VirtualMemoryGuardExceptionCode = 13
-	KGUARD_EXC_SEC_ACCESS_FAULT              VirtualMemoryGuardExceptionCode = 98
-	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        VirtualMemoryGuardExceptionCode = 99
-	KGUARD_EXC_SEC_COPY_DENIED               VirtualMemoryGuardExceptionCode = 100
-	KGUARD_EXC_SEC_SHARING_DENIED            VirtualMemoryGuardExceptionCode = 101
-	KGUARD_EXC_MTE_SYNC_FAULT                VirtualMemoryGuardExceptionCode = 200
-	KGUARD_EXC_MTE_ASYNC_USER_FAULT          VirtualMemoryGuardExceptionCode = 201
-	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          VirtualMemoryGuardExceptionCode = 202
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT VirtualMemoryGuardExceptionCode = 203
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT VirtualMemoryGuardExceptionCode = 204
+	KGUARD_EXC_DEALLOC_GAP                  VirtualMemoryGuardExceptionCode = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE       VirtualMemoryGuardExceptionCode = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE        VirtualMemoryGuardExceptionCode = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE   VirtualMemoryGuardExceptionCode = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE   VirtualMemoryGuardExceptionCode = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE        VirtualMemoryGuardExceptionCode = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE        VirtualMemoryGuardExceptionCode = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION VirtualMemoryGuardExceptionCode = 12
+	// Guard exception sent to a thread when a CoW defeatured map attempts to copy memory which is not permitted by system policy.
+	KGUARD_EXC_COW_DEFEATURED_COPY_DENIED VirtualMemoryGuardExceptionCode = 13
+	// Guard exception sent to a thread when it attempts to extract a given type of memory in a way which is not permitted for CoW defeatured maps.
+	KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED VirtualMemoryGuardExceptionCode = 14
+	// Guard exception sent to a thread when it attempts to copy-map a memory entry which was created for sharing by a CoW defeatured map.
+	KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED VirtualMemoryGuardExceptionCode = 15
+	KGUARD_EXC_COW_DEFEATURED_FIRST                    VirtualMemoryGuardExceptionCode = 13
+	KGUARD_EXC_COW_DEFEATURED_LAST                     VirtualMemoryGuardExceptionCode = 15
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY              VirtualMemoryGuardExceptionCode = 16
+	KGUARD_EXC_SEC_ACCESS_FAULT                        VirtualMemoryGuardExceptionCode = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT                  VirtualMemoryGuardExceptionCode = 99
+	KGUARD_EXC_SEC_COPY_DENIED                         VirtualMemoryGuardExceptionCode = 100
+	KGUARD_EXC_SEC_SHARING_DENIED                      VirtualMemoryGuardExceptionCode = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                          VirtualMemoryGuardExceptionCode = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT                    VirtualMemoryGuardExceptionCode = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT                    VirtualMemoryGuardExceptionCode = 202
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT           VirtualMemoryGuardExceptionCode = 203
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT           VirtualMemoryGuardExceptionCode = 204
 )
 
 // String returns the VirtualMemoryGuardExceptionCode constant's name, or its numeric form when the
@@ -1365,6 +1498,12 @@ func (e VirtualMemoryGuardExceptionCode) String() string {
 		return "KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE"
 	case KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION:
 		return "KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION"
+	case KGUARD_EXC_COW_DEFEATURED_COPY_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_COPY_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED"
 	case KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY:
 		return "KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY"
 	case KGUARD_EXC_SEC_ACCESS_FAULT:

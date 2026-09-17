@@ -29,6 +29,7 @@ var (
 	_hKHealthStoreSelGetRequestStatusForAuthorizationToShareTypesReadTypesCompletion = objc.RegisterName("getRequestStatusForAuthorizationToShareTypes:readTypes:completion:")
 	_hKHealthStoreSelHandleAuthorizationForExtensionWithCompletion                   = objc.RegisterName("handleAuthorizationForExtensionWithCompletion:")
 	_hKHealthStoreSelEarliestPermittedSampleDate                                     = objc.RegisterName("earliestPermittedSampleDate")
+	_hKHealthStoreSelGetEarliestAuthorizedSampleDateForTypesCompletion               = objc.RegisterName("getEarliestAuthorizedSampleDateForTypes:completion:")
 	_hKHealthStoreSelSaveObjectWithCompletion                                        = objc.RegisterName("saveObject:withCompletion:")
 	_hKHealthStoreSelSaveObjectsWithCompletion                                       = objc.RegisterName("saveObjects:withCompletion:")
 	_hKHealthStoreSelDeleteObjectWithCompletion                                      = objc.RegisterName("deleteObject:withCompletion:")
@@ -142,6 +143,21 @@ func (o *HKHealthStore) EarliestPermittedSampleDate() *foundation.NSDate {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return foundation.NSDateFromID(_ret)
+}
+
+// Returns the earliest date that the person permits your app to read samples for the given data types.
+func (o *HKHealthStore) GetEarliestAuthorizedSampleDateForTypesCompletion(types *foundation.NSSet[*HKObjectType], completion func(*foundation.NSDictionary[*HKObjectType, *foundation.NSDate], unsafe.Pointer)) {
+	var __block_completion objc.Block
+	if completion != nil {
+		__block_completion = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completion(foundation.NSDictionaryFromID[*HKObjectType, *foundation.NSDate](blockParam0), blockParam1)
+		})
+		defer __block_completion.Release()
+	}
+	o.Ptr().Send(_hKHealthStoreSelGetEarliestAuthorizedSampleDateForTypesCompletion, types.Ptr(), __block_completion)
 }
 
 // Saves the provided object to the HealthKit store.

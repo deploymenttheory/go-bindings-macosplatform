@@ -63,13 +63,11 @@ func (o *NSGarbageCollector) Disable() {
 }
 
 // Enables collection after collection has been disabled.
-// Deprecated: since macOS 10.6.
 func (o *NSGarbageCollector) Enable() {
 	o.Ptr().Send(_nSGarbageCollectorSelEnable)
 }
 
 // Returns a Boolean value that indicates whether garbage collection is currently enabled for the current process.
-// Deprecated: since macOS 10.6.
 func (o *NSGarbageCollector) IsEnabled() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSGarbageCollectorSelIsEnabled)
 	return _ret

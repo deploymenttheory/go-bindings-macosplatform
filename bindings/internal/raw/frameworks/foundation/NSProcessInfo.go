@@ -9,8 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A collection of information about the current process.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsprocessinfo
 type NSProcessInfo struct {
 	NSObject
@@ -63,12 +61,14 @@ func NSProcessInfoFromID(id objc.ID) *NSProcessInfo {
 	return o
 }
 
+// Returns a constant to indicate the operating system on which the process is executing. @DeprecationSummary { Use “ProcessInfo/operatingSystemVersion“ or “ProcessInfo/isOperatingSystemAtLeast(_:)“ instead } - Returns: Operating system identifier. In macOS, it's `NSMACHOperatingSystem`.
 // Deprecated: -operatingSystem always returns NSMACHOperatingSystem, use -operatingSystemVersion or -isOperatingSystemAtLeastVersion: instead
 func (o *NSProcessInfo) OperatingSystem() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSProcessInfoSelOperatingSystem)
 	return _ret
 }
 
+// Returns a string containing the name of the operating system on which the process is executing. @DeprecationSummary { Use “ProcessInfo/operatingSystemVersionString“ instead. } - Returns: Operating system name. In macOS, it's `@"NSMACHOperatingSystem"`.
 // Deprecated: -operatingSystemName always returns NSMACHOperatingSystem, use -operatingSystemVersionString instead
 func (o *NSProcessInfo) OperatingSystemName() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSProcessInfoSelOperatingSystemName)
@@ -78,27 +78,33 @@ func (o *NSProcessInfo) OperatingSystemName() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns a Boolean value indicating whether the version of the operating system on which the process is executing is the same or later than the given version. This method accounts for major, minor, and update versions of the operating system. - Parameters: - version: The operating system version to test against. - Returns: `true` if the operating system on which the process is executing is the same or later than the given version; otherwise `false`.
 func (o *NSProcessInfo) IsOperatingSystemAtLeastVersion(version NSOperatingSystemVersion) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSProcessInfoSelIsOperatingSystemAtLeastVersion, version)
 	return _ret
 }
 
+// Disables the application for quick killing using sudden termination. This method increments the sudden termination counter. When the termination counter reaches `0` the application allows sudden termination. By default the sudden termination counter is set to 1. This can be overridden in your application Info.plist. See <doc:ProcessInfo#Support-Sudden-Termination> for more information and debugging suggestions.
 func (o *NSProcessInfo) DisableSuddenTermination() {
 	o.Ptr().Send(_nSProcessInfoSelDisableSuddenTermination)
 }
 
+// Enables the application for quick killing using sudden termination. This method decrements the sudden termination counter. When the termination counter reaches `0` the application allows sudden termination. By default the sudden termination counter is set to 1. This can be overridden in your application Info.plist. See <doc:ProcessInfo#Support-Sudden-Termination> for more information and debugging suggestions.
 func (o *NSProcessInfo) EnableSuddenTermination() {
 	o.Ptr().Send(_nSProcessInfoSelEnableSuddenTermination)
 }
 
+// Disables automatic termination for the application. This method increments the automatic termination counter. When the counter is greater than `0`, the application is considered active and ineligible for automatic termination. For example, you could disable automatic termination when the user of an instant messaging application signs on, because the application requires a background connection to be maintained even if the application is otherwise inactive. The reason parameter is used to track why an application is or is not automatically terminable and can be inspected by debugging tools. A given reason can be used more than once at the same time. - Parameters: - reason: The reason why automatic termination is being disabled.
 func (o *NSProcessInfo) DisableAutomaticTermination(reason *NSString) {
 	o.Ptr().Send(_nSProcessInfoSelDisableAutomaticTermination, reason.Ptr())
 }
 
+// Enables automatic termination for the application. This method decrements the automatic termination counter. When the counter is `0`, the application is eligible for automatic termination. The reason parameter is used to track why an application is or is not automatically terminable and can be inspected by debugging tools. A given reason can be used more than once at the same time. - Parameters: - reason: The reason why automatic termination is being enabled.
 func (o *NSProcessInfo) EnableAutomaticTermination(reason *NSString) {
 	o.Ptr().Send(_nSProcessInfoSelEnableAutomaticTermination, reason.Ptr())
 }
 
+// Returns the process information agent for the process. An `NSProcessInfo` object is created the first time this property is accessed, and that same object is returned on each subsequent access.
 func NSProcessInfoProcessInfo() *NSProcessInfo {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSProcessInfo), _nSProcessInfoSelProcessInfo)
 	if _ret != 0 {
@@ -107,6 +113,7 @@ func NSProcessInfoProcessInfo() *NSProcessInfo {
 	return NSProcessInfoFromID(_ret)
 }
 
+// The variable names (keys) and their values in the environment from which the process was launched.
 func (o *NSProcessInfo) Environment() *NSDictionary[*NSString, *NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSProcessInfoSelEnvironment)
 	if _ret != 0 {
@@ -115,6 +122,7 @@ func (o *NSProcessInfo) Environment() *NSDictionary[*NSString, *NSString] {
 	return NSDictionaryFromID[*NSString, *NSString](_ret)
 }
 
+// Array of strings with the command-line arguments for the process. This array contains all the information passed in the `argv` array, including the executable name in the first element.
 func (o *NSProcessInfo) Arguments() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSProcessInfoSelArguments)
 	if _ret != 0 {
@@ -123,6 +131,7 @@ func (o *NSProcessInfo) Arguments() *NSArray[*NSString] {
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// The name of the host computer on which the process is executing.
 func (o *NSProcessInfo) HostName() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSProcessInfoSelHostName)
 	if _ret != 0 {
@@ -131,6 +140,7 @@ func (o *NSProcessInfo) HostName() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The name of the process. The process name is used to register application defaults and is used in error messages. It does not uniquely identify the process. > Warning: > User defaults and other aspects of the environment might depend on the process name, so be very careful if you change it. Setting the process name in this manner is not thread safe.
 func (o *NSProcessInfo) ProcessName() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSProcessInfoSelProcessName)
 	if _ret != 0 {
@@ -143,11 +153,13 @@ func (o *NSProcessInfo) SetProcessName(processName *NSString) {
 	o.Ptr().Send(_nSProcessInfoSelSetProcessName, processName.Ptr())
 }
 
+// The identifier of the process (often called process ID).
 func (o *NSProcessInfo) ProcessIdentifier() int {
 	_ret := objc.Send[int](o.Ptr(), _nSProcessInfoSelProcessIdentifier)
 	return _ret
 }
 
+// Global unique identifier for the process. The global ID for the process includes the host name, process ID, and a time stamp, which ensures that the ID is unique for the network. This property generates a new string each time its getter is invoked, and it uses a counter to guarantee that strings created from the same process are unique.
 func (o *NSProcessInfo) GloballyUniqueString() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSProcessInfoSelGloballyUniqueString)
 	if _ret != 0 {
@@ -156,7 +168,7 @@ func (o *NSProcessInfo) GloballyUniqueString() *NSString {
 	return NSStringFromID(_ret)
 }
 
-// Deprecated: -operatingSystemName always returns NSMACHOperatingSystem, use -operatingSystemVersionString instead
+// A string containing the version of the operating system on which the process is executing. The operating system version string is human readable, localized, and is appropriate for displaying to the user. This string is _not_ appropriate for parsing.
 func (o *NSProcessInfo) OperatingSystemVersionString() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSProcessInfoSelOperatingSystemVersionString)
 	if _ret != 0 {
@@ -165,31 +177,37 @@ func (o *NSProcessInfo) OperatingSystemVersionString() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The version of the operating system on which the process is executing.
 func (o *NSProcessInfo) OperatingSystemVersion() NSOperatingSystemVersion {
 	_ret := objc.Send[NSOperatingSystemVersion](o.Ptr(), _nSProcessInfoSelOperatingSystemVersion)
 	return _ret
 }
 
+// The number of processing cores available on the computer. This property value is equal to the result of entering the command `sysctl -n hw.ncpu` on the current system.
 func (o *NSProcessInfo) ProcessorCount() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSProcessInfoSelProcessorCount)
 	return _ret
 }
 
+// The number of active processing cores available on the computer. Whereas the “processorCount“ property reports the number of advertised processing cores, the “activeProcessorCount“ property reflects the actual number of active processing cores on the system. There are a number of different factors that may cause a core to not be active, including boot arguments, thermal throttling, or a manufacturing defect. This property value is equal to the result of entering the command `sysctl -n hw.logicalcpu` on the current system.
 func (o *NSProcessInfo) ActiveProcessorCount() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSProcessInfoSelActiveProcessorCount)
 	return _ret
 }
 
+// The amount of physical memory on the computer in bytes.
 func (o *NSProcessInfo) PhysicalMemory() uint64 {
 	_ret := objc.Send[uint64](o.Ptr(), _nSProcessInfoSelPhysicalMemory)
 	return _ret
 }
 
+// The amount of time the system has been awake since the last time it was restarted. > Important: > This API has the potential of being misused to access device signals to try to identify the device or user, also known as fingerprinting. Regardless of whether a user gives your app permission to track, fingerprinting is not allowed. When you use this API in your app or third-party SDK (an SDK not provided by Apple), declare your usage and the reason for using the API in your app or third-party SDK's `PrivacyInfo.xcprivacy` file. For more information, including the list of valid reasons for using the API, see [Describing use of required reason API](https://developer.apple.com/documentation/bundleresources/describing-use-of-required-reason-api).
 func (o *NSProcessInfo) SystemUptime() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSProcessInfoSelSystemUptime)
 	return _ret
 }
 
+// A Boolean value indicating whether the app supports automatic termination. Without setting this property or setting the equivalent `Info.plist` key (`NSSupportsAutomaticTermination`), the methods “disableAutomaticTermination:“ and “enableAutomaticTermination:“ have no effect, although the counter tracking automatic termination opt-outs is still kept up to date to ensure correctness if this is called later. Currently, setting this property to `NO` has no effect. This property should be set during `-applicationDidFinishLaunching:` or earlier.
 func (o *NSProcessInfo) AutomaticTerminationSupportEnabled() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSProcessInfoSelAutomaticTerminationSupportEnabled)
 	return _ret
@@ -199,15 +217,18 @@ func (o *NSProcessInfo) SetAutomaticTerminationSupportEnabled(automaticTerminati
 	o.Ptr().Send(_nSProcessInfoSelSetAutomaticTerminationSupportEnabled, automaticTerminationSupportEnabled)
 }
 
+// Begins an activity using the given options and reason. Indicate completion of the activity by calling “endActivity(_:)“ passing the returned object as the argument. - Parameters: - options: Options for the activity. See “ProcessInfo/ActivityOptions“ for possible values. - reason: A string used in debugging to indicate the reason the activity began. - Returns: An object token representing the activity.
 func (o *NSProcessInfo) BeginActivityWithOptionsReason(options NSActivityOptions, reason *NSString) NSObjectProtocol {
 	_ret := objc.Send[NSObjectProtocol](o.Ptr(), _nSProcessInfoSelBeginActivityWithOptionsReason, options, reason.Ptr())
 	return _ret
 }
 
+// Ends the given activity. - Parameters: - activity: An activity object returned by “beginActivity(options:reason:)“.
 func (o *NSProcessInfo) EndActivity(activity NSObjectProtocol) {
 	o.Ptr().Send(_nSProcessInfoSelEndActivity, activity)
 }
 
+// Synchronously performs an activity defined by a given block using the given options. The activity will be automatically ended after `block` returns. - Parameters: - options: Options for the activity. See “ProcessInfo/ActivityOptions“ for possible values. - reason: A string used in debugging to indicate the reason the activity began. - block: A block containing the work to be performed by the activity.
 func (o *NSProcessInfo) PerformActivityWithOptionsReasonUsing(options NSActivityOptions, reason *NSString, block func()) {
 	var __block_block objc.Block
 	if block != nil {
@@ -219,6 +240,7 @@ func (o *NSProcessInfo) PerformActivityWithOptionsReasonUsing(options NSActivity
 	o.Ptr().Send(_nSProcessInfoSelPerformActivityWithOptionsReasonUsing, options, reason.Ptr(), __block_block)
 }
 
+// Returns the account name of the current user.
 func (o *NSProcessInfo) UserName() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSProcessInfoSelUserName)
 	if _ret != 0 {
@@ -227,6 +249,7 @@ func (o *NSProcessInfo) UserName() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns the full name of the current user.
 func (o *NSProcessInfo) FullUserName() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSProcessInfoSelFullUserName)
 	if _ret != 0 {
@@ -245,16 +268,19 @@ func (o *NSProcessInfo) IsLowPowerModeEnabled() bool {
 	return _ret
 }
 
+// A Boolean value that indicates whether the process originated as an iOS app and runs on macOS. The value of this property is `YES` when the process is a Mac app built with Mac Catalyst, or an iOS app running on Apple silicon, and is running on a Mac. Frameworks that support iOS and macOS use this property to determine if the process is a Mac app built with Mac Catalyst. > Note: > To distinguish between an iOS app running on Apple silicon and a Mac app built with Mac Catalyst, use the “isiOSAppOnMac“ property.
 func (o *NSProcessInfo) IsMacCatalystApp() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSProcessInfoSelIsMacCatalystApp)
 	return _ret
 }
 
+// A Boolean value that indicates whether the process is an iPhone or iPad app running on a Mac. The value of this property is `YES` only when the process is an iOS app running on a Mac. The value is `NO` for all other apps on the Mac, including Mac apps built using Mac Catalyst. The property is also `NO` for processes running on platforms other than macOS.
 func (o *NSProcessInfo) IsiOSAppOnMac() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSProcessInfoSelIsiOSAppOnMac)
 	return _ret
 }
 
+// A Boolean value that indicates whether the process is an iPhone or iPad app running on visionOS. The value of this property is `YES` only when the process is an iOS app running on a visionOS device. The value is `NO` for all other apps on visionOS. The property is also `NO` for processes running on platforms other than visionOS.
 func (o *NSProcessInfo) IsiOSAppOnVision() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSProcessInfoSelIsiOSAppOnVision)
 	return _ret

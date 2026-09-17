@@ -73,7 +73,7 @@ func MTRBaseClusterOperationalStateFromID(id objc.ID) *MTRBaseClusterOperational
 	return o
 }
 
-// Command Pause Upon receipt, the device SHALL pause its operation if it is possible based on the current function of the server.
+// Command Pause This command SHALL be supported if the device supports remotely pausing the operation.
 func (o *MTRBaseClusterOperationalState) PauseWithParamsCompletion(params *MTROperationalStateClusterPauseParams, completion func(*MTROperationalStateClusterOperationalCommandResponseParams, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -102,7 +102,7 @@ func (o *MTRBaseClusterOperationalState) PauseWithCompletion(completion func(*MT
 	o.Ptr().Send(_mTRBaseClusterOperationalStateSelPauseWithCompletion, __block_completion)
 }
 
-// Command Stop Upon receipt, the device SHALL stop its operation if it is at a position where it is safe to do so and/or permitted.
+// Command Stop This command SHALL be supported if the device supports remotely stopping the operation.
 func (o *MTRBaseClusterOperationalState) StopWithParamsCompletion(params *MTROperationalStateClusterStopParams, completion func(*MTROperationalStateClusterOperationalCommandResponseParams, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -131,7 +131,7 @@ func (o *MTRBaseClusterOperationalState) StopWithCompletion(completion func(*MTR
 	o.Ptr().Send(_mTRBaseClusterOperationalStateSelStopWithCompletion, __block_completion)
 }
 
-// Command Start Upon receipt, the device SHALL start its operation if it is safe to do so and the device is in an operational state from which it can be started.
+// Command Start This command SHALL be supported if the device supports remotely starting the operation.
 func (o *MTRBaseClusterOperationalState) StartWithParamsCompletion(params *MTROperationalStateClusterStartParams, completion func(*MTROperationalStateClusterOperationalCommandResponseParams, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -160,7 +160,7 @@ func (o *MTRBaseClusterOperationalState) StartWithCompletion(completion func(*MT
 	o.Ptr().Send(_mTRBaseClusterOperationalStateSelStartWithCompletion, __block_completion)
 }
 
-// Command Resume Upon receipt, the device SHALL resume its operation from the point it was at when it received the Pause command, or from the point when it was paused by means outside of this cluster (for example by manual button press).
+// Command Resume This command SHALL be supported if the device supports remotely resuming the operation.
 func (o *MTRBaseClusterOperationalState) ResumeWithParamsCompletion(params *MTROperationalStateClusterResumeParams, completion func(*MTROperationalStateClusterOperationalCommandResponseParams, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {

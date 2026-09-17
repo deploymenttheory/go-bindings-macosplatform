@@ -386,7 +386,7 @@ func emitGenericFunctionWrappers(
 		}
 		funcs = append(funcs, view.Func{
 			GoName:  goName,
-			CName:   fn.Name,
+			CName:   fn.LinkSymbol(),
 			VarName: varName,
 			CommentLine: fmt.Sprintf(
 				"// %s calls the %s framework function %s.\n",
@@ -848,7 +848,7 @@ func emitCFFunctionWrappers(
 
 		funcs = append(funcs, view.Func{
 			GoName:  goName,
-			CName:   fn.Name,
+			CName:   fn.LinkSymbol(),
 			VarName: varName,
 			CommentLine: fmt.Sprintf(
 				"// %s reports an error if the %s framework function %s fails.\n",
@@ -938,7 +938,7 @@ func buildStatusCodeFunc(in statusCodeFuncInput, mapper *typemap.Mapper) view.Fu
 	}
 	return view.Func{
 		GoName:  in.goName,
-		CName:   in.fn.Name,
+		CName:   in.fn.LinkSymbol(),
 		VarName: in.varName,
 		CommentLine: fmt.Sprintf(
 			"// %s reports an error if the %s framework function %s fails.\n",

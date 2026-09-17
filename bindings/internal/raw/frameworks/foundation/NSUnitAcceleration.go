@@ -9,8 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A unit of measure for acceleration.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsunitacceleration
 type NSUnitAcceleration struct {
 	NSDimension
@@ -32,6 +30,7 @@ func NSUnitAccelerationFromID(id objc.ID) *NSUnitAcceleration {
 	return o
 }
 
+// The meters per second squared unit of acceleration.
 func NSUnitAccelerationMetersPerSecondSquared() *NSUnitAcceleration {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitAcceleration), _nSUnitAccelerationSelMetersPerSecondSquared)
 	if _ret != 0 {
@@ -40,6 +39,7 @@ func NSUnitAccelerationMetersPerSecondSquared() *NSUnitAcceleration {
 	return NSUnitAccelerationFromID(_ret)
 }
 
+// The gravity unit of acceleration.
 func NSUnitAccelerationGravity() *NSUnitAcceleration {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitAcceleration), _nSUnitAccelerationSelGravity)
 	if _ret != 0 {

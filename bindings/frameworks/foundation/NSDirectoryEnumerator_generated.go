@@ -18,8 +18,6 @@ import (
 // DirectoryEnumerator is an idiomatic wrapper over the Objective-C class NSDirectoryEnumerator.
 //
 // It embeds [Enumerator], promoting that type's methods.
-//
-// An object that enumerates the contents of a directory.
 type DirectoryEnumerator struct {
 	Enumerator
 }
@@ -68,26 +66,26 @@ func (de *DirectoryEnumerator) WithScriptingProperties(scriptingProperties map[s
 	return de
 }
 
-// SkipDescendents wraps the corresponding Objective-C method.
+// SkipDescendents causes the receiver to skip recursion into the most recently obtained subdirectory.
 func (de *DirectoryEnumerator) SkipDescendents() {
 	defer runtime.KeepAlive(de)
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("skipDescendents"))
 }
 
-// SkipDescendants wraps the corresponding Objective-C method.
+// SkipDescendants causes the receiver to skip recursion into the most recently obtained subdirectory. This method is identical to `skipDescendents` except for the spelling.
 func (de *DirectoryEnumerator) SkipDescendants() {
 	defer runtime.KeepAlive(de)
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("skipDescendants"))
 }
 
-// FileAttributes returns the file attributes.
+// FileAttributes returns a dictionary with the attributes of the most recently returned file or subdirectory (as referenced by the pathname). See the description of the `fileAttributesAtPath:traverseLink:` method of “NSFileManager“ for details on obtaining the attributes from the dictionary.
 func (de *DirectoryEnumerator) FileAttributes() obj.Object {
 	defer runtime.KeepAlive(de)
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("fileAttributes"))
 	return obj.Wrap(_r)
 }
 
-// DirectoryAttributes returns the directory attributes.
+// DirectoryAttributes returns a dictionary with the attributes of the directory at which enumeration started. See the description of the `fileAttributesAtPath:traverseLink:` method of “NSFileManager“ for details on obtaining the attributes from the dictionary.
 func (de *DirectoryEnumerator) DirectoryAttributes() obj.Object {
 	defer runtime.KeepAlive(de)
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("directoryAttributes"))
@@ -101,7 +99,7 @@ func (de *DirectoryEnumerator) IsEnumeratingDirectoryPostOrder() bool {
 	return _r
 }
 
-// Level returns the level.
+// Level returns the number of levels deep the current object is in the directory hierarchy being enumerated. The number of levels, with the directory passed to `enumeratorAtURL:includingPropertiesForKeys:options:errorHandler:` considered to be level `0`.
 func (de *DirectoryEnumerator) Level() int {
 	defer runtime.KeepAlive(de)
 	_r := objc.Send[int](objref.IDOf(de), objc.RegisterName("level"))

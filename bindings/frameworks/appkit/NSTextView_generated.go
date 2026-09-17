@@ -883,6 +883,14 @@ func (tv *TextView) WithGestureRecognizers(items ...GestureRecognizerProvider) *
 	return tv
 }
 
+// WithExclusiveGestureBehavior sets declares whether gesture recognizers should be exclusive in this view and its subviews.
+func (tv *TextView) WithExclusiveGestureBehavior(exclusiveGestureBehavior ViewExclusiveGestureBehavior) *TextView {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setExclusiveGestureBehavior:"), exclusiveGestureBehavior)
+	})
+	return tv
+}
+
 // WithAllowedTouchTypes sets the allowed touch types.
 func (tv *TextView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *TextView {
 	purego.Main(func() {
@@ -944,6 +952,15 @@ func (tv *TextView) WithHorizontalContentSizeConstraintActive(horizontalContentS
 func (tv *TextView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *TextView {
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
+	return tv
+}
+
+// WithTextSelectionManager sets the text selection manager for this view.
+func (tv *TextView) WithTextSelectionManager(textSelectionManager *TextSelectionManager) *TextView {
+	defer runtime.KeepAlive(textSelectionManager)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setTextSelectionManager:"), objref.IDOf(textSelectionManager))
 	})
 	return tv
 }
@@ -2492,6 +2509,62 @@ func (tv *TextView) CheckTextInDocument(sender obj.Object) {
 	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("checkTextInDocument:"), objref.IDOf(sender))
+	})
+
+}
+
+// TextViewportLayoutControllerConfigureRenderingSurfaceForTextLayoutFragment NSTextViewportLayoutControllerDelegate method that the framework calls when the layout controller lays out a text layout fragment in the UI. Requires a call to super.
+func (tv *TextView) TextViewportLayoutControllerConfigureRenderingSurfaceForTextLayoutFragment(textViewportLayoutController *TextViewportLayoutController, textLayoutFragment *TextLayoutFragment) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(textViewportLayoutController)
+	defer runtime.KeepAlive(textLayoutFragment)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("textViewportLayoutController:configureRenderingSurfaceForTextLayoutFragment:"), objref.IDOf(textViewportLayoutController), objref.IDOf(textLayoutFragment))
+	})
+
+}
+
+// ViewportBoundsForTextViewportLayoutController NSTextViewportLayoutControllerDelegate method that the framework calls to request the current viewport, which is the view visible bounds plus the overdraw area. Requires a call to super.
+func (tv *TextView) ViewportBoundsForTextViewportLayoutController(textViewportLayoutController *TextViewportLayoutController) corefoundation.CGRect {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(textViewportLayoutController)
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_r := objc.Send[corefoundation.CGRect](objref.IDOf(tv), objc.RegisterName("viewportBoundsForTextViewportLayoutController:"), objref.IDOf(textViewportLayoutController))
+			return _r
+		}()
+	})
+	return _mainthread0
+
+}
+
+// TextViewportLayoutControllerWillLayout NSTextViewportLayoutControllerDelegate method that the framework calls when the text viewport layout controller starts its layout process. Requires a call to super.
+func (tv *TextView) TextViewportLayoutControllerWillLayout(textViewportLayoutController *TextViewportLayoutController) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(textViewportLayoutController)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("textViewportLayoutControllerWillLayout:"), objref.IDOf(textViewportLayoutController))
+	})
+
+}
+
+// TextViewportLayoutControllerDidLayout NSTextViewportLayoutControllerDelegate method that the framework calls when the text viewport layout controller finishes its layout process. Requires a call to super.
+func (tv *TextView) TextViewportLayoutControllerDidLayout(textViewportLayoutController *TextViewportLayoutController) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(textViewportLayoutController)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("textViewportLayoutControllerDidLayout:"), objref.IDOf(textViewportLayoutController))
+	})
+
+}
+
+// TextViewportLayoutControllerReceivedSetNeedsLayout NSTextViewportLayoutControllerDelegate method that the framework calls when the text viewport layout controller receives a setNeedsLayout call. Requires a call to super.
+func (tv *TextView) TextViewportLayoutControllerReceivedSetNeedsLayout(textViewportLayoutController *TextViewportLayoutController) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(textViewportLayoutController)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("textViewportLayoutControllerReceivedSetNeedsLayout:"), objref.IDOf(textViewportLayoutController))
 	})
 
 }

@@ -10,6 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
+// The set of possible in-memory representations for the elements of an array passed to `AEGetArray`/`AEPutArray`, selected by an `AEArrayType`: a flat C array of fixed-size data values, a flat array of packed (variable-size) values, an array of `Handle`s, an array of `AEDesc`s, or an array of `AEKeyDesc`s.
 type AEArrayData struct {
 	KAEDataArray    [1]int16
 	KAEPackedArray  [1]int8
@@ -18,13 +19,16 @@ type AEArrayData struct {
 	KAEKeyDescArray [1]AEKeyDesc
 }
 
+// A structure containing error state.
 type AEBuildError struct {
 	FError    uint32
 	FErrorPos uint32
 }
 
+// An opaque reference to an object that encapsulates the mechnanism by which a list of processes running on a remote machine are obtained.  Created by AECreateRemoteProcessResolver, and must be disposed of by AEDisposeRemoteProcessResolver. A AERemoteProcessResolverRef is not a CFType.
 type AERemoteProcessResolver struct{}
 
+// An optional context parameter for asynchronous resolution.  The context is copied and the info pointer retained.  When the callback is made, the info pointer is passed to the callback.
 type AERemoteProcessResolverContext struct {
 	Version         int
 	Info            unsafe.Pointer
@@ -33,17 +37,20 @@ type AERemoteProcessResolverContext struct {
 	CopyDescription unsafe.Pointer
 }
 
+// A replacement token record used when manually resolving `formRange` key data. When an accessor proc receives key data whose descriptor type is `typeCurrentContainer` (`'ccnt'`), OSL has substituted the container token in place of the original container descriptor.  Applications that resolve range specifiers by calling “AEResolve“ recursively can ignore this type; those that walk the key data themselves will find one of these records when the range boundary was expressed as a `typeCurrentContainer`.
 type CcntTokenRecord struct {
 	TokenClass uint32
 	Token      AEDesc
 }
 
+// Text tagged with the script/language it's encoded in: a `WritingCode` header followed by the text bytes themselves (encoded per `theScriptCode`, not necessarily Unicode). Used as the payload of `typeIntlText`/`cIntlText` (`'itxt'`). `theText` is variable-length — the actual descriptor data extends past this one-byte placeholder for as many bytes as the text requires.
 type IntlText struct {
 	TheScriptCode int16
 	TheLangCode   int16
 	TheText       [1]int8
 }
 
+// A variable-length array of character offsets, used as the payload of `typeOffsetArray` (`'ofay'`), e.g. for `keyAEClauseOffsets` in TSM AppleEvents. `fOffset` is sized dynamically to hold `fNumOfOffsets` entries, as with `TextRangeArray`.
 type OffsetArray struct {
 	FNumOfOffsets int16
 	FOffset       [1]int32
@@ -51,8 +58,10 @@ type OffsetArray struct {
 
 type OpaqueAEDataStorageType struct{}
 
+// The AEStream interface allows you to build AppleEvents by appending to an opaque structure (an `AEStreamRef`) and then turning this structure into an AppleEvent.  The basic idea is to open the stream, write data, and then close it - closing it produces an `AEDesc`, which may be partially complete, or may be a complete AppleEvent.
 type OpaqueAEStreamRef struct{}
 
+// The layout of an application's `'scsz'` (Scripting Size) resource, read by the Apple Event Manager/OSA to learn how much memory a scriptable application needs and how it wants to be dispatched to. `scriptingSizeFlags` holds the `kLaunchToGetTerminology`/ `kDontFindAppBySignature`/`kAlwaysSendSubject` bits below; the remaining fields give the minimum, preferred, and maximum stack and heap sizes the application should be launched with.
 type TScriptingSizeResource struct {
 	ScriptingSizeFlags int16
 	MinStackSize       uint32
@@ -63,11 +72,13 @@ type TScriptingSizeResource struct {
 	MaxHeapSize        uint32
 }
 
+// A variable-length array of `TextRange`s, used as the payload of `typeTextRangeArray` (`'tray'`), e.g. for `keyAEUpdateRange`/`keyAEHiliteRange` in TSM AppleEvents. `fRange` is sized dynamically to hold `fNumOfRanges` entries — allocate the enclosing block large enough to hold all of them, not just the one declared here.
 type TextRangeArray struct {
 	FNumOfRanges int16
 	FRange       [1]TextRange
 }
 
+// Identifies the script and language of a run of text, as the pairing used by the classic Script Manager. Used as the payload of `typeIntlWritingCode`/`cIntlWritingCode` (`'intl'`) and as the header of `IntlText`.
 type WritingCode struct {
 	TheScriptCode int16
 	TheLangCode   int16
@@ -94,6 +105,7 @@ type AEStreamRef struct{ obj.Object }
 // it before using a returned handle; a nil handle's methods panic.
 func (h AEStreamRef) IsNil() bool { return h.Object == nil }
 
+// The fundamental unit of the Apple Event data model: a tagged descriptor consisting of a four-character `descriptorType` and an opaque handle to the data itself. Every value exchanged in an Apple event — scalars, lists, records, and the event itself — is represented as an `AEDesc`. Always initialize a descriptor (with `AEInitializeDesc`, or by zero-filling it) before using it, and dispose of it with `AEDisposeDesc` once you're done.
 // The C layout cannot be reproduced as a plain Go value struct, so it is held as
 // its exact-size bytes and read through the typed As* accessors below. It is
 // pointer-only: never pass it by value.
@@ -107,6 +119,7 @@ func (u *AEDesc) AsDescriptorType() uint32 {
 	return *(*uint32)(unsafe.Pointer(&u.data[0]))
 }
 
+// A single keyword/value pair, as stored in an `AERecord`: `descKey` identifies the parameter or property, and `descContent` holds its value.
 // The C layout cannot be reproduced as a plain Go value struct, so it is held as
 // its exact-size bytes and read through the typed As* accessors below. It is
 // pointer-only: never pass it by value.
@@ -120,6 +133,7 @@ func (u *AEKeyDesc) AsDescKey() uint32 {
 	return *(*uint32)(unsafe.Pointer(&u.data[0]))
 }
 
+// Identifies a range of text by character offset, along with how it should be highlighted. Used as the payload of `typeTextRange` (`'txrn'`), e.g. for `keyAEPinRange` in Text Services Manager (TSM) input-method AppleEvents.
 // The C layout cannot be reproduced as a plain Go value struct, so it is held as
 // its exact-size bytes and read through the typed As* accessors below. It is
 // pointer-only: never pass it by value.

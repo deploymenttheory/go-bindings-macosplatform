@@ -13,6 +13,7 @@ import (
 // An object representing the record for a signpost interval or event.
 //
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxsignpostrecord
+// Deprecated: Use SignpostRecord instead.
 type MXSignpostRecord struct {
 	foundation.NSObject
 }
@@ -41,6 +42,7 @@ func MXSignpostRecordFromID(id objc.ID) *MXSignpostRecord {
 }
 
 // @method        JSONRepresentation @abstract      Convenience method to return a JSON representation of this SignpostRecord. @result        An NSData object containing the JSON representation
+// Deprecated: Use SignpostRecord instead.
 func (o *MXSignpostRecord) JSONRepresentation() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXSignpostRecordSelJSONRepresentation)
 	if _ret != 0 {
@@ -50,6 +52,7 @@ func (o *MXSignpostRecord) JSONRepresentation() *foundation.NSData {
 }
 
 // @method        dictionaryRepresentation @abstract      Convenience method to return a NSDictionary representation of this SignpostRecord. @result        An NSDictionary object containing the dictionary representation
+// Deprecated: Use SignpostRecord instead.
 func (o *MXSignpostRecord) DictionaryRepresentation() *foundation.NSDictionary[objc.ID, objc.ID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXSignpostRecordSelDictionaryRepresentation)
 	if _ret != 0 {

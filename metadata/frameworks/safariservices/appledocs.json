@@ -43,6 +43,10 @@
       "doc": "An object that captures information about a webpage.",
       "url": "https://developer.apple.com/documentation/safariservices/sfsafaripageproperties"
     },
+    "SFSafariSettings": {
+      "doc": "A class that provides your app access to several of Safari’s settings options.",
+      "url": "https://developer.apple.com/documentation/safariservices/sfsafarisettings"
+    },
     "SFSafariTab": {
       "doc": "A proxy for a tab in a Safari window.",
       "url": "https://developer.apple.com/documentation/safariservices/sfsafaritab"
@@ -64,6 +68,21 @@
     "SFSafariExtensionHandling": {
       "doc": "A protocol for implementing event handling in a Safari app extension.",
       "url": "https://developer.apple.com/documentation/safariservices/sfsafariextensionhandling"
+    }
+  },
+  "enums": {
+    "SFSafariSettingsError": {
+      "url": "https://developer.apple.com/documentation/safariservices/sfsafarisettingserror",
+      "members": {
+        "SFSafariSettingsErrorFailed": {
+          "doc": "The system was unable to perform the requested operation.",
+          "url": "https://developer.apple.com/documentation/safariservices/sfsafarisettingserror/failed"
+        },
+        "SFSafariSettingsErrorNotAllowed": {
+          "doc": "The process does not have the permission to call this API.",
+          "url": "https://developer.apple.com/documentation/safariservices/sfsafarisettingserror/notallowed"
+        }
+      }
     }
   },
   "methods": {
@@ -121,6 +140,20 @@
       "-reload": {
         "doc": "Tells Safari to reload the webpage.",
         "url": "https://developer.apple.com/documentation/safariservices/sfsafaripage/reload()"
+      }
+    },
+    "SFSafariSettings": {
+      "+checkAutoFillUserNamesAndPasswordsEnabledWithCompletionHandler:": {
+        "doc": "Query the value of the Safari settings toggle for AutoFill \u003e User names and passwords",
+        "url": "https://developer.apple.com/documentation/safariservices/sfsafarisettings/checkautofillusernamesandpasswordsenabled(completionhandler:)"
+      },
+      "+openExportBrowsingDataSettingsWithCompletionHandler:": {
+        "doc": "Presents the Export Browsing Data sheet from Safari Settings.",
+        "url": "https://developer.apple.com/documentation/safariservices/sfsafarisettings/openexportbrowsingdatasettings(completionhandler:)"
+      },
+      "+openExtensionsSettingsForIdentifiers:completionHandler:": {
+        "doc": "Presents the extensions pane from Safari Settings.",
+        "url": "https://developer.apple.com/documentation/safariservices/sfsafarisettings/openextensionssettings(foridentifiers:completionhandler:)"
       }
     },
     "SFSafariTab": {

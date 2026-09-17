@@ -79,6 +79,7 @@ func (o *NSTextContentStorage) AdjustedRangeFromRangeForEditingTextSelection(tex
 	return NSTextRangeFromID(_ret)
 }
 
+// When `true`, `NSTextContentStorage` assumes the paragraph with `NSTextList` includes the text list marker string. Utilizes `NSTextList.includesTextListMarkers` as the default value.
 func (o *NSTextContentStorage) IncludesTextListMarkers() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTextContentStorageSelIncludesTextListMarkers)
 	return _ret
@@ -88,6 +89,7 @@ func (o *NSTextContentStorage) SetIncludesTextListMarkers(includesTextListMarker
 	o.Ptr().Send(_nSTextContentStorageSelSetIncludesTextListMarkers, includesTextListMarkers)
 }
 
+// An attributed string that contains the contents of the document. KVO-compliant.
 func (o *NSTextContentStorage) AttributedString() *foundation.NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextContentStorageSelAttributedString)
 	if _ret != 0 {

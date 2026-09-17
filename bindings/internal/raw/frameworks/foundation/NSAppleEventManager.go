@@ -103,6 +103,7 @@ func (o *NSAppleEventManager) ResumeWithSuspensionID(suspensionID unsafe.Pointer
 	o.Ptr().Send(_nSAppleEventManagerSelResumeWithSuspensionID, suspensionID)
 }
 
+// Returns the descriptor for `currentAppleEvent` if an Apple event is being handled on the current thread. An Apple event is being handled on the current thread if a handler that was registered with `-setEventHandler:andSelector:forEventClass:andEventID:` is being messaged at this instant or `-setCurrentAppleEventAndReplyEventWithSuspensionID:` has just been invoked. Returns `nil` otherwise. The effects of mutating or retaining the returned descriptor are undefined, although it may be copied.
 func (o *NSAppleEventManager) CurrentAppleEvent() *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppleEventManagerSelCurrentAppleEvent)
 	if _ret != 0 {
@@ -111,6 +112,7 @@ func (o *NSAppleEventManager) CurrentAppleEvent() *NSAppleEventDescriptor {
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
+// Returns the corresponding reply event descriptor if an Apple event is being handled on the current thread. An Apple event is being handled on the current thread if `currentAppleEvent` does not return `nil`. Returns `nil` otherwise. This descriptor, including any mutations, will be returned to the sender of the current event when all handling of the event has been completed, if the sender has requested a reply. The effects of retaining the descriptor are undefined; it may be copied, but mutations of the copy are not returned to the sender of the current event.
 func (o *NSAppleEventManager) CurrentReplyAppleEvent() *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppleEventManagerSelCurrentReplyAppleEvent)
 	if _ret != 0 {

@@ -120,21 +120,21 @@ func (ei *ExtensionItem) WithScriptingProperties(scriptingProperties map[string]
 	return ei
 }
 
-// AttributedTitle returns the attributed title.
+// AttributedTitle returns an optional title for the item.
 func (ei *ExtensionItem) AttributedTitle() *AttributedString {
 	defer runtime.KeepAlive(ei)
 	_r := objc.Send[objc.ID](objref.IDOf(ei), objc.RegisterName("attributedTitle"))
 	return AttributedStringFromID(_r)
 }
 
-// AttributedContentText returns the attributed content text.
+// AttributedContentText returns optional content text.
 func (ei *ExtensionItem) AttributedContentText() *AttributedString {
 	defer runtime.KeepAlive(ei)
 	_r := objc.Send[objc.ID](objref.IDOf(ei), objc.RegisterName("attributedContentText"))
 	return AttributedStringFromID(_r)
 }
 
-// Attachments returns the attachments.
+// Attachments returns optional array of media data associated with the extension item, including images, videos, and URLs. This is not meant to be an array of alternate data formats/types, but instead a collection to include in a social media post for example.
 //
 // Attachments returns the collection as a Go slice.
 func (ei *ExtensionItem) Attachments() []*ItemProvider {
@@ -143,7 +143,7 @@ func (ei *ExtensionItem) Attachments() []*ItemProvider {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ItemProvider { return ItemProviderFromID(_id) })
 }
 
-// UserInfo returns the user info.
+// UserInfo returns optional dictionary of key-value data. The key/value pairs accepted by the service are expected to be specified in the extension's
 func (ei *ExtensionItem) UserInfo() obj.Object {
 	defer runtime.KeepAlive(ei)
 	_r := objc.Send[objc.ID](objref.IDOf(ei), objc.RegisterName("userInfo"))

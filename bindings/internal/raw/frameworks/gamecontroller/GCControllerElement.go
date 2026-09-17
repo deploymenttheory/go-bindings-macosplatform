@@ -21,9 +21,6 @@ var (
 	_clsGCControllerElement                               = _objcClass("GCControllerElement")
 	_gCControllerElementSelCollection                     = objc.RegisterName("collection")
 	_gCControllerElementSelIsAnalog                       = objc.RegisterName("isAnalog")
-	_gCControllerElementSelIsBoundToSystemGesture         = objc.RegisterName("isBoundToSystemGesture")
-	_gCControllerElementSelPreferredSystemGestureState    = objc.RegisterName("preferredSystemGestureState")
-	_gCControllerElementSelSetPreferredSystemGestureState = objc.RegisterName("setPreferredSystemGestureState:")
 	_gCControllerElementSelSfSymbolsName                  = objc.RegisterName("sfSymbolsName")
 	_gCControllerElementSelSetSfSymbolsName               = objc.RegisterName("setSfSymbolsName:")
 	_gCControllerElementSelLocalizedName                  = objc.RegisterName("localizedName")
@@ -33,6 +30,9 @@ var (
 	_gCControllerElementSelUnmappedLocalizedName          = objc.RegisterName("unmappedLocalizedName")
 	_gCControllerElementSelSetUnmappedLocalizedName       = objc.RegisterName("setUnmappedLocalizedName:")
 	_gCControllerElementSelAliases                        = objc.RegisterName("aliases")
+	_gCControllerElementSelIsBoundToSystemGesture         = objc.RegisterName("isBoundToSystemGesture")
+	_gCControllerElementSelPreferredSystemGestureState    = objc.RegisterName("preferredSystemGestureState")
+	_gCControllerElementSelSetPreferredSystemGestureState = objc.RegisterName("setPreferredSystemGestureState:")
 )
 
 func GCControllerElementFromID(id objc.ID) *GCControllerElement {
@@ -58,22 +58,6 @@ func (o *GCControllerElement) Collection() *GCControllerElement {
 func (o *GCControllerElement) IsAnalog() bool {
 	_ret := objc.Send[bool](o.Ptr(), _gCControllerElementSelIsAnalog)
 	return _ret
-}
-
-// Check if the element is bound to a system gesture. Defaults to NO for most elements. @see preferredSystemGestureState @see GCSystemGestureState
-func (o *GCControllerElement) IsBoundToSystemGesture() bool {
-	_ret := objc.Send[bool](o.Ptr(), _gCControllerElementSelIsBoundToSystemGesture)
-	return _ret
-}
-
-// The preferred system gesture state for this element. Defaults to GCSystemGestureStateEnabled for most elements @note This is merely the preferred system gesture state - it is not guaranteed to be respected by the system. @note It is highly recommended to leave this set to the default value, however there may be situations (for example, game streaming apps) where it is preferrable to disable system gestures. @see boundToSystemGesture
-func (o *GCControllerElement) PreferredSystemGestureState() GCSystemGestureState {
-	_ret := objc.Send[GCSystemGestureState](o.Ptr(), _gCControllerElementSelPreferredSystemGestureState)
-	return _ret
-}
-
-func (o *GCControllerElement) SetPreferredSystemGestureState(preferredSystemGestureState GCSystemGestureState) {
-	o.Ptr().Send(_gCControllerElementSelSetPreferredSystemGestureState, preferredSystemGestureState)
 }
 
 // The element's SF Symbols name, taking input remapping into account. @note In almost all instances, you should use this over unmappedSfSymbolsName in your UI.
@@ -135,4 +119,20 @@ func (o *GCControllerElement) Aliases() *foundation.NSSet[*foundation.NSString] 
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return foundation.NSSetFromID[*foundation.NSString](_ret)
+}
+
+// Check if the element is bound to a system gesture. Defaults to NO for most elements. @see preferredSystemGestureState
+func (o *GCControllerElement) IsBoundToSystemGesture() bool {
+	_ret := objc.Send[bool](o.Ptr(), _gCControllerElementSelIsBoundToSystemGesture)
+	return _ret
+}
+
+// The preferred system gesture state for this element. This is merely the preferred system gesture state - it is not guaranteed to be respected by the system.  It is highly recommended to leave this set to the default value, however there may be situations (for example, game streaming apps) where it is preferrable to disable system gestures. Defaults to `GCSystemGestureStateEnabled`. @see GCSystemGestureState
+func (o *GCControllerElement) PreferredSystemGestureState() GCSystemGestureState {
+	_ret := objc.Send[GCSystemGestureState](o.Ptr(), _gCControllerElementSelPreferredSystemGestureState)
+	return _ret
+}
+
+func (o *GCControllerElement) SetPreferredSystemGestureState(preferredSystemGestureState GCSystemGestureState) {
+	o.Ptr().Send(_gCControllerElementSelSetPreferredSystemGestureState, preferredSystemGestureState)
 }

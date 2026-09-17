@@ -12,192 +12,370 @@ import (
 )
 
 var (
-	_fnCFBridgingRelease            func(unsafe.Pointer) unsafe.Pointer
-	_fnCFBridgingRetain             func(objc.ID) unsafe.Pointer
-	_fnNSAllHashTableObjects        func(objc.ID) objc.ID
-	_fnNSAllMapTableKeys            func(objc.ID) objc.ID
-	_fnNSAllMapTableValues          func(objc.ID) objc.ID
-	_fnNSAllocateCollectable        func(uint, uint) unsafe.Pointer
-	_fnNSAllocateMemoryPages        func(uint) unsafe.Pointer
-	_fnNSAllocateObject             func(objc.Class, uint, unsafe.Pointer) objc.ID
-	_fnNSClassFromString            func(objc.ID) objc.Class
-	_fnNSCompareHashTables          func(objc.ID, objc.ID) bool
-	_fnNSCompareMapTables           func(objc.ID, objc.ID) bool
-	_fnNSContainsRect               func(corefoundation.CGRect, corefoundation.CGRect) bool
+	_fnCFBridgingRelease func(unsafe.Pointer) objc.ID
+	_fnCFBridgingRetain  func(objc.ID) unsafe.Pointer
+	// Returns all of the elements in a hash table.
+	_fnNSAllHashTableObjects func(objc.ID) objc.ID
+	// Returns all of the keys in a map table.
+	_fnNSAllMapTableKeys func(objc.ID) objc.ID
+	// Returns all of the values in a map table.
+	_fnNSAllMapTableValues func(objc.ID) objc.ID
+	// Allocates collectable memory. @DeprecationSummary { Garbage collection is deprecated in OS X v10.8; instead, you should use Automatic Reference Counting. } - Parameters: - size: The number of bytes of memory to allocate. - options: `0` or `NSScannedOption`: A value of `0` allocates non-scanned memory; a value of `NSScannedOption` allocates scanned memory. - Returns: A pointer to the allocated memory, or `NULL` if the function is unable to allocate the requested memory.
+	_fnNSAllocateCollectable func(uint, uint) unsafe.Pointer
+	// Allocates a given number of bytes of virtual memory.
+	_fnNSAllocateMemoryPages func(uint) unsafe.Pointer
+	_fnNSAllocateObject      func(objc.Class, uint, unsafe.Pointer) objc.ID
+	// Obtains a class by name. - Parameter aClassName: The name of a class. - Returns: The class object named by `aClassName`, or `nil` if no class by that name is currently loaded. If `aClassName` is `nil`, returns `nil`.
+	_fnNSClassFromString func(objc.ID) objc.Class
+	// Returns a Boolean value that indicates whether two hash tables are equal.
+	_fnNSCompareHashTables func(objc.ID, objc.ID) bool
+	// Returns a Boolean value that indicates whether two map tables are equal.
+	_fnNSCompareMapTables func(objc.ID, objc.ID) bool
+	// Returns a Boolean value that indicates whether one rectangle completely encloses another. - Returns: `true` if `aRect` completely encloses `bRect`. For this condition to be true, `bRect` cannot be empty, and must not extend beyond `aRect` in any direction.
+	_fnNSContainsRect func(corefoundation.CGRect, corefoundation.CGRect) bool
+	// Performs a type conversion. Converts the double value in `x` to a value whose bytes can be swapped. This function does not actually swap the bytes of `x`. You should not need to call this function directly. - Parameter x: The value you want to convert. - Returns: The converted value.
 	_fnNSConvertHostDoubleToSwapped func(float64) NSSwappedDouble
-	_fnNSConvertHostFloatToSwapped  func(float32) NSSwappedFloat
+	// Performs a type conversion. Converts the float value in `x` to a value whose bytes can be swapped. This function does not actually swap the bytes of `x`. You should not need to call this function directly. - Parameter x: The value you want to convert. - Returns: The converted value.
+	_fnNSConvertHostFloatToSwapped func(float32) NSSwappedFloat
+	// Performs a type conversion. Converts the value in `x` to a double value. This function does not actually swap the bytes of `x`. You should not need to call this function directly. - Parameter x: The value you want to convert. - Returns: The converted value.
 	_fnNSConvertSwappedDoubleToHost func(NSSwappedDouble) float64
-	_fnNSConvertSwappedFloatToHost  func(NSSwappedFloat) float32
-	_fnNSCopyHashTableWithZone      func(objc.ID, unsafe.Pointer) objc.ID
-	_fnNSCopyMapTableWithZone       func(objc.ID, unsafe.Pointer) unsafe.Pointer
-	_fnNSCopyMemoryPages            func(unsafe.Pointer, unsafe.Pointer, uint)
+	// Performs a type conversion. Converts the value in `x` to a float value. This function does not actually swap the bytes of `x`. You should not need to call this function directly. - Parameter x: The value you want to convert. - Returns: The converted value.
+	_fnNSConvertSwappedFloatToHost func(NSSwappedFloat) float32
+	// Returns a copy of a hash table.
+	_fnNSCopyHashTableWithZone func(objc.ID, unsafe.Pointer) objc.ID
+	// Returns a copy of a map table.
+	_fnNSCopyMapTableWithZone func(objc.ID, unsafe.Pointer) objc.ID
+	// Copies a given number of bytes from one memory location to another.
+	_fnNSCopyMemoryPages func(unsafe.Pointer, unsafe.Pointer, uint)
+	// Creates an exact copy of an object.
 	// Deprecated: Not supported
-	_fnNSCopyObject                    func(objc.ID, uint, unsafe.Pointer) objc.ID
-	_fnNSCountHashTable                func(objc.ID) uint
-	_fnNSCountMapTable                 func(objc.ID) uint
-	_fnNSCreateHashTable               func(NSHashTableCallBacks, uint) objc.ID
-	_fnNSCreateHashTableWithZone       func(NSHashTableCallBacks, uint, unsafe.Pointer) objc.ID
-	_fnNSCreateMapTable                func(NSMapTableKeyCallBacks, NSMapTableValueCallBacks, uint) unsafe.Pointer
-	_fnNSCreateMapTableWithZone        func(NSMapTableKeyCallBacks, NSMapTableValueCallBacks, uint, unsafe.Pointer) unsafe.Pointer
-	_fnNSCreateZone                    func(uint, uint, bool) unsafe.Pointer
-	_fnNSDeallocateMemoryPages         func(unsafe.Pointer, uint)
-	_fnNSDeallocateObject              func(objc.ID)
-	_fnNSDecimalAdd                    func(*NSDecimal, *NSDecimal, *NSDecimal, NSRoundingMode) NSCalculationError
-	_fnNSDecimalCompact                func(*NSDecimal)
-	_fnNSDecimalCompare                func(*NSDecimal, *NSDecimal) NSComparisonResult
-	_fnNSDecimalCopy                   func(*NSDecimal, *NSDecimal)
-	_fnNSDecimalDivide                 func(*NSDecimal, *NSDecimal, *NSDecimal, NSRoundingMode) NSCalculationError
-	_fnNSDecimalIsNotANumber           func(*NSDecimal) bool
-	_fnNSDecimalMultiply               func(*NSDecimal, *NSDecimal, *NSDecimal, NSRoundingMode) NSCalculationError
-	_fnNSDecimalMultiplyByPowerOf10    func(*NSDecimal, *NSDecimal, int16, NSRoundingMode) NSCalculationError
-	_fnNSDecimalNormalize              func(*NSDecimal, *NSDecimal, NSRoundingMode) NSCalculationError
-	_fnNSDecimalPower                  func(*NSDecimal, *NSDecimal, uint, NSRoundingMode) NSCalculationError
-	_fnNSDecimalRound                  func(*NSDecimal, *NSDecimal, int, NSRoundingMode)
-	_fnNSDecimalString                 func(*NSDecimal, objc.ID) objc.ID
-	_fnNSDecimalSubtract               func(*NSDecimal, *NSDecimal, *NSDecimal, NSRoundingMode) NSCalculationError
+	_fnNSCopyObject func(objc.ID, uint, unsafe.Pointer) objc.ID
+	// Returns the number of elements in a hash table.
+	_fnNSCountHashTable func(objc.ID) uint
+	// Returns the number of entries in a map table.
+	_fnNSCountMapTable func(objc.ID) uint
+	// Creates and returns a new hash table. The table's size is dependent on (but generally not equal to) `capacity`. If `capacity` is 0, a small hash table is created. The `NSHashTableCallBacks` structure `callBacks` has five pointers to functions, with the following defaults: pointer hashing, if `hash` is `NULL`; pointer equality, if `isEqual` is `NULL`; no callback upon adding an element, if `retain` is `NULL`; no callback upon removing an element, if `release` is `NULL`; and a function returning a pointer's hexadecimal value as a string, if `describe` is `NULL`. The hashing function must be defined such that if two data elements are equal, as defined by the comparison function, the values produced by hashing on these elements must also be equal. Also, data elements must remain invariant if the value of the hashing function depends on them; for example, if the hashing function operates directly on the characters of a string, that string can't change. - Parameters: - callBacks: A structure that defines the callbacks for the hash table. - capacity: The initial capacity of the hash table. - Returns: A pointer to an `NSHashTable` created in the default zone.
+	_fnNSCreateHashTable func(NSHashTableCallBacks, uint) objc.ID
+	// Creates a new hash table in a given zone. The table's size is dependent on (but generally not equal to) `capacity`. If `capacity` is 0, a small hash table is created. The `NSHashTableCallBacks` structure `callBacks` has five pointers to functions, with the following defaults: pointer hashing, if `hash` is `NULL`; pointer equality, if `isEqual` is `NULL`; no callback upon adding an element, if `retain` is `NULL`; no callback upon removing an element, if `release` is `NULL`; and a function returning a pointer's hexadecimal value as a string, if `describe` is `NULL`. The hashing function must be defined such that if two data elements are equal, as defined by the comparison function, the values produced by hashing on these elements must also be equal. Also, data elements must remain invariant if the value of the hashing function depends on them; for example, if the hashing function operates directly on the characters of a string, that string can't change. - Parameters: - callBacks: A structure that defines the callbacks for the hash table. - capacity: The initial capacity of the hash table. - zone: The zone in which to create the hash table. If `NULL`, the hash table is created in the default zone. - Returns: A pointer to a new hash table created in the specified zone. If `zone` is `NULL`, the hash table is created in the default zone.
+	_fnNSCreateHashTableWithZone func(NSHashTableCallBacks, uint, unsafe.Pointer) objc.ID
+	// Creates a new map table in the default zone. The table's size is dependent on (but generally not equal to) `capacity`. If `capacity` is 0, a small map table is created. The `NSMapTableKeyCallBacks` arguments are structures that are very similar to the callback structure used by `NSCreateHashTable`—they have the same defaults as documented for that function. - Parameters: - keyCallBacks: The key callback structure for the map table. - valueCallBacks: The value callback structure for the map table. - capacity: The initial capacity of the map table.
+	_fnNSCreateMapTable func(NSMapTableKeyCallBacks, NSMapTableValueCallBacks, uint) objc.ID
+	// Creates a new map table in the specified zone. The table's size is dependent on (but generally not equal to) `capacity`. If `capacity` is 0, a small map table is created. The `NSMapTableKeyCallBacks` arguments are structures that are very similar to the callback structure used by `NSCreateHashTable`; in fact, they have the same defaults as documented for that function. - Parameters: - keyCallBacks: The key callback structure for the map table. - valueCallBacks: The value callback structure for the map table. - capacity: The initial capacity of the map table. - zone: The zone in which to create the map table. If `NULL`, the map table is created in the default zone. - Returns: A new map table allocated in `zone`. If `zone` is `NULL`, the map table is created in the default zone.
+	_fnNSCreateMapTableWithZone func(NSMapTableKeyCallBacks, NSMapTableValueCallBacks, uint, unsafe.Pointer) objc.ID
+	// Creates a new zone.
+	_fnNSCreateZone func(uint, uint, bool) unsafe.Pointer
+	// Deallocates the memory occupied by a given number of bytes.
+	_fnNSDeallocateMemoryPages func(unsafe.Pointer, uint)
+	// Destroys an existing object.
+	_fnNSDeallocateObject func(objc.ID)
+	// Adds two decimal values. The `result` parameter may be a pointer to the same space as `leftOperand` or `rightOperand`.
+	_fnNSDecimalAdd func(*NSDecimal, *NSDecimal, *NSDecimal, NSRoundingMode) NSCalculationError
+	// Compacts the decimal structure for efficiency.
+	_fnNSDecimalCompact func(*NSDecimal)
+	// Compares two decimal values.
+	_fnNSDecimalCompare func(*NSDecimal, *NSDecimal) NSComparisonResult
+	// Copies the value of a decimal number.
+	_fnNSDecimalCopy func(*NSDecimal, *NSDecimal)
+	// Divides one decimal number by another. Division could be silently inexact. The `result` parameter may be a pointer to the same space as `leftOperand` or `rightOperand`.
+	_fnNSDecimalDivide func(*NSDecimal, *NSDecimal, *NSDecimal, NSRoundingMode) NSCalculationError
+	// Returns a Boolean value indicating whether a decimal value is not a number. - Parameter dcm: The decimal value to evaluate. - Returns: `NO` if the value in `dcm` represents a valid number, otherwise `YES`.
+	_fnNSDecimalIsNotANumber func(*NSDecimal) bool
+	// Multiplies two decimal numbers together. The `result` parameter may be a pointer to the same space as `leftOperand` or `rightOperand`.
+	_fnNSDecimalMultiply func(*NSDecimal, *NSDecimal, *NSDecimal, NSRoundingMode) NSCalculationError
+	// Multiplies a decimal number by a power of 10.
+	_fnNSDecimalMultiplyByPowerOf10 func(*NSDecimal, *NSDecimal, int16, NSRoundingMode) NSCalculationError
+	// Normalizes the internal representation of two decimal numbers to simplify later operations.
+	_fnNSDecimalNormalize func(*NSDecimal, *NSDecimal, NSRoundingMode) NSCalculationError
+	// Raises a decimal number to the given power.
+	_fnNSDecimalPower func(*NSDecimal, *NSDecimal, uint, NSRoundingMode) NSCalculationError
+	// Rounds a decimal value to the given scale using the given mode. The `result` parameter may be a pointer to the same space as `number`. The `scale` parameter indicates the number of significant digits after the decimal point.
+	_fnNSDecimalRound func(*NSDecimal, *NSDecimal, int, NSRoundingMode)
+	// Returns a string representation of a decimal value appropriate for the given locale.
+	_fnNSDecimalString func(*NSDecimal, objc.ID) objc.ID
+	// Subtracts one decimal value from another. The `result` parameter may be a pointer to the same space as `leftOperand` or `rightOperand`.
+	_fnNSDecimalSubtract func(*NSDecimal, *NSDecimal, *NSDecimal, NSRoundingMode) NSCalculationError
+	// Decrements the specified object's reference count.
 	_fnNSDecrementExtraRefCountWasZero func(objc.ID) bool
-	_fnNSDefaultMallocZone             func() unsafe.Pointer
-	_fnNSDivideRect                    func(corefoundation.CGRect, *corefoundation.CGRect, *corefoundation.CGRect, float64, NSRectEdge)
-	_fnNSEdgeInsetsEqual               func(NSEdgeInsets, NSEdgeInsets) bool
-	_fnNSEdgeInsetsMake                func(float64, float64, float64, float64) NSEdgeInsets
-	_fnNSEndHashTableEnumeration       func(*NSHashEnumerator)
-	_fnNSEndMapTableEnumeration        func(*NSMapEnumerator)
-	_fnNSEnumerateHashTable            func(objc.ID) NSHashEnumerator
-	_fnNSEnumerateMapTable             func(objc.ID) NSMapEnumerator
-	_fnNSEqualPoints                   func(corefoundation.CGPoint, corefoundation.CGPoint) bool
-	_fnNSEqualRanges                   func(NSRange, NSRange) bool
-	_fnNSEqualRects                    func(corefoundation.CGRect, corefoundation.CGRect) bool
-	_fnNSEqualSizes                    func(corefoundation.CGSize, corefoundation.CGSize) bool
-	_fnNSExtraRefCount                 func(objc.ID) uint
-	_fnNSFileTypeForHFSTypeCode        func(uint) objc.ID
-	_fnNSFreeHashTable                 func(objc.ID)
-	_fnNSFreeMapTable                  func(objc.ID)
-	_fnNSFullUserName                  func() objc.ID
-	_fnNSGetSizeAndAlignment           func(string, *uint, *uint) string
-	_fnNSGetUncaughtExceptionHandler   func() unsafe.Pointer
-	_fnNSHFSTypeCodeFromFileType       func(objc.ID) uint
-	_fnNSHFSTypeOfFile                 func(objc.ID) objc.ID
-	_fnNSHashGet                       func(objc.ID, unsafe.Pointer) unsafe.Pointer
-	_fnNSHashInsert                    func(objc.ID, unsafe.Pointer)
-	_fnNSHashInsertIfAbsent            func(objc.ID, unsafe.Pointer) unsafe.Pointer
-	_fnNSHashInsertKnownAbsent         func(objc.ID, unsafe.Pointer)
-	_fnNSHashRemove                    func(objc.ID, unsafe.Pointer)
-	_fnNSHeight                        func(corefoundation.CGRect) float64
-	_fnNSHomeDirectory                 func() objc.ID
-	_fnNSHomeDirectoryForUser          func(objc.ID) objc.ID
-	_fnNSHostByteOrder                 func() int
-	// Deprecated: Not supported
-	_fnNSIncrementExtraRefCount  func(objc.ID)
-	_fnNSInsetRect               func(corefoundation.CGRect, float64, float64) corefoundation.CGRect
-	_fnNSIntegralRect            func(corefoundation.CGRect) corefoundation.CGRect
+	// Returns the default zone.
+	_fnNSDefaultMallocZone func() unsafe.Pointer
+	// Divides a rectangle into two new rectangles. Creates two rectangles -- `slice` and `rem` -- from `inRect`, by dividing `inRect` with a line that's parallel to the side of `inRect` specified by `edge`. The size of `slice` is determined by `amount`, which specifies the distance from `edge`. `slice` and `rem` must not be `NULL`.
+	_fnNSDivideRect func(corefoundation.CGRect, *corefoundation.CGRect, *corefoundation.CGRect, float64, NSRectEdge)
+	// Returns a Boolean value that indicates whether two edge insets structures are equal.
+	_fnNSEdgeInsetsEqual func(NSEdgeInsets, NSEdgeInsets) bool
+	// Creates an edge insets structure with the specified inset values. - Parameters: - top: The top edge inset value. - left: The left edge inset value. - bottom: The bottom edge inset value. - right: The right edge inset value. - Returns: A new `NSEdgeInsets` with the specified values.
+	_fnNSEdgeInsetsMake func(float64, float64, float64, float64) NSEdgeInsets
+	// Frees an enumerator for a hash table.
+	_fnNSEndHashTableEnumeration func(*NSHashEnumerator)
+	// Frees an enumerator for a map table.
+	_fnNSEndMapTableEnumeration func(*NSMapEnumerator)
+	// Returns an enumerator for a hash table.
+	_fnNSEnumerateHashTable func(objc.ID) NSHashEnumerator
+	// Returns an enumerator for a map table.
+	_fnNSEnumerateMapTable func(objc.ID) NSMapEnumerator
+	// Returns a Boolean value that indicates whether two points are equal. - Returns: `true` if the two points `aPoint` and `bPoint` are identical, otherwise `false`.
+	_fnNSEqualPoints func(corefoundation.CGPoint, corefoundation.CGPoint) bool
+	// Returns a Boolean value that indicates whether two given ranges are equal. - Parameters: - range1: The first range to compare. - range2: The second range to compare. - Returns: `YES` if `range1` and `range2` have the same locations and lengths.
+	_fnNSEqualRanges func(NSRange, NSRange) bool
+	// Returns a Boolean value that indicates whether the two rectangles are equal. - Returns: `true` if `aRect` and `bRect` are identical, otherwise `false`.
+	_fnNSEqualRects func(corefoundation.CGRect, corefoundation.CGRect) bool
+	// Returns a Boolean value that indicates whether two size values are equal. - Returns: `true` if `aSize` and `bSize` are identical, otherwise `false`.
+	_fnNSEqualSizes func(corefoundation.CGSize, corefoundation.CGSize) bool
+	// Returns the specified object's reference count.
+	_fnNSExtraRefCount func(objc.ID) uint
+	// Returns a string encoding a file type code. - Parameter hfsFileTypeCode: An HFS file type code. - Returns: A string that encodes `hfsFileTypeCode`. The format of the string is a private implementation detail, but such strings are suitable for inclusion in arrays that also contain file name extension strings.
+	_fnNSFileTypeForHFSTypeCode func(uint) objc.ID
+	// Frees a hash table.
+	_fnNSFreeHashTable func(objc.ID)
+	// Frees a map table.
+	_fnNSFreeMapTable func(objc.ID)
+	// Returns a string containing the full name of the current user.
+	_fnNSFullUserName func() objc.ID
+	// Obtains the actual size and the aligned size of an encoded type. - Parameters: - typePtr: A pointer to an Objective-C type encoding. - sizep: Upon return, contains the actual size of the type. Pass `NULL` if you don't want this information. - alignp: Upon return, contains the aligned size of the type. Pass `NULL` if you don't want this information. - Returns: A pointer to the first character of the type code that's next in the type encoding string, or the empty string if there is no next type code.
+	_fnNSGetSizeAndAlignment func(string, *uint, *uint) string
+	// Returns the top-level error handler.
+	_fnNSGetUncaughtExceptionHandler func() unsafe.Pointer
+	// Returns a file type code. - Parameter fileTypeString: A string of the sort encoded by `NSFileTypeForHFSTypeCode()`. - Returns: The HFS file type code corresponding to `fileTypeString`, or `0` if it cannot be found.
+	_fnNSHFSTypeCodeFromFileType func(objc.ID) uint
+	// Returns a string encoding a file type. - Parameter fullFilePath: The full absolute path of a file. - Returns: A string that encodes `fullFilePath`'s HFS file type, or `nil` if the operation was not successful.
+	_fnNSHFSTypeOfFile func(objc.ID) objc.ID
+	// Returns an element of the hash table.
+	_fnNSHashGet func(objc.ID, unsafe.Pointer) unsafe.Pointer
+	// Adds an element to the hash table.
+	_fnNSHashInsert func(objc.ID, unsafe.Pointer)
+	// Adds an element to the hash table if it is not already present, and returns the element.
+	_fnNSHashInsertIfAbsent func(objc.ID, unsafe.Pointer) unsafe.Pointer
+	// Adds an element to the hash table, raising an exception if the element is already present.
+	_fnNSHashInsertKnownAbsent func(objc.ID, unsafe.Pointer)
+	// Removes an element from the hash table.
+	_fnNSHashRemove func(objc.ID, unsafe.Pointer)
+	// Returns the height of a given rectangle. - Returns: The height of `aRect`.
+	_fnNSHeight func(corefoundation.CGRect) float64
+	// Returns the path to either the user's or application's home directory, depending on the platform.
+	_fnNSHomeDirectory func() objc.ID
+	// Returns the path to a given user's home directory.
+	_fnNSHomeDirectoryForUser func(objc.ID) objc.ID
+	// Returns the endian format. - Returns: The endian format, either `NS_LittleEndian` or `NS_BigEndian`.
+	_fnNSHostByteOrder func() int
+	// Increments the specified object's reference count.
+	_fnNSIncrementExtraRefCount func(objc.ID)
+	// Insets a rectangle by a specified amount. - Returns: A copy of `aRect`, altered by moving the two sides that are parallel to the y axis inward by `dX`, and the two sides parallel to the x axis inwards by `dY`.
+	_fnNSInsetRect func(corefoundation.CGRect, float64, float64) corefoundation.CGRect
+	// Adjusts the sides of a rectangle to integer values. - Returns: A copy of `aRect`, expanded outward just enough to ensure that none of its four defining values (x, y, width, and height) have fractional parts. If the width or height of `aRect` is `0` or negative, this function returns a rectangle with origin at (0.0, 0.0) and with zero width and height.
+	_fnNSIntegralRect func(corefoundation.CGRect) corefoundation.CGRect
+	// Adjusts the sides of a rectangle to integral values using the specified options. - Returns: A copy of `aRect`, modified based on the options. The options are defined in `NSAlignmentOptions`.
 	_fnNSIntegralRectWithOptions func(corefoundation.CGRect, NSAlignmentOptions) corefoundation.CGRect
-	_fnNSIntersectionRange       func(NSRange, NSRange) NSRange
-	_fnNSIntersectionRect        func(corefoundation.CGRect, corefoundation.CGRect) corefoundation.CGRect
-	_fnNSIntersectsRect          func(corefoundation.CGRect, corefoundation.CGRect) bool
-	_fnNSIsEmptyRect             func(corefoundation.CGRect) bool
-	_fnNSLocationInRange         func(uint, NSRange) bool
-	_fnNSLogPageSize             func() uint
-	_fnNSLogv                    func(objc.ID, string)
-	_fnNSMakeCollectable         func(unsafe.Pointer) unsafe.Pointer
-	_fnNSMakePoint               func(float64, float64) corefoundation.CGPoint
-	_fnNSMakeRange               func(uint, uint) NSRange
-	_fnNSMakeRect                func(float64, float64, float64, float64) corefoundation.CGRect
-	_fnNSMakeSize                func(float64, float64) corefoundation.CGSize
-	_fnNSMapGet                  func(objc.ID, unsafe.Pointer) unsafe.Pointer
-	_fnNSMapInsert               func(objc.ID, unsafe.Pointer, unsafe.Pointer)
-	_fnNSMapInsertIfAbsent       func(objc.ID, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnNSMapInsertKnownAbsent    func(objc.ID, unsafe.Pointer, unsafe.Pointer)
-	_fnNSMapMember               func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
-	_fnNSMapRemove               func(objc.ID, unsafe.Pointer)
-	_fnNSMaxRange                func(NSRange) uint
-	_fnNSMaxX                    func(corefoundation.CGRect) float64
-	_fnNSMaxY                    func(corefoundation.CGRect) float64
-	_fnNSMidX                    func(corefoundation.CGRect) float64
-	_fnNSMidY                    func(corefoundation.CGRect) float64
-	_fnNSMinX                    func(corefoundation.CGRect) float64
-	_fnNSMinY                    func(corefoundation.CGRect) float64
-	_fnNSMouseInRect             func(corefoundation.CGPoint, corefoundation.CGRect, bool) bool
-	_fnNSNextHashEnumeratorItem  func(*NSHashEnumerator) unsafe.Pointer
-	_fnNSNextMapEnumeratorPair   func(*NSMapEnumerator, unsafe.Pointer, unsafe.Pointer) bool
-	_fnNSOffsetRect              func(corefoundation.CGRect, float64, float64) corefoundation.CGRect
-	_fnNSOpenStepRootDirectory   func() objc.ID
-	_fnNSPageSize                func() uint
-	_fnNSPointFromCGPoint        func(corefoundation.CGPoint) corefoundation.CGPoint
-	_fnNSPointFromString         func(objc.ID) corefoundation.CGPoint
-	_fnNSPointInRect             func(corefoundation.CGPoint, corefoundation.CGRect) bool
-	_fnNSPointToCGPoint          func(corefoundation.CGPoint) corefoundation.CGPoint
-	_fnNSProtocolFromString      func(objc.ID) unsafe.Pointer
-	_fnNSRangeFromString         func(objc.ID) NSRange
+	// Returns the intersection of the specified ranges.
+	_fnNSIntersectionRange func(NSRange, NSRange) NSRange
+	// Calculates the intersection of two rectangles. - Returns: The graphic intersection of `aRect` and `bRect`. If the two rectangles don't overlap, the returned rectangle has its origin at (0.0, 0.0) and zero width and height (including situations where the intersection is a point or a line segment).
+	_fnNSIntersectionRect func(corefoundation.CGRect, corefoundation.CGRect) corefoundation.CGRect
+	// Returns a Boolean value that indicates whether two rectangles intersect. - Returns: `true` if `aRect` intersects `bRect`, otherwise `false`. Returns `false` if either `aRect` or `bRect` has a width or height that is 0.
+	_fnNSIntersectsRect func(corefoundation.CGRect, corefoundation.CGRect) bool
+	// Returns a Boolean value that indicates whether a given rectangle is empty. - Returns: `true` if `aRect` encloses no area at all -- that is, if its width or height is 0 or negative, otherwise `false`.
+	_fnNSIsEmptyRect func(corefoundation.CGRect) bool
+	// Returns a Boolean value that indicates whether a specified position is in a given range. - Parameters: - loc: The position to test. - range: The range to test against. - Returns: `YES` if `loc` lies within `range`—that is, if it's greater than or equal to `range.location` and less than `range.location` plus `range.length`.
+	_fnNSLocationInRange func(uint, NSRange) bool
+	// Returns the binary log of the page size.
+	_fnNSLogPageSize func() uint
+	// Logs an error message to the Apple System Log facility. - Parameters: - format: A format string. See "Formatting String Objects" for examples of how to use this method, and "String Format Specifiers" for a list of format specifiers. - args: A list of arguments to substitute into `format`.
+	_fnNSLogv func(objc.ID, string)
+	// Makes a newly allocated Core Foundation object eligible for collection. @DeprecationSummary { Garbage collection is deprecated in OS X v10.8; instead, you should use Automatic Reference Counting. Use `CFBridgingRelease` instead. } This function is a wrapper for `CFMakeCollectable`, but its return type is `id`—avoiding the need for casting when using Cocoa objects. This function may be useful when returning Core Foundation objects in code that must support both garbage-collected and non-garbage-collected environments, as illustrated in the following example. ```objc - (CFDateRef)foo { CFDateRef aCFDate; // ... return [NSMakeCollectable(aCFDate) autorelease]; } ``` `CFTypeRef` style objects are garbage collected, yet only sometime after the last `CFRelease` is performed. Particularly for fully-bridged `CFTypeRef` objects such as CFStrings and collections (such as CFDictionary), you must call either `CFMakeCollectable` or the more type safe `NSMakeCollectable`, preferably right upon allocation.
+	_fnNSMakeCollectable func(unsafe.Pointer) objc.ID
+	// Creates a new `NSPoint` from the specified values. - Parameters: - x: The x coordinate. - y: The y coordinate. - Returns: An `NSPoint` having the coordinates `x` and `y`.
+	_fnNSMakePoint func(float64, float64) corefoundation.CGPoint
+	// Creates a new `NSRange` from the specified values. - Parameters: - loc: The starting location of the range. - len: The length of the range. - Returns: An `NSRange` with location `loc` and length `len`.
+	_fnNSMakeRange func(uint, uint) NSRange
+	// Creates a new `NSRect` from the specified values. - Parameters: - x: The x coordinate of the origin. - y: The y coordinate of the origin. - w: The width. - h: The height. - Returns: An `NSRect` having the specified origin of [`x`, `y`] and size of [`w`, `h`].
+	_fnNSMakeRect func(float64, float64, float64, float64) corefoundation.CGRect
+	// Creates a new `NSSize` from the specified values. - Parameters: - w: The width. - h: The height. - Returns: An `NSSize` having the specified `width` and `height`.
+	_fnNSMakeSize func(float64, float64) corefoundation.CGSize
+	// Returns the value associated with a given key in a map table.
+	_fnNSMapGet func(objc.ID, unsafe.Pointer) unsafe.Pointer
+	// Inserts a key-value pair into a map table.
+	_fnNSMapInsert func(objc.ID, unsafe.Pointer, unsafe.Pointer)
+	// Inserts a key-value pair into a map table if the key does not already exist, and returns the value.
+	_fnNSMapInsertIfAbsent func(objc.ID, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	// Inserts a key-value pair into a map table if the key does not already exist.
+	_fnNSMapInsertKnownAbsent func(objc.ID, unsafe.Pointer, unsafe.Pointer)
+	// Returns a Boolean value that indicates whether a map table contains a given key.
+	_fnNSMapMember func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
+	// Removes a key and its associated value from a map table.
+	_fnNSMapRemove func(objc.ID, unsafe.Pointer)
+	// Returns the sum of the location and length of the range. - Parameter range: The range to evaluate. - Returns: The sum of the location and length of the range—that is, `range.location` + `range.length`.
+	_fnNSMaxRange func(NSRange) uint
+	// Returns the largest x coordinate of a given rectangle. - Returns: The largest x coordinate value within `aRect`.
+	_fnNSMaxX func(corefoundation.CGRect) float64
+	// Returns the largest y coordinate of a given rectangle. - Returns: The largest y coordinate value within `aRect`.
+	_fnNSMaxY func(corefoundation.CGRect) float64
+	// Returns the x coordinate of a given rectangle's midpoint. - Returns: The x coordinate of the center of `aRect`.
+	_fnNSMidX func(corefoundation.CGRect) float64
+	// Returns the y coordinate of a given rectangle's midpoint. - Returns: The y coordinate of `aRect`'s center point.
+	_fnNSMidY func(corefoundation.CGRect) float64
+	// Returns the smallest x coordinate of a given rectangle. - Returns: The smallest x coordinate value within `aRect`.
+	_fnNSMinX func(corefoundation.CGRect) float64
+	// Returns the smallest y coordinate of a given rectangle. - Returns: The smallest y coordinate value within `aRect`.
+	_fnNSMinY func(corefoundation.CGRect) float64
+	// Returns a Boolean value that indicates whether the point is in the specified rectangle. This method assumes an unscaled and unrotated coordinate system. Specify `true` for `flipped` if the underlying view uses a flipped coordinate system. Point-in-rectangle functions generally assume that the bottom edge of a rectangle is outside of the rectangle boundaries, while the upper edge is inside the boundaries. This method views `aRect` from the point of view of the user -- that is, this method always treats the bottom edge of the rectangle as the one closest to the bottom edge of the user's screen. By making this adjustment, this function ensures consistent mouse-detection behavior from the user's perspective. - Returns: `true` if the hot spot of the cursor lies inside a given rectangle, otherwise `false`.
+	_fnNSMouseInRect func(corefoundation.CGPoint, corefoundation.CGRect, bool) bool
+	// Returns the next element in the hash table enumeration.
+	_fnNSNextHashEnumeratorItem func(*NSHashEnumerator) unsafe.Pointer
+	// Returns the next key-value pair in the enumeration.
+	_fnNSNextMapEnumeratorPair func(*NSMapEnumerator, unsafe.Pointer, unsafe.Pointer) bool
+	// Offsets the rectangle by the specified amount. - Returns: A copy of `aRect`, with its location shifted by `dX` along the x axis and by `dY` along the y axis.
+	_fnNSOffsetRect func(corefoundation.CGRect, float64, float64) corefoundation.CGRect
+	// Returns the root directory of the user's system.
+	_fnNSOpenStepRootDirectory func() objc.ID
+	// Returns the page size.
+	_fnNSPageSize func() uint
+	// Returns an `NSPoint` typecast from a `CGPoint`. - Returns: An `NSPoint` typecast from a `CGPoint`.
+	_fnNSPointFromCGPoint func(corefoundation.CGPoint) corefoundation.CGPoint
+	// Returns a point from a text-based representation. - Parameters: - aString: A string of the form "\{x, y\}". - Returns: If `aString` is of the form "\{x, y\}" an `NSPoint` structure that uses x and y as the x and y coordinates, in that order. If `aString` only contains a single number, it is used as the x coordinate. If `aString` does not contain any numbers, returns an `NSPoint` object whose x and y coordinates are both 0.
+	_fnNSPointFromString func(objc.ID) corefoundation.CGPoint
+	// Returns a Boolean value that indicates whether a given point is in a given rectangle. Point-in-rectangle functions generally assume that the "upper" and "left" edges of a rectangle are inside the rectangle boundaries, while the "lower" and "right" edges are outside the boundaries. This method treats the "upper" and "left" edges of the rectangle as the ones containing the origin of the rectangle. > The meanings of "upper" and "lower" (and "left" and "right") are relative to the current coordinate system and the location of the rectangle. For a rectangle of positive height located in positive x and y coordinates: > - In the default macOS desktop coordinate system -- where the origin is at the bottom left -- the rectangle edge closest to the bottom of the screen is the "upper" edge (and is considered inside the rectangle). > - On iOS and in a flipped coordinate system in macOS desktop -- where the origin is at the top left -- the rectangle edge closest to the bottom of the screen is the "lower" edge (and is considered outside the rectangle). - Returns: `true` if `aPoint` is located within the rectangle represented by `aRect`, otherwise `false`.
+	_fnNSPointInRect func(corefoundation.CGPoint, corefoundation.CGRect) bool
+	// Returns a `CGPoint` typecast from an `NSPoint`. - Returns: A `CGPoint` typecast from an `NSPoint`.
+	_fnNSPointToCGPoint func(corefoundation.CGPoint) corefoundation.CGPoint
+	// Returns a protocol with a given name. - Parameter namestr: The name of a protocol. - Returns: The protocol named by `namestr`, or `nil` if no protocol by that name is currently loaded.
+	_fnNSProtocolFromString func(objc.ID) unsafe.Pointer
+	// Returns a range from a textual representation.
+	_fnNSRangeFromString func(objc.ID) NSRange
 	// Deprecated: Use NSProcessInfo instead
-	_fnNSRealMemoryAvailable               func() uint
-	_fnNSReallocateCollectable             func(unsafe.Pointer, uint, uint) unsafe.Pointer
-	_fnNSRectFromCGRect                    func(corefoundation.CGRect) corefoundation.CGRect
-	_fnNSRectFromString                    func(objc.ID) corefoundation.CGRect
-	_fnNSRectToCGRect                      func(corefoundation.CGRect) corefoundation.CGRect
-	_fnNSRecycleZone                       func(unsafe.Pointer)
-	_fnNSResetHashTable                    func(objc.ID)
-	_fnNSResetMapTable                     func(objc.ID)
-	_fnNSRoundDownToMultipleOfPageSize     func(uint) uint
-	_fnNSRoundUpToMultipleOfPageSize       func(uint) uint
+	_fnNSRealMemoryAvailable func() uint
+	// Reallocates collectable memory. @DeprecationSummary { Garbage collection is deprecated in OS X v10.8; instead, you should use Automatic Reference Counting. } Changes the size of the block of memory pointed to by `ptr` to `size` bytes. It may allocate new memory to replace the old, in which case it moves the contents of the old memory block to the new block, up to a maximum of `size` bytes. - Parameters: - ptr: A pointer to the previously allocated memory block. - size: The new number of bytes of memory to allocate. - options: `0` or `NSScannedOption`: A value of `0` allocates non-scanned memory; a value of `NSScannedOption` allocates scanned memory. - Returns: A pointer to the reallocated memory, or `NULL` if the function is unable to allocate the requested memory.
+	_fnNSReallocateCollectable func(unsafe.Pointer, uint, uint) unsafe.Pointer
+	// Returns an `NSRect` typecast from a `CGRect`. - Returns: An `NSRect` typecast from a `CGRect`.
+	_fnNSRectFromCGRect func(corefoundation.CGRect) corefoundation.CGRect
+	// Returns a rectangle from a text-based representation. Scans `aString` for four numbers which are used as the x and y coordinates and the width and height, in that order, to create an `NSRect` object. If `aString` does not contain four numbers, those numbers that were scanned are used, and 0 is used for the remaining values. If `aString` does not contain any numbers, this function returns an `NSRect` object with a rectangle whose origin is (0, 0) and width and height are both 0.
+	_fnNSRectFromString func(objc.ID) corefoundation.CGRect
+	// Returns a `CGRect` typecast from an `NSRect`. - Returns: A `CGRect` typecast from an `NSRect`.
+	_fnNSRectToCGRect func(corefoundation.CGRect) corefoundation.CGRect
+	// Frees a zone after first deallocating all of its memory.
+	_fnNSRecycleZone func(unsafe.Pointer)
+	// Deletes the elements from a hash table, without freeing the table itself.
+	_fnNSResetHashTable func(objc.ID)
+	// Deletes the entries from a map table, without freeing the table itself.
+	_fnNSResetMapTable func(objc.ID)
+	// Rounds down a value to the nearest multiple of the page size.
+	_fnNSRoundDownToMultipleOfPageSize func(uint) uint
+	// Rounds up a value to the nearest multiple of the page size.
+	_fnNSRoundUpToMultipleOfPageSize func(uint) uint
+	// Creates a list of directory search paths.
 	_fnNSSearchPathForDirectoriesInDomains func(NSSearchPathDirectory, NSSearchPathDomainMask, bool) objc.ID
-	_fnNSSelectorFromString                func(objc.ID) objc.SEL
-	_fnNSSetUncaughtExceptionHandler       func(unsafe.Pointer)
-	_fnNSSetZoneName                       func(unsafe.Pointer, objc.ID)
+	// Returns the selector with a given name. - Parameter aSelectorName: A string of any length, with any characters, that represents the name of a selector. - Returns: The selector named by `aSelectorName`. If `aSelectorName` is not a valid selector name, returns `0`.
+	_fnNSSelectorFromString func(objc.ID) objc.SEL
+	// Changes the top-level error handler.
+	_fnNSSetUncaughtExceptionHandler func(unsafe.Pointer)
+	// Sets the name of a zone.
+	_fnNSSetZoneName func(unsafe.Pointer, objc.ID)
+	// Indicates whether an object should be retained.
 	// Deprecated: Not supported
-	_fnNSShouldRetainWithZone     func(objc.ID, unsafe.Pointer) bool
-	_fnNSSizeFromCGSize           func(corefoundation.CGSize) corefoundation.CGSize
-	_fnNSSizeFromString           func(objc.ID) corefoundation.CGSize
-	_fnNSSizeToCGSize             func(corefoundation.CGSize) corefoundation.CGSize
-	_fnNSStringFromClass          func(objc.Class) objc.ID
-	_fnNSStringFromHashTable      func(objc.ID) objc.ID
-	_fnNSStringFromMapTable       func(objc.ID) objc.ID
-	_fnNSStringFromPoint          func(corefoundation.CGPoint) objc.ID
-	_fnNSStringFromProtocol       func(unsafe.Pointer) objc.ID
-	_fnNSStringFromRange          func(NSRange) objc.ID
-	_fnNSStringFromRect           func(corefoundation.CGRect) objc.ID
-	_fnNSStringFromSelector       func(objc.SEL) objc.ID
-	_fnNSStringFromSize           func(corefoundation.CGSize) objc.ID
-	_fnNSSwapBigDoubleToHost      func(NSSwappedDouble) float64
-	_fnNSSwapBigFloatToHost       func(NSSwappedFloat) float32
-	_fnNSSwapBigIntToHost         func(uint) uint
-	_fnNSSwapBigLongLongToHost    func(uint64) uint64
-	_fnNSSwapBigLongToHost        func(uint) uint
-	_fnNSSwapBigShortToHost       func(uint16) uint16
-	_fnNSSwapDouble               func(NSSwappedDouble) NSSwappedDouble
-	_fnNSSwapFloat                func(NSSwappedFloat) NSSwappedFloat
-	_fnNSSwapHostDoubleToBig      func(float64) NSSwappedDouble
-	_fnNSSwapHostDoubleToLittle   func(float64) NSSwappedDouble
-	_fnNSSwapHostFloatToBig       func(float32) NSSwappedFloat
-	_fnNSSwapHostFloatToLittle    func(float32) NSSwappedFloat
-	_fnNSSwapHostIntToBig         func(uint) uint
-	_fnNSSwapHostIntToLittle      func(uint) uint
-	_fnNSSwapHostLongLongToBig    func(uint64) uint64
+	_fnNSShouldRetainWithZone func(objc.ID, unsafe.Pointer) bool
+	// Returns an `NSSize` typecast from a `CGSize`. - Returns: An `NSSize` typecast from a `CGSize`.
+	_fnNSSizeFromCGSize func(corefoundation.CGSize) corefoundation.CGSize
+	// Returns a size from a text-based representation. Scans `aString` for two numbers which are used as the width and height, in that order, to create an `NSSize` struct. If `aString` only contains a single number, it is used as the width. The `aString` argument should be formatted like the output of ``NSStringFromSize``, for example, `@"\{10,20\}"`. If `aString` does not contain any numbers, this function returns an `NSSize` struct whose width and height are both `0`.
+	_fnNSSizeFromString func(objc.ID) corefoundation.CGSize
+	// Returns a `CGSize` typecast from an `NSSize`. - Returns: A `CGSize` typecast from an `NSSize`.
+	_fnNSSizeToCGSize func(corefoundation.CGSize) corefoundation.CGSize
+	// Returns a string containing the name of a class. - Parameter aClass: A class. - Returns: A string containing the name of `aClass`.
+	_fnNSStringFromClass func(objc.Class) objc.ID
+	// Returns a string describing the hash table's contents.
+	_fnNSStringFromHashTable func(objc.ID) objc.ID
+	// Returns a string describing the map table's contents.
+	_fnNSStringFromMapTable func(objc.ID) objc.ID
+	// Returns a string representation of a point. - Parameters: - aPoint: A point structure. - Returns: A string of the form "\{a, b\}", where a and b are the x and y coordinates of `aPoint`.
+	_fnNSStringFromPoint func(corefoundation.CGPoint) objc.ID
+	// Returns a string containing the name of a protocol. - Parameter proto: A protocol. - Returns: A string containing the name of `proto`.
+	_fnNSStringFromProtocol func(unsafe.Pointer) objc.ID
+	// Returns a string representation of a range.
+	_fnNSStringFromRange func(NSRange) objc.ID
+	// Returns a string representation of a rectangle. Returns a string of the form "\{\{a, b\}, \{c, d\}\}", where a, b, c, and d are the x and y coordinates and the width and height, respectively, of `aRect`.
+	_fnNSStringFromRect func(corefoundation.CGRect) objc.ID
+	// Returns a string representation of a given selector. - Parameter aSelector: A selector. - Returns: A string representation of `aSelector`.
+	_fnNSStringFromSelector func(objc.SEL) objc.ID
+	// Returns a string representation of a size. - Returns: A string of the form "\{a, b\}", where a and b are the width and height, respectively, of `aSize`.
+	_fnNSStringFromSize func(corefoundation.CGSize) objc.ID
+	// Swaps the bytes of a number. Converts the big-endian value in `x` to the current endian format and returns the resulting value. If it is necessary to swap the bytes of `x`, this function calls ``NSSwapDouble(_:)`` to perform the swap. - Parameter x: The value you want to convert. - Returns: The converted value.
+	_fnNSSwapBigDoubleToHost func(NSSwappedDouble) float64
+	// Swaps the bytes of a number. Converts the big-endian value in `x` to the current endian format and returns the resulting value. If it is necessary to swap the bytes of `x`, this function calls ``NSSwapFloat(_:)`` to perform the swap. - Parameter x: The value you want to convert. - Returns: The converted value.
+	_fnNSSwapBigFloatToHost func(NSSwappedFloat) float32
+	// Converts a big-endian `unsigned int` to the host's native byte order. Converts the big-endian value in `x` to the current endian format and returns the resulting value. If it is necessary to swap the bytes of `x`, this function calls ``NSSwapInt(_:)`` to perform the swap. - Parameter x: The value you want to convert. - Returns: The converted value.
+	_fnNSSwapBigIntToHost func(uint) uint
+	// Converts a big-endian `unsigned long long` to the host's native byte order. Converts the big-endian value in `x` to the current endian format and returns the resulting value. If it is necessary to swap the bytes of `x`, this function calls ``NSSwapLongLong(_:)`` to perform the swap. - Parameter x: The value you want to convert. - Returns: The converted value.
+	_fnNSSwapBigLongLongToHost func(uint64) uint64
+	// Converts a big-endian `unsigned long` to the host's native byte order. Converts the big-endian value in `x` to the current endian format and returns the resulting value. If it is necessary to swap the bytes of `x`, this function calls ``NSSwapLong(_:)`` to perform the swap. - Parameter x: The value you want to convert. - Returns: The converted value.
+	_fnNSSwapBigLongToHost func(uint) uint
+	// Converts a big-endian `unsigned short` to the host's native byte order. Converts the big-endian value in `x` to the current endian format and returns the resulting value. If it is necessary to swap the bytes of `x`, this function calls ``NSSwapShort(_:)`` to perform the swap. - Parameter x: The value you want to convert. - Returns: The converted value.
+	_fnNSSwapBigShortToHost func(uint16) uint16
+	// Swaps the bytes of a number. Swaps the bytes of `x` and returns the resulting value. Bytes are swapped from each low-order position to the corresponding high-order position and vice versa. For example, if the bytes of `x` are numbered from 1 to 8, this function swaps bytes 1 and 8, bytes 2 and 7, bytes 3 and 6, and bytes 4 and 5. - Parameter x: The value whose bytes you want to swap. - Returns: The byte-swapped value.
+	_fnNSSwapDouble func(NSSwappedDouble) NSSwappedDouble
+	// Swaps the bytes of a number. Swaps the bytes of `x` and returns the resulting value. Bytes are swapped from each low-order position to the corresponding high-order position and vice versa. For example, if the bytes of `x` are numbered from 1 to 4, this function swaps bytes 1 and 4, and bytes 2 and 3. - Parameter x: The value whose bytes you want to swap. - Returns: The byte-swapped value.
+	_fnNSSwapFloat func(NSSwappedFloat) NSSwappedFloat
+	// Swaps the bytes of a number. Converts the value in `x`, specified in the current endian format, to big-endian format and returns the resulting value. If it is necessary to swap the bytes, this function calls ``NSSwapDouble(_:)`` to perform the swap. - Parameter x: The value you want to convert. - Returns: The converted value.
+	_fnNSSwapHostDoubleToBig func(float64) NSSwappedDouble
+	// Swaps the bytes of a number. Converts the value in `x`, specified in the current endian format, to little-endian format and returns the resulting value. If it is necessary to swap the bytes, this function calls ``NSSwapDouble(_:)`` to perform the swap. - Parameter x: The value you want to convert. - Returns: The converted value.
+	_fnNSSwapHostDoubleToLittle func(float64) NSSwappedDouble
+	// Swaps the bytes of a number. Converts the value in `x`, specified in the current endian format, to big-endian format and returns the resulting value. If it is necessary to swap the bytes, this function calls ``NSSwapFloat(_:)`` to perform the swap. - Parameter x: The value you want to convert. - Returns: The converted value.
+	_fnNSSwapHostFloatToBig func(float32) NSSwappedFloat
+	// Swaps the bytes of a number. Converts the value in `x`, specified in the current endian format, to little-endian format and returns the resulting value. If it is necessary to swap the bytes, this function calls ``NSSwapFloat(_:)`` to perform the swap. - Parameter x: The value you want to convert. - Returns: The converted value.
+	_fnNSSwapHostFloatToLittle func(float32) NSSwappedFloat
+	// Converts an `unsigned int` from the host's native byte order to big-endian. Converts the value in `x`, specified in the current endian format, to big-endian format and returns the resulting value. If it is necessary to swap the bytes, this function calls ``NSSwapInt(_:)`` to perform the swap. - Parameter x: The value you want to convert. - Returns: The converted value.
+	_fnNSSwapHostIntToBig func(uint) uint
+	// Converts an `unsigned int` from the host's native byte order to little-endian. Converts the value in `x`, specified in the current endian format, to little-endian format and returns the resulting value. If it is necessary to swap the bytes, this function calls ``NSSwapInt(_:)`` to perform the swap. - Parameter x: The value you want to convert. - Returns: The converted value.
+	_fnNSSwapHostIntToLittle func(uint) uint
+	// Converts an `unsigned long long` from the host's native byte order to big-endian. Converts the value in `x`, specified in the current endian format, to big-endian format and returns the resulting value. If it is necessary to swap the bytes, this function calls ``NSSwapLongLong(_:)`` to perform the swap. - Parameter x: The value you want to convert. - Returns: The converted value.
+	_fnNSSwapHostLongLongToBig func(uint64) uint64
+	// Converts an `unsigned long long` from the host's native byte order to little-endian. Converts the value in `x`, specified in the current endian format, to little-endian format and returns the resulting value. If it is necessary to swap the bytes, this function calls ``NSSwapLongLong(_:)`` to perform the swap. - Parameter x: The value you want to convert. - Returns: The converted value.
 	_fnNSSwapHostLongLongToLittle func(uint64) uint64
-	_fnNSSwapHostLongToBig        func(uint) uint
-	_fnNSSwapHostLongToLittle     func(uint) uint
-	_fnNSSwapHostShortToBig       func(uint16) uint16
-	_fnNSSwapHostShortToLittle    func(uint16) uint16
-	_fnNSSwapInt                  func(uint) uint
-	_fnNSSwapLittleDoubleToHost   func(NSSwappedDouble) float64
-	_fnNSSwapLittleFloatToHost    func(NSSwappedFloat) float32
-	_fnNSSwapLittleIntToHost      func(uint) uint
+	// Converts an `unsigned long` from the host's native byte order to big-endian. Converts the value in `x`, specified in the current endian format, to big-endian format and returns the resulting value. If it is necessary to swap the bytes, this function calls ``NSSwapLong(_:)`` to perform the swap. - Parameter x: The value you want to convert. - Returns: The converted value.
+	_fnNSSwapHostLongToBig func(uint) uint
+	// Converts an `unsigned long` from the host's native byte order to little-endian. Converts the value in `x`, specified in the current endian format, to little-endian format and returns the resulting value. If it is necessary to swap the bytes, this function calls ``NSSwapLong(_:)`` to perform the swap. - Parameter x: The value you want to convert. - Returns: The converted value.
+	_fnNSSwapHostLongToLittle func(uint) uint
+	// Converts an `unsigned short` from the host's native byte order to big-endian. Converts the value in `x`, specified in the current endian format, to big-endian format and returns the resulting value. If it is necessary to swap the bytes, this function calls ``NSSwapShort(_:)`` to perform the swap. - Parameter x: The value you want to convert. - Returns: The converted value.
+	_fnNSSwapHostShortToBig func(uint16) uint16
+	// Converts an `unsigned short` from the host's native byte order to little-endian. Converts the value in `x`, specified in the current endian format, to little-endian format and returns the resulting value. If it is necessary to swap the bytes, this function calls ``NSSwapShort(_:)`` to perform the swap. - Parameter x: The value you want to convert. - Returns: The converted value.
+	_fnNSSwapHostShortToLittle func(uint16) uint16
+	// Swaps the bytes of a number. Swaps the bytes of `inv` and returns the resulting value. Bytes are swapped from each low-order position to the corresponding high-order position and vice versa. For example, if the bytes of `inv` are numbered from 1 to 4, this function swaps bytes 1 and 4, and bytes 2 and 3. - Parameter inv: The value whose bytes you want to swap. - Returns: The byte-swapped value.
+	_fnNSSwapInt func(uint) uint
+	// Swaps the bytes of a number. Converts the little-endian formatted value in `x` to the current endian format and returns the resulting value. If it is necessary to swap the bytes of `x`, this function calls ``NSSwapDouble(_:)`` to perform the swap. - Parameter x: The value you want to convert. - Returns: The converted value.
+	_fnNSSwapLittleDoubleToHost func(NSSwappedDouble) float64
+	// Swaps the bytes of a number. Converts the little-endian formatted value in `x` to the current endian format and returns the resulting value. If it is necessary to swap the bytes of `x`, this function calls ``NSSwapFloat(_:)`` to perform the swap. - Parameter x: The value you want to convert. - Returns: The converted value.
+	_fnNSSwapLittleFloatToHost func(NSSwappedFloat) float32
+	// Converts a little-endian `unsigned int` to the host's native byte order. Converts the little-endian formatted value in `x` to the current endian format and returns the resulting value. If it is necessary to swap the bytes, this function calls ``NSSwapInt(_:)`` to perform the swap. - Parameter x: The value you want to convert. - Returns: The converted value.
+	_fnNSSwapLittleIntToHost func(uint) uint
+	// Converts a little-endian `unsigned long long` to the host's native byte order. Converts the little-endian formatted value in `x` to the current endian format and returns the resulting value. If it is necessary to swap the bytes, this function calls ``NSSwapLongLong(_:)`` to perform the swap. - Parameter x: The value you want to convert. - Returns: The converted value.
 	_fnNSSwapLittleLongLongToHost func(uint64) uint64
-	_fnNSSwapLittleLongToHost     func(uint) uint
-	_fnNSSwapLittleShortToHost    func(uint16) uint16
-	_fnNSSwapLong                 func(uint) uint
-	_fnNSSwapLongLong             func(uint64) uint64
-	_fnNSSwapShort                func(uint16) uint16
-	_fnNSTemporaryDirectory       func() objc.ID
-	_fnNSUnionRange               func(NSRange, NSRange) NSRange
-	_fnNSUnionRect                func(corefoundation.CGRect, corefoundation.CGRect) corefoundation.CGRect
-	_fnNSUserName                 func() objc.ID
-	_fnNSWidth                    func(corefoundation.CGRect) float64
-	_fnNSZoneCalloc               func(unsafe.Pointer, uint, uint) unsafe.Pointer
-	_fnNSZoneFree                 func(unsafe.Pointer, unsafe.Pointer)
-	_fnNSZoneFromPointer          func(unsafe.Pointer) unsafe.Pointer
-	_fnNSZoneMalloc               func(unsafe.Pointer, uint) unsafe.Pointer
-	_fnNSZoneName                 func(unsafe.Pointer) objc.ID
-	_fnNSZoneRealloc              func(unsafe.Pointer, unsafe.Pointer, uint) unsafe.Pointer
+	// Converts a little-endian `unsigned long` to the host's native byte order. Converts the little-endian formatted value in `x` to the current endian format and returns the resulting value. If it is necessary to swap the bytes of `x`, this function calls ``NSSwapLong(_:)`` to perform the swap. - Parameter x: The value you want to convert. - Returns: The converted value.
+	_fnNSSwapLittleLongToHost func(uint) uint
+	// Converts a little-endian `unsigned short` to the host's native byte order. Converts the little-endian formatted value in `x` to the current endian format and returns the resulting value. If it is necessary to swap the bytes of `x`, this function calls ``NSSwapShort(_:)`` to perform the swap. - Parameter x: The value you want to convert. - Returns: The converted value.
+	_fnNSSwapLittleShortToHost func(uint16) uint16
+	// Swaps the bytes of a number. Swaps the bytes of `inv` and returns the resulting value. Bytes are swapped from each low-order position to the corresponding high-order position and vice versa. For example, if the bytes of `inv` are numbered from 1 to 4, this function swaps bytes 1 and 4, and bytes 2 and 3. - Parameter inv: The value whose bytes you want to swap. - Returns: The byte-swapped value.
+	_fnNSSwapLong func(uint) uint
+	// Swaps the bytes of a number. Swaps the bytes of `inv` and returns the resulting value. Bytes are swapped from each low-order position to the corresponding high-order position and vice versa. For example, if the bytes of `inv` are numbered from 1 to 8, this function swaps bytes 1 and 8, bytes 2 and 7, bytes 3 and 6, and bytes 4 and 5. - Parameter inv: The value whose bytes you want to swap. - Returns: The byte-swapped value.
+	_fnNSSwapLongLong func(uint64) uint64
+	// Swaps the bytes of a number. Swaps the low-order and high-order bytes of `inv` and returns the resulting value. - Parameter inv: The value whose bytes you want to swap. - Returns: The byte-swapped value.
+	_fnNSSwapShort func(uint16) uint16
+	// Returns the path of the temporary directory for the current user.
+	_fnNSTemporaryDirectory func() objc.ID
+	// Returns the union of the specified ranges.
+	_fnNSUnionRange func(NSRange, NSRange) NSRange
+	// Calculates the union of two rectangles. Returns the smallest rectangle that completely encloses both `aRect` and `bRect`. If one of the rectangles has 0 (or negative) width or height, a copy of the other rectangle is returned; but if both have 0 (or negative) width or height, the returned rectangle has its origin at (0.0, 0.0) and has 0 width and height.
+	_fnNSUnionRect func(corefoundation.CGRect, corefoundation.CGRect) corefoundation.CGRect
+	// Returns the logon name of the current user.
+	_fnNSUserName func() objc.ID
+	// Returns the width of the specified rectangle. - Returns: The width of `aRect`.
+	_fnNSWidth func(corefoundation.CGRect) float64
+	// Allocates zeroed memory in a zone.
+	_fnNSZoneCalloc func(unsafe.Pointer, uint, uint) unsafe.Pointer
+	// Frees memory in a zone.
+	_fnNSZoneFree func(unsafe.Pointer, unsafe.Pointer)
+	// Returns the zone for a given pointer.
+	_fnNSZoneFromPointer func(unsafe.Pointer) unsafe.Pointer
+	// Allocates memory in a zone.
+	_fnNSZoneMalloc func(unsafe.Pointer, uint) unsafe.Pointer
+	// Returns the name of a zone.
+	_fnNSZoneName func(unsafe.Pointer) objc.ID
+	// Resizes memory in a zone.
+	_fnNSZoneRealloc func(unsafe.Pointer, unsafe.Pointer, uint) unsafe.Pointer
+	// Returns the next object from the coder. Given an `NSCoder`, returns an object previously written with `NXWriteNSObject()`. The returned object is autoreleased. - Parameter decoder: The coder from which to read the object. - Returns: The next object from the coder.
 	// Deprecated: Not supported
 	_fnNXReadNSObjectFromCoder func(objc.ID) objc.ID
 	// Returns the class name of a given object. @param obj An Objective-C object. @return The name of the class of which \e obj is an instance.
@@ -214,7 +392,7 @@ var (
 	_sel_registerName func(string) objc.SEL
 )
 
-func CFBridgingRelease(x unsafe.Pointer) unsafe.Pointer {
+func CFBridgingRelease(x unsafe.Pointer) objc.ID {
 	return _fnCFBridgingRelease(x)
 }
 
@@ -222,6 +400,7 @@ func CFBridgingRetain(x objc.ID) unsafe.Pointer {
 	return _fnCFBridgingRetain(x)
 }
 
+// Returns all of the elements in a hash table.
 func NSAllHashTableObjects(table *NSHashTable[objc.ID]) *NSArray[objc.ID] {
 	_ret := _fnNSAllHashTableObjects(table.Ptr())
 	if _ret != 0 {
@@ -230,6 +409,7 @@ func NSAllHashTableObjects(table *NSHashTable[objc.ID]) *NSArray[objc.ID] {
 	return NSArrayFromID[objc.ID](_ret)
 }
 
+// Returns all of the keys in a map table.
 func NSAllMapTableKeys(table *NSMapTable[objc.ID, objc.ID]) *NSArray[objc.ID] {
 	_ret := _fnNSAllMapTableKeys(table.Ptr())
 	if _ret != 0 {
@@ -238,6 +418,7 @@ func NSAllMapTableKeys(table *NSMapTable[objc.ID, objc.ID]) *NSArray[objc.ID] {
 	return NSArrayFromID[objc.ID](_ret)
 }
 
+// Returns all of the values in a map table.
 func NSAllMapTableValues(table *NSMapTable[objc.ID, objc.ID]) *NSArray[objc.ID] {
 	_ret := _fnNSAllMapTableValues(table.Ptr())
 	if _ret != 0 {
@@ -246,10 +427,12 @@ func NSAllMapTableValues(table *NSMapTable[objc.ID, objc.ID]) *NSArray[objc.ID] 
 	return NSArrayFromID[objc.ID](_ret)
 }
 
+// Allocates collectable memory. @DeprecationSummary { Garbage collection is deprecated in OS X v10.8; instead, you should use Automatic Reference Counting. } - Parameters: - size: The number of bytes of memory to allocate. - options: `0` or `NSScannedOption`: A value of `0` allocates non-scanned memory; a value of `NSScannedOption` allocates scanned memory. - Returns: A pointer to the allocated memory, or `NULL` if the function is unable to allocate the requested memory.
 func NSAllocateCollectable(size uint, options uint) unsafe.Pointer {
 	return _fnNSAllocateCollectable(size, options)
 }
 
+// Allocates a given number of bytes of virtual memory.
 func NSAllocateMemoryPages(bytes_ uint) unsafe.Pointer {
 	return _fnNSAllocateMemoryPages(bytes_)
 }
@@ -258,38 +441,47 @@ func NSAllocateObject(aClass objc.Class, extraBytes uint, zone unsafe.Pointer) o
 	return _fnNSAllocateObject(aClass, extraBytes, zone)
 }
 
+// Obtains a class by name. - Parameter aClassName: The name of a class. - Returns: The class object named by `aClassName`, or `nil` if no class by that name is currently loaded. If `aClassName` is `nil`, returns `nil`.
 func NSClassFromString(aClassName *NSString) objc.Class {
 	return _fnNSClassFromString(aClassName.Ptr())
 }
 
+// Returns a Boolean value that indicates whether two hash tables are equal.
 func NSCompareHashTables(table1 *NSHashTable[objc.ID], table2 *NSHashTable[objc.ID]) bool {
 	return _fnNSCompareHashTables(table1.Ptr(), table2.Ptr())
 }
 
+// Returns a Boolean value that indicates whether two map tables are equal.
 func NSCompareMapTables(table1 *NSMapTable[objc.ID, objc.ID], table2 *NSMapTable[objc.ID, objc.ID]) bool {
 	return _fnNSCompareMapTables(table1.Ptr(), table2.Ptr())
 }
 
+// Returns a Boolean value that indicates whether one rectangle completely encloses another. - Returns: `true` if `aRect` completely encloses `bRect`. For this condition to be true, `bRect` cannot be empty, and must not extend beyond `aRect` in any direction.
 func NSContainsRect(aRect corefoundation.CGRect, bRect corefoundation.CGRect) bool {
 	return _fnNSContainsRect(aRect, bRect)
 }
 
+// Performs a type conversion. Converts the double value in `x` to a value whose bytes can be swapped. This function does not actually swap the bytes of `x`. You should not need to call this function directly. - Parameter x: The value you want to convert. - Returns: The converted value.
 func NSConvertHostDoubleToSwapped(x float64) NSSwappedDouble {
 	return _fnNSConvertHostDoubleToSwapped(x)
 }
 
+// Performs a type conversion. Converts the float value in `x` to a value whose bytes can be swapped. This function does not actually swap the bytes of `x`. You should not need to call this function directly. - Parameter x: The value you want to convert. - Returns: The converted value.
 func NSConvertHostFloatToSwapped(x float32) NSSwappedFloat {
 	return _fnNSConvertHostFloatToSwapped(x)
 }
 
+// Performs a type conversion. Converts the value in `x` to a double value. This function does not actually swap the bytes of `x`. You should not need to call this function directly. - Parameter x: The value you want to convert. - Returns: The converted value.
 func NSConvertSwappedDoubleToHost(x NSSwappedDouble) float64 {
 	return _fnNSConvertSwappedDoubleToHost(x)
 }
 
+// Performs a type conversion. Converts the value in `x` to a float value. This function does not actually swap the bytes of `x`. You should not need to call this function directly. - Parameter x: The value you want to convert. - Returns: The converted value.
 func NSConvertSwappedFloatToHost(x NSSwappedFloat) float32 {
 	return _fnNSConvertSwappedFloatToHost(x)
 }
 
+// Returns a copy of a hash table.
 func NSCopyHashTableWithZone(table *NSHashTable[objc.ID], zone unsafe.Pointer) *NSHashTable[objc.ID] {
 	_ret := _fnNSCopyHashTableWithZone(table.Ptr(), zone)
 	if _ret != 0 {
@@ -298,27 +490,37 @@ func NSCopyHashTableWithZone(table *NSHashTable[objc.ID], zone unsafe.Pointer) *
 	return NSHashTableFromID[objc.ID](_ret)
 }
 
-func NSCopyMapTableWithZone(table *NSMapTable[objc.ID, objc.ID], zone unsafe.Pointer) unsafe.Pointer {
-	return _fnNSCopyMapTableWithZone(table.Ptr(), zone)
+// Returns a copy of a map table.
+func NSCopyMapTableWithZone(table *NSMapTable[objc.ID, objc.ID], zone unsafe.Pointer) *NSMapTable[objc.ID, objc.ID] {
+	_ret := _fnNSCopyMapTableWithZone(table.Ptr(), zone)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSMapTableFromID[objc.ID, objc.ID](_ret)
 }
 
+// Copies a given number of bytes from one memory location to another.
 func NSCopyMemoryPages(source unsafe.Pointer, dest unsafe.Pointer, bytes_ uint) {
 	_fnNSCopyMemoryPages(source, dest, bytes_)
 }
 
+// Creates an exact copy of an object.
 // Deprecated: Not supported
 func NSCopyObject(object objc.ID, extraBytes uint, zone unsafe.Pointer) objc.ID {
 	return _fnNSCopyObject(object, extraBytes, zone)
 }
 
+// Returns the number of elements in a hash table.
 func NSCountHashTable(table *NSHashTable[objc.ID]) uint {
 	return _fnNSCountHashTable(table.Ptr())
 }
 
+// Returns the number of entries in a map table.
 func NSCountMapTable(table *NSMapTable[objc.ID, objc.ID]) uint {
 	return _fnNSCountMapTable(table.Ptr())
 }
 
+// Creates and returns a new hash table. The table's size is dependent on (but generally not equal to) `capacity`. If `capacity` is 0, a small hash table is created. The `NSHashTableCallBacks` structure `callBacks` has five pointers to functions, with the following defaults: pointer hashing, if `hash` is `NULL`; pointer equality, if `isEqual` is `NULL`; no callback upon adding an element, if `retain` is `NULL`; no callback upon removing an element, if `release` is `NULL`; and a function returning a pointer's hexadecimal value as a string, if `describe` is `NULL`. The hashing function must be defined such that if two data elements are equal, as defined by the comparison function, the values produced by hashing on these elements must also be equal. Also, data elements must remain invariant if the value of the hashing function depends on them; for example, if the hashing function operates directly on the characters of a string, that string can't change. - Parameters: - callBacks: A structure that defines the callbacks for the hash table. - capacity: The initial capacity of the hash table. - Returns: A pointer to an `NSHashTable` created in the default zone.
 func NSCreateHashTable(callBacks NSHashTableCallBacks, capacity uint) *NSHashTable[objc.ID] {
 	_ret := _fnNSCreateHashTable(callBacks, capacity)
 	if _ret != 0 {
@@ -327,6 +529,7 @@ func NSCreateHashTable(callBacks NSHashTableCallBacks, capacity uint) *NSHashTab
 	return NSHashTableFromID[objc.ID](_ret)
 }
 
+// Creates a new hash table in a given zone. The table's size is dependent on (but generally not equal to) `capacity`. If `capacity` is 0, a small hash table is created. The `NSHashTableCallBacks` structure `callBacks` has five pointers to functions, with the following defaults: pointer hashing, if `hash` is `NULL`; pointer equality, if `isEqual` is `NULL`; no callback upon adding an element, if `retain` is `NULL`; no callback upon removing an element, if `release` is `NULL`; and a function returning a pointer's hexadecimal value as a string, if `describe` is `NULL`. The hashing function must be defined such that if two data elements are equal, as defined by the comparison function, the values produced by hashing on these elements must also be equal. Also, data elements must remain invariant if the value of the hashing function depends on them; for example, if the hashing function operates directly on the characters of a string, that string can't change. - Parameters: - callBacks: A structure that defines the callbacks for the hash table. - capacity: The initial capacity of the hash table. - zone: The zone in which to create the hash table. If `NULL`, the hash table is created in the default zone. - Returns: A pointer to a new hash table created in the specified zone. If `zone` is `NULL`, the hash table is created in the default zone.
 func NSCreateHashTableWithZone(callBacks NSHashTableCallBacks, capacity uint, zone unsafe.Pointer) *NSHashTable[objc.ID] {
 	_ret := _fnNSCreateHashTableWithZone(callBacks, capacity, zone)
 	if _ret != 0 {
@@ -335,70 +538,95 @@ func NSCreateHashTableWithZone(callBacks NSHashTableCallBacks, capacity uint, zo
 	return NSHashTableFromID[objc.ID](_ret)
 }
 
-func NSCreateMapTable(keyCallBacks NSMapTableKeyCallBacks, valueCallBacks NSMapTableValueCallBacks, capacity uint) unsafe.Pointer {
-	return _fnNSCreateMapTable(keyCallBacks, valueCallBacks, capacity)
+// Creates a new map table in the default zone. The table's size is dependent on (but generally not equal to) `capacity`. If `capacity` is 0, a small map table is created. The `NSMapTableKeyCallBacks` arguments are structures that are very similar to the callback structure used by `NSCreateHashTable`—they have the same defaults as documented for that function. - Parameters: - keyCallBacks: The key callback structure for the map table. - valueCallBacks: The value callback structure for the map table. - capacity: The initial capacity of the map table.
+func NSCreateMapTable(keyCallBacks NSMapTableKeyCallBacks, valueCallBacks NSMapTableValueCallBacks, capacity uint) *NSMapTable[objc.ID, objc.ID] {
+	_ret := _fnNSCreateMapTable(keyCallBacks, valueCallBacks, capacity)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSMapTableFromID[objc.ID, objc.ID](_ret)
 }
 
-func NSCreateMapTableWithZone(keyCallBacks NSMapTableKeyCallBacks, valueCallBacks NSMapTableValueCallBacks, capacity uint, zone unsafe.Pointer) unsafe.Pointer {
-	return _fnNSCreateMapTableWithZone(keyCallBacks, valueCallBacks, capacity, zone)
+// Creates a new map table in the specified zone. The table's size is dependent on (but generally not equal to) `capacity`. If `capacity` is 0, a small map table is created. The `NSMapTableKeyCallBacks` arguments are structures that are very similar to the callback structure used by `NSCreateHashTable`; in fact, they have the same defaults as documented for that function. - Parameters: - keyCallBacks: The key callback structure for the map table. - valueCallBacks: The value callback structure for the map table. - capacity: The initial capacity of the map table. - zone: The zone in which to create the map table. If `NULL`, the map table is created in the default zone. - Returns: A new map table allocated in `zone`. If `zone` is `NULL`, the map table is created in the default zone.
+func NSCreateMapTableWithZone(keyCallBacks NSMapTableKeyCallBacks, valueCallBacks NSMapTableValueCallBacks, capacity uint, zone unsafe.Pointer) *NSMapTable[objc.ID, objc.ID] {
+	_ret := _fnNSCreateMapTableWithZone(keyCallBacks, valueCallBacks, capacity, zone)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSMapTableFromID[objc.ID, objc.ID](_ret)
 }
 
+// Creates a new zone.
 func NSCreateZone(startSize uint, granularity uint, canFree bool) unsafe.Pointer {
 	return _fnNSCreateZone(startSize, granularity, canFree)
 }
 
+// Deallocates the memory occupied by a given number of bytes.
 func NSDeallocateMemoryPages(ptr unsafe.Pointer, bytes_ uint) {
 	_fnNSDeallocateMemoryPages(ptr, bytes_)
 }
 
+// Destroys an existing object.
 func NSDeallocateObject(object objc.ID) {
 	_fnNSDeallocateObject(object)
 }
 
+// Adds two decimal values. The `result` parameter may be a pointer to the same space as `leftOperand` or `rightOperand`.
 func NSDecimalAdd(result *NSDecimal, leftOperand *NSDecimal, rightOperand *NSDecimal, roundingMode NSRoundingMode) NSCalculationError {
 	return _fnNSDecimalAdd(result, leftOperand, rightOperand, roundingMode)
 }
 
+// Compacts the decimal structure for efficiency.
 func NSDecimalCompact(number *NSDecimal) {
 	_fnNSDecimalCompact(number)
 }
 
+// Compares two decimal values.
 func NSDecimalCompare(leftOperand *NSDecimal, rightOperand *NSDecimal) NSComparisonResult {
 	return _fnNSDecimalCompare(leftOperand, rightOperand)
 }
 
+// Copies the value of a decimal number.
 func NSDecimalCopy(destination *NSDecimal, source *NSDecimal) {
 	_fnNSDecimalCopy(destination, source)
 }
 
+// Divides one decimal number by another. Division could be silently inexact. The `result` parameter may be a pointer to the same space as `leftOperand` or `rightOperand`.
 func NSDecimalDivide(result *NSDecimal, leftOperand *NSDecimal, rightOperand *NSDecimal, roundingMode NSRoundingMode) NSCalculationError {
 	return _fnNSDecimalDivide(result, leftOperand, rightOperand, roundingMode)
 }
 
+// Returns a Boolean value indicating whether a decimal value is not a number. - Parameter dcm: The decimal value to evaluate. - Returns: `NO` if the value in `dcm` represents a valid number, otherwise `YES`.
 func NSDecimalIsNotANumber(dcm *NSDecimal) bool {
 	return _fnNSDecimalIsNotANumber(dcm)
 }
 
+// Multiplies two decimal numbers together. The `result` parameter may be a pointer to the same space as `leftOperand` or `rightOperand`.
 func NSDecimalMultiply(result *NSDecimal, leftOperand *NSDecimal, rightOperand *NSDecimal, roundingMode NSRoundingMode) NSCalculationError {
 	return _fnNSDecimalMultiply(result, leftOperand, rightOperand, roundingMode)
 }
 
+// Multiplies a decimal number by a power of 10.
 func NSDecimalMultiplyByPowerOf10(result *NSDecimal, number *NSDecimal, power int16, roundingMode NSRoundingMode) NSCalculationError {
 	return _fnNSDecimalMultiplyByPowerOf10(result, number, power, roundingMode)
 }
 
+// Normalizes the internal representation of two decimal numbers to simplify later operations.
 func NSDecimalNormalize(number1 *NSDecimal, number2 *NSDecimal, roundingMode NSRoundingMode) NSCalculationError {
 	return _fnNSDecimalNormalize(number1, number2, roundingMode)
 }
 
+// Raises a decimal number to the given power.
 func NSDecimalPower(result *NSDecimal, number *NSDecimal, power uint, roundingMode NSRoundingMode) NSCalculationError {
 	return _fnNSDecimalPower(result, number, power, roundingMode)
 }
 
+// Rounds a decimal value to the given scale using the given mode. The `result` parameter may be a pointer to the same space as `number`. The `scale` parameter indicates the number of significant digits after the decimal point.
 func NSDecimalRound(result *NSDecimal, number *NSDecimal, scale int, roundingMode NSRoundingMode) {
 	_fnNSDecimalRound(result, number, scale, roundingMode)
 }
 
+// Returns a string representation of a decimal value appropriate for the given locale.
 func NSDecimalString(dcm *NSDecimal, locale objc.ID) *NSString {
 	_ret := _fnNSDecimalString(dcm, locale)
 	if _ret != 0 {
@@ -407,66 +635,82 @@ func NSDecimalString(dcm *NSDecimal, locale objc.ID) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Subtracts one decimal value from another. The `result` parameter may be a pointer to the same space as `leftOperand` or `rightOperand`.
 func NSDecimalSubtract(result *NSDecimal, leftOperand *NSDecimal, rightOperand *NSDecimal, roundingMode NSRoundingMode) NSCalculationError {
 	return _fnNSDecimalSubtract(result, leftOperand, rightOperand, roundingMode)
 }
 
+// Decrements the specified object's reference count.
 func NSDecrementExtraRefCountWasZero(object objc.ID) bool {
 	return _fnNSDecrementExtraRefCountWasZero(object)
 }
 
+// Returns the default zone.
 func NSDefaultMallocZone() unsafe.Pointer {
 	return _fnNSDefaultMallocZone()
 }
 
+// Divides a rectangle into two new rectangles. Creates two rectangles -- `slice` and `rem` -- from `inRect`, by dividing `inRect` with a line that's parallel to the side of `inRect` specified by `edge`. The size of `slice` is determined by `amount`, which specifies the distance from `edge`. `slice` and `rem` must not be `NULL`.
 func NSDivideRect(inRect corefoundation.CGRect, slice *corefoundation.CGRect, rem *corefoundation.CGRect, amount float64, edge NSRectEdge) {
 	_fnNSDivideRect(inRect, slice, rem, amount, edge)
 }
 
+// Returns a Boolean value that indicates whether two edge insets structures are equal.
 func NSEdgeInsetsEqual(aInsets NSEdgeInsets, bInsets NSEdgeInsets) bool {
 	return _fnNSEdgeInsetsEqual(aInsets, bInsets)
 }
 
+// Creates an edge insets structure with the specified inset values. - Parameters: - top: The top edge inset value. - left: The left edge inset value. - bottom: The bottom edge inset value. - right: The right edge inset value. - Returns: A new `NSEdgeInsets` with the specified values.
 func NSEdgeInsetsMake(top float64, left float64, bottom float64, right float64) NSEdgeInsets {
 	return _fnNSEdgeInsetsMake(top, left, bottom, right)
 }
 
+// Frees an enumerator for a hash table.
 func NSEndHashTableEnumeration(enumerator *NSHashEnumerator) {
 	_fnNSEndHashTableEnumeration(enumerator)
 }
 
+// Frees an enumerator for a map table.
 func NSEndMapTableEnumeration(enumerator *NSMapEnumerator) {
 	_fnNSEndMapTableEnumeration(enumerator)
 }
 
+// Returns an enumerator for a hash table.
 func NSEnumerateHashTable(table *NSHashTable[objc.ID]) NSHashEnumerator {
 	return _fnNSEnumerateHashTable(table.Ptr())
 }
 
+// Returns an enumerator for a map table.
 func NSEnumerateMapTable(table *NSMapTable[objc.ID, objc.ID]) NSMapEnumerator {
 	return _fnNSEnumerateMapTable(table.Ptr())
 }
 
+// Returns a Boolean value that indicates whether two points are equal. - Returns: `true` if the two points `aPoint` and `bPoint` are identical, otherwise `false`.
 func NSEqualPoints(aPoint corefoundation.CGPoint, bPoint corefoundation.CGPoint) bool {
 	return _fnNSEqualPoints(aPoint, bPoint)
 }
 
+// Returns a Boolean value that indicates whether two given ranges are equal. - Parameters: - range1: The first range to compare. - range2: The second range to compare. - Returns: `YES` if `range1` and `range2` have the same locations and lengths.
 func NSEqualRanges(range1 NSRange, range2 NSRange) bool {
 	return _fnNSEqualRanges(range1, range2)
 }
 
+// Returns a Boolean value that indicates whether the two rectangles are equal. - Returns: `true` if `aRect` and `bRect` are identical, otherwise `false`.
 func NSEqualRects(aRect corefoundation.CGRect, bRect corefoundation.CGRect) bool {
 	return _fnNSEqualRects(aRect, bRect)
 }
 
+// Returns a Boolean value that indicates whether two size values are equal. - Returns: `true` if `aSize` and `bSize` are identical, otherwise `false`.
 func NSEqualSizes(aSize corefoundation.CGSize, bSize corefoundation.CGSize) bool {
 	return _fnNSEqualSizes(aSize, bSize)
 }
 
+// Returns the specified object's reference count.
 func NSExtraRefCount(object objc.ID) uint {
 	return _fnNSExtraRefCount(object)
 }
 
+// Returns a string encoding a file type code. - Parameter hfsFileTypeCode: An HFS file type code. - Returns: A string that encodes `hfsFileTypeCode`. The format of the string is a private implementation detail, but such strings are suitable for inclusion in arrays that also contain file name extension strings.
 func NSFileTypeForHFSTypeCode(hfsFileTypeCode uint) *NSString {
 	_ret := _fnNSFileTypeForHFSTypeCode(hfsFileTypeCode)
 	if _ret != 0 {
@@ -475,14 +719,17 @@ func NSFileTypeForHFSTypeCode(hfsFileTypeCode uint) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Frees a hash table.
 func NSFreeHashTable(table *NSHashTable[objc.ID]) {
 	_fnNSFreeHashTable(table.Ptr())
 }
 
+// Frees a map table.
 func NSFreeMapTable(table *NSMapTable[objc.ID, objc.ID]) {
 	_fnNSFreeMapTable(table.Ptr())
 }
 
+// Returns a string containing the full name of the current user.
 func NSFullUserName() *NSString {
 	_ret := _fnNSFullUserName()
 	if _ret != 0 {
@@ -491,18 +738,22 @@ func NSFullUserName() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Obtains the actual size and the aligned size of an encoded type. - Parameters: - typePtr: A pointer to an Objective-C type encoding. - sizep: Upon return, contains the actual size of the type. Pass `NULL` if you don't want this information. - alignp: Upon return, contains the aligned size of the type. Pass `NULL` if you don't want this information. - Returns: A pointer to the first character of the type code that's next in the type encoding string, or the empty string if there is no next type code.
 func NSGetSizeAndAlignment(typePtr string, sizep *uint, alignp *uint) string {
 	return _fnNSGetSizeAndAlignment(typePtr, sizep, alignp)
 }
 
+// Returns the top-level error handler.
 func NSGetUncaughtExceptionHandler() unsafe.Pointer {
 	return _fnNSGetUncaughtExceptionHandler()
 }
 
+// Returns a file type code. - Parameter fileTypeString: A string of the sort encoded by `NSFileTypeForHFSTypeCode()`. - Returns: The HFS file type code corresponding to `fileTypeString`, or `0` if it cannot be found.
 func NSHFSTypeCodeFromFileType(fileTypeString *NSString) uint {
 	return _fnNSHFSTypeCodeFromFileType(fileTypeString.Ptr())
 }
 
+// Returns a string encoding a file type. - Parameter fullFilePath: The full absolute path of a file. - Returns: A string that encodes `fullFilePath`'s HFS file type, or `nil` if the operation was not successful.
 func NSHFSTypeOfFile(fullFilePath *NSString) *NSString {
 	_ret := _fnNSHFSTypeOfFile(fullFilePath.Ptr())
 	if _ret != 0 {
@@ -511,30 +762,37 @@ func NSHFSTypeOfFile(fullFilePath *NSString) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns an element of the hash table.
 func NSHashGet(table *NSHashTable[objc.ID], pointer unsafe.Pointer) unsafe.Pointer {
 	return _fnNSHashGet(table.Ptr(), pointer)
 }
 
+// Adds an element to the hash table.
 func NSHashInsert(table *NSHashTable[objc.ID], pointer unsafe.Pointer) {
 	_fnNSHashInsert(table.Ptr(), pointer)
 }
 
+// Adds an element to the hash table if it is not already present, and returns the element.
 func NSHashInsertIfAbsent(table *NSHashTable[objc.ID], pointer unsafe.Pointer) unsafe.Pointer {
 	return _fnNSHashInsertIfAbsent(table.Ptr(), pointer)
 }
 
+// Adds an element to the hash table, raising an exception if the element is already present.
 func NSHashInsertKnownAbsent(table *NSHashTable[objc.ID], pointer unsafe.Pointer) {
 	_fnNSHashInsertKnownAbsent(table.Ptr(), pointer)
 }
 
+// Removes an element from the hash table.
 func NSHashRemove(table *NSHashTable[objc.ID], pointer unsafe.Pointer) {
 	_fnNSHashRemove(table.Ptr(), pointer)
 }
 
+// Returns the height of a given rectangle. - Returns: The height of `aRect`.
 func NSHeight(aRect corefoundation.CGRect) float64 {
 	return _fnNSHeight(aRect)
 }
 
+// Returns the path to either the user's or application's home directory, depending on the platform.
 func NSHomeDirectory() *NSString {
 	_ret := _fnNSHomeDirectory()
 	if _ret != 0 {
@@ -543,6 +801,7 @@ func NSHomeDirectory() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns the path to a given user's home directory.
 func NSHomeDirectoryForUser(userName *NSString) *NSString {
 	_ret := _fnNSHomeDirectoryForUser(userName.Ptr())
 	if _ret != 0 {
@@ -551,143 +810,177 @@ func NSHomeDirectoryForUser(userName *NSString) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns the endian format. - Returns: The endian format, either `NS_LittleEndian` or `NS_BigEndian`.
 func NSHostByteOrder() int {
 	return _fnNSHostByteOrder()
 }
 
-// Deprecated: Not supported
+// Increments the specified object's reference count.
 func NSIncrementExtraRefCount(object objc.ID) {
 	_fnNSIncrementExtraRefCount(object)
 }
 
+// Insets a rectangle by a specified amount. - Returns: A copy of `aRect`, altered by moving the two sides that are parallel to the y axis inward by `dX`, and the two sides parallel to the x axis inwards by `dY`.
 func NSInsetRect(aRect corefoundation.CGRect, dX float64, dY float64) corefoundation.CGRect {
 	return _fnNSInsetRect(aRect, dX, dY)
 }
 
+// Adjusts the sides of a rectangle to integer values. - Returns: A copy of `aRect`, expanded outward just enough to ensure that none of its four defining values (x, y, width, and height) have fractional parts. If the width or height of `aRect` is `0` or negative, this function returns a rectangle with origin at (0.0, 0.0) and with zero width and height.
 func NSIntegralRect(aRect corefoundation.CGRect) corefoundation.CGRect {
 	return _fnNSIntegralRect(aRect)
 }
 
+// Adjusts the sides of a rectangle to integral values using the specified options. - Returns: A copy of `aRect`, modified based on the options. The options are defined in `NSAlignmentOptions`.
 func NSIntegralRectWithOptions(aRect corefoundation.CGRect, opts NSAlignmentOptions) corefoundation.CGRect {
 	return _fnNSIntegralRectWithOptions(aRect, opts)
 }
 
+// Returns the intersection of the specified ranges.
 func NSIntersectionRange(range1 NSRange, range2 NSRange) NSRange {
 	return _fnNSIntersectionRange(range1, range2)
 }
 
+// Calculates the intersection of two rectangles. - Returns: The graphic intersection of `aRect` and `bRect`. If the two rectangles don't overlap, the returned rectangle has its origin at (0.0, 0.0) and zero width and height (including situations where the intersection is a point or a line segment).
 func NSIntersectionRect(aRect corefoundation.CGRect, bRect corefoundation.CGRect) corefoundation.CGRect {
 	return _fnNSIntersectionRect(aRect, bRect)
 }
 
+// Returns a Boolean value that indicates whether two rectangles intersect. - Returns: `true` if `aRect` intersects `bRect`, otherwise `false`. Returns `false` if either `aRect` or `bRect` has a width or height that is 0.
 func NSIntersectsRect(aRect corefoundation.CGRect, bRect corefoundation.CGRect) bool {
 	return _fnNSIntersectsRect(aRect, bRect)
 }
 
+// Returns a Boolean value that indicates whether a given rectangle is empty. - Returns: `true` if `aRect` encloses no area at all -- that is, if its width or height is 0 or negative, otherwise `false`.
 func NSIsEmptyRect(aRect corefoundation.CGRect) bool {
 	return _fnNSIsEmptyRect(aRect)
 }
 
+// Returns a Boolean value that indicates whether a specified position is in a given range. - Parameters: - loc: The position to test. - range: The range to test against. - Returns: `YES` if `loc` lies within `range`—that is, if it's greater than or equal to `range.location` and less than `range.location` plus `range.length`.
 func NSLocationInRange(loc uint, range_ NSRange) bool {
 	return _fnNSLocationInRange(loc, range_)
 }
 
+// Returns the binary log of the page size.
 func NSLogPageSize() uint {
 	return _fnNSLogPageSize()
 }
 
+// Logs an error message to the Apple System Log facility. - Parameters: - format: A format string. See "Formatting String Objects" for examples of how to use this method, and "String Format Specifiers" for a list of format specifiers. - args: A list of arguments to substitute into `format`.
 func NSLogv(arg objc.ID, arg2 string) {
 	_fnNSLogv(arg, arg2)
 }
 
-func NSMakeCollectable(cf unsafe.Pointer) unsafe.Pointer {
+// Makes a newly allocated Core Foundation object eligible for collection. @DeprecationSummary { Garbage collection is deprecated in OS X v10.8; instead, you should use Automatic Reference Counting. Use `CFBridgingRelease` instead. } This function is a wrapper for `CFMakeCollectable`, but its return type is `id`—avoiding the need for casting when using Cocoa objects. This function may be useful when returning Core Foundation objects in code that must support both garbage-collected and non-garbage-collected environments, as illustrated in the following example. ```objc - (CFDateRef)foo { CFDateRef aCFDate; // ... return [NSMakeCollectable(aCFDate) autorelease]; } ``` `CFTypeRef` style objects are garbage collected, yet only sometime after the last `CFRelease` is performed. Particularly for fully-bridged `CFTypeRef` objects such as CFStrings and collections (such as CFDictionary), you must call either `CFMakeCollectable` or the more type safe `NSMakeCollectable`, preferably right upon allocation.
+func NSMakeCollectable(cf unsafe.Pointer) objc.ID {
 	return _fnNSMakeCollectable(cf)
 }
 
+// Creates a new `NSPoint` from the specified values. - Parameters: - x: The x coordinate. - y: The y coordinate. - Returns: An `NSPoint` having the coordinates `x` and `y`.
 func NSMakePoint(x float64, y float64) corefoundation.CGPoint {
 	return _fnNSMakePoint(x, y)
 }
 
+// Creates a new `NSRange` from the specified values. - Parameters: - loc: The starting location of the range. - len: The length of the range. - Returns: An `NSRange` with location `loc` and length `len`.
 func NSMakeRange(loc uint, len_ uint) NSRange {
 	return _fnNSMakeRange(loc, len_)
 }
 
+// Creates a new `NSRect` from the specified values. - Parameters: - x: The x coordinate of the origin. - y: The y coordinate of the origin. - w: The width. - h: The height. - Returns: An `NSRect` having the specified origin of [`x`, `y`] and size of [`w`, `h`].
 func NSMakeRect(x float64, y float64, w float64, h float64) corefoundation.CGRect {
 	return _fnNSMakeRect(x, y, w, h)
 }
 
+// Creates a new `NSSize` from the specified values. - Parameters: - w: The width. - h: The height. - Returns: An `NSSize` having the specified `width` and `height`.
 func NSMakeSize(w float64, h float64) corefoundation.CGSize {
 	return _fnNSMakeSize(w, h)
 }
 
+// Returns the value associated with a given key in a map table.
 func NSMapGet(table *NSMapTable[objc.ID, objc.ID], key unsafe.Pointer) unsafe.Pointer {
 	return _fnNSMapGet(table.Ptr(), key)
 }
 
+// Inserts a key-value pair into a map table.
 func NSMapInsert(table *NSMapTable[objc.ID, objc.ID], key unsafe.Pointer, value unsafe.Pointer) {
 	_fnNSMapInsert(table.Ptr(), key, value)
 }
 
+// Inserts a key-value pair into a map table if the key does not already exist, and returns the value.
 func NSMapInsertIfAbsent(table *NSMapTable[objc.ID, objc.ID], key unsafe.Pointer, value unsafe.Pointer) unsafe.Pointer {
 	return _fnNSMapInsertIfAbsent(table.Ptr(), key, value)
 }
 
+// Inserts a key-value pair into a map table if the key does not already exist.
 func NSMapInsertKnownAbsent(table *NSMapTable[objc.ID, objc.ID], key unsafe.Pointer, value unsafe.Pointer) {
 	_fnNSMapInsertKnownAbsent(table.Ptr(), key, value)
 }
 
+// Returns a Boolean value that indicates whether a map table contains a given key.
 func NSMapMember(table *NSMapTable[objc.ID, objc.ID], key unsafe.Pointer, originalKey unsafe.Pointer, value unsafe.Pointer) bool {
 	return _fnNSMapMember(table.Ptr(), key, originalKey, value)
 }
 
+// Removes a key and its associated value from a map table.
 func NSMapRemove(table *NSMapTable[objc.ID, objc.ID], key unsafe.Pointer) {
 	_fnNSMapRemove(table.Ptr(), key)
 }
 
+// Returns the sum of the location and length of the range. - Parameter range: The range to evaluate. - Returns: The sum of the location and length of the range—that is, `range.location` + `range.length`.
 func NSMaxRange(range_ NSRange) uint {
 	return _fnNSMaxRange(range_)
 }
 
+// Returns the largest x coordinate of a given rectangle. - Returns: The largest x coordinate value within `aRect`.
 func NSMaxX(aRect corefoundation.CGRect) float64 {
 	return _fnNSMaxX(aRect)
 }
 
+// Returns the largest y coordinate of a given rectangle. - Returns: The largest y coordinate value within `aRect`.
 func NSMaxY(aRect corefoundation.CGRect) float64 {
 	return _fnNSMaxY(aRect)
 }
 
+// Returns the x coordinate of a given rectangle's midpoint. - Returns: The x coordinate of the center of `aRect`.
 func NSMidX(aRect corefoundation.CGRect) float64 {
 	return _fnNSMidX(aRect)
 }
 
+// Returns the y coordinate of a given rectangle's midpoint. - Returns: The y coordinate of `aRect`'s center point.
 func NSMidY(aRect corefoundation.CGRect) float64 {
 	return _fnNSMidY(aRect)
 }
 
+// Returns the smallest x coordinate of a given rectangle. - Returns: The smallest x coordinate value within `aRect`.
 func NSMinX(aRect corefoundation.CGRect) float64 {
 	return _fnNSMinX(aRect)
 }
 
+// Returns the smallest y coordinate of a given rectangle. - Returns: The smallest y coordinate value within `aRect`.
 func NSMinY(aRect corefoundation.CGRect) float64 {
 	return _fnNSMinY(aRect)
 }
 
+// Returns a Boolean value that indicates whether the point is in the specified rectangle. This method assumes an unscaled and unrotated coordinate system. Specify `true` for `flipped` if the underlying view uses a flipped coordinate system. Point-in-rectangle functions generally assume that the bottom edge of a rectangle is outside of the rectangle boundaries, while the upper edge is inside the boundaries. This method views `aRect` from the point of view of the user -- that is, this method always treats the bottom edge of the rectangle as the one closest to the bottom edge of the user's screen. By making this adjustment, this function ensures consistent mouse-detection behavior from the user's perspective. - Returns: `true` if the hot spot of the cursor lies inside a given rectangle, otherwise `false`.
 func NSMouseInRect(aPoint corefoundation.CGPoint, aRect corefoundation.CGRect, flipped bool) bool {
 	return _fnNSMouseInRect(aPoint, aRect, flipped)
 }
 
+// Returns the next element in the hash table enumeration.
 func NSNextHashEnumeratorItem(enumerator *NSHashEnumerator) unsafe.Pointer {
 	return _fnNSNextHashEnumeratorItem(enumerator)
 }
 
+// Returns the next key-value pair in the enumeration.
 func NSNextMapEnumeratorPair(enumerator *NSMapEnumerator, key unsafe.Pointer, value unsafe.Pointer) bool {
 	return _fnNSNextMapEnumeratorPair(enumerator, key, value)
 }
 
+// Offsets the rectangle by the specified amount. - Returns: A copy of `aRect`, with its location shifted by `dX` along the x axis and by `dY` along the y axis.
 func NSOffsetRect(aRect corefoundation.CGRect, dX float64, dY float64) corefoundation.CGRect {
 	return _fnNSOffsetRect(aRect, dX, dY)
 }
 
+// Returns the root directory of the user's system.
 func NSOpenStepRootDirectory() *NSString {
 	_ret := _fnNSOpenStepRootDirectory()
 	if _ret != 0 {
@@ -696,30 +989,37 @@ func NSOpenStepRootDirectory() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns the page size.
 func NSPageSize() uint {
 	return _fnNSPageSize()
 }
 
+// Returns an `NSPoint` typecast from a `CGPoint`. - Returns: An `NSPoint` typecast from a `CGPoint`.
 func NSPointFromCGPoint(cgpoint corefoundation.CGPoint) corefoundation.CGPoint {
 	return _fnNSPointFromCGPoint(cgpoint)
 }
 
+// Returns a point from a text-based representation. - Parameters: - aString: A string of the form "\{x, y\}". - Returns: If `aString` is of the form "\{x, y\}" an `NSPoint` structure that uses x and y as the x and y coordinates, in that order. If `aString` only contains a single number, it is used as the x coordinate. If `aString` does not contain any numbers, returns an `NSPoint` object whose x and y coordinates are both 0.
 func NSPointFromString(aString *NSString) corefoundation.CGPoint {
 	return _fnNSPointFromString(aString.Ptr())
 }
 
+// Returns a Boolean value that indicates whether a given point is in a given rectangle. Point-in-rectangle functions generally assume that the "upper" and "left" edges of a rectangle are inside the rectangle boundaries, while the "lower" and "right" edges are outside the boundaries. This method treats the "upper" and "left" edges of the rectangle as the ones containing the origin of the rectangle. > The meanings of "upper" and "lower" (and "left" and "right") are relative to the current coordinate system and the location of the rectangle. For a rectangle of positive height located in positive x and y coordinates: > - In the default macOS desktop coordinate system -- where the origin is at the bottom left -- the rectangle edge closest to the bottom of the screen is the "upper" edge (and is considered inside the rectangle). > - On iOS and in a flipped coordinate system in macOS desktop -- where the origin is at the top left -- the rectangle edge closest to the bottom of the screen is the "lower" edge (and is considered outside the rectangle). - Returns: `true` if `aPoint` is located within the rectangle represented by `aRect`, otherwise `false`.
 func NSPointInRect(aPoint corefoundation.CGPoint, aRect corefoundation.CGRect) bool {
 	return _fnNSPointInRect(aPoint, aRect)
 }
 
+// Returns a `CGPoint` typecast from an `NSPoint`. - Returns: A `CGPoint` typecast from an `NSPoint`.
 func NSPointToCGPoint(nspoint corefoundation.CGPoint) corefoundation.CGPoint {
 	return _fnNSPointToCGPoint(nspoint)
 }
 
+// Returns a protocol with a given name. - Parameter namestr: The name of a protocol. - Returns: The protocol named by `namestr`, or `nil` if no protocol by that name is currently loaded.
 func NSProtocolFromString(namestr *NSString) unsafe.Pointer {
 	return _fnNSProtocolFromString(namestr.Ptr())
 }
 
+// Returns a range from a textual representation.
 func NSRangeFromString(aString *NSString) NSRange {
 	return _fnNSRangeFromString(aString.Ptr())
 }
@@ -729,42 +1029,52 @@ func NSRealMemoryAvailable() uint {
 	return _fnNSRealMemoryAvailable()
 }
 
+// Reallocates collectable memory. @DeprecationSummary { Garbage collection is deprecated in OS X v10.8; instead, you should use Automatic Reference Counting. } Changes the size of the block of memory pointed to by `ptr` to `size` bytes. It may allocate new memory to replace the old, in which case it moves the contents of the old memory block to the new block, up to a maximum of `size` bytes. - Parameters: - ptr: A pointer to the previously allocated memory block. - size: The new number of bytes of memory to allocate. - options: `0` or `NSScannedOption`: A value of `0` allocates non-scanned memory; a value of `NSScannedOption` allocates scanned memory. - Returns: A pointer to the reallocated memory, or `NULL` if the function is unable to allocate the requested memory.
 func NSReallocateCollectable(ptr unsafe.Pointer, size uint, options uint) unsafe.Pointer {
 	return _fnNSReallocateCollectable(ptr, size, options)
 }
 
+// Returns an `NSRect` typecast from a `CGRect`. - Returns: An `NSRect` typecast from a `CGRect`.
 func NSRectFromCGRect(cgrect corefoundation.CGRect) corefoundation.CGRect {
 	return _fnNSRectFromCGRect(cgrect)
 }
 
+// Returns a rectangle from a text-based representation. Scans `aString` for four numbers which are used as the x and y coordinates and the width and height, in that order, to create an `NSRect` object. If `aString` does not contain four numbers, those numbers that were scanned are used, and 0 is used for the remaining values. If `aString` does not contain any numbers, this function returns an `NSRect` object with a rectangle whose origin is (0, 0) and width and height are both 0.
 func NSRectFromString(aString *NSString) corefoundation.CGRect {
 	return _fnNSRectFromString(aString.Ptr())
 }
 
+// Returns a `CGRect` typecast from an `NSRect`. - Returns: A `CGRect` typecast from an `NSRect`.
 func NSRectToCGRect(nsrect corefoundation.CGRect) corefoundation.CGRect {
 	return _fnNSRectToCGRect(nsrect)
 }
 
+// Frees a zone after first deallocating all of its memory.
 func NSRecycleZone(zone unsafe.Pointer) {
 	_fnNSRecycleZone(zone)
 }
 
+// Deletes the elements from a hash table, without freeing the table itself.
 func NSResetHashTable(table *NSHashTable[objc.ID]) {
 	_fnNSResetHashTable(table.Ptr())
 }
 
+// Deletes the entries from a map table, without freeing the table itself.
 func NSResetMapTable(table *NSMapTable[objc.ID, objc.ID]) {
 	_fnNSResetMapTable(table.Ptr())
 }
 
+// Rounds down a value to the nearest multiple of the page size.
 func NSRoundDownToMultipleOfPageSize(bytes_ uint) uint {
 	return _fnNSRoundDownToMultipleOfPageSize(bytes_)
 }
 
+// Rounds up a value to the nearest multiple of the page size.
 func NSRoundUpToMultipleOfPageSize(bytes_ uint) uint {
 	return _fnNSRoundUpToMultipleOfPageSize(bytes_)
 }
 
+// Creates a list of directory search paths.
 func NSSearchPathForDirectoriesInDomains(directory NSSearchPathDirectory, domainMask NSSearchPathDomainMask, expandTilde bool) *NSArray[*NSString] {
 	_ret := _fnNSSearchPathForDirectoriesInDomains(directory, domainMask, expandTilde)
 	if _ret != 0 {
@@ -773,35 +1083,43 @@ func NSSearchPathForDirectoriesInDomains(directory NSSearchPathDirectory, domain
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// Returns the selector with a given name. - Parameter aSelectorName: A string of any length, with any characters, that represents the name of a selector. - Returns: The selector named by `aSelectorName`. If `aSelectorName` is not a valid selector name, returns `0`.
 func NSSelectorFromString(aSelectorName *NSString) objc.SEL {
 	return _fnNSSelectorFromString(aSelectorName.Ptr())
 }
 
+// Changes the top-level error handler.
 func NSSetUncaughtExceptionHandler(arg unsafe.Pointer) {
 	_fnNSSetUncaughtExceptionHandler(arg)
 }
 
+// Sets the name of a zone.
 func NSSetZoneName(zone unsafe.Pointer, name *NSString) {
 	_fnNSSetZoneName(zone, name.Ptr())
 }
 
+// Indicates whether an object should be retained.
 // Deprecated: Not supported
 func NSShouldRetainWithZone(anObject objc.ID, requestedZone unsafe.Pointer) bool {
 	return _fnNSShouldRetainWithZone(anObject, requestedZone)
 }
 
+// Returns an `NSSize` typecast from a `CGSize`. - Returns: An `NSSize` typecast from a `CGSize`.
 func NSSizeFromCGSize(cgsize corefoundation.CGSize) corefoundation.CGSize {
 	return _fnNSSizeFromCGSize(cgsize)
 }
 
+// Returns a size from a text-based representation. Scans `aString` for two numbers which are used as the width and height, in that order, to create an `NSSize` struct. If `aString` only contains a single number, it is used as the width. The `aString` argument should be formatted like the output of “NSStringFromSize“, for example, `@"\{10,20\}"`. If `aString` does not contain any numbers, this function returns an `NSSize` struct whose width and height are both `0`.
 func NSSizeFromString(aString *NSString) corefoundation.CGSize {
 	return _fnNSSizeFromString(aString.Ptr())
 }
 
+// Returns a `CGSize` typecast from an `NSSize`. - Returns: A `CGSize` typecast from an `NSSize`.
 func NSSizeToCGSize(nssize corefoundation.CGSize) corefoundation.CGSize {
 	return _fnNSSizeToCGSize(nssize)
 }
 
+// Returns a string containing the name of a class. - Parameter aClass: A class. - Returns: A string containing the name of `aClass`.
 func NSStringFromClass(aClass objc.Class) *NSString {
 	_ret := _fnNSStringFromClass(aClass)
 	if _ret != 0 {
@@ -810,6 +1128,7 @@ func NSStringFromClass(aClass objc.Class) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns a string describing the hash table's contents.
 func NSStringFromHashTable(table *NSHashTable[objc.ID]) *NSString {
 	_ret := _fnNSStringFromHashTable(table.Ptr())
 	if _ret != 0 {
@@ -818,6 +1137,7 @@ func NSStringFromHashTable(table *NSHashTable[objc.ID]) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns a string describing the map table's contents.
 func NSStringFromMapTable(table *NSMapTable[objc.ID, objc.ID]) *NSString {
 	_ret := _fnNSStringFromMapTable(table.Ptr())
 	if _ret != 0 {
@@ -826,6 +1146,7 @@ func NSStringFromMapTable(table *NSMapTable[objc.ID, objc.ID]) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns a string representation of a point. - Parameters: - aPoint: A point structure. - Returns: A string of the form "\{a, b\}", where a and b are the x and y coordinates of `aPoint`.
 func NSStringFromPoint(aPoint corefoundation.CGPoint) *NSString {
 	_ret := _fnNSStringFromPoint(aPoint)
 	if _ret != 0 {
@@ -834,6 +1155,7 @@ func NSStringFromPoint(aPoint corefoundation.CGPoint) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns a string containing the name of a protocol. - Parameter proto: A protocol. - Returns: A string containing the name of `proto`.
 func NSStringFromProtocol(proto unsafe.Pointer) *NSString {
 	_ret := _fnNSStringFromProtocol(proto)
 	if _ret != 0 {
@@ -842,6 +1164,7 @@ func NSStringFromProtocol(proto unsafe.Pointer) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns a string representation of a range.
 func NSStringFromRange(range_ NSRange) *NSString {
 	_ret := _fnNSStringFromRange(range_)
 	if _ret != 0 {
@@ -850,6 +1173,7 @@ func NSStringFromRange(range_ NSRange) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns a string representation of a rectangle. Returns a string of the form "\{\{a, b\}, \{c, d\}\}", where a, b, c, and d are the x and y coordinates and the width and height, respectively, of `aRect`.
 func NSStringFromRect(aRect corefoundation.CGRect) *NSString {
 	_ret := _fnNSStringFromRect(aRect)
 	if _ret != 0 {
@@ -858,6 +1182,7 @@ func NSStringFromRect(aRect corefoundation.CGRect) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns a string representation of a given selector. - Parameter aSelector: A selector. - Returns: A string representation of `aSelector`.
 func NSStringFromSelector(aSelector objc.SEL) *NSString {
 	_ret := _fnNSStringFromSelector(aSelector)
 	if _ret != 0 {
@@ -866,6 +1191,7 @@ func NSStringFromSelector(aSelector objc.SEL) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns a string representation of a size. - Returns: A string of the form "\{a, b\}", where a and b are the width and height, respectively, of `aSize`.
 func NSStringFromSize(aSize corefoundation.CGSize) *NSString {
 	_ret := _fnNSStringFromSize(aSize)
 	if _ret != 0 {
@@ -874,126 +1200,157 @@ func NSStringFromSize(aSize corefoundation.CGSize) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Swaps the bytes of a number. Converts the big-endian value in `x` to the current endian format and returns the resulting value. If it is necessary to swap the bytes of `x`, this function calls “NSSwapDouble(_:)“ to perform the swap. - Parameter x: The value you want to convert. - Returns: The converted value.
 func NSSwapBigDoubleToHost(x NSSwappedDouble) float64 {
 	return _fnNSSwapBigDoubleToHost(x)
 }
 
+// Swaps the bytes of a number. Converts the big-endian value in `x` to the current endian format and returns the resulting value. If it is necessary to swap the bytes of `x`, this function calls “NSSwapFloat(_:)“ to perform the swap. - Parameter x: The value you want to convert. - Returns: The converted value.
 func NSSwapBigFloatToHost(x NSSwappedFloat) float32 {
 	return _fnNSSwapBigFloatToHost(x)
 }
 
+// Converts a big-endian `unsigned int` to the host's native byte order. Converts the big-endian value in `x` to the current endian format and returns the resulting value. If it is necessary to swap the bytes of `x`, this function calls “NSSwapInt(_:)“ to perform the swap. - Parameter x: The value you want to convert. - Returns: The converted value.
 func NSSwapBigIntToHost(x uint) uint {
 	return _fnNSSwapBigIntToHost(x)
 }
 
+// Converts a big-endian `unsigned long long` to the host's native byte order. Converts the big-endian value in `x` to the current endian format and returns the resulting value. If it is necessary to swap the bytes of `x`, this function calls “NSSwapLongLong(_:)“ to perform the swap. - Parameter x: The value you want to convert. - Returns: The converted value.
 func NSSwapBigLongLongToHost(x uint64) uint64 {
 	return _fnNSSwapBigLongLongToHost(x)
 }
 
+// Converts a big-endian `unsigned long` to the host's native byte order. Converts the big-endian value in `x` to the current endian format and returns the resulting value. If it is necessary to swap the bytes of `x`, this function calls “NSSwapLong(_:)“ to perform the swap. - Parameter x: The value you want to convert. - Returns: The converted value.
 func NSSwapBigLongToHost(x uint) uint {
 	return _fnNSSwapBigLongToHost(x)
 }
 
+// Converts a big-endian `unsigned short` to the host's native byte order. Converts the big-endian value in `x` to the current endian format and returns the resulting value. If it is necessary to swap the bytes of `x`, this function calls “NSSwapShort(_:)“ to perform the swap. - Parameter x: The value you want to convert. - Returns: The converted value.
 func NSSwapBigShortToHost(x uint16) uint16 {
 	return _fnNSSwapBigShortToHost(x)
 }
 
+// Swaps the bytes of a number. Swaps the bytes of `x` and returns the resulting value. Bytes are swapped from each low-order position to the corresponding high-order position and vice versa. For example, if the bytes of `x` are numbered from 1 to 8, this function swaps bytes 1 and 8, bytes 2 and 7, bytes 3 and 6, and bytes 4 and 5. - Parameter x: The value whose bytes you want to swap. - Returns: The byte-swapped value.
 func NSSwapDouble(x NSSwappedDouble) NSSwappedDouble {
 	return _fnNSSwapDouble(x)
 }
 
+// Swaps the bytes of a number. Swaps the bytes of `x` and returns the resulting value. Bytes are swapped from each low-order position to the corresponding high-order position and vice versa. For example, if the bytes of `x` are numbered from 1 to 4, this function swaps bytes 1 and 4, and bytes 2 and 3. - Parameter x: The value whose bytes you want to swap. - Returns: The byte-swapped value.
 func NSSwapFloat(x NSSwappedFloat) NSSwappedFloat {
 	return _fnNSSwapFloat(x)
 }
 
+// Swaps the bytes of a number. Converts the value in `x`, specified in the current endian format, to big-endian format and returns the resulting value. If it is necessary to swap the bytes, this function calls “NSSwapDouble(_:)“ to perform the swap. - Parameter x: The value you want to convert. - Returns: The converted value.
 func NSSwapHostDoubleToBig(x float64) NSSwappedDouble {
 	return _fnNSSwapHostDoubleToBig(x)
 }
 
+// Swaps the bytes of a number. Converts the value in `x`, specified in the current endian format, to little-endian format and returns the resulting value. If it is necessary to swap the bytes, this function calls “NSSwapDouble(_:)“ to perform the swap. - Parameter x: The value you want to convert. - Returns: The converted value.
 func NSSwapHostDoubleToLittle(x float64) NSSwappedDouble {
 	return _fnNSSwapHostDoubleToLittle(x)
 }
 
+// Swaps the bytes of a number. Converts the value in `x`, specified in the current endian format, to big-endian format and returns the resulting value. If it is necessary to swap the bytes, this function calls “NSSwapFloat(_:)“ to perform the swap. - Parameter x: The value you want to convert. - Returns: The converted value.
 func NSSwapHostFloatToBig(x float32) NSSwappedFloat {
 	return _fnNSSwapHostFloatToBig(x)
 }
 
+// Swaps the bytes of a number. Converts the value in `x`, specified in the current endian format, to little-endian format and returns the resulting value. If it is necessary to swap the bytes, this function calls “NSSwapFloat(_:)“ to perform the swap. - Parameter x: The value you want to convert. - Returns: The converted value.
 func NSSwapHostFloatToLittle(x float32) NSSwappedFloat {
 	return _fnNSSwapHostFloatToLittle(x)
 }
 
+// Converts an `unsigned int` from the host's native byte order to big-endian. Converts the value in `x`, specified in the current endian format, to big-endian format and returns the resulting value. If it is necessary to swap the bytes, this function calls “NSSwapInt(_:)“ to perform the swap. - Parameter x: The value you want to convert. - Returns: The converted value.
 func NSSwapHostIntToBig(x uint) uint {
 	return _fnNSSwapHostIntToBig(x)
 }
 
+// Converts an `unsigned int` from the host's native byte order to little-endian. Converts the value in `x`, specified in the current endian format, to little-endian format and returns the resulting value. If it is necessary to swap the bytes, this function calls “NSSwapInt(_:)“ to perform the swap. - Parameter x: The value you want to convert. - Returns: The converted value.
 func NSSwapHostIntToLittle(x uint) uint {
 	return _fnNSSwapHostIntToLittle(x)
 }
 
+// Converts an `unsigned long long` from the host's native byte order to big-endian. Converts the value in `x`, specified in the current endian format, to big-endian format and returns the resulting value. If it is necessary to swap the bytes, this function calls “NSSwapLongLong(_:)“ to perform the swap. - Parameter x: The value you want to convert. - Returns: The converted value.
 func NSSwapHostLongLongToBig(x uint64) uint64 {
 	return _fnNSSwapHostLongLongToBig(x)
 }
 
+// Converts an `unsigned long long` from the host's native byte order to little-endian. Converts the value in `x`, specified in the current endian format, to little-endian format and returns the resulting value. If it is necessary to swap the bytes, this function calls “NSSwapLongLong(_:)“ to perform the swap. - Parameter x: The value you want to convert. - Returns: The converted value.
 func NSSwapHostLongLongToLittle(x uint64) uint64 {
 	return _fnNSSwapHostLongLongToLittle(x)
 }
 
+// Converts an `unsigned long` from the host's native byte order to big-endian. Converts the value in `x`, specified in the current endian format, to big-endian format and returns the resulting value. If it is necessary to swap the bytes, this function calls “NSSwapLong(_:)“ to perform the swap. - Parameter x: The value you want to convert. - Returns: The converted value.
 func NSSwapHostLongToBig(x uint) uint {
 	return _fnNSSwapHostLongToBig(x)
 }
 
+// Converts an `unsigned long` from the host's native byte order to little-endian. Converts the value in `x`, specified in the current endian format, to little-endian format and returns the resulting value. If it is necessary to swap the bytes, this function calls “NSSwapLong(_:)“ to perform the swap. - Parameter x: The value you want to convert. - Returns: The converted value.
 func NSSwapHostLongToLittle(x uint) uint {
 	return _fnNSSwapHostLongToLittle(x)
 }
 
+// Converts an `unsigned short` from the host's native byte order to big-endian. Converts the value in `x`, specified in the current endian format, to big-endian format and returns the resulting value. If it is necessary to swap the bytes, this function calls “NSSwapShort(_:)“ to perform the swap. - Parameter x: The value you want to convert. - Returns: The converted value.
 func NSSwapHostShortToBig(x uint16) uint16 {
 	return _fnNSSwapHostShortToBig(x)
 }
 
+// Converts an `unsigned short` from the host's native byte order to little-endian. Converts the value in `x`, specified in the current endian format, to little-endian format and returns the resulting value. If it is necessary to swap the bytes, this function calls “NSSwapShort(_:)“ to perform the swap. - Parameter x: The value you want to convert. - Returns: The converted value.
 func NSSwapHostShortToLittle(x uint16) uint16 {
 	return _fnNSSwapHostShortToLittle(x)
 }
 
+// Swaps the bytes of a number. Swaps the bytes of `inv` and returns the resulting value. Bytes are swapped from each low-order position to the corresponding high-order position and vice versa. For example, if the bytes of `inv` are numbered from 1 to 4, this function swaps bytes 1 and 4, and bytes 2 and 3. - Parameter inv: The value whose bytes you want to swap. - Returns: The byte-swapped value.
 func NSSwapInt(inv uint) uint {
 	return _fnNSSwapInt(inv)
 }
 
+// Swaps the bytes of a number. Converts the little-endian formatted value in `x` to the current endian format and returns the resulting value. If it is necessary to swap the bytes of `x`, this function calls “NSSwapDouble(_:)“ to perform the swap. - Parameter x: The value you want to convert. - Returns: The converted value.
 func NSSwapLittleDoubleToHost(x NSSwappedDouble) float64 {
 	return _fnNSSwapLittleDoubleToHost(x)
 }
 
+// Swaps the bytes of a number. Converts the little-endian formatted value in `x` to the current endian format and returns the resulting value. If it is necessary to swap the bytes of `x`, this function calls “NSSwapFloat(_:)“ to perform the swap. - Parameter x: The value you want to convert. - Returns: The converted value.
 func NSSwapLittleFloatToHost(x NSSwappedFloat) float32 {
 	return _fnNSSwapLittleFloatToHost(x)
 }
 
+// Converts a little-endian `unsigned int` to the host's native byte order. Converts the little-endian formatted value in `x` to the current endian format and returns the resulting value. If it is necessary to swap the bytes, this function calls “NSSwapInt(_:)“ to perform the swap. - Parameter x: The value you want to convert. - Returns: The converted value.
 func NSSwapLittleIntToHost(x uint) uint {
 	return _fnNSSwapLittleIntToHost(x)
 }
 
+// Converts a little-endian `unsigned long long` to the host's native byte order. Converts the little-endian formatted value in `x` to the current endian format and returns the resulting value. If it is necessary to swap the bytes, this function calls “NSSwapLongLong(_:)“ to perform the swap. - Parameter x: The value you want to convert. - Returns: The converted value.
 func NSSwapLittleLongLongToHost(x uint64) uint64 {
 	return _fnNSSwapLittleLongLongToHost(x)
 }
 
+// Converts a little-endian `unsigned long` to the host's native byte order. Converts the little-endian formatted value in `x` to the current endian format and returns the resulting value. If it is necessary to swap the bytes of `x`, this function calls “NSSwapLong(_:)“ to perform the swap. - Parameter x: The value you want to convert. - Returns: The converted value.
 func NSSwapLittleLongToHost(x uint) uint {
 	return _fnNSSwapLittleLongToHost(x)
 }
 
+// Converts a little-endian `unsigned short` to the host's native byte order. Converts the little-endian formatted value in `x` to the current endian format and returns the resulting value. If it is necessary to swap the bytes of `x`, this function calls “NSSwapShort(_:)“ to perform the swap. - Parameter x: The value you want to convert. - Returns: The converted value.
 func NSSwapLittleShortToHost(x uint16) uint16 {
 	return _fnNSSwapLittleShortToHost(x)
 }
 
+// Swaps the bytes of a number. Swaps the bytes of `inv` and returns the resulting value. Bytes are swapped from each low-order position to the corresponding high-order position and vice versa. For example, if the bytes of `inv` are numbered from 1 to 4, this function swaps bytes 1 and 4, and bytes 2 and 3. - Parameter inv: The value whose bytes you want to swap. - Returns: The byte-swapped value.
 func NSSwapLong(inv uint) uint {
 	return _fnNSSwapLong(inv)
 }
 
+// Swaps the bytes of a number. Swaps the bytes of `inv` and returns the resulting value. Bytes are swapped from each low-order position to the corresponding high-order position and vice versa. For example, if the bytes of `inv` are numbered from 1 to 8, this function swaps bytes 1 and 8, bytes 2 and 7, bytes 3 and 6, and bytes 4 and 5. - Parameter inv: The value whose bytes you want to swap. - Returns: The byte-swapped value.
 func NSSwapLongLong(inv uint64) uint64 {
 	return _fnNSSwapLongLong(inv)
 }
 
+// Swaps the bytes of a number. Swaps the low-order and high-order bytes of `inv` and returns the resulting value. - Parameter inv: The value whose bytes you want to swap. - Returns: The byte-swapped value.
 func NSSwapShort(inv uint16) uint16 {
 	return _fnNSSwapShort(inv)
 }
 
+// Returns the path of the temporary directory for the current user.
 func NSTemporaryDirectory() *NSString {
 	_ret := _fnNSTemporaryDirectory()
 	if _ret != 0 {
@@ -1002,14 +1359,17 @@ func NSTemporaryDirectory() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns the union of the specified ranges.
 func NSUnionRange(range1 NSRange, range2 NSRange) NSRange {
 	return _fnNSUnionRange(range1, range2)
 }
 
+// Calculates the union of two rectangles. Returns the smallest rectangle that completely encloses both `aRect` and `bRect`. If one of the rectangles has 0 (or negative) width or height, a copy of the other rectangle is returned; but if both have 0 (or negative) width or height, the returned rectangle has its origin at (0.0, 0.0) and has 0 width and height.
 func NSUnionRect(aRect corefoundation.CGRect, bRect corefoundation.CGRect) corefoundation.CGRect {
 	return _fnNSUnionRect(aRect, bRect)
 }
 
+// Returns the logon name of the current user.
 func NSUserName() *NSString {
 	_ret := _fnNSUserName()
 	if _ret != 0 {
@@ -1018,26 +1378,32 @@ func NSUserName() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns the width of the specified rectangle. - Returns: The width of `aRect`.
 func NSWidth(aRect corefoundation.CGRect) float64 {
 	return _fnNSWidth(aRect)
 }
 
+// Allocates zeroed memory in a zone.
 func NSZoneCalloc(zone unsafe.Pointer, numElems uint, byteSize uint) unsafe.Pointer {
 	return _fnNSZoneCalloc(zone, numElems, byteSize)
 }
 
+// Frees memory in a zone.
 func NSZoneFree(zone unsafe.Pointer, ptr unsafe.Pointer) {
 	_fnNSZoneFree(zone, ptr)
 }
 
+// Returns the zone for a given pointer.
 func NSZoneFromPointer(ptr unsafe.Pointer) unsafe.Pointer {
 	return _fnNSZoneFromPointer(ptr)
 }
 
+// Allocates memory in a zone.
 func NSZoneMalloc(zone unsafe.Pointer, size uint) unsafe.Pointer {
 	return _fnNSZoneMalloc(zone, size)
 }
 
+// Returns the name of a zone.
 func NSZoneName(zone unsafe.Pointer) *NSString {
 	_ret := _fnNSZoneName(zone)
 	if _ret != 0 {
@@ -1046,10 +1412,12 @@ func NSZoneName(zone unsafe.Pointer) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Resizes memory in a zone.
 func NSZoneRealloc(zone unsafe.Pointer, ptr unsafe.Pointer, size uint) unsafe.Pointer {
 	return _fnNSZoneRealloc(zone, ptr, size)
 }
 
+// Returns the next object from the coder. Given an `NSCoder`, returns an object previously written with `NXWriteNSObject()`. The returned object is autoreleased. - Parameter decoder: The coder from which to read the object. - Returns: The next object from the coder.
 // Deprecated: Not supported
 func NXReadNSObjectFromCoder(decoder *NSCoder) *NSObject {
 	_ret := _fnNXReadNSObjectFromCoder(decoder.Ptr())

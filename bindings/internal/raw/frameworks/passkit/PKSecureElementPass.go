@@ -24,6 +24,7 @@ var (
 	_pKSecureElementPassSelDeviceAccountIdentifier    = objc.RegisterName("deviceAccountIdentifier")
 	_pKSecureElementPassSelDeviceAccountNumberSuffix  = objc.RegisterName("deviceAccountNumberSuffix")
 	_pKSecureElementPassSelPassActivationState        = objc.RegisterName("passActivationState")
+	_pKSecureElementPassSelIsProvisioningAvailable    = objc.RegisterName("isProvisioningAvailable")
 	_pKSecureElementPassSelDevicePassIdentifier       = objc.RegisterName("devicePassIdentifier")
 	_pKSecureElementPassSelPairedTerminalIdentifier   = objc.RegisterName("pairedTerminalIdentifier")
 )
@@ -72,6 +73,12 @@ func (o *PKSecureElementPass) DeviceAccountNumberSuffix() *foundation.NSString {
 
 func (o *PKSecureElementPass) PassActivationState() PKSecureElementPassActivationState {
 	_ret := objc.Send[PKSecureElementPassActivationState](o.Ptr(), _pKSecureElementPassSelPassActivationState)
+	return _ret
+}
+
+// A Boolean value indicating whether provisioning is available for this pass. This property is YES when the pass is in a pre-provisioned state and the issuer app can guide the user to complete provisioning. Check this property when passActivationState returns PKSecureElementPassActivationStateDeactivated to determine if provisioning is available.
+func (o *PKSecureElementPass) IsProvisioningAvailable() bool {
+	_ret := objc.Send[bool](o.Ptr(), _pKSecureElementPassSelIsProvisioningAvailable)
 	return _ret
 }
 

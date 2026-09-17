@@ -10,8 +10,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An object that contains the specific font, style, and weight attributes to apply to a symbol image.
-//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsimagesymbolconfiguration
 type NSImageSymbolConfiguration struct {
 	foundation.NSObject

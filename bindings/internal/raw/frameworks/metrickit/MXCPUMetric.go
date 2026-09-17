@@ -13,6 +13,7 @@ import (
 // An object representing metrics about the use of the CPU.
 //
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxcpumetric
+// Deprecated: Use MetricResult instead.
 type MXCPUMetric struct {
 	MXMetric
 }

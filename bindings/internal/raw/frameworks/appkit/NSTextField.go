@@ -47,6 +47,8 @@ var (
 	_nSTextFieldSelSetDelegate                                         = objc.RegisterName("setDelegate:")
 	_nSTextFieldSelBezelStyle                                          = objc.RegisterName("bezelStyle")
 	_nSTextFieldSelSetBezelStyle                                       = objc.RegisterName("setBezelStyle:")
+	_nSTextFieldSelBorderShape                                         = objc.RegisterName("borderShape")
+	_nSTextFieldSelSetBorderShape                                      = objc.RegisterName("setBorderShape:")
 	_nSTextFieldSelPreferredMaxLayoutWidth                             = objc.RegisterName("preferredMaxLayoutWidth")
 	_nSTextFieldSelSetPreferredMaxLayoutWidth                          = objc.RegisterName("setPreferredMaxLayoutWidth:")
 	_nSTextFieldSelMaximumNumberOfLines                                = objc.RegisterName("maximumNumberOfLines")
@@ -338,6 +340,25 @@ func (o *NSTextField) BezelStyle() NSTextFieldBezelStyle {
 func (o *NSTextField) SetBezelStyle(bezelStyle NSTextFieldBezelStyle) {
 	purego.Main(func() {
 		o.Ptr().Send(_nSTextFieldSelSetBezelStyle, bezelStyle)
+	})
+}
+
+// Set border shape `NSControlBorderShapeAutomatic` sets text field or subclass to default system shape. `NSControlBorderShapeCircle` sets text field or subclass to `NSControlBorderShapeAutomatic`.
+func (o *NSTextField) BorderShape() NSControlBorderShape {
+	var _mainthread0 NSControlBorderShape
+	purego.Main(func() {
+		_mainthread0 = func() NSControlBorderShape {
+			_ret := objc.Send[NSControlBorderShape](o.Ptr(), _nSTextFieldSelBorderShape)
+			return _ret
+		}()
+	})
+	return _mainthread0
+}
+
+// Set border shape `NSControlBorderShapeAutomatic` sets text field or subclass to default system shape. `NSControlBorderShapeCircle` sets text field or subclass to `NSControlBorderShapeAutomatic`.
+func (o *NSTextField) SetBorderShape(borderShape NSControlBorderShape) {
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextFieldSelSetBorderShape, borderShape)
 	})
 }
 

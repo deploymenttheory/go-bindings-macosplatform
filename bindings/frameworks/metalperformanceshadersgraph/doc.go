@@ -23,7 +23,7 @@
 // Each base type below lists the concrete types you construct and pass where the
 // base is accepted:
 //
-//   - GraphObject: [Graph], [GraphCompilationDescriptor], [GraphConvolution2DOpDescriptor], [GraphConvolution3DOpDescriptor], [GraphCreateSparseOpDescriptor], [GraphDepthwiseConvolution2DOpDescriptor], [GraphDepthwiseConvolution3DOpDescriptor], [GraphDevice], [GraphExecutable], [GraphExecutableExecutionDescriptor], [GraphExecutableSerializationDescriptor], [GraphExecutionDescriptor], [GraphFFTDescriptor], [GraphGRUDescriptor], [GraphImToColOpDescriptor], [GraphLSTMDescriptor], [GraphOperation], [GraphPooling2DOpDescriptor], [GraphPooling4DOpDescriptor], [GraphRandomOpDescriptor], [GraphSingleGateRNNDescriptor], [GraphStencilOpDescriptor], [GraphTensor], [GraphTensorData], [GraphType]
+//   - GraphObject: [Graph], [GraphCompilationDescriptor], [GraphConvolution2DOpDescriptor], [GraphConvolution3DOpDescriptor], [GraphCreateSparseOpDescriptor], [GraphDepthwiseConvolution2DOpDescriptor], [GraphDepthwiseConvolution3DOpDescriptor], [GraphDevice], [GraphExecutable], [GraphExecutableExecutionDescriptor], [GraphExecutableSerializationDescriptor], [GraphExecutionDescriptor], [GraphFFTDescriptor], [GraphGRUDescriptor], [GraphImToColOpDescriptor], [GraphLSTMDescriptor], [GraphOperation], [GraphPooling2DOpDescriptor], [GraphPooling4DOpDescriptor], [GraphRandomOpDescriptor], [GraphSDPADescriptor], [GraphSingleGateRNNDescriptor], [GraphStencilOpDescriptor], [GraphTensor], [GraphTensorData], [GraphType]
 //   - GraphOperation: [GraphVariableOp]
 //   - GraphType: [GraphShapedType]
 package metalperformanceshadersgraph

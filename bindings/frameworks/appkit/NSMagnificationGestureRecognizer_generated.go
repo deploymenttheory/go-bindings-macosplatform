@@ -163,6 +163,14 @@ func (mgr *MagnificationGestureRecognizer) WithDelaysRotationEvents(delaysRotati
 	return mgr
 }
 
+// WithCancellableByScrollGesture sets causes the receiver to be cancelled when its enclosing scroll view’s gesture recognizer begins.
+func (mgr *MagnificationGestureRecognizer) WithCancellableByScrollGesture(cancellableByScrollGesture bool) *MagnificationGestureRecognizer {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mgr), objc.RegisterName("setCancellableByScrollGesture:"), cancellableByScrollGesture)
+	})
+	return mgr
+}
+
 // WithName sets the name.
 func (mgr *MagnificationGestureRecognizer) WithName(name string) *MagnificationGestureRecognizer {
 	purego.Main(func() {

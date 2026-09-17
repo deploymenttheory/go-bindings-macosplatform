@@ -136,10 +136,6 @@
         }
       }
     },
-    "LAError": {
-      "doc": "Errors issued by the LocalAuthentication framework.",
-      "url": "https://developer.apple.com/documentation/localauthentication/laerror"
-    },
     "LAPolicy": {
       "doc": "The set of available local authentication policies.",
       "url": "https://developer.apple.com/documentation/localauthentication/lapolicy",

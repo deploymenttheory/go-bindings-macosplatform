@@ -12,9 +12,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/foundation"
 )
 
-func DDDeviceProtocolStringDIAL() uintptr {
+func DDDeviceProtocolStringDIAL() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_devicediscoveryextensionLib, "DDDeviceProtocolStringDIAL")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func DDDeviceProtocolStringInvalid() *foundation.NSString {

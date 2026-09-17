@@ -83,8 +83,8 @@ func NewAuthorizationProviderExtensionLoginManager() *AuthorizationProviderExten
 }
 
 // WithLoginUserName sets the user name to use when authenticating with the identity provider.
-func (apelm *AuthorizationProviderExtensionLoginManager) WithLoginUserName(loginUserName unsafe.Pointer) *AuthorizationProviderExtensionLoginManager {
-	objc.Send[objc.ID](objref.IDOf(apelm), objc.RegisterName("setLoginUserName:"), loginUserName)
+func (apelm *AuthorizationProviderExtensionLoginManager) WithLoginUserName(loginUserName string) *AuthorizationProviderExtensionLoginManager {
+	objc.Send[objc.ID](objref.IDOf(apelm), objc.RegisterName("setLoginUserName:"), purego.NSString(loginUserName))
 	return apelm
 }
 
@@ -191,7 +191,7 @@ func (apelm *AuthorizationProviderExtensionLoginManager) DecryptionKeysNeedRepai
 	objc.Send[objc.ID](objref.IDOf(apelm), objc.RegisterName("decryptionKeysNeedRepair"))
 }
 
-// ResetKeys creates new encryption, signing, and Secure Enclave keys for the user.
+// ResetKeys creates new encryption, signing, and Secure Enclave keys.
 func (apelm *AuthorizationProviderExtensionLoginManager) ResetKeys() {
 	defer runtime.KeepAlive(apelm)
 	objc.Send[objc.ID](objref.IDOf(apelm), objc.RegisterName("resetKeys"))
@@ -320,10 +320,13 @@ func (apelm *AuthorizationProviderExtensionLoginManager) ExtensionData() obj.Obj
 }
 
 // LoginUserName returns the user name to use when authenticating with the identity provider.
-func (apelm *AuthorizationProviderExtensionLoginManager) LoginUserName() unsafe.Pointer {
+func (apelm *AuthorizationProviderExtensionLoginManager) LoginUserName() string {
 	defer runtime.KeepAlive(apelm)
-	_r := objc.Send[unsafe.Pointer](objref.IDOf(apelm), objc.RegisterName("loginUserName"))
-	return _r
+	_r := objc.Send[objc.ID](objref.IDOf(apelm), objc.RegisterName("loginUserName"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
 }
 
 // UserLoginConfiguration returns retrieves the current user login configuration for the extension.

@@ -12,8 +12,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A token’s configuration.
-//
 // Apple documentation: https://developer.apple.com/documentation/cryptotokenkit/tktokenconfiguration
 type TKTokenConfiguration struct {
 	foundation.NSObject

@@ -34,7 +34,6 @@ type PGDisplay interface {
 	Queue() *foundation.NSObject
 	ModeChangeHandler() objc.Block
 	NewFrameEventHandler() objc.Block
-	CursorGlyphHandler() objc.Block
 	CursorShowHandler() objc.Block
 	CursorMoveHandler() objc.Block
 	CursorPosition() PGDisplayCoord_t

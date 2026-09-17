@@ -432,11 +432,13 @@ func (o *NSCoder) FailWithError(error_ unsafe.Pointer) {
 	o.Ptr().Send(_nSCoderSelFailWithError, error_)
 }
 
+// The system version in effect for the archive. During encoding, the current version. During decoding, the version that was in effect when the data was encoded. Subclasses that implement decoding must override this property to return the system version of the data being decoded.
 func (o *NSCoder) SystemVersion() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSCoderSelSystemVersion)
 	return _ret
 }
 
+// A Boolean value that indicates whether the receiver supports keyed coding of objects. `NO` by default. Concrete subclasses that support keyed coding, such as `NSKeyedArchiver`, need to override this property to return `YES`.
 func (o *NSCoder) AllowsKeyedCoding() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSCoderSelAllowsKeyedCoding)
 	return _ret
@@ -455,13 +457,13 @@ func (o *NSCoder) AllowedClasses() *NSSet[objc.Class] {
 	return NSSetFromID[objc.Class](_ret)
 }
 
-// @abstract Defines the behavior this NSCoder should take on decode failure (i.e. corrupt archive, invalid data, etc.). @discussion The default result of this property is NSDecodingFailurePolicyRaiseException, subclasses can change this to an alternative policy.
+// The action the coder should take when decoding fails. A decode call can fail for the following reasons: - The keyed archive data is corrupt or missing. - A type mismatch occurs, such as expecting a class but encountering a numeric type instead. This also occurs when `decodeInteger(forKey:)` encounters a value encoded as floating-point, or vice versa. - A secure coding violation occurs. This happens when you attempt to decode an object that doesn't conform to `NSSecureCoding`, or when the encoded type doesn't match any of the expected types.
 func (o *NSCoder) DecodingFailurePolicy() NSDecodingFailurePolicy {
 	_ret := objc.Send[NSDecodingFailurePolicy](o.Ptr(), _nSCoderSelDecodingFailurePolicy)
 	return _ret
 }
 
-// @abstract The current error (if there is one) for the current TopLevel decode. @discussion The meaning of this property changes based on the result of the decodingFailurePolicy property: For NSDecodingFailurePolicyRaiseException, this property will always be nil. For NSDecodingFailurePolicySetErrorAndReturn, this property can be non-nil, and if so, indicates that there was a failure while decoding the archive (specifically its the very first error encountered). While .error is non-nil, all attempts to decode data from this coder will return a nil/zero-equivalent value. This error is consumed by a TopLevel decode API (which resets this coder back to a being able to potentially decode data).
+// An error in the top-level decode. The meaning of this property depends on the setting of the `decodingFailurePolicy` property. For `NSDecodingFailurePolicyRaiseException`, this property is always `nil`. For `NSDecodingFailurePolicySetErrorAndReturn`, a non-`nil` value represents the first error encountered while decoding the archive. While `error` is non-`nil`, all attempts to decode data from this coder will return a `nil`/zero-equivalent value. This error is consumed by a top-level decode API, which resets the coder back to being able to potentially decode data.
 func (o *NSCoder) Error() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSCoderSelError)
 	return _ret

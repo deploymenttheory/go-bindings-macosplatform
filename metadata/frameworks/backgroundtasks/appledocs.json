@@ -48,12 +48,6 @@
       "url": "https://developer.apple.com/documentation/backgroundtasks/bgtaskscheduler"
     }
   },
-  "enums": {
-    "BGTaskSchedulerErrorCode": {
-      "doc": "An enumeration of the task scheduling errors.",
-      "url": "https://developer.apple.com/documentation/backgroundtasks/bgtaskschedulererrorcode"
-    }
-  },
   "methods": {
     "BGAppRefreshTaskRequest": {
       "-initWithIdentifier:": {

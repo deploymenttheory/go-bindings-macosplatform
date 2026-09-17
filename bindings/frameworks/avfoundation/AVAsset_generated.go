@@ -123,6 +123,15 @@ func (a *Asset) MinimumTimeOffsetFromLive() coremedia.CMTime {
 	return _r
 }
 
+// ConstituentFileURLs returns the list of file URLs that collectively represent the media asset. The list of file URLs that constitute the asset are returned only for QuickTime reference movies, or if the MediaExtension format reader implements this property [MEFileInfo setConstituentFileNames:].
+//
+// ConstituentFileURLs returns the collection as a Go slice.
+func (a *Asset) ConstituentFileURLs() []string {
+	defer runtime.KeepAlive(a)
+	_arr := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("constituentFileURLs"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return rt.URLString(_id) })
+}
+
 // CancelLoading cancels all pending requests to asynchronously load property values.
 func (a *Asset) CancelLoading() {
 	defer runtime.KeepAlive(a)

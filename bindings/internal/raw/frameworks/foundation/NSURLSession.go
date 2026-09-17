@@ -11,8 +11,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An object that coordinates a group of related, network data transfer tasks.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsurlsession
 type NSURLSession struct {
 	NSObject
@@ -70,6 +68,7 @@ func NSURLSessionFromID(id objc.ID) *NSURLSession {
 	return o
 }
 
+// Creates a session with the specified session configuration. - Parameter configuration: A configuration object that specifies certain behaviors, such as caching policies, timeouts, proxies, pipelining, TLS versions to support, cookie policies, credential storage, and so on. See `NSURLSessionConfiguration` for more information. Calling this method is equivalent to calling `+sessionWithConfiguration:delegate:delegateQueue:` with a `nil` delegate and queue.
 func NSURLSessionSessionWithConfiguration(configuration *NSURLSessionConfiguration) *NSURLSession {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLSession), _nSURLSessionSelSessionWithConfiguration, configuration.Ptr())
 	if _ret != 0 {
@@ -78,6 +77,7 @@ func NSURLSessionSessionWithConfiguration(configuration *NSURLSessionConfigurati
 	return NSURLSessionFromID(_ret)
 }
 
+// Creates a session with the specified session configuration, delegate, and operation queue. - Parameter configuration: A configuration object that specifies certain behaviors, such as caching policies, timeouts, proxies, pipelining, TLS versions to support, cookie policies, and credential storage. See `NSURLSessionConfiguration` for more information. - Parameter delegate: A session delegate object that handles requests for authentication and other session-related events. This delegate object is responsible for handling authentication challenges, for making caching decisions, and for handling other session-related events. If `nil`, the class should be used only with methods that take completion handlers. The session object keeps a strong reference to the delegate until your app exits or explicitly invalidates the session. If you do not invalidate the session by calling `-invalidateAndCancel` or `-finishTasksAndInvalidate`, your app leaks memory until it exits. - Parameter queue: An operation queue for scheduling the delegate calls and completion handlers. The queue should be a serial queue, in order to ensure the correct ordering of callbacks. If `nil`, the session creates a serial operation queue for performing all delegate method calls and completion handler calls.
 func NSURLSessionSessionWithConfigurationDelegateDelegateQueue(configuration *NSURLSessionConfiguration, delegate NSURLSessionDelegate, queue *NSOperationQueue) *NSURLSession {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLSession), _nSURLSessionSelSessionWithConfigurationDelegateDelegateQueue, configuration.Ptr(), delegate, queue.Ptr())
 	if _ret != 0 {
@@ -86,14 +86,17 @@ func NSURLSessionSessionWithConfigurationDelegateDelegateQueue(configuration *NS
 	return NSURLSessionFromID(_ret)
 }
 
+// Invalidates the session, allowing any outstanding tasks to finish. This method returns immediately without waiting for tasks to finish. Once a session is invalidated, new tasks cannot be created in the session, but existing tasks continue until completion. After the last task finishes and the session makes the last delegate call related to those tasks, the session calls the `URLSession:didBecomeInvalidWithError:` method on its delegate, then breaks references to the delegate and callback objects. After invalidation, session objects cannot be reused. To cancel all outstanding tasks, call `-invalidateAndCancel` instead. > Important: Calling this method on the shared session has no effect. When invalidating a background session, it is not safe to create another background session with the same identifier until `URLSession:didBecomeInvalidWithError:` has been issued.
 func (o *NSURLSession) FinishTasksAndInvalidate() {
 	o.Ptr().Send(_nSURLSessionSelFinishTasksAndInvalidate)
 }
 
+// Cancels all outstanding tasks and then invalidates the session. Once invalidated, references to the delegate and callback objects are broken. After invalidation, session objects cannot be reused. To allow outstanding tasks to run until completion, call `-finishTasksAndInvalidate` instead. > Important: Calling this method on the shared session has no effect.
 func (o *NSURLSession) InvalidateAndCancel() {
 	o.Ptr().Send(_nSURLSessionSelInvalidateAndCancel)
 }
 
+// Empties all cookies, caches and credential stores, removes disk files, flushes in-progress downloads to disk, and ensures that future requests occur on a new socket. - Parameter completionHandler: The completion handler to call when the reset operation is complete. This handler is executed on the delegate queue.
 func (o *NSURLSession) ResetWithCompletionHandler(completionHandler func()) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -105,6 +108,7 @@ func (o *NSURLSession) ResetWithCompletionHandler(completionHandler func()) {
 	o.Ptr().Send(_nSURLSessionSelResetWithCompletionHandler, __block_completionHandler)
 }
 
+// Flushes cookies and credentials to disk, clears transient caches, and ensures that future requests occur on a new TCP connection. - Parameter completionHandler: The completion handler to call when the flush operation is complete. This handler is executed on the delegate queue.
 func (o *NSURLSession) FlushWithCompletionHandler(completionHandler func()) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -116,6 +120,7 @@ func (o *NSURLSession) FlushWithCompletionHandler(completionHandler func()) {
 	o.Ptr().Send(_nSURLSessionSelFlushWithCompletionHandler, __block_completionHandler)
 }
 
+// Asynchronously calls a completion callback with all data, upload, and download tasks in a session. - Parameter completionHandler: The completion handler to call with the list of tasks. This handler is executed on the delegate queue. The arrays passed to the completion handler contain any tasks that you have created within the session, not including any tasks that have been invalidated after completing, failing, or being cancelled.
 func (o *NSURLSession) GetTasksWithCompletionHandler(completionHandler func(*NSArray[*NSURLSessionDataTask], *NSArray[*NSURLSessionUploadTask], *NSArray[*NSURLSessionDownloadTask])) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -136,6 +141,7 @@ func (o *NSURLSession) GetTasksWithCompletionHandler(completionHandler func(*NSA
 	o.Ptr().Send(_nSURLSessionSelGetTasksWithCompletionHandler, __block_completionHandler)
 }
 
+// Asynchronously calls a completion callback with all tasks in a session. - Parameter completionHandler: The completion handler to call with the list of tasks.
 func (o *NSURLSession) GetAllTasksWithCompletionHandler(completionHandler func(*NSArray[*NSURLSessionTask])) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -150,6 +156,7 @@ func (o *NSURLSession) GetAllTasksWithCompletionHandler(completionHandler func(*
 	o.Ptr().Send(_nSURLSessionSelGetAllTasksWithCompletionHandler, __block_completionHandler)
 }
 
+// Creates a task that retrieves the contents of a URL based on the specified URL request object. By creating a task based on a request object, you can tune various aspects of the task's behavior, including the cache policy and timeout interval. After you create the task, you must start it by calling its `-resume` method. - Parameter request: A URL request object that provides request-specific information such as the URL, cache policy, request type, and body data or body stream. - Returns: The new session data task.
 func (o *NSURLSession) DataTaskWithRequest(request *NSURLRequest) *NSURLSessionDataTask {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionSelDataTaskWithRequest, request.Ptr())
 	if _ret != 0 {
@@ -158,6 +165,7 @@ func (o *NSURLSession) DataTaskWithRequest(request *NSURLRequest) *NSURLSessionD
 	return NSURLSessionDataTaskFromID(_ret)
 }
 
+// Creates a task that retrieves the contents of the specified URL. After you create the task, you must start it by calling its `-resume` method. The task calls methods on the session's delegate to provide you with the response metadata, response data, and so on. - Parameter url: The URL to be retrieved. - Returns: The new session data task.
 func (o *NSURLSession) DataTaskWithURL(url *NSURL) *NSURLSessionDataTask {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionSelDataTaskWithURL, url.Ptr())
 	if _ret != 0 {
@@ -166,6 +174,7 @@ func (o *NSURLSession) DataTaskWithURL(url *NSURL) *NSURLSessionDataTask {
 	return NSURLSessionDataTaskFromID(_ret)
 }
 
+// Creates a task that performs an HTTP request for uploading the specified file. An HTTP upload request is any request that contains a request body, such as a `POST` or `PUT` request. Upload tasks require you to create a request object so that you can provide metadata for the upload, like HTTP request headers. After you create the task, you must start it by calling its `-resume` method. The task calls methods on the session's delegate to provide you with the upload's progress, response metadata, response data, and so on. - Parameter request: A URL request object that provides the URL, cache policy, request type, and so on. The body stream and body data in this request object are ignored. - Parameter fileURL: The URL of the file to upload. - Returns: The new session upload task.
 func (o *NSURLSession) UploadTaskWithRequestFromFile(request *NSURLRequest, fileURL *NSURL) *NSURLSessionUploadTask {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionSelUploadTaskWithRequestFromFile, request.Ptr(), fileURL.Ptr())
 	if _ret != 0 {
@@ -174,6 +183,7 @@ func (o *NSURLSession) UploadTaskWithRequestFromFile(request *NSURLRequest, file
 	return NSURLSessionUploadTaskFromID(_ret)
 }
 
+// Creates a task that performs an HTTP request for the specified URL request object and uploads the provided data. An HTTP upload request is any request that contains a request body, such as a `POST` or `PUT` request. Upload tasks require you to create a request object so that you can provide metadata for the upload, like HTTP request headers. After you create the task, you must start it by calling its `-resume` method. The task calls methods on the session's delegate to provide you with the upload's progress, response metadata, response data, and so on. - Parameter request: A URL request object that provides the URL, cache policy, request type, and so on. The body stream and body data in this request object are ignored. - Parameter bodyData: The body data for the request. - Returns: The new session upload task.
 func (o *NSURLSession) UploadTaskWithRequestFromData(request *NSURLRequest, bodyData *NSData) *NSURLSessionUploadTask {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionSelUploadTaskWithRequestFromData, request.Ptr(), bodyData.Ptr())
 	if _ret != 0 {
@@ -191,6 +201,7 @@ func (o *NSURLSession) UploadTaskWithResumeData(resumeData *NSData) *NSURLSessio
 	return NSURLSessionUploadTaskFromID(_ret)
 }
 
+// Creates a task that performs an HTTP request for uploading data based on the specified URL request. An HTTP upload request is any request that contains a request body, such as a `POST` or `PUT` request. Upload tasks require you to provide a request object so that you can provide metadata for the upload, such as HTTP request headers. After you create the task, you must start it by calling its `-resume` method. The task calls methods on the session's delegate to provide you with the upload's progress, response metadata, response data, and so on. The session's delegate must have a `URLSession:task:needNewBodyStream:` method that provides the body data to upload. - Parameter request: A URL request object that provides the URL, cache policy, request type, and so on. The body stream and body data in this request object are ignored, and the session calls its delegate's `URLSession:task:needNewBodyStream:` method to supply an upload body. - Returns: The new session upload task.
 func (o *NSURLSession) UploadTaskWithStreamedRequest(request *NSURLRequest) *NSURLSessionUploadTask {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionSelUploadTaskWithStreamedRequest, request.Ptr())
 	if _ret != 0 {
@@ -199,6 +210,7 @@ func (o *NSURLSession) UploadTaskWithStreamedRequest(request *NSURLRequest) *NSU
 	return NSURLSessionUploadTaskFromID(_ret)
 }
 
+// Creates a download task that retrieves the contents of a URL based on the specified URL request object and saves the results to a file. By creating a task based on a request object, you can tune various aspects of the task's behavior, including the cache policy and timeout interval. After you create the task, you must start it by calling its `-resume` method. The task calls methods on the session's delegate to provide you with progress notifications, the location of the resulting temporary file, and so on. - Parameter request: A URL request object that provides the URL, cache policy, request type, body data or body stream, and so on. - Returns: The new session download task.
 func (o *NSURLSession) DownloadTaskWithRequest(request *NSURLRequest) *NSURLSessionDownloadTask {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionSelDownloadTaskWithRequest, request.Ptr())
 	if _ret != 0 {
@@ -207,6 +219,7 @@ func (o *NSURLSession) DownloadTaskWithRequest(request *NSURLRequest) *NSURLSess
 	return NSURLSessionDownloadTaskFromID(_ret)
 }
 
+// Creates a download task that retrieves the contents of the specified URL and saves the results to a file. After you create the task, you must start it by calling its `-resume` method. - Parameter url: The URL to download. - Returns: The new session download task.
 func (o *NSURLSession) DownloadTaskWithURL(url *NSURL) *NSURLSessionDownloadTask {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionSelDownloadTaskWithURL, url.Ptr())
 	if _ret != 0 {
@@ -215,6 +228,7 @@ func (o *NSURLSession) DownloadTaskWithURL(url *NSURL) *NSURLSessionDownloadTask
 	return NSURLSessionDownloadTaskFromID(_ret)
 }
 
+// Creates a download task to resume a previously canceled or failed download. After you create the task, you must start it by calling its `-resume` method. This method is equivalent to `-downloadTaskWithResumeData:completionHandler:` with a `nil` completion handler. For detailed usage information, including ways to obtain a resume data object, see that method. - Parameter resumeData: A data object that provides the data necessary to resume a download. - Returns: The new session download task.
 func (o *NSURLSession) DownloadTaskWithResumeData(resumeData *NSData) *NSURLSessionDownloadTask {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionSelDownloadTaskWithResumeData, resumeData.Ptr())
 	if _ret != 0 {
@@ -223,6 +237,7 @@ func (o *NSURLSession) DownloadTaskWithResumeData(resumeData *NSData) *NSURLSess
 	return NSURLSessionDownloadTaskFromID(_ret)
 }
 
+// Creates a task that establishes a bidirectional TCP/IP connection to a specified hostname and port. After you create the task, you must start it by calling its `-resume` method. - Parameter hostname: The hostname of the connection endpoint. - Parameter port: The port of the connection endpoint. - Returns: The new session stream task.
 func (o *NSURLSession) StreamTaskWithHostNamePort(hostname *NSString, port int) *NSURLSessionStreamTask {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionSelStreamTaskWithHostNamePort, hostname.Ptr(), port)
 	if _ret != 0 {
@@ -231,6 +246,7 @@ func (o *NSURLSession) StreamTaskWithHostNamePort(hostname *NSString, port int) 
 	return NSURLSessionStreamTaskFromID(_ret)
 }
 
+// Creates a task that establishes a bidirectional TCP/IP connection using a specified network service. After you create the task, you must start it by calling its `-resume` method. - Parameter service: An `NSNetService` object used to determine the endpoint of the TCP/IP connection. This network service is resolved before any data is read or written to the resulting stream task. - Returns: The new session stream task.
 // Deprecated: Use nw_connection_t in Network framework instead
 func (o *NSURLSession) StreamTaskWithNetService(service *NSNetService) *NSURLSessionStreamTask {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionSelStreamTaskWithNetService, service.Ptr())
@@ -240,6 +256,7 @@ func (o *NSURLSession) StreamTaskWithNetService(service *NSNetService) *NSURLSes
 	return NSURLSessionStreamTaskFromID(_ret)
 }
 
+// Creates a WebSocket task for the provided URL. The provided URL must have a `ws` or `wss` scheme. - Parameter url: The WebSocket URL with which to connect.
 func (o *NSURLSession) WebSocketTaskWithURL(url *NSURL) *NSURLSessionWebSocketTask {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionSelWebSocketTaskWithURL, url.Ptr())
 	if _ret != 0 {
@@ -248,6 +265,7 @@ func (o *NSURLSession) WebSocketTaskWithURL(url *NSURL) *NSURLSessionWebSocketTa
 	return NSURLSessionWebSocketTaskFromID(_ret)
 }
 
+// Creates a WebSocket task given a URL and an array of protocols. During the WebSocket handshake, the task uses the provided protocols to negotiate a preferred protocol with the server. > Note: The protocol doesn't affect the WebSocket framing. More details on the protocol > are available in RFC 6455, The WebSocket Protocol. - Parameter url: The WebSocket URL with which to connect. - Parameter protocols: An array of protocols to negotiate with the server.
 func (o *NSURLSession) WebSocketTaskWithURLProtocols(url *NSURL, protocols *NSArray[*NSString]) *NSURLSessionWebSocketTask {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionSelWebSocketTaskWithURLProtocols, url.Ptr(), protocols.Ptr())
 	if _ret != 0 {
@@ -256,6 +274,7 @@ func (o *NSURLSession) WebSocketTaskWithURLProtocols(url *NSURL, protocols *NSAr
 	return NSURLSessionWebSocketTaskFromID(_ret)
 }
 
+// Creates a WebSocket task for the provided URL request. You can modify the request's properties prior to calling `-resume` on the task. The task uses these properties during the HTTP handshake phase. To add custom protocols, add a header with the key `Sec-WebSocket-Protocol`, and a comma-separated list of protocols you want to negotiate with the server. The custom HTTP headers provided by the client remain unchanged for the handshake with the server. - Parameter request: A URL request that indicates a WebSocket endpoint with which to connect.
 func (o *NSURLSession) WebSocketTaskWithRequest(request *NSURLRequest) *NSURLSessionWebSocketTask {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionSelWebSocketTaskWithRequest, request.Ptr())
 	if _ret != 0 {
@@ -279,6 +298,7 @@ func NSURLSessionNew() *NSURLSession {
 	return NSURLSessionFromID(_ret)
 }
 
+// The shared singleton session object. For basic requests, the `NSURLSession` class provides a shared singleton session object that gives you a reasonable default behavior for creating tasks. Use the shared session to fetch the contents of a URL to memory with just a few lines of code. Unlike the other session types, you don't create the shared session; you merely access it by using this property directly. As a result, you don't provide a delegate or a configuration object. Because the shared session has neither a delegate nor a customizable configuration object, the shared session has important limitations: - You can't obtain data incrementally as it arrives from the server. - You can't significantly customize the default connection behavior. - Your ability to perform authentication is limited. - You can't perform background downloads or uploads when your app isn't running. The shared session uses the shared `NSURLCache`, `NSHTTPCookieStorage`, and `NSURLCredentialStorage` objects, uses a shared custom networking protocol list (configured with `+[NSURLProtocol registerClass:]` and `+[NSURLProtocol unregisterClass:]`), and is based on a default configuration.
 func NSURLSessionSharedSession() *NSURLSession {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLSession), _nSURLSessionSelSharedSession)
 	if _ret != 0 {
@@ -287,6 +307,7 @@ func NSURLSessionSharedSession() *NSURLSession {
 	return NSURLSessionFromID(_ret)
 }
 
+// The operation queue provided when this object was created. All delegate method calls and completion handlers related to the session are performed on this queue. The session object keeps a strong reference to this queue until your app exits or the session object is deallocated. If you do not invalidate the session, your app leaks memory until it exits. > Note: This queue must be set at object creation time and may not be changed.
 func (o *NSURLSession) DelegateQueue() *NSOperationQueue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionSelDelegateQueue)
 	if _ret != 0 {
@@ -295,11 +316,13 @@ func (o *NSURLSession) DelegateQueue() *NSOperationQueue {
 	return NSOperationQueueFromID(_ret)
 }
 
+// The delegate assigned when this object was created. This delegate object is responsible for handling authentication challenges, for making caching decisions, and for handling other session-related events. The session object keeps a strong reference to this delegate until your app exits or explicitly invalidates the session. If you do not invalidate the session, your app leaks memory until it exits. > Note: This delegate object must be set at object creation time and may not be changed.
 func (o *NSURLSession) Delegate() NSURLSessionDelegate {
 	_ret := objc.Send[NSURLSessionDelegate](o.Ptr(), _nSURLSessionSelDelegate)
 	return _ret
 }
 
+// A copy of the configuration object for this session. Beginning in iOS 9 and OS X 10.11, `NSURLSession` objects store a copy of the `NSURLSessionConfiguration` object passed to their initializers, such that a session's configuration is immutable after initialization. Any further changes to mutable properties on the configuration object passed to a session's initializer or the value returned from a session's configuration property do not affect the behavior of that session. However, you can create a new session with the modified configuration object.
 func (o *NSURLSession) Configuration() *NSURLSessionConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionSelConfiguration)
 	if _ret != 0 {
@@ -308,6 +331,7 @@ func (o *NSURLSession) Configuration() *NSURLSessionConfiguration {
 	return NSURLSessionConfigurationFromID(_ret)
 }
 
+// An app-defined descriptive label for the session. This property contains a human-readable string that you can use for debugging purposes. This value may be `nil` and defaults to `nil`. The value is ignored by the session.
 func (o *NSURLSession) SessionDescription() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionSelSessionDescription)
 	if _ret != 0 {
@@ -320,6 +344,7 @@ func (o *NSURLSession) SetSessionDescription(sessionDescription *NSString) {
 	o.Ptr().Send(_nSURLSessionSelSetSessionDescription, sessionDescription.Ptr())
 }
 
+// Creates a task that retrieves the contents of a URL based on the specified URL request object, and calls a handler upon completion. By creating a task based on a request object, you can tune various aspects of the task's behavior, including the cache policy and timeout interval. By using the completion handler, the task bypasses calls to delegate methods for response and data delivery, and instead provides any resulting `NSData`, `NSURLResponse`, and `NSError` objects inside the completion handler. Delegate methods for handling authentication challenges, however, are still called. After you create the task, you must start it by calling its `-resume` method. - Parameter request: A URL request object that provides the URL, cache policy, request type, body data or body stream, and so on. - Parameter completionHandler: The completion handler to call when the load request is complete. This handler is executed on the delegate queue.
 func (o *NSURLSession) DataTaskWithRequestCompletionHandler(request *NSURLRequest, completionHandler func(*NSData, *NSURLResponse, unsafe.Pointer)) *NSURLSessionDataTask {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -341,6 +366,7 @@ func (o *NSURLSession) DataTaskWithRequestCompletionHandler(request *NSURLReques
 	return NSURLSessionDataTaskFromID(_ret)
 }
 
+// Creates a task that retrieves the contents of the specified URL, then calls a handler upon completion. After you create the task, you must start it by calling its `-resume` method. By using the completion handler, the task bypasses calls to delegate methods for response and data delivery, and instead provides any resulting `NSData`, `NSURLResponse`, and `NSError` objects inside the completion handler. Delegate methods for handling authentication challenges, however, are still called. - Parameter url: The URL to be retrieved. - Parameter completionHandler: The completion handler to call when the load request is complete. This handler is executed on the delegate queue.
 func (o *NSURLSession) DataTaskWithURLCompletionHandler(url *NSURL, completionHandler func(*NSData, *NSURLResponse, unsafe.Pointer)) *NSURLSessionDataTask {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -362,6 +388,7 @@ func (o *NSURLSession) DataTaskWithURLCompletionHandler(url *NSURL, completionHa
 	return NSURLSessionDataTaskFromID(_ret)
 }
 
+// Creates a task that performs an HTTP request for uploading the specified file, then calls a handler upon completion. - Parameter request: A URL request object that provides the URL, cache policy, request type, and so on. The body stream and body data in this request object are ignored. - Parameter fileURL: The URL of the file to upload. - Parameter completionHandler: The completion handler to call when the load request is complete. This handler is executed on the delegate queue.
 func (o *NSURLSession) UploadTaskWithRequestFromFileCompletionHandler(request *NSURLRequest, fileURL *NSURL, completionHandler func(*NSData, *NSURLResponse, unsafe.Pointer)) *NSURLSessionUploadTask {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -383,6 +410,7 @@ func (o *NSURLSession) UploadTaskWithRequestFromFileCompletionHandler(request *N
 	return NSURLSessionUploadTaskFromID(_ret)
 }
 
+// Creates a task that performs an HTTP request for the specified URL request object, uploads the provided data, and calls a handler upon completion. - Parameter request: A URL request object that provides the URL, cache policy, request type, and so on. The body stream and body data in this request object are ignored. - Parameter bodyData: The body data for the request. - Parameter completionHandler: The completion handler to call when the load request is complete. This handler is executed on the delegate queue.
 func (o *NSURLSession) UploadTaskWithRequestFromDataCompletionHandler(request *NSURLRequest, bodyData *NSData, completionHandler func(*NSData, *NSURLResponse, unsafe.Pointer)) *NSURLSessionUploadTask {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -426,6 +454,7 @@ func (o *NSURLSession) UploadTaskWithResumeDataCompletionHandler(resumeData *NSD
 	return NSURLSessionUploadTaskFromID(_ret)
 }
 
+// Creates a download task that retrieves the contents of a URL based on the specified URL request object, saves the results to a file, and calls a handler upon completion. By creating a task based on a request object, you can tune various aspects of the task's behavior, including the cache policy and timeout interval. After you create the task, you must start it by calling its `-resume` method. - Parameter request: A URL request object that provides the URL, cache policy, request type, body data or body stream, and so on. - Parameter completionHandler: The completion handler to call when the load request is complete. This handler is executed on the delegate queue.
 func (o *NSURLSession) DownloadTaskWithRequestCompletionHandler(request *NSURLRequest, completionHandler func(*NSURL, *NSURLResponse, unsafe.Pointer)) *NSURLSessionDownloadTask {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -447,6 +476,7 @@ func (o *NSURLSession) DownloadTaskWithRequestCompletionHandler(request *NSURLRe
 	return NSURLSessionDownloadTaskFromID(_ret)
 }
 
+// Creates a download task that retrieves the contents of the specified URL, saves the results to a file, and calls a handler upon completion. After you create the task, you must start it by calling its `-resume` method. - Parameter url: The URL to download. - Parameter completionHandler: The completion handler to call when the load request is complete. This handler is executed on the delegate queue.
 func (o *NSURLSession) DownloadTaskWithURLCompletionHandler(url *NSURL, completionHandler func(*NSURL, *NSURLResponse, unsafe.Pointer)) *NSURLSessionDownloadTask {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -468,6 +498,7 @@ func (o *NSURLSession) DownloadTaskWithURLCompletionHandler(url *NSURL, completi
 	return NSURLSessionDownloadTaskFromID(_ret)
 }
 
+// Creates a download task to resume a previously canceled or failed download and calls a handler upon completion. Your app can obtain a `resumeData` object in two ways: - If your app cancels an existing transfer by calling `-cancelByProducingResumeData:`, the session object passes a `resumeData` object to the completion handler that you provided in that call. - If a transfer fails, the session object provides an `NSError` object either to its delegate or to the task's completion handler. In that object, the `NSURLSessionDownloadTaskResumeData` key in the `userInfo` dictionary contains a `resumeData` object. After you create the task, you must start it by calling its `-resume` method. > Note: A download can be resumed only if it is an HTTP or HTTPS `GET` request, and only > if the remote server supports byte-range requests (with the `Range` header) and provides > the `ETag` or `Last-Modified` header in its responses. - Parameter resumeData: A data object that provides the data necessary to resume the download. - Parameter completionHandler: The completion handler to call when the load request is complete. This handler is executed on the delegate queue.
 func (o *NSURLSession) DownloadTaskWithResumeDataCompletionHandler(resumeData *NSData, completionHandler func(*NSURL, *NSURLResponse, unsafe.Pointer)) *NSURLSessionDownloadTask {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

@@ -13,6 +13,7 @@ import (
 // Searches (by service type) for services offered by nearby devices using infrastructure Wi-Fi, peer-to-peer Wi-Fi, and Bluetooth (in iOS) or Ethernet (in macOS and tvOS), and provides the ability to easily invite those devices to a Multipeer Connectivity session (MCSession).
 //
 // Apple documentation: https://developer.apple.com/documentation/multipeerconnectivity/mcnearbyservicebrowser
+// Deprecated: Use Network Framework instead
 type MCNearbyServiceBrowser struct {
 	foundation.NSObject
 }
@@ -40,6 +41,7 @@ func MCNearbyServiceBrowserFromID(id objc.ID) *MCNearbyServiceBrowser {
 }
 
 // Initializes the nearby service browser object.
+// Deprecated: Use Network Framework instead
 func (o *MCNearbyServiceBrowser) InitWithPeerServiceType(myPeerID *MCPeerID, serviceType *foundation.NSString) *MCNearbyServiceBrowser {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mCNearbyServiceBrowserSelInitWithPeerServiceType, myPeerID.Ptr(), serviceType.Ptr())
 	if _ret != 0 {

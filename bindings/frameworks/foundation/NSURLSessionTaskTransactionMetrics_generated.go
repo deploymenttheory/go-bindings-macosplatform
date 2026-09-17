@@ -17,8 +17,6 @@ import (
 )
 
 // URLSessionTaskTransactionMetrics is an idiomatic wrapper over the Objective-C class NSURLSessionTaskTransactionMetrics.
-//
-// An object that encapsualtes the performance metrics collected by the URL Loading System during the execution of a session task.
 type URLSessionTaskTransactionMetrics struct {
 	objref.Handle
 }
@@ -93,98 +91,98 @@ func (usttm *URLSessionTaskTransactionMetrics) WithScriptingProperties(scripting
 	return usttm
 }
 
-// Request returns the request.
+// Request represents the transaction request.
 func (usttm *URLSessionTaskTransactionMetrics) Request() *URLRequest {
 	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("request"))
 	return URLRequestFromID(_r)
 }
 
-// Response returns the response.
+// Response represents the transaction response. Can be `nil` if error occurred and no response was generated.
 func (usttm *URLSessionTaskTransactionMetrics) Response() *URLResponse {
 	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("response"))
 	return URLResponseFromID(_r)
 }
 
-// FetchStartDate returns the fetch start date.
+// FetchStartDate returns the time when the user agent started fetching the resource, whether or not the resource was retrieved from the server or local resources. The following metrics will be set to `nil`, if a persistent connection was used or the resource was retrieved from local resources: `domainLookupStartDate`, `domainLookupEndDate`, `connectStartDate`, `connectEndDate`, `secureConnectionStartDate`, `secureConnectionEndDate`.
 func (usttm *URLSessionTaskTransactionMetrics) FetchStartDate() time.Time {
 	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("fetchStartDate"))
 	return rt.NSDateToTime(_r)
 }
 
-// DomainLookupStartDate returns the domain lookup start date.
+// DomainLookupStartDate returns the time immediately before the user agent started the name lookup for the resource.
 func (usttm *URLSessionTaskTransactionMetrics) DomainLookupStartDate() time.Time {
 	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("domainLookupStartDate"))
 	return rt.NSDateToTime(_r)
 }
 
-// DomainLookupEndDate returns the domain lookup end date.
+// DomainLookupEndDate returns the time after the name lookup was completed.
 func (usttm *URLSessionTaskTransactionMetrics) DomainLookupEndDate() time.Time {
 	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("domainLookupEndDate"))
 	return rt.NSDateToTime(_r)
 }
 
-// ConnectStartDate returns the connect start date.
+// ConnectStartDate returns the time immediately before the user agent started establishing the connection to the server. For example, this would correspond to the time immediately before the user agent started trying to establish the TCP connection.
 func (usttm *URLSessionTaskTransactionMetrics) ConnectStartDate() time.Time {
 	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("connectStartDate"))
 	return rt.NSDateToTime(_r)
 }
 
-// SecureConnectionStartDate returns the secure connection start date.
+// SecureConnectionStartDate returns if an encrypted connection was used, the time immediately before the user agent started the security handshake to secure the current connection. For example, this would correspond to the time immediately before the user agent started the TLS handshake. If an encrypted connection was not used, this attribute is set to `nil`.
 func (usttm *URLSessionTaskTransactionMetrics) SecureConnectionStartDate() time.Time {
 	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("secureConnectionStartDate"))
 	return rt.NSDateToTime(_r)
 }
 
-// SecureConnectionEndDate returns the secure connection end date.
+// SecureConnectionEndDate returns if an encrypted connection was used, the time immediately after the security handshake completed. If an encrypted connection was not used, this attribute is set to `nil`.
 func (usttm *URLSessionTaskTransactionMetrics) SecureConnectionEndDate() time.Time {
 	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("secureConnectionEndDate"))
 	return rt.NSDateToTime(_r)
 }
 
-// ConnectEndDate returns the connect end date.
+// ConnectEndDate returns the time immediately after the user agent finished establishing the connection to the server, including completion of security-related and other handshakes.
 func (usttm *URLSessionTaskTransactionMetrics) ConnectEndDate() time.Time {
 	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("connectEndDate"))
 	return rt.NSDateToTime(_r)
 }
 
-// RequestStartDate returns the request start date.
+// RequestStartDate returns the time immediately before the user agent started requesting the source, regardless of whether the resource was retrieved from the server or local resources.
 func (usttm *URLSessionTaskTransactionMetrics) RequestStartDate() time.Time {
 	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("requestStartDate"))
 	return rt.NSDateToTime(_r)
 }
 
-// RequestEndDate returns the request end date.
+// RequestEndDate returns the time immediately after the user agent finished requesting the source, regardless of whether the resource was retrieved from the server or local resources.
 func (usttm *URLSessionTaskTransactionMetrics) RequestEndDate() time.Time {
 	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("requestEndDate"))
 	return rt.NSDateToTime(_r)
 }
 
-// ResponseStartDate returns the response start date.
+// ResponseStartDate returns the time immediately after the user agent received the first byte of the response from the server or from local resources.
 func (usttm *URLSessionTaskTransactionMetrics) ResponseStartDate() time.Time {
 	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("responseStartDate"))
 	return rt.NSDateToTime(_r)
 }
 
-// ResponseEndDate returns the response end date.
+// ResponseEndDate returns the time immediately after the user agent received the last byte of the resource.
 func (usttm *URLSessionTaskTransactionMetrics) ResponseEndDate() time.Time {
 	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("responseEndDate"))
 	return rt.NSDateToTime(_r)
 }
 
-// NetworkProtocolName returns the network protocol name.
+// NetworkProtocolName returns the network protocol used to fetch the resource, as identified by the ALPN Protocol ID Identification Sequence [RFC7301]. E.g., h3, h2, http/1.1. When a proxy is configured AND a tunnel connection is established, then this attribute returns the value for the tunneled protocol.
 func (usttm *URLSessionTaskTransactionMetrics) NetworkProtocolName() string {
 	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("networkProtocolName"))
@@ -194,70 +192,70 @@ func (usttm *URLSessionTaskTransactionMetrics) NetworkProtocolName() string {
 	return purego.GoString(_r)
 }
 
-// IsProxyConnection reports whether the object is proxy connection.
+// IsProxyConnection reports whether a proxy connection was used to fetch the resource.
 func (usttm *URLSessionTaskTransactionMetrics) IsProxyConnection() bool {
 	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[bool](objref.IDOf(usttm), objc.RegisterName("isProxyConnection"))
 	return _r
 }
 
-// IsReusedConnection reports whether the object is reused connection.
+// IsReusedConnection reports whether a persistent connection was used to fetch the resource.
 func (usttm *URLSessionTaskTransactionMetrics) IsReusedConnection() bool {
 	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[bool](objref.IDOf(usttm), objc.RegisterName("isReusedConnection"))
 	return _r
 }
 
-// ResourceFetchType returns the resource fetch type.
+// ResourceFetchType indicates whether the resource was loaded, pushed or retrieved from the local cache.
 func (usttm *URLSessionTaskTransactionMetrics) ResourceFetchType() URLSessionTaskMetricsResourceFetchType {
 	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[URLSessionTaskMetricsResourceFetchType](objref.IDOf(usttm), objc.RegisterName("resourceFetchType"))
 	return _r
 }
 
-// CountOfRequestHeaderBytesSent returns the count of request header bytes sent.
+// CountOfRequestHeaderBytesSent returns the number of bytes transferred for request header.
 func (usttm *URLSessionTaskTransactionMetrics) CountOfRequestHeaderBytesSent() int64 {
 	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[int64](objref.IDOf(usttm), objc.RegisterName("countOfRequestHeaderBytesSent"))
 	return _r
 }
 
-// CountOfRequestBodyBytesSent returns the count of request body bytes sent.
+// CountOfRequestBodyBytesSent returns the number of bytes transferred for request body. It includes protocol-specific framing, transfer encoding, and content encoding.
 func (usttm *URLSessionTaskTransactionMetrics) CountOfRequestBodyBytesSent() int64 {
 	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[int64](objref.IDOf(usttm), objc.RegisterName("countOfRequestBodyBytesSent"))
 	return _r
 }
 
-// CountOfRequestBodyBytesBeforeEncoding returns the count of request body bytes before encoding.
+// CountOfRequestBodyBytesBeforeEncoding returns the size of upload body data, file, or stream.
 func (usttm *URLSessionTaskTransactionMetrics) CountOfRequestBodyBytesBeforeEncoding() int64 {
 	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[int64](objref.IDOf(usttm), objc.RegisterName("countOfRequestBodyBytesBeforeEncoding"))
 	return _r
 }
 
-// CountOfResponseHeaderBytesReceived returns the count of response header bytes received.
+// CountOfResponseHeaderBytesReceived returns the number of bytes transferred for response header.
 func (usttm *URLSessionTaskTransactionMetrics) CountOfResponseHeaderBytesReceived() int64 {
 	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[int64](objref.IDOf(usttm), objc.RegisterName("countOfResponseHeaderBytesReceived"))
 	return _r
 }
 
-// CountOfResponseBodyBytesReceived returns the count of response body bytes received.
+// CountOfResponseBodyBytesReceived returns the number of bytes transferred for response body. It includes protocol-specific framing, transfer encoding, and content encoding.
 func (usttm *URLSessionTaskTransactionMetrics) CountOfResponseBodyBytesReceived() int64 {
 	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[int64](objref.IDOf(usttm), objc.RegisterName("countOfResponseBodyBytesReceived"))
 	return _r
 }
 
-// CountOfResponseBodyBytesAfterDecoding returns the count of response body bytes after decoding.
+// CountOfResponseBodyBytesAfterDecoding returns the size of data delivered to your delegate or completion handler.
 func (usttm *URLSessionTaskTransactionMetrics) CountOfResponseBodyBytesAfterDecoding() int64 {
 	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[int64](objref.IDOf(usttm), objc.RegisterName("countOfResponseBodyBytesAfterDecoding"))
 	return _r
 }
 
-// LocalAddress returns the local address.
+// LocalAddress returns the IP address string of the local interface for the connection. For multipath protocols, this is the local address of the initial flow. If a connection was not used, this attribute is set to `nil`.
 func (usttm *URLSessionTaskTransactionMetrics) LocalAddress() string {
 	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("localAddress"))
@@ -267,14 +265,14 @@ func (usttm *URLSessionTaskTransactionMetrics) LocalAddress() string {
 	return purego.GoString(_r)
 }
 
-// LocalPort returns the local port.
+// LocalPort returns the port number of the local interface for the connection. For multipath protocols, this is the local port of the initial flow. If the app didn't use the connection, this value is `nil`.
 func (usttm *URLSessionTaskTransactionMetrics) LocalPort() *Number {
 	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("localPort"))
 	return NumberFromID(_r)
 }
 
-// RemoteAddress returns the remote address.
+// RemoteAddress returns the IP address string of the remote interface for the connection. For multipath protocols, this is the remote address of the initial flow. If a connection was not used, this attribute is set to `nil`.
 func (usttm *URLSessionTaskTransactionMetrics) RemoteAddress() string {
 	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("remoteAddress"))
@@ -284,56 +282,56 @@ func (usttm *URLSessionTaskTransactionMetrics) RemoteAddress() string {
 	return purego.GoString(_r)
 }
 
-// RemotePort returns the remote port.
+// RemotePort returns the port number of the remote interface for the connection. For multipath protocols, this is the remote port of the initial flow. If the app didn't use the connection, this value is `nil`.
 func (usttm *URLSessionTaskTransactionMetrics) RemotePort() *Number {
 	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("remotePort"))
 	return NumberFromID(_r)
 }
 
-// NegotiatedTLSProtocolVersion returns the negotiated TLS protocol version.
+// NegotiatedTLSProtocolVersion returns the TLS protocol version the task negotiated with the endpoint for the connection. This value is a 2-byte sequence in host byte order. See `tls_protocol_version_t` in `Security/SecProtocolTypes.h` for possible values. If the task didn't negotiate an encrypted connection, this value is `nil`.
 func (usttm *URLSessionTaskTransactionMetrics) NegotiatedTLSProtocolVersion() *Number {
 	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("negotiatedTLSProtocolVersion"))
 	return NumberFromID(_r)
 }
 
-// NegotiatedTLSCipherSuite returns the negotiated TLS cipher suite.
+// NegotiatedTLSCipherSuite returns the TLS cipher suite the task negotiated with the endpoint for the connection. This value is a 2-byte sequence in host byte order. See `tls_ciphersuite_t` in `Security/SecProtocolTypes.h` for possible values. If the task didn't negotiate an encrypted connection, this value is `nil`.
 func (usttm *URLSessionTaskTransactionMetrics) NegotiatedTLSCipherSuite() *Number {
 	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("negotiatedTLSCipherSuite"))
 	return NumberFromID(_r)
 }
 
-// IsCellular reports whether the object is cellular.
+// IsCellular reports whether the connection is established over a cellular interface.
 func (usttm *URLSessionTaskTransactionMetrics) IsCellular() bool {
 	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[bool](objref.IDOf(usttm), objc.RegisterName("isCellular"))
 	return _r
 }
 
-// IsExpensive reports whether the object is expensive.
+// IsExpensive reports whether the connection is established over an expensive interface.
 func (usttm *URLSessionTaskTransactionMetrics) IsExpensive() bool {
 	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[bool](objref.IDOf(usttm), objc.RegisterName("isExpensive"))
 	return _r
 }
 
-// IsConstrained reports whether the object is constrained.
+// IsConstrained reports whether the connection is established over a constrained interface.
 func (usttm *URLSessionTaskTransactionMetrics) IsConstrained() bool {
 	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[bool](objref.IDOf(usttm), objc.RegisterName("isConstrained"))
 	return _r
 }
 
-// IsMultipath reports whether the object is multipath.
+// IsMultipath reports whether a multipath protocol is successfully negotiated for the connection.
 func (usttm *URLSessionTaskTransactionMetrics) IsMultipath() bool {
 	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[bool](objref.IDOf(usttm), objc.RegisterName("isMultipath"))
 	return _r
 }
 
-// DomainResolutionProtocol returns the domain resolution protocol.
+// DomainResolutionProtocol returns DNS protocol used for domain resolution.
 func (usttm *URLSessionTaskTransactionMetrics) DomainResolutionProtocol() URLSessionTaskMetricsDomainResolutionProtocol {
 	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[URLSessionTaskMetricsDomainResolutionProtocol](objref.IDOf(usttm), objc.RegisterName("domainResolutionProtocol"))

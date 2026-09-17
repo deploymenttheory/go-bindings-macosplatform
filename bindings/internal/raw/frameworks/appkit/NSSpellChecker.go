@@ -36,6 +36,7 @@ var (
 	_nSSpellCheckerSelIgnoreWordInSpellDocumentWithTag                                                                 = objc.RegisterName("ignoreWord:inSpellDocumentWithTag:")
 	_nSSpellCheckerSelIgnoredWordsInSpellDocumentWithTag                                                               = objc.RegisterName("ignoredWordsInSpellDocumentWithTag:")
 	_nSSpellCheckerSelSetIgnoredWordsInSpellDocumentWithTag                                                            = objc.RegisterName("setIgnoredWords:inSpellDocumentWithTag:")
+	_nSSpellCheckerSelIgnoreGrammarRangeInSentenceInSpellDocumentWithTag                                               = objc.RegisterName("ignoreGrammarRange:inSentence:inSpellDocumentWithTag:")
 	_nSSpellCheckerSelGuessesForWordRangeInStringLanguageInSpellDocumentWithTag                                        = objc.RegisterName("guessesForWordRange:inString:language:inSpellDocumentWithTag:")
 	_nSSpellCheckerSelCorrectionForWordRangeInStringLanguageInSpellDocumentWithTag                                     = objc.RegisterName("correctionForWordRange:inString:language:inSpellDocumentWithTag:")
 	_nSSpellCheckerSelCompletionsForPartialWordRangeInStringLanguageInSpellDocumentWithTag                             = objc.RegisterName("completionsForPartialWordRange:inString:language:inSpellDocumentWithTag:")
@@ -211,6 +212,10 @@ func (o *NSSpellChecker) IgnoredWordsInSpellDocumentWithTag(tag int) *foundation
 // Initializes the ignored-words document (a dictionary identified by tag with someWords), an array of words to ignore.
 func (o *NSSpellChecker) SetIgnoredWordsInSpellDocumentWithTag(words *foundation.NSArray[*foundation.NSString], tag int) {
 	o.Ptr().Send(_nSSpellCheckerSelSetIgnoredWordsInSpellDocumentWithTag, words.Ptr(), tag)
+}
+
+func (o *NSSpellChecker) IgnoreGrammarRangeInSentenceInSpellDocumentWithTag(grammarRange foundation.NSRange, sentence *foundation.NSString, tag int) {
+	o.Ptr().Send(_nSSpellCheckerSelIgnoreGrammarRangeInSentenceInSpellDocumentWithTag, grammarRange, sentence.Ptr(), tag)
 }
 
 // Returns an array of possible substitutions for the specified string.

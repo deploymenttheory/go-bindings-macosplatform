@@ -10,8 +10,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A type to represent the output of the requested large binary object operation, which returns in a passkey sign-in response.
-//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/asauthorizationpublickeycredentiallargeblobassertionoutput
 type ASAuthorizationPublicKeyCredentialLargeBlobAssertionOutput struct {
 	foundation.NSObject

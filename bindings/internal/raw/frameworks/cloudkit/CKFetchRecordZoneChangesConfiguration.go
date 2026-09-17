@@ -10,8 +10,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A configuration object that describes the information to fetch from a record zone.
-//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/ckfetchrecordzonechangesconfiguration
 type CKFetchRecordZoneChangesConfiguration struct {
 	foundation.NSObject

@@ -144,9 +144,16 @@ func MPLanguageOptionCharacteristicVoiceOverTranslation() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
-func MPMediaEntityPropertyPersistentID() uintptr {
+func MPMediaEntityPropertyPersistentID() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPMediaEntityPropertyPersistentID")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MPMediaItemPropertyAlbumArtist() *foundation.NSString {
@@ -753,6 +760,18 @@ func MPNowPlayingInfoProperty3x4AnimatedArtwork() *foundation.NSString {
 
 func MPNowPlayingInfoPropertyAdTimeRanges() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPNowPlayingInfoPropertyAdTimeRanges")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
+func MPNowPlayingInfoPropertyAppEntityIdentifiers() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPNowPlayingInfoPropertyAppEntityIdentifiers")
 	if ptr == 0 {
 		return nil
 	}

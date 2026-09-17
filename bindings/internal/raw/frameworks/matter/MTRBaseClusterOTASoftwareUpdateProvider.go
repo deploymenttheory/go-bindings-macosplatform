@@ -50,7 +50,7 @@ func MTRBaseClusterOTASoftwareUpdateProviderFromID(id objc.ID) *MTRBaseClusterOT
 	return o
 }
 
-// Command QueryImage Determine availability of a new Software Image
+// Command QueryImage Upon receipt, this command SHALL trigger an attempt to find an updated Software Image by the OTA Provider to match the OTA Requestor's constraints provided in the payload fields.
 func (o *MTRBaseClusterOTASoftwareUpdateProvider) QueryImageWithParamsCompletion(params *MTROTASoftwareUpdateProviderClusterQueryImageParams, completion func(*MTROTASoftwareUpdateProviderClusterQueryImageResponseParams, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -65,7 +65,7 @@ func (o *MTRBaseClusterOTASoftwareUpdateProvider) QueryImageWithParamsCompletion
 	o.Ptr().Send(_mTRBaseClusterOTASoftwareUpdateProviderSelQueryImageWithParamsCompletion, params.Ptr(), __block_completion)
 }
 
-// Command ApplyUpdateRequest Determine next action to take for a downloaded Software Image
+// Command ApplyUpdateRequest This command requests the specified version be installed on the device.
 func (o *MTRBaseClusterOTASoftwareUpdateProvider) ApplyUpdateRequestWithParamsCompletion(params *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams, completion func(*MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -80,7 +80,7 @@ func (o *MTRBaseClusterOTASoftwareUpdateProvider) ApplyUpdateRequestWithParamsCo
 	o.Ptr().Send(_mTRBaseClusterOTASoftwareUpdateProviderSelApplyUpdateRequestWithParamsCompletion, params.Ptr(), __block_completion)
 }
 
-// Command NotifyUpdateApplied Notify OTA Provider that an update was applied
+// Command NotifyUpdateApplied This command tells the Provider that the specified update has been applied.
 func (o *MTRBaseClusterOTASoftwareUpdateProvider) NotifyUpdateAppliedWithParamsCompletion(params *MTROTASoftwareUpdateProviderClusterNotifyUpdateAppliedParams, completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {

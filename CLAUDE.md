@@ -157,6 +157,8 @@ All source files under `internal/scanner/` and `cmd/generate/` carry `//go:build
 > `opinionated/idiomatic/...` or `bindings/frameworks` (as the raw output) predate this switch and
 > describe the old locations.**
 
+The current bindings require **macOS 27+**. Frameworks use arm64 metadata from **Xcode 27.0 / macOS SDK 27.0**; C libraries retain SDK 26.5 metadata pending a separate refresh. Both frameworks and C libraries use purego. See [the extraction workflow](docs/extraction_workflow.md) for the current SDK upgrade procedure and verification gates.
+
 This project is a **code generator** that reads macOS SDK headers via Clang and emits idiomatic Go packages. It produces the `bindings/` tree (public idiomatic layer, private raw layer under `bindings/internal/raw`) in the same repository.
 
 There are **two generator pipelines**, sharing the scanner and the scanned-metadata model but otherwise independent:
@@ -358,7 +360,7 @@ Pre-built `.gometa.json` files are committed here, split by type:
 ```
 metadata/
 ├── frameworks/<name>/<Framework>-arm64-<sdk>.gometa.json   (ObjC frameworks)
-│   └── carbon/hitoolbox/HIToolbox-arm64-26.5.gometa.json   (sub-frameworks one level deeper)
+│   └── carbon/hitoolbox/HIToolbox-arm64-27.0.gometa.json   (sub-frameworks one level deeper)
 ├── frameworks/<name>/overrides.json                        (optional declarative fixups — see docs/metadata_overrides.md)
 ├── libraries/<name>/<Library>-arm64-<sdk>.gometa.json      (Apple C libraries)
 ├── clibraries.json                                         (Apple C library registry: name → link_lib/header/header_dir)

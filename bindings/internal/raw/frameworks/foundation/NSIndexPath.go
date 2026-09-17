@@ -112,6 +112,7 @@ func (o *NSIndexPath) Compare(otherObject *NSIndexPath) NSComparisonResult {
 	return _ret
 }
 
+// The number of nodes in the index path.
 func (o *NSIndexPath) Length() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSIndexPathSelLength)
 	return _ret

@@ -17,6 +17,7 @@ import (
 // A controller object that presents the macOS broadcast picker.
 //
 // Apple documentation: https://developer.apple.com/documentation/replaykit/rpbroadcastactivitycontroller
+// Deprecated: No longer supported
 type RPBroadcastActivityController struct {
 	foundation.NSObject
 }
@@ -39,6 +40,7 @@ func RPBroadcastActivityControllerFromID(id objc.ID) *RPBroadcastActivityControl
 }
 
 // Presents a list of available broadcast services for the user to select.
+// Deprecated: No longer supported
 func RPBroadcastActivityControllerShowBroadcastPickerAtPointFromWindowPreferredExtensionIdentifierCompletionHandler(point corefoundation.CGPoint, window *appkit.NSWindow, preferredExtension *foundation.NSString, handler func(*RPBroadcastActivityController, unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {

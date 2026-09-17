@@ -375,6 +375,14 @@ func (tii *TextInsertionIndicator) WithGestureRecognizers(items ...GestureRecogn
 	return tii
 }
 
+// WithExclusiveGestureBehavior sets declares whether gesture recognizers should be exclusive in this view and its subviews.
+func (tii *TextInsertionIndicator) WithExclusiveGestureBehavior(exclusiveGestureBehavior ViewExclusiveGestureBehavior) *TextInsertionIndicator {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setExclusiveGestureBehavior:"), exclusiveGestureBehavior)
+	})
+	return tii
+}
+
 // WithAllowedTouchTypes sets the allowed touch types.
 func (tii *TextInsertionIndicator) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *TextInsertionIndicator {
 	purego.Main(func() {
@@ -436,6 +444,15 @@ func (tii *TextInsertionIndicator) WithHorizontalContentSizeConstraintActive(hor
 func (tii *TextInsertionIndicator) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *TextInsertionIndicator {
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
+	return tii
+}
+
+// WithTextSelectionManager sets the text selection manager for this view.
+func (tii *TextInsertionIndicator) WithTextSelectionManager(textSelectionManager *TextSelectionManager) *TextInsertionIndicator {
+	defer runtime.KeepAlive(textSelectionManager)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setTextSelectionManager:"), objref.IDOf(textSelectionManager))
 	})
 	return tii
 }

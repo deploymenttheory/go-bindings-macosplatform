@@ -13,6 +13,7 @@ import (
 // A unit of measure of pixel luminosity on an OLED display.
 //
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxunitaveragepixelluminance
+// Deprecated: Use AveragePixelLuminance instead.
 type MXUnitAveragePixelLuminance struct {
 	foundation.NSDimension
 }

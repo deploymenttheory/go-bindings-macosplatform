@@ -19,7 +19,7 @@ import (
 // (URLSessionDownloadDelegate…Handler): implement the ones you need on the same value and the
 // framework will call them too.
 type URLSessionDownloadDelegate interface {
-	// URLSessionDownloadTaskDidFinishDownloadingToURL wraps the corresponding Objective-C method.
+	// URLSessionDownloadTaskDidFinishDownloadingToURL tells the delegate that a download task has completed a download. The delegate should copy or move the file at the given location to a new location as it will be removed when the delegate message returns. `URLSession:task:didCompleteWithError:` will still be called.
 	URLSessionDownloadTaskDidFinishDownloadingToURL(session *URLSession, downloadTask *URLSessionDownloadTask, location string)
 }
 

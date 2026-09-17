@@ -11,8 +11,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// Information about a single score by a player on a leaderboard.
-//
 // Apple documentation: https://developer.apple.com/documentation/gamekit/gkleaderboardentry
 type GKLeaderboardEntry struct {
 	foundation.NSObject

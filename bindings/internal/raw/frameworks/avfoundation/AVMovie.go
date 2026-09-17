@@ -91,7 +91,7 @@ func (o *AVMovie) InitWithDataOptions(data *foundation.NSData, options *foundati
 	return AVMovieFromID(_ret)
 }
 
-// @property       URL @abstract       The URL with which the instance of AVMovie was initialized; may be nil.
+// The URL with which the instance of AVMovie was initialized; may be nil.
 func (o *AVMovie) URL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMovieSelURL)
 	if _ret != 0 {
@@ -100,7 +100,7 @@ func (o *AVMovie) URL() *foundation.NSURL {
 	return foundation.NSURLFromID(_ret)
 }
 
-// @property       data @abstract       The data block with which the instance of AVMovie was initialized; may be nil.
+// The data block with which the instance of AVMovie was initialized; may be nil.
 func (o *AVMovie) Data() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMovieSelData)
 	if _ret != 0 {
@@ -109,7 +109,7 @@ func (o *AVMovie) Data() *foundation.NSData {
 	return foundation.NSDataFromID(_ret)
 }
 
-// @property       defaultMediaDataStorage @abstract       The default storage container for media data added to a movie. @discussion     The value of this property is an AVMediaDataStorage object that indicates where sample data that is added to a movie should be written by default.
+// The default storage container for media data added to a movie. The value of this property is an AVMediaDataStorage object that indicates where sample data that is added to a movie should be written by default.
 func (o *AVMovie) DefaultMediaDataStorage() *AVMediaDataStorage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMovieSelDefaultMediaDataStorage)
 	if _ret != 0 {
@@ -118,13 +118,13 @@ func (o *AVMovie) DefaultMediaDataStorage() *AVMediaDataStorage {
 	return AVMediaDataStorageFromID(_ret)
 }
 
-// @property       canContainMovieFragments @abstract       Indicates whether the movie file is capable of being extended by fragments. @discussion     The value of this property is YES if an 'mvex' box is present in the 'moov' box. The 'mvex' box is necessary in order to signal the possible presence of later 'moof' boxes.
+// Indicates whether the movie file is capable of being extended by fragments. The value of this property is YES if an 'mvex' box is present in the 'moov' box. The 'mvex' box is necessary in order to signal the possible presence of later 'moof' boxes.
 func (o *AVMovie) CanContainMovieFragments() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVMovieSelCanContainMovieFragments)
 	return _ret
 }
 
-// @property       containsMovieFragments @abstract       Indicates whether the movie file is extended by at least one movie fragment. @discussion     The value of this property is YES if canContainMovieFragments is YES and at least one 'moof' box is present after the 'moov' box.
+// Indicates whether the movie file is extended by at least one movie fragment. The value of this property is YES if canContainMovieFragments is YES and at least one 'moof' box is present after the 'moov' box.
 func (o *AVMovie) ContainsMovieFragments() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVMovieSelContainsMovieFragments)
 	return _ret

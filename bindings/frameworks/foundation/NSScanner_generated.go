@@ -17,7 +17,7 @@ import (
 
 // Scanner is an idiomatic wrapper over the Objective-C class NSScanner.
 //
-// A string parser that scans for substrings or characters in a character set, and for numeric values from decimal, hexadecimal, and floating-point representations.
+// A string parser that scans for substrings or characters in a character set, and for numeric values from decimal, hexadecimal, and floating-point representations. A “Scanner“ object interprets and converts the characters of a <doc://com.apple.documentation/documentation/swift/string> into number and string values. You assign the scanner's string when you create the scanner, and the scanner progresses through the characters of that string from beginning to end as you request items. Because of the nature of class clusters, a scanner object isn't an actual instance of the “Scanner“ class, but is one of its private subclasses. Although a scanner object's class is private, its interface is public, as declared by this abstract superclass, “Scanner“. The objects you create using this class are referred to as scanner objects (and when no confusion will result, merely as scanners). To set a “Scanner“ object to ignore a set of characters as it scans the string, use the “charactersToBeSkipped“ property. Characters in the skip set are skipped over before the target is scanned. The default set of characters to skip is the whitespace and newline character set. To retrieve the unscanned remainder of the string, use `scanner.string.substring(from: scanner.scanLocation)`.
 type Scanner struct {
 	objref.Handle
 }
@@ -67,33 +67,33 @@ func (s *Scanner) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(s), className)
 }
 
-// NewScannerWithString creates a new Scanner.
+// NewScannerWithString returns an `NSScanner` object initialized to scan a given string. - Parameter string: The string to scan. - Returns: An `NSScanner` object initialized to scan `aString` from the beginning.
 func NewScannerWithString(str string) *Scanner {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSScanner")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:"), purego.NSString(str))
 	return scannerAdopt(_id)
 }
 
-// WithScanLocation sets the scan location.
+// WithScanLocation sets the character position at which the receiver will begin its next scanning operation. Raises an `NSRangeException` if `index` is beyond the end of the string being scanned. This property is useful for backing up to rescan after an error. Rather than setting the scan location directly to skip known sequences of characters, use -scanString:intoString: or -scanCharactersFromSet:intoString:, which allow you to verify that the expected substring (or set of characters) is in fact present.
 func (s *Scanner) WithScanLocation(scanLocation int) *Scanner {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setScanLocation:"), scanLocation)
 	return s
 }
 
-// WithCharactersToBeSkipped sets the characters to be skipped.
+// WithCharactersToBeSkipped sets character set containing the characters the scanner ignores when looking for a scannable element. Characters to be skipped are skipped prior to the scanner examining the target. For example, if a scanner ignores spaces and you send it a -scanInt: message, it skips spaces until it finds a decimal digit or other character. While an element is being scanned, no characters are skipped. If you scan for something made of characters in the set to be skipped (for example, using -scanInt: when the set of characters to be skipped is the decimal digits), the result is undefined. The characters to be skipped are treated as single values. A scanner doesn't apply its case sensitivity setting to these characters and doesn't attempt to match composed character sequences with anything in the set of characters to be skipped (though it does match pre-composed characters individually). If you want to skip all vowels while scanning a string, for example, you can set the characters to be skipped to those in the string "AEIOUaeiou" (plus any accented variants with pre-composed characters). The default set to skip is the whitespace and newline character set.
 func (s *Scanner) WithCharactersToBeSkipped(charactersToBeSkipped CharacterSetProvider) *Scanner {
 	defer runtime.KeepAlive(charactersToBeSkipped)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCharactersToBeSkipped:"), objref.IDOf(charactersToBeSkipped))
 	return s
 }
 
-// WithCaseSensitive sets the case sensitive.
+// WithCaseSensitive sets flag that indicates whether the receiver distinguishes case in the characters it scans. `YES` if the receiver distinguishes case in the characters it scans, otherwise `NO`. The default value is `NO`. Note that case sensitivity doesn't apply to the characters to be skipped.
 func (s *Scanner) WithCaseSensitive(caseSensitive bool) *Scanner {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCaseSensitive:"), caseSensitive)
 	return s
 }
 
-// WithLocale sets the locale.
+// WithLocale sets the locale to use when scanning. A scanner's locale affects the way it interprets numeric values from the string. In particular, a scanner uses the locale's decimal separator to distinguish the integer and fractional parts of floating-point representations. A scanner with no locale set uses non-localized values. New scanners have no locale by default.
 func (s *Scanner) WithLocale(locale obj.Object) *Scanner {
 	defer runtime.KeepAlive(locale)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLocale:"), objref.IDOf(locale))
@@ -112,7 +112,7 @@ func (s *Scanner) WithScriptingProperties(scriptingProperties map[string]obj.Obj
 	return s
 }
 
-// String returns the string.
+// String returns the string the scanner will scan.
 func (s *Scanner) String() string {
 	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("string"))
@@ -122,35 +122,35 @@ func (s *Scanner) String() string {
 	return purego.GoString(_r)
 }
 
-// ScanLocation returns the scan location.
+// ScanLocation returns the character position at which the receiver will begin its next scanning operation. Raises an `NSRangeException` if `index` is beyond the end of the string being scanned. This property is useful for backing up to rescan after an error. Rather than setting the scan location directly to skip known sequences of characters, use -scanString:intoString: or -scanCharactersFromSet:intoString:, which allow you to verify that the expected substring (or set of characters) is in fact present.
 func (s *Scanner) ScanLocation() int {
 	defer runtime.KeepAlive(s)
 	_r := objc.Send[int](objref.IDOf(s), objc.RegisterName("scanLocation"))
 	return _r
 }
 
-// CharactersToBeSkipped returns the characters to be skipped.
+// CharactersToBeSkipped returns character set containing the characters the scanner ignores when looking for a scannable element. Characters to be skipped are skipped prior to the scanner examining the target. For example, if a scanner ignores spaces and you send it a -scanInt: message, it skips spaces until it finds a decimal digit or other character. While an element is being scanned, no characters are skipped. If you scan for something made of characters in the set to be skipped (for example, using -scanInt: when the set of characters to be skipped is the decimal digits), the result is undefined. The characters to be skipped are treated as single values. A scanner doesn't apply its case sensitivity setting to these characters and doesn't attempt to match composed character sequences with anything in the set of characters to be skipped (though it does match pre-composed characters individually). If you want to skip all vowels while scanning a string, for example, you can set the characters to be skipped to those in the string "AEIOUaeiou" (plus any accented variants with pre-composed characters). The default set to skip is the whitespace and newline character set.
 func (s *Scanner) CharactersToBeSkipped() *CharacterSet {
 	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("charactersToBeSkipped"))
 	return CharacterSetFromID(_r)
 }
 
-// CaseSensitive wraps the corresponding Objective-C method.
+// CaseSensitive reports whether flag that indicates whether the receiver distinguishes case in the characters it scans. `YES` if the receiver distinguishes case in the characters it scans, otherwise `NO`. The default value is `NO`. Note that case sensitivity doesn't apply to the characters to be skipped.
 func (s *Scanner) CaseSensitive() bool {
 	defer runtime.KeepAlive(s)
 	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("caseSensitive"))
 	return _r
 }
 
-// Locale returns the locale.
+// Locale returns the locale to use when scanning. A scanner's locale affects the way it interprets numeric values from the string. In particular, a scanner uses the locale's decimal separator to distinguish the integer and fractional parts of floating-point representations. A scanner with no locale set uses non-localized values. New scanners have no locale by default.
 func (s *Scanner) Locale() obj.Object {
 	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("locale"))
 	return obj.Wrap(_r)
 }
 
-// ScanInt wraps the corresponding Objective-C method.
+// ScanInt scans for an int value from a decimal representation, returning a found value by reference. Skips past excess digits in the case of overflow, so the receiver's position is past the entire decimal representation. Invoke this method with `NULL` as `intValue` to simply scan past a decimal integer representation. - Parameter result: Upon return, contains the scanned value. Contains `INT_MAX` or `INT_MIN` on overflow. - Returns: `YES` if the receiver finds a valid decimal integer representation, otherwise `NO`. Overflow is considered a valid integer representation.
 func (s *Scanner) ScanInt() (ok bool, result int32) {
 	defer runtime.KeepAlive(s)
 	var _out0 int32
@@ -158,7 +158,7 @@ func (s *Scanner) ScanInt() (ok bool, result int32) {
 	return _r, _out0
 }
 
-// ScanInteger wraps the corresponding Objective-C method.
+// ScanInteger scans for an NSInteger value from a decimal representation, returning a found value by reference. Skips past excess digits in the case of overflow, so the receiver's position is past the entire integer representation. Invoke this method with `NULL` as `value` to simply scan past a decimal integer representation. - Parameter result: Upon return, contains the scanned value. Contains `INT_MAX` or `INT_MIN` on overflow. - Returns: `YES` if the receiver finds a valid integer representation, otherwise `NO`. Overflow is considered a valid integer representation.
 func (s *Scanner) ScanInteger() (ok bool, result int64) {
 	defer runtime.KeepAlive(s)
 	var _out0 int64
@@ -166,7 +166,7 @@ func (s *Scanner) ScanInteger() (ok bool, result int64) {
 	return _r, _out0
 }
 
-// ScanLongLong wraps the corresponding Objective-C method.
+// ScanLongLong scans for a long long value from a decimal representation, returning a found value by reference. All overflow digits are skipped. Skips past excess digits in the case of overflow, so the receiver's position is past the entire decimal representation. Invoke this method with `NULL` as `longLongValue` to simply scan past a long decimal integer representation. - Parameter result: Upon return, contains the scanned value. Contains `LLONG_MAX` or `LLONG_MIN` on overflow. - Returns: `YES` if the receiver finds a valid decimal integer representation, otherwise `NO`. Overflow is considered a valid decimal integer representation.
 func (s *Scanner) ScanLongLong() (ok bool, result int64) {
 	defer runtime.KeepAlive(s)
 	var _out0 int64
@@ -174,7 +174,7 @@ func (s *Scanner) ScanLongLong() (ok bool, result int64) {
 	return _r, _out0
 }
 
-// ScanUnsignedLongLong wraps the corresponding Objective-C method.
+// ScanUnsignedLongLong scans for an unsigned long long value from a decimal representation, returning a found value by reference. All overflow digits are skipped. Skips past excess digits in the case of overflow, so the receiver's position is past the entire decimal representation. Invoke this method with `NULL` as `unsignedLongLongValue` to simply scan past an unsigned long decimal integer representation. - Parameter result: Upon return, contains the scanned value. Contains `ULLONG_MAX` on overflow. - Returns: `YES` if the receiver finds a valid decimal integer representation, otherwise `NO`. Overflow is considered a valid decimal integer representation.
 func (s *Scanner) ScanUnsignedLongLong() (ok bool, result uint64) {
 	defer runtime.KeepAlive(s)
 	var _out0 uint64
@@ -182,7 +182,7 @@ func (s *Scanner) ScanUnsignedLongLong() (ok bool, result uint64) {
 	return _r, _out0
 }
 
-// ScanFloat wraps the corresponding Objective-C method.
+// ScanFloat scans for a float value, returning a found value by reference. Skips past excess digits in the case of overflow, so the scanner's position is past the entire floating-point representation. Invoke this method with `NULL` as `floatValue` to simply scan past a float value representation. Floating-point representations are assumed to be IEEE compliant. - Parameter result: Upon return, contains the scanned value. Contains `HUGE_VAL` or `-HUGE_VAL` on overflow, or `0.0` on underflow. - Returns: `YES` if the receiver finds a valid floating-point representation, otherwise `NO`. Overflow or underflow are both considered valid floating-point representations.
 func (s *Scanner) ScanFloat() (ok bool, result float32) {
 	defer runtime.KeepAlive(s)
 	var _out0 float32
@@ -190,7 +190,7 @@ func (s *Scanner) ScanFloat() (ok bool, result float32) {
 	return _r, _out0
 }
 
-// ScanDouble wraps the corresponding Objective-C method.
+// ScanDouble scans for a double value, returning a found value by reference. Skips past excess digits in the case of overflow, so the scanner's position is past the entire floating-point representation. Invoke this method with `NULL` as `doubleValue` to simply scan past a double value representation. Floating-point representations are assumed to be IEEE compliant. - Parameter result: Upon return, contains the scanned value. Contains `HUGE_VAL` or `-HUGE_VAL` on overflow, or `0.0` on underflow. - Returns: `YES` if the receiver finds a valid floating-point representation, otherwise `NO`. Overflow or underflow are both considered valid floating-point representations.
 func (s *Scanner) ScanDouble() (ok bool, result float64) {
 	defer runtime.KeepAlive(s)
 	var _out0 float64
@@ -198,7 +198,7 @@ func (s *Scanner) ScanDouble() (ok bool, result float64) {
 	return _r, _out0
 }
 
-// ScanHexInt wraps the corresponding Objective-C method.
+// ScanHexInt scans for an unsigned value from a hexadecimal representation, returning a found value by reference. The hexadecimal integer representation may optionally be preceded by `0x` or `0X`. Skips past excess digits in the case of overflow, so the receiver's position is past the entire hexadecimal representation. Invoke this method with `NULL` as `intValue` to simply scan past a hexadecimal integer representation. - Parameter result: Upon return, contains the scanned value. Contains `UINT_MAX` on overflow. - Returns: `YES` if the receiver finds a valid hexadecimal integer representation, otherwise `NO`. Overflow is considered a valid hexadecimal integer representation.
 func (s *Scanner) ScanHexInt() (ok bool, result uint32) {
 	defer runtime.KeepAlive(s)
 	var _out0 uint32
@@ -206,7 +206,7 @@ func (s *Scanner) ScanHexInt() (ok bool, result uint32) {
 	return _r, _out0
 }
 
-// ScanHexLongLong wraps the corresponding Objective-C method.
+// ScanHexLongLong scans for a long long value from a hexadecimal representation, returning a found value by reference. The hexadecimal integer representation may optionally be preceded by `0x` or `0X`. Skips past excess digits in the case of overflow, so the receiver's position is past the entire hexadecimal representation. Invoke this method with `NULL` as `result` to simply scan past a hexadecimal long long representation. - Parameter result: Upon return, contains the scanned value. Contains `HUGE_VAL` or `-HUGE_VAL` on overflow. - Returns: `YES` if the receiver finds a valid hexadecimal long long representation, otherwise `NO`. Overflow is considered a valid hexadecimal long long representation.
 func (s *Scanner) ScanHexLongLong() (ok bool, result uint64) {
 	defer runtime.KeepAlive(s)
 	var _out0 uint64
@@ -214,7 +214,7 @@ func (s *Scanner) ScanHexLongLong() (ok bool, result uint64) {
 	return _r, _out0
 }
 
-// ScanHexFloat wraps the corresponding Objective-C method.
+// ScanHexFloat scans for a double value from a hexadecimal representation, returning a found value by reference. This corresponds to `%a` or `%A` formatting. The hexadecimal float representation must be preceded by `0x` or `0X`. Skips past excess digits in the case of overflow, so the scanner's position is past the entire floating-point representation. Invoke this method with `NULL` as `result` to simply scan past a hexadecimal float representation. - Parameter result: Upon return, contains the scanned value. Contains `HUGE_VAL` or `-HUGE_VAL` on overflow, or `0.0` on underflow. - Returns: `YES` if the receiver finds a valid float-point representation, otherwise `NO`. Overflow or underflow are both considered valid floating-point representations.
 func (s *Scanner) ScanHexFloat() (ok bool, result float32) {
 	defer runtime.KeepAlive(s)
 	var _out0 float32
@@ -222,7 +222,7 @@ func (s *Scanner) ScanHexFloat() (ok bool, result float32) {
 	return _r, _out0
 }
 
-// ScanHexDouble wraps the corresponding Objective-C method.
+// ScanHexDouble scans for a double value from a hexadecimal representation, returning a found value by reference. This corresponds to `%a` or `%A` formatting. The hexadecimal double representation must be preceded by `0x` or `0X`. Skips past excess digits in the case of overflow, so the scanner's position is past the entire floating-point representation. Invoke this method with `NULL` as `result` to simply scan past a hexadecimal double representation. - Parameter result: Upon return, contains the scanned value. Contains `HUGE_VAL` or `-HUGE_VAL` on overflow, or `0.0` on underflow. - Returns: `YES` if the receiver finds a valid double-point representation, otherwise `NO`. Overflow or underflow are both considered valid floating-point representations.
 func (s *Scanner) ScanHexDouble() (ok bool, result float64) {
 	defer runtime.KeepAlive(s)
 	var _out0 float64
@@ -230,14 +230,14 @@ func (s *Scanner) ScanHexDouble() (ok bool, result float64) {
 	return _r, _out0
 }
 
-// ScanStringIntoString wraps the corresponding Objective-C method.
+// ScanStringIntoString scans a given string, returning an equivalent string object by reference if a match is found. If `string` is present at the current scan location, then the current scan location is advanced to after the string; otherwise the scan location does not change. Invoke this method with `NULL` as `stringValue` to simply scan past a given string. - Parameters: - string: The string for which to scan at the current scan location. - result: Upon return, if the receiver contains a string equivalent to `string` at the current scan location, contains a string equivalent to `string`. - Returns: `YES` if `string` matches the characters at the scan location, otherwise `NO`.
 func (s *Scanner) ScanStringIntoString(str string, result string) bool {
 	defer runtime.KeepAlive(s)
 	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("scanString:intoString:"), purego.NSString(str), purego.NSString(result))
 	return _r
 }
 
-// ScanCharactersFromSetIntoString wraps the corresponding Objective-C method.
+// ScanCharactersFromSetIntoString scans the string as long as characters from a given character set are encountered, accumulating characters into a string that's returned by reference. Invoke this method with `NULL` as `stringValue` to simply scan past a given set of characters. - Parameters: - set: The set of characters to scan. - result: Upon return, contains the characters scanned. - Returns: `YES` if the receiver scanned any characters, otherwise `NO`.
 func (s *Scanner) ScanCharactersFromSetIntoString(set *CharacterSet, result string) bool {
 	defer runtime.KeepAlive(s)
 	defer runtime.KeepAlive(set)
@@ -245,14 +245,14 @@ func (s *Scanner) ScanCharactersFromSetIntoString(set *CharacterSet, result stri
 	return _r
 }
 
-// ScanUpToStringIntoString wraps the corresponding Objective-C method.
+// ScanUpToStringIntoString scans the string until a given string is encountered, accumulating characters into a string that's returned by reference. If `stopString` is present in the receiver, then on return the scan location is set to the beginning of that string. If `stopString` is the first string in the receiver, then the method returns `NO` and `stringValue` is not changed. If the search string (`stopString`) isn't present in the scanner's source string, the remainder of the source string is put into `stringValue`, the receiver's `scanLocation` is advanced to the end of the source string, and the method returns `YES`. Invoke this method with `NULL` as `stringValue` to simply scan up to a given string. - Parameters: - string: The string to scan up to. - result: Upon return, contains any characters that were scanned. - Returns: `YES` if the receiver scans any characters, otherwise `NO`. If the only scanned characters are in the `charactersToBeSkipped` character set (which by default is the whitespace and newline character set), then this method returns `NO`.
 func (s *Scanner) ScanUpToStringIntoString(str string, result string) bool {
 	defer runtime.KeepAlive(s)
 	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("scanUpToString:intoString:"), purego.NSString(str), purego.NSString(result))
 	return _r
 }
 
-// ScanUpToCharactersFromSetIntoString wraps the corresponding Objective-C method.
+// ScanUpToCharactersFromSetIntoString scans the string until a character from a given character set is encountered, accumulating characters into a string that's returned by reference. Invoke this method with `NULL` as `stringValue` to simply scan up to a given set of characters. If no characters in `stopSet` are present in the scanner's source string, the remainder of the source string is put into `stringValue`, the receiver's `scanLocation` is advanced to the end of the source string, and the method returns `YES`. - Parameters: - set: The set of characters up to which to scan. - result: Upon return, contains the characters scanned. - Returns: `YES` if the receiver scanned any characters, otherwise `NO`. If the only scanned characters are in the `charactersToBeSkipped` character set (which is the whitespace and newline character set by default), then returns `NO`.
 func (s *Scanner) ScanUpToCharactersFromSetIntoString(set *CharacterSet, result string) bool {
 	defer runtime.KeepAlive(s)
 	defer runtime.KeepAlive(set)
@@ -260,14 +260,14 @@ func (s *Scanner) ScanUpToCharactersFromSetIntoString(set *CharacterSet, result 
 	return _r
 }
 
-// IsAtEnd reports whether the object is at end.
+// IsAtEnd reports whether flag that indicates whether the receiver has exhausted all significant characters. `YES` if the receiver has exhausted all significant characters in its string, otherwise `NO`. If only characters from the set to be skipped remain, returns `YES`.
 func (s *Scanner) IsAtEnd() bool {
 	defer runtime.KeepAlive(s)
 	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("isAtEnd"))
 	return _r
 }
 
-// ScanDecimal wraps the corresponding Objective-C method.
+// ScanDecimal scans for an `NSDecimal` value, returning a found value by reference. Invoke this method with `NULL` as `dcm` to simply scan past an `NSDecimal` representation. - Parameters: - dcm: Upon return, contains the scanned value. - Returns: `YES` if the receiver finds a valid `NSDecimal` representation, otherwise `NO`.
 func (s *Scanner) ScanDecimal(dcm *NSDecimal) bool {
 	defer runtime.KeepAlive(s)
 	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("scanDecimal:"), unsafe.Pointer(dcm))

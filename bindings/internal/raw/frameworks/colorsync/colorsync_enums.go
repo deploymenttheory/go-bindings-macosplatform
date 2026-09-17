@@ -8,16 +8,24 @@ import (
 	"strings"
 )
 
+// The location of the alpha component in a pixel, and whether it’s premultiplied.
 type ColorSyncAlphaInfo int32
 
 const (
-	KColorSyncAlphaNone               ColorSyncAlphaInfo = 0
-	KColorSyncAlphaPremultipliedLast  ColorSyncAlphaInfo = 1
+	// There is no alpha channel. For example, RGB.
+	KColorSyncAlphaNone ColorSyncAlphaInfo = 0
+	// The alpha component is stored last and the color components are premultiplied by it. For example, premultiplied RGBA.
+	KColorSyncAlphaPremultipliedLast ColorSyncAlphaInfo = 1
+	// The alpha component is stored first and the color components are premultiplied by it. For example, premultiplied ARGB.
 	KColorSyncAlphaPremultipliedFirst ColorSyncAlphaInfo = 2
-	KColorSyncAlphaLast               ColorSyncAlphaInfo = 3
-	KColorSyncAlphaFirst              ColorSyncAlphaInfo = 4
-	KColorSyncAlphaNoneSkipLast       ColorSyncAlphaInfo = 5
-	KColorSyncAlphaNoneSkipFirst      ColorSyncAlphaInfo = 6
+	// The alpha component is stored last and is not premultiplied. For example, non-premultiplied RGBA.
+	KColorSyncAlphaLast ColorSyncAlphaInfo = 3
+	// The alpha component is stored first and is not premultiplied. For example, non-premultiplied ARGB.
+	KColorSyncAlphaFirst ColorSyncAlphaInfo = 4
+	// There is no alpha channel; the least significant bits are ignored. For example, RGBX.
+	KColorSyncAlphaNoneSkipLast ColorSyncAlphaInfo = 5
+	// There is no alpha channel; the most significant bits are ignored. For example, XRGB.
+	KColorSyncAlphaNoneSkipFirst ColorSyncAlphaInfo = 6
 )
 
 func (e ColorSyncAlphaInfo) String() string {
@@ -41,17 +49,26 @@ func (e ColorSyncAlphaInfo) String() string {
 	}
 }
 
+// The bit depth and numeric type of a color component in a pixel.
 type ColorSyncDataDepth int32
 
 const (
-	KColorSync1BitGamut            ColorSyncDataDepth = 1
-	KColorSync8BitInteger          ColorSyncDataDepth = 2
-	KColorSync16BitInteger         ColorSyncDataDepth = 3
-	KColorSync16BitFloat           ColorSyncDataDepth = 4
-	KColorSync32BitInteger         ColorSyncDataDepth = 5
+	// One-bit values, used for gamut-check results.
+	KColorSync1BitGamut ColorSyncDataDepth = 1
+	// 8-bit integer components.
+	KColorSync8BitInteger ColorSyncDataDepth = 2
+	// 16-bit integer components.
+	KColorSync16BitInteger ColorSyncDataDepth = 3
+	// 16-bit floating-point (half-float) components.
+	KColorSync16BitFloat ColorSyncDataDepth = 4
+	// 32-bit integer components.
+	KColorSync32BitInteger ColorSyncDataDepth = 5
+	// 32-bit named-color index values.
 	KColorSync32BitNamedColorIndex ColorSyncDataDepth = 6
-	KColorSync32BitFloat           ColorSyncDataDepth = 7
-	KColorSync10BitInteger         ColorSyncDataDepth = 8
+	// 32-bit floating-point components.
+	KColorSync32BitFloat ColorSyncDataDepth = 7
+	// 10-bit integer components.
+	KColorSync10BitInteger ColorSyncDataDepth = 8
 )
 
 func (e ColorSyncDataDepth) String() string {

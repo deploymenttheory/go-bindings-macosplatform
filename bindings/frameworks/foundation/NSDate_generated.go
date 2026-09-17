@@ -132,7 +132,7 @@ func (d *Date) WithScriptingProperties(scriptingProperties map[string]obj.Object
 	return d
 }
 
-// TimeIntervalSinceReferenceDate returns the time interval since reference date.
+// TimeIntervalSinceReferenceDate returns the interval between the date object and 00:00:00 UTC on 1 January 2001. This property's value is negative if the date object is earlier than the system's absolute reference date (00:00:00 UTC on 1 January 2001).
 func (d *Date) TimeIntervalSinceReferenceDate() float64 {
 	defer runtime.KeepAlive(d)
 	_r := objc.Send[float64](objref.IDOf(d), objc.RegisterName("timeIntervalSinceReferenceDate"))
@@ -199,14 +199,14 @@ func (d *Date) DescriptionWithLocale(locale obj.Object) string {
 	return purego.GoString(_r)
 }
 
-// TimeIntervalSinceNow returns the time interval since now.
+// TimeIntervalSinceNow returns the interval between the date object and the current date and time. If the date object is earlier than the current date and time, this property's value is negative.
 func (d *Date) TimeIntervalSinceNow() float64 {
 	defer runtime.KeepAlive(d)
 	_r := objc.Send[float64](objref.IDOf(d), objc.RegisterName("timeIntervalSinceNow"))
 	return _r
 }
 
-// TimeIntervalSince1970 returns the time interval since1970.
+// TimeIntervalSince1970 returns the interval between the date object and 00:00:00 UTC on 1 January 1970. This property's value is negative if the date object is earlier than 00:00:00 UTC on 1 January 1970.
 func (d *Date) TimeIntervalSince1970() float64 {
 	defer runtime.KeepAlive(d)
 	_r := objc.Send[float64](objref.IDOf(d), objc.RegisterName("timeIntervalSince1970"))

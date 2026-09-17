@@ -363,14 +363,6 @@
     }
   },
   "enums": {
-    "NEAppProxyFlowError": {
-      "doc": "An error that the app proxy flow encounters.",
-      "url": "https://developer.apple.com/documentation/networkextension/neappproxyflowerror"
-    },
-    "NEAppPushManagerError": {
-      "doc": "An error that the push manager encounters.",
-      "url": "https://developer.apple.com/documentation/networkextension/neapppushmanagererror"
-    },
     "NEDNSProtocol": {
       "url": "https://developer.apple.com/documentation/networkextension/nednsprotocol",
       "members": {
@@ -511,30 +503,6 @@
         }
       }
     },
-    "NEFilterManagerGrade": {
-      "doc": "A type for the grade or priority of the filter.",
-      "url": "https://developer.apple.com/documentation/networkextension/nefiltermanagergrade"
-    },
-    "NEFilterPacketProviderVerdict": {
-      "doc": "The verdict returned by a packet handler indicating what the framework should do with a packet.",
-      "url": "https://developer.apple.com/documentation/networkextension/nefilterpacketproviderverdict"
-    },
-    "NEFilterReportEvent": {
-      "doc": "A type that represents the kind of event indicated by a report.",
-      "url": "https://developer.apple.com/documentation/networkextension/nefilterreportevent"
-    },
-    "NEFilterReportFrequency": {
-      "doc": "An enumeration that represents the frequency of filter report delivery.",
-      "url": "https://developer.apple.com/documentation/networkextension/nefilterreportfrequency"
-    },
-    "NEHotspotConfigurationEAPTLSVersion": {
-      "doc": "The EAPTLS Version identifiers that may be specified by preferredTLSVersion.",
-      "url": "https://developer.apple.com/documentation/networkextension/nehotspotconfigurationeaptlsversion"
-    },
-    "NEHotspotConfigurationEAPType": {
-      "doc": "The EAP types that may be specified in supportedEAPTypes.",
-      "url": "https://developer.apple.com/documentation/networkextension/nehotspotconfigurationeaptype"
-    },
     "NEHotspotConfigurationError": {
       "doc": "Error values returned by hotspot configuration manager methods.",
       "url": "https://developer.apple.com/documentation/networkextension/nehotspotconfigurationerror",
@@ -604,10 +572,6 @@
           "url": "https://developer.apple.com/documentation/networkextension/nehotspotconfigurationerror/userdenied"
         }
       }
-    },
-    "NEHotspotConfigurationTTLSInnerAuthenticationType": {
-      "doc": "The TTLS Inner Authentication Types that may be specified by NEHotspotConfigurationTTLSInnerAuthenticationType.",
-      "url": "https://developer.apple.com/documentation/networkextension/nehotspotconfigurationttlsinnerauthenticationtype"
     },
     "NEHotspotHelperCommandType": {
       "doc": "An enumeration of hotspot command types.",
@@ -721,10 +685,6 @@
         }
       }
     },
-    "NENetworkRuleProtocol": {
-      "doc": "A type to represent network protocols used by routing rules.",
-      "url": "https://developer.apple.com/documentation/networkextension/nenetworkruleprotocol"
-    },
     "NEOnDemandRuleAction": {
       "url": "https://developer.apple.com/documentation/networkextension/neondemandruleaction",
       "members": {
@@ -766,6 +726,10 @@
           "url": "https://developer.apple.com/documentation/networkextension/neondemandruleinterfacetype/wifi"
         }
       }
+    },
+    "NEPacketTunnelNetworkSettingsIPFamily": {
+      "doc": "NEPacketTunnelNetworkSettings IP Family types",
+      "url": "https://developer.apple.com/documentation/networkextension/nepackettunnelnetworksettingsipfamily"
     },
     "NEProviderStopReason": {
       "doc": "Reasons why the provider extension was stopped.",
@@ -884,10 +848,6 @@
         }
       }
     },
-    "NETunnelProviderError": {
-      "doc": "An error that the tunnel provider encounters.",
-      "url": "https://developer.apple.com/documentation/networkextension/netunnelprovidererror"
-    },
     "NETunnelProviderRoutingMethod": {
       "url": "https://developer.apple.com/documentation/networkextension/netunnelproviderroutingmethod",
       "members": {
@@ -986,10 +946,6 @@
           "url": "https://developer.apple.com/documentation/networkextension/nevpnconnectionerror/unrecoverablenetworkchange"
         }
       }
-    },
-    "NEVPNError": {
-      "doc": "Information about an error encountered while configuring or using a VPN.",
-      "url": "https://developer.apple.com/documentation/networkextension/nevpnerror"
     },
     "NEVPNIKEAuthenticationMethod": {
       "doc": "Internet Key Exchange (IKE) authentication methods used to authenticate with the IPSec server.",
@@ -2886,10 +2842,6 @@
       "MTU": {
         "doc": "The size of the maximum trasnmission unit, in bytes.",
         "url": "https://developer.apple.com/documentation/networkextension/nepackettunnelnetworksettings/mtu"
-      },
-      "NEPacketTunnelNetworkSettingsIPFamily": {
-        "doc": "NEPacketTunnelNetworkSettings IP Family types",
-        "url": "https://developer.apple.com/documentation/networkextension/nepackettunnelnetworksettings/ipfamily"
       },
       "tunnelOverheadBytes": {
         "doc": "The number of bytes added to each tunneled packet for storing tunneling protocol headers.",

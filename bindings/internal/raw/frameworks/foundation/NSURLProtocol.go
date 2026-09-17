@@ -9,8 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An abstract class that handles the loading of protocol-specific URL data.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsurlprotocol
 type NSURLProtocol struct {
 	NSObject
@@ -47,7 +45,7 @@ func NSURLProtocolFromID(id objc.ID) *NSURLProtocol {
 	return o
 }
 
-// @method initWithRequest:cachedResponse:client: @abstract Initializes an NSURLProtocol given request, cached response, and client. @param request The request to load. @param cachedResponse A response that has been retrieved from the cache for the given request. The protocol implementation should apply protocol-specific validity checks if such tests are necessary. @param client The NSURLProtocolClient object that serves as the interface the protocol implementation can use to report results back to the URL loading system.
+// Creates a URL protocol instance to handle the request. - Parameters: - request: The request to load. - cachedResponse: A response that has been retrieved from the cache for the given request. The protocol implementation should apply protocol-specific validity checks if such tests are necessary. - client: The `NSURLProtocolClient` object that serves as the interface the protocol implementation can use to report results back to the URL loading system.
 func (o *NSURLProtocol) InitWithRequestCachedResponseClient(request *NSURLRequest, cachedResponse *NSCachedURLResponse, client NSURLProtocolClient) *NSURLProtocol {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLProtocolSelInitWithRequestCachedResponseClient, request.Ptr(), cachedResponse.Ptr(), client)
 	if _ret != 0 {
@@ -56,13 +54,13 @@ func (o *NSURLProtocol) InitWithRequestCachedResponseClient(request *NSURLReques
 	return NSURLProtocolFromID(_ret)
 }
 
-// @method canInitWithRequest: @abstract This method determines whether this protocol can handle the given request. @discussion A concrete subclass should inspect the given request and determine whether or not the implementation can perform a load with that request. This is an abstract method. Subclasses must provide an implementation. @param request A request to inspect. @result YES if the protocol can handle the given request, NO if not.
+// Determines whether the protocol subclass can handle the specified request. A concrete subclass should inspect the given request and determine whether or not the implementation can perform a load with that request. This is an abstract method. Subclasses must provide an implementation. - Parameter request: A request to inspect. - Returns: `YES` if the protocol can handle the given request, `NO` if not.
 func NSURLProtocolCanInitWithRequest(request *NSURLRequest) bool {
 	_ret := objc.Send[bool](objc.ID(_clsNSURLProtocol), _nSURLProtocolSelCanInitWithRequest, request.Ptr())
 	return _ret
 }
 
-// @method canonicalRequestForRequest: @abstract This method returns a canonical version of the given request. @discussion It is up to each concrete protocol implementation to define what "canonical" means. However, a protocol should guarantee that the same input request always yields the same canonical form. Special consideration should be given when implementing this method since the canonical form of a request is used to look up objects in the URL cache, a process which performs equality checks between NSURLRequest objects. <p> This is an abstract method; subclasses must provide an implementation. @param request A request to make canonical. @result The canonical form of the given request.
+// Returns a canonical version of the specified request. It is up to each concrete protocol implementation to define what "canonical" means. However, a protocol should guarantee that the same input request always yields the same canonical form. Special consideration should be given when implementing this method since the canonical form of a request is used to look up objects in the URL cache, a process which performs equality checks between `NSURLRequest` objects. This is an abstract method; subclasses must provide an implementation. - Parameter request: A request to make canonical. - Returns: The canonical form of the given request.
 func NSURLProtocolCanonicalRequestForRequest(request *NSURLRequest) *NSURLRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLProtocol), _nSURLProtocolSelCanonicalRequestForRequest, request.Ptr())
 	if _ret != 0 {
@@ -71,56 +69,56 @@ func NSURLProtocolCanonicalRequestForRequest(request *NSURLRequest) *NSURLReques
 	return NSURLRequestFromID(_ret)
 }
 
-// @method requestIsCacheEquivalent:toRequest: @abstract Compares two requests for equivalence with regard to caching. @discussion Requests are considered equivalent for cache purposes if and only if they would be handled by the same protocol AND that protocol declares them equivalent after performing implementation-specific checks. @result YES if the two requests are cache-equivalent, NO otherwise.
+// A Boolean value indicating whether two requests are equivalent for cache purposes. Requests are considered equivalent for cache purposes if and only if they would be handled by the same protocol AND that protocol declares them equivalent after performing implementation-specific checks. - Returns: `YES` if the two requests are cache-equivalent, `NO` otherwise.
 func NSURLProtocolRequestIsCacheEquivalentToRequest(a *NSURLRequest, b *NSURLRequest) bool {
 	_ret := objc.Send[bool](objc.ID(_clsNSURLProtocol), _nSURLProtocolSelRequestIsCacheEquivalentToRequest, a.Ptr(), b.Ptr())
 	return _ret
 }
 
-// @method startLoading @abstract Starts protocol-specific loading of a request. @discussion When this method is called, the protocol implementation should start loading a request.
+// Starts protocol-specific loading of the request. When this method is called, the protocol implementation should start loading a request.
 func (o *NSURLProtocol) StartLoading() {
 	o.Ptr().Send(_nSURLProtocolSelStartLoading)
 }
 
-// @method stopLoading @abstract Stops protocol-specific loading of a request. @discussion When this method is called, the protocol implementation should end the work of loading a request. This could be in response to a cancel operation, so protocol implementations must be able to handle this call while a load is in progress.
+// Stops protocol-specific loading of the request. When this method is called, the protocol implementation should end the work of loading a request. This could be in response to a cancel operation, so protocol implementations must be able to handle this call while a load is in progress.
 func (o *NSURLProtocol) StopLoading() {
 	o.Ptr().Send(_nSURLProtocolSelStopLoading)
 }
 
-// @method propertyForKey:inRequest: @abstract Returns the property in the given request previously stored with the given key. @discussion The purpose of this method is to provide an interface for protocol implementors to access protocol-specific information associated with NSURLRequest objects. @param key The string to use for the property lookup. @param request The request to use for the property lookup. @result The property stored with the given key, or nil if no property had previously been stored with the given key in the given request.
+// Fetches the property associated with the specified key in the specified request. The purpose of this method is to provide an interface for protocol implementors to access protocol-specific information associated with `NSURLRequest` objects. - Parameters: - key: The string to use for the property lookup. - request: The request to use for the property lookup. - Returns: The property stored with the given key, or `nil` if no property had previously been stored with the given key in the given request.
 func NSURLProtocolPropertyForKeyInRequest(key *NSString, request *NSURLRequest) objc.ID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLProtocol), _nSURLProtocolSelPropertyForKeyInRequest, key.Ptr(), request.Ptr())
 	return _ret
 }
 
-// @method setProperty:forKey:inRequest: @abstract Stores the given property in the given request using the given key. @discussion The purpose of this method is to provide an interface for protocol implementors to customize protocol-specific information associated with NSMutableURLRequest objects. @param value The property to store. @param key The string to use for the property storage. @param request The request in which to store the property.
+// Sets the property associated with the specified key in the specified request. The purpose of this method is to provide an interface for protocol implementors to customize protocol-specific information associated with `NSMutableURLRequest` objects. - Parameters: - value: The property to store. - key: The string to use for the property storage. - request: The request in which to store the property.
 func NSURLProtocolSetPropertyForKeyInRequest(value objc.ID, key *NSString, request *NSMutableURLRequest) {
 	objc.ID(_clsNSURLProtocol).Send(_nSURLProtocolSelSetPropertyForKeyInRequest, value, key.Ptr(), request.Ptr())
 }
 
-// @method removePropertyForKey:inRequest: @abstract Remove any property stored under the given key @discussion Like setProperty:forKey:inRequest: above, the purpose of this method is to give protocol implementors the ability to store protocol-specific information in an NSURLRequest @param key The key whose value should be removed @param request The request to be modified
+// Removes the property associated with the specified key in the specified request. Like `setProperty:forKey:inRequest:`, the purpose of this method is to give protocol implementors the ability to store protocol-specific information in an `NSURLRequest`. - Parameters: - key: The key whose value should be removed. - request: The request to be modified.
 func NSURLProtocolRemovePropertyForKeyInRequest(key *NSString, request *NSMutableURLRequest) {
 	objc.ID(_clsNSURLProtocol).Send(_nSURLProtocolSelRemovePropertyForKeyInRequest, key.Ptr(), request.Ptr())
 }
 
-// @method registerClass: @abstract This method registers a protocol class, making it visible to several other NSURLProtocol class methods. @discussion When the URL loading system begins to load a request, each protocol class that has been registered is consulted in turn to see if it can be initialized with a given request. The first protocol handler class to provide a YES answer to <tt>+canInitWithRequest:</tt> "wins" and that protocol implementation is used to perform the URL load. There is no guarantee that all registered protocol classes will be consulted. Hence, it should be noted that registering a class places it first on the list of classes that will be consulted in calls to <tt>+canInitWithRequest:</tt>, moving it in front of all classes that had been registered previously. <p>A similar design governs the process to create the canonical form of a request with the <tt>+canonicalRequestForRequest:</tt> class method. @param protocolClass the class to register. @result YES if the protocol was registered successfully, NO if not. The only way that failure can occur is if the given class is not a subclass of NSURLProtocol.
+// Attempts to register a subclass of “URLProtocol“, making it visible to the URL loading system. When the URL loading system begins to load a request, each protocol class that has been registered is consulted in turn to see if it can be initialized with a given request. The first protocol handler class to provide a `YES` answer to `+canInitWithRequest:` "wins" and that protocol implementation is used to perform the URL load. There is no guarantee that all registered protocol classes will be consulted. Registering a class places it first on the list of classes that will be consulted. - Parameter protocolClass: The class to register. - Returns: `YES` if the protocol was registered successfully, `NO` if not. The only way that failure can occur is if the given class is not a subclass of `NSURLProtocol`.
 func NSURLProtocolRegisterClass(protocolClass objc.Class) bool {
 	_ret := objc.Send[bool](objc.ID(_clsNSURLProtocol), _nSURLProtocolSelRegisterClass, protocolClass)
 	return _ret
 }
 
-// @method unregisterClass: @abstract This method unregisters a protocol. @discussion After unregistration, a protocol class is no longer consulted in calls to NSURLProtocol class methods. @param protocolClass The class to unregister.
+// Unregisters the specified subclass of “URLProtocol“. After unregistration, a protocol class is no longer consulted in calls to `NSURLProtocol` class methods. - Parameter protocolClass: The class to unregister.
 func NSURLProtocolUnregisterClass(protocolClass objc.Class) {
 	objc.ID(_clsNSURLProtocol).Send(_nSURLProtocolSelUnregisterClass, protocolClass)
 }
 
-// @abstract Returns the NSURLProtocolClient of the receiver. @result The NSURLProtocolClient of the receiver.
+// The object the protocol uses to communicate with the URL loading system.
 func (o *NSURLProtocol) Client() NSURLProtocolClient {
 	_ret := objc.Send[NSURLProtocolClient](o.Ptr(), _nSURLProtocolSelClient)
 	return _ret
 }
 
-// @abstract Returns the NSURLRequest of the receiver. @result The NSURLRequest of the receiver.
+// The protocol's request.
 func (o *NSURLProtocol) Request() *NSURLRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLProtocolSelRequest)
 	if _ret != 0 {
@@ -129,7 +127,7 @@ func (o *NSURLProtocol) Request() *NSURLRequest {
 	return NSURLRequestFromID(_ret)
 }
 
-// @abstract Returns the NSCachedURLResponse of the receiver. @result The NSCachedURLResponse of the receiver.
+// The protocol's cached response.
 func (o *NSURLProtocol) CachedResponse() *NSCachedURLResponse {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLProtocolSelCachedResponse)
 	if _ret != 0 {
@@ -138,11 +136,13 @@ func (o *NSURLProtocol) CachedResponse() *NSCachedURLResponse {
 	return NSCachedURLResponseFromID(_ret)
 }
 
+// Determines whether the protocol subclass can handle the specified task.
 func NSURLProtocolCanInitWithTask(task *NSURLSessionTask) bool {
 	_ret := objc.Send[bool](objc.ID(_clsNSURLProtocol), _nSURLProtocolSelCanInitWithTask, task.Ptr())
 	return _ret
 }
 
+// Creates a URL protocol instance to handle the task.
 func (o *NSURLProtocol) InitWithTaskCachedResponseClient(task *NSURLSessionTask, cachedResponse *NSCachedURLResponse, client NSURLProtocolClient) *NSURLProtocol {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLProtocolSelInitWithTaskCachedResponseClient, task.Ptr(), cachedResponse.Ptr(), client)
 	if _ret != 0 {

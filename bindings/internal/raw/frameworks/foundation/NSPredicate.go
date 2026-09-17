@@ -143,6 +143,7 @@ func (o *NSPredicate) AllowEvaluationWithValidatorError(validator NSPredicateVal
 	return _ret, nil
 }
 
+// The predicate's format string. The return value of this property is not guaranteed to be the same as the string used to create the predicate using `predicateWithFormat:` or similar methods.
 func (o *NSPredicate) PredicateFormat() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPredicateSelPredicateFormat)
 	if _ret != 0 {

@@ -116,6 +116,7 @@ type MTL4ComputeCommandEncoder interface {
 	CopyFromBufferSourceOffsetSourceBytesPerRowSourceBytesPerImageSourceSizeToTextureDestinationSliceDestinationLevelDestinationOrigin(sourceBuffer MTLBuffer, sourceOffset uint, sourceBytesPerRow uint, sourceBytesPerImage uint, sourceSize MTLSize, destinationTexture MTLTexture, destinationSlice uint, destinationLevel uint, destinationOrigin MTLOrigin)
 	CopyFromBufferSourceOffsetSourceBytesPerRowSourceBytesPerImageSourceSizeToTextureDestinationSliceDestinationLevelDestinationOriginOptions(sourceBuffer MTLBuffer, sourceOffset uint, sourceBytesPerRow uint, sourceBytesPerImage uint, sourceSize MTLSize, destinationTexture MTLTexture, destinationSlice uint, destinationLevel uint, destinationOrigin MTLOrigin, options MTLBlitOption)
 	CopyFromTensorSourceOriginSourceDimensionsToTensorDestinationOriginDestinationDimensions(sourceTensor MTLTensor, sourceOrigin *MTLTensorExtents, sourceDimensions *MTLTensorExtents, destinationTensor MTLTensor, destinationOrigin *MTLTensorExtents, destinationDimensions *MTLTensorExtents)
+	CopyFromTensorSourceOriginSourceDimensionsSourcePlaneToTensorDestinationOriginDestinationDimensionsDestinationPlane(sourceTensor MTLTensor, sourceOrigin *MTLTensorExtents, sourceDimensions *MTLTensorExtents, sourcePlane MTLTensorPlaneType, destinationTensor MTLTensor, destinationOrigin *MTLTensorExtents, destinationDimensions *MTLTensorExtents, destinationPlane MTLTensorPlaneType)
 	GenerateMipmapsForTexture(texture MTLTexture)
 	FillBufferRangeValue(buffer MTLBuffer, range_ foundation.NSRange, value uint8)
 	OptimizeContentsForGPUAccess(texture MTLTexture)
@@ -583,7 +584,7 @@ type MTLIndirectRenderCommand interface {
 	SetDepthBiasSlopeScaleClamp(depthBias float32, slopeScale float32, clamp float32)
 	SetDepthClipMode(depthClipMode MTLDepthClipMode)
 	SetCullMode(cullMode MTLCullMode)
-	SetFrontFacingWinding(frontFacingWindning MTLWinding)
+	SetFrontFacingWinding(frontFacingWinding MTLWinding)
 	SetTriangleFillMode(fillMode MTLTriangleFillMode)
 	Reset()
 }
@@ -721,6 +722,8 @@ type MTLTensor interface {
 	MTLResource
 	ReplaceSliceOriginSliceDimensionsWithBytesStrides(sliceOrigin *MTLTensorExtents, sliceDimensions *MTLTensorExtents, bytes_ unsafe.Pointer, strides *MTLTensorExtents)
 	GetBytesStridesFromSliceOriginSliceDimensions(bytes_ unsafe.Pointer, strides *MTLTensorExtents, sliceOrigin *MTLTensorExtents, sliceDimensions *MTLTensorExtents)
+	GetBytesStridesFromSliceOriginSliceDimensionsPlane(bytes_ unsafe.Pointer, strides *MTLTensorExtents, sliceOrigin *MTLTensorExtents, sliceDimensions *MTLTensorExtents, plane MTLTensorPlaneType)
+	ReplaceSliceOriginSliceDimensionsPlaneWithBytesStrides(sliceOrigin *MTLTensorExtents, sliceDimensions *MTLTensorExtents, plane MTLTensorPlaneType, bytes_ unsafe.Pointer, strides *MTLTensorExtents)
 	GpuResourceID() MTLResourceID
 	Buffer() MTLBuffer
 	BufferOffset() uint
@@ -728,6 +731,16 @@ type MTLTensor interface {
 	Dimensions() *MTLTensorExtents
 	DataType() MTLTensorDataType
 	Usage() MTLTensorUsage
+	AuxiliaryPlanes() *foundation.NSArray[MTLTensorAuxiliaryPlane]
+}
+
+// MTLTensorAuxiliaryPlane wraps the ObjC protocol MTLTensorAuxiliaryPlane.
+type MTLTensorAuxiliaryPlane interface {
+	DataType() MTLTensorDataType
+	BlockFactors() *MTLTensorExtents
+	Buffer() MTLBuffer
+	BufferOffset() uint
+	PlaneType() MTLTensorPlaneType
 }
 
 // MTLTensorBinding wraps the ObjC protocol MTLTensorBinding.
@@ -736,6 +749,7 @@ type MTLTensorBinding interface {
 	TensorDataType() MTLTensorDataType
 	IndexType() MTLDataType
 	Dimensions() *MTLTensorExtents
+	AuxiliaryPlanes() *foundation.NSArray[*MTLTensorAuxiliaryPlaneType]
 }
 
 // MTLTexture wraps the ObjC protocol MTLTexture.

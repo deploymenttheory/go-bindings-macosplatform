@@ -24,7 +24,7 @@ func IOBSDNameMatching(mainPort int, options uint32, bsdName string) corefoundat
 		ebipurego.RegisterLibFunc(&_fnIOBSDNameMatching, _lib, "IOBSDNameMatching")
 	}
 	_ret := _fnIOBSDNameMatching(mainPort, options, bsdName)
-	return corefoundation.CFMutableDictionaryRef{Object: obj.Wrap(_ret)}
+	return corefoundation.CFMutableDictionaryRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnIOCatalogueGetData func(int, uint32, string, unsafe.Pointer) int32
@@ -902,7 +902,7 @@ func IORegistryEntryIDMatching(entryID uint64) corefoundation.CFMutableDictionar
 		ebipurego.RegisterLibFunc(&_fnIORegistryEntryIDMatching, _lib, "IORegistryEntryIDMatching")
 	}
 	_ret := _fnIORegistryEntryIDMatching(entryID)
-	return corefoundation.CFMutableDictionaryRef{Object: obj.Wrap(_ret)}
+	return corefoundation.CFMutableDictionaryRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnIORegistryEntryInPlane func(int, string) int32
@@ -925,7 +925,7 @@ func IORegistryEntrySearchCFProperty(entry int, plane string, key corefoundation
 		ebipurego.RegisterLibFunc(&_fnIORegistryEntrySearchCFProperty, _lib, "IORegistryEntrySearchCFProperty")
 	}
 	_ret := _fnIORegistryEntrySearchCFProperty(entry, plane, objref.IDOf(key.Object), objref.IDOf(allocator.Object), options)
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnIORegistryEntrySetCFProperties func(int, objc.ID) int32
@@ -1103,7 +1103,7 @@ func IOServiceMatching(name string) corefoundation.CFMutableDictionaryRef {
 		ebipurego.RegisterLibFunc(&_fnIOServiceMatching, _lib, "IOServiceMatching")
 	}
 	_ret := _fnIOServiceMatching(name)
-	return corefoundation.CFMutableDictionaryRef{Object: obj.Wrap(_ret)}
+	return corefoundation.CFMutableDictionaryRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnIOServiceNameMatching func(string) objc.ID
@@ -1115,7 +1115,7 @@ func IOServiceNameMatching(name string) corefoundation.CFMutableDictionaryRef {
 		ebipurego.RegisterLibFunc(&_fnIOServiceNameMatching, _lib, "IOServiceNameMatching")
 	}
 	_ret := _fnIOServiceNameMatching(name)
-	return corefoundation.CFMutableDictionaryRef{Object: obj.Wrap(_ret)}
+	return corefoundation.CFMutableDictionaryRef{Object: obj.Adopt(_ret)}
 }
 
 var _fnIOServiceOFPathToBSDName func(int, string, string) int32

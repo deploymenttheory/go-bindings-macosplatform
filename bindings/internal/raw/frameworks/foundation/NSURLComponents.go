@@ -154,6 +154,7 @@ func (o *NSURLComponents) URLRelativeToURL(baseURL *NSURL) *NSURL {
 	return NSURLFromID(_ret)
 }
 
+// A URL object derived from the components object. If the receiver has an authority component (user, password, host, or port) and a path component, then the path must either begin with `"/"` or be an empty string. Otherwise, this property contains `nil`. If the receiver does not have an authority component (user, password, host, or port) and has a path component, the path component must not start with `"//"`. If it does, this property contains `nil`.
 func (o *NSURLComponents) URL() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLComponentsSelURL)
 	if _ret != 0 {
@@ -162,6 +163,7 @@ func (o *NSURLComponents) URL() *NSURL {
 	return NSURLFromID(_ret)
 }
 
+// A URL derived from the components object, in string form. If the receiver has an authority component (user, password, host, or port) and a path component, then the path must either begin with `"/"` or be an empty string. Otherwise, this property contains `nil`. If the receiver does not have an authority component (user, password, host, or port) and has a path component, the path component must not start with `"//"`. If it does, this property contains `nil`.
 func (o *NSURLComponents) String() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLComponentsSelString)
 	if _ret != 0 {
@@ -170,6 +172,7 @@ func (o *NSURLComponents) String() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The scheme URL component, or `nil` if not present. For example, in the URL `http://www.example.com/index.html`, the scheme is `http`. Attempting to set the scheme with an invalid scheme string will cause an exception.
 func (o *NSURLComponents) Scheme() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLComponentsSelScheme)
 	if _ret != 0 {
@@ -182,6 +185,7 @@ func (o *NSURLComponents) SetScheme(scheme *NSString) {
 	o.Ptr().Send(_nSURLComponentsSelSetScheme, scheme.Ptr())
 }
 
+// The username URL subcomponent, or `nil` if not present. For example, in the URL `http://username:password@www.example.com/index.html`, the user is `username`. Getting this property removes any percent encoding this component may have. Setting this property assumes the string is not percent encoded and will add percent encoding.
 func (o *NSURLComponents) User() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLComponentsSelUser)
 	if _ret != 0 {
@@ -194,6 +198,7 @@ func (o *NSURLComponents) SetUser(user *NSString) {
 	o.Ptr().Send(_nSURLComponentsSelSetUser, user.Ptr())
 }
 
+// The password URL subcomponent, or `nil` if not present. For example, in the URL `http://username:password@www.example.com/index.html`, the password is `password`. Getting this property removes any percent encoding this component may have. Setting this property assumes the string is not percent encoded and will add percent encoding.
 func (o *NSURLComponents) Password() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLComponentsSelPassword)
 	if _ret != 0 {
@@ -206,6 +211,7 @@ func (o *NSURLComponents) SetPassword(password *NSString) {
 	o.Ptr().Send(_nSURLComponentsSelSetPassword, password.Ptr())
 }
 
+// The host URL subcomponent, or `nil` if not present. For example, in the URL `http://www.example.com/index.html`, the host is `www.example.com`. Getting this property removes any percent encoding this component may have. Setting this property assumes the string is not percent encoded and will add percent encoding.
 func (o *NSURLComponents) Host() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLComponentsSelHost)
 	if _ret != 0 {
@@ -218,6 +224,7 @@ func (o *NSURLComponents) SetHost(host *NSString) {
 	o.Ptr().Send(_nSURLComponentsSelSetHost, host.Ptr())
 }
 
+// The port number URL component, or `nil` if not present. For example, in the URL `http://www.example.com:8080/index.php`, the port number is `8080`. Attempting to set a negative port number will cause an exception.
 func (o *NSURLComponents) Port() *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLComponentsSelPort)
 	if _ret != 0 {
@@ -230,6 +237,7 @@ func (o *NSURLComponents) SetPort(port *NSNumber) {
 	o.Ptr().Send(_nSURLComponentsSelSetPort, port.Ptr())
 }
 
+// The path URL component, or `nil` if not present. For example, in the URL `http://www.example.com/index.html`, the path is `/index.html`. Getting this property removes any percent encoding this component may have. Setting this property assumes the string is not percent encoded and will add percent encoding.
 func (o *NSURLComponents) Path() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLComponentsSelPath)
 	if _ret != 0 {
@@ -242,6 +250,7 @@ func (o *NSURLComponents) SetPath(path *NSString) {
 	o.Ptr().Send(_nSURLComponentsSelSetPath, path.Ptr())
 }
 
+// The query URL component as a string, or `nil` if not present. For example, in the URL `http://www.example.com/index.php?key1=value1&key2=value2`, the query string is `key1=value1&key2=value2`. Getting this property removes any percent encoding this component may have. Setting this property assumes the string is not percent encoded and will add percent encoding.
 func (o *NSURLComponents) Query() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLComponentsSelQuery)
 	if _ret != 0 {
@@ -254,6 +263,7 @@ func (o *NSURLComponents) SetQuery(query *NSString) {
 	o.Ptr().Send(_nSURLComponentsSelSetQuery, query.Ptr())
 }
 
+// The fragment URL component (the part after a `#` symbol), or `nil` if not present. For example, in the URL `http://www.example.com/index.html#jumpLocation`, the fragment is `jumpLocation`. Getting this property removes any percent encoding this component may have. Setting this property assumes the string is not percent encoded and will add percent encoding.
 func (o *NSURLComponents) Fragment() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLComponentsSelFragment)
 	if _ret != 0 {
@@ -266,6 +276,7 @@ func (o *NSURLComponents) SetFragment(fragment *NSString) {
 	o.Ptr().Send(_nSURLComponentsSelSetFragment, fragment.Ptr())
 }
 
+// The username URL subcomponent expressed as a URL-encoded string, or `nil` if not present. If you set this value to something that is not a valid, percent-encoded string, this class throws an exception.
 func (o *NSURLComponents) PercentEncodedUser() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLComponentsSelPercentEncodedUser)
 	if _ret != 0 {
@@ -278,6 +289,7 @@ func (o *NSURLComponents) SetPercentEncodedUser(percentEncodedUser *NSString) {
 	o.Ptr().Send(_nSURLComponentsSelSetPercentEncodedUser, percentEncodedUser.Ptr())
 }
 
+// The password URL subcomponent expressed as a URL-encoded string, or `nil` if not present. If you set this value to something that is not a valid, percent-encoded string, this class throws an exception.
 func (o *NSURLComponents) PercentEncodedPassword() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLComponentsSelPercentEncodedPassword)
 	if _ret != 0 {
@@ -290,6 +302,7 @@ func (o *NSURLComponents) SetPercentEncodedPassword(percentEncodedPassword *NSSt
 	o.Ptr().Send(_nSURLComponentsSelSetPercentEncodedPassword, percentEncodedPassword.Ptr())
 }
 
+// The host URL subcomponent expressed as a URL-encoded string, or `nil` if not present. If you set this value to something that is not a valid, percent-encoded string, this class throws an exception.
 // Deprecated: Use encodedHost instead
 func (o *NSURLComponents) PercentEncodedHost() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLComponentsSelPercentEncodedHost)
@@ -304,7 +317,7 @@ func (o *NSURLComponents) SetPercentEncodedHost(percentEncodedHost *NSString) {
 	o.Ptr().Send(_nSURLComponentsSelSetPercentEncodedHost, percentEncodedHost.Ptr())
 }
 
-// Deprecated: Use encodedHost instead
+// The path URL component expressed as a URL-encoded string, or `nil` if not present. If you set this value to something that is not a valid, percent-encoded string, this class throws an exception. Although an unencoded semicolon is a valid character in a percent-encoded path, for compatibility with `NSURL`, you should always percent-encode it.
 func (o *NSURLComponents) PercentEncodedPath() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLComponentsSelPercentEncodedPath)
 	if _ret != 0 {
@@ -317,7 +330,7 @@ func (o *NSURLComponents) SetPercentEncodedPath(percentEncodedPath *NSString) {
 	o.Ptr().Send(_nSURLComponentsSelSetPercentEncodedPath, percentEncodedPath.Ptr())
 }
 
-// Deprecated: Use encodedHost instead
+// The query URL component expressed as a URL-encoded string, or `nil` if not present. If you set this value to something that is not a valid, percent-encoded string, this class throws an exception.
 func (o *NSURLComponents) PercentEncodedQuery() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLComponentsSelPercentEncodedQuery)
 	if _ret != 0 {
@@ -330,7 +343,7 @@ func (o *NSURLComponents) SetPercentEncodedQuery(percentEncodedQuery *NSString) 
 	o.Ptr().Send(_nSURLComponentsSelSetPercentEncodedQuery, percentEncodedQuery.Ptr())
 }
 
-// Deprecated: Use encodedHost instead
+// The fragment URL component (the part after a `#` symbol) expressed as a URL-encoded string, or `nil` if not present. If you set this value to something that is not a valid, percent-encoded string, this class throws an exception.
 func (o *NSURLComponents) PercentEncodedFragment() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLComponentsSelPercentEncodedFragment)
 	if _ret != 0 {
@@ -343,6 +356,7 @@ func (o *NSURLComponents) SetPercentEncodedFragment(percentEncodedFragment *NSSt
 	o.Ptr().Send(_nSURLComponentsSelSetPercentEncodedFragment, percentEncodedFragment.Ptr())
 }
 
+// The host subcomponent, percent-encoded. The getter for this property retains any percent-encoding this component may have. Setting this property assumes the component string already has the correct percent-encoding. Attempting to set an incorrectly percent-encoded string raises an exception.
 func (o *NSURLComponents) EncodedHost() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLComponentsSelEncodedHost)
 	if _ret != 0 {
@@ -355,46 +369,55 @@ func (o *NSURLComponents) SetEncodedHost(encodedHost *NSString) {
 	o.Ptr().Send(_nSURLComponentsSelSetEncodedHost, encodedHost.Ptr())
 }
 
+// Returns the character range of the scheme in the URL string returned by the `string` property. If the component does not exist in the `NSURLComponents` object, `{NSNotFound, 0}` is returned.
 func (o *NSURLComponents) RangeOfScheme() NSRange {
 	_ret := objc.Send[NSRange](o.Ptr(), _nSURLComponentsSelRangeOfScheme)
 	return _ret
 }
 
+// Returns the character range of the user in the URL string returned by the `string` property. If the component does not exist in the `NSURLComponents` object, `{NSNotFound, 0}` is returned.
 func (o *NSURLComponents) RangeOfUser() NSRange {
 	_ret := objc.Send[NSRange](o.Ptr(), _nSURLComponentsSelRangeOfUser)
 	return _ret
 }
 
+// Returns the character range of the password in the URL string returned by the `string` property. If the component does not exist in the `NSURLComponents` object, `{NSNotFound, 0}` is returned.
 func (o *NSURLComponents) RangeOfPassword() NSRange {
 	_ret := objc.Send[NSRange](o.Ptr(), _nSURLComponentsSelRangeOfPassword)
 	return _ret
 }
 
+// Returns the character range of the host in the URL string returned by the `string` property. If the component does not exist in the `NSURLComponents` object, `{NSNotFound, 0}` is returned.
 func (o *NSURLComponents) RangeOfHost() NSRange {
 	_ret := objc.Send[NSRange](o.Ptr(), _nSURLComponentsSelRangeOfHost)
 	return _ret
 }
 
+// Returns the character range of the port in the URL string returned by the `string` property. If the component does not exist in the `NSURLComponents` object, `{NSNotFound, 0}` is returned.
 func (o *NSURLComponents) RangeOfPort() NSRange {
 	_ret := objc.Send[NSRange](o.Ptr(), _nSURLComponentsSelRangeOfPort)
 	return _ret
 }
 
+// Returns the character range of the path in the URL string returned by the `string` property. If the component does not exist in the `NSURLComponents` object, `{NSNotFound, 0}` is returned.
 func (o *NSURLComponents) RangeOfPath() NSRange {
 	_ret := objc.Send[NSRange](o.Ptr(), _nSURLComponentsSelRangeOfPath)
 	return _ret
 }
 
+// Returns the character range of the query in the URL string returned by the `string` property. If the component does not exist in the `NSURLComponents` object, `{NSNotFound, 0}` is returned.
 func (o *NSURLComponents) RangeOfQuery() NSRange {
 	_ret := objc.Send[NSRange](o.Ptr(), _nSURLComponentsSelRangeOfQuery)
 	return _ret
 }
 
+// Returns the character range of the fragment in the URL string returned by the `string` property. If the component does not exist in the `NSURLComponents` object, `{NSNotFound, 0}` is returned.
 func (o *NSURLComponents) RangeOfFragment() NSRange {
 	_ret := objc.Send[NSRange](o.Ptr(), _nSURLComponentsSelRangeOfFragment)
 	return _ret
 }
 
+// The query URL component as an array of name/value pairs. When you get this property's value, the `NSURLComponents` class parses the `query` string and returns an array of `NSURLQueryItem` objects, each of which represents a single key-value pair, in the order in which they appear in the original query string. Because a name may appear more than once in a single query string, the name properties of query items are not guaranteed to be unique. If the `query` property is an empty string, the `queryItems` property is an empty array. If the `query` property is `nil`, the `queryItems` property is also `nil`. When you set this property's value, the `NSURLComponents` class joins each name/value pair with a `=` delimiter and joins the array with a `&` delimiter, then sets the `query` property to the resulting string. Setting this property to an empty array sets the `query` property to an empty string. Setting this property to `nil` sets the `query` property to `nil`.
 func (o *NSURLComponents) QueryItems() *NSArray[*NSURLQueryItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLComponentsSelQueryItems)
 	if _ret != 0 {

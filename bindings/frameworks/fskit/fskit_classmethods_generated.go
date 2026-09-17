@@ -80,6 +80,12 @@ func NameWithString(name string) *FileName {
 	return FileNameFromID(_r)
 }
 
+// NoUpdate returns the no update.
+func NoUpdate() *FreeSpace {
+	_r := objc.Send[objc.ID](objc.ID(_class("FSFreeSpace")), objc.RegisterName("noUpdate"))
+	return FreeSpaceFromID(_r)
+}
+
 // RangeWithOffsetSegmentLengthSegmentCount creates a metadata range with the given properties.
 func RangeWithOffsetSegmentLengthSegmentCount(startOffset int64, segmentLength uint64, segmentCount uint64) *MetadataRange {
 	_r := objc.Send[objc.ID](objc.ID(_class("FSMetadataRange")), objc.RegisterName("rangeWithOffset:segmentLength:segmentCount:"), startOffset, segmentLength, segmentCount)
@@ -117,4 +123,10 @@ func NotRecognizedProbeResult() *ProbeResult {
 func UsableButLimitedProbeResult() *ProbeResult {
 	_r := objc.Send[objc.ID](objc.ID(_class("FSProbeResult")), objc.RegisterName("usableButLimitedProbeResult"))
 	return ProbeResultFromID(_r)
+}
+
+// RequestedAttributes returns the requested attributes.
+func RequestedAttributes() *ItemGetAttributesRequest {
+	_r := objc.Send[objc.ID](objc.ID(_class("FSVolumeHandlerResult")), objc.RegisterName("requestedAttributes"))
+	return ItemGetAttributesRequestFromID(_r)
 }

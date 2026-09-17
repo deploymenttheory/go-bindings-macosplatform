@@ -94,6 +94,7 @@ func NSProxyRespondsToSelector(aSelector objc.SEL) bool {
 	return _ret
 }
 
+// A string containing a human-readable description of the receiver.
 func (o *NSProxy) Description() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSProxySelDescription)
 	if _ret != 0 {
@@ -102,6 +103,7 @@ func (o *NSProxy) Description() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// A string containing a human-readable description of the receiver suitable for debugging.
 func (o *NSProxy) DebugDescription() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSProxySelDebugDescription)
 	if _ret != 0 {

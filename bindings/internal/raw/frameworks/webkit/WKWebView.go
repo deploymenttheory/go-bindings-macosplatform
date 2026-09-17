@@ -26,6 +26,7 @@ var (
 	_wKWebViewSelInitWithFrameConfiguration                                         = objc.RegisterName("initWithFrame:configuration:")
 	_wKWebViewSelInitWithCoder                                                      = objc.RegisterName("initWithCoder:")
 	_wKWebViewSelLoadRequest                                                        = objc.RegisterName("loadRequest:")
+	_wKWebViewSelLoadURL                                                            = objc.RegisterName("loadURL:")
 	_wKWebViewSelLoadFileURLAllowingReadAccessToURL                                 = objc.RegisterName("loadFileURL:allowingReadAccessToURL:")
 	_wKWebViewSelLoadHTMLStringBaseURL                                              = objc.RegisterName("loadHTMLString:baseURL:")
 	_wKWebViewSelLoadDataMIMETypeCharacterEncodingNameBaseURL                       = objc.RegisterName("loadData:MIMEType:characterEncodingName:baseURL:")
@@ -110,6 +111,8 @@ var (
 	_wKWebViewSelIsWritingToolsActive                                               = objc.RegisterName("isWritingToolsActive")
 	_wKWebViewSelObscuredContentInsets                                              = objc.RegisterName("obscuredContentInsets")
 	_wKWebViewSelSetObscuredContentInsets                                           = objc.RegisterName("setObscuredContentInsets:")
+	_wKWebViewSelRefreshController                                                  = objc.RegisterName("refreshController")
+	_wKWebViewSelSetRefreshController                                               = objc.RegisterName("setRefreshController:")
 	_wKWebViewSelCertificateChain                                                   = objc.RegisterName("certificateChain")
 )
 
@@ -159,6 +162,21 @@ func (o *WKWebView) LoadRequest(request *foundation.NSURLRequest) *WKNavigation 
 	purego.Main(func() {
 		_mainthread0 = func() *WKNavigation {
 			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewSelLoadRequest, request.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WKNavigationFromID(_ret)
+		}()
+	})
+	return _mainthread0
+}
+
+// @abstract Navigates to a requested URL. @param url The URL to which to navigate. @result A new navigation for the given request.
+func (o *WKWebView) LoadURL(url *foundation.NSURL) *WKNavigation {
+	var _mainthread0 *WKNavigation
+	purego.Main(func() {
+		_mainthread0 = func() *WKNavigation {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewSelLoadURL, url.Ptr())
 			if _ret != 0 {
 				_ret.Send(objc.RegisterName("retain"))
 			}
@@ -1195,6 +1213,26 @@ func (o *WKWebView) ObscuredContentInsets() foundation.NSEdgeInsets {
 func (o *WKWebView) SetObscuredContentInsets(obscuredContentInsets foundation.NSEdgeInsets) {
 	purego.Main(func() {
 		o.Ptr().Send(_wKWebViewSelSetObscuredContentInsets, obscuredContentInsets)
+	})
+}
+
+func (o *WKWebView) RefreshController() *appkit.NSRefreshController {
+	var _mainthread0 *appkit.NSRefreshController
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSRefreshController {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewSelRefreshController)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSRefreshControllerFromID(_ret)
+		}()
+	})
+	return _mainthread0
+}
+
+func (o *WKWebView) SetRefreshController(refreshController *appkit.NSRefreshController) {
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebViewSelSetRefreshController, refreshController.Ptr())
 	})
 }
 

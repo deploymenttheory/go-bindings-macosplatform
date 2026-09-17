@@ -77,6 +77,7 @@ func (o *NSValue) InitWithCoder(coder *NSCoder) *NSValue {
 	return NSValueFromID(_ret)
 }
 
+// A C string containing the Objective-C type of the data contained in the value object, as encoded by the `@encode()` compiler directive.
 func (o *NSValue) ObjCType() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSValueSelObjCType)
 	return _ret
@@ -124,11 +125,13 @@ func (o *NSValue) IsEqualToValue(value *NSValue) bool {
 	return _ret
 }
 
+// The value as a non-retained pointer to an object. This method is potentially dangerous, because the returned object might have been released by the time it is used. Ensure that the object has a retained reference before using it.
 func (o *NSValue) NonretainedObjectValue() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSValueSelNonretainedObjectValue)
 	return _ret
 }
 
+// Returns the value as an untyped pointer.
 func (o *NSValue) PointerValue() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSValueSelPointerValue)
 	return _ret
@@ -190,21 +193,25 @@ func NSValueValueWithEdgeInsets(insets NSEdgeInsets) *NSValue {
 	return NSValueFromID(_ret)
 }
 
+// The Foundation point structure representation of the value.
 func (o *NSValue) PointValue() corefoundation.CGPoint {
 	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSValueSelPointValue)
 	return _ret
 }
 
+// The Foundation size structure representation of the value.
 func (o *NSValue) SizeValue() corefoundation.CGSize {
 	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSValueSelSizeValue)
 	return _ret
 }
 
+// The Foundation rectangle structure representation of the value.
 func (o *NSValue) RectValue() corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSValueSelRectValue)
 	return _ret
 }
 
+// The edge insets structure representation of the value.
 func (o *NSValue) EdgeInsetsValue() NSEdgeInsets {
 	_ret := objc.Send[NSEdgeInsets](o.Ptr(), _nSValueSelEdgeInsetsValue)
 	return _ret

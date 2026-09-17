@@ -125,7 +125,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/tools/grandcentraldispatch/mainthread"
-	"github.com/ebitengine/purego/objc"
 )
 
 // ════════════════════════════════════════════════════════════════════════════
@@ -2259,7 +2258,7 @@ func TestRuntimeRead_MenuBarVisible(t *testing.T) {
 
 func TestRuntimeRead_MetalDevice(t *testing.T) {
 	dev := metal.MTLCreateSystemDefaultDevice()
-	if dev == nil {
+	if dev == 0 {
 		t.Skip("MTLCreateSystemDefaultDevice() returned nil — no Metal-capable GPU?")
 	}
 	t.Log("MTLCreateSystemDefaultDevice() non-nil")
@@ -2272,9 +2271,7 @@ func TestRuntimeRead_AllMetalDevices(t *testing.T) {
 	if devices == nil {
 		t.Skip("MTLCopyAllDevices() returned nil")
 	}
-	// MTLCopyAllDevices returns an unsafe.Pointer (CFArrayRef); send count via purego.
-	selCount := objc.RegisterName("count")
-	count := objc.Send[uint](objc.ID(uintptr(devices)), selCount)
+	count := devices.Count()
 	if count == 0 {
 		t.Errorf("MTLCopyAllDevices().Count() = 0, expected >= 1 on Metal-capable Mac")
 	}

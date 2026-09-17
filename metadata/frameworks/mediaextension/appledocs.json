@@ -101,14 +101,6 @@
         }
       }
     },
-    "MEError": {
-      "doc": "A MediaExtension framework error.",
-      "url": "https://developer.apple.com/documentation/mediaextension/meerror"
-    },
-    "MEFileInfoFragmentsStatus": {
-      "doc": "An enumeration that describes if a media asset contains or supports fragments.",
-      "url": "https://developer.apple.com/documentation/mediaextension/mefileinfofragmentsstatus"
-    },
     "MEFormatReaderParseAdditionalFragmentsStatus": {
       "doc": "Informational status flags that the format reader returns after parsing additional fragments.",
       "url": "https://developer.apple.com/documentation/mediaextension/meformatreaderparseadditionalfragmentsstatus",
@@ -342,7 +334,7 @@
     "MERAWProcessorPixelBufferManager": {
       "pixelBufferAttributes": {
         "doc": "A dictionary that contains the attributes Video Toolbox uses to create a pixel buffer for the video RAW processor.",
-        "url": "https://developer.apple.com/documentation/mediaextension/merawprocessorpixelbuffermanager/pixelbufferattributes-2cki6"
+        "url": "https://developer.apple.com/documentation/mediaextension/merawprocessorpixelbuffermanager/pixelbufferattributes-4fe69"
       }
     },
     "MESampleCursorChunk": {

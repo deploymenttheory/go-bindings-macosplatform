@@ -107,7 +107,7 @@ func SCStreamConfigurationStreamConfigurationWithPreset(preset SCStreamConfigura
 	return SCStreamConfigurationFromID(_ret)
 }
 
-// @abstract SCStreamProperty for output width as measured in pixels. Default is set to 1920.
+// @abstract SCStreamProperty for output width as measured in pixels. On macOS default is set to 1920. In iOS/tvOS platforms, default is the native resolution width of the captured content. On supported embedded platforms, if either width or height is greater than native resolution, resulting frame will be capped at native resolution.
 func (o *SCStreamConfiguration) Width() uint {
 	_ret := objc.Send[uint](o.Ptr(), _sCStreamConfigurationSelWidth)
 	return _ret
@@ -117,7 +117,7 @@ func (o *SCStreamConfiguration) SetWidth(width uint) {
 	o.Ptr().Send(_sCStreamConfigurationSelSetWidth, width)
 }
 
-// @abstract SCStreamProperty for output height as measured in pixels. Default is set to 1080.
+// @abstract SCStreamProperty for output height as measured in pixels. on macOS default is set to 1080. In iOS/tvOS platforms, default is the native resolution width of the captured content. On supported embedded platforms, if either width or height is greater than native resolution, resulting frame will be capped at native resolution.
 func (o *SCStreamConfiguration) Height() uint {
 	_ret := objc.Send[uint](o.Ptr(), _sCStreamConfigurationSelHeight)
 	return _ret
@@ -137,7 +137,7 @@ func (o *SCStreamConfiguration) SetMinimumFrameInterval(minimumFrameInterval cor
 	o.Ptr().Send(_sCStreamConfigurationSelSetMinimumFrameInterval, minimumFrameInterval)
 }
 
-// @abstract SCStreamProperty for output pixel format. Supported pixel formats are: 'BGRA': Packed Little Endian ARGB8888 'l10r': Packed Little Endian ARGB2101010 '420v': 2-plane "video" range YCbCr 4:2:0 '420f': 2-plane "full" range YCbCr 4:2:0 'xf44': 2 plane "full" range YCbCr10 4:4:4 'RGhA': 64 bit RGBA IEEE half-precision float, 16-bit little-endian See https://developer.apple.com/documentation/coregraphics/1455170-cgdisplaystreamcreate
+// @abstract SCStreamProperty for output pixel format. Supported pixel formats are: 'BGRA': Packed Little Endian ARGB8888 (macOS, iOS) 'l10r': Packed Little Endian ARGB2101010 (macOS) '420v': 2-plane "video" range YCbCr 4:2:0 (macOS, iOS) '420f': 2-plane "full" range YCbCr 4:2:0 (macOS, iOS) 'xf44': 2 plane "full" range YCbCr10 4:4:4 (macOS) 'RGhA': 64 bit RGBA IEEE half-precision float, 16-bit little-endian (macOS) 'x420': 2 plane "video" range YCbCr10 4:2:0 (macOS, iOS) See https://developer.apple.com/documentation/coregraphics/1455170-cgdisplaystreamcreate
 func (o *SCStreamConfiguration) PixelFormat() uint {
 	_ret := objc.Send[uint](o.Ptr(), _sCStreamConfigurationSelPixelFormat)
 	return _ret
@@ -390,7 +390,7 @@ func (o *SCStreamConfiguration) SetIncludeChildWindows(includeChildWindows bool)
 	o.Ptr().Send(_sCStreamConfigurationSelSetIncludeChildWindows, includeChildWindows)
 }
 
-// @abstract SCStreamProperty that specifies whether the microphone audio will be captured.  By default microphone is not captured.
+// @abstract SCStreamProperty that specifies whether the microphone audio will be captured.  By default microphone is not captured. on iOS and visionos, client can configure showsMicrophoneControl in SCContentSharingPickerConfiguration for user to choose enable microphone capture or not
 func (o *SCStreamConfiguration) CaptureMicrophone() bool {
 	_ret := objc.Send[bool](o.Ptr(), _sCStreamConfigurationSelCaptureMicrophone)
 	return _ret

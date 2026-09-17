@@ -14,8 +14,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An image that a snapshotter object generates.
-//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkmapsnapshot
 type MKMapSnapshot struct {
 	foundation.NSObject

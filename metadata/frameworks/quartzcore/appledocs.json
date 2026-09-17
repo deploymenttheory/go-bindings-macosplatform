@@ -59,10 +59,6 @@
       "doc": "A class your Metal app uses to register for callbacks to synchronize its animations for a display.",
       "url": "https://developer.apple.com/documentation/quartzcore/cametaldisplaylink"
     },
-    "CAMetalDisplayLinkUpdate": {
-      "doc": "Stores information about a single update from a Metal display link instance.",
-      "url": "https://developer.apple.com/documentation/quartzcore/cametaldisplaylinkupdate"
-    },
     "CAMetalLayer": {
       "doc": "A Core Animation layer that Metal can render into, typically displayed onscreen.",
       "url": "https://developer.apple.com/documentation/quartzcore/cametallayer"

@@ -16,8 +16,6 @@ import (
 )
 
 // CaptureDeskViewApplicationLaunchConfiguration is an idiomatic wrapper over the Objective-C class AVCaptureDeskViewApplicationLaunchConfiguration.
-//
-// An object that configures how to present Desk View.
 type CaptureDeskViewApplicationLaunchConfiguration struct {
 	objref.Handle
 }

@@ -8,7 +8,6 @@ import (
 	"strings"
 )
 
-// A style for the authorization button.
 type ASAuthorizationAppleIDButtonStyle int64
 
 const (
@@ -30,7 +29,6 @@ func (e ASAuthorizationAppleIDButtonStyle) String() string {
 	}
 }
 
-// A type for the authorization button.
 type ASAuthorizationAppleIDButtonType int64
 
 const (
@@ -53,7 +51,6 @@ func (e ASAuthorizationAppleIDButtonType) String() string {
 	}
 }
 
-// Possible values for the credential state of a user.
 type ASAuthorizationAppleIDProviderCredentialState int64
 
 const (
@@ -78,7 +75,6 @@ func (e ASAuthorizationAppleIDProviderCredentialState) String() string {
 	}
 }
 
-// Options that modify how a controller performs authorization requests.
 type ASAuthorizationControllerRequestOptions uint64
 
 const (
@@ -97,7 +93,6 @@ func (e ASAuthorizationControllerRequestOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Errors that can occur during authorization.
 type ASAuthorizationError int64
 
 const (
@@ -177,6 +172,7 @@ const (
 	// Secure Enclave key authentication.
 	ASAuthorizationProviderExtensionAuthenticationMethodUserSecureEnclaveKey ASAuthorizationProviderExtensionAuthenticationMethod = 2
 	ASAuthorizationProviderExtensionAuthenticationMethodSmartCard            ASAuthorizationProviderExtensionAuthenticationMethod = 3
+	ASAuthorizationProviderExtensionAuthenticationMethodOpenID               ASAuthorizationProviderExtensionAuthenticationMethod = 5
 )
 
 func (e ASAuthorizationProviderExtensionAuthenticationMethod) String() string {
@@ -187,6 +183,8 @@ func (e ASAuthorizationProviderExtensionAuthenticationMethod) String() string {
 		return "ASAuthorizationProviderExtensionAuthenticationMethodUserSecureEnclaveKey"
 	case ASAuthorizationProviderExtensionAuthenticationMethodSmartCard:
 		return "ASAuthorizationProviderExtensionAuthenticationMethodSmartCard"
+	case ASAuthorizationProviderExtensionAuthenticationMethodOpenID:
+		return "ASAuthorizationProviderExtensionAuthenticationMethodOpenID"
 	default:
 		return fmt.Sprintf("ASAuthorizationProviderExtensionAuthenticationMethod(%d)", int64(e))
 	}
@@ -198,6 +196,8 @@ const (
 	ASAuthorizationProviderExtensionFederationTypeNone           ASAuthorizationProviderExtensionFederationType = 0
 	ASAuthorizationProviderExtensionFederationTypeWSTrust        ASAuthorizationProviderExtensionFederationType = 1
 	ASAuthorizationProviderExtensionFederationTypeDynamicWSTrust ASAuthorizationProviderExtensionFederationType = 2
+	ASAuthorizationProviderExtensionFederationTypeOpenID         ASAuthorizationProviderExtensionFederationType = 3
+	ASAuthorizationProviderExtensionFederationTypeDynamicOpenID  ASAuthorizationProviderExtensionFederationType = 4
 )
 
 func (e ASAuthorizationProviderExtensionFederationType) String() string {
@@ -208,6 +208,10 @@ func (e ASAuthorizationProviderExtensionFederationType) String() string {
 		return "ASAuthorizationProviderExtensionFederationTypeWSTrust"
 	case ASAuthorizationProviderExtensionFederationTypeDynamicWSTrust:
 		return "ASAuthorizationProviderExtensionFederationTypeDynamicWSTrust"
+	case ASAuthorizationProviderExtensionFederationTypeOpenID:
+		return "ASAuthorizationProviderExtensionFederationTypeOpenID"
+	case ASAuthorizationProviderExtensionFederationTypeDynamicOpenID:
+		return "ASAuthorizationProviderExtensionFederationTypeDynamicOpenID"
 	default:
 		return fmt.Sprintf("ASAuthorizationProviderExtensionFederationType(%d)", int64(e))
 	}
@@ -353,11 +357,12 @@ func (e ASAuthorizationProviderExtensionRequestOptions) String() string {
 type ASAuthorizationProviderExtensionSupportedGrantTypes int64
 
 const (
-	ASAuthorizationProviderExtensionSupportedGrantTypesNone      ASAuthorizationProviderExtensionSupportedGrantTypes = 0
-	ASAuthorizationProviderExtensionSupportedGrantTypesPassword  ASAuthorizationProviderExtensionSupportedGrantTypes = 1
-	ASAuthorizationProviderExtensionSupportedGrantTypesJWTBearer ASAuthorizationProviderExtensionSupportedGrantTypes = 2
-	ASAuthorizationProviderExtensionSupportedGrantTypesSAML1_1   ASAuthorizationProviderExtensionSupportedGrantTypes = 4
-	ASAuthorizationProviderExtensionSupportedGrantTypesSAML2_0   ASAuthorizationProviderExtensionSupportedGrantTypes = 8
+	ASAuthorizationProviderExtensionSupportedGrantTypesNone          ASAuthorizationProviderExtensionSupportedGrantTypes = 0
+	ASAuthorizationProviderExtensionSupportedGrantTypesPassword      ASAuthorizationProviderExtensionSupportedGrantTypes = 1
+	ASAuthorizationProviderExtensionSupportedGrantTypesJWTBearer     ASAuthorizationProviderExtensionSupportedGrantTypes = 2
+	ASAuthorizationProviderExtensionSupportedGrantTypesSAML1_1       ASAuthorizationProviderExtensionSupportedGrantTypes = 4
+	ASAuthorizationProviderExtensionSupportedGrantTypesSAML2_0       ASAuthorizationProviderExtensionSupportedGrantTypes = 8
+	ASAuthorizationProviderExtensionSupportedGrantTypesTokenExchange ASAuthorizationProviderExtensionSupportedGrantTypes = 16
 )
 
 func (e ASAuthorizationProviderExtensionSupportedGrantTypes) String() string {
@@ -373,6 +378,9 @@ func (e ASAuthorizationProviderExtensionSupportedGrantTypes) String() string {
 	}
 	if e&ASAuthorizationProviderExtensionSupportedGrantTypesSAML2_0 != 0 {
 		parts = append(parts, "ASAuthorizationProviderExtensionSupportedGrantTypesSAML2_0")
+	}
+	if e&ASAuthorizationProviderExtensionSupportedGrantTypesTokenExchange != 0 {
+		parts = append(parts, "ASAuthorizationProviderExtensionSupportedGrantTypesTokenExchange")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -469,7 +477,6 @@ func (e ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirement) String() 
 	}
 }
 
-// An enumeration of values that indicate whether the browser app has access to a person’s passkeys.
 type ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState int64
 
 const (
@@ -491,7 +498,6 @@ func (e ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState) S
 	}
 }
 
-// Constants that represent credential identity store error codes.
 type ASCredentialIdentityStoreErrorCode int64
 
 const (
@@ -513,11 +519,9 @@ func (e ASCredentialIdentityStoreErrorCode) String() string {
 	}
 }
 
-// The defined identity types for use in retrieving credentials.
 type ASCredentialIdentityTypes uint64
 
 const (
-	// A value that matches all identity types.
 	ASCredentialIdentityTypesAll         ASCredentialIdentityTypes = 0
 	ASCredentialIdentityTypesPassword    ASCredentialIdentityTypes = 1
 	ASCredentialIdentityTypesPasskey     ASCredentialIdentityTypes = 2
@@ -570,7 +574,6 @@ func (e ASCredentialRequestType) String() string {
 	}
 }
 
-// Possible values for the service identifier type.
 type ASCredentialServiceIdentifierType int64
 
 const (
@@ -593,7 +596,6 @@ func (e ASCredentialServiceIdentifierType) String() string {
 	}
 }
 
-// The codes for a credential provider extension error.
 type ASExtensionErrorCode int64
 
 const (
@@ -689,7 +691,6 @@ func (e ASUserDetectionStatus) String() string {
 	}
 }
 
-// The error code for a web authentication session error.
 type ASWebAuthenticationSessionErrorCode int64
 
 const (
@@ -1594,27 +1595,53 @@ func (e Qos_class_t) String() string {
 	}
 }
 
+type Task_shared_region_stubs_t uint8
+
+const (
+	TASK_SHARED_REGION_STUBS_DEV  Task_shared_region_stubs_t = 1
+	TASK_SHARED_REGION_STUBS_PROD Task_shared_region_stubs_t = 2
+)
+
+func (e Task_shared_region_stubs_t) String() string {
+	switch e {
+	case TASK_SHARED_REGION_STUBS_DEV:
+		return "TASK_SHARED_REGION_STUBS_DEV"
+	case TASK_SHARED_REGION_STUBS_PROD:
+		return "TASK_SHARED_REGION_STUBS_PROD"
+	default:
+		return fmt.Sprintf("Task_shared_region_stubs_t(%d)", int64(e))
+	}
+}
+
 type Virtual_memory_guard_exception_code_t uint32
 
 const (
-	KGUARD_EXC_DEALLOC_GAP                   Virtual_memory_guard_exception_code_t = 1
-	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        Virtual_memory_guard_exception_code_t = 2
-	KGUARD_EXC_RECLAIM_INDEX_FAILURE         Virtual_memory_guard_exception_code_t = 4
-	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    Virtual_memory_guard_exception_code_t = 8
-	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    Virtual_memory_guard_exception_code_t = 9
-	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         Virtual_memory_guard_exception_code_t = 10
-	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         Virtual_memory_guard_exception_code_t = 11
-	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  Virtual_memory_guard_exception_code_t = 12
-	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    Virtual_memory_guard_exception_code_t = 13
-	KGUARD_EXC_SEC_ACCESS_FAULT              Virtual_memory_guard_exception_code_t = 98
-	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        Virtual_memory_guard_exception_code_t = 99
-	KGUARD_EXC_SEC_COPY_DENIED               Virtual_memory_guard_exception_code_t = 100
-	KGUARD_EXC_SEC_SHARING_DENIED            Virtual_memory_guard_exception_code_t = 101
-	KGUARD_EXC_MTE_SYNC_FAULT                Virtual_memory_guard_exception_code_t = 200
-	KGUARD_EXC_MTE_ASYNC_USER_FAULT          Virtual_memory_guard_exception_code_t = 201
-	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          Virtual_memory_guard_exception_code_t = 202
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 203
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 204
+	KGUARD_EXC_DEALLOC_GAP                  Virtual_memory_guard_exception_code_t = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE       Virtual_memory_guard_exception_code_t = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE        Virtual_memory_guard_exception_code_t = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE   Virtual_memory_guard_exception_code_t = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE   Virtual_memory_guard_exception_code_t = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE        Virtual_memory_guard_exception_code_t = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE        Virtual_memory_guard_exception_code_t = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION Virtual_memory_guard_exception_code_t = 12
+	// Guard exception sent to a thread when a CoW defeatured map attempts to copy memory which is not permitted by system policy.
+	KGUARD_EXC_COW_DEFEATURED_COPY_DENIED Virtual_memory_guard_exception_code_t = 13
+	// Guard exception sent to a thread when it attempts to extract a given type of memory in a way which is not permitted for CoW defeatured maps.
+	KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED Virtual_memory_guard_exception_code_t = 14
+	// Guard exception sent to a thread when it attempts to copy-map a memory entry which was created for sharing by a CoW defeatured map.
+	KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED Virtual_memory_guard_exception_code_t = 15
+	KGUARD_EXC_COW_DEFEATURED_FIRST                    Virtual_memory_guard_exception_code_t = 13
+	KGUARD_EXC_COW_DEFEATURED_LAST                     Virtual_memory_guard_exception_code_t = 15
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY              Virtual_memory_guard_exception_code_t = 16
+	KGUARD_EXC_SEC_ACCESS_FAULT                        Virtual_memory_guard_exception_code_t = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT                  Virtual_memory_guard_exception_code_t = 99
+	KGUARD_EXC_SEC_COPY_DENIED                         Virtual_memory_guard_exception_code_t = 100
+	KGUARD_EXC_SEC_SHARING_DENIED                      Virtual_memory_guard_exception_code_t = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                          Virtual_memory_guard_exception_code_t = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT                    Virtual_memory_guard_exception_code_t = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT                    Virtual_memory_guard_exception_code_t = 202
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT           Virtual_memory_guard_exception_code_t = 203
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT           Virtual_memory_guard_exception_code_t = 204
 )
 
 func (e Virtual_memory_guard_exception_code_t) String() string {
@@ -1635,6 +1662,12 @@ func (e Virtual_memory_guard_exception_code_t) String() string {
 		return "KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE"
 	case KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION:
 		return "KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION"
+	case KGUARD_EXC_COW_DEFEATURED_COPY_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_COPY_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED"
 	case KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY:
 		return "KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY"
 	case KGUARD_EXC_SEC_ACCESS_FAULT:

@@ -13,8 +13,6 @@ import (
 // LassoTool is an idiomatic wrapper over the Objective-C class PKLassoTool.
 //
 // It embeds [Tool], promoting that type's methods.
-//
-// A tool for selecting stroked lines and shapes in a canvas view.
 type LassoTool struct {
 	Tool
 }

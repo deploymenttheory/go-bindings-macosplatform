@@ -4,6 +4,8 @@
 package virtualization
 
 import (
+	"unsafe"
+
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -17,9 +19,11 @@ type VZMacOSVirtualMachineStartOptions struct {
 }
 
 var (
-	_clsVZMacOSVirtualMachineStartOptions                            = _objcClass("VZMacOSVirtualMachineStartOptions")
-	_vZMacOSVirtualMachineStartOptionsSelStartUpFromMacOSRecovery    = objc.RegisterName("startUpFromMacOSRecovery")
-	_vZMacOSVirtualMachineStartOptionsSelSetStartUpFromMacOSRecovery = objc.RegisterName("setStartUpFromMacOSRecovery:")
+	_clsVZMacOSVirtualMachineStartOptions                                 = _objcClass("VZMacOSVirtualMachineStartOptions")
+	_vZMacOSVirtualMachineStartOptionsSelSetGuestProvisioningOptionsError = objc.RegisterName("setGuestProvisioningOptions:error:")
+	_vZMacOSVirtualMachineStartOptionsSelStartUpFromMacOSRecovery         = objc.RegisterName("startUpFromMacOSRecovery")
+	_vZMacOSVirtualMachineStartOptionsSelSetStartUpFromMacOSRecovery      = objc.RegisterName("setStartUpFromMacOSRecovery:")
+	_vZMacOSVirtualMachineStartOptionsSelGuestProvisioningOptions         = objc.RegisterName("guestProvisioningOptions")
 )
 
 func VZMacOSVirtualMachineStartOptionsFromID(id objc.ID) *VZMacOSVirtualMachineStartOptions {
@@ -32,6 +36,17 @@ func VZMacOSVirtualMachineStartOptionsFromID(id objc.ID) *VZMacOSVirtualMachineS
 	return o
 }
 
+// Sets guest provisioning options with validation.
+func (o *VZMacOSVirtualMachineStartOptions) SetGuestProvisioningOptionsError(guestProvisioningOptions *VZMacGuestProvisioningOptions) (bool, error) {
+	var _nsErr uintptr
+	_ret := objc.Send[bool](o.Ptr(), _vZMacOSVirtualMachineStartOptionsSelSetGuestProvisioningOptionsError, guestProvisioningOptions.Ptr(), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
+	}
+	return _ret, nil
+}
+
+// A Boolean value that indicates whether to start up from macOS Recovery.
 func (o *VZMacOSVirtualMachineStartOptions) StartUpFromMacOSRecovery() bool {
 	_ret := objc.Send[bool](o.Ptr(), _vZMacOSVirtualMachineStartOptionsSelStartUpFromMacOSRecovery)
 	return _ret
@@ -39,4 +54,13 @@ func (o *VZMacOSVirtualMachineStartOptions) StartUpFromMacOSRecovery() bool {
 
 func (o *VZMacOSVirtualMachineStartOptions) SetStartUpFromMacOSRecovery(startUpFromMacOSRecovery bool) {
 	o.Ptr().Send(_vZMacOSVirtualMachineStartOptionsSelSetStartUpFromMacOSRecovery, startUpFromMacOSRecovery)
+}
+
+// A value that controls provisioning a macOS guest. This property allows someone to provision a macOS guest by setting “VZMacGuestProvisioningOptions“.
+func (o *VZMacOSVirtualMachineStartOptions) GuestProvisioningOptions() *VZMacGuestProvisioningOptions {
+	_ret := objc.Send[objc.ID](o.Ptr(), _vZMacOSVirtualMachineStartOptionsSelGuestProvisioningOptions)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return VZMacGuestProvisioningOptionsFromID(_ret)
 }

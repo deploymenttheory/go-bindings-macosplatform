@@ -7,7 +7,10 @@ package metal
 import (
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	ebipurego "github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 )
 
 var _fnMTL4BufferRangeMake func(uint64, uint64) MTL4BufferRange
@@ -43,26 +46,28 @@ func MTLCoordinate2DMake(x float32, y float32) MTLSamplePosition {
 	return _fnMTLCoordinate2DMake(x, y)
 }
 
-var _fnMTLCopyAllDevices func() unsafe.Pointer
+var _fnMTLCopyAllDevices func() objc.ID
 
 // MTLCopyAllDevices calls the Metal framework function MTLCopyAllDevices.
-func MTLCopyAllDevices() unsafe.Pointer {
+func MTLCopyAllDevices() []obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMTLCopyAllDevices == nil {
 		ebipurego.RegisterLibFunc(&_fnMTLCopyAllDevices, _lib, "MTLCopyAllDevices")
 	}
-	return _fnMTLCopyAllDevices()
+	_ret := _fnMTLCopyAllDevices()
+	return purego.NSArrayToSlice(_ret, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-var _fnMTLCopyAllDevicesWithObserver func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+var _fnMTLCopyAllDevicesWithObserver func(unsafe.Pointer, unsafe.Pointer) objc.ID
 
 // MTLCopyAllDevicesWithObserver calls the Metal framework function MTLCopyAllDevicesWithObserver.
-func MTLCopyAllDevicesWithObserver(observer unsafe.Pointer, handler unsafe.Pointer) unsafe.Pointer {
+func MTLCopyAllDevicesWithObserver(observer unsafe.Pointer, handler unsafe.Pointer) []obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMTLCopyAllDevicesWithObserver == nil {
 		ebipurego.RegisterLibFunc(&_fnMTLCopyAllDevicesWithObserver, _lib, "MTLCopyAllDevicesWithObserver")
 	}
-	return _fnMTLCopyAllDevicesWithObserver(observer, handler)
+	_ret := _fnMTLCopyAllDevicesWithObserver(observer, handler)
+	return purego.NSArrayToSlice(_ret, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 var _fnMTLCreateSystemDefaultDevice func() unsafe.Pointer

@@ -9,7 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An abstract class that represents a communication channel.
+// An abstract class that represents a communication channel. Communication occurs between “NSPort“ objects, which typically reside in different threads or tasks. The distributed objects system uses “NSPort“ objects to send “NSPortMessage“ objects back and forth. Implement interapplication communication using distributed objects whenever possible and use “NSPort“ objects only when necessary. To receive incoming messages, add “NSPort“ objects to an instance of “NSRunLoop“ as input sources. “NSConnection“ objects automatically add their receive port when initialized.
 //
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsport
 type NSPort struct {
@@ -42,7 +42,7 @@ func NSPortFromID(id objc.ID) *NSPort {
 	return o
 }
 
-// Creates and returns a new NSPort object capable of both sending and receiving messages.
+// Creates and returns a new “NSPort“ object capable of both sending and receiving messages.
 func NSPortPort() *NSPort {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPort), _nSPortSelPort)
 	if _ret != 0 {
@@ -51,54 +51,63 @@ func NSPortPort() *NSPort {
 	return NSPortFromID(_ret)
 }
 
+// Marks the receiver as invalid and posts an “NSPortDidBecomeInvalidNotification“ to the default notification center.
 func (o *NSPort) Invalidate() {
 	o.Ptr().Send(_nSPortSelInvalidate)
 }
 
+// Sets the receiver's delegate to a given object.
 func (o *NSPort) SetDelegate(anObject NSPortDelegate) {
 	o.Ptr().Send(_nSPortSelSetDelegate, anObject)
 }
 
+// Returns the receiver's delegate.
 func (o *NSPort) Delegate() NSPortDelegate {
 	_ret := objc.Send[NSPortDelegate](o.Ptr(), _nSPortSelDelegate)
 	return _ret
 }
 
+// Schedules the receiver into a given run loop. You should not directly invoke this method. Instead, you should add the port to a run loop.
 func (o *NSPort) ScheduleInRunLoopForMode(runLoop *NSRunLoop, mode *NSString) {
 	o.Ptr().Send(_nSPortSelScheduleInRunLoopForMode, runLoop.Ptr(), mode.Ptr())
 }
 
+// Removes the receiver from the run loop mode of the given run loop. You should not directly invoke this method. Instead, you should remove the port from the run loop.
 func (o *NSPort) RemoveFromRunLoopForMode(runLoop *NSRunLoop, mode *NSString) {
 	o.Ptr().Send(_nSPortSelRemoveFromRunLoopForMode, runLoop.Ptr(), mode.Ptr())
 }
 
+// Attempts to send the message before a given date, treating the receiver as the send port and the given port as the receive port.
 func (o *NSPort) SendBeforeDateComponentsFromReserved(limitDate *NSDate, components *NSMutableArray[objc.ID], receivePort *NSPort, headerSpaceReserved uint) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSPortSelSendBeforeDateComponentsFromReserved, limitDate.Ptr(), components.Ptr(), receivePort.Ptr(), headerSpaceReserved)
 	return _ret
 }
 
+// Attempts to send the message with a given identifier before a given date, treating the receiver as the send port and the given port as the receive port.
 func (o *NSPort) SendBeforeDateMsgidComponentsFromReserved(limitDate *NSDate, msgID uint, components *NSMutableArray[objc.ID], receivePort *NSPort, headerSpaceReserved uint) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSPortSelSendBeforeDateMsgidComponentsFromReserved, limitDate.Ptr(), msgID, components.Ptr(), receivePort.Ptr(), headerSpaceReserved)
 	return _ret
 }
 
-// Adds the receiver to the list of ports monitored by a given run loop for the given input mode.
+// Adds a given connection to the receiver in a given run loop mode.
 // Deprecated: Use NSXPCConnection instead
 func (o *NSPort) AddConnectionToRunLoopForMode(conn *NSConnection, runLoop *NSRunLoop, mode *NSString) {
 	o.Ptr().Send(_nSPortSelAddConnectionToRunLoopForMode, conn.Ptr(), runLoop.Ptr(), mode.Ptr())
 }
 
-// Removes the receiver from the list of ports monitored by runLoop in the given input mode, mode.
+// Removes a given connection from the receiver in a given run loop mode.
 // Deprecated: Use NSXPCConnection instead
 func (o *NSPort) RemoveConnectionFromRunLoopForMode(conn *NSConnection, runLoop *NSRunLoop, mode *NSString) {
 	o.Ptr().Send(_nSPortSelRemoveConnectionFromRunLoopForMode, conn.Ptr(), runLoop.Ptr(), mode.Ptr())
 }
 
+// A Boolean value that indicates whether the receiver is valid.
 func (o *NSPort) IsValid() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSPortSelIsValid)
 	return _ret
 }
 
+// The number of bytes of space reserved by the receiver for sending data.
 func (o *NSPort) ReservedSpaceLength() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSPortSelReservedSpaceLength)
 	return _ret

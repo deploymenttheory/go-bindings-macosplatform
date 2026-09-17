@@ -202,7 +202,7 @@ func (un *UserNotification) WithScriptingProperties(scriptingProperties map[stri
 	return un
 }
 
-// Title returns the title.
+// Title specifies the title of the notification. This value should be localized because it is presented to the user. The string is truncated to a length appropriate for display and the property is modified to reflect the truncation.
 func (un *UserNotification) Title() string {
 	defer runtime.KeepAlive(un)
 	_r := objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("title"))
@@ -212,7 +212,7 @@ func (un *UserNotification) Title() string {
 	return purego.GoString(_r)
 }
 
-// Subtitle returns the subtitle.
+// Subtitle specifies the subtitle of the notification. This value should be localized as it is presented to the user. The string is truncated to a length appropriate for display and the property is modified to reflect the truncation.
 func (un *UserNotification) Subtitle() string {
 	defer runtime.KeepAlive(un)
 	_r := objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("subtitle"))
@@ -222,7 +222,7 @@ func (un *UserNotification) Subtitle() string {
 	return purego.GoString(_r)
 }
 
-// InformativeText returns the informative text.
+// InformativeText returns the body text of the notification. This value should be localized as it is presented to the user. The string is truncated to a length appropriate for display and the property is modified to reflect the truncation.
 func (un *UserNotification) InformativeText() string {
 	defer runtime.KeepAlive(un)
 	_r := objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("informativeText"))
@@ -232,7 +232,7 @@ func (un *UserNotification) InformativeText() string {
 	return purego.GoString(_r)
 }
 
-// ActionButtonTitle returns the action button title.
+// ActionButtonTitle specifies the title of the action button displayed in the notification. This value should be localized as it is presented to the user. The string is truncated to a length appropriate for display and the property is modified to reflect the truncation.
 func (un *UserNotification) ActionButtonTitle() string {
 	defer runtime.KeepAlive(un)
 	_r := objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("actionButtonTitle"))
@@ -242,56 +242,56 @@ func (un *UserNotification) ActionButtonTitle() string {
 	return purego.GoString(_r)
 }
 
-// UserInfo returns the user info.
+// UserInfo returns application-specific user info that can be attached to the notification. All items must be property list types or an exception is thrown. The `userInfo` content must be of reasonable serialized size (less than 1KB) or an exception is thrown.
 func (un *UserNotification) UserInfo() map[string]obj.Object {
 	defer runtime.KeepAlive(un)
 	_r := objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("userInfo"))
 	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// DeliveryDate returns the delivery date.
+// DeliveryDate specifies when the notification should be delivered. The delivery date is specified in an absolute time. After a notification is delivered, it may be presented to the user.
 func (un *UserNotification) DeliveryDate() time.Time {
 	defer runtime.KeepAlive(un)
 	_r := objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("deliveryDate"))
 	return rt.NSDateToTime(_r)
 }
 
-// DeliveryTimeZone returns the delivery time zone.
+// DeliveryTimeZone specify the time zone to interpret the delivery date in. If this value is `nil` and the user switches time zones, the notification center will adjust the time of presentation to account for the time zone change. If a notification should be delivered at a time in a specific time zone (regardless of whether the user switches time zones), set this value to the specific time zone, for example the current time zone.
 func (un *UserNotification) DeliveryTimeZone() *TimeZone {
 	defer runtime.KeepAlive(un)
 	_r := objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("deliveryTimeZone"))
 	return TimeZoneFromID(_r)
 }
 
-// DeliveryRepeatInterval returns the delivery repeat interval.
+// DeliveryRepeatInterval specifies the date components that control how often a user notification is repeated. This value may be `nil` if the notification should not repeat. The date component values are relative to the date the notification was delivered. If the calendar value of the `deliveryRepeatInterval` is `nil`, the current calendar is used to calculate the repeat interval. For example, if a notification should repeat every hour, set the `hour` property of the `deliveryRepeatInterval` to `1`. This value is ignored unless the user notification is scheduled with the `NSUserNotificationCenter` object.
 func (un *UserNotification) DeliveryRepeatInterval() *DateComponents {
 	defer runtime.KeepAlive(un)
 	_r := objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("deliveryRepeatInterval"))
 	return DateComponentsFromID(_r)
 }
 
-// ActualDeliveryDate returns the actual delivery date.
+// ActualDeliveryDate returns the date this notification was actually delivered. The notification center will set this value if a notification is put in the scheduled list and the delivery time arrives. If the notification is delivered directly using the `deliverNotification:` method of the `NSUserNotificationCenter` class, this value is set to the `deliveryDate` value. If the `deliveryDate` value is `nil`, this value is set to the current date. This value is used to sort the list of notifications in the user interface.
 func (un *UserNotification) ActualDeliveryDate() time.Time {
 	defer runtime.KeepAlive(un)
 	_r := objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("actualDeliveryDate"))
 	return rt.NSDateToTime(_r)
 }
 
-// IsPresented reports whether the object is presented.
+// IsPresented reports whether the user notification has been presented. In some cases, for example when your application is frontmost, the notification center may decide not to actually present a delivered notification. In that case, the value of this property is `NO`. It is set to `YES` if the notification was presented according to user preferences.
 func (un *UserNotification) IsPresented() bool {
 	defer runtime.KeepAlive(un)
 	_r := objc.Send[bool](objref.IDOf(un), objc.RegisterName("isPresented"))
 	return _r
 }
 
-// IsRemote reports whether the object is remote.
+// IsRemote reports whether the notification was generated by a push notification. If this property is `YES` then the user notification was generated by a push notification (that is, remotely); if `NO` it was generated locally.
 func (un *UserNotification) IsRemote() bool {
 	defer runtime.KeepAlive(un)
 	_r := objc.Send[bool](objref.IDOf(un), objc.RegisterName("isRemote"))
 	return _r
 }
 
-// SoundName returns the sound name.
+// SoundName specifies the name of the sound to play when the notification is delivered. Passing the `NSUserNotificationDefaultSoundName` constant causes the default notification center sound to be played. A value of `nil` means no sound is played.
 func (un *UserNotification) SoundName() string {
 	defer runtime.KeepAlive(un)
 	_r := objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("soundName"))
@@ -301,21 +301,21 @@ func (un *UserNotification) SoundName() string {
 	return purego.GoString(_r)
 }
 
-// HasActionButton reports whether the object has action button.
+// HasActionButton reports whether a Boolean value that specifies whether the notification displays an action button. Set to `NO` if the notification has no action button. This is the case for notifications that are purely for information and have no user action. The default value is `YES`.
 func (un *UserNotification) HasActionButton() bool {
 	defer runtime.KeepAlive(un)
 	_r := objc.Send[bool](objref.IDOf(un), objc.RegisterName("hasActionButton"))
 	return _r
 }
 
-// ActivationType returns the activation type.
+// ActivationType specifies what caused a user notification to occur. This property specifies why the user notification was sent to the `NSUserNotificationCenterDelegate` method `userNotificationCenter:didActivateNotification:`. The supported values are described in `NSUserNotificationActivationType`.
 func (un *UserNotification) ActivationType() UserNotificationActivationType {
 	defer runtime.KeepAlive(un)
 	_r := objc.Send[UserNotificationActivationType](objref.IDOf(un), objc.RegisterName("activationType"))
 	return _r
 }
 
-// OtherButtonTitle returns the other button title.
+// OtherButtonTitle specifies a custom title for the close button in an alert-style notification. This value should be localized as it is presented to the user. The string is truncated to a length appropriate for display and the property is modified to reflect the truncation. An empty string will cause the default localized text to be used. A `nil` value is invalid.
 func (un *UserNotification) OtherButtonTitle() string {
 	defer runtime.KeepAlive(un)
 	_r := objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("otherButtonTitle"))
@@ -325,7 +325,7 @@ func (un *UserNotification) OtherButtonTitle() string {
 	return purego.GoString(_r)
 }
 
-// Identifier returns the identifier.
+// Identifier returns a string that uniquely identifies a notification. The identifier is unique to a notification. A notification delivered with the same identifier as an existing notification replaces the existing notification rather than causing the display of a new notification.
 func (un *UserNotification) Identifier() string {
 	defer runtime.KeepAlive(un)
 	_r := objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("identifier"))
@@ -335,21 +335,21 @@ func (un *UserNotification) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// ContentImage returns the content image.
+// ContentImage returns image shown in the content of the notification.
 func (un *UserNotification) ContentImage() obj.Object {
 	defer runtime.KeepAlive(un)
 	_r := objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("contentImage"))
 	return obj.Wrap(_r)
 }
 
-// HasReplyButton reports whether the object has reply button.
+// HasReplyButton reports whether a Boolean value that specifies whether the notification displays a reply button. Set to `YES` if the notification has a reply button. The default value is `NO`. If this property and `hasActionButton` are both `YES`, the reply button is shown.
 func (un *UserNotification) HasReplyButton() bool {
 	defer runtime.KeepAlive(un)
 	_r := objc.Send[bool](objref.IDOf(un), objc.RegisterName("hasReplyButton"))
 	return _r
 }
 
-// ResponsePlaceholder returns the response placeholder.
+// ResponsePlaceholder returns optional placeholder string for inline reply field.
 func (un *UserNotification) ResponsePlaceholder() string {
 	defer runtime.KeepAlive(un)
 	_r := objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("responsePlaceholder"))
@@ -359,14 +359,14 @@ func (un *UserNotification) ResponsePlaceholder() string {
 	return purego.GoString(_r)
 }
 
-// Response returns the response.
+// Response returns the response with which the user responded to a notification. When the user responds to a notification, the `NSUserNotificationCenterDelegate` method `userNotificationCenter:didActivateNotification:` is called with the notification, the `activationType` property set to `NSUserNotificationActivationTypeReplied`, and this property is set with the user's response.
 func (un *UserNotification) Response() *AttributedString {
 	defer runtime.KeepAlive(un)
 	_r := objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("response"))
 	return AttributedStringFromID(_r)
 }
 
-// AdditionalActions returns the additional actions.
+// AdditionalActions returns the actions that can be taken on a notification in addition to the default action. This array contains `NSUserNotificationAction` objects that describe the different actions for a notification in addition to the default action described by `actionButtonTitle`.
 //
 // AdditionalActions returns the collection as a Go slice.
 func (un *UserNotification) AdditionalActions() []*UserNotificationAction {
@@ -375,7 +375,7 @@ func (un *UserNotification) AdditionalActions() []*UserNotificationAction {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *UserNotificationAction { return UserNotificationActionFromID(_id) })
 }
 
-// AdditionalActivationAction returns the additional activation action.
+// AdditionalActivationAction returns an additional action selected by the user. This property specifies an additional action selected by the user when the user notification is sent to the `NSUserNotificationCenterDelegate` method `userNotificationCenter:didActivateNotification:`.
 func (un *UserNotification) AdditionalActivationAction() *UserNotificationAction {
 	defer runtime.KeepAlive(un)
 	_r := objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("additionalActivationAction"))

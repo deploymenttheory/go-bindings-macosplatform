@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "framework": "AccessoryAccess",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "AAUSBAccessory": {
+      "doc": "A class that represents a USB accessory.",
+      "url": "https://developer.apple.com/documentation/accessoryaccess/aausbaccessory"
+    },
+    "AAUSBAccessoryManager": {
+      "doc": "A class your app uses to manage USB accessories and the listener objects for those accessories.",
+      "url": "https://developer.apple.com/documentation/accessoryaccess/aausbaccessorymanager"
+    },
+    "AAUSBAccessoryMatchingCriteria": {
+      "doc": "A class that represents the accessory matching criteria for a USB accessory.",
+      "url": "https://developer.apple.com/documentation/accessoryaccess/aausbaccessorymatchingcriteria"
+    }
+  },
+  "protocols": {
+    "AAUSBAccessoryListener": {
+      "doc": "A class that conforms to the framework’s USB accessory listener protocol can listen to the accessory events.",
+      "url": "https://developer.apple.com/documentation/accessoryaccess/aausbaccessorylistener"
+    }
+  },
+  "methods": {
+    "AAUSBAccessory": {
+      "-closeWithCompletionHandler:": {
+        "doc": "Closes all connections to the USB accessory for this process.",
+        "url": "https://developer.apple.com/documentation/accessoryaccess/aausbaccessory/close(completionhandler:)"
+      },
+      "-createXPCRepresentation": {
+        "doc": "Creates an encoded representation of the USB accessory.",
+        "url": "https://developer.apple.com/documentation/accessoryaccess/aausbaccessory/createxpcrepresentation()"
+      },
+      "-initWithXPCRepresentation:": {
+        "doc": "Creates a USB accessory from an XPC representation.",
+        "url": "https://developer.apple.com/documentation/accessoryaccess/aausbaccessory/init(xpcrepresentation:)-6dmbu"
+      },
+      "-openWithServiceQueue:completionHandler:": {
+        "doc": "Opens a connection to the USB accessory for this process to access it exclusively.",
+        "url": "https://developer.apple.com/documentation/accessoryaccess/aausbaccessory/open(servicequeue:completionhandler:)"
+      }
+    },
+    "AAUSBAccessoryManager": {
+      "-registerListener:withMatchingCriteria:completionHandler:": {
+        "doc": "Registers a USB accessory listener.",
+        "url": "https://developer.apple.com/documentation/accessoryaccess/aausbaccessorymanager/registerlistener(_:matchingcriteria:completionhandler:)"
+      },
+      "-unregisterListener:completionHandler:": {
+        "doc": "Unregister a previously registered listener.",
+        "url": "https://developer.apple.com/documentation/accessoryaccess/aausbaccessorymanager/unregisterlistener(_:completionhandler:)"
+      }
+    },
+    "AAUSBAccessoryMatchingCriteria": {
+      "-initWithDeviceMatchingDictionary:": {
+        "doc": "Initializes a criteria object using a USB device matching dictionary.",
+        "url": "https://developer.apple.com/documentation/accessoryaccess/aausbaccessorymatchingcriteria/init(devicematchingdictionary:)"
+      },
+      "-initWithDeviceMatchingDictionary:interfaceMatchingDictionaries:interfaceMatchingOption:": {
+        "doc": "Initializes a criteria object using USB interface matching dictionaries, for the provided USB device matching criteria.",
+        "url": "https://developer.apple.com/documentation/accessoryaccess/aausbaccessorymatchingcriteria/init(devicematchingdictionary:interfacematchingdictionaries:interfacematchingoption:)"
+      }
+    }
+  },
+  "properties": {
+    "AAUSBAccessory": {
+      "AAUSBAccessory.Event": {
+        "doc": "Events that represent accessory connection and disconnection.",
+        "url": "https://developer.apple.com/documentation/accessoryaccess/aausbaccessory/event"
+      },
+      "configurationDescriptorData": {
+        "doc": "Returns the currently selected configuration descriptor data.",
+        "url": "https://developer.apple.com/documentation/accessoryaccess/aausbaccessory/configurationdescriptordata"
+      },
+      "deviceDescriptorData": {
+        "doc": "Returns the device descriptor data.",
+        "url": "https://developer.apple.com/documentation/accessoryaccess/aausbaccessory/devicedescriptordata"
+      },
+      "init(XPCRepresentation:)": {
+        "doc": "Creates a USB accessory from an XPC representation.",
+        "url": "https://developer.apple.com/documentation/accessoryaccess/aausbaccessory/init(xpcrepresentation:)-5lxcr"
+      },
+      "init(coder:)": {
+        "doc": "Creates a new USB accessory with the provided coder.",
+        "url": "https://developer.apple.com/documentation/accessoryaccess/aausbaccessory/init(coder:)"
+      },
+      "registryID": {
+        "doc": "Returns the IORegistry ID for the USB accessory.",
+        "url": "https://developer.apple.com/documentation/accessoryaccess/aausbaccessory/registryid"
+      }
+    },
+    "AAUSBAccessoryManager": {
+      "events(matching:)": {
+        "doc": "Returns an asynchronous list of events that match the provided criteria.",
+        "url": "https://developer.apple.com/documentation/accessoryaccess/aausbaccessorymanager/events(matching:)"
+      },
+      "sharedManager": {
+        "doc": "Returns the shared USB accessory manager object for this process.",
+        "url": "https://developer.apple.com/documentation/accessoryaccess/aausbaccessorymanager/shared"
+      }
+    },
+    "AAUSBAccessoryMatchingCriteria": {
+      "AAUSBAccessoryMatchingCriteria.DeviceMatchingCriteria": {
+        "doc": "A structure you provide that enumerates which device characteristics to search for.",
+        "url": "https://developer.apple.com/documentation/accessoryaccess/aausbaccessorymatchingcriteria/devicematchingcriteria"
+      },
+      "AAUSBAccessoryMatchingCriteria.InterfaceMatchingCriteria": {
+        "doc": "A structure you provide that enumerates which device interface characteristics to search for.",
+        "url": "https://developer.apple.com/documentation/accessoryaccess/aausbaccessorymatchingcriteria/interfacematchingcriteria"
+      },
+      "AAUSBAccessoryMatchingCriteriaInterfaceMatchingOption": {
+        "doc": "Values that represent options for performing interface matching using interface matching criteria.",
+        "url": "https://developer.apple.com/documentation/accessoryaccess/aausbaccessorymatchingcriteria/interfacematchingoption"
+      },
+      "init(deviceMatchingCriteria:)": {
+        "doc": "Initializes a criteria object with the provided USB device matching properties.",
+        "url": "https://developer.apple.com/documentation/accessoryaccess/aausbaccessorymatchingcriteria/init(devicematchingcriteria:)"
+      },
+      "init(deviceMatchingCriteria:interfaceMatchingCriteria:interfaceMatchingOption:)": {
+        "doc": "Initializes a criteria object using USB interface matching criteria, for the given USB device matching criteria.",
+        "url": "https://developer.apple.com/documentation/accessoryaccess/aausbaccessorymatchingcriteria/init(devicematchingcriteria:interfacematchingcriteria:interfacematchingoption:)"
+      }
+    }
+  }
+}

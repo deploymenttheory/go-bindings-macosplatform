@@ -4,220 +4,526 @@
 package corehaptics
 
 import (
+	"unsafe"
+
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/foundation"
 )
 
-func CHHapticAudioResourceKeyLoopEnabled() uintptr {
+func CHHapticAudioResourceKeyLoopEnabled() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corehapticsLib, "CHHapticAudioResourceKeyLoopEnabled")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CHHapticAudioResourceKeyUseVolumeEnvelope() uintptr {
+func CHHapticAudioResourceKeyUseVolumeEnvelope() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corehapticsLib, "CHHapticAudioResourceKeyUseVolumeEnvelope")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CHHapticDynamicParameterIDAudioAttackTimeControl() uintptr {
+func CHHapticDynamicParameterIDAudioAttackTimeControl() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corehapticsLib, "CHHapticDynamicParameterIDAudioAttackTimeControl")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CHHapticDynamicParameterIDAudioBrightnessControl() uintptr {
+func CHHapticDynamicParameterIDAudioBrightnessControl() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corehapticsLib, "CHHapticDynamicParameterIDAudioBrightnessControl")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CHHapticDynamicParameterIDAudioDecayTimeControl() uintptr {
+func CHHapticDynamicParameterIDAudioDecayTimeControl() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corehapticsLib, "CHHapticDynamicParameterIDAudioDecayTimeControl")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CHHapticDynamicParameterIDAudioPanControl() uintptr {
+func CHHapticDynamicParameterIDAudioPanControl() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corehapticsLib, "CHHapticDynamicParameterIDAudioPanControl")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CHHapticDynamicParameterIDAudioPitchControl() uintptr {
+func CHHapticDynamicParameterIDAudioPitchControl() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corehapticsLib, "CHHapticDynamicParameterIDAudioPitchControl")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CHHapticDynamicParameterIDAudioReleaseTimeControl() uintptr {
+func CHHapticDynamicParameterIDAudioReleaseTimeControl() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corehapticsLib, "CHHapticDynamicParameterIDAudioReleaseTimeControl")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CHHapticDynamicParameterIDAudioVolumeControl() uintptr {
+func CHHapticDynamicParameterIDAudioVolumeControl() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corehapticsLib, "CHHapticDynamicParameterIDAudioVolumeControl")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CHHapticDynamicParameterIDHapticAttackTimeControl() uintptr {
+func CHHapticDynamicParameterIDHapticAttackTimeControl() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corehapticsLib, "CHHapticDynamicParameterIDHapticAttackTimeControl")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CHHapticDynamicParameterIDHapticDecayTimeControl() uintptr {
+func CHHapticDynamicParameterIDHapticDecayTimeControl() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corehapticsLib, "CHHapticDynamicParameterIDHapticDecayTimeControl")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CHHapticDynamicParameterIDHapticIntensityControl() uintptr {
+func CHHapticDynamicParameterIDHapticIntensityControl() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corehapticsLib, "CHHapticDynamicParameterIDHapticIntensityControl")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CHHapticDynamicParameterIDHapticReleaseTimeControl() uintptr {
+func CHHapticDynamicParameterIDHapticReleaseTimeControl() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corehapticsLib, "CHHapticDynamicParameterIDHapticReleaseTimeControl")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CHHapticDynamicParameterIDHapticSharpnessControl() uintptr {
+func CHHapticDynamicParameterIDHapticSharpnessControl() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corehapticsLib, "CHHapticDynamicParameterIDHapticSharpnessControl")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CHHapticEventParameterIDAttackTime() uintptr {
+func CHHapticEventParameterIDAttackTime() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corehapticsLib, "CHHapticEventParameterIDAttackTime")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CHHapticEventParameterIDAudioBrightness() uintptr {
+func CHHapticEventParameterIDAudioBrightness() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corehapticsLib, "CHHapticEventParameterIDAudioBrightness")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CHHapticEventParameterIDAudioPan() uintptr {
+func CHHapticEventParameterIDAudioPan() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corehapticsLib, "CHHapticEventParameterIDAudioPan")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CHHapticEventParameterIDAudioPitch() uintptr {
+func CHHapticEventParameterIDAudioPitch() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corehapticsLib, "CHHapticEventParameterIDAudioPitch")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CHHapticEventParameterIDAudioVolume() uintptr {
+func CHHapticEventParameterIDAudioVolume() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corehapticsLib, "CHHapticEventParameterIDAudioVolume")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CHHapticEventParameterIDDecayTime() uintptr {
+func CHHapticEventParameterIDDecayTime() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corehapticsLib, "CHHapticEventParameterIDDecayTime")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CHHapticEventParameterIDHapticIntensity() uintptr {
+func CHHapticEventParameterIDHapticIntensity() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corehapticsLib, "CHHapticEventParameterIDHapticIntensity")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CHHapticEventParameterIDHapticSharpness() uintptr {
+func CHHapticEventParameterIDHapticSharpness() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corehapticsLib, "CHHapticEventParameterIDHapticSharpness")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CHHapticEventParameterIDReleaseTime() uintptr {
+func CHHapticEventParameterIDReleaseTime() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corehapticsLib, "CHHapticEventParameterIDReleaseTime")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CHHapticEventParameterIDSustained() uintptr {
+func CHHapticEventParameterIDSustained() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corehapticsLib, "CHHapticEventParameterIDSustained")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CHHapticEventTypeAudioContinuous() uintptr {
+func CHHapticEventTypeAudioContinuous() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corehapticsLib, "CHHapticEventTypeAudioContinuous")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CHHapticEventTypeAudioCustom() uintptr {
+func CHHapticEventTypeAudioCustom() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corehapticsLib, "CHHapticEventTypeAudioCustom")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CHHapticEventTypeHapticContinuous() uintptr {
+func CHHapticEventTypeHapticContinuous() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corehapticsLib, "CHHapticEventTypeHapticContinuous")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CHHapticEventTypeHapticTransient() uintptr {
+func CHHapticEventTypeHapticTransient() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corehapticsLib, "CHHapticEventTypeHapticTransient")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CHHapticPatternKeyEvent() uintptr {
+func CHHapticPatternKeyEvent() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corehapticsLib, "CHHapticPatternKeyEvent")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CHHapticPatternKeyEventDuration() uintptr {
+func CHHapticPatternKeyEventDuration() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corehapticsLib, "CHHapticPatternKeyEventDuration")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CHHapticPatternKeyEventParameters() uintptr {
+func CHHapticPatternKeyEventParameters() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corehapticsLib, "CHHapticPatternKeyEventParameters")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CHHapticPatternKeyEventType() uintptr {
+func CHHapticPatternKeyEventType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corehapticsLib, "CHHapticPatternKeyEventType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CHHapticPatternKeyEventWaveformLoopEnabled() uintptr {
+func CHHapticPatternKeyEventWaveformLoopEnabled() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corehapticsLib, "CHHapticPatternKeyEventWaveformLoopEnabled")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CHHapticPatternKeyEventWaveformPath() uintptr {
+func CHHapticPatternKeyEventWaveformPath() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corehapticsLib, "CHHapticPatternKeyEventWaveformPath")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CHHapticPatternKeyEventWaveformUseVolumeEnvelope() uintptr {
+func CHHapticPatternKeyEventWaveformUseVolumeEnvelope() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corehapticsLib, "CHHapticPatternKeyEventWaveformUseVolumeEnvelope")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CHHapticPatternKeyParameter() uintptr {
+func CHHapticPatternKeyParameter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corehapticsLib, "CHHapticPatternKeyParameter")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CHHapticPatternKeyParameterCurve() uintptr {
+func CHHapticPatternKeyParameterCurve() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corehapticsLib, "CHHapticPatternKeyParameterCurve")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CHHapticPatternKeyParameterCurveControlPoints() uintptr {
+func CHHapticPatternKeyParameterCurveControlPoints() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corehapticsLib, "CHHapticPatternKeyParameterCurveControlPoints")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CHHapticPatternKeyParameterID() uintptr {
+func CHHapticPatternKeyParameterID() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corehapticsLib, "CHHapticPatternKeyParameterID")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CHHapticPatternKeyParameterValue() uintptr {
+func CHHapticPatternKeyParameterValue() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corehapticsLib, "CHHapticPatternKeyParameterValue")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CHHapticPatternKeyPattern() uintptr {
+func CHHapticPatternKeyPattern() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corehapticsLib, "CHHapticPatternKeyPattern")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CHHapticPatternKeyTime() uintptr {
+func CHHapticPatternKeyTime() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corehapticsLib, "CHHapticPatternKeyTime")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CHHapticPatternKeyVersion() uintptr {
+func CHHapticPatternKeyVersion() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corehapticsLib, "CHHapticPatternKeyVersion")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }

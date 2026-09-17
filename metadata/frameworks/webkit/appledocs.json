@@ -356,6 +356,10 @@
       "doc": "An object that defines a scope of execution for JavaScript code, and which you use to prevent conflicts between different scripts.",
       "url": "https://developer.apple.com/documentation/webkit/wkcontentworld"
     },
+    "WKDOMNodeSnapshot": {
+      "doc": "A WKDOMNodeSnapshot object contains a snapshot of a DOM node",
+      "url": "https://developer.apple.com/documentation/webkit/wkdomnodesnapshot"
+    },
     "WKDownload": {
       "doc": "An object that represents the download of a web resource.",
       "url": "https://developer.apple.com/documentation/webkit/wkdownload"
@@ -368,6 +372,9 @@
       "doc": "An object that contains the results of searching the web view’s contents.",
       "url": "https://developer.apple.com/documentation/webkit/wkfindresult"
     },
+    "WKFormInfo": {
+      "url": "https://developer.apple.com/documentation/webkit/wkforminfo"
+    },
     "WKFrameInfo": {
       "doc": "An object that contains information about a frame on a webpage.",
       "url": "https://developer.apple.com/documentation/webkit/wkframeinfo"
@@ -375,6 +382,13 @@
     "WKHTTPCookieStore": {
       "doc": "An object that manages the HTTP cookies associated with a particular web view.",
       "url": "https://developer.apple.com/documentation/webkit/wkhttpcookiestore"
+    },
+    "WKImmersiveEnvironment": {
+      "url": "https://developer.apple.com/documentation/webkit/wkimmersiveenvironment"
+    },
+    "WKJSHandle": {
+      "doc": "A WKJSHandle object contains a reference to a JavaScript object.",
+      "url": "https://developer.apple.com/documentation/webkit/wkjshandle"
     },
     "WKNavigation": {
       "doc": "An object that tracks the loading progress of a webpage.",
@@ -530,6 +544,9 @@
       "doc": "The methods to adopt in an object that monitors changes to a webpage’s cookies.",
       "url": "https://developer.apple.com/documentation/webkit/wkhttpcookiestoreobserver"
     },
+    "WKImmersiveEnvironmentDelegate": {
+      "url": "https://developer.apple.com/documentation/webkit/wkimmersiveenvironmentdelegate"
+    },
     "WKNavigationDelegate": {
       "doc": "Methods for accepting or rejecting navigation changes, and for tracking the progress of navigation requests.",
       "url": "https://developer.apple.com/documentation/webkit/wknavigationdelegate"
@@ -650,14 +667,6 @@
         }
       }
     },
-    "WKContentMode": {
-      "doc": "Constants that indicate how to render web view content.",
-      "url": "https://developer.apple.com/documentation/webkit/wkcontentmode"
-    },
-    "WKCookiePolicy": {
-      "doc": "An enumeration with cases that indicate whether a cookie store allows cookie storage.",
-      "url": "https://developer.apple.com/documentation/webkit/wkcookiepolicy"
-    },
     "WKDialogResult": {
       "doc": "An enumeration that lists the possible ways a delegate handled displaying a custom Lockdown Mode first use dialog.",
       "url": "https://developer.apple.com/documentation/webkit/wkdialogresult",
@@ -675,24 +684,6 @@
           "url": "https://developer.apple.com/documentation/webkit/wkdialogresult/showdefault"
         }
       }
-    },
-    "WKDownloadPlaceholderPolicy": {
-      "url": "https://developer.apple.com/documentation/webkit/wkdownloadplaceholderpolicy"
-    },
-    "WKDownloadRedirectPolicy": {
-      "doc": "An enumeration with cases that indicate whether to proceed with a redirect.",
-      "url": "https://developer.apple.com/documentation/webkit/wkdownloadredirectpolicy"
-    },
-    "WKErrorCode": {
-      "doc": "Possible error values that WebKit APIs can return.",
-      "url": "https://developer.apple.com/documentation/webkit/wkerrorcode"
-    },
-    "WKFullscreenState": {
-      "url": "https://developer.apple.com/documentation/webkit/wkfullscreenstate"
-    },
-    "WKInactiveSchedulingPolicy": {
-      "doc": "An enumeration that lists policies for how a web view that’s not in a window handles tasks.",
-      "url": "https://developer.apple.com/documentation/webkit/wkinactiveschedulingpolicy"
     },
     "WKMediaCaptureState": {
       "doc": "An enumeration that describes whether a media device, like a camera or microphone, is currently capturing audio or video.",
@@ -867,41 +858,8 @@
         }
       }
     },
-    "WKWebExtensionDataRecordError": {
-      "doc": "Constants that indicate errors in the WKWebExtensionDataRecord domain.",
-      "url": "https://developer.apple.com/documentation/webkit/wkwebextensiondatarecorderror"
-    },
-    "WKWebExtensionMatchPatternError": {
-      "doc": "Constants that indicate errors in the WKWebExtensionMatchPattern domain.",
-      "url": "https://developer.apple.com/documentation/webkit/wkwebextensionmatchpatternerror"
-    },
-    "WKWebExtensionMatchPatternOptions": {
-      "doc": "Constants used by WKWebExtensionMatchPattern to indicate matching options.",
-      "url": "https://developer.apple.com/documentation/webkit/wkwebextensionmatchpatternoptions",
-      "members": {
-        "WKWebExtensionMatchPatternOptionsNone": {
-          "doc": "Indicates no special matching options.",
-          "url": "https://developer.apple.com/documentation/webkit/wkwebextensionmatchpatternoptions/wkwebextensionmatchpatternoptionsnone"
-        }
-      }
-    },
-    "WKWebExtensionMessagePortError": {
-      "doc": "Constants that indicate errors in the WKWebExtensionMessagePort domain.",
-      "url": "https://developer.apple.com/documentation/webkit/wkwebextensionmessageporterror"
-    },
-    "WKWebExtensionWindowState": {
-      "doc": "Constants used by WKWebExtensionWindow to indicate possible states of a window.",
-      "url": "https://developer.apple.com/documentation/webkit/wkwebextensionwindowstate"
-    },
-    "WKWebExtensionWindowType": {
-      "doc": "Constants used by WKWebExtensionWindow to indicate the type of a window.",
-      "url": "https://developer.apple.com/documentation/webkit/wkwebextensionwindowtype"
-    },
     "WKWebViewDataType": {
       "url": "https://developer.apple.com/documentation/webkit/wkwebviewdatatype"
-    },
-    "WKWebpagePreferencesUpgradeToHTTPSPolicy": {
-      "url": "https://developer.apple.com/documentation/webkit/wkwebpagepreferencesupgradetohttpspolicy"
     },
     "WebCacheModel": {
       "doc": "Specifies the caching model for a web view.",
@@ -1024,14 +982,6 @@
           "url": "https://developer.apple.com/documentation/webkit/webviewinsertaction/typed"
         }
       }
-    }
-  },
-  "structs": {
-    "DOMObjectInternal": {
-      "url": "https://developer.apple.com/documentation/webkit/domobjectinternal"
-    },
-    "WebPreferencesPrivate": {
-      "url": "https://developer.apple.com/documentation/webkit/webpreferencesprivate"
     }
   },
   "methods": {
@@ -2242,6 +2192,14 @@
       }
     },
     "WKUserContentController": {
+      "addBuffer(_:name:to:)": {
+        "doc": "Adds a data buffer that will be available to JavaScript through the window.webkit.buffers object.",
+        "url": "https://developer.apple.com/documentation/webkit/wkusercontentcontroller/addbuffer(_:name:to:)"
+      },
+      "removeBuffer(named:from:)": {
+        "doc": "Removes a previously added data buffer from the given WKContentWorld.",
+        "url": "https://developer.apple.com/documentation/webkit/wkusercontentcontroller/removebuffer(named:from:)"
+      },
       "userScripts": {
         "doc": "The user scripts associated with the user content controller.",
         "url": "https://developer.apple.com/documentation/webkit/wkusercontentcontroller/userscripts"

@@ -12,7 +12,6 @@ import (
 // An object that specifies a date or time in terms of units (such as year, month, day, hour, and minute) to be evaluated in a calendar system and time zone.
 //
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsdatecomponents
-// Deprecated: since macOS 10.10.
 type NSDateComponents struct {
 	NSObject
 }
@@ -106,6 +105,7 @@ func (o *NSDateComponents) IsValidDateInCalendar(calendar *NSCalendar) bool {
 	return _ret
 }
 
+// The calendar used to interpret the date components.
 func (o *NSDateComponents) Calendar() *NSCalendar {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateComponentsSelCalendar)
 	if _ret != 0 {
@@ -118,6 +118,7 @@ func (o *NSDateComponents) SetCalendar(calendar *NSCalendar) {
 	o.Ptr().Send(_nSDateComponentsSelSetCalendar, calendar.Ptr())
 }
 
+// The time zone used to interpret the date components.
 func (o *NSDateComponents) TimeZone() *NSTimeZone {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateComponentsSelTimeZone)
 	if _ret != 0 {
@@ -130,6 +131,7 @@ func (o *NSDateComponents) SetTimeZone(timeZone *NSTimeZone) {
 	o.Ptr().Send(_nSDateComponentsSelSetTimeZone, timeZone.Ptr())
 }
 
+// The number of eras.
 func (o *NSDateComponents) Era() int {
 	_ret := objc.Send[int](o.Ptr(), _nSDateComponentsSelEra)
 	return _ret
@@ -139,6 +141,7 @@ func (o *NSDateComponents) SetEra(era int) {
 	o.Ptr().Send(_nSDateComponentsSelSetEra, era)
 }
 
+// The number of years.
 func (o *NSDateComponents) Year() int {
 	_ret := objc.Send[int](o.Ptr(), _nSDateComponentsSelYear)
 	return _ret
@@ -148,6 +151,7 @@ func (o *NSDateComponents) SetYear(year int) {
 	o.Ptr().Send(_nSDateComponentsSelSetYear, year)
 }
 
+// The number of months.
 func (o *NSDateComponents) Month() int {
 	_ret := objc.Send[int](o.Ptr(), _nSDateComponentsSelMonth)
 	return _ret
@@ -157,6 +161,7 @@ func (o *NSDateComponents) SetMonth(month int) {
 	o.Ptr().Send(_nSDateComponentsSelSetMonth, month)
 }
 
+// The number of days.
 func (o *NSDateComponents) Day() int {
 	_ret := objc.Send[int](o.Ptr(), _nSDateComponentsSelDay)
 	return _ret
@@ -166,6 +171,7 @@ func (o *NSDateComponents) SetDay(day int) {
 	o.Ptr().Send(_nSDateComponentsSelSetDay, day)
 }
 
+// The number of hour units for the receiver.
 func (o *NSDateComponents) Hour() int {
 	_ret := objc.Send[int](o.Ptr(), _nSDateComponentsSelHour)
 	return _ret
@@ -175,6 +181,7 @@ func (o *NSDateComponents) SetHour(hour int) {
 	o.Ptr().Send(_nSDateComponentsSelSetHour, hour)
 }
 
+// The number of minute units for the receiver.
 func (o *NSDateComponents) Minute() int {
 	_ret := objc.Send[int](o.Ptr(), _nSDateComponentsSelMinute)
 	return _ret
@@ -184,6 +191,7 @@ func (o *NSDateComponents) SetMinute(minute int) {
 	o.Ptr().Send(_nSDateComponentsSelSetMinute, minute)
 }
 
+// The number of second units for the receiver.
 func (o *NSDateComponents) Second() int {
 	_ret := objc.Send[int](o.Ptr(), _nSDateComponentsSelSecond)
 	return _ret
@@ -193,6 +201,7 @@ func (o *NSDateComponents) SetSecond(second int) {
 	o.Ptr().Send(_nSDateComponentsSelSetSecond, second)
 }
 
+// The number of nanosecond units for the receiver.
 func (o *NSDateComponents) Nanosecond() int {
 	_ret := objc.Send[int](o.Ptr(), _nSDateComponentsSelNanosecond)
 	return _ret
@@ -202,6 +211,7 @@ func (o *NSDateComponents) SetNanosecond(nanosecond int) {
 	o.Ptr().Send(_nSDateComponentsSelSetNanosecond, nanosecond)
 }
 
+// The number of the weekdays.
 func (o *NSDateComponents) Weekday() int {
 	_ret := objc.Send[int](o.Ptr(), _nSDateComponentsSelWeekday)
 	return _ret
@@ -211,6 +221,7 @@ func (o *NSDateComponents) SetWeekday(weekday int) {
 	o.Ptr().Send(_nSDateComponentsSelSetWeekday, weekday)
 }
 
+// The ordinal number of weekdays.
 func (o *NSDateComponents) WeekdayOrdinal() int {
 	_ret := objc.Send[int](o.Ptr(), _nSDateComponentsSelWeekdayOrdinal)
 	return _ret
@@ -220,6 +231,7 @@ func (o *NSDateComponents) SetWeekdayOrdinal(weekdayOrdinal int) {
 	o.Ptr().Send(_nSDateComponentsSelSetWeekdayOrdinal, weekdayOrdinal)
 }
 
+// The number of quarters.
 func (o *NSDateComponents) Quarter() int {
 	_ret := objc.Send[int](o.Ptr(), _nSDateComponentsSelQuarter)
 	return _ret
@@ -229,6 +241,7 @@ func (o *NSDateComponents) SetQuarter(quarter int) {
 	o.Ptr().Send(_nSDateComponentsSelSetQuarter, quarter)
 }
 
+// The week number of the months.
 func (o *NSDateComponents) WeekOfMonth() int {
 	_ret := objc.Send[int](o.Ptr(), _nSDateComponentsSelWeekOfMonth)
 	return _ret
@@ -238,6 +251,7 @@ func (o *NSDateComponents) SetWeekOfMonth(weekOfMonth int) {
 	o.Ptr().Send(_nSDateComponentsSelSetWeekOfMonth, weekOfMonth)
 }
 
+// The ISO 8601 week date of the year.
 func (o *NSDateComponents) WeekOfYear() int {
 	_ret := objc.Send[int](o.Ptr(), _nSDateComponentsSelWeekOfYear)
 	return _ret
@@ -247,6 +261,7 @@ func (o *NSDateComponents) SetWeekOfYear(weekOfYear int) {
 	o.Ptr().Send(_nSDateComponentsSelSetWeekOfYear, weekOfYear)
 }
 
+// The ISO 8601 week-numbering year.
 func (o *NSDateComponents) YearForWeekOfYear() int {
 	_ret := objc.Send[int](o.Ptr(), _nSDateComponentsSelYearForWeekOfYear)
 	return _ret
@@ -256,6 +271,7 @@ func (o *NSDateComponents) SetYearForWeekOfYear(yearForWeekOfYear int) {
 	o.Ptr().Send(_nSDateComponentsSelSetYearForWeekOfYear, yearForWeekOfYear)
 }
 
+// The day of the year value of the date components.
 func (o *NSDateComponents) DayOfYear() int {
 	_ret := objc.Send[int](o.Ptr(), _nSDateComponentsSelDayOfYear)
 	return _ret
@@ -265,6 +281,7 @@ func (o *NSDateComponents) SetDayOfYear(dayOfYear int) {
 	o.Ptr().Send(_nSDateComponentsSelSetDayOfYear, dayOfYear)
 }
 
+// A Boolean value that indicates whether the month is a leap month.
 func (o *NSDateComponents) IsLeapMonth() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSDateComponentsSelIsLeapMonth)
 	return _ret
@@ -283,6 +300,7 @@ func (o *NSDateComponents) SetRepeatedDay(repeatedDay bool) {
 	o.Ptr().Send(_nSDateComponentsSelSetRepeatedDay, repeatedDay)
 }
 
+// The date calculated from the current components using the stored calendar.
 func (o *NSDateComponents) Date() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateComponentsSelDate)
 	if _ret != 0 {

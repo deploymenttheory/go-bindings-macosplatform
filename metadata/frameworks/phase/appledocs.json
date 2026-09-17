@@ -185,10 +185,6 @@
       "doc": "A collection of points that connect to form a 3D volume.",
       "url": "https://developer.apple.com/documentation/phase/phaseshape"
     },
-    "PHASEShapeElement": {
-      "doc": "An object that describes the characteristics of a physical surface.",
-      "url": "https://developer.apple.com/documentation/phase/phaseshapeelement"
-    },
     "PHASESoundAsset": {
       "doc": "A sound resource stored in the asset registry.",
       "url": "https://developer.apple.com/documentation/phase/phasesoundasset"
@@ -238,14 +234,6 @@
     }
   },
   "enums": {
-    "PHASEAssetError": {
-      "doc": "An asset error that PHASE reports.",
-      "url": "https://developer.apple.com/documentation/phase/phaseasseterror"
-    },
-    "PHASEAssetType": {
-      "doc": "Options that determine how PHASE manages sound assets in memory.",
-      "url": "https://developer.apple.com/documentation/phase/phaseassettype"
-    },
     "PHASEAutomaticHeadTrackingFlags": {
       "url": "https://developer.apple.com/documentation/phase/phaseautomaticheadtrackingflags"
     },
@@ -343,10 +331,6 @@
         }
       }
     },
-    "PHASEError": {
-      "doc": "An error that PHASE reports.",
-      "url": "https://developer.apple.com/documentation/phase/phaseerror"
-    },
     "PHASEMaterialPreset": {
       "doc": "A collection of physical surfaces that each add a unique acoustic quality to your app’s audio.",
       "url": "https://developer.apple.com/documentation/phase/phasematerialpreset",
@@ -376,10 +360,6 @@
           "url": "https://developer.apple.com/documentation/phase/phasematerialpreset/wood"
         }
       }
-    },
-    "PHASEMediumPreset": {
-      "doc": "Predetermined qualities of an environment that affect how sound transmits.",
-      "url": "https://developer.apple.com/documentation/phase/phasemediumpreset"
     },
     "PHASENormalizationMode": {
       "doc": "Options that determine whether the framework adjusts a sound asset’s loudness for the user’s output device.",
@@ -445,10 +425,6 @@
         }
       }
     },
-    "PHASERenderingState": {
-      "doc": "The playback status of audio.",
-      "url": "https://developer.apple.com/documentation/phase/phaserenderingstate"
-    },
     "PHASEReverbPreset": {
       "doc": "The manner in which PHASE diffuses resonating sound.",
       "url": "https://developer.apple.com/documentation/phase/phasereverbpreset",
@@ -507,30 +483,6 @@
         }
       }
     },
-    "PHASESoundEventError": {
-      "doc": "A sound event error that PHASE reports.",
-      "url": "https://developer.apple.com/documentation/phase/phasesoundeventerror"
-    },
-    "PHASESoundEventPrepareHandlerReason": {
-      "doc": "Indicates the results of sound-event preparation.",
-      "url": "https://developer.apple.com/documentation/phase/phasesoundeventpreparehandlerreason"
-    },
-    "PHASESoundEventPrepareState": {
-      "doc": "Indicates the state of sound-event preparation.",
-      "url": "https://developer.apple.com/documentation/phase/phasesoundeventpreparestate"
-    },
-    "PHASESoundEventSeekHandlerReason": {
-      "doc": "Indicates the status after a sound event changes its playback position.",
-      "url": "https://developer.apple.com/documentation/phase/phasesoundeventseekhandlerreason"
-    },
-    "PHASESoundEventStartHandlerReason": {
-      "doc": "Indicates the status after starting a sound event.",
-      "url": "https://developer.apple.com/documentation/phase/phasesoundeventstarthandlerreason"
-    },
-    "PHASESpatialPipelineFlags": {
-      "doc": "Sound resonance options for a spatial pipeline.",
-      "url": "https://developer.apple.com/documentation/phase/phasespatialpipelineflags"
-    },
     "PHASESpatializationMode": {
       "doc": "The manner in which PHASE outputs spatial audio.",
       "url": "https://developer.apple.com/documentation/phase/phasespatializationmode",
@@ -548,10 +500,6 @@
           "url": "https://developer.apple.com/documentation/phase/phasespatializationmode/automatic"
         }
       }
-    },
-    "PHASEUpdateMode": {
-      "doc": "Modes that determine when the framework consumes API calls and updates internal state.",
-      "url": "https://developer.apple.com/documentation/phase/phaseupdatemode"
     }
   },
   "methods": {

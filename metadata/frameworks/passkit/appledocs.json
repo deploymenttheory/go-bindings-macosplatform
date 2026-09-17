@@ -257,9 +257,6 @@
       "doc": "Information that you use to configure the sharing sheet for a pass.",
       "url": "https://developer.apple.com/documentation/passkit/pkshareablepassmetadata"
     },
-    "PKShareablePassMetadataPreview": {
-      "url": "https://developer.apple.com/documentation/passkit/pkshareablepassmetadatapreview"
-    },
     "PKShippingMethod": {
       "doc": "An object that defines a shipping method for delivering physical goods.",
       "url": "https://developer.apple.com/documentation/passkit/pkshippingmethod"
@@ -359,16 +356,6 @@
         }
       }
     },
-    "PKAddSecureElementPassErrorCode": {
-      "doc": "Error codes for problems that occur when you add a secure element passes.",
-      "url": "https://developer.apple.com/documentation/passkit/pkaddsecureelementpasserrorcode",
-      "members": {
-        "PKAddSecureElementPassUnknownError": {
-          "doc": "The system canceled adding the pass due to an unknown failure.",
-          "url": "https://developer.apple.com/documentation/passkit/pkaddsecureelementpasserrorcode/pkaddsecureelementpassunknownerror"
-        }
-      }
-    },
     "PKAddShareablePassConfigurationPrimaryAction": {
       "doc": "The kind of add action that the system performs with a pass.",
       "url": "https://developer.apple.com/documentation/passkit/pkaddshareablepassconfigurationprimaryaction",
@@ -460,14 +447,6 @@
     "PKBarcodeEventConfigurationDataType": {
       "url": "https://developer.apple.com/documentation/passkit/pkbarcodeeventconfigurationdatatype"
     },
-    "PKDisbursementErrorCode": {
-      "doc": "Values that describe errors that can occur while processing the disbursement.",
-      "url": "https://developer.apple.com/documentation/passkit/pkdisbursementerrorcode"
-    },
-    "PKIdentityError": {
-      "doc": "A structure that represents an identity error.",
-      "url": "https://developer.apple.com/documentation/passkit/pkidentityerror"
-    },
     "PKIssuerProvisioningExtensionAuthorizationResult": {
       "doc": "A value that indicates the result of authorizing the addition of a payment card.",
       "url": "https://developer.apple.com/documentation/passkit/pkissuerprovisioningextensionauthorizationresult",
@@ -511,10 +490,6 @@
           "url": "https://developer.apple.com/documentation/passkit/pkmerchantcapability/init(rawvalue:)"
         }
       }
-    },
-    "PKPassKitErrorCode": {
-      "doc": "Errors that the PassKit framework uses.",
-      "url": "https://developer.apple.com/documentation/passkit/pkpasskiterrorcode"
     },
     "PKPassLibraryAddPassesStatus": {
       "doc": "Statuses that PassKit uses when it adds passes to the pass library.",
@@ -690,10 +665,6 @@
         }
       }
     },
-    "PKPaymentErrorCode": {
-      "doc": "An error code that you provide to indicate problems with address or contact information on an Apple Pay sheet.",
-      "url": "https://developer.apple.com/documentation/passkit/pkpaymenterrorcode"
-    },
     "PKPaymentMethodType": {
       "doc": "The type of cards available in Apple Pay.",
       "url": "https://developer.apple.com/documentation/passkit/pkpaymentmethodtype",
@@ -785,13 +756,6 @@
           "url": "https://developer.apple.com/documentation/passkit/pkradiotechnology/init(rawvalue:)"
         }
       }
-    },
-    "PKSecureElementPassActivationState": {
-      "doc": "The activation states of a Secure Element pass.",
-      "url": "https://developer.apple.com/documentation/passkit/pksecureelementpassactivationstate"
-    },
-    "PKShareSecureElementPassErrorCode": {
-      "url": "https://developer.apple.com/documentation/passkit/pksharesecureelementpasserrorcode"
     },
     "PKShippingContactEditingMode": {
       "doc": "Constants that indicate whether the shipping mode prevents the user from editing fields of the shipping address.",
@@ -1547,6 +1511,10 @@
       "supportedRegions": {
         "doc": "An array of two-letter region codes that describes the regions to support.",
         "url": "https://developer.apple.com/documentation/passkit/pkdisbursementrequest/supportedregions-j9ug"
+      },
+      "unsupportedPrimaryAccountIdentifiers": {
+        "doc": "An array of Apple Pay cards to exclude from payment.",
+        "url": "https://developer.apple.com/documentation/passkit/pkdisbursementrequest/unsupportedprimaryaccountidentifiers"
       }
     },
     "PKIdentityAnyOfDescriptor": {
@@ -1564,7 +1532,7 @@
     "PKIdentityDocumentMetadata": {
       "documentType": {
         "doc": "Identifies the type of the identity document.",
-        "url": "https://developer.apple.com/documentation/PassKit/PKIdentityDocumentMetadata/documentType"
+        "url": "https://developer.apple.com/documentation/passkit/pkidentitydocumentmetadata/documenttype"
       },
       "issuingCountryCode": {
         "doc": "Identifies the issuing country of the identity document.",
@@ -1576,7 +1544,7 @@
       },
       "sharingInstanceIdentifier": {
         "doc": "A unique identifier that refers to an instance of sharing credentials to a person’s device that another user, device, or the web initiates.",
-        "url": "https://developer.apple.com/documentation/PassKit/PKIdentityDocumentMetadata/sharingInstanceIdentifier"
+        "url": "https://developer.apple.com/documentation/passkit/pkidentitydocumentmetadata/sharinginstanceidentifier"
       }
     },
     "PKIdentityElement": {
@@ -2347,8 +2315,8 @@
         "url": "https://developer.apple.com/documentation/passkit/pkstoredvaluepassbalance/balancetype-swift.struct"
       },
       "amount": {
-        "doc": "The current balance of a stored-value pass in money or points.",
-        "url": "https://developer.apple.com/documentation/passkit/pkstoredvaluepassbalance/amount-2nwf5"
+        "doc": "The current balance in money or points.",
+        "url": "https://developer.apple.com/documentation/passkit/pkstoredvaluepassbalance/amount-2vfd3"
       },
       "balanceType": {
         "doc": "The type of value that the balance represents, such as money or points.",

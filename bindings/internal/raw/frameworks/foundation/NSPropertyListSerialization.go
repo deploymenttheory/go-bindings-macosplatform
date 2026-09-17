@@ -11,7 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An object that converts between a property list and one of several serialized representations.
+// An object that converts between a property list and one of several serialized representations. The “PropertyListSerialization“ class provides methods that convert a property list to and from several serialized formats. A property list is itself an array or dictionary that contains only “NSData“, “NSString“, “NSArray“, “NSDictionary“, “NSDate“, and “NSNumber“ objects. Property list objects are toll-free bridged with their respective Core Foundation types (<doc://com.apple.documentation/documentation/corefoundation/cfdata>, <doc://com.apple.documentation/documentation/corefoundation/cfstring>, and so on). See [Toll-Free Bridging](https://developer.apple.com/library/archive/documentation/General/Conceptual/CocoaEncyclopedia/Toll-FreeBridgin/Toll-FreeBridgin.html#//apple_ref/doc/uid/TP40010810-CH2)  for more information on toll-free bridging.
 //
 // Apple documentation: https://developer.apple.com/documentation/foundation/nspropertylistserialization
 type NSPropertyListSerialization struct {
@@ -39,11 +39,13 @@ func NSPropertyListSerializationFromID(id objc.ID) *NSPropertyListSerialization 
 	return o
 }
 
+// Returns a Boolean value that indicates whether a given property list is valid for a given format.
 func NSPropertyListSerializationPropertyListIsValidForFormat(plist objc.ID, format NSPropertyListFormat) bool {
 	_ret := objc.Send[bool](objc.ID(_clsNSPropertyListSerialization), _nSPropertyListSerializationSelPropertyListIsValidForFormat, plist, format)
 	return _ret
 }
 
+// Returns an `NSData` object containing the serialized representation of a given property list in a given format. The format can be either `NSPropertyListXMLFormat_v1_0` or `NSPropertyListBinaryFormat_v1_0`. The `opt` parameter is currently unused and should be set to `0`. If an error occurs the return value will be `nil` and the error parameter (if non-NULL) set to an autoreleased `NSError` describing the problem.
 func NSPropertyListSerializationDataWithPropertyListFormatOptionsError(plist objc.ID, format NSPropertyListFormat, opt uint) (*NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPropertyListSerialization), _nSPropertyListSerializationSelDataWithPropertyListFormatOptionsError, plist, format, opt, unsafe.Pointer(&_nsErr))
@@ -56,6 +58,7 @@ func NSPropertyListSerializationDataWithPropertyListFormatOptionsError(plist obj
 	return NSDataFromID(_ret), nil
 }
 
+// Writes a property list to an output stream in a given format. The stream should be opened and configured. The format can be either `NSPropertyListXMLFormat_v1_0` or `NSPropertyListBinaryFormat_v1_0`. The `opt` parameter is currently unused and should be set to `0`. If an error occurs the return value will be `0` and the error parameter (if non-NULL) set to an autoreleased `NSError` describing the problem. In a successful case, the return value is the number of bytes written to the stream.
 func NSPropertyListSerializationWritePropertyListToStreamFormatOptionsError(plist objc.ID, stream *NSOutputStream, format NSPropertyListFormat, opt uint) (int, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[int](objc.ID(_clsNSPropertyListSerialization), _nSPropertyListSerializationSelWritePropertyListToStreamFormatOptionsError, plist, stream.Ptr(), format, opt, unsafe.Pointer(&_nsErr))
@@ -65,6 +68,7 @@ func NSPropertyListSerializationWritePropertyListToStreamFormatOptionsError(plis
 	return _ret, nil
 }
 
+// Creates and returns a property list from the specified data. The options can be any of `NSPropertyListMutabilityOptions`. If the format parameter is non-NULL, it will be filled out with the format that the property list was stored in. If an error occurs the return value will be `nil` and the error parameter (if non-NULL) set to an autoreleased `NSError` describing the problem.
 func NSPropertyListSerializationPropertyListWithDataOptionsFormatError(data *NSData, opt NSPropertyListMutabilityOptions, format *NSPropertyListFormat) (objc.ID, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPropertyListSerialization), _nSPropertyListSerializationSelPropertyListWithDataOptionsFormatError, data.Ptr(), opt, format, unsafe.Pointer(&_nsErr))
@@ -74,6 +78,7 @@ func NSPropertyListSerializationPropertyListWithDataOptionsFormatError(data *NSD
 	return _ret, nil
 }
 
+// Creates and returns a property list by reading from the specified stream. The options can be any of `NSPropertyListMutabilityOptions`. If the format parameter is non-NULL, it will be filled out with the format that the property list was stored in. If an error occurs the return value will be `nil` and the error parameter (if non-NULL) set to an autoreleased `NSError` describing the problem.
 func NSPropertyListSerializationPropertyListWithStreamOptionsFormatError(stream *NSInputStream, opt NSPropertyListMutabilityOptions, format *NSPropertyListFormat) (objc.ID, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPropertyListSerialization), _nSPropertyListSerializationSelPropertyListWithStreamOptionsFormatError, stream.Ptr(), opt, format, unsafe.Pointer(&_nsErr))
@@ -83,6 +88,7 @@ func NSPropertyListSerializationPropertyListWithStreamOptionsFormatError(stream 
 	return _ret, nil
 }
 
+// Returns a data object containing a given property list in a given format. @DeprecationSummary { Use “NSPropertyListSerialization/dataWithPropertyList:format:options:error:“ instead. }
 // Deprecated: Use dataWithPropertyList:format:options:error: instead.
 func NSPropertyListSerializationDataFromPropertyListFormatErrorDescription(plist objc.ID, format NSPropertyListFormat, errorString *NSString) *NSData {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPropertyListSerialization), _nSPropertyListSerializationSelDataFromPropertyListFormatErrorDescription, plist, format, errorString.Ptr())
@@ -92,6 +98,7 @@ func NSPropertyListSerializationDataFromPropertyListFormatErrorDescription(plist
 	return NSDataFromID(_ret)
 }
 
+// Creates and returns a property list from the specified data and using the specified options. @DeprecationSummary { Use “NSPropertyListSerialization/propertyListWithData:options:format:error:“ instead. }
 // Deprecated: Use propertyListWithData:options:format:error: instead.
 func NSPropertyListSerializationPropertyListFromDataMutabilityOptionFormatErrorDescription(data *NSData, opt NSPropertyListMutabilityOptions, format *NSPropertyListFormat, errorString *NSString) objc.ID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPropertyListSerialization), _nSPropertyListSerializationSelPropertyListFromDataMutabilityOptionFormatErrorDescription, data.Ptr(), opt, format, errorString.Ptr())

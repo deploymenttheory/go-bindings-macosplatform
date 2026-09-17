@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An array of length matching the rank, holding the dimensions of a tensor.
+// An integer array that holds per-dimension values such as tensor sizes, strides, or block factors
 //
 // Apple documentation: https://developer.apple.com/documentation/metal/mtltensorextents
 type MTLTensorExtents struct {
@@ -34,7 +34,7 @@ func MTLTensorExtentsFromID(id objc.ID) *MTLTensorExtents {
 	return o
 }
 
-// Creates a new tensor extents with the rank and extent values you provide.
+// Creates an extents object with the rank and values you provide.
 func (o *MTLTensorExtents) InitWithRankValues(rank uint, values *int64) *MTLTensorExtents {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLTensorExtentsSelInitWithRankValues, rank, values)
 	if _ret != 0 {
@@ -43,13 +43,13 @@ func (o *MTLTensorExtents) InitWithRankValues(rank uint, values *int64) *MTLTens
 	return MTLTensorExtentsFromID(_ret)
 }
 
-// Returns the extent at an index.
+// Returns the value at the specified dimension index.
 func (o *MTLTensorExtents) ExtentAtDimensionIndex(dimensionIndex uint) int {
 	_ret := objc.Send[int](o.Ptr(), _mTLTensorExtentsSelExtentAtDimensionIndex, dimensionIndex)
 	return _ret
 }
 
-// Obtains the rank of the tensor. The rank represents the number of dimensions.
+// The number of values in the extents object.
 func (o *MTLTensorExtents) Rank() uint {
 	_ret := objc.Send[uint](o.Ptr(), _mTLTensorExtentsSelRank)
 	return _ret

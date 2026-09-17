@@ -1039,6 +1039,19 @@ func UTTypeMakefile() *UTType {
 	return UTTypeFromID(id)
 }
 
+// \brief Markdown data UTI: net.daringfireball.markdown conforms to: public.utf8-plain-text
+func UTTypeMarkdown() *UTType {
+	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeMarkdown")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
+}
+
 // \brief A base type for messages (email, IM, etc.) UTI: public.message
 func UTTypeMessage() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeMessage")

@@ -141,21 +141,21 @@ func (m *Morphology) WithScriptingProperties(scriptingProperties map[string]obj.
 	return m
 }
 
-// GrammaticalGender returns the grammatical gender.
+// GrammaticalGender returns the grammatical gender used for inflecting strings.
 func (m *Morphology) GrammaticalGender() GrammaticalGender {
 	defer runtime.KeepAlive(m)
 	_r := objc.Send[GrammaticalGender](objref.IDOf(m), objc.RegisterName("grammaticalGender"))
 	return _r
 }
 
-// PartOfSpeech returns the part of speech.
+// PartOfSpeech returns the grammatical part of speech used for inflecting strings.
 func (m *Morphology) PartOfSpeech() GrammaticalPartOfSpeech {
 	defer runtime.KeepAlive(m)
 	_r := objc.Send[GrammaticalPartOfSpeech](objref.IDOf(m), objc.RegisterName("partOfSpeech"))
 	return _r
 }
 
-// Number returns the number.
+// Number returns the grammatical number used for inflecting strings.
 func (m *Morphology) Number() GrammaticalNumber {
 	defer runtime.KeepAlive(m)
 	_r := objc.Send[GrammaticalNumber](objref.IDOf(m), objc.RegisterName("number"))
@@ -216,7 +216,7 @@ func (m *Morphology) SetCustomPronounForLanguage(features *MorphologyCustomProno
 	return nil
 }
 
-// IsUnspecified reports whether the object is unspecified.
+// IsUnspecified reports whether the morphology has no specific settings.
 func (m *Morphology) IsUnspecified() bool {
 	defer runtime.KeepAlive(m)
 	_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("isUnspecified"))

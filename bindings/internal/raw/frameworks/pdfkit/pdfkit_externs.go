@@ -7,6 +7,9 @@ import (
 	"unsafe"
 
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/foundation"
 )
 
 func PDFAnnotationHighlightingModeInvert() uintptr {
@@ -569,24 +572,52 @@ func PDFDocumentUserPasswordOption() uintptr {
 	return ptr
 }
 
-func PDFPageImageInitializationOptionCompressionQuality() uintptr {
+func PDFPageImageInitializationOptionCompressionQuality() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_pdfkitLib, "PDFPageImageInitializationOptionCompressionQuality")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func PDFPageImageInitializationOptionMediaBox() uintptr {
+func PDFPageImageInitializationOptionMediaBox() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_pdfkitLib, "PDFPageImageInitializationOptionMediaBox")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func PDFPageImageInitializationOptionRotation() uintptr {
+func PDFPageImageInitializationOptionRotation() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_pdfkitLib, "PDFPageImageInitializationOptionRotation")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func PDFPageImageInitializationOptionUpscaleIfSmaller() uintptr {
+func PDFPageImageInitializationOptionUpscaleIfSmaller() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_pdfkitLib, "PDFPageImageInitializationOptionUpscaleIfSmaller")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PDFThumbnailViewDocumentEditedNotification() uintptr {

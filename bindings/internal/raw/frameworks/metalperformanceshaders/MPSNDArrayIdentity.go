@@ -26,6 +26,9 @@ var (
 	_mPSNDArrayIdentitySelReshapeWithCommandBufferSourceArrayDimensionCountDimensionSizesDestinationArray               = objc.RegisterName("reshapeWithCommandBuffer:sourceArray:dimensionCount:dimensionSizes:destinationArray:")
 	_mPSNDArrayIdentitySelReshapeWithCommandEncoderCommandBufferSourceArrayShapeDestinationArray                        = objc.RegisterName("reshapeWithCommandEncoder:commandBuffer:sourceArray:shape:destinationArray:")
 	_mPSNDArrayIdentitySelReshapeWithCommandEncoderCommandBufferSourceArrayDimensionCountDimensionSizesDestinationArray = objc.RegisterName("reshapeWithCommandEncoder:commandBuffer:sourceArray:dimensionCount:dimensionSizes:destinationArray:")
+	_mPSNDArrayIdentitySelReshapeWithSourceArrayShape                                                                   = objc.RegisterName("reshapeWithSourceArray:shape:")
+	_mPSNDArrayIdentitySelReshapeWithMTL4CommandEncoderSourceArrayShapeDestinationArray                                 = objc.RegisterName("reshapeWithMTL4CommandEncoder:sourceArray:shape:destinationArray:")
+	_mPSNDArrayIdentitySelReshapeWithMTL4CommandEncoderSourceArrayDimensionCountDimensionSizesDestinationArray          = objc.RegisterName("reshapeWithMTL4CommandEncoder:sourceArray:dimensionCount:dimensionSizes:destinationArray:")
 )
 
 func MPSNDArrayIdentityFromID(id objc.ID) *MPSNDArrayIdentity {
@@ -80,4 +83,23 @@ func (o *MPSNDArrayIdentity) ReshapeWithCommandEncoderCommandBufferSourceArrayDi
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return mpscore.MPSNDArrayFromID(_ret)
+}
+
+// @abstract   Do a reshape operation on the CPU. @param      sourceArray         The source NDArray. @param      shape               The new shape in Tensorflow dimension order. @result     A new array view of `sourceArray` is returned. Or `nil` If aliasing is not possible.
+func (o *MPSNDArrayIdentity) ReshapeWithSourceArrayShape(sourceArray *mpscore.MPSNDArray, shape unsafe.Pointer) *mpscore.MPSNDArray {
+	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNDArrayIdentitySelReshapeWithSourceArrayShape, sourceArray.Ptr(), shape)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return mpscore.MPSNDArrayFromID(_ret)
+}
+
+// @abstract   Encode a reshape operation. The encoder associates the commands with MTLStageDispatch. Synchronize your workloads against this stage when using this function to prevent race conditions. @param      encoder          The MTL4ComputeCommandEncoder to encode the kernel with. @param      sourceArray      The source NDArray. @param      shape            The new shape in Tensorflow dimension order. @param      destinationArray The destination NDArray. The shape of `destinationArray` must match `shape`.
+func (o *MPSNDArrayIdentity) ReshapeWithMTL4CommandEncoderSourceArrayShapeDestinationArray(encoder metal.MTL4ComputeCommandEncoder, sourceArray *mpscore.MPSNDArray, shape unsafe.Pointer, destinationArray *mpscore.MPSNDArray) {
+	o.Ptr().Send(_mPSNDArrayIdentitySelReshapeWithMTL4CommandEncoderSourceArrayShapeDestinationArray, encoder, sourceArray.Ptr(), shape, destinationArray.Ptr())
+}
+
+// @abstract   Encode a reshape operation. The encoder associates the commands with MTLStageDispatch. Synchronize your workloads against this stage when using this function to prevent race conditions. @param      encoder            The MTL4ComputeCommandEncoder to encode the kernel with. @param      sourceArray        The source NDArray. @param      numberOfDimensions The NDArray's dimension count. @param      dimensionSizes     The extents of each dimension of the NDArray. @param      destinationArray   The destination NDArray. The shape of `destinationArray` must match `numberOfDimensions` and `dimensionSizes`.
+func (o *MPSNDArrayIdentity) ReshapeWithMTL4CommandEncoderSourceArrayDimensionCountDimensionSizesDestinationArray(encoder metal.MTL4ComputeCommandEncoder, sourceArray *mpscore.MPSNDArray, numberOfDimensions uint, dimensionSizes *uint, destinationArray *mpscore.MPSNDArray) {
+	o.Ptr().Send(_mPSNDArrayIdentitySelReshapeWithMTL4CommandEncoderSourceArrayDimensionCountDimensionSizesDestinationArray, encoder, sourceArray.Ptr(), numberOfDimensions, dimensionSizes, destinationArray.Ptr())
 }

@@ -9,8 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A unit of measure for temperature.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsunittemperature
 type NSUnitTemperature struct {
 	NSDimension
@@ -33,6 +31,7 @@ func NSUnitTemperatureFromID(id objc.ID) *NSUnitTemperature {
 	return o
 }
 
+// The kelvin unit of temperature.
 func NSUnitTemperatureKelvin() *NSUnitTemperature {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitTemperature), _nSUnitTemperatureSelKelvin)
 	if _ret != 0 {
@@ -41,6 +40,7 @@ func NSUnitTemperatureKelvin() *NSUnitTemperature {
 	return NSUnitTemperatureFromID(_ret)
 }
 
+// The degrees Celsius unit of temperature.
 func NSUnitTemperatureCelsius() *NSUnitTemperature {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitTemperature), _nSUnitTemperatureSelCelsius)
 	if _ret != 0 {
@@ -49,6 +49,7 @@ func NSUnitTemperatureCelsius() *NSUnitTemperature {
 	return NSUnitTemperatureFromID(_ret)
 }
 
+// The degrees Fahrenheit unit of temperature.
 func NSUnitTemperatureFahrenheit() *NSUnitTemperature {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitTemperature), _nSUnitTemperatureSelFahrenheit)
 	if _ret != 0 {

@@ -33,6 +33,8 @@ var (
 	_pHFetchOptionsSelSetFetchLimit                    = objc.RegisterName("setFetchLimit:")
 	_pHFetchOptionsSelWantsIncrementalChangeDetails    = objc.RegisterName("wantsIncrementalChangeDetails")
 	_pHFetchOptionsSelSetWantsIncrementalChangeDetails = objc.RegisterName("setWantsIncrementalChangeDetails:")
+	_pHFetchOptionsSelPrefetchAssetExtendedMetadata    = objc.RegisterName("prefetchAssetExtendedMetadata")
+	_pHFetchOptionsSelSetPrefetchAssetExtendedMetadata = objc.RegisterName("setPrefetchAssetExtendedMetadata:")
 )
 
 func PHFetchOptionsFromID(id objc.ID) *PHFetchOptions {
@@ -112,4 +114,14 @@ func (o *PHFetchOptions) WantsIncrementalChangeDetails() bool {
 
 func (o *PHFetchOptions) SetWantsIncrementalChangeDetails(wantsIncrementalChangeDetails bool) {
 	o.Ptr().Send(_pHFetchOptionsSelSetWantsIncrementalChangeDetails, wantsIncrementalChangeDetails)
+}
+
+// A Boolean value to fetch `PHAssetExtendedMetadata` when the asset is also fetched. By default `extendedMetadata` is fetched on demand, with the dot accessor. Prefetching will fetch it as part of the `PHAsset` in a single fetch, rather than incurring fetch overhead for each `PHAsset`.
+func (o *PHFetchOptions) PrefetchAssetExtendedMetadata() bool {
+	_ret := objc.Send[bool](o.Ptr(), _pHFetchOptionsSelPrefetchAssetExtendedMetadata)
+	return _ret
+}
+
+func (o *PHFetchOptions) SetPrefetchAssetExtendedMetadata(prefetchAssetExtendedMetadata bool) {
+	o.Ptr().Send(_pHFetchOptionsSelSetPrefetchAssetExtendedMetadata, prefetchAssetExtendedMetadata)
 }

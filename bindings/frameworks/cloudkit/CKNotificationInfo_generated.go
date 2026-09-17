@@ -16,8 +16,6 @@ import (
 )
 
 // NotificationInfo is an idiomatic wrapper over the Objective-C class CKNotificationInfo.
-//
-// An object that describes the configuration of a subscription’s push notifications.
 type NotificationInfo struct {
 	objref.Handle
 }
@@ -92,7 +90,7 @@ func (ni *NotificationInfo) WithAlertLocalizationKey(alertLocalizationKey unsafe
 	return ni
 }
 
-// WithAlertLocalizationArgs sets the fields for building a notification’s alert.
+// WithAlertLocalizationArgs sets the fields for building a notification's alert. This property is an array of field names that CloudKit uses to extract the corresponding values from the record that triggers the push notification. The values must be strings, numbers, or dates. Don't specify keys that use other value types. CloudKit may truncate strings with a length greater than 100 characters when it adds them to a notification's payload. If you use `%
 func (ni *NotificationInfo) WithAlertLocalizationArgs(alertLocalizationArgs unsafe.Pointer) *NotificationInfo {
 	objc.Send[objc.ID](objref.IDOf(ni), objc.RegisterName("setAlertLocalizationArgs:"), alertLocalizationArgs)
 	return ni
@@ -110,7 +108,7 @@ func (ni *NotificationInfo) WithTitleLocalizationKey(titleLocalizationKey unsafe
 	return ni
 }
 
-// WithTitleLocalizationArgs sets the fields for building a notification’s title.
+// WithTitleLocalizationArgs sets the fields for building a notification's title. This property is an array of field names that CloudKit uses to extract the corresponding values from the record that triggers the push notification. The values must be strings, numbers, or dates. Don't specify keys that use other value types. CloudKit may truncate strings with a length greater than 100 characters when it adds them to a notification's payload. If you use `%
 func (ni *NotificationInfo) WithTitleLocalizationArgs(titleLocalizationArgs unsafe.Pointer) *NotificationInfo {
 	objc.Send[objc.ID](objref.IDOf(ni), objc.RegisterName("setTitleLocalizationArgs:"), titleLocalizationArgs)
 	return ni
@@ -128,7 +126,7 @@ func (ni *NotificationInfo) WithSubtitleLocalizationKey(subtitleLocalizationKey 
 	return ni
 }
 
-// WithSubtitleLocalizationArgs sets the fields for building a notification’s subtitle.
+// WithSubtitleLocalizationArgs sets the fields for building a notification's subtitle. This property is an array of field names that CloudKit uses to extract the corresponding values from the record that triggers the push notification. The values must be strings, numbers, or dates. Don't specify keys that use other value types. CloudKit may truncate strings with a length greater than 100 characters when it adds them to a notification's payload. If you use `%
 func (ni *NotificationInfo) WithSubtitleLocalizationArgs(subtitleLocalizationArgs unsafe.Pointer) *NotificationInfo {
 	objc.Send[objc.ID](objref.IDOf(ni), objc.RegisterName("setSubtitleLocalizationArgs:"), subtitleLocalizationArgs)
 	return ni
@@ -152,7 +150,7 @@ func (ni *NotificationInfo) WithSoundName(soundName unsafe.Pointer) *Notificatio
 	return ni
 }
 
-// WithDesiredKeys sets the names of fields to include in the push notification’s payload.
+// WithDesiredKeys sets the names of fields to include in the push notification's payload. This property contains an array of strings, each of which corresponds to the name of a field in the record that triggers the notification. When the system receives a notification, it includes the keys, and their corresponding values. You can request a maximum of three keys. For the keys you specify, the allowable types are <doc://com.apple.documentation/documentation/foundation/nsstring>, <doc://com.apple.documentation/documentation/foundation/nsnumber>, <doc://com.apple.documentation/documentation/corelocation/cllocation>, <doc://com.apple.documentation/documentation/foundation/nsdate>, and “CKRecord/Reference“. You can't specify keys with values that contain other data types. CloudKit may truncate strings that are more than 100 characters when it adds them to the notification's payload.
 func (ni *NotificationInfo) WithDesiredKeys(items ...obj.Object) *NotificationInfo {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(ni), objc.RegisterName("setDesiredKeys:"), _arr)
@@ -171,7 +169,7 @@ func (ni *NotificationInfo) WithShouldSendContentAvailable(shouldSendContentAvai
 	return ni
 }
 
-// WithShouldSendMutableContent sets a Boolean value that indicates whether the push notification sets the mutable content flag. When this property is <doc://com.apple.documentation/documentation/swift/true>, the server includes the `mutable-content` flag with a value of `1` in the push notification's payload. When the value is `1`, the system passes the notification to your app extension for modification before delivery. See <doc://com.apple.documentation/documentation/usernotifications/generating-a-remote-notification> for more information about the `mutable-content` flag, and <doc://com.apple.documentation/documentation/usernotifications/modifying-content-in-newly-delivered-notifications> for information about how to modify push notifiction content in your app extension prior to delivery. The default value of this property is <doc://com.apple.documentation/documentation/swift/false>.
+// WithShouldSendMutableContent sets a Boolean value that indicates whether the push notification sets the mutable content flag. When this property is <doc://com.apple.documentation/documentation/swift/true>, the server includes the `mutable-content` flag with a value of `1` in the push notification's payload. When the value is `1`, the system passes the notification to your app extension for modification before delivery. See <doc://com.apple.documentation/documentation/usernotifications/generating-a-remote-notification> for more information about the `mutable-content` flag, and <doc://com.apple.documentation/documentation/usernotifications/modifying-content-in-newly-delivered-notifications> for information about how to modify push notification content in your app extension prior to delivery. The default value of this property is <doc://com.apple.documentation/documentation/swift/false>.
 func (ni *NotificationInfo) WithShouldSendMutableContent(shouldSendMutableContent bool) *NotificationInfo {
 	objc.Send[objc.ID](objref.IDOf(ni), objc.RegisterName("setShouldSendMutableContent:"), shouldSendMutableContent)
 	return ni
@@ -296,7 +294,7 @@ func (ni *NotificationInfo) ShouldSendContentAvailable() bool {
 	return _r
 }
 
-// ShouldSendMutableContent reports whether the push notification sets the mutable content flag. When this property is <doc://com.apple.documentation/documentation/swift/true>, the server includes the `mutable-content` flag with a value of `1` in the push notification's payload. When the value is `1`, the system passes the notification to your app extension for modification before delivery. See <doc://com.apple.documentation/documentation/usernotifications/generating-a-remote-notification> for more information about the `mutable-content` flag, and <doc://com.apple.documentation/documentation/usernotifications/modifying-content-in-newly-delivered-notifications> for information about how to modify push notifiction content in your app extension prior to delivery. The default value of this property is <doc://com.apple.documentation/documentation/swift/false>.
+// ShouldSendMutableContent reports whether the push notification sets the mutable content flag. When this property is <doc://com.apple.documentation/documentation/swift/true>, the server includes the `mutable-content` flag with a value of `1` in the push notification's payload. When the value is `1`, the system passes the notification to your app extension for modification before delivery. See <doc://com.apple.documentation/documentation/usernotifications/generating-a-remote-notification> for more information about the `mutable-content` flag, and <doc://com.apple.documentation/documentation/usernotifications/modifying-content-in-newly-delivered-notifications> for information about how to modify push notification content in your app extension prior to delivery. The default value of this property is <doc://com.apple.documentation/documentation/swift/false>.
 func (ni *NotificationInfo) ShouldSendMutableContent() bool {
 	defer runtime.KeepAlive(ni)
 	_r := objc.Send[bool](objref.IDOf(ni), objc.RegisterName("shouldSendMutableContent"))

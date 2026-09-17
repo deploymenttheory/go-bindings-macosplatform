@@ -4,7 +4,8 @@
   "main_actor_classes": [
     "AVPlayer",
     "AVPlayerItem",
-    "AVPlayerItemTrack"
+    "AVPlayerItemTrack",
+    "AVSampleBufferDisplayLayer"
   ],
   "nonisolated_selectors": {
     "AVPlayer": [
@@ -81,11 +82,14 @@
       "copy",
       "copyWithZone:",
       "currentDate",
+      "currentMediaSelection",
       "currentTime",
       "customVideoCompositor",
       "duration",
       "error",
       "errorLog",
+      "fetchAccessLogWithCompletionHandler:",
+      "fetchErrorLogWithCompletionHandler:",
       "forwardPlaybackEndTime",
       "initWithURL:",
       "initWithURL:::SYNTHESIZED::c:objc(cs)AVPlayerItem",

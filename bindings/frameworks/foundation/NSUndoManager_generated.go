@@ -16,8 +16,6 @@ import (
 )
 
 // UndoManager is an idiomatic wrapper over the Objective-C class NSUndoManager.
-//
-// A general-purpose recorder of operations that enables undo and redo.
 type UndoManager struct {
 	objref.Handle
 }
@@ -86,7 +84,7 @@ func NewUndoManager() *UndoManager {
 	return _mainthread0
 }
 
-// WithGroupsByEvent sets a Boolean value that indicates whether the receiver automatically creates undo groups around each pass of the run loop. If `true`, the receiver automatically creates undo groups around each pass of the run loop. The default is `true`. If you turn automatic grouping off, you must close groups explicitly before invoking either “undo“ or “undoNestedGroup“.
+// WithGroupsByEvent sets a Boolean value that indicates whether the manager automatically creates undo groups around each pass of the run loop. If `true`, the receiver automatically creates undo groups around each pass of the run loop. The default is `true`. If you turn automatic grouping off, you must close groups explicitly before invoking either “undo“ or “undoNestedGroup“.
 func (um *UndoManager) WithGroupsByEvent(groupsByEvent bool) *UndoManager {
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(um), objc.RegisterName("setGroupsByEvent:"), groupsByEvent)
@@ -141,7 +139,7 @@ func (um *UndoManager) EndUndoGrouping() {
 
 }
 
-// DisableUndoRegistration disables the recording of undo operations, whether by “registerUndoWithTarget:selector:object:“ or by invocation-based undo. This method can be invoked multiple times by multiple clients. The “enableUndoRegistration“ method must be invoked an equal number of times to re-enable undo registration.
+// DisableUndoRegistration disables the recording of undo operations. This method can be invoked multiple times by multiple clients. The “enableUndoRegistration“ method must be invoked an equal number of times to re-enable undo registration.
 func (um *UndoManager) DisableUndoRegistration() {
 	defer runtime.KeepAlive(um)
 	purego.Main(func() {
@@ -159,7 +157,7 @@ func (um *UndoManager) EnableUndoRegistration() {
 
 }
 
-// Undo closes the top-level undo group if necessary and invokes “undoNestedGroup“. This method also invokes “endUndoGrouping“ if the nesting level is 1. Raises an “NSInternalInconsistencyException“ if more than one undo group is open (that is, if the last group isn’t at the top level). This method posts an “NSUndoManagerCheckpointNotification“.
+// Undo closes the top-level undo group if necessary, and then performs undo operations on the group. This method also invokes “endUndoGrouping“ if the nesting level is 1. Raises an “NSInternalInconsistencyException“ if more than one undo group is open (that is, if the last group isn’t at the top level). This method posts an “NSUndoManagerCheckpointNotification“.
 func (um *UndoManager) Undo() {
 	defer runtime.KeepAlive(um)
 	purego.Main(func() {
@@ -186,7 +184,7 @@ func (um *UndoManager) UndoNestedGroup() {
 
 }
 
-// RemoveAllActions clears the undo and redo stacks and re-enables the receiver.
+// RemoveAllActions clears the undo and redo stacks and reenables the manager.
 func (um *UndoManager) RemoveAllActions() {
 	defer runtime.KeepAlive(um)
 	purego.Main(func() {
@@ -220,7 +218,7 @@ func (um *UndoManager) PrepareWithInvocationTarget(target obj.Object) obj.Object
 
 }
 
-// RegisterUndoWithTargetHandler records a single undo operation for a given target so that when the manager performs an undo, it executes the specified block.
+// RegisterUndoWithTargetHandler registers the specified closure to implement a single undo operation that the target receives. As with other undo operations, this does not strongly retain target. Care should be taken to avoid introducing retain cycles by other references captured by the block. - Parameter target: The target of the undo operation. - Parameter undoHandler: The block to be executed when an operation is undone. The block takes a single argument, the target of the undo operation.
 func (um *UndoManager) RegisterUndoWithTargetHandler(target obj.Object, undoHandler func(obj.Object)) {
 	defer runtime.KeepAlive(um)
 	defer runtime.KeepAlive(target)
@@ -248,7 +246,7 @@ func (um *UndoManager) SetActionName(actionName string) {
 
 }
 
-// UndoActionUserInfoValueForKey get a value from the undo action's user info - Parameter key: Which value should be retrieved
+// UndoActionUserInfoValueForKey retrieves the undo action's user info value for the given key. - Parameter key: Which value should be retrieved
 func (um *UndoManager) UndoActionUserInfoValueForKey(key *String) obj.Object {
 	defer runtime.KeepAlive(um)
 	defer runtime.KeepAlive(key)
@@ -263,7 +261,7 @@ func (um *UndoManager) UndoActionUserInfoValueForKey(key *String) obj.Object {
 
 }
 
-// RedoActionUserInfoValueForKey get a value from the redo action's user info - Parameter key: Which value should be retrieved
+// RedoActionUserInfoValueForKey retrieves the redo action's user info value for the given key. - Parameter key: Which value should be retrieved
 func (um *UndoManager) RedoActionUserInfoValueForKey(key *String) obj.Object {
 	defer runtime.KeepAlive(um)
 	defer runtime.KeepAlive(key)
@@ -278,7 +276,7 @@ func (um *UndoManager) RedoActionUserInfoValueForKey(key *String) obj.Object {
 
 }
 
-// SetActionUserInfoValueForKey set user info for the Undo or Redo command. - Parameter info: Value to be saved in the user info - Parameter key: Key at which the object should be saved
+// SetActionUserInfoValueForKey sets a user info value for an undo or redo action. - Parameter info: Value to be saved in the user info - Parameter key: Key at which the object should be saved
 func (um *UndoManager) SetActionUserInfoValueForKey(info obj.Object, key *String) {
 	defer runtime.KeepAlive(um)
 	defer runtime.KeepAlive(info)
@@ -289,7 +287,7 @@ func (um *UndoManager) SetActionUserInfoValueForKey(info obj.Object, key *String
 
 }
 
-// UndoMenuTitleForUndoActionName returns the complete, localized title of the Undo menu command for the action identified by the given name. Override this method if you want to customize the localization behaviour. This method is invoked by “undoMenuItemTitle“. - Parameter actionName: The name of the undo action. - Returns: The localized title of the undo menu item.
+// UndoMenuTitleForUndoActionName returns the localized title of the Undo menu command for the identified action. Override this method if you want to customize the localization behaviour. This method is invoked by “undoMenuItemTitle“. - Parameter actionName: The name of the undo action. - Returns: The localized title of the undo menu item.
 func (um *UndoManager) UndoMenuTitleForUndoActionName(actionName string) string {
 	defer runtime.KeepAlive(um)
 	var _mainthread0 string
@@ -306,7 +304,7 @@ func (um *UndoManager) UndoMenuTitleForUndoActionName(actionName string) string 
 
 }
 
-// RedoMenuTitleForUndoActionName returns the complete, localized title of the Redo menu command for the action identified by the given name. Override this method if you want to customize the localization behaviour. This method is invoked by “redoMenuItemTitle“. - Parameter actionName: The name of the redo action. - Returns: The localized title of the redo menu item.
+// RedoMenuTitleForUndoActionName returns the localized title of the Redo menu command for the identified action. Override this method if you want to customize the localization behaviour. This method is invoked by “redoMenuItemTitle“. - Parameter actionName: The name of the redo action. - Returns: The localized title of the redo menu item.
 func (um *UndoManager) RedoMenuTitleForUndoActionName(actionName string) string {
 	defer runtime.KeepAlive(um)
 	var _mainthread0 string
@@ -323,7 +321,7 @@ func (um *UndoManager) RedoMenuTitleForUndoActionName(actionName string) string 
 
 }
 
-// GroupingLevel returns the number of nested undo groups (or redo groups, if Redo was invoked last) in the current event loop. An integer indicating the number of nested groups. If `0` is returned, there is no open undo or redo group.
+// GroupingLevel returns the number of nested undo groups (or redo groups, if redo is the most recent operation) in the current event loop. An integer indicating the number of nested groups. If `0` is returned, there is no open undo or redo group.
 func (um *UndoManager) GroupingLevel() int {
 	defer runtime.KeepAlive(um)
 	var _mainthread0 int
@@ -351,7 +349,7 @@ func (um *UndoManager) IsUndoRegistrationEnabled() bool {
 
 }
 
-// GroupsByEvent reports whether the receiver automatically creates undo groups around each pass of the run loop. If `true`, the receiver automatically creates undo groups around each pass of the run loop. The default is `true`. If you turn automatic grouping off, you must close groups explicitly before invoking either “undo“ or “undoNestedGroup“.
+// GroupsByEvent reports whether the manager automatically creates undo groups around each pass of the run loop. If `true`, the receiver automatically creates undo groups around each pass of the run loop. The default is `true`. If you turn automatic grouping off, you must close groups explicitly before invoking either “undo“ or “undoNestedGroup“.
 func (um *UndoManager) GroupsByEvent() bool {
 	defer runtime.KeepAlive(um)
 	var _mainthread0 bool
@@ -394,7 +392,7 @@ func (um *UndoManager) RunLoopModes() []*String {
 	return _mainthread0
 }
 
-// CanUndo reports whether the receiver has any actions to undo. The return value does not mean you can safely invoke “undo“ or “undoNestedGroup“ — you may have to close open undo groups first.
+// CanUndo reports whether the manager has any actions to undo. The return value does not mean you can safely invoke “undo“ or “undoNestedGroup“ — you may have to close open undo groups first.
 func (um *UndoManager) CanUndo() bool {
 	defer runtime.KeepAlive(um)
 	var _mainthread0 bool
@@ -408,7 +406,7 @@ func (um *UndoManager) CanUndo() bool {
 
 }
 
-// CanRedo reports whether the receiver has any actions to redo. Because any undo operation registered clears the redo stack, this method posts an NSUndoManagerCheckpointNotification to allow clients to apply their pending operations before testing the redo stack.
+// CanRedo reports whether the manager has any actions to redo. Because any undo operation registered clears the redo stack, this method posts an NSUndoManagerCheckpointNotification to allow clients to apply their pending operations before testing the redo stack.
 func (um *UndoManager) CanRedo() bool {
 	defer runtime.KeepAlive(um)
 	var _mainthread0 bool
@@ -422,7 +420,7 @@ func (um *UndoManager) CanRedo() bool {
 
 }
 
-// UndoCount returns how many times `undo` can be invoked before there are no more actions left to be undone
+// UndoCount returns the number of times you can invoke undo before there are no actions left to undo. A nonzero value doesn't imply you can safely invoke “undo“ immediately, because you may have to close open undo groups first.
 func (um *UndoManager) UndoCount() int {
 	defer runtime.KeepAlive(um)
 	var _mainthread0 int
@@ -436,7 +434,7 @@ func (um *UndoManager) UndoCount() int {
 
 }
 
-// RedoCount returns how many times `redo` can be invoked before there are no more actions left to be redone
+// RedoCount returns the number of times you can invoke redo before there are no actions left to redo.
 func (um *UndoManager) RedoCount() int {
 	defer runtime.KeepAlive(um)
 	var _mainthread0 int
@@ -450,7 +448,7 @@ func (um *UndoManager) RedoCount() int {
 
 }
 
-// IsUndoing reports whether the receiver is in the process of performing its “undo“ or “undoNestedGroup“ method.
+// IsUndoing reports whether returns a Boolean value that indicates whether the manager is in the process of performing an undo action.
 func (um *UndoManager) IsUndoing() bool {
 	defer runtime.KeepAlive(um)
 	var _mainthread0 bool
@@ -464,7 +462,7 @@ func (um *UndoManager) IsUndoing() bool {
 
 }
 
-// IsRedoing reports whether the receiver is in the process of performing its “redo“ method.
+// IsRedoing reports whether returns a Boolean value that indicates whether the manager is in the process of performing a redo action.
 func (um *UndoManager) IsRedoing() bool {
 	defer runtime.KeepAlive(um)
 	var _mainthread0 bool
@@ -540,7 +538,7 @@ func (um *UndoManager) RedoActionName() string {
 
 }
 
-// UndoMenuItemTitle returns the complete title of the Undo menu command, for example, “Undo Paste.” Returns “Undo” if no action name has been assigned or nil if there is nothing to undo.
+// UndoMenuItemTitle returns the title of the Undo menu command, such as Undo Paste. Returns “Undo” if no action name has been assigned or nil if there is nothing to undo.
 func (um *UndoManager) UndoMenuItemTitle() string {
 	defer runtime.KeepAlive(um)
 	var _mainthread0 string
@@ -557,7 +555,7 @@ func (um *UndoManager) UndoMenuItemTitle() string {
 
 }
 
-// RedoMenuItemTitle returns the complete title of the Redo menu command, for example, “Redo Paste.” Returns “Redo” if no action name has been assigned or nil if there is nothing to redo.
+// RedoMenuItemTitle returns the title of the Redo menu command, such as Redo Paste. Returns “Redo” if no action name has been assigned or nil if there is nothing to redo.
 func (um *UndoManager) RedoMenuItemTitle() string {
 	defer runtime.KeepAlive(um)
 	var _mainthread0 string

@@ -34,7 +34,6 @@ type PGDisplay interface {
 	Queue() *foundation.Object
 	ModeChangeHandler() obj.Object
 	NewFrameEventHandler() obj.Object
-	CursorGlyphHandler() obj.Object
 	CursorShowHandler() obj.Object
 	CursorMoveHandler() obj.Object
 	CursorPosition() PGDisplayCoord_t

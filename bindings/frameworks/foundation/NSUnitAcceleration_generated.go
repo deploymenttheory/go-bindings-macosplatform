@@ -17,8 +17,6 @@ import (
 // UnitAcceleration is an idiomatic wrapper over the Objective-C class NSUnitAcceleration.
 //
 // It embeds [Dimension], promoting that type's methods.
-//
-// A unit of measure for acceleration.
 type UnitAcceleration struct {
 	Dimension
 }

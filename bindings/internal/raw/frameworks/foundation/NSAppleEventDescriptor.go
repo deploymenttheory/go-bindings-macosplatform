@@ -403,16 +403,19 @@ func (o *NSAppleEventDescriptor) CoerceToDescriptorType(descriptorType uint) *NS
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
+// The `AEDesc` structure encapsulated by the receiver, if it has one. If the receiver has a valid `AEDesc` structure, returns a pointer to it; otherwise returns `nil`.
 func (o *NSAppleEventDescriptor) AeDesc() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSAppleEventDescriptorSelAeDesc)
 	return _ret
 }
 
+// The descriptor type of the receiver.
 func (o *NSAppleEventDescriptor) DescriptorType() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSAppleEventDescriptorSelDescriptorType)
 	return _ret
 }
 
+// The receiver's data. An instance of `NSData` containing the receiver's data, or `nil` if an error occurs.
 func (o *NSAppleEventDescriptor) Data() *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppleEventDescriptorSelData)
 	if _ret != 0 {
@@ -421,31 +424,37 @@ func (o *NSAppleEventDescriptor) Data() *NSData {
 	return NSDataFromID(_ret)
 }
 
+// The contents of the receiver as a Boolean value, coercing (to `typeBoolean`) if necessary. The contents of the descriptor, as a Boolean value, or `false` if an error occurs.
 func (o *NSAppleEventDescriptor) BooleanValue() uint8 {
 	_ret := objc.Send[uint8](o.Ptr(), _nSAppleEventDescriptorSelBooleanValue)
 	return _ret
 }
 
+// The contents of the receiver as an enumeration type, coercing to `typeEnumerated` if necessary. The contents of the descriptor, as an enumeration type, or 0 if an error occurs.
 func (o *NSAppleEventDescriptor) EnumCodeValue() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSAppleEventDescriptorSelEnumCodeValue)
 	return _ret
 }
 
+// The contents of the receiver as an integer, coercing (to `typeSInt32`) if necessary. The contents of the descriptor, as an integer value, or 0 if an error occurs.
 func (o *NSAppleEventDescriptor) Int32Value() int {
 	_ret := objc.Send[int](o.Ptr(), _nSAppleEventDescriptorSelInt32Value)
 	return _ret
 }
 
+// The contents of the receiver as a double value, coercing (to `typeIEEE64BitFloatingPoint`) if necessary.
 func (o *NSAppleEventDescriptor) DoubleValue() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSAppleEventDescriptorSelDoubleValue)
 	return _ret
 }
 
+// The contents of the receiver as a type, coercing to `typeType` if necessary. The contents of the descriptor, as a type, or 0 if an error occurs.
 func (o *NSAppleEventDescriptor) TypeCodeValue() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSAppleEventDescriptorSelTypeCodeValue)
 	return _ret
 }
 
+// The contents of the receiver as a Unicode text string, coercing to `typeUnicodeText` if necessary. The contents of the descriptor, as a string, or `nil` if an error occurs.
 func (o *NSAppleEventDescriptor) StringValue() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppleEventDescriptorSelStringValue)
 	if _ret != 0 {
@@ -454,6 +463,7 @@ func (o *NSAppleEventDescriptor) StringValue() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The contents of the receiver as a date, coercing if necessary.
 func (o *NSAppleEventDescriptor) DateValue() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppleEventDescriptorSelDateValue)
 	if _ret != 0 {
@@ -462,6 +472,7 @@ func (o *NSAppleEventDescriptor) DateValue() *NSDate {
 	return NSDateFromID(_ret)
 }
 
+// The contents of the receiver as a file URL, coercing if necessary.
 func (o *NSAppleEventDescriptor) FileURLValue() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppleEventDescriptorSelFileURLValue)
 	if _ret != 0 {
@@ -470,31 +481,37 @@ func (o *NSAppleEventDescriptor) FileURLValue() *NSURL {
 	return NSURLFromID(_ret)
 }
 
+// The event class for the receiver. The event class (a four-character code) for the receiver, or 0 if an error occurs. The receiver must be an Apple event. An Apple event is identified by its event class and event ID, a pair of four-character codes stored as 32-bit integers.
 func (o *NSAppleEventDescriptor) EventClass() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSAppleEventDescriptorSelEventClass)
 	return _ret
 }
 
+// The event ID for the receiver. The event ID (a four-character code) for the receiver, or 0 if an error occurs. The receiver must be an Apple event.
 func (o *NSAppleEventDescriptor) EventID() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSAppleEventDescriptorSelEventID)
 	return _ret
 }
 
+// The receiver's return ID (the ID for a reply Apple event). The receiver's return ID (an integer value), or 0 if an error occurs. The receiver must be an Apple event.
 func (o *NSAppleEventDescriptor) ReturnID() int16 {
 	_ret := objc.Send[int16](o.Ptr(), _nSAppleEventDescriptorSelReturnID)
 	return _ret
 }
 
+// The receiver's transaction ID, if any. The receiver's transaction ID (an integer value), or 0 if an error occurs. The receiver must be an Apple event.
 func (o *NSAppleEventDescriptor) TransactionID() int {
 	_ret := objc.Send[int](o.Ptr(), _nSAppleEventDescriptorSelTransactionID)
 	return _ret
 }
 
+// Returns whether or not the receiver is a record-like descriptor. Record-like descriptors function as records, but may have a `descriptorType` other than `typeAERecord`, such as `typeObjectSpecifier`.
 func (o *NSAppleEventDescriptor) IsRecordDescriptor() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSAppleEventDescriptorSelIsRecordDescriptor)
 	return _ret
 }
 
+// The number of descriptors in the receiver's descriptor list. The number of descriptors in the receiver's descriptor list (possibly 0); returns 0 if an error occurs.
 func (o *NSAppleEventDescriptor) NumberOfItems() int {
 	_ret := objc.Send[int](o.Ptr(), _nSAppleEventDescriptorSelNumberOfItems)
 	return _ret

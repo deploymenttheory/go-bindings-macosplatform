@@ -104,61 +104,131 @@ func NEFilterErrorDomain() *foundation.NSString {
 }
 
 // @const NERelayClientErrorDomain The NERelay error domain as detected by the client
-func NERelayClientErrorDomain() uintptr {
+func NERelayClientErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_networkextensionLib, "NERelayClientErrorDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const NERelayConfigurationDidChangeNotification Name of the NSNotification that is posted when the relay configuration changes.
-func NERelayConfigurationDidChangeNotification() uintptr {
+func NERelayConfigurationDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_networkextensionLib, "NERelayConfigurationDidChangeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const NERelayErrorDomain The NERelay error domain
-func NERelayErrorDomain() uintptr {
+func NERelayErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_networkextensionLib, "NERelayErrorDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const NETunnelProviderErrorDomain The tunnel provider error domain
-func NETunnelProviderErrorDomain() uintptr {
+func NETunnelProviderErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_networkextensionLib, "NETunnelProviderErrorDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const NEVPNConfigurationChangeNotification Name of the NSNotification that is posted when the VPN configuration changes.
-func NEVPNConfigurationChangeNotification() uintptr {
+func NEVPNConfigurationChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_networkextensionLib, "NEVPNConfigurationChangeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const NEVPNConnectionErrorDomain The VPN connection error domain
-func NEVPNConnectionErrorDomain() uintptr {
+func NEVPNConnectionErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_networkextensionLib, "NEVPNConnectionErrorDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const NEVPNConnectionStartOptionPassword Specify this key in the options dictionary passed to startVPNTunnelWithOptions:returningError: to override the password saved in the configuration. The value is a string
-func NEVPNConnectionStartOptionPassword() uintptr {
+func NEVPNConnectionStartOptionPassword() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_networkextensionLib, "NEVPNConnectionStartOptionPassword")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const NEVPNConnectionStartOptionUsername Specify this key in the options dictionary passed to startVPNTunnelWithOptions:returningError: to override the username saved in the configuration. The value is a string
-func NEVPNConnectionStartOptionUsername() uintptr {
+func NEVPNConnectionStartOptionUsername() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_networkextensionLib, "NEVPNConnectionStartOptionUsername")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const NEVPNErrorDomain The VPN error domain
-func NEVPNErrorDomain() uintptr {
+func NEVPNErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_networkextensionLib, "NEVPNErrorDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const NEVPNStatusDidChangeNotification Name of the NSNotification that is posted when the VPN status changes.
-func NEVPNStatusDidChangeNotification() uintptr {
+func NEVPNStatusDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_networkextensionLib, "NEVPNStatusDidChangeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }

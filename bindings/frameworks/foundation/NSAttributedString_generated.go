@@ -70,14 +70,14 @@ func (as *AttributedString) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(as), className)
 }
 
-// NewAttributedStringWithString creates a new AttributedString.
+// NewAttributedStringWithString creates an attributed string with the specified text and no attribute information. - Parameter str: The text for the new attributed string. - Returns: An `NSAttributedString` object initialized with the characters of `str` and no attribute information.
 func NewAttributedStringWithString(str string) *AttributedString {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAttributedString")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:"), purego.NSString(str))
 	return attributedStringAdopt(_id)
 }
 
-// NewAttributedStringWithStringAttributes creates a new AttributedString.
+// NewAttributedStringWithStringAttributes creates an attributed string with the specified text and attributes. Returns an `NSAttributedString` object initialized with the characters of `str` and the attributes of `attrs`. - Parameters: - str: The text for the new attributed string. - attrs: The attributes for the new attributed string. This method applies the attributes to the entire string.
 func NewAttributedStringWithStringAttributes(str string, attrs obj.Object) *AttributedString {
 	defer runtime.KeepAlive(attrs)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAttributedString")), objc.RegisterName("alloc"))
@@ -85,7 +85,7 @@ func NewAttributedStringWithStringAttributes(str string, attrs obj.Object) *Attr
 	return attributedStringAdopt(_id)
 }
 
-// NewAttributedStringWithAttributedString creates a new AttributedString.
+// NewAttributedStringWithAttributedString creates a new attributed string from the contents of another attributed string. - Parameter attrStr: An attributed string. - Returns: An `NSAttributedString` object initialized with the characters and attributes of `attrStr`.
 func NewAttributedStringWithAttributedString(attrStr *AttributedString) *AttributedString {
 	defer runtime.KeepAlive(attrStr)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAttributedString")), objc.RegisterName("alloc"))
@@ -93,7 +93,7 @@ func NewAttributedStringWithAttributedString(attrStr *AttributedString) *Attribu
 	return attributedStringAdopt(_id)
 }
 
-// NewAttributedStringWithContentsOfMarkdownFileAtURLOptionsBaseURL creates a new AttributedString.
+// NewAttributedStringWithContentsOfMarkdownFileAtURLOptionsBaseURL creates an attributed string from the contents of a specified URL that contains Markdown-formatted data using the provided options. - Parameters: - markdownFile: The URL to load Markdown-formatted data from. - options: Options that affect how the initializer interprets formatting in the Markdown string. This parameter defaults to no options. - baseURL: The base URL to use when resolving Markdown URLs. The initializer treats URLs as being relative to this URL. If this value is `nil`, the initializer doesn't resolve URLs. The default is `nil`. - error: On return, if an error occurs, this pointer contains an actual error object with the error information. You may specify `nil` for this parameter if you don't want the error information. - Returns: An attributed string with the parsed Markdown text and styling, or `nil` if parsing the data fails.
 func NewAttributedStringWithContentsOfMarkdownFileAtURLOptionsBaseURL(markdownFile string, options *AttributedStringMarkdownParsingOptions, baseURL string) (result *AttributedString, err error) {
 	defer runtime.KeepAlive(options)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAttributedString")), objc.RegisterName("alloc"))
@@ -105,7 +105,7 @@ func NewAttributedStringWithContentsOfMarkdownFileAtURLOptionsBaseURL(markdownFi
 	return attributedStringAdopt(_id), nil
 }
 
-// NewAttributedStringWithMarkdownOptionsBaseURL creates a new AttributedString.
+// NewAttributedStringWithMarkdownOptionsBaseURL creates an attributed string from Markdown-formatted data using the provided options. - Parameters: - markdown: The `NSData` instance that contains the Markdown formatting. - options: Options that affect how the initializer interprets formatting in the Markdown string. This parameter defaults to no options. - baseURL: The base URL to use when resolving Markdown URLs. The initializer treats URLs as being relative to this URL. If this value is `nil`, the initializer doesn't resolve URLs. The default is `nil`. - error: On return, if an error occurs, this pointer contains an actual error object with the error information. You may specify `nil` for this parameter if you don't want the error information. - Returns: An attributed string with the parsed Markdown text and styling, or `nil` if parsing the data fails.
 func NewAttributedStringWithMarkdownOptionsBaseURL(markdown []byte, options *AttributedStringMarkdownParsingOptions, baseURL string) (result *AttributedString, err error) {
 	defer runtime.KeepAlive(options)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAttributedString")), objc.RegisterName("alloc"))
@@ -117,7 +117,7 @@ func NewAttributedStringWithMarkdownOptionsBaseURL(markdown []byte, options *Att
 	return attributedStringAdopt(_id), nil
 }
 
-// NewAttributedStringWithMarkdownStringOptionsBaseURL creates a new AttributedString.
+// NewAttributedStringWithMarkdownStringOptionsBaseURL creates an attributed string from a Markdown-formatted string using the provided options. - Parameters: - markdownString: The string that contains the Markdown formatting. - options: Options that affect how the initializer interprets formatting in the Markdown string. This parameter defaults to no options. - baseURL: The base URL to use when resolving Markdown URLs. The initializer treats URLs as being relative to this URL. If this value is `nil`, the initializer doesn't resolve URLs. The default is `nil`. - error: On return, if an error occurs, this pointer contains an actual error object with the error information. You may specify `nil` for this parameter if you don't want the error information. - Returns: An attributed string with the parsed Markdown text and styling, or `nil` if parsing the data fails.
 func NewAttributedStringWithMarkdownStringOptionsBaseURL(markdownString string, options *AttributedStringMarkdownParsingOptions, baseURL string) (result *AttributedString, err error) {
 	defer runtime.KeepAlive(options)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAttributedString")), objc.RegisterName("alloc"))
@@ -186,7 +186,7 @@ func (as *AttributedString) AttributesAtIndexEffectiveRange(location int, range_
 	return obj.Wrap(_r)
 }
 
-// String returns the string.
+// String returns the character contents of the receiver as a string.
 func (as *AttributedString) String() string {
 	defer runtime.KeepAlive(as)
 	_r := objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("string"))
@@ -234,7 +234,7 @@ func (as *AttributedString) IsEqualToAttributedString(other *AttributedString) b
 	return _r
 }
 
-// Length returns the length.
+// Length returns the length of the attributed string.
 func (as *AttributedString) Length() int {
 	defer runtime.KeepAlive(as)
 	_r := objc.Send[int](objref.IDOf(as), objc.RegisterName("length"))

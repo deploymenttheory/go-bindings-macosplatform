@@ -17,8 +17,6 @@ import (
 )
 
 // Bundle is an idiomatic wrapper over the Objective-C class NSBundle.
-//
-// A representation of the code and resources stored in a bundle directory on disk.
 type Bundle struct {
 	objref.Handle
 }
@@ -75,14 +73,14 @@ func (b *Bundle) String() string {
 	return rt.Description(objref.IDOf(b))
 }
 
-// NewBundleWithPath creates a new Bundle.
+// NewBundleWithPath returns an `NSBundle` object initialized to correspond to the specified directory. This method initializes and returns a new instance only if there is no existing bundle associated with
 func NewBundleWithPath(path string) *Bundle {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSBundle")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPath:"), purego.NSString(path))
 	return bundleAdopt(_id)
 }
 
-// NewBundleWithURL creates a new Bundle.
+// NewBundleWithURL returns an `NSBundle` object initialized to correspond to the specified file URL. This method initializes and returns a new instance only if there is no existing bundle associated with
 func NewBundleWithURL(url string) *Bundle {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSBundle")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), rt.FileURL(url))
@@ -101,21 +99,21 @@ func (b *Bundle) WithScriptingProperties(scriptingProperties map[string]obj.Obje
 	return b
 }
 
-// Load wraps the corresponding Objective-C method.
+// Load reports whether dynamically loads the bundle's executable code into a running program, if the code has not already been loaded. You can use this method to load the code associated with a dynamically loaded bundle, such as a plug-in or framework. You don't need to load a bundle's executable code to search the bundle's resources.
 func (b *Bundle) Load() bool {
 	defer runtime.KeepAlive(b)
 	_r := objc.Send[bool](objref.IDOf(b), objc.RegisterName("load"))
 	return _r
 }
 
-// Unload wraps the corresponding Objective-C method.
+// Unload reports whether unloads the code associated with the receiver. This method attempts to unload a bundle's executable code using the underlying dynamic loader (typically
 func (b *Bundle) Unload() bool {
 	defer runtime.KeepAlive(b)
 	_r := objc.Send[bool](objref.IDOf(b), objc.RegisterName("unload"))
 	return _r
 }
 
-// PreflightAndReturnError wraps the corresponding Objective-C method.
+// PreflightAndReturnError returns a Boolean value indicating whether the bundle's executable code could be loaded successfully. This method does not actually load the bundle's executable code. Instead, it performs several checks to see if the code could be loaded and with one exception returns the same errors that would occur during an actual load operation.
 //
 // PreflightAndReturnError returns an error if the operation did not succeed.
 func (b *Bundle) PreflightAndReturnError() error {
@@ -128,7 +126,7 @@ func (b *Bundle) PreflightAndReturnError() error {
 	return nil
 }
 
-// LoadAndReturnError loads and return error.
+// LoadAndReturnError loads the bundle's executable code and returns any errors. If this method returns
 //
 // LoadAndReturnError returns an error if the operation did not succeed.
 func (b *Bundle) LoadAndReturnError() error {
@@ -141,14 +139,14 @@ func (b *Bundle) LoadAndReturnError() error {
 	return nil
 }
 
-// URLForAuxiliaryExecutable wraps the corresponding Objective-C method.
+// URLForAuxiliaryExecutable returns the file URL of the executable with the specified name in the receiver's bundle. This method returns the appropriate path for modern application and framework bundles. This method may not return a URL for non-standard bundle formats or for some older bundle formats.
 func (b *Bundle) URLForAuxiliaryExecutable(executableName string) string {
 	defer runtime.KeepAlive(b)
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("URLForAuxiliaryExecutable:"), purego.NSString(executableName))
 	return rt.URLString(_r)
 }
 
-// PathForAuxiliaryExecutable wraps the corresponding Objective-C method.
+// PathForAuxiliaryExecutable returns the full pathname of the executable with the specified name in the receiver's bundle. This method returns the appropriate path for modern application and framework bundles. This method may not return a path for non-standard bundle formats or for some older bundle formats.
 func (b *Bundle) PathForAuxiliaryExecutable(executableName string) string {
 	defer runtime.KeepAlive(b)
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("pathForAuxiliaryExecutable:"), purego.NSString(executableName))
@@ -158,42 +156,42 @@ func (b *Bundle) PathForAuxiliaryExecutable(executableName string) string {
 	return purego.GoString(_r)
 }
 
-// URLForResourceWithExtension wraps the corresponding Objective-C method.
+// URLForResourceWithExtension returns the file URL for the resource identified by the specified name and file extension.
 func (b *Bundle) URLForResourceWithExtension(name string, ext string) string {
 	defer runtime.KeepAlive(b)
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("URLForResource:withExtension:"), purego.NSString(name), purego.NSString(ext))
 	return rt.URLString(_r)
 }
 
-// URLForResourceWithExtensionSubdirectory wraps the corresponding Objective-C method.
+// URLForResourceWithExtensionSubdirectory returns the file URL for the resource file identified by the specified name and extension and residing in a given bundle directory.
 func (b *Bundle) URLForResourceWithExtensionSubdirectory(name string, ext string, subpath string) string {
 	defer runtime.KeepAlive(b)
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("URLForResource:withExtension:subdirectory:"), purego.NSString(name), purego.NSString(ext), purego.NSString(subpath))
 	return rt.URLString(_r)
 }
 
-// URLForResourceWithExtensionSubdirectoryLocalization wraps the corresponding Objective-C method.
+// URLForResourceWithExtensionSubdirectoryLocalization returns the file URL for the resource identified by the specified name and file extension, located in the specified bundle subdirectory, and limited to global resources and those associated with the specified localization.
 func (b *Bundle) URLForResourceWithExtensionSubdirectoryLocalization(name string, ext string, subpath string, localizationName string) string {
 	defer runtime.KeepAlive(b)
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("URLForResource:withExtension:subdirectory:localization:"), purego.NSString(name), purego.NSString(ext), purego.NSString(subpath), purego.NSString(localizationName))
 	return rt.URLString(_r)
 }
 
-// URLsForResourcesWithExtensionSubdirectory wraps the corresponding Objective-C method.
+// URLsForResourcesWithExtensionSubdirectory returns an array of file URLs for all resources identified by the specified file extension and located in the specified bundle subdirectory.
 func (b *Bundle) URLsForResourcesWithExtensionSubdirectory(ext string, subpath string) []string {
 	defer runtime.KeepAlive(b)
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("URLsForResourcesWithExtension:subdirectory:"), purego.NSString(ext), purego.NSString(subpath))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return rt.URLString(_id) })
 }
 
-// URLsForResourcesWithExtensionSubdirectoryLocalization wraps the corresponding Objective-C method.
+// URLsForResourcesWithExtensionSubdirectoryLocalization returns an array containing the file URLs for all bundle resources having the specified filename extension, residing in the specified resource subdirectory, and limited to global resources and those associated with the specified localization.
 func (b *Bundle) URLsForResourcesWithExtensionSubdirectoryLocalization(ext string, subpath string, localizationName string) []string {
 	defer runtime.KeepAlive(b)
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("URLsForResourcesWithExtension:subdirectory:localization:"), purego.NSString(ext), purego.NSString(subpath), purego.NSString(localizationName))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return rt.URLString(_id) })
 }
 
-// PathForResourceOfType wraps the corresponding Objective-C method.
+// PathForResourceOfType returns the full pathname for the resource identified by the specified name and file extension. The method first looks for a matching resource file in the non-localized resource directory of the specified bundle. If a matching resource file is not found, it then looks in the top level of an available language-specific
 func (b *Bundle) PathForResourceOfType(name string, ext string) string {
 	defer runtime.KeepAlive(b)
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("pathForResource:ofType:"), purego.NSString(name), purego.NSString(ext))
@@ -203,7 +201,7 @@ func (b *Bundle) PathForResourceOfType(name string, ext string) string {
 	return purego.GoString(_r)
 }
 
-// PathForResourceOfTypeInDirectory wraps the corresponding Objective-C method.
+// PathForResourceOfTypeInDirectory returns the full pathname for the resource identified by the specified name and file extension and located in the specified bundle subdirectory.
 func (b *Bundle) PathForResourceOfTypeInDirectory(name string, ext string, subpath string) string {
 	defer runtime.KeepAlive(b)
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("pathForResource:ofType:inDirectory:"), purego.NSString(name), purego.NSString(ext), purego.NSString(subpath))
@@ -213,7 +211,7 @@ func (b *Bundle) PathForResourceOfTypeInDirectory(name string, ext string, subpa
 	return purego.GoString(_r)
 }
 
-// PathForResourceOfTypeInDirectoryForLocalization wraps the corresponding Objective-C method.
+// PathForResourceOfTypeInDirectoryForLocalization returns the full pathname for the resource identified by the specified name and file extension, located in the specified bundle subdirectory, and limited to global resources and those associated with the specified localization.
 func (b *Bundle) PathForResourceOfTypeInDirectoryForLocalization(name string, ext string, subpath string, localizationName string) string {
 	defer runtime.KeepAlive(b)
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("pathForResource:ofType:inDirectory:forLocalization:"), purego.NSString(name), purego.NSString(ext), purego.NSString(subpath), purego.NSString(localizationName))
@@ -223,21 +221,21 @@ func (b *Bundle) PathForResourceOfTypeInDirectoryForLocalization(name string, ex
 	return purego.GoString(_r)
 }
 
-// PathsForResourcesOfTypeInDirectory wraps the corresponding Objective-C method.
+// PathsForResourcesOfTypeInDirectory returns an array containing the pathnames for all bundle resources having the specified filename extension and residing in the resource subdirectory.
 func (b *Bundle) PathsForResourcesOfTypeInDirectory(ext string, subpath string) []string {
 	defer runtime.KeepAlive(b)
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("pathsForResourcesOfType:inDirectory:"), purego.NSString(ext), purego.NSString(subpath))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// PathsForResourcesOfTypeInDirectoryForLocalization wraps the corresponding Objective-C method.
+// PathsForResourcesOfTypeInDirectoryForLocalization returns an array containing the file for all bundle resources having the specified filename extension, residing in the specified resource subdirectory, and limited to global resources and those associated with the specified localization.
 func (b *Bundle) PathsForResourcesOfTypeInDirectoryForLocalization(ext string, subpath string, localizationName string) []string {
 	defer runtime.KeepAlive(b)
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("pathsForResourcesOfType:inDirectory:forLocalization:"), purego.NSString(ext), purego.NSString(subpath), purego.NSString(localizationName))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// LocalizedStringForKeyValueTable wraps the corresponding Objective-C method.
+// LocalizedStringForKeyValueTable returns a localized version of the string designated by the specified key and residing in the specified table.
 func (b *Bundle) LocalizedStringForKeyValueTable(key string, value string, tableName string) string {
 	defer runtime.KeepAlive(b)
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("localizedStringForKey:value:table:"), purego.NSString(key), purego.NSString(value), purego.NSString(tableName))
@@ -254,7 +252,7 @@ func (b *Bundle) LocalizedAttributedStringForKeyValueTable(key string, value str
 	return AttributedStringFromID(_r)
 }
 
-// LocalizedStringForKeyValueTableLocalizations look up a localized string given a list of available localizations.
+// LocalizedStringForKeyValueTableLocalizations look up a localized string given a list of available localizations. - Parameters: - key: The key for the localized string to retrieve. - value: A default value to return if a localized string for “key“ cannot be found. - tableName: The name of the strings file to search. If `nil`, the method uses tables in `Localizable.strings`. - localizations: An array of BCP 47 language codes corresponding to available localizations. Bundle compares the array against its available localizations, and uses the best result to retrieve the localized string. If empty, we treat it as no localization is available, and may return a fallback. - Returns: A localized version of the string designated by “key“ in table “tableName“.
 func (b *Bundle) LocalizedStringForKeyValueTableLocalizations(key string, value string, tableName string, localizations []string) string {
 	defer runtime.KeepAlive(b)
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("localizedStringForKey:value:table:localizations:"), purego.NSString(key), purego.NSString(value), purego.NSString(tableName), purego.SliceToNSArray(localizations, func(_v string) objc.ID { return purego.NSString(_v) }))
@@ -264,77 +262,77 @@ func (b *Bundle) LocalizedStringForKeyValueTableLocalizations(key string, value 
 	return purego.GoString(_r)
 }
 
-// ObjectForInfoDictionaryKey wraps the corresponding Objective-C method.
+// ObjectForInfoDictionaryKey returns the value associated with the specified key in the receiver's information property list. Use of this method is preferred over other access methods because it returns the localized value of a key when one is available.
 func (b *Bundle) ObjectForInfoDictionaryKey(key string) obj.Object {
 	defer runtime.KeepAlive(b)
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("objectForInfoDictionaryKey:"), purego.NSString(key))
 	return obj.Wrap(_r)
 }
 
-// IsLoaded reports whether the object is loaded.
+// IsLoaded reports whether the load status of a bundle.
 func (b *Bundle) IsLoaded() bool {
 	defer runtime.KeepAlive(b)
 	_r := objc.Send[bool](objref.IDOf(b), objc.RegisterName("isLoaded"))
 	return _r
 }
 
-// BundleURL returns the bundle URL.
+// BundleURL returns the full URL of the receiver's bundle directory.
 func (b *Bundle) BundleURL() string {
 	defer runtime.KeepAlive(b)
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("bundleURL"))
 	return rt.URLString(_r)
 }
 
-// ResourceURL returns the resource URL.
+// ResourceURL returns the file URL of the bundle's subdirectory containing resource files. This property contains the appropriate path for modern application and framework bundles. This property may not contain a path for non-standard bundle formats or for some older bundle formats.
 func (b *Bundle) ResourceURL() string {
 	defer runtime.KeepAlive(b)
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("resourceURL"))
 	return rt.URLString(_r)
 }
 
-// ExecutableURL returns the executable URL.
+// ExecutableURL returns the file URL of the receiver's executable file.
 func (b *Bundle) ExecutableURL() string {
 	defer runtime.KeepAlive(b)
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("executableURL"))
 	return rt.URLString(_r)
 }
 
-// PrivateFrameworksURL returns the private frameworks URL.
+// PrivateFrameworksURL returns the file URL of the bundle's subdirectory containing private frameworks. This property contains the appropriate path for modern application and framework bundles. This property may not be a URL for non-standard bundle formats or for some older bundle formats.
 func (b *Bundle) PrivateFrameworksURL() string {
 	defer runtime.KeepAlive(b)
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("privateFrameworksURL"))
 	return rt.URLString(_r)
 }
 
-// SharedFrameworksURL returns the shared frameworks URL.
+// SharedFrameworksURL returns the file URL of the receiver's subdirectory containing shared frameworks. This property contains the appropriate path for modern application and framework bundles. This property may not contain a URL for non-standard bundle formats or for some older bundle formats.
 func (b *Bundle) SharedFrameworksURL() string {
 	defer runtime.KeepAlive(b)
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("sharedFrameworksURL"))
 	return rt.URLString(_r)
 }
 
-// SharedSupportURL returns the shared support URL.
+// SharedSupportURL returns the file URL of the bundle's subdirectory containing shared support files. This property contains the appropriate path for modern application and framework bundles. This property may not contain a path for non-standard bundle formats or for some older bundle formats.
 func (b *Bundle) SharedSupportURL() string {
 	defer runtime.KeepAlive(b)
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("sharedSupportURL"))
 	return rt.URLString(_r)
 }
 
-// BuiltInPlugInsURL returns the built in plug ins URL.
+// BuiltInPlugInsURL returns the file URL of the receiver's subdirectory containing plug-ins. This is the appropriate path for modern application and framework bundles. This may not be a URL for non-standard bundle formats or for some older bundle formats.
 func (b *Bundle) BuiltInPlugInsURL() string {
 	defer runtime.KeepAlive(b)
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("builtInPlugInsURL"))
 	return rt.URLString(_r)
 }
 
-// AppStoreReceiptURL returns the app store receipt URL.
+// AppStoreReceiptURL returns the file URL for the bundle's App Store receipt. Use this app bundle property to locate the app receipt if it's present; this property is
 func (b *Bundle) AppStoreReceiptURL() string {
 	defer runtime.KeepAlive(b)
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("appStoreReceiptURL"))
 	return rt.URLString(_r)
 }
 
-// BundlePath returns the bundle path.
+// BundlePath returns the full pathname of the receiver's bundle directory.
 func (b *Bundle) BundlePath() string {
 	defer runtime.KeepAlive(b)
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("bundlePath"))
@@ -344,7 +342,7 @@ func (b *Bundle) BundlePath() string {
 	return purego.GoString(_r)
 }
 
-// ResourcePath returns the resource path.
+// ResourcePath returns the full pathname of the bundle's subdirectory containing resources.
 func (b *Bundle) ResourcePath() string {
 	defer runtime.KeepAlive(b)
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("resourcePath"))
@@ -354,7 +352,7 @@ func (b *Bundle) ResourcePath() string {
 	return purego.GoString(_r)
 }
 
-// ExecutablePath returns the executable path.
+// ExecutablePath returns the full pathname of the receiver's executable file.
 func (b *Bundle) ExecutablePath() string {
 	defer runtime.KeepAlive(b)
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("executablePath"))
@@ -364,7 +362,7 @@ func (b *Bundle) ExecutablePath() string {
 	return purego.GoString(_r)
 }
 
-// PrivateFrameworksPath returns the private frameworks path.
+// PrivateFrameworksPath returns the full pathname of the bundle's subdirectory containing private frameworks. This property contains the appropriate path for modern application and framework bundles. This property may not contain a path for non-standard bundle formats or for some older bundle formats.
 func (b *Bundle) PrivateFrameworksPath() string {
 	defer runtime.KeepAlive(b)
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("privateFrameworksPath"))
@@ -374,7 +372,7 @@ func (b *Bundle) PrivateFrameworksPath() string {
 	return purego.GoString(_r)
 }
 
-// SharedFrameworksPath returns the shared frameworks path.
+// SharedFrameworksPath returns the full pathname of the bundle's subdirectory containing shared frameworks. This property contains the appropriate path for modern application and framework bundles. This property may not contain a path for non-standard bundle formats or for some older bundle formats.
 func (b *Bundle) SharedFrameworksPath() string {
 	defer runtime.KeepAlive(b)
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("sharedFrameworksPath"))
@@ -384,7 +382,7 @@ func (b *Bundle) SharedFrameworksPath() string {
 	return purego.GoString(_r)
 }
 
-// SharedSupportPath returns the shared support path.
+// SharedSupportPath returns the full pathname of the bundle's subdirectory containing shared support files. This property contains the appropriate path for modern application and framework bundles. This property may not contain a path for non-standard bundle formats or for some older bundle formats.
 func (b *Bundle) SharedSupportPath() string {
 	defer runtime.KeepAlive(b)
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("sharedSupportPath"))
@@ -394,7 +392,7 @@ func (b *Bundle) SharedSupportPath() string {
 	return purego.GoString(_r)
 }
 
-// BuiltInPlugInsPath returns the built in plug ins path.
+// BuiltInPlugInsPath returns the full pathname of the receiver's subdirectory containing plug-ins. This is the appropriate path for modern application and framework bundles. This may not be a path for non-standard bundle formats or for some older bundle formats.
 func (b *Bundle) BuiltInPlugInsPath() string {
 	defer runtime.KeepAlive(b)
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("builtInPlugInsPath"))
@@ -404,7 +402,7 @@ func (b *Bundle) BuiltInPlugInsPath() string {
 	return purego.GoString(_r)
 }
 
-// BundleIdentifier returns the bundle identifier.
+// BundleIdentifier returns the receiver's bundle identifier. The bundle identifier is defined by the
 func (b *Bundle) BundleIdentifier() string {
 	defer runtime.KeepAlive(b)
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("bundleIdentifier"))
@@ -414,21 +412,21 @@ func (b *Bundle) BundleIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// InfoDictionary returns the info dictionary.
+// InfoDictionary returns a dictionary, constructed from the bundle's
 func (b *Bundle) InfoDictionary() map[string]obj.Object {
 	defer runtime.KeepAlive(b)
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("infoDictionary"))
 	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// LocalizedInfoDictionary returns the localized info dictionary.
+// LocalizedInfoDictionary returns a dictionary with the keys from the bundle's localized property list. This property uses the preferred localization for the current user when determining which resources to include. If the preferred localization is not available, this property chooses the most appropriate localization found in the bundle.
 func (b *Bundle) LocalizedInfoDictionary() map[string]obj.Object {
 	defer runtime.KeepAlive(b)
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("localizedInfoDictionary"))
 	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// PreferredLocalizations returns the preferred localizations.
+// PreferredLocalizations returns an ordered list of preferred localizations contained in the bundle. An array of
 //
 // PreferredLocalizations returns the collection as a Go slice.
 func (b *Bundle) PreferredLocalizations() []string {
@@ -437,7 +435,7 @@ func (b *Bundle) PreferredLocalizations() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Localizations returns the localizations.
+// Localizations returns a list of all the localizations contained in the bundle. An array of
 //
 // Localizations returns the collection as a Go slice.
 func (b *Bundle) Localizations() []string {
@@ -446,7 +444,7 @@ func (b *Bundle) Localizations() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// DevelopmentLocalization returns the development localization.
+// DevelopmentLocalization returns the localization for the development language. This property corresponds to the value in the
 func (b *Bundle) DevelopmentLocalization() string {
 	defer runtime.KeepAlive(b)
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("developmentLocalization"))
@@ -456,7 +454,7 @@ func (b *Bundle) DevelopmentLocalization() string {
 	return purego.GoString(_r)
 }
 
-// ExecutableArchitectures returns the executable architectures.
+// ExecutableArchitectures returns an array of numbers indicating the architecture types supported by the bundle's executable. An array of
 //
 // ExecutableArchitectures returns the collection as a Go slice.
 func (b *Bundle) ExecutableArchitectures() []*Number {

@@ -15,8 +15,6 @@ import (
 )
 
 // MetalDisplayLinkUpdate is an idiomatic wrapper over the Objective-C class CAMetalDisplayLinkUpdate.
-//
-// Stores information about a single update from a Metal display link instance.
 type MetalDisplayLinkUpdate struct {
 	objref.Handle
 }

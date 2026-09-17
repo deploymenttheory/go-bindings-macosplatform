@@ -53,6 +53,9 @@ var ErrCodeDownloadWouldExceedAllowance = errkit.New("BAErrorDomain", 112)
 // ErrCodeFileNotFound matches the BackgroundAssets error BAManagedErrorCodeFileNotFound.
 var ErrCodeFileNotFound = errkit.New("BAManagedErrorDomain", 1)
 
+// ErrCodeLocalAvailabilityFailure matches the BackgroundAssets error BAManagedErrorCodeLocalAvailabilityFailure.
+var ErrCodeLocalAvailabilityFailure = errkit.New("BAManagedErrorDomain", 2)
+
 // ErrCodeSessionDownloadAllowanceExceeded matches the BackgroundAssets error BAErrorCodeSessionDownloadAllowanceExceeded.
 var ErrCodeSessionDownloadAllowanceExceeded = errkit.New("BAErrorDomain", 204)
 

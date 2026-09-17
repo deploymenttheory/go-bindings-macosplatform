@@ -107,21 +107,21 @@ func (ps *PositionalSpecifier) Evaluate() {
 	objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("evaluate"))
 }
 
-// Position returns the position.
+// Position returns the insertion position.
 func (ps *PositionalSpecifier) Position() InsertionPosition {
 	defer runtime.KeepAlive(ps)
 	_r := objc.Send[InsertionPosition](objref.IDOf(ps), objc.RegisterName("position"))
 	return _r
 }
 
-// InsertionContainer returns the insertion container.
+// InsertionContainer returns the container into which insertion should be done, if evaluation has been successful.
 func (ps *PositionalSpecifier) InsertionContainer() obj.Object {
 	defer runtime.KeepAlive(ps)
 	_r := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("insertionContainer"))
 	return obj.Wrap(_r)
 }
 
-// InsertionKey returns the insertion key.
+// InsertionKey returns the key for the to-many relationship for which insertion should be done, if evaluation has been successful.
 func (ps *PositionalSpecifier) InsertionKey() string {
 	defer runtime.KeepAlive(ps)
 	_r := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("insertionKey"))
@@ -131,14 +131,14 @@ func (ps *PositionalSpecifier) InsertionKey() string {
 	return purego.GoString(_r)
 }
 
-// InsertionIndex returns the insertion index.
+// InsertionIndex returns the index at which insertion should be done, if evaluation has been successful.
 func (ps *PositionalSpecifier) InsertionIndex() int {
 	defer runtime.KeepAlive(ps)
 	_r := objc.Send[int](objref.IDOf(ps), objc.RegisterName("insertionIndex"))
 	return _r
 }
 
-// InsertionReplaces wraps the corresponding Objective-C method.
+// InsertionReplaces reports whether the object to be inserted should replace the keyed, indexed object.
 func (ps *PositionalSpecifier) InsertionReplaces() bool {
 	defer runtime.KeepAlive(ps)
 	_r := objc.Send[bool](objref.IDOf(ps), objc.RegisterName("insertionReplaces"))

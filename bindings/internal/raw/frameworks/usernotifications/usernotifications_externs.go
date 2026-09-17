@@ -24,32 +24,74 @@ func UNErrorDomain() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
-func UNNotificationAttachmentOptionsThumbnailClippingRectKey() uintptr {
+func UNNotificationAttachmentOptionsThumbnailClippingRectKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_usernotificationsLib, "UNNotificationAttachmentOptionsThumbnailClippingRectKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func UNNotificationAttachmentOptionsThumbnailHiddenKey() uintptr {
+func UNNotificationAttachmentOptionsThumbnailHiddenKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_usernotificationsLib, "UNNotificationAttachmentOptionsThumbnailHiddenKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func UNNotificationAttachmentOptionsThumbnailTimeKey() uintptr {
+func UNNotificationAttachmentOptionsThumbnailTimeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_usernotificationsLib, "UNNotificationAttachmentOptionsThumbnailTimeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func UNNotificationAttachmentOptionsTypeHintKey() uintptr {
+func UNNotificationAttachmentOptionsTypeHintKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_usernotificationsLib, "UNNotificationAttachmentOptionsTypeHintKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func UNNotificationDefaultActionIdentifier() uintptr {
+func UNNotificationDefaultActionIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_usernotificationsLib, "UNNotificationDefaultActionIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func UNNotificationDismissActionIdentifier() uintptr {
+func UNNotificationDismissActionIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_usernotificationsLib, "UNNotificationDismissActionIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }

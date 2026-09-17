@@ -8,14 +8,18 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
+// A reference to a Color Management Module (CMM).
 type ColorSyncCMM struct{}
 
+// An MD5 digest that uniquely identifies a profile, as defined by the ICC specification.
 type ColorSyncMD5 struct {
 	Digest [16]uint8
 }
 
+// A reference to an immutable International Color Consortium (ICC) color profile.
 type ColorSyncProfile struct{}
 
+// A reference to a color transform that converts color data between profiles.
 type ColorSyncTransform struct{}
 
 // ColorSyncCMMRef is a handle for the opaque ColorSyncCMMRef type.

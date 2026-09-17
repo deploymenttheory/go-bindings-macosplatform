@@ -53,7 +53,7 @@ func (o *AVAssetWriterInputGroup) InitWithInputsDefaultInput(inputs *foundation.
 	return AVAssetWriterInputGroupFromID(_ret)
 }
 
-// @property inputs @abstract The inputs grouped together by the receiver. @discussion The value of this property is an NSArray containing concrete instances of AVAssetWriterInput.
+// The inputs grouped together by the receiver. The value of this property is an NSArray containing concrete instances of AVAssetWriterInput.
 func (o *AVAssetWriterInputGroup) Inputs() *foundation.NSArray[*AVAssetWriterInput] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetWriterInputGroupSelInputs)
 	if _ret != 0 {
@@ -62,7 +62,7 @@ func (o *AVAssetWriterInputGroup) Inputs() *foundation.NSArray[*AVAssetWriterInp
 	return foundation.NSArrayFromID[*AVAssetWriterInput](_ret)
 }
 
-// @property defaultInput @abstract The input designated at the defaultInput of the receiver. @discussion The value of this property is a concrete instance of AVAssetWriterInput.
+// The input designated at the defaultInput of the receiver. The value of this property is a concrete instance of AVAssetWriterInput.
 func (o *AVAssetWriterInputGroup) DefaultInput() *AVAssetWriterInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetWriterInputGroupSelDefaultInput)
 	if _ret != 0 {

@@ -530,7 +530,7 @@ func (o *MTRBaseClusterDoorLock) SetYearDayScheduleWithParamsCompletion(params *
 	o.Ptr().Send(_mTRBaseClusterDoorLockSelSetYearDayScheduleWithParamsCompletion, params.Ptr(), __block_completion)
 }
 
-// Command GetYearDaySchedule Returns the year day schedule data for the specified schedule and user indexes.
+// Command GetYearDaySchedule Retrieve the specific year day schedule for the specific schedule and user indexes.
 func (o *MTRBaseClusterDoorLock) GetYearDayScheduleWithParamsCompletion(params *MTRDoorLockClusterGetYearDayScheduleParams, completion func(*MTRDoorLockClusterGetYearDayScheduleResponseParams, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -596,7 +596,7 @@ func (o *MTRBaseClusterDoorLock) ClearHolidayScheduleWithParamsCompletion(params
 	o.Ptr().Send(_mTRBaseClusterDoorLockSelClearHolidayScheduleWithParamsCompletion, params.Ptr(), __block_completion)
 }
 
-// Command SetUser Set User into the lock.
+// Command SetUser Set user into the lock.
 func (o *MTRBaseClusterDoorLock) SetUserWithParamsCompletion(params *MTRDoorLockClusterSetUserParams, completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -608,7 +608,7 @@ func (o *MTRBaseClusterDoorLock) SetUserWithParamsCompletion(params *MTRDoorLock
 	o.Ptr().Send(_mTRBaseClusterDoorLockSelSetUserWithParamsCompletion, params.Ptr(), __block_completion)
 }
 
-// Command GetUser Retrieve User.
+// Command GetUser Retrieve user.
 func (o *MTRBaseClusterDoorLock) GetUserWithParamsCompletion(params *MTRDoorLockClusterGetUserParams, completion func(*MTRDoorLockClusterGetUserResponseParams, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -623,7 +623,7 @@ func (o *MTRBaseClusterDoorLock) GetUserWithParamsCompletion(params *MTRDoorLock
 	o.Ptr().Send(_mTRBaseClusterDoorLockSelGetUserWithParamsCompletion, params.Ptr(), __block_completion)
 }
 
-// Command ClearUser Clears a User or all Users.
+// Command ClearUser Clears a user or all Users.
 func (o *MTRBaseClusterDoorLock) ClearUserWithParamsCompletion(params *MTRDoorLockClusterClearUserParams, completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {

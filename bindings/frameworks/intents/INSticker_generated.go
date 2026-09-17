@@ -71,7 +71,7 @@ func (s *Sticker) String() string {
 	return rt.Description(objref.IDOf(s))
 }
 
-// NewStickerWithTypeEmoji creates an object that represents a sticker a person sends in a message. - Parameters: - type: The type of the sticker. - emoji: The single emoji character that the sticker represents.
+// NewStickerWithTypeEmoji creates a new Sticker.
 func NewStickerWithTypeEmoji(type_ StickerType, emoji string) *Sticker {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INSticker")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:emoji:"), type_, purego.NSString(emoji))

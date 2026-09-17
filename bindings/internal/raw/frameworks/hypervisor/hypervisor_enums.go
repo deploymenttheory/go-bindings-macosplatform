@@ -76,6 +76,10 @@ const (
 	HV_FEATURE_REG_DCZID_EL0        Hv_feature_reg_t = 11
 	HV_FEATURE_REG_ID_AA64SMFR0_EL1 Hv_feature_reg_t = 12
 	HV_FEATURE_REG_ID_AA64ZFR0_EL1  Hv_feature_reg_t = 13
+	HV_FEATURE_REG_ID_AA64ISAR2_EL1 Hv_feature_reg_t = 14
+	HV_FEATURE_REG_ID_AA64PFR2_EL1  Hv_feature_reg_t = 15
+	HV_FEATURE_REG_ID_AA64MMFR3_EL1 Hv_feature_reg_t = 16
+	HV_FEATURE_REG_ID_AA64MMFR4_EL1 Hv_feature_reg_t = 17
 )
 
 func (e Hv_feature_reg_t) String() string {
@@ -108,6 +112,14 @@ func (e Hv_feature_reg_t) String() string {
 		return "HV_FEATURE_REG_ID_AA64SMFR0_EL1"
 	case HV_FEATURE_REG_ID_AA64ZFR0_EL1:
 		return "HV_FEATURE_REG_ID_AA64ZFR0_EL1"
+	case HV_FEATURE_REG_ID_AA64ISAR2_EL1:
+		return "HV_FEATURE_REG_ID_AA64ISAR2_EL1"
+	case HV_FEATURE_REG_ID_AA64PFR2_EL1:
+		return "HV_FEATURE_REG_ID_AA64PFR2_EL1"
+	case HV_FEATURE_REG_ID_AA64MMFR3_EL1:
+		return "HV_FEATURE_REG_ID_AA64MMFR3_EL1"
+	case HV_FEATURE_REG_ID_AA64MMFR4_EL1:
+		return "HV_FEATURE_REG_ID_AA64MMFR4_EL1"
 	default:
 		return fmt.Sprintf("Hv_feature_reg_t(%d)", int64(e))
 	}
@@ -5016,7 +5028,7 @@ func (e Hv_gic_redistributor_reg_t) String() string {
 type Hv_interrupt_type_t uint32
 
 const (
-	// Corresponds to an ARM IRQ .
+	// Corresponds to an ARM IRQ.
 	HV_INTERRUPT_TYPE_IRQ Hv_interrupt_type_t = 0
 	// Corresponds to an ARM FIQ.
 	HV_INTERRUPT_TYPE_FIQ Hv_interrupt_type_t = 1
@@ -5522,15 +5534,19 @@ const (
 	HV_SYS_REG_MPIDR_EL1        Hv_sys_reg_t = 49157
 	HV_SYS_REG_ID_AA64PFR0_EL1  Hv_sys_reg_t = 49184
 	HV_SYS_REG_ID_AA64PFR1_EL1  Hv_sys_reg_t = 49185
+	HV_SYS_REG_ID_AA64PFR2_EL1  Hv_sys_reg_t = 49186
 	HV_SYS_REG_ID_AA64ZFR0_EL1  Hv_sys_reg_t = 49188
 	HV_SYS_REG_ID_AA64SMFR0_EL1 Hv_sys_reg_t = 49189
 	HV_SYS_REG_ID_AA64DFR0_EL1  Hv_sys_reg_t = 49192
 	HV_SYS_REG_ID_AA64DFR1_EL1  Hv_sys_reg_t = 49193
 	HV_SYS_REG_ID_AA64ISAR0_EL1 Hv_sys_reg_t = 49200
 	HV_SYS_REG_ID_AA64ISAR1_EL1 Hv_sys_reg_t = 49201
+	HV_SYS_REG_ID_AA64ISAR2_EL1 Hv_sys_reg_t = 49202
 	HV_SYS_REG_ID_AA64MMFR0_EL1 Hv_sys_reg_t = 49208
 	HV_SYS_REG_ID_AA64MMFR1_EL1 Hv_sys_reg_t = 49209
 	HV_SYS_REG_ID_AA64MMFR2_EL1 Hv_sys_reg_t = 49210
+	HV_SYS_REG_ID_AA64MMFR3_EL1 Hv_sys_reg_t = 49211
+	HV_SYS_REG_ID_AA64MMFR4_EL1 Hv_sys_reg_t = 49212
 	HV_SYS_REG_SCTLR_EL1        Hv_sys_reg_t = 49280
 	// @abstract The ACTLR_EL1 register @discussion This only allows getting / setting of the ACTLR_EL1.EnTSO bit (index 1). Setting this bit to 1 will cause the vcpu to use a TSO memory model, whereas clearing it will cause the vcpu to use the default ARM64 memory model (weakly ordered loads / stores).
 	HV_SYS_REG_ACTLR_EL1      Hv_sys_reg_t = 49281
@@ -5745,6 +5761,8 @@ func (e Hv_sys_reg_t) String() string {
 		return "HV_SYS_REG_ID_AA64PFR0_EL1"
 	case HV_SYS_REG_ID_AA64PFR1_EL1:
 		return "HV_SYS_REG_ID_AA64PFR1_EL1"
+	case HV_SYS_REG_ID_AA64PFR2_EL1:
+		return "HV_SYS_REG_ID_AA64PFR2_EL1"
 	case HV_SYS_REG_ID_AA64ZFR0_EL1:
 		return "HV_SYS_REG_ID_AA64ZFR0_EL1"
 	case HV_SYS_REG_ID_AA64SMFR0_EL1:
@@ -5757,12 +5775,18 @@ func (e Hv_sys_reg_t) String() string {
 		return "HV_SYS_REG_ID_AA64ISAR0_EL1"
 	case HV_SYS_REG_ID_AA64ISAR1_EL1:
 		return "HV_SYS_REG_ID_AA64ISAR1_EL1"
+	case HV_SYS_REG_ID_AA64ISAR2_EL1:
+		return "HV_SYS_REG_ID_AA64ISAR2_EL1"
 	case HV_SYS_REG_ID_AA64MMFR0_EL1:
 		return "HV_SYS_REG_ID_AA64MMFR0_EL1"
 	case HV_SYS_REG_ID_AA64MMFR1_EL1:
 		return "HV_SYS_REG_ID_AA64MMFR1_EL1"
 	case HV_SYS_REG_ID_AA64MMFR2_EL1:
 		return "HV_SYS_REG_ID_AA64MMFR2_EL1"
+	case HV_SYS_REG_ID_AA64MMFR3_EL1:
+		return "HV_SYS_REG_ID_AA64MMFR3_EL1"
+	case HV_SYS_REG_ID_AA64MMFR4_EL1:
+		return "HV_SYS_REG_ID_AA64MMFR4_EL1"
 	case HV_SYS_REG_SCTLR_EL1:
 		return "HV_SYS_REG_SCTLR_EL1"
 	case HV_SYS_REG_ACTLR_EL1:
@@ -5903,6 +5927,48 @@ func (e Hv_sys_reg_t) String() string {
 		return "HV_SYS_REG_VTTBR_EL2"
 	default:
 		return fmt.Sprintf("Hv_sys_reg_t(%d)", int64(e))
+	}
+}
+
+type Hv_tlbi_op_t uint16
+
+const (
+	HV_TLBI_OP_RVAE1IS   Hv_tlbi_op_t = 17
+	HV_TLBI_OP_RVAAE1IS  Hv_tlbi_op_t = 19
+	HV_TLBI_OP_RVALE1IS  Hv_tlbi_op_t = 21
+	HV_TLBI_OP_RVAALE1IS Hv_tlbi_op_t = 23
+	HV_TLBI_OP_VMALLE1IS Hv_tlbi_op_t = 24
+	HV_TLBI_OP_VAE1IS    Hv_tlbi_op_t = 25
+	HV_TLBI_OP_ASIDE1IS  Hv_tlbi_op_t = 26
+	HV_TLBI_OP_VAAE1IS   Hv_tlbi_op_t = 27
+	HV_TLBI_OP_VALE1IS   Hv_tlbi_op_t = 29
+	HV_TLBI_OP_VAALE1IS  Hv_tlbi_op_t = 31
+)
+
+func (e Hv_tlbi_op_t) String() string {
+	switch e {
+	case HV_TLBI_OP_RVAE1IS:
+		return "HV_TLBI_OP_RVAE1IS"
+	case HV_TLBI_OP_RVAAE1IS:
+		return "HV_TLBI_OP_RVAAE1IS"
+	case HV_TLBI_OP_RVALE1IS:
+		return "HV_TLBI_OP_RVALE1IS"
+	case HV_TLBI_OP_RVAALE1IS:
+		return "HV_TLBI_OP_RVAALE1IS"
+	case HV_TLBI_OP_VMALLE1IS:
+		return "HV_TLBI_OP_VMALLE1IS"
+	case HV_TLBI_OP_VAE1IS:
+		return "HV_TLBI_OP_VAE1IS"
+	case HV_TLBI_OP_ASIDE1IS:
+		return "HV_TLBI_OP_ASIDE1IS"
+	case HV_TLBI_OP_VAAE1IS:
+		return "HV_TLBI_OP_VAAE1IS"
+	case HV_TLBI_OP_VALE1IS:
+		return "HV_TLBI_OP_VALE1IS"
+	case HV_TLBI_OP_VAALE1IS:
+		return "HV_TLBI_OP_VAALE1IS"
+	default:
+		return fmt.Sprintf("Hv_tlbi_op_t(%d)", int64(e))
 	}
 }
 

@@ -16,8 +16,6 @@ import (
 )
 
 // LookAroundSnapshotOptions is an idiomatic wrapper over the Objective-C class MKLookAroundSnapshotOptions.
-//
-// Values you use to customize LookAround snapshots.
 type LookAroundSnapshotOptions struct {
 	objref.Handle
 }

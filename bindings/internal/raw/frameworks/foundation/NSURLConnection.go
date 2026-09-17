@@ -106,6 +106,7 @@ func NSURLConnectionCanHandleRequest(request *NSURLRequest) bool {
 	return _ret
 }
 
+// A deep copy of the original connection request. As the connection performs the load, the request may change as a result of protocol canonicalization or due to following redirects.
 func (o *NSURLConnection) OriginalRequest() *NSURLRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLConnectionSelOriginalRequest)
 	if _ret != 0 {
@@ -114,6 +115,7 @@ func (o *NSURLConnection) OriginalRequest() *NSURLRequest {
 	return NSURLRequestFromID(_ret)
 }
 
+// The current connection request. As the connection performs the load, the request may change as a result of protocol canonicalization or due to following redirects. This property provides the current value of the request.
 func (o *NSURLConnection) CurrentRequest() *NSURLRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLConnectionSelCurrentRequest)
 	if _ret != 0 {

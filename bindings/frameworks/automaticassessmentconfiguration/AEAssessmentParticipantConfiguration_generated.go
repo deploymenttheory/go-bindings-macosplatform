@@ -97,6 +97,28 @@ func (apc *AssessmentParticipantConfiguration) WithConfigurationInfo(configurati
 	return apc
 }
 
+// AllowedMenuItemsForLanguageIdentifier returns the set of allowed menu item titles for the given language identifier, or nil if no items have been configured for that identifier.
+// The order of the returned elements is unspecified.
+func (apc *AssessmentParticipantConfiguration) AllowedMenuItemsForLanguageIdentifier(languageIdentifier string) []string {
+	defer runtime.KeepAlive(apc)
+	_r := objc.Send[objc.ID](objref.IDOf(apc), objc.RegisterName("allowedMenuItemsForLanguageIdentifier:"), purego.NSString(languageIdentifier))
+	return rt.NSSetToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
+}
+
+// SetAllowedMenuItemsForLanguageIdentifier sets the allowed menu item titles for the given language identifier.
+func (apc *AssessmentParticipantConfiguration) SetAllowedMenuItemsForLanguageIdentifier(menuItems []string, languageIdentifier string) {
+	defer runtime.KeepAlive(apc)
+	objc.Send[objc.ID](objref.IDOf(apc), objc.RegisterName("setAllowedMenuItems:forLanguageIdentifier:"), rt.SliceToNSSet(menuItems, func(_v string) objc.ID { return purego.NSString(_v) }), purego.NSString(languageIdentifier))
+}
+
+// AllowedMenuItemLanguageIdentifiers returns the set of language identifiers for which allowed menu items have been configured. Contains only identifiers explicitly added via “setAllowedMenuItems(_:forLanguageIdentifier:)“. Does not include identifiers inferred through localization resolution.
+// The order of the returned elements is unspecified.
+func (apc *AssessmentParticipantConfiguration) AllowedMenuItemLanguageIdentifiers() []string {
+	defer runtime.KeepAlive(apc)
+	_r := objc.Send[objc.ID](objref.IDOf(apc), objc.RegisterName("allowedMenuItemLanguageIdentifiers"))
+	return rt.NSSetToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
+}
+
 // AllowsNetworkAccess wraps the corresponding Objective-C method.
 func (apc *AssessmentParticipantConfiguration) AllowsNetworkAccess() bool {
 	defer runtime.KeepAlive(apc)

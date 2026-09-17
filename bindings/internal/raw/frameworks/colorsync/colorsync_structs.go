@@ -3,15 +3,19 @@
 
 package colorsync
 
+// A reference to a Color Management Module (CMM).
 // ColorSyncCMM is an opaque type.
 type ColorSyncCMM struct{}
 
+// An MD5 digest that uniquely identifies a profile, as defined by the ICC specification.
 type ColorSyncMD5 struct {
 	Digest [16]uint8
 }
 
+// A reference to an immutable International Color Consortium (ICC) color profile.
 // ColorSyncProfile is an opaque type.
 type ColorSyncProfile struct{}
 
+// A reference to a color transform that converts color data between profiles.
 // ColorSyncTransform is an opaque type.
 type ColorSyncTransform struct{}

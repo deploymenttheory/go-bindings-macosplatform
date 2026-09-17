@@ -41,24 +41,41 @@ func Write(outDir, pkgName string, checks []Check) error {
 	b.WriteString("// TestGeneratedLayout asserts each emitted value struct reproduces the C ABI\n")
 	b.WriteString("// size and alignment clang reported (Go alignment caps at 8).\n")
 	b.WriteString("func TestGeneratedLayout(t *testing.T) {\n")
-	b.WriteString("\tcases := []struct {\n\t\tname        string\n\t\tgot, want   uintptr\n\t\tgotA, wantA uintptr\n\t}{\n")
+	b.WriteString(
+		"\tcases := []struct {\n\t\tname        string\n\t\tgot, want   uintptr\n\t\tgotA, wantA uintptr\n\t}{\n",
+	)
 	for _, c := range checks {
 		wantA := c.Align
 		if wantA > 8 {
 			wantA = 8 // Go has no scalar wider than 8-byte alignment
 		}
-		fmt.Fprintf(&b, "\t\t{%q, reflect.TypeOf(%s{}).Size(), %d, uintptr(reflect.TypeOf(%s{}).Align()), %d},\n",
-			c.GoName, c.GoName, c.Size, c.GoName, wantA)
+		fmt.Fprintf(
+			&b,
+			"\t\t{%q, reflect.TypeOf(%s{}).Size(), %d, uintptr(reflect.TypeOf(%s{}).Align()), %d},\n",
+			c.GoName,
+			c.GoName,
+			c.Size,
+			c.GoName,
+			wantA,
+		)
 	}
 	b.WriteString("\t}\n")
 	b.WriteString("\tfor _, c := range cases {\n")
-	b.WriteString("\t\tif c.got != c.want {\n\t\t\tt.Errorf(\"sizeof %s = %d, want %d (C ABI)\", c.name, c.got, c.want)\n\t\t}\n")
-	b.WriteString("\t\tif c.wantA != 0 && c.gotA != c.wantA {\n\t\t\tt.Errorf(\"alignof %s = %d, want %d (C ABI)\", c.name, c.gotA, c.wantA)\n\t\t}\n")
+	b.WriteString(
+		"\t\tif c.got != c.want {\n\t\t\tt.Errorf(\"sizeof %s = %d, want %d (C ABI)\", c.name, c.got, c.want)\n\t\t}\n",
+	)
+	b.WriteString(
+		"\t\tif c.wantA != 0 && c.gotA != c.wantA {\n\t\t\tt.Errorf(\"alignof %s = %d, want %d (C ABI)\", c.name, c.gotA, c.wantA)\n\t\t}\n",
+	)
 	b.WriteString("\t}\n}\n")
 
 	src, err := format.Source([]byte(b.String()))
 	if err != nil {
 		return fmt.Errorf("format layout test for %s: %w", pkgName, err)
 	}
-	return os.WriteFile(filepath.Join(outDir, pkgName+"_layout_generated_test.go"), src, 0o644)
+	filename := pkgName + "_layout_generated_test.go"
+	if strings.HasPrefix(filename, "_") {
+		filename = "sdk" + filename
+	}
+	return os.WriteFile(filepath.Join(outDir, filename), src, 0o644)
 }

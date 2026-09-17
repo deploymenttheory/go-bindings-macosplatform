@@ -21,18 +21,19 @@ type CIImageProcessorKernel struct {
 }
 
 var (
-	_clsCIImageProcessorKernel                                        = _objcClass("CIImageProcessorKernel")
-	_cIImageProcessorKernelSelProcessWithInputsArgumentsOutputError   = objc.RegisterName("processWithInputs:arguments:output:error:")
-	_cIImageProcessorKernelSelRoiForInputArgumentsOutputRect          = objc.RegisterName("roiForInput:arguments:outputRect:")
-	_cIImageProcessorKernelSelRoiTileArrayForInputArgumentsOutputRect = objc.RegisterName("roiTileArrayForInput:arguments:outputRect:")
-	_cIImageProcessorKernelSelFormatForInputAtIndex                   = objc.RegisterName("formatForInputAtIndex:")
-	_cIImageProcessorKernelSelApplyWithExtentInputsArgumentsError     = objc.RegisterName("applyWithExtent:inputs:arguments:error:")
-	_cIImageProcessorKernelSelOutputFormat                            = objc.RegisterName("outputFormat")
-	_cIImageProcessorKernelSelOutputIsOpaque                          = objc.RegisterName("outputIsOpaque")
-	_cIImageProcessorKernelSelSynchronizeInputs                       = objc.RegisterName("synchronizeInputs")
-	_cIImageProcessorKernelSelProcessWithInputsArgumentsOutputsError  = objc.RegisterName("processWithInputs:arguments:outputs:error:")
-	_cIImageProcessorKernelSelOutputFormatAtIndexArguments            = objc.RegisterName("outputFormatAtIndex:arguments:")
-	_cIImageProcessorKernelSelApplyWithExtentsInputsArgumentsError    = objc.RegisterName("applyWithExtents:inputs:arguments:error:")
+	_clsCIImageProcessorKernel                                         = _objcClass("CIImageProcessorKernel")
+	_cIImageProcessorKernelSelProcessWithInputsArgumentsOutputError    = objc.RegisterName("processWithInputs:arguments:output:error:")
+	_cIImageProcessorKernelSelRoiForInputArgumentsOutputRect           = objc.RegisterName("roiForInput:arguments:outputRect:")
+	_cIImageProcessorKernelSelRoiTileArrayForInputArgumentsOutputRect  = objc.RegisterName("roiTileArrayForInput:arguments:outputRect:")
+	_cIImageProcessorKernelSelFormatForInputAtIndex                    = objc.RegisterName("formatForInputAtIndex:")
+	_cIImageProcessorKernelSelApplyWithExtentInputsArgumentsError      = objc.RegisterName("applyWithExtent:inputs:arguments:error:")
+	_cIImageProcessorKernelSelOutputFormat                             = objc.RegisterName("outputFormat")
+	_cIImageProcessorKernelSelOutputIsOpaque                           = objc.RegisterName("outputIsOpaque")
+	_cIImageProcessorKernelSelSynchronizeInputs                        = objc.RegisterName("synchronizeInputs")
+	_cIImageProcessorKernelSelProcessWithInputsArgumentsOutputsError   = objc.RegisterName("processWithInputs:arguments:outputs:error:")
+	_cIImageProcessorKernelSelOutputFormatAtIndexArguments             = objc.RegisterName("outputFormatAtIndex:arguments:")
+	_cIImageProcessorKernelSelApplyWithExtentsInputsArgumentsError     = objc.RegisterName("applyWithExtents:inputs:arguments:error:")
+	_cIImageProcessorKernelSelApplyWithTiledExtentInputsArgumentsError = objc.RegisterName("applyWithTiledExtent:inputs:arguments:error:")
 )
 
 func CIImageProcessorKernelFromID(id objc.ID) *CIImageProcessorKernel {
@@ -134,4 +135,17 @@ func CIImageProcessorKernelApplyWithExtentsInputsArgumentsError(extents *foundat
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return foundation.NSArrayFromID[*CIImage](_ret), nil
+}
+
+// Call this method on your Core Image Processor Kernel subclass to create a new image based on an array of tile extents that together cover the output.
+func CIImageProcessorKernelApplyWithTiledExtentInputsArgumentsError(tileExtents *foundation.NSArray[*CIVector], inputs *foundation.NSArray[*CIImage], args *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*CIImage, error) {
+	var _nsErr uintptr
+	_ret := objc.Send[objc.ID](objc.ID(_clsCIImageProcessorKernel), _cIImageProcessorKernelSelApplyWithTiledExtentInputsArgumentsError, tileExtents.Ptr(), inputs.Ptr(), args.Ptr(), unsafe.Pointer(&_nsErr))
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	if _nsErr != 0 {
+		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+	}
+	return CIImageFromID(_ret), nil
 }

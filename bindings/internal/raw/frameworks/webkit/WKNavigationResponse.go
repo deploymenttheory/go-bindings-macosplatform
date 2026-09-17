@@ -18,10 +18,11 @@ type WKNavigationResponse struct {
 }
 
 var (
-	_clsWKNavigationResponse                = _objcClass("WKNavigationResponse")
-	_wKNavigationResponseSelIsForMainFrame  = objc.RegisterName("isForMainFrame")
-	_wKNavigationResponseSelResponse        = objc.RegisterName("response")
-	_wKNavigationResponseSelCanShowMIMEType = objc.RegisterName("canShowMIMEType")
+	_clsWKNavigationResponse                    = _objcClass("WKNavigationResponse")
+	_wKNavigationResponseSelIsForMainFrame      = objc.RegisterName("isForMainFrame")
+	_wKNavigationResponseSelResponse            = objc.RegisterName("response")
+	_wKNavigationResponseSelCanShowMIMEType     = objc.RegisterName("canShowMIMEType")
+	_wKNavigationResponseSelMainFrameNavigation = objc.RegisterName("mainFrameNavigation")
 )
 
 func WKNavigationResponseFromID(id objc.ID) *WKNavigationResponse {
@@ -68,6 +69,21 @@ func (o *WKNavigationResponse) CanShowMIMEType() bool {
 		_mainthread0 = func() bool {
 			_ret := objc.Send[bool](o.Ptr(), _wKNavigationResponseSelCanShowMIMEType)
 			return _ret
+		}()
+	})
+	return _mainthread0
+}
+
+// @abstract The most recent main frame navigation that took place that encompasses this navigation response.
+func (o *WKNavigationResponse) MainFrameNavigation() *WKNavigation {
+	var _mainthread0 *WKNavigation
+	purego.Main(func() {
+		_mainthread0 = func() *WKNavigation {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKNavigationResponseSelMainFrameNavigation)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WKNavigationFromID(_ret)
 		}()
 	})
 	return _mainthread0

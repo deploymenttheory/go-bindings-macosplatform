@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"go/format"
 	"os"
+	"path/filepath"
+	"strings"
 )
 
 // FormatGoSource runs src through go/format (canonical gofmt). It returns an
@@ -18,6 +20,12 @@ func FormatGoSource(src []byte) ([]byte, error) {
 // always gofmt-canonical and emitters/templates need not hand-manage whitespace,
 // alignment, or import grouping.
 func WriteGoFile(path string, src []byte) error {
+	// Go ignores files beginning with an underscore, even in a valid package
+	// such as _ScreenCaptureKit_SwiftUI. Keep the package path, but make its
+	// generated declarations visible to the Go toolchain.
+	if name := filepath.Base(path); strings.HasPrefix(name, "_") {
+		path = filepath.Join(filepath.Dir(path), "sdk"+name)
+	}
 	formatted, err := format.Source(src)
 	if err != nil {
 		return fmt.Errorf("format %s: %w", path, err)

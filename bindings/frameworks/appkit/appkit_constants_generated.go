@@ -277,6 +277,11 @@ func NSBrowserIllegalDelegateException() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSBrowserIllegalDelegateException")))
 }
 
+// NSAccessibilityException returns the string constant NSAccessibilityException, for use as a dictionary key or argument.
+func NSAccessibilityException() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityException")))
+}
+
 // NSAccessibilityErrorCodeExceptionInfo returns the string constant NSAccessibilityErrorCodeExceptionInfo, for use as a dictionary key or argument.
 func NSAccessibilityErrorCodeExceptionInfo() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityErrorCodeExceptionInfo")))
@@ -732,6 +737,26 @@ func NSAccessibilityLinkTextAttribute() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityLinkTextAttribute")))
 }
 
+// NSAccessibilityAutocorrectedTextAttribute returns the string constant NSAccessibilityAutocorrectedTextAttribute, for use as a dictionary key or argument.
+func NSAccessibilityAutocorrectedTextAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityAutocorrectedTextAttribute")))
+}
+
+// NSAccessibilityTextAlignmentAttribute returns the string constant NSAccessibilityTextAlignmentAttribute, for use as a dictionary key or argument.
+func NSAccessibilityTextAlignmentAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityTextAlignmentAttribute")))
+}
+
+// NSAccessibilityFontBoldAttribute returns the string constant NSAccessibilityFontBoldAttribute, for use as a dictionary key or argument.
+func NSAccessibilityFontBoldAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityFontBoldAttribute")))
+}
+
+// NSAccessibilityFontItalicAttribute returns the string constant NSAccessibilityFontItalicAttribute, for use as a dictionary key or argument.
+func NSAccessibilityFontItalicAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityFontItalicAttribute")))
+}
+
 // NSAccessibilityChildrenInNavigationOrderAttribute returns the string constant NSAccessibilityChildrenInNavigationOrderAttribute, for use as a dictionary key or argument.
 func NSAccessibilityChildrenInNavigationOrderAttribute() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityChildrenInNavigationOrderAttribute")))
@@ -747,9 +772,44 @@ func NSAccessibilityIndexForChildUIElementInNavigationOrderAttribute() obj.Objec
 	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityIndexForChildUIElementInNavigationOrderAttribute")))
 }
 
+// NSAccessibilityListItemPrefixTextAttribute returns the string constant NSAccessibilityListItemPrefixTextAttribute, for use as a dictionary key or argument.
+func NSAccessibilityListItemPrefixTextAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityListItemPrefixTextAttribute")))
+}
+
+// NSAccessibilityListItemIndexTextAttribute returns the string constant NSAccessibilityListItemIndexTextAttribute, for use as a dictionary key or argument.
+func NSAccessibilityListItemIndexTextAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityListItemIndexTextAttribute")))
+}
+
+// NSAccessibilityListItemLevelTextAttribute returns the string constant NSAccessibilityListItemLevelTextAttribute, for use as a dictionary key or argument.
+func NSAccessibilityListItemLevelTextAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityListItemLevelTextAttribute")))
+}
+
 // NSAccessibilityMisspelledTextAttribute returns the string constant NSAccessibilityMisspelledTextAttribute, for use as a dictionary key or argument.
 func NSAccessibilityMisspelledTextAttribute() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityMisspelledTextAttribute")))
+}
+
+// NSAccessibilityMarkedMisspelledTextAttribute returns the string constant NSAccessibilityMarkedMisspelledTextAttribute, for use as a dictionary key or argument.
+func NSAccessibilityMarkedMisspelledTextAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityMarkedMisspelledTextAttribute")))
+}
+
+// NSAccessibilityLanguageTextAttribute returns the string constant NSAccessibilityLanguageTextAttribute, for use as a dictionary key or argument.
+func NSAccessibilityLanguageTextAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityLanguageTextAttribute")))
+}
+
+// NSAccessibilityCustomTextAttribute returns the string constant NSAccessibilityCustomTextAttribute, for use as a dictionary key or argument.
+func NSAccessibilityCustomTextAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityCustomTextAttribute")))
+}
+
+// NSAccessibilityAnnotationTextAttribute returns the string constant NSAccessibilityAnnotationTextAttribute, for use as a dictionary key or argument.
+func NSAccessibilityAnnotationTextAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityAnnotationTextAttribute")))
 }
 
 // NSAccessibilityTextCompletionAttribute returns the string constant NSAccessibilityTextCompletionAttribute, for use as a dictionary key or argument.
@@ -2282,6 +2342,26 @@ func NSWorkspaceDidTerminateApplicationNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSWorkspaceDidTerminateApplicationNotification")))
 }
 
+// NSWorkspaceDidHideApplicationNotification returns the string constant NSWorkspaceDidHideApplicationNotification, for use as a dictionary key or argument.
+func NSWorkspaceDidHideApplicationNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWorkspaceDidHideApplicationNotification")))
+}
+
+// NSWorkspaceDidUnhideApplicationNotification returns the string constant NSWorkspaceDidUnhideApplicationNotification, for use as a dictionary key or argument.
+func NSWorkspaceDidUnhideApplicationNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWorkspaceDidUnhideApplicationNotification")))
+}
+
+// NSWorkspaceDidActivateApplicationNotification returns the string constant NSWorkspaceDidActivateApplicationNotification, for use as a dictionary key or argument.
+func NSWorkspaceDidActivateApplicationNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWorkspaceDidActivateApplicationNotification")))
+}
+
+// NSWorkspaceDidDeactivateApplicationNotification returns the string constant NSWorkspaceDidDeactivateApplicationNotification, for use as a dictionary key or argument.
+func NSWorkspaceDidDeactivateApplicationNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWorkspaceDidDeactivateApplicationNotification")))
+}
+
 // NSWorkspaceVolumeLocalizedNameKey returns the string constant NSWorkspaceVolumeLocalizedNameKey, for use as a dictionary key or argument.
 func NSWorkspaceVolumeLocalizedNameKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSWorkspaceVolumeLocalizedNameKey")))
@@ -2317,6 +2397,11 @@ func NSWorkspaceWillUnmountNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSWorkspaceWillUnmountNotification")))
 }
 
+// NSWorkspaceDidRenameVolumeNotification returns the string constant NSWorkspaceDidRenameVolumeNotification, for use as a dictionary key or argument.
+func NSWorkspaceDidRenameVolumeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWorkspaceDidRenameVolumeNotification")))
+}
+
 // NSWorkspaceWillPowerOffNotification returns the string constant NSWorkspaceWillPowerOffNotification, for use as a dictionary key or argument.
 func NSWorkspaceWillPowerOffNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSWorkspaceWillPowerOffNotification")))
@@ -2332,6 +2417,16 @@ func NSWorkspaceDidWakeNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSWorkspaceDidWakeNotification")))
 }
 
+// NSWorkspaceScreensDidSleepNotification returns the string constant NSWorkspaceScreensDidSleepNotification, for use as a dictionary key or argument.
+func NSWorkspaceScreensDidSleepNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWorkspaceScreensDidSleepNotification")))
+}
+
+// NSWorkspaceScreensDidWakeNotification returns the string constant NSWorkspaceScreensDidWakeNotification, for use as a dictionary key or argument.
+func NSWorkspaceScreensDidWakeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWorkspaceScreensDidWakeNotification")))
+}
+
 // NSWorkspaceSessionDidBecomeActiveNotification returns the string constant NSWorkspaceSessionDidBecomeActiveNotification, for use as a dictionary key or argument.
 func NSWorkspaceSessionDidBecomeActiveNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSWorkspaceSessionDidBecomeActiveNotification")))
@@ -2340,6 +2435,16 @@ func NSWorkspaceSessionDidBecomeActiveNotification() obj.Object {
 // NSWorkspaceSessionDidResignActiveNotification returns the string constant NSWorkspaceSessionDidResignActiveNotification, for use as a dictionary key or argument.
 func NSWorkspaceSessionDidResignActiveNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSWorkspaceSessionDidResignActiveNotification")))
+}
+
+// NSWorkspaceDidChangeFileLabelsNotification returns the string constant NSWorkspaceDidChangeFileLabelsNotification, for use as a dictionary key or argument.
+func NSWorkspaceDidChangeFileLabelsNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWorkspaceDidChangeFileLabelsNotification")))
+}
+
+// NSWorkspaceActiveSpaceDidChangeNotification returns the string constant NSWorkspaceActiveSpaceDidChangeNotification, for use as a dictionary key or argument.
+func NSWorkspaceActiveSpaceDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWorkspaceActiveSpaceDidChangeNotification")))
 }
 
 // NSWorkspaceLaunchConfigurationAppleEvent returns the string constant NSWorkspaceLaunchConfigurationAppleEvent, for use as a dictionary key or argument.
@@ -2412,6 +2517,11 @@ func NSWorkspaceDuplicateOperation() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSWorkspaceDuplicateOperation")))
 }
 
+// NSWorkspaceDidPerformFileOperationNotification returns the string constant NSWorkspaceDidPerformFileOperationNotification, for use as a dictionary key or argument.
+func NSWorkspaceDidPerformFileOperationNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWorkspaceDidPerformFileOperationNotification")))
+}
+
 // NSPlainFileType returns the string constant NSPlainFileType, for use as a dictionary key or argument.
 func NSPlainFileType() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSPlainFileType"))) }
 
@@ -2433,6 +2543,11 @@ func NSFilesystemFileType() obj.Object {
 // NSShellCommandFileType returns the string constant NSShellCommandFileType, for use as a dictionary key or argument.
 func NSShellCommandFileType() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSShellCommandFileType")))
+}
+
+// NSWorkspaceAccessibilityDisplayOptionsDidChangeNotification returns the string constant NSWorkspaceAccessibilityDisplayOptionsDidChangeNotification, for use as a dictionary key or argument.
+func NSWorkspaceAccessibilityDisplayOptionsDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWorkspaceAccessibilityDisplayOptionsDidChangeNotification")))
 }
 
 // NSPasteboardTypeString returns the string constant NSPasteboardTypeString, for use as a dictionary key or argument.
@@ -2846,9 +2961,24 @@ func NSViewFrameDidChangeNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSViewFrameDidChangeNotification")))
 }
 
+// NSViewFocusDidChangeNotification returns the string constant NSViewFocusDidChangeNotification, for use as a dictionary key or argument.
+func NSViewFocusDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSViewFocusDidChangeNotification")))
+}
+
 // NSViewBoundsDidChangeNotification returns the string constant NSViewBoundsDidChangeNotification, for use as a dictionary key or argument.
 func NSViewBoundsDidChangeNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSViewBoundsDidChangeNotification")))
+}
+
+// NSViewGlobalFrameDidChangeNotification returns the string constant NSViewGlobalFrameDidChangeNotification, for use as a dictionary key or argument.
+func NSViewGlobalFrameDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSViewGlobalFrameDidChangeNotification")))
+}
+
+// NSViewDidUpdateTrackingAreasNotification returns the string constant NSViewDidUpdateTrackingAreasNotification, for use as a dictionary key or argument.
+func NSViewDidUpdateTrackingAreasNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSViewDidUpdateTrackingAreasNotification")))
 }
 
 // NSTextDidBeginEditingNotification returns the string constant NSTextDidBeginEditingNotification, for use as a dictionary key or argument.
@@ -2874,6 +3004,11 @@ func NSTextMovementUserInfoKey() obj.Object {
 // NSTabColumnTerminatorsAttributeName returns the string constant NSTabColumnTerminatorsAttributeName, for use as a dictionary key or argument.
 func NSTabColumnTerminatorsAttributeName() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSTabColumnTerminatorsAttributeName")))
+}
+
+// NSControlTintDidChangeNotification returns the string constant NSControlTintDidChangeNotification, for use as a dictionary key or argument.
+func NSControlTintDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSControlTintDidChangeNotification")))
 }
 
 // NSMenuItemImportFromDeviceIdentifier returns the string constant NSMenuItemImportFromDeviceIdentifier, for use as a dictionary key or argument.
@@ -3676,6 +3811,26 @@ func NSApplicationDidChangeScreenParametersNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSApplicationDidChangeScreenParametersNotification")))
 }
 
+// NSApplicationProtectedDataWillBecomeUnavailableNotification returns the string constant NSApplicationProtectedDataWillBecomeUnavailableNotification, for use as a dictionary key or argument.
+func NSApplicationProtectedDataWillBecomeUnavailableNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSApplicationProtectedDataWillBecomeUnavailableNotification")))
+}
+
+// NSApplicationProtectedDataDidBecomeAvailableNotification returns the string constant NSApplicationProtectedDataDidBecomeAvailableNotification, for use as a dictionary key or argument.
+func NSApplicationProtectedDataDidBecomeAvailableNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSApplicationProtectedDataDidBecomeAvailableNotification")))
+}
+
+// NSApplicationShouldBeginSuppressingHighDynamicRangeContentNotification returns the string constant NSApplicationShouldBeginSuppressingHighDynamicRangeContentNotification, for use as a dictionary key or argument.
+func NSApplicationShouldBeginSuppressingHighDynamicRangeContentNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSApplicationShouldBeginSuppressingHighDynamicRangeContentNotification")))
+}
+
+// NSApplicationShouldEndSuppressingHighDynamicRangeContentNotification returns the string constant NSApplicationShouldEndSuppressingHighDynamicRangeContentNotification, for use as a dictionary key or argument.
+func NSApplicationShouldEndSuppressingHighDynamicRangeContentNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSApplicationShouldEndSuppressingHighDynamicRangeContentNotification")))
+}
+
 // NSApplicationLaunchIsDefaultLaunchKey returns the string constant NSApplicationLaunchIsDefaultLaunchKey, for use as a dictionary key or argument.
 func NSApplicationLaunchIsDefaultLaunchKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSApplicationLaunchIsDefaultLaunchKey")))
@@ -3689,6 +3844,11 @@ func NSApplicationLaunchUserNotificationKey() obj.Object {
 // NSApplicationLaunchRemoteNotificationKey returns the string constant NSApplicationLaunchRemoteNotificationKey, for use as a dictionary key or argument.
 func NSApplicationLaunchRemoteNotificationKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSApplicationLaunchRemoteNotificationKey")))
+}
+
+// NSApplicationDidChangeOcclusionStateNotification returns the string constant NSApplicationDidChangeOcclusionStateNotification, for use as a dictionary key or argument.
+func NSApplicationDidChangeOcclusionStateNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSApplicationDidChangeOcclusionStateNotification")))
 }
 
 // NSColorListDidChangeNotification returns the string constant NSColorListDidChangeNotification, for use as a dictionary key or argument.
@@ -3764,6 +3924,26 @@ func NSPopoverCloseReasonStandard() obj.Object {
 // NSPopoverCloseReasonDetachToWindow returns the string constant NSPopoverCloseReasonDetachToWindow, for use as a dictionary key or argument.
 func NSPopoverCloseReasonDetachToWindow() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSPopoverCloseReasonDetachToWindow")))
+}
+
+// NSPopoverWillShowNotification returns the string constant NSPopoverWillShowNotification, for use as a dictionary key or argument.
+func NSPopoverWillShowNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPopoverWillShowNotification")))
+}
+
+// NSPopoverDidShowNotification returns the string constant NSPopoverDidShowNotification, for use as a dictionary key or argument.
+func NSPopoverDidShowNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPopoverDidShowNotification")))
+}
+
+// NSPopoverWillCloseNotification returns the string constant NSPopoverWillCloseNotification, for use as a dictionary key or argument.
+func NSPopoverWillCloseNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPopoverWillCloseNotification")))
+}
+
+// NSPopoverDidCloseNotification returns the string constant NSPopoverDidCloseNotification, for use as a dictionary key or argument.
+func NSPopoverDidCloseNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPopoverDidCloseNotification")))
 }
 
 // NSCollectionElementKindInterItemGapIndicator returns the string constant NSCollectionElementKindInterItemGapIndicator, for use as a dictionary key or argument.
@@ -3995,6 +4175,11 @@ func NSFontCollectionDisallowAutoActivationOption() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSFontCollectionDisallowAutoActivationOption")))
 }
 
+// NSFontCollectionDidChangeNotification returns the string constant NSFontCollectionDidChangeNotification, for use as a dictionary key or argument.
+func NSFontCollectionDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontCollectionDidChangeNotification")))
+}
+
 // NSFontCollectionActionKey returns the string constant NSFontCollectionActionKey, for use as a dictionary key or argument.
 func NSFontCollectionActionKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSFontCollectionActionKey")))
@@ -4130,6 +4315,11 @@ func NSWindowDidEndSheetNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSWindowDidEndSheetNotification")))
 }
 
+// NSWindowDidChangeBackingPropertiesNotification returns the string constant NSWindowDidChangeBackingPropertiesNotification, for use as a dictionary key or argument.
+func NSWindowDidChangeBackingPropertiesNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWindowDidChangeBackingPropertiesNotification")))
+}
+
 // NSBackingPropertyOldScaleFactorKey returns the string constant NSBackingPropertyOldScaleFactorKey, for use as a dictionary key or argument.
 func NSBackingPropertyOldScaleFactorKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSBackingPropertyOldScaleFactorKey")))
@@ -4143,6 +4333,61 @@ func NSBackingPropertyOldColorSpaceKey() obj.Object {
 // NSWindowDidChangeScreenProfileNotification returns the string constant NSWindowDidChangeScreenProfileNotification, for use as a dictionary key or argument.
 func NSWindowDidChangeScreenProfileNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSWindowDidChangeScreenProfileNotification")))
+}
+
+// NSWindowWillStartLiveResizeNotification returns the string constant NSWindowWillStartLiveResizeNotification, for use as a dictionary key or argument.
+func NSWindowWillStartLiveResizeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWindowWillStartLiveResizeNotification")))
+}
+
+// NSWindowDidEndLiveResizeNotification returns the string constant NSWindowDidEndLiveResizeNotification, for use as a dictionary key or argument.
+func NSWindowDidEndLiveResizeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWindowDidEndLiveResizeNotification")))
+}
+
+// NSWindowWillEnterFullScreenNotification returns the string constant NSWindowWillEnterFullScreenNotification, for use as a dictionary key or argument.
+func NSWindowWillEnterFullScreenNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWindowWillEnterFullScreenNotification")))
+}
+
+// NSWindowDidEnterFullScreenNotification returns the string constant NSWindowDidEnterFullScreenNotification, for use as a dictionary key or argument.
+func NSWindowDidEnterFullScreenNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWindowDidEnterFullScreenNotification")))
+}
+
+// NSWindowWillExitFullScreenNotification returns the string constant NSWindowWillExitFullScreenNotification, for use as a dictionary key or argument.
+func NSWindowWillExitFullScreenNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWindowWillExitFullScreenNotification")))
+}
+
+// NSWindowDidExitFullScreenNotification returns the string constant NSWindowDidExitFullScreenNotification, for use as a dictionary key or argument.
+func NSWindowDidExitFullScreenNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWindowDidExitFullScreenNotification")))
+}
+
+// NSWindowWillEnterVersionBrowserNotification returns the string constant NSWindowWillEnterVersionBrowserNotification, for use as a dictionary key or argument.
+func NSWindowWillEnterVersionBrowserNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWindowWillEnterVersionBrowserNotification")))
+}
+
+// NSWindowDidEnterVersionBrowserNotification returns the string constant NSWindowDidEnterVersionBrowserNotification, for use as a dictionary key or argument.
+func NSWindowDidEnterVersionBrowserNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWindowDidEnterVersionBrowserNotification")))
+}
+
+// NSWindowWillExitVersionBrowserNotification returns the string constant NSWindowWillExitVersionBrowserNotification, for use as a dictionary key or argument.
+func NSWindowWillExitVersionBrowserNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWindowWillExitVersionBrowserNotification")))
+}
+
+// NSWindowDidExitVersionBrowserNotification returns the string constant NSWindowDidExitVersionBrowserNotification, for use as a dictionary key or argument.
+func NSWindowDidExitVersionBrowserNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWindowDidExitVersionBrowserNotification")))
+}
+
+// NSWindowDidChangeOcclusionStateNotification returns the string constant NSWindowDidChangeOcclusionStateNotification, for use as a dictionary key or argument.
+func NSWindowDidChangeOcclusionStateNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWindowDidChangeOcclusionStateNotification")))
 }
 
 // NSImageRepRegistryDidChangeNotification returns the string constant NSImageRepRegistryDidChangeNotification, for use as a dictionary key or argument.
@@ -5357,6 +5602,56 @@ func NSTextCheckingGenerateInlinePredictionsKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSTextCheckingGenerateInlinePredictionsKey")))
 }
 
+// NSTextCheckingAutomaticCapitalizationEnabledKey returns the string constant NSTextCheckingAutomaticCapitalizationEnabledKey, for use as a dictionary key or argument.
+func NSTextCheckingAutomaticCapitalizationEnabledKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextCheckingAutomaticCapitalizationEnabledKey")))
+}
+
+// NSTextCheckingWaitForAllGrammarCheckingResultsKey returns the string constant NSTextCheckingWaitForAllGrammarCheckingResultsKey, for use as a dictionary key or argument.
+func NSTextCheckingWaitForAllGrammarCheckingResultsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextCheckingWaitForAllGrammarCheckingResultsKey")))
+}
+
+// NSSpellCheckerDidChangeAutomaticSpellingCorrectionNotification returns the string constant NSSpellCheckerDidChangeAutomaticSpellingCorrectionNotification, for use as a dictionary key or argument.
+func NSSpellCheckerDidChangeAutomaticSpellingCorrectionNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSpellCheckerDidChangeAutomaticSpellingCorrectionNotification")))
+}
+
+// NSSpellCheckerDidChangeAutomaticTextReplacementNotification returns the string constant NSSpellCheckerDidChangeAutomaticTextReplacementNotification, for use as a dictionary key or argument.
+func NSSpellCheckerDidChangeAutomaticTextReplacementNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSpellCheckerDidChangeAutomaticTextReplacementNotification")))
+}
+
+// NSSpellCheckerDidChangeAutomaticQuoteSubstitutionNotification returns the string constant NSSpellCheckerDidChangeAutomaticQuoteSubstitutionNotification, for use as a dictionary key or argument.
+func NSSpellCheckerDidChangeAutomaticQuoteSubstitutionNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSpellCheckerDidChangeAutomaticQuoteSubstitutionNotification")))
+}
+
+// NSSpellCheckerDidChangeAutomaticDashSubstitutionNotification returns the string constant NSSpellCheckerDidChangeAutomaticDashSubstitutionNotification, for use as a dictionary key or argument.
+func NSSpellCheckerDidChangeAutomaticDashSubstitutionNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSpellCheckerDidChangeAutomaticDashSubstitutionNotification")))
+}
+
+// NSSpellCheckerDidChangeAutomaticCapitalizationNotification returns the string constant NSSpellCheckerDidChangeAutomaticCapitalizationNotification, for use as a dictionary key or argument.
+func NSSpellCheckerDidChangeAutomaticCapitalizationNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSpellCheckerDidChangeAutomaticCapitalizationNotification")))
+}
+
+// NSSpellCheckerDidChangeAutomaticPeriodSubstitutionNotification returns the string constant NSSpellCheckerDidChangeAutomaticPeriodSubstitutionNotification, for use as a dictionary key or argument.
+func NSSpellCheckerDidChangeAutomaticPeriodSubstitutionNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSpellCheckerDidChangeAutomaticPeriodSubstitutionNotification")))
+}
+
+// NSSpellCheckerDidChangeAutomaticTextCompletionNotification returns the string constant NSSpellCheckerDidChangeAutomaticTextCompletionNotification, for use as a dictionary key or argument.
+func NSSpellCheckerDidChangeAutomaticTextCompletionNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSpellCheckerDidChangeAutomaticTextCompletionNotification")))
+}
+
+// NSSpellCheckerDidChangeAutomaticInlinePredictionNotification returns the string constant NSSpellCheckerDidChangeAutomaticInlinePredictionNotification, for use as a dictionary key or argument.
+func NSSpellCheckerDidChangeAutomaticInlinePredictionNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSpellCheckerDidChangeAutomaticInlinePredictionNotification")))
+}
+
 // NSSplitViewWillResizeSubviewsNotification returns the string constant NSSplitViewWillResizeSubviewsNotification, for use as a dictionary key or argument.
 func NSSplitViewWillResizeSubviewsNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSSplitViewWillResizeSubviewsNotification")))
@@ -5407,6 +5702,16 @@ func NSPrintPanelAccessorySummaryItemDescriptionKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSPrintPanelAccessorySummaryItemDescriptionKey")))
 }
 
+// NSScreenColorSpaceDidChangeNotification returns the string constant NSScreenColorSpaceDidChangeNotification, for use as a dictionary key or argument.
+func NSScreenColorSpaceDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSScreenColorSpaceDidChangeNotification")))
+}
+
+// NSPreferredScrollerStyleDidChangeNotification returns the string constant NSPreferredScrollerStyleDidChangeNotification, for use as a dictionary key or argument.
+func NSPreferredScrollerStyleDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPreferredScrollerStyleDidChangeNotification")))
+}
+
 // NSTextFinderCaseInsensitiveKey returns the string constant NSTextFinderCaseInsensitiveKey, for use as a dictionary key or argument.
 func NSTextFinderCaseInsensitiveKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSTextFinderCaseInsensitiveKey")))
@@ -5415,6 +5720,31 @@ func NSTextFinderCaseInsensitiveKey() obj.Object {
 // NSTextFinderMatchingTypeKey returns the string constant NSTextFinderMatchingTypeKey, for use as a dictionary key or argument.
 func NSTextFinderMatchingTypeKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSTextFinderMatchingTypeKey")))
+}
+
+// NSScrollViewWillStartLiveMagnifyNotification returns the string constant NSScrollViewWillStartLiveMagnifyNotification, for use as a dictionary key or argument.
+func NSScrollViewWillStartLiveMagnifyNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSScrollViewWillStartLiveMagnifyNotification")))
+}
+
+// NSScrollViewDidEndLiveMagnifyNotification returns the string constant NSScrollViewDidEndLiveMagnifyNotification, for use as a dictionary key or argument.
+func NSScrollViewDidEndLiveMagnifyNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSScrollViewDidEndLiveMagnifyNotification")))
+}
+
+// NSScrollViewWillStartLiveScrollNotification returns the string constant NSScrollViewWillStartLiveScrollNotification, for use as a dictionary key or argument.
+func NSScrollViewWillStartLiveScrollNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSScrollViewWillStartLiveScrollNotification")))
+}
+
+// NSScrollViewDidLiveScrollNotification returns the string constant NSScrollViewDidLiveScrollNotification, for use as a dictionary key or argument.
+func NSScrollViewDidLiveScrollNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSScrollViewDidLiveScrollNotification")))
+}
+
+// NSScrollViewDidEndLiveScrollNotification returns the string constant NSScrollViewDidEndLiveScrollNotification, for use as a dictionary key or argument.
+func NSScrollViewDidEndLiveScrollNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSScrollViewDidEndLiveScrollNotification")))
 }
 
 // NSTextContentTypeUsername returns the string constant NSTextContentTypeUsername, for use as a dictionary key or argument.
@@ -5927,6 +6257,26 @@ func NSTextKit1ListMarkerFormatDocumentOption() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSTextKit1ListMarkerFormatDocumentOption")))
 }
 
+// NSPaperMarginDocumentAttribute returns the string constant NSPaperMarginDocumentAttribute, for use as a dictionary key or argument.
+func NSPaperMarginDocumentAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPaperMarginDocumentAttribute")))
+}
+
+// NSObliquenessAttributeName returns the string constant NSObliquenessAttributeName, for use as a dictionary key or argument.
+func NSObliquenessAttributeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSObliquenessAttributeName")))
+}
+
+// NSExpansionAttributeName returns the string constant NSExpansionAttributeName, for use as a dictionary key or argument.
+func NSExpansionAttributeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSExpansionAttributeName")))
+}
+
+// NSVerticalGlyphFormAttributeName returns the string constant NSVerticalGlyphFormAttributeName, for use as a dictionary key or argument.
+func NSVerticalGlyphFormAttributeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSVerticalGlyphFormAttributeName")))
+}
+
 // NSCursorAttributeName returns the string constant NSCursorAttributeName, for use as a dictionary key or argument.
 func NSCursorAttributeName() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSCursorAttributeName")))
@@ -5940,6 +6290,11 @@ func NSToolTipAttributeName() obj.Object {
 // NSMarkedClauseSegmentAttributeName returns the string constant NSMarkedClauseSegmentAttributeName, for use as a dictionary key or argument.
 func NSMarkedClauseSegmentAttributeName() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSMarkedClauseSegmentAttributeName")))
+}
+
+// NSTextAlternativesAttributeName returns the string constant NSTextAlternativesAttributeName, for use as a dictionary key or argument.
+func NSTextAlternativesAttributeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextAlternativesAttributeName")))
 }
 
 // NSSpellingStateAttributeName returns the string constant NSSpellingStateAttributeName, for use as a dictionary key or argument.
@@ -6132,19 +6487,14 @@ func NSFileTypeDocumentOption() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSFileTypeDocumentOption")))
 }
 
-// NSObliquenessAttributeName returns the string constant NSObliquenessAttributeName, for use as a dictionary key or argument.
-func NSObliquenessAttributeName() obj.Object {
-	return obj.Wrap(purego.CFConstant(_symbol("NSObliquenessAttributeName")))
+// NSCharacterShapeAttributeName returns the string constant NSCharacterShapeAttributeName, for use as a dictionary key or argument.
+func NSCharacterShapeAttributeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSCharacterShapeAttributeName")))
 }
 
-// NSExpansionAttributeName returns the string constant NSExpansionAttributeName, for use as a dictionary key or argument.
-func NSExpansionAttributeName() obj.Object {
-	return obj.Wrap(purego.CFConstant(_symbol("NSExpansionAttributeName")))
-}
-
-// NSVerticalGlyphFormAttributeName returns the string constant NSVerticalGlyphFormAttributeName, for use as a dictionary key or argument.
-func NSVerticalGlyphFormAttributeName() obj.Object {
-	return obj.Wrap(purego.CFConstant(_symbol("NSVerticalGlyphFormAttributeName")))
+// NSUsesScreenFontsDocumentAttribute returns the string constant NSUsesScreenFontsDocumentAttribute, for use as a dictionary key or argument.
+func NSUsesScreenFontsDocumentAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSUsesScreenFontsDocumentAttribute")))
 }
 
 // NSTextStorageWillProcessEditingNotification returns the string constant NSTextStorageWillProcessEditingNotification, for use as a dictionary key or argument.
@@ -6163,6 +6513,16 @@ func NSToolbarItemKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("
 // NSToolbarNewIndexKey returns the string constant NSToolbarNewIndexKey, for use as a dictionary key or argument.
 func NSToolbarNewIndexKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSToolbarNewIndexKey")))
+}
+
+// NSToolbarWillAddItemNotification returns the string constant NSToolbarWillAddItemNotification, for use as a dictionary key or argument.
+func NSToolbarWillAddItemNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSToolbarWillAddItemNotification")))
+}
+
+// NSToolbarDidRemoveItemNotification returns the string constant NSToolbarDidRemoveItemNotification, for use as a dictionary key or argument.
+func NSToolbarDidRemoveItemNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSToolbarDidRemoveItemNotification")))
 }
 
 // NSToolbarSpaceItemIdentifier returns the string constant NSToolbarSpaceItemIdentifier, for use as a dictionary key or argument.
@@ -6300,6 +6660,16 @@ func NSTextViewDidChangeTypingAttributesNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSTextViewDidChangeTypingAttributesNotification")))
 }
 
+// NSTextViewWillSwitchToNSLayoutManagerNotification returns the string constant NSTextViewWillSwitchToNSLayoutManagerNotification, for use as a dictionary key or argument.
+func NSTextViewWillSwitchToNSLayoutManagerNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextViewWillSwitchToNSLayoutManagerNotification")))
+}
+
+// NSTextViewDidSwitchToNSLayoutManagerNotification returns the string constant NSTextViewDidSwitchToNSLayoutManagerNotification, for use as a dictionary key or argument.
+func NSTextViewDidSwitchToNSLayoutManagerNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextViewDidSwitchToNSLayoutManagerNotification")))
+}
+
 // NSFindPanelSearchOptionsPboardType returns the string constant NSFindPanelSearchOptionsPboardType, for use as a dictionary key or argument.
 func NSFindPanelSearchOptionsPboardType() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSFindPanelSearchOptionsPboardType")))
@@ -6417,6 +6787,26 @@ func NSInterfaceStyleDefault() obj.Object {
 
 // NSSoundPboardType returns the string constant NSSoundPboardType, for use as a dictionary key or argument.
 func NSSoundPboardType() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSSoundPboardType"))) }
+
+// NSDrawerWillOpenNotification returns the string constant NSDrawerWillOpenNotification, for use as a dictionary key or argument.
+func NSDrawerWillOpenNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSDrawerWillOpenNotification")))
+}
+
+// NSDrawerDidOpenNotification returns the string constant NSDrawerDidOpenNotification, for use as a dictionary key or argument.
+func NSDrawerDidOpenNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSDrawerDidOpenNotification")))
+}
+
+// NSDrawerWillCloseNotification returns the string constant NSDrawerWillCloseNotification, for use as a dictionary key or argument.
+func NSDrawerWillCloseNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSDrawerWillCloseNotification")))
+}
+
+// NSDrawerDidCloseNotification returns the string constant NSDrawerDidCloseNotification, for use as a dictionary key or argument.
+func NSDrawerDidCloseNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSDrawerDidCloseNotification")))
+}
 
 // NSTextListMarkerBox returns the string constant NSTextListMarkerBox, for use as a dictionary key or argument.
 func NSTextListMarkerBox() obj.Object {
@@ -6543,6 +6933,21 @@ func NSRuleEditorRowsDidChangeNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSRuleEditorRowsDidChangeNotification")))
 }
 
+// NSTextInputContextKeyboardSelectionDidChangeNotification returns the string constant NSTextInputContextKeyboardSelectionDidChangeNotification, for use as a dictionary key or argument.
+func NSTextInputContextKeyboardSelectionDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextInputContextKeyboardSelectionDidChangeNotification")))
+}
+
+// NSApplicationDidFinishRestoringWindowsNotification returns the string constant NSApplicationDidFinishRestoringWindowsNotification, for use as a dictionary key or argument.
+func NSApplicationDidFinishRestoringWindowsNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSApplicationDidFinishRestoringWindowsNotification")))
+}
+
+// NSTextAlternativesSelectedAlternativeStringNotification returns the string constant NSTextAlternativesSelectedAlternativeStringNotification, for use as a dictionary key or argument.
+func NSTextAlternativesSelectedAlternativeStringNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextAlternativesSelectedAlternativeStringNotification")))
+}
+
 // NSTypeIdentifierDateText returns the string constant NSTypeIdentifierDateText, for use as a dictionary key or argument.
 func NSTypeIdentifierDateText() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSTypeIdentifierDateText")))
@@ -6561,6 +6966,11 @@ func NSTypeIdentifierPhoneNumberText() obj.Object {
 // NSTypeIdentifierTransitInformationText returns the string constant NSTypeIdentifierTransitInformationText, for use as a dictionary key or argument.
 func NSTypeIdentifierTransitInformationText() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSTypeIdentifierTransitInformationText")))
+}
+
+// NSTextContentStorageUnsupportedAttributeAddedNotification returns the string constant NSTextContentStorageUnsupportedAttributeAddedNotification, for use as a dictionary key or argument.
+func NSTextContentStorageUnsupportedAttributeAddedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextContentStorageUnsupportedAttributeAddedNotification")))
 }
 
 // NSApp returns the NSApp ObjC object as an idiomatic Application.
@@ -6609,135 +7019,6 @@ func NSBlack() float64 {
 	return *(*float64)(unsafe.Pointer(addr))
 }
 
-// NSAccessibilityException returns the address of the symbol NSAccessibilityException.
-func NSAccessibilityException() uintptr { return _symbol("NSAccessibilityException") }
-
-// NSAccessibilityAutocorrectedTextAttribute returns the address of the symbol NSAccessibilityAutocorrectedTextAttribute.
-func NSAccessibilityAutocorrectedTextAttribute() uintptr {
-	return _symbol("NSAccessibilityAutocorrectedTextAttribute")
-}
-
-// NSAccessibilityTextAlignmentAttribute returns the address of the symbol NSAccessibilityTextAlignmentAttribute.
-func NSAccessibilityTextAlignmentAttribute() uintptr {
-	return _symbol("NSAccessibilityTextAlignmentAttribute")
-}
-
-// NSAccessibilityFontBoldAttribute returns the address of the symbol NSAccessibilityFontBoldAttribute.
-func NSAccessibilityFontBoldAttribute() uintptr { return _symbol("NSAccessibilityFontBoldAttribute") }
-
-// NSAccessibilityFontItalicAttribute returns the address of the symbol NSAccessibilityFontItalicAttribute.
-func NSAccessibilityFontItalicAttribute() uintptr {
-	return _symbol("NSAccessibilityFontItalicAttribute")
-}
-
-// NSAccessibilityListItemPrefixTextAttribute returns the address of the symbol NSAccessibilityListItemPrefixTextAttribute.
-func NSAccessibilityListItemPrefixTextAttribute() uintptr {
-	return _symbol("NSAccessibilityListItemPrefixTextAttribute")
-}
-
-// NSAccessibilityListItemIndexTextAttribute returns the address of the symbol NSAccessibilityListItemIndexTextAttribute.
-func NSAccessibilityListItemIndexTextAttribute() uintptr {
-	return _symbol("NSAccessibilityListItemIndexTextAttribute")
-}
-
-// NSAccessibilityListItemLevelTextAttribute returns the address of the symbol NSAccessibilityListItemLevelTextAttribute.
-func NSAccessibilityListItemLevelTextAttribute() uintptr {
-	return _symbol("NSAccessibilityListItemLevelTextAttribute")
-}
-
-// NSAccessibilityMarkedMisspelledTextAttribute returns the address of the symbol NSAccessibilityMarkedMisspelledTextAttribute.
-func NSAccessibilityMarkedMisspelledTextAttribute() uintptr {
-	return _symbol("NSAccessibilityMarkedMisspelledTextAttribute")
-}
-
-// NSAccessibilityLanguageTextAttribute returns the address of the symbol NSAccessibilityLanguageTextAttribute.
-func NSAccessibilityLanguageTextAttribute() uintptr {
-	return _symbol("NSAccessibilityLanguageTextAttribute")
-}
-
-// NSAccessibilityCustomTextAttribute returns the address of the symbol NSAccessibilityCustomTextAttribute.
-func NSAccessibilityCustomTextAttribute() uintptr {
-	return _symbol("NSAccessibilityCustomTextAttribute")
-}
-
-// NSAccessibilityAnnotationTextAttribute returns the address of the symbol NSAccessibilityAnnotationTextAttribute.
-func NSAccessibilityAnnotationTextAttribute() uintptr {
-	return _symbol("NSAccessibilityAnnotationTextAttribute")
-}
-
-// NSWorkspaceDidHideApplicationNotification returns the address of the symbol NSWorkspaceDidHideApplicationNotification.
-func NSWorkspaceDidHideApplicationNotification() uintptr {
-	return _symbol("NSWorkspaceDidHideApplicationNotification")
-}
-
-// NSWorkspaceDidUnhideApplicationNotification returns the address of the symbol NSWorkspaceDidUnhideApplicationNotification.
-func NSWorkspaceDidUnhideApplicationNotification() uintptr {
-	return _symbol("NSWorkspaceDidUnhideApplicationNotification")
-}
-
-// NSWorkspaceDidActivateApplicationNotification returns the address of the symbol NSWorkspaceDidActivateApplicationNotification.
-func NSWorkspaceDidActivateApplicationNotification() uintptr {
-	return _symbol("NSWorkspaceDidActivateApplicationNotification")
-}
-
-// NSWorkspaceDidDeactivateApplicationNotification returns the address of the symbol NSWorkspaceDidDeactivateApplicationNotification.
-func NSWorkspaceDidDeactivateApplicationNotification() uintptr {
-	return _symbol("NSWorkspaceDidDeactivateApplicationNotification")
-}
-
-// NSWorkspaceDidRenameVolumeNotification returns the address of the symbol NSWorkspaceDidRenameVolumeNotification.
-func NSWorkspaceDidRenameVolumeNotification() uintptr {
-	return _symbol("NSWorkspaceDidRenameVolumeNotification")
-}
-
-// NSWorkspaceScreensDidSleepNotification returns the address of the symbol NSWorkspaceScreensDidSleepNotification.
-func NSWorkspaceScreensDidSleepNotification() uintptr {
-	return _symbol("NSWorkspaceScreensDidSleepNotification")
-}
-
-// NSWorkspaceScreensDidWakeNotification returns the address of the symbol NSWorkspaceScreensDidWakeNotification.
-func NSWorkspaceScreensDidWakeNotification() uintptr {
-	return _symbol("NSWorkspaceScreensDidWakeNotification")
-}
-
-// NSWorkspaceDidChangeFileLabelsNotification returns the address of the symbol NSWorkspaceDidChangeFileLabelsNotification.
-func NSWorkspaceDidChangeFileLabelsNotification() uintptr {
-	return _symbol("NSWorkspaceDidChangeFileLabelsNotification")
-}
-
-// NSWorkspaceActiveSpaceDidChangeNotification returns the address of the symbol NSWorkspaceActiveSpaceDidChangeNotification.
-func NSWorkspaceActiveSpaceDidChangeNotification() uintptr {
-	return _symbol("NSWorkspaceActiveSpaceDidChangeNotification")
-}
-
-// NSWorkspaceDidPerformFileOperationNotification returns the address of the symbol NSWorkspaceDidPerformFileOperationNotification.
-func NSWorkspaceDidPerformFileOperationNotification() uintptr {
-	return _symbol("NSWorkspaceDidPerformFileOperationNotification")
-}
-
-// NSWorkspaceAccessibilityDisplayOptionsDidChangeNotification returns the address of the symbol NSWorkspaceAccessibilityDisplayOptionsDidChangeNotification.
-func NSWorkspaceAccessibilityDisplayOptionsDidChangeNotification() uintptr {
-	return _symbol("NSWorkspaceAccessibilityDisplayOptionsDidChangeNotification")
-}
-
-// NSViewFocusDidChangeNotification returns the address of the symbol NSViewFocusDidChangeNotification.
-func NSViewFocusDidChangeNotification() uintptr { return _symbol("NSViewFocusDidChangeNotification") }
-
-// NSViewGlobalFrameDidChangeNotification returns the address of the symbol NSViewGlobalFrameDidChangeNotification.
-func NSViewGlobalFrameDidChangeNotification() uintptr {
-	return _symbol("NSViewGlobalFrameDidChangeNotification")
-}
-
-// NSViewDidUpdateTrackingAreasNotification returns the address of the symbol NSViewDidUpdateTrackingAreasNotification.
-func NSViewDidUpdateTrackingAreasNotification() uintptr {
-	return _symbol("NSViewDidUpdateTrackingAreasNotification")
-}
-
-// NSControlTintDidChangeNotification returns the address of the symbol NSControlTintDidChangeNotification.
-func NSControlTintDidChangeNotification() uintptr {
-	return _symbol("NSControlTintDidChangeNotification")
-}
-
 // NSMultipleValuesMarker returns the address of the symbol NSMultipleValuesMarker.
 func NSMultipleValuesMarker() uintptr { return _symbol("NSMultipleValuesMarker") }
 
@@ -6755,43 +7036,6 @@ func NSAppKitVersionNumber() float64 {
 	}
 	return *(*float64)(unsafe.Pointer(addr))
 }
-
-// NSApplicationProtectedDataWillBecomeUnavailableNotification returns the address of the symbol NSApplicationProtectedDataWillBecomeUnavailableNotification.
-func NSApplicationProtectedDataWillBecomeUnavailableNotification() uintptr {
-	return _symbol("NSApplicationProtectedDataWillBecomeUnavailableNotification")
-}
-
-// NSApplicationProtectedDataDidBecomeAvailableNotification returns the address of the symbol NSApplicationProtectedDataDidBecomeAvailableNotification.
-func NSApplicationProtectedDataDidBecomeAvailableNotification() uintptr {
-	return _symbol("NSApplicationProtectedDataDidBecomeAvailableNotification")
-}
-
-// NSApplicationShouldBeginSuppressingHighDynamicRangeContentNotification returns the address of the symbol NSApplicationShouldBeginSuppressingHighDynamicRangeContentNotification.
-func NSApplicationShouldBeginSuppressingHighDynamicRangeContentNotification() uintptr {
-	return _symbol("NSApplicationShouldBeginSuppressingHighDynamicRangeContentNotification")
-}
-
-// NSApplicationShouldEndSuppressingHighDynamicRangeContentNotification returns the address of the symbol NSApplicationShouldEndSuppressingHighDynamicRangeContentNotification.
-func NSApplicationShouldEndSuppressingHighDynamicRangeContentNotification() uintptr {
-	return _symbol("NSApplicationShouldEndSuppressingHighDynamicRangeContentNotification")
-}
-
-// NSApplicationDidChangeOcclusionStateNotification returns the address of the symbol NSApplicationDidChangeOcclusionStateNotification.
-func NSApplicationDidChangeOcclusionStateNotification() uintptr {
-	return _symbol("NSApplicationDidChangeOcclusionStateNotification")
-}
-
-// NSPopoverWillShowNotification returns the address of the symbol NSPopoverWillShowNotification.
-func NSPopoverWillShowNotification() uintptr { return _symbol("NSPopoverWillShowNotification") }
-
-// NSPopoverDidShowNotification returns the address of the symbol NSPopoverDidShowNotification.
-func NSPopoverDidShowNotification() uintptr { return _symbol("NSPopoverDidShowNotification") }
-
-// NSPopoverWillCloseNotification returns the address of the symbol NSPopoverWillCloseNotification.
-func NSPopoverWillCloseNotification() uintptr { return _symbol("NSPopoverWillCloseNotification") }
-
-// NSPopoverDidCloseNotification returns the address of the symbol NSPopoverDidCloseNotification.
-func NSPopoverDidCloseNotification() uintptr { return _symbol("NSPopoverDidCloseNotification") }
 
 // NSDirectionalEdgeInsetsZero returns the address of the symbol NSDirectionalEdgeInsetsZero.
 func NSDirectionalEdgeInsetsZero() uintptr { return _symbol("NSDirectionalEdgeInsetsZero") }
@@ -6916,71 +7160,6 @@ func NSFontWidthExpanded() float64 {
 // NSFontIdentityMatrix returns the address of the symbol NSFontIdentityMatrix.
 func NSFontIdentityMatrix() uintptr { return _symbol("NSFontIdentityMatrix") }
 
-// NSFontCollectionDidChangeNotification returns the address of the symbol NSFontCollectionDidChangeNotification.
-func NSFontCollectionDidChangeNotification() uintptr {
-	return _symbol("NSFontCollectionDidChangeNotification")
-}
-
-// NSWindowDidChangeBackingPropertiesNotification returns the address of the symbol NSWindowDidChangeBackingPropertiesNotification.
-func NSWindowDidChangeBackingPropertiesNotification() uintptr {
-	return _symbol("NSWindowDidChangeBackingPropertiesNotification")
-}
-
-// NSWindowWillStartLiveResizeNotification returns the address of the symbol NSWindowWillStartLiveResizeNotification.
-func NSWindowWillStartLiveResizeNotification() uintptr {
-	return _symbol("NSWindowWillStartLiveResizeNotification")
-}
-
-// NSWindowDidEndLiveResizeNotification returns the address of the symbol NSWindowDidEndLiveResizeNotification.
-func NSWindowDidEndLiveResizeNotification() uintptr {
-	return _symbol("NSWindowDidEndLiveResizeNotification")
-}
-
-// NSWindowWillEnterFullScreenNotification returns the address of the symbol NSWindowWillEnterFullScreenNotification.
-func NSWindowWillEnterFullScreenNotification() uintptr {
-	return _symbol("NSWindowWillEnterFullScreenNotification")
-}
-
-// NSWindowDidEnterFullScreenNotification returns the address of the symbol NSWindowDidEnterFullScreenNotification.
-func NSWindowDidEnterFullScreenNotification() uintptr {
-	return _symbol("NSWindowDidEnterFullScreenNotification")
-}
-
-// NSWindowWillExitFullScreenNotification returns the address of the symbol NSWindowWillExitFullScreenNotification.
-func NSWindowWillExitFullScreenNotification() uintptr {
-	return _symbol("NSWindowWillExitFullScreenNotification")
-}
-
-// NSWindowDidExitFullScreenNotification returns the address of the symbol NSWindowDidExitFullScreenNotification.
-func NSWindowDidExitFullScreenNotification() uintptr {
-	return _symbol("NSWindowDidExitFullScreenNotification")
-}
-
-// NSWindowWillEnterVersionBrowserNotification returns the address of the symbol NSWindowWillEnterVersionBrowserNotification.
-func NSWindowWillEnterVersionBrowserNotification() uintptr {
-	return _symbol("NSWindowWillEnterVersionBrowserNotification")
-}
-
-// NSWindowDidEnterVersionBrowserNotification returns the address of the symbol NSWindowDidEnterVersionBrowserNotification.
-func NSWindowDidEnterVersionBrowserNotification() uintptr {
-	return _symbol("NSWindowDidEnterVersionBrowserNotification")
-}
-
-// NSWindowWillExitVersionBrowserNotification returns the address of the symbol NSWindowWillExitVersionBrowserNotification.
-func NSWindowWillExitVersionBrowserNotification() uintptr {
-	return _symbol("NSWindowWillExitVersionBrowserNotification")
-}
-
-// NSWindowDidExitVersionBrowserNotification returns the address of the symbol NSWindowDidExitVersionBrowserNotification.
-func NSWindowDidExitVersionBrowserNotification() uintptr {
-	return _symbol("NSWindowDidExitVersionBrowserNotification")
-}
-
-// NSWindowDidChangeOcclusionStateNotification returns the address of the symbol NSWindowDidChangeOcclusionStateNotification.
-func NSWindowDidChangeOcclusionStateNotification() uintptr {
-	return _symbol("NSWindowDidChangeOcclusionStateNotification")
-}
-
 // NSViewNoInstrinsicMetric returns the value of the constant NSViewNoInstrinsicMetric.
 func NSViewNoInstrinsicMetric() float64 {
 	addr := _symbol("NSViewNoInstrinsicMetric")
@@ -7017,46 +7196,6 @@ func NSSliderAccessoryWidthWide() float64 {
 	return *(*float64)(unsafe.Pointer(addr))
 }
 
-// NSSpellCheckerDidChangeAutomaticSpellingCorrectionNotification returns the address of the symbol NSSpellCheckerDidChangeAutomaticSpellingCorrectionNotification.
-func NSSpellCheckerDidChangeAutomaticSpellingCorrectionNotification() uintptr {
-	return _symbol("NSSpellCheckerDidChangeAutomaticSpellingCorrectionNotification")
-}
-
-// NSSpellCheckerDidChangeAutomaticTextReplacementNotification returns the address of the symbol NSSpellCheckerDidChangeAutomaticTextReplacementNotification.
-func NSSpellCheckerDidChangeAutomaticTextReplacementNotification() uintptr {
-	return _symbol("NSSpellCheckerDidChangeAutomaticTextReplacementNotification")
-}
-
-// NSSpellCheckerDidChangeAutomaticQuoteSubstitutionNotification returns the address of the symbol NSSpellCheckerDidChangeAutomaticQuoteSubstitutionNotification.
-func NSSpellCheckerDidChangeAutomaticQuoteSubstitutionNotification() uintptr {
-	return _symbol("NSSpellCheckerDidChangeAutomaticQuoteSubstitutionNotification")
-}
-
-// NSSpellCheckerDidChangeAutomaticDashSubstitutionNotification returns the address of the symbol NSSpellCheckerDidChangeAutomaticDashSubstitutionNotification.
-func NSSpellCheckerDidChangeAutomaticDashSubstitutionNotification() uintptr {
-	return _symbol("NSSpellCheckerDidChangeAutomaticDashSubstitutionNotification")
-}
-
-// NSSpellCheckerDidChangeAutomaticCapitalizationNotification returns the address of the symbol NSSpellCheckerDidChangeAutomaticCapitalizationNotification.
-func NSSpellCheckerDidChangeAutomaticCapitalizationNotification() uintptr {
-	return _symbol("NSSpellCheckerDidChangeAutomaticCapitalizationNotification")
-}
-
-// NSSpellCheckerDidChangeAutomaticPeriodSubstitutionNotification returns the address of the symbol NSSpellCheckerDidChangeAutomaticPeriodSubstitutionNotification.
-func NSSpellCheckerDidChangeAutomaticPeriodSubstitutionNotification() uintptr {
-	return _symbol("NSSpellCheckerDidChangeAutomaticPeriodSubstitutionNotification")
-}
-
-// NSSpellCheckerDidChangeAutomaticTextCompletionNotification returns the address of the symbol NSSpellCheckerDidChangeAutomaticTextCompletionNotification.
-func NSSpellCheckerDidChangeAutomaticTextCompletionNotification() uintptr {
-	return _symbol("NSSpellCheckerDidChangeAutomaticTextCompletionNotification")
-}
-
-// NSSpellCheckerDidChangeAutomaticInlinePredictionNotification returns the address of the symbol NSSpellCheckerDidChangeAutomaticInlinePredictionNotification.
-func NSSpellCheckerDidChangeAutomaticInlinePredictionNotification() uintptr {
-	return _symbol("NSSpellCheckerDidChangeAutomaticInlinePredictionNotification")
-}
-
 // NSSplitViewItemUnspecifiedDimension returns the value of the constant NSSplitViewItemUnspecifiedDimension.
 func NSSplitViewItemUnspecifiedDimension() float64 {
 	addr := _symbol("NSSplitViewItemUnspecifiedDimension")
@@ -7075,41 +7214,6 @@ func NSSplitViewControllerAutomaticDimension() float64 {
 	return *(*float64)(unsafe.Pointer(addr))
 }
 
-// NSScreenColorSpaceDidChangeNotification returns the address of the symbol NSScreenColorSpaceDidChangeNotification.
-func NSScreenColorSpaceDidChangeNotification() uintptr {
-	return _symbol("NSScreenColorSpaceDidChangeNotification")
-}
-
-// NSPreferredScrollerStyleDidChangeNotification returns the address of the symbol NSPreferredScrollerStyleDidChangeNotification.
-func NSPreferredScrollerStyleDidChangeNotification() uintptr {
-	return _symbol("NSPreferredScrollerStyleDidChangeNotification")
-}
-
-// NSScrollViewWillStartLiveMagnifyNotification returns the address of the symbol NSScrollViewWillStartLiveMagnifyNotification.
-func NSScrollViewWillStartLiveMagnifyNotification() uintptr {
-	return _symbol("NSScrollViewWillStartLiveMagnifyNotification")
-}
-
-// NSScrollViewDidEndLiveMagnifyNotification returns the address of the symbol NSScrollViewDidEndLiveMagnifyNotification.
-func NSScrollViewDidEndLiveMagnifyNotification() uintptr {
-	return _symbol("NSScrollViewDidEndLiveMagnifyNotification")
-}
-
-// NSScrollViewWillStartLiveScrollNotification returns the address of the symbol NSScrollViewWillStartLiveScrollNotification.
-func NSScrollViewWillStartLiveScrollNotification() uintptr {
-	return _symbol("NSScrollViewWillStartLiveScrollNotification")
-}
-
-// NSScrollViewDidLiveScrollNotification returns the address of the symbol NSScrollViewDidLiveScrollNotification.
-func NSScrollViewDidLiveScrollNotification() uintptr {
-	return _symbol("NSScrollViewDidLiveScrollNotification")
-}
-
-// NSScrollViewDidEndLiveScrollNotification returns the address of the symbol NSScrollViewDidEndLiveScrollNotification.
-func NSScrollViewDidEndLiveScrollNotification() uintptr {
-	return _symbol("NSScrollViewDidEndLiveScrollNotification")
-}
-
 // NSGridViewSizeForContent returns the value of the constant NSGridViewSizeForContent.
 func NSGridViewSizeForContent() float64 {
 	addr := _symbol("NSGridViewSizeForContent")
@@ -7117,17 +7221,6 @@ func NSGridViewSizeForContent() float64 {
 		return 0
 	}
 	return *(*float64)(unsafe.Pointer(addr))
-}
-
-// NSTextAlternativesAttributeName returns the address of the symbol NSTextAlternativesAttributeName.
-func NSTextAlternativesAttributeName() uintptr { return _symbol("NSTextAlternativesAttributeName") }
-
-// NSCharacterShapeAttributeName returns the address of the symbol NSCharacterShapeAttributeName.
-func NSCharacterShapeAttributeName() uintptr { return _symbol("NSCharacterShapeAttributeName") }
-
-// NSUsesScreenFontsDocumentAttribute returns the address of the symbol NSUsesScreenFontsDocumentAttribute.
-func NSUsesScreenFontsDocumentAttribute() uintptr {
-	return _symbol("NSUsesScreenFontsDocumentAttribute")
 }
 
 // NSUnderlineStrikethroughMask returns the value of the constant NSUnderlineStrikethroughMask.
@@ -7146,54 +7239,4 @@ func NSUnderlineByWordMask() uint {
 		return 0
 	}
 	return *(*uint)(unsafe.Pointer(addr))
-}
-
-// NSToolbarWillAddItemNotification returns the address of the symbol NSToolbarWillAddItemNotification.
-func NSToolbarWillAddItemNotification() uintptr { return _symbol("NSToolbarWillAddItemNotification") }
-
-// NSToolbarDidRemoveItemNotification returns the address of the symbol NSToolbarDidRemoveItemNotification.
-func NSToolbarDidRemoveItemNotification() uintptr {
-	return _symbol("NSToolbarDidRemoveItemNotification")
-}
-
-// NSTextViewWillSwitchToNSLayoutManagerNotification returns the address of the symbol NSTextViewWillSwitchToNSLayoutManagerNotification.
-func NSTextViewWillSwitchToNSLayoutManagerNotification() uintptr {
-	return _symbol("NSTextViewWillSwitchToNSLayoutManagerNotification")
-}
-
-// NSTextViewDidSwitchToNSLayoutManagerNotification returns the address of the symbol NSTextViewDidSwitchToNSLayoutManagerNotification.
-func NSTextViewDidSwitchToNSLayoutManagerNotification() uintptr {
-	return _symbol("NSTextViewDidSwitchToNSLayoutManagerNotification")
-}
-
-// NSDrawerWillOpenNotification returns the address of the symbol NSDrawerWillOpenNotification.
-func NSDrawerWillOpenNotification() uintptr { return _symbol("NSDrawerWillOpenNotification") }
-
-// NSDrawerDidOpenNotification returns the address of the symbol NSDrawerDidOpenNotification.
-func NSDrawerDidOpenNotification() uintptr { return _symbol("NSDrawerDidOpenNotification") }
-
-// NSDrawerWillCloseNotification returns the address of the symbol NSDrawerWillCloseNotification.
-func NSDrawerWillCloseNotification() uintptr { return _symbol("NSDrawerWillCloseNotification") }
-
-// NSDrawerDidCloseNotification returns the address of the symbol NSDrawerDidCloseNotification.
-func NSDrawerDidCloseNotification() uintptr { return _symbol("NSDrawerDidCloseNotification") }
-
-// NSTextInputContextKeyboardSelectionDidChangeNotification returns the address of the symbol NSTextInputContextKeyboardSelectionDidChangeNotification.
-func NSTextInputContextKeyboardSelectionDidChangeNotification() uintptr {
-	return _symbol("NSTextInputContextKeyboardSelectionDidChangeNotification")
-}
-
-// NSApplicationDidFinishRestoringWindowsNotification returns the address of the symbol NSApplicationDidFinishRestoringWindowsNotification.
-func NSApplicationDidFinishRestoringWindowsNotification() uintptr {
-	return _symbol("NSApplicationDidFinishRestoringWindowsNotification")
-}
-
-// NSTextAlternativesSelectedAlternativeStringNotification returns the address of the symbol NSTextAlternativesSelectedAlternativeStringNotification.
-func NSTextAlternativesSelectedAlternativeStringNotification() uintptr {
-	return _symbol("NSTextAlternativesSelectedAlternativeStringNotification")
-}
-
-// NSTextContentStorageUnsupportedAttributeAddedNotification returns the address of the symbol NSTextContentStorageUnsupportedAttributeAddedNotification.
-func NSTextContentStorageUnsupportedAttributeAddedNotification() uintptr {
-	return _symbol("NSTextContentStorageUnsupportedAttributeAddedNotification")
 }

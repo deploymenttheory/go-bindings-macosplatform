@@ -16,7 +16,7 @@ import (
 
 // AssetDownloadURLSession is an idiomatic wrapper over the Objective-C class AVAssetDownloadURLSession.
 //
-// A URL session that creates and executes asset download tasks.
+// A URL session that creates and manages asset download tasks.
 type AssetDownloadURLSession struct {
 	objref.Handle
 }

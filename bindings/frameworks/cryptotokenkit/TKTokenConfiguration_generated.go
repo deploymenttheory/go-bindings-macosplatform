@@ -18,8 +18,6 @@ import (
 )
 
 // TokenConfiguration is an idiomatic wrapper over the Objective-C class TKTokenConfiguration.
-//
-// A token’s configuration.
 type TokenConfiguration struct {
 	objref.Handle
 }

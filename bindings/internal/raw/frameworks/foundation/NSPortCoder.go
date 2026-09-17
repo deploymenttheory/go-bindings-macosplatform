@@ -40,7 +40,6 @@ func NSPortCoderFromID(id objc.ID) *NSPortCoder {
 }
 
 // Returns a Boolean value that indicates whether the receiver is encoding an object by copying it.
-// Deprecated: Use NSXPCConnection instead
 func (o *NSPortCoder) IsBycopy() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSPortCoderSelIsBycopy)
 	return _ret

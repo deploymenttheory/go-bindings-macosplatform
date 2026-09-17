@@ -140,12 +140,12 @@ func AXTextMarkerCreate(allocator corefoundation.CFAllocatorRef, data unsafe.Poi
 var _fnAXTextMarkerGetBytePtr func(objc.ID) unsafe.Pointer
 
 // AXTextMarkerGetBytePtr calls the HIServices framework function AXTextMarkerGetBytePtr.
-func AXTextMarkerGetBytePtr(theTextMarker AXTextMarkerRef) unsafe.Pointer {
+func AXTextMarkerGetBytePtr(marker AXTextMarkerRef) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAXTextMarkerGetBytePtr == nil {
 		ebipurego.RegisterLibFunc(&_fnAXTextMarkerGetBytePtr, _lib, "AXTextMarkerGetBytePtr")
 	}
-	return _fnAXTextMarkerGetBytePtr(objref.IDOf(theTextMarker.Object))
+	return _fnAXTextMarkerGetBytePtr(objref.IDOf(marker.Object))
 }
 
 var _fnAXTextMarkerGetLength func(objc.ID) int

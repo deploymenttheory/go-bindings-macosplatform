@@ -94,6 +94,9 @@
     "IOUSBHostIsochronousTransferOptions": {
       "url": "https://developer.apple.com/documentation/iousbhost/iousbhostisochronoustransferoptions"
     },
+    "IOUSBHostObjectDataOptions": {
+      "url": "https://developer.apple.com/documentation/iousbhost/iousbhostobjectdataoptions"
+    },
     "IOUSBHostObjectDestroyOptions": {
       "url": "https://developer.apple.com/documentation/iousbhost/iousbhostobjectdestroyoptions"
     },

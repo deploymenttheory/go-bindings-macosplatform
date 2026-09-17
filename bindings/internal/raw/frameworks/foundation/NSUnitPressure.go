@@ -9,8 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A unit of measure for pressure.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsunitpressure
 type NSUnitPressure struct {
 	NSDimension
@@ -40,6 +38,7 @@ func NSUnitPressureFromID(id objc.ID) *NSUnitPressure {
 	return o
 }
 
+// The newtons per meters squared unit of pressure.
 func NSUnitPressureNewtonsPerMetersSquared() *NSUnitPressure {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitPressure), _nSUnitPressureSelNewtonsPerMetersSquared)
 	if _ret != 0 {
@@ -48,6 +47,7 @@ func NSUnitPressureNewtonsPerMetersSquared() *NSUnitPressure {
 	return NSUnitPressureFromID(_ret)
 }
 
+// The gigapascals unit of pressure.
 func NSUnitPressureGigapascals() *NSUnitPressure {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitPressure), _nSUnitPressureSelGigapascals)
 	if _ret != 0 {
@@ -56,6 +56,7 @@ func NSUnitPressureGigapascals() *NSUnitPressure {
 	return NSUnitPressureFromID(_ret)
 }
 
+// The megapascals unit of pressure.
 func NSUnitPressureMegapascals() *NSUnitPressure {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitPressure), _nSUnitPressureSelMegapascals)
 	if _ret != 0 {
@@ -64,6 +65,7 @@ func NSUnitPressureMegapascals() *NSUnitPressure {
 	return NSUnitPressureFromID(_ret)
 }
 
+// The kilopascals unit of pressure.
 func NSUnitPressureKilopascals() *NSUnitPressure {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitPressure), _nSUnitPressureSelKilopascals)
 	if _ret != 0 {
@@ -72,6 +74,7 @@ func NSUnitPressureKilopascals() *NSUnitPressure {
 	return NSUnitPressureFromID(_ret)
 }
 
+// The hectopascals unit of pressure.
 func NSUnitPressureHectopascals() *NSUnitPressure {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitPressure), _nSUnitPressureSelHectopascals)
 	if _ret != 0 {
@@ -80,6 +83,7 @@ func NSUnitPressureHectopascals() *NSUnitPressure {
 	return NSUnitPressureFromID(_ret)
 }
 
+// The inches of mercury unit of pressure.
 func NSUnitPressureInchesOfMercury() *NSUnitPressure {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitPressure), _nSUnitPressureSelInchesOfMercury)
 	if _ret != 0 {
@@ -88,6 +92,7 @@ func NSUnitPressureInchesOfMercury() *NSUnitPressure {
 	return NSUnitPressureFromID(_ret)
 }
 
+// The bars unit of pressure.
 func NSUnitPressureBars() *NSUnitPressure {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitPressure), _nSUnitPressureSelBars)
 	if _ret != 0 {
@@ -96,6 +101,7 @@ func NSUnitPressureBars() *NSUnitPressure {
 	return NSUnitPressureFromID(_ret)
 }
 
+// The millibars unit of pressure.
 func NSUnitPressureMillibars() *NSUnitPressure {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitPressure), _nSUnitPressureSelMillibars)
 	if _ret != 0 {
@@ -104,6 +110,7 @@ func NSUnitPressureMillibars() *NSUnitPressure {
 	return NSUnitPressureFromID(_ret)
 }
 
+// The millimeters of mercury unit of pressure.
 func NSUnitPressureMillimetersOfMercury() *NSUnitPressure {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitPressure), _nSUnitPressureSelMillimetersOfMercury)
 	if _ret != 0 {
@@ -112,6 +119,7 @@ func NSUnitPressureMillimetersOfMercury() *NSUnitPressure {
 	return NSUnitPressureFromID(_ret)
 }
 
+// The pounds per square inch unit of pressure.
 func NSUnitPressurePoundsForcePerSquareInch() *NSUnitPressure {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitPressure), _nSUnitPressureSelPoundsForcePerSquareInch)
 	if _ret != 0 {

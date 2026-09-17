@@ -21,8 +21,6 @@ import (
 // URLSessionStreamTask is an idiomatic wrapper over the Objective-C class NSURLSessionStreamTask.
 //
 // It embeds [URLSessionTask], promoting that type's methods.
-//
-// A URL session task that is stream-based.
 type URLSessionStreamTask struct {
 	URLSessionTask
 }
@@ -59,7 +57,7 @@ func NewURLSessionStreamTask() *URLSessionStreamTask {
 	return uRLSessionStreamTaskAdopt(_id)
 }
 
-// WithDelegate sets the delegate.
+// WithDelegate sets a delegate specific to the task. This task-specific delegate receives messages from the task before the session's delegate receives them. Methods not implemented on this delegate will still be forwarded to the session delegate. Cannot be modified after task resumes. Not supported on background session. Delegate is strongly referenced until the task completes, after which it is reset to `nil`.
 func (usst *URLSessionStreamTask) WithDelegate(delegate URLSessionTaskDelegate) *URLSessionStreamTask {
 	_shim := newURLSessionTaskDelegateShim(delegate)
 	_sel := objc.RegisterName("setDelegate:")
@@ -69,39 +67,39 @@ func (usst *URLSessionStreamTask) WithDelegate(delegate URLSessionTaskDelegate) 
 	return usst
 }
 
-// WithEarliestBeginDate sets the earliest begin date.
+// WithEarliestBeginDate sets the earliest date at which the network load should begin. For tasks created from background `NSURLSession` instances, this property indicates that the network load should not begin any earlier than this date. Setting this property does not guarantee that the load will begin at the specified date, but only that it will not begin sooner. If not specified, no start delay is used. This property has no effect for tasks created from nonbackground sessions.
 func (usst *URLSessionStreamTask) WithEarliestBeginDate(earliestBeginDate DateProvider) *URLSessionStreamTask {
 	defer runtime.KeepAlive(earliestBeginDate)
 	objc.Send[objc.ID](objref.IDOf(usst), objc.RegisterName("setEarliestBeginDate:"), objref.IDOf(earliestBeginDate))
 	return usst
 }
 
-// WithCountOfBytesClientExpectsToSend sets the count of bytes client expects to send.
+// WithCountOfBytesClientExpectsToSend sets a best-guess upper bound on the number of bytes the client expects to send. The value set for this property should account for the size of HTTP headers and body data or body stream. If no value is specified, the system uses `NSURLSessionTransferSizeUnknown` instead. This property is used by the system to optimize the scheduling of URL session tasks. Developers are strongly encouraged to provide an approximate upper bound, or an exact byte count, if possible, rather than accept the default.
 func (usst *URLSessionStreamTask) WithCountOfBytesClientExpectsToSend(countOfBytesClientExpectsToSend int64) *URLSessionStreamTask {
 	objc.Send[objc.ID](objref.IDOf(usst), objc.RegisterName("setCountOfBytesClientExpectsToSend:"), countOfBytesClientExpectsToSend)
 	return usst
 }
 
-// WithCountOfBytesClientExpectsToReceive sets the count of bytes client expects to receive.
+// WithCountOfBytesClientExpectsToReceive sets a best-guess upper bound on the number of bytes the client expects to receive. The value set for this property should account for the size of both HTTP response headers and the response body. If no value is specified, the system uses `NSURLSessionTransferSizeUnknown` instead. This property is used by the system to optimize the scheduling of URL session tasks. Developers are strongly encouraged to provide an approximate upper bound, or an exact byte count, if possible, rather than accept the default.
 func (usst *URLSessionStreamTask) WithCountOfBytesClientExpectsToReceive(countOfBytesClientExpectsToReceive int64) *URLSessionStreamTask {
 	objc.Send[objc.ID](objref.IDOf(usst), objc.RegisterName("setCountOfBytesClientExpectsToReceive:"), countOfBytesClientExpectsToReceive)
 	return usst
 }
 
-// WithTaskDescription sets the task description.
+// WithTaskDescription sets an app-provided string value for the current task. The system doesn't interpret this value; use it for whatever purpose you see fit. For example, you could store a description of the task for debugging purposes, or a key to track the task in your own data structures.
 func (usst *URLSessionStreamTask) WithTaskDescription(taskDescription StringProvider) *URLSessionStreamTask {
 	defer runtime.KeepAlive(taskDescription)
 	objc.Send[objc.ID](objref.IDOf(usst), objc.RegisterName("setTaskDescription:"), objref.IDOf(taskDescription))
 	return usst
 }
 
-// WithPriority sets the priority.
+// WithPriority sets the relative priority at which you'd like a host to handle the task, specified as a floating point value between `0.0` (lowest priority) and `1.0` (highest priority). To provide hints to a host on how to prioritize URL session tasks from your app, specify a priority for each task. Specifying a priority provides only a hint and does not guarantee performance. If you don't specify a priority, a URL session task has a priority of `NSURLSessionTaskPriorityDefault`, with a value of `0.5`. There are three named priorities you can employ: `NSURLSessionTaskPriorityDefault`, `NSURLSessionTaskPriorityLow`, and `NSURLSessionTaskPriorityHigh`. You can specify or change a task's priority at any time, but not all networking protocols respond to changes after a task has started. There is no API to let you determine the effective priority for a task from a host's perspective.
 func (usst *URLSessionStreamTask) WithPriority(priority float32) *URLSessionStreamTask {
 	objc.Send[objc.ID](objref.IDOf(usst), objc.RegisterName("setPriority:"), priority)
 	return usst
 }
 
-// WithPrefersIncrementalDelivery sets the prefers incremental delivery.
+// WithPrefersIncrementalDelivery sets a Boolean value that determines whether to deliver a partial response body in increments. Set this property to `true` to tell the task that the app would benefit from receiving a partial response body in increments. If the app can't process the response until it has all the data, set this property to `false`. Task performance may improve when this value is `false`, in which case the task only delivers data when complete. This property defaults to `true`, except in the following cases which default to `false`: - The task delivers results to a completion handler rather than to a delegate. - The task is a download task.
 func (usst *URLSessionStreamTask) WithPrefersIncrementalDelivery(prefersIncrementalDelivery bool) *URLSessionStreamTask {
 	objc.Send[objc.ID](objref.IDOf(usst), objc.RegisterName("setPrefersIncrementalDelivery:"), prefersIncrementalDelivery)
 	return usst
@@ -119,13 +117,13 @@ func (usst *URLSessionStreamTask) WithScriptingProperties(scriptingProperties ma
 	return usst
 }
 
-// ReadDataOfMinLengthMaxLengthTimeoutCompletionHandler reads data of min length max length timeout completion handler.
+// ReadDataOfMinLengthMaxLengthTimeoutCompletionHandler reads minimum `minBytes`, or at most `maxBytes` bytes and invokes the completion handler on the session's delegate queue with the data or an error. If an error occurs, any outstanding reads will also fail, and new read requests will error out immediately. - Parameter minBytes: The minimum number of bytes to read. - Parameter maxBytes: The maximum number of bytes to read. - Parameter timeout: The timeout interval for the read operation. - Parameter completionHandler: The completion handler to call when the read operation completes.
 func (usst *URLSessionStreamTask) ReadDataOfMinLengthMaxLengthTimeoutCompletionHandler(minBytes int, maxBytes int, timeout float64, completionHandler func(unsafe.Pointer, bool, unsafe.Pointer)) {
 	defer runtime.KeepAlive(usst)
 	objc.Send[objc.ID](objref.IDOf(usst), objc.RegisterName("readDataOfMinLength:maxLength:timeout:completionHandler:"), minBytes, maxBytes, timeout, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 bool, _b2 unsafe.Pointer) { completionHandler(_b0, _b1, _b2) }))
 }
 
-// WriteDataTimeout writes data timeout.
+// WriteDataTimeout writes the data completely to the underlying socket. If all the bytes have not been written by the timeout, a timeout error will occur. Note that invocation of the completion handler does not guarantee that the remote side has received all the bytes, only that they have been written to the kernel. - Parameter data: The data to write to the stream. - Parameter timeout: The timeout interval for the write operation. - Parameter completionHandler: The completion handler to call when the write operation completes.
 //
 // WriteDataTimeout blocks until the operation completes or ctx is cancelled.
 func (usst *URLSessionStreamTask) WriteDataTimeout(ctx context.Context, data []byte, timeout float64) error {
@@ -145,31 +143,31 @@ func (usst *URLSessionStreamTask) WriteDataTimeout(ctx context.Context, data []b
 	}
 }
 
-// CaptureStreams wraps the corresponding Objective-C method.
+// CaptureStreams completes any already enqueued reads and writes, then invokes the `URLSession:streamTask:didBecomeInputStream:outputStream:` delegate message. When that message is received, the task object is considered completed and will not receive any more delegate messages.
 func (usst *URLSessionStreamTask) CaptureStreams() {
 	defer runtime.KeepAlive(usst)
 	objc.Send[objc.ID](objref.IDOf(usst), objc.RegisterName("captureStreams"))
 }
 
-// CloseWrite closes write.
+// CloseWrite enqueues a request to close the write end of the underlying socket. All outstanding IO will complete before the write side of the socket is closed. The server, however, may continue to write bytes back to the client, so best practice is to continue reading from the server until you receive EOF.
 func (usst *URLSessionStreamTask) CloseWrite() {
 	defer runtime.KeepAlive(usst)
 	objc.Send[objc.ID](objref.IDOf(usst), objc.RegisterName("closeWrite"))
 }
 
-// CloseRead closes read.
+// CloseRead enqueues a request to close the read side of the underlying socket. All outstanding IO will complete before the read side is closed. You may continue writing to the server.
 func (usst *URLSessionStreamTask) CloseRead() {
 	defer runtime.KeepAlive(usst)
 	objc.Send[objc.ID](objref.IDOf(usst), objc.RegisterName("closeRead"))
 }
 
-// StartSecureConnection starts secure connection.
+// StartSecureConnection begins encrypted handshake. The handshake begins after all pending IO has completed. TLS authentication callbacks are sent to the session's `URLSession:task:didReceiveChallenge:completionHandler:` delegate method.
 func (usst *URLSessionStreamTask) StartSecureConnection() {
 	defer runtime.KeepAlive(usst)
 	objc.Send[objc.ID](objref.IDOf(usst), objc.RegisterName("startSecureConnection"))
 }
 
-// StopSecureConnection stops secure connection.
+// StopSecureConnection completes any enqueued reads and writes, and closes the secure connection.
 func (usst *URLSessionStreamTask) StopSecureConnection() {
 	defer runtime.KeepAlive(usst)
 	objc.Send[objc.ID](objref.IDOf(usst), objc.RegisterName("stopSecureConnection"))

@@ -12,129 +12,304 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/foundation"
 )
 
-func CNContactBirthdayKey() uintptr {
+func CNContactBirthdayKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNContactBirthdayKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNContactDatesKey() uintptr {
+func CNContactDatesKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNContactDatesKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNContactDepartmentNameKey() uintptr {
+func CNContactDepartmentNameKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNContactDepartmentNameKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNContactEmailAddressesKey() uintptr {
+func CNContactEmailAddressesKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNContactEmailAddressesKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNContactFamilyNameKey() uintptr {
+func CNContactFamilyNameKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNContactFamilyNameKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNContactGivenNameKey() uintptr {
+func CNContactGivenNameKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNContactGivenNameKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNContactIdentifierKey() uintptr {
+func CNContactIdentifierKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNContactIdentifierKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNContactImageDataAvailableKey() uintptr {
+func CNContactImageDataAvailableKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNContactImageDataAvailableKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNContactImageDataKey() uintptr {
+func CNContactImageDataKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNContactImageDataKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNContactInstantMessageAddressesKey() uintptr {
+func CNContactInstantMessageAddressesKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNContactInstantMessageAddressesKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNContactJobTitleKey() uintptr {
+func CNContactJobTitleKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNContactJobTitleKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNContactMiddleNameKey() uintptr {
+func CNContactMiddleNameKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNContactMiddleNameKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNContactNamePrefixKey() uintptr {
+func CNContactNamePrefixKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNContactNamePrefixKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNContactNameSuffixKey() uintptr {
+func CNContactNameSuffixKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNContactNameSuffixKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNContactNicknameKey() uintptr {
+func CNContactNicknameKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNContactNicknameKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNContactNonGregorianBirthdayKey() uintptr {
+func CNContactNonGregorianBirthdayKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNContactNonGregorianBirthdayKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNContactNoteKey() uintptr {
+func CNContactNoteKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNContactNoteKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNContactOrganizationNameKey() uintptr {
+func CNContactOrganizationNameKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNContactOrganizationNameKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNContactPhoneNumbersKey() uintptr {
+func CNContactPhoneNumbersKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNContactPhoneNumbersKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNContactPhoneticFamilyNameKey() uintptr {
+func CNContactPhoneticFamilyNameKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNContactPhoneticFamilyNameKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNContactPhoneticGivenNameKey() uintptr {
+func CNContactPhoneticGivenNameKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNContactPhoneticGivenNameKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNContactPhoneticMiddleNameKey() uintptr {
+func CNContactPhoneticMiddleNameKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNContactPhoneticMiddleNameKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNContactPhoneticOrganizationNameKey() uintptr {
+func CNContactPhoneticOrganizationNameKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNContactPhoneticOrganizationNameKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNContactPostalAddressesKey() uintptr {
+func CNContactPostalAddressesKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNContactPostalAddressesKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNContactPreviousFamilyNameKey() uintptr {
+func CNContactPreviousFamilyNameKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNContactPreviousFamilyNameKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func CNContactPropertyAttribute() *foundation.NSString {
@@ -161,50 +336,113 @@ func CNContactPropertyNotFetchedExceptionName() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
-func CNContactRelationsKey() uintptr {
+func CNContactRelationsKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNContactRelationsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNContactSocialProfilesKey() uintptr {
+func CNContactSocialProfilesKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNContactSocialProfilesKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @abstract Notification posted when changes occur in another CNContactStore.
-func CNContactStoreDidChangeNotification() uintptr {
+func CNContactStoreDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNContactStoreDidChangeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNContactThumbnailImageDataKey() uintptr {
+func CNContactThumbnailImageDataKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNContactThumbnailImageDataKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNContactTypeKey() uintptr {
+func CNContactTypeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNContactTypeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNContactUrlAddressesKey() uintptr {
+func CNContactUrlAddressesKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNContactUrlAddressesKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNContainerIdentifierKey() uintptr {
+func CNContainerIdentifierKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNContainerIdentifierKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNContainerNameKey() uintptr {
+func CNContainerNameKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNContainerNameKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNContainerTypeKey() uintptr {
+func CNContainerTypeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNContainerTypeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func CNErrorDomain() *foundation.NSString {
@@ -271,1174 +509,2812 @@ func CNErrorUserInfoValidationErrorsKey() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
-func CNGroupIdentifierKey() uintptr {
+func CNGroupIdentifierKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNGroupIdentifierKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNGroupNameKey() uintptr {
+func CNGroupNameKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNGroupNameKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNInstantMessageAddressServiceKey() uintptr {
+func CNInstantMessageAddressServiceKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNInstantMessageAddressServiceKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNInstantMessageAddressUsernameKey() uintptr {
+func CNInstantMessageAddressUsernameKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNInstantMessageAddressUsernameKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNInstantMessageServiceAIM() uintptr {
+func CNInstantMessageServiceAIM() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNInstantMessageServiceAIM")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNInstantMessageServiceFacebook() uintptr {
+func CNInstantMessageServiceFacebook() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNInstantMessageServiceFacebook")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNInstantMessageServiceGaduGadu() uintptr {
+func CNInstantMessageServiceGaduGadu() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNInstantMessageServiceGaduGadu")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNInstantMessageServiceGoogleTalk() uintptr {
+func CNInstantMessageServiceGoogleTalk() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNInstantMessageServiceGoogleTalk")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNInstantMessageServiceICQ() uintptr {
+func CNInstantMessageServiceICQ() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNInstantMessageServiceICQ")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNInstantMessageServiceJabber() uintptr {
+func CNInstantMessageServiceJabber() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNInstantMessageServiceJabber")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNInstantMessageServiceMSN() uintptr {
+func CNInstantMessageServiceMSN() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNInstantMessageServiceMSN")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNInstantMessageServiceQQ() uintptr {
+func CNInstantMessageServiceQQ() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNInstantMessageServiceQQ")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNInstantMessageServiceSkype() uintptr {
+func CNInstantMessageServiceSkype() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNInstantMessageServiceSkype")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNInstantMessageServiceYahoo() uintptr {
+func CNInstantMessageServiceYahoo() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNInstantMessageServiceYahoo")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationAssistant() uintptr {
+func CNLabelContactRelationAssistant() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationAssistant")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationAunt() uintptr {
+func CNLabelContactRelationAunt() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationAunt")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationAuntFathersBrothersWife() uintptr {
+func CNLabelContactRelationAuntFathersBrothersWife() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationAuntFathersBrothersWife")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationAuntFathersElderBrothersWife() uintptr {
+func CNLabelContactRelationAuntFathersElderBrothersWife() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationAuntFathersElderBrothersWife")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationAuntFathersElderSister() uintptr {
+func CNLabelContactRelationAuntFathersElderSister() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationAuntFathersElderSister")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationAuntFathersSister() uintptr {
+func CNLabelContactRelationAuntFathersSister() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationAuntFathersSister")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationAuntFathersYoungerBrothersWife() uintptr {
+func CNLabelContactRelationAuntFathersYoungerBrothersWife() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationAuntFathersYoungerBrothersWife")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationAuntFathersYoungerSister() uintptr {
+func CNLabelContactRelationAuntFathersYoungerSister() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationAuntFathersYoungerSister")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationAuntMothersBrothersWife() uintptr {
+func CNLabelContactRelationAuntMothersBrothersWife() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationAuntMothersBrothersWife")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationAuntMothersElderSister() uintptr {
+func CNLabelContactRelationAuntMothersElderSister() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationAuntMothersElderSister")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationAuntMothersSister() uintptr {
+func CNLabelContactRelationAuntMothersSister() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationAuntMothersSister")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationAuntMothersYoungerSister() uintptr {
+func CNLabelContactRelationAuntMothersYoungerSister() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationAuntMothersYoungerSister")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationAuntParentsElderSister() uintptr {
+func CNLabelContactRelationAuntParentsElderSister() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationAuntParentsElderSister")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationAuntParentsSister() uintptr {
+func CNLabelContactRelationAuntParentsSister() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationAuntParentsSister")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationAuntParentsYoungerSister() uintptr {
+func CNLabelContactRelationAuntParentsYoungerSister() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationAuntParentsYoungerSister")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationBoyfriend() uintptr {
+func CNLabelContactRelationBoyfriend() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationBoyfriend")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationBrother() uintptr {
+func CNLabelContactRelationBrother() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationBrother")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationBrotherInLaw() uintptr {
+func CNLabelContactRelationBrotherInLaw() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationBrotherInLaw")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationBrotherInLawElderSistersHusband() uintptr {
+func CNLabelContactRelationBrotherInLawElderSistersHusband() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationBrotherInLawElderSistersHusband")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationBrotherInLawHusbandsBrother() uintptr {
+func CNLabelContactRelationBrotherInLawHusbandsBrother() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationBrotherInLawHusbandsBrother")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationBrotherInLawHusbandsSistersHusband() uintptr {
+func CNLabelContactRelationBrotherInLawHusbandsSistersHusband() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationBrotherInLawHusbandsSistersHusband")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationBrotherInLawSistersHusband() uintptr {
+func CNLabelContactRelationBrotherInLawSistersHusband() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationBrotherInLawSistersHusband")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationBrotherInLawSpousesBrother() uintptr {
+func CNLabelContactRelationBrotherInLawSpousesBrother() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationBrotherInLawSpousesBrother")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationBrotherInLawWifesBrother() uintptr {
+func CNLabelContactRelationBrotherInLawWifesBrother() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationBrotherInLawWifesBrother")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationBrotherInLawWifesSistersHusband() uintptr {
+func CNLabelContactRelationBrotherInLawWifesSistersHusband() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationBrotherInLawWifesSistersHusband")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationBrotherInLawYoungerSistersHusband() uintptr {
+func CNLabelContactRelationBrotherInLawYoungerSistersHusband() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationBrotherInLawYoungerSistersHusband")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationChild() uintptr {
+func CNLabelContactRelationChild() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationChild")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationChildInLaw() uintptr {
+func CNLabelContactRelationChildInLaw() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationChildInLaw")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationCoBrotherInLaw() uintptr {
+func CNLabelContactRelationCoBrotherInLaw() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationCoBrotherInLaw")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationCoFatherInLaw() uintptr {
+func CNLabelContactRelationCoFatherInLaw() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationCoFatherInLaw")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationCoMotherInLaw() uintptr {
+func CNLabelContactRelationCoMotherInLaw() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationCoMotherInLaw")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationCoParentInLaw() uintptr {
+func CNLabelContactRelationCoParentInLaw() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationCoParentInLaw")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationCoSiblingInLaw() uintptr {
+func CNLabelContactRelationCoSiblingInLaw() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationCoSiblingInLaw")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationCoSisterInLaw() uintptr {
+func CNLabelContactRelationCoSisterInLaw() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationCoSisterInLaw")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationColleague() uintptr {
+func CNLabelContactRelationColleague() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationColleague")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationCousin() uintptr {
+func CNLabelContactRelationCousin() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationCousin")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationCousinFathersBrothersDaughter() uintptr {
+func CNLabelContactRelationCousinFathersBrothersDaughter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationCousinFathersBrothersDaughter")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationCousinFathersBrothersSon() uintptr {
+func CNLabelContactRelationCousinFathersBrothersSon() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationCousinFathersBrothersSon")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationCousinFathersSistersDaughter() uintptr {
+func CNLabelContactRelationCousinFathersSistersDaughter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationCousinFathersSistersDaughter")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationCousinFathersSistersSon() uintptr {
+func CNLabelContactRelationCousinFathersSistersSon() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationCousinFathersSistersSon")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationCousinGrandparentsSiblingsChild() uintptr {
+func CNLabelContactRelationCousinGrandparentsSiblingsChild() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationCousinGrandparentsSiblingsChild")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationCousinGrandparentsSiblingsDaughter() uintptr {
+func CNLabelContactRelationCousinGrandparentsSiblingsDaughter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationCousinGrandparentsSiblingsDaughter")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationCousinGrandparentsSiblingsSon() uintptr {
+func CNLabelContactRelationCousinGrandparentsSiblingsSon() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationCousinGrandparentsSiblingsSon")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationCousinMothersBrothersDaughter() uintptr {
+func CNLabelContactRelationCousinMothersBrothersDaughter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationCousinMothersBrothersDaughter")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationCousinMothersBrothersSon() uintptr {
+func CNLabelContactRelationCousinMothersBrothersSon() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationCousinMothersBrothersSon")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationCousinMothersSistersDaughter() uintptr {
+func CNLabelContactRelationCousinMothersSistersDaughter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationCousinMothersSistersDaughter")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationCousinMothersSistersSon() uintptr {
+func CNLabelContactRelationCousinMothersSistersSon() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationCousinMothersSistersSon")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationCousinOrSiblingsChild() uintptr {
+func CNLabelContactRelationCousinOrSiblingsChild() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationCousinOrSiblingsChild")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationCousinParentsSiblingsChild() uintptr {
+func CNLabelContactRelationCousinParentsSiblingsChild() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationCousinParentsSiblingsChild")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationCousinParentsSiblingsDaughter() uintptr {
+func CNLabelContactRelationCousinParentsSiblingsDaughter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationCousinParentsSiblingsDaughter")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationCousinParentsSiblingsSon() uintptr {
+func CNLabelContactRelationCousinParentsSiblingsSon() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationCousinParentsSiblingsSon")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationDaughter() uintptr {
+func CNLabelContactRelationDaughter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationDaughter")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationDaughterInLaw() uintptr {
+func CNLabelContactRelationDaughterInLaw() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationDaughterInLaw")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationDaughterInLawOrSisterInLaw() uintptr {
+func CNLabelContactRelationDaughterInLawOrSisterInLaw() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationDaughterInLawOrSisterInLaw")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationDaughterInLawOrStepdaughter() uintptr {
+func CNLabelContactRelationDaughterInLawOrStepdaughter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationDaughterInLawOrStepdaughter")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationElderBrother() uintptr {
+func CNLabelContactRelationElderBrother() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationElderBrother")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationElderBrotherInLaw() uintptr {
+func CNLabelContactRelationElderBrotherInLaw() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationElderBrotherInLaw")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationElderCousin() uintptr {
+func CNLabelContactRelationElderCousin() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationElderCousin")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationElderCousinFathersBrothersDaughter() uintptr {
+func CNLabelContactRelationElderCousinFathersBrothersDaughter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationElderCousinFathersBrothersDaughter")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationElderCousinFathersBrothersSon() uintptr {
+func CNLabelContactRelationElderCousinFathersBrothersSon() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationElderCousinFathersBrothersSon")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationElderCousinFathersSistersDaughter() uintptr {
+func CNLabelContactRelationElderCousinFathersSistersDaughter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationElderCousinFathersSistersDaughter")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationElderCousinFathersSistersSon() uintptr {
+func CNLabelContactRelationElderCousinFathersSistersSon() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationElderCousinFathersSistersSon")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationElderCousinMothersBrothersDaughter() uintptr {
+func CNLabelContactRelationElderCousinMothersBrothersDaughter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationElderCousinMothersBrothersDaughter")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationElderCousinMothersBrothersSon() uintptr {
+func CNLabelContactRelationElderCousinMothersBrothersSon() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationElderCousinMothersBrothersSon")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationElderCousinMothersSiblingsDaughterOrFathersSistersDaughter() uintptr {
+func CNLabelContactRelationElderCousinMothersSiblingsDaughterOrFathersSistersDaughter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationElderCousinMothersSiblingsDaughterOrFathersSistersDaughter")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationElderCousinMothersSiblingsSonOrFathersSistersSon() uintptr {
+func CNLabelContactRelationElderCousinMothersSiblingsSonOrFathersSistersSon() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationElderCousinMothersSiblingsSonOrFathersSistersSon")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationElderCousinMothersSistersDaughter() uintptr {
+func CNLabelContactRelationElderCousinMothersSistersDaughter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationElderCousinMothersSistersDaughter")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationElderCousinMothersSistersSon() uintptr {
+func CNLabelContactRelationElderCousinMothersSistersSon() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationElderCousinMothersSistersSon")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationElderCousinParentsSiblingsDaughter() uintptr {
+func CNLabelContactRelationElderCousinParentsSiblingsDaughter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationElderCousinParentsSiblingsDaughter")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationElderCousinParentsSiblingsSon() uintptr {
+func CNLabelContactRelationElderCousinParentsSiblingsSon() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationElderCousinParentsSiblingsSon")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationElderSibling() uintptr {
+func CNLabelContactRelationElderSibling() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationElderSibling")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationElderSiblingInLaw() uintptr {
+func CNLabelContactRelationElderSiblingInLaw() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationElderSiblingInLaw")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationElderSister() uintptr {
+func CNLabelContactRelationElderSister() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationElderSister")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationElderSisterInLaw() uintptr {
+func CNLabelContactRelationElderSisterInLaw() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationElderSisterInLaw")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationEldestBrother() uintptr {
+func CNLabelContactRelationEldestBrother() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationEldestBrother")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationEldestSister() uintptr {
+func CNLabelContactRelationEldestSister() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationEldestSister")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationFather() uintptr {
+func CNLabelContactRelationFather() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationFather")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationFatherInLaw() uintptr {
+func CNLabelContactRelationFatherInLaw() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationFatherInLaw")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationFatherInLawHusbandsFather() uintptr {
+func CNLabelContactRelationFatherInLawHusbandsFather() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationFatherInLawHusbandsFather")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationFatherInLawOrStepfather() uintptr {
+func CNLabelContactRelationFatherInLawOrStepfather() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationFatherInLawOrStepfather")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationFatherInLawWifesFather() uintptr {
+func CNLabelContactRelationFatherInLawWifesFather() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationFatherInLawWifesFather")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationFemaleCousin() uintptr {
+func CNLabelContactRelationFemaleCousin() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationFemaleCousin")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationFemaleFriend() uintptr {
+func CNLabelContactRelationFemaleFriend() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationFemaleFriend")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationFemalePartner() uintptr {
+func CNLabelContactRelationFemalePartner() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationFemalePartner")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationFriend() uintptr {
+func CNLabelContactRelationFriend() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationFriend")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationGirlfriend() uintptr {
+func CNLabelContactRelationGirlfriend() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationGirlfriend")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationGirlfriendOrBoyfriend() uintptr {
+func CNLabelContactRelationGirlfriendOrBoyfriend() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationGirlfriendOrBoyfriend")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationGrandaunt() uintptr {
+func CNLabelContactRelationGrandaunt() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationGrandaunt")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationGrandchild() uintptr {
+func CNLabelContactRelationGrandchild() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationGrandchild")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationGrandchildOrSiblingsChild() uintptr {
+func CNLabelContactRelationGrandchildOrSiblingsChild() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationGrandchildOrSiblingsChild")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationGranddaughter() uintptr {
+func CNLabelContactRelationGranddaughter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationGranddaughter")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationGranddaughterDaughtersDaughter() uintptr {
+func CNLabelContactRelationGranddaughterDaughtersDaughter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationGranddaughterDaughtersDaughter")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationGranddaughterOrNiece() uintptr {
+func CNLabelContactRelationGranddaughterOrNiece() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationGranddaughterOrNiece")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationGranddaughterSonsDaughter() uintptr {
+func CNLabelContactRelationGranddaughterSonsDaughter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationGranddaughterSonsDaughter")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationGrandfather() uintptr {
+func CNLabelContactRelationGrandfather() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationGrandfather")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationGrandfatherFathersFather() uintptr {
+func CNLabelContactRelationGrandfatherFathersFather() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationGrandfatherFathersFather")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationGrandfatherMothersFather() uintptr {
+func CNLabelContactRelationGrandfatherMothersFather() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationGrandfatherMothersFather")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationGrandmother() uintptr {
+func CNLabelContactRelationGrandmother() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationGrandmother")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationGrandmotherFathersMother() uintptr {
+func CNLabelContactRelationGrandmotherFathersMother() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationGrandmotherFathersMother")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationGrandmotherMothersMother() uintptr {
+func CNLabelContactRelationGrandmotherMothersMother() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationGrandmotherMothersMother")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationGrandnephew() uintptr {
+func CNLabelContactRelationGrandnephew() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationGrandnephew")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationGrandnephewBrothersGrandson() uintptr {
+func CNLabelContactRelationGrandnephewBrothersGrandson() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationGrandnephewBrothersGrandson")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationGrandnephewSistersGrandson() uintptr {
+func CNLabelContactRelationGrandnephewSistersGrandson() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationGrandnephewSistersGrandson")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationGrandniece() uintptr {
+func CNLabelContactRelationGrandniece() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationGrandniece")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationGrandnieceBrothersGranddaughter() uintptr {
+func CNLabelContactRelationGrandnieceBrothersGranddaughter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationGrandnieceBrothersGranddaughter")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationGrandnieceSistersGranddaughter() uintptr {
+func CNLabelContactRelationGrandnieceSistersGranddaughter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationGrandnieceSistersGranddaughter")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationGrandparent() uintptr {
+func CNLabelContactRelationGrandparent() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationGrandparent")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationGrandson() uintptr {
+func CNLabelContactRelationGrandson() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationGrandson")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationGrandsonDaughtersSon() uintptr {
+func CNLabelContactRelationGrandsonDaughtersSon() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationGrandsonDaughtersSon")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationGrandsonOrNephew() uintptr {
+func CNLabelContactRelationGrandsonOrNephew() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationGrandsonOrNephew")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationGrandsonSonsSon() uintptr {
+func CNLabelContactRelationGrandsonSonsSon() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationGrandsonSonsSon")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationGranduncle() uintptr {
+func CNLabelContactRelationGranduncle() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationGranduncle")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationGreatGrandchild() uintptr {
+func CNLabelContactRelationGreatGrandchild() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationGreatGrandchild")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationGreatGrandchildOrSiblingsGrandchild() uintptr {
+func CNLabelContactRelationGreatGrandchildOrSiblingsGrandchild() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationGreatGrandchildOrSiblingsGrandchild")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationGreatGranddaughter() uintptr {
+func CNLabelContactRelationGreatGranddaughter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationGreatGranddaughter")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationGreatGrandfather() uintptr {
+func CNLabelContactRelationGreatGrandfather() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationGreatGrandfather")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationGreatGrandmother() uintptr {
+func CNLabelContactRelationGreatGrandmother() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationGreatGrandmother")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationGreatGrandparent() uintptr {
+func CNLabelContactRelationGreatGrandparent() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationGreatGrandparent")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationGreatGrandson() uintptr {
+func CNLabelContactRelationGreatGrandson() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationGreatGrandson")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationHusband() uintptr {
+func CNLabelContactRelationHusband() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationHusband")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationMaleCousin() uintptr {
+func CNLabelContactRelationMaleCousin() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationMaleCousin")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationMaleFriend() uintptr {
+func CNLabelContactRelationMaleFriend() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationMaleFriend")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationMalePartner() uintptr {
+func CNLabelContactRelationMalePartner() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationMalePartner")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationManager() uintptr {
+func CNLabelContactRelationManager() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationManager")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationMother() uintptr {
+func CNLabelContactRelationMother() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationMother")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationMotherInLaw() uintptr {
+func CNLabelContactRelationMotherInLaw() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationMotherInLaw")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationMotherInLawHusbandsMother() uintptr {
+func CNLabelContactRelationMotherInLawHusbandsMother() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationMotherInLawHusbandsMother")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationMotherInLawOrStepmother() uintptr {
+func CNLabelContactRelationMotherInLawOrStepmother() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationMotherInLawOrStepmother")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationMotherInLawWifesMother() uintptr {
+func CNLabelContactRelationMotherInLawWifesMother() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationMotherInLawWifesMother")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationNephew() uintptr {
+func CNLabelContactRelationNephew() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationNephew")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationNephewBrothersSon() uintptr {
+func CNLabelContactRelationNephewBrothersSon() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationNephewBrothersSon")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationNephewBrothersSonOrHusbandsSiblingsSon() uintptr {
+func CNLabelContactRelationNephewBrothersSonOrHusbandsSiblingsSon() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationNephewBrothersSonOrHusbandsSiblingsSon")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationNephewOrCousin() uintptr {
+func CNLabelContactRelationNephewOrCousin() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationNephewOrCousin")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationNephewSistersSon() uintptr {
+func CNLabelContactRelationNephewSistersSon() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationNephewSistersSon")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationNephewSistersSonOrWifesSiblingsSon() uintptr {
+func CNLabelContactRelationNephewSistersSonOrWifesSiblingsSon() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationNephewSistersSonOrWifesSiblingsSon")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationNiece() uintptr {
+func CNLabelContactRelationNiece() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationNiece")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationNieceBrothersDaughter() uintptr {
+func CNLabelContactRelationNieceBrothersDaughter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationNieceBrothersDaughter")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationNieceBrothersDaughterOrHusbandsSiblingsDaughter() uintptr {
+func CNLabelContactRelationNieceBrothersDaughterOrHusbandsSiblingsDaughter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationNieceBrothersDaughterOrHusbandsSiblingsDaughter")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationNieceOrCousin() uintptr {
+func CNLabelContactRelationNieceOrCousin() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationNieceOrCousin")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationNieceSistersDaughter() uintptr {
+func CNLabelContactRelationNieceSistersDaughter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationNieceSistersDaughter")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationNieceSistersDaughterOrWifesSiblingsDaughter() uintptr {
+func CNLabelContactRelationNieceSistersDaughterOrWifesSiblingsDaughter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationNieceSistersDaughterOrWifesSiblingsDaughter")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationParent() uintptr {
+func CNLabelContactRelationParent() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationParent")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationParentInLaw() uintptr {
+func CNLabelContactRelationParentInLaw() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationParentInLaw")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationParentsElderSibling() uintptr {
+func CNLabelContactRelationParentsElderSibling() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationParentsElderSibling")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationParentsSibling() uintptr {
+func CNLabelContactRelationParentsSibling() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationParentsSibling")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationParentsSiblingFathersElderSibling() uintptr {
+func CNLabelContactRelationParentsSiblingFathersElderSibling() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationParentsSiblingFathersElderSibling")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationParentsSiblingFathersSibling() uintptr {
+func CNLabelContactRelationParentsSiblingFathersSibling() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationParentsSiblingFathersSibling")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationParentsSiblingFathersYoungerSibling() uintptr {
+func CNLabelContactRelationParentsSiblingFathersYoungerSibling() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationParentsSiblingFathersYoungerSibling")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationParentsSiblingMothersElderSibling() uintptr {
+func CNLabelContactRelationParentsSiblingMothersElderSibling() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationParentsSiblingMothersElderSibling")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationParentsSiblingMothersSibling() uintptr {
+func CNLabelContactRelationParentsSiblingMothersSibling() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationParentsSiblingMothersSibling")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationParentsSiblingMothersYoungerSibling() uintptr {
+func CNLabelContactRelationParentsSiblingMothersYoungerSibling() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationParentsSiblingMothersYoungerSibling")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationParentsYoungerSibling() uintptr {
+func CNLabelContactRelationParentsYoungerSibling() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationParentsYoungerSibling")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationPartner() uintptr {
+func CNLabelContactRelationPartner() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationPartner")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationSibling() uintptr {
+func CNLabelContactRelationSibling() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationSibling")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationSiblingInLaw() uintptr {
+func CNLabelContactRelationSiblingInLaw() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationSiblingInLaw")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationSiblingsChild() uintptr {
+func CNLabelContactRelationSiblingsChild() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationSiblingsChild")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationSister() uintptr {
+func CNLabelContactRelationSister() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationSister")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationSisterInLaw() uintptr {
+func CNLabelContactRelationSisterInLaw() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationSisterInLaw")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationSisterInLawBrothersWife() uintptr {
+func CNLabelContactRelationSisterInLawBrothersWife() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationSisterInLawBrothersWife")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationSisterInLawElderBrothersWife() uintptr {
+func CNLabelContactRelationSisterInLawElderBrothersWife() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationSisterInLawElderBrothersWife")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationSisterInLawHusbandsBrothersWife() uintptr {
+func CNLabelContactRelationSisterInLawHusbandsBrothersWife() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationSisterInLawHusbandsBrothersWife")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationSisterInLawHusbandsSister() uintptr {
+func CNLabelContactRelationSisterInLawHusbandsSister() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationSisterInLawHusbandsSister")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationSisterInLawSpousesSister() uintptr {
+func CNLabelContactRelationSisterInLawSpousesSister() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationSisterInLawSpousesSister")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationSisterInLawWifesBrothersWife() uintptr {
+func CNLabelContactRelationSisterInLawWifesBrothersWife() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationSisterInLawWifesBrothersWife")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationSisterInLawWifesSister() uintptr {
+func CNLabelContactRelationSisterInLawWifesSister() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationSisterInLawWifesSister")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationSisterInLawYoungerBrothersWife() uintptr {
+func CNLabelContactRelationSisterInLawYoungerBrothersWife() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationSisterInLawYoungerBrothersWife")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationSon() uintptr {
+func CNLabelContactRelationSon() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationSon")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationSonInLaw() uintptr {
+func CNLabelContactRelationSonInLaw() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationSonInLaw")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationSonInLawOrBrotherInLaw() uintptr {
+func CNLabelContactRelationSonInLawOrBrotherInLaw() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationSonInLawOrBrotherInLaw")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationSonInLawOrStepson() uintptr {
+func CNLabelContactRelationSonInLawOrStepson() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationSonInLawOrStepson")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationSpouse() uintptr {
+func CNLabelContactRelationSpouse() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationSpouse")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationStepbrother() uintptr {
+func CNLabelContactRelationStepbrother() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationStepbrother")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationStepchild() uintptr {
+func CNLabelContactRelationStepchild() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationStepchild")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationStepdaughter() uintptr {
+func CNLabelContactRelationStepdaughter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationStepdaughter")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationStepfather() uintptr {
+func CNLabelContactRelationStepfather() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationStepfather")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationStepmother() uintptr {
+func CNLabelContactRelationStepmother() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationStepmother")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationStepparent() uintptr {
+func CNLabelContactRelationStepparent() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationStepparent")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationStepsister() uintptr {
+func CNLabelContactRelationStepsister() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationStepsister")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationStepson() uintptr {
+func CNLabelContactRelationStepson() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationStepson")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationTeacher() uintptr {
+func CNLabelContactRelationTeacher() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationTeacher")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationUncle() uintptr {
+func CNLabelContactRelationUncle() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationUncle")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationUncleFathersBrother() uintptr {
+func CNLabelContactRelationUncleFathersBrother() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationUncleFathersBrother")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationUncleFathersElderBrother() uintptr {
+func CNLabelContactRelationUncleFathersElderBrother() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationUncleFathersElderBrother")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationUncleFathersElderSistersHusband() uintptr {
+func CNLabelContactRelationUncleFathersElderSistersHusband() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationUncleFathersElderSistersHusband")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationUncleFathersSistersHusband() uintptr {
+func CNLabelContactRelationUncleFathersSistersHusband() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationUncleFathersSistersHusband")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationUncleFathersYoungerBrother() uintptr {
+func CNLabelContactRelationUncleFathersYoungerBrother() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationUncleFathersYoungerBrother")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationUncleFathersYoungerSistersHusband() uintptr {
+func CNLabelContactRelationUncleFathersYoungerSistersHusband() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationUncleFathersYoungerSistersHusband")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationUncleMothersBrother() uintptr {
+func CNLabelContactRelationUncleMothersBrother() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationUncleMothersBrother")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationUncleMothersElderBrother() uintptr {
+func CNLabelContactRelationUncleMothersElderBrother() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationUncleMothersElderBrother")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationUncleMothersSistersHusband() uintptr {
+func CNLabelContactRelationUncleMothersSistersHusband() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationUncleMothersSistersHusband")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationUncleMothersYoungerBrother() uintptr {
+func CNLabelContactRelationUncleMothersYoungerBrother() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationUncleMothersYoungerBrother")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationUncleParentsBrother() uintptr {
+func CNLabelContactRelationUncleParentsBrother() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationUncleParentsBrother")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationUncleParentsElderBrother() uintptr {
+func CNLabelContactRelationUncleParentsElderBrother() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationUncleParentsElderBrother")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationUncleParentsYoungerBrother() uintptr {
+func CNLabelContactRelationUncleParentsYoungerBrother() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationUncleParentsYoungerBrother")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationWife() uintptr {
+func CNLabelContactRelationWife() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationWife")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationYoungerBrother() uintptr {
+func CNLabelContactRelationYoungerBrother() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationYoungerBrother")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationYoungerBrotherInLaw() uintptr {
+func CNLabelContactRelationYoungerBrotherInLaw() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationYoungerBrotherInLaw")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationYoungerCousin() uintptr {
+func CNLabelContactRelationYoungerCousin() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationYoungerCousin")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationYoungerCousinFathersBrothersDaughter() uintptr {
+func CNLabelContactRelationYoungerCousinFathersBrothersDaughter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationYoungerCousinFathersBrothersDaughter")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationYoungerCousinFathersBrothersSon() uintptr {
+func CNLabelContactRelationYoungerCousinFathersBrothersSon() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationYoungerCousinFathersBrothersSon")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationYoungerCousinFathersSistersDaughter() uintptr {
+func CNLabelContactRelationYoungerCousinFathersSistersDaughter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationYoungerCousinFathersSistersDaughter")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationYoungerCousinFathersSistersSon() uintptr {
+func CNLabelContactRelationYoungerCousinFathersSistersSon() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationYoungerCousinFathersSistersSon")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationYoungerCousinMothersBrothersDaughter() uintptr {
+func CNLabelContactRelationYoungerCousinMothersBrothersDaughter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationYoungerCousinMothersBrothersDaughter")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationYoungerCousinMothersBrothersSon() uintptr {
+func CNLabelContactRelationYoungerCousinMothersBrothersSon() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationYoungerCousinMothersBrothersSon")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationYoungerCousinMothersSiblingsDaughterOrFathersSistersDaughter() uintptr {
+func CNLabelContactRelationYoungerCousinMothersSiblingsDaughterOrFathersSistersDaughter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationYoungerCousinMothersSiblingsDaughterOrFathersSistersDaughter")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationYoungerCousinMothersSiblingsSonOrFathersSistersSon() uintptr {
+func CNLabelContactRelationYoungerCousinMothersSiblingsSonOrFathersSistersSon() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationYoungerCousinMothersSiblingsSonOrFathersSistersSon")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationYoungerCousinMothersSistersDaughter() uintptr {
+func CNLabelContactRelationYoungerCousinMothersSistersDaughter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationYoungerCousinMothersSistersDaughter")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationYoungerCousinMothersSistersSon() uintptr {
+func CNLabelContactRelationYoungerCousinMothersSistersSon() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationYoungerCousinMothersSistersSon")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationYoungerCousinParentsSiblingsDaughter() uintptr {
+func CNLabelContactRelationYoungerCousinParentsSiblingsDaughter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationYoungerCousinParentsSiblingsDaughter")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationYoungerCousinParentsSiblingsSon() uintptr {
+func CNLabelContactRelationYoungerCousinParentsSiblingsSon() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationYoungerCousinParentsSiblingsSon")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationYoungerSibling() uintptr {
+func CNLabelContactRelationYoungerSibling() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationYoungerSibling")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationYoungerSiblingInLaw() uintptr {
+func CNLabelContactRelationYoungerSiblingInLaw() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationYoungerSiblingInLaw")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationYoungerSister() uintptr {
+func CNLabelContactRelationYoungerSister() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationYoungerSister")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationYoungerSisterInLaw() uintptr {
+func CNLabelContactRelationYoungerSisterInLaw() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationYoungerSisterInLaw")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationYoungestBrother() uintptr {
+func CNLabelContactRelationYoungestBrother() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationYoungestBrother")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelContactRelationYoungestSister() uintptr {
+func CNLabelContactRelationYoungestSister() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelContactRelationYoungestSister")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelDateAnniversary() uintptr {
+func CNLabelDateAnniversary() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelDateAnniversary")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelEmailiCloud() uintptr {
+func CNLabelEmailiCloud() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelEmailiCloud")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelHome() uintptr {
+func CNLabelHome() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelHome")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelOther() uintptr {
+func CNLabelOther() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelOther")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func CNLabelPhoneNumberAppleWatch() *foundation.NSString {
@@ -1453,69 +3329,160 @@ func CNLabelPhoneNumberAppleWatch() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
-func CNLabelPhoneNumberHomeFax() uintptr {
+func CNLabelPhoneNumberHomeFax() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelPhoneNumberHomeFax")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelPhoneNumberMain() uintptr {
+func CNLabelPhoneNumberMain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelPhoneNumberMain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelPhoneNumberMobile() uintptr {
+func CNLabelPhoneNumberMobile() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelPhoneNumberMobile")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelPhoneNumberOtherFax() uintptr {
+func CNLabelPhoneNumberOtherFax() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelPhoneNumberOtherFax")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelPhoneNumberPager() uintptr {
+func CNLabelPhoneNumberPager() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelPhoneNumberPager")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelPhoneNumberWorkFax() uintptr {
+func CNLabelPhoneNumberWorkFax() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelPhoneNumberWorkFax")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelPhoneNumberiPhone() uintptr {
+func CNLabelPhoneNumberiPhone() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelPhoneNumberiPhone")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelSchool() uintptr {
+func CNLabelSchool() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelSchool")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelURLAddressHomePage() uintptr {
+func CNLabelURLAddressHomePage() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelURLAddressHomePage")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNLabelWork() uintptr {
+func CNLabelWork() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelWork")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNPostalAddressCityKey() uintptr {
+func CNPostalAddressCityKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNPostalAddressCityKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNPostalAddressCountryKey() uintptr {
+func CNPostalAddressCountryKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNPostalAddressCountryKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNPostalAddressISOCountryCodeKey() uintptr {
+func CNPostalAddressISOCountryCodeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNPostalAddressISOCountryCodeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func CNPostalAddressLocalizedPropertyNameAttribute() *foundation.NSString {
@@ -1530,9 +3497,16 @@ func CNPostalAddressLocalizedPropertyNameAttribute() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
-func CNPostalAddressPostalCodeKey() uintptr {
+func CNPostalAddressPostalCodeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNPostalAddressPostalCodeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func CNPostalAddressPropertyAttribute() *foundation.NSString {
@@ -1547,87 +3521,206 @@ func CNPostalAddressPropertyAttribute() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
-func CNPostalAddressStateKey() uintptr {
+func CNPostalAddressStateKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNPostalAddressStateKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNPostalAddressStreetKey() uintptr {
+func CNPostalAddressStreetKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNPostalAddressStreetKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNPostalAddressSubAdministrativeAreaKey() uintptr {
+func CNPostalAddressSubAdministrativeAreaKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNPostalAddressSubAdministrativeAreaKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNPostalAddressSubLocalityKey() uintptr {
+func CNPostalAddressSubLocalityKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNPostalAddressSubLocalityKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNSocialProfileServiceFacebook() uintptr {
+func CNSocialProfileServiceFacebook() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNSocialProfileServiceFacebook")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNSocialProfileServiceFlickr() uintptr {
+func CNSocialProfileServiceFlickr() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNSocialProfileServiceFlickr")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNSocialProfileServiceGameCenter() uintptr {
+func CNSocialProfileServiceGameCenter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNSocialProfileServiceGameCenter")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNSocialProfileServiceKey() uintptr {
+func CNSocialProfileServiceKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNSocialProfileServiceKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNSocialProfileServiceLinkedIn() uintptr {
+func CNSocialProfileServiceLinkedIn() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNSocialProfileServiceLinkedIn")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNSocialProfileServiceMySpace() uintptr {
+func CNSocialProfileServiceMySpace() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNSocialProfileServiceMySpace")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNSocialProfileServiceSinaWeibo() uintptr {
+func CNSocialProfileServiceSinaWeibo() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNSocialProfileServiceSinaWeibo")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNSocialProfileServiceTencentWeibo() uintptr {
+func CNSocialProfileServiceTencentWeibo() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNSocialProfileServiceTencentWeibo")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNSocialProfileServiceTwitter() uintptr {
+func CNSocialProfileServiceTwitter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNSocialProfileServiceTwitter")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNSocialProfileServiceYelp() uintptr {
+func CNSocialProfileServiceYelp() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNSocialProfileServiceYelp")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNSocialProfileURLStringKey() uintptr {
+func CNSocialProfileURLStringKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNSocialProfileURLStringKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNSocialProfileUserIdentifierKey() uintptr {
+func CNSocialProfileUserIdentifierKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNSocialProfileUserIdentifierKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNSocialProfileUsernameKey() uintptr {
+func CNSocialProfileUsernameKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNSocialProfileUsernameKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }

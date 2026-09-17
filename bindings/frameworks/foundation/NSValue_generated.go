@@ -110,7 +110,7 @@ func (v_ *Value) GetValueSize(value unsafe.Pointer, size int) {
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("getValue:size:"), value, size)
 }
 
-// ObjCType returns the obj c type.
+// ObjCType returns a C string containing the Objective-C type of the data contained in the value object, as encoded by the `
 func (v_ *Value) ObjCType() unsafe.Pointer {
 	defer runtime.KeepAlive(v_)
 	_r := objc.Send[unsafe.Pointer](objref.IDOf(v_), objc.RegisterName("objCType"))
@@ -125,14 +125,14 @@ func (v_ *Value) IsEqualToValue(value *Value) bool {
 	return _r
 }
 
-// NonretainedObjectValue returns the nonretained object value.
+// NonretainedObjectValue returns the value as a non-retained pointer to an object. This method is potentially dangerous, because the returned object might have been released by the time it is used. Ensure that the object has a retained reference before using it.
 func (v_ *Value) NonretainedObjectValue() obj.Object {
 	defer runtime.KeepAlive(v_)
 	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("nonretainedObjectValue"))
 	return obj.Wrap(_r)
 }
 
-// PointerValue returns the pointer value.
+// PointerValue returns the value as an untyped pointer.
 func (v_ *Value) PointerValue() unsafe.Pointer {
 	defer runtime.KeepAlive(v_)
 	_r := objc.Send[unsafe.Pointer](objref.IDOf(v_), objc.RegisterName("pointerValue"))
@@ -152,28 +152,28 @@ func (v_ *Value) RangeValue() NSRange {
 	return _r
 }
 
-// PointValue returns the point value.
+// PointValue returns the Foundation point structure representation of the value.
 func (v_ *Value) PointValue() corefoundation.CGPoint {
 	defer runtime.KeepAlive(v_)
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(v_), objc.RegisterName("pointValue"))
 	return _r
 }
 
-// SizeValue returns the size value.
+// SizeValue returns the Foundation size structure representation of the value.
 func (v_ *Value) SizeValue() corefoundation.CGSize {
 	defer runtime.KeepAlive(v_)
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(v_), objc.RegisterName("sizeValue"))
 	return _r
 }
 
-// RectValue returns the rect value.
+// RectValue returns the Foundation rectangle structure representation of the value.
 func (v_ *Value) RectValue() corefoundation.CGRect {
 	defer runtime.KeepAlive(v_)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(v_), objc.RegisterName("rectValue"))
 	return _r
 }
 
-// EdgeInsetsValue returns the edge insets value.
+// EdgeInsetsValue returns the edge insets structure representation of the value.
 func (v_ *Value) EdgeInsetsValue() NSEdgeInsets {
 	defer runtime.KeepAlive(v_)
 	_r := objc.Send[NSEdgeInsets](objref.IDOf(v_), objc.RegisterName("edgeInsetsValue"))

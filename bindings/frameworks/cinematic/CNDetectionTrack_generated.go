@@ -19,7 +19,7 @@ import (
 //
 // DetectionTrack is an abstract base — you do not construct it directly. Construct one of [CustomDetectionTrack], [FixedDetectionTrack] and pass it where a DetectionTrack is accepted.
 //
-// An object representing a series of detections of the same subject over time.
+// Abstract class representing a series of detections of the same subject over time.
 type DetectionTrack struct {
 	objref.Handle
 }

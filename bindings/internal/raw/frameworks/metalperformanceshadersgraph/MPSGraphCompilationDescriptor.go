@@ -23,6 +23,7 @@ var (
 	_clsMPSGraphCompilationDescriptor                                = _objcClass("MPSGraphCompilationDescriptor")
 	_mPSGraphCompilationDescriptorSelDisableTypeInference            = objc.RegisterName("disableTypeInference")
 	_mPSGraphCompilationDescriptorSelConvertLayoutToNHWC             = objc.RegisterName("convertLayoutToNHWC")
+	_mPSGraphCompilationDescriptorSelDisableAutoLayoutConversion     = objc.RegisterName("disableAutoLayoutConversion")
 	_mPSGraphCompilationDescriptorSelOptimizationLevel               = objc.RegisterName("optimizationLevel")
 	_mPSGraphCompilationDescriptorSelSetOptimizationLevel            = objc.RegisterName("setOptimizationLevel:")
 	_mPSGraphCompilationDescriptorSelWaitForCompilationCompletion    = objc.RegisterName("waitForCompilationCompletion")
@@ -57,6 +58,11 @@ func (o *MPSGraphCompilationDescriptor) DisableTypeInference() {
 // Turns on Automatic Layout Conversion (for conv like operations) for GPU.
 func (o *MPSGraphCompilationDescriptor) ConvertLayoutToNHWC() {
 	o.Ptr().Send(_mPSGraphCompilationDescriptorSelConvertLayoutToNHWC)
+}
+
+// Turns off Automatic Layout Conversion (for conv like operations) for GPU.
+func (o *MPSGraphCompilationDescriptor) DisableAutoLayoutConversion() {
+	o.Ptr().Send(_mPSGraphCompilationDescriptorSelDisableAutoLayoutConversion)
 }
 
 // The optimization level for the graph execution, default is MPSGraphOptimizationLevel1.

@@ -650,27 +650,55 @@ func (e QosClass) String() string {
 	}
 }
 
+type TaskSharedRegionStubs uint8
+
+const (
+	TaskSharedRegionStubsDev  TaskSharedRegionStubs = 1
+	TaskSharedRegionStubsProd TaskSharedRegionStubs = 2
+)
+
+// String returns the TaskSharedRegionStubs constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TaskSharedRegionStubs) String() string {
+	switch e {
+	case TaskSharedRegionStubsDev:
+		return "TaskSharedRegionStubsDev"
+	case TaskSharedRegionStubsProd:
+		return "TaskSharedRegionStubsProd"
+	default:
+		return fmt.Sprintf("TaskSharedRegionStubs(%d)", int64(e))
+	}
+}
+
 type VirtualMemoryGuardExceptionCode uint32
 
 const (
-	KGUARD_EXC_DEALLOC_GAP                   VirtualMemoryGuardExceptionCode = 1
-	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        VirtualMemoryGuardExceptionCode = 2
-	KGUARD_EXC_RECLAIM_INDEX_FAILURE         VirtualMemoryGuardExceptionCode = 4
-	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    VirtualMemoryGuardExceptionCode = 8
-	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    VirtualMemoryGuardExceptionCode = 9
-	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         VirtualMemoryGuardExceptionCode = 10
-	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         VirtualMemoryGuardExceptionCode = 11
-	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  VirtualMemoryGuardExceptionCode = 12
-	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    VirtualMemoryGuardExceptionCode = 13
-	KGUARD_EXC_SEC_ACCESS_FAULT              VirtualMemoryGuardExceptionCode = 98
-	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        VirtualMemoryGuardExceptionCode = 99
-	KGUARD_EXC_SEC_COPY_DENIED               VirtualMemoryGuardExceptionCode = 100
-	KGUARD_EXC_SEC_SHARING_DENIED            VirtualMemoryGuardExceptionCode = 101
-	KGUARD_EXC_MTE_SYNC_FAULT                VirtualMemoryGuardExceptionCode = 200
-	KGUARD_EXC_MTE_ASYNC_USER_FAULT          VirtualMemoryGuardExceptionCode = 201
-	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          VirtualMemoryGuardExceptionCode = 202
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT VirtualMemoryGuardExceptionCode = 203
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT VirtualMemoryGuardExceptionCode = 204
+	KGUARD_EXC_DEALLOC_GAP                  VirtualMemoryGuardExceptionCode = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE       VirtualMemoryGuardExceptionCode = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE        VirtualMemoryGuardExceptionCode = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE   VirtualMemoryGuardExceptionCode = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE   VirtualMemoryGuardExceptionCode = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE        VirtualMemoryGuardExceptionCode = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE        VirtualMemoryGuardExceptionCode = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION VirtualMemoryGuardExceptionCode = 12
+	// Guard exception sent to a thread when a CoW defeatured map attempts to copy memory which is not permitted by system policy.
+	KGUARD_EXC_COW_DEFEATURED_COPY_DENIED VirtualMemoryGuardExceptionCode = 13
+	// Guard exception sent to a thread when it attempts to extract a given type of memory in a way which is not permitted for CoW defeatured maps.
+	KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED VirtualMemoryGuardExceptionCode = 14
+	// Guard exception sent to a thread when it attempts to copy-map a memory entry which was created for sharing by a CoW defeatured map.
+	KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED VirtualMemoryGuardExceptionCode = 15
+	KGUARD_EXC_COW_DEFEATURED_FIRST                    VirtualMemoryGuardExceptionCode = 13
+	KGUARD_EXC_COW_DEFEATURED_LAST                     VirtualMemoryGuardExceptionCode = 15
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY              VirtualMemoryGuardExceptionCode = 16
+	KGUARD_EXC_SEC_ACCESS_FAULT                        VirtualMemoryGuardExceptionCode = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT                  VirtualMemoryGuardExceptionCode = 99
+	KGUARD_EXC_SEC_COPY_DENIED                         VirtualMemoryGuardExceptionCode = 100
+	KGUARD_EXC_SEC_SHARING_DENIED                      VirtualMemoryGuardExceptionCode = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                          VirtualMemoryGuardExceptionCode = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT                    VirtualMemoryGuardExceptionCode = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT                    VirtualMemoryGuardExceptionCode = 202
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT           VirtualMemoryGuardExceptionCode = 203
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT           VirtualMemoryGuardExceptionCode = 204
 )
 
 // String returns the VirtualMemoryGuardExceptionCode constant's name, or its numeric form when the
@@ -693,6 +721,12 @@ func (e VirtualMemoryGuardExceptionCode) String() string {
 		return "KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE"
 	case KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION:
 		return "KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION"
+	case KGUARD_EXC_COW_DEFEATURED_COPY_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_COPY_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED"
 	case KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY:
 		return "KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY"
 	case KGUARD_EXC_SEC_ACCESS_FAULT:
@@ -773,130 +807,132 @@ func (e XpcSessionCreateFlags) String() string {
 }
 
 const (
-	THREAD_ABORTSAFE                           = 0
-	THREAD_INTERRUPTIBLE                       = 0
-	THREAD_UNINT                               = 0
-	KIOPMWakeEventFullWake                     = 2
-	KIOPMWakeEventPossibleFullWake             = 4
-	KIOPMWakeEventSource                       = 1
-	KIOConnectMethodVarOutputSize              = -3
-	KIODMACommandCompleteDMANoOptions          = 0
-	KIODMACommandCreateNoOptions               = 0
-	KIODMACommandPerformOperationOptionRead    = 1
-	KIODMACommandPerformOperationOptionWrite   = 2
-	KIODMACommandPerformOperationOptionZero    = 4
-	KIODMACommandPrepareForDMANoOptions        = 0
-	KIODMACommandSpecificationNoOptions        = 0
-	KIODispatchQueueMethodsNotSynchronized     = 2
-	KIODispatchQueueReentrant                  = 1
-	KIODispatchQueueSleepReuseEvent            = 256
-	KIODispatchQueueWakeupAll                  = 1
-	KIOInterruptDispatchSourceTypeEdge         = 0
-	KIOInterruptDispatchSourceTypeLevel        = 1
-	KIOInterruptSourceAbsoluteTime             = 0
-	KIOInterruptSourceContinuousTime           = 65536
-	KIOInterruptSourceIndexMask                = 65535
-	KIOMaxBusStall10usec                       = 10000
-	KIOMaxBusStall20usec                       = 20000
-	KIOMaxBusStall25usec                       = 25000
-	KIOMaxBusStall30usec                       = 30000
-	KIOMaxBusStall40usec                       = 40000
-	KIOMaxBusStall5usec                        = 5000
-	KIOMaxBusStallNone                         = 0
-	KIOMemoryDirectionIn                       = 1
-	KIOMemoryDirectionInOut                    = 3
-	KIOMemoryDirectionNone                     = 0
-	KIOMemoryDirectionOut                      = 2
-	KIOMemoryDirectionOutIn                    = 3
-	KIOMemoryDisableCopyOnWrite                = 16
-	KIOMemoryMapCacheModeCopyback              = 512
-	KIOMemoryMapCacheModeDefault               = 0
-	KIOMemoryMapCacheModeInhibit               = 256
-	KIOMemoryMapCacheModeRealTime              = 2048
-	KIOMemoryMapCacheModeWriteThrough          = 1024
-	KIOMemoryMapFixedAddress                   = 1
-	KIOMemoryMapGuardedDefault                 = 0
-	KIOMemoryMapGuardedLarge                   = 12
-	KIOMemoryMapGuardedMask                    = 28
-	KIOMemoryMapGuardedNone                    = 4
-	KIOMemoryMapGuardedSmall                   = 8
-	KIOMemoryMapReadOnly                       = 2
-	KIORPCMessageError                         = 64
-	KIORPCMessageIDKernel                      = 9223372036854775808
-	KIORPCMessageKernel                        = 4
-	KIORPCMessageLocalHost                     = 2
-	KIORPCMessageObjectRefs                    = 16
-	KIORPCMessageOneway                        = 8
-	KIORPCMessageOnqueue                       = 32
-	KIORPCMessageRemote                        = 1
-	KIORPCMessageSimpleReply                   = 128
-	KIORPCVersion190615                        = 1302509196
-	KIORPCVersion190615Reply                   = 1302509197
-	KIOReportCopyChannelData                   = 1
-	KIOReportDisable                           = 0
-	KIOReportEnable                            = 1
-	KIOReportFormatHistogram                   = 3
-	KIOReportFormatSimple                      = 1
-	KIOReportFormatSimpleArray                 = 4
-	KIOReportFormatState                       = 2
-	KIOReportGetDimensions                     = 2
-	KIOReportInvalidFormat                     = 0
-	KIOReportNotifyHubOnChange                 = 16
-	KIOReportQuantityCPUInstrs                 = 102
-	KIOReportQuantityCapacitance               = 6
-	KIOReportQuantityCurrent                   = 4
-	KIOReportQuantityData                      = 9
-	KIOReportQuantityEnergy                    = 3
-	KIOReportQuantityEventCount                = 100
-	KIOReportQuantityFrequency                 = 8
-	KIOReportQuantityInductance                = 7
-	KIOReportQuantityPacketCount               = 101
-	KIOReportQuantityPower                     = 2
-	KIOReportQuantityTemperature               = 10
-	KIOReportQuantityTime                      = 1
-	KIOReportQuantityUndefined                 = 0
-	KIOReportQuantityVoltage                   = 5
-	KIOReportTraceChannelData                  = 2
-	KIOReportTraceOnChange                     = 32
-	KIOServiceHaltStatePowerOff                = 1
-	KIOServiceHaltStateRestart                 = 2
-	KIOServiceNotificationTypeLast             = 1
-	KIOServiceNotificationTypeMatched          = 1
-	KIOServiceNotificationTypeNone             = 4294967295
-	KIOServiceNotificationTypeTerminated       = 0
-	KIOServicePMAssertionCPUBit                = 1
-	KIOServicePMAssertionForceFullWakeupBit    = 2048
-	KIOServicePowerCapabilityLPW               = 131072
-	KIOServicePowerCapabilityLow               = 65536
-	KIOServicePowerCapabilityOff               = 0
-	KIOServicePowerCapabilityOn                = 2
-	KIOServiceSearchPropertyParents            = 1
-	KIOTimerClockMachAbsoluteTime              = 200
-	KIOTimerClockMachContinuousTime            = 196
-	KIOTimerClockMonotonicRaw                  = 132
-	KIOTimerClockRealTime                      = 128
-	KIOTimerClockUptimeRaw                     = 136
-	KIOTimerClockWallTime                      = 128
-	KIOUserClientAsyncArgumentsCountMax        = 16
-	KIOUserClientAsyncReferenceCountMax        = 16
-	KIOUserClientMemoryReadOnly                = 1
-	KIOUserClientMethodArgumentsCurrentVersion = 2
-	KIOUserClientScalarArrayCountMax           = 16
-	KIOUserClientVariableStructureSize         = 4294967295
-	KMicrosecondScale                          = 1000
-	KMillisecondScale                          = 1000000
-	KNanosecondScale                           = 1
-	KOSArrayAppend                             = 18446744073709551615
-	KOSClassCanRemote                          = 1
-	KOSCollectionTypeArray                     = 2
-	KOSCollectionTypeBoolean                   = 11
-	KOSCollectionTypeData                      = 10
-	KOSCollectionTypeDictionary                = 1
-	KOSCollectionTypeNumber                    = 4
-	KOSCollectionTypeSerialization             = 13
-	KOSCollectionTypeSet                       = 3
-	KOSCollectionTypeString                    = 9
-	KOSCollectionTypeSymbol                    = 8
-	KSecondScale                               = 1000000000
-	KTickScale                                 = 10000000
+	THREAD_ABORTSAFE                             = 0
+	THREAD_INTERRUPTIBLE                         = 0
+	THREAD_UNINT                                 = 0
+	KIOPMWakeEventFullWake                       = 2
+	KIOPMWakeEventPossibleFullWake               = 4
+	KIOPMWakeEventSource                         = 1
+	KIOConnectMethodVarOutputSize                = -3
+	KIODMACommandCompleteDMANoOptions            = 0
+	KIODMACommandCreateNoOptions                 = 0
+	KIODMACommandPerformOperationOptionRead      = 1
+	KIODMACommandPerformOperationOptionWrite     = 2
+	KIODMACommandPerformOperationOptionZero      = 4
+	KIODMACommandPrepareForDMANoOptions          = 0
+	KIODMACommandSpecificationNoOptions          = 0
+	KIODispatchQueueMethodsNotSynchronized       = 2
+	KIODispatchQueueReentrant                    = 1
+	KIODispatchQueueSleepReuseEvent              = 256
+	KIODispatchQueueWakeupAll                    = 1
+	KIOInterruptDispatchSourceTypeEdge           = 0
+	KIOInterruptDispatchSourceTypeLevel          = 1
+	KIOInterruptSourceAbsoluteTime               = 0
+	KIOInterruptSourceContinuousTime             = 65536
+	KIOInterruptSourceIndexMask                  = 65535
+	KIOMaxBusStall10usec                         = 10000
+	KIOMaxBusStall20usec                         = 20000
+	KIOMaxBusStall25usec                         = 25000
+	KIOMaxBusStall30usec                         = 30000
+	KIOMaxBusStall40usec                         = 40000
+	KIOMaxBusStall5usec                          = 5000
+	KIOMaxBusStallNone                           = 0
+	KIOMemoryDirectionIn                         = 1
+	KIOMemoryDirectionInOut                      = 3
+	KIOMemoryDirectionNone                       = 0
+	KIOMemoryDirectionOut                        = 2
+	KIOMemoryDirectionOutIn                      = 3
+	KIOMemoryDisableCopyOnWrite                  = 16
+	KIOMemoryMapCacheModeCopyback                = 512
+	KIOMemoryMapCacheModeDefault                 = 0
+	KIOMemoryMapCacheModeInhibit                 = 256
+	KIOMemoryMapCacheModePostedCombinedReordered = 4096
+	KIOMemoryMapCacheModeRealTime                = 2048
+	KIOMemoryMapCacheModeWriteThrough            = 1024
+	KIOMemoryMapFixedAddress                     = 1
+	KIOMemoryMapGuardedDefault                   = 0
+	KIOMemoryMapGuardedLarge                     = 12
+	KIOMemoryMapGuardedMask                      = 28
+	KIOMemoryMapGuardedNone                      = 4
+	KIOMemoryMapGuardedSmall                     = 8
+	KIOMemoryMapReadOnly                         = 2
+	KIORPCMessageDeepSerialization               = 256
+	KIORPCMessageError                           = 64
+	KIORPCMessageIDKernel                        = 9223372036854775808
+	KIORPCMessageKernel                          = 4
+	KIORPCMessageLocalHost                       = 2
+	KIORPCMessageObjectRefs                      = 16
+	KIORPCMessageOneway                          = 8
+	KIORPCMessageOnqueue                         = 32
+	KIORPCMessageRemote                          = 1
+	KIORPCMessageSimpleReply                     = 128
+	KIORPCVersion190615                          = 1302509196
+	KIORPCVersion190615Reply                     = 1302509197
+	KIOReportCopyChannelData                     = 1
+	KIOReportDisable                             = 0
+	KIOReportEnable                              = 1
+	KIOReportFormatHistogram                     = 3
+	KIOReportFormatSimple                        = 1
+	KIOReportFormatSimpleArray                   = 4
+	KIOReportFormatState                         = 2
+	KIOReportGetDimensions                       = 2
+	KIOReportInvalidFormat                       = 0
+	KIOReportNotifyHubOnChange                   = 16
+	KIOReportQuantityCPUInstrs                   = 102
+	KIOReportQuantityCapacitance                 = 6
+	KIOReportQuantityCurrent                     = 4
+	KIOReportQuantityData                        = 9
+	KIOReportQuantityEnergy                      = 3
+	KIOReportQuantityEventCount                  = 100
+	KIOReportQuantityFrequency                   = 8
+	KIOReportQuantityInductance                  = 7
+	KIOReportQuantityPacketCount                 = 101
+	KIOReportQuantityPower                       = 2
+	KIOReportQuantityTemperature                 = 10
+	KIOReportQuantityTime                        = 1
+	KIOReportQuantityUndefined                   = 0
+	KIOReportQuantityVoltage                     = 5
+	KIOReportTraceChannelData                    = 2
+	KIOReportTraceOnChange                       = 32
+	KIOServiceHaltStatePowerOff                  = 1
+	KIOServiceHaltStateRestart                   = 2
+	KIOServiceNotificationTypeLast               = 1
+	KIOServiceNotificationTypeMatched            = 1
+	KIOServiceNotificationTypeNone               = 4294967295
+	KIOServiceNotificationTypeTerminated         = 0
+	KIOServicePMAssertionCPUBit                  = 1
+	KIOServicePMAssertionForceFullWakeupBit      = 2048
+	KIOServicePowerCapabilityLPW                 = 131072
+	KIOServicePowerCapabilityLow                 = 65536
+	KIOServicePowerCapabilityOff                 = 0
+	KIOServicePowerCapabilityOn                  = 2
+	KIOServiceSearchPropertyParents              = 1
+	KIOTimerClockMachAbsoluteTime                = 200
+	KIOTimerClockMachContinuousTime              = 196
+	KIOTimerClockMonotonicRaw                    = 132
+	KIOTimerClockRealTime                        = 128
+	KIOTimerClockUptimeRaw                       = 136
+	KIOTimerClockWallTime                        = 128
+	KIOUserClientAsyncArgumentsCountMax          = 16
+	KIOUserClientAsyncReferenceCountMax          = 16
+	KIOUserClientMemoryReadOnly                  = 1
+	KIOUserClientMethodArgumentsCurrentVersion   = 2
+	KIOUserClientScalarArrayCountMax             = 16
+	KIOUserClientVariableStructureSize           = 4294967295
+	KMicrosecondScale                            = 1000
+	KMillisecondScale                            = 1000000
+	KNanosecondScale                             = 1
+	KOSArrayAppend                               = 18446744073709551615
+	KOSClassCanRemote                            = 1
+	KOSCollectionTypeArray                       = 2
+	KOSCollectionTypeBoolean                     = 11
+	KOSCollectionTypeData                        = 10
+	KOSCollectionTypeDictionary                  = 1
+	KOSCollectionTypeNumber                      = 4
+	KOSCollectionTypeSerialization               = 13
+	KOSCollectionTypeSet                         = 3
+	KOSCollectionTypeString                      = 9
+	KOSCollectionTypeSymbol                      = 8
+	KSecondScale                                 = 1000000000
+	KTickScale                                   = 10000000
 )

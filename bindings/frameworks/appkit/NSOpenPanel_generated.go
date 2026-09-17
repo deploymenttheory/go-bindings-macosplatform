@@ -72,14 +72,6 @@ func (op *OpenPanel) WithResolvesAliases(resolvesAliases bool) *OpenPanel {
 	return op
 }
 
-// WithCanChooseDirectories sets a Boolean that indicates whether the user can choose directories in the panel.
-func (op *OpenPanel) WithCanChooseDirectories(canChooseDirectories bool) *OpenPanel {
-	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(op), objc.RegisterName("setCanChooseDirectories:"), canChooseDirectories)
-	})
-	return op
-}
-
 // WithAllowsMultipleSelection sets a Boolean that indicates whether the user may select multiple files and directories.
 func (op *OpenPanel) WithAllowsMultipleSelection(allowsMultipleSelection bool) *OpenPanel {
 	purego.Main(func() {
@@ -92,6 +84,14 @@ func (op *OpenPanel) WithAllowsMultipleSelection(allowsMultipleSelection bool) *
 func (op *OpenPanel) WithCanChooseFiles(canChooseFiles bool) *OpenPanel {
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(op), objc.RegisterName("setCanChooseFiles:"), canChooseFiles)
+	})
+	return op
+}
+
+// WithCanChooseDirectories sets a Boolean that indicates whether the user can choose directories in the panel.
+func (op *OpenPanel) WithCanChooseDirectories(canChooseDirectories bool) *OpenPanel {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(op), objc.RegisterName("setCanChooseDirectories:"), canChooseDirectories)
 	})
 	return op
 }
@@ -945,20 +945,6 @@ func (op *OpenPanel) ResolvesAliases() bool {
 
 }
 
-// CanChooseDirectories wraps the corresponding Objective-C method.
-func (op *OpenPanel) CanChooseDirectories() bool {
-	defer runtime.KeepAlive(op)
-	var _mainthread0 bool
-	purego.Main(func() {
-		_mainthread0 = func() bool {
-			_r := objc.Send[bool](objref.IDOf(op), objc.RegisterName("canChooseDirectories"))
-			return _r
-		}()
-	})
-	return _mainthread0
-
-}
-
 // AllowsMultipleSelection wraps the corresponding Objective-C method.
 func (op *OpenPanel) AllowsMultipleSelection() bool {
 	defer runtime.KeepAlive(op)
@@ -973,13 +959,27 @@ func (op *OpenPanel) AllowsMultipleSelection() bool {
 
 }
 
-// CanChooseFiles wraps the corresponding Objective-C method.
+// CanChooseFiles reports whether the user can choose files in the open panel. In macOS 27 and later, `canChooseFiles` is updated when you set `allowedContentTypes` or set `treatsFilePackagesAsDirectories`. If `allowedContentTypes` contains a type that does not conform to `UTTypeDirectory` then `canChooseFiles` is set to `YES`. If `allowedContentTypes` contains a type that conforms to `UTTypePackage` and `treatsFilePackagesAsDirectories` is `NO`, then `canChooseFiles` is set to `YES. By default `canChooseFiles` is `YES`. In general you will only need to set `canChooseFiles` to `NO` when `allowedContentTypes` is `[]` (the empty array). If you set `canChooseFiles` to `NO` then set `allowedContentTypes` to `[]`, `canChooseFiles` will still be `NO`. However, if you reset `allowedContentTypes` from non-empty to empty, then that will also reset `canChooseFiles` to `YES`, the default value. In short, setting `allowedContentTypes` to `[]` keeps your setting or overrides the automatic system setting. If unsure, you can always set `canChooseFiles` after setting `allowedContentTypes`.
 func (op *OpenPanel) CanChooseFiles() bool {
 	defer runtime.KeepAlive(op)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
 			_r := objc.Send[bool](objref.IDOf(op), objc.RegisterName("canChooseFiles"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
+}
+
+// CanChooseDirectories reports whether the user can choose directories in open the panel. In macOS 27 and later, `canChooseDirectories` is updated when you set `allowedContentTypes` or set `treatsFilePackagesAsDirectories`. If `allowedContentTypes` contains a type that conforms to `UTTypeDirectory` then `canChooseDirectories` is set to `YES`. If `allowedContentTypes` contains a type that conforms to `UTTypePackage` and `treatsFilePackagesAsDirectories` is `YES`, then `canChooseDirectories` is set to `YES`. By default `canChooseDirectories` is `NO`. In general you will only need to set `canChooseDirectories` to `YES` when `allowedContentTypes` is `[]` (the empty array). If you set `canChooseDirectories` to `YES` then set `allowedContentTypes` to `[]`, `canChooseDirectories` will still be `YES`. However, if you reset `allowedContentTypes` from non-empty to empty, then that will also reset `canChooseDirectories` to `NO`, the default value. In short, setting `allowedContentTypes` to `[]` keeps your setting or overrides the automatic system setting. If unsure, you can always set `canChooseDirectories` after setting `allowedContentTypes`.
+func (op *OpenPanel) CanChooseDirectories() bool {
+	defer runtime.KeepAlive(op)
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(op), objc.RegisterName("canChooseDirectories"))
 			return _r
 		}()
 	})

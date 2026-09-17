@@ -9,8 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A unit of measure for length.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsunitlength
 type NSUnitLength struct {
 	NSDimension
@@ -52,6 +50,7 @@ func NSUnitLengthFromID(id objc.ID) *NSUnitLength {
 	return o
 }
 
+// The megameters unit of length.
 func NSUnitLengthMegameters() *NSUnitLength {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitLength), _nSUnitLengthSelMegameters)
 	if _ret != 0 {
@@ -60,6 +59,7 @@ func NSUnitLengthMegameters() *NSUnitLength {
 	return NSUnitLengthFromID(_ret)
 }
 
+// The kilometers unit of length.
 func NSUnitLengthKilometers() *NSUnitLength {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitLength), _nSUnitLengthSelKilometers)
 	if _ret != 0 {
@@ -68,6 +68,7 @@ func NSUnitLengthKilometers() *NSUnitLength {
 	return NSUnitLengthFromID(_ret)
 }
 
+// The hectometers unit of length.
 func NSUnitLengthHectometers() *NSUnitLength {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitLength), _nSUnitLengthSelHectometers)
 	if _ret != 0 {
@@ -76,6 +77,7 @@ func NSUnitLengthHectometers() *NSUnitLength {
 	return NSUnitLengthFromID(_ret)
 }
 
+// The decameters unit of length.
 func NSUnitLengthDecameters() *NSUnitLength {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitLength), _nSUnitLengthSelDecameters)
 	if _ret != 0 {
@@ -84,6 +86,7 @@ func NSUnitLengthDecameters() *NSUnitLength {
 	return NSUnitLengthFromID(_ret)
 }
 
+// The meters unit of length.
 func NSUnitLengthMeters() *NSUnitLength {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitLength), _nSUnitLengthSelMeters)
 	if _ret != 0 {
@@ -92,6 +95,7 @@ func NSUnitLengthMeters() *NSUnitLength {
 	return NSUnitLengthFromID(_ret)
 }
 
+// The decimeters unit of length.
 func NSUnitLengthDecimeters() *NSUnitLength {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitLength), _nSUnitLengthSelDecimeters)
 	if _ret != 0 {
@@ -100,6 +104,7 @@ func NSUnitLengthDecimeters() *NSUnitLength {
 	return NSUnitLengthFromID(_ret)
 }
 
+// The centimeters unit of length.
 func NSUnitLengthCentimeters() *NSUnitLength {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitLength), _nSUnitLengthSelCentimeters)
 	if _ret != 0 {
@@ -108,6 +113,7 @@ func NSUnitLengthCentimeters() *NSUnitLength {
 	return NSUnitLengthFromID(_ret)
 }
 
+// The millimeters unit of length.
 func NSUnitLengthMillimeters() *NSUnitLength {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitLength), _nSUnitLengthSelMillimeters)
 	if _ret != 0 {
@@ -116,6 +122,7 @@ func NSUnitLengthMillimeters() *NSUnitLength {
 	return NSUnitLengthFromID(_ret)
 }
 
+// The micrometers unit of length.
 func NSUnitLengthMicrometers() *NSUnitLength {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitLength), _nSUnitLengthSelMicrometers)
 	if _ret != 0 {
@@ -124,6 +131,7 @@ func NSUnitLengthMicrometers() *NSUnitLength {
 	return NSUnitLengthFromID(_ret)
 }
 
+// The nanometers unit of length.
 func NSUnitLengthNanometers() *NSUnitLength {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitLength), _nSUnitLengthSelNanometers)
 	if _ret != 0 {
@@ -132,6 +140,7 @@ func NSUnitLengthNanometers() *NSUnitLength {
 	return NSUnitLengthFromID(_ret)
 }
 
+// The picometers unit of length.
 func NSUnitLengthPicometers() *NSUnitLength {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitLength), _nSUnitLengthSelPicometers)
 	if _ret != 0 {
@@ -140,6 +149,7 @@ func NSUnitLengthPicometers() *NSUnitLength {
 	return NSUnitLengthFromID(_ret)
 }
 
+// The inches unit of length.
 func NSUnitLengthInches() *NSUnitLength {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitLength), _nSUnitLengthSelInches)
 	if _ret != 0 {
@@ -148,6 +158,7 @@ func NSUnitLengthInches() *NSUnitLength {
 	return NSUnitLengthFromID(_ret)
 }
 
+// The feet unit of length.
 func NSUnitLengthFeet() *NSUnitLength {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitLength), _nSUnitLengthSelFeet)
 	if _ret != 0 {
@@ -156,6 +167,7 @@ func NSUnitLengthFeet() *NSUnitLength {
 	return NSUnitLengthFromID(_ret)
 }
 
+// The yards unit of length.
 func NSUnitLengthYards() *NSUnitLength {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitLength), _nSUnitLengthSelYards)
 	if _ret != 0 {
@@ -164,6 +176,7 @@ func NSUnitLengthYards() *NSUnitLength {
 	return NSUnitLengthFromID(_ret)
 }
 
+// The miles unit of length.
 func NSUnitLengthMiles() *NSUnitLength {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitLength), _nSUnitLengthSelMiles)
 	if _ret != 0 {
@@ -172,6 +185,7 @@ func NSUnitLengthMiles() *NSUnitLength {
 	return NSUnitLengthFromID(_ret)
 }
 
+// The Scandinavian miles unit of length.
 func NSUnitLengthScandinavianMiles() *NSUnitLength {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitLength), _nSUnitLengthSelScandinavianMiles)
 	if _ret != 0 {
@@ -180,6 +194,7 @@ func NSUnitLengthScandinavianMiles() *NSUnitLength {
 	return NSUnitLengthFromID(_ret)
 }
 
+// The lightyears unit of length.
 func NSUnitLengthLightyears() *NSUnitLength {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitLength), _nSUnitLengthSelLightyears)
 	if _ret != 0 {
@@ -188,6 +203,7 @@ func NSUnitLengthLightyears() *NSUnitLength {
 	return NSUnitLengthFromID(_ret)
 }
 
+// The nautical miles unit of length.
 func NSUnitLengthNauticalMiles() *NSUnitLength {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitLength), _nSUnitLengthSelNauticalMiles)
 	if _ret != 0 {
@@ -196,6 +212,7 @@ func NSUnitLengthNauticalMiles() *NSUnitLength {
 	return NSUnitLengthFromID(_ret)
 }
 
+// The fathoms unit of length.
 func NSUnitLengthFathoms() *NSUnitLength {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitLength), _nSUnitLengthSelFathoms)
 	if _ret != 0 {
@@ -204,6 +221,7 @@ func NSUnitLengthFathoms() *NSUnitLength {
 	return NSUnitLengthFromID(_ret)
 }
 
+// The furlongs unit of length.
 func NSUnitLengthFurlongs() *NSUnitLength {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitLength), _nSUnitLengthSelFurlongs)
 	if _ret != 0 {
@@ -212,6 +230,7 @@ func NSUnitLengthFurlongs() *NSUnitLength {
 	return NSUnitLengthFromID(_ret)
 }
 
+// The astronomical units unit of length.
 func NSUnitLengthAstronomicalUnits() *NSUnitLength {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitLength), _nSUnitLengthSelAstronomicalUnits)
 	if _ret != 0 {
@@ -220,6 +239,7 @@ func NSUnitLengthAstronomicalUnits() *NSUnitLength {
 	return NSUnitLengthFromID(_ret)
 }
 
+// The parsecs unit of length.
 func NSUnitLengthParsecs() *NSUnitLength {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitLength), _nSUnitLengthSelParsecs)
 	if _ret != 0 {

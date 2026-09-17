@@ -158,12 +158,6 @@
       "url": "https://developer.apple.com/documentation/metrickit/mxmetricmanagersubscriber"
     }
   },
-  "enums": {
-    "MXErrorCode": {
-      "doc": "Error codes for error values from app metrics.",
-      "url": "https://developer.apple.com/documentation/metrickit/mxerrorcode"
-    }
-  },
   "methods": {
     "MXCallStackTree": {
       "-JSONRepresentation": {
@@ -713,6 +707,10 @@
       "diskIOMetrics": {
         "doc": "The storage metrics for the reporting period.",
         "url": "https://developer.apple.com/documentation/metrickit/mxmetricpayload/diskiometrics"
+      },
+      "diskSpaceUsageMetrics": {
+        "doc": "An object containing disk space usage metrics for this application.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxmetricpayload/diskspaceusagemetrics"
       },
       "displayMetrics": {
         "doc": "The display metrics for the reporting period.",

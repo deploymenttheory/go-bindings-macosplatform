@@ -16,15 +16,17 @@ type SCRecordingOutputConfiguration struct {
 }
 
 var (
-	_clsSCRecordingOutputConfiguration                         = _objcClass("SCRecordingOutputConfiguration")
-	_sCRecordingOutputConfigurationSelOutputURL                = objc.RegisterName("outputURL")
-	_sCRecordingOutputConfigurationSelSetOutputURL             = objc.RegisterName("setOutputURL:")
-	_sCRecordingOutputConfigurationSelVideoCodecType           = objc.RegisterName("videoCodecType")
-	_sCRecordingOutputConfigurationSelSetVideoCodecType        = objc.RegisterName("setVideoCodecType:")
-	_sCRecordingOutputConfigurationSelOutputFileType           = objc.RegisterName("outputFileType")
-	_sCRecordingOutputConfigurationSelSetOutputFileType        = objc.RegisterName("setOutputFileType:")
-	_sCRecordingOutputConfigurationSelAvailableVideoCodecTypes = objc.RegisterName("availableVideoCodecTypes")
-	_sCRecordingOutputConfigurationSelAvailableOutputFileTypes = objc.RegisterName("availableOutputFileTypes")
+	_clsSCRecordingOutputConfiguration                            = _objcClass("SCRecordingOutputConfiguration")
+	_sCRecordingOutputConfigurationSelOutputURL                   = objc.RegisterName("outputURL")
+	_sCRecordingOutputConfigurationSelSetOutputURL                = objc.RegisterName("setOutputURL:")
+	_sCRecordingOutputConfigurationSelVideoCodecType              = objc.RegisterName("videoCodecType")
+	_sCRecordingOutputConfigurationSelSetVideoCodecType           = objc.RegisterName("setVideoCodecType:")
+	_sCRecordingOutputConfigurationSelOutputFileType              = objc.RegisterName("outputFileType")
+	_sCRecordingOutputConfigurationSelSetOutputFileType           = objc.RegisterName("setOutputFileType:")
+	_sCRecordingOutputConfigurationSelAvailableVideoCodecTypes    = objc.RegisterName("availableVideoCodecTypes")
+	_sCRecordingOutputConfigurationSelAvailableOutputFileTypes    = objc.RegisterName("availableOutputFileTypes")
+	_sCRecordingOutputConfigurationSelMixesAudioWithMicrophone    = objc.RegisterName("mixesAudioWithMicrophone")
+	_sCRecordingOutputConfigurationSelSetMixesAudioWithMicrophone = objc.RegisterName("setMixesAudioWithMicrophone:")
 )
 
 func SCRecordingOutputConfigurationFromID(id objc.ID) *SCRecordingOutputConfiguration {
@@ -92,4 +94,14 @@ func (o *SCRecordingOutputConfiguration) AvailableOutputFileTypes() *foundation.
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return foundation.NSArrayFromID[*foundation.NSString](_ret)
+}
+
+// @abstract if the stream being recorded captures both system audio and microphone audio, setting mixesAudioWithMicrophone to NO will keep two audio tracks for each audio stream in the recording output. Default value is YES, which will mix system and microphone audio, result one audio track in recording output.
+func (o *SCRecordingOutputConfiguration) MixesAudioWithMicrophone() bool {
+	_ret := objc.Send[bool](o.Ptr(), _sCRecordingOutputConfigurationSelMixesAudioWithMicrophone)
+	return _ret
+}
+
+func (o *SCRecordingOutputConfiguration) SetMixesAudioWithMicrophone(mixesAudioWithMicrophone bool) {
+	o.Ptr().Send(_sCRecordingOutputConfigurationSelSetMixesAudioWithMicrophone, mixesAudioWithMicrophone)
 }

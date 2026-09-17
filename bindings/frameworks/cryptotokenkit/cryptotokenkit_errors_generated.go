@@ -26,6 +26,9 @@ var ErrCodeCommunicationError = errkit.New("TKErrorDomain", -2)
 // ErrCodeCorruptedData matches the CryptoTokenKit error TKErrorCodeCorruptedData.
 var ErrCodeCorruptedData = errkit.New("TKErrorDomain", -3)
 
+// ErrCodeInvalidatedDeviceKey matches the CryptoTokenKit error TKErrorCodeInvalidatedDeviceKey.
+var ErrCodeInvalidatedDeviceKey = errkit.New("TKErrorDomain", -10)
+
 // ErrCodeNotImplemented matches the CryptoTokenKit error TKErrorCodeNotImplemented.
 var ErrCodeNotImplemented = errkit.New("TKErrorDomain", -1)
 

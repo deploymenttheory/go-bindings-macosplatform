@@ -19,7 +19,7 @@ const (
 	FSAccessWriteData FSAccessMask = 4
 	// The file system allows adding files.
 	FSAccessAddFile FSAccessMask = 4
-	// The file system allows file executuion.
+	// The file system allows file execution.
 	FSAccessExecute FSAccessMask = 8
 	// The file system allows searching files.
 	FSAccessSearch FSAccessMask = 8
@@ -188,6 +188,62 @@ func (e FSContainerState) String() string {
 	}
 }
 
+type FSDataCacheErrorCode int64
+
+const (
+	// The requested cache mode and coherency type combination is invalid.
+	FSErrorInvalidCacheModeCoherency FSDataCacheErrorCode = 4510
+	// The cache transition is not allowed. This error occurs when attempting an invalid transition, such as using an upgrade method for a downgrade operation, or vice versa.
+	FSErrorInvalidCacheTransition FSDataCacheErrorCode = 4511
+	// Failed to flush dirty cached data to storage.
+	FSErrorCacheFlushFailed FSDataCacheErrorCode = 4512
+	// Failed to invalidate (clear) cached data.
+	FSErrorCacheInvalidationFailed FSDataCacheErrorCode = 4513
+	// A conflicting cache operation is in progress. This error occurs when multiple cache operations on the same item conflict, such as attempting to change cache mode while I/O is active.
+	FSErrorCacheOperationConflict FSDataCacheErrorCode = 4514
+)
+
+func (e FSDataCacheErrorCode) String() string {
+	switch e {
+	case FSErrorInvalidCacheModeCoherency:
+		return "FSErrorInvalidCacheModeCoherency"
+	case FSErrorInvalidCacheTransition:
+		return "FSErrorInvalidCacheTransition"
+	case FSErrorCacheFlushFailed:
+		return "FSErrorCacheFlushFailed"
+	case FSErrorCacheInvalidationFailed:
+		return "FSErrorCacheInvalidationFailed"
+	case FSErrorCacheOperationConflict:
+		return "FSErrorCacheOperationConflict"
+	default:
+		return fmt.Sprintf("FSDataCacheErrorCode(%d)", int64(e))
+	}
+}
+
+type FSDataCacheMode int64
+
+const (
+	// A mode that indicates no active caching.
+	FSDataCacheModeNone FSDataCacheMode = 0
+	// A mode that indicates read access with caching enabled.
+	FSDataCacheModeReadWithCache FSDataCacheMode = 1
+	// A mode that indicates read-write access with caching enabled.
+	FSDataCacheModeReadWriteWithCache FSDataCacheMode = 2
+)
+
+func (e FSDataCacheMode) String() string {
+	switch e {
+	case FSDataCacheModeNone:
+		return "FSDataCacheModeNone"
+	case FSDataCacheModeReadWithCache:
+		return "FSDataCacheModeReadWithCache"
+	case FSDataCacheModeReadWriteWithCache:
+		return "FSDataCacheModeReadWriteWithCache"
+	default:
+		return fmt.Sprintf("FSDataCacheMode(%d)", int64(e))
+	}
+}
+
 // Options that affect the behavior of deactivate methods.
 type FSDeactivateOptions int64
 
@@ -255,6 +311,8 @@ const (
 	FSExtentTypeData FSExtentType = 0
 	// An extent type to indicate uninitialized data.
 	FSExtentTypeZeroFill FSExtentType = 1
+	// An extent type to indicate read-only data.
+	FSExtentTypeReadOnly FSExtentType = 2
 )
 
 func (e FSExtentType) String() string {
@@ -263,6 +321,8 @@ func (e FSExtentType) String() string {
 		return "FSExtentTypeData"
 	case FSExtentTypeZeroFill:
 		return "FSExtentTypeZeroFill"
+	case FSExtentTypeReadOnly:
+		return "FSExtentTypeReadOnly"
 	default:
 		return fmt.Sprintf("FSExtentType(%d)", int64(e))
 	}
@@ -380,7 +440,7 @@ const (
 	FSItemDeactivationAlways FSItemDeactivationOptions = 18446744073709551615
 	// An option to process deactivation for open-unlinked items at the moment of last close.
 	FSItemDeactivationForRemovedItems FSItemDeactivationOptions = 1
-	// An option to process deactivation for for files with preallocated space. This option facilitates a sort of trim-on-close behavior. It is only meaningful for volumes that conform to ``FSVolume/PreallocateOperations``.
+	// An option to process deactivation for for files with preallocated space. This option facilitates a sort of trim-on-close behavior. It is only meaningful for volumes that conform to ``FSVolume/PreallocateHandler``.
 	FSItemDeactivationForPreallocatedItems FSItemDeactivationOptions = 2
 )
 
@@ -469,6 +529,66 @@ func (e FSItemType) String() string {
 	}
 }
 
+type FSKernelCacheCoherencyAction int64
+
+const (
+	// An action to flush dirty data from cache to storage, preserving cache contents.
+	FSKernelCacheCoherencyActionPush FSKernelCacheCoherencyAction = 0
+	// An action to flush dirty data to storage and invalidate (clear) the cache.
+	FSKernelCacheCoherencyActionPushInvalidate FSKernelCacheCoherencyAction = 1
+	// An action to invalidate (clear) the cache, discarding any dirty data without writing to storage.
+	FSKernelCacheCoherencyActionInvalidate FSKernelCacheCoherencyAction = 2
+	// An action to update the coherency mode while keeping the cache valid, requiring no push or invalidation.
+	FSKernelCacheCoherencyActionUpdate FSKernelCacheCoherencyAction = 3
+	// An action to invalidate all caches, revoke all access to the item, and trigger vnode reclamation. Use this action when the module determines that an item no longer exists or is no longer accessible. Common scenarios include: - Another client deleted the item, as detected via server notification. - The module received a server callback indicating the file's absence.
+	FSKernelCacheCoherencyActionRevoke FSKernelCacheCoherencyAction = 4
+)
+
+func (e FSKernelCacheCoherencyAction) String() string {
+	switch e {
+	case FSKernelCacheCoherencyActionPush:
+		return "FSKernelCacheCoherencyActionPush"
+	case FSKernelCacheCoherencyActionPushInvalidate:
+		return "FSKernelCacheCoherencyActionPushInvalidate"
+	case FSKernelCacheCoherencyActionInvalidate:
+		return "FSKernelCacheCoherencyActionInvalidate"
+	case FSKernelCacheCoherencyActionUpdate:
+		return "FSKernelCacheCoherencyActionUpdate"
+	case FSKernelCacheCoherencyActionRevoke:
+		return "FSKernelCacheCoherencyActionRevoke"
+	default:
+		return fmt.Sprintf("FSKernelCacheCoherencyAction(%d)", int64(e))
+	}
+}
+
+type FSKernelCacheCoherencyType int64
+
+const (
+	// A type that indicates all I/O goes directly to storage, without caching.
+	FSKernelCacheCoherencyTypeNoCache FSKernelCacheCoherencyType = 0
+	// A type that indicates that writes bypass the cache and go directly to storage.
+	FSKernelCacheCoherencyTypeReadCache FSKernelCacheCoherencyType = 1
+	// A type that indicates writes update cache and storage synchronously.
+	FSKernelCacheCoherencyTypeWriteThrough FSKernelCacheCoherencyType = 2
+	// A type that indicates writes immediately update the cache only, followed by a deferred write to storage.
+	FSKernelCacheCoherencyTypeWriteBack FSKernelCacheCoherencyType = 3
+)
+
+func (e FSKernelCacheCoherencyType) String() string {
+	switch e {
+	case FSKernelCacheCoherencyTypeNoCache:
+		return "FSKernelCacheCoherencyTypeNoCache"
+	case FSKernelCacheCoherencyTypeReadCache:
+		return "FSKernelCacheCoherencyTypeReadCache"
+	case FSKernelCacheCoherencyTypeWriteThrough:
+		return "FSKernelCacheCoherencyTypeWriteThrough"
+	case FSKernelCacheCoherencyTypeWriteBack:
+		return "FSKernelCacheCoherencyTypeWriteBack"
+	default:
+		return fmt.Sprintf("FSKernelCacheCoherencyType(%d)", int64(e))
+	}
+}
+
 // A type that represents the recognition and usability of a probed resource.
 type FSMatchResult int64
 
@@ -525,7 +645,7 @@ const (
 	FSPreallocateFlagsAll FSPreallocateFlags = 4
 	// Allocates space that isn't freed when deleting the descriptor. This space remains allocated even after calling `close(2)`.
 	FSPreallocateFlagsPersist FSPreallocateFlags = 8
-	// Allocates space from the physical end of file. When implementing this behavior, ignore any offset in the preallocate call. This flag is currently set for all ``FSVolume/PreallocateOperations/preallocateSpace(for:at:length:flags:replyHandler:)`` calls.
+	// Allocates space from the physical end of file. When implementing this behavior, ignore any offset in the preallocate call. This flag is currently set for all ``FSVolume/PreallocateHandler/preallocateSpace(for:at:length:flags:context:replyHandler:)`` calls.
 	FSPreallocateFlagsFromEOF FSPreallocateFlags = 16
 )
 
@@ -547,6 +667,26 @@ func (e FSPreallocateFlags) String() string {
 		return "0"
 	}
 	return strings.Join(parts, "|")
+}
+
+type FSSeekRegion uint64
+
+const (
+	// Seek the next hole region. When there are no more hole regions past the supplied `offset`, the current file size (end-of-file offset) should be returned.
+	FSSeekRegionHole FSSeekRegion = 1
+	// Seek the next data region. When there are no more data regions past the supplied `offset`, an error code `ENXIO` should be returned.
+	FSSeekRegionData FSSeekRegion = 2
+)
+
+func (e FSSeekRegion) String() string {
+	switch e {
+	case FSSeekRegionHole:
+		return "FSSeekRegionHole"
+	case FSSeekRegionData:
+		return "FSSeekRegionData"
+	default:
+		return fmt.Sprintf("FSSeekRegion(%d)", int64(e))
+	}
 }
 
 type FSSetXattrPolicy uint64
@@ -1454,27 +1594,53 @@ func (e Qos_class_t) String() string {
 	}
 }
 
+type Task_shared_region_stubs_t uint8
+
+const (
+	TASK_SHARED_REGION_STUBS_DEV  Task_shared_region_stubs_t = 1
+	TASK_SHARED_REGION_STUBS_PROD Task_shared_region_stubs_t = 2
+)
+
+func (e Task_shared_region_stubs_t) String() string {
+	switch e {
+	case TASK_SHARED_REGION_STUBS_DEV:
+		return "TASK_SHARED_REGION_STUBS_DEV"
+	case TASK_SHARED_REGION_STUBS_PROD:
+		return "TASK_SHARED_REGION_STUBS_PROD"
+	default:
+		return fmt.Sprintf("Task_shared_region_stubs_t(%d)", int64(e))
+	}
+}
+
 type Virtual_memory_guard_exception_code_t uint32
 
 const (
-	KGUARD_EXC_DEALLOC_GAP                   Virtual_memory_guard_exception_code_t = 1
-	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        Virtual_memory_guard_exception_code_t = 2
-	KGUARD_EXC_RECLAIM_INDEX_FAILURE         Virtual_memory_guard_exception_code_t = 4
-	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    Virtual_memory_guard_exception_code_t = 8
-	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    Virtual_memory_guard_exception_code_t = 9
-	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         Virtual_memory_guard_exception_code_t = 10
-	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         Virtual_memory_guard_exception_code_t = 11
-	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  Virtual_memory_guard_exception_code_t = 12
-	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    Virtual_memory_guard_exception_code_t = 13
-	KGUARD_EXC_SEC_ACCESS_FAULT              Virtual_memory_guard_exception_code_t = 98
-	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        Virtual_memory_guard_exception_code_t = 99
-	KGUARD_EXC_SEC_COPY_DENIED               Virtual_memory_guard_exception_code_t = 100
-	KGUARD_EXC_SEC_SHARING_DENIED            Virtual_memory_guard_exception_code_t = 101
-	KGUARD_EXC_MTE_SYNC_FAULT                Virtual_memory_guard_exception_code_t = 200
-	KGUARD_EXC_MTE_ASYNC_USER_FAULT          Virtual_memory_guard_exception_code_t = 201
-	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          Virtual_memory_guard_exception_code_t = 202
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 203
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 204
+	KGUARD_EXC_DEALLOC_GAP                  Virtual_memory_guard_exception_code_t = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE       Virtual_memory_guard_exception_code_t = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE        Virtual_memory_guard_exception_code_t = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE   Virtual_memory_guard_exception_code_t = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE   Virtual_memory_guard_exception_code_t = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE        Virtual_memory_guard_exception_code_t = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE        Virtual_memory_guard_exception_code_t = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION Virtual_memory_guard_exception_code_t = 12
+	// Guard exception sent to a thread when a CoW defeatured map attempts to copy memory which is not permitted by system policy.
+	KGUARD_EXC_COW_DEFEATURED_COPY_DENIED Virtual_memory_guard_exception_code_t = 13
+	// Guard exception sent to a thread when it attempts to extract a given type of memory in a way which is not permitted for CoW defeatured maps.
+	KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED Virtual_memory_guard_exception_code_t = 14
+	// Guard exception sent to a thread when it attempts to copy-map a memory entry which was created for sharing by a CoW defeatured map.
+	KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED Virtual_memory_guard_exception_code_t = 15
+	KGUARD_EXC_COW_DEFEATURED_FIRST                    Virtual_memory_guard_exception_code_t = 13
+	KGUARD_EXC_COW_DEFEATURED_LAST                     Virtual_memory_guard_exception_code_t = 15
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY              Virtual_memory_guard_exception_code_t = 16
+	KGUARD_EXC_SEC_ACCESS_FAULT                        Virtual_memory_guard_exception_code_t = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT                  Virtual_memory_guard_exception_code_t = 99
+	KGUARD_EXC_SEC_COPY_DENIED                         Virtual_memory_guard_exception_code_t = 100
+	KGUARD_EXC_SEC_SHARING_DENIED                      Virtual_memory_guard_exception_code_t = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                          Virtual_memory_guard_exception_code_t = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT                    Virtual_memory_guard_exception_code_t = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT                    Virtual_memory_guard_exception_code_t = 202
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT           Virtual_memory_guard_exception_code_t = 203
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT           Virtual_memory_guard_exception_code_t = 204
 )
 
 func (e Virtual_memory_guard_exception_code_t) String() string {
@@ -1495,6 +1661,12 @@ func (e Virtual_memory_guard_exception_code_t) String() string {
 		return "KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE"
 	case KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION:
 		return "KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION"
+	case KGUARD_EXC_COW_DEFEATURED_COPY_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_COPY_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED"
 	case KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY:
 		return "KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY"
 	case KGUARD_EXC_SEC_ACCESS_FAULT:

@@ -95,9 +95,12 @@ func KHITextViewClassID() uintptr {
 	return ptr
 }
 
-func KHIToolboxVersionNumber() uintptr {
+func KHIToolboxVersionNumber() float32 {
 	ptr, _ := purego.Dlsym(_hitoolboxLib, "kHIToolboxVersionNumber")
-	return ptr
+	if ptr == 0 {
+		return 0
+	}
+	return *(*float32)(unsafe.Pointer(ptr))
 }
 
 func KHIViewMenuContentID() ControlID {

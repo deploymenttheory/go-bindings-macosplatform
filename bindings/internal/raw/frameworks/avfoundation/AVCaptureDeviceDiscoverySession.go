@@ -10,8 +10,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An object that finds capture devices that match specific search criteria.
-//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avcapturedevicediscoverysession
 type AVCaptureDeviceDiscoverySession struct {
 	foundation.NSObject

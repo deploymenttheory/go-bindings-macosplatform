@@ -9,8 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A unit of measure for a duration of time.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsunitduration
 type NSUnitDuration struct {
 	NSDimension
@@ -37,6 +35,7 @@ func NSUnitDurationFromID(id objc.ID) *NSUnitDuration {
 	return o
 }
 
+// The hours unit of duration.
 func NSUnitDurationHours() *NSUnitDuration {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitDuration), _nSUnitDurationSelHours)
 	if _ret != 0 {
@@ -45,6 +44,7 @@ func NSUnitDurationHours() *NSUnitDuration {
 	return NSUnitDurationFromID(_ret)
 }
 
+// The minutes unit of duration.
 func NSUnitDurationMinutes() *NSUnitDuration {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitDuration), _nSUnitDurationSelMinutes)
 	if _ret != 0 {
@@ -53,6 +53,7 @@ func NSUnitDurationMinutes() *NSUnitDuration {
 	return NSUnitDurationFromID(_ret)
 }
 
+// The seconds unit of duration.
 func NSUnitDurationSeconds() *NSUnitDuration {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitDuration), _nSUnitDurationSelSeconds)
 	if _ret != 0 {
@@ -61,6 +62,7 @@ func NSUnitDurationSeconds() *NSUnitDuration {
 	return NSUnitDurationFromID(_ret)
 }
 
+// The milliseconds unit of duration.
 func NSUnitDurationMilliseconds() *NSUnitDuration {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitDuration), _nSUnitDurationSelMilliseconds)
 	if _ret != 0 {
@@ -69,6 +71,7 @@ func NSUnitDurationMilliseconds() *NSUnitDuration {
 	return NSUnitDurationFromID(_ret)
 }
 
+// The microseconds unit of duration.
 func NSUnitDurationMicroseconds() *NSUnitDuration {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitDuration), _nSUnitDurationSelMicroseconds)
 	if _ret != 0 {
@@ -77,6 +80,7 @@ func NSUnitDurationMicroseconds() *NSUnitDuration {
 	return NSUnitDurationFromID(_ret)
 }
 
+// The nanoseconds unit of duration.
 func NSUnitDurationNanoseconds() *NSUnitDuration {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitDuration), _nSUnitDurationSelNanoseconds)
 	if _ret != 0 {
@@ -85,6 +89,7 @@ func NSUnitDurationNanoseconds() *NSUnitDuration {
 	return NSUnitDurationFromID(_ret)
 }
 
+// The picoseconds unit of duration.
 func NSUnitDurationPicoseconds() *NSUnitDuration {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitDuration), _nSUnitDurationSelPicoseconds)
 	if _ret != 0 {

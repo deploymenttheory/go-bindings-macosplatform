@@ -9,8 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A unit of measure for mass.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsunitmass
 type NSUnitMass struct {
 	NSDimension
@@ -46,6 +44,7 @@ func NSUnitMassFromID(id objc.ID) *NSUnitMass {
 	return o
 }
 
+// The kilograms unit of mass.
 func NSUnitMassKilograms() *NSUnitMass {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitMass), _nSUnitMassSelKilograms)
 	if _ret != 0 {
@@ -54,6 +53,7 @@ func NSUnitMassKilograms() *NSUnitMass {
 	return NSUnitMassFromID(_ret)
 }
 
+// The grams unit of mass.
 func NSUnitMassGrams() *NSUnitMass {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitMass), _nSUnitMassSelGrams)
 	if _ret != 0 {
@@ -62,6 +62,7 @@ func NSUnitMassGrams() *NSUnitMass {
 	return NSUnitMassFromID(_ret)
 }
 
+// The decigrams unit of mass.
 func NSUnitMassDecigrams() *NSUnitMass {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitMass), _nSUnitMassSelDecigrams)
 	if _ret != 0 {
@@ -70,6 +71,7 @@ func NSUnitMassDecigrams() *NSUnitMass {
 	return NSUnitMassFromID(_ret)
 }
 
+// The centigrams unit of mass.
 func NSUnitMassCentigrams() *NSUnitMass {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitMass), _nSUnitMassSelCentigrams)
 	if _ret != 0 {
@@ -78,6 +80,7 @@ func NSUnitMassCentigrams() *NSUnitMass {
 	return NSUnitMassFromID(_ret)
 }
 
+// The milligrams unit of mass.
 func NSUnitMassMilligrams() *NSUnitMass {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitMass), _nSUnitMassSelMilligrams)
 	if _ret != 0 {
@@ -86,6 +89,7 @@ func NSUnitMassMilligrams() *NSUnitMass {
 	return NSUnitMassFromID(_ret)
 }
 
+// The micrograms unit of mass.
 func NSUnitMassMicrograms() *NSUnitMass {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitMass), _nSUnitMassSelMicrograms)
 	if _ret != 0 {
@@ -94,6 +98,7 @@ func NSUnitMassMicrograms() *NSUnitMass {
 	return NSUnitMassFromID(_ret)
 }
 
+// The nanograms unit of mass.
 func NSUnitMassNanograms() *NSUnitMass {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitMass), _nSUnitMassSelNanograms)
 	if _ret != 0 {
@@ -102,6 +107,7 @@ func NSUnitMassNanograms() *NSUnitMass {
 	return NSUnitMassFromID(_ret)
 }
 
+// The picograms unit of mass.
 func NSUnitMassPicograms() *NSUnitMass {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitMass), _nSUnitMassSelPicograms)
 	if _ret != 0 {
@@ -110,6 +116,7 @@ func NSUnitMassPicograms() *NSUnitMass {
 	return NSUnitMassFromID(_ret)
 }
 
+// The ounces unit of mass.
 func NSUnitMassOunces() *NSUnitMass {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitMass), _nSUnitMassSelOunces)
 	if _ret != 0 {
@@ -118,6 +125,7 @@ func NSUnitMassOunces() *NSUnitMass {
 	return NSUnitMassFromID(_ret)
 }
 
+// The pounds unit of mass.
 func NSUnitMassPoundsMass() *NSUnitMass {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitMass), _nSUnitMassSelPoundsMass)
 	if _ret != 0 {
@@ -126,6 +134,7 @@ func NSUnitMassPoundsMass() *NSUnitMass {
 	return NSUnitMassFromID(_ret)
 }
 
+// The stones unit of mass.
 func NSUnitMassStones() *NSUnitMass {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitMass), _nSUnitMassSelStones)
 	if _ret != 0 {
@@ -134,6 +143,7 @@ func NSUnitMassStones() *NSUnitMass {
 	return NSUnitMassFromID(_ret)
 }
 
+// The metric tons unit of mass.
 func NSUnitMassMetricTons() *NSUnitMass {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitMass), _nSUnitMassSelMetricTons)
 	if _ret != 0 {
@@ -142,6 +152,7 @@ func NSUnitMassMetricTons() *NSUnitMass {
 	return NSUnitMassFromID(_ret)
 }
 
+// The short tons unit of mass.
 func NSUnitMassShortTons() *NSUnitMass {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitMass), _nSUnitMassSelShortTons)
 	if _ret != 0 {
@@ -150,6 +161,7 @@ func NSUnitMassShortTons() *NSUnitMass {
 	return NSUnitMassFromID(_ret)
 }
 
+// The carats unit of mass.
 func NSUnitMassCarats() *NSUnitMass {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitMass), _nSUnitMassSelCarats)
 	if _ret != 0 {
@@ -158,6 +170,7 @@ func NSUnitMassCarats() *NSUnitMass {
 	return NSUnitMassFromID(_ret)
 }
 
+// The troy ounces unit of mass.
 func NSUnitMassOuncesTroy() *NSUnitMass {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitMass), _nSUnitMassSelOuncesTroy)
 	if _ret != 0 {
@@ -166,6 +179,7 @@ func NSUnitMassOuncesTroy() *NSUnitMass {
 	return NSUnitMassFromID(_ret)
 }
 
+// The slugs unit of mass.
 func NSUnitMassSlugs() *NSUnitMass {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitMass), _nSUnitMassSelSlugs)
 	if _ret != 0 {

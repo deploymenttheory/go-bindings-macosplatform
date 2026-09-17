@@ -11,8 +11,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// Defines the time duration windows the request’s underlying sound classifier accepts with a range, or an array, of durations.
-//
 // Apple documentation: https://developer.apple.com/documentation/soundanalysis/sntimedurationconstraint
 type SNTimeDurationConstraint struct {
 	foundation.NSObject

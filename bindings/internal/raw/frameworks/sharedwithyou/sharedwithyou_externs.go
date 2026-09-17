@@ -35,3 +35,16 @@ func SWCollaborationMetadataTypeIdentifier() *foundation.NSString {
 	}
 	return foundation.NSStringFromID(id)
 }
+
+// @abstract Type identifier for copy representation that signals the system to use the app's local document version. @discussion Register this as the first open-in-place type identifier on an NSItemProvider when you want the system to load the document's file URL directly from your app rather than from the file provider. This ensures that users share the most current version of their document, including any unsynced local edits. When this type identifier is registered first, also register a "public.file-url" representation that provides the local file URL. @code NSItemProvider *provider = [[NSItemProvider alloc] init]; NSURL *localDocumentURL = [self currentDocumentFileURL]; // Obtain from your document management code // Step 1: Register SWCopyRepresentationTypeIdentifier as an open-in-place file [provider registerFileRepresentationForTypeIdentifier:SWCopyRepresentationTypeIdentifier fileOptions:NSItemProviderFileOptionOpenInPlace visibility:NSItemProviderRepresentationVisibilityAll loadHandler:^NSProgress * _Nullable(void (^completionHandler)(NSURL * _Nullable, BOOL, NSError * _Nullable)) { completionHandler(localDocumentURL, YES, nil); return nil; }]; // Step 2: Register the public.file-url representation [provider registerObject:localDocumentURL visibility:NSItemProviderRepresentationVisibilityAll]; @endcode @note In a UIDocument subclass, use self.fileURL. In an NSDocument subclass, use self.fileURL. For custom document handling, use whatever property or method provides access to the current file location.
+func SWCopyRepresentationTypeIdentifier() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_sharedwithyouLib, "SWCopyRepresentationTypeIdentifier")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}

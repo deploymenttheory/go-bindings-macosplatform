@@ -41,11 +41,17 @@ var ErrFailedToStartMicrophoneCapture = errkit.New("SCStreamErrorDomain", -3820)
 // ErrFailedToStopAudioCapture matches the ScreenCaptureKit error SCStreamErrorFailedToStopAudioCapture.
 var ErrFailedToStopAudioCapture = errkit.New("SCStreamErrorDomain", -3819)
 
+// ErrInsufficientStorage matches the ScreenCaptureKit error SCStreamErrorInsufficientStorage.
+var ErrInsufficientStorage = errkit.New("SCStreamErrorDomain", -3822)
+
 // ErrInternalError matches the ScreenCaptureKit error SCStreamErrorInternalError.
 var ErrInternalError = errkit.New("SCStreamErrorDomain", -3811)
 
 // ErrInvalidParameter matches the ScreenCaptureKit error SCStreamErrorInvalidParameter.
 var ErrInvalidParameter = errkit.New("SCStreamErrorDomain", -3812)
+
+// ErrMissingBackgroundMode matches the ScreenCaptureKit error SCStreamErrorMissingBackgroundMode.
+var ErrMissingBackgroundMode = errkit.New("SCStreamErrorDomain", -3824)
 
 // ErrMissingEntitlements matches the ScreenCaptureKit error SCStreamErrorMissingEntitlements.
 var ErrMissingEntitlements = errkit.New("SCStreamErrorDomain", -3803)
@@ -58,6 +64,9 @@ var ErrNoDisplayList = errkit.New("SCStreamErrorDomain", -3814)
 
 // ErrNoWindowList matches the ScreenCaptureKit error SCStreamErrorNoWindowList.
 var ErrNoWindowList = errkit.New("SCStreamErrorDomain", -3813)
+
+// ErrNotSupported matches the ScreenCaptureKit error SCStreamErrorNotSupported.
+var ErrNotSupported = errkit.New("SCStreamErrorDomain", -3823)
 
 // ErrRemovingStream matches the ScreenCaptureKit error SCStreamErrorRemovingStream.
 var ErrRemovingStream = errkit.New("SCStreamErrorDomain", -3816)

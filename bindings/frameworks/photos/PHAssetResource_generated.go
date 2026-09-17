@@ -7,6 +7,7 @@ package photos
 import (
 	"runtime"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -79,14 +80,14 @@ func NewAssetResource() *AssetResource {
 	return assetResourceAdopt(_id)
 }
 
-// Type returns the type.
+// Type describes the type of asset resource represented by this object, e.g. `photo`
 func (ar *AssetResource) Type() AssetResourceType {
 	defer runtime.KeepAlive(ar)
 	_r := objc.Send[AssetResourceType](objref.IDOf(ar), objc.RegisterName("type"))
 	return _r
 }
 
-// AssetLocalIdentifier returns the asset local identifier.
+// AssetLocalIdentifier returns the local identifier of the asset associated with this asset resource
 func (ar *AssetResource) AssetLocalIdentifier() string {
 	defer runtime.KeepAlive(ar)
 	_r := objc.Send[objc.ID](objref.IDOf(ar), objc.RegisterName("assetLocalIdentifier"))
@@ -106,7 +107,17 @@ func (ar *AssetResource) OriginalFilename() string {
 	return purego.GoString(_r)
 }
 
-// ContentType returns the type of data associated with this asset resource (the data can be retrieved via PHAssetResourceManager)
+// Filename returns the filename associated with this asset resource (if any)
+func (ar *AssetResource) Filename() string {
+	defer runtime.KeepAlive(ar)
+	_r := objc.Send[objc.ID](objref.IDOf(ar), objc.RegisterName("filename"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// ContentType returns the content type of the data associated with this asset resource (the data can be retrieved via `PHAssetResourceManager`)
 func (ar *AssetResource) ContentType() obj.Object {
 	defer runtime.KeepAlive(ar)
 	_r := objc.Send[objc.ID](objref.IDOf(ar), objc.RegisterName("contentType"))
@@ -135,4 +146,11 @@ func (ar *AssetResource) PixelHeight() int {
 	defer runtime.KeepAlive(ar)
 	_r := objc.Send[int](objref.IDOf(ar), objc.RegisterName("pixelHeight"))
 	return _r
+}
+
+// DataSize returns the size of the resource in bytes if known, `nil` if unavailable (may not be available until resource download/processing is complete)
+func (ar *AssetResource) DataSize() *foundation.Number {
+	defer runtime.KeepAlive(ar)
+	_r := objc.Send[objc.ID](objref.IDOf(ar), objc.RegisterName("dataSize"))
+	return foundation.NumberFromID(_r)
 }

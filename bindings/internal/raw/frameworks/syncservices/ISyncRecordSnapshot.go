@@ -4,8 +4,6 @@
 package syncservices
 
 import (
-	"unsafe"
-
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/foundation"
@@ -74,14 +72,17 @@ func (o *ISyncRecordSnapshot) RecordsWithMatchingAttributes(attributes *foundati
 }
 
 // Deprecated: since macOS 10.7.
-func (o *ISyncRecordSnapshot) RecordReferenceForRecordWithIdentifier(identifier *foundation.NSString) unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _iSyncRecordSnapshotSelRecordReferenceForRecordWithIdentifier, identifier.Ptr())
-	return _ret
+func (o *ISyncRecordSnapshot) RecordReferenceForRecordWithIdentifier(identifier *foundation.NSString) *ISyncRecordReference {
+	_ret := objc.Send[objc.ID](o.Ptr(), _iSyncRecordSnapshotSelRecordReferenceForRecordWithIdentifier, identifier.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return ISyncRecordReferenceFromID(_ret)
 }
 
 // Deprecated: since macOS 10.7.
-func (o *ISyncRecordSnapshot) RecordIdentifierForReferenceIsModified(reference unsafe.Pointer, pModified *bool) *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iSyncRecordSnapshotSelRecordIdentifierForReferenceIsModified, reference, pModified)
+func (o *ISyncRecordSnapshot) RecordIdentifierForReferenceIsModified(reference *ISyncRecordReference, pModified *bool) *foundation.NSString {
+	_ret := objc.Send[objc.ID](o.Ptr(), _iSyncRecordSnapshotSelRecordIdentifierForReferenceIsModified, reference.Ptr(), pModified)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

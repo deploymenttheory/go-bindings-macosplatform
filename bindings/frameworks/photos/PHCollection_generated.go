@@ -6,9 +6,11 @@ package photos
 
 import (
 	"runtime"
+	"time"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -76,6 +78,13 @@ func (c *Collection) LocalizedTitle() string {
 		return ""
 	}
 	return purego.GoString(_r)
+}
+
+// ModificationDate returns the last date at which this collection was modified.
+func (c *Collection) ModificationDate() time.Time {
+	defer runtime.KeepAlive(c)
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("modificationDate"))
+	return rt.NSDateToTime(_r)
 }
 
 // isCollection marks Collection — and, by embedding promotion, its

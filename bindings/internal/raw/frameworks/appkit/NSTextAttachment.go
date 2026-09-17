@@ -82,6 +82,7 @@ func NSTextAttachmentRegisterTextAttachmentViewProviderClassForFileType(textAtta
 	objc.ID(_clsNSTextAttachment).Send(_nSTextAttachmentSelRegisterTextAttachmentViewProviderClassForFileType, textAttachmentViewProviderClass, fileType.Ptr())
 }
 
+// The contents for the text attachment. Modifying this property has a side effect of invalidating “image“ and “fileWrapper“ properties.
 func (o *NSTextAttachment) Contents() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextAttachmentSelContents)
 	if _ret != 0 {
@@ -94,6 +95,7 @@ func (o *NSTextAttachment) SetContents(contents *foundation.NSData) {
 	o.Ptr().Send(_nSTextAttachmentSelSetContents, contents.Ptr())
 }
 
+// The file type of the contents for the text attachment. A UTI describing the format for “contents“. Modifying this property has a side effect of invalidating “image“ and “fileWrapper“ properties.
 func (o *NSTextAttachment) FileType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextAttachmentSelFileType)
 	if _ret != 0 {
@@ -106,6 +108,7 @@ func (o *NSTextAttachment) SetFileType(fileType *foundation.NSString) {
 	o.Ptr().Send(_nSTextAttachmentSelSetFileType, fileType.Ptr())
 }
 
+// An instance of the relevant image class that represents the contents of the text attachment object. For details about using the <doc://com.apple.documentation/documentation/uikit/uiimage> class to create text attachments that automatically adjust to surrounding font and color attributes, see the <doc://com.apple.documentation/documentation/uikit/NSTextAttachment/init(image:)> initializer. Modifying this property has the side effect of invalidating the “NSTextAttachment/contents“, “NSTextAttachment/fileType“, and “NSTextAttachment/fileWrapper“ properties.
 func (o *NSTextAttachment) Image() *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextAttachmentSelImage)
 	if _ret != 0 {
@@ -118,6 +121,7 @@ func (o *NSTextAttachment) SetImage(image *NSImage) {
 	o.Ptr().Send(_nSTextAttachmentSelSetImage, image.Ptr())
 }
 
+// The layout bounds of the text attachment's graphical representation in the text coordinate system. The bounds rectangle origin is at the current glyph location on the text baseline. The default value is <doc://com.apple.documentation/documentation/coregraphics/cgrectzero>.
 func (o *NSTextAttachment) Bounds() corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSTextAttachmentSelBounds)
 	return _ret
@@ -127,6 +131,7 @@ func (o *NSTextAttachment) SetBounds(bounds corefoundation.CGRect) {
 	o.Ptr().Send(_nSTextAttachmentSelSetBounds, bounds)
 }
 
+// The text attachment's file wrapper. The file wrapper holds the contents of the attached file. Modifying this property has a side effect of invalidating the “NSTextAttachment/image“, “NSTextAttachment/contents“, and “NSTextAttachment/fileType“ properties.
 func (o *NSTextAttachment) FileWrapper() *foundation.NSFileWrapper {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextAttachmentSelFileWrapper)
 	if _ret != 0 {
@@ -139,6 +144,7 @@ func (o *NSTextAttachment) SetFileWrapper(fileWrapper *foundation.NSFileWrapper)
 	o.Ptr().Send(_nSTextAttachmentSelSetFileWrapper, fileWrapper.Ptr())
 }
 
+// The object that draws the icon for the text attachment and handles mouse events. By default an instance of `NSTextAttachmentCell` is used.
 func (o *NSTextAttachment) AttachmentCell() NSTextAttachmentCellProtocol {
 	_ret := objc.Send[NSTextAttachmentCellProtocol](o.Ptr(), _nSTextAttachmentSelAttachmentCell)
 	return _ret
@@ -148,6 +154,7 @@ func (o *NSTextAttachment) SetAttachmentCell(attachmentCell NSTextAttachmentCell
 	o.Ptr().Send(_nSTextAttachmentSelSetAttachmentCell, attachmentCell)
 }
 
+// The layout padding before and after the text attachment bounds. The layout and rendering bounds X origin is inset by the padding value. This affects the relationship between the text attachment bounds and `NSLayoutManager` glyph metrics methods “NSLayoutManager/location(forGlyphAt:)“ and “NSLayoutManager/attachmentSize(forGlyphAt:)“. The default value is `0.0`.
 func (o *NSTextAttachment) LineLayoutPadding() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSTextAttachmentSelLineLayoutPadding)
 	return _ret
@@ -157,6 +164,7 @@ func (o *NSTextAttachment) SetLineLayoutPadding(lineLayoutPadding float64) {
 	o.Ptr().Send(_nSTextAttachmentSelSetLineLayoutPadding, lineLayoutPadding)
 }
 
+// A Boolean value that indicates whether the text attachment tries to use a text attachment view provider. When `true`, the text attachment tries to use a view provider returned by “NSTextAttachmentLayout/viewProvider(for:location:textContainer:)“. Default is `true`.
 func (o *NSTextAttachment) AllowsTextAttachmentView() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTextAttachmentSelAllowsTextAttachmentView)
 	return _ret
@@ -166,6 +174,7 @@ func (o *NSTextAttachment) SetAllowsTextAttachmentView(allowsTextAttachmentView 
 	o.Ptr().Send(_nSTextAttachmentSelSetAllowsTextAttachmentView, allowsTextAttachmentView)
 }
 
+// A Boolean value that indicates whether the text attachment is configured to use text attachment view providers. The default implementation of this property checks “NSTextAttachment/allowsTextAttachmentView“, “textAttachmentViewProviderClassForFileType:“, and “contents“.
 func (o *NSTextAttachment) UsesTextAttachmentView() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTextAttachmentSelUsesTextAttachmentView)
 	return _ret

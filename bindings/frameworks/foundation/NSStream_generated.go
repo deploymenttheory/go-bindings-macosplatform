@@ -20,7 +20,7 @@ import (
 //
 // Stream is an abstract base — you do not construct it directly. Construct one of [InputStream], [OutputStream] and pass it where a Stream is accepted.
 //
-// An abstract class representing a stream.
+// An abstract class representing a stream. This class's interface is common to all Cocoa stream classes, including its concrete subclasses “InputStream“ and “OutputStream“. “Stream“ objects provide an easy way to read and write data to and from a variety of media in a device-independent way. You can create stream objects for data located in memory, in a file, or on a network (using sockets), and you can use stream objects without loading all of the data into memory at once. By default, “Stream“ instances that aren't file-based are non-seekable, one-way streams (although custom seekable subclasses are possible). After you provide or consume data, you can't retrieve the data from the stream. ### Subclassing Notes “Stream“ is an abstract class, incapable of instantiation and intended for you to subclass it. It publishes a programmatic interface that all subclasses must adopt and provide implementations for. The two Apple-provided concrete subclasses of “Stream“, “InputStream“ and “OutputStream“, are suitable for most purposes. However, there might be situations when you want a peer subclass to “InputStream“ and “OutputStream“. For example, you might want a class that implements a full-duplex (two-way) stream, or a class whose instances are capable of seeking through a stream. #### Methods to Override All subclasses must fully implement the following methods: - “open()“ and “close()“ Implement “open()“ to open the stream for reading or writing and make the stream available to the client directly or, if the stream object is scheduled on a run loop, to the delegate. Implement “close()“ to close the stream and remove the stream object from the run loop, if necessary. A closed stream should still be able to accept new properties and report its current properties. Once you close a stream, you can't reopen it. - “delegate“ Return and set the delegate. By a default, a stream object must be its own delegate; so a “delegate“ message with an argument of `nil` should restore this delegate. Don't retain the delegate to prevent retain cycles. To learn about delegates and delegation, read "Delegation" in Cocoa Fundamentals Guide. - “schedule(in:forMode:)“ and “remove(from:forMode:)“ Implement “schedule(in:forMode:)“ to schedule the stream object on the specified run loop for the specified mode. Implement “remove(from:forMode:)“ to remove the object from the run loop. See the documentation of the “RunLoop“ class for details. Once the stream object for an open stream is scheduled on a run loop, it is the responsibility of the subclass as it processes stream data to send “StreamDelegate/stream(_:handle:)“ messages to its delegate. - “property(forKey:)“ and “setProperty(_:forKey:)“ Implement these methods to return and set, respectively, the property value for the specified key. You may add custom properties, but be sure to handle all properties defined by “Stream“ as well. - “streamStatus“ and “streamError“ Implement “streamStatus“ to return the current status of the stream as a “Status“ constant; you may define new “Status“ constants, but be sure to handle the system defined constants properly. Implement “streamError“ to return an “NSError“ object representing the current error. You might decide to return a custom “NSError“ object that can provide complete and localized information about the error.
 type Stream struct {
 	objref.Handle
 }
@@ -77,7 +77,7 @@ func (s *Stream) String() string {
 	return rt.Description(objref.IDOf(s))
 }
 
-// WithDelegate sets the delegate.
+// WithDelegate sets the receiver's delegate. By default, a stream is its own delegate, and subclasses of `NSInputStream` and `NSOutputStream` must maintain this contract. If you override this method in a subclass, passing `nil` must restore the receiver as its own delegate. Delegates are not retained.
 func (s *Stream) WithDelegate(delegate StreamDelegate) *Stream {
 	_shim := newStreamDelegateShim(delegate)
 	_sel := objc.RegisterName("setDelegate:")
@@ -99,19 +99,19 @@ func (s *Stream) WithScriptingProperties(scriptingProperties map[string]obj.Obje
 	return s
 }
 
-// Open wraps the corresponding Objective-C method.
+// Open opens the receiving stream. A stream must be created before it can be opened. Once opened, a stream cannot be closed and reopened.
 func (s *Stream) Open() {
 	defer runtime.KeepAlive(s)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("open"))
 }
 
-// Close wraps the corresponding Objective-C method.
+// Close closes the receiver. Closing the stream terminates the flow of bytes and releases system resources that were reserved for the stream when it was opened. If the stream has been scheduled on a run loop, closing the stream implicitly removes the stream from the run loop. A stream that is closed can still be queried for its properties.
 func (s *Stream) Close() {
 	defer runtime.KeepAlive(s)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("close"))
 }
 
-// PropertyForKey wraps the corresponding Objective-C method.
+// PropertyForKey returns the receiver's property for a given key. - Parameter key: The key for one of the receiver's properties. - Returns: The receiver's property for the key `key`.
 func (s *Stream) PropertyForKey(key *String) obj.Object {
 	defer runtime.KeepAlive(s)
 	defer runtime.KeepAlive(key)
@@ -119,7 +119,7 @@ func (s *Stream) PropertyForKey(key *String) obj.Object {
 	return obj.Wrap(_r)
 }
 
-// SetPropertyForKey wraps the corresponding Objective-C method.
+// SetPropertyForKey attempts to set the value of a given property of the receiver and returns a Boolean value that indicates whether the value is accepted by the receiver. - Parameters: - property: The value for `key`. - key: The key for one of the receiver's properties. - Returns: `YES` if the value is accepted by the receiver, otherwise `NO`.
 func (s *Stream) SetPropertyForKey(property obj.Object, key *String) bool {
 	defer runtime.KeepAlive(s)
 	defer runtime.KeepAlive(property)
@@ -128,7 +128,7 @@ func (s *Stream) SetPropertyForKey(property obj.Object, key *String) bool {
 	return _r
 }
 
-// ScheduleInRunLoopForMode wraps the corresponding Objective-C method.
+// ScheduleInRunLoopForMode schedules the receiver on a given run loop in a given mode. Unless the client is polling the stream, it is responsible for ensuring that the stream is scheduled on at least one run loop and that at least one of the run loops on which the stream is scheduled is being run. - Parameters: - aRunLoop: The run loop on which to schedule the receiver. - mode: The mode for the run loop.
 func (s *Stream) ScheduleInRunLoopForMode(aRunLoop *RunLoop, mode *String) {
 	defer runtime.KeepAlive(s)
 	defer runtime.KeepAlive(aRunLoop)
@@ -136,7 +136,7 @@ func (s *Stream) ScheduleInRunLoopForMode(aRunLoop *RunLoop, mode *String) {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("scheduleInRunLoop:forMode:"), objref.IDOf(aRunLoop), objref.IDOf(mode))
 }
 
-// RemoveFromRunLoopForMode removes from run loop for mode.
+// RemoveFromRunLoopForMode removes the receiver from a given run loop running in a given mode. - Parameters: - aRunLoop: The run loop on which the receiver was scheduled. - mode: The mode for the run loop.
 func (s *Stream) RemoveFromRunLoopForMode(aRunLoop *RunLoop, mode *String) {
 	defer runtime.KeepAlive(s)
 	defer runtime.KeepAlive(aRunLoop)
@@ -144,14 +144,14 @@ func (s *Stream) RemoveFromRunLoopForMode(aRunLoop *RunLoop, mode *String) {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("removeFromRunLoop:forMode:"), objref.IDOf(aRunLoop), objref.IDOf(mode))
 }
 
-// StreamStatus returns the stream status.
+// StreamStatus returns the receiver's status.
 func (s *Stream) StreamStatus() StreamStatus {
 	defer runtime.KeepAlive(s)
 	_r := objc.Send[StreamStatus](objref.IDOf(s), objc.RegisterName("streamStatus"))
 	return _r
 }
 
-// StreamError returns the stream error.
+// StreamError returns an `NSError` object representing the stream error, or `nil` if no error has been encountered.
 func (s *Stream) StreamError() unsafe.Pointer {
 	defer runtime.KeepAlive(s)
 	_r := objc.Send[unsafe.Pointer](objref.IDOf(s), objc.RegisterName("streamError"))

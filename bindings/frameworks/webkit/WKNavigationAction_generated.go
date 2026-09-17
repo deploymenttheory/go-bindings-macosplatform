@@ -170,6 +170,20 @@ func (wna *WKNavigationAction) IsContentRuleListRedirect() bool {
 
 }
 
+// MainFrameNavigation returns the most recent main frame navigation that took place that encompasses this navigation action. If this WKNavigationAction represents a request to open a new WKWebView or it represents a frame load that is not in the main frame of an existing WKWebView, then mainFrameNavigation will be nil.
+func (wna *WKNavigationAction) MainFrameNavigation() *WKNavigation {
+	defer runtime.KeepAlive(wna)
+	var _mainthread0 *WKNavigation
+	purego.Main(func() {
+		_mainthread0 = func() *WKNavigation {
+			_r := objc.Send[objc.ID](objref.IDOf(wna), objc.RegisterName("mainFrameNavigation"))
+			return WKNavigationFromID(_r)
+		}()
+	})
+	return _mainthread0
+
+}
+
 // ButtonNumber returns the number of the mouse button causing the navigation to be requested.
 func (wna *WKNavigationAction) ButtonNumber() int {
 	defer runtime.KeepAlive(wna)

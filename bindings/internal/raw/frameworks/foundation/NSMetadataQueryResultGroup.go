@@ -42,6 +42,7 @@ func (o *NSMetadataQueryResultGroup) ResultAtIndex(idx uint) objc.ID {
 	return _ret
 }
 
+// The attribute name for this result group.
 func (o *NSMetadataQueryResultGroup) Attribute() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMetadataQueryResultGroupSelAttribute)
 	if _ret != 0 {
@@ -50,11 +51,13 @@ func (o *NSMetadataQueryResultGroup) Attribute() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The attribute value for this result group.
 func (o *NSMetadataQueryResultGroup) Value() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMetadataQueryResultGroupSelValue)
 	return _ret
 }
 
+// An array of subgroups for this result group, or nil if this is a leaf group.
 func (o *NSMetadataQueryResultGroup) Subgroups() *NSArray[*NSMetadataQueryResultGroup] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMetadataQueryResultGroupSelSubgroups)
 	if _ret != 0 {
@@ -63,11 +66,13 @@ func (o *NSMetadataQueryResultGroup) Subgroups() *NSArray[*NSMetadataQueryResult
 	return NSArrayFromID[*NSMetadataQueryResultGroup](_ret)
 }
 
+// The number of results in this group.
 func (o *NSMetadataQueryResultGroup) ResultCount() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSMetadataQueryResultGroupSelResultCount)
 	return _ret
 }
 
+// An array containing the results in this group. This is for K-V Bindings, and causes side-effects on the query.
 func (o *NSMetadataQueryResultGroup) Results() *NSArray[objc.ID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMetadataQueryResultGroupSelResults)
 	if _ret != 0 {

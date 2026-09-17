@@ -13,6 +13,7 @@ import (
 // An object representing a bucket of data in a histogram.
 //
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxhistogrambucket
+// Deprecated: Use Histogram.Bucket instead.
 type MXHistogramBucket[UnitType purego.AnyObject] struct {
 	foundation.NSObject
 }

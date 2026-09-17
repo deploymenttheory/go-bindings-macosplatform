@@ -103,6 +103,7 @@ func (o *NSScriptCommandDescription) CreateCommandInstanceWithZone(zone unsafe.P
 	return NSScriptCommandFromID(_ret)
 }
 
+// The name of the suite that contains the command described by the receiver. Within an application's scriptability information, named suites contain related sets of information.
 func (o *NSScriptCommandDescription) SuiteName() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptCommandDescriptionSelSuiteName)
 	if _ret != 0 {
@@ -111,6 +112,7 @@ func (o *NSScriptCommandDescription) SuiteName() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The name of the command. The command name as it appears in the application's scriptability information; may be different from what is displayed to the scripter.
 func (o *NSScriptCommandDescription) CommandName() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptCommandDescriptionSelCommandName)
 	if _ret != 0 {
@@ -119,16 +121,19 @@ func (o *NSScriptCommandDescription) CommandName() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The four-character code for the Apple event class of the receiver's command. In an Apple event that specifies a script command, two four character codes -- the event class and event ID -- together identify the command. You use this property to obtain the event class. You use “NSScriptCommandDescription/appleEventCode“ to obtain the event ID. For example, commands in AppleScript's Core suite, such as `clone`, `count`, and `create`, have an event class code of `'core'`. This code and the event ID code returned by “appleEventCode“ together specify the necessary information for identifying and dispatching an Apple event.
 func (o *NSScriptCommandDescription) AppleEventClassCode() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSScriptCommandDescriptionSelAppleEventClassCode)
 	return _ret
 }
 
+// The four-character code for the Apple event ID of the receiver's command. This value, together with the event class code returned by “NSScriptCommandDescription/appleEventClassCode“, specifies the necessary information for identifying and dispatching an Apple event.
 func (o *NSScriptCommandDescription) AppleEventCode() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSScriptCommandDescriptionSelAppleEventCode)
 	return _ret
 }
 
+// The name of the class that will be instantiated to handle the command. The Objective-C class name (for example, `"NSGetCommand"`). This is always “NSScriptCommand“ or a subclass.
 func (o *NSScriptCommandDescription) CommandClassName() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptCommandDescriptionSelCommandClassName)
 	if _ret != 0 {
@@ -137,6 +142,7 @@ func (o *NSScriptCommandDescription) CommandClassName() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The return type of the command. The receiver's command return type (for example, `"NSNumber"` or `"NSDictionary"`), or `nil` if the described command is not declared to return a result.
 func (o *NSScriptCommandDescription) ReturnType() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptCommandDescriptionSelReturnType)
 	if _ret != 0 {
@@ -145,11 +151,13 @@ func (o *NSScriptCommandDescription) ReturnType() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The Apple event code that identifies the command's return type.
 func (o *NSScriptCommandDescription) AppleEventCodeForReturnType() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSScriptCommandDescriptionSelAppleEventCodeForReturnType)
 	return _ret
 }
 
+// The names (or keys) for all arguments of the receiver's command. If there are no arguments for the command, returns an empty array.
 func (o *NSScriptCommandDescription) ArgumentNames() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptCommandDescriptionSelArgumentNames)
 	if _ret != 0 {

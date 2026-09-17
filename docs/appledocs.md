@@ -34,7 +34,7 @@ separate, regenerable layer, so an SDK re-scan never clobbers them.
 Both pipeline loaders apply the sidecar right after `overrides`, mirroring that
 package exactly:
 
-- libraries (CGo): `internal/codegen/libraries/pipeline/loader.go` →
+- libraries (purego C functions): `internal/codegen/libraries/pipeline/loader.go` →
   `internal/appledocs.ApplyAdjacent`
 - frameworks (purego): `internal/codegen/frameworks/pipeline/loader.go` →
   `internal/codegen/frameworks/appledocs.ApplyAdjacent`
@@ -58,3 +58,10 @@ go run ./cmd/generate/ idiomatic
 
 See the [tool README](../scripts/tools/appledeveloperdocs/README.md) for fetch
 flags and the DocC/Objective-C-projection details.
+
+For an SDK upgrade, use a fresh `--cache` directory: both successful responses
+and 404s are cached without an expiry. Xcode's locally downloaded documentation
+does not refresh this HTTP cache. Check the per-framework `Errors` counts and
+retry failed downloads before promoting staged sidecars; an unpublished page
+(404) falls back to its SDK header comment. See the
+[SDK upgrade workflow](extraction_workflow.md#upgrading-the-sdk).

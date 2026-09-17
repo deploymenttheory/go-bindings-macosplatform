@@ -11,8 +11,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// Values you use to customize LookAround snapshots.
-//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mklookaroundsnapshotoptions
 type MKLookAroundSnapshotOptions struct {
 	foundation.NSObject

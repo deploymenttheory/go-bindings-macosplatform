@@ -177,6 +177,7 @@ func (o *NSFileCoordinator) Cancel() {
 	o.Ptr().Send(_nSFileCoordinatorSelCancel)
 }
 
+// Returns an array containing the process's currently registered file presenter objects.
 func NSFileCoordinatorFilePresenters() *NSArray[NSFilePresenter] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFileCoordinator), _nSFileCoordinatorSelFilePresenters)
 	if _ret != 0 {
@@ -185,6 +186,7 @@ func NSFileCoordinatorFilePresenters() *NSArray[NSFilePresenter] {
 	return NSArrayFromID[NSFilePresenter](_ret)
 }
 
+// A string that uniquely identifies the file access that was performed by this file coordinator. Every NSFileCoordinator has a unique purpose identifier that is created during initialization. Coordinated reads and writes performed by NSFileCoordinators with the same purpose identifier never block each other, even if they exist in different processes. If you are coordinating file access on behalf of a file presenter, use -initWithFilePresenter: and do not attempt to set a custom purpose identifier. Every file coordinator instance initialized with the same file presenter has the same purpose identifier. You may need to set a custom purpose identifier for the following reasons: - Your application has a File Provider extension. Any file coordination done on behalf of the File Provider needs to be done using the File Provider's purpose identifier. - You have two separate subsystems that need to work together to perform a single high-level operation, and both subsystems perform their own coordinated reads or writes. Using the same purpose identifier in both subsystems prevents possible deadlocks between the two subsystems. When creating custom purpose identifiers, you can use a reverse DNS style string, such as "com.mycompany.myapplication.mypurpose", or a UUID string. Nil and zero-length strings are not allowed. Purpose identifiers can be set only once. If you attempt to set the purpose identifier of an NSFileCoordinator that you initialized with -initWithFilePresenter: or that you already assigned a purpose identifier, an exception will be thrown.
 func (o *NSFileCoordinator) PurposeIdentifier() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileCoordinatorSelPurposeIdentifier)
 	if _ret != 0 {

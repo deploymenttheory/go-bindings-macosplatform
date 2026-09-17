@@ -10,6 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/rt"
@@ -87,6 +88,16 @@ func NewTextLayoutManagerWithCoder(coder obj.Object) *TextLayoutManager {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextLayoutManager")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return textLayoutManagerAdopt(_id)
+}
+
+// WithDelegate sets the delegate for the text layout manager object.
+func (tlm *TextLayoutManager) WithDelegate(delegate TextLayoutManagerDelegate) *TextLayoutManager {
+	_shim := newTextLayoutManagerDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(tlm), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(tlm), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return tlm
 }
 
 // WithUsesFontLeading sets a Boolean value that controls whether the framework uses the leading information specified by the font when laying out text.
@@ -230,70 +241,70 @@ func (tlm *TextLayoutManager) ReplaceContentsInRangeWithAttributedString(range_ 
 	objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("replaceContentsInRange:withAttributedString:"), objref.IDOf(range_), objref.IDOf(attributedString))
 }
 
-// UsesFontLeading wraps the corresponding Objective-C method.
+// UsesFontLeading reports whether a Boolean value that controls whether the framework uses the leading information specified by the font when laying out text. If set to `true`, uses the leading as specified by the font. However, this isn't appropriate for most UI text. The default value is `true`.
 func (tlm *TextLayoutManager) UsesFontLeading() bool {
 	defer runtime.KeepAlive(tlm)
 	_r := objc.Send[bool](objref.IDOf(tlm), objc.RegisterName("usesFontLeading"))
 	return _r
 }
 
-// LimitsLayoutForSuspiciousContents wraps the corresponding Objective-C method.
+// LimitsLayoutForSuspiciousContents reports whether a Boolean value that controls internal security analysis for malicious inputs and activates defensive behaviors. By enabling this functionality, it's possible certain text such as a very long paragraph might result in unexpected layout. The default value is `false`.
 func (tlm *TextLayoutManager) LimitsLayoutForSuspiciousContents() bool {
 	defer runtime.KeepAlive(tlm)
 	_r := objc.Send[bool](objref.IDOf(tlm), objc.RegisterName("limitsLayoutForSuspiciousContents"))
 	return _r
 }
 
-// UsesHyphenation wraps the corresponding Objective-C method.
+// UsesHyphenation reports whether a Boolean value that controls whether the text layout manager attempts to hyphenate when wrapping lines. May be overridden on a per-paragraph basis by the `NSParagraphStyle`'s `usesDefaultHyphenation`. The receiver makes the best effort to decide the exact logic including the hyphenation factor based on the context. The default value is `false`. Can be overridden by the preference key `"NSUsesDefaultHyphenation"`.
 func (tlm *TextLayoutManager) UsesHyphenation() bool {
 	defer runtime.KeepAlive(tlm)
 	_r := objc.Send[bool](objref.IDOf(tlm), objc.RegisterName("usesHyphenation"))
 	return _r
 }
 
-// ResolvesNaturalAlignmentWithBaseWritingDirection reports whether specifies the behavior for resolving “NSTextAlignment.natural“ to the visual alignment. When set to “true“, the resolved visual alignment is determined by the resolved base writing direction; otherwise, it is using the user’s preferred language. The default value is “true“.
+// ResolvesNaturalAlignmentWithBaseWritingDirection reports whether specifies the behavior for resolving “NSTextAlignment/natural“ to the visual alignment. When set to `true`, the resolved visual alignment is determined by the resolved base writing direction; otherwise, it is using the user’s preferred language. The default value is `true`.
 func (tlm *TextLayoutManager) ResolvesNaturalAlignmentWithBaseWritingDirection() bool {
 	defer runtime.KeepAlive(tlm)
 	_r := objc.Send[bool](objref.IDOf(tlm), objc.RegisterName("resolvesNaturalAlignmentWithBaseWritingDirection"))
 	return _r
 }
 
-// TextContentManager returns the text content manager.
+// TextContentManager returns the text content manager associated with this text layout manager.
 func (tlm *TextLayoutManager) TextContentManager() *TextContentManager {
 	defer runtime.KeepAlive(tlm)
 	_r := objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("textContentManager"))
 	return TextContentManagerFromID(_r)
 }
 
-// TextContainer returns the text container.
+// TextContainer returns the text container object that provides geometric information for the layout destination. If `isSimpleRectangularTextContainer` is `false`, “NSTextLayoutManager“ always fills from the top instead of allowing non-contiguous layout support.
 func (tlm *TextLayoutManager) TextContainer() *TextContainer {
 	defer runtime.KeepAlive(tlm)
 	_r := objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("textContainer"))
 	return TextContainerFromID(_r)
 }
 
-// UsageBoundsForTextContainer returns the usage bounds for text container.
+// UsageBoundsForTextContainer returns the usage bounds for the text container. KVO-compliant. Views can observe this property in order to trigger a resize operation. For example, `UIView`/`NSView` should call `setNeedsUpdateConstraints()` when the usage bounds changes.
 func (tlm *TextLayoutManager) UsageBoundsForTextContainer() corefoundation.CGRect {
 	defer runtime.KeepAlive(tlm)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(tlm), objc.RegisterName("usageBoundsForTextContainer"))
 	return _r
 }
 
-// TextViewportLayoutController returns the text viewport layout controller.
+// TextViewportLayoutController returns the text viewport layout controller associated with the text layout manager's text container.
 func (tlm *TextLayoutManager) TextViewportLayoutController() *TextViewportLayoutController {
 	defer runtime.KeepAlive(tlm)
 	_r := objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("textViewportLayoutController"))
 	return TextViewportLayoutControllerFromID(_r)
 }
 
-// LayoutQueue returns the layout queue.
+// LayoutQueue returns the queue that the framework dispatches layout operations on. If non-nil, it performs layout in the specified queue until `estimatedUsageBounds` is `false`.
 func (tlm *TextLayoutManager) LayoutQueue() *foundation.OperationQueue {
 	defer runtime.KeepAlive(tlm)
 	_r := objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("layoutQueue"))
 	return foundation.OperationQueueFromID(_r)
 }
 
-// TextSelections returns the text selections.
+// TextSelections returns an array of text selections associated by the text layout manager. Each “NSTextSelection“ represents an insertion point. The selection state is shared among all view ports connected to the text layout manager via text containers.
 //
 // TextSelections returns the collection as a Go slice.
 func (tlm *TextLayoutManager) TextSelections() []*TextSelection {
@@ -302,7 +313,7 @@ func (tlm *TextLayoutManager) TextSelections() []*TextSelection {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TextSelection { return TextSelectionFromID(_id) })
 }
 
-// TextSelectionNavigation returns the text selection navigation.
+// TextSelectionNavigation returns a text selection navigation configured to have the text layout manager as its data source.
 func (tlm *TextLayoutManager) TextSelectionNavigation() *TextSelectionNavigation {
 	defer runtime.KeepAlive(tlm)
 	_r := objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("textSelectionNavigation"))

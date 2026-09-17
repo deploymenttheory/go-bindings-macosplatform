@@ -46,6 +46,8 @@ var (
 	_pKDisbursementRequestSelSetApplicationData                                                                                = objc.RegisterName("setApplicationData:")
 	_pKDisbursementRequestSelIsDelegatedRequest                                                                                = objc.RegisterName("isDelegatedRequest")
 	_pKDisbursementRequestSelSetIsDelegatedRequest                                                                             = objc.RegisterName("setIsDelegatedRequest:")
+	_pKDisbursementRequestSelUnsupportedPrimaryAccountIdentifiers                                                              = objc.RegisterName("unsupportedPrimaryAccountIdentifiers")
+	_pKDisbursementRequestSelSetUnsupportedPrimaryAccountIdentifiers                                                           = objc.RegisterName("setUnsupportedPrimaryAccountIdentifiers:")
 )
 
 func PKDisbursementRequestFromID(id objc.ID) *PKDisbursementRequest {
@@ -204,4 +206,16 @@ func (o *PKDisbursementRequest) IsDelegatedRequest() bool {
 
 func (o *PKDisbursementRequest) SetIsDelegatedRequest(isDelegatedRequest bool) {
 	o.Ptr().Send(_pKDisbursementRequestSelSetIsDelegatedRequest, isDelegatedRequest)
+}
+
+func (o *PKDisbursementRequest) UnsupportedPrimaryAccountIdentifiers() *foundation.NSArray[*foundation.NSString] {
+	_ret := objc.Send[objc.ID](o.Ptr(), _pKDisbursementRequestSelUnsupportedPrimaryAccountIdentifiers)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
+}
+
+func (o *PKDisbursementRequest) SetUnsupportedPrimaryAccountIdentifiers(unsupportedPrimaryAccountIdentifiers *foundation.NSArray[*foundation.NSString]) {
+	o.Ptr().Send(_pKDisbursementRequestSelSetUnsupportedPrimaryAccountIdentifiers, unsupportedPrimaryAccountIdentifiers.Ptr())
 }

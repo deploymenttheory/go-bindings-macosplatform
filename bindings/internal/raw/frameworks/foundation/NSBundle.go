@@ -11,8 +11,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A representation of the code and resources stored in a bundle directory on disk.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsbundle
 type NSBundle struct {
 	NSObject
@@ -90,7 +88,7 @@ func NSBundleFromID(id objc.ID) *NSBundle {
 	return o
 }
 
-// Returns an NSBundle object that corresponds to the specified directory.
+// Creates and returns an `NSBundle` object that corresponds to the specified directory. @param path The path to a directory. This must be a full pathname for a directory; if it contains any symbolic links, they must be resolvable. @return An `NSBundle` object that corresponds to @c path. Returns @c nil if @c path does not exist or the user doesn't have access to it.
 func NSBundleBundleWithPath(path *NSString) *NSBundle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSBundle), _nSBundleSelBundleWithPath, path.Ptr())
 	if _ret != 0 {
@@ -99,6 +97,7 @@ func NSBundleBundleWithPath(path *NSString) *NSBundle {
 	return NSBundleFromID(_ret)
 }
 
+// Returns an `NSBundle` object initialized to correspond to the specified directory. This method initializes and returns a new instance only if there is no existing bundle associated with @c fullPath, otherwise it deallocates @c self and returns the existing object. @param path The path to a directory. This must be a full pathname for a directory; if it contains any symbolic links, they must be resolvable. @return An `NSBundle` object initialized to correspond to @c fullPath, or @c nil if @c fullPath doesn't exist or the user doesn't have access to it.
 func (o *NSBundle) InitWithPath(path *NSString) *NSBundle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBundleSelInitWithPath, path.Ptr())
 	if _ret != 0 {
@@ -107,6 +106,7 @@ func (o *NSBundle) InitWithPath(path *NSString) *NSBundle {
 	return NSBundleFromID(_ret)
 }
 
+// Creates and returns an `NSBundle` object that corresponds to the specified file URL. @param url The file URL to a directory. This must be a full URL for a directory; if it contains any symbolic links, they must be resolvable. @return An `NSBundle` object that corresponds to @c url. Returns @c nil if @c url does not exist or the user doesn't have access to it.
 func NSBundleBundleWithURL(url *NSURL) *NSBundle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSBundle), _nSBundleSelBundleWithURL, url.Ptr())
 	if _ret != 0 {
@@ -115,6 +115,7 @@ func NSBundleBundleWithURL(url *NSURL) *NSBundle {
 	return NSBundleFromID(_ret)
 }
 
+// Returns an `NSBundle` object initialized to correspond to the specified file URL. This method initializes and returns a new instance only if there is no existing bundle associated with @c url, otherwise it deallocates @c self and returns the existing object. @param url The file URL to a directory. This must be a full URL for a directory; if it contains any symbolic links, they must be resolvable. @return An `NSBundle` object initialized to correspond to @c url, or @c nil if @c url doesn't exist or the user doesn't have access to it.
 func (o *NSBundle) InitWithURL(url *NSURL) *NSBundle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBundleSelInitWithURL, url.Ptr())
 	if _ret != 0 {
@@ -123,6 +124,7 @@ func (o *NSBundle) InitWithURL(url *NSURL) *NSBundle {
 	return NSBundleFromID(_ret)
 }
 
+// Returns the `NSBundle` object with which the specified class is associated. @param aClass A class. @return The `NSBundle` object that dynamically loaded @c aClass (a loadable bundle), the `NSBundle` object for the framework in which @c aClass is defined, or the main bundle object if @c aClass was not dynamically loaded or is not defined in a framework.
 func NSBundleBundleForClass(aClass objc.Class) *NSBundle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSBundle), _nSBundleSelBundleForClass, aClass)
 	if _ret != 0 {
@@ -131,6 +133,7 @@ func NSBundleBundleForClass(aClass objc.Class) *NSBundle {
 	return NSBundleFromID(_ret)
 }
 
+// Returns the `NSBundle` instance that has the specified bundle identifier. This method is typically used by frameworks and plug-ins to locate their own bundle at runtime. It may be somewhat more efficient than trying to locate the bundle using @c bundleForClass:. However, if the initial lookup fails, this method uses potentially time-consuming heuristics to attempt to locate the bundle. @param identifier The identifier for an existing `NSBundle` instance. @return The previously allocated `NSBundle` object with the bundle identifier @c identifier, or @c nil if the requested bundle is not found.
 func NSBundleBundleWithIdentifier(identifier *NSString) *NSBundle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSBundle), _nSBundleSelBundleWithIdentifier, identifier.Ptr())
 	if _ret != 0 {
@@ -139,16 +142,19 @@ func NSBundleBundleWithIdentifier(identifier *NSString) *NSBundle {
 	return NSBundleFromID(_ret)
 }
 
+// Dynamically loads the bundle's executable code into a running program, if the code has not already been loaded. You can use this method to load the code associated with a dynamically loaded bundle, such as a plug-in or framework. You don't need to load a bundle's executable code to search the bundle's resources. @return @c YES if the method successfully loads the bundle's code or if the code has already been loaded, otherwise @c NO.
 func (o *NSBundle) Load() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSBundleSelLoad)
 	return _ret
 }
 
+// Unloads the code associated with the receiver. This method attempts to unload a bundle's executable code using the underlying dynamic loader (typically @c dyld). You may use this method to unload plug-in and framework bundles when you no longer need the code they contain. It is the responsibility of the caller to ensure that no in-memory objects or data structures refer to the code being unloaded. @return @c YES if the bundle was successfully unloaded or was not already loaded; otherwise, @c NO if the bundle could not be unloaded.
 func (o *NSBundle) Unload() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSBundleSelUnload)
 	return _ret
 }
 
+// Returns a Boolean value indicating whether the bundle's executable code could be loaded successfully. This method does not actually load the bundle's executable code. Instead, it performs several checks to see if the code could be loaded and with one exception returns the same errors that would occur during an actual load operation. @param error On output, this variable may contain an error object indicating why the bundle's executable could not be loaded. @return @c YES if the bundle's executable code could be loaded successfully or is already loaded; otherwise, @c NO.
 func (o *NSBundle) PreflightAndReturnError() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSBundleSelPreflightAndReturnError, unsafe.Pointer(&_nsErr))
@@ -158,6 +164,7 @@ func (o *NSBundle) PreflightAndReturnError() (bool, error) {
 	return _ret, nil
 }
 
+// Loads the bundle's executable code and returns any errors. If this method returns @c NO and you pass a value for the @c error parameter, a suitable error object is returned. Potential errors include @c NSFileNoSuchFileError, @c NSExecutableNotLoadableError, @c NSExecutableArchitectureMismatchError, @c NSExecutableRuntimeMismatchError, @c NSExecutableLoadError, and @c NSExecutableLinkError. @param error On output, this variable may contain an error object indicating why the bundle's executable could not be loaded. @return @c YES if the bundle's executable code was loaded successfully or was already loaded; otherwise, @c NO.
 func (o *NSBundle) LoadAndReturnError() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSBundleSelLoadAndReturnError, unsafe.Pointer(&_nsErr))
@@ -167,6 +174,7 @@ func (o *NSBundle) LoadAndReturnError() (bool, error) {
 	return _ret, nil
 }
 
+// Returns the file URL of the executable with the specified name in the receiver's bundle. This method returns the appropriate path for modern application and framework bundles. This method may not return a URL for non-standard bundle formats or for some older bundle formats. @param executableName The name of an executable file. @return The file URL of the executable in the receiver's bundle.
 func (o *NSBundle) URLForAuxiliaryExecutable(executableName *NSString) *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBundleSelURLForAuxiliaryExecutable, executableName.Ptr())
 	if _ret != 0 {
@@ -175,6 +183,7 @@ func (o *NSBundle) URLForAuxiliaryExecutable(executableName *NSString) *NSURL {
 	return NSURLFromID(_ret)
 }
 
+// Returns the full pathname of the executable with the specified name in the receiver's bundle. This method returns the appropriate path for modern application and framework bundles. This method may not return a path for non-standard bundle formats or for some older bundle formats. @param executableName The name of an executable file. @return The full pathname of the executable in the receiver's bundle.
 func (o *NSBundle) PathForAuxiliaryExecutable(executableName *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBundleSelPathForAuxiliaryExecutable, executableName.Ptr())
 	if _ret != 0 {
@@ -183,6 +192,7 @@ func (o *NSBundle) PathForAuxiliaryExecutable(executableName *NSString) *NSStrin
 	return NSStringFromID(_ret)
 }
 
+// Creates and returns a file URL for the resource with the specified name and extension in the specified bundle. @param name The name of the resource file. If @c nil, the method returns the first resource file it finds that matches the remaining criteria. @param ext The filename extension of the file to locate. If an empty string or @c nil, the extension is assumed not to exist. @param subpath The name of the bundle subdirectory to search. @param bundleURL The file URL of the bundle to search. @return The file URL for the resource file or @c nil if the file could not be located.
 func NSBundleURLForResourceWithExtensionSubdirectoryInBundleWithURL(name *NSString, ext *NSString, subpath *NSString, bundleURL *NSURL) *NSURL {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSBundle), _nSBundleSelURLForResourceWithExtensionSubdirectoryInBundleWithURL, name.Ptr(), ext.Ptr(), subpath.Ptr(), bundleURL.Ptr())
 	if _ret != 0 {
@@ -191,6 +201,7 @@ func NSBundleURLForResourceWithExtensionSubdirectoryInBundleWithURL(name *NSStri
 	return NSURLFromID(_ret)
 }
 
+// Returns an array containing the file URLs for all bundle resources having the specified filename extension, residing in the specified resource subdirectory, within the specified bundle. @param ext The filename extension of the files to locate. If an empty string or @c nil, all files in @c subpath are returned. @param subpath The name of the bundle subdirectory to search. @param bundleURL The file URL of the bundle to search. @return An array of file URLs for the resource files matching the criteria or an empty array if no files could be located.
 func NSBundleURLsForResourcesWithExtensionSubdirectoryInBundleWithURL(ext *NSString, subpath *NSString, bundleURL *NSURL) *NSArray[*NSURL] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSBundle), _nSBundleSelURLsForResourcesWithExtensionSubdirectoryInBundleWithURL, ext.Ptr(), subpath.Ptr(), bundleURL.Ptr())
 	if _ret != 0 {
@@ -199,6 +210,7 @@ func NSBundleURLsForResourcesWithExtensionSubdirectoryInBundleWithURL(ext *NSStr
 	return NSArrayFromID[*NSURL](_ret)
 }
 
+// Returns the file URL for the resource identified by the specified name and file extension. @param name The name of the resource file. If @c nil, the method returns the first resource file it finds with the specified extension. @param ext The extension of the resource file. If an empty string or @c nil, the extension is assumed not to exist. @return The file URL for the resource file or @c nil if the file could not be located.
 func (o *NSBundle) URLForResourceWithExtension(name *NSString, ext *NSString) *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBundleSelURLForResourceWithExtension, name.Ptr(), ext.Ptr())
 	if _ret != 0 {
@@ -207,6 +219,7 @@ func (o *NSBundle) URLForResourceWithExtension(name *NSString, ext *NSString) *N
 	return NSURLFromID(_ret)
 }
 
+// Returns the file URL for the resource file identified by the specified name and extension and residing in a given bundle directory. @param name The name of a resource file. If @c nil, the method returns the first resource file it finds with the specified extension. @param ext The filename extension of the file to locate. If an empty string or @c nil, the extension is assumed not to exist. @param subpath The name of the bundle subdirectory to search. @return The file URL for the resource file or @c nil if the file could not be located.
 func (o *NSBundle) URLForResourceWithExtensionSubdirectory(name *NSString, ext *NSString, subpath *NSString) *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBundleSelURLForResourceWithExtensionSubdirectory, name.Ptr(), ext.Ptr(), subpath.Ptr())
 	if _ret != 0 {
@@ -215,6 +228,7 @@ func (o *NSBundle) URLForResourceWithExtensionSubdirectory(name *NSString, ext *
 	return NSURLFromID(_ret)
 }
 
+// Returns the file URL for the resource identified by the specified name and file extension, located in the specified bundle subdirectory, and limited to global resources and those associated with the specified localization. @param name The name of the resource file. If @c nil, the method returns the first resource file it finds that matches the remaining criteria. @param ext The filename extension of the file to locate. If an empty string or @c nil, the extension is assumed not to exist. @param subpath The name of the bundle subdirectory to search. @param localizationName The language ID for the localization. This parameter should correspond to the name of one of the bundle's language-specific resource directories without the @c .lproj extension. @return The file URL for the resource file or @c nil if the file could not be located.
 func (o *NSBundle) URLForResourceWithExtensionSubdirectoryLocalization(name *NSString, ext *NSString, subpath *NSString, localizationName *NSString) *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBundleSelURLForResourceWithExtensionSubdirectoryLocalization, name.Ptr(), ext.Ptr(), subpath.Ptr(), localizationName.Ptr())
 	if _ret != 0 {
@@ -223,6 +237,7 @@ func (o *NSBundle) URLForResourceWithExtensionSubdirectoryLocalization(name *NSS
 	return NSURLFromID(_ret)
 }
 
+// Returns an array of file URLs for all resources identified by the specified file extension and located in the specified bundle subdirectory. @param ext The filename extension of the files to locate. If an empty string or @c nil, all files in @c subpath are returned. @param subpath The name of the bundle subdirectory. @return An array of file URLs for the resource files or @c nil if no files could be located.
 func (o *NSBundle) URLsForResourcesWithExtensionSubdirectory(ext *NSString, subpath *NSString) *NSArray[*NSURL] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBundleSelURLsForResourcesWithExtensionSubdirectory, ext.Ptr(), subpath.Ptr())
 	if _ret != 0 {
@@ -231,6 +246,7 @@ func (o *NSBundle) URLsForResourcesWithExtensionSubdirectory(ext *NSString, subp
 	return NSArrayFromID[*NSURL](_ret)
 }
 
+// Returns an array containing the file URLs for all bundle resources having the specified filename extension, residing in the specified resource subdirectory, and limited to global resources and those associated with the specified localization. @param ext The filename extension of the files to locate. If an empty string or @c nil, all files in @c subpath are returned. @param subpath The name of the bundle subdirectory to search. @param localizationName The language ID for the localization. This parameter should correspond to the name of one of the bundle's language-specific resource directories without the @c .lproj extension. @return An array containing the file URLs for all bundle resources matching the specified criteria. Returns an empty array if no matching resource files are found.
 func (o *NSBundle) URLsForResourcesWithExtensionSubdirectoryLocalization(ext *NSString, subpath *NSString, localizationName *NSString) *NSArray[*NSURL] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBundleSelURLsForResourcesWithExtensionSubdirectoryLocalization, ext.Ptr(), subpath.Ptr(), localizationName.Ptr())
 	if _ret != 0 {
@@ -239,6 +255,7 @@ func (o *NSBundle) URLsForResourcesWithExtensionSubdirectoryLocalization(ext *NS
 	return NSArrayFromID[*NSURL](_ret)
 }
 
+// Returns the full pathname for the resource file identified by the specified name and extension and residing in a given bundle directory. @param name The name of a resource file contained in the directory specified by @c bundlePath. If @c nil, the method returns the first resource file it finds with the specified extension. @param ext The filename extension of the file to locate. If an empty string or @c nil, the extension is assumed not to exist. @param bundlePath The path of a top-level bundle directory. This must be a valid path. @return The full pathname for the resource file or @c nil if the file could not be located.
 func NSBundlePathForResourceOfTypeInDirectory(name *NSString, ext *NSString, bundlePath *NSString) *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSBundle), _nSBundleSelPathForResourceOfTypeInDirectory, name.Ptr(), ext.Ptr(), bundlePath.Ptr())
 	if _ret != 0 {
@@ -247,6 +264,7 @@ func NSBundlePathForResourceOfTypeInDirectory(name *NSString, ext *NSString, bun
 	return NSStringFromID(_ret)
 }
 
+// Returns an array containing the pathnames for all bundle resources having the specified extension and residing in the bundle directory at the specified path. @param ext The filename extension of the files to locate. If an empty string or @c nil, all files in @c bundlePath are returned. @param bundlePath The top-level directory of a bundle. This must represent a valid path. @return An array containing the full pathnames for all bundle resources with the specified extension. Returns an empty array if no matching resource files are found.
 func NSBundlePathsForResourcesOfTypeInDirectory(ext *NSString, bundlePath *NSString) *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSBundle), _nSBundleSelPathsForResourcesOfTypeInDirectory, ext.Ptr(), bundlePath.Ptr())
 	if _ret != 0 {
@@ -255,6 +273,7 @@ func NSBundlePathsForResourcesOfTypeInDirectory(ext *NSString, bundlePath *NSStr
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// Returns the full pathname for the resource identified by the specified name and file extension. The method first looks for a matching resource file in the non-localized resource directory of the specified bundle. If a matching resource file is not found, it then looks in the top level of an available language-specific @c .lproj folder. @param name The name of the resource file. If @c nil, the method returns the first resource file it finds with the specified extension. @param ext The filename extension of the file to locate. If an empty string or @c nil, the extension is assumed not to exist. @return The full pathname for the resource file, or @c nil if the file could not be located.
 func (o *NSBundle) PathForResourceOfType(name *NSString, ext *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBundleSelPathForResourceOfType, name.Ptr(), ext.Ptr())
 	if _ret != 0 {
@@ -263,6 +282,7 @@ func (o *NSBundle) PathForResourceOfType(name *NSString, ext *NSString) *NSStrin
 	return NSStringFromID(_ret)
 }
 
+// Returns the full pathname for the resource identified by the specified name and file extension and located in the specified bundle subdirectory. @param name The name of the resource file. If @c nil, the method returns the first resource file it finds that matches the remaining criteria. @param ext The filename extension of the files to locate. If an empty string or @c nil, all files in @c subpath and its subdirectories are returned. @param subpath The name of the bundle subdirectory. @return The full pathname for the resource file, or @c nil if the file could not be located.
 func (o *NSBundle) PathForResourceOfTypeInDirectory(name *NSString, ext *NSString, subpath *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBundleSelPathForResourceOfTypeInDirectory, name.Ptr(), ext.Ptr(), subpath.Ptr())
 	if _ret != 0 {
@@ -271,6 +291,7 @@ func (o *NSBundle) PathForResourceOfTypeInDirectory(name *NSString, ext *NSStrin
 	return NSStringFromID(_ret)
 }
 
+// Returns the full pathname for the resource identified by the specified name and file extension, located in the specified bundle subdirectory, and limited to global resources and those associated with the specified localization. @param name The name of the resource file. If @c nil, the method returns the first resource file it finds that matches the remaining criteria. @param ext The filename extension of the files to locate. If an empty string or @c nil, the extension is assumed not to exist. @param subpath The name of the bundle subdirectory to search. @param localizationName The language ID for the localization. This parameter should correspond to the name of one of the bundle's language-specific resource directories without the @c .lproj extension. @return The full pathname for the resource file or @c nil if the file could not be located.
 func (o *NSBundle) PathForResourceOfTypeInDirectoryForLocalization(name *NSString, ext *NSString, subpath *NSString, localizationName *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBundleSelPathForResourceOfTypeInDirectoryForLocalization, name.Ptr(), ext.Ptr(), subpath.Ptr(), localizationName.Ptr())
 	if _ret != 0 {
@@ -279,6 +300,7 @@ func (o *NSBundle) PathForResourceOfTypeInDirectoryForLocalization(name *NSStrin
 	return NSStringFromID(_ret)
 }
 
+// Returns an array containing the pathnames for all bundle resources having the specified filename extension and residing in the resource subdirectory. @param ext The filename extension of the files to locate. If an empty string or @c nil, all files in @c subpath are returned. @param subpath The name of the bundle subdirectory to search. @return An array containing the full pathnames for all bundle resources matching the specified criteria. Returns an empty array if no matching resource files are found.
 func (o *NSBundle) PathsForResourcesOfTypeInDirectory(ext *NSString, subpath *NSString) *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBundleSelPathsForResourcesOfTypeInDirectory, ext.Ptr(), subpath.Ptr())
 	if _ret != 0 {
@@ -287,6 +309,7 @@ func (o *NSBundle) PathsForResourcesOfTypeInDirectory(ext *NSString, subpath *NS
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// Returns an array containing the file for all bundle resources having the specified filename extension, residing in the specified resource subdirectory, and limited to global resources and those associated with the specified localization. @param ext The filename extension of the files to locate. If an empty string or @c nil, all files in @c subpath are returned. @param subpath The name of the bundle subdirectory to search. @param localizationName The language ID for the localization. This parameter should correspond to the name of one of the bundle's language-specific resource directories without the @c .lproj extension. @return An array containing the full pathnames for all bundle resources matching the specified criteria. Returns an empty array if no matching resource files are found.
 func (o *NSBundle) PathsForResourcesOfTypeInDirectoryForLocalization(ext *NSString, subpath *NSString, localizationName *NSString) *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBundleSelPathsForResourcesOfTypeInDirectoryForLocalization, ext.Ptr(), subpath.Ptr(), localizationName.Ptr())
 	if _ret != 0 {
@@ -295,6 +318,7 @@ func (o *NSBundle) PathsForResourcesOfTypeInDirectoryForLocalization(ext *NSStri
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// Returns a localized version of the string designated by the specified key and residing in the specified table. @param key The key for a string in the table identified by @c tableName. @param value The value to return if @c key is @c nil or if a localized string for @c key can't be found in the table. @param tableName The receiver's string table to search. If @c nil or an empty string, the method attempts to use the table in @c Localizable.strings. @return A localized version of the string designated by @c key in table @c tableName.
 func (o *NSBundle) LocalizedStringForKeyValueTable(key *NSString, value *NSString, tableName *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBundleSelLocalizedStringForKeyValueTable, key.Ptr(), value.Ptr(), tableName.Ptr())
 	if _ret != 0 {
@@ -311,7 +335,7 @@ func (o *NSBundle) LocalizedAttributedStringForKeyValueTable(key *NSString, valu
 	return NSAttributedStringFromID(_ret)
 }
 
-// Look up a localized string given a list of available localizations.
+// Look up a localized string given a list of available localizations. - Parameters: - key: The key for the localized string to retrieve. - value: A default value to return if a localized string for “key“ cannot be found. - tableName: The name of the strings file to search. If `nil`, the method uses tables in `Localizable.strings`. - localizations: An array of BCP 47 language codes corresponding to available localizations. Bundle compares the array against its available localizations, and uses the best result to retrieve the localized string. If empty, we treat it as no localization is available, and may return a fallback. - Returns: A localized version of the string designated by “key“ in table “tableName“.
 func (o *NSBundle) LocalizedStringForKeyValueTableLocalizations(key *NSString, value *NSString, tableName *NSString, localizations *NSArray[*NSString]) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBundleSelLocalizedStringForKeyValueTableLocalizations, key.Ptr(), value.Ptr(), tableName.Ptr(), localizations.Ptr())
 	if _ret != 0 {
@@ -320,16 +344,19 @@ func (o *NSBundle) LocalizedStringForKeyValueTableLocalizations(key *NSString, v
 	return NSStringFromID(_ret)
 }
 
+// Returns the value associated with the specified key in the receiver's information property list. Use of this method is preferred over other access methods because it returns the localized value of a key when one is available. @param key A key in the receiver's property list. @return The value associated with @c key in the receiver's property list (@c Info.plist). The localized value of a key is returned when one is available.
 func (o *NSBundle) ObjectForInfoDictionaryKey(key *NSString) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBundleSelObjectForInfoDictionaryKey, key.Ptr())
 	return _ret
 }
 
+// Returns the @c Class object for the specified name. If the bundle's executable code is not yet loaded, this method dynamically loads it into memory. @param className The name of a class. @return The @c Class object for @c className. Returns @c nil if @c className is not one of the classes associated with the receiver or if there is an error loading the executable code.
 func (o *NSBundle) ClassNamed(className *NSString) objc.Class {
 	_ret := objc.Send[objc.Class](o.Ptr(), _nSBundleSelClassNamed, className.Ptr())
 	return _ret
 }
 
+// Returns one or more localizations from the specified list that a bundle object would use to locate resources for the current user. This method does not return all localizations in preference order but only those from which @c NSBundle would get localized content, typically either a single non-region-specific localization or a region-specific localization followed by a corresponding non-region-specific localization as a fallback. @param localizationsArray An array of @c NSString objects, each of which specifies the language ID for a localization that the bundle supports. @return An array of @c NSString objects containing the preferred localizations, ordered according to the user's language preferences.
 func NSBundlePreferredLocalizationsFromArray(localizationsArray *NSArray[*NSString]) *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSBundle), _nSBundleSelPreferredLocalizationsFromArray, localizationsArray.Ptr())
 	if _ret != 0 {
@@ -338,6 +365,7 @@ func NSBundlePreferredLocalizationsFromArray(localizationsArray *NSArray[*NSStri
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// Returns locale identifiers for which a bundle would provide localized content, given a specified list of candidates for a user's language preferences. @param localizationsArray An array of identifiers, each corresponding to a localization that a bundle can support. @param preferencesArray An array of BCP 47 language codes corresponding to a user's preferred languages. If @c nil, the method uses the current user's language preferences. @return An array of locale identifiers, ordered according to user preference. If none of the user-preferred localizations are available, this method returns one of the values in @c localizationsArray.
 func NSBundlePreferredLocalizationsFromArrayForPreferences(localizationsArray *NSArray[*NSString], preferencesArray *NSArray[*NSString]) *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSBundle), _nSBundleSelPreferredLocalizationsFromArrayForPreferences, localizationsArray.Ptr(), preferencesArray.Ptr())
 	if _ret != 0 {
@@ -346,6 +374,7 @@ func NSBundlePreferredLocalizationsFromArrayForPreferences(localizationsArray *N
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// Returns the bundle object that contains the current executable. The main bundle lets you access the resources in the same directory as the currently running executable. For a running app or code running in a framework, the main bundle offers access to the app's bundle directory. This method may return a valid bundle object even for unbundled apps. It may also return `nil` if the bundle object could not be created, so always check the return value.
 func NSBundleMainBundle() *NSBundle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSBundle), _nSBundleSelMainBundle)
 	if _ret != 0 {
@@ -354,6 +383,7 @@ func NSBundleMainBundle() *NSBundle {
 	return NSBundleFromID(_ret)
 }
 
+// An array of all the application's non-framework bundles. The returned array includes the main bundle and all bundles that have been dynamically created but doesn't contain any bundles that represent frameworks.
 func NSBundleAllBundles() *NSArray[*NSBundle] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSBundle), _nSBundleSelAllBundles)
 	if _ret != 0 {
@@ -362,6 +392,7 @@ func NSBundleAllBundles() *NSArray[*NSBundle] {
 	return NSArrayFromID[*NSBundle](_ret)
 }
 
+// An array of all of the application's bundles that represent frameworks. The returned array includes frameworks that are linked into an application when the application is built and bundles for frameworks that have been dynamically created. Only frameworks with one or more Objective-C classes in them are included.
 func NSBundleAllFrameworks() *NSArray[*NSBundle] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSBundle), _nSBundleSelAllFrameworks)
 	if _ret != 0 {
@@ -370,11 +401,13 @@ func NSBundleAllFrameworks() *NSArray[*NSBundle] {
 	return NSArrayFromID[*NSBundle](_ret)
 }
 
+// The load status of a bundle. @c YES if the bundle's code is currently loaded, otherwise @c NO.
 func (o *NSBundle) IsLoaded() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSBundleSelIsLoaded)
 	return _ret
 }
 
+// The full URL of the receiver's bundle directory.
 func (o *NSBundle) BundleURL() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBundleSelBundleURL)
 	if _ret != 0 {
@@ -383,6 +416,7 @@ func (o *NSBundle) BundleURL() *NSURL {
 	return NSURLFromID(_ret)
 }
 
+// The file URL of the bundle's subdirectory containing resource files. This property contains the appropriate path for modern application and framework bundles. This property may not contain a path for non-standard bundle formats or for some older bundle formats.
 func (o *NSBundle) ResourceURL() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBundleSelResourceURL)
 	if _ret != 0 {
@@ -391,6 +425,7 @@ func (o *NSBundle) ResourceURL() *NSURL {
 	return NSURLFromID(_ret)
 }
 
+// The file URL of the receiver's executable file.
 func (o *NSBundle) ExecutableURL() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBundleSelExecutableURL)
 	if _ret != 0 {
@@ -399,6 +434,7 @@ func (o *NSBundle) ExecutableURL() *NSURL {
 	return NSURLFromID(_ret)
 }
 
+// The file URL of the bundle's subdirectory containing private frameworks. This property contains the appropriate path for modern application and framework bundles. This property may not be a URL for non-standard bundle formats or for some older bundle formats.
 func (o *NSBundle) PrivateFrameworksURL() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBundleSelPrivateFrameworksURL)
 	if _ret != 0 {
@@ -407,6 +443,7 @@ func (o *NSBundle) PrivateFrameworksURL() *NSURL {
 	return NSURLFromID(_ret)
 }
 
+// The file URL of the receiver's subdirectory containing shared frameworks. This property contains the appropriate path for modern application and framework bundles. This property may not contain a URL for non-standard bundle formats or for some older bundle formats.
 func (o *NSBundle) SharedFrameworksURL() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBundleSelSharedFrameworksURL)
 	if _ret != 0 {
@@ -415,6 +452,7 @@ func (o *NSBundle) SharedFrameworksURL() *NSURL {
 	return NSURLFromID(_ret)
 }
 
+// The file URL of the bundle's subdirectory containing shared support files. This property contains the appropriate path for modern application and framework bundles. This property may not contain a path for non-standard bundle formats or for some older bundle formats.
 func (o *NSBundle) SharedSupportURL() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBundleSelSharedSupportURL)
 	if _ret != 0 {
@@ -423,6 +461,7 @@ func (o *NSBundle) SharedSupportURL() *NSURL {
 	return NSURLFromID(_ret)
 }
 
+// The file URL of the receiver's subdirectory containing plug-ins. This is the appropriate path for modern application and framework bundles. This may not be a URL for non-standard bundle formats or for some older bundle formats.
 func (o *NSBundle) BuiltInPlugInsURL() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBundleSelBuiltInPlugInsURL)
 	if _ret != 0 {
@@ -431,6 +470,7 @@ func (o *NSBundle) BuiltInPlugInsURL() *NSURL {
 	return NSURLFromID(_ret)
 }
 
+// The file URL for the bundle's App Store receipt. Use this app bundle property to locate the app receipt if it's present; this property is @c nil if the receipt isn't present. In the rare case a receipt is invalid or missing in an app that a user downloads from the App Store, use @c SKReceiptRefreshRequest to request a new receipt.
 func (o *NSBundle) AppStoreReceiptURL() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBundleSelAppStoreReceiptURL)
 	if _ret != 0 {
@@ -439,6 +479,7 @@ func (o *NSBundle) AppStoreReceiptURL() *NSURL {
 	return NSURLFromID(_ret)
 }
 
+// The full pathname of the receiver's bundle directory.
 func (o *NSBundle) BundlePath() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBundleSelBundlePath)
 	if _ret != 0 {
@@ -447,6 +488,7 @@ func (o *NSBundle) BundlePath() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The full pathname of the bundle's subdirectory containing resources.
 func (o *NSBundle) ResourcePath() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBundleSelResourcePath)
 	if _ret != 0 {
@@ -455,6 +497,7 @@ func (o *NSBundle) ResourcePath() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The full pathname of the receiver's executable file.
 func (o *NSBundle) ExecutablePath() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBundleSelExecutablePath)
 	if _ret != 0 {
@@ -463,6 +506,7 @@ func (o *NSBundle) ExecutablePath() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The full pathname of the bundle's subdirectory containing private frameworks. This property contains the appropriate path for modern application and framework bundles. This property may not contain a path for non-standard bundle formats or for some older bundle formats.
 func (o *NSBundle) PrivateFrameworksPath() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBundleSelPrivateFrameworksPath)
 	if _ret != 0 {
@@ -471,6 +515,7 @@ func (o *NSBundle) PrivateFrameworksPath() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The full pathname of the bundle's subdirectory containing shared frameworks. This property contains the appropriate path for modern application and framework bundles. This property may not contain a path for non-standard bundle formats or for some older bundle formats.
 func (o *NSBundle) SharedFrameworksPath() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBundleSelSharedFrameworksPath)
 	if _ret != 0 {
@@ -479,6 +524,7 @@ func (o *NSBundle) SharedFrameworksPath() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The full pathname of the bundle's subdirectory containing shared support files. This property contains the appropriate path for modern application and framework bundles. This property may not contain a path for non-standard bundle formats or for some older bundle formats.
 func (o *NSBundle) SharedSupportPath() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBundleSelSharedSupportPath)
 	if _ret != 0 {
@@ -487,6 +533,7 @@ func (o *NSBundle) SharedSupportPath() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The full pathname of the receiver's subdirectory containing plug-ins. This is the appropriate path for modern application and framework bundles. This may not be a path for non-standard bundle formats or for some older bundle formats.
 func (o *NSBundle) BuiltInPlugInsPath() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBundleSelBuiltInPlugInsPath)
 	if _ret != 0 {
@@ -495,6 +542,7 @@ func (o *NSBundle) BuiltInPlugInsPath() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The receiver's bundle identifier. The bundle identifier is defined by the @c CFBundleIdentifier key in the bundle's information property list.
 func (o *NSBundle) BundleIdentifier() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBundleSelBundleIdentifier)
 	if _ret != 0 {
@@ -503,6 +551,7 @@ func (o *NSBundle) BundleIdentifier() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// A dictionary, constructed from the bundle's @c Info.plist file, that contains information about the receiver. If the bundle does not contain an @c Info.plist file, this dictionary contains only private keys that are used internally by the @c NSBundle class. Common keys for accessing the values of the dictionary are @c CFBundleIdentifier, @c NSMainNibFile, and @c NSPrincipalClass.
 func (o *NSBundle) InfoDictionary() *NSDictionary[*NSString, objc.ID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBundleSelInfoDictionary)
 	if _ret != 0 {
@@ -511,6 +560,7 @@ func (o *NSBundle) InfoDictionary() *NSDictionary[*NSString, objc.ID] {
 	return NSDictionaryFromID[*NSString, objc.ID](_ret)
 }
 
+// A dictionary with the keys from the bundle's localized property list. This property uses the preferred localization for the current user when determining which resources to include. If the preferred localization is not available, this property chooses the most appropriate localization found in the bundle.
 func (o *NSBundle) LocalizedInfoDictionary() *NSDictionary[*NSString, objc.ID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBundleSelLocalizedInfoDictionary)
 	if _ret != 0 {
@@ -519,11 +569,13 @@ func (o *NSBundle) LocalizedInfoDictionary() *NSDictionary[*NSString, objc.ID] {
 	return NSDictionaryFromID[*NSString, objc.ID](_ret)
 }
 
+// The bundle's principal class. This property is set after ensuring that the code containing the definition of the class is dynamically loaded. If the bundle encounters errors in loading or if it can't find the executable code file in the bundle directory, this property is @c nil. The bundle obtains the principal class from the information dictionary using the key @c NSPrincipalClass. For non-loadable bundles (applications and frameworks), if the principal class is not specified in the property list, this property is @c nil.
 func (o *NSBundle) PrincipalClass() objc.Class {
 	_ret := objc.Send[objc.Class](o.Ptr(), _nSBundleSelPrincipalClass)
 	return _ret
 }
 
+// An ordered list of preferred localizations contained in the bundle. An array of @c NSString objects containing language IDs for localizations in the bundle. The strings are ordered according to the user's language preferences and available localizations.
 func (o *NSBundle) PreferredLocalizations() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBundleSelPreferredLocalizations)
 	if _ret != 0 {
@@ -532,6 +584,7 @@ func (o *NSBundle) PreferredLocalizations() *NSArray[*NSString] {
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// A list of all the localizations contained in the bundle. An array of @c NSString objects containing language IDs for all the localizations contained in the bundle.
 func (o *NSBundle) Localizations() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBundleSelLocalizations)
 	if _ret != 0 {
@@ -540,6 +593,7 @@ func (o *NSBundle) Localizations() *NSArray[*NSString] {
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// The localization for the development language. This property corresponds to the value in the @c CFBundleDevelopmentRegion key of the bundle's property list (@c Info.plist).
 func (o *NSBundle) DevelopmentLocalization() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBundleSelDevelopmentLocalization)
 	if _ret != 0 {
@@ -548,6 +602,7 @@ func (o *NSBundle) DevelopmentLocalization() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// An array of numbers indicating the architecture types supported by the bundle's executable. An array of @c NSNumber objects, each of which contains an integer value corresponding to a supported processor architecture. If the bundle does not contain a Mach-O executable, this is @c nil.
 func (o *NSBundle) ExecutableArchitectures() *NSArray[*NSNumber] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBundleSelExecutableArchitectures)
 	if _ret != 0 {

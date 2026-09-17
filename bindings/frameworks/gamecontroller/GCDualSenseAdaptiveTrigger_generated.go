@@ -80,12 +80,6 @@ func (dsat *DualSenseAdaptiveTrigger) WithValue(value float32) *DualSenseAdaptiv
 	return dsat
 }
 
-// WithPreferredSystemGestureState sets the preferred state for handling input when the user binds the element to a system gesture.
-func (dsat *DualSenseAdaptiveTrigger) WithPreferredSystemGestureState(preferredSystemGestureState SystemGestureState) *DualSenseAdaptiveTrigger {
-	objc.Send[objc.ID](objref.IDOf(dsat), objc.RegisterName("setPreferredSystemGestureState:"), preferredSystemGestureState)
-	return dsat
-}
-
 // WithSfSymbolsName sets a system symbol for the element or the remapped element.
 func (dsat *DualSenseAdaptiveTrigger) WithSfSymbolsName(sfSymbolsName string) *DualSenseAdaptiveTrigger {
 	objc.Send[objc.ID](objref.IDOf(dsat), objc.RegisterName("setSfSymbolsName:"), purego.NSString(sfSymbolsName))
@@ -107,6 +101,12 @@ func (dsat *DualSenseAdaptiveTrigger) WithUnmappedSfSymbolsName(unmappedSfSymbol
 // WithUnmappedLocalizedName sets the element’s localized name, not the remapped name.
 func (dsat *DualSenseAdaptiveTrigger) WithUnmappedLocalizedName(unmappedLocalizedName string) *DualSenseAdaptiveTrigger {
 	objc.Send[objc.ID](objref.IDOf(dsat), objc.RegisterName("setUnmappedLocalizedName:"), purego.NSString(unmappedLocalizedName))
+	return dsat
+}
+
+// WithPreferredSystemGestureState sets the preferred state for handling input when the user binds the element to a system gesture.
+func (dsat *DualSenseAdaptiveTrigger) WithPreferredSystemGestureState(preferredSystemGestureState SystemGestureState) *DualSenseAdaptiveTrigger {
+	objc.Send[objc.ID](objref.IDOf(dsat), objc.RegisterName("setPreferredSystemGestureState:"), preferredSystemGestureState)
 	return dsat
 }
 

@@ -74,21 +74,21 @@ func (tle *TextListElement) WithElementRange(elementRange *TextRange) *TextListE
 	return tle
 }
 
-// TextList returns the text list.
+// TextList returns the value that represents the text list.
 func (tle *TextListElement) TextList() *TextList {
 	defer runtime.KeepAlive(tle)
 	_r := objc.Send[objc.ID](objref.IDOf(tle), objc.RegisterName("textList"))
 	return TextListFromID(_r)
 }
 
-// Contents returns the contents.
+// Contents returns the text list element contents without markers and formatting.
 func (tle *TextListElement) Contents() *foundation.AttributedString {
 	defer runtime.KeepAlive(tle)
 	_r := objc.Send[objc.ID](objref.IDOf(tle), objc.RegisterName("contents"))
 	return foundation.AttributedStringFromID(_r)
 }
 
-// MarkerAttributes returns the marker attributes.
+// MarkerAttributes returns a dictionary of attributed string keys and values that represent the list's marker attributes.
 func (tle *TextListElement) MarkerAttributes() obj.Object {
 	defer runtime.KeepAlive(tle)
 	_r := objc.Send[objc.ID](objref.IDOf(tle), objc.RegisterName("markerAttributes"))

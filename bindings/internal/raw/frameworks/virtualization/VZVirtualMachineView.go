@@ -37,7 +37,7 @@ func VZVirtualMachineViewFromID(id objc.ID) *VZVirtualMachineView {
 	return o
 }
 
-// @abstract The virtual machine to display in the view.
+// @abstract The virtual machine to display in the view. @discussion In Swift, when set, the `adaptor` property is set to nil. If the `adaptor` is set, `virtualMachine` is reset to nil.
 func (o *VZVirtualMachineView) VirtualMachine() *VZVirtualMachine {
 	var _mainthread0 *VZVirtualMachine
 	purego.Main(func() {

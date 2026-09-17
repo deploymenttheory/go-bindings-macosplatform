@@ -158,6 +158,45 @@ func (wtc *WritingToolsCoordinator) UpdateForReflowedTextInContextWithIdentifier
 
 }
 
+// StartTextAnimationForRangeInContextWritingDirection starts text animation for range in context writing direction.
+func (wtc *WritingToolsCoordinator) StartTextAnimationForRangeInContextWritingDirection(textAnimation WritingToolsCoordinatorTextAnimation, range_ foundation.NSRange, context_ *WritingToolsCoordinatorContext, writingDirection WritingDirection) *foundation.UUID {
+	defer runtime.KeepAlive(wtc)
+	defer runtime.KeepAlive(context_)
+	var _mainthread0 *foundation.UUID
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.UUID {
+			_r := objc.Send[objc.ID](objref.IDOf(wtc), objc.RegisterName("startTextAnimation:forRange:inContext:writingDirection:"), textAnimation, range_, objref.IDOf(context_), writingDirection)
+			return foundation.UUIDFromID(_r)
+		}()
+	})
+	return _mainthread0
+
+}
+
+// CancelTextAnimationsWithIdentifiers used to support the presentation of grammar issues in text. If it is necessary to cancel the animation of one or more issues, call this to cancel theanimations.
+func (wtc *WritingToolsCoordinator) CancelTextAnimationsWithIdentifiers(identifiers []*foundation.UUID) {
+	defer runtime.KeepAlive(wtc)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wtc), objc.RegisterName("cancelTextAnimationsWithIdentifiers:"), purego.SliceToNSArray(identifiers, func(_v *foundation.UUID) objc.ID { return objref.IDOf(_v) }))
+	})
+
+}
+
+// ShowGrammarPresentationForRangeInContext used to support the presentation of grammar issues in text. When the user interacts with an issue, call this to bring up the relevant UI.
+func (wtc *WritingToolsCoordinator) ShowGrammarPresentationForRangeInContext(range_ foundation.NSRange, context_ *WritingToolsCoordinatorContext) bool {
+	defer runtime.KeepAlive(wtc)
+	defer runtime.KeepAlive(context_)
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wtc), objc.RegisterName("showGrammarPresentationForRange:inContext:"), range_, objref.IDOf(context_))
+			return _r
+		}()
+	})
+	return _mainthread0
+
+}
+
 // View returns the view that currently uses the writing tools coordinator. Use this property to refer to the view that currently owns the coordinator object. The system updates this property automatically when you assign the coordinator to the “NSView/writingToolsCoordinator“ property of your view. The value of this property is `nil` if there is no associated view.
 func (wtc *WritingToolsCoordinator) View() *View {
 	defer runtime.KeepAlive(wtc)

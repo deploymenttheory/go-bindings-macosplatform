@@ -117,7 +117,7 @@ func (p *Predicate) AllowEvaluation() {
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("allowEvaluation"))
 }
 
-// PredicateFormat returns the predicate format.
+// PredicateFormat returns the predicate's format string. The return value of this property is not guaranteed to be the same as the string used to create the predicate using `predicateWithFormat:` or similar methods.
 func (p *Predicate) PredicateFormat() string {
 	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("predicateFormat"))

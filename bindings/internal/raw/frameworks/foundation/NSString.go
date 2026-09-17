@@ -220,6 +220,7 @@ func (o *NSString) InitWithCoder(coder *NSCoder) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The number of UTF-16 code units in the receiver. This number includes the individual characters of composed character sequences, so you cannot use this property to determine if a string will be visible when printed or how long it will appear.
 func (o *NSString) Length() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSStringSelLength)
 	return _ret
@@ -1038,36 +1039,43 @@ func NSStringStringWithContentsOfFileUsedEncodingError(path *NSString, enc *uint
 	return NSStringFromID(_ret), nil
 }
 
+// The floating-point value of the string as a @c double. This property doesn't include any whitespace at the beginning of the string. This property is @c HUGE_VAL or @c -HUGE_VAL on overflow, @c 0.0 on underflow. This property is @c 0.0 if the string doesn't begin with a valid text representation of a floating-point number. Uses non-localized formatting information.
 func (o *NSString) DoubleValue() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSStringSelDoubleValue)
 	return _ret
 }
 
+// The floating-point value of the string as a @c float. This property doesn't include whitespace at the beginning of the string. This property is @c HUGE_VAL or @c -HUGE_VAL on overflow, @c 0.0 on underflow. This property is @c 0.0 if the string doesn't begin with a valid text representation of a floating-point number. Uses non-localized formatting information.
 func (o *NSString) FloatValue() float32 {
 	_ret := objc.Send[float32](o.Ptr(), _nSStringSelFloatValue)
 	return _ret
 }
 
+// The integer value of the string. The integer value of the string, assuming a decimal representation and skipping whitespace at the beginning of the string. This property is @c INT_MAX or @c INT_MIN on overflow. This property is @c 0 if the string doesn't begin with a valid decimal text representation of a number. Uses non-localized formatting information.
 func (o *NSString) IntValue() int {
 	_ret := objc.Send[int](o.Ptr(), _nSStringSelIntValue)
 	return _ret
 }
 
+// The @c NSInteger value of the string. The @c NSInteger value of the string, assuming a decimal representation and skipping whitespace at the beginning of the string. This property is @c 0 if the string doesn't begin with a valid decimal text representation of a number. Uses non-localized formatting information.
 func (o *NSString) IntegerValue() int {
 	_ret := objc.Send[int](o.Ptr(), _nSStringSelIntegerValue)
 	return _ret
 }
 
+// The @c long @c long value of the string. The @c long @c long value of the string, assuming a decimal representation and skipping whitespace at the beginning of the string. This property is @c LLONG_MAX or @c LLONG_MIN on overflow. This property is @c 0 if the receiver doesn't begin with a valid decimal text representation of a number. Uses non-localized formatting information.
 func (o *NSString) LongLongValue() int64 {
 	_ret := objc.Send[int64](o.Ptr(), _nSStringSelLongLongValue)
 	return _ret
 }
 
+// The Boolean value of the string. Returns @c YES on encountering one of "Y", "y", "T", "t", or a digit 1-9---the method ignores any trailing characters. Returns @c NO if the receiver doesn't begin with a valid decimal text representation of a number. Skips initial space characters (whitespaceSet), or optional -/+ sign followed by zeroes.
 func (o *NSString) BoolValue() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSStringSelBoolValue)
 	return _ret
 }
 
+// An uppercase representation of the string. This property performs the canonical (non-localized) mapping. It is suitable for programming operations that require stable results not depending on the current locale. Case transformations aren't guaranteed to be symmetrical or to produce strings of the same lengths as the originals.
 func (o *NSString) UppercaseString() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelUppercaseString)
 	if _ret != 0 {
@@ -1076,6 +1084,7 @@ func (o *NSString) UppercaseString() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// A lowercase representation of the string. This property performs the canonical (non-localized) mapping. It is suitable for programming operations that require stable results not depending on the current locale. Case transformations aren't guaranteed to be symmetrical or to produce strings of the same lengths as the originals.
 func (o *NSString) LowercaseString() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelLowercaseString)
 	if _ret != 0 {
@@ -1084,6 +1093,7 @@ func (o *NSString) LowercaseString() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// A capitalized representation of the string. A capitalized string is a string with the first character in each word changed to its corresponding uppercase value, and all remaining characters set to their corresponding lowercase values. This property performs the canonical (non-localized) mapping. Case transformations aren't guaranteed to be symmetrical or to produce strings of the same lengths as the originals.
 func (o *NSString) CapitalizedString() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelCapitalizedString)
 	if _ret != 0 {
@@ -1092,6 +1102,7 @@ func (o *NSString) CapitalizedString() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns a version of the string with all letters converted to uppercase, taking into account the current locale.
 func (o *NSString) LocalizedUppercaseString() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelLocalizedUppercaseString)
 	if _ret != 0 {
@@ -1100,6 +1111,7 @@ func (o *NSString) LocalizedUppercaseString() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns a version of the string with all letters converted to lowercase, taking into account the current locale.
 func (o *NSString) LocalizedLowercaseString() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelLocalizedLowercaseString)
 	if _ret != 0 {
@@ -1108,6 +1120,7 @@ func (o *NSString) LocalizedLowercaseString() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns a capitalized representation of the receiver using the current locale.
 func (o *NSString) LocalizedCapitalizedString() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelLocalizedCapitalizedString)
 	if _ret != 0 {
@@ -1116,31 +1129,37 @@ func (o *NSString) LocalizedCapitalizedString() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// A null-terminated UTF8 representation of the string. This C string is a pointer to a structure inside the string object, which may have a lifetime shorter than the string object and will certainly not have a longer lifetime. Therefore, you should copy the C string if it needs to be stored outside of the memory context in which you use this property.
 func (o *NSString) UTF8String() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSStringSelUTF8String)
 	return _ret
 }
 
+// The fastest encoding to which the receiver may be converted without loss of information. "Fastest" applies to retrieval of characters from the string. This encoding may not be space efficient.
 func (o *NSString) FastestEncoding() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSStringSelFastestEncoding)
 	return _ret
 }
 
+// The smallest encoding to which the receiver can be converted without loss of information. This encoding may not be the fastest for accessing characters, but is space-efficient. This property may take some time to access.
 func (o *NSString) SmallestEncoding() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSStringSelSmallestEncoding)
 	return _ret
 }
 
+// Returns a zero-terminated list of the encodings string objects support in the application's environment.
 func NSStringAvailableStringEncodings() *uint {
 	_ret := objc.Send[*uint](objc.ID(_clsNSString), _nSStringSelAvailableStringEncodings)
 	return _ret
 }
 
+// Returns the C-string encoding assumed for any method accepting a C string as an argument. This property returns a user-dependent encoding whose value is derived from user's default language and potentially other factors. You might sometimes need to use this encoding when interpreting user documents with unknown encodings, in the absence of other hints, but in general this encoding should be used rarely, if at all.
 func NSStringDefaultCStringEncoding() uint {
 	_ret := objc.Send[uint](objc.ID(_clsNSString), _nSStringSelDefaultCStringEncoding)
 	return _ret
 }
 
+// A string made by normalizing the string's contents using the Unicode Normalization Form D.
 func (o *NSString) DecomposedStringWithCanonicalMapping() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelDecomposedStringWithCanonicalMapping)
 	if _ret != 0 {
@@ -1149,6 +1168,7 @@ func (o *NSString) DecomposedStringWithCanonicalMapping() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// A string made by normalizing the string's contents using the Unicode Normalization Form C.
 func (o *NSString) PrecomposedStringWithCanonicalMapping() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelPrecomposedStringWithCanonicalMapping)
 	if _ret != 0 {
@@ -1157,6 +1177,7 @@ func (o *NSString) PrecomposedStringWithCanonicalMapping() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// A string made by normalizing the receiver's contents using the Unicode Normalization Form KD.
 func (o *NSString) DecomposedStringWithCompatibilityMapping() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelDecomposedStringWithCompatibilityMapping)
 	if _ret != 0 {
@@ -1165,6 +1186,7 @@ func (o *NSString) DecomposedStringWithCompatibilityMapping() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// A string made by normalizing the receiver's contents using the Unicode Normalization Form KC.
 func (o *NSString) PrecomposedStringWithCompatibilityMapping() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelPrecomposedStringWithCompatibilityMapping)
 	if _ret != 0 {
@@ -1308,7 +1330,6 @@ func NSStringStringWithCString(bytes_ string) objc.ID {
 }
 
 // Copies all characters from the receiver into a given buffer.
-// Deprecated: Use +stringWithCString:encoding: instead
 func (o *NSString) GetCharacters(buffer *uint16) {
 	o.Ptr().Send(_nSStringSelGetCharacters, buffer)
 }
@@ -1370,6 +1391,7 @@ func (o *NSString) GetFileSystemRepresentationMaxLength(cname string, max uint) 
 	return _ret
 }
 
+// The file-system path components of the receiver. The strings in the array appear in the order they did in the receiver. If the string begins or ends with the path separator, then the first or last component, respectively, will contain the separator. Empty components (caused by consecutive path separators) are deleted. This property only works with file paths (not, for example, string representations of URLs).
 func (o *NSString) PathComponents() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelPathComponents)
 	if _ret != 0 {
@@ -1378,11 +1400,13 @@ func (o *NSString) PathComponents() *NSArray[*NSString] {
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// A Boolean value that indicates whether the receiver represents an absolute path. This property only works with file paths (not, for example, string representations of URLs). It does not check the filesystem for the existence of the path.
 func (o *NSString) IsAbsolutePath() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSStringSelIsAbsolutePath)
 	return _ret
 }
 
+// The last path component of the receiver. This property only works with file paths (not, for example, string representations of URLs).
 func (o *NSString) LastPathComponent() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelLastPathComponent)
 	if _ret != 0 {
@@ -1391,6 +1415,7 @@ func (o *NSString) LastPathComponent() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// A new string made by deleting the last path component from the receiver, along with any final path separator. If the receiver represents the root path it is returned unaltered. This property only works with file paths (not, for example, string representations of URLs).
 func (o *NSString) StringByDeletingLastPathComponent() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelStringByDeletingLastPathComponent)
 	if _ret != 0 {
@@ -1399,6 +1424,7 @@ func (o *NSString) StringByDeletingLastPathComponent() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The path extension, if any, of the string as interpreted as a path. The path extension is the portion of the last path component which follows the final period, if there is one. The extension divider is not included. This property only works with file paths (not, for example, string representations of URLs).
 func (o *NSString) PathExtension() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelPathExtension)
 	if _ret != 0 {
@@ -1407,6 +1433,7 @@ func (o *NSString) PathExtension() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// A new string made by deleting the extension (if any, and only the last) from the receiver. Strips any trailing path separator before checking for an extension. If the receiver represents the root path, it is returned unaltered. This property only works with file paths (not, for example, string representations of URLs).
 func (o *NSString) StringByDeletingPathExtension() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelStringByDeletingPathExtension)
 	if _ret != 0 {
@@ -1415,6 +1442,7 @@ func (o *NSString) StringByDeletingPathExtension() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// A new string that replaces the current home directory portion of the current path with a tilde (`~`) character. If the string does not specify a file in the current home directory, the path is unchanged. This property only works with file paths (not, for example, string representations of URLs).
 func (o *NSString) StringByAbbreviatingWithTildeInPath() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelStringByAbbreviatingWithTildeInPath)
 	if _ret != 0 {
@@ -1423,6 +1451,7 @@ func (o *NSString) StringByAbbreviatingWithTildeInPath() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// A new string made by expanding the initial component of the receiver to its full path value. Expands an initial "`~`" or "`~user`" component to its full path value. Returns a new string matching the receiver if the initial component can't be expanded. This property only works with file paths (not, for example, string representations of URLs).
 func (o *NSString) StringByExpandingTildeInPath() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelStringByExpandingTildeInPath)
 	if _ret != 0 {
@@ -1431,6 +1460,7 @@ func (o *NSString) StringByExpandingTildeInPath() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// A new string made by removing extraneous path components from the receiver. Expands an initial tilde expression, reduces empty components and "`/./`" sequences to single path separators, and resolves "`..`" references in absolute paths. Returns `self` if an error occurs. This property only works with file paths (not, for example, string representations of URLs).
 func (o *NSString) StringByStandardizingPath() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelStringByStandardizingPath)
 	if _ret != 0 {
@@ -1439,6 +1469,7 @@ func (o *NSString) StringByStandardizingPath() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// A new string made from the receiver by resolving all symbolic links and standardizing path. For absolute paths, all symbolic links are guaranteed to be removed. For relative paths, symbolic links that can't be resolved are left unresolved. Returns `self` if an error occurs. This property only works with file paths (not, for example, string representations of URLs).
 func (o *NSString) StringByResolvingSymlinksInPath() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelStringByResolvingSymlinksInPath)
 	if _ret != 0 {
@@ -1447,6 +1478,7 @@ func (o *NSString) StringByResolvingSymlinksInPath() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// A file system-specific representation of the receiver. The returned C string will be automatically freed just as a returned object would be released; your code should copy the representation or use “NSString/getFileSystemRepresentation(_:maxLength:)“ if it needs to store it outside of the autorelease context. Raises “NSExceptionName/characterConversionException“ if the receiver can't be represented in the file system's encoding.
 func (o *NSString) FileSystemRepresentation() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSStringSelFileSystemRepresentation)
 	return _ret
@@ -1481,6 +1513,7 @@ func (o *NSString) StringByReplacingPercentEscapesUsingEncoding(enc uint) *NSStr
 	return NSStringFromID(_ret)
 }
 
+// A new string made from the receiver by replacing all percent-encoded sequences with the matching UTF-8 characters. Returns `nil` if the receiver contains an invalid percent-encoding sequence. > Important: Call this method only on strings that you know to be percent-encoded. Calling it on strings that are not percent-encoded can lead to misinterpreting a percent character as the beginning of a percent-encoded sequence.
 func (o *NSString) StringByRemovingPercentEncoding() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelStringByRemovingPercentEncoding)
 	if _ret != 0 {

@@ -102,28 +102,28 @@ func (occ *OrderedCollectionChange) WithScriptingProperties(scriptingProperties 
 	return occ
 }
 
-// Object returns the object.
+// Object returns an object the change inserts or removes.
 func (occ *OrderedCollectionChange) Object() obj.Object {
 	defer runtime.KeepAlive(occ)
 	_r := objc.Send[objc.ID](objref.IDOf(occ), objc.RegisterName("object"))
 	return obj.Wrap(_r)
 }
 
-// ChangeType returns the change type.
+// ChangeType returns the type of change.
 func (occ *OrderedCollectionChange) ChangeType() CollectionChangeType {
 	defer runtime.KeepAlive(occ)
 	_r := objc.Send[CollectionChangeType](objref.IDOf(occ), objc.RegisterName("changeType"))
 	return _r
 }
 
-// Index returns the index.
+// Index returns the index location of the change. For removals, the index of the object in the original state. For insertions, the index of the object in the final state.
 func (occ *OrderedCollectionChange) Index() int {
 	defer runtime.KeepAlive(occ)
 	_r := objc.Send[int](objref.IDOf(occ), objc.RegisterName("index"))
 	return _r
 }
 
-// AssociatedIndex returns the associated index.
+// AssociatedIndex returns when this property is set to a value other than `NSNotFound`, the receiver is one half of a move, and this value is the index of the change's counterpart of the opposite type in the diff. Pairs of changes with opposite types that refer to each other represent the index location of their counterpart with the `associatedIndex` property. A move pair can have a different `object` in its removal and insertion changes, which can imply that the change represents moving and changing or replacing an element. > Note: > Don't ignore a move when the indexes of its changes are the same. The calculated difference may legitimately produce a diff where a change removes the object at one index and the object at another index moves to the same index. Ignoring the move produces an incorrect result.
 func (occ *OrderedCollectionChange) AssociatedIndex() int {
 	defer runtime.KeepAlive(occ)
 	_r := objc.Send[int](objref.IDOf(occ), objc.RegisterName("associatedIndex"))

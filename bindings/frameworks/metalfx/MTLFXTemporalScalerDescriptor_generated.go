@@ -133,6 +133,18 @@ func (tsd *TemporalScalerDescriptor) WithInputContentMaxScale(inputContentMaxSca
 	return tsd
 }
 
+// WithOutputResolutionMotionVectorsEnabled sets a Boolean value that indicates whether the scaler expects motion vectors at output resolution.
+func (tsd *TemporalScalerDescriptor) WithOutputResolutionMotionVectorsEnabled(outputResolutionMotionVectorsEnabled bool) *TemporalScalerDescriptor {
+	objc.Send[objc.ID](objref.IDOf(tsd), objc.RegisterName("setOutputResolutionMotionVectorsEnabled:"), outputResolutionMotionVectorsEnabled)
+	return tsd
+}
+
+// WithJitteredMotionVectorsEnabled sets a Boolean value that indicates whether the motion vectors include the jittering pattern.
+func (tsd *TemporalScalerDescriptor) WithJitteredMotionVectorsEnabled(jitteredMotionVectorsEnabled bool) *TemporalScalerDescriptor {
+	objc.Send[objc.ID](objref.IDOf(tsd), objc.RegisterName("setJitteredMotionVectorsEnabled:"), jitteredMotionVectorsEnabled)
+	return tsd
+}
+
 // WithReactiveMaskTextureEnabled sets a Boolean value that indicates whether a temporal scaler you create with the descriptor applies a reactive mask.
 func (tsd *TemporalScalerDescriptor) WithReactiveMaskTextureEnabled(reactiveMaskTextureEnabled bool) *TemporalScalerDescriptor {
 	objc.Send[objc.ID](objref.IDOf(tsd), objc.RegisterName("setReactiveMaskTextureEnabled:"), reactiveMaskTextureEnabled)
@@ -199,6 +211,20 @@ func (tsd *TemporalScalerDescriptor) InputContentMinScale() float32 {
 func (tsd *TemporalScalerDescriptor) InputContentMaxScale() float32 {
 	defer runtime.KeepAlive(tsd)
 	_r := objc.Send[float32](objref.IDOf(tsd), objc.RegisterName("inputContentMaxScale"))
+	return _r
+}
+
+// IsOutputResolutionMotionVectorsEnabled reports whether the scaler expects motion vectors at output resolution. Set this property to <doc://com.apple.documentation/documentation/swift/true> when your app provides motion vectors at the output resolution rather than the input resolution. When you enable this property, the scaler interprets the “MTLFXTemporalScalerBase/motionTexture“ dimensions to match “outputWidth“ and “outputHeight“ instead of “inputWidth“ and “inputHeight“. This property's default value is <doc://com.apple.documentation/documentation/swift/false>.
+func (tsd *TemporalScalerDescriptor) IsOutputResolutionMotionVectorsEnabled() bool {
+	defer runtime.KeepAlive(tsd)
+	_r := objc.Send[bool](objref.IDOf(tsd), objc.RegisterName("isOutputResolutionMotionVectorsEnabled"))
+	return _r
+}
+
+// IsJitteredMotionVectorsEnabled reports whether the motion vectors include the jittering pattern. When you set this property to <doc://com.apple.documentation/documentation/swift/true>, the scaler internally subtracts the jitter from the motion vectors using the jitter offset values provided each frame via “MTLFXTemporalScalerBase/jitterOffsetX“ and “MTLFXTemporalScalerBase/jitterOffsetY“. When <doc://com.apple.documentation/documentation/swift/false> (the default), the scaler uses the motion vectors directly without any adjustment.
+func (tsd *TemporalScalerDescriptor) IsJitteredMotionVectorsEnabled() bool {
+	defer runtime.KeepAlive(tsd)
+	_r := objc.Send[bool](objref.IDOf(tsd), objc.RegisterName("isJitteredMotionVectorsEnabled"))
 	return _r
 }
 

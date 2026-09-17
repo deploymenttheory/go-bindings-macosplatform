@@ -114,28 +114,28 @@ func (tl *TextList) MarkerForItemNumber(itemNumber int) string {
 	return purego.GoString(_r)
 }
 
-// MarkerFormat returns the marker format.
+// MarkerFormat returns the marker format string used by the receiver. ## See Also - “NSTextList/init(markerFormat:options:)“
 func (tl *TextList) MarkerFormat() *foundation.String {
 	defer runtime.KeepAlive(tl)
 	_r := objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("markerFormat"))
 	return foundation.StringFromID(_r)
 }
 
-// ListOptions returns the list options.
+// ListOptions returns the list options mask value of the receiver.
 func (tl *TextList) ListOptions() TextListOptions {
 	defer runtime.KeepAlive(tl)
 	_r := objc.Send[TextListOptions](objref.IDOf(tl), objc.RegisterName("listOptions"))
 	return _r
 }
 
-// StartingItemNumber returns the starting item number.
+// StartingItemNumber returns the starting item number for the text list. The default value is `1`. This value will be used only for ordered lists, and ignored in other cases.
 func (tl *TextList) StartingItemNumber() int {
 	defer runtime.KeepAlive(tl)
 	_r := objc.Send[int](objref.IDOf(tl), objc.RegisterName("startingItemNumber"))
 	return _r
 }
 
-// IsOrdered reports whether the object is ordered.
+// IsOrdered reports whether the list is ordered.
 func (tl *TextList) IsOrdered() bool {
 	defer runtime.KeepAlive(tl)
 	_r := objc.Send[bool](objref.IDOf(tl), objc.RegisterName("isOrdered"))

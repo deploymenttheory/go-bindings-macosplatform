@@ -15,8 +15,6 @@ import (
 )
 
 // AuthorizationWebBrowserPlatformPublicKeyCredential is an idiomatic wrapper over the Objective-C class ASAuthorizationWebBrowserPlatformPublicKeyCredential.
-//
-// A structure that describes a passkey stored in the keychain, or managed by a third-party credential manager.
 type AuthorizationWebBrowserPlatformPublicKeyCredential struct {
 	objref.Handle
 }

@@ -16,8 +16,6 @@ import (
 )
 
 // URLCredential is an idiomatic wrapper over the Objective-C class NSURLCredential.
-//
-// An authentication credential consisting of information specific to the type of credential and the type of persistent storage to use, if any.
 type URLCredential struct {
 	objref.Handle
 }
@@ -74,14 +72,14 @@ func (uc *URLCredential) String() string {
 	return rt.Description(objref.IDOf(uc))
 }
 
-// NewURLCredentialWithUserPasswordPersistence initialize a NSURLCredential with a user and password
+// NewURLCredentialWithUserPasswordPersistence creates a URL credential instance initialized with a given user name and password, using a given persistence setting. - Parameter user: The user for the credential. - Parameter password: The password for `user`. - Parameter persistence: A value indicating whether the credential should be stored permanently, for the duration of the current session, or not at all.
 func NewURLCredentialWithUserPasswordPersistence(user string, password string, persistence URLCredentialPersistence) *URLCredential {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSURLCredential")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUser:password:persistence:"), purego.NSString(user), purego.NSString(password), persistence)
 	return uRLCredentialAdopt(_id)
 }
 
-// NewURLCredentialWithIdentityCertificatesPersistence initialize an NSURLCredential with an identity and array of at least 1 client certificates (SecCertificateRef)
+// NewURLCredentialWithIdentityCertificatesPersistence creates a URL credential instance for resolving a client certificate authentication challenge. - Parameter identity: A `SecIdentityRef` object. - Parameter certArray: An array containing at least one `SecCertificateRef` objects, or `nil` if the server does not need any intermediate certificates to authenticate the client. - Parameter persistence: A value indicating whether the credential should be stored permanently, for the duration of the current session, or not at all.
 func NewURLCredentialWithIdentityCertificatesPersistence(identity obj.Object, certArray obj.Object, persistence URLCredentialPersistence) *URLCredential {
 	defer runtime.KeepAlive(identity)
 	defer runtime.KeepAlive(certArray)
@@ -90,7 +88,7 @@ func NewURLCredentialWithIdentityCertificatesPersistence(identity obj.Object, ce
 	return uRLCredentialAdopt(_id)
 }
 
-// NewURLCredentialWithTrust initialize a new NSURLCredential which specifies that the specified trust has been accepted.
+// NewURLCredentialWithTrust creates a URL credential instance for server trust authentication, initialized with an accepted trust. - Parameter trust: The accepted trust.
 func NewURLCredentialWithTrust(trust obj.Object) *URLCredential {
 	defer runtime.KeepAlive(trust)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSURLCredential")), objc.RegisterName("alloc"))
@@ -117,7 +115,7 @@ func (uc *URLCredential) Persistence() URLCredentialPersistence {
 	return _r
 }
 
-// User get the username
+// User returns the credential's user name.
 func (uc *URLCredential) User() string {
 	defer runtime.KeepAlive(uc)
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("user"))
@@ -127,7 +125,7 @@ func (uc *URLCredential) User() string {
 	return purego.GoString(_r)
 }
 
-// Password get the password This method might actually attempt to retrieve the password from an external store, possible resulting in prompting, so do not call it unless needed.
+// Password returns the credential's password. You should only access this property if you need the actual password value. If you only need to know if there is a password, use `hasPassword`. Accessing this property may result in prompting the user for access.
 func (uc *URLCredential) Password() string {
 	defer runtime.KeepAlive(uc)
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("password"))
@@ -137,21 +135,21 @@ func (uc *URLCredential) Password() string {
 	return purego.GoString(_r)
 }
 
-// HasPassword reports whether find out if this credential has a password, without trying to get it If this credential's password is actually kept in an external store, the password method may return nil even if this method returns true, since getting the password may fail, or the user may refuse access.
+// HasPassword reports whether the credential has a password. This method does not attempt to retrieve the password. If this credential's password is stored in the user's keychain, the `password` property may return `nil` even if this method returns `YES` -- getting the password may fail, or the user may refuse access.
 func (uc *URLCredential) HasPassword() bool {
 	defer runtime.KeepAlive(uc)
 	_r := objc.Send[bool](objref.IDOf(uc), objc.RegisterName("hasPassword"))
 	return _r
 }
 
-// Identity returns the SecIdentityRef of this credential, if it was created with a certificate and identity
+// Identity returns the identity of this credential if it is a client certificate credential. This value is `nil` if the credential is not a client certificate credential.
 func (uc *URLCredential) Identity() obj.Object {
 	defer runtime.KeepAlive(uc)
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("identity"))
 	return obj.Wrap(_r)
 }
 
-// Certificates returns an NSArray of SecCertificateRef objects representing the client certificate for this credential, if this credential was created with an identity and certificate.
+// Certificates returns the intermediate certificates of the credential, if it is a client certificate credential. The certificates are `SecCertificateRef` objects. This value is `nil` if this is not a client certificate credential.
 func (uc *URLCredential) Certificates() obj.Object {
 	defer runtime.KeepAlive(uc)
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("certificates"))

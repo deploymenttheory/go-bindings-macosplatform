@@ -126,14 +126,14 @@ func (m *Measurement) MeasurementBySubtractingMeasurement(measurement obj.Object
 	return obj.Wrap(_r)
 }
 
-// Unit returns the unit.
+// Unit returns the unit component of the measurement.
 func (m *Measurement) Unit() obj.Object {
 	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("unit"))
 	return obj.Wrap(_r)
 }
 
-// DoubleValue returns the double value.
+// DoubleValue returns the value component of the measurement.
 func (m *Measurement) DoubleValue() float64 {
 	defer runtime.KeepAlive(m)
 	_r := objc.Send[float64](objref.IDOf(m), objc.RegisterName("doubleValue"))

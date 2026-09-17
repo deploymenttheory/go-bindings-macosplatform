@@ -98,28 +98,28 @@ func (tavp *TextAttachmentViewProvider) LoadView() {
 	objc.Send[objc.ID](objref.IDOf(tavp), objc.RegisterName("loadView"))
 }
 
-// TextAttachment returns the text attachment.
+// TextAttachment returns the text attachment for this view. Specify the value of this property at initialization time using the “NSTextAttachmentViewProvider/init(textAttachment:parentView:textLayoutManager:location:)“ initializer.
 func (tavp *TextAttachmentViewProvider) TextAttachment() *TextAttachment {
 	defer runtime.KeepAlive(tavp)
 	_r := objc.Send[objc.ID](objref.IDOf(tavp), objc.RegisterName("textAttachment"))
 	return TextAttachmentFromID(_r)
 }
 
-// TextLayoutManager returns the text layout manager.
+// TextLayoutManager returns the text layout manager for this view. Specify the value of this property at initialization time using the “NSTextAttachmentViewProvider/init(textAttachment:parentView:textLayoutManager:location:)“ initializer.
 func (tavp *TextAttachmentViewProvider) TextLayoutManager() *TextLayoutManager {
 	defer runtime.KeepAlive(tavp)
 	_r := objc.Send[objc.ID](objref.IDOf(tavp), objc.RegisterName("textLayoutManager"))
 	return TextLayoutManagerFromID(_r)
 }
 
-// View returns the view.
+// View returns the text attachment's view. The getter first invokes “loadView“ if the view hasn't been set yet. > Important: Subclasses must call the superclass implementation if they override the setter or getter.
 func (tavp *TextAttachmentViewProvider) View() *View {
 	defer runtime.KeepAlive(tavp)
 	_r := objc.Send[objc.ID](objref.IDOf(tavp), objc.RegisterName("view"))
 	return ViewFromID(_r)
 }
 
-// TracksTextAttachmentViewBounds wraps the corresponding Objective-C method.
+// TracksTextAttachmentViewBounds reports whether a Boolean value that determines the text attachment's bounds policy. If `true`, the framework calls the `textAttachment` property's “NSTextAttachmentViewProvider/attachmentBounds(for:location:textContainer:proposedLineFragment:position:)“ method and examines the text attachment view provider to determine the bounds instead of using the `bounds` property of this instance. Defaults to `false`.
 func (tavp *TextAttachmentViewProvider) TracksTextAttachmentViewBounds() bool {
 	defer runtime.KeepAlive(tavp)
 	_r := objc.Send[bool](objref.IDOf(tavp), objc.RegisterName("tracksTextAttachmentViewBounds"))

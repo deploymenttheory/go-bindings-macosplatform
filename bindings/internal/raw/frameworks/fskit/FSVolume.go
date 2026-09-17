@@ -4,6 +4,8 @@
 package fskit
 
 import (
+	"unsafe"
+
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/foundation"
@@ -18,11 +20,12 @@ type FSVolume struct {
 }
 
 var (
-	_clsFSVolume                           = _objcClass("FSVolume")
-	_fSVolumeSelInitWithVolumeIDVolumeName = objc.RegisterName("initWithVolumeID:volumeName:")
-	_fSVolumeSelVolumeID                   = objc.RegisterName("volumeID")
-	_fSVolumeSelName                       = objc.RegisterName("name")
-	_fSVolumeSelSetName                    = objc.RegisterName("setName:")
+	_clsFSVolume                                                          = _objcClass("FSVolume")
+	_fSVolumeSelInitWithVolumeIDVolumeName                                = objc.RegisterName("initWithVolumeID:volumeName:")
+	_fSVolumeSelVolumeID                                                  = objc.RegisterName("volumeID")
+	_fSVolumeSelName                                                      = objc.RegisterName("name")
+	_fSVolumeSelSetName                                                   = objc.RegisterName("setName:")
+	_fSVolumeSelSetCacheStateForItemCacheModeCoherencyTypeCoherencyAction = objc.RegisterName("setCacheStateForItem:cacheMode:coherencyType:coherencyAction:")
 )
 
 func FSVolumeFromID(id objc.ID) *FSVolume {
@@ -64,4 +67,10 @@ func (o *FSVolume) Name() *FSFileName {
 
 func (o *FSVolume) SetName(name *FSFileName) {
 	o.Ptr().Send(_fSVolumeSelSetName, name.Ptr())
+}
+
+// Sends a synchronous cache state update request from the module to the kernel.
+func (o *FSVolume) SetCacheStateForItemCacheModeCoherencyTypeCoherencyAction(item *FSItem, cacheMode FSDataCacheMode, coherencyType FSKernelCacheCoherencyType, action FSKernelCacheCoherencyAction) unsafe.Pointer {
+	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _fSVolumeSelSetCacheStateForItemCacheModeCoherencyTypeCoherencyAction, item.Ptr(), cacheMode, coherencyType, action)
+	return _ret
 }

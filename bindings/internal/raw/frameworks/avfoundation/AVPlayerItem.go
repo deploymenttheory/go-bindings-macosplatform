@@ -103,6 +103,7 @@ var (
 	_aVPlayerItemSelSetVariantPreferences                                                         = objc.RegisterName("setVariantPreferences:")
 	_aVPlayerItemSelSelectMediaOptionInMediaSelectionGroup                                        = objc.RegisterName("selectMediaOption:inMediaSelectionGroup:")
 	_aVPlayerItemSelSelectMediaOptionAutomaticallyInMediaSelectionGroup                           = objc.RegisterName("selectMediaOptionAutomaticallyInMediaSelectionGroup:")
+	_aVPlayerItemSelSelectableMediaSelectionOptionsInMediaSelectionGroup                          = objc.RegisterName("selectableMediaSelectionOptionsInMediaSelectionGroup:")
 	_aVPlayerItemSelCurrentMediaSelection                                                         = objc.RegisterName("currentMediaSelection")
 	_aVPlayerItemSelSelectMediaPresentationLanguageForMediaSelectionGroup                         = objc.RegisterName("selectMediaPresentationLanguage:forMediaSelectionGroup:")
 	_aVPlayerItemSelSelectedMediaPresentationLanguageForMediaSelectionGroup                       = objc.RegisterName("selectedMediaPresentationLanguageForMediaSelectionGroup:")
@@ -113,6 +114,8 @@ var (
 	_aVPlayerItemSelSetPreferredCustomMediaSelectionSchemes                                       = objc.RegisterName("setPreferredCustomMediaSelectionSchemes:")
 	_aVPlayerItemSelAccessLog                                                                     = objc.RegisterName("accessLog")
 	_aVPlayerItemSelErrorLog                                                                      = objc.RegisterName("errorLog")
+	_aVPlayerItemSelFetchAccessLogWithCompletionHandler                                           = objc.RegisterName("fetchAccessLogWithCompletionHandler:")
+	_aVPlayerItemSelFetchErrorLogWithCompletionHandler                                            = objc.RegisterName("fetchErrorLogWithCompletionHandler:")
 	_aVPlayerItemSelAddOutput                                                                     = objc.RegisterName("addOutput:")
 	_aVPlayerItemSelRemoveOutput                                                                  = objc.RegisterName("removeOutput:")
 	_aVPlayerItemSelOutputs                                                                       = objc.RegisterName("outputs")
@@ -770,18 +773,28 @@ func (o *AVPlayerItem) SelectMediaOptionAutomaticallyInMediaSelectionGroup(media
 	o.Ptr().Send(_aVPlayerItemSelSelectMediaOptionAutomaticallyInMediaSelectionGroup, mediaSelectionGroup.Ptr())
 }
 
-func (o *AVPlayerItem) CurrentMediaSelection() *AVMediaSelection {
-	var _mainthread0 *AVMediaSelection
+// Returns the media selection options in the specified media selection group that can produce content.
+func (o *AVPlayerItem) SelectableMediaSelectionOptionsInMediaSelectionGroup(mediaSelectionGroup *AVMediaSelectionGroup) *foundation.NSArray[*AVMediaSelectionOption] {
+	var _mainthread0 *foundation.NSArray[*AVMediaSelectionOption]
 	purego.Main(func() {
-		_mainthread0 = func() *AVMediaSelection {
-			_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelCurrentMediaSelection)
+		_mainthread0 = func() *foundation.NSArray[*AVMediaSelectionOption] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelSelectableMediaSelectionOptionsInMediaSelectionGroup, mediaSelectionGroup.Ptr())
 			if _ret != 0 {
 				_ret.Send(objc.RegisterName("retain"))
 			}
-			return AVMediaSelectionFromID(_ret)
+			return foundation.NSArrayFromID[*AVMediaSelectionOption](_ret)
 		}()
 	})
 	return _mainthread0
+}
+
+// Provides an instance of AVMediaSelection carrying current selections for each of the receiver's media selection groups.
+func (o *AVPlayerItem) CurrentMediaSelection() *AVMediaSelection {
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelCurrentMediaSelection)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return AVMediaSelectionFromID(_ret)
 }
 
 // When the associated AVPlayer’s appliesMediaSelectionCriteriaAutomatically property is set to YES, configures the player item to prefer a particular language, replacing any previous preference for available languages of the specified group’s custom media selection scheme.
@@ -865,6 +878,7 @@ func (o *AVPlayerItem) SetPreferredCustomMediaSelectionSchemes(preferredCustomMe
 }
 
 // Returns an object that represents a snapshot of the network access log.
+// Deprecated: Use fetchAccessLogWithCompletionHandler:
 func (o *AVPlayerItem) AccessLog() *AVPlayerItemAccessLog {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelAccessLog)
 	if _ret != 0 {
@@ -874,12 +888,43 @@ func (o *AVPlayerItem) AccessLog() *AVPlayerItemAccessLog {
 }
 
 // Returns an object that represents a snapshot of the error log.
+// Deprecated: Use fetchErrorLogWithCompletionHandler:
 func (o *AVPlayerItem) ErrorLog() *AVPlayerItemErrorLog {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelErrorLog)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return AVPlayerItemErrorLogFromID(_ret)
+}
+
+// Asynchronously retrieves the access log without blocking the calling thread.
+func (o *AVPlayerItem) FetchAccessLogWithCompletionHandler(completionHandler func(*AVPlayerItemAccessLog)) {
+	var __block_completionHandler objc.Block
+	if completionHandler != nil {
+		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completionHandler(AVPlayerItemAccessLogFromID(blockParam0))
+		})
+		defer __block_completionHandler.Release()
+	}
+	o.Ptr().Send(_aVPlayerItemSelFetchAccessLogWithCompletionHandler, __block_completionHandler)
+}
+
+// Asynchronously retrieves the error log without blocking the calling thread.
+func (o *AVPlayerItem) FetchErrorLogWithCompletionHandler(completionHandler func(*AVPlayerItemErrorLog)) {
+	var __block_completionHandler objc.Block
+	if completionHandler != nil {
+		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completionHandler(AVPlayerItemErrorLogFromID(blockParam0))
+		})
+		defer __block_completionHandler.Release()
+	}
+	o.Ptr().Send(_aVPlayerItemSelFetchErrorLogWithCompletionHandler, __block_completionHandler)
 }
 
 // Adds the specified player item output object to the receiver.

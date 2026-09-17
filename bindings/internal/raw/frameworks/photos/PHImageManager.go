@@ -71,7 +71,7 @@ func (o *PHImageManager) RequestImageForAssetTargetSizeContentModeOptionsResultH
 	return _ret
 }
 
-// Requests the largest represented image as data bytes and EXIF orientation for the specified asset.
+// Requests the largest represented image as data bytes and Exif orientation for the specified asset.
 func (o *PHImageManager) RequestImageDataAndOrientationForAssetOptionsResultHandler(asset *PHAsset, options *PHImageRequestOptions, resultHandler func(*foundation.NSData, *foundation.NSString, imageio.CGImagePropertyOrientation, *foundation.NSDictionary[objc.ID, objc.ID])) int32 {
 	var __block_resultHandler objc.Block
 	if resultHandler != nil {

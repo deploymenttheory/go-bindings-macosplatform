@@ -442,6 +442,14 @@ func (b *Box) WithGestureRecognizers(items ...GestureRecognizerProvider) *Box {
 	return b
 }
 
+// WithExclusiveGestureBehavior sets declares whether gesture recognizers should be exclusive in this view and its subviews.
+func (b *Box) WithExclusiveGestureBehavior(exclusiveGestureBehavior ViewExclusiveGestureBehavior) *Box {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setExclusiveGestureBehavior:"), exclusiveGestureBehavior)
+	})
+	return b
+}
+
 // WithAllowedTouchTypes sets the allowed touch types.
 func (b *Box) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *Box {
 	purego.Main(func() {
@@ -503,6 +511,15 @@ func (b *Box) WithHorizontalContentSizeConstraintActive(horizontalContentSizeCon
 func (b *Box) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Box {
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
+	return b
+}
+
+// WithTextSelectionManager sets the text selection manager for this view.
+func (b *Box) WithTextSelectionManager(textSelectionManager *TextSelectionManager) *Box {
+	defer runtime.KeepAlive(textSelectionManager)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setTextSelectionManager:"), objref.IDOf(textSelectionManager))
 	})
 	return b
 }

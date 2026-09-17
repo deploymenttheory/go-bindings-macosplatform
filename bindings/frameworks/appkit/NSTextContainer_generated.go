@@ -109,6 +109,13 @@ func (tc *TextContainer) WithLineBreakMode(lineBreakMode LineBreakMode) *TextCon
 	return tc
 }
 
+// WithExclusionPaths sets an array of path objects that represents the regions where text doesn’t display in the text container.
+func (tc *TextContainer) WithExclusionPaths(items ...*BezierPath) *TextContainer {
+	_arr := purego.SliceToNSArray(items, func(_v *BezierPath) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("setExclusionPaths:"), _arr)
+	return tc
+}
+
 // WithLineFragmentPadding sets the value for the text inset within line fragment rectangles.
 func (tc *TextContainer) WithLineFragmentPadding(lineFragmentPadding float64) *TextContainer {
 	objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("setLineFragmentPadding:"), lineFragmentPadding)
@@ -133,24 +140,17 @@ func (tc *TextContainer) WithHeightTracksTextView(heightTracksTextView bool) *Te
 	return tc
 }
 
-// WithLayoutManager sets the text container’s layout manager.
-func (tc *TextContainer) WithLayoutManager(layoutManager *LayoutManager) *TextContainer {
-	defer runtime.KeepAlive(layoutManager)
-	objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("setLayoutManager:"), objref.IDOf(layoutManager))
-	return tc
-}
-
-// WithExclusionPaths sets an array of path objects that represents the regions where text doesn’t display in the text container.
-func (tc *TextContainer) WithExclusionPaths(items ...*BezierPath) *TextContainer {
-	_arr := purego.SliceToNSArray(items, func(_v *BezierPath) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("setExclusionPaths:"), _arr)
-	return tc
-}
-
 // WithTextView sets the text container’s text view.
 func (tc *TextContainer) WithTextView(textView *TextView) *TextContainer {
 	defer runtime.KeepAlive(textView)
 	objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("setTextView:"), objref.IDOf(textView))
+	return tc
+}
+
+// WithLayoutManager sets the text container’s layout manager.
+func (tc *TextContainer) WithLayoutManager(layoutManager *LayoutManager) *TextContainer {
+	defer runtime.KeepAlive(layoutManager)
+	objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("setLayoutManager:"), objref.IDOf(layoutManager))
 	return tc
 }
 
@@ -167,67 +167,76 @@ func (tc *TextContainer) LineFragmentRectForProposedRectAtIndexWritingDirectionR
 	return _r
 }
 
-// TextLayoutManager returns the text layout manager.
+// TextLayoutManager returns the “NSTextLayoutManager“ owning the text container. When non-nil, the legacy `layoutManager` should be `nil`.
 func (tc *TextContainer) TextLayoutManager() *TextLayoutManager {
 	defer runtime.KeepAlive(tc)
 	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("textLayoutManager"))
 	return TextLayoutManagerFromID(_r)
 }
 
-// Size returns the size.
+// Size returns the size of the text container's bounding rectangle. This property defines the maximum size for the layout area returned from “NSTextContainer/lineFragmentRect(forProposedRect:at:writingDirection:remaining:)“. A value of `0.0` or less means no limitation. If you don't specify an explicit size when you initialize a text container, the system uses a default large size of (`10000000.0`, `10000000.0`).
 func (tc *TextContainer) Size() corefoundation.CGSize {
 	defer runtime.KeepAlive(tc)
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(tc), objc.RegisterName("size"))
 	return _r
 }
 
-// LineBreakMode returns the line break mode.
+// LineBreakMode returns the behavior of the last line inside the text container. The “NSLineBreakMode“ constants specify what happens when a line is too long for its container. For example, wrapping can occur on word boundaries (the default) or character boundaries, or the line can be clipped or truncated. The default value of this property is “NSLineBreakMode/byWordWrapping“.
 func (tc *TextContainer) LineBreakMode() LineBreakMode {
 	defer runtime.KeepAlive(tc)
 	_r := objc.Send[LineBreakMode](objref.IDOf(tc), objc.RegisterName("lineBreakMode"))
 	return _r
 }
 
-// LineFragmentPadding returns the line fragment padding.
+// ExclusionPaths returns an array of path objects that represents the regions where text doesn't display in the text container. The default value is an empty array.
+//
+// ExclusionPaths returns the collection as a Go slice.
+func (tc *TextContainer) ExclusionPaths() []*BezierPath {
+	defer runtime.KeepAlive(tc)
+	_arr := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("exclusionPaths"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *BezierPath { return BezierPathFromID(_id) })
+}
+
+// LineFragmentPadding returns the value for the text inset within line fragment rectangles. The padding appears at the beginning and end of the line fragment rectangles. The layout manager and text layout manager use this value to determine the layout width. The default value of this property is `5.0`. Line fragment padding is not designed to express text margins. Instead, you should use insets on your text view, adjust the paragraph margin attributes, or change the position of the text view within its superview. ## See Also - “lineFragmentRect(forProposedRect:at:writingDirection:remaining:)“
 func (tc *TextContainer) LineFragmentPadding() float64 {
 	defer runtime.KeepAlive(tc)
 	_r := objc.Send[float64](objref.IDOf(tc), objc.RegisterName("lineFragmentPadding"))
 	return _r
 }
 
-// MaximumNumberOfLines returns the maximum number of lines.
+// MaximumNumberOfLines returns the maximum number of lines that the text container can store. The layout manager and text layout manager use the value of this property to determine the maximum number of lines associated with the text container. The default value of this property is `0`, which indicates that there is no limit.
 func (tc *TextContainer) MaximumNumberOfLines() int {
 	defer runtime.KeepAlive(tc)
 	_r := objc.Send[int](objref.IDOf(tc), objc.RegisterName("maximumNumberOfLines"))
 	return _r
 }
 
-// IsSimpleRectangularTextContainer reports whether the object is simple rectangular text container.
+// IsSimpleRectangularTextContainer reports whether a Boolean that indicates whether the text container's region is a rectangle with no holes or gaps, and whose edges are parallel to the text view's coordinate system axes. The value of this property is <doc://com.apple.documentation/documentation/swift/true> when the text container's region is a rectangle with no holes or gaps and the edges are parallel to the text view's coordinate system axes. The default value of this property is <doc://com.apple.documentation/documentation/swift/false> when the “NSTextContainer/exclusionPaths“ property contains one or more items, when the “NSTextContainer/maximumNumberOfLines“ property is not zero, or when you override the “NSTextContainer/lineFragmentRect(forProposedRect:at:writingDirection:remaining:)“ method. Otherwise, the default value is <doc://com.apple.documentation/documentation/swift/true>.
 func (tc *TextContainer) IsSimpleRectangularTextContainer() bool {
 	defer runtime.KeepAlive(tc)
 	_r := objc.Send[bool](objref.IDOf(tc), objc.RegisterName("isSimpleRectangularTextContainer"))
 	return _r
 }
 
-// WidthTracksTextView wraps the corresponding Objective-C method.
+// WidthTracksTextView reports whether a Boolean that controls whether the text container adjusts the width of its bounding rectangle when its text view resizes. When the value of this property is <doc://com.apple.documentation/documentation/swift/true>, the text container adjusts its width when the width of its text view changes. The default value of this property is <doc://com.apple.documentation/documentation/swift/false>. For more information about size tracking, see [Text System Storage Layer Overview](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/TextStorageLayer/TextStorageLayer.html#//apple_ref/doc/uid/10000087i). ## See Also - “NSTextContainer/size“
 func (tc *TextContainer) WidthTracksTextView() bool {
 	defer runtime.KeepAlive(tc)
 	_r := objc.Send[bool](objref.IDOf(tc), objc.RegisterName("widthTracksTextView"))
 	return _r
 }
 
-// HeightTracksTextView wraps the corresponding Objective-C method.
+// HeightTracksTextView reports whether a Boolean that controls whether the text container adjusts the height of its bounding rectangle when its text view resizes. When the value of this property is <doc://com.apple.documentation/documentation/swift/true>, the text container adjusts its height when the height of its text view changes. The default value of this property is <doc://com.apple.documentation/documentation/swift/false>. For more information about size tracking, see [Text System Storage Layer Overview](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/TextStorageLayer/TextStorageLayer.html#//apple_ref/doc/uid/10000087i). ## See Also - “NSTextContainer/size“
 func (tc *TextContainer) HeightTracksTextView() bool {
 	defer runtime.KeepAlive(tc)
 	_r := objc.Send[bool](objref.IDOf(tc), objc.RegisterName("heightTracksTextView"))
 	return _r
 }
 
-// LayoutManager returns the layout manager.
-func (tc *TextContainer) LayoutManager() *LayoutManager {
+// TextView returns the text view.
+func (tc *TextContainer) TextView() *TextView {
 	defer runtime.KeepAlive(tc)
-	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("layoutManager"))
-	return LayoutManagerFromID(_r)
+	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("textView"))
+	return TextViewFromID(_r)
 }
 
 // ReplaceLayoutManager replaces the layout manager for the group of text system objects that contains the text container.
@@ -237,20 +246,11 @@ func (tc *TextContainer) ReplaceLayoutManager(newLayoutManager *LayoutManager) {
 	objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("replaceLayoutManager:"), objref.IDOf(newLayoutManager))
 }
 
-// ExclusionPaths returns the exclusion paths.
-//
-// ExclusionPaths returns the collection as a Go slice.
-func (tc *TextContainer) ExclusionPaths() []*BezierPath {
+// LayoutManager returns the layout manager.
+func (tc *TextContainer) LayoutManager() *LayoutManager {
 	defer runtime.KeepAlive(tc)
-	_arr := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("exclusionPaths"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *BezierPath { return BezierPathFromID(_id) })
-}
-
-// TextView returns the text view.
-func (tc *TextContainer) TextView() *TextView {
-	defer runtime.KeepAlive(tc)
-	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("textView"))
-	return TextViewFromID(_r)
+	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("layoutManager"))
+	return LayoutManagerFromID(_r)
 }
 
 // LineFragmentRectForProposedRectSweepDirectionMovementDirectionRemainingRect calculates and returns the longest rectangle available in the proposed rectangle for displaying text.

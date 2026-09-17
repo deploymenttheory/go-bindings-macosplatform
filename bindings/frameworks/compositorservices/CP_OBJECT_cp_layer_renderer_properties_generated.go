@@ -15,8 +15,6 @@ import (
 )
 
 // _cp_layer_renderer_properties is an idiomatic wrapper over the Objective-C class CP_OBJECT_cp_layer_renderer_properties.
-//
-// Returns the type value that specifies how the underlying texture organizes its views. - Parameters: - texture_topology: The texture topology to query. Get the texture topology from the layer properties using the “cp_layer_renderer_properties_get_texture_topology“ function. - Returns: A Metal value that indicates the arrangement of views within the texture. A texture might store the content of one view or multiple views. For example, a single texture might store one or both views for the left and right eyes of a head-mounted display. The texture type indicates this content organization strategy.
 type _cp_layer_renderer_properties struct {
 	objref.Handle
 }

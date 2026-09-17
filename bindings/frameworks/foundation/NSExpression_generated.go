@@ -116,21 +116,21 @@ func (e *Expression) AllowEvaluation() {
 	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("allowEvaluation"))
 }
 
-// ExpressionType returns the expression type.
+// ExpressionType returns the expression type for the expression. Accessing this property raises an exception if it is not applicable to the expression.
 func (e *Expression) ExpressionType() ExpressionType {
 	defer runtime.KeepAlive(e)
 	_r := objc.Send[ExpressionType](objref.IDOf(e), objc.RegisterName("expressionType"))
 	return _r
 }
 
-// ConstantValue returns the constant value.
+// ConstantValue returns the constant value of the expression.
 func (e *Expression) ConstantValue() obj.Object {
 	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("constantValue"))
 	return obj.Wrap(_r)
 }
 
-// KeyPath returns the key path.
+// KeyPath returns the key path for the expression.
 func (e *Expression) KeyPath() string {
 	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("keyPath"))
@@ -140,7 +140,7 @@ func (e *Expression) KeyPath() string {
 	return purego.GoString(_r)
 }
 
-// Function returns the function.
+// Function returns the function for the expression.
 func (e *Expression) Function() string {
 	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("function"))
@@ -150,7 +150,7 @@ func (e *Expression) Function() string {
 	return purego.GoString(_r)
 }
 
-// Variable returns the variable.
+// Variable returns the variable for the expression.
 func (e *Expression) Variable() string {
 	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("variable"))
@@ -160,14 +160,14 @@ func (e *Expression) Variable() string {
 	return purego.GoString(_r)
 }
 
-// Operand returns the operand.
+// Operand returns the operand for the expression. The operand is the object on which the expression's selector or block will be invoked. The object is the result of evaluating a key path or one of the defined functions.
 func (e *Expression) Operand() *Expression {
 	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("operand"))
 	return ExpressionFromID(_r)
 }
 
-// Arguments returns the arguments.
+// Arguments returns the arguments for the expression. The array of expressions which will be passed as parameters during invocation of the selector on the operand of a function expression.
 //
 // Arguments returns the collection as a Go slice.
 func (e *Expression) Arguments() []*Expression {
@@ -176,42 +176,42 @@ func (e *Expression) Arguments() []*Expression {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Expression { return ExpressionFromID(_id) })
 }
 
-// Collection returns the collection.
+// Collection returns the collection of expressions in an aggregate expression, or the collection element of a subquery expression.
 func (e *Expression) Collection() obj.Object {
 	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("collection"))
 	return obj.Wrap(_r)
 }
 
-// Predicate returns the predicate.
+// Predicate returns the predicate of a subquery expression.
 func (e *Expression) Predicate() *Predicate {
 	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("predicate"))
 	return PredicateFromID(_r)
 }
 
-// LeftExpression returns the left expression.
+// LeftExpression returns the left expression of an aggregate expression.
 func (e *Expression) LeftExpression() *Expression {
 	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("leftExpression"))
 	return ExpressionFromID(_r)
 }
 
-// RightExpression returns the right expression.
+// RightExpression returns the right expression of an aggregate expression.
 func (e *Expression) RightExpression() *Expression {
 	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("rightExpression"))
 	return ExpressionFromID(_r)
 }
 
-// TrueExpression returns the true expression.
+// TrueExpression returns an expression to evaluate if a conditional expression's predicate evaluates to true.
 func (e *Expression) TrueExpression() *Expression {
 	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("trueExpression"))
 	return ExpressionFromID(_r)
 }
 
-// FalseExpression returns the false expression.
+// FalseExpression returns an expression to evaluate if a conditional expression's predicate evaluates to false.
 func (e *Expression) FalseExpression() *Expression {
 	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("falseExpression"))

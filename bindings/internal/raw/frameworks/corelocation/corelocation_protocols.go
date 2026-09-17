@@ -3,6 +3,10 @@
 
 package corelocation
 
+// CLBodyIdentifiable wraps the ObjC protocol CLBodyIdentifiable.
+type CLBodyIdentifiable interface {
+}
+
 // CLLocationManagerDelegate wraps the ObjC protocol CLLocationManagerDelegate.
 type CLLocationManagerDelegate interface {
 }

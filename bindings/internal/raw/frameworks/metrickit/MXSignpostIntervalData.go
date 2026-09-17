@@ -13,6 +13,7 @@ import (
 // A data object representing the captured data for a custom metric.
 //
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxsignpostintervaldata
+// Deprecated: Use SignpostIntervalMetric instead.
 type MXSignpostIntervalData struct {
 	foundation.NSObject
 }

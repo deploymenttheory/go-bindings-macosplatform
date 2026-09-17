@@ -110,7 +110,7 @@ func (vmv *VirtualMachineView) WithAutomaticallyReconfiguresDisplay(automaticall
 	return vmv
 }
 
-// VirtualMachine returns the virtual machine to display in the view.
+// VirtualMachine returns the virtual machine to display in the view. In Swift, when set, the `adaptor` property is set to nil. If the `adaptor` is set, `virtualMachine` is reset to nil.
 func (vmv *VirtualMachineView) VirtualMachine() *VirtualMachine {
 	defer runtime.KeepAlive(vmv)
 	var _mainthread0 *VirtualMachine

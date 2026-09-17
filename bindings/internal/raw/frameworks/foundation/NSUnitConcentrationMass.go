@@ -9,8 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A unit of measure for concentration of mass.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsunitconcentrationmass
 type NSUnitConcentrationMass struct {
 	NSDimension
@@ -33,6 +31,7 @@ func NSUnitConcentrationMassFromID(id objc.ID) *NSUnitConcentrationMass {
 	return o
 }
 
+// Returns the millimoles per liter unit with the specified grams per mole.
 func NSUnitConcentrationMassMillimolesPerLiterWithGramsPerMole(gramsPerMole float64) *NSUnitConcentrationMass {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitConcentrationMass), _nSUnitConcentrationMassSelMillimolesPerLiterWithGramsPerMole, gramsPerMole)
 	if _ret != 0 {
@@ -41,6 +40,7 @@ func NSUnitConcentrationMassMillimolesPerLiterWithGramsPerMole(gramsPerMole floa
 	return NSUnitConcentrationMassFromID(_ret)
 }
 
+// The grams per liter unit of concentration.
 func NSUnitConcentrationMassGramsPerLiter() *NSUnitConcentrationMass {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitConcentrationMass), _nSUnitConcentrationMassSelGramsPerLiter)
 	if _ret != 0 {
@@ -49,6 +49,7 @@ func NSUnitConcentrationMassGramsPerLiter() *NSUnitConcentrationMass {
 	return NSUnitConcentrationMassFromID(_ret)
 }
 
+// The milligrams per deciliter unit of concentration.
 func NSUnitConcentrationMassMilligramsPerDeciliter() *NSUnitConcentrationMass {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitConcentrationMass), _nSUnitConcentrationMassSelMilligramsPerDeciliter)
 	if _ret != 0 {

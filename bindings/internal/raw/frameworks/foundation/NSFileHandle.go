@@ -11,8 +11,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An object-oriented wrapper for a file descriptor.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsfilehandle
 type NSFileHandle struct {
 	NSObject
@@ -77,6 +75,7 @@ func NSFileHandleFromID(id objc.ID) *NSFileHandle {
 	return o
 }
 
+// Creates and returns a file handle object associated with the specified file descriptor and deallocation policy. - Parameters: - fd: The POSIX file descriptor with which to initialize the file handle. This descriptor represents an open file or socket that you created previously. For example, when creating a file handle for a socket, you would pass the value returned by the `socket` function. - closeopt: `YES` if the returned file handle object should take ownership of the file descriptor and close it for you or `NO` if you want to maintain ownership of the file descriptor. - Returns: An initialized file handle object. If `flag` is `NO`, you are responsible for closing the file descriptor at some point after disposing of the file handle object. If you want the file handle object to close the descriptor for you automatically, pass `YES` for the `flag` parameter. The file handle does not close the descriptor if you release the file handle after sending “FileHandle/closeFile()“ or “FileHandle/close()“.
 func (o *NSFileHandle) InitWithFileDescriptorCloseOnDealloc(fd int, closeopt bool) *NSFileHandle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileHandleSelInitWithFileDescriptorCloseOnDealloc, fd, closeopt)
 	if _ret != 0 {
@@ -85,6 +84,7 @@ func (o *NSFileHandle) InitWithFileDescriptorCloseOnDealloc(fd int, closeopt boo
 	return NSFileHandleFromID(_ret)
 }
 
+// Returns a file handle initialized from data in an unarchiver.
 func (o *NSFileHandle) InitWithCoder(coder *NSCoder) *NSFileHandle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileHandleSelInitWithCoder, coder.Ptr())
 	if _ret != 0 {
@@ -93,7 +93,7 @@ func (o *NSFileHandle) InitWithCoder(coder *NSCoder) *NSFileHandle {
 	return NSFileHandleFromID(_ret)
 }
 
-// Reads the available data synchronously up to the end of file or maximum number of bytes.
+// Reads the available data synchronously up to the end of file or maximum number of bytes. - Returns: The data available through the receiver up to the maximum size that can be represented by an `NSData` object. This method invokes “FileHandle/readData(ofLength:)“ as part of its implementation.
 func (o *NSFileHandle) ReadDataToEndOfFileAndReturnError() (*NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileHandleSelReadDataToEndOfFileAndReturnError, unsafe.Pointer(&_nsErr))
@@ -106,7 +106,7 @@ func (o *NSFileHandle) ReadDataToEndOfFileAndReturnError() (*NSData, error) {
 	return NSDataFromID(_ret), nil
 }
 
-// Reads data synchronously up to the specified number of bytes.
+// Reads data synchronously up to the specified number of bytes. - Parameters: - length: The number of bytes to read from the receiver. - error: If an error occurs, upon return contains an `NSError` object that describes the problem. - Returns: The data available through the receiver up to a maximum of `length` bytes, or `nil` if an error occurred. If the receiver is a file, this method returns data obtained by reading `length` bytes starting at the current file pointer. If `length` bytes are not available, returns as many bytes as are available. Returns an empty `NSData` when the end of file is reached.
 func (o *NSFileHandle) ReadDataUpToLengthError(length uint) (*NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileHandleSelReadDataUpToLengthError, length, unsafe.Pointer(&_nsErr))
@@ -119,7 +119,7 @@ func (o *NSFileHandle) ReadDataUpToLengthError(length uint) (*NSData, error) {
 	return NSDataFromID(_ret), nil
 }
 
-// Writes the specified data synchronously to the file handle.
+// Writes the specified data synchronously to the file handle. - Parameters: - data: The data to write. - error: If an error occurs, upon return contains an `NSError` object that describes the problem. - Returns: `YES` if the data was written successfully; otherwise, `NO`. This method writes data at the current file pointer, advancing the file pointer.
 func (o *NSFileHandle) WriteDataError(data *NSData) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileHandleSelWriteDataError, data.Ptr(), unsafe.Pointer(&_nsErr))
@@ -129,7 +129,7 @@ func (o *NSFileHandle) WriteDataError(data *NSData) (bool, error) {
 	return _ret, nil
 }
 
-// Get the current position of the file pointer within the file.
+// Gets the position of the file pointer within the file. - Parameters: - offsetInFile: On return, contains the file offset. - error: If an error occurs, upon return contains an `NSError` object that describes the problem. - Returns: `YES` if the offset was retrieved successfully; otherwise, `NO`.
 func (o *NSFileHandle) GetOffsetError(offsetInFile *uint64) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileHandleSelGetOffsetError, offsetInFile, unsafe.Pointer(&_nsErr))
@@ -139,7 +139,7 @@ func (o *NSFileHandle) GetOffsetError(offsetInFile *uint64) (bool, error) {
 	return _ret, nil
 }
 
-// Places the file pointer at the end of the file referenced by the file handle and returns the new file offset.
+// Places the file pointer at the end of the file and returns the new file offset. - Parameters: - offsetInFile: On return, contains the new file offset, which is the file size. - error: If an error occurs, upon return contains an `NSError` object that describes the problem. - Returns: `YES` if the operation succeeded; otherwise, `NO`.
 func (o *NSFileHandle) SeekToEndReturningOffsetError(offsetInFile *uint64) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileHandleSelSeekToEndReturningOffsetError, offsetInFile, unsafe.Pointer(&_nsErr))
@@ -149,6 +149,7 @@ func (o *NSFileHandle) SeekToEndReturningOffsetError(offsetInFile *uint64) (bool
 	return _ret, nil
 }
 
+// Moves the file pointer to the specified offset within the file. - Parameters: - offset: The offset to seek to. - error: If an error occurs, upon return contains an `NSError` object that describes the problem. - Returns: `YES` if the operation succeeded; otherwise, `NO`.
 func (o *NSFileHandle) SeekToOffsetError(offset uint64) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileHandleSelSeekToOffsetError, offset, unsafe.Pointer(&_nsErr))
@@ -158,6 +159,7 @@ func (o *NSFileHandle) SeekToOffsetError(offset uint64) (bool, error) {
 	return _ret, nil
 }
 
+// Truncates or extends the file represented by the file handle to a specified offset within the file and puts the file pointer at that position. - Parameters: - offset: The offset within the file that will mark the new end of the file. - error: If an error occurs, upon return contains an `NSError` object that describes the problem. - Returns: `YES` if the operation succeeded; otherwise, `NO`. If the file is extended (if `offset` is beyond the current end of file), the added characters are null bytes.
 func (o *NSFileHandle) TruncateAtOffsetError(offset uint64) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileHandleSelTruncateAtOffsetError, offset, unsafe.Pointer(&_nsErr))
@@ -167,6 +169,7 @@ func (o *NSFileHandle) TruncateAtOffsetError(offset uint64) (bool, error) {
 	return _ret, nil
 }
 
+// Causes all in-memory data and attributes of the file represented by the file handle to write to permanent storage. This method should be invoked by programs that require the file to be in a known state. Invocation of this method does not return until memory is flushed.
 func (o *NSFileHandle) SynchronizeAndReturnError() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileHandleSelSynchronizeAndReturnError, unsafe.Pointer(&_nsErr))
@@ -176,6 +179,7 @@ func (o *NSFileHandle) SynchronizeAndReturnError() (bool, error) {
 	return _ret, nil
 }
 
+// Disallows further access to the represented file or communications channel and signals end of file on communications channels that permit writing. If the file handle object owns its file descriptor, it automatically closes that descriptor when it is deallocated. If you initialized the file handle object using the “FileHandle/init(fileDescriptor:closeOnDealloc:)“ method, the file handle object takes ownership of the file descriptor if you passed `YES` for the `flag` parameter. After invoking this method, you may still need to release the file handle object, but the object should not be used to read from or write to the file.
 func (o *NSFileHandle) CloseAndReturnError() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileHandleSelCloseAndReturnError, unsafe.Pointer(&_nsErr))
@@ -185,6 +189,7 @@ func (o *NSFileHandle) CloseAndReturnError() (bool, error) {
 	return _ret, nil
 }
 
+// The data currently available in the receiver. If the receiver is a file, returns the data obtained by reading the file from the current file pointer to the end of the file. If the receiver is a communications channel, reads up to a buffer of data and returns it; if no data is available, the method blocks. Returns an empty data object if the end of file has been reached. Raises “NSExceptionName/fileHandleOperationException“ upon failure.
 func (o *NSFileHandle) AvailableData() *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileHandleSelAvailableData)
 	if _ret != 0 {
@@ -193,6 +198,7 @@ func (o *NSFileHandle) AvailableData() *NSData {
 	return NSDataFromID(_ret)
 }
 
+// Returns a file handle initialized for reading the file, device, or named socket at the specified path. - Parameter path: The path to the file, device, or named socket to access. - Returns: The initialized file handle object or `nil` if no file exists at `path`. The file pointer is set to the beginning of the file. You cannot write data to the returned file handle object. The returned object responds only to “FileHandle/readData(ofLength:)“, “FileHandle/readDataToEndOfFile()“, and “FileHandle/availableData“. The file handle owns its file descriptor.
 func NSFileHandleFileHandleForReadingAtPath(path *NSString) *NSFileHandle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFileHandle), _nSFileHandleSelFileHandleForReadingAtPath, path.Ptr())
 	if _ret != 0 {
@@ -201,6 +207,7 @@ func NSFileHandleFileHandleForReadingAtPath(path *NSString) *NSFileHandle {
 	return NSFileHandleFromID(_ret)
 }
 
+// Returns a file handle initialized for writing to the file, device, or named socket at the specified path. - Parameter path: The path to the file, device, or named socket to access. - Returns: The initialized file handle object or `nil` if no file exists at `path`. The file pointer is set to the beginning of the file. You cannot read data from the returned file handle object. Use “FileHandle/write(_:)“ to write data to the returned file handle object. The file handle owns its file descriptor.
 func NSFileHandleFileHandleForWritingAtPath(path *NSString) *NSFileHandle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFileHandle), _nSFileHandleSelFileHandleForWritingAtPath, path.Ptr())
 	if _ret != 0 {
@@ -209,6 +216,7 @@ func NSFileHandleFileHandleForWritingAtPath(path *NSString) *NSFileHandle {
 	return NSFileHandleFromID(_ret)
 }
 
+// Returns a file handle initialized for reading and writing to the file, device, or named socket at the specified path. - Parameter path: The path to the file, device, or named socket to access. - Returns: The initialized file handle object or `nil` if no file exists at `path`. The file pointer is set to the beginning of the file. The returned object responds to both read and write messages.
 func NSFileHandleFileHandleForUpdatingAtPath(path *NSString) *NSFileHandle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFileHandle), _nSFileHandleSelFileHandleForUpdatingAtPath, path.Ptr())
 	if _ret != 0 {
@@ -217,6 +225,7 @@ func NSFileHandleFileHandleForUpdatingAtPath(path *NSString) *NSFileHandle {
 	return NSFileHandleFromID(_ret)
 }
 
+// Returns a file handle initialized for reading the file, device, or named socket at the specified URL. - Parameters: - url: The URL of the file, device, or named socket to access. - error: If an error occurs, upon return contains an `NSError` object that describes the problem. Pass `NULL` if you do not want error information. - Returns: The initialized file handle object or `nil` if no file exists at `url`. The file pointer is set to the beginning of the file. You cannot write data to the returned file handle object. Use the “FileHandle/readDataToEndOfFile()“ or “FileHandle/readData(ofLength:)“ methods to read data from it. When using this method to create a file handle object, the file handle owns its associated file descriptor and is responsible for closing it.
 func NSFileHandleFileHandleForReadingFromURLError(url *NSURL) (*NSFileHandle, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFileHandle), _nSFileHandleSelFileHandleForReadingFromURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
@@ -229,6 +238,7 @@ func NSFileHandleFileHandleForReadingFromURLError(url *NSURL) (*NSFileHandle, er
 	return NSFileHandleFromID(_ret), nil
 }
 
+// Returns a file handle initialized for writing to the file, device, or named socket at the specified URL. - Parameters: - url: The URL of the file, device, or named socket to access. - error: If an error occurs, upon return contains an `NSError` object that describes the problem. Pass `NULL` if you do not want error information. - Returns: The initialized file handle object or `nil` if no file exists at `url`. The file pointer is set to the beginning of the file. The returned object responds only to “FileHandle/write(_:)“. When using this method to create a file handle object, the file handle owns its associated file descriptor and is responsible for closing it.
 func NSFileHandleFileHandleForWritingToURLError(url *NSURL) (*NSFileHandle, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFileHandle), _nSFileHandleSelFileHandleForWritingToURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
@@ -241,6 +251,7 @@ func NSFileHandleFileHandleForWritingToURLError(url *NSURL) (*NSFileHandle, erro
 	return NSFileHandleFromID(_ret), nil
 }
 
+// Returns a file handle initialized for reading and writing to the file, device, or named socket at the specified URL. - Parameters: - url: The URL of the file, device, or named socket to access. - error: If an error occurs, upon return contains an `NSError` object that describes the problem. Pass `NULL` if you do not want error information. - Returns: The initialized file handle object or `nil` if no file exists at `url`. The file pointer is set to the beginning of the file. The returned object responds to both read and “FileHandle/write(_:)“ messages. When using this method to create a file handle object, the file handle owns its associated file descriptor and is responsible for closing it.
 func NSFileHandleFileHandleForUpdatingURLError(url *NSURL) (*NSFileHandle, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFileHandle), _nSFileHandleSelFileHandleForUpdatingURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
@@ -253,6 +264,7 @@ func NSFileHandleFileHandleForUpdatingURLError(url *NSURL) (*NSFileHandle, error
 	return NSFileHandleFromID(_ret), nil
 }
 
+// The file handle associated with the standard input file. Conventionally this is a terminal device on which the user enters a stream of data. There is one standard input file handle per process; it is a shared instance.
 func NSFileHandleFileHandleWithStandardInput() *NSFileHandle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFileHandle), _nSFileHandleSelFileHandleWithStandardInput)
 	if _ret != 0 {
@@ -261,6 +273,7 @@ func NSFileHandleFileHandleWithStandardInput() *NSFileHandle {
 	return NSFileHandleFromID(_ret)
 }
 
+// The file handle associated with the standard output file. Conventionally this is a terminal device that receives a stream of data from a program. There is one standard output file handle per process; it is a shared instance.
 func NSFileHandleFileHandleWithStandardOutput() *NSFileHandle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFileHandle), _nSFileHandleSelFileHandleWithStandardOutput)
 	if _ret != 0 {
@@ -269,6 +282,7 @@ func NSFileHandleFileHandleWithStandardOutput() *NSFileHandle {
 	return NSFileHandleFromID(_ret)
 }
 
+// The file handle associated with the standard error file. Conventionally this is a terminal device to which error messages are sent. There is one standard error file handle per process; it is a shared instance.
 func NSFileHandleFileHandleWithStandardError() *NSFileHandle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFileHandle), _nSFileHandleSelFileHandleWithStandardError)
 	if _ret != 0 {
@@ -277,6 +291,7 @@ func NSFileHandleFileHandleWithStandardError() *NSFileHandle {
 	return NSFileHandleFromID(_ret)
 }
 
+// The file handle associated with a null device. You can use the returned file handle as a "stand in" for standard file handles. Reads from the null-device file handle return an empty “NSData“ object. Writes to it are discarded. The “FileHandle/fileDescriptor“ property returns an illegal value. The “FileHandle/close()“ method has no effect.
 func NSFileHandleFileHandleWithNullDevice() *NSFileHandle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFileHandle), _nSFileHandleSelFileHandleWithNullDevice)
 	if _ret != 0 {
@@ -285,39 +300,47 @@ func NSFileHandleFileHandleWithNullDevice() *NSFileHandle {
 	return NSFileHandleFromID(_ret)
 }
 
-// Deprecated: Not supported
+// Reads from the file or communications channel in the background and posts a notification when finished. - Parameter modes: The runloop modes in which the read completion notification can be posted. See “FileHandle/readInBackgroundAndNotify()“ for details. This method differs in that the notification is queued for posting in the specified run-loop modes.
 func (o *NSFileHandle) ReadInBackgroundAndNotifyForModes(modes *NSArray[*NSString]) {
 	o.Ptr().Send(_nSFileHandleSelReadInBackgroundAndNotifyForModes, modes.Ptr())
 }
 
+// Reads from the file or communications channel in the background and posts a notification when finished. This method performs an asynchronous “FileHandle/availableData“ operation on a file or communications channel and posts an “FileHandle/readCompletionNotification“. You must call this method from a thread that has an active run loop.
 func (o *NSFileHandle) ReadInBackgroundAndNotify() {
 	o.Ptr().Send(_nSFileHandleSelReadInBackgroundAndNotify)
 }
 
+// Reads to the end of file from the file or communications channel in the background and posts a notification when finished. - Parameter modes: The runloop modes in which the read completion notification can be posted. See “FileHandle/readToEndOfFileInBackgroundAndNotify()“ for details. This method differs in that the notification is queued for posting in the specified run-loop modes.
 func (o *NSFileHandle) ReadToEndOfFileInBackgroundAndNotifyForModes(modes *NSArray[*NSString]) {
 	o.Ptr().Send(_nSFileHandleSelReadToEndOfFileInBackgroundAndNotifyForModes, modes.Ptr())
 }
 
+// Reads to the end of file from the file or communications channel in the background and posts a notification when finished. This method performs an asynchronous “FileHandle/readDataToEndOfFile()“ operation on a file or communications channel and posts an `NSFileHandleReadToEndOfFileCompletionNotification`. You must call this method from a thread that has an active run loop.
 func (o *NSFileHandle) ReadToEndOfFileInBackgroundAndNotify() {
 	o.Ptr().Send(_nSFileHandleSelReadToEndOfFileInBackgroundAndNotify)
 }
 
+// Accepts a socket connection (for stream-type sockets only) in the background and creates a file handle for the "near" (client) end of the communications channel. - Parameter modes: The runloop modes in which the connection accepted notification can be posted. See “FileHandle/acceptConnectionInBackgroundAndNotify()“ for details. This method differs in that the notification is queued for posting in the specified run-loop modes.
 func (o *NSFileHandle) AcceptConnectionInBackgroundAndNotifyForModes(modes *NSArray[*NSString]) {
 	o.Ptr().Send(_nSFileHandleSelAcceptConnectionInBackgroundAndNotifyForModes, modes.Ptr())
 }
 
+// Accepts a socket connection (for stream-type sockets only) in the background and creates a file handle for the "near" (client) end of the communications channel. This method asynchronously creates a file handle for the other end of the socket connection and returns that object by posting an `NSFileHandleConnectionAcceptedNotification`. The notification includes a `userInfo` dictionary with the created “FileHandle“ object, accessible using the `NSFileHandleNotificationFileHandleItem` key. You must call this method from a thread that has an active run loop.
 func (o *NSFileHandle) AcceptConnectionInBackgroundAndNotify() {
 	o.Ptr().Send(_nSFileHandleSelAcceptConnectionInBackgroundAndNotify)
 }
 
+// Asynchronously checks to see if data is available. - Parameter modes: The runloop modes in which the data available notification can be posted. See “FileHandle/waitForDataInBackgroundAndNotify()“ for details. This method differs in that the notification is queued for posting in the specified run-loop modes.
 func (o *NSFileHandle) WaitForDataInBackgroundAndNotifyForModes(modes *NSArray[*NSString]) {
 	o.Ptr().Send(_nSFileHandleSelWaitForDataInBackgroundAndNotifyForModes, modes.Ptr())
 }
 
+// Asynchronously checks to see if data is available. When the data becomes available, this method posts a “FileHandle/dataAvailableNotification“ notification on the current thread. You must call this method from a thread that has an active run loop.
 func (o *NSFileHandle) WaitForDataInBackgroundAndNotify() {
 	o.Ptr().Send(_nSFileHandleSelWaitForDataInBackgroundAndNotify)
 }
 
+// The block to use for reading the contents of the file handle asynchronously. The default value is `nil`. To read data asynchronously, assign a non-nil block. Doing so creates a dispatch source for the associated file descriptor and submits the block to that source when data arrives. Set to `nil` to stop reading.
 func (o *NSFileHandle) ReadabilityHandler() objc.Block {
 	_ret := objc.Send[objc.Block](o.Ptr(), _nSFileHandleSelReadabilityHandler)
 	return _ret
@@ -337,6 +360,7 @@ func (o *NSFileHandle) SetReadabilityHandler(readabilityHandler func(*NSFileHand
 	o.Ptr().Send(_nSFileHandleSelSetReadabilityHandler, __block_readabilityHandler)
 }
 
+// The block to use for writing the contents of the file handle asynchronously. The default value is `nil`. To write data asynchronously, assign a non-nil block. Doing so creates a dispatch source for the associated file descriptor and submits the block when the file handle has room for data. Set to `nil` to stop.
 func (o *NSFileHandle) WriteabilityHandler() objc.Block {
 	_ret := objc.Send[objc.Block](o.Ptr(), _nSFileHandleSelWriteabilityHandler)
 	return _ret
@@ -356,6 +380,7 @@ func (o *NSFileHandle) SetWriteabilityHandler(writeabilityHandler func(*NSFileHa
 	o.Ptr().Send(_nSFileHandleSelSetWriteabilityHandler, __block_writeabilityHandler)
 }
 
+// Creates and returns a file handle object associated with the specified file descriptor. - Parameter fd: The POSIX file descriptor. - Returns: A file handle initialized with `fileDescriptor`. The file descriptor is not owned by the file handle object, so you are responsible for closing the file descriptor at some point after disposing of the file handle object. You can create a file handle for a socket by using the result of a `socket` call as `fileDescriptor`.
 func (o *NSFileHandle) InitWithFileDescriptor(fd int) *NSFileHandle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileHandleSelInitWithFileDescriptor, fd)
 	if _ret != 0 {
@@ -369,6 +394,7 @@ func (o *NSFileHandle) FileDescriptor() int {
 	return _ret
 }
 
+// Reads the available data synchronously up to the end of file or maximum number of bytes. @DeprecationSummary { Use “FileHandle/readToEnd()“ in Swift, or `readDataToEndOfFileAndReturnError:` in Objective-C. } - Returns: The data available through the receiver up to the maximum size that can be represented by an `NSData` object. This method invokes “FileHandle/readData(ofLength:)“ as part of its implementation. Raises “NSExceptionName/fileHandleOperationException“ upon failure.
 func (o *NSFileHandle) ReadDataToEndOfFile() *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileHandleSelReadDataToEndOfFile)
 	if _ret != 0 {
@@ -377,6 +403,7 @@ func (o *NSFileHandle) ReadDataToEndOfFile() *NSData {
 	return NSDataFromID(_ret)
 }
 
+// Reads data synchronously up to the specified number of bytes. @DeprecationSummary { Use “FileHandle/read(upToCount:)“ in Swift, or `readDataUpToLength:error:` in Objective-C. } - Parameter length: The number of bytes to read from the receiver. - Returns: The data available through the receiver up to a maximum of `length` bytes. If the receiver is a file, this method returns data obtained by reading `length` bytes starting at the current file pointer. Returns an empty `NSData` when the end of file is reached. Raises “NSExceptionName/fileHandleOperationException“ upon failure.
 func (o *NSFileHandle) ReadDataOfLength(length uint) *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileHandleSelReadDataOfLength, length)
 	if _ret != 0 {
@@ -385,32 +412,39 @@ func (o *NSFileHandle) ReadDataOfLength(length uint) *NSData {
 	return NSDataFromID(_ret)
 }
 
+// Writes the specified data synchronously to the file handle. @DeprecationSummary { Use “FileHandle/write(contentsOf:)“ in Swift, or `writeData:error:` in Objective-C. } - Parameter data: The data to write. This method writes data at the current file pointer, advancing the file pointer. Raises “NSExceptionName/fileHandleOperationException“ upon failure.
 func (o *NSFileHandle) WriteData(data *NSData) {
 	o.Ptr().Send(_nSFileHandleSelWriteData, data.Ptr())
 }
 
+// The position of the file pointer within the file represented by the file handle. @DeprecationSummary { Use “FileHandle/offset()“ in Swift, or `getOffset:error:` in Objective-C. } Raises “NSExceptionName/fileHandleOperationException“ if the message is sent to a file handle representing a pipe or socket, or if the file descriptor is closed.
 func (o *NSFileHandle) OffsetInFile() uint64 {
 	_ret := objc.Send[uint64](o.Ptr(), _nSFileHandleSelOffsetInFile)
 	return _ret
 }
 
+// Places the file pointer at the end of the file referenced by the file handle and returns the new file offset. @DeprecationSummary { Use “FileHandle/seekToEnd()“ in Swift, or `seekToEndReturningOffset:error:` in Objective-C. } - Returns: The file offset with the file pointer at the end of the file. This is the size of the file. Raises “NSExceptionName/fileHandleOperationException“ if the message is sent to a file handle representing a pipe or socket, or if the file descriptor is closed.
 func (o *NSFileHandle) SeekToEndOfFile() uint64 {
 	_ret := objc.Send[uint64](o.Ptr(), _nSFileHandleSelSeekToEndOfFile)
 	return _ret
 }
 
+// Moves the file pointer to the specified offset within the file represented by the receiver. @DeprecationSummary { Use “FileHandle/seek(toOffset:)“ instead. } - Parameter offset: The offset to seek to. Raises “NSExceptionName/fileHandleOperationException“ if the message is sent to a file handle representing a pipe or socket, or if the file descriptor is closed.
 func (o *NSFileHandle) SeekToFileOffset(offset uint64) {
 	o.Ptr().Send(_nSFileHandleSelSeekToFileOffset, offset)
 }
 
+// Truncates or extends the file represented by the file handle to a specified offset within the file and puts the file pointer at that position. @DeprecationSummary { Use “FileHandle/truncate(atOffset:)“ instead. } - Parameter offset: The offset within the file that will mark the new end of the file. If the file is extended (if `offset` is beyond the current end of file), the added characters are null bytes. Raises “NSExceptionName/fileHandleOperationException“ upon failure.
 func (o *NSFileHandle) TruncateFileAtOffset(offset uint64) {
 	o.Ptr().Send(_nSFileHandleSelTruncateFileAtOffset, offset)
 }
 
+// Causes all in-memory data and attributes of the file represented by the handle to write to permanent storage. @DeprecationSummary { Use “FileHandle/synchronize()“ instead. } This method should be invoked by programs that require the file to be in a known state. Invocation of this method does not return until memory is flushed. Raises “NSExceptionName/fileHandleOperationException“ upon failure.
 func (o *NSFileHandle) SynchronizeFile() {
 	o.Ptr().Send(_nSFileHandleSelSynchronizeFile)
 }
 
+// Disallows further access to the represented file or communications channel and signals end of file on communications channels that permit writing. @DeprecationSummary { Use “FileHandle/close()“ to handle errors when closing a file. } If the file handle object owns its file descriptor, it automatically closes that descriptor when it is deallocated. After invoking this method, you may still need to release the file handle object, but the object should not be used to read from or write to the file.
 func (o *NSFileHandle) CloseFile() {
 	o.Ptr().Send(_nSFileHandleSelCloseFile)
 }

@@ -49,6 +49,8 @@ const (
 	Ar_authorization_type_world_sensing AuthorizationType = 2
 	// The authorization for camera access.
 	Ar_authorization_type_camera_access AuthorizationType = 8
+	// Authorization type used when requesting:
+	Ar_authorization_type_accessory_tracking AuthorizationType = 32
 )
 
 // String returns the AuthorizationType constant's name, or its numeric form when the
@@ -63,6 +65,9 @@ func (e AuthorizationType) String() string {
 	}
 	if e&Ar_authorization_type_camera_access != 0 {
 		parts = append(parts, "Ar_authorization_type_camera_access")
+	}
+	if e&Ar_authorization_type_accessory_tracking != 0 {
+		parts = append(parts, "Ar_authorization_type_accessory_tracking")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -147,6 +152,29 @@ func (e DeviceAnchorTrackingState) String() string {
 		return "Ar_device_anchor_tracking_state_tracked"
 	default:
 		return fmt.Sprintf("DeviceAnchorTrackingState(%d)", int64(e))
+	}
+}
+
+// A correction type to apply for transforms returned from ARKit APIs.
+type TransformCorrection int64
+
+const (
+	// Transforms are unaltered and represent actual locations.
+	Ar_transform_correction_none TransformCorrection = 0
+	// Transforms are corrected to render over physical objects in passthrough displays.
+	Ar_transform_correction_rendered TransformCorrection = 1
+)
+
+// String returns the TransformCorrection constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TransformCorrection) String() string {
+	switch e {
+	case Ar_transform_correction_none:
+		return "Ar_transform_correction_none"
+	case Ar_transform_correction_rendered:
+		return "Ar_transform_correction_rendered"
+	default:
+		return fmt.Sprintf("TransformCorrection(%d)", int64(e))
 	}
 }
 
@@ -326,6 +354,139 @@ func (e ACLType) String() string {
 	}
 }
 
+// An enumeration that describes the status of a hand anchor query.
+type HandAnchorQueryStatus int64
+
+const (
+	Ar_hand_anchor_query_status_failure HandAnchorQueryStatus = 1
+)
+
+// String returns the HandAnchorQueryStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e HandAnchorQueryStatus) String() string {
+	switch e {
+	case Ar_hand_anchor_query_status_failure:
+		return "Ar_hand_anchor_query_status_failure"
+	default:
+		return fmt.Sprintf("HandAnchorQueryStatus(%d)", int64(e))
+	}
+}
+
+// The values identifying hand chirality.
+type HandChirality int64
+
+const ()
+
+// String returns the HandChirality constant's name, or its numeric form when the
+// value is not a known constant.
+func (e HandChirality) String() string {
+	switch e {
+	default:
+		return fmt.Sprintf("HandChirality(%d)", int64(e))
+	}
+}
+
+// Enum for hand fidelity.
+type HandFidelity int64
+
+const ()
+
+// String returns the HandFidelity constant's name, or its numeric form when the
+// value is not a known constant.
+func (e HandFidelity) String() string {
+	switch e {
+	default:
+		return fmt.Sprintf("HandFidelity(%d)", int64(e))
+	}
+}
+
+// An enumeration that describes hand joint names.
+type HandSkeletonJointName uint64
+
+const (
+	Ar_hand_skeleton_joint_name_thumb_intermediate_tip          HandSkeletonJointName = 3
+	Ar_hand_skeleton_joint_name_thumb_tip                       HandSkeletonJointName = 4
+	Ar_hand_skeleton_joint_name_index_finger_metacarpal         HandSkeletonJointName = 5
+	Ar_hand_skeleton_joint_name_index_finger_knuckle            HandSkeletonJointName = 6
+	Ar_hand_skeleton_joint_name_index_finger_intermediate_base  HandSkeletonJointName = 7
+	Ar_hand_skeleton_joint_name_index_finger_intermediate_tip   HandSkeletonJointName = 8
+	Ar_hand_skeleton_joint_name_index_finger_tip                HandSkeletonJointName = 9
+	Ar_hand_skeleton_joint_name_middle_finger_metacarpal        HandSkeletonJointName = 10
+	Ar_hand_skeleton_joint_name_middle_finger_knuckle           HandSkeletonJointName = 11
+	Ar_hand_skeleton_joint_name_middle_finger_intermediate_base HandSkeletonJointName = 12
+	Ar_hand_skeleton_joint_name_middle_finger_intermediate_tip  HandSkeletonJointName = 13
+	Ar_hand_skeleton_joint_name_middle_finger_tip               HandSkeletonJointName = 14
+	Ar_hand_skeleton_joint_name_ring_finger_metacarpal          HandSkeletonJointName = 15
+	Ar_hand_skeleton_joint_name_ring_finger_knuckle             HandSkeletonJointName = 16
+	Ar_hand_skeleton_joint_name_ring_finger_intermediate_base   HandSkeletonJointName = 17
+	Ar_hand_skeleton_joint_name_ring_finger_intermediate_tip    HandSkeletonJointName = 18
+	Ar_hand_skeleton_joint_name_ring_finger_tip                 HandSkeletonJointName = 19
+	Ar_hand_skeleton_joint_name_little_finger_metacarpal        HandSkeletonJointName = 20
+	Ar_hand_skeleton_joint_name_little_finger_knuckle           HandSkeletonJointName = 21
+	Ar_hand_skeleton_joint_name_little_finger_intermediate_base HandSkeletonJointName = 22
+	Ar_hand_skeleton_joint_name_little_finger_intermediate_tip  HandSkeletonJointName = 23
+	Ar_hand_skeleton_joint_name_little_finger_tip               HandSkeletonJointName = 24
+	Ar_hand_skeleton_joint_name_forearm_wrist                   HandSkeletonJointName = 25
+	Ar_hand_skeleton_joint_name_forearm_arm                     HandSkeletonJointName = 26
+)
+
+// String returns the HandSkeletonJointName constant's name, or its numeric form when the
+// value is not a known constant.
+func (e HandSkeletonJointName) String() string {
+	switch e {
+	case Ar_hand_skeleton_joint_name_thumb_intermediate_tip:
+		return "Ar_hand_skeleton_joint_name_thumb_intermediate_tip"
+	case Ar_hand_skeleton_joint_name_thumb_tip:
+		return "Ar_hand_skeleton_joint_name_thumb_tip"
+	case Ar_hand_skeleton_joint_name_index_finger_metacarpal:
+		return "Ar_hand_skeleton_joint_name_index_finger_metacarpal"
+	case Ar_hand_skeleton_joint_name_index_finger_knuckle:
+		return "Ar_hand_skeleton_joint_name_index_finger_knuckle"
+	case Ar_hand_skeleton_joint_name_index_finger_intermediate_base:
+		return "Ar_hand_skeleton_joint_name_index_finger_intermediate_base"
+	case Ar_hand_skeleton_joint_name_index_finger_intermediate_tip:
+		return "Ar_hand_skeleton_joint_name_index_finger_intermediate_tip"
+	case Ar_hand_skeleton_joint_name_index_finger_tip:
+		return "Ar_hand_skeleton_joint_name_index_finger_tip"
+	case Ar_hand_skeleton_joint_name_middle_finger_metacarpal:
+		return "Ar_hand_skeleton_joint_name_middle_finger_metacarpal"
+	case Ar_hand_skeleton_joint_name_middle_finger_knuckle:
+		return "Ar_hand_skeleton_joint_name_middle_finger_knuckle"
+	case Ar_hand_skeleton_joint_name_middle_finger_intermediate_base:
+		return "Ar_hand_skeleton_joint_name_middle_finger_intermediate_base"
+	case Ar_hand_skeleton_joint_name_middle_finger_intermediate_tip:
+		return "Ar_hand_skeleton_joint_name_middle_finger_intermediate_tip"
+	case Ar_hand_skeleton_joint_name_middle_finger_tip:
+		return "Ar_hand_skeleton_joint_name_middle_finger_tip"
+	case Ar_hand_skeleton_joint_name_ring_finger_metacarpal:
+		return "Ar_hand_skeleton_joint_name_ring_finger_metacarpal"
+	case Ar_hand_skeleton_joint_name_ring_finger_knuckle:
+		return "Ar_hand_skeleton_joint_name_ring_finger_knuckle"
+	case Ar_hand_skeleton_joint_name_ring_finger_intermediate_base:
+		return "Ar_hand_skeleton_joint_name_ring_finger_intermediate_base"
+	case Ar_hand_skeleton_joint_name_ring_finger_intermediate_tip:
+		return "Ar_hand_skeleton_joint_name_ring_finger_intermediate_tip"
+	case Ar_hand_skeleton_joint_name_ring_finger_tip:
+		return "Ar_hand_skeleton_joint_name_ring_finger_tip"
+	case Ar_hand_skeleton_joint_name_little_finger_metacarpal:
+		return "Ar_hand_skeleton_joint_name_little_finger_metacarpal"
+	case Ar_hand_skeleton_joint_name_little_finger_knuckle:
+		return "Ar_hand_skeleton_joint_name_little_finger_knuckle"
+	case Ar_hand_skeleton_joint_name_little_finger_intermediate_base:
+		return "Ar_hand_skeleton_joint_name_little_finger_intermediate_base"
+	case Ar_hand_skeleton_joint_name_little_finger_intermediate_tip:
+		return "Ar_hand_skeleton_joint_name_little_finger_intermediate_tip"
+	case Ar_hand_skeleton_joint_name_little_finger_tip:
+		return "Ar_hand_skeleton_joint_name_little_finger_tip"
+	case Ar_hand_skeleton_joint_name_forearm_wrist:
+		return "Ar_hand_skeleton_joint_name_forearm_wrist"
+	case Ar_hand_skeleton_joint_name_forearm_arm:
+		return "Ar_hand_skeleton_joint_name_forearm_arm"
+	default:
+		return fmt.Sprintf("HandSkeletonJointName(%d)", int64(e))
+	}
+}
+
 // The error codes for ARKit sessions.
 type SessionErrorCode int64
 
@@ -346,6 +507,25 @@ func (e SessionErrorCode) String() string {
 		return "Ar_session_error_code_data_provider_failed_to_run"
 	default:
 		return fmt.Sprintf("SessionErrorCode(%d)", int64(e))
+	}
+}
+
+// Enumeration indicating the availability of world anchor sharing.
+type WorldAnchorSharingAvailability int64
+
+const (
+	// Enumeration indicating the availability of world anchor sharing.
+	Ar_world_anchor_sharing_availability_unavailable WorldAnchorSharingAvailability = 1
+)
+
+// String returns the WorldAnchorSharingAvailability constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WorldAnchorSharingAvailability) String() string {
+	switch e {
+	case Ar_world_anchor_sharing_availability_unavailable:
+		return "Ar_world_anchor_sharing_availability_unavailable"
+	default:
+		return fmt.Sprintf("WorldAnchorSharingAvailability(%d)", int64(e))
 	}
 }
 
@@ -1092,27 +1272,55 @@ func (e QosClass) String() string {
 	}
 }
 
+type TaskSharedRegionStubs uint8
+
+const (
+	TaskSharedRegionStubsDev  TaskSharedRegionStubs = 1
+	TaskSharedRegionStubsProd TaskSharedRegionStubs = 2
+)
+
+// String returns the TaskSharedRegionStubs constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TaskSharedRegionStubs) String() string {
+	switch e {
+	case TaskSharedRegionStubsDev:
+		return "TaskSharedRegionStubsDev"
+	case TaskSharedRegionStubsProd:
+		return "TaskSharedRegionStubsProd"
+	default:
+		return fmt.Sprintf("TaskSharedRegionStubs(%d)", int64(e))
+	}
+}
+
 type VirtualMemoryGuardExceptionCode uint32
 
 const (
-	KGUARD_EXC_DEALLOC_GAP                   VirtualMemoryGuardExceptionCode = 1
-	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        VirtualMemoryGuardExceptionCode = 2
-	KGUARD_EXC_RECLAIM_INDEX_FAILURE         VirtualMemoryGuardExceptionCode = 4
-	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    VirtualMemoryGuardExceptionCode = 8
-	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    VirtualMemoryGuardExceptionCode = 9
-	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         VirtualMemoryGuardExceptionCode = 10
-	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         VirtualMemoryGuardExceptionCode = 11
-	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  VirtualMemoryGuardExceptionCode = 12
-	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    VirtualMemoryGuardExceptionCode = 13
-	KGUARD_EXC_SEC_ACCESS_FAULT              VirtualMemoryGuardExceptionCode = 98
-	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        VirtualMemoryGuardExceptionCode = 99
-	KGUARD_EXC_SEC_COPY_DENIED               VirtualMemoryGuardExceptionCode = 100
-	KGUARD_EXC_SEC_SHARING_DENIED            VirtualMemoryGuardExceptionCode = 101
-	KGUARD_EXC_MTE_SYNC_FAULT                VirtualMemoryGuardExceptionCode = 200
-	KGUARD_EXC_MTE_ASYNC_USER_FAULT          VirtualMemoryGuardExceptionCode = 201
-	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          VirtualMemoryGuardExceptionCode = 202
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT VirtualMemoryGuardExceptionCode = 203
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT VirtualMemoryGuardExceptionCode = 204
+	KGUARD_EXC_DEALLOC_GAP                  VirtualMemoryGuardExceptionCode = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE       VirtualMemoryGuardExceptionCode = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE        VirtualMemoryGuardExceptionCode = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE   VirtualMemoryGuardExceptionCode = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE   VirtualMemoryGuardExceptionCode = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE        VirtualMemoryGuardExceptionCode = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE        VirtualMemoryGuardExceptionCode = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION VirtualMemoryGuardExceptionCode = 12
+	// Guard exception sent to a thread when a CoW defeatured map attempts to copy memory which is not permitted by system policy.
+	KGUARD_EXC_COW_DEFEATURED_COPY_DENIED VirtualMemoryGuardExceptionCode = 13
+	// Guard exception sent to a thread when it attempts to extract a given type of memory in a way which is not permitted for CoW defeatured maps.
+	KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED VirtualMemoryGuardExceptionCode = 14
+	// Guard exception sent to a thread when it attempts to copy-map a memory entry which was created for sharing by a CoW defeatured map.
+	KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED VirtualMemoryGuardExceptionCode = 15
+	KGUARD_EXC_COW_DEFEATURED_FIRST                    VirtualMemoryGuardExceptionCode = 13
+	KGUARD_EXC_COW_DEFEATURED_LAST                     VirtualMemoryGuardExceptionCode = 15
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY              VirtualMemoryGuardExceptionCode = 16
+	KGUARD_EXC_SEC_ACCESS_FAULT                        VirtualMemoryGuardExceptionCode = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT                  VirtualMemoryGuardExceptionCode = 99
+	KGUARD_EXC_SEC_COPY_DENIED                         VirtualMemoryGuardExceptionCode = 100
+	KGUARD_EXC_SEC_SHARING_DENIED                      VirtualMemoryGuardExceptionCode = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                          VirtualMemoryGuardExceptionCode = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT                    VirtualMemoryGuardExceptionCode = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT                    VirtualMemoryGuardExceptionCode = 202
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT           VirtualMemoryGuardExceptionCode = 203
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT           VirtualMemoryGuardExceptionCode = 204
 )
 
 // String returns the VirtualMemoryGuardExceptionCode constant's name, or its numeric form when the
@@ -1135,6 +1343,12 @@ func (e VirtualMemoryGuardExceptionCode) String() string {
 		return "KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE"
 	case KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION:
 		return "KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION"
+	case KGUARD_EXC_COW_DEFEATURED_COPY_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_COPY_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED"
 	case KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY:
 		return "KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY"
 	case KGUARD_EXC_SEC_ACCESS_FAULT:

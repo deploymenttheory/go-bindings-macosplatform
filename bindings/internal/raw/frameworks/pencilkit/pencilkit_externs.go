@@ -12,7 +12,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/foundation"
 )
 
-// The UTType for storing drawing data.
+// The UTType identifier for PencilKit drawing data.
 func PKAppleDrawingTypeIdentifier() uintptr {
 	ptr, _ := purego.Dlsym(_pencilkitLib, "PKAppleDrawingTypeIdentifier")
 	return ptr

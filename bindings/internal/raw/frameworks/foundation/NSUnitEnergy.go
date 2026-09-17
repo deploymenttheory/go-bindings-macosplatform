@@ -9,8 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A unit of measure for energy.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsunitenergy
 type NSUnitEnergy struct {
 	NSDimension
@@ -35,6 +33,7 @@ func NSUnitEnergyFromID(id objc.ID) *NSUnitEnergy {
 	return o
 }
 
+// The kilojoules unit of energy.
 func NSUnitEnergyKilojoules() *NSUnitEnergy {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitEnergy), _nSUnitEnergySelKilojoules)
 	if _ret != 0 {
@@ -43,6 +42,7 @@ func NSUnitEnergyKilojoules() *NSUnitEnergy {
 	return NSUnitEnergyFromID(_ret)
 }
 
+// The joules unit of energy.
 func NSUnitEnergyJoules() *NSUnitEnergy {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitEnergy), _nSUnitEnergySelJoules)
 	if _ret != 0 {
@@ -51,6 +51,7 @@ func NSUnitEnergyJoules() *NSUnitEnergy {
 	return NSUnitEnergyFromID(_ret)
 }
 
+// The kilocalories unit of energy.
 func NSUnitEnergyKilocalories() *NSUnitEnergy {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitEnergy), _nSUnitEnergySelKilocalories)
 	if _ret != 0 {
@@ -59,6 +60,7 @@ func NSUnitEnergyKilocalories() *NSUnitEnergy {
 	return NSUnitEnergyFromID(_ret)
 }
 
+// The calories unit of energy.
 func NSUnitEnergyCalories() *NSUnitEnergy {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitEnergy), _nSUnitEnergySelCalories)
 	if _ret != 0 {
@@ -67,6 +69,7 @@ func NSUnitEnergyCalories() *NSUnitEnergy {
 	return NSUnitEnergyFromID(_ret)
 }
 
+// The kilowatt hours unit of energy.
 func NSUnitEnergyKilowattHours() *NSUnitEnergy {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitEnergy), _nSUnitEnergySelKilowattHours)
 	if _ret != 0 {

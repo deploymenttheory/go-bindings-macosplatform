@@ -15,8 +15,6 @@ import (
 )
 
 // SharingCollaborationModeRestriction is an idiomatic wrapper over the Objective-C class NSSharingCollaborationModeRestriction.
-//
-// Specifies whether a specific type of sharing should be disabled in the share picker, and if so, whether a reason should be provided for the disablement.
 type SharingCollaborationModeRestriction struct {
 	objref.Handle
 }

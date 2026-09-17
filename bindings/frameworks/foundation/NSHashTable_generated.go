@@ -189,35 +189,36 @@ func (ht *HashTable) MinusHashTable(other obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(ht), objc.RegisterName("minusHashTable:"), objref.IDOf(other))
 }
 
-// PointerFunctions returns the pointer functions.
+// PointerFunctions returns the pointer functions for the hash table.
 func (ht *HashTable) PointerFunctions() *PointerFunctions {
 	defer runtime.KeepAlive(ht)
 	_r := objc.Send[objc.ID](objref.IDOf(ht), objc.RegisterName("pointerFunctions"))
 	return PointerFunctionsFromID(_r)
 }
 
-// Count returns the count.
+// Count returns the number of elements in the hash table.
 func (ht *HashTable) Count() int {
 	defer runtime.KeepAlive(ht)
 	_r := objc.Send[int](objref.IDOf(ht), objc.RegisterName("count"))
 	return _r
 }
 
-// AllObjects returns the all objects.
+// AllObjects returns the hash table's members.
 func (ht *HashTable) AllObjects() []obj.Object {
 	defer runtime.KeepAlive(ht)
 	_r := objc.Send[objc.ID](objref.IDOf(ht), objc.RegisterName("allObjects"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// AnyObject returns the any object.
+// AnyObject returns one of the objects in the hash table. One of the objects in the hash table, or `nil` if the hash table contains no objects. The object returned is chosen at the hash table's convenience -- the selection is not guaranteed to be random.
 func (ht *HashTable) AnyObject() obj.Object {
 	defer runtime.KeepAlive(ht)
 	_r := objc.Send[objc.ID](objref.IDOf(ht), objc.RegisterName("anyObject"))
 	return obj.Wrap(_r)
 }
 
-// SetRepresentation returns the order of the returned elements is unspecified.
+// SetRepresentation returns a set that contains the hash table's members.
+// The order of the returned elements is unspecified.
 func (ht *HashTable) SetRepresentation() []obj.Object {
 	defer runtime.KeepAlive(ht)
 	_r := objc.Send[objc.ID](objref.IDOf(ht), objc.RegisterName("setRepresentation"))

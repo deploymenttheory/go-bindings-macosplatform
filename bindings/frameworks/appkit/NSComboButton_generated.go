@@ -565,6 +565,14 @@ func (cb *ComboButton) WithGestureRecognizers(items ...GestureRecognizerProvider
 	return cb
 }
 
+// WithExclusiveGestureBehavior sets declares whether gesture recognizers should be exclusive in this view and its subviews.
+func (cb *ComboButton) WithExclusiveGestureBehavior(exclusiveGestureBehavior ViewExclusiveGestureBehavior) *ComboButton {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setExclusiveGestureBehavior:"), exclusiveGestureBehavior)
+	})
+	return cb
+}
+
 // WithAllowedTouchTypes sets the allowed touch types.
 func (cb *ComboButton) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *ComboButton {
 	purego.Main(func() {
@@ -626,6 +634,15 @@ func (cb *ComboButton) WithHorizontalContentSizeConstraintActive(horizontalConte
 func (cb *ComboButton) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ComboButton {
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
+	return cb
+}
+
+// WithTextSelectionManager sets the text selection manager for this view.
+func (cb *ComboButton) WithTextSelectionManager(textSelectionManager *TextSelectionManager) *ComboButton {
+	defer runtime.KeepAlive(textSelectionManager)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setTextSelectionManager:"), objref.IDOf(textSelectionManager))
 	})
 	return cb
 }

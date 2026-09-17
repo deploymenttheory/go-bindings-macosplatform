@@ -98,6 +98,12 @@ func (roc *RecordingOutputConfiguration) WithOutputFileType(outputFileType obj.O
 	return roc
 }
 
+// WithMixesAudioWithMicrophone sets if the stream being recorded captures both system audio and microphone audio, setting mixesAudioWithMicrophone to NO will keep two audio tracks for each audio stream in the recording output. Default value is YES, which will mix system and microphone audio, result one audio track in recording output.
+func (roc *RecordingOutputConfiguration) WithMixesAudioWithMicrophone(mixesAudioWithMicrophone bool) *RecordingOutputConfiguration {
+	objc.Send[objc.ID](objref.IDOf(roc), objc.RegisterName("setMixesAudioWithMicrophone:"), mixesAudioWithMicrophone)
+	return roc
+}
+
 // OutputURL specifies output URL to save the recording.
 func (roc *RecordingOutputConfiguration) OutputURL() string {
 	defer runtime.KeepAlive(roc)
@@ -135,4 +141,11 @@ func (roc *RecordingOutputConfiguration) AvailableOutputFileTypes() []obj.Object
 	defer runtime.KeepAlive(roc)
 	_arr := objc.Send[objc.ID](objref.IDOf(roc), objc.RegisterName("availableOutputFileTypes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
+// MixesAudioWithMicrophone reports whether if the stream being recorded captures both system audio and microphone audio, setting mixesAudioWithMicrophone to false will keep two audio tracks for each audio stream in the recording output. Default value is true, which will mix system and microphone audio, result one audio track in recording output.
+func (roc *RecordingOutputConfiguration) MixesAudioWithMicrophone() bool {
+	defer runtime.KeepAlive(roc)
+	_r := objc.Send[bool](objref.IDOf(roc), objc.RegisterName("mixesAudioWithMicrophone"))
+	return _r
 }

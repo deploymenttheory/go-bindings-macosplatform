@@ -10,8 +10,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A type that represents input for the web authentication PRF extension in passkey assertion requests.
-//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/asauthorizationpublickeycredentialprfassertioninput
 type ASAuthorizationPublicKeyCredentialPRFAssertionInput struct {
 	foundation.NSObject

@@ -287,7 +287,7 @@ func (s *String) CharacterAtIndex(index int) uint16 {
 	return _r
 }
 
-// Length returns the length.
+// Length returns the number of UTF-16 code units in the receiver. This number includes the individual characters of composed character sequences, so you cannot use this property to determine if a string will be visible when printed or how long it will appear.
 func (s *String) Length() int {
 	defer runtime.KeepAlive(s)
 	_r := objc.Send[int](objref.IDOf(s), objc.RegisterName("length"))
@@ -775,49 +775,49 @@ func (s *String) WriteToFile(path string, useAuxiliaryFile bool, enc int) error 
 	return nil
 }
 
-// DoubleValue returns the double value.
+// DoubleValue returns the floating-point value of the string as a
 func (s *String) DoubleValue() float64 {
 	defer runtime.KeepAlive(s)
 	_r := objc.Send[float64](objref.IDOf(s), objc.RegisterName("doubleValue"))
 	return _r
 }
 
-// FloatValue returns the float value.
+// FloatValue returns the floating-point value of the string as a
 func (s *String) FloatValue() float32 {
 	defer runtime.KeepAlive(s)
 	_r := objc.Send[float32](objref.IDOf(s), objc.RegisterName("floatValue"))
 	return _r
 }
 
-// IntValue returns the int value.
+// IntValue returns the integer value of the string. The integer value of the string, assuming a decimal representation and skipping whitespace at the beginning of the string. This property is
 func (s *String) IntValue() int {
 	defer runtime.KeepAlive(s)
 	_r := objc.Send[int](objref.IDOf(s), objc.RegisterName("intValue"))
 	return _r
 }
 
-// IntegerValue returns the integer value.
+// IntegerValue returns the
 func (s *String) IntegerValue() int {
 	defer runtime.KeepAlive(s)
 	_r := objc.Send[int](objref.IDOf(s), objc.RegisterName("integerValue"))
 	return _r
 }
 
-// LongLongValue returns the long long value.
+// LongLongValue returns the
 func (s *String) LongLongValue() int64 {
 	defer runtime.KeepAlive(s)
 	_r := objc.Send[int64](objref.IDOf(s), objc.RegisterName("longLongValue"))
 	return _r
 }
 
-// BoolValue wraps the corresponding Objective-C method.
+// BoolValue reports whether the Boolean value of the string. Returns
 func (s *String) BoolValue() bool {
 	defer runtime.KeepAlive(s)
 	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("boolValue"))
 	return _r
 }
 
-// UppercaseString returns the uppercase string.
+// UppercaseString returns an uppercase representation of the string. This property performs the canonical (non-localized) mapping. It is suitable for programming operations that require stable results not depending on the current locale. Case transformations aren't guaranteed to be symmetrical or to produce strings of the same lengths as the originals.
 func (s *String) UppercaseString() string {
 	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("uppercaseString"))
@@ -827,7 +827,7 @@ func (s *String) UppercaseString() string {
 	return purego.GoString(_r)
 }
 
-// LowercaseString returns the lowercase string.
+// LowercaseString returns a lowercase representation of the string. This property performs the canonical (non-localized) mapping. It is suitable for programming operations that require stable results not depending on the current locale. Case transformations aren't guaranteed to be symmetrical or to produce strings of the same lengths as the originals.
 func (s *String) LowercaseString() string {
 	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("lowercaseString"))
@@ -837,7 +837,7 @@ func (s *String) LowercaseString() string {
 	return purego.GoString(_r)
 }
 
-// CapitalizedString returns the capitalized string.
+// CapitalizedString returns a capitalized representation of the string. A capitalized string is a string with the first character in each word changed to its corresponding uppercase value, and all remaining characters set to their corresponding lowercase values. This property performs the canonical (non-localized) mapping. Case transformations aren't guaranteed to be symmetrical or to produce strings of the same lengths as the originals.
 func (s *String) CapitalizedString() string {
 	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("capitalizedString"))
@@ -847,7 +847,7 @@ func (s *String) CapitalizedString() string {
 	return purego.GoString(_r)
 }
 
-// LocalizedUppercaseString returns the localized uppercase string.
+// LocalizedUppercaseString returns a version of the string with all letters converted to uppercase, taking into account the current locale.
 func (s *String) LocalizedUppercaseString() string {
 	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("localizedUppercaseString"))
@@ -857,7 +857,7 @@ func (s *String) LocalizedUppercaseString() string {
 	return purego.GoString(_r)
 }
 
-// LocalizedLowercaseString returns the localized lowercase string.
+// LocalizedLowercaseString returns a version of the string with all letters converted to lowercase, taking into account the current locale.
 func (s *String) LocalizedLowercaseString() string {
 	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("localizedLowercaseString"))
@@ -867,7 +867,7 @@ func (s *String) LocalizedLowercaseString() string {
 	return purego.GoString(_r)
 }
 
-// LocalizedCapitalizedString returns the localized capitalized string.
+// LocalizedCapitalizedString returns a capitalized representation of the receiver using the current locale.
 func (s *String) LocalizedCapitalizedString() string {
 	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("localizedCapitalizedString"))
@@ -877,28 +877,28 @@ func (s *String) LocalizedCapitalizedString() string {
 	return purego.GoString(_r)
 }
 
-// UTF8String returns the UTF8 string.
+// UTF8String returns a null-terminated UTF8 representation of the string. This C string is a pointer to a structure inside the string object, which may have a lifetime shorter than the string object and will certainly not have a longer lifetime. Therefore, you should copy the C string if it needs to be stored outside of the memory context in which you use this property.
 func (s *String) UTF8String() unsafe.Pointer {
 	defer runtime.KeepAlive(s)
 	_r := objc.Send[unsafe.Pointer](objref.IDOf(s), objc.RegisterName("UTF8String"))
 	return _r
 }
 
-// FastestEncoding returns the fastest encoding.
+// FastestEncoding returns the fastest encoding to which the receiver may be converted without loss of information. "Fastest" applies to retrieval of characters from the string. This encoding may not be space efficient.
 func (s *String) FastestEncoding() int {
 	defer runtime.KeepAlive(s)
 	_r := objc.Send[int](objref.IDOf(s), objc.RegisterName("fastestEncoding"))
 	return _r
 }
 
-// SmallestEncoding returns the smallest encoding.
+// SmallestEncoding returns the smallest encoding to which the receiver can be converted without loss of information. This encoding may not be the fastest for accessing characters, but is space-efficient. This property may take some time to access.
 func (s *String) SmallestEncoding() int {
 	defer runtime.KeepAlive(s)
 	_r := objc.Send[int](objref.IDOf(s), objc.RegisterName("smallestEncoding"))
 	return _r
 }
 
-// DecomposedStringWithCanonicalMapping returns the decomposed string with canonical mapping.
+// DecomposedStringWithCanonicalMapping returns a string made by normalizing the string's contents using the Unicode Normalization Form D.
 func (s *String) DecomposedStringWithCanonicalMapping() string {
 	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("decomposedStringWithCanonicalMapping"))
@@ -908,7 +908,7 @@ func (s *String) DecomposedStringWithCanonicalMapping() string {
 	return purego.GoString(_r)
 }
 
-// PrecomposedStringWithCanonicalMapping returns the precomposed string with canonical mapping.
+// PrecomposedStringWithCanonicalMapping returns a string made by normalizing the string's contents using the Unicode Normalization Form C.
 func (s *String) PrecomposedStringWithCanonicalMapping() string {
 	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("precomposedStringWithCanonicalMapping"))
@@ -918,7 +918,7 @@ func (s *String) PrecomposedStringWithCanonicalMapping() string {
 	return purego.GoString(_r)
 }
 
-// DecomposedStringWithCompatibilityMapping returns the decomposed string with compatibility mapping.
+// DecomposedStringWithCompatibilityMapping returns a string made by normalizing the receiver's contents using the Unicode Normalization Form KD.
 func (s *String) DecomposedStringWithCompatibilityMapping() string {
 	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("decomposedStringWithCompatibilityMapping"))
@@ -928,7 +928,7 @@ func (s *String) DecomposedStringWithCompatibilityMapping() string {
 	return purego.GoString(_r)
 }
 
-// PrecomposedStringWithCompatibilityMapping returns the precomposed string with compatibility mapping.
+// PrecomposedStringWithCompatibilityMapping returns a string made by normalizing the receiver's contents using the Unicode Normalization Form KC.
 func (s *String) PrecomposedStringWithCompatibilityMapping() string {
 	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("precomposedStringWithCompatibilityMapping"))
@@ -1064,7 +1064,7 @@ func (s *String) GetFileSystemRepresentationMaxLength(cname string, max int) boo
 	return _r
 }
 
-// PathComponents returns the path components.
+// PathComponents returns the file-system path components of the receiver. The strings in the array appear in the order they did in the receiver. If the string begins or ends with the path separator, then the first or last component, respectively, will contain the separator. Empty components (caused by consecutive path separators) are deleted. This property only works with file paths (not, for example, string representations of URLs).
 //
 // PathComponents returns the collection as a Go slice.
 func (s *String) PathComponents() []string {
@@ -1073,14 +1073,14 @@ func (s *String) PathComponents() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// IsAbsolutePath reports whether the object is absolute path.
+// IsAbsolutePath reports whether the receiver represents an absolute path. This property only works with file paths (not, for example, string representations of URLs). It does not check the filesystem for the existence of the path.
 func (s *String) IsAbsolutePath() bool {
 	defer runtime.KeepAlive(s)
 	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("isAbsolutePath"))
 	return _r
 }
 
-// LastPathComponent returns the last path component.
+// LastPathComponent returns the last path component of the receiver. This property only works with file paths (not, for example, string representations of URLs).
 func (s *String) LastPathComponent() string {
 	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("lastPathComponent"))
@@ -1090,7 +1090,7 @@ func (s *String) LastPathComponent() string {
 	return purego.GoString(_r)
 }
 
-// StringByDeletingLastPathComponent returns the string by deleting last path component.
+// StringByDeletingLastPathComponent returns a new string made by deleting the last path component from the receiver, along with any final path separator. If the receiver represents the root path it is returned unaltered. This property only works with file paths (not, for example, string representations of URLs).
 func (s *String) StringByDeletingLastPathComponent() string {
 	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("stringByDeletingLastPathComponent"))
@@ -1100,7 +1100,7 @@ func (s *String) StringByDeletingLastPathComponent() string {
 	return purego.GoString(_r)
 }
 
-// PathExtension returns the path extension.
+// PathExtension returns the path extension, if any, of the string as interpreted as a path. The path extension is the portion of the last path component which follows the final period, if there is one. The extension divider is not included. This property only works with file paths (not, for example, string representations of URLs).
 func (s *String) PathExtension() string {
 	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("pathExtension"))
@@ -1110,7 +1110,7 @@ func (s *String) PathExtension() string {
 	return purego.GoString(_r)
 }
 
-// StringByDeletingPathExtension returns the string by deleting path extension.
+// StringByDeletingPathExtension returns a new string made by deleting the extension (if any, and only the last) from the receiver. Strips any trailing path separator before checking for an extension. If the receiver represents the root path, it is returned unaltered. This property only works with file paths (not, for example, string representations of URLs).
 func (s *String) StringByDeletingPathExtension() string {
 	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("stringByDeletingPathExtension"))
@@ -1120,7 +1120,7 @@ func (s *String) StringByDeletingPathExtension() string {
 	return purego.GoString(_r)
 }
 
-// StringByAbbreviatingWithTildeInPath returns the string by abbreviating with tilde in path.
+// StringByAbbreviatingWithTildeInPath returns a new string that replaces the current home directory portion of the current path with a tilde (`~`) character. If the string does not specify a file in the current home directory, the path is unchanged. This property only works with file paths (not, for example, string representations of URLs).
 func (s *String) StringByAbbreviatingWithTildeInPath() string {
 	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("stringByAbbreviatingWithTildeInPath"))
@@ -1130,7 +1130,7 @@ func (s *String) StringByAbbreviatingWithTildeInPath() string {
 	return purego.GoString(_r)
 }
 
-// StringByExpandingTildeInPath returns the string by expanding tilde in path.
+// StringByExpandingTildeInPath returns a new string made by expanding the initial component of the receiver to its full path value. Expands an initial "`~`" or "`~user`" component to its full path value. Returns a new string matching the receiver if the initial component can't be expanded. This property only works with file paths (not, for example, string representations of URLs).
 func (s *String) StringByExpandingTildeInPath() string {
 	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("stringByExpandingTildeInPath"))
@@ -1140,7 +1140,7 @@ func (s *String) StringByExpandingTildeInPath() string {
 	return purego.GoString(_r)
 }
 
-// StringByStandardizingPath returns the string by standardizing path.
+// StringByStandardizingPath returns a new string made by removing extraneous path components from the receiver. Expands an initial tilde expression, reduces empty components and "`/./`" sequences to single path separators, and resolves "`..`" references in absolute paths. Returns `self` if an error occurs. This property only works with file paths (not, for example, string representations of URLs).
 func (s *String) StringByStandardizingPath() string {
 	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("stringByStandardizingPath"))
@@ -1150,7 +1150,7 @@ func (s *String) StringByStandardizingPath() string {
 	return purego.GoString(_r)
 }
 
-// StringByResolvingSymlinksInPath returns the string by resolving symlinks in path.
+// StringByResolvingSymlinksInPath returns a new string made from the receiver by resolving all symbolic links and standardizing path. For absolute paths, all symbolic links are guaranteed to be removed. For relative paths, symbolic links that can't be resolved are left unresolved. Returns `self` if an error occurs. This property only works with file paths (not, for example, string representations of URLs).
 func (s *String) StringByResolvingSymlinksInPath() string {
 	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("stringByResolvingSymlinksInPath"))
@@ -1160,7 +1160,7 @@ func (s *String) StringByResolvingSymlinksInPath() string {
 	return purego.GoString(_r)
 }
 
-// FileSystemRepresentation returns the file system representation.
+// FileSystemRepresentation returns a file system-specific representation of the receiver. The returned C string will be automatically freed just as a returned object would be released; your code should copy the representation or use “NSString/getFileSystemRepresentation(_:maxLength:)“ if it needs to store it outside of the autorelease context. Raises “NSExceptionName/characterConversionException“ if the receiver can't be represented in the file system's encoding.
 func (s *String) FileSystemRepresentation() unsafe.Pointer {
 	defer runtime.KeepAlive(s)
 	_r := objc.Send[unsafe.Pointer](objref.IDOf(s), objc.RegisterName("fileSystemRepresentation"))
@@ -1198,7 +1198,7 @@ func (s *String) StringByReplacingPercentEscapesUsingEncoding(enc int) string {
 	return purego.GoString(_r)
 }
 
-// StringByRemovingPercentEncoding returns the string by removing percent encoding.
+// StringByRemovingPercentEncoding returns a new string made from the receiver by replacing all percent-encoded sequences with the matching UTF-8 characters. Returns `nil` if the receiver contains an invalid percent-encoding sequence. > Important: Call this method only on strings that you know to be percent-encoded. Calling it on strings that are not percent-encoded can lead to misinterpreting a percent character as the beginning of a percent-encoded sequence.
 func (s *String) StringByRemovingPercentEncoding() string {
 	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("stringByRemovingPercentEncoding"))

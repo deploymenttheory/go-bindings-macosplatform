@@ -13,6 +13,7 @@ import (
 // The MCAdvertiserAssistant is a convenience class that handles advertising, presents incoming invitations to the user, and handles users’ responses. Use this class to provide a user interface for handling invitations when your app does not require programmatic control over the invitation process.
 //
 // Apple documentation: https://developer.apple.com/documentation/multipeerconnectivity/mcadvertiserassistant
+// Deprecated: Use Network Framework instead
 type MCAdvertiserAssistant struct {
 	foundation.NSObject
 }
@@ -40,6 +41,7 @@ func MCAdvertiserAssistantFromID(id objc.ID) *MCAdvertiserAssistant {
 }
 
 // Initializes an advertiser assistant object.
+// Deprecated: Use Network Framework instead
 func (o *MCAdvertiserAssistant) InitWithServiceTypeDiscoveryInfoSession(serviceType *foundation.NSString, info *foundation.NSDictionary[*foundation.NSString, *foundation.NSString], session *MCSession) *MCAdvertiserAssistant {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mCAdvertiserAssistantSelInitWithServiceTypeDiscoveryInfoSession, serviceType.Ptr(), info.Ptr(), session.Ptr())
 	if _ret != 0 {

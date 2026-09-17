@@ -8,6 +8,7 @@ import (
 
 	"github.com/ebitengine/purego/objc"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/coremidi"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
@@ -25,8 +26,11 @@ var (
 	_aVAudioEngineSelAttachNode                                            = objc.RegisterName("attachNode:")
 	_aVAudioEngineSelDetachNode                                            = objc.RegisterName("detachNode:")
 	_aVAudioEngineSelConnectToFromBusToBusFormat                           = objc.RegisterName("connect:to:fromBus:toBus:format:")
+	_aVAudioEngineSelConnectToFromBusToBusFormatError                      = objc.RegisterName("connect:to:fromBus:toBus:format:error:")
 	_aVAudioEngineSelConnectToFormat                                       = objc.RegisterName("connect:to:format:")
+	_aVAudioEngineSelConnectToFormatError                                  = objc.RegisterName("connect:to:format:error:")
 	_aVAudioEngineSelConnectToConnectionPointsFromBusFormat                = objc.RegisterName("connect:toConnectionPoints:fromBus:format:")
+	_aVAudioEngineSelConnectToConnectionPointsFromBusFormatError           = objc.RegisterName("connect:toConnectionPoints:fromBus:format:error:")
 	_aVAudioEngineSelDisconnectNodeInputBus                                = objc.RegisterName("disconnectNodeInput:bus:")
 	_aVAudioEngineSelDisconnectNodeInput                                   = objc.RegisterName("disconnectNodeInput:")
 	_aVAudioEngineSelDisconnectNodeOutputBus                               = objc.RegisterName("disconnectNodeOutput:bus:")
@@ -43,8 +47,10 @@ var (
 	_aVAudioEngineSelRenderOfflineToBufferError                            = objc.RegisterName("renderOffline:toBuffer:error:")
 	_aVAudioEngineSelConnectMIDIToFormatBlock                              = objc.RegisterName("connectMIDI:to:format:block:")
 	_aVAudioEngineSelConnectMIDIToFormatEventListBlock                     = objc.RegisterName("connectMIDI:to:format:eventListBlock:")
+	_aVAudioEngineSelConnectMIDIToFormatEventListProvider                  = objc.RegisterName("connectMIDI:to:format:eventListProvider:")
 	_aVAudioEngineSelConnectMIDIToNodesFormatBlock                         = objc.RegisterName("connectMIDI:toNodes:format:block:")
 	_aVAudioEngineSelConnectMIDIToNodesFormatEventListBlock                = objc.RegisterName("connectMIDI:toNodes:format:eventListBlock:")
+	_aVAudioEngineSelConnectMIDIToNodesFormatEventListProvider             = objc.RegisterName("connectMIDI:toNodes:format:eventListProvider:")
 	_aVAudioEngineSelDisconnectMIDIFrom                                    = objc.RegisterName("disconnectMIDI:from:")
 	_aVAudioEngineSelDisconnectMIDIFromNodes                               = objc.RegisterName("disconnectMIDI:fromNodes:")
 	_aVAudioEngineSelDisconnectMIDIInput                                   = objc.RegisterName("disconnectMIDIInput:")
@@ -96,18 +102,51 @@ func (o *AVAudioEngine) DetachNode(node *AVAudioNode) {
 }
 
 // Establishes a connection between two nodes, specifying the input and output busses.
+// Deprecated: since macOS 27.0.
 func (o *AVAudioEngine) ConnectToFromBusToBusFormat(node1 *AVAudioNode, node2 *AVAudioNode, bus1 uint, bus2 uint, format *AVAudioFormat) {
 	o.Ptr().Send(_aVAudioEngineSelConnectToFromBusToBusFormat, node1.Ptr(), node2.Ptr(), bus1, bus2, format.Ptr())
 }
 
+// @method connect:to:fromBus:toBus:format:error @abstract Establish a connection between two nodes. @param node1 The source node @param node2 The destination node @param bus1 The output bus on the source node @param bus2 The input bus on the destination node @param format If non-nil, the format of the source node's output bus is set to this format. In all cases, the format of the destination node's input bus is set to match that of the source node's output bus. @param error on exit, if an error occurs, a description of the error @return YES for success Nodes have input and output buses (AVAudioNodeBus). Use this method to establish one-to-one connections betweeen nodes. Connections made using this method are always one-to-one, never one-to-many or many-to-one. Note that any pre-existing connection(s) involving the source's output bus or the destination's input bus will be broken.
+func (o *AVAudioEngine) ConnectToFromBusToBusFormatError(node1 *AVAudioNode, node2 *AVAudioNode, bus1 uint, bus2 uint, format *AVAudioFormat) (bool, error) {
+	var _nsErr uintptr
+	_ret := objc.Send[bool](o.Ptr(), _aVAudioEngineSelConnectToFromBusToBusFormatError, node1.Ptr(), node2.Ptr(), bus1, bus2, format.Ptr(), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
+	}
+	return _ret, nil
+}
+
 // Establishes a connection between two nodes.
+// Deprecated: since macOS 27.0.
 func (o *AVAudioEngine) ConnectToFormat(node1 *AVAudioNode, node2 *AVAudioNode, format *AVAudioFormat) {
 	o.Ptr().Send(_aVAudioEngineSelConnectToFormat, node1.Ptr(), node2.Ptr(), format.Ptr())
 }
 
+// @method connect:to:format:error: @abstract Establish a connection between two nodes @param error on exit, if an error occurs, a description of the error @return YES for success This calls connect:to:fromBus:toBus:format: using bus 0 on the source node, and bus 0 on the destination node, except in the case of a destination which is a mixer, in which case the destination is the mixer's nextAvailableInputBus.
+func (o *AVAudioEngine) ConnectToFormatError(node1 *AVAudioNode, node2 *AVAudioNode, format *AVAudioFormat) (bool, error) {
+	var _nsErr uintptr
+	_ret := objc.Send[bool](o.Ptr(), _aVAudioEngineSelConnectToFormatError, node1.Ptr(), node2.Ptr(), format.Ptr(), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
+	}
+	return _ret, nil
+}
+
 // Establishes a connection between a source node and multiple destination nodes.
+// Deprecated: since macOS 27.0.
 func (o *AVAudioEngine) ConnectToConnectionPointsFromBusFormat(sourceNode *AVAudioNode, destNodes *foundation.NSArray[*AVAudioConnectionPoint], sourceBus uint, format *AVAudioFormat) {
 	o.Ptr().Send(_aVAudioEngineSelConnectToConnectionPointsFromBusFormat, sourceNode.Ptr(), destNodes.Ptr(), sourceBus, format.Ptr())
+}
+
+// @method connect:toConnectionPoints:fromBus:format:error: @abstract Establish connections between a source node and multiple destination nodes. @param sourceNode The source node @param destNodes An array of AVAudioConnectionPoint objects specifying destination nodes and busses @param sourceBus The output bus on source node @param format If non-nil, the format of the source node's output bus is set to this format. In all cases, the format of the destination nodes' input bus is set to match that of the source node's output bus @param error on exit, if an error occurs, a description of the error @return YES for success Use this method to establish connections from a source node to multiple destination nodes. Connections made using this method are either one-to-one (when a single destination connection is specified) or one-to-many (when multiple connections are specified), but never many-to-one. To incrementally add a new connection to a source node, use this method with an array of AVAudioConnectionPoint objects comprising of pre-existing connections (obtained from `outputConnectionPointsForNode:outputBus:`) and the new connection. Note that any pre-existing connection involving the destination's input bus will be broken. And, any pre-existing connection on source node which is not a part of the specified destination connection array will also be broken. Also note that when the output of a node is split into multiple paths, all the paths must render at the same rate until they reach a common mixer. In other words, starting from the split node until the common mixer node where all split paths terminate, you cannot have: - any AVAudioUnitTimeEffect - any sample rate conversion
+func (o *AVAudioEngine) ConnectToConnectionPointsFromBusFormatError(sourceNode *AVAudioNode, destNodes *foundation.NSArray[*AVAudioConnectionPoint], sourceBus uint, format *AVAudioFormat) (bool, error) {
+	var _nsErr uintptr
+	_ret := objc.Send[bool](o.Ptr(), _aVAudioEngineSelConnectToConnectionPointsFromBusFormatError, sourceNode.Ptr(), destNodes.Ptr(), sourceBus, format.Ptr(), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return false, purego.NSErrorToError(objc.ID(_nsErr))
+	}
+	return _ret, nil
 }
 
 // Removes the input connection of a node on the specified bus.
@@ -205,10 +244,10 @@ func (o *AVAudioEngine) RenderOfflineToBufferError(numberOfFrames uint32, buffer
 
 // Establishes a MIDI-only connection between two nodes.
 // Deprecated: since macOS 13.0.
-func (o *AVAudioEngine) ConnectMIDIToFormatBlock(sourceNode *AVAudioNode, destinationNode *AVAudioNode, format *AVAudioFormat, tapBlock func(int64, uint8, int, unsafe.Pointer) int) {
+func (o *AVAudioEngine) ConnectMIDIToFormatBlock(sourceNode *AVAudioNode, destinationNode *AVAudioNode, format *AVAudioFormat, tapBlock func(int64, uint8, int, *uint8) int) {
 	var __block_tapBlock objc.Block
 	if tapBlock != nil {
-		__block_tapBlock = objc.NewBlock(func(_ objc.Block, blockParam0 int64, blockParam1 uint8, blockParam2 int, blockParam3 unsafe.Pointer) int {
+		__block_tapBlock = objc.NewBlock(func(_ objc.Block, blockParam0 int64, blockParam1 uint8, blockParam2 int, blockParam3 *uint8) int {
 			return tapBlock(blockParam0, blockParam1, blockParam2, blockParam3)
 		})
 		defer __block_tapBlock.Release()
@@ -217,10 +256,11 @@ func (o *AVAudioEngine) ConnectMIDIToFormatBlock(sourceNode *AVAudioNode, destin
 }
 
 // Establishes a MIDI connection between two nodes.
-func (o *AVAudioEngine) ConnectMIDIToFormatEventListBlock(sourceNode *AVAudioNode, destinationNode *AVAudioNode, format *AVAudioFormat, tapBlock func(int64, uint8, unsafe.Pointer) int) {
+// Deprecated: since macOS 27.0.
+func (o *AVAudioEngine) ConnectMIDIToFormatEventListBlock(sourceNode *AVAudioNode, destinationNode *AVAudioNode, format *AVAudioFormat, tapBlock func(int64, uint8, *coremidi.MIDIEventList) int) {
 	var __block_tapBlock objc.Block
 	if tapBlock != nil {
-		__block_tapBlock = objc.NewBlock(func(_ objc.Block, blockParam0 int64, blockParam1 uint8, blockParam2 unsafe.Pointer) int {
+		__block_tapBlock = objc.NewBlock(func(_ objc.Block, blockParam0 int64, blockParam1 uint8, blockParam2 *coremidi.MIDIEventList) int {
 			return tapBlock(blockParam0, blockParam1, blockParam2)
 		})
 		defer __block_tapBlock.Release()
@@ -228,12 +268,23 @@ func (o *AVAudioEngine) ConnectMIDIToFormatEventListBlock(sourceNode *AVAudioNod
 	o.Ptr().Send(_aVAudioEngineSelConnectMIDIToFormatEventListBlock, sourceNode.Ptr(), destinationNode.Ptr(), format.Ptr(), __block_tapBlock)
 }
 
-// Establishes a MIDI-only connection between a source node and multiple destination nodes.
-// Deprecated: since macOS 13.0.
-func (o *AVAudioEngine) ConnectMIDIToNodesFormatBlock(sourceNode *AVAudioNode, destinationNodes *foundation.NSArray[*AVAudioNode], format *AVAudioFormat, tapBlock func(int64, uint8, int, unsafe.Pointer) int) {
+func (o *AVAudioEngine) ConnectMIDIToFormatEventListProvider(sourceNode *AVAudioNode, destinationNode *AVAudioNode, format *AVAudioFormat, tapBlock func(int64, uint8, *coremidi.MIDIEventList) int) {
 	var __block_tapBlock objc.Block
 	if tapBlock != nil {
-		__block_tapBlock = objc.NewBlock(func(_ objc.Block, blockParam0 int64, blockParam1 uint8, blockParam2 int, blockParam3 unsafe.Pointer) int {
+		__block_tapBlock = objc.NewBlock(func(_ objc.Block, blockParam0 int64, blockParam1 uint8, blockParam2 *coremidi.MIDIEventList) int {
+			return tapBlock(blockParam0, blockParam1, blockParam2)
+		})
+		defer __block_tapBlock.Release()
+	}
+	o.Ptr().Send(_aVAudioEngineSelConnectMIDIToFormatEventListProvider, sourceNode.Ptr(), destinationNode.Ptr(), format.Ptr(), __block_tapBlock)
+}
+
+// Establishes a MIDI-only connection between a source node and multiple destination nodes.
+// Deprecated: since macOS 13.0.
+func (o *AVAudioEngine) ConnectMIDIToNodesFormatBlock(sourceNode *AVAudioNode, destinationNodes *foundation.NSArray[*AVAudioNode], format *AVAudioFormat, tapBlock func(int64, uint8, int, *uint8) int) {
+	var __block_tapBlock objc.Block
+	if tapBlock != nil {
+		__block_tapBlock = objc.NewBlock(func(_ objc.Block, blockParam0 int64, blockParam1 uint8, blockParam2 int, blockParam3 *uint8) int {
 			return tapBlock(blockParam0, blockParam1, blockParam2, blockParam3)
 		})
 		defer __block_tapBlock.Release()
@@ -242,15 +293,28 @@ func (o *AVAudioEngine) ConnectMIDIToNodesFormatBlock(sourceNode *AVAudioNode, d
 }
 
 // Establishes a MIDI connection between a source node and multiple destination nodes.
-func (o *AVAudioEngine) ConnectMIDIToNodesFormatEventListBlock(sourceNode *AVAudioNode, destinationNodes *foundation.NSArray[*AVAudioNode], format *AVAudioFormat, tapBlock func(int64, uint8, unsafe.Pointer) int) {
+// Deprecated: since macOS 27.0.
+func (o *AVAudioEngine) ConnectMIDIToNodesFormatEventListBlock(sourceNode *AVAudioNode, destinationNodes *foundation.NSArray[*AVAudioNode], format *AVAudioFormat, tapBlock func(int64, uint8, *coremidi.MIDIEventList) int) {
 	var __block_tapBlock objc.Block
 	if tapBlock != nil {
-		__block_tapBlock = objc.NewBlock(func(_ objc.Block, blockParam0 int64, blockParam1 uint8, blockParam2 unsafe.Pointer) int {
+		__block_tapBlock = objc.NewBlock(func(_ objc.Block, blockParam0 int64, blockParam1 uint8, blockParam2 *coremidi.MIDIEventList) int {
 			return tapBlock(blockParam0, blockParam1, blockParam2)
 		})
 		defer __block_tapBlock.Release()
 	}
 	o.Ptr().Send(_aVAudioEngineSelConnectMIDIToNodesFormatEventListBlock, sourceNode.Ptr(), destinationNodes.Ptr(), format.Ptr(), __block_tapBlock)
+}
+
+// @method connectMIDI:toNodes:format:eventListProvider: @abstract Establish a MIDI only connection between a source node and multiple destination nodes. @param sourceNode The source node. @param destinationNodes An array of AVAudioNodes specifying destination nodes. @param format If non-nil, the format of the source node's output bus is set to this format. In all cases, the format of the source nodes' output bus has to match with the destination nodes' output bus format. Although the output bus of the source is not in use, the format needs to be set in order to be able to use the sample rate for MIDI event timing calculations. @param tapBlock This block is called from the source node's `AUMIDIOutputEventListBlock` on the realtime thread. The host can tap the MIDI data of the source node through this block. Use this method to establish a MIDI only connection between a source node and multiple destination nodes. The source node can only be a AVAudioUnit node of type `kAudioUnitType_MIDIProcessor`. The destination node types can be `kAudioUnitType_MusicDevice`, `kAudioUnitType_MusicEffect` or `kAudioUnitType_MIDIProcessor`. MIDI connections made using this method are either one-to-one (when a single destination connection is specified) or one-to-many (when multiple connections are specified), but never many-to-one. Note that any pre-existing connection involving the destination will be broken. Any client installed block on the source node's audio unit `AUMIDIOutputEventListBlock` will be overwritten when making the MIDI connection.
+func (o *AVAudioEngine) ConnectMIDIToNodesFormatEventListProvider(sourceNode *AVAudioNode, destinationNodes *foundation.NSArray[*AVAudioNode], format *AVAudioFormat, tapBlock func(int64, uint8, *coremidi.MIDIEventList) int) {
+	var __block_tapBlock objc.Block
+	if tapBlock != nil {
+		__block_tapBlock = objc.NewBlock(func(_ objc.Block, blockParam0 int64, blockParam1 uint8, blockParam2 *coremidi.MIDIEventList) int {
+			return tapBlock(blockParam0, blockParam1, blockParam2)
+		})
+		defer __block_tapBlock.Release()
+	}
+	o.Ptr().Send(_aVAudioEngineSelConnectMIDIToNodesFormatEventListProvider, sourceNode.Ptr(), destinationNodes.Ptr(), format.Ptr(), __block_tapBlock)
 }
 
 // Removes a MIDI connection between two nodes.

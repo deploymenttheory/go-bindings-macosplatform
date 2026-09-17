@@ -4,12 +4,24 @@
 package videotoolbox
 
 import (
+	"unsafe"
+
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/foundation"
 )
 
-func VTFrameProcessorErrorDomain() uintptr {
+func VTFrameProcessorErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_videotoolboxLib, "VTFrameProcessorErrorDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KVTAlphaChannelMode_PremultipliedAlpha() uintptr {
@@ -52,25 +64,31 @@ func KVTCameraCalibrationLensRole_Right() uintptr {
 	return ptr
 }
 
-// @constant kVTCompressionPreset_Balanced @abstract A preset to provide a balanced compression quality and encoding speed. @discussion An encoder configured using this preset is expected to achieve a higher quality than an encoder configured with the preset kVTCompressionPreset_HighSpeed. The preset kVTCompressionPreset_HighSpeed may be preferred for a faster encoding. The preset kVTCompressionPreset_HighQuality may be preferred for a higher compression quality. See also kVTCompressionPreset_HighQuality, kVTCompressionPreset_HighSpeed, kVTCompressionPreset_VideoConferencing.
+// @constant kVTCompressionPreset_Balanced @abstract A preset to provide a balanced compression quality and encoding speed. @discussion An encoder configured using this preset is expected to achieve a higher quality than an encoder configured with the preset kVTCompressionPreset_HighSpeed. The preset kVTCompressionPreset_HighSpeed may be preferred for a faster encoding. The preset kVTCompressionPreset_HighQuality may be preferred for a higher compression quality. See also kVTCompressionPreset_HighQuality, kVTCompressionPreset_HighSpeed, kVTCompressionPreset_VideoConferencing, kVTCompressionPreset_ConsistentQuality.
 func KVTCompressionPreset_Balanced() uintptr {
 	ptr, _ := purego.Dlsym(_videotoolboxLib, "kVTCompressionPreset_Balanced")
 	return ptr
 }
 
-// @constant kVTCompressionPreset_HighQuality @abstract A preset to achieve a high compression quality. @discussion An encoder configured using this preset is expected to achieve a higher quality with a slower encoding than an encoder configured with the preset kVTCompressionPreset_Balanced or kVTCompressionPreset_HighSpeed. The presets kVTCompressionPreset_Balanced and kVTCompressionPreset_HighSpeed may be preferred for a faster encoding. See also kVTCompressionPreset_Balanced, kVTCompressionPreset_HighSpeed, kVTCompressionPreset_VideoConferencing.
+// @constant kVTCompressionPreset_ConsistentQuality @abstract A preset to achieve consistent quality encoding across frames. @discussion An encoder configured using this preset is expected to achieve consistent quality across frames with relaxed rate-control constraints. See also kVTCompressionPreset_HighQuality, kVTCompressionPreset_Balanced, kVTCompressionPreset_HighSpeed, kVTCompressionPreset_VideoConferencing.
+func KVTCompressionPreset_ConsistentQuality() uintptr {
+	ptr, _ := purego.Dlsym(_videotoolboxLib, "kVTCompressionPreset_ConsistentQuality")
+	return ptr
+}
+
+// @constant kVTCompressionPreset_HighQuality @abstract A preset to achieve a high compression quality. @discussion An encoder configured using this preset is expected to achieve a higher quality with a slower encoding than an encoder configured with the preset kVTCompressionPreset_Balanced or kVTCompressionPreset_HighSpeed. The presets kVTCompressionPreset_Balanced and kVTCompressionPreset_HighSpeed may be preferred for a faster encoding. See also kVTCompressionPreset_Balanced, kVTCompressionPreset_HighSpeed, kVTCompressionPreset_VideoConferencing, kVTCompressionPreset_ConsistentQuality.
 func KVTCompressionPreset_HighQuality() uintptr {
 	ptr, _ := purego.Dlsym(_videotoolboxLib, "kVTCompressionPreset_HighQuality")
 	return ptr
 }
 
-// @constant kVTCompressionPreset_HighSpeed @abstract A preset to provide a high-speed encoding. @discussion An encoder configured using this preset is expected to achieve a faster encoding at a lower compression quality than an encoder configured with the preset kVTCompressionPreset_HighQuality or kVTCompressionPreset_Balanced. The presets kVTCompressionPreset_HighQuality and kVTCompressionPreset_Balanced may be preferred for a higher compression quality. See also kVTCompressionPreset_HighQuality, kVTCompressionPreset_Balanced, kVTCompressionPreset_VideoConferencing.
+// @constant kVTCompressionPreset_HighSpeed @abstract A preset to provide a high-speed encoding. @discussion An encoder configured using this preset is expected to achieve a faster encoding at a lower compression quality than an encoder configured with the preset kVTCompressionPreset_HighQuality or kVTCompressionPreset_Balanced. The presets kVTCompressionPreset_HighQuality and kVTCompressionPreset_Balanced may be preferred for a higher compression quality. See also kVTCompressionPreset_HighQuality, kVTCompressionPreset_Balanced, kVTCompressionPreset_VideoConferencing, kVTCompressionPreset_ConsistentQuality.
 func KVTCompressionPreset_HighSpeed() uintptr {
 	ptr, _ := purego.Dlsym(_videotoolboxLib, "kVTCompressionPreset_HighSpeed")
 	return ptr
 }
 
-// @constant kVTCompressionPreset_VideoConferencing @abstract A preset to achieve low-latency encoding for real-time communication applications. @discussion This preset requires setting kVTVideoEncoderSpecification_EnableLowLatencyRateControl to kCFBooleanTrue for encoding in the low-latency mode. See also kVTCompressionPreset_HighQuality, kVTCompressionPreset_Balanced, kVTCompressionPreset_HighSpeed.
+// @constant kVTCompressionPreset_VideoConferencing @abstract A preset to achieve low-latency encoding for real-time communication applications. @discussion This preset requires setting kVTVideoEncoderSpecification_EnableLowLatencyRateControl to kCFBooleanTrue for encoding in the low-latency mode. See also kVTCompressionPreset_HighQuality, kVTCompressionPreset_Balanced, kVTCompressionPreset_HighSpeed, kVTCompressionPreset_ConsistentQuality.
 func KVTCompressionPreset_VideoConferencing() uintptr {
 	ptr, _ := purego.Dlsym(_videotoolboxLib, "kVTCompressionPreset_VideoConferencing")
 	return ptr
@@ -101,7 +119,7 @@ func KVTCompressionPropertyCameraCalibrationKey_IntrinsicMatrixReferenceDimensio
 	return ptr
 }
 
-// The following keys are required in each kVTCompressionPropertyKey_CameraCalibrationDataLensCollection dictionary. @constant kVTCompressionPropertyCameraCalibrationKey_LensAlgorithmKind @abstract	Specifies the camera calibration methodology. @discussion If the algorithm kind is ParametricLens, the camera lens collection requires camera intrinsic and extrinsic parameters. @constant kVTCompressionPropertyCameraCalibrationKey_LensDomain @abstract	Specifies the kind of lens (e.g., color). @constant kVTCompressionPropertyCameraCalibrationKey_LensIdentifier @abstract	Specifies a unique number associated with a lens. @constant kVTCompressionPropertyCameraCalibrationKey_LensRole @abstract	Specifies the particular use of the lens in the camera system (e.g., left or right for a stereo system). @discussion For a stereoscopic camera system, one lens should have the left role and another should have the right role. @constant kVTCompressionPropertyCameraCalibrationKey_LensDistortions @abstract	Specifies the first and second radial distortion coefficients(k1 and k2) used to correct the distortion that appeared as curved lines for straight lines and the first and second tangential distortion coefficients(p1 and p2) used to correct the distortion caused by a lens's improper alignment of physical elements. @discussion The values are in a CFArray of four CFNumbers in k1, k2, p1 and p2 order. @constant kVTCompressionPropertyCameraCalibrationKey_LensFrameAdjustmentsPolynomialX @abstract    Specifies a three element polynomial for mapping x axis UV parameters with an adjustment using the equation `x' = polynomialX[0] + polynomialX[1]*x + polynomialX[2]*x^3`. @discussion The values are in a CFArray of three CFNumbers(float) in the order polynomialX[0], polynomialX[1] & polynomialX[2]. The polynomial transform origin is at the center of the frame. The default values of elements of polynomialX[] are [0.0, 1.0, 0.0]. @constant kVTCompressionPropertyCameraCalibrationKey_LensFrameAdjustmentsPolynomialY @abstract    Specifies a three element polynomial for mapping y axis UV parameters with an adjustment using the equation `y' = polynomialY[0] + polynomialY[1]*y + polynomialY[2]*y^3`. @discussion The values are in a CFArray of three CFNumbers(float) in the order polynomialY[0], polynomialY[1] & polynomialY[2]. The polynomial transform origin is at the center of the frame. The default values of elements of polynomialY[] are [0.0, 1.0, 0.0]. @constant kVTCompressionPropertyCameraCalibrationKey_RadialAngleLimit @abstract	Specifies the outer limit of the calibration validity in degrees of angle eccentric from the optical axis. @discussion The value is linked to radial distortion corrections with k1 and k2. @constant kVTCompressionPropertyCameraCalibrationKey_IntrinsicMatrix @abstract	Specifies the 3x3 camera intrinsic matrix for camera calibration. @discussion Camera intrinsic matrix is a CFData containing a matrix_float3x3, which is column-major. Each element is in IEEE754 native-endian 32-bit floating point. It has the following contents: fx	s	cx 0	fy	cy 0	0	1 fx and fy are the focal length in pixels. For square pixels, they will have the same value. cx and cy are the coordinates of the principal point. The origin is the upper left of the frame. s is an optional skew factor. @constant kVTCompressionPropertyCameraCalibrationKey_IntrinsicMatrixProjectionOffset @abstract	Specifies the offset of the point of perspective relative to the rectilinear projection. @constant kVTCompressionPropertyCameraCalibrationKey_IntrinsicMatrixReferenceDimensions @abstract	Specifies the image dimensions to which the camera’s intrinsic matrix values are relative. @discussion Values are width and height in a CFDictionary. Dictionary keys are compatible with CGSize dictionary, namely "Width" and "Height". @constant kVTCompressionPropertyCameraCalibrationKey_ExtrinsicOriginSource @abstract	Identifies how the origin of the camera system's extrinsics are determined. @discussion The 'blin' value indicates the center of transform is determined by the point mid way along the dimensions indicated by the StereoCameraSystemBaselineBox held in the StereoCameraSystemBox. Each left and right lens within a stereoscopic camera system is equidistant from this point, so the 'blin' value is halved when associated with the respective left and right lenses. @constant kVTCompressionPropertyCameraCalibrationKey_ExtrinsicOrientationQuaternion @abstract	Specifies a camera’s orientation to a world or scene coordinate system. The orientation value is a unit quaternion(ix, iy, and iz) instead of the classical 3x3 matrix. @discussion The values are in a CFArray of three CFNumbers in ix, iy, and iz order.
+// @constant kVTCompressionPropertyCameraCalibrationKey_LensAlgorithmKind @abstract	Specifies the camera calibration methodology. @discussion If the algorithm kind is ParametricLens, the camera lens collection requires camera intrinsic and extrinsic parameters.
 func KVTCompressionPropertyCameraCalibrationKey_LensAlgorithmKind() uintptr {
 	ptr, _ := purego.Dlsym(_videotoolboxLib, "kVTCompressionPropertyCameraCalibrationKey_LensAlgorithmKind")
 	return ptr
@@ -202,7 +220,7 @@ func KVTCompressionPropertyKey_CalculateMeanSquaredError() uintptr {
 	return ptr
 }
 
-// @constant kVTCompressionPropertyKey_CameraCalibrationDataLensCollection @abstract	Specifies intrinsic and extrinsic parameters for single or multiple lenses. @discussion The property value is an array of dictionaries describing the camera calibration data for each lens. The camera calibration data includes intrinsics and extrinics with other parameters. For a stereoscopic camera system, the left and right lens signaling can be done with the kVTCompressionPropertyCameraCalibrationKey_LensRole key and its value.
+// @constant kVTCompressionPropertyKey_CameraCalibrationDataLensCollection @abstract	Specifies intrinsic and extrinsic parameters for single or multiple lenses. @discussion The property value is an array of dictionaries describing the camera calibration data for each lens. The camera calibration data includes intrinsics and extrinics with other parameters. For a stereoscopic camera system, the left and right lens signaling can be done with the kVTCompressionPropertyCameraCalibrationKey_LensRole key and its value. The following keys are required in each kVTCompressionPropertyKey_CameraCalibrationDataLensCollection dictionary. kVTCompressionPropertyCameraCalibrationKey_LensAlgorithmKind kVTCompressionPropertyCameraCalibrationKey_LensDomain kVTCompressionPropertyCameraCalibrationKey_LensIdentifier kVTCompressionPropertyCameraCalibrationKey_LensRole kVTCompressionPropertyCameraCalibrationKey_LensDistortions kVTCompressionPropertyCameraCalibrationKey_LensFrameAdjustmentsPolynomialX kVTCompressionPropertyCameraCalibrationKey_LensFrameAdjustmentsPolynomialY kVTCompressionPropertyCameraCalibrationKey_RadialAngleLimit kVTCompressionPropertyCameraCalibrationKey_IntrinsicMatrix kVTCompressionPropertyCameraCalibrationKey_IntrinsicMatrixProjectionOffset kVTCompressionPropertyCameraCalibrationKey_IntrinsicMatrixReferenceDimensions kVTCompressionPropertyCameraCalibrationKey_ExtrinsicOriginSource kVTCompressionPropertyCameraCalibrationKey_ExtrinsicOrientationQuaternion
 func KVTCompressionPropertyKey_CameraCalibrationDataLensCollection() uintptr {
 	ptr, _ := purego.Dlsym(_videotoolboxLib, "kVTCompressionPropertyKey_CameraCalibrationDataLensCollection")
 	return ptr
@@ -223,6 +241,12 @@ func KVTCompressionPropertyKey_ColorPrimaries() uintptr {
 // @constant	kVTCompressionPropertyKey_ConstantBitRate @abstract Requires that the encoder use a Constant Bit Rate algorithm. @discussion The property kVTCompressionPropertyKey_ExpectedFrameRate should be set along with kVTCompressionPropertyKey_ConstantBitRate to ensure effective CBR rate control. This property is not compatible with kVTCompressionPropertyKey_DataRateLimits, kVTCompressionPropertyKey_AverageBitRate, and kVTCompressionPropertyKey_VariableBitRate. The encoder will pad the frame if they are smaller than they need to be based on the Constant BitRate. This property is not recommended for general streaming or export scenarios. It is intended for interoperability with certain streaming CDNs which specifically require that data rates not drop even during low motion and activity scenes. This is not supported in all encoders or in all encoder operating modes. kVTPropertyNotSupportedErr will be returned when this option is not supported.
 func KVTCompressionPropertyKey_ConstantBitRate() uintptr {
 	ptr, _ := purego.Dlsym(_videotoolboxLib, "kVTCompressionPropertyKey_ConstantBitRate")
+	return ptr
+}
+
+// @constant	kVTCompressionPropertyKey_ConstantQualityFactor @abstract Requires the encoder to maintain consistent quality by specifying a target constant quality factor in the range of 0.0 to 1.0. @discussion In contrast to cases where kVTCompressionPropertyKey_Quality will cause the quantization parameter to adhere to a fixed value, this property is designed for consistent visual quality with or without bitrate limit constraints. 0.0 is the lowest quality and 1.0 implies the highest quality possible.
+func KVTCompressionPropertyKey_ConstantQualityFactor() uintptr {
+	ptr, _ := purego.Dlsym(_videotoolboxLib, "kVTCompressionPropertyKey_ConstantQualityFactor")
 	return ptr
 }
 
@@ -336,6 +360,12 @@ func KVTCompressionPropertyKey_HorizontalFieldOfView() uintptr {
 // @constant	kVTCompressionPropertyKey_ICCProfile @abstract Indicates ICC profile for compressed content. @discussion Some video encoders may enforce specific colorimetry; in those cases this property will be read-only (SetProperty will return kVTPropertyReadOnlyErr). If this property and any of the previous three are all set, they should be set to consistent values, or undefined behavior may occur. The value will be set on the format description for output sample buffers. NULL can be a valid value for this property.
 func KVTCompressionPropertyKey_ICCProfile() uintptr {
 	ptr, _ := purego.Dlsym(_videotoolboxLib, "kVTCompressionPropertyKey_ICCProfile")
+	return ptr
+}
+
+// Indicates that the transfer function or gamma of the content is a log format and identifies the specific log curve. Log curve identifiers include “kCVImageBufferLogTransferFunction_AppleLog“ ("com.apple.rec2020.apple-log") and “kCVImageBufferLogTransferFunction_AppleLog2“ ("com.apple.apple-wide-gamut.apple-log"). When the LogTransferFunction is specified for a VTCompressionSession, if source image buffers do not have exactly that LogTransferFunction, encoding will fail.
+func KVTCompressionPropertyKey_LogTransferFunction() uintptr {
+	ptr, _ := purego.Dlsym(_videotoolboxLib, "kVTCompressionPropertyKey_LogTransferFunction")
 	return ptr
 }
 
@@ -495,7 +525,7 @@ func KVTCompressionPropertyKey_ProjectionKind() uintptr {
 	return ptr
 }
 
-// @constant	kVTCompressionPropertyKey_Quality @abstract The desired compression quality. @discussion Some encoders, such as JPEG, describe the compression level of each image with a quality value.  This value should be specified as a number in the range of 0.0 to 1.0, where low = 0.25, normal = 0.50, high = 0.75, and 1.0 implies lossless compression for encoders that support it.
+// @constant	kVTCompressionPropertyKey_Quality @abstract The desired compression quality. @discussion Some encoders, such as JPEG, describe the compression level of each image with a quality value.  This value should be specified as a number in the range of 0.0 to 1.0, where low = 0.25, normal = 0.50, high = 0.75, and 1.0 implies lossless compression for encoders that support it. For some formats, this property will direct encoder to use a fixed quantization parameter during encoding.
 func KVTCompressionPropertyKey_Quality() uintptr {
 	ptr, _ := purego.Dlsym(_videotoolboxLib, "kVTCompressionPropertyKey_Quality")
 	return ptr
@@ -555,7 +585,7 @@ func KVTCompressionPropertyKey_SuggestedLookAheadFrameCount() uintptr {
 	return ptr
 }
 
-// @constant kVTCompressionPropertyKey_SupportedPresetDictionaries @abstract Where supported by video encoders, returns a dictionary whose keys are the available compression presets (prefixed by `kVTCompressionPreset_`) and the values are dictionaries containing the corresponding settings property key/value pairs. @discussion Clients can select a compression preset for their encoding needs and use its encoder settings to configure the encoder. Clients may also use the encoder settings as a base configuration that they can customize as they require. See also kVTCompressionPreset_HighQuality, kVTCompressionPreset_Balanced, kVTCompressionPreset_HighSpeed, kVTCompressionPreset_VideoConferencing.
+// @constant kVTCompressionPropertyKey_SupportedPresetDictionaries @abstract Where supported by video encoders, returns a dictionary whose keys are the available compression presets (prefixed by `kVTCompressionPreset_`) and the values are dictionaries containing the corresponding settings property key/value pairs. @discussion Clients can select a compression preset for their encoding needs and use its encoder settings to configure the encoder. Clients may also use the encoder settings as a base configuration that they can customize as they require. See also kVTCompressionPreset_HighQuality, kVTCompressionPreset_Balanced, kVTCompressionPreset_HighSpeed, kVTCompressionPreset_VideoConferencing, kVTCompressionPreset_ConsistentQuality.
 func KVTCompressionPropertyKey_SupportedPresetDictionaries() uintptr {
 	ptr, _ := purego.Dlsym(_videotoolboxLib, "kVTCompressionPropertyKey_SupportedPresetDictionaries")
 	return ptr
@@ -1370,6 +1400,11 @@ func KVTProfileLevel_MP4V_Simple_L2() uintptr {
 
 func KVTProfileLevel_MP4V_Simple_L3() uintptr {
 	ptr, _ := purego.Dlsym(_videotoolboxLib, "kVTProfileLevel_MP4V_Simple_L3")
+	return ptr
+}
+
+func KVTProjectionKind_AppleImmersiveVideo() uintptr {
+	ptr, _ := purego.Dlsym(_videotoolboxLib, "kVTProjectionKind_AppleImmersiveVideo")
 	return ptr
 }
 

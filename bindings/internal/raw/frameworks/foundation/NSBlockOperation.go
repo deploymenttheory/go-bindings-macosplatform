@@ -4,15 +4,11 @@
 package foundation
 
 import (
-	"unsafe"
-
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An operation that manages the concurrent execution of one or more blocks.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsblockoperation
 type NSBlockOperation struct {
 	NSOperation
@@ -35,6 +31,7 @@ func NSBlockOperationFromID(id objc.ID) *NSBlockOperation {
 	return o
 }
 
+// Creates and returns an `NSBlockOperation` object and adds the specified block to it. - Parameter block: The block to add to the new block operation object's list. The block should take no parameters and have no return value. - Returns: A new block operation object.
 func NSBlockOperationBlockOperationWith(block func()) *NSBlockOperation {
 	var __block_block objc.Block
 	if block != nil {
@@ -50,6 +47,7 @@ func NSBlockOperationBlockOperationWith(block func()) *NSBlockOperation {
 	return NSBlockOperationFromID(_ret)
 }
 
+// Adds the specified block to the receiver's list of blocks to perform. The specified block should not make any assumptions about its execution environment. Calling this method while the receiver is executing or has already finished causes an `NSInvalidArgumentException` exception to be thrown. - Parameter block: The block to add to the receiver's list. The block should take no parameters and have no return value.
 func (o *NSBlockOperation) AddExecutionBlock(block func()) {
 	var __block_block objc.Block
 	if block != nil {
@@ -61,7 +59,7 @@ func (o *NSBlockOperation) AddExecutionBlock(block func()) {
 	o.Ptr().Send(_nSBlockOperationSelAddExecutionBlock, __block_block)
 }
 
-func (o *NSBlockOperation) ExecutionBlocks() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSBlockOperationSelExecutionBlocks)
+func (o *NSBlockOperation) ExecutionBlocks() objc.Block {
+	_ret := objc.Send[objc.Block](o.Ptr(), _nSBlockOperationSelExecutionBlocks)
 	return _ret
 }

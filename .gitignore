@@ -24,7 +24,7 @@
 /vendor/
 
 # Generated acceptance test sample (regenerated per run by cmd/genacceptance)
-acceptance/generated_acceptance_test.go
+/bindings/acceptance/generated_acceptance_test.go
 acceptance-attestation.jsonl
 /bin/
 /dist/

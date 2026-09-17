@@ -12,6 +12,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/foundation"
 )
 
+// Deprecated: Use Network Framework instead
 func MCErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_multipeerconnectivityLib, "MCErrorDomain")
 	if ptr == 0 {
@@ -24,6 +25,7 @@ func MCErrorDomain() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
+// Deprecated: Use Network Framework instead
 func KMCSessionMaximumNumberOfPeers() uint {
 	ptr, _ := purego.Dlsym(_multipeerconnectivityLib, "kMCSessionMaximumNumberOfPeers")
 	if ptr == 0 {
@@ -32,6 +34,7 @@ func KMCSessionMaximumNumberOfPeers() uint {
 	return *(*uint)(unsafe.Pointer(ptr))
 }
 
+// Deprecated: Use Network Framework instead
 func KMCSessionMinimumNumberOfPeers() uint {
 	ptr, _ := purego.Dlsym(_multipeerconnectivityLib, "kMCSessionMinimumNumberOfPeers")
 	if ptr == 0 {

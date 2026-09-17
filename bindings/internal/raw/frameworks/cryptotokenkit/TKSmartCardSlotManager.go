@@ -68,7 +68,7 @@ func TKSmartCardSlotManagerDefaultManager() *TKSmartCardSlotManager {
 	return TKSmartCardSlotManagerFromID(_ret)
 }
 
-// Array of currently known slots in the system.  Slots are identified by NSString name instances.  Use KVO to be notified about slots arrivals and removals.
+// Array of currently known slots in the system. Slots are identified by NSString name instances. Use KVO to be notified about slot arrivals and removals. Recommended pattern: @code - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context { dispatch_async(self.myQueue, ^{ // Process slot changes here }); } @endcode
 func (o *TKSmartCardSlotManager) SlotNames() *foundation.NSArray[*foundation.NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKSmartCardSlotManagerSelSlotNames)
 	if _ret != 0 {

@@ -56,12 +56,12 @@ func Nw_content_context_final_send() *foundation.NSObject {
 	return foundation.NSObjectFromID(id)
 }
 
-func Nw_data_transfer_report_all_paths() uint {
+func Nw_data_transfer_report_all_paths() uint32 {
 	ptr, _ := purego.Dlsym(_networkLib, "_nw_data_transfer_report_all_paths")
 	if ptr == 0 {
 		return 0
 	}
-	return *(*uint)(unsafe.Pointer(ptr))
+	return *(*uint32)(unsafe.Pointer(ptr))
 }
 
 func Nw_parameters_configure_protocol_default_configuration() func(*foundation.NSObject) {

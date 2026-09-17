@@ -88,6 +88,7 @@ func (o *NSDate) InitWithCoder(coder *NSCoder) *NSDate {
 	return NSDateFromID(_ret)
 }
 
+// The interval between the date object and 00:00:00 UTC on 1 January 2001. This property's value is negative if the date object is earlier than the system's absolute reference date (00:00:00 UTC on 1 January 2001).
 func (o *NSDate) TimeIntervalSinceReferenceDate() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSDateSelTimeIntervalSinceReferenceDate)
 	return _ret
@@ -154,16 +155,19 @@ func (o *NSDate) DescriptionWithLocale(locale objc.ID) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The interval between the date object and the current date and time. If the date object is earlier than the current date and time, this property's value is negative.
 func (o *NSDate) TimeIntervalSinceNow() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSDateSelTimeIntervalSinceNow)
 	return _ret
 }
 
+// The interval between the date object and 00:00:00 UTC on 1 January 1970. This property's value is negative if the date object is earlier than 00:00:00 UTC on 1 January 1970.
 func (o *NSDate) TimeIntervalSince1970() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSDateSelTimeIntervalSince1970)
 	return _ret
 }
 
+// The interval between 00:00:00 UTC on 1 January 2001 and the current date and time. This method is the primitive method for `NSDate`. If you subclass `NSDate`, you must override this method with your own implementation for it.
 func NSDateTimeIntervalSinceReferenceDate() float64 {
 	_ret := objc.Send[float64](objc.ID(_clsNSDate), _nSDateSelTimeIntervalSinceReferenceDate)
 	return _ret
@@ -241,6 +245,7 @@ func (o *NSDate) InitWithTimeIntervalSinceDate(secsToBeAdded float64, date *NSDa
 	return NSDateFromID(_ret)
 }
 
+// A date object representing a date in the distant future. You can pass this value when an `NSDate` object is required to have the date argument essentially ignored. For example, the `NSWindow` method `nextEventMatchingMask:untilDate:inMode:dequeue:` returns `nil` if an event specified in the event mask does not happen before the specified date. You can use the object returned by `distantFuture` as the date argument to wait indefinitely for the event to occur.
 func NSDateDistantFuture() *NSDate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDate), _nSDateSelDistantFuture)
 	if _ret != 0 {
@@ -249,6 +254,7 @@ func NSDateDistantFuture() *NSDate {
 	return NSDateFromID(_ret)
 }
 
+// A date object representing a date in the distant past. You can use this object as a control date, a guaranteed temporal boundary.
 func NSDateDistantPast() *NSDate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDate), _nSDateSelDistantPast)
 	if _ret != 0 {
@@ -257,6 +263,7 @@ func NSDateDistantPast() *NSDate {
 	return NSDateFromID(_ret)
 }
 
+// The current date and time, as of the time of access. This is equivalent to initializing a new instance with `NSDate()` (or `[[NSDate alloc] init]` in Objective-C). The `NSDate` instance doesn't automatically update its time after you retrieve it.
 func NSDateNow() *NSDate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDate), _nSDateSelNow)
 	if _ret != 0 {

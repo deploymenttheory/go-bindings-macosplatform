@@ -111,42 +111,91 @@ func ASAuthorizationProviderAuthorizationOperationDirectRequest() *foundation.NS
 }
 
 // A encryption algorithm that uses NIST P-256 elliptic curve key agreement, ConcatKDF key derivation with a 256-bit digest, and the Advanced Encryption Standard cipher in Galois/Counter Mode with a key length of 256 bits.
-func ASAuthorizationProviderExtensionEncryptionAlgorithmECDHE_A256GCM() uintptr {
+func ASAuthorizationProviderExtensionEncryptionAlgorithmECDHE_A256GCM() *foundation.NSNumber {
 	ptr, _ := purego.Dlsym(_authenticationservicesLib, "ASAuthorizationProviderExtensionEncryptionAlgorithmECDHE_A256GCM")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSNumberFromID(id)
 }
 
 // A cipher suite for HPKE that uses X25519 elliptic curve key agreement, SHA-2 key derivation with a 256-bit digest, and the ChaCha20 stream cipher with the Poly1305 message authentication code.
-func ASAuthorizationProviderExtensionEncryptionAlgorithmHPKE_Curve25519_SHA256_ChachaPoly() uintptr {
+func ASAuthorizationProviderExtensionEncryptionAlgorithmHPKE_Curve25519_SHA256_ChachaPoly() *foundation.NSNumber {
 	ptr, _ := purego.Dlsym(_authenticationservicesLib, "ASAuthorizationProviderExtensionEncryptionAlgorithmHPKE_Curve25519_SHA256_ChachaPoly")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSNumberFromID(id)
 }
 
 // A cipher suite for HPKE that uses NIST P-256 elliptic curve key agreement, SHA-2 key derivation with a 256-bit digest, and the Advanced Encryption Standard cipher in Galois/Counter Mode with a key length of 256 bits.
-func ASAuthorizationProviderExtensionEncryptionAlgorithmHPKE_P256_SHA256_AES_GCM_256() uintptr {
+func ASAuthorizationProviderExtensionEncryptionAlgorithmHPKE_P256_SHA256_AES_GCM_256() *foundation.NSNumber {
 	ptr, _ := purego.Dlsym(_authenticationservicesLib, "ASAuthorizationProviderExtensionEncryptionAlgorithmHPKE_P256_SHA256_AES_GCM_256")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSNumberFromID(id)
 }
 
 // A cipher suite that you use for HPKE using NIST P-384 elliptic curve key agreement, SHA-2 key derivation with a 384-bit digest, and the Advanced Encryption Standard cipher in Galois/Counter Mode with a key length of 256 bits.
-func ASAuthorizationProviderExtensionEncryptionAlgorithmHPKE_P384_SHA384_AES_GCM_256() uintptr {
+func ASAuthorizationProviderExtensionEncryptionAlgorithmHPKE_P384_SHA384_AES_GCM_256() *foundation.NSNumber {
 	ptr, _ := purego.Dlsym(_authenticationservicesLib, "ASAuthorizationProviderExtensionEncryptionAlgorithmHPKE_P384_SHA384_AES_GCM_256")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSNumberFromID(id)
 }
 
-func ASAuthorizationProviderExtensionSigningAlgorithmES256() uintptr {
+func ASAuthorizationProviderExtensionSigningAlgorithmES256() *foundation.NSNumber {
 	ptr, _ := purego.Dlsym(_authenticationservicesLib, "ASAuthorizationProviderExtensionSigningAlgorithmES256")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSNumberFromID(id)
 }
 
-func ASAuthorizationProviderExtensionSigningAlgorithmES384() uintptr {
+func ASAuthorizationProviderExtensionSigningAlgorithmES384() *foundation.NSNumber {
 	ptr, _ := purego.Dlsym(_authenticationservicesLib, "ASAuthorizationProviderExtensionSigningAlgorithmES384")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSNumberFromID(id)
 }
 
-func ASAuthorizationProviderExtensionSigningAlgorithmEd25519() uintptr {
+func ASAuthorizationProviderExtensionSigningAlgorithmEd25519() *foundation.NSNumber {
 	ptr, _ := purego.Dlsym(_authenticationservicesLib, "ASAuthorizationProviderExtensionSigningAlgorithmEd25519")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSNumberFromID(id)
 }
 
 func ASAuthorizationPublicKeyCredentialAttestationKindDirect() *foundation.NSString {
@@ -293,19 +342,40 @@ func ASAuthorizationScopeFullName() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
-func ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorTransportBluetooth() uintptr {
+func ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorTransportBluetooth() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_authenticationservicesLib, "ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorTransportBluetooth")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorTransportNFC() uintptr {
+func ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorTransportNFC() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_authenticationservicesLib, "ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorTransportNFC")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorTransportUSB() uintptr {
+func ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorTransportUSB() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_authenticationservicesLib, "ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorTransportUSB")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func ASCredentialIdentityStoreErrorDomain() *foundation.NSString {

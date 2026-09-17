@@ -111,6 +111,12 @@ func (gcd *GraphCompilationDescriptor) ConvertLayoutToNHWC() {
 	objc.Send[objc.ID](objref.IDOf(gcd), objc.RegisterName("convertLayoutToNHWC"))
 }
 
+// DisableAutoLayoutConversion turns off Automatic Layout Conversion (for conv like operations) for GPU.
+func (gcd *GraphCompilationDescriptor) DisableAutoLayoutConversion() {
+	defer runtime.KeepAlive(gcd)
+	objc.Send[objc.ID](objref.IDOf(gcd), objc.RegisterName("disableAutoLayoutConversion"))
+}
+
 // OptimizationLevel returns the optimization level for the graph execution, default is MPSGraphOptimizationLevel1.
 func (gcd *GraphCompilationDescriptor) OptimizationLevel() GraphOptimization {
 	defer runtime.KeepAlive(gcd)

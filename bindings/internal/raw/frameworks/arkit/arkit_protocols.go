@@ -3,6 +3,10 @@
 
 package arkit
 
+// GCDevice wraps the ObjC protocol GCDevice.
+type GCDevice interface {
+}
+
 // OS_ar_anchor wraps the ObjC protocol OS_ar_anchor.
 type OS_ar_anchor interface {
 }
@@ -13,6 +17,10 @@ type OS_ar_authorization_result interface {
 
 // OS_ar_authorization_results wraps the ObjC protocol OS_ar_authorization_results.
 type OS_ar_authorization_results interface {
+}
+
+// OS_ar_data wraps the ObjC protocol OS_ar_data.
+type OS_ar_data interface {
 }
 
 // OS_ar_data_provider wraps the ObjC protocol OS_ar_data_provider.
@@ -36,8 +44,26 @@ type OS_ar_device_anchor interface {
 type OS_ar_error interface {
 }
 
+// OS_ar_hand_anchor wraps the ObjC protocol OS_ar_hand_anchor.
+type OS_ar_hand_anchor interface {
+	OS_ar_trackable_anchor
+}
+
+// OS_ar_hand_skeleton wraps the ObjC protocol OS_ar_hand_skeleton.
+type OS_ar_hand_skeleton interface {
+}
+
+// OS_ar_hand_tracking_provider wraps the ObjC protocol OS_ar_hand_tracking_provider.
+type OS_ar_hand_tracking_provider interface {
+	OS_ar_data_provider
+}
+
 // OS_ar_session wraps the ObjC protocol OS_ar_session.
 type OS_ar_session interface {
+}
+
+// OS_ar_skeleton_joint wraps the ObjC protocol OS_ar_skeleton_joint.
+type OS_ar_skeleton_joint interface {
 }
 
 // OS_ar_strings wraps the ObjC protocol OS_ar_strings.
@@ -49,8 +75,8 @@ type OS_ar_trackable_anchor interface {
 	OS_ar_anchor
 }
 
-// OS_ar_world_anchors wraps the ObjC protocol OS_ar_world_anchors.
-type OS_ar_world_anchors interface {
+// OS_ar_world_tracking_configuration wraps the ObjC protocol OS_ar_world_tracking_configuration.
+type OS_ar_world_tracking_configuration interface {
 }
 
 // OS_ar_world_tracking_provider wraps the ObjC protocol OS_ar_world_tracking_provider.

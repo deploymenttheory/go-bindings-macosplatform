@@ -44,6 +44,7 @@ func (o *NSTextParagraph) InitWithAttributedString(attributedString *foundation.
 	return NSTextParagraphFromID(_ret)
 }
 
+// The source attributed string.
 func (o *NSTextParagraph) AttributedString() *foundation.NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextParagraphSelAttributedString)
 	if _ret != 0 {
@@ -52,6 +53,7 @@ func (o *NSTextParagraph) AttributedString() *foundation.NSAttributedString {
 	return foundation.NSAttributedStringFromID(_ret)
 }
 
+// The range of the paragraph's content within the document. The paragraph's content is the text up to but not including the paragraph separator. Together with “paragraphSeparatorRange“, this range covers the entire “NSTextElement/elementRange“.
 func (o *NSTextParagraph) ParagraphContentRange() *NSTextRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextParagraphSelParagraphContentRange)
 	if _ret != 0 {
@@ -60,6 +62,7 @@ func (o *NSTextParagraph) ParagraphContentRange() *NSTextRange {
 	return NSTextRangeFromID(_ret)
 }
 
+// The range of the paragraph separator within the document. Together with “paragraphContentRange“, this range covers the entire “NSTextElement/elementRange“.
 func (o *NSTextParagraph) ParagraphSeparatorRange() *NSTextRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextParagraphSelParagraphSeparatorRange)
 	if _ret != 0 {

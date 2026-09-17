@@ -191,10 +191,6 @@ func _loadLibrary() {
 	_register("dsGetRecordTypeFromEntry", func() {
 		purego.RegisterLibFunc(&_dsGetRecordTypeFromEntry, _directoryserviceLib, "dsGetRecordTypeFromEntry")
 	})
-	_register("dsIsDirServiceLocalRunning", func() {
-		purego.RegisterLibFunc(&_dsIsDirServiceLocalRunning, _directoryserviceLib, "dsIsDirServiceLocalRunning")
-	})
-	_register("dsIsDirServiceRunning", func() { purego.RegisterLibFunc(&_dsIsDirServiceRunning, _directoryserviceLib, "dsIsDirServiceRunning") })
 	_register("dsOpenDirNode", func() { purego.RegisterLibFunc(&_dsOpenDirNode, _directoryserviceLib, "dsOpenDirNode") })
 	_register("dsOpenDirService", func() { purego.RegisterLibFunc(&_dsOpenDirService, _directoryserviceLib, "dsOpenDirService") })
 	_register("dsOpenDirServiceLocal", func() { purego.RegisterLibFunc(&_dsOpenDirServiceLocal, _directoryserviceLib, "dsOpenDirServiceLocal") })

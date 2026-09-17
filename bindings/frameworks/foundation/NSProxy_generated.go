@@ -94,7 +94,7 @@ func (p *Proxy) Finalize() {
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("finalize"))
 }
 
-// DebugDescription returns the debug description.
+// DebugDescription returns a string containing a human-readable description of the receiver suitable for debugging.
 func (p *Proxy) DebugDescription() string {
 	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("debugDescription"))

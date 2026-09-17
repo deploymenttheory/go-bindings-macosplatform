@@ -19,8 +19,6 @@ import (
 // DateIntervalFormatter is an idiomatic wrapper over the Objective-C class NSDateIntervalFormatter.
 //
 // It embeds [Formatter], promoting that type's methods.
-//
-// A formatter that creates string representations of time intervals.
 type DateIntervalFormatter struct {
 	Formatter
 }
@@ -57,41 +55,41 @@ func NewDateIntervalFormatter() *DateIntervalFormatter {
 	return dateIntervalFormatterAdopt(_id)
 }
 
-// WithLocale sets the locale.
+// WithLocale sets the locale for the formatter. Default is `[NSLocale currentLocale]`.
 func (dif *DateIntervalFormatter) WithLocale(locale *Locale) *DateIntervalFormatter {
 	defer runtime.KeepAlive(locale)
 	objc.Send[objc.ID](objref.IDOf(dif), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 	return dif
 }
 
-// WithCalendar sets the calendar.
+// WithCalendar sets the calendar for the formatter. Default is the calendar of the locale.
 func (dif *DateIntervalFormatter) WithCalendar(calendar *Calendar) *DateIntervalFormatter {
 	defer runtime.KeepAlive(calendar)
 	objc.Send[objc.ID](objref.IDOf(dif), objc.RegisterName("setCalendar:"), objref.IDOf(calendar))
 	return dif
 }
 
-// WithTimeZone sets the time zone.
+// WithTimeZone sets the time zone for the formatter. Default is `[NSTimeZone defaultTimeZone]`.
 func (dif *DateIntervalFormatter) WithTimeZone(timeZone *TimeZone) *DateIntervalFormatter {
 	defer runtime.KeepAlive(timeZone)
 	objc.Send[objc.ID](objref.IDOf(dif), objc.RegisterName("setTimeZone:"), objref.IDOf(timeZone))
 	return dif
 }
 
-// WithDateTemplate sets the date template.
+// WithDateTemplate sets the date template for the formatter. Default is an empty string.
 func (dif *DateIntervalFormatter) WithDateTemplate(dateTemplate StringProvider) *DateIntervalFormatter {
 	defer runtime.KeepAlive(dateTemplate)
 	objc.Send[objc.ID](objref.IDOf(dif), objc.RegisterName("setDateTemplate:"), objref.IDOf(dateTemplate))
 	return dif
 }
 
-// WithDateStyle sets the date style.
+// WithDateStyle sets the date style for the formatter. Default is `NSDateIntervalFormatterNoStyle`.
 func (dif *DateIntervalFormatter) WithDateStyle(dateStyle DateIntervalFormatterStyle) *DateIntervalFormatter {
 	objc.Send[objc.ID](objref.IDOf(dif), objc.RegisterName("setDateStyle:"), dateStyle)
 	return dif
 }
 
-// WithTimeStyle sets the time style.
+// WithTimeStyle sets the time style for the formatter. Default is `NSDateIntervalFormatterNoStyle`.
 func (dif *DateIntervalFormatter) WithTimeStyle(timeStyle DateIntervalFormatterStyle) *DateIntervalFormatter {
 	objc.Send[objc.ID](objref.IDOf(dif), objc.RegisterName("setTimeStyle:"), timeStyle)
 	return dif
@@ -109,7 +107,7 @@ func (dif *DateIntervalFormatter) WithScriptingProperties(scriptingProperties ma
 	return dif
 }
 
-// StringFromDateToDate wraps the corresponding Objective-C method.
+// StringFromDateToDate returns a formatted date interval from the specified start date to end date. If the range is smaller than the resolution specified by the `dateTemplate`, a single date format will be produced. If the range is larger than the format specified by the `dateTemplate`, a locale-specific fallback will be used to format the items missing from the pattern. For example, if the range is 2010-03-04 07:56 - 2010-03-04 19:56 (12 hours) - The pattern `jm` will produce for `en_US`, "7:56 AM - 7:56 PM" for `en_GB`, "7:56 - 19:56" - The pattern `MMMd` will produce for `en_US`, "Mar 4" for `en_GB`, "4 Mar" If the range is 2010-03-04 07:56 - 2010-03-08 16:11 (4 days, 8 hours, 15 minutes) - The pattern `jm` will produce for `en_US`, "3/4/2010 7:56 AM - 3/8/2010 4:11 PM" for `en_GB`, "4/3/2010 7:56 - 8/3/2010 16:11" - The pattern `MMMd` will produce for `en_US`, "Mar 4-8" for `en_GB`, "4-8 Mar"
 func (dif *DateIntervalFormatter) StringFromDateToDate(fromDate time.Time, toDate time.Time) string {
 	defer runtime.KeepAlive(dif)
 	_r := objc.Send[objc.ID](objref.IDOf(dif), objc.RegisterName("stringFromDate:toDate:"), rt.TimeToNSDate(fromDate), rt.TimeToNSDate(toDate))
@@ -119,7 +117,7 @@ func (dif *DateIntervalFormatter) StringFromDateToDate(fromDate time.Time, toDat
 	return purego.GoString(_r)
 }
 
-// StringFromDateInterval wraps the corresponding Objective-C method.
+// StringFromDateInterval returns a formatted string for the given date interval.
 func (dif *DateIntervalFormatter) StringFromDateInterval(dateInterval *DateInterval) string {
 	defer runtime.KeepAlive(dif)
 	defer runtime.KeepAlive(dateInterval)
@@ -130,28 +128,28 @@ func (dif *DateIntervalFormatter) StringFromDateInterval(dateInterval *DateInter
 	return purego.GoString(_r)
 }
 
-// Locale returns the locale.
+// Locale returns the locale for the formatter. Default is `[NSLocale currentLocale]`.
 func (dif *DateIntervalFormatter) Locale() *Locale {
 	defer runtime.KeepAlive(dif)
 	_r := objc.Send[objc.ID](objref.IDOf(dif), objc.RegisterName("locale"))
 	return LocaleFromID(_r)
 }
 
-// Calendar returns the calendar.
+// Calendar returns the calendar for the formatter. Default is the calendar of the locale.
 func (dif *DateIntervalFormatter) Calendar() *Calendar {
 	defer runtime.KeepAlive(dif)
 	_r := objc.Send[objc.ID](objref.IDOf(dif), objc.RegisterName("calendar"))
 	return CalendarFromID(_r)
 }
 
-// TimeZone returns the time zone.
+// TimeZone returns the time zone for the formatter. Default is `[NSTimeZone defaultTimeZone]`.
 func (dif *DateIntervalFormatter) TimeZone() *TimeZone {
 	defer runtime.KeepAlive(dif)
 	_r := objc.Send[objc.ID](objref.IDOf(dif), objc.RegisterName("timeZone"))
 	return TimeZoneFromID(_r)
 }
 
-// DateTemplate returns the date template.
+// DateTemplate returns the date template for the formatter. Default is an empty string.
 func (dif *DateIntervalFormatter) DateTemplate() string {
 	defer runtime.KeepAlive(dif)
 	_r := objc.Send[objc.ID](objref.IDOf(dif), objc.RegisterName("dateTemplate"))
@@ -161,14 +159,14 @@ func (dif *DateIntervalFormatter) DateTemplate() string {
 	return purego.GoString(_r)
 }
 
-// DateStyle returns the date style.
+// DateStyle returns the date style for the formatter. Default is `NSDateIntervalFormatterNoStyle`.
 func (dif *DateIntervalFormatter) DateStyle() DateIntervalFormatterStyle {
 	defer runtime.KeepAlive(dif)
 	_r := objc.Send[DateIntervalFormatterStyle](objref.IDOf(dif), objc.RegisterName("dateStyle"))
 	return _r
 }
 
-// TimeStyle returns the time style.
+// TimeStyle returns the time style for the formatter. Default is `NSDateIntervalFormatterNoStyle`.
 func (dif *DateIntervalFormatter) TimeStyle() DateIntervalFormatterStyle {
 	defer runtime.KeepAlive(dif)
 	_r := objc.Send[DateIntervalFormatterStyle](objref.IDOf(dif), objc.RegisterName("timeStyle"))

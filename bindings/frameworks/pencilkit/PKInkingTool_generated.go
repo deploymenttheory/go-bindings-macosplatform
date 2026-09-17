@@ -17,8 +17,6 @@ import (
 // InkingTool is an idiomatic wrapper over the Objective-C class PKInkingTool.
 //
 // It embeds [Tool], promoting that type's methods.
-//
-// A structure that defines the drawing characteristics (width, color, pen style) to use when drawing lines on a canvas view.
 type InkingTool struct {
 	Tool
 }

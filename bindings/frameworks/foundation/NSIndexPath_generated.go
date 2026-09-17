@@ -130,7 +130,7 @@ func (ip *IndexPath) Compare(otherObject *IndexPath) ComparisonResult {
 	return _r
 }
 
-// Length returns the length.
+// Length returns the number of nodes in the index path.
 func (ip *IndexPath) Length() int {
 	defer runtime.KeepAlive(ip)
 	_r := objc.Send[int](objref.IDOf(ip), objc.RegisterName("length"))

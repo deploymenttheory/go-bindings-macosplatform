@@ -53,6 +53,12 @@ type MTRDeviceControllerDelegateControllerCommissioningCompleteNodeIDMetricsHand
 	ControllerCommissioningCompleteNodeIDMetrics(controller *MTRDeviceController, err error, nodeID obj.Object, metrics *MTRMetrics)
 }
 
+// MTRDeviceControllerDelegateControllerCommissioningCompleteNodeIDMetricsContextHandler is the optional MTRDeviceControllerDelegate method controller:commissioningComplete:nodeID:metrics:context:. Implement it on a MTRDeviceControllerDelegate value
+// to receive that callback; a value without it is simply never sent one.
+type MTRDeviceControllerDelegateControllerCommissioningCompleteNodeIDMetricsContextHandler interface {
+	ControllerCommissioningCompleteNodeIDMetricsContext(controller *MTRDeviceController, err error, nodeID obj.Object, metrics *MTRMetrics, context_ obj.Object)
+}
+
 // MTRDeviceControllerDelegateControllerReadCommissioneeInfoHandler is the optional MTRDeviceControllerDelegate method controller:readCommissioneeInfo:. Implement it on a MTRDeviceControllerDelegate value
 // to receive that callback; a value without it is simply never sent one.
 type MTRDeviceControllerDelegateControllerReadCommissioneeInfoHandler interface {
@@ -120,6 +126,11 @@ func newMTRDeviceControllerDelegateShim(d MTRDeviceControllerDelegate) objc.ID {
 					_h.ControllerCommissioningCompleteNodeIDMetrics(MTRDeviceControllerFromID(_p0), errkit.FromObjC(purego.NSErrorToError(_p1)), obj.Wrap(_p2), MTRMetricsFromID(_p3))
 				}
 			}},
+			{Cmd: objc.RegisterName("controller:commissioningComplete:nodeID:metrics:context:"), Fn: func(_self objc.ID, _ objc.SEL, _p0 objc.ID, _p1 objc.ID, _p2 objc.ID, _p3 objc.ID, _p4 objc.ID) {
+				if _h, _ok := shim.Value(_self).(MTRDeviceControllerDelegateControllerCommissioningCompleteNodeIDMetricsContextHandler); _ok {
+					_h.ControllerCommissioningCompleteNodeIDMetricsContext(MTRDeviceControllerFromID(_p0), errkit.FromObjC(purego.NSErrorToError(_p1)), obj.Wrap(_p2), MTRMetricsFromID(_p3), obj.Wrap(_p4))
+				}
+			}},
 			{Cmd: objc.RegisterName("controller:readCommissioneeInfo:"), Fn: func(_self objc.ID, _ objc.SEL, _p0 objc.ID, _p1 objc.ID) {
 				if _h, _ok := shim.Value(_self).(MTRDeviceControllerDelegateControllerReadCommissioneeInfoHandler); _ok {
 					_h.ControllerReadCommissioneeInfo(MTRDeviceControllerFromID(_p0), MTRCommissioneeInfoFromID(_p1))
@@ -158,15 +169,17 @@ func newMTRDeviceControllerDelegateShim(d MTRDeviceControllerDelegate) objc.ID {
 	_responds[objc.RegisterName("controller:commissioningComplete:nodeID:")] = _ok3
 	_, _ok4 := d.(MTRDeviceControllerDelegateControllerCommissioningCompleteNodeIDMetricsHandler)
 	_responds[objc.RegisterName("controller:commissioningComplete:nodeID:metrics:")] = _ok4
-	_, _ok5 := d.(MTRDeviceControllerDelegateControllerReadCommissioneeInfoHandler)
-	_responds[objc.RegisterName("controller:readCommissioneeInfo:")] = _ok5
-	_, _ok6 := d.(MTRDeviceControllerDelegateControllerReadCommissioningInfoHandler)
-	_responds[objc.RegisterName("controller:readCommissioningInfo:")] = _ok6
-	_, _ok7 := d.(MTRDeviceControllerDelegateControllerSuspendedChangedToHandler)
-	_responds[objc.RegisterName("controller:suspendedChangedTo:")] = _ok7
-	_, _ok8 := d.(MTRDeviceControllerDelegateDevicesChangedForControllerHandler)
-	_responds[objc.RegisterName("devicesChangedForController:")] = _ok8
-	_, _ok9 := d.(MTRDeviceControllerDelegateControllerCommissioneeHasReceivedNetworkCredentialsHandler)
-	_responds[objc.RegisterName("controller:commissioneeHasReceivedNetworkCredentials:")] = _ok9
+	_, _ok5 := d.(MTRDeviceControllerDelegateControllerCommissioningCompleteNodeIDMetricsContextHandler)
+	_responds[objc.RegisterName("controller:commissioningComplete:nodeID:metrics:context:")] = _ok5
+	_, _ok6 := d.(MTRDeviceControllerDelegateControllerReadCommissioneeInfoHandler)
+	_responds[objc.RegisterName("controller:readCommissioneeInfo:")] = _ok6
+	_, _ok7 := d.(MTRDeviceControllerDelegateControllerReadCommissioningInfoHandler)
+	_responds[objc.RegisterName("controller:readCommissioningInfo:")] = _ok7
+	_, _ok8 := d.(MTRDeviceControllerDelegateControllerSuspendedChangedToHandler)
+	_responds[objc.RegisterName("controller:suspendedChangedTo:")] = _ok8
+	_, _ok9 := d.(MTRDeviceControllerDelegateDevicesChangedForControllerHandler)
+	_responds[objc.RegisterName("devicesChangedForController:")] = _ok9
+	_, _ok10 := d.(MTRDeviceControllerDelegateControllerCommissioneeHasReceivedNetworkCredentialsHandler)
+	_responds[objc.RegisterName("controller:commissioneeHasReceivedNetworkCredentials:")] = _ok10
 	return shim.New(_mTRDeviceControllerDelegateShimClass, d, _responds)
 }

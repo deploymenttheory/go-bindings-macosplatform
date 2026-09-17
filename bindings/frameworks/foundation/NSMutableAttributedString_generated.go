@@ -149,7 +149,7 @@ func (mas *MutableAttributedString) EndEditing() {
 	objc.Send[objc.ID](objref.IDOf(mas), objc.RegisterName("endEditing"))
 }
 
-// MutableString returns the mutable string.
+// MutableString returns the character contents of the receiver as a mutable string object. The receiver tracks changes to this string and keeps its attribute mappings up to date.
 func (mas *MutableAttributedString) MutableString() *MutableString {
 	defer runtime.KeepAlive(mas)
 	_r := objc.Send[objc.ID](objref.IDOf(mas), objc.RegisterName("mutableString"))

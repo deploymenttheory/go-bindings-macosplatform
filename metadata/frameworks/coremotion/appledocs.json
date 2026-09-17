@@ -106,6 +106,9 @@
       "doc": "A single piece of accelerometer data that was recorded by the device.",
       "url": "https://developer.apple.com/documentation/coremotion/cmrecordedaccelerometerdata"
     },
+    "CMRecordedDeviceMotion": {
+      "url": "https://developer.apple.com/documentation/coremotion/cmrecordeddevicemotion"
+    },
     "CMRecordedPressureData": {
       "doc": "A recorded measurement of pressure data.",
       "url": "https://developer.apple.com/documentation/coremotion/cmrecordedpressuredata"
@@ -152,6 +155,9 @@
     }
   },
   "protocols": {
+    "CMBodyIdentifiable": {
+      "url": "https://developer.apple.com/documentation/coremotion/cmbodyidentifiable"
+    },
     "CMFallDetectionDelegate": {
       "doc": "A delegate that receives information about fall detection events and authorization status changes.",
       "url": "https://developer.apple.com/documentation/coremotion/cmfalldetectiondelegate"
@@ -210,21 +216,9 @@
         }
       }
     },
-    "CMDeviceMotionSensorLocation": {
-      "doc": "Defines the device’s sensor locations.",
-      "url": "https://developer.apple.com/documentation/coremotion/cmdevicemotionsensorlocation"
-    },
     "CMError": {
       "doc": "Defines motion errors.",
       "url": "https://developer.apple.com/documentation/coremotion/cmerror"
-    },
-    "CMFallDetectionEventUserResolution": {
-      "doc": "User resolutions for fall detection events.",
-      "url": "https://developer.apple.com/documentation/coremotion/cmfalldetectioneventuserresolution"
-    },
-    "CMHeadphoneActivityStatus": {
-      "doc": "Headphone connection status updates.",
-      "url": "https://developer.apple.com/documentation/coremotion/cmheadphoneactivitystatus"
     },
     "CMHighFrequencyHeartRateDataConfidence": {
       "doc": "The level of confidence in the accuracy of the heart rate data.",
@@ -319,14 +313,6 @@
           "url": "https://developer.apple.com/documentation/coremotion/cmpedometereventtype/resume"
         }
       }
-    },
-    "CMWaterSubmersionDepthState": {
-      "doc": "A state based on the device’s depth under water.",
-      "url": "https://developer.apple.com/documentation/coremotion/cmwatersubmersiondepthstate"
-    },
-    "CMWaterSubmersionState": {
-      "doc": "The device’s submersion state.",
-      "url": "https://developer.apple.com/documentation/coremotion/cmwatersubmersionstate"
     }
   },
   "structs": {

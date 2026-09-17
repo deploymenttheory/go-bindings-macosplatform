@@ -59,7 +59,7 @@ func NewMTRBaseClusterOTASoftwareUpdateRequestorWithDeviceEndpointIDQueue(device
 	return mTRBaseClusterOTASoftwareUpdateRequestorAdopt(_id)
 }
 
-// AnnounceOTAProviderWithParamsCompletion command AnnounceOTAProvider Announce the presence of an OTA Provider
+// AnnounceOTAProviderWithParamsCompletion command AnnounceOTAProvider This command MAY be invoked by Administrators to announce the presence of a particular OTA Provider.
 func (mbcosur *MTRBaseClusterOTASoftwareUpdateRequestor) AnnounceOTAProviderWithParamsCompletion(params *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams, completion func(unsafe.Pointer)) {
 	defer runtime.KeepAlive(mbcosur)
 	defer runtime.KeepAlive(params)

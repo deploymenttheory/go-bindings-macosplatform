@@ -18,17 +18,15 @@ type NSColorPanel struct {
 
 var (
 	_clsNSColorPanel                           = _objcClass("NSColorPanel")
-	_nSColorPanelSelDragColorWithEventFromView = objc.RegisterName("dragColor:withEvent:fromView:")
 	_nSColorPanelSelSetPickerMask              = objc.RegisterName("setPickerMask:")
 	_nSColorPanelSelSetPickerMode              = objc.RegisterName("setPickerMode:")
+	_nSColorPanelSelDragColorWithEventFromView = objc.RegisterName("dragColor:withEvent:fromView:")
 	_nSColorPanelSelSetAction                  = objc.RegisterName("setAction:")
 	_nSColorPanelSelSetTarget                  = objc.RegisterName("setTarget:")
 	_nSColorPanelSelAttachColorList            = objc.RegisterName("attachColorList:")
 	_nSColorPanelSelDetachColorList            = objc.RegisterName("detachColorList:")
 	_nSColorPanelSelSharedColorPanel           = objc.RegisterName("sharedColorPanel")
 	_nSColorPanelSelSharedColorPanelExists     = objc.RegisterName("sharedColorPanelExists")
-	_nSColorPanelSelAccessoryView              = objc.RegisterName("accessoryView")
-	_nSColorPanelSelSetAccessoryView           = objc.RegisterName("setAccessoryView:")
 	_nSColorPanelSelIsContinuous               = objc.RegisterName("isContinuous")
 	_nSColorPanelSelSetContinuous              = objc.RegisterName("setContinuous:")
 	_nSColorPanelSelShowsAlpha                 = objc.RegisterName("showsAlpha")
@@ -40,6 +38,8 @@ var (
 	_nSColorPanelSelAlpha                      = objc.RegisterName("alpha")
 	_nSColorPanelSelMaximumLinearExposure      = objc.RegisterName("maximumLinearExposure")
 	_nSColorPanelSelSetMaximumLinearExposure   = objc.RegisterName("setMaximumLinearExposure:")
+	_nSColorPanelSelAccessoryView              = objc.RegisterName("accessoryView")
+	_nSColorPanelSelSetAccessoryView           = objc.RegisterName("setAccessoryView:")
 )
 
 func NSColorPanelFromID(id objc.ID) *NSColorPanel {
@@ -50,18 +50,6 @@ func NSColorPanelFromID(id objc.ID) *NSColorPanel {
 	o.InitPtr(id)
 	purego.Track(o)
 	return o
-}
-
-// Drags a color into a destination view from the specified source view.
-func NSColorPanelDragColorWithEventFromView(color *NSColor, event *NSEvent, sourceView *NSView) bool {
-	var _mainthread0 bool
-	purego.Main(func() {
-		_mainthread0 = func() bool {
-			_ret := objc.Send[bool](objc.ID(_clsNSColorPanel), _nSColorPanelSelDragColorWithEventFromView, color.Ptr(), event.Ptr(), sourceView.Ptr())
-			return _ret
-		}()
-	})
-	return _mainthread0
 }
 
 // Determines which color selection modes are available in an application’s NSColorPanel.
@@ -76,6 +64,18 @@ func NSColorPanelSetPickerMode(mode NSColorPanelMode) {
 	purego.Main(func() {
 		objc.ID(_clsNSColorPanel).Send(_nSColorPanelSelSetPickerMode, mode)
 	})
+}
+
+// Drags a color into a destination view from the specified source view.
+func NSColorPanelDragColorWithEventFromView(color *NSColor, event *NSEvent, sourceView *NSView) bool {
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](objc.ID(_clsNSColorPanel), _nSColorPanelSelDragColorWithEventFromView, color.Ptr(), event.Ptr(), sourceView.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the color panel’s action message.
@@ -129,26 +129,6 @@ func NSColorPanelSharedColorPanelExists() bool {
 		}()
 	})
 	return _mainthread0
-}
-
-func (o *NSColorPanel) AccessoryView() *NSView {
-	var _mainthread0 *NSView
-	purego.Main(func() {
-		_mainthread0 = func() *NSView {
-			_ret := objc.Send[objc.ID](o.Ptr(), _nSColorPanelSelAccessoryView)
-			if _ret != 0 {
-				_ret.Send(objc.RegisterName("retain"))
-			}
-			return NSViewFromID(_ret)
-		}()
-	})
-	return _mainthread0
-}
-
-func (o *NSColorPanel) SetAccessoryView(accessoryView *NSView) {
-	purego.Main(func() {
-		o.Ptr().Send(_nSColorPanelSelSetAccessoryView, accessoryView.Ptr())
-	})
 }
 
 func (o *NSColorPanel) IsContinuous() bool {
@@ -249,5 +229,25 @@ func (o *NSColorPanel) MaximumLinearExposure() float64 {
 func (o *NSColorPanel) SetMaximumLinearExposure(maximumLinearExposure float64) {
 	purego.Main(func() {
 		o.Ptr().Send(_nSColorPanelSelSetMaximumLinearExposure, maximumLinearExposure)
+	})
+}
+
+func (o *NSColorPanel) AccessoryView() *NSView {
+	var _mainthread0 *NSView
+	purego.Main(func() {
+		_mainthread0 = func() *NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSColorPanelSelAccessoryView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
+}
+
+func (o *NSColorPanel) SetAccessoryView(accessoryView *NSView) {
+	purego.Main(func() {
+		o.Ptr().Send(_nSColorPanelSelSetAccessoryView, accessoryView.Ptr())
 	})
 }

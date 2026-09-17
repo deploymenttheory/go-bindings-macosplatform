@@ -13,8 +13,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An image processor that produces an image by manipulating one or more input images or by generating new image data.
-//
 // Apple documentation: https://developer.apple.com/documentation/coreimage/cifilter
 type CIFilter struct {
 	foundation.NSObject

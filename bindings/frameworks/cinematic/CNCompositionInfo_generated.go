@@ -19,7 +19,7 @@ import (
 //
 // It embeds [AssetInfo], promoting that type's methods.
 //
-// An object that enables you to add the appropriate number of tracks for a Cinematic asset.
+// Information about composition tracks added to an AVComposition for a cinematic asset.
 type CompositionInfo struct {
 	AssetInfo
 }

@@ -51,6 +51,7 @@ func (o *NSUserUnixTask) ExecuteWithArgumentsCompletionHandler(arguments *NSArra
 	o.Ptr().Send(_nSUserUnixTaskSelExecuteWithArgumentsCompletionHandler, arguments.Ptr(), __block_handler)
 }
 
+// The standard input stream. Setting to `nil` will bind the stream to `/dev/null`. The default is `nil`.
 func (o *NSUserUnixTask) StandardInput() *NSFileHandle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserUnixTaskSelStandardInput)
 	if _ret != 0 {
@@ -63,6 +64,7 @@ func (o *NSUserUnixTask) SetStandardInput(standardInput *NSFileHandle) {
 	o.Ptr().Send(_nSUserUnixTaskSelSetStandardInput, standardInput.Ptr())
 }
 
+// The standard output stream. Setting to `nil` will bind the stream to `/dev/null`. The default is `nil`.
 func (o *NSUserUnixTask) StandardOutput() *NSFileHandle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserUnixTaskSelStandardOutput)
 	if _ret != 0 {
@@ -75,6 +77,7 @@ func (o *NSUserUnixTask) SetStandardOutput(standardOutput *NSFileHandle) {
 	o.Ptr().Send(_nSUserUnixTaskSelSetStandardOutput, standardOutput.Ptr())
 }
 
+// The standard error stream. Setting to `nil` will bind the stream to `/dev/null`. The default is `nil`.
 func (o *NSUserUnixTask) StandardError() *NSFileHandle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserUnixTaskSelStandardError)
 	if _ret != 0 {

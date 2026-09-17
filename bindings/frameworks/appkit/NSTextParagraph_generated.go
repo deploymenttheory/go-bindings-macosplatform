@@ -71,21 +71,21 @@ func (tp *TextParagraph) WithElementRange(elementRange *TextRange) *TextParagrap
 	return tp
 }
 
-// AttributedString returns the attributed string.
+// AttributedString returns the source attributed string.
 func (tp *TextParagraph) AttributedString() *foundation.AttributedString {
 	defer runtime.KeepAlive(tp)
 	_r := objc.Send[objc.ID](objref.IDOf(tp), objc.RegisterName("attributedString"))
 	return foundation.AttributedStringFromID(_r)
 }
 
-// ParagraphContentRange returns the paragraph content range.
+// ParagraphContentRange returns the range of the paragraph's content within the document. The paragraph's content is the text up to but not including the paragraph separator. Together with “paragraphSeparatorRange“, this range covers the entire “NSTextElement/elementRange“.
 func (tp *TextParagraph) ParagraphContentRange() *TextRange {
 	defer runtime.KeepAlive(tp)
 	_r := objc.Send[objc.ID](objref.IDOf(tp), objc.RegisterName("paragraphContentRange"))
 	return TextRangeFromID(_r)
 }
 
-// ParagraphSeparatorRange returns the paragraph separator range.
+// ParagraphSeparatorRange returns the range of the paragraph separator within the document. Together with “paragraphContentRange“, this range covers the entire “NSTextElement/elementRange“.
 func (tp *TextParagraph) ParagraphSeparatorRange() *TextRange {
 	defer runtime.KeepAlive(tp)
 	_r := objc.Send[objc.ID](objref.IDOf(tp), objc.RegisterName("paragraphSeparatorRange"))

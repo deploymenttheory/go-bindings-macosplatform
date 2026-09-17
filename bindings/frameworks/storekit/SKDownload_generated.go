@@ -8,6 +8,7 @@ import (
 	"runtime"
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -88,10 +89,10 @@ func (d *Download) State() DownloadState {
 }
 
 // ContentLength returns the content length.
-func (d *Download) ContentLength() unsafe.Pointer {
+func (d *Download) ContentLength() *foundation.Number {
 	defer runtime.KeepAlive(d)
-	_r := objc.Send[unsafe.Pointer](objref.IDOf(d), objc.RegisterName("contentLength"))
-	return _r
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("contentLength"))
+	return foundation.NumberFromID(_r)
 }
 
 // ExpectedContentLength returns the expected content length.

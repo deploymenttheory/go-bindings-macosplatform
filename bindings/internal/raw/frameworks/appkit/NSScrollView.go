@@ -93,6 +93,15 @@ var (
 	_nSScrollViewSelSetContentInsets                                                                                      = objc.RegisterName("setContentInsets:")
 	_nSScrollViewSelScrollerInsets                                                                                        = objc.RegisterName("scrollerInsets")
 	_nSScrollViewSelSetScrollerInsets                                                                                     = objc.RegisterName("setScrollerInsets:")
+	_nSScrollViewSelIsTouchScrollingEnabled                                                                               = objc.RegisterName("isTouchScrollingEnabled")
+	_nSScrollViewSelSetTouchScrollingEnabled                                                                              = objc.RegisterName("setTouchScrollingEnabled:")
+	_nSScrollViewSelMinimumNumberOfTouchesForScrolling                                                                    = objc.RegisterName("minimumNumberOfTouchesForScrolling")
+	_nSScrollViewSelSetMinimumNumberOfTouchesForScrolling                                                                 = objc.RegisterName("setMinimumNumberOfTouchesForScrolling:")
+	_nSScrollViewSelMaximumNumberOfTouchesForScrolling                                                                    = objc.RegisterName("maximumNumberOfTouchesForScrolling")
+	_nSScrollViewSelSetMaximumNumberOfTouchesForScrolling                                                                 = objc.RegisterName("setMaximumNumberOfTouchesForScrolling:")
+	_nSScrollViewSelScrollGestureForRelationships                                                                         = objc.RegisterName("scrollGestureForRelationships")
+	_nSScrollViewSelRefreshController                                                                                     = objc.RegisterName("refreshController")
+	_nSScrollViewSelSetRefreshController                                                                                  = objc.RegisterName("setRefreshController:")
 	_nSScrollViewSelRulerViewClass                                                                                        = objc.RegisterName("rulerViewClass")
 	_nSScrollViewSelSetRulerViewClass                                                                                     = objc.RegisterName("setRulerViewClass:")
 	_nSScrollViewSelRulersVisible                                                                                         = objc.RegisterName("rulersVisible")
@@ -783,6 +792,100 @@ func (o *NSScrollView) ScrollerInsets() foundation.NSEdgeInsets {
 func (o *NSScrollView) SetScrollerInsets(scrollerInsets foundation.NSEdgeInsets) {
 	purego.Main(func() {
 		o.Ptr().Send(_nSScrollViewSelSetScrollerInsets, scrollerInsets)
+	})
+}
+
+// Enable touch scrolling Defaults to `true`.
+func (o *NSScrollView) IsTouchScrollingEnabled() bool {
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSScrollViewSelIsTouchScrollingEnabled)
+			return _ret
+		}()
+	})
+	return _mainthread0
+}
+
+// Enable touch scrolling Defaults to `true`.
+func (o *NSScrollView) SetTouchScrollingEnabled(touchScrollingEnabled bool) {
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollViewSelSetTouchScrollingEnabled, touchScrollingEnabled)
+	})
+}
+
+// The minimum number of touches needed for scrolling Defaults to 1.
+func (o *NSScrollView) MinimumNumberOfTouchesForScrolling() int {
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSScrollViewSelMinimumNumberOfTouchesForScrolling)
+			return _ret
+		}()
+	})
+	return _mainthread0
+}
+
+// The minimum number of touches needed for scrolling Defaults to 1.
+func (o *NSScrollView) SetMinimumNumberOfTouchesForScrolling(minimumNumberOfTouchesForScrolling int) {
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollViewSelSetMinimumNumberOfTouchesForScrolling, minimumNumberOfTouchesForScrolling)
+	})
+}
+
+// The maximum number of touches needed for scrolling Set this property to 0 to require exactly `minimumNumberOfTouchesForScrolling` touches to recognize the gesture. Defaults to `NSIntegerMax`.
+func (o *NSScrollView) MaximumNumberOfTouchesForScrolling() int {
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSScrollViewSelMaximumNumberOfTouchesForScrolling)
+			return _ret
+		}()
+	})
+	return _mainthread0
+}
+
+// The maximum number of touches needed for scrolling Set this property to 0 to require exactly `minimumNumberOfTouchesForScrolling` touches to recognize the gesture. Defaults to `NSIntegerMax`.
+func (o *NSScrollView) SetMaximumNumberOfTouchesForScrolling(maximumNumberOfTouchesForScrolling int) {
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollViewSelSetMaximumNumberOfTouchesForScrolling, maximumNumberOfTouchesForScrolling)
+	})
+}
+
+// A gesture recognizer for setting up failure or exclusion relationships against scrolling gestures
+func (o *NSScrollView) ScrollGestureForRelationships() *NSGestureRecognizer {
+	var _mainthread0 *NSGestureRecognizer
+	purego.Main(func() {
+		_mainthread0 = func() *NSGestureRecognizer {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSScrollViewSelScrollGestureForRelationships)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSGestureRecognizerFromID(_ret)
+		}()
+	})
+	return _mainthread0
+}
+
+// The refresh controller associated with this scroll view. Setting this property adds the refresh controller to the scroll view, enabling pull-to-refresh functionality. Set to nil to remove it.
+func (o *NSScrollView) RefreshController() *NSRefreshController {
+	var _mainthread0 *NSRefreshController
+	purego.Main(func() {
+		_mainthread0 = func() *NSRefreshController {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSScrollViewSelRefreshController)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSRefreshControllerFromID(_ret)
+		}()
+	})
+	return _mainthread0
+}
+
+// The refresh controller associated with this scroll view. Setting this property adds the refresh controller to the scroll view, enabling pull-to-refresh functionality. Set to nil to remove it.
+func (o *NSScrollView) SetRefreshController(refreshController *NSRefreshController) {
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollViewSelSetRefreshController, refreshController.Ptr())
 	})
 }
 

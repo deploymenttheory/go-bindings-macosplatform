@@ -15,8 +15,6 @@ import (
 )
 
 // PictureInPictureControllerContentSource is an idiomatic wrapper over the Objective-C class AVPictureInPictureControllerContentSource.
-//
-// An object that represents the source of the content to present in Picture in Picture.
 type PictureInPictureControllerContentSource struct {
 	objref.Handle
 }

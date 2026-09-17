@@ -153,6 +153,7 @@ func NSUserActivityDeleteAllSavedUserActivitiesWithCompletionHandler(handler fun
 	objc.ID(_clsNSUserActivity).Send(_nSUserActivitySelDeleteAllSavedUserActivitiesWithCompletionHandler, __block_handler)
 }
 
+// The activity type the user activity was created with.
 // Deprecated: Use initWithActivityType: with a specific activity type string
 func (o *NSUserActivity) ActivityType() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserActivitySelActivityType)
@@ -162,6 +163,7 @@ func (o *NSUserActivity) ActivityType() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// An optional, user-visible title for this activity, such as a document name or web page title.
 func (o *NSUserActivity) Title() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserActivitySelTitle)
 	if _ret != 0 {
@@ -174,6 +176,7 @@ func (o *NSUserActivity) SetTitle(title *NSString) {
 	o.Ptr().Send(_nSUserActivitySelSetTitle, title.Ptr())
 }
 
+// The user info dictionary contains application-specific state needed to continue an activity on another device. Each key and value must be of the following types: @c NSArray, @c NSData, @c NSDate, @c NSDictionary, @c NSNull, @c NSNumber, @c NSSet, @c NSString, @c NSURL, or @c NSUUID.
 func (o *NSUserActivity) UserInfo() *NSDictionary[objc.ID, objc.ID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserActivitySelUserInfo)
 	if _ret != 0 {
@@ -186,6 +189,7 @@ func (o *NSUserActivity) SetUserInfo(userInfo *NSDictionary[objc.ID, objc.ID]) {
 	o.Ptr().Send(_nSUserActivitySelSetUserInfo, userInfo.Ptr())
 }
 
+// The keys from the user info property which represent the minimal information about this user activity that should be stored for later restoration. A @c nil value means all keys in the user info are required.
 func (o *NSUserActivity) RequiredUserInfoKeys() *NSSet[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserActivitySelRequiredUserInfoKeys)
 	if _ret != 0 {
@@ -198,6 +202,7 @@ func (o *NSUserActivity) SetRequiredUserInfoKeys(requiredUserInfoKeys *NSSet[*NS
 	o.Ptr().Send(_nSUserActivitySelSetRequiredUserInfoKeys, requiredUserInfoKeys.Ptr())
 }
 
+// If set to @c YES, then the delegate for this user activity will receive a @c userActivityWillSave: callback before being sent for continuation on another device.
 func (o *NSUserActivity) NeedsSave() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSUserActivitySelNeedsSave)
 	return _ret
@@ -207,6 +212,7 @@ func (o *NSUserActivity) SetNeedsSave(needsSave bool) {
 	o.Ptr().Send(_nSUserActivitySelSetNeedsSave, needsSave)
 }
 
+// When no suitable application is installed on a resuming device and this is set, the user activity will instead be continued in a web browser by loading this resource.
 func (o *NSUserActivity) WebpageURL() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserActivitySelWebpageURL)
 	if _ret != 0 {
@@ -219,6 +225,7 @@ func (o *NSUserActivity) SetWebpageURL(webpageURL *NSURL) {
 	o.Ptr().Send(_nSUserActivitySelSetWebpageURL, webpageURL.Ptr())
 }
 
+// The URL of the webpage that referred (linked to) @c webpageURL.
 func (o *NSUserActivity) ReferrerURL() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserActivitySelReferrerURL)
 	if _ret != 0 {
@@ -231,6 +238,7 @@ func (o *NSUserActivity) SetReferrerURL(referrerURL *NSURL) {
 	o.Ptr().Send(_nSUserActivitySelSetReferrerURL, referrerURL.Ptr())
 }
 
+// If non-nil, an absolute date after which this activity is no longer eligible to be indexed or handed off.
 func (o *NSUserActivity) ExpirationDate() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserActivitySelExpirationDate)
 	if _ret != 0 {
@@ -243,6 +251,7 @@ func (o *NSUserActivity) SetExpirationDate(expirationDate *NSDate) {
 	o.Ptr().Send(_nSUserActivitySelSetExpirationDate, expirationDate.Ptr())
 }
 
+// A set of keywords, representing words or phrases in the current user’s language that might help the user to find this activity in the application history.
 func (o *NSUserActivity) Keywords() *NSSet[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserActivitySelKeywords)
 	if _ret != 0 {
@@ -255,6 +264,7 @@ func (o *NSUserActivity) SetKeywords(keywords *NSSet[*NSString]) {
 	o.Ptr().Send(_nSUserActivitySelSetKeywords, keywords.Ptr())
 }
 
+// When used for continuation, the user activity can allow the continuing side to connect back for more information using streams. This value is set to @c NO by default. It can be dynamically set to @c YES to selectively support continuation streams.
 func (o *NSUserActivity) SupportsContinuationStreams() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSUserActivitySelSupportsContinuationStreams)
 	return _ret
@@ -264,6 +274,7 @@ func (o *NSUserActivity) SetSupportsContinuationStreams(supportsContinuationStre
 	o.Ptr().Send(_nSUserActivitySelSetSupportsContinuationStreams, supportsContinuationStreams)
 }
 
+// The user activity delegate is informed when the activity is being saved or continued.
 func (o *NSUserActivity) Delegate() NSUserActivityDelegate {
 	_ret := objc.Send[NSUserActivityDelegate](o.Ptr(), _nSUserActivitySelDelegate)
 	return _ret
@@ -273,6 +284,7 @@ func (o *NSUserActivity) SetDelegate(delegate NSUserActivityDelegate) {
 	o.Ptr().Send(_nSUserActivitySelSetDelegate, delegate)
 }
 
+// A string that identifies the content of this NSUserActivity, for matching against existing documents when re-opening to see if they are the same. Setting this property is optional and does not automatically set @c needsSave to @c YES.
 func (o *NSUserActivity) TargetContentIdentifier() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserActivitySelTargetContentIdentifier)
 	if _ret != 0 {
@@ -285,6 +297,7 @@ func (o *NSUserActivity) SetTargetContentIdentifier(targetContentIdentifier *NSS
 	o.Ptr().Send(_nSUserActivitySelSetTargetContentIdentifier, targetContentIdentifier.Ptr())
 }
 
+// Set to @c YES if this user activity should be eligible to be handed off to another device.
 func (o *NSUserActivity) IsEligibleForHandoff() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSUserActivitySelIsEligibleForHandoff)
 	return _ret
@@ -294,6 +307,7 @@ func (o *NSUserActivity) SetEligibleForHandoff(eligibleForHandoff bool) {
 	o.Ptr().Send(_nSUserActivitySelSetEligibleForHandoff, eligibleForHandoff)
 }
 
+// Set to @c YES if this user activity should be indexed by App History.
 func (o *NSUserActivity) IsEligibleForSearch() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSUserActivitySelIsEligibleForSearch)
 	return _ret
@@ -303,6 +317,7 @@ func (o *NSUserActivity) SetEligibleForSearch(eligibleForSearch bool) {
 	o.Ptr().Send(_nSUserActivitySelSetEligibleForSearch, eligibleForSearch)
 }
 
+// Set to @c YES if this user activity should be eligible for indexing for any user of this application, on any device. Set to @c NO if the activity contains private or sensitive information or which would not be useful to other users if indexed. The activity must also have @c requiredUserActivityKeys or a @c webpageURL.
 func (o *NSUserActivity) IsEligibleForPublicIndexing() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSUserActivitySelIsEligibleForPublicIndexing)
 	return _ret
@@ -312,6 +327,7 @@ func (o *NSUserActivity) SetEligibleForPublicIndexing(eligibleForPublicIndexing 
 	o.Ptr().Send(_nSUserActivitySelSetEligibleForPublicIndexing, eligibleForPublicIndexing)
 }
 
+// A persistent identifier for this user activity.
 func (o *NSUserActivity) PersistentIdentifier() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserActivitySelPersistentIdentifier)
 	if _ret != 0 {

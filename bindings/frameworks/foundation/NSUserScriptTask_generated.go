@@ -106,7 +106,7 @@ func (ust *UserScriptTask) ExecuteWithCompletionHandler(handler func(unsafe.Poin
 	objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("executeWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { handler(_b0) }))
 }
 
-// ScriptURL returns the script URL.
+// ScriptURL returns the URL of the script file.
 func (ust *UserScriptTask) ScriptURL() string {
 	defer runtime.KeepAlive(ust)
 	_r := objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("scriptURL"))

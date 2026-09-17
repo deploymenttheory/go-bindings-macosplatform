@@ -15,8 +15,6 @@ import (
 )
 
 // CaptureDeviceDiscoverySession is an idiomatic wrapper over the Objective-C class AVCaptureDeviceDiscoverySession.
-//
-// An object that finds capture devices that match specific search criteria.
 type CaptureDeviceDiscoverySession struct {
 	objref.Handle
 }

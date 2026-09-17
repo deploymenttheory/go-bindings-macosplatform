@@ -97,6 +97,7 @@ var (
 	_nSEventSelStageTransition                                                                                                        = objc.RegisterName("stageTransition")
 	_nSEventSelAssociatedEventsMask                                                                                                   = objc.RegisterName("associatedEventsMask")
 	_nSEventSelPressureBehavior                                                                                                       = objc.RegisterName("pressureBehavior")
+	_nSEventSelIsTouchSwipeNavigationEnabled                                                                                          = objc.RegisterName("isTouchSwipeNavigationEnabled")
 	_nSEventSelIsSwipeTrackingFromScrollEventsEnabled                                                                                 = objc.RegisterName("isSwipeTrackingFromScrollEventsEnabled")
 	_nSEventSelMouseLocation                                                                                                          = objc.RegisterName("mouseLocation")
 	_nSEventSelPressedMouseButtons                                                                                                    = objc.RegisterName("pressedMouseButtons")
@@ -567,6 +568,11 @@ func (o *NSEvent) AssociatedEventsMask() NSEventMask {
 
 func (o *NSEvent) PressureBehavior() NSPressureBehavior {
 	_ret := objc.Send[NSPressureBehavior](o.Ptr(), _nSEventSelPressureBehavior)
+	return _ret
+}
+
+func NSEventIsTouchSwipeNavigationEnabled() bool {
+	_ret := objc.Send[bool](objc.ID(_clsNSEvent), _nSEventSelIsTouchSwipeNavigationEnabled)
 	return _ret
 }
 

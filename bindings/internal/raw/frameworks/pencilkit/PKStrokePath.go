@@ -4,6 +4,8 @@
 package pencilkit
 
 import (
+	"unsafe"
+
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/corefoundation"
@@ -11,8 +13,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A structure that captures the components of a stroke and provides methods to find and interpolate points along the stroke’s path.
-//
 // Apple documentation: https://developer.apple.com/documentation/pencilkit/pkstrokepath
 type PKStrokePath struct {
 	foundation.NSObject
@@ -21,6 +21,9 @@ type PKStrokePath struct {
 var (
 	_clsPKStrokePath                                                              = _objcClass("PKStrokePath")
 	_pKStrokePathSelInitWithControlPointsCreationDate                             = objc.RegisterName("initWithControlPoints:creationDate:")
+	_pKStrokePathSelInitWithControlPointsCreationDateStrokePathID                 = objc.RegisterName("initWithControlPoints:creationDate:strokePathID:")
+	_pKStrokePathSelInitWithBezierPathCreationDatePointProvider                   = objc.RegisterName("initWithBezierPath:creationDate:pointProvider:")
+	_pKStrokePathSelSubpathWithRange                                              = objc.RegisterName("subpathWithRange:")
 	_pKStrokePathSelPointAtIndex                                                  = objc.RegisterName("pointAtIndex:")
 	_pKStrokePathSelObjectAtIndexedSubscript                                      = objc.RegisterName("objectAtIndexedSubscript:")
 	_pKStrokePathSelInterpolatedLocationAt                                        = objc.RegisterName("interpolatedLocationAt:")
@@ -30,8 +33,10 @@ var (
 	_pKStrokePathSelEnumerateInterpolatedPointsInRangeStrideByParametricStepUsing = objc.RegisterName("enumerateInterpolatedPointsInRange:strideByParametricStep:usingBlock:")
 	_pKStrokePathSelParametricValueOffsetByDistance                               = objc.RegisterName("parametricValue:offsetByDistance:")
 	_pKStrokePathSelParametricValueOffsetByTime                                   = objc.RegisterName("parametricValue:offsetByTime:")
+	_pKStrokePathSelStrokePathID                                                  = objc.RegisterName("strokePathID")
 	_pKStrokePathSelCount                                                         = objc.RegisterName("count")
 	_pKStrokePathSelCreationDate                                                  = objc.RegisterName("creationDate")
+	_pKStrokePathSelBezierRepresentation                                          = objc.RegisterName("bezierRepresentation")
 )
 
 func PKStrokePathFromID(id objc.ID) *PKStrokePath {
@@ -44,7 +49,7 @@ func PKStrokePathFromID(id objc.ID) *PKStrokePath {
 	return o
 }
 
-// Create a stroke path value with the given cubic B-spline control points. @param controlPoints An array of control points for a cubic B-spline. @param creationDate The start time of this path.
+// Creates a stroke path with the specified cubic B-spline control points. @param controlPoints An array of control points for a cubic B-spline. @param creationDate The start time of this path.
 func (o *PKStrokePath) InitWithControlPointsCreationDate(controlPoints *foundation.NSArray[*PKStrokePoint], creationDate *foundation.NSDate) *PKStrokePath {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKStrokePathSelInitWithControlPointsCreationDate, controlPoints.Ptr(), creationDate.Ptr())
 	if _ret != 0 {
@@ -53,7 +58,34 @@ func (o *PKStrokePath) InitWithControlPointsCreationDate(controlPoints *foundati
 	return PKStrokePathFromID(_ret)
 }
 
-// Returns B-spline control point at index `i`.
+// Creates a stroke path with the specified control points and a unique identifier. @param controlPoints An array of control points for a cubic B-spline. @param creationDate The start time of this path. @param strokePathID The unique identity of the stroke path. > Warning: Using multiple stroke paths with identical IDs but different control points will result in undefined rendering behavior. Ensure each stroke path has a unique identifier.
+func (o *PKStrokePath) InitWithControlPointsCreationDateStrokePathID(controlPoints *foundation.NSArray[*PKStrokePoint], creationDate *foundation.NSDate, strokePathID *foundation.NSUUID) *PKStrokePath {
+	_ret := objc.Send[objc.ID](o.Ptr(), _pKStrokePathSelInitWithControlPointsCreationDateStrokePathID, controlPoints.Ptr(), creationDate.Ptr(), strokePathID.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return PKStrokePathFromID(_ret)
+}
+
+// Creates a stroke path recreating the specified Bézier path as a cubic uniform B-Spline. @param bezierPath The Bézier path to convert to a cubic uniform B-Spline. @param creationDate The start time of this path. @param pointProvider Block to initialize the `PKStrokePoint`s of the path. A single `PKConvertedBezierPoint` instance is shared across all converted points. The count of control points of the generated spline is not guaranteed to be a specific value except when the provided path is the output of “bezierRepresentation->CGPathRef“, where it will match the original curve. The output B-Spline will have continuous curvature and 0 curvature at the endpoints. In cases where the B-Spline cannot fully recreate the Bézier path, it will be an approximation. For example, if the given Bézier path includes `line to` elements, these will produce straight line segments in the resulting B-Spline, but if a `line to` element is adjacent to a `curve to` element, the resulting curve may not match the original. > Warning: For a Bézier path with multiple subpaths, only the first will be converted.
+func (o *PKStrokePath) InitWithBezierPathCreationDatePointProvider(bezierPath unsafe.Pointer, creationDate *foundation.NSDate, pointProvider objc.Block) *PKStrokePath {
+	_ret := objc.Send[objc.ID](o.Ptr(), _pKStrokePathSelInitWithBezierPathCreationDatePointProvider, bezierPath, creationDate.Ptr(), pointProvider)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return PKStrokePathFromID(_ret)
+}
+
+// Returns a copy of the path containing the control points in the specified parametric range. @param range The parametric range to copy. Values must be within [0, count-1]. @return A new stroke path containing the portion within the specified parametric range.
+func (o *PKStrokePath) SubpathWithRange(range_ *PKFloatRange) *PKStrokePath {
+	_ret := objc.Send[objc.ID](o.Ptr(), _pKStrokePathSelSubpathWithRange, range_.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return PKStrokePathFromID(_ret)
+}
+
+// Returns the B-spline control point at the specified index.
 func (o *PKStrokePath) PointAtIndex(i uint) *PKStrokePoint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKStrokePathSelPointAtIndex, i)
 	if _ret != 0 {
@@ -62,7 +94,7 @@ func (o *PKStrokePath) PointAtIndex(i uint) *PKStrokePoint {
 	return PKStrokePointFromID(_ret)
 }
 
-// Returns B-spline control point at index `i`.
+// Returns the B-spline control point at the specified index.
 func (o *PKStrokePath) ObjectAtIndexedSubscript(i uint) *PKStrokePoint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKStrokePathSelObjectAtIndexedSubscript, i)
 	if _ret != 0 {
@@ -71,13 +103,13 @@ func (o *PKStrokePath) ObjectAtIndexedSubscript(i uint) *PKStrokePoint {
 	return PKStrokePointFromID(_ret)
 }
 
-// The on-curve location for the floating point [0, count-1] `parametricValue` parameter. This has better performance than `[self interpolatedPointAt: parametricValue].location` for when only the location is required.
+// Returns the on-curve location for the specified parametric value. The floating-point `parametricValue` must be in the range [0, count-1]. This has better performance than `[self interpolatedPointAt: parametricValue].location` when only the location is required.
 func (o *PKStrokePath) InterpolatedLocationAt(parametricValue float64) corefoundation.CGPoint {
 	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _pKStrokePathSelInterpolatedLocationAt, parametricValue)
 	return _ret
 }
 
-// The on-curve point for the floating point [0, count-1] `parametricValue` parameter.
+// Returns the on-curve stroke point for the specified parametric value.
 func (o *PKStrokePath) InterpolatedPointAt(parametricValue float64) *PKStrokePoint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKStrokePathSelInterpolatedPointAt, parametricValue)
 	if _ret != 0 {
@@ -86,7 +118,7 @@ func (o *PKStrokePath) InterpolatedPointAt(parametricValue float64) *PKStrokePoi
 	return PKStrokePointFromID(_ret)
 }
 
-// Executes a given block using each point in a range with a distance step. @param range The parametric range to enumerate points in. @param distanceStep The distance to step between points. @param block The block to execute for each point. This block takes two parameters point The interpolated point on the spline. stop A reference to a Boolean value. Setting the value to YES within the block stops further enumeration of the array. If a block stops further enumeration, that block continues to run until it’s finished.
+// Executes a block for each interpolated point in the specified range, stepping by distance. @param range The parametric range to enumerate points in. @param distanceStep The distance to step between points. @param block The block to execute for each point. The block receives the interpolated point and a stop flag; set the flag to `YES` to stop enumeration.
 func (o *PKStrokePath) EnumerateInterpolatedPointsInRangeStrideByDistanceUsing(range_ *PKFloatRange, distanceStep float64, block func(*PKStrokePoint, *bool)) {
 	var __block_block objc.Block
 	if block != nil {
@@ -101,7 +133,7 @@ func (o *PKStrokePath) EnumerateInterpolatedPointsInRangeStrideByDistanceUsing(r
 	o.Ptr().Send(_pKStrokePathSelEnumerateInterpolatedPointsInRangeStrideByDistanceUsing, range_.Ptr(), distanceStep, __block_block)
 }
 
-// Executes a given block using each point in a range with a time step. @param range The parametric range to enumerate points in. @param timeStep The time interval to step between points. @param block The block to execute for each point. This block takes two parameters point The interpolated point on the spline. stop A reference to a Boolean value. Setting the value to YES within the block stops further enumeration of the array. If a block stops further enumeration, that block continues to run until it’s finished.
+// Executes a block for each interpolated point in the specified range, stepping by time interval. @param range The parametric range to enumerate points in. @param timeStep The time interval to step between points. @param block The block to execute for each point. The block receives the interpolated point and a stop flag; set the flag to `YES` to stop enumeration.
 func (o *PKStrokePath) EnumerateInterpolatedPointsInRangeStrideByTimeUsing(range_ *PKFloatRange, timeStep float64, block func(*PKStrokePoint, *bool)) {
 	var __block_block objc.Block
 	if block != nil {
@@ -116,7 +148,7 @@ func (o *PKStrokePath) EnumerateInterpolatedPointsInRangeStrideByTimeUsing(range
 	o.Ptr().Send(_pKStrokePathSelEnumerateInterpolatedPointsInRangeStrideByTimeUsing, range_.Ptr(), timeStep, __block_block)
 }
 
-// Executes a given block using each point in a range with a parametric step. @param range The parametric range to enumerate points in. @param parametricStep The parametric step between points. @param block The block to execute for each point. This block takes two parameters point The interpolated point on the spline. stop A reference to a Boolean value. Setting the value to YES within the block stops further enumeration of the array. If a block stops further enumeration, that block continues to run until it’s finished.
+// Executes a block for each interpolated point in the specified range, stepping by a parametric step. @param range The parametric range to enumerate points in. @param parametricStep The parametric step between points. @param block The block to execute for each point. The block receives the interpolated point and a stop flag; set the flag to `YES` to stop enumeration.
 func (o *PKStrokePath) EnumerateInterpolatedPointsInRangeStrideByParametricStepUsing(range_ *PKFloatRange, parametricStep float64, block func(*PKStrokePoint, *bool)) {
 	var __block_block objc.Block
 	if block != nil {
@@ -131,29 +163,44 @@ func (o *PKStrokePath) EnumerateInterpolatedPointsInRangeStrideByParametricStepU
 	o.Ptr().Send(_pKStrokePathSelEnumerateInterpolatedPointsInRangeStrideByParametricStepUsing, range_.Ptr(), parametricStep, __block_block)
 }
 
-// Returns a parametric value on the B-spline that is a specified distance from the given parametric value. @param parametricValue The floating point [0, count-1] parametric value. @param distanceStep The distance to offset `parametricValue`. `distanceStep` can be positive or negative. @return A parametric value offset by `distanceStep` from `parametricValue`.
+// Returns a parametric value on the B-spline that is a specified distance from the given parametric value. @param parametricValue The floating point [0, count-1] parametric value. @param distanceStep The distance to offset `parametricValue`. Can be positive or negative. @return A parametric value offset by `distanceStep` from `parametricValue`.
 func (o *PKStrokePath) ParametricValueOffsetByDistance(parametricValue float64, distanceStep float64) float64 {
 	_ret := objc.Send[float64](o.Ptr(), _pKStrokePathSelParametricValueOffsetByDistance, parametricValue, distanceStep)
 	return _ret
 }
 
-// Returns a parametric value on the B-spline that is a specified time from the given parametric value. @param parametricValue The floating point [0, count-1] parametric value. @param timeStep The time to offset `parametricValue`. `timeStep` can be positive or negative. @return A parametric value offset by `timeStep` from `parametricValue`.
+// Returns a parametric value on the B-spline that is a specified time from the given parametric value. @param parametricValue The floating point [0, count-1] parametric value. @param timeStep The time to offset `parametricValue`. Can be positive or negative. @return A parametric value offset by `timeStep` from `parametricValue`.
 func (o *PKStrokePath) ParametricValueOffsetByTime(parametricValue float64, timeStep float64) float64 {
 	_ret := objc.Send[float64](o.Ptr(), _pKStrokePathSelParametricValueOffsetByTime, parametricValue, timeStep)
 	return _ret
 }
 
-// The number of control points in this stroke path.
+// The unique identity of the stroke path. > Warning: Using multiple stroke paths with identical IDs but different control points will result in undefined rendering behavior. Ensure each stroke path has a unique identifier.
+func (o *PKStrokePath) StrokePathID() *foundation.NSUUID {
+	_ret := objc.Send[objc.ID](o.Ptr(), _pKStrokePathSelStrokePathID)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSUUIDFromID(_ret)
+}
+
+// The number of control points in the stroke path.
 func (o *PKStrokePath) Count() uint {
 	_ret := objc.Send[uint](o.Ptr(), _pKStrokePathSelCount)
 	return _ret
 }
 
-// The time at which this stroke path was started. The `timeOffset` of contained PKStrokePoints is relative to this date.
+// The time at which the stroke path started. The `timeOffset` of each contained `PKStrokePoint` is relative to this date.
 func (o *PKStrokePath) CreationDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKStrokePathSelCreationDate)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return foundation.NSDateFromID(_ret)
+}
+
+// A Bézier path representation of the path's curve, computed in linear time.
+func (o *PKStrokePath) BezierRepresentation() unsafe.Pointer {
+	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _pKStrokePathSelBezierRepresentation)
+	return _ret
 }

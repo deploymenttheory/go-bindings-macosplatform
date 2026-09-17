@@ -18,8 +18,6 @@ import (
 // Operation is an idiomatic wrapper over the Objective-C class NSOperation.
 //
 // Operation is an abstract base — you do not construct it directly. Construct one of [BlockOperation], [InvocationOperation] and pass it where a Operation is accepted.
-//
-// An abstract class that represents the code and data associated with a single task.
 type Operation struct {
 	objref.Handle
 }
@@ -76,31 +74,31 @@ func (o *Operation) String() string {
 	return rt.Description(objref.IDOf(o))
 }
 
-// WithQueuePriority sets the queue priority.
+// WithQueuePriority sets the execution priority of the operation in an operation queue. This property contains the relative priority of the operation. This value is used to influence the order in which operations are dequeued and executed. You should use priority values only as needed to classify the relative priority of non-dependent operations. Priority values should not be used to implement dependency management among different operation objects. If you need to establish dependencies between operations, use the “addDependency:“ method instead.
 func (o *Operation) WithQueuePriority(queuePriority OperationQueuePriority) *Operation {
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setQueuePriority:"), queuePriority)
 	return o
 }
 
-// WithCompletionBlock sets the completion block.
+// WithCompletionBlock sets the block to execute after the operation's main task is completed. The completion block takes no parameters and has no return value. The exact execution context for your completion block is not guaranteed but is typically a secondary thread. Therefore, you should not use this block to do any work that requires a very specific execution context. Instead, you should shunt that work to your application's main thread or to the specific thread that is capable of doing it. Because the completion block executes after the operation indicates it has finished its task, you must not use a completion block to queue additional work considered to be part of that task. A finished operation may finish either because it was cancelled or because it successfully completed its task. You should take that fact into account when writing your block code. In iOS 8 and later and macOS 10.10 and later, this property is set to `nil` after the completion block begins executing.
 func (o *Operation) WithCompletionBlock(completionBlock func()) *Operation {
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setCompletionBlock:"), objc.NewBlock(func(_ objc.Block) { completionBlock() }))
 	return o
 }
 
-// WithThreadPriority sets the thread priority.
+// WithThreadPriority sets the thread priority to use when executing the operation. Use `qualityOfService` instead.
 func (o *Operation) WithThreadPriority(threadPriority float64) *Operation {
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setThreadPriority:"), threadPriority)
 	return o
 }
 
-// WithQualityOfService sets the quality of service.
+// WithQualityOfService sets the relative amount of importance for granting system resources to the operation. Service levels affect the priority with which an operation object is given access to system resources such as CPU time, network resources, disk resources, and so on. Operations with a higher quality of service level are given greater priority over system resources so that they may perform their task more quickly.
 func (o *Operation) WithQualityOfService(qualityOfService QualityOfService) *Operation {
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setQualityOfService:"), qualityOfService)
 	return o
 }
 
-// WithName sets the name.
+// WithName sets the name of the operation. Assign a name to the operation object to help identify it during debugging.
 func (o *Operation) WithName(name StringProvider) *Operation {
 	defer runtime.KeepAlive(name)
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setName:"), objref.IDOf(name))
@@ -119,87 +117,87 @@ func (o *Operation) WithScriptingProperties(scriptingProperties map[string]obj.O
 	return o
 }
 
-// Start wraps the corresponding Objective-C method.
+// Start begins the execution of the operation. The default implementation of this method updates the execution state of the operation and calls the receiver's “main“ method. This method also performs several checks to ensure that the operation can actually run. For example, if the receiver was cancelled or is already finished, this method simply returns without calling “main“. If the operation is currently executing or is not ready to execute, this method throws an `NSInvalidArgumentException` exception. If you are implementing a concurrent operation, you must override this method and use it to initiate your operation. Your custom implementation must not call `super` at any time. In addition to configuring the execution environment for your task, your implementation of this method must also track the state of the operation and provide appropriate state transitions. When the operation executes and subsequently finishes its work, it should generate KVO notifications for the `isExecuting` and `isFinished` key paths respectively. You can call this method explicitly if you want to execute your operations manually. However, it is a programmer error to call this method on an operation object that is already in an operation queue or to queue the operation after calling this method. Once you add an operation object to a queue, the queue assumes all responsibility for it.
 func (o *Operation) Start() {
 	defer runtime.KeepAlive(o)
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("start"))
 }
 
-// Main wraps the corresponding Objective-C method.
+// Main performs the receiver's non-concurrent task. The default implementation of this method does nothing. You should override this method to perform the desired task. In your implementation, do not invoke `super`. This method will automatically execute within an autorelease pool provided by `NSOperation`, so you do not need to create your own autorelease pool block in your implementation. If you are implementing a concurrent operation, you are not required to override this method but may do so if you plan to call it from your custom “start“ method.
 func (o *Operation) Main() {
 	defer runtime.KeepAlive(o)
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("main"))
 }
 
-// Cancel wraps the corresponding Objective-C method.
+// Cancel advises the operation object that it should stop executing its task. This method does not force your operation code to stop. Instead, it updates the object's internal flags to reflect the change in state. If the operation has already finished executing, this method has no effect. Canceling an operation that is currently in an operation queue, but not yet executing, makes it possible to remove the operation from the queue sooner than usual.
 func (o *Operation) Cancel() {
 	defer runtime.KeepAlive(o)
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("cancel"))
 }
 
-// AddDependency adds dependency.
+// AddDependency makes the receiver dependent on the completion of the specified operation. The receiver is not considered ready to execute until all of its dependent operations have finished executing. If the receiver is already executing its task, adding dependencies has no practical effect. This method may change the `isReady` and `dependencies` properties of the receiver. It is a programmer error to create any circular dependencies among a set of operations. Doing so can cause a deadlock among the operations and may freeze your program. - Parameter op: The operation on which the receiver should depend. The same dependency should not be added more than once to the receiver, and the results of doing so are undefined.
 func (o *Operation) AddDependency(op *Operation) {
 	defer runtime.KeepAlive(o)
 	defer runtime.KeepAlive(op)
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("addDependency:"), objref.IDOf(op))
 }
 
-// RemoveDependency removes dependency.
+// RemoveDependency removes the receiver's dependence on the specified operation. This method may change the `isReady` and `dependencies` properties of the receiver. - Parameter op: The dependent operation to be removed from the receiver.
 func (o *Operation) RemoveDependency(op *Operation) {
 	defer runtime.KeepAlive(o)
 	defer runtime.KeepAlive(op)
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("removeDependency:"), objref.IDOf(op))
 }
 
-// WaitUntilFinished wraps the corresponding Objective-C method.
+// WaitUntilFinished blocks execution of the current thread until the operation object finishes its task. An operation object must never call this method on itself and should avoid calling it on any operations submitted to the same operation queue as itself. Doing so can cause the operation to deadlock. It is generally safe to call this method on an operation that is in a different operation queue, although it is still possible to create deadlocks if each operation waits on the other.
 func (o *Operation) WaitUntilFinished() {
 	defer runtime.KeepAlive(o)
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("waitUntilFinished"))
 }
 
-// IsCancelled reports whether the object is cancelled.
+// IsCancelled reports whether the operation has been cancelled. The default value of this property is `NO`. Calling the “cancel“ method of this object sets the value of this property to `YES`. Once canceled, an operation must move to the finished state. Canceling an operation does not actively stop the receiver's code from executing. An operation object is responsible for calling this method periodically and stopping itself if the method returns `YES`. You should always check the value of this property before doing any work towards accomplishing the operation's task, which typically means checking it at the beginning of your custom “main“ method. It is possible for an operation to be cancelled before it begins executing or at any time while it is executing.
 func (o *Operation) IsCancelled() bool {
 	defer runtime.KeepAlive(o)
 	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("isCancelled"))
 	return _r
 }
 
-// IsExecuting reports whether the object is executing.
+// IsExecuting reports whether the operation is currently executing. The value of this property is `YES` if the operation is currently executing its main task or `NO` if it is not. When implementing a concurrent operation object, you must override the implementation of this property so that you can return the execution state of your operation. In your custom implementation, you must generate KVO notifications for the `isExecuting` key path whenever the execution state of your operation object changes.
 func (o *Operation) IsExecuting() bool {
 	defer runtime.KeepAlive(o)
 	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("isExecuting"))
 	return _r
 }
 
-// IsFinished reports whether the object is finished.
+// IsFinished reports whether the operation has finished executing its task. The value of this property is `YES` if the operation has finished its main task or `NO` if it is executing that task or has not yet started it. When implementing a concurrent operation object, you must override the implementation of this property so that you can return the finished state of your operation. In your custom implementation, you must generate KVO notifications for the `isFinished` key path whenever the finished state of your operation object changes.
 func (o *Operation) IsFinished() bool {
 	defer runtime.KeepAlive(o)
 	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("isFinished"))
 	return _r
 }
 
-// IsConcurrent reports whether the object is concurrent.
+// IsConcurrent reports whether the operation executes its task asynchronously. Use the “asynchronous“ property instead. The default value of this property is `NO`. In macOS 10.6 and later, operation queues ignore the value in this property and always start operations on a separate thread.
 func (o *Operation) IsConcurrent() bool {
 	defer runtime.KeepAlive(o)
 	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("isConcurrent"))
 	return _r
 }
 
-// IsAsynchronous reports whether the object is asynchronous.
+// IsAsynchronous reports whether the operation executes its task asynchronously. The default value of this property is `NO`. When implementing an asynchronous operation object, you must implement this property and return `YES`.
 func (o *Operation) IsAsynchronous() bool {
 	defer runtime.KeepAlive(o)
 	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("isAsynchronous"))
 	return _r
 }
 
-// IsReady reports whether the object is ready.
+// IsReady reports whether the operation can be performed now. The readiness of operations is determined by their dependencies on other operations and potentially by custom conditions that you define. The `NSOperation` class manages dependencies on other operations and reports the readiness of the receiver based on those dependencies. If you want to use custom conditions to define the readiness of your operation object, reimplement this property and return a value that accurately reflects the readiness of the receiver. If you do so, your custom implementation must get the default property value from `super` and incorporate that readiness value into the new value of the property. In your custom implementation, you must generate KVO notifications for the `isReady` key path whenever the ready state of your operation object changes.
 func (o *Operation) IsReady() bool {
 	defer runtime.KeepAlive(o)
 	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("isReady"))
 	return _r
 }
 
-// Dependencies returns the dependencies.
+// Dependencies returns an array of the operation objects that must finish executing before the current object can begin executing. This property contains an array of `NSOperation` objects. To add an object to this array, use the “addDependency:“ method. An operation object must not execute until all of its dependent operations finish executing. Operations are not removed from this dependency list as they finish executing. You can use this list to track all dependent operations, including those that have already finished executing. The only way to remove an operation from this list is to use the “removeDependency:“ method.
 //
 // Dependencies returns the collection as a Go slice.
 func (o *Operation) Dependencies() []*Operation {
@@ -208,28 +206,28 @@ func (o *Operation) Dependencies() []*Operation {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Operation { return OperationFromID(_id) })
 }
 
-// QueuePriority returns the queue priority.
+// QueuePriority returns the execution priority of the operation in an operation queue. This property contains the relative priority of the operation. This value is used to influence the order in which operations are dequeued and executed. You should use priority values only as needed to classify the relative priority of non-dependent operations. Priority values should not be used to implement dependency management among different operation objects. If you need to establish dependencies between operations, use the “addDependency:“ method instead.
 func (o *Operation) QueuePriority() OperationQueuePriority {
 	defer runtime.KeepAlive(o)
 	_r := objc.Send[OperationQueuePriority](objref.IDOf(o), objc.RegisterName("queuePriority"))
 	return _r
 }
 
-// ThreadPriority returns the thread priority.
+// ThreadPriority returns the thread priority to use when executing the operation. Use `qualityOfService` instead.
 func (o *Operation) ThreadPriority() float64 {
 	defer runtime.KeepAlive(o)
 	_r := objc.Send[float64](objref.IDOf(o), objc.RegisterName("threadPriority"))
 	return _r
 }
 
-// QualityOfService returns the quality of service.
+// QualityOfService returns the relative amount of importance for granting system resources to the operation. Service levels affect the priority with which an operation object is given access to system resources such as CPU time, network resources, disk resources, and so on. Operations with a higher quality of service level are given greater priority over system resources so that they may perform their task more quickly.
 func (o *Operation) QualityOfService() QualityOfService {
 	defer runtime.KeepAlive(o)
 	_r := objc.Send[QualityOfService](objref.IDOf(o), objc.RegisterName("qualityOfService"))
 	return _r
 }
 
-// Name returns the name.
+// Name returns the name of the operation. Assign a name to the operation object to help identify it during debugging.
 func (o *Operation) Name() string {
 	defer runtime.KeepAlive(o)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("name"))

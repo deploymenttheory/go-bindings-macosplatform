@@ -10,8 +10,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// Specifies whether a specific type of sharing should be disabled in the share picker, and if so, whether a reason should be provided for the disablement.
-//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nssharingcollaborationmoderestriction
 type NSSharingCollaborationModeRestriction struct {
 	foundation.NSObject

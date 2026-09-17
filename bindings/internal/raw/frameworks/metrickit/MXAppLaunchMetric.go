@@ -13,6 +13,7 @@ import (
 // An object representing metrics about app launch time.
 //
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxapplaunchmetric
+// Deprecated: Use MetricResult instead.
 type MXAppLaunchMetric struct {
 	MXMetric
 }

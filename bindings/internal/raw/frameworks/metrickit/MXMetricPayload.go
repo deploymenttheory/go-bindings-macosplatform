@@ -13,6 +13,7 @@ import (
 // An object that encapsulates a daily metrics report.
 //
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxmetricpayload
+// Deprecated: Use MetricReport instead.
 type MXMetricPayload struct {
 	foundation.NSObject
 }
@@ -54,6 +55,7 @@ func MXMetricPayloadFromID(id objc.ID) *MXMetricPayload {
 }
 
 // Returns the contents of the payload in JSON format.
+// Deprecated: Use MetricReport instead.
 func (o *MXMetricPayload) JSONRepresentation() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXMetricPayloadSelJSONRepresentation)
 	if _ret != 0 {
@@ -63,6 +65,7 @@ func (o *MXMetricPayload) JSONRepresentation() *foundation.NSData {
 }
 
 // Returns the results of the payload as a dictionary.
+// Deprecated: Use MetricReport instead.
 func (o *MXMetricPayload) DictionaryRepresentation() *foundation.NSDictionary[objc.ID, objc.ID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXMetricPayloadSelDictionaryRepresentation)
 	if _ret != 0 {

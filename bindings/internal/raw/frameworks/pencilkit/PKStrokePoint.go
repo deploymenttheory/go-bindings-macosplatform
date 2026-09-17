@@ -11,27 +11,27 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A structure that represents the properties of a specific point along a stroke’s path.
-//
 // Apple documentation: https://developer.apple.com/documentation/pencilkit/pkstrokepoint
 type PKStrokePoint struct {
 	foundation.NSObject
 }
 
 var (
-	_clsPKStrokePoint                                                                                 = _objcClass("PKStrokePoint")
-	_pKStrokePointSelInitWithLocationTimeOffsetSizeOpacityForceAzimuthAltitude                        = objc.RegisterName("initWithLocation:timeOffset:size:opacity:force:azimuth:altitude:")
-	_pKStrokePointSelInitWithLocationTimeOffsetSizeOpacityForceAzimuthAltitudeSecondaryScale          = objc.RegisterName("initWithLocation:timeOffset:size:opacity:force:azimuth:altitude:secondaryScale:")
-	_pKStrokePointSelInitWithLocationTimeOffsetSizeOpacityForceAzimuthAltitudeSecondaryScaleThreshold = objc.RegisterName("initWithLocation:timeOffset:size:opacity:force:azimuth:altitude:secondaryScale:threshold:")
-	_pKStrokePointSelLocation                                                                         = objc.RegisterName("location")
-	_pKStrokePointSelTimeOffset                                                                       = objc.RegisterName("timeOffset")
-	_pKStrokePointSelSize                                                                             = objc.RegisterName("size")
-	_pKStrokePointSelOpacity                                                                          = objc.RegisterName("opacity")
-	_pKStrokePointSelAzimuth                                                                          = objc.RegisterName("azimuth")
-	_pKStrokePointSelForce                                                                            = objc.RegisterName("force")
-	_pKStrokePointSelAltitude                                                                         = objc.RegisterName("altitude")
-	_pKStrokePointSelSecondaryScale                                                                   = objc.RegisterName("secondaryScale")
-	_pKStrokePointSelThreshold                                                                        = objc.RegisterName("threshold")
+	_clsPKStrokePoint                                                                                              = _objcClass("PKStrokePoint")
+	_pKStrokePointSelInitWithLocationTimeOffsetSizeOpacityForceAzimuthAltitude                                     = objc.RegisterName("initWithLocation:timeOffset:size:opacity:force:azimuth:altitude:")
+	_pKStrokePointSelInitWithLocationTimeOffsetSizeOpacityForceAzimuthAltitudeSecondaryScale                       = objc.RegisterName("initWithLocation:timeOffset:size:opacity:force:azimuth:altitude:secondaryScale:")
+	_pKStrokePointSelInitWithLocationTimeOffsetSizeOpacityForceAzimuthAltitudeSecondaryScaleThreshold              = objc.RegisterName("initWithLocation:timeOffset:size:opacity:force:azimuth:altitude:secondaryScale:threshold:")
+	_pKStrokePointSelInitWithLocationTimeOffsetSizeOpacityForceAzimuthAltitudeSecondaryScaleThresholdLateralJitter = objc.RegisterName("initWithLocation:timeOffset:size:opacity:force:azimuth:altitude:secondaryScale:threshold:lateralJitter:")
+	_pKStrokePointSelLocation                                                                                      = objc.RegisterName("location")
+	_pKStrokePointSelTimeOffset                                                                                    = objc.RegisterName("timeOffset")
+	_pKStrokePointSelSize                                                                                          = objc.RegisterName("size")
+	_pKStrokePointSelOpacity                                                                                       = objc.RegisterName("opacity")
+	_pKStrokePointSelForce                                                                                         = objc.RegisterName("force")
+	_pKStrokePointSelAzimuth                                                                                       = objc.RegisterName("azimuth")
+	_pKStrokePointSelAltitude                                                                                      = objc.RegisterName("altitude")
+	_pKStrokePointSelSecondaryScale                                                                                = objc.RegisterName("secondaryScale")
+	_pKStrokePointSelThreshold                                                                                     = objc.RegisterName("threshold")
+	_pKStrokePointSelLateralJitter                                                                                 = objc.RegisterName("lateralJitter")
 )
 
 func PKStrokePointFromID(id objc.ID) *PKStrokePoint {
@@ -44,7 +44,7 @@ func PKStrokePointFromID(id objc.ID) *PKStrokePoint {
 	return o
 }
 
-// Create a new point with the provided properties.
+// Creates a stroke point with the specified properties.
 func (o *PKStrokePoint) InitWithLocationTimeOffsetSizeOpacityForceAzimuthAltitude(location corefoundation.CGPoint, timeOffset float64, size corefoundation.CGSize, opacity float64, force float64, azimuth float64, altitude float64) *PKStrokePoint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKStrokePointSelInitWithLocationTimeOffsetSizeOpacityForceAzimuthAltitude, location, timeOffset, size, opacity, force, azimuth, altitude)
 	if _ret != 0 {
@@ -53,7 +53,7 @@ func (o *PKStrokePoint) InitWithLocationTimeOffsetSizeOpacityForceAzimuthAltitud
 	return PKStrokePointFromID(_ret)
 }
 
-// Create a new point with the provided properties.
+// Creates a stroke point with the specified properties, including secondary scale.
 func (o *PKStrokePoint) InitWithLocationTimeOffsetSizeOpacityForceAzimuthAltitudeSecondaryScale(location corefoundation.CGPoint, timeOffset float64, size corefoundation.CGSize, opacity float64, force float64, azimuth float64, altitude float64, secondaryScale float64) *PKStrokePoint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKStrokePointSelInitWithLocationTimeOffsetSizeOpacityForceAzimuthAltitudeSecondaryScale, location, timeOffset, size, opacity, force, azimuth, altitude, secondaryScale)
 	if _ret != 0 {
@@ -62,7 +62,7 @@ func (o *PKStrokePoint) InitWithLocationTimeOffsetSizeOpacityForceAzimuthAltitud
 	return PKStrokePointFromID(_ret)
 }
 
-// Create a new point with the provided properties.
+// Creates a stroke point with the specified properties, including a rendering threshold.
 func (o *PKStrokePoint) InitWithLocationTimeOffsetSizeOpacityForceAzimuthAltitudeSecondaryScaleThreshold(location corefoundation.CGPoint, timeOffset float64, size corefoundation.CGSize, opacity float64, force float64, azimuth float64, altitude float64, secondaryScale float64, threshold float64) *PKStrokePoint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKStrokePointSelInitWithLocationTimeOffsetSizeOpacityForceAzimuthAltitudeSecondaryScaleThreshold, location, timeOffset, size, opacity, force, azimuth, altitude, secondaryScale, threshold)
 	if _ret != 0 {
@@ -71,56 +71,71 @@ func (o *PKStrokePoint) InitWithLocationTimeOffsetSizeOpacityForceAzimuthAltitud
 	return PKStrokePointFromID(_ret)
 }
 
-// Location of the point.
+// Creates a stroke point with the specified properties, including lateral jitter.
+func (o *PKStrokePoint) InitWithLocationTimeOffsetSizeOpacityForceAzimuthAltitudeSecondaryScaleThresholdLateralJitter(location corefoundation.CGPoint, timeOffset float64, size corefoundation.CGSize, opacity float64, force float64, azimuth float64, altitude float64, secondaryScale float64, threshold float64, lateralJitter float64) *PKStrokePoint {
+	_ret := objc.Send[objc.ID](o.Ptr(), _pKStrokePointSelInitWithLocationTimeOffsetSizeOpacityForceAzimuthAltitudeSecondaryScaleThresholdLateralJitter, location, timeOffset, size, opacity, force, azimuth, altitude, secondaryScale, threshold, lateralJitter)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return PKStrokePointFromID(_ret)
+}
+
+// The location of the point.
 func (o *PKStrokePoint) Location() corefoundation.CGPoint {
 	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _pKStrokePointSelLocation)
 	return _ret
 }
 
-// Time offset since the start of the stroke path in seconds.
+// The time offset in seconds from the start of the stroke path.
 func (o *PKStrokePoint) TimeOffset() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _pKStrokePointSelTimeOffset)
 	return _ret
 }
 
-// Size of the point.
+// The size of the point.
 func (o *PKStrokePoint) Size() corefoundation.CGSize {
 	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _pKStrokePointSelSize)
 	return _ret
 }
 
-// Opacity of the point 0-2.
+// The opacity of the point, in the range 0 to 2.
 func (o *PKStrokePoint) Opacity() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _pKStrokePointSelOpacity)
 	return _ret
 }
 
-// Azimuth of the point in radians, 0.0-2π radians
-func (o *PKStrokePoint) Azimuth() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _pKStrokePointSelAzimuth)
-	return _ret
-}
-
-// Force used to create this point.
+// The force used to create the point.
 func (o *PKStrokePoint) Force() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _pKStrokePointSelForce)
 	return _ret
 }
 
-// Altitude used to create this point in radians, 0.0-π/2 radians
+// The azimuth of the point in radians, in the range 0.0 to 2π.
+func (o *PKStrokePoint) Azimuth() float64 {
+	_ret := objc.Send[float64](o.Ptr(), _pKStrokePointSelAzimuth)
+	return _ret
+}
+
+// The altitude used to create the point in radians, in the range 0.0 to π/2.
 func (o *PKStrokePoint) Altitude() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _pKStrokePointSelAltitude)
 	return _ret
 }
 
-// The scaling of the point for secondary effects. For example the scaling of the pigment in the watercolor ink.
+// The scale factor for secondary rendering effects at this point. For example, this controls the pigment spread in watercolor ink.
 func (o *PKStrokePoint) SecondaryScale() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _pKStrokePointSelSecondaryScale)
 	return _ret
 }
 
-// The threshold for clipping the stroke rendering. When rendering only pixels with an alpha greater than the threshold are drawn. A threshold of 0 has no affect on rendering, a threshold of 1 does not draw anything. Thresholds are only used for some inks, eg. `PKInkIdentifierReed`.
+// The alpha threshold for clipping the stroke rendering for supported inks. Only pixels with an alpha greater than the threshold are drawn. A threshold of `0` has no effect on rendering; a threshold of `1` draws nothing. Thresholds apply only to some inks, such as `PKInkIdentifierReed`.
 func (o *PKStrokePoint) Threshold() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _pKStrokePointSelThreshold)
+	return _ret
+}
+
+// The amount of lateral particle jitter at the stroke edge for supported inks. Lateral jitter applies only to some inks, such as `PKInkIdentifierPencil`.
+func (o *PKStrokePoint) LateralJitter() float64 {
+	_ret := objc.Send[float64](o.Ptr(), _pKStrokePointSelLateralJitter)
 	return _ret
 }

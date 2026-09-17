@@ -97,6 +97,14 @@ func (cv *CollaborationView) WithActiveParticipantCount(activeParticipantCount i
 	return cv
 }
 
+// WithPendingAccessRequestsCount sets the pending access requests count.
+func (cv *CollaborationView) WithPendingAccessRequestsCount(pendingAccessRequestsCount int) *CollaborationView {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setPendingAccessRequestsCount:"), pendingAccessRequestsCount)
+	})
+	return cv
+}
+
 // WithDelegate sets the delegate object for the collaboration view.
 func (cv *CollaborationView) WithDelegate(delegate CollaborationViewDelegate) *CollaborationView {
 	_shim := newCollaborationViewDelegateShim(delegate)
@@ -186,6 +194,20 @@ func (cv *CollaborationView) ActiveParticipantCount() int {
 	purego.Main(func() {
 		_mainthread0 = func() int {
 			_r := objc.Send[int](objref.IDOf(cv), objc.RegisterName("activeParticipantCount"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
+}
+
+// PendingAccessRequestsCount returns the pending access requests count.
+func (cv *CollaborationView) PendingAccessRequestsCount() int {
+	defer runtime.KeepAlive(cv)
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(cv), objc.RegisterName("pendingAccessRequestsCount"))
 			return _r
 		}()
 	})

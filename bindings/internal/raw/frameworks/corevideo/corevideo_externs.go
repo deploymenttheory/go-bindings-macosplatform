@@ -317,6 +317,12 @@ func KCVImageBufferGammaLevelKey() uintptr {
 	return ptr
 }
 
+// @constant    kCVImageBufferHorizontalDisparityAdjustmentKey @abstract Indicates a relative shift of the left and right images, which changes the zero parallax plane. @discussion The value encoded in normalized image space is a CFNumber holding a signed 32-bit integer measured over the range of -10000 to 10000 mapping to the uniform range [-1.0...1.0]. The interval of 0.0 to 1.0 or 0 to 10000 maps onto the stereo eye view image width. The negative interval 0.0 to -1.0 or 0 to -10000 similarly map onto the stereo eye view image width. The default value of 0 is inferred if this property is not set.
+func KCVImageBufferHorizontalDisparityAdjustmentKey() uintptr {
+	ptr, _ := purego.Dlsym(_corevideoLib, "kCVImageBufferHorizontalDisparityAdjustmentKey")
+	return ptr
+}
+
 func KCVImageBufferICCProfileKey() uintptr {
 	ptr, _ := purego.Dlsym(_corevideoLib, "kCVImageBufferICCProfileKey")
 	return ptr
@@ -627,7 +633,7 @@ func KCVPixelBufferIOSurfacePropertiesKey() uintptr {
 	return ptr
 }
 
-// @const      kCVPixelBufferIOSurfacePurgeableKey @abstract   Key sets the IOSurface backed memory allocation for CVPixelBuffer as purgable and volatile. @discussion A purgeable IOSurface is capable of being switched between non-volatile, volatile and empty states using IOSurfaceSetPurgeable.  When in the volatile state, the OS is permitted to instantly change its state to empty and remove all its memory pages.  Clients should set the IOSurfaces to the non-volatile state while they are in use and the volatile state when their need and contents is optional/speculative and OK to discard in response to system memory demand.  See IOSurfaceSetPurgeable for more details.  This key is only effective for CVPixelBuffers that are backed by IOSurface.
+// @const      kCVPixelBufferIOSurfacePurgeableKey @abstract   Key sets the IOSurface backed memory allocation for CVPixelBuffer as purgeable and non-volatile. @discussion A purgeable IOSurface is capable of being switched between non-volatile, volatile and empty states using IOSurfaceSetPurgeable.  When in the volatile state, the OS is permitted to instantly change its state to empty and remove all its memory pages.  Clients should set the IOSurfaces to the non-volatile state while they are in use and the volatile state when their need and contents is optional/speculative and OK to discard in response to system memory demand.  See IOSurfaceSetPurgeable for more details.  This key is only effective for CVPixelBuffers that are backed by IOSurface.
 func KCVPixelBufferIOSurfacePurgeableKey() uintptr {
 	ptr, _ := purego.Dlsym(_corevideoLib, "kCVPixelBufferIOSurfacePurgeableKey")
 	return ptr

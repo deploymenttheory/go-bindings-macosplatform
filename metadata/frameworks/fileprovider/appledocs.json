@@ -69,10 +69,6 @@
       "doc": "Support for fetching changes to the item’s content.",
       "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderincrementalcontentfetching"
     },
-    "NSFileProviderItem": {
-      "doc": "An item the File Provider extension manages.",
-      "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovideritem"
-    },
     "NSFileProviderItemDecorating": {
       "doc": "Support for decorating items.",
       "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovideritemdecorating"
@@ -195,24 +191,6 @@
         "init(rawValue:)": {
           "doc": "Creates an option instance from the raw value.",
           "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderdeleteitemoptions/init(rawvalue:)"
-        }
-      }
-    },
-    "NSFileProviderDomainRemovalMode": {
-      "doc": "A mode indicating how the system handles user data when removing a domain.",
-      "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderdomainremovalmode"
-    },
-    "NSFileProviderDomainTestingModes": {
-      "doc": "Modes that modify the system’s behavior while testing.",
-      "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderdomaintestingmodes"
-    },
-    "NSFileProviderErrorCode": {
-      "doc": "The error codes for the File Provider extension.",
-      "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidererrorcode",
-      "members": {
-        "NSFileProviderErrorPageExpired": {
-          "doc": "An error indicating that the page is too old, and that the system must restart the enumeration operation from the beginning.",
-          "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidererrorcode/nsfileprovidererrorpageexpired"
         }
       }
     },
@@ -372,10 +350,6 @@
       "doc": "Constants that identify known folders.",
       "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderknownfolders"
     },
-    "NSFileProviderManagerDisconnectionOptions": {
-      "doc": "Options for disconnecting a domain from the extension.",
-      "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidermanagerdisconnectionoptions"
-    },
     "NSFileProviderMaterializationFlags": {
       "doc": "Flags that provides additional information about the provided content.",
       "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidermaterializationflags",
@@ -409,6 +383,23 @@
         "init(rawValue:)": {
           "doc": "Creates an option instance from the raw value.",
           "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidermodifyitemoptions/init(rawvalue:)"
+        }
+      }
+    },
+    "NSFileProviderNamespacePolicy": {
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidernamespacepolicy",
+      "members": {
+        "NSFileProviderNamespacePolicyInherited": {
+          "doc": "Inherit the namespace policy of the parent folder.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidernamespacepolicy/inherited"
+        },
+        "NSFileProviderNamespacePolicyMaterializeEagerly": {
+          "doc": "Download this folder eagerly, make sure it’s always fully enumerated Keep downloading remote updates eagerly. Prevent eviction on low disk pressure and other triggers.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidernamespacepolicy/materializeeagerly"
+        },
+        "NSFileProviderNamespacePolicyMaterializeLazily": {
+          "doc": "Enumerate this folder lazily (i.e upon access) if it is dataless. Keep populate new items below this folder eagerly if it’s already on disk.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidernamespacepolicy/materializelazily"
         }
       }
     },

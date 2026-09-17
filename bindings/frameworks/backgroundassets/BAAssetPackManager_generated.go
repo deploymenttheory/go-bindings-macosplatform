@@ -93,6 +93,257 @@ func (apm *AssetPackManager) WithDelegate(delegate ManagedAssetPackDownloadDeleg
 	return apm
 }
 
+// WithResolvedLanguage sets the language asset packs that are localized for which the system automatically makes available locally, represented as a BCP-47 identifier.
+func (apm *AssetPackManager) WithResolvedLanguage(resolvedLanguage string) *AssetPackManager {
+	objc.Send[objc.ID](objref.IDOf(apm), objc.RegisterName("setResolvedLanguage:"), purego.NSString(resolvedLanguage))
+	return apm
+}
+
+// GetManifest gets the manifest of asset packs that are available to download.
+//
+// GetManifest blocks until the operation completes or ctx is cancelled.
+func (apm *AssetPackManager) GetManifest(ctx context.Context) (result *AssetPackManifest, err error) {
+	defer runtime.KeepAlive(apm)
+	type _result struct {
+		val *AssetPackManifest
+		err error
+	}
+	_ch := make(chan _result, 1)
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
+		var _o _result
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = AssetPackManifestFromID(_p0)
+		_ch <- _o
+	})
+	objc.Send[objc.ID](objref.IDOf(apm), objc.RegisterName("getManifestWithCompletionHandler:"), _block)
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *AssetPackManifest
+		return _zero, ctx.Err()
+	}
+}
+
+// GetStatusRelativeToAssetPackCompletionHandler gets the current status relative to a particular asset pack.
+func (apm *AssetPackManager) GetStatusRelativeToAssetPackCompletionHandler(assetPack *AssetPack, completionHandler func(AssetPackStatus, unsafe.Pointer)) {
+	defer runtime.KeepAlive(apm)
+	defer runtime.KeepAlive(assetPack)
+	objc.Send[objc.ID](objref.IDOf(apm), objc.RegisterName("getStatusRelativeToAssetPack:completionHandler:"), objref.IDOf(assetPack), objc.NewBlock(func(_ objc.Block, _b0 AssetPackStatus, _b1 unsafe.Pointer) { completionHandler(_b0, _b1) }))
+}
+
+// GetLocalStatusOfAssetPackWithIdentifierCompletionHandler gets an asset pack’s local status.
+func (apm *AssetPackManager) GetLocalStatusOfAssetPackWithIdentifierCompletionHandler(assetPackIdentifier string, completionHandler func(AssetPackStatus)) {
+	defer runtime.KeepAlive(apm)
+	objc.Send[objc.ID](objref.IDOf(apm), objc.RegisterName("getLocalStatusOfAssetPackWithIdentifier:completionHandler:"), purego.NSString(assetPackIdentifier), objc.NewBlock(func(_ objc.Block, _b0 AssetPackStatus) { completionHandler(_b0) }))
+}
+
+// AssetPackIsAvailableLocallyWithIdentifier checks whether the asset pack with the specified identifier is available locally.
+func (apm *AssetPackManager) AssetPackIsAvailableLocallyWithIdentifier(assetPackIdentifier string) bool {
+	defer runtime.KeepAlive(apm)
+	_r := objc.Send[bool](objref.IDOf(apm), objc.RegisterName("assetPackIsAvailableLocallyWithIdentifier:"), purego.NSString(assetPackIdentifier))
+	return _r
+}
+
+// GetLocallyAvailableLanguages gets the languages used by asset packs that are localized and are available locally.
+//
+// GetLocallyAvailableLanguages blocks until the operation completes or ctx is cancelled.
+func (apm *AssetPackManager) GetLocallyAvailableLanguages(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(apm)
+	type _result struct {
+		val obj.Object
+		err error
+	}
+	_ch := make(chan _result, 1)
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
+		var _o _result
+		_o.val = obj.Wrap(_p0)
+		_ch <- _o
+	})
+	objc.Send[objc.ID](objref.IDOf(apm), objc.RegisterName("getLocallyAvailableLanguagesWithCompletionHandler:"), _block)
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero obj.Object
+		return _zero, ctx.Err()
+	}
+}
+
+// ReconcilePreferredLanguages reconciles the set of locally available asset packs with the current preferred languages.
+//
+// ReconcilePreferredLanguages blocks until the operation completes or ctx is cancelled.
+func (apm *AssetPackManager) ReconcilePreferredLanguages(ctx context.Context) error {
+	defer runtime.KeepAlive(apm)
+	_ch := make(chan error, 1)
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
+		var _err error
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
+		_ch <- _err
+	})
+	objc.Send[objc.ID](objref.IDOf(apm), objc.RegisterName("reconcilePreferredLanguagesWithCompletionHandler:"), _block)
+	select {
+	case err := <-_ch:
+		return err
+	case <-ctx.Done():
+		return ctx.Err()
+	}
+}
+
+// EnsureLocalAvailabilityOfAssetPack ensures that the specified asset pack is available locally, performing a download if necessary.
+//
+// EnsureLocalAvailabilityOfAssetPack blocks until the operation completes or ctx is cancelled.
+func (apm *AssetPackManager) EnsureLocalAvailabilityOfAssetPack(ctx context.Context, assetPack *AssetPack) error {
+	defer runtime.KeepAlive(apm)
+	defer runtime.KeepAlive(assetPack)
+	_ch := make(chan error, 1)
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
+		var _err error
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
+		_ch <- _err
+	})
+	objc.Send[objc.ID](objref.IDOf(apm), objc.RegisterName("ensureLocalAvailabilityOfAssetPack:completionHandler:"), objref.IDOf(assetPack), _block)
+	select {
+	case err := <-_ch:
+		return err
+	case <-ctx.Done():
+		return ctx.Err()
+	}
+}
+
+// EnsureLocalAvailabilityOfAssetPackRequireLatestVersion ensures that the specified asset pack is available locally, performing a download if necessary.
+//
+// EnsureLocalAvailabilityOfAssetPackRequireLatestVersion blocks until the operation completes or ctx is cancelled.
+func (apm *AssetPackManager) EnsureLocalAvailabilityOfAssetPackRequireLatestVersion(ctx context.Context, assetPack *AssetPack, shouldUpdate bool) error {
+	defer runtime.KeepAlive(apm)
+	defer runtime.KeepAlive(assetPack)
+	_ch := make(chan error, 1)
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
+		var _err error
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
+		_ch <- _err
+	})
+	objc.Send[objc.ID](objref.IDOf(apm), objc.RegisterName("ensureLocalAvailabilityOfAssetPack:requireLatestVersion:completionHandler:"), objref.IDOf(assetPack), shouldUpdate, _block)
+	select {
+	case err := <-_ch:
+		return err
+	case <-ctx.Done():
+		return ctx.Err()
+	}
+}
+
+// EnsureLocalAvailabilityOfAssetPacks ensures that the specified asset packs are available locally.
+//
+// EnsureLocalAvailabilityOfAssetPacks blocks until the operation completes or ctx is cancelled.
+func (apm *AssetPackManager) EnsureLocalAvailabilityOfAssetPacks(ctx context.Context, assetPacks []*AssetPack) error {
+	defer runtime.KeepAlive(apm)
+	_ch := make(chan error, 1)
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
+		var _err error
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
+		_ch <- _err
+	})
+	objc.Send[objc.ID](objref.IDOf(apm), objc.RegisterName("ensureLocalAvailabilityOfAssetPacks:completionHandler:"), rt.SliceToNSSet(assetPacks, func(_v *AssetPack) objc.ID { return objref.IDOf(_v) }), _block)
+	select {
+	case err := <-_ch:
+		return err
+	case <-ctx.Done():
+		return ctx.Err()
+	}
+}
+
+// EnsureLocalAvailabilityOfAssetPacksRequireLatestVersions ensures that the specified asset packs are available locally, performing a batch download if necessary.
+//
+// EnsureLocalAvailabilityOfAssetPacksRequireLatestVersions blocks until the operation completes or ctx is cancelled.
+func (apm *AssetPackManager) EnsureLocalAvailabilityOfAssetPacksRequireLatestVersions(ctx context.Context, assetPacks []*AssetPack, shouldUpdate bool) error {
+	defer runtime.KeepAlive(apm)
+	_ch := make(chan error, 1)
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
+		var _err error
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
+		_ch <- _err
+	})
+	objc.Send[objc.ID](objref.IDOf(apm), objc.RegisterName("ensureLocalAvailabilityOfAssetPacks:requireLatestVersions:completionHandler:"), rt.SliceToNSSet(assetPacks, func(_v *AssetPack) objc.ID { return objref.IDOf(_v) }), shouldUpdate, _block)
+	select {
+	case err := <-_ch:
+		return err
+	case <-ctx.Done():
+		return ctx.Err()
+	}
+}
+
+// CheckForUpdatesWithCompletionHandler gets the latest asset-pack information from the server, updates outdated asset packs, and removes obsolete asset packs.
+func (apm *AssetPackManager) CheckForUpdatesWithCompletionHandler(completionHandler func(obj.Object, obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(apm)
+	objc.Send[objc.ID](objref.IDOf(apm), objc.RegisterName("checkForUpdatesWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
+		completionHandler(obj.Wrap(_b0), obj.Wrap(_b1), _b2)
+	}))
+}
+
+// FileDescriptorForPathSearchingInAssetPackWithIdentifier opens and returns a file descriptor for the asset file at the specified relative path.
+func (apm *AssetPackManager) FileDescriptorForPathSearchingInAssetPackWithIdentifier(path string, assetPackIdentifier string) (result int, err error) {
+	defer runtime.KeepAlive(apm)
+	var _nsErr uintptr
+	_r := objc.Send[int](objref.IDOf(apm), objc.RegisterName("fileDescriptorForPath:searchingInAssetPackWithIdentifier:error:"), purego.NSString(path), purego.NSString(assetPackIdentifier), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return 0, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return _r, nil
+}
+
+// FileDescriptorForPathAsLocalizedForLanguage opens and returns a file descriptor for a localized asset file at the specified relative path.
+func (apm *AssetPackManager) FileDescriptorForPathAsLocalizedForLanguage(path string, languageIdentifier string) (result int, err error) {
+	defer runtime.KeepAlive(apm)
+	var _nsErr uintptr
+	_r := objc.Send[int](objref.IDOf(apm), objc.RegisterName("fileDescriptorForPath:asLocalizedForLanguage:error:"), purego.NSString(path), purego.NSString(languageIdentifier), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return 0, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return _r, nil
+}
+
+// URLForPath returns a URL for the specified relative path.
+func (apm *AssetPackManager) URLForPath(path string) (result string, err error) {
+	defer runtime.KeepAlive(apm)
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(apm), objc.RegisterName("URLForPath:error:"), purego.NSString(path), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return "", errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return rt.URLString(_r), nil
+}
+
+// URLForPathAsLocalizedForLanguage returns a URL for the specified relative path.
+func (apm *AssetPackManager) URLForPathAsLocalizedForLanguage(path string, languageIdentifier string) (result string, err error) {
+	defer runtime.KeepAlive(apm)
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(apm), objc.RegisterName("URLForPath:asLocalizedForLanguage:error:"), purego.NSString(path), purego.NSString(languageIdentifier), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return "", errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return rt.URLString(_r), nil
+}
+
+// RemoveAssetPackWithIdentifier removes the specified asset pack from the device.
+//
+// RemoveAssetPackWithIdentifier blocks until the operation completes or ctx is cancelled.
+func (apm *AssetPackManager) RemoveAssetPackWithIdentifier(ctx context.Context, assetPackIdentifier string) error {
+	defer runtime.KeepAlive(apm)
+	_ch := make(chan error, 1)
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
+		var _err error
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
+		_ch <- _err
+	})
+	objc.Send[objc.ID](objref.IDOf(apm), objc.RegisterName("removeAssetPackWithIdentifier:completionHandler:"), purego.NSString(assetPackIdentifier), _block)
+	select {
+	case err := <-_ch:
+		return err
+	case <-ctx.Done():
+		return ctx.Err()
+	}
+}
+
 // GetAllAssetPacks gets the asset packs that are available to download.
 //
 // GetAllAssetPacks blocks until the operation completes or ctx is cancelled.
@@ -145,120 +396,18 @@ func (apm *AssetPackManager) GetAssetPackWithIdentifier(ctx context.Context, ass
 	}
 }
 
-// GetStatusRelativeToAssetPackCompletionHandler gets the current status relative to a particular asset pack.
-func (apm *AssetPackManager) GetStatusRelativeToAssetPackCompletionHandler(assetPack *AssetPack, completionHandler func(AssetPackStatus, unsafe.Pointer)) {
-	defer runtime.KeepAlive(apm)
-	defer runtime.KeepAlive(assetPack)
-	objc.Send[objc.ID](objref.IDOf(apm), objc.RegisterName("getStatusRelativeToAssetPack:completionHandler:"), objref.IDOf(assetPack), objc.NewBlock(func(_ objc.Block, _b0 AssetPackStatus, _b1 unsafe.Pointer) { completionHandler(_b0, _b1) }))
-}
-
-// GetLocalStatusOfAssetPackWithIdentifierCompletionHandler gets an asset pack’s local status.
-func (apm *AssetPackManager) GetLocalStatusOfAssetPackWithIdentifierCompletionHandler(assetPackIdentifier string, completionHandler func(AssetPackStatus)) {
-	defer runtime.KeepAlive(apm)
-	objc.Send[objc.ID](objref.IDOf(apm), objc.RegisterName("getLocalStatusOfAssetPackWithIdentifier:completionHandler:"), purego.NSString(assetPackIdentifier), objc.NewBlock(func(_ objc.Block, _b0 AssetPackStatus) { completionHandler(_b0) }))
-}
-
-// AssetPackIsAvailableLocallyWithIdentifier checks whether the asset pack with the specified identifier is available locally.
-func (apm *AssetPackManager) AssetPackIsAvailableLocallyWithIdentifier(assetPackIdentifier string) bool {
-	defer runtime.KeepAlive(apm)
-	_r := objc.Send[bool](objref.IDOf(apm), objc.RegisterName("assetPackIsAvailableLocallyWithIdentifier:"), purego.NSString(assetPackIdentifier))
-	return _r
-}
-
-// EnsureLocalAvailabilityOfAssetPack ensures that the specified asset pack be available locally.
-//
-// EnsureLocalAvailabilityOfAssetPack blocks until the operation completes or ctx is cancelled.
-func (apm *AssetPackManager) EnsureLocalAvailabilityOfAssetPack(ctx context.Context, assetPack *AssetPack) error {
-	defer runtime.KeepAlive(apm)
-	defer runtime.KeepAlive(assetPack)
-	_ch := make(chan error, 1)
-	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
-		var _err error
-		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
-		_ch <- _err
-	})
-	objc.Send[objc.ID](objref.IDOf(apm), objc.RegisterName("ensureLocalAvailabilityOfAssetPack:completionHandler:"), objref.IDOf(assetPack), _block)
-	select {
-	case err := <-_ch:
-		return err
-	case <-ctx.Done():
-		return ctx.Err()
-	}
-}
-
-// EnsureLocalAvailabilityOfAssetPackRequireLatestVersion ensures that the specified asset pack is available locally, performing a download if necessary.
-//
-// EnsureLocalAvailabilityOfAssetPackRequireLatestVersion blocks until the operation completes or ctx is cancelled.
-func (apm *AssetPackManager) EnsureLocalAvailabilityOfAssetPackRequireLatestVersion(ctx context.Context, assetPack *AssetPack, shouldUpdate bool) error {
-	defer runtime.KeepAlive(apm)
-	defer runtime.KeepAlive(assetPack)
-	_ch := make(chan error, 1)
-	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
-		var _err error
-		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
-		_ch <- _err
-	})
-	objc.Send[objc.ID](objref.IDOf(apm), objc.RegisterName("ensureLocalAvailabilityOfAssetPack:requireLatestVersion:completionHandler:"), objref.IDOf(assetPack), shouldUpdate, _block)
-	select {
-	case err := <-_ch:
-		return err
-	case <-ctx.Done():
-		return ctx.Err()
-	}
-}
-
-// CheckForUpdatesWithCompletionHandler gets the latest asset-pack information from the server, updates outdated asset packs, and removes obsolete asset packs.
-func (apm *AssetPackManager) CheckForUpdatesWithCompletionHandler(completionHandler func(obj.Object, obj.Object, unsafe.Pointer)) {
-	defer runtime.KeepAlive(apm)
-	objc.Send[objc.ID](objref.IDOf(apm), objc.RegisterName("checkForUpdatesWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
-		completionHandler(obj.Wrap(_b0), obj.Wrap(_b1), _b2)
-	}))
-}
-
-// FileDescriptorForPathSearchingInAssetPackWithIdentifier opens and returns a file descriptor for the asset file at the specified relative path.
-func (apm *AssetPackManager) FileDescriptorForPathSearchingInAssetPackWithIdentifier(path string, assetPackIdentifier string) (result int, err error) {
-	defer runtime.KeepAlive(apm)
-	var _nsErr uintptr
-	_r := objc.Send[int](objref.IDOf(apm), objc.RegisterName("fileDescriptorForPath:searchingInAssetPackWithIdentifier:error:"), purego.NSString(path), purego.NSString(assetPackIdentifier), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return 0, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
-	}
-	return _r, nil
-}
-
-// URLForPath returns a URL for the specified relative path.
-func (apm *AssetPackManager) URLForPath(path string) (result string, err error) {
-	defer runtime.KeepAlive(apm)
-	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(apm), objc.RegisterName("URLForPath:error:"), purego.NSString(path), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return "", errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
-	}
-	return rt.URLString(_r), nil
-}
-
-// RemoveAssetPackWithIdentifier removes the specified asset pack from the device.
-//
-// RemoveAssetPackWithIdentifier blocks until the operation completes or ctx is cancelled.
-func (apm *AssetPackManager) RemoveAssetPackWithIdentifier(ctx context.Context, assetPackIdentifier string) error {
-	defer runtime.KeepAlive(apm)
-	_ch := make(chan error, 1)
-	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
-		var _err error
-		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
-		_ch <- _err
-	})
-	objc.Send[objc.ID](objref.IDOf(apm), objc.RegisterName("removeAssetPackWithIdentifier:completionHandler:"), purego.NSString(assetPackIdentifier), _block)
-	select {
-	case err := <-_ch:
-		return err
-	case <-ctx.Done():
-		return ctx.Err()
-	}
-}
-
 // GetStatusOfAssetPackWithIdentifierCompletionHandler gets an asset pack’s status.
 func (apm *AssetPackManager) GetStatusOfAssetPackWithIdentifierCompletionHandler(assetPackIdentifier string, completionHandler func(AssetPackStatus, unsafe.Pointer)) {
 	defer runtime.KeepAlive(apm)
 	objc.Send[objc.ID](objref.IDOf(apm), objc.RegisterName("getStatusOfAssetPackWithIdentifier:completionHandler:"), purego.NSString(assetPackIdentifier), objc.NewBlock(func(_ objc.Block, _b0 AssetPackStatus, _b1 unsafe.Pointer) { completionHandler(_b0, _b1) }))
+}
+
+// ResolvedLanguage returns the language asset packs that are localized for which the system automatically makes available locally, represented as a BCP-47 identifier. The user’s preferred languages inform the choice of resolved language, respecting any language that your application sets manually. This property may be `nil` if no localized asset packs are available. You can manually set this property to `nil` to revert to the user’s system-wide language preference. If the user recently changed their preferred language, then this property’s value could be temporarily out of sync with the set of asset packs that are available locally. Setting the language doesn’t immediately download or remove any asset packs; call “BAAssetPackManager/reconcilePreferredLanguagesWithCompletionHandler:“ to reconcile the set of downloaded asset packs with the new configuration. Setting a new resolved language also changes your application’s display language. - Note: Don’t set this property to a new value within your downloader extension.
+func (apm *AssetPackManager) ResolvedLanguage() string {
+	defer runtime.KeepAlive(apm)
+	_r := objc.Send[objc.ID](objref.IDOf(apm), objc.RegisterName("resolvedLanguage"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
 }

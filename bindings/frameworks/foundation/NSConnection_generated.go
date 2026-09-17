@@ -197,56 +197,56 @@ func (c *Connection) DispatchWithComponents(components obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("dispatchWithComponents:"), objref.IDOf(components))
 }
 
-// Statistics returns the statistics.
+// Statistics returns a dictionary containing various statistics for the receiver. An `NSDictionary` object containing various statistics for the receiver, such as the number of vended objects, the number of requests and replies, and so on. The statistics dictionary should be used only for debugging purposes.
 func (c *Connection) Statistics() map[string]*Number {
 	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("statistics"))
 	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) *Number { return NumberFromID(_id) })
 }
 
-// RequestTimeout returns the request timeout.
+// RequestTimeout returns the timeout interval for outgoing requests.
 func (c *Connection) RequestTimeout() float64 {
 	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("requestTimeout"))
 	return _r
 }
 
-// ReplyTimeout returns the reply timeout.
+// ReplyTimeout returns the timeout interval for replies.
 func (c *Connection) ReplyTimeout() float64 {
 	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("replyTimeout"))
 	return _r
 }
 
-// RootObject returns the root object.
+// RootObject returns the object that the receiver makes available to other applications or threads.
 func (c *Connection) RootObject() obj.Object {
 	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("rootObject"))
 	return obj.Wrap(_r)
 }
 
-// IndependentConversationQueueing wraps the corresponding Objective-C method.
+// IndependentConversationQueueing reports whether the receiver handles requests atomically.
 func (c *Connection) IndependentConversationQueueing() bool {
 	defer runtime.KeepAlive(c)
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("independentConversationQueueing"))
 	return _r
 }
 
-// IsValid reports whether the object is valid.
+// IsValid reports whether the receiver is known to be valid.
 func (c *Connection) IsValid() bool {
 	defer runtime.KeepAlive(c)
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isValid"))
 	return _r
 }
 
-// RootProxy returns the root proxy.
+// RootProxy returns the proxy for the root object of the receiver's peer in another application or thread. The proxy returned can change between invocations if the peer `NSConnection` object's root object is changed. > Note: If the `NSConnection` object uses separate send and receive ports and has no peer, when you invoke > `rootProxy` it will block for the duration of the reply timeout interval, waiting for a reply.
 func (c *Connection) RootProxy() *DistantObject {
 	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("rootProxy"))
 	return DistantObjectFromID(_r)
 }
 
-// RequestModes returns the request modes.
+// RequestModes returns the set of request modes the receiver's receive port is registered for with its `NSRunLoop` object.
 //
 // RequestModes returns the collection as a Go slice.
 func (c *Connection) RequestModes() []string {
@@ -255,35 +255,35 @@ func (c *Connection) RequestModes() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SendPort returns the send port.
+// SendPort returns the port on which the receiver sends messages.
 func (c *Connection) SendPort() *Port {
 	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("sendPort"))
 	return PortFromID(_r)
 }
 
-// ReceivePort returns the receive port.
+// ReceivePort returns the port on which the receiver receives messages.
 func (c *Connection) ReceivePort() *Port {
 	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("receivePort"))
 	return PortFromID(_r)
 }
 
-// MultipleThreadsEnabled wraps the corresponding Objective-C method.
+// MultipleThreadsEnabled reports whether the receiver supports requests from multiple threads.
 func (c *Connection) MultipleThreadsEnabled() bool {
 	defer runtime.KeepAlive(c)
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("multipleThreadsEnabled"))
 	return _r
 }
 
-// RemoteObjects returns the remote objects.
+// RemoteObjects returns the proxies for all remote objects that have been received over the connection but have not yet been deallocated.
 func (c *Connection) RemoteObjects() obj.Object {
 	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("remoteObjects"))
 	return obj.Wrap(_r)
 }
 
-// LocalObjects returns the local objects.
+// LocalObjects returns all local objects that are being vended over the connection.
 func (c *Connection) LocalObjects() obj.Object {
 	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("localObjects"))

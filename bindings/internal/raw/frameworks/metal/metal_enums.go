@@ -873,7 +873,6 @@ func (e MTLBarrierScope) String() string {
 	return strings.Join(parts, "|")
 }
 
-// An error that occurred when creating a binary shader archive.
 type MTLBinaryArchiveError uint64
 
 const (
@@ -1271,7 +1270,6 @@ func (e MTLColorWriteMask) String() string {
 	return strings.Join(parts, "|")
 }
 
-// The command buffer error codes that indicate why the GPU doesn’t finish executing a command buffer.
 type MTLCommandBufferError uint64
 
 const (
@@ -1472,7 +1470,24 @@ func (e MTLCompileSymbolVisibility) String() string {
 	}
 }
 
-// The error codes that indicate why a GPU driver can’t create a counter sample buffer.
+type MTLContentionRelief int64
+
+const (
+	MTLContentionReliefAutomatic MTLContentionRelief = 0
+	MTLContentionReliefNone      MTLContentionRelief = 1
+)
+
+func (e MTLContentionRelief) String() string {
+	switch e {
+	case MTLContentionReliefAutomatic:
+		return "MTLContentionReliefAutomatic"
+	case MTLContentionReliefNone:
+		return "MTLContentionReliefNone"
+	default:
+		return fmt.Sprintf("MTLContentionRelief(%d)", int64(e))
+	}
+}
+
 type MTLCounterSampleBufferError int64
 
 const (
@@ -2067,6 +2082,7 @@ func (e MTLDeviceError) String() string {
 }
 
 // Indicates the location of the GPU relative to the system it’s connect to.
+// Deprecated: Not applicable on Apple Silicon
 type MTLDeviceLocation uint64
 
 const (
@@ -2116,7 +2132,6 @@ func (e MTLDispatchType) String() string {
 	}
 }
 
-// Errors when compiling dynamic libraries.
 type MTLDynamicLibraryError uint64
 
 const (
@@ -2185,6 +2200,45 @@ func (e MTLFeatureSet) String() string {
 		return "MTLFeatureSet_macOS_GPUFamily2_v1"
 	default:
 		return fmt.Sprintf("MTLFeatureSet(%d)", int64(e))
+	}
+}
+
+type MTLFloatingPointConversionRoundingMode int64
+
+const (
+	MTLFloatingPointConversionRoundingModeToNearestEven MTLFloatingPointConversionRoundingMode = 0
+	MTLFloatingPointConversionRoundingModeTowardZero    MTLFloatingPointConversionRoundingMode = 1
+)
+
+func (e MTLFloatingPointConversionRoundingMode) String() string {
+	switch e {
+	case MTLFloatingPointConversionRoundingModeToNearestEven:
+		return "MTLFloatingPointConversionRoundingModeToNearestEven"
+	case MTLFloatingPointConversionRoundingModeTowardZero:
+		return "MTLFloatingPointConversionRoundingModeTowardZero"
+	default:
+		return fmt.Sprintf("MTLFloatingPointConversionRoundingMode(%d)", int64(e))
+	}
+}
+
+type MTLForwardProgressUsage int64
+
+const (
+	MTLForwardProgressUsageAutomatic         MTLForwardProgressUsage = 0
+	MTLForwardProgressUsageWeak              MTLForwardProgressUsage = 1
+	MTLForwardProgressUsageSIMDGroupParallel MTLForwardProgressUsage = 2
+)
+
+func (e MTLForwardProgressUsage) String() string {
+	switch e {
+	case MTLForwardProgressUsageAutomatic:
+		return "MTLForwardProgressUsageAutomatic"
+	case MTLForwardProgressUsageWeak:
+		return "MTLForwardProgressUsageWeak"
+	case MTLForwardProgressUsageSIMDGroupParallel:
+		return "MTLForwardProgressUsageSIMDGroupParallel"
+	default:
+		return fmt.Sprintf("MTLForwardProgressUsage(%d)", int64(e))
 	}
 }
 
@@ -2308,6 +2362,7 @@ const (
 	// Represents the Apple family 9 GPU features that correspond to the Apple A17, M3, and M4 GPUs.
 	MTLGPUFamilyApple9  MTLGPUFamily = 1009
 	MTLGPUFamilyApple10 MTLGPUFamily = 1010
+	MTLGPUFamilyApple11 MTLGPUFamily = 1011
 	// Represents the Mac family 1 GPU features.
 	MTLGPUFamilyMac1 MTLGPUFamily = 2001
 	// Represents the Mac family 2 GPU features.
@@ -2349,6 +2404,8 @@ func (e MTLGPUFamily) String() string {
 		return "MTLGPUFamilyApple9"
 	case MTLGPUFamilyApple10:
 		return "MTLGPUFamilyApple10"
+	case MTLGPUFamilyApple11:
+		return "MTLGPUFamilyApple11"
 	case MTLGPUFamilyMac1:
 		return "MTLGPUFamilyMac1"
 	case MTLGPUFamilyMac2:
@@ -2497,7 +2554,6 @@ func (e MTLIOCompressionStatus) String() string {
 	}
 }
 
-// The categories of errors for creating an input/output file handle.
 type MTLIOError int64
 
 const (
@@ -2734,6 +2790,7 @@ const (
 	// Version 3.2 of the Metal shading language.
 	MTLLanguageVersion3_2 MTLLanguageVersion = 196610
 	MTLLanguageVersion4_0 MTLLanguageVersion = 262144
+	MTLLanguageVersion4_1 MTLLanguageVersion = 262145
 )
 
 func (e MTLLanguageVersion) String() string {
@@ -2760,12 +2817,13 @@ func (e MTLLanguageVersion) String() string {
 		return "MTLLanguageVersion3_2"
 	case MTLLanguageVersion4_0:
 		return "MTLLanguageVersion4_0"
+	case MTLLanguageVersion4_1:
+		return "MTLLanguageVersion4_1"
 	default:
 		return fmt.Sprintf("MTLLanguageVersion(%d)", int64(e))
 	}
 }
 
-// Metal errors related to libraries.
 type MTLLibraryError uint64
 
 const (
@@ -3183,6 +3241,14 @@ const (
 	MTLPixelFormatABGR4Unorm MTLPixelFormat = 42
 	// Packed 16-bit format with normalized unsigned integer color components: 5 bits each for BGR and 1 for alpha, packed into 16 bits.
 	MTLPixelFormatBGR5A1Unorm MTLPixelFormat = 43
+	// An ordinary format with three components of 8-bit normalized, unsigned integer values in RGB order.
+	MTLPixelFormatRGB8Unorm MTLPixelFormat = 45
+	// An ordinary format with three components of 8-bit normalized, signed integer values in RGB order.
+	MTLPixelFormatRGB8Snorm MTLPixelFormat = 46
+	// An ordinary format with three components of 8-bit unsigned integer values in RGB order.
+	MTLPixelFormatRGB8Uint MTLPixelFormat = 47
+	// An ordinary format with three components of 8-bit signed integer values in RGB order.
+	MTLPixelFormatRGB8Sint MTLPixelFormat = 48
 	// Ordinary format with one 32-bit unsigned integer component.
 	MTLPixelFormatR32Uint MTLPixelFormat = 53
 	// Ordinary format with one 32-bit signed integer component.
@@ -3227,6 +3293,16 @@ const (
 	MTLPixelFormatBGR10_XR MTLPixelFormat = 554
 	// A 32-bit extended-range pixel format with sRGB conversion and three fixed-point components of 10-bit blue, 10-bit green, and 10-bit red.
 	MTLPixelFormatBGR10_XR_sRGB MTLPixelFormat = 555
+	// An ordinary format with three components of 16-bit normalized, unsigned integer values in RGB order.
+	MTLPixelFormatRGB16Unorm MTLPixelFormat = 95
+	// An ordinary format with three components of 16-bit normalized, signed integer values in RGB order.
+	MTLPixelFormatRGB16Snorm MTLPixelFormat = 96
+	// An ordinary format with three components of 16-bit unsigned integer values in RGB order.
+	MTLPixelFormatRGB16Uint MTLPixelFormat = 97
+	// An ordinary format with three components of 16-bit signed integer values in RGB order.
+	MTLPixelFormatRGB16Sint MTLPixelFormat = 98
+	// An ordinary format with three components of 16-bit floating-point values in RGB order.
+	MTLPixelFormatRGB16Float MTLPixelFormat = 99
 	// Ordinary format with two 32-bit unsigned integer components.
 	MTLPixelFormatRG32Uint MTLPixelFormat = 103
 	// Ordinary format with two 32-bit signed integer components.
@@ -3247,6 +3323,12 @@ const (
 	MTLPixelFormatBGRA10_XR MTLPixelFormat = 552
 	// A 64-bit extended-range pixel format with sRGB conversion and four fixed-point components of 10-bit blue, 10-bit green, 10-bit red, and 10-bit alpha.
 	MTLPixelFormatBGRA10_XR_sRGB MTLPixelFormat = 553
+	// An ordinary format with three components of 32-bit unsigned integer values in RGB order.
+	MTLPixelFormatRGB32Uint MTLPixelFormat = 120
+	// An ordinary format with three components of 32-bit signed integer values in RGB order.
+	MTLPixelFormatRGB32Sint MTLPixelFormat = 121
+	// An ordinary format with three components of 32-bit floating-point values in RGB order.
+	MTLPixelFormatRGB32Float MTLPixelFormat = 122
 	// Ordinary format with four 32-bit unsigned integer components in RGBA order.
 	MTLPixelFormatRGBA32Uint MTLPixelFormat = 123
 	// Ordinary format with four 32-bit signed integer components in RGBA order.
@@ -3466,6 +3548,14 @@ func (e MTLPixelFormat) String() string {
 		return "MTLPixelFormatABGR4Unorm"
 	case MTLPixelFormatBGR5A1Unorm:
 		return "MTLPixelFormatBGR5A1Unorm"
+	case MTLPixelFormatRGB8Unorm:
+		return "MTLPixelFormatRGB8Unorm"
+	case MTLPixelFormatRGB8Snorm:
+		return "MTLPixelFormatRGB8Snorm"
+	case MTLPixelFormatRGB8Uint:
+		return "MTLPixelFormatRGB8Uint"
+	case MTLPixelFormatRGB8Sint:
+		return "MTLPixelFormatRGB8Sint"
 	case MTLPixelFormatR32Uint:
 		return "MTLPixelFormatR32Uint"
 	case MTLPixelFormatR32Sint:
@@ -3510,6 +3600,16 @@ func (e MTLPixelFormat) String() string {
 		return "MTLPixelFormatBGR10_XR"
 	case MTLPixelFormatBGR10_XR_sRGB:
 		return "MTLPixelFormatBGR10_XR_sRGB"
+	case MTLPixelFormatRGB16Unorm:
+		return "MTLPixelFormatRGB16Unorm"
+	case MTLPixelFormatRGB16Snorm:
+		return "MTLPixelFormatRGB16Snorm"
+	case MTLPixelFormatRGB16Uint:
+		return "MTLPixelFormatRGB16Uint"
+	case MTLPixelFormatRGB16Sint:
+		return "MTLPixelFormatRGB16Sint"
+	case MTLPixelFormatRGB16Float:
+		return "MTLPixelFormatRGB16Float"
 	case MTLPixelFormatRG32Uint:
 		return "MTLPixelFormatRG32Uint"
 	case MTLPixelFormatRG32Sint:
@@ -3530,6 +3630,12 @@ func (e MTLPixelFormat) String() string {
 		return "MTLPixelFormatBGRA10_XR"
 	case MTLPixelFormatBGRA10_XR_sRGB:
 		return "MTLPixelFormatBGRA10_XR_sRGB"
+	case MTLPixelFormatRGB32Uint:
+		return "MTLPixelFormatRGB32Uint"
+	case MTLPixelFormatRGB32Sint:
+		return "MTLPixelFormatRGB32Sint"
+	case MTLPixelFormatRGB32Float:
+		return "MTLPixelFormatRGB32Float"
 	case MTLPixelFormatRGBA32Uint:
 		return "MTLPixelFormatRGBA32Uint"
 	case MTLPixelFormatRGBA32Sint:
@@ -4429,6 +4535,7 @@ func (e MTLStoreAction) String() string {
 }
 
 // Options that modify a store action.
+// Deprecated: Store action options have no effect on Apple Silicon
 type MTLStoreActionOptions uint64
 
 const (
@@ -4459,7 +4566,7 @@ const (
 	MTLTensorDataTypeFloat32 MTLTensorDataType = 3
 	// A half-precision floating point data type.
 	MTLTensorDataTypeFloat16 MTLTensorDataType = 16
-	// A 16-bit floating point data type with 8 exponent bits, 7 mantissa bits and 1 sign bit.
+	// A 16-bit floating point data type with 8 exponent bits, 7 mantissa bits, and 1 sign bit.
 	MTLTensorDataTypeBFloat16 MTLTensorDataType = 121
 	// An 8-bit signed integer data type.
 	MTLTensorDataTypeInt8 MTLTensorDataType = 45
@@ -4469,14 +4576,26 @@ const (
 	MTLTensorDataTypeInt16 MTLTensorDataType = 37
 	// A 16-bit unsigned integer data type.
 	MTLTensorDataTypeUInt16 MTLTensorDataType = 41
-	// A 32-bit integer data type.
+	// A 32-bit signed integer data type.
 	MTLTensorDataTypeInt32 MTLTensorDataType = 29
 	// A 32-bit unsigned integer data type.
 	MTLTensorDataTypeUInt32 MTLTensorDataType = 33
-	// A 4-bit signed integer format data type.
+	// A 4-bit signed integer data type.
 	MTLTensorDataTypeInt4 MTLTensorDataType = 143
-	// A 4-bit unsigned integer format data type.
+	// A 4-bit unsigned integer data type.
 	MTLTensorDataTypeUInt4 MTLTensorDataType = 144
+	// An 8-bit floating point data type with 8 exponent bits, 0 mantissa bits, and no sign bit.
+	MTLTensorDataTypeMetalFloat8UE8M0 MTLTensorDataType = 145
+	// A 2-bit unsigned integer data type.
+	MTLTensorDataTypeUInt2 MTLTensorDataType = 149
+	// A 2-bit signed integer data type.
+	MTLTensorDataTypeInt2 MTLTensorDataType = 150
+	// An 8-bit floating point data type with 5 exponent bits, 2 mantissa bits, and 1 sign bit.
+	MTLTensorDataTypeMetalFloat8E5M2 MTLTensorDataType = 141
+	// An 8-bit floating point data type with 4 exponent bits, 3 mantissa bits, and 1 sign bit.
+	MTLTensorDataTypeMetalFloat8E4M3 MTLTensorDataType = 142
+	// A 4-bit floating point data type with 2 exponent bits, 1 mantissa bit, and 1 sign bit.
+	MTLTensorDataTypeMetalFloat4E2M1 MTLTensorDataType = 148
 )
 
 func (e MTLTensorDataType) String() string {
@@ -4505,6 +4624,18 @@ func (e MTLTensorDataType) String() string {
 		return "MTLTensorDataTypeInt4"
 	case MTLTensorDataTypeUInt4:
 		return "MTLTensorDataTypeUInt4"
+	case MTLTensorDataTypeMetalFloat8UE8M0:
+		return "MTLTensorDataTypeMetalFloat8UE8M0"
+	case MTLTensorDataTypeUInt2:
+		return "MTLTensorDataTypeUInt2"
+	case MTLTensorDataTypeInt2:
+		return "MTLTensorDataTypeInt2"
+	case MTLTensorDataTypeMetalFloat8E5M2:
+		return "MTLTensorDataTypeMetalFloat8E5M2"
+	case MTLTensorDataTypeMetalFloat8E4M3:
+		return "MTLTensorDataTypeMetalFloat8E4M3"
+	case MTLTensorDataTypeMetalFloat4E2M1:
+		return "MTLTensorDataTypeMetalFloat4E2M1"
 	default:
 		return fmt.Sprintf("MTLTensorDataType(%d)", int64(e))
 	}
@@ -4513,8 +4644,11 @@ func (e MTLTensorDataType) String() string {
 type MTLTensorError int64
 
 const (
-	MTLTensorErrorNone              MTLTensorError = 0
-	MTLTensorErrorInternalError     MTLTensorError = 1
+	// No error occurred.
+	MTLTensorErrorNone MTLTensorError = 0
+	// An internal Metal error occurred.
+	MTLTensorErrorInternalError MTLTensorError = 1
+	// The tensor descriptor is invalid.
 	MTLTensorErrorInvalidDescriptor MTLTensorError = 2
 )
 
@@ -4531,7 +4665,28 @@ func (e MTLTensorError) String() string {
 	}
 }
 
-// The type that represents the different contexts for a tensor.
+// The possible tensor plane types.
+type MTLTensorPlaneType int64
+
+const (
+	// The main data plane, which every tensor has
+	MTLTensorPlaneTypeData MTLTensorPlaneType = 0
+	// The auxiliary plane that stores scale factors for elements in the data plane.
+	MTLTensorPlaneTypeScales MTLTensorPlaneType = 1
+)
+
+func (e MTLTensorPlaneType) String() string {
+	switch e {
+	case MTLTensorPlaneTypeData:
+		return "MTLTensorPlaneTypeData"
+	case MTLTensorPlaneTypeScales:
+		return "MTLTensorPlaneTypeScales"
+	default:
+		return fmt.Sprintf("MTLTensorPlaneType(%d)", int64(e))
+	}
+}
+
+// The contexts in which you can use a tensor.
 type MTLTensorUsage uint64
 
 const (
@@ -5162,7 +5317,7 @@ func (e MTLVisibilityResultMode) String() string {
 	}
 }
 
-// This enumeration controls if Metal accumulates visibility results between render encoders or resets them.
+// Actions for visibility results between render passes.
 type MTLVisibilityResultType int64
 
 const (
@@ -5926,27 +6081,53 @@ func (e Qos_class_t) String() string {
 	}
 }
 
+type Task_shared_region_stubs_t uint8
+
+const (
+	TASK_SHARED_REGION_STUBS_DEV  Task_shared_region_stubs_t = 1
+	TASK_SHARED_REGION_STUBS_PROD Task_shared_region_stubs_t = 2
+)
+
+func (e Task_shared_region_stubs_t) String() string {
+	switch e {
+	case TASK_SHARED_REGION_STUBS_DEV:
+		return "TASK_SHARED_REGION_STUBS_DEV"
+	case TASK_SHARED_REGION_STUBS_PROD:
+		return "TASK_SHARED_REGION_STUBS_PROD"
+	default:
+		return fmt.Sprintf("Task_shared_region_stubs_t(%d)", int64(e))
+	}
+}
+
 type Virtual_memory_guard_exception_code_t uint32
 
 const (
-	KGUARD_EXC_DEALLOC_GAP                   Virtual_memory_guard_exception_code_t = 1
-	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        Virtual_memory_guard_exception_code_t = 2
-	KGUARD_EXC_RECLAIM_INDEX_FAILURE         Virtual_memory_guard_exception_code_t = 4
-	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    Virtual_memory_guard_exception_code_t = 8
-	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    Virtual_memory_guard_exception_code_t = 9
-	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         Virtual_memory_guard_exception_code_t = 10
-	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         Virtual_memory_guard_exception_code_t = 11
-	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  Virtual_memory_guard_exception_code_t = 12
-	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    Virtual_memory_guard_exception_code_t = 13
-	KGUARD_EXC_SEC_ACCESS_FAULT              Virtual_memory_guard_exception_code_t = 98
-	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        Virtual_memory_guard_exception_code_t = 99
-	KGUARD_EXC_SEC_COPY_DENIED               Virtual_memory_guard_exception_code_t = 100
-	KGUARD_EXC_SEC_SHARING_DENIED            Virtual_memory_guard_exception_code_t = 101
-	KGUARD_EXC_MTE_SYNC_FAULT                Virtual_memory_guard_exception_code_t = 200
-	KGUARD_EXC_MTE_ASYNC_USER_FAULT          Virtual_memory_guard_exception_code_t = 201
-	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          Virtual_memory_guard_exception_code_t = 202
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 203
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 204
+	KGUARD_EXC_DEALLOC_GAP                  Virtual_memory_guard_exception_code_t = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE       Virtual_memory_guard_exception_code_t = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE        Virtual_memory_guard_exception_code_t = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE   Virtual_memory_guard_exception_code_t = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE   Virtual_memory_guard_exception_code_t = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE        Virtual_memory_guard_exception_code_t = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE        Virtual_memory_guard_exception_code_t = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION Virtual_memory_guard_exception_code_t = 12
+	// Guard exception sent to a thread when a CoW defeatured map attempts to copy memory which is not permitted by system policy.
+	KGUARD_EXC_COW_DEFEATURED_COPY_DENIED Virtual_memory_guard_exception_code_t = 13
+	// Guard exception sent to a thread when it attempts to extract a given type of memory in a way which is not permitted for CoW defeatured maps.
+	KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED Virtual_memory_guard_exception_code_t = 14
+	// Guard exception sent to a thread when it attempts to copy-map a memory entry which was created for sharing by a CoW defeatured map.
+	KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED Virtual_memory_guard_exception_code_t = 15
+	KGUARD_EXC_COW_DEFEATURED_FIRST                    Virtual_memory_guard_exception_code_t = 13
+	KGUARD_EXC_COW_DEFEATURED_LAST                     Virtual_memory_guard_exception_code_t = 15
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY              Virtual_memory_guard_exception_code_t = 16
+	KGUARD_EXC_SEC_ACCESS_FAULT                        Virtual_memory_guard_exception_code_t = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT                  Virtual_memory_guard_exception_code_t = 99
+	KGUARD_EXC_SEC_COPY_DENIED                         Virtual_memory_guard_exception_code_t = 100
+	KGUARD_EXC_SEC_SHARING_DENIED                      Virtual_memory_guard_exception_code_t = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                          Virtual_memory_guard_exception_code_t = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT                    Virtual_memory_guard_exception_code_t = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT                    Virtual_memory_guard_exception_code_t = 202
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT           Virtual_memory_guard_exception_code_t = 203
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT           Virtual_memory_guard_exception_code_t = 204
 )
 
 func (e Virtual_memory_guard_exception_code_t) String() string {
@@ -5967,6 +6148,12 @@ func (e Virtual_memory_guard_exception_code_t) String() string {
 		return "KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE"
 	case KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION:
 		return "KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION"
+	case KGUARD_EXC_COW_DEFEATURED_COPY_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_COPY_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED"
 	case KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY:
 		return "KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY"
 	case KGUARD_EXC_SEC_ACCESS_FAULT:

@@ -8,12 +8,6 @@
       "url": "https://developer.apple.com/documentation/servicemanagement/smappservice"
     }
   },
-  "enums": {
-    "SMAppServiceStatus": {
-      "doc": "Constants that describe the registration or authorization status of a helper executable.",
-      "url": "https://developer.apple.com/documentation/servicemanagement/smappservicestatus"
-    }
-  },
   "methods": {
     "SMAppService": {
       "+agentServiceWithPlistName:": {

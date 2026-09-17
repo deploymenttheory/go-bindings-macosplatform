@@ -95,6 +95,7 @@ func (o *NSTextLineFragment) FractionOfDistanceThroughGlyphForPoint(point corefo
 	return _ret
 }
 
+// The source attributed string.
 func (o *NSTextLineFragment) AttributedString() *foundation.NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextLineFragmentSelAttributedString)
 	if _ret != 0 {
@@ -103,16 +104,19 @@ func (o *NSTextLineFragment) AttributedString() *foundation.NSAttributedString {
 	return foundation.NSAttributedStringFromID(_ret)
 }
 
+// The string range for the source attributed string corresponding to this line fragment.
 func (o *NSTextLineFragment) CharacterRange() foundation.NSRange {
 	_ret := objc.Send[foundation.NSRange](o.Ptr(), _nSTextLineFragmentSelCharacterRange)
 	return _ret
 }
 
+// The typographic bounds specifying the dimensions of the line fragment for laying out line fragments to each other. The origin value is offset from the beginning of the line fragment group belonging to the parent layout fragment.
 func (o *NSTextLineFragment) TypographicBounds() corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSTextLineFragmentSelTypographicBounds)
 	return _ret
 }
 
+// The rendering origin for the leftmost glyph in the line fragment coordinate system.
 func (o *NSTextLineFragment) GlyphOrigin() corefoundation.CGPoint {
 	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSTextLineFragmentSelGlyphOrigin)
 	return _ret

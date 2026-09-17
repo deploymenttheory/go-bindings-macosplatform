@@ -16,8 +16,6 @@ import (
 )
 
 // SpeechLanguageModelConfiguration is an idiomatic wrapper over the Objective-C class SFSpeechLanguageModelConfiguration.
-//
-// An object describing the location of a custom language model and specialized vocabulary.
 type SpeechLanguageModelConfiguration struct {
 	objref.Handle
 }

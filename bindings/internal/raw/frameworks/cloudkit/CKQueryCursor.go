@@ -10,8 +10,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An object that marks the stopping point for a query and the starting point for retrieving the remaining results.
-//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/ckquerycursor
 type CKQueryCursor struct {
 	foundation.NSObject

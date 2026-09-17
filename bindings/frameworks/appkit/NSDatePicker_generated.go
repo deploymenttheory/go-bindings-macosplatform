@@ -667,6 +667,14 @@ func (dp *DatePicker) WithGestureRecognizers(items ...GestureRecognizerProvider)
 	return dp
 }
 
+// WithExclusiveGestureBehavior sets declares whether gesture recognizers should be exclusive in this view and its subviews.
+func (dp *DatePicker) WithExclusiveGestureBehavior(exclusiveGestureBehavior ViewExclusiveGestureBehavior) *DatePicker {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setExclusiveGestureBehavior:"), exclusiveGestureBehavior)
+	})
+	return dp
+}
+
 // WithAllowedTouchTypes sets the allowed touch types.
 func (dp *DatePicker) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *DatePicker {
 	purego.Main(func() {
@@ -728,6 +736,15 @@ func (dp *DatePicker) WithHorizontalContentSizeConstraintActive(horizontalConten
 func (dp *DatePicker) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *DatePicker {
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
+	return dp
+}
+
+// WithTextSelectionManager sets the text selection manager for this view.
+func (dp *DatePicker) WithTextSelectionManager(textSelectionManager *TextSelectionManager) *DatePicker {
+	defer runtime.KeepAlive(textSelectionManager)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setTextSelectionManager:"), objref.IDOf(textSelectionManager))
 	})
 	return dp
 }

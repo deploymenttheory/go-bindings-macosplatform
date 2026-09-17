@@ -18,7 +18,6 @@ import (
 	"runtime"
 	"testing"
 	"time"
-	"unsafe"
 
 	"github.com/ebitengine/purego/objc"
 
@@ -26,7 +25,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/vmnet"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/libraries/dispatch"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/libraries/xpc"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // TestCurated_BlockAdapter_CompletionHandler proves the generated block
@@ -73,6 +71,16 @@ func TestCurated_Vmnet_NetworkConfigurationCreate(t *testing.T) {
 	})
 }
 
+// The extern is a pointer to a C string, so its symbol address must be
+// dereferenced before decoding the string. This probe needs no entitlement.
+func TestCurated_Vmnet_OperationModeKey(t *testing.T) {
+	runIsolated(t, "curated:vmnet.vmnet_operation_mode_key string", func(t *testing.T) {
+		if got := vmnet.Vmnet_operation_mode_key(); got != "vmnet_operation_mode" {
+			t.Fatalf("vmnet_operation_mode_key = %q, want vmnet_operation_mode", got)
+		}
+	})
+}
+
 // TestCurated_Vmnet_StartStopInterface starts a shared-mode vmnet interface,
 // asserts the async completion handler fires with VMNET_SUCCESS, and stops it
 // again. Requires root (or the com.apple.vm.networking entitlement) — see the
@@ -93,7 +101,7 @@ func TestCurated_Vmnet_StartStopInterface(t *testing.T) {
 	if dict == nil {
 		t.Fatal("xpc_dictionary_create returned nil")
 	}
-	modeKey := derefCStringVar(vmnet.Vmnet_operation_mode_key())
+	modeKey := vmnet.Vmnet_operation_mode_key()
 	if modeKey == "" {
 		t.Fatal("could not read vmnet_operation_mode_key")
 	}
@@ -141,13 +149,4 @@ func TestCurated_Vmnet_StartStopInterface(t *testing.T) {
 
 	runtime.KeepAlive(desc)
 	runtime.KeepAlive(queue)
-}
-
-// derefCStringVar reads a `const char *` global through the address returned
-// by a generated extern accessor.
-func derefCStringVar(addr uintptr) string {
-	if addr == 0 {
-		return ""
-	}
-	return purego.GoCString(*(*uintptr)(unsafe.Pointer(addr))) //nolint:govet // dlsym-provided address of a global
 }

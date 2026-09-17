@@ -100,6 +100,12 @@ func (lpro *LivePhotoRequestOptions) WithProgressHandler(progressHandler func(fl
 	return lpro
 }
 
+// WithPreferHDR sets request HDR image data if available (such as PQ/HLG formats).
+func (lpro *LivePhotoRequestOptions) WithPreferHDR(preferHDR bool) *LivePhotoRequestOptions {
+	objc.Send[objc.ID](objref.IDOf(lpro), objc.RegisterName("setPreferHDR:"), preferHDR)
+	return lpro
+}
+
 // DeliveryMode returns the delivery mode.
 func (lpro *LivePhotoRequestOptions) DeliveryMode() ImageRequestOptionsDeliveryMode {
 	defer runtime.KeepAlive(lpro)
@@ -111,5 +117,12 @@ func (lpro *LivePhotoRequestOptions) DeliveryMode() ImageRequestOptionsDeliveryM
 func (lpro *LivePhotoRequestOptions) IsNetworkAccessAllowed() bool {
 	defer runtime.KeepAlive(lpro)
 	_r := objc.Send[bool](objref.IDOf(lpro), objc.RegisterName("isNetworkAccessAllowed"))
+	return _r
+}
+
+// PreferHDR reports whether request HDR image data if available (such as PQ/HLG formats). Off by default. For best results, only enable this when you intend to display an HDR experience in `PHLivePhotoView` — for example, when the view's `preferredImageDynamicRange` is greater than standard (SDR). Defaults to `NO`.
+func (lpro *LivePhotoRequestOptions) PreferHDR() bool {
+	defer runtime.KeepAlive(lpro)
+	_r := objc.Send[bool](objref.IDOf(lpro), objc.RegisterName("preferHDR"))
 	return _r
 }

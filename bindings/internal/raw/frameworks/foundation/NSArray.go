@@ -125,6 +125,7 @@ func (o *NSArray[ObjectType]) InitWithObjectsCount(objects unsafe.Pointer, cnt u
 	return NSArrayFromID[ObjectType](_ret)
 }
 
+// - Parameter coder: The coder.
 func (o *NSArray[ObjectType]) InitWithCoder(coder *NSCoder) *NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelInitWithCoder, coder.Ptr())
 	if _ret != 0 {
@@ -133,6 +134,7 @@ func (o *NSArray[ObjectType]) InitWithCoder(coder *NSCoder) *NSArray[ObjectType]
 	return NSArrayFromID[ObjectType](_ret)
 }
 
+// The number of objects in the array.
 func (o *NSArray[ObjectType]) Count() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSArraySelCount)
 	return _ret
@@ -423,16 +425,19 @@ func (o *NSArray[ObjectType]) IndexOfObjectInSortedRangeOptionsUsingComparator(o
 	return _ret
 }
 
+// The first object in the array. If the array is empty, returns `nil`.
 func (o *NSArray[ObjectType]) FirstObject() ObjectType {
 	_ret := objc.Send[ObjectType](o.Ptr(), _nSArraySelFirstObject)
 	return _ret
 }
 
+// The last object in the array. If the array is empty, returns `nil`.
 func (o *NSArray[ObjectType]) LastObject() ObjectType {
 	_ret := objc.Send[ObjectType](o.Ptr(), _nSArraySelLastObject)
 	return _ret
 }
 
+// Analyzes the array and returns a "hint" that speeds the sorting of the array when the hint is supplied to `sortedArrayUsingFunction:context:hint:`.
 func (o *NSArray[ObjectType]) SortedArrayHint() *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelSortedArrayHint)
 	if _ret != 0 {

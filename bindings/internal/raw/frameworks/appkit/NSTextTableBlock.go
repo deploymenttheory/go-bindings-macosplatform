@@ -6,6 +6,7 @@ package appkit
 import (
 	"github.com/ebitengine/purego/objc"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
@@ -19,6 +20,7 @@ type NSTextTableBlock struct {
 var (
 	_clsNSTextTableBlock                                                        = _objcClass("NSTextTableBlock")
 	_nSTextTableBlockSelInitWithTableStartingRowRowSpanStartingColumnColumnSpan = objc.RegisterName("initWithTable:startingRow:rowSpan:startingColumn:columnSpan:")
+	_nSTextTableBlockSelInitWithCoder                                           = objc.RegisterName("initWithCoder:")
 	_nSTextTableBlockSelTable                                                   = objc.RegisterName("table")
 	_nSTextTableBlockSelStartingRow                                             = objc.RegisterName("startingRow")
 	_nSTextTableBlockSelRowSpan                                                 = objc.RegisterName("rowSpan")
@@ -37,8 +39,16 @@ func NSTextTableBlockFromID(id objc.ID) *NSTextTableBlock {
 }
 
 // Returns an initialized text table block.
-func (o *NSTextTableBlock) InitWithTableStartingRowRowSpanStartingColumnColumnSpan(table *NSTextTable, row int, rowSpan int, col int, colSpan int) *NSTextTableBlock {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextTableBlockSelInitWithTableStartingRowRowSpanStartingColumnColumnSpan, table.Ptr(), row, rowSpan, col, colSpan)
+func (o *NSTextTableBlock) InitWithTableStartingRowRowSpanStartingColumnColumnSpan(table *NSTextTable, row int, rowSpan int, column int, columnSpan int) *NSTextTableBlock {
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextTableBlockSelInitWithTableStartingRowRowSpanStartingColumnColumnSpan, table.Ptr(), row, rowSpan, column, columnSpan)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSTextTableBlockFromID(_ret)
+}
+
+func (o *NSTextTableBlock) InitWithCoder(coder *foundation.NSCoder) *NSTextTableBlock {
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextTableBlockSelInitWithCoder, coder.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

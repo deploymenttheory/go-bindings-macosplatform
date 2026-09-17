@@ -18,8 +18,6 @@ import (
 )
 
 // URLCache is an idiomatic wrapper over the Objective-C class NSURLCache.
-//
-// An object that maps URL requests to cached response objects.
 type URLCache struct {
 	objref.Handle
 }
@@ -76,27 +74,27 @@ func (uc *URLCache) String() string {
 	return rt.Description(objref.IDOf(uc))
 }
 
-// NewURLCacheWithMemoryCapacityDiskCapacityDiskPath initializes an NSURLCache with the given capacity and path. The returned NSURLCache is backed by disk, so developers can be more liberal with space when choosing the capacity for this kind of cache. A disk cache measured in the tens of megabytes should be acceptable in most cases.
+// NewURLCacheWithMemoryCapacityDiskCapacityDiskPath initializes an `NSURLCache` with the given capacity and path. The returned `NSURLCache` is backed by disk. A disk cache measured in the tens of megabytes should be acceptable in most cases. - Parameters: - memoryCapacity: The capacity, measured in bytes, for the cache in memory. - diskCapacity: The capacity, measured in bytes, for the cache on disk. - path: The path on disk where the cache data is stored. - Returns: An initialized `NSURLCache`, with the given capacity, backed by disk.
 func NewURLCacheWithMemoryCapacityDiskCapacityDiskPath(memoryCapacity int, diskCapacity int, path string) *URLCache {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSURLCache")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMemoryCapacity:diskCapacity:diskPath:"), memoryCapacity, diskCapacity, purego.NSString(path))
 	return uRLCacheAdopt(_id)
 }
 
-// NewURLCacheWithMemoryCapacityDiskCapacityDirectoryURL creates a URL cache object with the specified memory and disk capacities, in the specified directory.
+// NewURLCacheWithMemoryCapacityDiskCapacityDirectoryURL initializes an `NSURLCache` with the given capacity and directory. - Parameters: - memoryCapacity: The capacity, measured in bytes, for the cache in memory. Or `0` to disable memory cache. - diskCapacity: The capacity, measured in bytes, for the cache on disk. Or `0` to disable disk cache. - directoryURL: The path to a directory on disk where the cache data is stored. Or `nil` for default directory. - Returns: An initialized `NSURLCache`, with the given capacity, optionally backed by disk.
 func NewURLCacheWithMemoryCapacityDiskCapacityDirectoryURL(memoryCapacity int, diskCapacity int, directoryURL string) *URLCache {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSURLCache")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMemoryCapacity:diskCapacity:directoryURL:"), memoryCapacity, diskCapacity, rt.FileURL(directoryURL))
 	return uRLCacheAdopt(_id)
 }
 
-// WithMemoryCapacity sets in-memory capacity of the receiver. At the time this call is made, the in-memory cache will truncate its contents to the size given, if necessary.
+// WithMemoryCapacity sets the in-memory capacity of the receiver, measured in bytes. At the time this value is set, the in-memory cache will truncate its contents to the size given, if necessary.
 func (uc *URLCache) WithMemoryCapacity(memoryCapacity int) *URLCache {
 	objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("setMemoryCapacity:"), memoryCapacity)
 	return uc
 }
 
-// WithDiskCapacity sets the on-disk capacity of the receiver. The on-disk capacity, measured in bytes, for the receiver. On mutation the on-disk cache will truncate its contents to the size given, if necessary.
+// WithDiskCapacity sets the on-disk capacity of the receiver, measured in bytes. On mutation, the on-disk cache will truncate its contents to the size given, if necessary.
 func (uc *URLCache) WithDiskCapacity(diskCapacity int) *URLCache {
 	objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("setDiskCapacity:"), diskCapacity)
 	return uc
@@ -114,7 +112,7 @@ func (uc *URLCache) WithScriptingProperties(scriptingProperties map[string]obj.O
 	return uc
 }
 
-// CachedResponseForRequest returns the NSCachedURLResponse stored in the cache with the given request. The method returns nil if there is no NSCachedURLResponse stored using the given request.
+// CachedResponseForRequest returns the cached URL response in the cache for the specified URL request. Returns `nil` if there is no `NSCachedURLResponse` stored using the given request. - Parameter request: The `NSURLRequest` to use as a key for the lookup. - Returns: The `NSCachedURLResponse` stored in the cache with the given request, or `nil` if there is no cached response.
 func (uc *URLCache) CachedResponseForRequest(request *URLRequest) *CachedURLResponse {
 	defer runtime.KeepAlive(uc)
 	defer runtime.KeepAlive(request)
@@ -122,7 +120,7 @@ func (uc *URLCache) CachedResponseForRequest(request *URLRequest) *CachedURLResp
 	return CachedURLResponseFromID(_r)
 }
 
-// StoreCachedResponseForRequest stores the given NSCachedURLResponse in the cache using the given request.
+// StoreCachedResponseForRequest stores a cached URL response for a specified request. - Parameters: - cachedResponse: The cached response to store. - request: The `NSURLRequest` to use as a key for the storage.
 func (uc *URLCache) StoreCachedResponseForRequest(cachedResponse *CachedURLResponse, request *URLRequest) {
 	defer runtime.KeepAlive(uc)
 	defer runtime.KeepAlive(cachedResponse)
@@ -130,54 +128,54 @@ func (uc *URLCache) StoreCachedResponseForRequest(cachedResponse *CachedURLRespo
 	objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("storeCachedResponse:forRequest:"), objref.IDOf(cachedResponse), objref.IDOf(request))
 }
 
-// RemoveCachedResponseForRequest removes the NSCachedURLResponse from the cache that is stored using the given request. No action is taken if there is no NSCachedURLResponse stored with the given request.
+// RemoveCachedResponseForRequest removes the cached URL response for a specified request. No action is taken if there is no `NSCachedURLResponse` stored with the given request. - Parameter request: The `NSURLRequest` to use as a key for the lookup.
 func (uc *URLCache) RemoveCachedResponseForRequest(request *URLRequest) {
 	defer runtime.KeepAlive(uc)
 	defer runtime.KeepAlive(request)
 	objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("removeCachedResponseForRequest:"), objref.IDOf(request))
 }
 
-// RemoveAllCachedResponses clears the given cache, removing all NSCachedURLResponse objects that it stores.
+// RemoveAllCachedResponses clears the cache, removing all `NSCachedURLResponse` objects that it stores.
 func (uc *URLCache) RemoveAllCachedResponses() {
 	defer runtime.KeepAlive(uc)
 	objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("removeAllCachedResponses"))
 }
 
-// RemoveCachedResponsesSinceDate clears the given cache of any cached responses since the provided date.
+// RemoveCachedResponsesSinceDate clears the cache of any cached responses since the provided date.
 func (uc *URLCache) RemoveCachedResponsesSinceDate(date time.Time) {
 	defer runtime.KeepAlive(uc)
 	objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("removeCachedResponsesSinceDate:"), rt.TimeToNSDate(date))
 }
 
-// MemoryCapacity returns in-memory capacity of the receiver. At the time this call is made, the in-memory cache will truncate its contents to the size given, if necessary.
+// MemoryCapacity returns the in-memory capacity of the receiver, measured in bytes. At the time this value is set, the in-memory cache will truncate its contents to the size given, if necessary.
 func (uc *URLCache) MemoryCapacity() int {
 	defer runtime.KeepAlive(uc)
 	_r := objc.Send[int](objref.IDOf(uc), objc.RegisterName("memoryCapacity"))
 	return _r
 }
 
-// DiskCapacity returns the on-disk capacity of the receiver. The on-disk capacity, measured in bytes, for the receiver. On mutation the on-disk cache will truncate its contents to the size given, if necessary.
+// DiskCapacity returns the on-disk capacity of the receiver, measured in bytes. On mutation, the on-disk cache will truncate its contents to the size given, if necessary.
 func (uc *URLCache) DiskCapacity() int {
 	defer runtime.KeepAlive(uc)
 	_r := objc.Send[int](objref.IDOf(uc), objc.RegisterName("diskCapacity"))
 	return _r
 }
 
-// CurrentMemoryUsage returns the current amount of space consumed by the in-memory cache of the receiver. This size, measured in bytes, indicates the current usage of the in-memory cache.
+// CurrentMemoryUsage returns the current amount of space consumed by the in-memory cache of the receiver, measured in bytes.
 func (uc *URLCache) CurrentMemoryUsage() int {
 	defer runtime.KeepAlive(uc)
 	_r := objc.Send[int](objref.IDOf(uc), objc.RegisterName("currentMemoryUsage"))
 	return _r
 }
 
-// CurrentDiskUsage returns the current amount of space consumed by the on-disk cache of the receiver. This size, measured in bytes, indicates the current usage of the on-disk cache.
+// CurrentDiskUsage returns the current amount of space consumed by the on-disk cache of the receiver, measured in bytes.
 func (uc *URLCache) CurrentDiskUsage() int {
 	defer runtime.KeepAlive(uc)
 	_r := objc.Send[int](objref.IDOf(uc), objc.RegisterName("currentDiskUsage"))
 	return _r
 }
 
-// StoreCachedResponseForDataTask wraps the corresponding Objective-C method.
+// StoreCachedResponseForDataTask stores a cached URL response for a specified data task.
 func (uc *URLCache) StoreCachedResponseForDataTask(cachedResponse *CachedURLResponse, dataTask *URLSessionDataTask) {
 	defer runtime.KeepAlive(uc)
 	defer runtime.KeepAlive(cachedResponse)
@@ -185,7 +183,7 @@ func (uc *URLCache) StoreCachedResponseForDataTask(cachedResponse *CachedURLResp
 	objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("storeCachedResponse:forDataTask:"), objref.IDOf(cachedResponse), objref.IDOf(dataTask))
 }
 
-// GetCachedResponseForDataTask wraps the corresponding Objective-C method.
+// GetCachedResponseForDataTask gets the cached URL response for a specified data task, passing it to a completion handler.
 //
 // GetCachedResponseForDataTask blocks until the operation completes or ctx is cancelled.
 func (uc *URLCache) GetCachedResponseForDataTask(ctx context.Context, dataTask *URLSessionDataTask) (result *CachedURLResponse, err error) {
@@ -211,7 +209,7 @@ func (uc *URLCache) GetCachedResponseForDataTask(ctx context.Context, dataTask *
 	}
 }
 
-// RemoveCachedResponseForDataTask removes cached response for data task.
+// RemoveCachedResponseForDataTask removes the cached URL response for a specified data task.
 func (uc *URLCache) RemoveCachedResponseForDataTask(dataTask *URLSessionDataTask) {
 	defer runtime.KeepAlive(uc)
 	defer runtime.KeepAlive(dataTask)

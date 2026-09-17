@@ -28,6 +28,8 @@ var (
 	_nSTextContainerSelSetSize                                                                     = objc.RegisterName("setSize:")
 	_nSTextContainerSelLineBreakMode                                                               = objc.RegisterName("lineBreakMode")
 	_nSTextContainerSelSetLineBreakMode                                                            = objc.RegisterName("setLineBreakMode:")
+	_nSTextContainerSelExclusionPaths                                                              = objc.RegisterName("exclusionPaths")
+	_nSTextContainerSelSetExclusionPaths                                                           = objc.RegisterName("setExclusionPaths:")
 	_nSTextContainerSelLineFragmentPadding                                                         = objc.RegisterName("lineFragmentPadding")
 	_nSTextContainerSelSetLineFragmentPadding                                                      = objc.RegisterName("setLineFragmentPadding:")
 	_nSTextContainerSelMaximumNumberOfLines                                                        = objc.RegisterName("maximumNumberOfLines")
@@ -37,13 +39,11 @@ var (
 	_nSTextContainerSelSetWidthTracksTextView                                                      = objc.RegisterName("setWidthTracksTextView:")
 	_nSTextContainerSelHeightTracksTextView                                                        = objc.RegisterName("heightTracksTextView")
 	_nSTextContainerSelSetHeightTracksTextView                                                     = objc.RegisterName("setHeightTracksTextView:")
-	_nSTextContainerSelLayoutManager                                                               = objc.RegisterName("layoutManager")
-	_nSTextContainerSelSetLayoutManager                                                            = objc.RegisterName("setLayoutManager:")
-	_nSTextContainerSelReplaceLayoutManager                                                        = objc.RegisterName("replaceLayoutManager:")
-	_nSTextContainerSelExclusionPaths                                                              = objc.RegisterName("exclusionPaths")
-	_nSTextContainerSelSetExclusionPaths                                                           = objc.RegisterName("setExclusionPaths:")
 	_nSTextContainerSelTextView                                                                    = objc.RegisterName("textView")
 	_nSTextContainerSelSetTextView                                                                 = objc.RegisterName("setTextView:")
+	_nSTextContainerSelReplaceLayoutManager                                                        = objc.RegisterName("replaceLayoutManager:")
+	_nSTextContainerSelLayoutManager                                                               = objc.RegisterName("layoutManager")
+	_nSTextContainerSelSetLayoutManager                                                            = objc.RegisterName("setLayoutManager:")
 	_nSTextContainerSelInitWithContainerSize                                                       = objc.RegisterName("initWithContainerSize:")
 	_nSTextContainerSelLineFragmentRectForProposedRectSweepDirectionMovementDirectionRemainingRect = objc.RegisterName("lineFragmentRectForProposedRect:sweepDirection:movementDirection:remainingRect:")
 	_nSTextContainerSelContainsPoint                                                               = objc.RegisterName("containsPoint:")
@@ -85,6 +85,7 @@ func (o *NSTextContainer) LineFragmentRectForProposedRectAtIndexWritingDirection
 	return _ret
 }
 
+// The “NSTextLayoutManager“ owning the text container. When non-nil, the legacy `layoutManager` should be `nil`.
 func (o *NSTextContainer) TextLayoutManager() *NSTextLayoutManager {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextContainerSelTextLayoutManager)
 	if _ret != 0 {
@@ -93,6 +94,7 @@ func (o *NSTextContainer) TextLayoutManager() *NSTextLayoutManager {
 	return NSTextLayoutManagerFromID(_ret)
 }
 
+// The size of the text container's bounding rectangle. This property defines the maximum size for the layout area returned from “NSTextContainer/lineFragmentRect(forProposedRect:at:writingDirection:remaining:)“. A value of `0.0` or less means no limitation. If you don't specify an explicit size when you initialize a text container, the system uses a default large size of (`10000000.0`, `10000000.0`).
 func (o *NSTextContainer) Size() corefoundation.CGSize {
 	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSTextContainerSelSize)
 	return _ret
@@ -102,6 +104,7 @@ func (o *NSTextContainer) SetSize(size corefoundation.CGSize) {
 	o.Ptr().Send(_nSTextContainerSelSetSize, size)
 }
 
+// The behavior of the last line inside the text container. The “NSLineBreakMode“ constants specify what happens when a line is too long for its container. For example, wrapping can occur on word boundaries (the default) or character boundaries, or the line can be clipped or truncated. The default value of this property is “NSLineBreakMode/byWordWrapping“.
 func (o *NSTextContainer) LineBreakMode() NSLineBreakMode {
 	_ret := objc.Send[NSLineBreakMode](o.Ptr(), _nSTextContainerSelLineBreakMode)
 	return _ret
@@ -111,64 +114,7 @@ func (o *NSTextContainer) SetLineBreakMode(lineBreakMode NSLineBreakMode) {
 	o.Ptr().Send(_nSTextContainerSelSetLineBreakMode, lineBreakMode)
 }
 
-func (o *NSTextContainer) LineFragmentPadding() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSTextContainerSelLineFragmentPadding)
-	return _ret
-}
-
-func (o *NSTextContainer) SetLineFragmentPadding(lineFragmentPadding float64) {
-	o.Ptr().Send(_nSTextContainerSelSetLineFragmentPadding, lineFragmentPadding)
-}
-
-func (o *NSTextContainer) MaximumNumberOfLines() uint {
-	_ret := objc.Send[uint](o.Ptr(), _nSTextContainerSelMaximumNumberOfLines)
-	return _ret
-}
-
-func (o *NSTextContainer) SetMaximumNumberOfLines(maximumNumberOfLines uint) {
-	o.Ptr().Send(_nSTextContainerSelSetMaximumNumberOfLines, maximumNumberOfLines)
-}
-
-func (o *NSTextContainer) IsSimpleRectangularTextContainer() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextContainerSelIsSimpleRectangularTextContainer)
-	return _ret
-}
-
-func (o *NSTextContainer) WidthTracksTextView() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextContainerSelWidthTracksTextView)
-	return _ret
-}
-
-func (o *NSTextContainer) SetWidthTracksTextView(widthTracksTextView bool) {
-	o.Ptr().Send(_nSTextContainerSelSetWidthTracksTextView, widthTracksTextView)
-}
-
-func (o *NSTextContainer) HeightTracksTextView() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextContainerSelHeightTracksTextView)
-	return _ret
-}
-
-func (o *NSTextContainer) SetHeightTracksTextView(heightTracksTextView bool) {
-	o.Ptr().Send(_nSTextContainerSelSetHeightTracksTextView, heightTracksTextView)
-}
-
-func (o *NSTextContainer) LayoutManager() *NSLayoutManager {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextContainerSelLayoutManager)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSLayoutManagerFromID(_ret)
-}
-
-func (o *NSTextContainer) SetLayoutManager(layoutManager *NSLayoutManager) {
-	o.Ptr().Send(_nSTextContainerSelSetLayoutManager, layoutManager.Ptr())
-}
-
-// Replaces the layout manager for the group of text system objects that contains the text container.
-func (o *NSTextContainer) ReplaceLayoutManager(newLayoutManager *NSLayoutManager) {
-	o.Ptr().Send(_nSTextContainerSelReplaceLayoutManager, newLayoutManager.Ptr())
-}
-
+// An array of path objects that represents the regions where text doesn't display in the text container. The default value is an empty array.
 func (o *NSTextContainer) ExclusionPaths() *foundation.NSArray[*NSBezierPath] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextContainerSelExclusionPaths)
 	if _ret != 0 {
@@ -179,6 +125,52 @@ func (o *NSTextContainer) ExclusionPaths() *foundation.NSArray[*NSBezierPath] {
 
 func (o *NSTextContainer) SetExclusionPaths(exclusionPaths *foundation.NSArray[*NSBezierPath]) {
 	o.Ptr().Send(_nSTextContainerSelSetExclusionPaths, exclusionPaths.Ptr())
+}
+
+// The value for the text inset within line fragment rectangles. The padding appears at the beginning and end of the line fragment rectangles. The layout manager and text layout manager use this value to determine the layout width. The default value of this property is `5.0`. Line fragment padding is not designed to express text margins. Instead, you should use insets on your text view, adjust the paragraph margin attributes, or change the position of the text view within its superview. ## See Also - “lineFragmentRect(forProposedRect:at:writingDirection:remaining:)“
+func (o *NSTextContainer) LineFragmentPadding() float64 {
+	_ret := objc.Send[float64](o.Ptr(), _nSTextContainerSelLineFragmentPadding)
+	return _ret
+}
+
+func (o *NSTextContainer) SetLineFragmentPadding(lineFragmentPadding float64) {
+	o.Ptr().Send(_nSTextContainerSelSetLineFragmentPadding, lineFragmentPadding)
+}
+
+// The maximum number of lines that the text container can store. The layout manager and text layout manager use the value of this property to determine the maximum number of lines associated with the text container. The default value of this property is `0`, which indicates that there is no limit.
+func (o *NSTextContainer) MaximumNumberOfLines() uint {
+	_ret := objc.Send[uint](o.Ptr(), _nSTextContainerSelMaximumNumberOfLines)
+	return _ret
+}
+
+func (o *NSTextContainer) SetMaximumNumberOfLines(maximumNumberOfLines uint) {
+	o.Ptr().Send(_nSTextContainerSelSetMaximumNumberOfLines, maximumNumberOfLines)
+}
+
+// A Boolean that indicates whether the text container's region is a rectangle with no holes or gaps, and whose edges are parallel to the text view's coordinate system axes. The value of this property is <doc://com.apple.documentation/documentation/swift/true> when the text container's region is a rectangle with no holes or gaps and the edges are parallel to the text view's coordinate system axes. The default value of this property is <doc://com.apple.documentation/documentation/swift/false> when the “NSTextContainer/exclusionPaths“ property contains one or more items, when the “NSTextContainer/maximumNumberOfLines“ property is not zero, or when you override the “NSTextContainer/lineFragmentRect(forProposedRect:at:writingDirection:remaining:)“ method. Otherwise, the default value is <doc://com.apple.documentation/documentation/swift/true>.
+func (o *NSTextContainer) IsSimpleRectangularTextContainer() bool {
+	_ret := objc.Send[bool](o.Ptr(), _nSTextContainerSelIsSimpleRectangularTextContainer)
+	return _ret
+}
+
+// A Boolean that controls whether the text container adjusts the width of its bounding rectangle when its text view resizes. When the value of this property is <doc://com.apple.documentation/documentation/swift/true>, the text container adjusts its width when the width of its text view changes. The default value of this property is <doc://com.apple.documentation/documentation/swift/false>. For more information about size tracking, see [Text System Storage Layer Overview](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/TextStorageLayer/TextStorageLayer.html#//apple_ref/doc/uid/10000087i). ## See Also - “NSTextContainer/size“
+func (o *NSTextContainer) WidthTracksTextView() bool {
+	_ret := objc.Send[bool](o.Ptr(), _nSTextContainerSelWidthTracksTextView)
+	return _ret
+}
+
+func (o *NSTextContainer) SetWidthTracksTextView(widthTracksTextView bool) {
+	o.Ptr().Send(_nSTextContainerSelSetWidthTracksTextView, widthTracksTextView)
+}
+
+// A Boolean that controls whether the text container adjusts the height of its bounding rectangle when its text view resizes. When the value of this property is <doc://com.apple.documentation/documentation/swift/true>, the text container adjusts its height when the height of its text view changes. The default value of this property is <doc://com.apple.documentation/documentation/swift/false>. For more information about size tracking, see [Text System Storage Layer Overview](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/TextStorageLayer/TextStorageLayer.html#//apple_ref/doc/uid/10000087i). ## See Also - “NSTextContainer/size“
+func (o *NSTextContainer) HeightTracksTextView() bool {
+	_ret := objc.Send[bool](o.Ptr(), _nSTextContainerSelHeightTracksTextView)
+	return _ret
+}
+
+func (o *NSTextContainer) SetHeightTracksTextView(heightTracksTextView bool) {
+	o.Ptr().Send(_nSTextContainerSelSetHeightTracksTextView, heightTracksTextView)
 }
 
 func (o *NSTextContainer) TextView() *NSTextView {
@@ -193,7 +185,25 @@ func (o *NSTextContainer) SetTextView(textView *NSTextView) {
 	o.Ptr().Send(_nSTextContainerSelSetTextView, textView.Ptr())
 }
 
+// Replaces the layout manager for the group of text system objects that contains the text container.
+func (o *NSTextContainer) ReplaceLayoutManager(newLayoutManager *NSLayoutManager) {
+	o.Ptr().Send(_nSTextContainerSelReplaceLayoutManager, newLayoutManager.Ptr())
+}
+
+func (o *NSTextContainer) LayoutManager() *NSLayoutManager {
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextContainerSelLayoutManager)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSLayoutManagerFromID(_ret)
+}
+
+func (o *NSTextContainer) SetLayoutManager(layoutManager *NSLayoutManager) {
+	o.Ptr().Send(_nSTextContainerSelSetLayoutManager, layoutManager.Ptr())
+}
+
 // Initializes a text container with a specified bounding rectangle.
+// Deprecated: since macOS API_TO_BE_DEPRECATED.
 func (o *NSTextContainer) InitWithContainerSize(aContainerSize corefoundation.CGSize) *NSTextContainer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextContainerSelInitWithContainerSize, aContainerSize)
 	if _ret != 0 {
@@ -203,6 +213,7 @@ func (o *NSTextContainer) InitWithContainerSize(aContainerSize corefoundation.CG
 }
 
 // Calculates and returns the longest rectangle available in the proposed rectangle for displaying text.
+// Deprecated: since macOS API_TO_BE_DEPRECATED.
 func (o *NSTextContainer) LineFragmentRectForProposedRectSweepDirectionMovementDirectionRemainingRect(proposedRect corefoundation.CGRect, sweepDirection NSLineSweepDirection, movementDirection NSLineMovementDirection, remainingRect *corefoundation.CGRect) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSTextContainerSelLineFragmentRectForProposedRectSweepDirectionMovementDirectionRemainingRect, proposedRect, sweepDirection, movementDirection, remainingRect)
 	return _ret
@@ -215,11 +226,13 @@ func (o *NSTextContainer) ContainsPoint(point corefoundation.CGPoint) bool {
 	return _ret
 }
 
+// Deprecated: since macOS API_TO_BE_DEPRECATED.
 func (o *NSTextContainer) ContainerSize() corefoundation.CGSize {
 	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSTextContainerSelContainerSize)
 	return _ret
 }
 
+// Deprecated: since macOS API_TO_BE_DEPRECATED.
 func (o *NSTextContainer) SetContainerSize(containerSize corefoundation.CGSize) {
 	o.Ptr().Send(_nSTextContainerSelSetContainerSize, containerSize)
 }

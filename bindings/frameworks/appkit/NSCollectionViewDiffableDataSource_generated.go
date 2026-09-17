@@ -16,8 +16,6 @@ import (
 )
 
 // CollectionViewDiffableDataSource is an idiomatic wrapper over the Objective-C class NSCollectionViewDiffableDataSource.
-//
-// The object you use to manage data and provide items for a collection view.
 type CollectionViewDiffableDataSource struct {
 	objref.Handle
 }

@@ -8,61 +8,124 @@ import (
 )
 
 var (
-	_fnCGDisplayCreateUUIDFromDisplayID                    func(uint32) unsafe.Pointer
-	_fnCGDisplayGetDisplayIDFromUUID                       func(unsafe.Pointer) uint32
-	_fnColorSyncAPIVersion                                 func() uint32
-	_fnColorSyncCMMCopyCMMIdentifier                       func(unsafe.Pointer) unsafe.Pointer
-	_fnColorSyncCMMCopyLocalizedName                       func(unsafe.Pointer) unsafe.Pointer
-	_fnColorSyncCMMCreate                                  func(unsafe.Pointer) unsafe.Pointer
-	_fnColorSyncCMMGetBundle                               func(unsafe.Pointer) unsafe.Pointer
-	_fnColorSyncCMMGetTypeID                               func() uint
-	_fnColorSyncCreateCodeFragment                         func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnColorSyncDeviceCopyDeviceInfo                       func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnColorSyncDeviceSetCustomProfiles                    func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
-	_fnColorSyncIterateDeviceProfiles                      func(unsafe.Pointer, unsafe.Pointer)
-	_fnColorSyncIterateInstalledCMMs                       func(unsafe.Pointer, unsafe.Pointer)
-	_fnColorSyncIterateInstalledProfiles                   func(unsafe.Pointer, *uint32, unsafe.Pointer, unsafe.Pointer)
-	_fnColorSyncIterateInstalledProfilesWithOptions        func(unsafe.Pointer, *uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnColorSyncProfileContainsTag                         func(unsafe.Pointer, unsafe.Pointer) bool
-	_fnColorSyncProfileCopyData                            func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnColorSyncProfileCopyDescriptionString               func(unsafe.Pointer) unsafe.Pointer
-	_fnColorSyncProfileCopyHeader                          func(unsafe.Pointer) unsafe.Pointer
-	_fnColorSyncProfileCopyTag                             func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnColorSyncProfileCopyTagSignatures                   func(unsafe.Pointer) unsafe.Pointer
-	_fnColorSyncProfileCreate                              func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnColorSyncProfileCreateDeviceProfile                 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCGDisplayCreateUUIDFromDisplayID func(uint32) unsafe.Pointer
+	_fnCGDisplayGetDisplayIDFromUUID    func(unsafe.Pointer) uint32
+	// Returns the version of the ColorSync API. - Returns: The API version as a binary-coded decimal `uint32_t`. From most to least significant byte, the value encodes the major OS version, minor OS version, patch version, and API version — that is, `(major << 24) | (minor << 16) | (dot << 8) | (apiVersion & 0xFF)`.
+	_fnColorSyncAPIVersion func() uint32
+	// Copies the identifier of a CMM. Use this function to get the identifier of the built-in CMM. - Returns: The identifier of the CMM.
+	_fnColorSyncCMMCopyCMMIdentifier func(unsafe.Pointer) unsafe.Pointer
+	// Copies the localized name of a CMM. Use this function to get the name of the built-in CMM. - Returns: The localized name of the CMM.
+	_fnColorSyncCMMCopyLocalizedName func(unsafe.Pointer) unsafe.Pointer
+	// Creates a CMM object from a CMM bundle. - Parameter cmmBundle: The bundle containing the CMM. - Returns: A new ``ColorSyncCMMRef``, or `NULL` in case of failure.
+	_fnColorSyncCMMCreate func(unsafe.Pointer) unsafe.Pointer
+	// Returns the bundle associated with a CMM. - Returns: The `CFBundleRef` for the CMM, or `NULL` for the built-in Apple CMM.
+	_fnColorSyncCMMGetBundle func(unsafe.Pointer) unsafe.Pointer
+	// Returns the `CFTypeID` for `ColorSyncCMM`s.
+	_fnColorSyncCMMGetTypeID func() uint
+	// Creates a code fragment from a sequence of profiles. Each dictionary in `profileSequence` contains a profile object and information on the usage of the profile in the code fragment. Required keys: - ``kColorSyncProfile``: A ``ColorSyncProfileRef``. - ``kColorSyncRenderingIntent``: A `CFStringRef` defining the rendering intent. - ``kColorSyncTransformTag``: A `CFStringRef` defining which tags to use. Optional key: - ``kColorSyncBlackPointCompensation``: A `CFBooleanRef` to enable or disable black point compensation. - ``kColorSyncExtendedRange``: A `CFBooleanRef` to enable or disable extended range; disabling implies floating point conversions. - Parameters: - profileSequence: An array of dictionaries, each one containing a profile object and the information on the usage of the profile in the code fragment. - options: A dictionary with additional options as in the case of creating a `ColorSyncTransform`. - Returns: A `CFTypeRef` representing a ColorSync code fragment, or `NULL` in case of failure.
+	_fnColorSyncCreateCodeFragment func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	// Copies information about a device, resolved for the current host and current user. Returns a dictionary with the following keys and values resolved for the current host and current user: << kColorSyncDeviceClass                   {camera, display, printer, scanner} kColorSyncDeviceID                      {CFUUIDRef registered with ColorSync} kColorSyncDeviceDescription             {localized device description} kColorSyncFactoryProfiles  (dictionary) << {ProfileID}    (dictionary) << kColorSyncDeviceProfileURL      {CFURLRef or kCFNull} kColorSyncDeviceModeDescription {localized mode description} >> ... kColorSyncDeviceDefaultProfileID {ProfileID} >> kColorSyncCustomProfiles  (dictionary) << {ProfileID}    {CFURLRef or kCFNull} ... << kColorSyncDeviceUserScope              {kCFPreferencesAnyUser or kCFPreferencesCurrentUser} kColorSyncDeviceHostScope              {kCFPreferencesAnyHost or kCFPreferencesCurrentHost} >> - Parameters: - deviceClass: The class of the device. - devID: The identifier of the device. - Returns: A dictionary describing the device, or `NULL` if no matching device is registered.
+	_fnColorSyncDeviceCopyDeviceInfo func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	// Sets custom profiles for a device in lieu of its factory profiles. The `profileInfo` dictionary requires the following keys: - ProfileIDs, which must be a subset of the ProfileIDs you registered the device with, or ``kColorSyncDeviceDefaultProfileID`` for setting a custom default profile. It requires the following values: - The `CFURLRef` of the profile to set as a custom profile. It may also include the following optional keys: - ``kColorSyncProfileHostScope``: The host scope of the profile; one of `kCFPreferencesCurrentHost` or `kCFPreferencesAnyHost`. If you don't specify it, the framework assumes `kCFPreferencesCurrentHost`. - ``kColorSyncProfileUserScope``: The user scope of the profile; one of `kCFPreferencesCurrentUser` or `kCFPreferencesAnyUser`. If you don't specify it, the framework assumes `kCFPreferencesCurrentUser`. - Note: Profile scope for custom profiles cannot exceed the scope of the factory profiles. - Note: There is only one host scope and user scope per dictionary (that is, per call). - Note: Pass `kCFNull` in lieu of the profile URL to unset the custom profile and reset the current profile to the factory profile. - Parameters: - deviceClass: The class of the device. - deviceID: The identifier of the device. - profileInfo: A `CFDictionary` containing the information about custom profiles to set in lieu of factory profiles. - Returns: `true` on success and `false` in case of failure.
+	_fnColorSyncDeviceSetCustomProfiles func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
+	// Iterates over the profiles registered for all devices, invoking a callback for each. - Parameters: - callBack: The callback to invoke for each registered device profile. - userInfo: Caller-supplied context passed through to the callback. Optional.
+	_fnColorSyncIterateDeviceProfiles func(unsafe.Pointer, unsafe.Pointer)
+	// Iterates over the installed CMMs, invoking a callback for each one. - Parameters: - callBack: A pointer to a client-provided function. - userInfo: A pointer to the user info that the framework passes to the callback. Optional.
+	_fnColorSyncIterateInstalledCMMs func(unsafe.Pointer, unsafe.Pointer)
+	// Iterates over the installed profiles. When called for the first time, this function returns only system profiles, because profile iteration is a slow process requiring multiple accesses to the file system. Clients are advised to register for ``kColorSyncProfileRepositoryChangeNotification`` using `CFNotificationCenter` or `NSNotificationCenter` to obtain all installed profiles. The notification callback receives, if possible, a `CFDictionary` containing a new seed value of the profile cache (key ``kColorSyncProfileCacheSeed`` / value `kCFNumberSInt32Type`). Comparing old and new seed values may prevent unnecessary calls to iterate installed profiles. Alternatively, call ``ColorSyncIterateInstalledProfilesWithOptions`` with the ``kColorSyncWaitForCacheReply`` option set to `kCFBooleanTrue` to obtain all installed profiles in one call. - Parameters: - callBack: A pointer to a client-provided function (can be `NULL`). - seed: A pointer to a cache seed owned by the client (can be `NULL`). - userInfo: User-defined data passed to the callback. - error: On failure, a pointer to an error describing the problem. Optional.
+	_fnColorSyncIterateInstalledProfiles func(unsafe.Pointer, *uint32, unsafe.Pointer, unsafe.Pointer)
+	// Iterates over the installed profiles, using the given options. - Parameters: - callBack: A pointer to a client-provided function (can be `NULL`). - seed: A pointer to a cache seed owned by the client. - userInfo: User-defined data passed to the callback. - options: A dictionary with iteration options, for example ``kColorSyncWaitForCacheReply`` to wait for the cache to finish updating before returning. - error: On failure, a pointer to an error describing the problem. Optional.
+	_fnColorSyncIterateInstalledProfilesWithOptions func(unsafe.Pointer, *uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	// Returns whether a profile contains a Headroom Adaptive Gain Curve tag. - Parameter profile: The profile to test. - Returns: `true` if the profile contains an HAGC tag; otherwise, `false`.
+	_fnColorSyncProfileContainsHeadroomAdaptiveGainCurve func(unsafe.Pointer) bool
+	// Returns a Boolean value indicating whether a profile contains a given tag. - Parameters: - prof: The profile in which to search for the tag. - signature: The signature of the tag to search for. - Returns: `true` if the tag exists; otherwise, `false`.
+	_fnColorSyncProfileContainsTag func(unsafe.Pointer, unsafe.Pointer) bool
+	// Copies the flattened data from a profile. - Parameters: - prof: The profile to copy the flattened data from. - error: On failure, a pointer to an error describing the problem. Optional. - Returns: The profile data on success, or `NULL` in case of failure.
+	_fnColorSyncProfileCopyData func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	// Copies the localized description string of a profile. - Parameter prof: The profile to copy the description string from. - Returns: The profile description, localized to the current locale.
+	_fnColorSyncProfileCopyDescriptionString func(unsafe.Pointer) unsafe.Pointer
+	// Copies the header from a profile. - Parameter prof: The profile to copy the header from. - Returns: The profile header (in host endianness), or `NULL` in case of failure.
+	_fnColorSyncProfileCopyHeader func(unsafe.Pointer) unsafe.Pointer
+	// Returns a dictionary describing the Headroom Adaptive Gain Curve decoded from a profile. - Parameter profile: The profile to decode the HAGC tag from. - Returns: A dictionary describing the gain curve, which the caller must release with `CFRelease`, or `NULL` if the profile carries no HAGC tag. See the key constants declared below for the dictionary's contents.
+	_fnColorSyncProfileCopyHeadroomAdaptiveGainCurveInfoDictionary func(unsafe.Pointer) unsafe.Pointer
+	// Returns a copy of the raw Headroom Adaptive Gain Curve data embedded in a profile. - Parameter profile: The profile to read the HAGC tag from. - Returns: A copy of the raw HAGC data that the caller must release with `CFRelease`, or `NULL` if the profile contains no HAGC tag.
+	_fnColorSyncProfileCopyHeadroomAdaptiveGainCurveMetadata func(unsafe.Pointer) unsafe.Pointer
+	// Copies a tag from a profile. - Parameters: - prof: The profile to copy the tag from. - signature: The signature of the tag to copy. - Returns: The tag data, or `NULL` in case of failure.
+	_fnColorSyncProfileCopyTag func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	// Copies the tag signatures of a profile. - Parameter prof: The profile to copy tag signatures from. - Returns: An array with the signatures (`CFStringRef`) of the tags in the profile.
+	_fnColorSyncProfileCopyTagSignatures func(unsafe.Pointer) unsafe.Pointer
+	// Creates a profile from ICC profile data. - Parameters: - data: The ICC profile data. - error: On failure, a pointer to an error describing the problem. Optional. - Returns: A new profile, or `NULL` in case of failure.
+	_fnColorSyncProfileCreate func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	// Returns a copy of a profile with an HAGC tag synthesized from an info dictionary. - Parameters: - profile: A profile whose CICP tag indicates a PQ, HLG, or linear transfer function. (Use linear for extended-range data.) Passing an SDR profile returns `NULL`. - info: A dictionary describing the gain curve. See the key constants declared below for its structure. - Returns: A new profile that the caller must release with `CFRelease`, or `NULL` on failure.
+	_fnColorSyncProfileCreateCopyWithHeadroomAdaptiveGainCurveInfoDictionary func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	// Returns a copy of a profile with the supplied Headroom Adaptive Gain Curve data embedded as an HAGC tag. - Parameters: - profile: A profile whose CICP tag indicates a PQ, HLG, or linear transfer function. (Use linear for extended-range data.) Passing an SDR profile returns `NULL`. - data: The raw Headroom Adaptive Gain Curve data to embed. Must be non-`NULL`. - options: Reserved for future use. Pass `NULL`. - Returns: A new profile that the caller must release with `CFRelease`, or `NULL` on failure.
+	_fnColorSyncProfileCreateCopyWithHeadroomAdaptiveGainCurveMetadata func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	// Creates a profile for a device registered with ColorSync. See `ColorSyncDevice.h` for more information on `deviceClass`, `deviceID`, and `profileID`. - Parameters: - deviceClass: The ColorSync device class. - deviceID: The device ID registered with ColorSync. - profileID: The profile ID registered with ColorSync; pass ``kColorSyncDeviceDefaultProfileID`` to get the default profile. - Returns: A new profile, or `NULL` in case of failure.
+	_fnColorSyncProfileCreateDeviceProfile func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	// Creates display transfer tables from the profile's `vcgt` tag. Creates three tables of floats (a red table, a green table, and a blue table), each of size `nSamplesPerChannel`, packed into contiguous memory contained in the returned `CFDataRef`, from the `vcgt` tag of the profile (if a `vcgt` tag exists in the profile). `CGSetDisplayTransferByTable` uses these tables.
 	_fnColorSyncProfileCreateDisplayTransferTablesFromVCGT func(unsafe.Pointer, *uint) unsafe.Pointer
-	_fnColorSyncProfileCreateLink                          func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnColorSyncProfileCreateMutable                       func() unsafe.Pointer
-	_fnColorSyncProfileCreateMutableCopy                   func(unsafe.Pointer) unsafe.Pointer
-	_fnColorSyncProfileCreateWithDisplayID                 func(uint32) unsafe.Pointer
-	_fnColorSyncProfileCreateWithName                      func(unsafe.Pointer) unsafe.Pointer
-	_fnColorSyncProfileCreateWithURL                       func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnColorSyncProfileCreateWithURLAndOptions             func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnColorSyncProfileEstimateGamma                       func(unsafe.Pointer, unsafe.Pointer) float32
-	_fnColorSyncProfileEstimateGammaWithDisplayID          func(int, unsafe.Pointer) float32
-	_fnColorSyncProfileGetDisplayTransferFormulaFromVCGT   func(unsafe.Pointer, *float32, *float32, *float32, *float32, *float32, *float32, *float32, *float32, *float32) bool
-	_fnColorSyncProfileGetMD5                              func(unsafe.Pointer) ColorSyncMD5
-	_fnColorSyncProfileGetTypeID                           func() uint
-	_fnColorSyncProfileGetURL                              func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnColorSyncProfileInstall                             func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
-	_fnColorSyncProfileIsHLGBased                          func(unsafe.Pointer) bool
-	_fnColorSyncProfileIsMatrixBased                       func(unsafe.Pointer) bool
-	_fnColorSyncProfileIsPQBased                           func(unsafe.Pointer) bool
-	_fnColorSyncProfileIsWideGamut                         func(unsafe.Pointer) bool
-	_fnColorSyncProfileRemoveTag                           func(unsafe.Pointer, unsafe.Pointer)
-	_fnColorSyncProfileSetHeader                           func(unsafe.Pointer, unsafe.Pointer)
-	_fnColorSyncProfileSetTag                              func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnColorSyncProfileUninstall                           func(unsafe.Pointer, unsafe.Pointer) bool
-	_fnColorSyncProfileVerify                              func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
-	_fnColorSyncRegisterDevice                             func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
-	_fnColorSyncTransformConvert                           func(unsafe.Pointer, uint, uint, unsafe.Pointer, ColorSyncDataDepth, uint32, uint, unsafe.Pointer, ColorSyncDataDepth, uint32, uint, unsafe.Pointer) bool
-	_fnColorSyncTransformCopyProperty                      func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnColorSyncTransformCreate                            func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnColorSyncTransformGetProfileSequence                func(unsafe.Pointer) unsafe.Pointer
-	_fnColorSyncTransformGetTypeID                         func() uint
-	_fnColorSyncTransformSetProperty                       func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnColorSyncUnregisterDevice                           func(unsafe.Pointer, unsafe.Pointer) bool
+	// Creates a device link profile from an array of profiles. Each dictionary in `profileInfo` contains a profile object and information on the usage of the profile in the transform. Required keys: - ``kColorSyncProfile``: A ``ColorSyncProfileRef``. - ``kColorSyncRenderingIntent``: A `CFStringRef` defining the rendering intent. - ``kColorSyncTransformTag``: A `CFStringRef` defining which tags to use. Optional key: - ``kColorSyncBlackPointCompensation``: A `CFBooleanRef` to enable or disable black point compensation. - Parameters: - profileInfo: An array of dictionaries, each containing a profile object and the information on the usage of the profile in the transform. - options: A dictionary with additional public global options (for example, preferred CMM, quality, and so on). It can also contain custom options that are CMM specific. - Returns: A new profile, or `NULL` in case of failure.
+	_fnColorSyncProfileCreateLink func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	// Creates an empty mutable profile. - Returns: An empty mutable profile, or `NULL` in case of failure.
+	_fnColorSyncProfileCreateMutable func() unsafe.Pointer
+	// Creates a mutable copy of a profile. - Parameter prof: The profile whose data the function copies into the new mutable profile. - Returns: A new mutable profile, or `NULL` in case of failure.
+	_fnColorSyncProfileCreateMutableCopy func(unsafe.Pointer) unsafe.Pointer
+	// Creates a profile for the specified display. - Parameter displayID: The system-wide unique display ID (defined by IOKit); pass `0` for the main display. - Returns: A new profile, or `NULL` in case of failure.
+	_fnColorSyncProfileCreateWithDisplayID func(uint32) unsafe.Pointer
+	// Creates a profile from a predefined profile name. - Parameter name: The predefined profile name. - Returns: A new profile, or `NULL` in case of failure.
+	_fnColorSyncProfileCreateWithName func(unsafe.Pointer) unsafe.Pointer
+	// Creates a profile from ICC profile data at a URL. - Parameters: - url: The URL to the profile data. - error: On failure, a pointer to an error describing the problem. Optional. - Returns: A new profile, or `NULL` in case of failure.
+	_fnColorSyncProfileCreateWithURL func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	// Creates a profile from ICC profile data at a URL, using the given options. - Parameters: - url: The URL to the profile data. - options: A dictionary with creation options, for example ``kColorSyncDoNotSubstituteProfiles``. - error: On failure, a pointer to an error describing the problem. Optional. - Returns: A new profile, or `NULL` in case of failure.
+	_fnColorSyncProfileCreateWithURLAndOptions func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	// Estimates the gamma of a profile. - Parameters: - prof: The profile to perform estimation on. - error: On failure, a pointer to an error describing the problem. Optional. - Returns: A non-zero value on success, or `0.0` in case of error.
+	_fnColorSyncProfileEstimateGamma func(unsafe.Pointer, unsafe.Pointer) float32
+	// Estimates the gamma of the profile for the specified display. - Parameters: - displayID: The system-wide unique display ID (defined by IOKit). - error: On failure, a pointer to an error describing the problem. Optional. - Returns: A non-zero value on success, or `0.0` in case of error.
+	_fnColorSyncProfileEstimateGammaWithDisplayID func(int32, unsafe.Pointer) float32
+	// Converts the profile's `vcgt` tag to formula components used by `CGSetDisplayTransferByFormula`. The function performs this conversion only if a `vcgt` tag exists in the profile and the conversion is possible.
+	_fnColorSyncProfileGetDisplayTransferFormulaFromVCGT func(unsafe.Pointer, *float32, *float32, *float32, *float32, *float32, *float32, *float32, *float32, *float32) bool
+	// Returns the MD5 digest for a profile. - Parameter prof: The profile to compute the digest for. - Returns: The MD5 digest for the profile, calculated as defined by the ICC specification, or a "zero" signature (filled with zeros) in case of failure.
+	_fnColorSyncProfileGetMD5 func(unsafe.Pointer) ColorSyncMD5
+	// Returns the unique identifier for the ColorSync profile opaque type. - Returns: The `CFTypeID` for `ColorSyncProfile` objects.
+	_fnColorSyncProfileGetTypeID func() uint
+	// Returns the URL of a profile. - Parameters: - prof: The profile to get the URL from. - error: On failure, a pointer to an error describing the problem. Optional. - Returns: The profile's URL on success, or `NULL` in case of failure.
+	_fnColorSyncProfileGetURL func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	// Installs a profile in the specified domain. The `domain` is either ``kColorSyncProfileComputerDomain`` or ``kColorSyncProfileUserDomain``. ``kColorSyncProfileComputerDomain`` is for sharing the profiles (from `/Library/ColorSync/Profiles`). ``kColorSyncProfileUserDomain`` is for user custom profiles (installed under the home directory, that is, in `~/Library/ColorSync/Profiles`). `NULL` is the same as ``kColorSyncProfileUserDomain``. The `subpath` is the file system representation of the path of the file to contain the installed profile. The function interprets the last component of the path as a file name if it ends with the extension `.icc`. Otherwise, the function interprets the subpath as the directory path and creates the file name from the profile description tag, appended with the `.icc` extension. Using this function requires `COLORSYNC_PROFILE_INSTALL_ENTITLEMENT`. - Parameters: - profile: The profile to install. - domain: The domain to install into, either ``kColorSyncProfileComputerDomain`` or ``kColorSyncProfileUserDomain``. - subpath: A string created from the file system representation of the path of the file to contain the installed profile. - error: On failure, a pointer to an error describing the problem. Optional. - Returns: `true` on success, or `false` in case of error.
+	_fnColorSyncProfileInstall func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
+	// Returns a Boolean value indicating whether the profile uses ITU BT.2100 HLG transfer functions.
+	_fnColorSyncProfileIsHLGBased func(unsafe.Pointer) bool
+	// Returns a Boolean value indicating whether the profile is matrix-based.
+	_fnColorSyncProfileIsMatrixBased func(unsafe.Pointer) bool
+	// Returns a Boolean value indicating whether the profile uses ITU BT.2100 PQ transfer functions.
+	_fnColorSyncProfileIsPQBased func(unsafe.Pointer) bool
+	// Returns a Boolean value indicating whether the display profile describes a wide-gamut color space.
+	_fnColorSyncProfileIsWideGamut func(unsafe.Pointer) bool
+	// Removes a tag from a mutable profile. - Parameters: - prof: The profile to remove the tag from. - signature: The signature of the tag to remove.
+	_fnColorSyncProfileRemoveTag func(unsafe.Pointer, unsafe.Pointer)
+	// Sets the header of a mutable profile. - Parameters: - prof: The profile in which to set the header. - header: The header data (must be in host endianness).
+	_fnColorSyncProfileSetHeader func(unsafe.Pointer, unsafe.Pointer)
+	// Sets a tag in a mutable profile. - Parameters: - prof: The profile in which to set the tag. - signature: The signature of the tag to set in the profile. - data: The tag data.
+	_fnColorSyncProfileSetTag func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	// Uninstalls a profile. The profile must return a valid URL for ``ColorSyncProfileGetURL``; that is, it must be created with ``ColorSyncProfileCreateWithURL``. Also, the URL must be in either ``kColorSyncProfileComputerDomain`` or ``kColorSyncProfileUserDomain``, including subfolders of those. Using this function requires `COLORSYNC_PROFILE_INSTALL_ENTITLEMENT`. - Parameters: - profile: The profile to uninstall. - error: On failure, a pointer to an error describing the problem. Optional. - Returns: `true` on success, or `false` in case of error.
+	_fnColorSyncProfileUninstall func(unsafe.Pointer, unsafe.Pointer) bool
+	// Verifies whether a profile can be used. - Parameters: - prof: The profile to verify. - errors: Returns error strings in case problems are found that would prevent use of the profile. - warnings: Returns warning strings indicating problems due to lack of conformance with the ICC specification, but not preventing use of the profile. - Returns: `true` if the profile can be used; otherwise, `false`.
+	_fnColorSyncProfileVerify func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
+	// Registers a device of the given class with ColorSync. The `deviceInfo` dictionary requires the following keys: - ``kColorSyncDeviceDescriptions``: A `CFDictionary` with localized names of the device. Localization keys must be five-character strings containing a language code and region code in the `lc_RG` format, and must contain (at least) the `en_US` locale. - ``kColorSyncFactoryProfiles``: A `CFDictionary` of factory profile info dictionaries. The keys are the profile IDs and the values are the profile info dictionaries. It may also include the following optional keys: - ``kColorSyncDeviceHostScope``: The host scope of the device; one of `kCFPreferencesCurrentHost` or `kCFPreferencesAnyHost`. If you don't specify it, the framework assumes `kCFPreferencesCurrentHost`. - ``kColorSyncDeviceUserScope``: The user scope of the device; one of `kCFPreferencesCurrentUser` or `kCFPreferencesAnyUser`. If you don't specify it, the framework assumes `kCFPreferencesCurrentUser`. The factory profiles dictionary (the value for the key ``kColorSyncFactoryProfiles`` in `deviceInfo`) requires the following keys and values. A ProfileID (of `CFStringRef` type) identifies each profile and serves as the key. The value associated with the key is a profile info dictionary that describes an individual device profile. - ``kColorSyncDeviceDefaultProfileID``: The associated value must be one of the ProfileIDs present in the dictionary. Presence of this key is not required if there is only one factory profile. Each profile info `CFDictionary` requires the following keys: - ``kColorSyncDeviceProfileURL``: The `CFURLRef` of the profile to register. - ``kColorSyncDeviceModeDescriptions``: A `CFDictionary` with localized device mode names for the profile. Localization keys must be five-character strings containing a language code and region code in the `lc_RG` format, and must contain (at least) the `en_US` locale. For example, `en_US` "Glossy Paper with best quality". Example of a `deviceInfo` dictionary: << kColorSyncDeviceDescriptions   << en_US  My Little Printer de_DE  Mein Kleiner Drucker fr_FR  Mon petit immprimeur ... >> kColorSyncFactoryProfiles       << CFSTR("Profile 1")  << kColorSyncDeviceProfileURL    {CFURLRef} kColorSyncDeviceModeDescriptions    << en_US Glossy Paper de_DE Glanzpapier fr_FR Papier glace ... >> ... kColorSyncDeviceDefaultProfileID  CFSTR("Profile 1") >> kColorSyncDeviceUserScope   kCFPreferencesAnyUser kColorSyncDeviceHostScope   kCFPreferencesCurrentHost << - Note: Scope for factory profiles is exactly the same as the device scope. - Note: Pass `kCFNull` in lieu of the profile URL, or no URL key/value pair at all, if a factory profile is not available. This enables setting a custom profile. - Note: For compatibility with the legacy API, create the profile keys as `CFString`s from `uint32_t` numbers as follows: `CFStringRef key = CFStringCreateWithFormat(NULL, NULL, CFSTR("%u"), (uint32_t) i);` - Parameters: - deviceClass: The class of the device to register. - deviceID: The identifier of the device to register. - deviceInfo: A dictionary containing the information needed to register a device. - Returns: `true` on success and `false` in case of failure.
+	_fnColorSyncRegisterDevice func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
+	// Converts color data from a source layout to a destination layout using a color transform. Use this function with care for performance reasons. Color conversions are computationally intensive and the recommended way to perform these is by using the vImage converter with a ColorSync code fragment. vImage employs vectorized code which is not only faster but also more battery efficient. Please visit the following link to see a sample application of vImage used in conjunction with ColorSync: <https://developer.apple.com/library/prerelease/content/samplecode/convertImage/Listings/convertImage_main_c.html> More details regarding ColorSync code fragments are included below, as well. - Parameters: - transform: The transform to use for converting color. - width: The width of the image in pixels. - height: The height of the image in pixels. - dst: A pointer to the destination where the function writes the results. - dstDepth: Describes the bit depth and type of the destination color components. - dstLayout: Describes the format and byte packing of the destination pixels. - dstBytesPerRow: The number of bytes in the row of data. - src: A pointer to the data to convert. - srcDepth: Describes the bit depth and type of the source color components. - srcLayout: Describes the format and byte packing of the source pixels. - srcBytesPerRow: The number of bytes in the row of data. - options: A dictionary with additional options. - Returns: `true` if the conversion succeeds, or `false` otherwise.
+	_fnColorSyncTransformConvert func(unsafe.Pointer, uint, uint, unsafe.Pointer, ColorSyncDataDepth, uint32, uint, unsafe.Pointer, ColorSyncDataDepth, uint32, uint, unsafe.Pointer) bool
+	// Copies a property from a color transform. - Parameters: - transform: The transform from which to copy the property. - key: A `CFTypeRef` used as a key to identify the property. - options: A dictionary with additional options.
+	_fnColorSyncTransformCopyProperty func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	// Creates a color transform from a sequence of profiles. Each dictionary in `profileSequence` contains a profile object and information on the usage of the profile in the transform. Required keys: - ``kColorSyncProfile``: A ``ColorSyncProfileRef``. - ``kColorSyncRenderingIntent``: A `CFStringRef` defining the rendering intent. - ``kColorSyncTransformTag``: A `CFStringRef` defining which tags to use. Optional key: - ``kColorSyncBlackPointCompensation``: A `CFBooleanRef` to enable or disable black point compensation. - Parameters: - profileSequence: An array of dictionaries, each one containing a profile object and the information on the usage of the profile in the transform. - options: A dictionary with additional public global options (for example, preferred CMM, quality, and so on). It can also contain custom options that are CMM specific. - Returns: A new ``ColorSyncTransformRef``, or `NULL` in case of failure.
+	_fnColorSyncTransformCreate func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	// Returns the profile sequence used to create a color transform. - Parameter transform: The transform from which to get the profile sequence used to create the transform.
+	_fnColorSyncTransformGetProfileSequence func(unsafe.Pointer) unsafe.Pointer
+	// Returns the type identifier for the `ColorSyncTransform` opaque type. - Returns: The `CFTypeID` for `ColorSyncTransform` objects.
+	_fnColorSyncTransformGetTypeID func() uint
+	// Sets a property on a color transform. - Parameters: - transform: The transform in which to set the property. - key: A `CFTypeRef` used as a key to identify the property. - property: The `CFTypeRef` to set as the property.
+	_fnColorSyncTransformSetProperty func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	// Unregisters a device of the given class and identifier. - Parameters: - deviceClass: The class of the device to unregister. - deviceID: The identifier of the device to unregister. - Returns: `true` on success and `false` in case of failure.
+	_fnColorSyncUnregisterDevice func(unsafe.Pointer, unsafe.Pointer) bool
 )
 
 func CGDisplayCreateUUIDFromDisplayID(displayID uint32) unsafe.Pointer {
@@ -73,214 +136,292 @@ func CGDisplayGetDisplayIDFromUUID(uuid unsafe.Pointer) uint32 {
 	return _fnCGDisplayGetDisplayIDFromUUID(uuid)
 }
 
+// Returns the version of the ColorSync API. - Returns: The API version as a binary-coded decimal `uint32_t`. From most to least significant byte, the value encodes the major OS version, minor OS version, patch version, and API version — that is, `(major << 24) | (minor << 16) | (dot << 8) | (apiVersion & 0xFF)`.
 func ColorSyncAPIVersion() uint32 {
 	return _fnColorSyncAPIVersion()
 }
 
+// Copies the identifier of a CMM. Use this function to get the identifier of the built-in CMM. - Returns: The identifier of the CMM.
 func ColorSyncCMMCopyCMMIdentifier(arg unsafe.Pointer) unsafe.Pointer {
 	return _fnColorSyncCMMCopyCMMIdentifier(arg)
 }
 
+// Copies the localized name of a CMM. Use this function to get the name of the built-in CMM. - Returns: The localized name of the CMM.
 func ColorSyncCMMCopyLocalizedName(arg unsafe.Pointer) unsafe.Pointer {
 	return _fnColorSyncCMMCopyLocalizedName(arg)
 }
 
+// Creates a CMM object from a CMM bundle. - Parameter cmmBundle: The bundle containing the CMM. - Returns: A new “ColorSyncCMMRef“, or `NULL` in case of failure.
 func ColorSyncCMMCreate(cmmBundle unsafe.Pointer) unsafe.Pointer {
 	return _fnColorSyncCMMCreate(cmmBundle)
 }
 
+// Returns the bundle associated with a CMM. - Returns: The `CFBundleRef` for the CMM, or `NULL` for the built-in Apple CMM.
 func ColorSyncCMMGetBundle(arg unsafe.Pointer) unsafe.Pointer {
 	return _fnColorSyncCMMGetBundle(arg)
 }
 
+// Returns the `CFTypeID` for `ColorSyncCMM`s.
 func ColorSyncCMMGetTypeID() uint {
 	return _fnColorSyncCMMGetTypeID()
 }
 
+// Creates a code fragment from a sequence of profiles. Each dictionary in `profileSequence` contains a profile object and information on the usage of the profile in the code fragment. Required keys: - “kColorSyncProfile“: A “ColorSyncProfileRef“. - “kColorSyncRenderingIntent“: A `CFStringRef` defining the rendering intent. - “kColorSyncTransformTag“: A `CFStringRef` defining which tags to use. Optional key: - “kColorSyncBlackPointCompensation“: A `CFBooleanRef` to enable or disable black point compensation. - “kColorSyncExtendedRange“: A `CFBooleanRef` to enable or disable extended range; disabling implies floating point conversions. - Parameters: - profileSequence: An array of dictionaries, each one containing a profile object and the information on the usage of the profile in the code fragment. - options: A dictionary with additional options as in the case of creating a `ColorSyncTransform`. - Returns: A `CFTypeRef` representing a ColorSync code fragment, or `NULL` in case of failure.
 func ColorSyncCreateCodeFragment(profileSequence unsafe.Pointer, options unsafe.Pointer) unsafe.Pointer {
 	return _fnColorSyncCreateCodeFragment(profileSequence, options)
 }
 
+// Copies information about a device, resolved for the current host and current user. Returns a dictionary with the following keys and values resolved for the current host and current user: << kColorSyncDeviceClass                   {camera, display, printer, scanner} kColorSyncDeviceID                      {CFUUIDRef registered with ColorSync} kColorSyncDeviceDescription             {localized device description} kColorSyncFactoryProfiles  (dictionary) << {ProfileID}    (dictionary) << kColorSyncDeviceProfileURL      {CFURLRef or kCFNull} kColorSyncDeviceModeDescription {localized mode description} >> ... kColorSyncDeviceDefaultProfileID {ProfileID} >> kColorSyncCustomProfiles  (dictionary) << {ProfileID}    {CFURLRef or kCFNull} ... << kColorSyncDeviceUserScope              {kCFPreferencesAnyUser or kCFPreferencesCurrentUser} kColorSyncDeviceHostScope              {kCFPreferencesAnyHost or kCFPreferencesCurrentHost} >> - Parameters: - deviceClass: The class of the device. - devID: The identifier of the device. - Returns: A dictionary describing the device, or `NULL` if no matching device is registered.
 func ColorSyncDeviceCopyDeviceInfo(deviceClass unsafe.Pointer, devID unsafe.Pointer) unsafe.Pointer {
 	return _fnColorSyncDeviceCopyDeviceInfo(deviceClass, devID)
 }
 
+// Sets custom profiles for a device in lieu of its factory profiles. The `profileInfo` dictionary requires the following keys: - ProfileIDs, which must be a subset of the ProfileIDs you registered the device with, or “kColorSyncDeviceDefaultProfileID“ for setting a custom default profile. It requires the following values: - The `CFURLRef` of the profile to set as a custom profile. It may also include the following optional keys: - “kColorSyncProfileHostScope“: The host scope of the profile; one of `kCFPreferencesCurrentHost` or `kCFPreferencesAnyHost`. If you don't specify it, the framework assumes `kCFPreferencesCurrentHost`. - “kColorSyncProfileUserScope“: The user scope of the profile; one of `kCFPreferencesCurrentUser` or `kCFPreferencesAnyUser`. If you don't specify it, the framework assumes `kCFPreferencesCurrentUser`. - Note: Profile scope for custom profiles cannot exceed the scope of the factory profiles. - Note: There is only one host scope and user scope per dictionary (that is, per call). - Note: Pass `kCFNull` in lieu of the profile URL to unset the custom profile and reset the current profile to the factory profile. - Parameters: - deviceClass: The class of the device. - deviceID: The identifier of the device. - profileInfo: A `CFDictionary` containing the information about custom profiles to set in lieu of factory profiles. - Returns: `true` on success and `false` in case of failure.
 func ColorSyncDeviceSetCustomProfiles(deviceClass unsafe.Pointer, deviceID unsafe.Pointer, profileInfo unsafe.Pointer) bool {
 	return _fnColorSyncDeviceSetCustomProfiles(deviceClass, deviceID, profileInfo)
 }
 
+// Iterates over the profiles registered for all devices, invoking a callback for each. - Parameters: - callBack: The callback to invoke for each registered device profile. - userInfo: Caller-supplied context passed through to the callback. Optional.
 func ColorSyncIterateDeviceProfiles(callBack unsafe.Pointer, userInfo unsafe.Pointer) {
 	_fnColorSyncIterateDeviceProfiles(callBack, userInfo)
 }
 
+// Iterates over the installed CMMs, invoking a callback for each one. - Parameters: - callBack: A pointer to a client-provided function. - userInfo: A pointer to the user info that the framework passes to the callback. Optional.
 func ColorSyncIterateInstalledCMMs(callBack unsafe.Pointer, userInfo unsafe.Pointer) {
 	_fnColorSyncIterateInstalledCMMs(callBack, userInfo)
 }
 
+// Iterates over the installed profiles. When called for the first time, this function returns only system profiles, because profile iteration is a slow process requiring multiple accesses to the file system. Clients are advised to register for “kColorSyncProfileRepositoryChangeNotification“ using `CFNotificationCenter` or `NSNotificationCenter` to obtain all installed profiles. The notification callback receives, if possible, a `CFDictionary` containing a new seed value of the profile cache (key “kColorSyncProfileCacheSeed“ / value `kCFNumberSInt32Type`). Comparing old and new seed values may prevent unnecessary calls to iterate installed profiles. Alternatively, call “ColorSyncIterateInstalledProfilesWithOptions“ with the “kColorSyncWaitForCacheReply“ option set to `kCFBooleanTrue` to obtain all installed profiles in one call. - Parameters: - callBack: A pointer to a client-provided function (can be `NULL`). - seed: A pointer to a cache seed owned by the client (can be `NULL`). - userInfo: User-defined data passed to the callback. - error: On failure, a pointer to an error describing the problem. Optional.
 func ColorSyncIterateInstalledProfiles(callBack unsafe.Pointer, seed *uint32, userInfo unsafe.Pointer, error_ unsafe.Pointer) {
 	_fnColorSyncIterateInstalledProfiles(callBack, seed, userInfo, error_)
 }
 
+// Iterates over the installed profiles, using the given options. - Parameters: - callBack: A pointer to a client-provided function (can be `NULL`). - seed: A pointer to a cache seed owned by the client. - userInfo: User-defined data passed to the callback. - options: A dictionary with iteration options, for example “kColorSyncWaitForCacheReply“ to wait for the cache to finish updating before returning. - error: On failure, a pointer to an error describing the problem. Optional.
 func ColorSyncIterateInstalledProfilesWithOptions(callBack unsafe.Pointer, seed *uint32, userInfo unsafe.Pointer, options unsafe.Pointer, error_ unsafe.Pointer) {
 	_fnColorSyncIterateInstalledProfilesWithOptions(callBack, seed, userInfo, options, error_)
 }
 
+// Returns whether a profile contains a Headroom Adaptive Gain Curve tag. - Parameter profile: The profile to test. - Returns: `true` if the profile contains an HAGC tag; otherwise, `false`.
+func ColorSyncProfileContainsHeadroomAdaptiveGainCurve(profile unsafe.Pointer) bool {
+	return _fnColorSyncProfileContainsHeadroomAdaptiveGainCurve(profile)
+}
+
+// Returns a Boolean value indicating whether a profile contains a given tag. - Parameters: - prof: The profile in which to search for the tag. - signature: The signature of the tag to search for. - Returns: `true` if the tag exists; otherwise, `false`.
 func ColorSyncProfileContainsTag(prof unsafe.Pointer, signature unsafe.Pointer) bool {
 	return _fnColorSyncProfileContainsTag(prof, signature)
 }
 
+// Copies the flattened data from a profile. - Parameters: - prof: The profile to copy the flattened data from. - error: On failure, a pointer to an error describing the problem. Optional. - Returns: The profile data on success, or `NULL` in case of failure.
 func ColorSyncProfileCopyData(prof unsafe.Pointer, error_ unsafe.Pointer) unsafe.Pointer {
 	return _fnColorSyncProfileCopyData(prof, error_)
 }
 
+// Copies the localized description string of a profile. - Parameter prof: The profile to copy the description string from. - Returns: The profile description, localized to the current locale.
 func ColorSyncProfileCopyDescriptionString(prof unsafe.Pointer) unsafe.Pointer {
 	return _fnColorSyncProfileCopyDescriptionString(prof)
 }
 
+// Copies the header from a profile. - Parameter prof: The profile to copy the header from. - Returns: The profile header (in host endianness), or `NULL` in case of failure.
 func ColorSyncProfileCopyHeader(prof unsafe.Pointer) unsafe.Pointer {
 	return _fnColorSyncProfileCopyHeader(prof)
 }
 
+// Returns a dictionary describing the Headroom Adaptive Gain Curve decoded from a profile. - Parameter profile: The profile to decode the HAGC tag from. - Returns: A dictionary describing the gain curve, which the caller must release with `CFRelease`, or `NULL` if the profile carries no HAGC tag. See the key constants declared below for the dictionary's contents.
+func ColorSyncProfileCopyHeadroomAdaptiveGainCurveInfoDictionary(profile unsafe.Pointer) unsafe.Pointer {
+	return _fnColorSyncProfileCopyHeadroomAdaptiveGainCurveInfoDictionary(profile)
+}
+
+// Returns a copy of the raw Headroom Adaptive Gain Curve data embedded in a profile. - Parameter profile: The profile to read the HAGC tag from. - Returns: A copy of the raw HAGC data that the caller must release with `CFRelease`, or `NULL` if the profile contains no HAGC tag.
+func ColorSyncProfileCopyHeadroomAdaptiveGainCurveMetadata(profile unsafe.Pointer) unsafe.Pointer {
+	return _fnColorSyncProfileCopyHeadroomAdaptiveGainCurveMetadata(profile)
+}
+
+// Copies a tag from a profile. - Parameters: - prof: The profile to copy the tag from. - signature: The signature of the tag to copy. - Returns: The tag data, or `NULL` in case of failure.
 func ColorSyncProfileCopyTag(prof unsafe.Pointer, signature unsafe.Pointer) unsafe.Pointer {
 	return _fnColorSyncProfileCopyTag(prof, signature)
 }
 
+// Copies the tag signatures of a profile. - Parameter prof: The profile to copy tag signatures from. - Returns: An array with the signatures (`CFStringRef`) of the tags in the profile.
 func ColorSyncProfileCopyTagSignatures(prof unsafe.Pointer) unsafe.Pointer {
 	return _fnColorSyncProfileCopyTagSignatures(prof)
 }
 
+// Creates a profile from ICC profile data. - Parameters: - data: The ICC profile data. - error: On failure, a pointer to an error describing the problem. Optional. - Returns: A new profile, or `NULL` in case of failure.
 func ColorSyncProfileCreate(data unsafe.Pointer, error_ unsafe.Pointer) unsafe.Pointer {
 	return _fnColorSyncProfileCreate(data, error_)
 }
 
+// Returns a copy of a profile with an HAGC tag synthesized from an info dictionary. - Parameters: - profile: A profile whose CICP tag indicates a PQ, HLG, or linear transfer function. (Use linear for extended-range data.) Passing an SDR profile returns `NULL`. - info: A dictionary describing the gain curve. See the key constants declared below for its structure. - Returns: A new profile that the caller must release with `CFRelease`, or `NULL` on failure.
+func ColorSyncProfileCreateCopyWithHeadroomAdaptiveGainCurveInfoDictionary(profile unsafe.Pointer, info unsafe.Pointer) unsafe.Pointer {
+	return _fnColorSyncProfileCreateCopyWithHeadroomAdaptiveGainCurveInfoDictionary(profile, info)
+}
+
+// Returns a copy of a profile with the supplied Headroom Adaptive Gain Curve data embedded as an HAGC tag. - Parameters: - profile: A profile whose CICP tag indicates a PQ, HLG, or linear transfer function. (Use linear for extended-range data.) Passing an SDR profile returns `NULL`. - data: The raw Headroom Adaptive Gain Curve data to embed. Must be non-`NULL`. - options: Reserved for future use. Pass `NULL`. - Returns: A new profile that the caller must release with `CFRelease`, or `NULL` on failure.
+func ColorSyncProfileCreateCopyWithHeadroomAdaptiveGainCurveMetadata(profile unsafe.Pointer, data unsafe.Pointer, options unsafe.Pointer) unsafe.Pointer {
+	return _fnColorSyncProfileCreateCopyWithHeadroomAdaptiveGainCurveMetadata(profile, data, options)
+}
+
+// Creates a profile for a device registered with ColorSync. See `ColorSyncDevice.h` for more information on `deviceClass`, `deviceID`, and `profileID`. - Parameters: - deviceClass: The ColorSync device class. - deviceID: The device ID registered with ColorSync. - profileID: The profile ID registered with ColorSync; pass “kColorSyncDeviceDefaultProfileID“ to get the default profile. - Returns: A new profile, or `NULL` in case of failure.
 func ColorSyncProfileCreateDeviceProfile(deviceClass unsafe.Pointer, deviceID unsafe.Pointer, profileID unsafe.Pointer) unsafe.Pointer {
 	return _fnColorSyncProfileCreateDeviceProfile(deviceClass, deviceID, profileID)
 }
 
+// Creates display transfer tables from the profile's `vcgt` tag. Creates three tables of floats (a red table, a green table, and a blue table), each of size `nSamplesPerChannel`, packed into contiguous memory contained in the returned `CFDataRef`, from the `vcgt` tag of the profile (if a `vcgt` tag exists in the profile). `CGSetDisplayTransferByTable` uses these tables.
 func ColorSyncProfileCreateDisplayTransferTablesFromVCGT(profile unsafe.Pointer, nSamplesPerChannel *uint) unsafe.Pointer {
 	return _fnColorSyncProfileCreateDisplayTransferTablesFromVCGT(profile, nSamplesPerChannel)
 }
 
+// Creates a device link profile from an array of profiles. Each dictionary in `profileInfo` contains a profile object and information on the usage of the profile in the transform. Required keys: - “kColorSyncProfile“: A “ColorSyncProfileRef“. - “kColorSyncRenderingIntent“: A `CFStringRef` defining the rendering intent. - “kColorSyncTransformTag“: A `CFStringRef` defining which tags to use. Optional key: - “kColorSyncBlackPointCompensation“: A `CFBooleanRef` to enable or disable black point compensation. - Parameters: - profileInfo: An array of dictionaries, each containing a profile object and the information on the usage of the profile in the transform. - options: A dictionary with additional public global options (for example, preferred CMM, quality, and so on). It can also contain custom options that are CMM specific. - Returns: A new profile, or `NULL` in case of failure.
 func ColorSyncProfileCreateLink(profileInfo unsafe.Pointer, options unsafe.Pointer) unsafe.Pointer {
 	return _fnColorSyncProfileCreateLink(profileInfo, options)
 }
 
+// Creates an empty mutable profile. - Returns: An empty mutable profile, or `NULL` in case of failure.
 func ColorSyncProfileCreateMutable() unsafe.Pointer {
 	return _fnColorSyncProfileCreateMutable()
 }
 
+// Creates a mutable copy of a profile. - Parameter prof: The profile whose data the function copies into the new mutable profile. - Returns: A new mutable profile, or `NULL` in case of failure.
 func ColorSyncProfileCreateMutableCopy(prof unsafe.Pointer) unsafe.Pointer {
 	return _fnColorSyncProfileCreateMutableCopy(prof)
 }
 
+// Creates a profile for the specified display. - Parameter displayID: The system-wide unique display ID (defined by IOKit); pass `0` for the main display. - Returns: A new profile, or `NULL` in case of failure.
 func ColorSyncProfileCreateWithDisplayID(displayID uint32) unsafe.Pointer {
 	return _fnColorSyncProfileCreateWithDisplayID(displayID)
 }
 
+// Creates a profile from a predefined profile name. - Parameter name: The predefined profile name. - Returns: A new profile, or `NULL` in case of failure.
 func ColorSyncProfileCreateWithName(name unsafe.Pointer) unsafe.Pointer {
 	return _fnColorSyncProfileCreateWithName(name)
 }
 
+// Creates a profile from ICC profile data at a URL. - Parameters: - url: The URL to the profile data. - error: On failure, a pointer to an error describing the problem. Optional. - Returns: A new profile, or `NULL` in case of failure.
 func ColorSyncProfileCreateWithURL(url unsafe.Pointer, error_ unsafe.Pointer) unsafe.Pointer {
 	return _fnColorSyncProfileCreateWithURL(url, error_)
 }
 
+// Creates a profile from ICC profile data at a URL, using the given options. - Parameters: - url: The URL to the profile data. - options: A dictionary with creation options, for example “kColorSyncDoNotSubstituteProfiles“. - error: On failure, a pointer to an error describing the problem. Optional. - Returns: A new profile, or `NULL` in case of failure.
 func ColorSyncProfileCreateWithURLAndOptions(url unsafe.Pointer, options unsafe.Pointer, error_ unsafe.Pointer) unsafe.Pointer {
 	return _fnColorSyncProfileCreateWithURLAndOptions(url, options, error_)
 }
 
+// Estimates the gamma of a profile. - Parameters: - prof: The profile to perform estimation on. - error: On failure, a pointer to an error describing the problem. Optional. - Returns: A non-zero value on success, or `0.0` in case of error.
 func ColorSyncProfileEstimateGamma(prof unsafe.Pointer, error_ unsafe.Pointer) float32 {
 	return _fnColorSyncProfileEstimateGamma(prof, error_)
 }
 
-func ColorSyncProfileEstimateGammaWithDisplayID(displayID int, error_ unsafe.Pointer) float32 {
+// Estimates the gamma of the profile for the specified display. - Parameters: - displayID: The system-wide unique display ID (defined by IOKit). - error: On failure, a pointer to an error describing the problem. Optional. - Returns: A non-zero value on success, or `0.0` in case of error.
+func ColorSyncProfileEstimateGammaWithDisplayID(displayID int32, error_ unsafe.Pointer) float32 {
 	return _fnColorSyncProfileEstimateGammaWithDisplayID(displayID, error_)
 }
 
+// Converts the profile's `vcgt` tag to formula components used by `CGSetDisplayTransferByFormula`. The function performs this conversion only if a `vcgt` tag exists in the profile and the conversion is possible.
 func ColorSyncProfileGetDisplayTransferFormulaFromVCGT(profile unsafe.Pointer, redMin *float32, redMax *float32, redGamma *float32, greenMin *float32, greenMax *float32, greenGamma *float32, blueMin *float32, blueMax *float32, blueGamma *float32) bool {
 	return _fnColorSyncProfileGetDisplayTransferFormulaFromVCGT(profile, redMin, redMax, redGamma, greenMin, greenMax, greenGamma, blueMin, blueMax, blueGamma)
 }
 
+// Returns the MD5 digest for a profile. - Parameter prof: The profile to compute the digest for. - Returns: The MD5 digest for the profile, calculated as defined by the ICC specification, or a "zero" signature (filled with zeros) in case of failure.
 func ColorSyncProfileGetMD5(prof unsafe.Pointer) ColorSyncMD5 {
 	return _fnColorSyncProfileGetMD5(prof)
 }
 
+// Returns the unique identifier for the ColorSync profile opaque type. - Returns: The `CFTypeID` for `ColorSyncProfile` objects.
 func ColorSyncProfileGetTypeID() uint {
 	return _fnColorSyncProfileGetTypeID()
 }
 
+// Returns the URL of a profile. - Parameters: - prof: The profile to get the URL from. - error: On failure, a pointer to an error describing the problem. Optional. - Returns: The profile's URL on success, or `NULL` in case of failure.
 func ColorSyncProfileGetURL(prof unsafe.Pointer, error_ unsafe.Pointer) unsafe.Pointer {
 	return _fnColorSyncProfileGetURL(prof, error_)
 }
 
+// Installs a profile in the specified domain. The `domain` is either “kColorSyncProfileComputerDomain“ or “kColorSyncProfileUserDomain“. “kColorSyncProfileComputerDomain“ is for sharing the profiles (from `/Library/ColorSync/Profiles`). “kColorSyncProfileUserDomain“ is for user custom profiles (installed under the home directory, that is, in `~/Library/ColorSync/Profiles`). `NULL` is the same as “kColorSyncProfileUserDomain“. The `subpath` is the file system representation of the path of the file to contain the installed profile. The function interprets the last component of the path as a file name if it ends with the extension `.icc`. Otherwise, the function interprets the subpath as the directory path and creates the file name from the profile description tag, appended with the `.icc` extension. Using this function requires `COLORSYNC_PROFILE_INSTALL_ENTITLEMENT`. - Parameters: - profile: The profile to install. - domain: The domain to install into, either “kColorSyncProfileComputerDomain“ or “kColorSyncProfileUserDomain“. - subpath: A string created from the file system representation of the path of the file to contain the installed profile. - error: On failure, a pointer to an error describing the problem. Optional. - Returns: `true` on success, or `false` in case of error.
 func ColorSyncProfileInstall(profile unsafe.Pointer, domain unsafe.Pointer, subpath unsafe.Pointer, error_ unsafe.Pointer) bool {
 	return _fnColorSyncProfileInstall(profile, domain, subpath, error_)
 }
 
+// Returns a Boolean value indicating whether the profile uses ITU BT.2100 HLG transfer functions.
 func ColorSyncProfileIsHLGBased(arg unsafe.Pointer) bool {
 	return _fnColorSyncProfileIsHLGBased(arg)
 }
 
+// Returns a Boolean value indicating whether the profile is matrix-based.
 func ColorSyncProfileIsMatrixBased(arg unsafe.Pointer) bool {
 	return _fnColorSyncProfileIsMatrixBased(arg)
 }
 
+// Returns a Boolean value indicating whether the profile uses ITU BT.2100 PQ transfer functions.
 func ColorSyncProfileIsPQBased(arg unsafe.Pointer) bool {
 	return _fnColorSyncProfileIsPQBased(arg)
 }
 
+// Returns a Boolean value indicating whether the display profile describes a wide-gamut color space.
 func ColorSyncProfileIsWideGamut(arg unsafe.Pointer) bool {
 	return _fnColorSyncProfileIsWideGamut(arg)
 }
 
+// Removes a tag from a mutable profile. - Parameters: - prof: The profile to remove the tag from. - signature: The signature of the tag to remove.
 func ColorSyncProfileRemoveTag(prof unsafe.Pointer, signature unsafe.Pointer) {
 	_fnColorSyncProfileRemoveTag(prof, signature)
 }
 
+// Sets the header of a mutable profile. - Parameters: - prof: The profile in which to set the header. - header: The header data (must be in host endianness).
 func ColorSyncProfileSetHeader(prof unsafe.Pointer, header unsafe.Pointer) {
 	_fnColorSyncProfileSetHeader(prof, header)
 }
 
+// Sets a tag in a mutable profile. - Parameters: - prof: The profile in which to set the tag. - signature: The signature of the tag to set in the profile. - data: The tag data.
 func ColorSyncProfileSetTag(prof unsafe.Pointer, signature unsafe.Pointer, data unsafe.Pointer) {
 	_fnColorSyncProfileSetTag(prof, signature, data)
 }
 
+// Uninstalls a profile. The profile must return a valid URL for “ColorSyncProfileGetURL“; that is, it must be created with “ColorSyncProfileCreateWithURL“. Also, the URL must be in either “kColorSyncProfileComputerDomain“ or “kColorSyncProfileUserDomain“, including subfolders of those. Using this function requires `COLORSYNC_PROFILE_INSTALL_ENTITLEMENT`. - Parameters: - profile: The profile to uninstall. - error: On failure, a pointer to an error describing the problem. Optional. - Returns: `true` on success, or `false` in case of error.
 func ColorSyncProfileUninstall(profile unsafe.Pointer, error_ unsafe.Pointer) bool {
 	return _fnColorSyncProfileUninstall(profile, error_)
 }
 
+// Verifies whether a profile can be used. - Parameters: - prof: The profile to verify. - errors: Returns error strings in case problems are found that would prevent use of the profile. - warnings: Returns warning strings indicating problems due to lack of conformance with the ICC specification, but not preventing use of the profile. - Returns: `true` if the profile can be used; otherwise, `false`.
 func ColorSyncProfileVerify(prof unsafe.Pointer, errors_ unsafe.Pointer, warnings unsafe.Pointer) bool {
 	return _fnColorSyncProfileVerify(prof, errors_, warnings)
 }
 
+// Registers a device of the given class with ColorSync. The `deviceInfo` dictionary requires the following keys: - “kColorSyncDeviceDescriptions“: A `CFDictionary` with localized names of the device. Localization keys must be five-character strings containing a language code and region code in the `lc_RG` format, and must contain (at least) the `en_US` locale. - “kColorSyncFactoryProfiles“: A `CFDictionary` of factory profile info dictionaries. The keys are the profile IDs and the values are the profile info dictionaries. It may also include the following optional keys: - “kColorSyncDeviceHostScope“: The host scope of the device; one of `kCFPreferencesCurrentHost` or `kCFPreferencesAnyHost`. If you don't specify it, the framework assumes `kCFPreferencesCurrentHost`. - “kColorSyncDeviceUserScope“: The user scope of the device; one of `kCFPreferencesCurrentUser` or `kCFPreferencesAnyUser`. If you don't specify it, the framework assumes `kCFPreferencesCurrentUser`. The factory profiles dictionary (the value for the key “kColorSyncFactoryProfiles“ in `deviceInfo`) requires the following keys and values. A ProfileID (of `CFStringRef` type) identifies each profile and serves as the key. The value associated with the key is a profile info dictionary that describes an individual device profile. - “kColorSyncDeviceDefaultProfileID“: The associated value must be one of the ProfileIDs present in the dictionary. Presence of this key is not required if there is only one factory profile. Each profile info `CFDictionary` requires the following keys: - “kColorSyncDeviceProfileURL“: The `CFURLRef` of the profile to register. - “kColorSyncDeviceModeDescriptions“: A `CFDictionary` with localized device mode names for the profile. Localization keys must be five-character strings containing a language code and region code in the `lc_RG` format, and must contain (at least) the `en_US` locale. For example, `en_US` "Glossy Paper with best quality". Example of a `deviceInfo` dictionary: << kColorSyncDeviceDescriptions   << en_US  My Little Printer de_DE  Mein Kleiner Drucker fr_FR  Mon petit immprimeur ... >> kColorSyncFactoryProfiles       << CFSTR("Profile 1")  << kColorSyncDeviceProfileURL    {CFURLRef} kColorSyncDeviceModeDescriptions    << en_US Glossy Paper de_DE Glanzpapier fr_FR Papier glace ... >> ... kColorSyncDeviceDefaultProfileID  CFSTR("Profile 1") >> kColorSyncDeviceUserScope   kCFPreferencesAnyUser kColorSyncDeviceHostScope   kCFPreferencesCurrentHost << - Note: Scope for factory profiles is exactly the same as the device scope. - Note: Pass `kCFNull` in lieu of the profile URL, or no URL key/value pair at all, if a factory profile is not available. This enables setting a custom profile. - Note: For compatibility with the legacy API, create the profile keys as `CFString`s from `uint32_t` numbers as follows: `CFStringRef key = CFStringCreateWithFormat(NULL, NULL, CFSTR("%u"), (uint32_t) i);` - Parameters: - deviceClass: The class of the device to register. - deviceID: The identifier of the device to register. - deviceInfo: A dictionary containing the information needed to register a device. - Returns: `true` on success and `false` in case of failure.
 func ColorSyncRegisterDevice(deviceClass unsafe.Pointer, deviceID unsafe.Pointer, deviceInfo unsafe.Pointer) bool {
 	return _fnColorSyncRegisterDevice(deviceClass, deviceID, deviceInfo)
 }
 
+// Converts color data from a source layout to a destination layout using a color transform. Use this function with care for performance reasons. Color conversions are computationally intensive and the recommended way to perform these is by using the vImage converter with a ColorSync code fragment. vImage employs vectorized code which is not only faster but also more battery efficient. Please visit the following link to see a sample application of vImage used in conjunction with ColorSync: <https://developer.apple.com/library/prerelease/content/samplecode/convertImage/Listings/convertImage_main_c.html> More details regarding ColorSync code fragments are included below, as well. - Parameters: - transform: The transform to use for converting color. - width: The width of the image in pixels. - height: The height of the image in pixels. - dst: A pointer to the destination where the function writes the results. - dstDepth: Describes the bit depth and type of the destination color components. - dstLayout: Describes the format and byte packing of the destination pixels. - dstBytesPerRow: The number of bytes in the row of data. - src: A pointer to the data to convert. - srcDepth: Describes the bit depth and type of the source color components. - srcLayout: Describes the format and byte packing of the source pixels. - srcBytesPerRow: The number of bytes in the row of data. - options: A dictionary with additional options. - Returns: `true` if the conversion succeeds, or `false` otherwise.
 func ColorSyncTransformConvert(transform unsafe.Pointer, width uint, height uint, dst unsafe.Pointer, dstDepth ColorSyncDataDepth, dstLayout uint32, dstBytesPerRow uint, src unsafe.Pointer, srcDepth ColorSyncDataDepth, srcLayout uint32, srcBytesPerRow uint, options unsafe.Pointer) bool {
 	return _fnColorSyncTransformConvert(transform, width, height, dst, dstDepth, dstLayout, dstBytesPerRow, src, srcDepth, srcLayout, srcBytesPerRow, options)
 }
 
+// Copies a property from a color transform. - Parameters: - transform: The transform from which to copy the property. - key: A `CFTypeRef` used as a key to identify the property. - options: A dictionary with additional options.
 func ColorSyncTransformCopyProperty(transform unsafe.Pointer, key unsafe.Pointer, options unsafe.Pointer) unsafe.Pointer {
 	return _fnColorSyncTransformCopyProperty(transform, key, options)
 }
 
+// Creates a color transform from a sequence of profiles. Each dictionary in `profileSequence` contains a profile object and information on the usage of the profile in the transform. Required keys: - “kColorSyncProfile“: A “ColorSyncProfileRef“. - “kColorSyncRenderingIntent“: A `CFStringRef` defining the rendering intent. - “kColorSyncTransformTag“: A `CFStringRef` defining which tags to use. Optional key: - “kColorSyncBlackPointCompensation“: A `CFBooleanRef` to enable or disable black point compensation. - Parameters: - profileSequence: An array of dictionaries, each one containing a profile object and the information on the usage of the profile in the transform. - options: A dictionary with additional public global options (for example, preferred CMM, quality, and so on). It can also contain custom options that are CMM specific. - Returns: A new “ColorSyncTransformRef“, or `NULL` in case of failure.
 func ColorSyncTransformCreate(profileSequence unsafe.Pointer, options unsafe.Pointer) unsafe.Pointer {
 	return _fnColorSyncTransformCreate(profileSequence, options)
 }
 
+// Returns the profile sequence used to create a color transform. - Parameter transform: The transform from which to get the profile sequence used to create the transform.
 func ColorSyncTransformGetProfileSequence(transform unsafe.Pointer) unsafe.Pointer {
 	return _fnColorSyncTransformGetProfileSequence(transform)
 }
 
+// Returns the type identifier for the `ColorSyncTransform` opaque type. - Returns: The `CFTypeID` for `ColorSyncTransform` objects.
 func ColorSyncTransformGetTypeID() uint {
 	return _fnColorSyncTransformGetTypeID()
 }
 
+// Sets a property on a color transform. - Parameters: - transform: The transform in which to set the property. - key: A `CFTypeRef` used as a key to identify the property. - property: The `CFTypeRef` to set as the property.
 func ColorSyncTransformSetProperty(transform unsafe.Pointer, key unsafe.Pointer, property unsafe.Pointer) {
 	_fnColorSyncTransformSetProperty(transform, key, property)
 }
 
+// Unregisters a device of the given class and identifier. - Parameters: - deviceClass: The class of the device to unregister. - deviceID: The identifier of the device to unregister. - Returns: `true` on success and `false` in case of failure.
 func ColorSyncUnregisterDevice(deviceClass unsafe.Pointer, deviceID unsafe.Pointer) bool {
 	return _fnColorSyncUnregisterDevice(deviceClass, deviceID)
 }

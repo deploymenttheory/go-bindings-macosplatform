@@ -10,10 +10,6 @@
       "doc": "The amount of ambient light in the user’s environment.",
       "url": "https://developer.apple.com/documentation/sensorkit/srambientlightsample"
     },
-    "SRApplicationUsage": {
-      "doc": "An object that describes the user’s app activity over a period of time.",
-      "url": "https://developer.apple.com/documentation/sensorkit/srapplicationusage"
-    },
     "SRAudioLevel": {
       "doc": "An object that represents the audio level for a range of speech.",
       "url": "https://developer.apple.com/documentation/sensorkit/sraudiolevel"
@@ -58,13 +54,12 @@
       "doc": "Recorded data that a sensor reader fetches.",
       "url": "https://developer.apple.com/documentation/sensorkit/srfetchresult"
     },
+    "SRHeadphoneSettings": {
+      "url": "https://developer.apple.com/documentation/sensorkit/srheadphonesettings"
+    },
     "SRKeyboardMetrics": {
       "doc": "The configuration of a device’s keyboard and its usage patterns.",
       "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics"
-    },
-    "SRKeyboardProbabilityMetric": {
-      "doc": "A likelihood of occurrence.",
-      "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardprobabilitymetric"
     },
     "SRMediaEvent": {
       "doc": "A user interaction with a media object, such as an image or a video.",
@@ -73,10 +68,6 @@
     "SRMessagesUsageReport": {
       "doc": "An object that describes the user’s Messages app activity over a period of time.",
       "url": "https://developer.apple.com/documentation/sensorkit/srmessagesusagereport"
-    },
-    "SRNotificationUsage": {
-      "doc": "An object that describes notification frequency and the manner in which the user interacts with notifications.",
-      "url": "https://developer.apple.com/documentation/sensorkit/srnotificationusage"
     },
     "SRPhoneUsageReport": {
       "doc": "An object that describes the user’s phone activity over a period of time.",
@@ -101,6 +92,9 @@
     "SRSleepSession": {
       "url": "https://developer.apple.com/documentation/sensorkit/srsleepsession"
     },
+    "SRSourceDevice": {
+      "url": "https://developer.apple.com/documentation/sensorkit/srsourcedevice"
+    },
     "SRSpeechExpression": {
       "doc": "An object that represents the metrics and voice analytics for a range of speech.",
       "url": "https://developer.apple.com/documentation/sensorkit/srspeechexpression"
@@ -120,10 +114,6 @@
     "SRVisit": {
       "doc": "The user’s progress in their daily travel routine.",
       "url": "https://developer.apple.com/documentation/sensorkit/srvisit"
-    },
-    "SRWebUsage": {
-      "doc": "An object that describes a user’s website usage.",
-      "url": "https://developer.apple.com/documentation/sensorkit/srwebusage"
     },
     "SRWristDetection": {
       "doc": "The configuration of a watch on the wearer’s wrist.",
@@ -145,10 +135,6 @@
     }
   },
   "enums": {
-    "SRAmbientLightSensorPlacement": {
-      "doc": "Directional values that describe light-source location with respect to the sensor.",
-      "url": "https://developer.apple.com/documentation/sensorkit/srambientlightsensorplacement"
-    },
     "SRAuthorizationStatus": {
       "doc": "The states that model whether the user approves the app to read a particular sensor.",
       "url": "https://developer.apple.com/documentation/sensorkit/srauthorizationstatus",
@@ -166,10 +152,6 @@
           "url": "https://developer.apple.com/documentation/sensorkit/srauthorizationstatus/notdetermined"
         }
       }
-    },
-    "SRCrownOrientation": {
-      "doc": "Directions the Digital Crown can face with respect to the wearer.",
-      "url": "https://developer.apple.com/documentation/sensorkit/srcrownorientation"
     },
     "SRDeletionReason": {
       "doc": "Reasons that the framework deletes samples.",
@@ -197,44 +179,6 @@
         }
       }
     },
-    "SRElectrocardiogramDataFlags": {
-      "doc": "Sensor context or events that occur during a sample ECG data reading.",
-      "url": "https://developer.apple.com/documentation/sensorkit/srelectrocardiogramdataflags",
-      "members": {
-        "SRElectrocardiogramDataFlagsNone": {
-          "doc": "Flag that indicates no context or events occur.",
-          "url": "https://developer.apple.com/documentation/sensorkit/srelectrocardiogramdataflags/srelectrocardiogramdataflagsnone"
-        }
-      }
-    },
-    "SRElectrocardiogramLead": {
-      "doc": "The location of the lead that a person uses to record the ECG data.",
-      "url": "https://developer.apple.com/documentation/sensorkit/srelectrocardiogramlead"
-    },
-    "SRElectrocardiogramSessionGuidance": {
-      "doc": "The type of session guidance used to record a ECG sample.",
-      "url": "https://developer.apple.com/documentation/sensorkit/srelectrocardiogramsessionguidance"
-    },
-    "SRElectrocardiogramSessionState": {
-      "doc": "The state of a session used to record a ECG sample.",
-      "url": "https://developer.apple.com/documentation/sensorkit/srelectrocardiogramsessionstate"
-    },
-    "SRErrorCode": {
-      "doc": "The kinds of problems that stop a recording or a fetch.",
-      "url": "https://developer.apple.com/documentation/sensorkit/srerrorcode"
-    },
-    "SRFaceMetricsContext": {
-      "doc": "The context of the system during the camera session.",
-      "url": "https://developer.apple.com/documentation/sensorkit/srfacemetricscontext"
-    },
-    "SRKeyboardMetricsSentimentCategory": {
-      "doc": "Moods that the framework determines by analyzing the user’s input.",
-      "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetricssentimentcategory"
-    },
-    "SRLocationCategory": {
-      "doc": "Types of locations.",
-      "url": "https://developer.apple.com/documentation/sensorkit/srlocationcategory"
-    },
     "SRMediaEventType": {
       "doc": "The types of user interaction with media that the sensor tracks.",
       "url": "https://developer.apple.com/documentation/sensorkit/srmediaeventtype",
@@ -248,38 +192,6 @@
           "url": "https://developer.apple.com/documentation/sensorkit/srmediaeventtype/onscreen"
         }
       }
-    },
-    "SRNotificationEvent": {
-      "doc": "The ways that a user interacts with notifications.",
-      "url": "https://developer.apple.com/documentation/sensorkit/srnotificationevent"
-    },
-    "SRSpeechMetricsSessionFlags": {
-      "doc": "Possible details about processing an audio stream.",
-      "url": "https://developer.apple.com/documentation/sensorkit/srspeechmetricssessionflags",
-      "members": {
-        "SRSpeechMetricsSessionFlagsDefault": {
-          "doc": "Audio processing went through the system voice processor.",
-          "url": "https://developer.apple.com/documentation/sensorkit/srspeechmetricssessionflags/srspeechmetricssessionflagsdefault"
-        }
-      }
-    },
-    "SRTextInputSessionType": {
-      "doc": "Methods to input text during a session.",
-      "url": "https://developer.apple.com/documentation/sensorkit/srtextinputsessiontype"
-    },
-    "SRWristLocation": {
-      "doc": "Preferences for where a user wears a watch.",
-      "url": "https://developer.apple.com/documentation/sensorkit/srwristlocation"
-    },
-    "SRWristTemperatureCondition": {
-      "doc": "The user activities with the watch that can impact the temperature measurement.",
-      "url": "https://developer.apple.com/documentation/sensorkit/srwristtemperaturecondition"
-    }
-  },
-  "structs": {
-    "SRAmbientLightChromaticity": {
-      "doc": "A coordinate pair that describes light brightness and tint.",
-      "url": "https://developer.apple.com/documentation/sensorkit/srambientlightchromaticity"
     }
   },
   "methods": {
@@ -1245,8 +1157,8 @@
         "url": "https://developer.apple.com/documentation/sensorkit/srwristtemperaturesession/startdate"
       },
       "temperatures": {
-        "doc": "An enumerator that you use to get the wrist temperatures and their accuracies.",
-        "url": "https://developer.apple.com/documentation/sensorkit/srwristtemperaturesession/temperatures-7p7du"
+        "doc": "The wrist temperatures and their accuracies.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srwristtemperaturesession/temperatures-8bqrl"
       },
       "version": {
         "doc": "The version of the algorithm that analyzes the temperature.",

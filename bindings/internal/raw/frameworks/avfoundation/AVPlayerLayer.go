@@ -72,7 +72,7 @@ func (o *AVPlayerLayer) StopShowingCaptionPreview() {
 	o.Ptr().Send(_aVPlayerLayerSelStopShowingCaptionPreview)
 }
 
-// @property		player @abstract		Indicates the instance of AVPlayer for which the AVPlayerLayer displays visual output
+// Indicates the instance of AVPlayer for which the AVPlayerLayer displays visual output
 func (o *AVPlayerLayer) Player() *AVPlayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerLayerSelPlayer)
 	if _ret != 0 {
@@ -85,7 +85,7 @@ func (o *AVPlayerLayer) SetPlayer(player *AVPlayer) {
 	o.Ptr().Send(_aVPlayerLayerSelSetPlayer, player.Ptr())
 }
 
-// @property		videoGravity @abstract		A string defining how the video is displayed within an AVPlayerLayer bounds rect. @discusssion	Options are AVLayerVideoGravityResizeAspect, AVLayerVideoGravityResizeAspectFill and AVLayerVideoGravityResize. AVLayerVideoGravityResizeAspect is default. See <AVFoundation/AVAnimation.h> for a description of these options.
+// A string defining how the video is displayed within an AVPlayerLayer bounds rect. @discusssion Options are AVLayerVideoGravityResizeAspect, AVLayerVideoGravityResizeAspectFill and AVLayerVideoGravityResize. AVLayerVideoGravityResizeAspect is default. See <AVFoundation/AVAnimation.h> for a description of these options.
 func (o *AVPlayerLayer) VideoGravity() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerLayerSelVideoGravity)
 	if _ret != 0 {
@@ -98,19 +98,19 @@ func (o *AVPlayerLayer) SetVideoGravity(videoGravity *foundation.NSString) {
 	o.Ptr().Send(_aVPlayerLayerSelSetVideoGravity, videoGravity.Ptr())
 }
 
-// @property		readyForDisplay @abstract		Boolean indicating that the first video frame has been made ready for display for the current item of the associated AVPlayer. @discusssion	Use this property as an indicator of when best to show or animate-in an AVPlayerLayer into view. An AVPlayerLayer may be displayed, or made visible, while this property is NO, however the layer will not have any user-visible content until the value becomes YES. Note that if an animation is added to an AVPlayerLayer before it becomes readyForDisplay the video image displayed inside might not animate with the receiver. This property remains NO for an AVPlayer currentItem whose AVAsset contains no enabled video tracks. This property is key-value observable.
+// Boolean indicating that the first video frame has been made ready for display for the current item of the associated AVPlayer. @discusssion Use this property as an indicator of when best to show or animate-in an AVPlayerLayer into view. An AVPlayerLayer may be displayed, or made visible, while this property is NO, however the layer will not have any user-visible content until the value becomes YES. Note that if an animation is added to an AVPlayerLayer before it becomes readyForDisplay the video image displayed inside might not animate with the receiver. This property remains NO for an AVPlayer currentItem whose AVAsset contains no enabled video tracks. This property is key-value observable.
 func (o *AVPlayerLayer) IsReadyForDisplay() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVPlayerLayerSelIsReadyForDisplay)
 	return _ret
 }
 
-// @property		videoRect @abstract		The current size and position of the video image as displayed within the receiver's bounds.
+// The current size and position of the video image as displayed within the receiver's bounds.
 func (o *AVPlayerLayer) VideoRect() corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _aVPlayerLayerSelVideoRect)
 	return _ret
 }
 
-// @property		pixelBufferAttributes @abstract		The client requirements for the visual output displayed in AVPlayerLayer during playback. @discussion		Pixel buffer attribute keys are defined in <CoreVideo/CVPixelBuffer.h> This property is key-value observable.
+// The client requirements for the visual output displayed in AVPlayerLayer during playback. Pixel buffer attribute keys are defined in <CoreVideo/CVPixelBuffer.h> This property is key-value observable.
 func (o *AVPlayerLayer) PixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerLayerSelPixelBufferAttributes)
 	if _ret != 0 {

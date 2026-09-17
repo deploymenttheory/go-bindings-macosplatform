@@ -36,6 +36,14 @@ var (
 	_aVCaptureMovieFileOutputSelIsSpatialVideoCaptureSupported                                                                = objc.RegisterName("isSpatialVideoCaptureSupported")
 	_aVCaptureMovieFileOutputSelIsSpatialVideoCaptureEnabled                                                                  = objc.RegisterName("isSpatialVideoCaptureEnabled")
 	_aVCaptureMovieFileOutputSelSetSpatialVideoCaptureEnabled                                                                 = objc.RegisterName("setSpatialVideoCaptureEnabled:")
+	_aVCaptureMovieFileOutputSelIsCinematicVideoMetadataCaptureSupported                                                      = objc.RegisterName("isCinematicVideoMetadataCaptureSupported")
+	_aVCaptureMovieFileOutputSelAutomaticallyAdjustsCinematicVideoMetadataCaptureEnabled                                      = objc.RegisterName("automaticallyAdjustsCinematicVideoMetadataCaptureEnabled")
+	_aVCaptureMovieFileOutputSelSetAutomaticallyAdjustsCinematicVideoMetadataCaptureEnabled                                   = objc.RegisterName("setAutomaticallyAdjustsCinematicVideoMetadataCaptureEnabled:")
+	_aVCaptureMovieFileOutputSelIsCinematicVideoMetadataCaptureEnabled                                                        = objc.RegisterName("isCinematicVideoMetadataCaptureEnabled")
+	_aVCaptureMovieFileOutputSelSetCinematicVideoMetadataCaptureEnabled                                                       = objc.RegisterName("setCinematicVideoMetadataCaptureEnabled:")
+	_aVCaptureMovieFileOutputSelIsProVideoStorageSupported                                                                    = objc.RegisterName("isProVideoStorageSupported")
+	_aVCaptureMovieFileOutputSelUsesProVideoStorage                                                                           = objc.RegisterName("usesProVideoStorage")
+	_aVCaptureMovieFileOutputSelSetUsesProVideoStorage                                                                        = objc.RegisterName("setUsesProVideoStorage:")
 )
 
 func AVCaptureMovieFileOutputFromID(id objc.ID) *AVCaptureMovieFileOutput {
@@ -141,4 +149,48 @@ func (o *AVCaptureMovieFileOutput) IsSpatialVideoCaptureEnabled() bool {
 
 func (o *AVCaptureMovieFileOutput) SetSpatialVideoCaptureEnabled(spatialVideoCaptureEnabled bool) {
 	o.Ptr().Send(_aVCaptureMovieFileOutputSelSetSpatialVideoCaptureEnabled, spatialVideoCaptureEnabled)
+}
+
+// Returns whether capturing cinematic video metadata to the movie file is supported in the current session configuration. Cinematic video metadata enables post-capture cinematic video editing using the Cinematic framework. This property returns `true` when all of the following conditions are met: - The source device's `activeFormat` supports cinematic video metadata capture. - The source device's dynamic aspect ratio is 16:9 or 9:16 (or unset). - Spatial video capture (`spatialVideoCaptureEnabled`) is not enabled. - No other incompatible features are enabled. When switching cameras, formats, or toggling other features, this property may change. This property is key-value observable.
+func (o *AVCaptureMovieFileOutput) IsCinematicVideoMetadataCaptureSupported() bool {
+	_ret := objc.Send[bool](o.Ptr(), _aVCaptureMovieFileOutputSelIsCinematicVideoMetadataCaptureSupported)
+	return _ret
+}
+
+// Controls whether cinematic video metadata capture is automatically managed by the framework. When this property is `true` (the default), the framework manages `cinematicVideoMetadataCaptureEnabled` automatically. The framework decides when to enable cinematic video metadata capture; capture is not guaranteed even when `cinematicVideoMetadataCaptureSupported` is `true`. Clients that need explicit control over whether metadata is captured should set this property to `false` and manage `cinematicVideoMetadataCaptureEnabled` directly. When this property is `false`, `cinematicVideoMetadataCaptureEnabled` is not automatically managed and must be explicitly set by the client. Setting this property from `true` to `false` sets `cinematicVideoMetadataCaptureEnabled` to `false`. This property can be set before calling `-[AVCaptureSession startRunning]` or within `-[AVCaptureSession beginConfiguration]` and `-[AVCaptureSession commitConfiguration]` while the session is running. Default value: `true`.
+func (o *AVCaptureMovieFileOutput) AutomaticallyAdjustsCinematicVideoMetadataCaptureEnabled() bool {
+	_ret := objc.Send[bool](o.Ptr(), _aVCaptureMovieFileOutputSelAutomaticallyAdjustsCinematicVideoMetadataCaptureEnabled)
+	return _ret
+}
+
+// Controls whether cinematic video metadata capture is automatically managed by the framework. When this property is `true` (the default), the framework manages `cinematicVideoMetadataCaptureEnabled` automatically. The framework decides when to enable cinematic video metadata capture; capture is not guaranteed even when `cinematicVideoMetadataCaptureSupported` is `true`. Clients that need explicit control over whether metadata is captured should set this property to `false` and manage `cinematicVideoMetadataCaptureEnabled` directly. When this property is `false`, `cinematicVideoMetadataCaptureEnabled` is not automatically managed and must be explicitly set by the client. Setting this property from `true` to `false` sets `cinematicVideoMetadataCaptureEnabled` to `false`. This property can be set before calling `-[AVCaptureSession startRunning]` or within `-[AVCaptureSession beginConfiguration]` and `-[AVCaptureSession commitConfiguration]` while the session is running. Default value: `true`.
+func (o *AVCaptureMovieFileOutput) SetAutomaticallyAdjustsCinematicVideoMetadataCaptureEnabled(automaticallyAdjustsCinematicVideoMetadataCaptureEnabled bool) {
+	o.Ptr().Send(_aVCaptureMovieFileOutputSelSetAutomaticallyAdjustsCinematicVideoMetadataCaptureEnabled, automaticallyAdjustsCinematicVideoMetadataCaptureEnabled)
+}
+
+// Indicates whether cinematic video metadata is captured to movie files. When `true`, recorded movie files include a cinematic video metadata track that enables post-capture cinematic video editing using the Cinematic framework. This property may only be set when `automaticallyAdjustsCinematicVideoMetadataCaptureEnabled` is `false`. Setting this property when `automaticallyAdjustsCinematicVideoMetadataCaptureEnabled` is `true` throws an `NSInvalidArgumentException`. This property may only be set to `true` when `cinematicVideoMetadataCaptureSupported` is `true`. Setting to `true` when not supported throws an `NSInvalidArgumentException`. This property is key-value observable.
+func (o *AVCaptureMovieFileOutput) IsCinematicVideoMetadataCaptureEnabled() bool {
+	_ret := objc.Send[bool](o.Ptr(), _aVCaptureMovieFileOutputSelIsCinematicVideoMetadataCaptureEnabled)
+	return _ret
+}
+
+// Indicates whether cinematic video metadata is captured to movie files. When `true`, recorded movie files include a cinematic video metadata track that enables post-capture cinematic video editing using the Cinematic framework. This property may only be set when `automaticallyAdjustsCinematicVideoMetadataCaptureEnabled` is `false`. Setting this property when `automaticallyAdjustsCinematicVideoMetadataCaptureEnabled` is `true` throws an `NSInvalidArgumentException`. This property may only be set to `true` when `cinematicVideoMetadataCaptureSupported` is `true`. Setting to `true` when not supported throws an `NSInvalidArgumentException`. This property is key-value observable.
+func (o *AVCaptureMovieFileOutput) SetCinematicVideoMetadataCaptureEnabled(cinematicVideoMetadataCaptureEnabled bool) {
+	o.Ptr().Send(_aVCaptureMovieFileOutputSelSetCinematicVideoMetadataCaptureEnabled, cinematicVideoMetadataCaptureEnabled)
+}
+
+// Whether this movie file output supports writing to Pro Video Storage in its current configuration. A value of `YES` indicates that Pro Video Storage support is enabled for this output while `NO` indicates it is not. Check this value prior to setting property usesProVideoStorage to avoid exceptions when Pro Video Storage support is not enabled.
+func (o *AVCaptureMovieFileOutput) IsProVideoStorageSupported() bool {
+	_ret := objc.Send[bool](o.Ptr(), _aVCaptureMovieFileOutputSelIsProVideoStorageSupported)
+	return _ret
+}
+
+// Whether this movie file output is configured to write to Pro Video Storage. Default is `NO`. Raises an exception if set to `YES` while proVideoStorageSupported is `NO`.
+func (o *AVCaptureMovieFileOutput) UsesProVideoStorage() bool {
+	_ret := objc.Send[bool](o.Ptr(), _aVCaptureMovieFileOutputSelUsesProVideoStorage)
+	return _ret
+}
+
+func (o *AVCaptureMovieFileOutput) SetUsesProVideoStorage(usesProVideoStorage bool) {
+	o.Ptr().Send(_aVCaptureMovieFileOutputSelSetUsesProVideoStorage, usesProVideoStorage)
 }

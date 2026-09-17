@@ -27,6 +27,8 @@ var (
 	_mTLTensorDescriptorSelSetDataType           = objc.RegisterName("setDataType:")
 	_mTLTensorDescriptorSelUsage                 = objc.RegisterName("usage")
 	_mTLTensorDescriptorSelSetUsage              = objc.RegisterName("setUsage:")
+	_mTLTensorDescriptorSelAuxiliaryPlanes       = objc.RegisterName("auxiliaryPlanes")
+	_mTLTensorDescriptorSelSetAuxiliaryPlanes    = objc.RegisterName("setAuxiliaryPlanes:")
 	_mTLTensorDescriptorSelResourceOptions       = objc.RegisterName("resourceOptions")
 	_mTLTensorDescriptorSelSetResourceOptions    = objc.RegisterName("setResourceOptions:")
 	_mTLTensorDescriptorSelCpuCacheMode          = objc.RegisterName("cpuCacheMode")
@@ -47,7 +49,7 @@ func MTLTensorDescriptorFromID(id objc.ID) *MTLTensorDescriptor {
 	return o
 }
 
-// An array of sizes, in elements, one for each dimension of the tensors you create with this descriptor. The default value of this property is a rank one extents with size one.
+// An array of sizes, in elements, one for each dimension of the tensors you create with this descriptor. Every element of the array needs to be greater than `0`. When “dataType“ is “MTLTensorDataType/MTLTensorDataTypeInt2“, “MTLTensorDataType/MTLTensorDataTypeUInt2“, “MTLTensorDataType/MTLTensorDataTypeInt4“, “MTLTensorDataType/MTLTensorDataTypeUInt4“, “MTLTensorDataType/MTLTensorDataTypeMetalFloat4E2M1“, “MTLTensorDataType/MTLTensorDataTypeMetalFloat8E4M3“, “MTLTensorDataType/MTLTensorDataTypeMetalFloat8E5M2“, or “MTLTensorDataType/MTLTensorDataTypeMetalFloat8UE8M0“: - The dimension value of the array's first element needs to be a multiple of 32 elements. - The extents needs to have at least one dimension. If the tensor has auxiliary planes, each dimension needs to be evenly divisible by its corresponding block factor. The default value of this property is a rank one extents with size one.
 func (o *MTLTensorDescriptor) Dimensions() *MTLTensorExtents {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLTensorDescriptorSelDimensions)
 	if _ret != 0 {
@@ -60,7 +62,7 @@ func (o *MTLTensorDescriptor) SetDimensions(dimensions *MTLTensorExtents) {
 	o.Ptr().Send(_mTLTensorDescriptorSelSetDimensions, dimensions.Ptr())
 }
 
-// An array of strides, in elements, one for each dimension in the tensors you create with this descriptor, if applicable. You are responsible for ensuring `strides` meets the following requirements: - The first element of `strides` is one. - If “usage“ contains “MTLTensorUsage/MTLTensorUsageMachineLearning“, the second element of `strides` is aligned to 64 bytes, and for any `i` larger than one, `strides[i]` is equal to `strides[i-1] * dimensions[i-1]`. - If “dataType“ is a sub-byte “MTLTensorDataType“, for any `i` greater than or equal to 1, `strides[i]` is aligned to 128 bytes. This is not a requirement for non-sub-byte data types, but following this convention improves performance. Only set this property when creating tensors from a buffer.
+// An array of strides, in elements, one for each dimension of this tensor, if applicable. The stride value of the array's first element needs to be exactly `1`, because it is the innermost dimension. The strides for the subsequent dimensions can have different requirements based on the value of other properties. When the “usage“ property includes the “MTLTensorUsage/MTLTensorUsageMachineLearning“ option: - The second element of the array needs to be a multiple of 64 bytes. - The rest of the elements in the array need to equal the product of the previous stride multiplied with the size of the previous dimension. For example: `strides[i] = strides[i - 1] * dimensions[i - 1]`. When “dataType“ is “MTLTensorDataType/MTLTensorDataTypeInt2“, “MTLTensorDataType/MTLTensorDataTypeUInt2“, “MTLTensorDataType/MTLTensorDataTypeInt4“, “MTLTensorDataType/MTLTensorDataTypeUInt4“, “MTLTensorDataType/MTLTensorDataTypeMetalFloat4E2M1“, “MTLTensorDataType/MTLTensorDataTypeMetalFloat8E4M3“, “MTLTensorDataType/MTLTensorDataTypeMetalFloat8E5M2“, or “MTLTensorDataType/MTLTensorDataTypeMetalFloat8UE8M0“, all elements of the array, except for the first element, need to be a multiple of 128 bytes. > Tip: You can improve runtime performance by using strides that are multiples of 128, even when it's not a requirement. Only set this property when creating tensors from a buffer.
 func (o *MTLTensorDescriptor) Strides() *MTLTensorExtents {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLTensorDescriptorSelStrides)
 	if _ret != 0 {
@@ -73,7 +75,7 @@ func (o *MTLTensorDescriptor) SetStrides(strides *MTLTensorExtents) {
 	o.Ptr().Send(_mTLTensorDescriptorSelSetStrides, strides.Ptr())
 }
 
-// A data format for the tensors you create with this descriptor. The default value of this property is “MTLTensorDataType/MTLTensorDataTypeFloat32“.
+// The data format of all elements in the data plane. The default value of this property is “MTLTensorDataType/MTLTensorDataTypeFloat32“. “MTLTensorDataType/MTLTensorDataTypeMetalFloat8UE8M0“ is not a valid data type for this property.
 func (o *MTLTensorDescriptor) DataType() MTLTensorDataType {
 	_ret := objc.Send[MTLTensorDataType](o.Ptr(), _mTLTensorDescriptorSelDataType)
 	return _ret
@@ -93,7 +95,20 @@ func (o *MTLTensorDescriptor) SetUsage(usage MTLTensorUsage) {
 	o.Ptr().Send(_mTLTensorDescriptorSelSetUsage, usage)
 }
 
-// A packed set of the `storageMode`, `cpuCacheMode` and `hazardTrackingMode` properties.
+// The auxiliary plane configurations for this tensor. Set this property with a populated “MTLTensorAuxiliaryPlaneDescriptorMap“ to create a multi-plane tensor. When `nil`, the tensor has only a data plane. Multi-plane tensors do not support “MTLTensorUsage/MTLTensorUsageMachineLearning“. Use “MTLTensorUsage/MTLTensorUsageCompute“ or “MTLTensorUsage/MTLTensorUsageRender“. Multi-plane tensors do not support data types larger than one byte as the data plane type. Multi-plane tensors do not support rank zero. The default value is `nil`.
+func (o *MTLTensorDescriptor) AuxiliaryPlanes() *MTLTensorAuxiliaryPlaneDescriptorMap {
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTLTensorDescriptorSelAuxiliaryPlanes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return MTLTensorAuxiliaryPlaneDescriptorMapFromID(_ret)
+}
+
+func (o *MTLTensorDescriptor) SetAuxiliaryPlanes(auxiliaryPlanes *MTLTensorAuxiliaryPlaneDescriptorMap) {
+	o.Ptr().Send(_mTLTensorDescriptorSelSetAuxiliaryPlanes, auxiliaryPlanes.Ptr())
+}
+
+// A packed set of the “storageMode“, “cpuCacheMode“, and “hazardTrackingMode“ properties.
 func (o *MTLTensorDescriptor) ResourceOptions() MTLResourceOptions {
 	_ret := objc.Send[MTLResourceOptions](o.Ptr(), _mTLTensorDescriptorSelResourceOptions)
 	return _ret
@@ -113,7 +128,7 @@ func (o *MTLTensorDescriptor) SetCpuCacheMode(cpuCacheMode MTLCPUCacheMode) {
 	o.Ptr().Send(_mTLTensorDescriptorSelSetCpuCacheMode, cpuCacheMode)
 }
 
-// A value that configures the memory location and access permissions of tensors you create with this descriptor. The default value of this property defaults to “MTLStorageMode/MTLStorageModeShared“.
+// A value that configures the memory location and access permissions of tensors you create with this descriptor. The default value of this property is “MTLStorageMode/MTLStorageModeShared“.
 func (o *MTLTensorDescriptor) StorageMode() MTLStorageMode {
 	_ret := objc.Send[MTLStorageMode](o.Ptr(), _mTLTensorDescriptorSelStorageMode)
 	return _ret

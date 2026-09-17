@@ -195,6 +195,7 @@ func (o *NSItemProvider) LoadObjectOfClassCompletionHandler(aClass unsafe.Pointe
 }
 
 // Creates an item provider with an object, according to the item provider type coercion policy.
+// Deprecated: Use initWithObject: instead.
 func (o *NSItemProvider) InitWithItemTypeIdentifier(item NSSecureCoding, typeIdentifier *NSString) *NSItemProvider {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSItemProviderSelInitWithItemTypeIdentifier, item, typeIdentifier.Ptr())
 	if _ret != 0 {
@@ -213,6 +214,7 @@ func (o *NSItemProvider) InitWithContentsOfURL(fileURL *NSURL) *NSItemProvider {
 }
 
 // Lazily registers an item, according to the item provider type coercion policy.
+// Deprecated: Use registerObjectOfClass:visibility:loadHandler: instead.
 func (o *NSItemProvider) RegisterItemForTypeIdentifierLoadHandler(typeIdentifier *NSString, loadHandler func(objc.Block, objc.Class, *NSDictionary[objc.ID, objc.ID])) {
 	var __block_loadHandler objc.Block
 	if loadHandler != nil {
@@ -228,6 +230,7 @@ func (o *NSItemProvider) RegisterItemForTypeIdentifierLoadHandler(typeIdentifier
 }
 
 // Loads the item’s data and coerces it to the specified type.
+// Deprecated: Use loadObjectOfClass:completionHandler: instead.
 func (o *NSItemProvider) LoadItemForTypeIdentifierOptionsCompletionHandler(typeIdentifier *NSString, options *NSDictionary[objc.ID, objc.ID], completionHandler func(objc.ID, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -239,6 +242,7 @@ func (o *NSItemProvider) LoadItemForTypeIdentifierOptionsCompletionHandler(typeI
 	o.Ptr().Send(_nSItemProviderSelLoadItemForTypeIdentifierOptionsCompletionHandler, typeIdentifier.Ptr(), options.Ptr(), __block_completionHandler)
 }
 
+// The array of type identifiers for the item provider, in the same order they were registered.
 func (o *NSItemProvider) RegisteredTypeIdentifiers() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSItemProviderSelRegisteredTypeIdentifiers)
 	if _ret != 0 {
@@ -247,6 +251,7 @@ func (o *NSItemProvider) RegisteredTypeIdentifiers() *NSArray[*NSString] {
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// The suggested name for the item.
 func (o *NSItemProvider) SuggestedName() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSItemProviderSelSuggestedName)
 	if _ret != 0 {
@@ -271,6 +276,7 @@ func (o *NSItemProvider) LoadPreviewImageWithOptionsCompletionHandler(options *N
 	o.Ptr().Send(_nSItemProviderSelLoadPreviewImageWithOptionsCompletionHandler, options.Ptr(), __block_completionHandler)
 }
 
+// The custom preview image handler block for the item provider. In your image handler block, return an “NSURL“ object that specifies a file, or return an “NSData“ object.
 func (o *NSItemProvider) PreviewImageHandler() objc.Block {
 	_ret := objc.Send[objc.Block](o.Ptr(), _nSItemProviderSelPreviewImageHandler)
 	return _ret

@@ -39,7 +39,7 @@ func KMADimFlashingLightsChangedNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kMADimFlashingLightsChangedNotification")))
 }
 
-// MAMusicHapticsManagerActiveStatusDidChangeNotification returns the address of the symbol MAMusicHapticsManagerActiveStatusDidChangeNotification.
-func MAMusicHapticsManagerActiveStatusDidChangeNotification() uintptr {
-	return _symbol("MAMusicHapticsManagerActiveStatusDidChangeNotification")
+// MAMusicHapticsManagerActiveStatusDidChangeNotification returns the string constant MAMusicHapticsManagerActiveStatusDidChangeNotification, for use as a dictionary key or argument.
+func MAMusicHapticsManagerActiveStatusDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MAMusicHapticsManagerActiveStatusDidChangeNotification")))
 }

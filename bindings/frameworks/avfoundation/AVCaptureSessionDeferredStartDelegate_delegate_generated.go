@@ -18,9 +18,9 @@ import (
 // (CaptureSessionDeferredStartDelegate…Handler): implement the ones you need on the same value and the
 // framework will call them too.
 type CaptureSessionDeferredStartDelegate interface {
-	// SessionWillRunDeferredStart this method gets called by the session when deferred start is about to run. Delegates receive this message when the session has finished the deferred start. This message will be sent regardless of whether the session's “AVCaptureSession/automaticallyRunsDeferredStart“ property is set. See “AVCaptureSession/setDeferredStartDelegate:deferredStartDelegateCallbackQueue:“ documentation for more information. - Parameter session: The “AVCaptureSession“ instance that runs the deferred start.
+	// SessionWillRunDeferredStart this method gets called by the session when deferred start is about to run. Delegates receive this message when the session has finished the deferred start. This message will be sent regardless of whether the session's ``AVCaptureSession/automaticallyRunsDeferredStart`` property is set. See ``AVCaptureSession/setDeferredStartDelegate:deferredStartDelegateCallbackQueue:`` documentation for more information. - Parameter session: The ``AVCaptureSession`` instance that runs the deferred start.
 	SessionWillRunDeferredStart(session *CaptureSession)
-	// SessionDidRunDeferredStart this method gets called by the session when deferred start has finished running. - Parameter session: The “AVCaptureSession“ instance that runs the deferred start.
+	// SessionDidRunDeferredStart this method gets called by the session when deferred start has finished running. - Parameter session: The ``AVCaptureSession`` instance that runs the deferred start.
 	SessionDidRunDeferredStart(session *CaptureSession)
 }
 

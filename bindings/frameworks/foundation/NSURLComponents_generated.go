@@ -232,14 +232,14 @@ func (uc *URLComponents) URLRelativeToURL(baseURL string) string {
 	return rt.URLString(_r)
 }
 
-// URL returns the URL.
+// URL returns a URL object derived from the components object. If the receiver has an authority component (user, password, host, or port) and a path component, then the path must either begin with `"/"` or be an empty string. Otherwise, this property contains `nil`. If the receiver does not have an authority component (user, password, host, or port) and has a path component, the path component must not start with `"//"`. If it does, this property contains `nil`.
 func (uc *URLComponents) URL() string {
 	defer runtime.KeepAlive(uc)
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("URL"))
 	return rt.URLString(_r)
 }
 
-// String returns the string.
+// String returns a URL derived from the components object, in string form. If the receiver has an authority component (user, password, host, or port) and a path component, then the path must either begin with `"/"` or be an empty string. Otherwise, this property contains `nil`. If the receiver does not have an authority component (user, password, host, or port) and has a path component, the path component must not start with `"//"`. If it does, this property contains `nil`.
 func (uc *URLComponents) String() string {
 	defer runtime.KeepAlive(uc)
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("string"))
@@ -249,7 +249,7 @@ func (uc *URLComponents) String() string {
 	return purego.GoString(_r)
 }
 
-// Scheme returns the scheme.
+// Scheme returns the scheme URL component, or `nil` if not present. For example, in the URL `http://www.example.com/index.html`, the scheme is `http`. Attempting to set the scheme with an invalid scheme string will cause an exception.
 func (uc *URLComponents) Scheme() string {
 	defer runtime.KeepAlive(uc)
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("scheme"))
@@ -259,7 +259,7 @@ func (uc *URLComponents) Scheme() string {
 	return purego.GoString(_r)
 }
 
-// User returns the user.
+// User returns the username URL subcomponent, or `nil` if not present. For example, in the URL `http://username:password
 func (uc *URLComponents) User() string {
 	defer runtime.KeepAlive(uc)
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("user"))
@@ -269,7 +269,7 @@ func (uc *URLComponents) User() string {
 	return purego.GoString(_r)
 }
 
-// Password returns the password.
+// Password returns the password URL subcomponent, or `nil` if not present. For example, in the URL `http://username:password
 func (uc *URLComponents) Password() string {
 	defer runtime.KeepAlive(uc)
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("password"))
@@ -279,7 +279,7 @@ func (uc *URLComponents) Password() string {
 	return purego.GoString(_r)
 }
 
-// Host returns the host.
+// Host returns the host URL subcomponent, or `nil` if not present. For example, in the URL `http://www.example.com/index.html`, the host is `www.example.com`. Getting this property removes any percent encoding this component may have. Setting this property assumes the string is not percent encoded and will add percent encoding.
 func (uc *URLComponents) Host() string {
 	defer runtime.KeepAlive(uc)
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("host"))
@@ -289,14 +289,14 @@ func (uc *URLComponents) Host() string {
 	return purego.GoString(_r)
 }
 
-// Port returns the port.
+// Port returns the port number URL component, or `nil` if not present. For example, in the URL `http://www.example.com:8080/index.php`, the port number is `8080`. Attempting to set a negative port number will cause an exception.
 func (uc *URLComponents) Port() *Number {
 	defer runtime.KeepAlive(uc)
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("port"))
 	return NumberFromID(_r)
 }
 
-// Path returns the path.
+// Path returns the path URL component, or `nil` if not present. For example, in the URL `http://www.example.com/index.html`, the path is `/index.html`. Getting this property removes any percent encoding this component may have. Setting this property assumes the string is not percent encoded and will add percent encoding.
 func (uc *URLComponents) Path() string {
 	defer runtime.KeepAlive(uc)
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("path"))
@@ -306,7 +306,7 @@ func (uc *URLComponents) Path() string {
 	return purego.GoString(_r)
 }
 
-// Query returns the query.
+// Query returns the query URL component as a string, or `nil` if not present. For example, in the URL `http://www.example.com/index.php?key1=value1&key2=value2`, the query string is `key1=value1&key2=value2`. Getting this property removes any percent encoding this component may have. Setting this property assumes the string is not percent encoded and will add percent encoding.
 func (uc *URLComponents) Query() string {
 	defer runtime.KeepAlive(uc)
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("query"))
@@ -316,7 +316,7 @@ func (uc *URLComponents) Query() string {
 	return purego.GoString(_r)
 }
 
-// Fragment returns the fragment.
+// Fragment returns the fragment URL component (the part after a `#` symbol), or `nil` if not present. For example, in the URL `http://www.example.com/index.html#jumpLocation`, the fragment is `jumpLocation`. Getting this property removes any percent encoding this component may have. Setting this property assumes the string is not percent encoded and will add percent encoding.
 func (uc *URLComponents) Fragment() string {
 	defer runtime.KeepAlive(uc)
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("fragment"))
@@ -326,7 +326,7 @@ func (uc *URLComponents) Fragment() string {
 	return purego.GoString(_r)
 }
 
-// PercentEncodedUser returns the percent encoded user.
+// PercentEncodedUser returns the username URL subcomponent expressed as a URL-encoded string, or `nil` if not present. If you set this value to something that is not a valid, percent-encoded string, this class throws an exception.
 func (uc *URLComponents) PercentEncodedUser() string {
 	defer runtime.KeepAlive(uc)
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("percentEncodedUser"))
@@ -336,7 +336,7 @@ func (uc *URLComponents) PercentEncodedUser() string {
 	return purego.GoString(_r)
 }
 
-// PercentEncodedPassword returns the percent encoded password.
+// PercentEncodedPassword returns the password URL subcomponent expressed as a URL-encoded string, or `nil` if not present. If you set this value to something that is not a valid, percent-encoded string, this class throws an exception.
 func (uc *URLComponents) PercentEncodedPassword() string {
 	defer runtime.KeepAlive(uc)
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("percentEncodedPassword"))
@@ -346,7 +346,7 @@ func (uc *URLComponents) PercentEncodedPassword() string {
 	return purego.GoString(_r)
 }
 
-// PercentEncodedHost returns the percent encoded host.
+// PercentEncodedHost returns the host URL subcomponent expressed as a URL-encoded string, or `nil` if not present. If you set this value to something that is not a valid, percent-encoded string, this class throws an exception.
 func (uc *URLComponents) PercentEncodedHost() string {
 	defer runtime.KeepAlive(uc)
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("percentEncodedHost"))
@@ -356,7 +356,7 @@ func (uc *URLComponents) PercentEncodedHost() string {
 	return purego.GoString(_r)
 }
 
-// PercentEncodedPath returns the percent encoded path.
+// PercentEncodedPath returns the path URL component expressed as a URL-encoded string, or `nil` if not present. If you set this value to something that is not a valid, percent-encoded string, this class throws an exception. Although an unencoded semicolon is a valid character in a percent-encoded path, for compatibility with `NSURL`, you should always percent-encode it.
 func (uc *URLComponents) PercentEncodedPath() string {
 	defer runtime.KeepAlive(uc)
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("percentEncodedPath"))
@@ -366,7 +366,7 @@ func (uc *URLComponents) PercentEncodedPath() string {
 	return purego.GoString(_r)
 }
 
-// PercentEncodedQuery returns the percent encoded query.
+// PercentEncodedQuery returns the query URL component expressed as a URL-encoded string, or `nil` if not present. If you set this value to something that is not a valid, percent-encoded string, this class throws an exception.
 func (uc *URLComponents) PercentEncodedQuery() string {
 	defer runtime.KeepAlive(uc)
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("percentEncodedQuery"))
@@ -376,7 +376,7 @@ func (uc *URLComponents) PercentEncodedQuery() string {
 	return purego.GoString(_r)
 }
 
-// PercentEncodedFragment returns the percent encoded fragment.
+// PercentEncodedFragment returns the fragment URL component (the part after a `#` symbol) expressed as a URL-encoded string, or `nil` if not present. If you set this value to something that is not a valid, percent-encoded string, this class throws an exception.
 func (uc *URLComponents) PercentEncodedFragment() string {
 	defer runtime.KeepAlive(uc)
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("percentEncodedFragment"))
@@ -386,7 +386,7 @@ func (uc *URLComponents) PercentEncodedFragment() string {
 	return purego.GoString(_r)
 }
 
-// EncodedHost returns the encoded host.
+// EncodedHost returns the host subcomponent, percent-encoded. The getter for this property retains any percent-encoding this component may have. Setting this property assumes the component string already has the correct percent-encoding. Attempting to set an incorrectly percent-encoded string raises an exception.
 func (uc *URLComponents) EncodedHost() string {
 	defer runtime.KeepAlive(uc)
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("encodedHost"))
@@ -396,63 +396,63 @@ func (uc *URLComponents) EncodedHost() string {
 	return purego.GoString(_r)
 }
 
-// RangeOfScheme returns the range of scheme.
+// RangeOfScheme returns the character range of the scheme in the URL string returned by the `string` property. If the component does not exist in the `NSURLComponents` object, `{NSNotFound, 0}` is returned.
 func (uc *URLComponents) RangeOfScheme() NSRange {
 	defer runtime.KeepAlive(uc)
 	_r := objc.Send[NSRange](objref.IDOf(uc), objc.RegisterName("rangeOfScheme"))
 	return _r
 }
 
-// RangeOfUser returns the range of user.
+// RangeOfUser returns the character range of the user in the URL string returned by the `string` property. If the component does not exist in the `NSURLComponents` object, `{NSNotFound, 0}` is returned.
 func (uc *URLComponents) RangeOfUser() NSRange {
 	defer runtime.KeepAlive(uc)
 	_r := objc.Send[NSRange](objref.IDOf(uc), objc.RegisterName("rangeOfUser"))
 	return _r
 }
 
-// RangeOfPassword returns the range of password.
+// RangeOfPassword returns the character range of the password in the URL string returned by the `string` property. If the component does not exist in the `NSURLComponents` object, `{NSNotFound, 0}` is returned.
 func (uc *URLComponents) RangeOfPassword() NSRange {
 	defer runtime.KeepAlive(uc)
 	_r := objc.Send[NSRange](objref.IDOf(uc), objc.RegisterName("rangeOfPassword"))
 	return _r
 }
 
-// RangeOfHost returns the range of host.
+// RangeOfHost returns the character range of the host in the URL string returned by the `string` property. If the component does not exist in the `NSURLComponents` object, `{NSNotFound, 0}` is returned.
 func (uc *URLComponents) RangeOfHost() NSRange {
 	defer runtime.KeepAlive(uc)
 	_r := objc.Send[NSRange](objref.IDOf(uc), objc.RegisterName("rangeOfHost"))
 	return _r
 }
 
-// RangeOfPort returns the range of port.
+// RangeOfPort returns the character range of the port in the URL string returned by the `string` property. If the component does not exist in the `NSURLComponents` object, `{NSNotFound, 0}` is returned.
 func (uc *URLComponents) RangeOfPort() NSRange {
 	defer runtime.KeepAlive(uc)
 	_r := objc.Send[NSRange](objref.IDOf(uc), objc.RegisterName("rangeOfPort"))
 	return _r
 }
 
-// RangeOfPath returns the range of path.
+// RangeOfPath returns the character range of the path in the URL string returned by the `string` property. If the component does not exist in the `NSURLComponents` object, `{NSNotFound, 0}` is returned.
 func (uc *URLComponents) RangeOfPath() NSRange {
 	defer runtime.KeepAlive(uc)
 	_r := objc.Send[NSRange](objref.IDOf(uc), objc.RegisterName("rangeOfPath"))
 	return _r
 }
 
-// RangeOfQuery returns the range of query.
+// RangeOfQuery returns the character range of the query in the URL string returned by the `string` property. If the component does not exist in the `NSURLComponents` object, `{NSNotFound, 0}` is returned.
 func (uc *URLComponents) RangeOfQuery() NSRange {
 	defer runtime.KeepAlive(uc)
 	_r := objc.Send[NSRange](objref.IDOf(uc), objc.RegisterName("rangeOfQuery"))
 	return _r
 }
 
-// RangeOfFragment returns the range of fragment.
+// RangeOfFragment returns the character range of the fragment in the URL string returned by the `string` property. If the component does not exist in the `NSURLComponents` object, `{NSNotFound, 0}` is returned.
 func (uc *URLComponents) RangeOfFragment() NSRange {
 	defer runtime.KeepAlive(uc)
 	_r := objc.Send[NSRange](objref.IDOf(uc), objc.RegisterName("rangeOfFragment"))
 	return _r
 }
 
-// QueryItems returns the query items.
+// QueryItems returns the query URL component as an array of name/value pairs. When you get this property's value, the `NSURLComponents` class parses the `query` string and returns an array of `NSURLQueryItem` objects, each of which represents a single key-value pair, in the order in which they appear in the original query string. Because a name may appear more than once in a single query string, the name properties of query items are not guaranteed to be unique. If the `query` property is an empty string, the `queryItems` property is an empty array. If the `query` property is `nil`, the `queryItems` property is also `nil`. When you set this property's value, the `NSURLComponents` class joins each name/value pair with a `=` delimiter and joins the array with a `&` delimiter, then sets the `query` property to the resulting string. Setting this property to an empty array sets the `query` property to an empty string. Setting this property to `nil` sets the `query` property to `nil`.
 //
 // QueryItems returns the collection as a Go slice.
 func (uc *URLComponents) QueryItems() []*URLQueryItem {

@@ -32,6 +32,7 @@ var (
 	_cSSearchableIndexSelDeleteAllSearchableItemsWithCompletionHandler                          = objc.RegisterName("deleteAllSearchableItemsWithCompletionHandler:")
 	_cSSearchableIndexSelIndexDelegate                                                          = objc.RegisterName("indexDelegate")
 	_cSSearchableIndexSelSetIndexDelegate                                                       = objc.RegisterName("setIndexDelegate:")
+	_cSSearchableIndexSelProtectionClass                                                        = objc.RegisterName("protectionClass")
 	_cSSearchableIndexSelBeginIndexBatch                                                        = objc.RegisterName("beginIndexBatch")
 	_cSSearchableIndexSelEndIndexBatchWithExpectedClientStateNewClientStateCompletionHandler    = objc.RegisterName("endIndexBatchWithExpectedClientState:newClientState:completionHandler:")
 	_cSSearchableIndexSelEndIndexBatchWithClientStateCompletionHandler                          = objc.RegisterName("endIndexBatchWithClientState:completionHandler:")
@@ -137,6 +138,14 @@ func (o *CSSearchableIndex) IndexDelegate() CSSearchableIndexDelegate {
 
 func (o *CSSearchableIndex) SetIndexDelegate(indexDelegate CSSearchableIndexDelegate) {
 	o.Ptr().Send(_cSSearchableIndexSelSetIndexDelegate, indexDelegate)
+}
+
+func (o *CSSearchableIndex) ProtectionClass() *foundation.NSString {
+	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableIndexSelProtectionClass)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSStringFromID(_ret)
 }
 
 // Begins a batch of updates to an index.

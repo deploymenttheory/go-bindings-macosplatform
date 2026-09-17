@@ -103,13 +103,13 @@ func (o *VZMACAddress) IsUnicastAddress() bool {
 	return _ret
 }
 
-// @abstract True if the address is a locally administered addresses (LAA), false otherwise.
+// @abstract True if the address is a locally administered address (LAA), false otherwise.
 func (o *VZMACAddress) IsLocallyAdministeredAddress() bool {
 	_ret := objc.Send[bool](o.Ptr(), _vZMACAddressSelIsLocallyAdministeredAddress)
 	return _ret
 }
 
-// @abstract True if the address is a universally administered addresses (UAA), false otherwise.
+// @abstract True if the address is a universally administered address (UAA), false otherwise.
 func (o *VZMACAddress) IsUniversallyAdministeredAddress() bool {
 	_ret := objc.Send[bool](o.Ptr(), _vZMACAddressSelIsUniversallyAdministeredAddress)
 	return _ret

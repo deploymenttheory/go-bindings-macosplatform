@@ -496,6 +496,21 @@ func CMClockGetAnchorTime(clock CMClockRef, clockTimeOut *CMTime, referenceClock
 	return nil
 }
 
+var _fnCMClockGetPreferredStartTimePattern func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CMClockGetPreferredStartTimePattern reports an error if the CoreMedia framework function CMClockGetPreferredStartTimePattern fails.
+func CMClockGetPreferredStartTimePattern(clock CMClockRef, outClockStartTime *CMTime, outHostClockStartTime *CMTime, outDeltaBetweenPreferredStartTimes *CMTime) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMClockGetPreferredStartTimePattern == nil {
+		ebipurego.RegisterLibFunc(&_fnCMClockGetPreferredStartTimePattern, _lib, "CMClockGetPreferredStartTimePattern")
+	}
+	_rc := _fnCMClockGetPreferredStartTimePattern(objref.IDOf(clock.Object), unsafe.Pointer(outClockStartTime), unsafe.Pointer(outHostClockStartTime), unsafe.Pointer(outDeltaBetweenPreferredStartTimes))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
 var _fnCMClosedCaptionFormatDescriptionCopyAsBigEndianClosedCaptionDescriptionBlockBuffer func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // CMClosedCaptionFormatDescriptionCopyAsBigEndianClosedCaptionDescriptionBlockBuffer reports an error if the CoreMedia framework function CMClosedCaptionFormatDescriptionCopyAsBigEndianClosedCaptionDescriptionBlockBuffer fails.

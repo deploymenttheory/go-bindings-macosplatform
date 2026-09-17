@@ -16,7 +16,7 @@ import (
 //
 // It embeds [DetectionTrack], promoting that type's methods.
 //
-// An object representing a discrete detection track composed of individual detections.
+// A discrete detection track composed of individual detections.
 type CustomDetectionTrack struct {
 	DetectionTrack
 }

@@ -13,9 +13,6 @@
   "enums": {
     "EPDeveloperToolStatus": {
       "url": "https://developer.apple.com/documentation/executionpolicy/epdevelopertoolstatus"
-    },
-    "EPError": {
-      "url": "https://developer.apple.com/documentation/executionpolicy/eperror"
     }
   }
 }

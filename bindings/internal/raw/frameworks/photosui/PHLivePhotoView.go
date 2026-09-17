@@ -12,7 +12,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A view that displays a Live Photo—a picture that also includes motion and sound from the moments just before and after its capture.
+// A view that displays a Live Photo.
 //
 // Apple documentation: https://developer.apple.com/documentation/photosui/phlivephotoview
 type PHLivePhotoView struct {

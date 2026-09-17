@@ -64,15 +64,6 @@ func NewColorPanel() *ColorPanel {
 	return _mainthread0
 }
 
-// WithAccessoryView sets the accessory view.
-func (cp *ColorPanel) WithAccessoryView(accessoryView ViewProvider) *ColorPanel {
-	defer runtime.KeepAlive(accessoryView)
-	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setAccessoryView:"), objref.IDOf(accessoryView))
-	})
-	return cp
-}
-
 // WithContinuous sets a Boolean value indicating whether the receiver continuously sends the action message to the target.
 func (cp *ColorPanel) WithContinuous(continuous bool) *ColorPanel {
 	purego.Main(func() {
@@ -110,6 +101,15 @@ func (cp *ColorPanel) WithColor(color *Color) *ColorPanel {
 func (cp *ColorPanel) WithMaximumLinearExposure(maximumLinearExposure float64) *ColorPanel {
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setMaximumLinearExposure:"), maximumLinearExposure)
+	})
+	return cp
+}
+
+// WithAccessoryView sets the accessory view.
+func (cp *ColorPanel) WithAccessoryView(accessoryView ViewProvider) *ColorPanel {
+	defer runtime.KeepAlive(accessoryView)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setAccessoryView:"), objref.IDOf(accessoryView))
 	})
 	return cp
 }
@@ -782,20 +782,6 @@ func (cp *ColorPanel) DetachColorList(colorList *ColorList) {
 
 }
 
-// AccessoryView returns the accessory view.
-func (cp *ColorPanel) AccessoryView() *View {
-	defer runtime.KeepAlive(cp)
-	var _mainthread0 *View
-	purego.Main(func() {
-		_mainthread0 = func() *View {
-			_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("accessoryView"))
-			return ViewFromID(_r)
-		}()
-	})
-	return _mainthread0
-
-}
-
 // IsContinuous reports whether the object is continuous.
 func (cp *ColorPanel) IsContinuous() bool {
 	defer runtime.KeepAlive(cp)
@@ -874,6 +860,20 @@ func (cp *ColorPanel) MaximumLinearExposure() float64 {
 		_mainthread0 = func() float64 {
 			_r := objc.Send[float64](objref.IDOf(cp), objc.RegisterName("maximumLinearExposure"))
 			return _r
+		}()
+	})
+	return _mainthread0
+
+}
+
+// AccessoryView returns the accessory view.
+func (cp *ColorPanel) AccessoryView() *View {
+	defer runtime.KeepAlive(cp)
+	var _mainthread0 *View
+	purego.Main(func() {
+		_mainthread0 = func() *View {
+			_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("accessoryView"))
+			return ViewFromID(_r)
 		}()
 	})
 	return _mainthread0

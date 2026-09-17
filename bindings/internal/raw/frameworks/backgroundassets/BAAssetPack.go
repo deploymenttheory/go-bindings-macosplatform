@@ -23,6 +23,7 @@ var (
 	_bAAssetPackSelDownloadForContentRequest = objc.RegisterName("downloadForContentRequest:")
 	_bAAssetPackSelIdentifier                = objc.RegisterName("identifier")
 	_bAAssetPackSelDownloadSize              = objc.RegisterName("downloadSize")
+	_bAAssetPackSelLanguage                  = objc.RegisterName("language")
 	_bAAssetPackSelUserInfo                  = objc.RegisterName("userInfo")
 )
 
@@ -67,6 +68,15 @@ func (o *BAAssetPack) Identifier() *foundation.NSString {
 func (o *BAAssetPack) DownloadSize() int {
 	_ret := objc.Send[int](o.Ptr(), _bAAssetPackSelDownloadSize)
 	return _ret
+}
+
+// The language, represented as a BCP-47 identifier, for which this asset pack is localized. This property is `nil` if the asset pack isn’t localized and therefore isn’t language-specific.
+func (o *BAAssetPack) Language() *foundation.NSString {
+	_ret := objc.Send[objc.ID](o.Ptr(), _bAAssetPackSelLanguage)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSStringFromID(_ret)
 }
 
 // JSON-encoded custom information that’s associated with the asset pack. This property is `nil` for Apple-hosted asset packs.

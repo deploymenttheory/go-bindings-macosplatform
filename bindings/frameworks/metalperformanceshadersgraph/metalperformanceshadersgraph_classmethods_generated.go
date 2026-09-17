@@ -121,6 +121,12 @@ func DescriptorWithKernelSizesPaddingStyle(kernelSizes []*foundation.Number, pad
 	return GraphPooling4DOpDescriptorFromID(_r)
 }
 
+// DescriptorWithScale creates a descriptor with the given scale and all other properties set to their defaults (no mask, isCausal = NO, no sinks).
+func DescriptorWithScale(scale float32) *GraphSDPADescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSGraphSDPADescriptor")), objc.RegisterName("descriptorWithScale:"), scale)
+	return GraphSDPADescriptorFromID(_r)
+}
+
 // MPSGraphSingleGateRNNDescriptorDescriptor creates a single gate RNN descriptor with default values.
 func MPSGraphSingleGateRNNDescriptorDescriptor() *GraphSingleGateRNNDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSGraphSingleGateRNNDescriptor")), objc.RegisterName("descriptor"))

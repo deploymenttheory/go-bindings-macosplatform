@@ -388,6 +388,14 @@ func (sv *SplitView) WithGestureRecognizers(items ...GestureRecognizerProvider) 
 	return sv
 }
 
+// WithExclusiveGestureBehavior sets declares whether gesture recognizers should be exclusive in this view and its subviews.
+func (sv *SplitView) WithExclusiveGestureBehavior(exclusiveGestureBehavior ViewExclusiveGestureBehavior) *SplitView {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setExclusiveGestureBehavior:"), exclusiveGestureBehavior)
+	})
+	return sv
+}
+
 // WithAllowedTouchTypes sets the allowed touch types.
 func (sv *SplitView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *SplitView {
 	purego.Main(func() {
@@ -449,6 +457,15 @@ func (sv *SplitView) WithHorizontalContentSizeConstraintActive(horizontalContent
 func (sv *SplitView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *SplitView {
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
+	return sv
+}
+
+// WithTextSelectionManager sets the text selection manager for this view.
+func (sv *SplitView) WithTextSelectionManager(textSelectionManager *TextSelectionManager) *SplitView {
+	defer runtime.KeepAlive(textSelectionManager)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setTextSelectionManager:"), objref.IDOf(textSelectionManager))
 	})
 	return sv
 }

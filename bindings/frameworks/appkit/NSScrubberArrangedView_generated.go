@@ -346,6 +346,14 @@ func (sav *ScrubberArrangedView) WithGestureRecognizers(items ...GestureRecogniz
 	return sav
 }
 
+// WithExclusiveGestureBehavior sets declares whether gesture recognizers should be exclusive in this view and its subviews.
+func (sav *ScrubberArrangedView) WithExclusiveGestureBehavior(exclusiveGestureBehavior ViewExclusiveGestureBehavior) *ScrubberArrangedView {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("setExclusiveGestureBehavior:"), exclusiveGestureBehavior)
+	})
+	return sav
+}
+
 // WithAllowedTouchTypes sets the allowed touch types.
 func (sav *ScrubberArrangedView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *ScrubberArrangedView {
 	purego.Main(func() {
@@ -407,6 +415,15 @@ func (sav *ScrubberArrangedView) WithHorizontalContentSizeConstraintActive(horiz
 func (sav *ScrubberArrangedView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ScrubberArrangedView {
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
+	return sav
+}
+
+// WithTextSelectionManager sets the text selection manager for this view.
+func (sav *ScrubberArrangedView) WithTextSelectionManager(textSelectionManager *TextSelectionManager) *ScrubberArrangedView {
+	defer runtime.KeepAlive(textSelectionManager)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("setTextSelectionManager:"), objref.IDOf(textSelectionManager))
 	})
 	return sav
 }

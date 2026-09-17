@@ -12,9 +12,263 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/foundation"
 )
 
-func AEAssessmentErrorDomain() uintptr {
+// The About This Mac item, which remains visible during an assessment session whether or not “AEAssessmentConfiguration/allowedAppleMenuItems“ names it.
+func AEAppleMenuItemAboutThisMac() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_automaticassessmentconfigurationLib, "AEAppleMenuItemAboutThisMac")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
+// The App Store item.
+func AEAppleMenuItemAppStore() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_automaticassessmentconfigurationLib, "AEAppleMenuItemAppStore")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
+// The Force Quit item, covering both the Force Quit Applications window and quitting an app outright.
+func AEAppleMenuItemForceQuit() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_automaticassessmentconfigurationLib, "AEAppleMenuItemForceQuit")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
+// The Location item.
+func AEAppleMenuItemLocation() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_automaticassessmentconfigurationLib, "AEAppleMenuItemLocation")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
+// The Lock Screen item.
+func AEAppleMenuItemLockScreen() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_automaticassessmentconfigurationLib, "AEAppleMenuItemLockScreen")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
+// The Log Out item, covering both the command and its confirmation.
+func AEAppleMenuItemLogout() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_automaticassessmentconfigurationLib, "AEAppleMenuItemLogout")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
+// The Recent Items item.
+func AEAppleMenuItemRecent() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_automaticassessmentconfigurationLib, "AEAppleMenuItemRecent")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
+// The Restart item, covering both the command and its confirmation.
+func AEAppleMenuItemRestart() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_automaticassessmentconfigurationLib, "AEAppleMenuItemRestart")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
+// The Shut Down item, covering both the command and its confirmation.
+func AEAppleMenuItemShutDown() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_automaticassessmentconfigurationLib, "AEAppleMenuItemShutDown")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
+// The Sleep item.
+func AEAppleMenuItemSleep() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_automaticassessmentconfigurationLib, "AEAppleMenuItemSleep")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
+// The System Information item.
+func AEAppleMenuItemSystemInformation() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_automaticassessmentconfigurationLib, "AEAppleMenuItemSystemInformation")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
+// The System Settings item.
+func AEAppleMenuItemSystemSettings() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_automaticassessmentconfigurationLib, "AEAppleMenuItemSystemSettings")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
+func AEAssessmentErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_automaticassessmentconfigurationLib, "AEAssessmentErrorDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
+// The Battery system menu bar item.
+func AEMenuBarItemBattery() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_automaticassessmentconfigurationLib, "AEMenuBarItemBattery")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
+// The Bluetooth system menu bar item.
+func AEMenuBarItemBluetooth() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_automaticassessmentconfigurationLib, "AEMenuBarItemBluetooth")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
+// The Clock system menu bar item.
+func AEMenuBarItemClock() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_automaticassessmentconfigurationLib, "AEMenuBarItemClock")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
+// The Displays system menu bar item.
+func AEMenuBarItemDisplays() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_automaticassessmentconfigurationLib, "AEMenuBarItemDisplays")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
+// The Input Menu system menu bar item, which selects keyboard layouts.
+func AEMenuBarItemKeyboard() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_automaticassessmentconfigurationLib, "AEMenuBarItemKeyboard")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
+// The Volume system menu bar item.
+func AEMenuBarItemVolume() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_automaticassessmentconfigurationLib, "AEMenuBarItemVolume")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
+// The Wi-Fi system menu bar item.
+func AEMenuBarItemWifi() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_automaticassessmentconfigurationLib, "AEMenuBarItemWifi")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AENotInstalledParticipantsKey() *foundation.NSString {

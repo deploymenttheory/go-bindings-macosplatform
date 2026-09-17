@@ -150,7 +150,7 @@ func (o *AVMutableMovie) SetPreferredTransform(preferredTransform corefoundation
 	o.Ptr().Send(_aVMutableMovieSelSetPreferredTransform, preferredTransform)
 }
 
-// @property       timescale @abstract       For file types that contain a 'moov' atom, such as QuickTime Movie files, specifies the time scale of the movie. @discussion		The default movie time scale is 600. In certain cases, you may want to set this to a different value. For instance, a movie that contains a single audio track should typically have the movie time scale set to the media time scale of that track. This property should be set on a new empty movie before any edits are performed on the movie.
+// For file types that contain a 'moov' atom, such as QuickTime Movie files, specifies the time scale of the movie. The default movie time scale is 600. In certain cases, you may want to set this to a different value. For instance, a movie that contains a single audio track should typically have the movie time scale set to the media time scale of that track. This property should be set on a new empty movie before any edits are performed on the movie.
 func (o *AVMutableMovie) Timescale() int32 {
 	_ret := objc.Send[int32](o.Ptr(), _aVMutableMovieSelTimescale)
 	return _ret
@@ -185,7 +185,7 @@ func (o *AVMutableMovie) ScaleTimeRangeToDuration(timeRange coremedia.CMTimeRang
 	o.Ptr().Send(_aVMutableMovieSelScaleTimeRangeToDuration, timeRange, duration)
 }
 
-// @property       modified @abstract       Whether a movie has been modified. @discussion     The value of this property is a BOOL that indicates whether the AVMutableMovie object has been modified since it was created, was last written, or had its modified state cleared via a call to setModified:NO.
+// Whether a movie has been modified. The value of this property is a BOOL that indicates whether the AVMutableMovie object has been modified since it was created, was last written, or had its modified state cleared via a call to setModified:NO.
 func (o *AVMutableMovie) IsModified() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVMutableMovieSelIsModified)
 	return _ret
@@ -199,7 +199,7 @@ func (o *AVMutableMovie) SetDefaultMediaDataStorage(defaultMediaDataStorage *AVM
 	o.Ptr().Send(_aVMutableMovieSelSetDefaultMediaDataStorage, defaultMediaDataStorage.Ptr())
 }
 
-// @property		interleavingPeriod @abstract		A CMTime that indicates the duration for interleaving runs of samples of each track. @discussion		The default interleaving period is 0.5 seconds.
+// A CMTime that indicates the duration for interleaving runs of samples of each track. The default interleaving period is 0.5 seconds.
 func (o *AVMutableMovie) InterleavingPeriod() coremedia.CMTime {
 	_ret := objc.Send[coremedia.CMTime](o.Ptr(), _aVMutableMovieSelInterleavingPeriod)
 	return _ret

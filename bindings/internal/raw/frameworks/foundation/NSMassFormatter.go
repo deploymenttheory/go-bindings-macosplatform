@@ -9,8 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A formatter that provides localized descriptions of mass and weight values.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsmassformatter
 type NSMassFormatter struct {
 	NSFormatter
@@ -40,6 +38,7 @@ func NSMassFormatterFromID(id objc.ID) *NSMassFormatter {
 	return o
 }
 
+// Returns a mass string for the provided value and unit.
 func (o *NSMassFormatter) StringFromValueUnit(value float64, unit NSMassFormatterUnit) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMassFormatterSelStringFromValueUnit, value, unit)
 	if _ret != 0 {
@@ -48,6 +47,7 @@ func (o *NSMassFormatter) StringFromValueUnit(value float64, unit NSMassFormatte
 	return NSStringFromID(_ret)
 }
 
+// Returns a mass string for the provided value in kilograms. Formats a number in kilograms to a localized string with the locale-appropriate unit and an appropriate scale (e.g. 1.2kg = 2.64lb in the US locale).
 func (o *NSMassFormatter) StringFromKilograms(numberInKilograms float64) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMassFormatterSelStringFromKilograms, numberInKilograms)
 	if _ret != 0 {
@@ -56,6 +56,7 @@ func (o *NSMassFormatter) StringFromKilograms(numberInKilograms float64) *NSStri
 	return NSStringFromID(_ret)
 }
 
+// Returns a unit string for the provided value and unit. Returns a localized string of the given unit, and if the unit is singular or plural is based on the given number.
 func (o *NSMassFormatter) UnitStringFromValueUnit(value float64, unit NSMassFormatterUnit) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMassFormatterSelUnitStringFromValueUnit, value, unit)
 	if _ret != 0 {
@@ -64,6 +65,7 @@ func (o *NSMassFormatter) UnitStringFromValueUnit(value float64, unit NSMassForm
 	return NSStringFromID(_ret)
 }
 
+// Returns a unit string based on the provided value in kilograms. Returns the locale-appropriate unit, the same unit used by `stringFromKilograms:`.
 func (o *NSMassFormatter) UnitStringFromKilogramsUsedUnit(numberInKilograms float64, unitp *NSMassFormatterUnit) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMassFormatterSelUnitStringFromKilogramsUsedUnit, numberInKilograms, unitp)
 	if _ret != 0 {
@@ -72,6 +74,7 @@ func (o *NSMassFormatter) UnitStringFromKilogramsUsedUnit(numberInKilograms floa
 	return NSStringFromID(_ret)
 }
 
+// The number formatter used to format the numbers in a mass string. The default value is an `NSNumberFormatter` with `NSNumberFormatterDecimalStyle`.
 func (o *NSMassFormatter) NumberFormatter() *NSNumberFormatter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMassFormatterSelNumberFormatter)
 	if _ret != 0 {
@@ -84,6 +87,7 @@ func (o *NSMassFormatter) SetNumberFormatter(numberFormatter *NSNumberFormatter)
 	o.Ptr().Send(_nSMassFormatterSelSetNumberFormatter, numberFormatter.Ptr())
 }
 
+// The unit style used when creating string representations of mass values. The default value is `NSFormattingUnitStyleMedium`.
 func (o *NSMassFormatter) UnitStyle() NSFormattingUnitStyle {
 	_ret := objc.Send[NSFormattingUnitStyle](o.Ptr(), _nSMassFormatterSelUnitStyle)
 	return _ret
@@ -93,6 +97,7 @@ func (o *NSMassFormatter) SetUnitStyle(unitStyle NSFormattingUnitStyle) {
 	o.Ptr().Send(_nSMassFormatterSelSetUnitStyle, unitStyle)
 }
 
+// A Boolean value that indicates whether the resulting string represents a person's mass. The default value is `NO`. If set to `YES`, the number argument for `stringFromKilograms:` and `unitStringFromKilograms:usedUnit:` is considered as a person's mass.
 func (o *NSMassFormatter) IsForPersonMassUse() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSMassFormatterSelIsForPersonMassUse)
 	return _ret

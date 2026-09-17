@@ -247,6 +247,7 @@ func (o *NSDecimalNumber) DecimalNumberByRoundingAccordingToBehavior(behavior NS
 	return NSDecimalNumberFromID(_ret)
 }
 
+// A decimal number equivalent to the number 0.
 func NSDecimalNumberZero() *NSDecimalNumber {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDecimalNumber), _nSDecimalNumberSelZero)
 	if _ret != 0 {
@@ -255,6 +256,7 @@ func NSDecimalNumberZero() *NSDecimalNumber {
 	return NSDecimalNumberFromID(_ret)
 }
 
+// A decimal number equivalent to the number 1.
 func NSDecimalNumberOne() *NSDecimalNumber {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDecimalNumber), _nSDecimalNumberSelOne)
 	if _ret != 0 {
@@ -263,6 +265,7 @@ func NSDecimalNumberOne() *NSDecimalNumber {
 	return NSDecimalNumberFromID(_ret)
 }
 
+// The smallest possible value of a decimal number.
 func NSDecimalNumberMinimumDecimalNumber() *NSDecimalNumber {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDecimalNumber), _nSDecimalNumberSelMinimumDecimalNumber)
 	if _ret != 0 {
@@ -271,6 +274,7 @@ func NSDecimalNumberMinimumDecimalNumber() *NSDecimalNumber {
 	return NSDecimalNumberFromID(_ret)
 }
 
+// The largest possible value of a decimal number.
 func NSDecimalNumberMaximumDecimalNumber() *NSDecimalNumber {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDecimalNumber), _nSDecimalNumberSelMaximumDecimalNumber)
 	if _ret != 0 {
@@ -279,6 +283,7 @@ func NSDecimalNumberMaximumDecimalNumber() *NSDecimalNumber {
 	return NSDecimalNumberFromID(_ret)
 }
 
+// A decimal number that specifies no number. Any arithmetic method receiving `notANumber` as an argument returns `notANumber`.
 func NSDecimalNumberNotANumber() *NSDecimalNumber {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDecimalNumber), _nSDecimalNumberSelNotANumber)
 	if _ret != 0 {

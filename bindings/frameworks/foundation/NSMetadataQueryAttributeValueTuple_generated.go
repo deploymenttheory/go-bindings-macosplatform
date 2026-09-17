@@ -92,7 +92,7 @@ func (mqavt *MetadataQueryAttributeValueTuple) WithScriptingProperties(scripting
 	return mqavt
 }
 
-// Attribute returns the attribute.
+// Attribute returns the attribute name for the tuple.
 func (mqavt *MetadataQueryAttributeValueTuple) Attribute() string {
 	defer runtime.KeepAlive(mqavt)
 	_r := objc.Send[objc.ID](objref.IDOf(mqavt), objc.RegisterName("attribute"))
@@ -102,14 +102,14 @@ func (mqavt *MetadataQueryAttributeValueTuple) Attribute() string {
 	return purego.GoString(_r)
 }
 
-// Value returns the value.
+// Value returns the attribute value for the tuple.
 func (mqavt *MetadataQueryAttributeValueTuple) Value() obj.Object {
 	defer runtime.KeepAlive(mqavt)
 	_r := objc.Send[objc.ID](objref.IDOf(mqavt), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
 
-// Count returns the count.
+// Count returns the number of results with the given attribute value.
 func (mqavt *MetadataQueryAttributeValueTuple) Count() int {
 	defer runtime.KeepAlive(mqavt)
 	_r := objc.Send[int](objref.IDOf(mqavt), objc.RegisterName("count"))

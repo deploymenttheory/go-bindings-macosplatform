@@ -3,6 +3,7 @@
 
 package metalperformanceshaders
 
+// A description of matrix copy operations.
 type MPSMatrixCopyOffsets struct {
 	SourceRowOffset         uint32
 	SourceColumnOffset      uint32
@@ -10,7 +11,7 @@ type MPSMatrixCopyOffsets struct {
 	DestinationColumnOffset uint32
 }
 
-// @struct         MPSScaleTransform @abstract       Transform matrix for explict control over resampling in MPSImageScale. @discussion     The MPSScaleTransform is equivalent to: @code (CGAffineTransform) { .a = scaleX,        .b = 0, .c = 0,             .d = scaleY, .tx = translateX,   .ty = translateY } @endcode @memberof       MPSImageScale
+// A transform matrix for explicit resampling control with a Lanczos kernel.
 type MPSScaleTransform struct {
 	ScaleX     float64
 	ScaleY     float64

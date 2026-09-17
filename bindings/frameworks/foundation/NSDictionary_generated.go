@@ -169,7 +169,7 @@ func (d *Dictionary) KeyEnumerator() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// Count returns the count.
+// Count returns the number of entries in the dictionary.
 func (d *Dictionary) Count() int {
 	defer runtime.KeepAlive(d)
 	_r := objc.Send[int](objref.IDOf(d), objc.RegisterName("count"))
@@ -304,21 +304,21 @@ func (d *Dictionary) KeysOfEntriesWithOptionsPassingTest(opts EnumerationOptions
 	return rt.NSSetToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// AllKeys returns the all keys.
+// AllKeys returns a new array containing the dictionary's keys, or an empty array if the dictionary has no entries. The order of the elements in the array is not defined.
 func (d *Dictionary) AllKeys() []obj.Object {
 	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("allKeys"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// AllValues returns the all values.
+// AllValues returns a new array containing the dictionary's values, or an empty array if the dictionary has no entries. The order of the values in the array isn't defined.
 func (d *Dictionary) AllValues() []obj.Object {
 	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("allValues"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// DescriptionInStringsFileFormat returns the description in strings file format.
+// DescriptionInStringsFileFormat returns a string that represents the contents of the dictionary, formatted in `.strings` file format. The order in which the entries are listed is undefined. This method fails unless the dictionary can be represented by a strings resource file. For details, see [String Resources](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/LoadingResources/Strings/Strings.html#//apple_ref/doc/uid/10000051i-CH6) in [Resource Programming Guide](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/LoadingResources/Introduction/Introduction.html#//apple_ref/doc/uid/10000051i).
 func (d *Dictionary) DescriptionInStringsFileFormat() string {
 	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("descriptionInStringsFileFormat"))

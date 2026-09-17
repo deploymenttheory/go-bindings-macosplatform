@@ -11,7 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An object that represents a decision to focus on a particular detection, or group of detections, at a particular time.
+// Represents a decision to focus on a specific detectionID or detectionGroupID; optionally strong. A strong decision keeps focus for as long as possible.
 //
 // Apple documentation: https://developer.apple.com/documentation/cinematic/cndecision
 type CNDecision struct {

@@ -10,8 +10,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A collection of physical input elements.
-//
 // Apple documentation: https://developer.apple.com/documentation/gamecontroller/gcphysicalinputelementcollection
 type GCPhysicalInputElementCollection[Key purego.AnyObject, Element purego.AnyObject] struct {
 	foundation.NSObject

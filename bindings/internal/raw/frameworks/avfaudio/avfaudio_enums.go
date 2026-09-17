@@ -99,7 +99,6 @@ func (e AVAudio3DMixingSourceMode) String() string {
 	}
 }
 
-// Constants that indicate an app’s permission to add audio to calls.
 type AVAudioApplicationMicrophoneInjectionPermission int64
 
 const (
@@ -124,7 +123,6 @@ func (e AVAudioApplicationMicrophoneInjectionPermission) String() string {
 	}
 }
 
-// Constants that indicate the app’s permission to record audio.
 type AVAudioApplicationRecordPermission int64
 
 const (
@@ -579,7 +577,6 @@ func (e AVAudioQuality) String() string {
 	}
 }
 
-// Categories that describe the general nature of your app’s audio use.
 type AVAudioRoutingArbitrationCategory int64
 
 const (
@@ -605,7 +602,6 @@ func (e AVAudioRoutingArbitrationCategory) String() string {
 type AVAudioSessionActivationOptions uint64
 
 const (
-	// A value that indicates the system should activate the audio session with no options.
 	AVAudioSessionActivationOptionNone AVAudioSessionActivationOptions = 0
 )
 
@@ -617,7 +613,6 @@ func (e AVAudioSessionActivationOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Constants that specify optional audio behaviors.
 type AVAudioSessionCategoryOptions uint64
 
 const (
@@ -641,7 +636,21 @@ func (e AVAudioSessionCategoryOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Constant values used to specify the audio session’s aggregated I/O behavior.
+// Options for deactivating an AVAudioSession
+type AVAudioSessionDeactivationOptions uint64
+
+const (
+	AVAudioSessionDeactivationOptionNone AVAudioSessionDeactivationOptions = 0
+)
+
+func (e AVAudioSessionDeactivationOptions) String() string {
+	var parts []string
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type AVAudioSessionIOType uint64
 
 const (
@@ -660,7 +669,6 @@ func (e AVAudioSessionIOType) String() string {
 	}
 }
 
-// Constants that indicate the state of an audio session after an interruption.
 type AVAudioSessionInterruptionOptions uint64
 
 const (
@@ -679,7 +687,6 @@ func (e AVAudioSessionInterruptionOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Constants that define the reasons for an audio session interruption.
 type AVAudioSessionInterruptionReason uint64
 
 const (
@@ -701,7 +708,6 @@ func (e AVAudioSessionInterruptionReason) String() string {
 	}
 }
 
-// Constants that describe the type of an audio interruption.
 type AVAudioSessionInterruptionType uint64
 
 const (
@@ -720,7 +726,6 @@ func (e AVAudioSessionInterruptionType) String() string {
 	}
 }
 
-// The modes of injecting audio into another app’s input stream.
 type AVAudioSessionMicrophoneInjectionMode int64
 
 const (
@@ -741,7 +746,6 @@ func (e AVAudioSessionMicrophoneInjectionMode) String() string {
 	}
 }
 
-// Constants for use with the overrideOutputAudioPort(_:) method.
 type AVAudioSessionPortOverride uint64
 
 const (
@@ -758,7 +762,6 @@ func (e AVAudioSessionPortOverride) String() string {
 	}
 }
 
-// Constants that indicate the prompt style to use.
 type AVAudioSessionPromptStyle uint64
 
 const (
@@ -780,7 +783,6 @@ func (e AVAudioSessionPromptStyle) String() string {
 	}
 }
 
-// The values that define the current state of the record permission request.
 type AVAudioSessionRecordPermission uint64
 
 const ()
@@ -792,7 +794,6 @@ func (e AVAudioSessionRecordPermission) String() string {
 	}
 }
 
-// Audio session rendering mode identifiers.
 type AVAudioSessionRenderingMode int64
 
 const (
@@ -829,7 +830,6 @@ func (e AVAudioSessionRenderingMode) String() string {
 	}
 }
 
-// Constants that indicate the reason for an audio route change.
 type AVAudioSessionRouteChangeReason uint64
 
 const (
@@ -874,7 +874,6 @@ func (e AVAudioSessionRouteChangeReason) String() string {
 	}
 }
 
-// Cases that indicate the possible route-sharing policies for an audio session.
 type AVAudioSessionRouteSharingPolicy uint64
 
 const (
@@ -893,7 +892,6 @@ func (e AVAudioSessionRouteSharingPolicy) String() string {
 	}
 }
 
-// Options that provide additional information about your app’s audio intentions upon session deactivation.
 type AVAudioSessionSetActiveOptions uint64
 
 const (
@@ -912,7 +910,6 @@ func (e AVAudioSessionSetActiveOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Constants that indicate whether optional secondary audio muting should begin or end.
 type AVAudioSessionSilenceSecondaryAudioHintType uint64
 
 const (
@@ -933,7 +930,6 @@ func (e AVAudioSessionSilenceSecondaryAudioHintType) String() string {
 	}
 }
 
-// Constants that define the supported stereo orientations.
 type AVAudioStereoOrientation int64
 
 const (
@@ -1148,7 +1144,8 @@ const (
 	// A preset that represents a reverb with the acoustic characteristics of an alternative medium-sized hall environment.
 	AVAudioUnitReverbPresetMediumHall3 AVAudioUnitReverbPreset = 11
 	// A preset that represents a reverb with the acoustic characteristics of an alternative large-sized hall environment.
-	AVAudioUnitReverbPresetLargeHall2 AVAudioUnitReverbPreset = 12
+	AVAudioUnitReverbPresetLargeHall2     AVAudioUnitReverbPreset = 12
+	AVAudioUnitReverbPresetOutdoorGeneral AVAudioUnitReverbPreset = 24
 )
 
 func (e AVAudioUnitReverbPreset) String() string {
@@ -1179,12 +1176,13 @@ func (e AVAudioUnitReverbPreset) String() string {
 		return "AVAudioUnitReverbPresetMediumHall3"
 	case AVAudioUnitReverbPresetLargeHall2:
 		return "AVAudioUnitReverbPresetLargeHall2"
+	case AVAudioUnitReverbPresetOutdoorGeneral:
+		return "AVAudioUnitReverbPresetOutdoorGeneral"
 	default:
 		return fmt.Sprintf("AVAudioUnitReverbPreset(%d)", int64(e))
 	}
 }
 
-// Constants that define the supported ducking levels.
 type AVAudioVoiceProcessingOtherAudioDuckingLevel int64
 
 const (
@@ -1230,7 +1228,6 @@ func (e AVAudioVoiceProcessingSpeechActivityEvent) String() string {
 	}
 }
 
-// Constants that represents control change event types.
 type AVMIDIControlChangeMessageType int64
 
 const (
@@ -1348,7 +1345,6 @@ func (e AVMIDIControlChangeMessageType) String() string {
 	}
 }
 
-// Constants that represent the types of meta events.
 type AVMIDIMetaEventType int64
 
 const (
@@ -1468,7 +1464,6 @@ func (e AVSpeechBoundary) String() string {
 	}
 }
 
-// Constants that describe the type of text.
 type AVSpeechSynthesisMarkerMark int64
 
 const (
@@ -1496,7 +1491,6 @@ func (e AVSpeechSynthesisMarkerMark) String() string {
 	}
 }
 
-// An enumeration that models the personal voices authorization status.
 type AVSpeechSynthesisPersonalVoiceAuthorizationStatus uint64
 
 const (
@@ -1575,11 +1569,9 @@ func (e AVSpeechSynthesisVoiceQuality) String() string {
 	}
 }
 
-// Traits that describe a voice.
 type AVSpeechSynthesisVoiceTraits uint64
 
 const (
-	// The trait that indicates a voice is a regular voice.
 	AVSpeechSynthesisVoiceTraitNone AVSpeechSynthesisVoiceTraits = 0
 	// The voice is generally for novelty purposes, for example a character's voice in a game.
 	AVSpeechSynthesisVoiceTraitIsNoveltyVoice AVSpeechSynthesisVoiceTraits = 1
@@ -2466,27 +2458,53 @@ func (e Qos_class_t) String() string {
 	}
 }
 
+type Task_shared_region_stubs_t uint8
+
+const (
+	TASK_SHARED_REGION_STUBS_DEV  Task_shared_region_stubs_t = 1
+	TASK_SHARED_REGION_STUBS_PROD Task_shared_region_stubs_t = 2
+)
+
+func (e Task_shared_region_stubs_t) String() string {
+	switch e {
+	case TASK_SHARED_REGION_STUBS_DEV:
+		return "TASK_SHARED_REGION_STUBS_DEV"
+	case TASK_SHARED_REGION_STUBS_PROD:
+		return "TASK_SHARED_REGION_STUBS_PROD"
+	default:
+		return fmt.Sprintf("Task_shared_region_stubs_t(%d)", int64(e))
+	}
+}
+
 type Virtual_memory_guard_exception_code_t uint32
 
 const (
-	KGUARD_EXC_DEALLOC_GAP                   Virtual_memory_guard_exception_code_t = 1
-	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        Virtual_memory_guard_exception_code_t = 2
-	KGUARD_EXC_RECLAIM_INDEX_FAILURE         Virtual_memory_guard_exception_code_t = 4
-	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    Virtual_memory_guard_exception_code_t = 8
-	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    Virtual_memory_guard_exception_code_t = 9
-	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         Virtual_memory_guard_exception_code_t = 10
-	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         Virtual_memory_guard_exception_code_t = 11
-	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  Virtual_memory_guard_exception_code_t = 12
-	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    Virtual_memory_guard_exception_code_t = 13
-	KGUARD_EXC_SEC_ACCESS_FAULT              Virtual_memory_guard_exception_code_t = 98
-	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        Virtual_memory_guard_exception_code_t = 99
-	KGUARD_EXC_SEC_COPY_DENIED               Virtual_memory_guard_exception_code_t = 100
-	KGUARD_EXC_SEC_SHARING_DENIED            Virtual_memory_guard_exception_code_t = 101
-	KGUARD_EXC_MTE_SYNC_FAULT                Virtual_memory_guard_exception_code_t = 200
-	KGUARD_EXC_MTE_ASYNC_USER_FAULT          Virtual_memory_guard_exception_code_t = 201
-	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          Virtual_memory_guard_exception_code_t = 202
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 203
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 204
+	KGUARD_EXC_DEALLOC_GAP                  Virtual_memory_guard_exception_code_t = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE       Virtual_memory_guard_exception_code_t = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE        Virtual_memory_guard_exception_code_t = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE   Virtual_memory_guard_exception_code_t = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE   Virtual_memory_guard_exception_code_t = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE        Virtual_memory_guard_exception_code_t = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE        Virtual_memory_guard_exception_code_t = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION Virtual_memory_guard_exception_code_t = 12
+	// Guard exception sent to a thread when a CoW defeatured map attempts to copy memory which is not permitted by system policy.
+	KGUARD_EXC_COW_DEFEATURED_COPY_DENIED Virtual_memory_guard_exception_code_t = 13
+	// Guard exception sent to a thread when it attempts to extract a given type of memory in a way which is not permitted for CoW defeatured maps.
+	KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED Virtual_memory_guard_exception_code_t = 14
+	// Guard exception sent to a thread when it attempts to copy-map a memory entry which was created for sharing by a CoW defeatured map.
+	KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED Virtual_memory_guard_exception_code_t = 15
+	KGUARD_EXC_COW_DEFEATURED_FIRST                    Virtual_memory_guard_exception_code_t = 13
+	KGUARD_EXC_COW_DEFEATURED_LAST                     Virtual_memory_guard_exception_code_t = 15
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY              Virtual_memory_guard_exception_code_t = 16
+	KGUARD_EXC_SEC_ACCESS_FAULT                        Virtual_memory_guard_exception_code_t = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT                  Virtual_memory_guard_exception_code_t = 99
+	KGUARD_EXC_SEC_COPY_DENIED                         Virtual_memory_guard_exception_code_t = 100
+	KGUARD_EXC_SEC_SHARING_DENIED                      Virtual_memory_guard_exception_code_t = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                          Virtual_memory_guard_exception_code_t = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT                    Virtual_memory_guard_exception_code_t = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT                    Virtual_memory_guard_exception_code_t = 202
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT           Virtual_memory_guard_exception_code_t = 203
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT           Virtual_memory_guard_exception_code_t = 204
 )
 
 func (e Virtual_memory_guard_exception_code_t) String() string {
@@ -2507,6 +2525,12 @@ func (e Virtual_memory_guard_exception_code_t) String() string {
 		return "KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE"
 	case KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION:
 		return "KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION"
+	case KGUARD_EXC_COW_DEFEATURED_COPY_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_COPY_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED"
 	case KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY:
 		return "KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY"
 	case KGUARD_EXC_SEC_ACCESS_FAULT:

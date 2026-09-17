@@ -51,6 +51,9 @@ func _loadLibrary() {
 	_register("AXAnimatedImagesEnabled", func() {
 		purego.RegisterLibFunc(&_fnAXAnimatedImagesEnabled, _accessibilityLib, "AXAnimatedImagesEnabled")
 	})
+	_register("AXApplicationAccessibilityEnabled", func() {
+		purego.RegisterLibFunc(&_fnAXApplicationAccessibilityEnabled, _accessibilityLib, "AXApplicationAccessibilityEnabled")
+	})
 	_register("AXAssistiveAccessEnabled", func() {
 		purego.RegisterLibFunc(&_fnAXAssistiveAccessEnabled, _accessibilityLib, "AXAssistiveAccessEnabled")
 	})

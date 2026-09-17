@@ -66,6 +66,7 @@ func (o *NSTextViewportLayoutController) AdjustViewportByVerticalOffset(vertical
 	o.Ptr().Send(_nSTextViewportLayoutControllerSelAdjustViewportByVerticalOffset, verticalOffset)
 }
 
+// The viewport layout delegate.
 func (o *NSTextViewportLayoutController) Delegate() NSTextViewportLayoutControllerDelegate {
 	_ret := objc.Send[NSTextViewportLayoutControllerDelegate](o.Ptr(), _nSTextViewportLayoutControllerSelDelegate)
 	return _ret
@@ -75,6 +76,7 @@ func (o *NSTextViewportLayoutController) SetDelegate(delegate NSTextViewportLayo
 	o.Ptr().Send(_nSTextViewportLayoutControllerSelSetDelegate, delegate)
 }
 
+// The text layout manager for this viewport layout controller.
 func (o *NSTextViewportLayoutController) TextLayoutManager() *NSTextLayoutManager {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewportLayoutControllerSelTextLayoutManager)
 	if _ret != 0 {
@@ -83,11 +85,13 @@ func (o *NSTextViewportLayoutController) TextLayoutManager() *NSTextLayoutManage
 	return NSTextLayoutManagerFromID(_ret)
 }
 
+// The visible bounds of the view, plus the overdraw area. Not KVO-compliant.
 func (o *NSTextViewportLayoutController) ViewportBounds() corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSTextViewportLayoutControllerSelViewportBounds)
 	return _ret
 }
 
+// The text range of the current viewport layout. Not KVO-compliant.
 func (o *NSTextViewportLayoutController) ViewportRange() *NSTextRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewportLayoutControllerSelViewportRange)
 	if _ret != 0 {

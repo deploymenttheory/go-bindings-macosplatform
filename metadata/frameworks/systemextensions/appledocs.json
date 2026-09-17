@@ -31,20 +31,6 @@
       "url": "https://developer.apple.com/documentation/systemextensions/ossystemextensionsworkspaceobserver"
     }
   },
-  "enums": {
-    "OSSystemExtensionErrorCode": {
-      "doc": "Error codes for system extensions.",
-      "url": "https://developer.apple.com/documentation/systemextensions/ossystemextensionerrorcode"
-    },
-    "OSSystemExtensionReplacementAction": {
-      "doc": "Actions for describing how the extension manager should resolve a version conflict.",
-      "url": "https://developer.apple.com/documentation/systemextensions/ossystemextensionreplacementaction"
-    },
-    "OSSystemExtensionRequestResult": {
-      "doc": "The result of a completed request, possibly including additional information about the extension’s state.",
-      "url": "https://developer.apple.com/documentation/systemextensions/ossystemextensionrequestresult"
-    }
-  },
   "methods": {
     "OSSystemExtensionManager": {
       "-submitRequest:": {

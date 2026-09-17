@@ -164,6 +164,7 @@ func (o *DDDevice) MediaPlaybackState() DDDeviceMediaPlaybackState {
 	return _ret
 }
 
+// Current state of media playback on this device.
 func (o *DDDevice) SetMediaPlaybackState(mediaPlaybackState DDDeviceMediaPlaybackState) {
 	o.Ptr().Send(_dDDeviceSelSetMediaPlaybackState, mediaPlaybackState)
 }
@@ -177,6 +178,7 @@ func (o *DDDevice) MediaContentTitle() *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
+// Title of the media content being played.
 func (o *DDDevice) SetMediaContentTitle(mediaContentTitle *foundation.NSString) {
 	o.Ptr().Send(_dDDeviceSelSetMediaContentTitle, mediaContentTitle.Ptr())
 }
@@ -190,6 +192,7 @@ func (o *DDDevice) MediaContentSubtitle() *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
+// Subtitle of the media content being played. It can be used to display extra information about the content, such as the name of the artist.
 func (o *DDDevice) SetMediaContentSubtitle(mediaContentSubtitle *foundation.NSString) {
 	o.Ptr().Send(_dDDeviceSelSetMediaContentSubtitle, mediaContentSubtitle.Ptr())
 }

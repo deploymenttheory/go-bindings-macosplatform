@@ -9,8 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A formatter that creates locale-aware string representations of a relative date or time.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsrelativedatetimeformatter
 type NSRelativeDateTimeFormatter struct {
 	NSFormatter
@@ -43,6 +41,7 @@ func NSRelativeDateTimeFormatterFromID(id objc.ID) *NSRelativeDateTimeFormatter 
 	return o
 }
 
+// Returns a formatted string representing a relative time from the given date components. Negative component values are evaluated as a date in the past. This method formats the value of the least granular unit in the `NSDateComponents` object, and does not provide a compound format of the date component. Note this method only supports the following components: year, month, week of month, day, hour, minute, and second. The rest will be ignored.
 func (o *NSRelativeDateTimeFormatter) LocalizedStringFromDateComponents(dateComponents *NSDateComponents) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRelativeDateTimeFormatterSelLocalizedStringFromDateComponents, dateComponents.Ptr())
 	if _ret != 0 {
@@ -51,6 +50,7 @@ func (o *NSRelativeDateTimeFormatter) LocalizedStringFromDateComponents(dateComp
 	return NSStringFromID(_ret)
 }
 
+// Returns a formatted string representing a relative time from the given time interval. Negative time interval is evaluated as a date in the past.
 func (o *NSRelativeDateTimeFormatter) LocalizedStringFromTimeInterval(timeInterval float64) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRelativeDateTimeFormatterSelLocalizedStringFromTimeInterval, timeInterval)
 	if _ret != 0 {
@@ -59,6 +59,7 @@ func (o *NSRelativeDateTimeFormatter) LocalizedStringFromTimeInterval(timeInterv
 	return NSStringFromID(_ret)
 }
 
+// Formats the date interval from the reference date to the given date using the formatter's calendar.
 func (o *NSRelativeDateTimeFormatter) LocalizedStringForDateRelativeToDate(date *NSDate, referenceDate *NSDate) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRelativeDateTimeFormatterSelLocalizedStringForDateRelativeToDate, date.Ptr(), referenceDate.Ptr())
 	if _ret != 0 {
@@ -67,6 +68,7 @@ func (o *NSRelativeDateTimeFormatter) LocalizedStringForDateRelativeToDate(date 
 	return NSStringFromID(_ret)
 }
 
+// Specifies how to describe a relative date. For example, "yesterday" vs "1 day ago" in English. Default is `NSRelativeDateTimeFormatterStyleNumeric`.
 func (o *NSRelativeDateTimeFormatter) DateTimeStyle() NSRelativeDateTimeFormatterStyle {
 	_ret := objc.Send[NSRelativeDateTimeFormatterStyle](o.Ptr(), _nSRelativeDateTimeFormatterSelDateTimeStyle)
 	return _ret
@@ -76,6 +78,7 @@ func (o *NSRelativeDateTimeFormatter) SetDateTimeStyle(dateTimeStyle NSRelativeD
 	o.Ptr().Send(_nSRelativeDateTimeFormatterSelSetDateTimeStyle, dateTimeStyle)
 }
 
+// Specifies how to format the quantity or the name of the unit. For example, "1 day ago" vs "one day ago" in English. Default is `NSRelativeDateTimeFormatterUnitsStyleFull`.
 func (o *NSRelativeDateTimeFormatter) UnitsStyle() NSRelativeDateTimeFormatterUnitsStyle {
 	_ret := objc.Send[NSRelativeDateTimeFormatterUnitsStyle](o.Ptr(), _nSRelativeDateTimeFormatterSelUnitsStyle)
 	return _ret
@@ -85,6 +88,7 @@ func (o *NSRelativeDateTimeFormatter) SetUnitsStyle(unitsStyle NSRelativeDateTim
 	o.Ptr().Send(_nSRelativeDateTimeFormatterSelSetUnitsStyle, unitsStyle)
 }
 
+// Specifies the formatting context of the output. Default is `NSFormattingContextUnknown`.
 func (o *NSRelativeDateTimeFormatter) FormattingContext() NSFormattingContext {
 	_ret := objc.Send[NSFormattingContext](o.Ptr(), _nSRelativeDateTimeFormatterSelFormattingContext)
 	return _ret
@@ -94,6 +98,7 @@ func (o *NSRelativeDateTimeFormatter) SetFormattingContext(formattingContext NSF
 	o.Ptr().Send(_nSRelativeDateTimeFormatterSelSetFormattingContext, formattingContext)
 }
 
+// Specifies the calendar to use for formatting values that do not have an inherent calendar of their own. Defaults to `autoupdatingCurrentCalendar`. Also resets to `autoupdatingCurrentCalendar` on assignment of `nil`.
 func (o *NSRelativeDateTimeFormatter) Calendar() *NSCalendar {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRelativeDateTimeFormatterSelCalendar)
 	if _ret != 0 {
@@ -106,6 +111,7 @@ func (o *NSRelativeDateTimeFormatter) SetCalendar(calendar *NSCalendar) {
 	o.Ptr().Send(_nSRelativeDateTimeFormatterSelSetCalendar, calendar.Ptr())
 }
 
+// Specifies the locale of the output string. Defaults to and resets on assignment of `nil` to the calendar's locale.
 func (o *NSRelativeDateTimeFormatter) Locale() *NSLocale {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRelativeDateTimeFormatterSelLocale)
 	if _ret != 0 {

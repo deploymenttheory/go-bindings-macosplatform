@@ -10,8 +10,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An object that describes the characteristics of a physical surface.
-//
 // Apple documentation: https://developer.apple.com/documentation/phase/phaseshapeelement
 type PHASEShapeElement struct {
 	foundation.NSObject

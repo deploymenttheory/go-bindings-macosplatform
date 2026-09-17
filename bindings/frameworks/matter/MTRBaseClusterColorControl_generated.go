@@ -67,133 +67,133 @@ func NewMTRBaseClusterColorControlWithDeviceEndpointQueue(device *MTRBaseDevice,
 	return mTRBaseClusterColorControlAdopt(_id)
 }
 
-// MoveToHueWithParamsCompletion command MoveToHue Move to specified hue.
+// MoveToHueWithParamsCompletion command MoveToHue This command will move the device to the requested hue using a transition.
 func (mbccc *MTRBaseClusterColorControl) MoveToHueWithParamsCompletion(params *MTRColorControlClusterMoveToHueParams, completion func(unsafe.Pointer)) {
 	defer runtime.KeepAlive(mbccc)
 	defer runtime.KeepAlive(params)
 	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("moveToHueWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
-// MoveHueWithParamsCompletion command MoveHue Move hue up or down at specified rate.
+// MoveHueWithParamsCompletion command MoveHue This command will change the hue of the device with a requested rate.
 func (mbccc *MTRBaseClusterColorControl) MoveHueWithParamsCompletion(params *MTRColorControlClusterMoveHueParams, completion func(unsafe.Pointer)) {
 	defer runtime.KeepAlive(mbccc)
 	defer runtime.KeepAlive(params)
 	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("moveHueWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
-// StepHueWithParamsCompletion command StepHue Step hue up or down by specified size at specified rate.
+// StepHueWithParamsCompletion command StepHue This command will change the hue of the device using a step and transition.
 func (mbccc *MTRBaseClusterColorControl) StepHueWithParamsCompletion(params *MTRColorControlClusterStepHueParams, completion func(unsafe.Pointer)) {
 	defer runtime.KeepAlive(mbccc)
 	defer runtime.KeepAlive(params)
 	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("stepHueWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
-// MoveToSaturationWithParamsCompletion command MoveToSaturation Move to specified saturation.
+// MoveToSaturationWithParamsCompletion command MoveToSaturation This command will move the device to the requested saturation using a transition.
 func (mbccc *MTRBaseClusterColorControl) MoveToSaturationWithParamsCompletion(params *MTRColorControlClusterMoveToSaturationParams, completion func(unsafe.Pointer)) {
 	defer runtime.KeepAlive(mbccc)
 	defer runtime.KeepAlive(params)
 	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("moveToSaturationWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
-// MoveSaturationWithParamsCompletion command MoveSaturation Move saturation up or down at specified rate.
+// MoveSaturationWithParamsCompletion command MoveSaturation This command will change the saturation of the device with a requested rate.
 func (mbccc *MTRBaseClusterColorControl) MoveSaturationWithParamsCompletion(params *MTRColorControlClusterMoveSaturationParams, completion func(unsafe.Pointer)) {
 	defer runtime.KeepAlive(mbccc)
 	defer runtime.KeepAlive(params)
 	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("moveSaturationWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
-// StepSaturationWithParamsCompletion command StepSaturation Step saturation up or down by specified size at specified rate.
+// StepSaturationWithParamsCompletion command StepSaturation This command will change the saturation of the device using a step and transition.
 func (mbccc *MTRBaseClusterColorControl) StepSaturationWithParamsCompletion(params *MTRColorControlClusterStepSaturationParams, completion func(unsafe.Pointer)) {
 	defer runtime.KeepAlive(mbccc)
 	defer runtime.KeepAlive(params)
 	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("stepSaturationWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
-// MoveToHueAndSaturationWithParamsCompletion command MoveToHueAndSaturation Move to hue and saturation.
+// MoveToHueAndSaturationWithParamsCompletion command MoveToHueAndSaturation This command will move the device to the requested hue and saturation using a transition.
 func (mbccc *MTRBaseClusterColorControl) MoveToHueAndSaturationWithParamsCompletion(params *MTRColorControlClusterMoveToHueAndSaturationParams, completion func(unsafe.Pointer)) {
 	defer runtime.KeepAlive(mbccc)
 	defer runtime.KeepAlive(params)
 	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("moveToHueAndSaturationWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
-// MoveToColorWithParamsCompletion command MoveToColor Move to specified color.
+// MoveToColorWithParamsCompletion command MoveToColor This command will move the device to the requested color using a transition.
 func (mbccc *MTRBaseClusterColorControl) MoveToColorWithParamsCompletion(params *MTRColorControlClusterMoveToColorParams, completion func(unsafe.Pointer)) {
 	defer runtime.KeepAlive(mbccc)
 	defer runtime.KeepAlive(params)
 	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("moveToColorWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
-// MoveColorWithParamsCompletion command MoveColor Moves the color.
+// MoveColorWithParamsCompletion command MoveColor This command will change the color of the device with a requested rate.
 func (mbccc *MTRBaseClusterColorControl) MoveColorWithParamsCompletion(params *MTRColorControlClusterMoveColorParams, completion func(unsafe.Pointer)) {
 	defer runtime.KeepAlive(mbccc)
 	defer runtime.KeepAlive(params)
 	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("moveColorWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
-// StepColorWithParamsCompletion command StepColor Steps the lighting to a specific color.
+// StepColorWithParamsCompletion command StepColor This command will change the color of the device using a step and transition.
 func (mbccc *MTRBaseClusterColorControl) StepColorWithParamsCompletion(params *MTRColorControlClusterStepColorParams, completion func(unsafe.Pointer)) {
 	defer runtime.KeepAlive(mbccc)
 	defer runtime.KeepAlive(params)
 	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("stepColorWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
-// MoveToColorTemperatureWithParamsCompletion command MoveToColorTemperature Move to a specific color temperature.
+// MoveToColorTemperatureWithParamsCompletion command MoveToColorTemperature This command will move the device to the requested color temperate using a transition.
 func (mbccc *MTRBaseClusterColorControl) MoveToColorTemperatureWithParamsCompletion(params *MTRColorControlClusterMoveToColorTemperatureParams, completion func(unsafe.Pointer)) {
 	defer runtime.KeepAlive(mbccc)
 	defer runtime.KeepAlive(params)
 	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("moveToColorTemperatureWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
-// EnhancedMoveToHueWithParamsCompletion command EnhancedMoveToHue Command description for EnhancedMoveToHue
+// EnhancedMoveToHueWithParamsCompletion command EnhancedMoveToHue This command allows the light to be moved in a smooth continuous transition from their current hue to a target hue.
 func (mbccc *MTRBaseClusterColorControl) EnhancedMoveToHueWithParamsCompletion(params *MTRColorControlClusterEnhancedMoveToHueParams, completion func(unsafe.Pointer)) {
 	defer runtime.KeepAlive(mbccc)
 	defer runtime.KeepAlive(params)
 	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("enhancedMoveToHueWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
-// EnhancedMoveHueWithParamsCompletion command EnhancedMoveHue Command description for EnhancedMoveHue
+// EnhancedMoveHueWithParamsCompletion command EnhancedMoveHue This command allows the light to start a continuous transition starting from their current hue.
 func (mbccc *MTRBaseClusterColorControl) EnhancedMoveHueWithParamsCompletion(params *MTRColorControlClusterEnhancedMoveHueParams, completion func(unsafe.Pointer)) {
 	defer runtime.KeepAlive(mbccc)
 	defer runtime.KeepAlive(params)
 	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("enhancedMoveHueWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
-// EnhancedStepHueWithParamsCompletion command EnhancedStepHue Command description for EnhancedStepHue
+// EnhancedStepHueWithParamsCompletion command EnhancedStepHue This command allows the device to be moved in a stepped transition from their current hue.
 func (mbccc *MTRBaseClusterColorControl) EnhancedStepHueWithParamsCompletion(params *MTRColorControlClusterEnhancedStepHueParams, completion func(unsafe.Pointer)) {
 	defer runtime.KeepAlive(mbccc)
 	defer runtime.KeepAlive(params)
 	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("enhancedStepHueWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
-// EnhancedMoveToHueAndSaturationWithParamsCompletion command EnhancedMoveToHueAndSaturation Command description for EnhancedMoveToHueAndSaturation
+// EnhancedMoveToHueAndSaturationWithParamsCompletion command EnhancedMoveToHueAndSaturation This command allows the light to be moved in a smooth continuous transition from their current hue to a target hue and from their current saturation to a target saturation.
 func (mbccc *MTRBaseClusterColorControl) EnhancedMoveToHueAndSaturationWithParamsCompletion(params *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams, completion func(unsafe.Pointer)) {
 	defer runtime.KeepAlive(mbccc)
 	defer runtime.KeepAlive(params)
 	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("enhancedMoveToHueAndSaturationWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
-// ColorLoopSetWithParamsCompletion command ColorLoopSet Command description for ColorLoopSet
+// ColorLoopSetWithParamsCompletion command ColorLoopSet This command allows a color loop to be activated such that the color light cycles through its range of hues.
 func (mbccc *MTRBaseClusterColorControl) ColorLoopSetWithParamsCompletion(params *MTRColorControlClusterColorLoopSetParams, completion func(unsafe.Pointer)) {
 	defer runtime.KeepAlive(mbccc)
 	defer runtime.KeepAlive(params)
 	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("colorLoopSetWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
-// StopMoveStepWithParamsCompletion command StopMoveStep Command description for StopMoveStep
+// StopMoveStepWithParamsCompletion command StopMoveStep This command is provided to allow MoveTo and Step commands to be stopped.
 func (mbccc *MTRBaseClusterColorControl) StopMoveStepWithParamsCompletion(params *MTRColorControlClusterStopMoveStepParams, completion func(unsafe.Pointer)) {
 	defer runtime.KeepAlive(mbccc)
 	defer runtime.KeepAlive(params)
 	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("stopMoveStepWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
-// MoveColorTemperatureWithParamsCompletion command MoveColorTemperature Command description for MoveColorTemperature
+// MoveColorTemperatureWithParamsCompletion command MoveColorTemperature This command allows the color temperature of the light to be moved at a specified rate.
 func (mbccc *MTRBaseClusterColorControl) MoveColorTemperatureWithParamsCompletion(params *MTRColorControlClusterMoveColorTemperatureParams, completion func(unsafe.Pointer)) {
 	defer runtime.KeepAlive(mbccc)
 	defer runtime.KeepAlive(params)
 	objc.Send[objc.ID](objref.IDOf(mbccc), objc.RegisterName("moveColorTemperatureWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
-// StepColorTemperatureWithParamsCompletion command StepColorTemperature Command description for StepColorTemperature
+// StepColorTemperatureWithParamsCompletion command StepColorTemperature This command allows the color temperature of the light to be stepped with a specified step size.
 func (mbccc *MTRBaseClusterColorControl) StepColorTemperatureWithParamsCompletion(params *MTRColorControlClusterStepColorTemperatureParams, completion func(unsafe.Pointer)) {
 	defer runtime.KeepAlive(mbccc)
 	defer runtime.KeepAlive(params)

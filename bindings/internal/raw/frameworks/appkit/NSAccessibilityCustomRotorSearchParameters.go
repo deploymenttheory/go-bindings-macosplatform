@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// Search parameters for a custom rotor.
+// @brief NSAccessibilityCustomRotorSearchParameters is a container for search parameters. It should be examined to determine the next matching NSAccessibilityCustomRotorItemResult.
 //
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsaccessibilitycustomrotorsearchparameters
 type NSAccessibilityCustomRotorSearchParameters struct {

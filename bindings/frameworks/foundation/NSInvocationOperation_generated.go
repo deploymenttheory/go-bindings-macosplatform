@@ -58,31 +58,31 @@ func NewInvocationOperationWithInvocation(inv *Invocation) *InvocationOperation 
 	return invocationOperationAdopt(_id)
 }
 
-// WithQueuePriority sets the queue priority.
+// WithQueuePriority sets the execution priority of the operation in an operation queue. This property contains the relative priority of the operation. This value is used to influence the order in which operations are dequeued and executed. You should use priority values only as needed to classify the relative priority of non-dependent operations. Priority values should not be used to implement dependency management among different operation objects. If you need to establish dependencies between operations, use the “addDependency:“ method instead.
 func (io *InvocationOperation) WithQueuePriority(queuePriority OperationQueuePriority) *InvocationOperation {
 	objc.Send[objc.ID](objref.IDOf(io), objc.RegisterName("setQueuePriority:"), queuePriority)
 	return io
 }
 
-// WithCompletionBlock sets the completion block.
+// WithCompletionBlock sets the block to execute after the operation's main task is completed. The completion block takes no parameters and has no return value. The exact execution context for your completion block is not guaranteed but is typically a secondary thread. Therefore, you should not use this block to do any work that requires a very specific execution context. Instead, you should shunt that work to your application's main thread or to the specific thread that is capable of doing it. Because the completion block executes after the operation indicates it has finished its task, you must not use a completion block to queue additional work considered to be part of that task. A finished operation may finish either because it was cancelled or because it successfully completed its task. You should take that fact into account when writing your block code. In iOS 8 and later and macOS 10.10 and later, this property is set to `nil` after the completion block begins executing.
 func (io *InvocationOperation) WithCompletionBlock(completionBlock func()) *InvocationOperation {
 	objc.Send[objc.ID](objref.IDOf(io), objc.RegisterName("setCompletionBlock:"), objc.NewBlock(func(_ objc.Block) { completionBlock() }))
 	return io
 }
 
-// WithThreadPriority sets the thread priority.
+// WithThreadPriority sets the thread priority to use when executing the operation. Use `qualityOfService` instead.
 func (io *InvocationOperation) WithThreadPriority(threadPriority float64) *InvocationOperation {
 	objc.Send[objc.ID](objref.IDOf(io), objc.RegisterName("setThreadPriority:"), threadPriority)
 	return io
 }
 
-// WithQualityOfService sets the quality of service.
+// WithQualityOfService sets the relative amount of importance for granting system resources to the operation. Service levels affect the priority with which an operation object is given access to system resources such as CPU time, network resources, disk resources, and so on. Operations with a higher quality of service level are given greater priority over system resources so that they may perform their task more quickly.
 func (io *InvocationOperation) WithQualityOfService(qualityOfService QualityOfService) *InvocationOperation {
 	objc.Send[objc.ID](objref.IDOf(io), objc.RegisterName("setQualityOfService:"), qualityOfService)
 	return io
 }
 
-// WithName sets the name.
+// WithName sets the name of the operation. Assign a name to the operation object to help identify it during debugging.
 func (io *InvocationOperation) WithName(name StringProvider) *InvocationOperation {
 	defer runtime.KeepAlive(name)
 	objc.Send[objc.ID](objref.IDOf(io), objc.RegisterName("setName:"), objref.IDOf(name))
@@ -101,14 +101,14 @@ func (io *InvocationOperation) WithScriptingProperties(scriptingProperties map[s
 	return io
 }
 
-// Invocation returns the invocation.
+// Invocation returns the receiver's invocation object. The invocation object identifying the target object, selector, and parameters to use to execute the operation's task.
 func (io *InvocationOperation) Invocation() *Invocation {
 	defer runtime.KeepAlive(io)
 	_r := objc.Send[objc.ID](objref.IDOf(io), objc.RegisterName("invocation"))
 	return InvocationFromID(_r)
 }
 
-// Result returns the result.
+// Result returns the result of the invocation or method. The object returned by the method or an `NSValue` object containing the return value if it is not an object. `nil` if the method or invocation is not finished executing.
 func (io *InvocationOperation) Result() obj.Object {
 	defer runtime.KeepAlive(io)
 	_r := objc.Send[objc.ID](objref.IDOf(io), objc.RegisterName("result"))

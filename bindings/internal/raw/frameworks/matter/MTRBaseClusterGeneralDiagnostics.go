@@ -122,7 +122,7 @@ func MTRBaseClusterGeneralDiagnosticsFromID(id objc.ID) *MTRBaseClusterGeneralDi
 	return o
 }
 
-// Command TestEventTrigger Provide a means for certification tests to trigger some test-plan-specific events
+// Command TestEventTrigger This command SHALL be supported to provide a means for certification tests to trigger some test-plan-specific events, necessary to assist in automation of device interactions for some certification test cases.
 func (o *MTRBaseClusterGeneralDiagnostics) TestEventTriggerWithParamsCompletion(params *MTRGeneralDiagnosticsClusterTestEventTriggerParams, completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {

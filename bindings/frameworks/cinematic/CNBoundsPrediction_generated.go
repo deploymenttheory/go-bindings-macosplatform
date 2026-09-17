@@ -16,8 +16,6 @@ import (
 )
 
 // BoundsPrediction is an idiomatic wrapper over the Objective-C class CNBoundsPrediction.
-//
-// A structure representing the bounds of the predicted subject.
 type BoundsPrediction struct {
 	objref.Handle
 }

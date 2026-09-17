@@ -29,16 +29,41 @@ func (e CGLCPContextPriorityRequest) String() string {
 	}
 }
 
+type CNCinematicCapability int64
+
+const (
+	// No cinematic capabilities
+	CNCinematicCapabilityNone CNCinematicCapability = 0
+	// The cinematic asset can be used without preprocessing
+	CNCinematicCapabilityRenderable CNCinematicCapability = 1
+	// The cinematic asset needs preprocessing before it can be used
+	CNCinematicCapabilityNeedsPreprocessing CNCinematicCapability = 2
+)
+
+func (e CNCinematicCapability) String() string {
+	switch e {
+	case CNCinematicCapabilityNone:
+		return "CNCinematicCapabilityNone"
+	case CNCinematicCapabilityRenderable:
+		return "CNCinematicCapabilityRenderable"
+	case CNCinematicCapabilityNeedsPreprocessing:
+		return "CNCinematicCapabilityNeedsPreprocessing"
+	default:
+		return fmt.Sprintf("CNCinematicCapability(%d)", int64(e))
+	}
+}
+
 type CNCinematicErrorCode int64
 
 const (
-	CNCinematicErrorCodeUnknown      CNCinematicErrorCode = 1
-	CNCinematicErrorCodeUnreadable   CNCinematicErrorCode = 2
-	CNCinematicErrorCodeIncomplete   CNCinematicErrorCode = 3
-	CNCinematicErrorCodeMalformed    CNCinematicErrorCode = 4
-	CNCinematicErrorCodeUnsupported  CNCinematicErrorCode = 5
-	CNCinematicErrorCodeIncompatible CNCinematicErrorCode = 6
-	CNCinematicErrorCodeCancelled    CNCinematicErrorCode = 7
+	CNCinematicErrorCodeUnknown        CNCinematicErrorCode = 1
+	CNCinematicErrorCodeUnreadable     CNCinematicErrorCode = 2
+	CNCinematicErrorCodeIncomplete     CNCinematicErrorCode = 3
+	CNCinematicErrorCodeMalformed      CNCinematicErrorCode = 4
+	CNCinematicErrorCodeUnsupported    CNCinematicErrorCode = 5
+	CNCinematicErrorCodeIncompatible   CNCinematicErrorCode = 6
+	CNCinematicErrorCodeCancelled      CNCinematicErrorCode = 7
+	CNCinematicErrorCodeDownloadFailed CNCinematicErrorCode = 8
 )
 
 func (e CNCinematicErrorCode) String() string {
@@ -57,8 +82,25 @@ func (e CNCinematicErrorCode) String() string {
 		return "CNCinematicErrorCodeIncompatible"
 	case CNCinematicErrorCodeCancelled:
 		return "CNCinematicErrorCodeCancelled"
+	case CNCinematicErrorCodeDownloadFailed:
+		return "CNCinematicErrorCodeDownloadFailed"
 	default:
 		return fmt.Sprintf("CNCinematicErrorCode(%d)", int64(e))
+	}
+}
+
+type CNCinematicResourceVersion int64
+
+const (
+	CNCinematicResourceVersion1 CNCinematicResourceVersion = 1
+)
+
+func (e CNCinematicResourceVersion) String() string {
+	switch e {
+	case CNCinematicResourceVersion1:
+		return "CNCinematicResourceVersion1"
+	default:
+		return fmt.Sprintf("CNCinematicResourceVersion(%d)", int64(e))
 	}
 }
 
@@ -136,6 +178,34 @@ func (e CNRenderingQuality) String() string {
 	}
 }
 
+type CNResourceStatus int64
+
+const (
+	// Configuration is supported
+	CNResourceStatusReady CNResourceStatus = 0
+	// Configuration is supported but requires download of resources
+	CNResourceStatusNeedsDownloading CNResourceStatus = 1
+	// The device lacks hardware capabilities for the given configuration
+	CNResourceStatusUnsupportedDevice CNResourceStatus = 2
+	// The given asset is unsupported on the current build
+	CNResourceStatusUnsupportedAsset CNResourceStatus = 3
+)
+
+func (e CNResourceStatus) String() string {
+	switch e {
+	case CNResourceStatusReady:
+		return "CNResourceStatusReady"
+	case CNResourceStatusNeedsDownloading:
+		return "CNResourceStatusNeedsDownloading"
+	case CNResourceStatusUnsupportedDevice:
+		return "CNResourceStatusUnsupportedDevice"
+	case CNResourceStatusUnsupportedAsset:
+		return "CNResourceStatusUnsupportedAsset"
+	default:
+		return fmt.Sprintf("CNResourceStatus(%d)", int64(e))
+	}
+}
+
 type CNSpatialAudioContentType int64
 
 const (
@@ -159,25 +229,25 @@ func (e CNSpatialAudioContentType) String() string {
 type CNSpatialAudioRenderingStyle int64
 
 const (
-	// Isolates the ambience and place it in a spatial stem. Isolates all voices and place them in a mono stem.
+	// Isolates background and foreground sounds and places them in separate stems.
 	CNSpatialAudioRenderingStyleCinematic CNSpatialAudioRenderingStyle = 0
-	// Isolates the ambience and place it in a spatial stem. Isolates all voices, add a studio/proximity effect in the voice track and place them in a mono stem.
+	// Isolates background and foreground in separate stems. Adds a proximity effect to foreground sounds.
 	CNSpatialAudioRenderingStyleStudio CNSpatialAudioRenderingStyle = 1
-	// Isolates the ambience and place it in a spatial stem. Isolates only voices from the camera field of view and place them in a mono stem.
+	// Isolates background from foreground sounds in the camera field of view and places them in separate stems.
 	CNSpatialAudioRenderingStyleInFrame CNSpatialAudioRenderingStyle = 2
-	// Isolates the ambience when foreground is cinematic Audio Mix and place it in a spatial stem. There is no voice stem.
+	// Isolates background sounds in a stem.
 	CNSpatialAudioRenderingStyleCinematicBackgroundStem CNSpatialAudioRenderingStyle = 3
-	// Isolates all voices and places them in a mono stem. There is no ambience stem.
+	// Isolates foreground sounds in a stem.
 	CNSpatialAudioRenderingStyleCinematicForegroundStem CNSpatialAudioRenderingStyle = 4
-	// Isolates all voices, add a studio/proximity effect in the voice track and place them in a mono stem. There is no ambience stem.
+	// Isolates foreground sounds in a stem, and adds a proximity effect.
 	CNSpatialAudioRenderingStyleStudioForegroundStem CNSpatialAudioRenderingStyle = 5
-	// Isolates only voices from the camera field of view and place them in a mono stem. There is no ambience stem.
+	// Isolates foreground sounds within the camera field of view in a stem.
 	CNSpatialAudioRenderingStyleInFrameForegroundStem CNSpatialAudioRenderingStyle = 6
-	// This produces a spatial stem of the original recording that is unprocessed. This is the default rendering style.
+	// Produces an unprocessed spatial stem of the original recording. This is the default rendering style.
 	CNSpatialAudioRenderingStyleStandard CNSpatialAudioRenderingStyle = 7
-	// Isolates the ambience when foreground is studio Audio Mix and place it in a spatial stem. There is no voice stem.
+	// Isolates background sounds in a stem.
 	CNSpatialAudioRenderingStyleStudioBackgroundStem CNSpatialAudioRenderingStyle = 8
-	// Isolates the ambience and foreground that is out of frame and place it in a spatial stem. There is no voice stem.
+	// Isolates background plus foreground sounds outside the camera field of view in a stem.
 	CNSpatialAudioRenderingStyleInFrameBackgroundStem CNSpatialAudioRenderingStyle = 9
 )
 
@@ -1052,27 +1122,53 @@ func (e Qos_class_t) String() string {
 	}
 }
 
+type Task_shared_region_stubs_t uint8
+
+const (
+	TASK_SHARED_REGION_STUBS_DEV  Task_shared_region_stubs_t = 1
+	TASK_SHARED_REGION_STUBS_PROD Task_shared_region_stubs_t = 2
+)
+
+func (e Task_shared_region_stubs_t) String() string {
+	switch e {
+	case TASK_SHARED_REGION_STUBS_DEV:
+		return "TASK_SHARED_REGION_STUBS_DEV"
+	case TASK_SHARED_REGION_STUBS_PROD:
+		return "TASK_SHARED_REGION_STUBS_PROD"
+	default:
+		return fmt.Sprintf("Task_shared_region_stubs_t(%d)", int64(e))
+	}
+}
+
 type Virtual_memory_guard_exception_code_t uint32
 
 const (
-	KGUARD_EXC_DEALLOC_GAP                   Virtual_memory_guard_exception_code_t = 1
-	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        Virtual_memory_guard_exception_code_t = 2
-	KGUARD_EXC_RECLAIM_INDEX_FAILURE         Virtual_memory_guard_exception_code_t = 4
-	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    Virtual_memory_guard_exception_code_t = 8
-	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    Virtual_memory_guard_exception_code_t = 9
-	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         Virtual_memory_guard_exception_code_t = 10
-	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         Virtual_memory_guard_exception_code_t = 11
-	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  Virtual_memory_guard_exception_code_t = 12
-	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    Virtual_memory_guard_exception_code_t = 13
-	KGUARD_EXC_SEC_ACCESS_FAULT              Virtual_memory_guard_exception_code_t = 98
-	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        Virtual_memory_guard_exception_code_t = 99
-	KGUARD_EXC_SEC_COPY_DENIED               Virtual_memory_guard_exception_code_t = 100
-	KGUARD_EXC_SEC_SHARING_DENIED            Virtual_memory_guard_exception_code_t = 101
-	KGUARD_EXC_MTE_SYNC_FAULT                Virtual_memory_guard_exception_code_t = 200
-	KGUARD_EXC_MTE_ASYNC_USER_FAULT          Virtual_memory_guard_exception_code_t = 201
-	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          Virtual_memory_guard_exception_code_t = 202
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 203
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 204
+	KGUARD_EXC_DEALLOC_GAP                  Virtual_memory_guard_exception_code_t = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE       Virtual_memory_guard_exception_code_t = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE        Virtual_memory_guard_exception_code_t = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE   Virtual_memory_guard_exception_code_t = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE   Virtual_memory_guard_exception_code_t = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE        Virtual_memory_guard_exception_code_t = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE        Virtual_memory_guard_exception_code_t = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION Virtual_memory_guard_exception_code_t = 12
+	// Guard exception sent to a thread when a CoW defeatured map attempts to copy memory which is not permitted by system policy.
+	KGUARD_EXC_COW_DEFEATURED_COPY_DENIED Virtual_memory_guard_exception_code_t = 13
+	// Guard exception sent to a thread when it attempts to extract a given type of memory in a way which is not permitted for CoW defeatured maps.
+	KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED Virtual_memory_guard_exception_code_t = 14
+	// Guard exception sent to a thread when it attempts to copy-map a memory entry which was created for sharing by a CoW defeatured map.
+	KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED Virtual_memory_guard_exception_code_t = 15
+	KGUARD_EXC_COW_DEFEATURED_FIRST                    Virtual_memory_guard_exception_code_t = 13
+	KGUARD_EXC_COW_DEFEATURED_LAST                     Virtual_memory_guard_exception_code_t = 15
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY              Virtual_memory_guard_exception_code_t = 16
+	KGUARD_EXC_SEC_ACCESS_FAULT                        Virtual_memory_guard_exception_code_t = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT                  Virtual_memory_guard_exception_code_t = 99
+	KGUARD_EXC_SEC_COPY_DENIED                         Virtual_memory_guard_exception_code_t = 100
+	KGUARD_EXC_SEC_SHARING_DENIED                      Virtual_memory_guard_exception_code_t = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                          Virtual_memory_guard_exception_code_t = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT                    Virtual_memory_guard_exception_code_t = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT                    Virtual_memory_guard_exception_code_t = 202
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT           Virtual_memory_guard_exception_code_t = 203
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT           Virtual_memory_guard_exception_code_t = 204
 )
 
 func (e Virtual_memory_guard_exception_code_t) String() string {
@@ -1093,6 +1189,12 @@ func (e Virtual_memory_guard_exception_code_t) String() string {
 		return "KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE"
 	case KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION:
 		return "KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION"
+	case KGUARD_EXC_COW_DEFEATURED_COPY_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_COPY_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED"
 	case KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY:
 		return "KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY"
 	case KGUARD_EXC_SEC_ACCESS_FAULT:

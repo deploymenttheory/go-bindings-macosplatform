@@ -161,6 +161,7 @@ func NSFileVersionRemoveOtherVersionsOfItemAtURLError(url *NSURL) (bool, error) 
 	return _ret, nil
 }
 
+// The URL identifying the location of the file associated with the file version object. The URL identifies the location of the file associated with this version. If this version of the file has been deleted, the value in this property is nil. Do not display any part of this URL to the user. The location of file versions is managed by the system and should not be exposed to the user. If you want to present the name of a file version, use the localizedName property.
 func (o *NSFileVersion) URL() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileVersionSelURL)
 	if _ret != 0 {
@@ -169,6 +170,7 @@ func (o *NSFileVersion) URL() *NSURL {
 	return NSURLFromID(_ret)
 }
 
+// The string containing the user-presentable name of the file version. When displaying different versions of a file to the user, you should present this string to the user instead of the version's URL.
 func (o *NSFileVersion) LocalizedName() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileVersionSelLocalizedName)
 	if _ret != 0 {
@@ -177,6 +179,7 @@ func (o *NSFileVersion) LocalizedName() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The user-presentable name of the computer on which the revision was saved. If the current revision has been deleted from disk, or if no computer name was recorded, the value in this property is nil. The computer name is guaranteed to be recorded only when the current version is in conflict with another version. The version object does not track changes to the computer name itself. Thus, if the computer name changed, the value in this string might be an old value.
 func (o *NSFileVersion) LocalizedNameOfSavingComputer() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileVersionSelLocalizedNameOfSavingComputer)
 	if _ret != 0 {
@@ -185,6 +188,7 @@ func (o *NSFileVersion) LocalizedNameOfSavingComputer() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The name components of the user who created this version of the file. Is nil if the file is not shared or if the current user is the originator.
 func (o *NSFileVersion) OriginatorNameComponents() *NSPersonNameComponents {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileVersionSelOriginatorNameComponents)
 	if _ret != 0 {
@@ -193,6 +197,7 @@ func (o *NSFileVersion) OriginatorNameComponents() *NSPersonNameComponents {
 	return NSPersonNameComponentsFromID(_ret)
 }
 
+// The modification date of the version, or possibly nil if the receiver's storage has been deleted.
 func (o *NSFileVersion) ModificationDate() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileVersionSelModificationDate)
 	if _ret != 0 {
@@ -201,16 +206,19 @@ func (o *NSFileVersion) ModificationDate() *NSDate {
 	return NSDateFromID(_ret)
 }
 
+// The identifier for this version of the file. You can save the value of this property persistently and use it to recreate the version object later. When recreating the version object using the +versionOfItemAtURL:forPersistentIdentifier: method, the version object returned is equivalent to the current object.
 func (o *NSFileVersion) PersistentIdentifier() NSCoding {
 	_ret := objc.Send[NSCoding](o.Ptr(), _nSFileVersionSelPersistentIdentifier)
 	return _ret
 }
 
+// A Boolean value indicating whether the contents of the version are in conflict with the contents of another version. When two or more versions of a file are written at the same time, perhaps because the file is saved in the cloud and one or more of the writers were offline when they were writing, the system attempts to resolve the conflict automatically. It does this by picking one of the file versions to be the current file and setting this property to YES for the other file versions that are in conflict.
 func (o *NSFileVersion) IsConflict() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSFileVersionSelIsConflict)
 	return _ret
 }
 
+// A Boolean value that indicates whether the conflict has been resolved. When the system detects a conflict involving versions of a file, it sets this property to NO to indicate an unresolved conflict. After you resolve the conflict, set this property to YES to tell the system it is resolved; you must then remove any versions of the file that are no longer useful. Never set the value of this property to NO. If you do, the system raises an exception. Resolving a conflict causes the file version object to be removed from any reports about conflicting versions, such as those returned by the +unresolvedConflictVersionsOfItemAtURL: method.
 func (o *NSFileVersion) IsResolved() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSFileVersionSelIsResolved)
 	return _ret
@@ -220,6 +228,7 @@ func (o *NSFileVersion) SetResolved(resolved bool) {
 	o.Ptr().Send(_nSFileVersionSelSetResolved, resolved)
 }
 
+// A Boolean value that specifies whether the system can delete the associated file at some future time. Marking a file version as discardable gives the system the flexibility to reclaim the space, occupied by the associated file, at some future time. Do not, however, depend on the file being discarded. After setting this property to YES, do not set this property to NO again. Doing so causes the system to raise an exception. In addition, if you set this property to YES for the version of the file returned by the +currentVersionOfItemAtURL: method, the system raises an exception. Versions can be discardable only on Mac OS X.
 func (o *NSFileVersion) IsDiscardable() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSFileVersionSelIsDiscardable)
 	return _ret
@@ -229,11 +238,13 @@ func (o *NSFileVersion) SetDiscardable(discardable bool) {
 	o.Ptr().Send(_nSFileVersionSelSetDiscardable, discardable)
 }
 
+// Whether the version has local contents. Versions that are returned by +getNonlocalVersionsOfItemAtURL:completionHandler: do not initially have local contents. You can only access their contents, either directly via the URL or by invoking -replaceItemAtURL:options:error:, from within a coordinated read on the NSFileVersion's URL.
 func (o *NSFileVersion) HasLocalContents() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSFileVersionSelHasLocalContents)
 	return _ret
 }
 
+// Whether the version has a thumbnail image available. Thumbnails for versions from +getNonlocalVersionsOfItemAtURL:completionHandler: may not immediately be available. As soon as it becomes available, this property will change from NO to YES. You can use KVO to be notified of this change. If a thumbnail is available, you can access it using NSURLThumbnailKey or NSURLThumbnailDictionaryKey.
 func (o *NSFileVersion) HasThumbnail() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSFileVersionSelHasThumbnail)
 	return _ret

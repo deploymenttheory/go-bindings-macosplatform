@@ -2122,6 +2122,21 @@ func AVVideoYCbCrMatrix_ITU_R_2020() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVVideoYCbCrMatrix_ITU_R_2020")))
 }
 
+// AVVideoLogTransferFunctionKey returns the string constant AVVideoLogTransferFunctionKey, for use as a dictionary key or argument.
+func AVVideoLogTransferFunctionKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoLogTransferFunctionKey")))
+}
+
+// AVVideoLogTransferFunction_AppleLog returns the string constant AVVideoLogTransferFunction_AppleLog, for use as a dictionary key or argument.
+func AVVideoLogTransferFunction_AppleLog() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoLogTransferFunction_AppleLog")))
+}
+
+// AVVideoLogTransferFunction_AppleLog2 returns the string constant AVVideoLogTransferFunction_AppleLog2, for use as a dictionary key or argument.
+func AVVideoLogTransferFunction_AppleLog2() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoLogTransferFunction_AppleLog2")))
+}
+
 // AVVideoAllowWideColorKey returns the string constant AVVideoAllowWideColorKey, for use as a dictionary key or argument.
 func AVVideoAllowWideColorKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVVideoAllowWideColorKey")))
@@ -2530,6 +2545,26 @@ func AVAssetExportPresetAppleM4V1080pHD() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVAssetExportPresetAppleM4V1080pHD")))
 }
 
+// AVAssetExportSessionResumptionFailureReasonUnsupportedForPresetOnPlatform returns the string constant AVAssetExportSessionResumptionFailureReasonUnsupportedForPresetOnPlatform, for use as a dictionary key or argument.
+func AVAssetExportSessionResumptionFailureReasonUnsupportedForPresetOnPlatform() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetExportSessionResumptionFailureReasonUnsupportedForPresetOnPlatform")))
+}
+
+// AVAssetExportSessionResumptionFailureReasonTemporaryDirectoryDoesNotExist returns the string constant AVAssetExportSessionResumptionFailureReasonTemporaryDirectoryDoesNotExist, for use as a dictionary key or argument.
+func AVAssetExportSessionResumptionFailureReasonTemporaryDirectoryDoesNotExist() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetExportSessionResumptionFailureReasonTemporaryDirectoryDoesNotExist")))
+}
+
+// AVAssetExportSessionResumptionFailureReasonIncompatibleSessionSettings returns the string constant AVAssetExportSessionResumptionFailureReasonIncompatibleSessionSettings, for use as a dictionary key or argument.
+func AVAssetExportSessionResumptionFailureReasonIncompatibleSessionSettings() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetExportSessionResumptionFailureReasonIncompatibleSessionSettings")))
+}
+
+// AVAssetExportSessionResumptionFailureReasonIncompatibleTemporaryDirectoryContents returns the string constant AVAssetExportSessionResumptionFailureReasonIncompatibleTemporaryDirectoryContents, for use as a dictionary key or argument.
+func AVAssetExportSessionResumptionFailureReasonIncompatibleTemporaryDirectoryContents() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetExportSessionResumptionFailureReasonIncompatibleTemporaryDirectoryContents")))
+}
+
 // AVAssetImageGeneratorApertureModeCleanAperture returns the string constant AVAssetImageGeneratorApertureModeCleanAperture, for use as a dictionary key or argument.
 func AVAssetImageGeneratorApertureModeCleanAperture() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVAssetImageGeneratorApertureModeCleanAperture")))
@@ -2553,21 +2588,6 @@ func AVAssetImageGeneratorDynamicRangePolicyForceSDR() obj.Object {
 // AVAssetImageGeneratorDynamicRangePolicyMatchSource returns the string constant AVAssetImageGeneratorDynamicRangePolicyMatchSource, for use as a dictionary key or argument.
 func AVAssetImageGeneratorDynamicRangePolicyMatchSource() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVAssetImageGeneratorDynamicRangePolicyMatchSource")))
-}
-
-// AVVideoCompositionPerFrameHDRDisplayMetadataPolicyPropagate returns the string constant AVVideoCompositionPerFrameHDRDisplayMetadataPolicyPropagate, for use as a dictionary key or argument.
-func AVVideoCompositionPerFrameHDRDisplayMetadataPolicyPropagate() obj.Object {
-	return obj.Wrap(purego.CFConstant(_symbol("AVVideoCompositionPerFrameHDRDisplayMetadataPolicyPropagate")))
-}
-
-// AVVideoCompositionPerFrameHDRDisplayMetadataPolicyGenerate returns the string constant AVVideoCompositionPerFrameHDRDisplayMetadataPolicyGenerate, for use as a dictionary key or argument.
-func AVVideoCompositionPerFrameHDRDisplayMetadataPolicyGenerate() obj.Object {
-	return obj.Wrap(purego.CFConstant(_symbol("AVVideoCompositionPerFrameHDRDisplayMetadataPolicyGenerate")))
-}
-
-// AVAssetResourceLoadingRequestStreamingContentKeyRequestRequiresPersistentKey returns the string constant AVAssetResourceLoadingRequestStreamingContentKeyRequestRequiresPersistentKey, for use as a dictionary key or argument.
-func AVAssetResourceLoadingRequestStreamingContentKeyRequestRequiresPersistentKey() obj.Object {
-	return obj.Wrap(purego.CFConstant(_symbol("AVAssetResourceLoadingRequestStreamingContentKeyRequestRequiresPersistentKey")))
 }
 
 // AVTrackAssociationTypeAudioFallback returns the string constant AVTrackAssociationTypeAudioFallback, for use as a dictionary key or argument.
@@ -2633,6 +2653,21 @@ func AVAssetWriterInputMediaDataLocationBeforeMainMediaDataNotInterleaved() obj.
 // AVAssetWriterInputMediaDataLocationSparselyInterleavedWithMainMediaData returns the string constant AVAssetWriterInputMediaDataLocationSparselyInterleavedWithMainMediaData, for use as a dictionary key or argument.
 func AVAssetWriterInputMediaDataLocationSparselyInterleavedWithMainMediaData() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVAssetWriterInputMediaDataLocationSparselyInterleavedWithMainMediaData")))
+}
+
+// AVVideoCompositionPerFrameHDRDisplayMetadataPolicyPropagate returns the string constant AVVideoCompositionPerFrameHDRDisplayMetadataPolicyPropagate, for use as a dictionary key or argument.
+func AVVideoCompositionPerFrameHDRDisplayMetadataPolicyPropagate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoCompositionPerFrameHDRDisplayMetadataPolicyPropagate")))
+}
+
+// AVVideoCompositionPerFrameHDRDisplayMetadataPolicyGenerate returns the string constant AVVideoCompositionPerFrameHDRDisplayMetadataPolicyGenerate, for use as a dictionary key or argument.
+func AVVideoCompositionPerFrameHDRDisplayMetadataPolicyGenerate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoCompositionPerFrameHDRDisplayMetadataPolicyGenerate")))
+}
+
+// AVAssetResourceLoadingRequestStreamingContentKeyRequestRequiresPersistentKey returns the string constant AVAssetResourceLoadingRequestStreamingContentKeyRequestRequiresPersistentKey, for use as a dictionary key or argument.
+func AVAssetResourceLoadingRequestStreamingContentKeyRequestRequiresPersistentKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetResourceLoadingRequestStreamingContentKeyRequestRequiresPersistentKey")))
 }
 
 // AVAssetPlaybackConfigurationOptionStereoVideo returns the string constant AVAssetPlaybackConfigurationOptionStereoVideo, for use as a dictionary key or argument.
@@ -4469,6 +4504,16 @@ func AVCoordinatedPlaybackSuspensionReasonUserIsChangingCurrentTime() obj.Object
 	return obj.Wrap(purego.CFConstant(_symbol("AVCoordinatedPlaybackSuspensionReasonUserIsChangingCurrentTime")))
 }
 
+// AVPlaybackCoordinatorOtherParticipantsDidChangeNotification returns the string constant AVPlaybackCoordinatorOtherParticipantsDidChangeNotification, for use as a dictionary key or argument.
+func AVPlaybackCoordinatorOtherParticipantsDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlaybackCoordinatorOtherParticipantsDidChangeNotification")))
+}
+
+// AVPlaybackCoordinatorSuspensionReasonsDidChangeNotification returns the string constant AVPlaybackCoordinatorSuspensionReasonsDidChangeNotification, for use as a dictionary key or argument.
+func AVPlaybackCoordinatorSuspensionReasonsDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlaybackCoordinatorSuspensionReasonsDidChangeNotification")))
+}
+
 // AVPlayerItemTimeJumpedNotification returns the string constant AVPlayerItemTimeJumpedNotification, for use as a dictionary key or argument.
 func AVPlayerItemTimeJumpedNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerItemTimeJumpedNotification")))
@@ -4694,6 +4739,11 @@ func AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonLoadedTimeRangesChanged()
 	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonLoadedTimeRangesChanged")))
 }
 
+// AVRouteDetectorMultipleRoutesDetectedDidChangeNotification returns the string constant AVRouteDetectorMultipleRoutesDetectedDidChangeNotification, for use as a dictionary key or argument.
+func AVRouteDetectorMultipleRoutesDetectedDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVRouteDetectorMultipleRoutesDetectedDidChangeNotification")))
+}
+
 // AVSampleBufferAudioRendererWasFlushedAutomaticallyNotification returns the string constant AVSampleBufferAudioRendererWasFlushedAutomaticallyNotification, for use as a dictionary key or argument.
 func AVSampleBufferAudioRendererWasFlushedAutomaticallyNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVSampleBufferAudioRendererWasFlushedAutomaticallyNotification")))
@@ -4719,9 +4769,19 @@ func AVSampleBufferDisplayLayerFailedToDecodeNotificationErrorKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVSampleBufferDisplayLayerFailedToDecodeNotificationErrorKey")))
 }
 
+// AVSampleBufferDisplayLayerRequiresFlushToResumeDecodingDidChangeNotification returns the string constant AVSampleBufferDisplayLayerRequiresFlushToResumeDecodingDidChangeNotification, for use as a dictionary key or argument.
+func AVSampleBufferDisplayLayerRequiresFlushToResumeDecodingDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVSampleBufferDisplayLayerRequiresFlushToResumeDecodingDidChangeNotification")))
+}
+
 // AVSampleBufferDisplayLayerOutputObscuredDueToInsufficientExternalProtectionDidChangeNotification returns the string constant AVSampleBufferDisplayLayerOutputObscuredDueToInsufficientExternalProtectionDidChangeNotification, for use as a dictionary key or argument.
 func AVSampleBufferDisplayLayerOutputObscuredDueToInsufficientExternalProtectionDidChangeNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVSampleBufferDisplayLayerOutputObscuredDueToInsufficientExternalProtectionDidChangeNotification")))
+}
+
+// AVSampleBufferDisplayLayerReadyForDisplayDidChangeNotification returns the string constant AVSampleBufferDisplayLayerReadyForDisplayDidChangeNotification, for use as a dictionary key or argument.
+func AVSampleBufferDisplayLayerReadyForDisplayDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVSampleBufferDisplayLayerReadyForDisplayDidChangeNotification")))
 }
 
 // AVSampleBufferRenderSynchronizerRateDidChangeNotification returns the string constant AVSampleBufferRenderSynchronizerRateDidChangeNotification, for use as a dictionary key or argument.
@@ -4729,9 +4789,39 @@ func AVSampleBufferRenderSynchronizerRateDidChangeNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVSampleBufferRenderSynchronizerRateDidChangeNotification")))
 }
 
+// AVSampleBufferVideoRendererDidFailToDecodeNotification returns the string constant AVSampleBufferVideoRendererDidFailToDecodeNotification, for use as a dictionary key or argument.
+func AVSampleBufferVideoRendererDidFailToDecodeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVSampleBufferVideoRendererDidFailToDecodeNotification")))
+}
+
 // AVSampleBufferVideoRendererDidFailToDecodeNotificationErrorKey returns the string constant AVSampleBufferVideoRendererDidFailToDecodeNotificationErrorKey, for use as a dictionary key or argument.
 func AVSampleBufferVideoRendererDidFailToDecodeNotificationErrorKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVSampleBufferVideoRendererDidFailToDecodeNotificationErrorKey")))
+}
+
+// AVSampleBufferVideoRendererRequiresFlushToResumeDecodingDidChangeNotification returns the string constant AVSampleBufferVideoRendererRequiresFlushToResumeDecodingDidChangeNotification, for use as a dictionary key or argument.
+func AVSampleBufferVideoRendererRequiresFlushToResumeDecodingDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVSampleBufferVideoRendererRequiresFlushToResumeDecodingDidChangeNotification")))
+}
+
+// AVSampleBufferVideoRendererRequiresFlushToResumeDecodingDidChangeNotificationRequiresFlushKey returns the string constant AVSampleBufferVideoRendererRequiresFlushToResumeDecodingDidChangeNotificationRequiresFlushKey, for use as a dictionary key or argument.
+func AVSampleBufferVideoRendererRequiresFlushToResumeDecodingDidChangeNotificationRequiresFlushKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVSampleBufferVideoRendererRequiresFlushToResumeDecodingDidChangeNotificationRequiresFlushKey")))
+}
+
+// AVCaptureAncillaryDataUserKeyRDD18InstanceUID returns the string constant AVCaptureAncillaryDataUserKeyRDD18InstanceUID, for use as a dictionary key or argument.
+func AVCaptureAncillaryDataUserKeyRDD18InstanceUID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureAncillaryDataUserKeyRDD18InstanceUID")))
+}
+
+// AVCaptureAncillaryDataUserKeyRDD18UDAMSetVersion returns the string constant AVCaptureAncillaryDataUserKeyRDD18UDAMSetVersion, for use as a dictionary key or argument.
+func AVCaptureAncillaryDataUserKeyRDD18UDAMSetVersion() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureAncillaryDataUserKeyRDD18UDAMSetVersion")))
+}
+
+// AVCaptureAncillaryDataUserKeyRDD18UserItems returns the string constant AVCaptureAncillaryDataUserKeyRDD18UserItems, for use as a dictionary key or argument.
+func AVCaptureAncillaryDataUserKeyRDD18UserItems() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureAncillaryDataUserKeyRDD18UserItems")))
 }
 
 // AVCaptureSessionPresetPhoto returns the string constant AVCaptureSessionPresetPhoto, for use as a dictionary key or argument.
@@ -4839,6 +4929,16 @@ func AVCaptureReactionTypeLasers() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureReactionTypeLasers")))
 }
 
+// AVCaptureDeviceWasConnectedNotification returns the string constant AVCaptureDeviceWasConnectedNotification, for use as a dictionary key or argument.
+func AVCaptureDeviceWasConnectedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureDeviceWasConnectedNotification")))
+}
+
+// AVCaptureDeviceWasDisconnectedNotification returns the string constant AVCaptureDeviceWasDisconnectedNotification, for use as a dictionary key or argument.
+func AVCaptureDeviceWasDisconnectedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureDeviceWasDisconnectedNotification")))
+}
+
 // AVCaptureDeviceTypeExternal returns the string constant AVCaptureDeviceTypeExternal, for use as a dictionary key or argument.
 func AVCaptureDeviceTypeExternal() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureDeviceTypeExternal")))
@@ -4889,9 +4989,44 @@ func AVCaptureSceneMonitoringStatusNotEnoughLight() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureSceneMonitoringStatusNotEnoughLight")))
 }
 
+// AVCaptureSessionRuntimeErrorNotification returns the string constant AVCaptureSessionRuntimeErrorNotification, for use as a dictionary key or argument.
+func AVCaptureSessionRuntimeErrorNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureSessionRuntimeErrorNotification")))
+}
+
 // AVCaptureSessionErrorKey returns the string constant AVCaptureSessionErrorKey, for use as a dictionary key or argument.
 func AVCaptureSessionErrorKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureSessionErrorKey")))
+}
+
+// AVCaptureSessionDidStartRunningNotification returns the string constant AVCaptureSessionDidStartRunningNotification, for use as a dictionary key or argument.
+func AVCaptureSessionDidStartRunningNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureSessionDidStartRunningNotification")))
+}
+
+// AVCaptureSessionDidStopRunningNotification returns the string constant AVCaptureSessionDidStopRunningNotification, for use as a dictionary key or argument.
+func AVCaptureSessionDidStopRunningNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureSessionDidStopRunningNotification")))
+}
+
+// AVCaptureSessionWasInterruptedNotification returns the string constant AVCaptureSessionWasInterruptedNotification, for use as a dictionary key or argument.
+func AVCaptureSessionWasInterruptedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureSessionWasInterruptedNotification")))
+}
+
+// AVCaptureSessionInterruptionEndedNotification returns the string constant AVCaptureSessionInterruptionEndedNotification, for use as a dictionary key or argument.
+func AVCaptureSessionInterruptionEndedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureSessionInterruptionEndedNotification")))
+}
+
+// AVMetadataObjectTypeFocusTrackedObject returns the string constant AVMetadataObjectTypeFocusTrackedObject, for use as a dictionary key or argument.
+func AVMetadataObjectTypeFocusTrackedObject() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypeFocusTrackedObject")))
+}
+
+// AVMetadataObjectTypeCinematicVideoMetadata returns the string constant AVMetadataObjectTypeCinematicVideoMetadata, for use as a dictionary key or argument.
+func AVMetadataObjectTypeCinematicVideoMetadata() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypeCinematicVideoMetadata")))
 }
 
 // AVMetadataObjectTypeHumanBody returns the string constant AVMetadataObjectTypeHumanBody, for use as a dictionary key or argument.
@@ -5049,6 +5184,46 @@ func AVSemanticSegmentationMatteTypeGlasses() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVSemanticSegmentationMatteTypeGlasses")))
 }
 
+// AVCaptureInputPortFormatDescriptionDidChangeNotification returns the string constant AVCaptureInputPortFormatDescriptionDidChangeNotification, for use as a dictionary key or argument.
+func AVCaptureInputPortFormatDescriptionDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureInputPortFormatDescriptionDidChangeNotification")))
+}
+
+// AVExternalStorageDeviceReasonNotRecommendedForCaptureUseEncrypted returns the string constant AVExternalStorageDeviceReasonNotRecommendedForCaptureUseEncrypted, for use as a dictionary key or argument.
+func AVExternalStorageDeviceReasonNotRecommendedForCaptureUseEncrypted() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVExternalStorageDeviceReasonNotRecommendedForCaptureUseEncrypted")))
+}
+
+// AVExternalStorageDeviceReasonNotRecommendedForCaptureUseUnsupportedFileSystem returns the string constant AVExternalStorageDeviceReasonNotRecommendedForCaptureUseUnsupportedFileSystem, for use as a dictionary key or argument.
+func AVExternalStorageDeviceReasonNotRecommendedForCaptureUseUnsupportedFileSystem() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVExternalStorageDeviceReasonNotRecommendedForCaptureUseUnsupportedFileSystem")))
+}
+
+// AVExternalStorageDeviceReasonNotRecommendedForCaptureUseSlowWritingSpeed returns the string constant AVExternalStorageDeviceReasonNotRecommendedForCaptureUseSlowWritingSpeed, for use as a dictionary key or argument.
+func AVExternalStorageDeviceReasonNotRecommendedForCaptureUseSlowWritingSpeed() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVExternalStorageDeviceReasonNotRecommendedForCaptureUseSlowWritingSpeed")))
+}
+
+// AVExternalStorageDeviceReasonNotRecommendedForCaptureUseUnknownWritingSpeed returns the string constant AVExternalStorageDeviceReasonNotRecommendedForCaptureUseUnknownWritingSpeed, for use as a dictionary key or argument.
+func AVExternalStorageDeviceReasonNotRecommendedForCaptureUseUnknownWritingSpeed() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVExternalStorageDeviceReasonNotRecommendedForCaptureUseUnknownWritingSpeed")))
+}
+
+// AVProVideoStorageBusyReasonAdjustingCapacity returns the string constant AVProVideoStorageBusyReasonAdjustingCapacity, for use as a dictionary key or argument.
+func AVProVideoStorageBusyReasonAdjustingCapacity() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVProVideoStorageBusyReasonAdjustingCapacity")))
+}
+
+// AVProVideoStorageBusyReasonReplenishing returns the string constant AVProVideoStorageBusyReasonReplenishing, for use as a dictionary key or argument.
+func AVProVideoStorageBusyReasonReplenishing() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVProVideoStorageBusyReasonReplenishing")))
+}
+
+// AVProVideoStorageBusyReasonCapturing returns the string constant AVProVideoStorageBusyReasonCapturing, for use as a dictionary key or argument.
+func AVProVideoStorageBusyReasonCapturing() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVProVideoStorageBusyReasonCapturing")))
+}
+
 // AVCoreAnimationBeginTimeAtZero returns the value of the constant AVCoreAnimationBeginTimeAtZero.
 func AVCoreAnimationBeginTimeAtZero() float64 {
 	addr := _symbol("AVCoreAnimationBeginTimeAtZero")
@@ -5058,80 +5233,11 @@ func AVCoreAnimationBeginTimeAtZero() float64 {
 	return *(*float64)(unsafe.Pointer(addr))
 }
 
-// AVPlaybackCoordinatorOtherParticipantsDidChangeNotification returns the address of the symbol AVPlaybackCoordinatorOtherParticipantsDidChangeNotification.
-func AVPlaybackCoordinatorOtherParticipantsDidChangeNotification() uintptr {
-	return _symbol("AVPlaybackCoordinatorOtherParticipantsDidChangeNotification")
-}
-
-// AVPlaybackCoordinatorSuspensionReasonsDidChangeNotification returns the address of the symbol AVPlaybackCoordinatorSuspensionReasonsDidChangeNotification.
-func AVPlaybackCoordinatorSuspensionReasonsDidChangeNotification() uintptr {
-	return _symbol("AVPlaybackCoordinatorSuspensionReasonsDidChangeNotification")
-}
-
-// AVRouteDetectorMultipleRoutesDetectedDidChangeNotification returns the address of the symbol AVRouteDetectorMultipleRoutesDetectedDidChangeNotification.
-func AVRouteDetectorMultipleRoutesDetectedDidChangeNotification() uintptr {
-	return _symbol("AVRouteDetectorMultipleRoutesDetectedDidChangeNotification")
-}
-
-// AVSampleBufferDisplayLayerRequiresFlushToResumeDecodingDidChangeNotification returns the address of the symbol AVSampleBufferDisplayLayerRequiresFlushToResumeDecodingDidChangeNotification.
-func AVSampleBufferDisplayLayerRequiresFlushToResumeDecodingDidChangeNotification() uintptr {
-	return _symbol("AVSampleBufferDisplayLayerRequiresFlushToResumeDecodingDidChangeNotification")
-}
-
-// AVSampleBufferDisplayLayerReadyForDisplayDidChangeNotification returns the address of the symbol AVSampleBufferDisplayLayerReadyForDisplayDidChangeNotification.
-func AVSampleBufferDisplayLayerReadyForDisplayDidChangeNotification() uintptr {
-	return _symbol("AVSampleBufferDisplayLayerReadyForDisplayDidChangeNotification")
-}
-
-// AVSampleBufferVideoRendererDidFailToDecodeNotification returns the address of the symbol AVSampleBufferVideoRendererDidFailToDecodeNotification.
-func AVSampleBufferVideoRendererDidFailToDecodeNotification() uintptr {
-	return _symbol("AVSampleBufferVideoRendererDidFailToDecodeNotification")
-}
-
-// AVSampleBufferVideoRendererRequiresFlushToResumeDecodingDidChangeNotification returns the address of the symbol AVSampleBufferVideoRendererRequiresFlushToResumeDecodingDidChangeNotification.
-func AVSampleBufferVideoRendererRequiresFlushToResumeDecodingDidChangeNotification() uintptr {
-	return _symbol("AVSampleBufferVideoRendererRequiresFlushToResumeDecodingDidChangeNotification")
-}
-
-// AVCaptureDeviceWasConnectedNotification returns the address of the symbol AVCaptureDeviceWasConnectedNotification.
-func AVCaptureDeviceWasConnectedNotification() uintptr {
-	return _symbol("AVCaptureDeviceWasConnectedNotification")
-}
-
-// AVCaptureDeviceWasDisconnectedNotification returns the address of the symbol AVCaptureDeviceWasDisconnectedNotification.
-func AVCaptureDeviceWasDisconnectedNotification() uintptr {
-	return _symbol("AVCaptureDeviceWasDisconnectedNotification")
-}
-
-// AVCaptureMaxAvailableTorchLevel returns the address of the symbol AVCaptureMaxAvailableTorchLevel.
-func AVCaptureMaxAvailableTorchLevel() uintptr { return _symbol("AVCaptureMaxAvailableTorchLevel") }
-
-// AVCaptureSessionRuntimeErrorNotification returns the address of the symbol AVCaptureSessionRuntimeErrorNotification.
-func AVCaptureSessionRuntimeErrorNotification() uintptr {
-	return _symbol("AVCaptureSessionRuntimeErrorNotification")
-}
-
-// AVCaptureSessionDidStartRunningNotification returns the address of the symbol AVCaptureSessionDidStartRunningNotification.
-func AVCaptureSessionDidStartRunningNotification() uintptr {
-	return _symbol("AVCaptureSessionDidStartRunningNotification")
-}
-
-// AVCaptureSessionDidStopRunningNotification returns the address of the symbol AVCaptureSessionDidStopRunningNotification.
-func AVCaptureSessionDidStopRunningNotification() uintptr {
-	return _symbol("AVCaptureSessionDidStopRunningNotification")
-}
-
-// AVCaptureSessionWasInterruptedNotification returns the address of the symbol AVCaptureSessionWasInterruptedNotification.
-func AVCaptureSessionWasInterruptedNotification() uintptr {
-	return _symbol("AVCaptureSessionWasInterruptedNotification")
-}
-
-// AVCaptureSessionInterruptionEndedNotification returns the address of the symbol AVCaptureSessionInterruptionEndedNotification.
-func AVCaptureSessionInterruptionEndedNotification() uintptr {
-	return _symbol("AVCaptureSessionInterruptionEndedNotification")
-}
-
-// AVCaptureInputPortFormatDescriptionDidChangeNotification returns the address of the symbol AVCaptureInputPortFormatDescriptionDidChangeNotification.
-func AVCaptureInputPortFormatDescriptionDidChangeNotification() uintptr {
-	return _symbol("AVCaptureInputPortFormatDescriptionDidChangeNotification")
+// AVCaptureMaxAvailableTorchLevel returns the value of the constant AVCaptureMaxAvailableTorchLevel.
+func AVCaptureMaxAvailableTorchLevel() float32 {
+	addr := _symbol("AVCaptureMaxAvailableTorchLevel")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float32)(unsafe.Pointer(addr))
 }

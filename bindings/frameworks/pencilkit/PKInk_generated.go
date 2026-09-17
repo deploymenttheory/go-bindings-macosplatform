@@ -16,8 +16,6 @@ import (
 )
 
 // Ink is an idiomatic wrapper over the Objective-C class PKInk.
-//
-// A structure that represents an ink that specifies its type, color, and width.
 type Ink struct {
 	objref.Handle
 }

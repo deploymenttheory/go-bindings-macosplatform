@@ -18,8 +18,6 @@ import (
 )
 
 // Drawing is an idiomatic wrapper over the Objective-C class PKDrawing.
-//
-// A structure representing the drawing information captured by a canvas view.
 type Drawing struct {
 	objref.Handle
 }
@@ -82,14 +80,14 @@ func NewDrawing() *Drawing {
 	return drawingAdopt(_id)
 }
 
-// NewDrawingWithStrokes initializes a drawing with an array of strokes.
+// NewDrawingWithStrokes creates a drawing with the specified strokes. When setting strokes, duplicate IDs are automatically resolved by generating new UUIDs for conflicting strokes. The first occurrence keeps its original ID.
 func NewDrawingWithStrokes(strokes []*Stroke) *Drawing {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKDrawing")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStrokes:"), purego.SliceToNSArray(strokes, func(_v *Stroke) objc.ID { return objref.IDOf(_v) }))
 	return drawingAdopt(_id)
 }
 
-// NewDrawingWithData initializes and returns the drawing with the specified data.
+// NewDrawingWithData creates a drawing from the specified encoded data.
 func NewDrawingWithData(data []byte) (result *Drawing, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKDrawing")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
@@ -100,7 +98,7 @@ func NewDrawingWithData(data []byte) (result *Drawing, err error) {
 	return drawingAdopt(_id), nil
 }
 
-// DataRepresentation returns generate a data representation of the drawing.
+// DataRepresentation returns a data representation of the drawing.
 func (d *Drawing) DataRepresentation() []byte {
 	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("dataRepresentation"))
@@ -114,14 +112,14 @@ func (d *Drawing) ImageFromRectScale(rect corefoundation.CGRect, scale float64) 
 	return obj.Wrap(_r)
 }
 
-// DrawingByApplyingTransform returns a new drawing with `transform` applied.
+// DrawingByApplyingTransform returns a new drawing with the specified transform applied.
 func (d *Drawing) DrawingByApplyingTransform(transform corefoundation.CGAffineTransform) *Drawing {
 	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("drawingByApplyingTransform:"), transform)
 	return DrawingFromID(_r)
 }
 
-// DrawingByAppendingDrawing returns a new drawing by appending the contents of `drawing` on top of the receiver’s contents.
+// DrawingByAppendingDrawing returns a new drawing by appending the contents of the specified drawing on top of the receiver's contents.
 func (d *Drawing) DrawingByAppendingDrawing(drawing *Drawing) *Drawing {
 	defer runtime.KeepAlive(d)
 	defer runtime.KeepAlive(drawing)
@@ -129,14 +127,23 @@ func (d *Drawing) DrawingByAppendingDrawing(drawing *Drawing) *Drawing {
 	return DrawingFromID(_r)
 }
 
-// DrawingByAppendingStrokes create a new drawing by appending an array of strokes to this drawing. This is a convenience method, to quickly add strokes to a drawing.
+// DrawingByAppendingStrokes returns a new drawing with the specified strokes appended.
 func (d *Drawing) DrawingByAppendingStrokes(strokes []*Stroke) *Drawing {
 	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("drawingByAppendingStrokes:"), purego.SliceToNSArray(strokes, func(_v *Stroke) objc.ID { return objref.IDOf(_v) }))
 	return DrawingFromID(_r)
 }
 
-// Strokes returns the strokes that this drawing contains.
+// DrawingByErasingStrokePathMaskTransform wraps the corresponding Objective-C method.
+func (d *Drawing) DrawingByErasingStrokePathMaskTransform(eraserPath *StrokePath, mask obj.Object, transform corefoundation.CGAffineTransform) *Drawing {
+	defer runtime.KeepAlive(d)
+	defer runtime.KeepAlive(eraserPath)
+	defer runtime.KeepAlive(mask)
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("drawingByErasingStrokePath:mask:transform:"), objref.IDOf(eraserPath), objref.IDOf(mask), transform)
+	return DrawingFromID(_r)
+}
+
+// Strokes returns the strokes the drawing contains.
 //
 // Strokes returns the collection as a Go slice.
 func (d *Drawing) Strokes() []*Stroke {
@@ -145,7 +152,7 @@ func (d *Drawing) Strokes() []*Stroke {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Stroke { return StrokeFromID(_id) })
 }
 
-// Bounds returns the bounds of the drawing's contents, taking into account the rendered width of all content. If these bounds are used to render an image with `imageFromRect:scale:`, no contents will be cropped.
+// Bounds returns the bounds of the drawing's contents, accounting for the rendered width of all strokes. Passing these bounds to `imageFromRect:scale:` produces an image that includes all content without cropping.
 func (d *Drawing) Bounds() corefoundation.CGRect {
 	defer runtime.KeepAlive(d)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(d), objc.RegisterName("bounds"))

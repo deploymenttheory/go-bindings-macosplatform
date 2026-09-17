@@ -15,8 +15,6 @@ import (
 )
 
 // FetchRecordZoneChangesOptions is an idiomatic wrapper over the Objective-C class CKFetchRecordZoneChangesOptions.
-//
-// A configuration object that describes the information to fetch from a record zone.
 type FetchRecordZoneChangesOptions struct {
 	objref.Handle
 }

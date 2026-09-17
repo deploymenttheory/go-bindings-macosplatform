@@ -5,6 +5,8 @@
 package discrecording
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
@@ -2818,32 +2820,92 @@ func DRErrorStatusAdditionalSenseStringKey() obj.Object {
 // KDRRefConCFTypeCallbacks returns the address of the symbol kDRRefConCFTypeCallbacks.
 func KDRRefConCFTypeCallbacks() uintptr { return _symbol("kDRRefConCFTypeCallbacks") }
 
-// KDRDeviceBurnSpeedCD1x returns the address of the symbol kDRDeviceBurnSpeedCD1x.
-func KDRDeviceBurnSpeedCD1x() uintptr { return _symbol("kDRDeviceBurnSpeedCD1x") }
+// KDRDeviceBurnSpeedCD1x returns the value of the constant kDRDeviceBurnSpeedCD1x.
+func KDRDeviceBurnSpeedCD1x() float32 {
+	addr := _symbol("kDRDeviceBurnSpeedCD1x")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float32)(unsafe.Pointer(addr))
+}
 
-// KDRDeviceBurnSpeedDVD1x returns the address of the symbol kDRDeviceBurnSpeedDVD1x.
-func KDRDeviceBurnSpeedDVD1x() uintptr { return _symbol("kDRDeviceBurnSpeedDVD1x") }
+// KDRDeviceBurnSpeedDVD1x returns the value of the constant kDRDeviceBurnSpeedDVD1x.
+func KDRDeviceBurnSpeedDVD1x() float32 {
+	addr := _symbol("kDRDeviceBurnSpeedDVD1x")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float32)(unsafe.Pointer(addr))
+}
 
-// KDRDeviceBurnSpeedBD1x returns the address of the symbol kDRDeviceBurnSpeedBD1x.
-func KDRDeviceBurnSpeedBD1x() uintptr { return _symbol("kDRDeviceBurnSpeedBD1x") }
+// KDRDeviceBurnSpeedBD1x returns the value of the constant kDRDeviceBurnSpeedBD1x.
+func KDRDeviceBurnSpeedBD1x() float32 {
+	addr := _symbol("kDRDeviceBurnSpeedBD1x")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float32)(unsafe.Pointer(addr))
+}
 
-// KDRDeviceBurnSpeedHDDVD1x returns the address of the symbol kDRDeviceBurnSpeedHDDVD1x.
-func KDRDeviceBurnSpeedHDDVD1x() uintptr { return _symbol("kDRDeviceBurnSpeedHDDVD1x") }
+// KDRDeviceBurnSpeedHDDVD1x returns the value of the constant kDRDeviceBurnSpeedHDDVD1x.
+func KDRDeviceBurnSpeedHDDVD1x() float32 {
+	addr := _symbol("kDRDeviceBurnSpeedHDDVD1x")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float32)(unsafe.Pointer(addr))
+}
 
-// KDRDeviceBurnSpeedMax returns the address of the symbol kDRDeviceBurnSpeedMax.
-func KDRDeviceBurnSpeedMax() uintptr { return _symbol("kDRDeviceBurnSpeedMax") }
+// KDRDeviceBurnSpeedMax returns the value of the constant kDRDeviceBurnSpeedMax.
+func KDRDeviceBurnSpeedMax() float32 {
+	addr := _symbol("kDRDeviceBurnSpeedMax")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float32)(unsafe.Pointer(addr))
+}
 
-// DRDeviceBurnSpeedCD1x returns the address of the symbol DRDeviceBurnSpeedCD1x.
-func DRDeviceBurnSpeedCD1x() uintptr { return _symbol("DRDeviceBurnSpeedCD1x") }
+// DRDeviceBurnSpeedCD1x returns the value of the constant DRDeviceBurnSpeedCD1x.
+func DRDeviceBurnSpeedCD1x() float32 {
+	addr := _symbol("DRDeviceBurnSpeedCD1x")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float32)(unsafe.Pointer(addr))
+}
 
-// DRDeviceBurnSpeedDVD1x returns the address of the symbol DRDeviceBurnSpeedDVD1x.
-func DRDeviceBurnSpeedDVD1x() uintptr { return _symbol("DRDeviceBurnSpeedDVD1x") }
+// DRDeviceBurnSpeedDVD1x returns the value of the constant DRDeviceBurnSpeedDVD1x.
+func DRDeviceBurnSpeedDVD1x() float32 {
+	addr := _symbol("DRDeviceBurnSpeedDVD1x")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float32)(unsafe.Pointer(addr))
+}
 
-// DRDeviceBurnSpeedBD1x returns the address of the symbol DRDeviceBurnSpeedBD1x.
-func DRDeviceBurnSpeedBD1x() uintptr { return _symbol("DRDeviceBurnSpeedBD1x") }
+// DRDeviceBurnSpeedBD1x returns the value of the constant DRDeviceBurnSpeedBD1x.
+func DRDeviceBurnSpeedBD1x() float32 {
+	addr := _symbol("DRDeviceBurnSpeedBD1x")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float32)(unsafe.Pointer(addr))
+}
 
-// DRDeviceBurnSpeedHDDVD1x returns the address of the symbol DRDeviceBurnSpeedHDDVD1x.
-func DRDeviceBurnSpeedHDDVD1x() uintptr { return _symbol("DRDeviceBurnSpeedHDDVD1x") }
+// DRDeviceBurnSpeedHDDVD1x returns the value of the constant DRDeviceBurnSpeedHDDVD1x.
+func DRDeviceBurnSpeedHDDVD1x() float32 {
+	addr := _symbol("DRDeviceBurnSpeedHDDVD1x")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float32)(unsafe.Pointer(addr))
+}
 
-// DRDeviceBurnSpeedMax returns the address of the symbol DRDeviceBurnSpeedMax.
-func DRDeviceBurnSpeedMax() uintptr { return _symbol("DRDeviceBurnSpeedMax") }
+// DRDeviceBurnSpeedMax returns the value of the constant DRDeviceBurnSpeedMax.
+func DRDeviceBurnSpeedMax() float32 {
+	addr := _symbol("DRDeviceBurnSpeedMax")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float32)(unsafe.Pointer(addr))
+}

@@ -9,8 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A notification dispatch mechanism that enables the broadcast of information to registered observers.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsnotificationcenter
 type NSNotificationCenter struct {
 	NSObject
@@ -38,30 +36,37 @@ func NSNotificationCenterFromID(id objc.ID) *NSNotificationCenter {
 	return o
 }
 
+// Adds an entry to the notification center to call the provided selector with the notification. - Parameters: - observer: Object registering as an observer. - aSelector: Selector that specifies the message the receiver sends the observer when posting the notification. The method must have one and only one argument (an instance of `NSNotification`). - aName: The name of the notification for which to register the observer; that is, only notifications with this name are used to add the block to the operation queue. Pass `nil` to receive notifications with any name. - anObject: The object whose notifications the observer wants to receive; that is, only notifications sent by this sender are delivered to the observer. Pass `nil` to receive notifications from any sender.
 func (o *NSNotificationCenter) AddObserverSelectorNameObject(observer objc.ID, aSelector objc.SEL, aName *NSString, anObject objc.ID) {
 	o.Ptr().Send(_nSNotificationCenterSelAddObserverSelectorNameObject, observer, aSelector, aName.Ptr(), anObject)
 }
 
+// Posts a given notification to the notification center. - Parameter notification: The notification to post.
 func (o *NSNotificationCenter) PostNotification(notification *NSNotification) {
 	o.Ptr().Send(_nSNotificationCenterSelPostNotification, notification.Ptr())
 }
 
+// Creates a notification with a given name and sender and posts it to the notification center. - Parameters: - aName: The name of the notification. - anObject: The object posting the notification.
 func (o *NSNotificationCenter) PostNotificationNameObject(aName *NSString, anObject objc.ID) {
 	o.Ptr().Send(_nSNotificationCenterSelPostNotificationNameObject, aName.Ptr(), anObject)
 }
 
+// Creates a notification with a given name, sender, and information and posts it to the notification center. - Parameters: - aName: The name of the notification. - anObject: The object posting the notification. - aUserInfo: Optional information about the notification.
 func (o *NSNotificationCenter) PostNotificationNameObjectUserInfo(aName *NSString, anObject objc.ID, aUserInfo *NSDictionary[objc.ID, objc.ID]) {
 	o.Ptr().Send(_nSNotificationCenterSelPostNotificationNameObjectUserInfo, aName.Ptr(), anObject, aUserInfo.Ptr())
 }
 
+// Removes all entries specifying an observer from the notification center's dispatch table. - Parameter observer: The notification observer to remove.
 func (o *NSNotificationCenter) RemoveObserver(observer objc.ID) {
 	o.Ptr().Send(_nSNotificationCenterSelRemoveObserver, observer)
 }
 
+// Removes matching entries from the notification center's dispatch table. - Parameters: - observer: The notification observer to remove. - aName: The name of the notification to remove from the dispatch table. Pass `nil` to remove all entries for the observer. - anObject: The sender to remove from the dispatch table. Pass `nil` to remove the observer regardless of the sender.
 func (o *NSNotificationCenter) RemoveObserverNameObject(observer objc.ID, aName *NSString, anObject objc.ID) {
 	o.Ptr().Send(_nSNotificationCenterSelRemoveObserverNameObject, observer, aName.Ptr(), anObject)
 }
 
+// Adds an entry to the notification center to receive notifications that passed to the provided block. - Parameters: - name: The name of the notification for which to register the observer. Pass `nil` to receive notifications with any name. - obj: The object whose notifications the observer wants to receive. Pass `nil` to receive notifications from any sender. - queue: The operation queue to which the block is added. Pass `nil` to run the block synchronously on the posting thread. - block: The block to be executed when the notification is received. - Returns: An opaque object to act as the observer, which you use to deregister the observer with “removeObserver:“.
 func (o *NSNotificationCenter) AddObserverForNameObjectQueueUsing(name *NSString, obj objc.ID, queue *NSOperationQueue, block func(*NSNotification)) NSObjectProtocol {
 	var __block_block objc.Block
 	if block != nil {
@@ -77,6 +82,7 @@ func (o *NSNotificationCenter) AddObserverForNameObjectQueueUsing(name *NSString
 	return _ret
 }
 
+// The app's default notification center.
 func NSNotificationCenterDefaultCenter() *NSNotificationCenter {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSNotificationCenter), _nSNotificationCenterSelDefaultCenter)
 	if _ret != 0 {

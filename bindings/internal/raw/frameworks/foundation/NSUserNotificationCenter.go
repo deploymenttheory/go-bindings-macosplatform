@@ -67,6 +67,7 @@ func (o *NSUserNotificationCenter) RemoveAllDeliveredNotifications() {
 	o.Ptr().Send(_nSUserNotificationCenterSelRemoveAllDeliveredNotifications)
 }
 
+// Returns the default user notification center.
 func NSUserNotificationCenterDefaultUserNotificationCenter() *NSUserNotificationCenter {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUserNotificationCenter), _nSUserNotificationCenterSelDefaultUserNotificationCenter)
 	if _ret != 0 {
@@ -75,6 +76,7 @@ func NSUserNotificationCenterDefaultUserNotificationCenter() *NSUserNotification
 	return NSUserNotificationCenterFromID(_ret)
 }
 
+// Specifies the notification center delegate. The delegate must conform to the `NSUserNotificationCenterDelegate` protocol.
 func (o *NSUserNotificationCenter) Delegate() NSUserNotificationCenterDelegate {
 	_ret := objc.Send[NSUserNotificationCenterDelegate](o.Ptr(), _nSUserNotificationCenterSelDelegate)
 	return _ret
@@ -84,6 +86,7 @@ func (o *NSUserNotificationCenter) SetDelegate(delegate NSUserNotificationCenter
 	o.Ptr().Send(_nSUserNotificationCenterSelSetDelegate, delegate)
 }
 
+// Specifies an array of scheduled user notifications that have not yet been delivered. Newly scheduled notifications are added to the end of the array. You may also bulk-schedule notifications by setting this array. Bulk setting new scheduled notifications unschedules existing notifications.
 func (o *NSUserNotificationCenter) ScheduledNotifications() *NSArray[*NSUserNotification] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserNotificationCenterSelScheduledNotifications)
 	if _ret != 0 {
@@ -96,6 +99,7 @@ func (o *NSUserNotificationCenter) SetScheduledNotifications(scheduledNotificati
 	o.Ptr().Send(_nSUserNotificationCenterSelSetScheduledNotifications, scheduledNotifications.Ptr())
 }
 
+// An array of all user notifications delivered to the notification center. The number of notifications the user actually sees in the user interface may be less than the size of this array. Note that these may or may not have been actually presented to the user. See the `presented` property in the `NSUserNotification` class.
 func (o *NSUserNotificationCenter) DeliveredNotifications() *NSArray[*NSUserNotification] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserNotificationCenterSelDeliveredNotifications)
 	if _ret != 0 {

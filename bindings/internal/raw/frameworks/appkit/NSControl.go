@@ -100,6 +100,8 @@ var (
 	_nSControlSelSetCellClass                             = objc.RegisterName("setCellClass:")
 	_nSControlSelCell                                     = objc.RegisterName("cell")
 	_nSControlSelSetCell                                  = objc.RegisterName("setCell:")
+	_nSControlSelAddTargetActionForControlEvents          = objc.RegisterName("addTarget:action:forControlEvents:")
+	_nSControlSelRemoveTargetActionForControlEvents       = objc.RegisterName("removeTarget:action:forControlEvents:")
 	_nSControlSelInvalidateIntrinsicContentSizeForCell    = objc.RegisterName("invalidateIntrinsicContentSizeForCell:")
 )
 
@@ -819,6 +821,20 @@ func (o *NSControl) Cell() *NSCell {
 func (o *NSControl) SetCell(cell *NSCell) {
 	purego.Main(func() {
 		o.Ptr().Send(_nSControlSelSetCell, cell.Ptr())
+	})
+}
+
+// Registers a target-action pair for the specified control events.
+func (o *NSControl) AddTargetActionForControlEvents(target objc.ID, action objc.SEL, controlEvents NSControlEvents) {
+	purego.Main(func() {
+		o.Ptr().Send(_nSControlSelAddTargetActionForControlEvents, target, action, controlEvents)
+	})
+}
+
+// Stops the delivery of events to the specified target object.
+func (o *NSControl) RemoveTargetActionForControlEvents(target objc.ID, action objc.SEL, controlEvents NSControlEvents) {
+	purego.Main(func() {
+		o.Ptr().Send(_nSControlSelRemoveTargetActionForControlEvents, target, action, controlEvents)
 	})
 }
 

@@ -266,14 +266,14 @@ func (u *URL) StopAccessingSecurityScopedResource() {
 	objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("stopAccessingSecurityScopedResource"))
 }
 
-// DataRepresentation returns the data representation.
+// DataRepresentation returns the data representation of the URL's relativeString. If the URL was initialized with `initWithData:relativeToURL:`, the data representation returned are the same bytes as those used at initialization; otherwise, the data representation returned are the bytes of the relativeString encoded with `NSUTF8StringEncoding`.
 func (u *URL) DataRepresentation() []byte {
 	defer runtime.KeepAlive(u)
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("dataRepresentation"))
 	return rt.NSDataToBytes(_r)
 }
 
-// AbsoluteString returns the absolute string.
+// AbsoluteString returns the URL string for the receiver as an absolute URL.
 func (u *URL) AbsoluteString() string {
 	defer runtime.KeepAlive(u)
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("absoluteString"))
@@ -283,7 +283,7 @@ func (u *URL) AbsoluteString() string {
 	return purego.GoString(_r)
 }
 
-// RelativeString returns the relative string.
+// RelativeString returns the relative portion of the URL. If `baseURL` is `nil`, or if the receiver is itself absolute, this is the same as `absoluteString`.
 func (u *URL) RelativeString() string {
 	defer runtime.KeepAlive(u)
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("relativeString"))
@@ -293,21 +293,21 @@ func (u *URL) RelativeString() string {
 	return purego.GoString(_r)
 }
 
-// BaseURL returns the base URL.
+// BaseURL returns the base URL. May be `nil`.
 func (u *URL) BaseURL() string {
 	defer runtime.KeepAlive(u)
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("baseURL"))
 	return rt.URLString(_r)
 }
 
-// AbsoluteURL returns the absolute URL.
+// AbsoluteURL returns the absolute URL. If the receiver is itself absolute, this returns self.
 func (u *URL) AbsoluteURL() string {
 	defer runtime.KeepAlive(u)
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("absoluteURL"))
 	return rt.URLString(_r)
 }
 
-// Scheme returns the scheme.
+// Scheme returns the scheme component of the URL. The full URL is the concatenation of `[myURL scheme]`, `':'`, `[myURL resourceSpecifier]`.
 func (u *URL) Scheme() string {
 	defer runtime.KeepAlive(u)
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("scheme"))
@@ -317,7 +317,7 @@ func (u *URL) Scheme() string {
 	return purego.GoString(_r)
 }
 
-// ResourceSpecifier returns the resource specifier.
+// ResourceSpecifier returns the resource specifier component of the URL.
 func (u *URL) ResourceSpecifier() string {
 	defer runtime.KeepAlive(u)
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("resourceSpecifier"))
@@ -327,7 +327,7 @@ func (u *URL) ResourceSpecifier() string {
 	return purego.GoString(_r)
 }
 
-// Host returns the host.
+// Host returns the host component of the URL, or `nil` if the URL does not conform to RFC 1808.
 func (u *URL) Host() string {
 	defer runtime.KeepAlive(u)
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("host"))
@@ -337,14 +337,14 @@ func (u *URL) Host() string {
 	return purego.GoString(_r)
 }
 
-// Port returns the port.
+// Port returns the port component of the URL, or `nil` if the URL does not conform to RFC 1808.
 func (u *URL) Port() *Number {
 	defer runtime.KeepAlive(u)
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("port"))
 	return NumberFromID(_r)
 }
 
-// User returns the user.
+// User returns the user component of the URL, or `nil` if the URL does not conform to RFC 1808.
 func (u *URL) User() string {
 	defer runtime.KeepAlive(u)
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("user"))
@@ -354,7 +354,7 @@ func (u *URL) User() string {
 	return purego.GoString(_r)
 }
 
-// Password returns the password.
+// Password returns the password component of the URL, or `nil` if the URL does not conform to RFC 1808.
 func (u *URL) Password() string {
 	defer runtime.KeepAlive(u)
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("password"))
@@ -364,7 +364,7 @@ func (u *URL) Password() string {
 	return purego.GoString(_r)
 }
 
-// Path returns the path.
+// Path returns the path component of the URL, or `nil` if the URL does not conform to RFC 1808.
 func (u *URL) Path() string {
 	defer runtime.KeepAlive(u)
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("path"))
@@ -374,7 +374,7 @@ func (u *URL) Path() string {
 	return purego.GoString(_r)
 }
 
-// Fragment returns the fragment.
+// Fragment returns the fragment component of the URL, or `nil` if the URL does not conform to RFC 1808.
 func (u *URL) Fragment() string {
 	defer runtime.KeepAlive(u)
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("fragment"))
@@ -384,7 +384,7 @@ func (u *URL) Fragment() string {
 	return purego.GoString(_r)
 }
 
-// ParameterString returns the parameter string.
+// ParameterString returns the parameter string of the URL.
 func (u *URL) ParameterString() string {
 	defer runtime.KeepAlive(u)
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("parameterString"))
@@ -394,7 +394,7 @@ func (u *URL) ParameterString() string {
 	return purego.GoString(_r)
 }
 
-// Query returns the query.
+// Query returns the query component of the URL, or `nil` if the URL does not conform to RFC 1808.
 func (u *URL) Query() string {
 	defer runtime.KeepAlive(u)
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("query"))
@@ -404,7 +404,7 @@ func (u *URL) Query() string {
 	return purego.GoString(_r)
 }
 
-// RelativePath returns the relative path.
+// RelativePath returns the relative path of the URL. Same as `path` if `baseURL` is `nil`.
 func (u *URL) RelativePath() string {
 	defer runtime.KeepAlive(u)
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("relativePath"))
@@ -414,35 +414,35 @@ func (u *URL) RelativePath() string {
 	return purego.GoString(_r)
 }
 
-// HasDirectoryPath reports whether the object has directory path.
+// HasDirectoryPath reports whether the URL's path represents a directory. Determined from the URL string (whether the path component ends with a `/` character). Does not check the resource.
 func (u *URL) HasDirectoryPath() bool {
 	defer runtime.KeepAlive(u)
 	_r := objc.Send[bool](objref.IDOf(u), objc.RegisterName("hasDirectoryPath"))
 	return _r
 }
 
-// FileSystemRepresentation returns the file system representation.
+// FileSystemRepresentation returns the URL's path in file system representation. File system representation is a null-terminated C string with canonical UTF-8 encoding. The returned C string will be automatically freed just as a returned object would be released; use `getFileSystemRepresentation:maxLength:` if you need to store the representation outside of the autorelease context.
 func (u *URL) FileSystemRepresentation() unsafe.Pointer {
 	defer runtime.KeepAlive(u)
 	_r := objc.Send[unsafe.Pointer](objref.IDOf(u), objc.RegisterName("fileSystemRepresentation"))
 	return _r
 }
 
-// IsFileURL reports whether the object is file URL.
+// IsFileURL reports whether the URL scheme is `file:`. If `isFileURL` is `YES`, then `path` is suitable for input into `NSFileManager` or `NSPathUtilities`.
 func (u *URL) IsFileURL() bool {
 	defer runtime.KeepAlive(u)
 	_r := objc.Send[bool](objref.IDOf(u), objc.RegisterName("isFileURL"))
 	return _r
 }
 
-// StandardizedURL returns the standardized URL.
+// StandardizedURL returns the standardized form of the URL.
 func (u *URL) StandardizedURL() string {
 	defer runtime.KeepAlive(u)
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("standardizedURL"))
 	return rt.URLString(_r)
 }
 
-// FilePathURL returns the file path URL.
+// FilePathURL returns a file path URL that refers to the same resource as this URL. File path URLs use a file system style path. The resource must exist and be reachable to be converted.
 func (u *URL) FilePathURL() string {
 	defer runtime.KeepAlive(u)
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("filePathURL"))
@@ -507,7 +507,7 @@ func (u *URL) CheckResourceIsReachableAndReturnError() error {
 	return nil
 }
 
-// PathComponents returns the path components.
+// PathComponents returns an array containing the path components. Each component is unescaped. For example, in the URL `file:///directory/directory%202/file`, the path components array would be `
 //
 // PathComponents returns the collection as a Go slice.
 func (u *URL) PathComponents() []string {
@@ -516,7 +516,7 @@ func (u *URL) PathComponents() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// LastPathComponent returns the last path component.
+// LastPathComponent returns the last path component. This property contains the last path component, unescaped. For example, in the URL `file:///path/to/file`, the last path component is `file`.
 func (u *URL) LastPathComponent() string {
 	defer runtime.KeepAlive(u)
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("lastPathComponent"))
@@ -526,7 +526,7 @@ func (u *URL) LastPathComponent() string {
 	return purego.GoString(_r)
 }
 
-// PathExtension returns the path extension.
+// PathExtension returns the path extension. This property contains the path extension, unescaped. For example, in the URL `file:///path/to/file.txt`, the path extension is `txt`.
 func (u *URL) PathExtension() string {
 	defer runtime.KeepAlive(u)
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("pathExtension"))
@@ -536,28 +536,28 @@ func (u *URL) PathExtension() string {
 	return purego.GoString(_r)
 }
 
-// URLByDeletingLastPathComponent returns the URL by deleting last path component.
+// URLByDeletingLastPathComponent returns a URL you create by removing the last path component from the receiver. If the URL represents the root path, this property contains a copy of the original URL. Otherwise, if the original URL has only one path component, this property contains the empty string.
 func (u *URL) URLByDeletingLastPathComponent() string {
 	defer runtime.KeepAlive(u)
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("URLByDeletingLastPathComponent"))
 	return rt.URLString(_r)
 }
 
-// URLByDeletingPathExtension returns the URL by deleting path extension.
+// URLByDeletingPathExtension returns a URL you create by removing the path extension from the receiver, if any. If the URL represents the root path, this property contains a copy of the original URL. If the URL has multiple path extensions, only the last one is removed.
 func (u *URL) URLByDeletingPathExtension() string {
 	defer runtime.KeepAlive(u)
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("URLByDeletingPathExtension"))
 	return rt.URLString(_r)
 }
 
-// URLByStandardizingPath returns the URL by standardizing path.
+// URLByStandardizingPath returns a URL that points to the same resource as the original URL using an absolute path. This property only works on URLs with the `file:` path scheme. For all other URLs, it returns a copy of the original URL. Like “NSString/standardizingPath“, this property expands an initial tilde expression, reduces empty components and "`/./`" sequences, and resolves "`..`" references in absolute paths. The resulting path may still contain symbolic links.
 func (u *URL) URLByStandardizingPath() string {
 	defer runtime.KeepAlive(u)
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("URLByStandardizingPath"))
 	return rt.URLString(_r)
 }
 
-// URLByResolvingSymlinksInPath returns the URL by resolving symlinks in path.
+// URLByResolvingSymlinksInPath returns a URL that points to the same resource as the receiver and includes no symbolic links. If the receiver has no symbolic links, this property contains a copy of the original URL. If some symbolic links cannot be resolved, they are left in place. This property only works on URLs with the `file:` path scheme. For all other URLs, it returns a copy of the receiver.
 func (u *URL) URLByResolvingSymlinksInPath() string {
 	defer runtime.KeepAlive(u)
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("URLByResolvingSymlinksInPath"))

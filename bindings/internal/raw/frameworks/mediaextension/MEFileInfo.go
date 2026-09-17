@@ -19,13 +19,15 @@ type MEFileInfo struct {
 }
 
 var (
-	_clsMEFileInfo                   = _objcClass("MEFileInfo")
-	_mEFileInfoSelDuration           = objc.RegisterName("duration")
-	_mEFileInfoSelSetDuration        = objc.RegisterName("setDuration:")
-	_mEFileInfoSelFragmentsStatus    = objc.RegisterName("fragmentsStatus")
-	_mEFileInfoSelSetFragmentsStatus = objc.RegisterName("setFragmentsStatus:")
-	_mEFileInfoSelSidecarFileName    = objc.RegisterName("sidecarFileName")
-	_mEFileInfoSelSetSidecarFileName = objc.RegisterName("setSidecarFileName:")
+	_clsMEFileInfo                        = _objcClass("MEFileInfo")
+	_mEFileInfoSelDuration                = objc.RegisterName("duration")
+	_mEFileInfoSelSetDuration             = objc.RegisterName("setDuration:")
+	_mEFileInfoSelFragmentsStatus         = objc.RegisterName("fragmentsStatus")
+	_mEFileInfoSelSetFragmentsStatus      = objc.RegisterName("setFragmentsStatus:")
+	_mEFileInfoSelSidecarFileName         = objc.RegisterName("sidecarFileName")
+	_mEFileInfoSelSetSidecarFileName      = objc.RegisterName("setSidecarFileName:")
+	_mEFileInfoSelConstituentFileNames    = objc.RegisterName("constituentFileNames")
+	_mEFileInfoSelSetConstituentFileNames = objc.RegisterName("setConstituentFileNames:")
 )
 
 func MEFileInfoFromID(id objc.ID) *MEFileInfo {
@@ -69,4 +71,17 @@ func (o *MEFileInfo) SidecarFileName() *foundation.NSString {
 
 func (o *MEFileInfo) SetSidecarFileName(sidecarFileName *foundation.NSString) {
 	o.Ptr().Send(_mEFileInfoSelSetSidecarFileName, sidecarFileName.Ptr())
+}
+
+// @property		constituentFileNames @abstract		List of media files that collectively represent the media asset. @discussion		Represents a list of media files that constitute the media asset. All files must be located in the same directory. The returned filenames should include just the file name and file extension, omitting any file path or directory slashes. The file extensions should all be explicitly supported by the format reader as declared in the EXAppExtensionAttributes and UTExportedTypeDeclarations dictionaries in the MediaExtension format reader Info.plist.
+func (o *MEFileInfo) ConstituentFileNames() *foundation.NSArray[*foundation.NSString] {
+	_ret := objc.Send[objc.ID](o.Ptr(), _mEFileInfoSelConstituentFileNames)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
+}
+
+func (o *MEFileInfo) SetConstituentFileNames(constituentFileNames *foundation.NSArray[*foundation.NSString]) {
+	o.Ptr().Send(_mEFileInfoSelSetConstituentFileNames, constituentFileNames.Ptr())
 }

@@ -1707,74 +1707,11 @@
       "doc": "A structure that contains information about keychain settings.",
       "url": "https://developer.apple.com/documentation/security/seckeychainsettings"
     },
-    "cssm_applecspdl_db_change_password_parameters": {
-      "url": "https://developer.apple.com/documentation/security/cssm_applecspdl_db_change_password_parameters"
-    },
-    "cssm_applecspdl_db_is_locked_parameters": {
-      "url": "https://developer.apple.com/documentation/security/cssm_applecspdl_db_is_locked_parameters"
-    },
-    "cssm_applecspdl_db_settings_parameters": {
-      "url": "https://developer.apple.com/documentation/security/cssm_applecspdl_db_settings_parameters"
-    },
-    "cssm_appledl_open_parameters": {
-      "url": "https://developer.apple.com/documentation/security/cssm_appledl_open_parameters"
-    },
-    "cssm_authorizationgroup": {
-      "url": "https://developer.apple.com/documentation/security/cssm_authorizationgroup"
-    },
-    "cssm_csp_operational_statistics": {
-      "url": "https://developer.apple.com/documentation/security/cssm_csp_operational_statistics"
-    },
-    "cssm_date": {
-      "url": "https://developer.apple.com/documentation/security/cssm_date"
-    },
-    "cssm_db_schema_index_info": {
-      "url": "https://developer.apple.com/documentation/security/cssm_db_schema_index_info"
-    },
-    "cssm_dl_db_handle": {
-      "url": "https://developer.apple.com/documentation/security/cssm_dl_db_handle"
-    },
     "cssm_dl_pkcs11_attributes": {
       "url": "https://developer.apple.com/documentation/security/cssm_dl_pkcs11_attributes"
     },
-    "cssm_func_name_addr": {
-      "url": "https://developer.apple.com/documentation/security/cssm_func_name_addr"
-    },
-    "cssm_guid": {
-      "url": "https://developer.apple.com/documentation/security/cssm_guid"
-    },
-    "cssm_key_size": {
-      "url": "https://developer.apple.com/documentation/security/cssm_key_size"
-    },
     "cssm_kr_wrappedproductinfo": {
       "url": "https://developer.apple.com/documentation/security/cssm_kr_wrappedproductinfo"
-    },
-    "cssm_list": {
-      "url": "https://developer.apple.com/documentation/security/cssm_list"
-    },
-    "cssm_memory_funcs": {
-      "url": "https://developer.apple.com/documentation/security/cssm_memory_funcs"
-    },
-    "cssm_name_list": {
-      "url": "https://developer.apple.com/documentation/security/cssm_name_list"
-    },
-    "cssm_parsed_cert": {
-      "url": "https://developer.apple.com/documentation/security/cssm_parsed_cert"
-    },
-    "cssm_parsed_crl": {
-      "url": "https://developer.apple.com/documentation/security/cssm_parsed_crl"
-    },
-    "cssm_query_size_data": {
-      "url": "https://developer.apple.com/documentation/security/cssm_query_size_data"
-    },
-    "cssm_range": {
-      "url": "https://developer.apple.com/documentation/security/cssm_range"
-    },
-    "cssm_tp_result_set": {
-      "url": "https://developer.apple.com/documentation/security/cssm_tp_result_set"
-    },
-    "cssm_version": {
-      "url": "https://developer.apple.com/documentation/security/cssm_version"
     },
     "cssm_x509_extensionTagAndValue": {
       "url": "https://developer.apple.com/documentation/security/cssm_x509_extensiontagandvalue"

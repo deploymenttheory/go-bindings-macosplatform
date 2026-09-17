@@ -4,8 +4,6 @@
 package mpsimage
 
 import (
-	"unsafe"
-
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/foundation"
@@ -52,7 +50,7 @@ func MPSImageEDLinesFromID(id objc.ID) *MPSImageEDLines {
 }
 
 // @abstract   Initialize an EDLines kernel on a given device with specified parameters. @param      device             The device the filter will run on @param      gaussianSigma     The standard deviation of gaussian blur filter. Gaussian weight, centered at 0, at integer grid i is given as @code w(i) = 1/sqrt(2*pi*sigma) * exp(-i^2/(2*sigma^2)) @endcode If we take cut off at 1% of w(0) (max weight) beyond which weights are considered 0, we have @code ceil (sqrt(-log(0.01)*2)*sigma) ~ ceil(3.7*sigma) @endcode as rough estimate of filter width @param      minLineLength           The minimum length of output line segments. @param      maxLines                      The maximum amount of lines for the EDLines algorithm to output. The size of the endpointBuffer supplied at encode must be >= maxLines * 4 * sizeof(unsigned short) + sizeof(uint32_t). @param      detailRatio                The detailRatio to use in the EDLines algorithm, which inversely effects the number of anchor points @param      gradientThreshold   Any pixel with a gradient below the gradientThreshold will not be considerd an edge @param      lineErrorThreshold  The limit of how much error a line segment can have relative to the edge it represents @param      mergeLocalityThreshold  Determines how many pixels apart two lines can deviate spatially and still be merged. This value is normalized to the diagonal length of the image. @return     A valid object or nil, if failure.
-func (o *MPSImageEDLines) InitWithDeviceGaussianSigmaMinLineLengthMaxLinesDetailRatioGradientThresholdLineErrorThresholdMergeLocalityThreshold(device metal.MTLDevice, gaussianSigma unsafe.Pointer, minLineLength unsafe.Pointer, maxLines uint, detailRatio unsafe.Pointer, gradientThreshold unsafe.Pointer, lineErrorThreshold unsafe.Pointer, mergeLocalityThreshold unsafe.Pointer) *MPSImageEDLines {
+func (o *MPSImageEDLines) InitWithDeviceGaussianSigmaMinLineLengthMaxLinesDetailRatioGradientThresholdLineErrorThresholdMergeLocalityThreshold(device metal.MTLDevice, gaussianSigma float32, minLineLength uint16, maxLines uint, detailRatio uint16, gradientThreshold float32, lineErrorThreshold float32, mergeLocalityThreshold float32) *MPSImageEDLines {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageEDLinesSelInitWithDeviceGaussianSigmaMinLineLengthMaxLinesDetailRatioGradientThresholdLineErrorThresholdMergeLocalityThreshold, device, gaussianSigma, minLineLength, maxLines, detailRatio, gradientThreshold, lineErrorThreshold, mergeLocalityThreshold)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))

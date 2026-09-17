@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A session used to download HTTP Live Streaming assets.
+// A URL session task that downloads a remote asset to the device for offline playback.
 //
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avassetdownloadtask
 type AVAssetDownloadTask struct {

@@ -9,7 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A port that represents a BSD socket.
+// A port that represents a BSD socket. A “NSSocketPort“ object can be used as an endpoint for distributed object connections. Companion classes, “NSMachPort“ and “NSMessagePort“, allow for local (on the same machine) communication only. The “NSSocketPort“ class allows for both local and remote communication, but may be more expensive than the others for the local case.
 //
 // Apple documentation: https://developer.apple.com/documentation/foundation/nssocketport
 type NSSocketPort struct {
@@ -41,6 +41,7 @@ func NSSocketPortFromID(id objc.ID) *NSSocketPort {
 	return o
 }
 
+// Initializes the receiver as a local TCP/IP socket of type `SOCK_STREAM`, on a system-selected port.
 func (o *NSSocketPort) Init() *NSSocketPort {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSocketPortSelInit)
 	if _ret != 0 {
@@ -49,6 +50,7 @@ func (o *NSSocketPort) Init() *NSSocketPort {
 	return NSSocketPortFromID(_ret)
 }
 
+// Initializes the receiver as a local TCP/IP socket of type `SOCK_STREAM`, listening on a given port number.
 func (o *NSSocketPort) InitWithTCPPort(port uint16) *NSSocketPort {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSocketPortSelInitWithTCPPort, port)
 	if _ret != 0 {
@@ -57,6 +59,7 @@ func (o *NSSocketPort) InitWithTCPPort(port uint16) *NSSocketPort {
 	return NSSocketPortFromID(_ret)
 }
 
+// Initializes the receiver as a local socket with the provided arguments.
 func (o *NSSocketPort) InitWithProtocolFamilySocketTypeProtocolAddress(family int, type_ int, protocol int, address *NSData) *NSSocketPort {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSocketPortSelInitWithProtocolFamilySocketTypeProtocolAddress, family, type_, protocol, address.Ptr())
 	if _ret != 0 {
@@ -65,6 +68,7 @@ func (o *NSSocketPort) InitWithProtocolFamilySocketTypeProtocolAddress(family in
 	return NSSocketPortFromID(_ret)
 }
 
+// Initializes the receiver with a previously created local socket.
 func (o *NSSocketPort) InitWithProtocolFamilySocketTypeProtocolSocket(family int, type_ int, protocol int, sock int) *NSSocketPort {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSocketPortSelInitWithProtocolFamilySocketTypeProtocolSocket, family, type_, protocol, sock)
 	if _ret != 0 {
@@ -73,6 +77,7 @@ func (o *NSSocketPort) InitWithProtocolFamilySocketTypeProtocolSocket(family int
 	return NSSocketPortFromID(_ret)
 }
 
+// Initializes the receiver as a TCP/IP socket of type `SOCK_STREAM` that can connect to a remote host on a given port.
 func (o *NSSocketPort) InitRemoteWithTCPPortHost(port uint16, hostName *NSString) *NSSocketPort {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSocketPortSelInitRemoteWithTCPPortHost, port, hostName.Ptr())
 	if _ret != 0 {
@@ -81,6 +86,7 @@ func (o *NSSocketPort) InitRemoteWithTCPPortHost(port uint16, hostName *NSString
 	return NSSocketPortFromID(_ret)
 }
 
+// Initializes the receiver as a remote socket with the provided arguments.
 func (o *NSSocketPort) InitRemoteWithProtocolFamilySocketTypeProtocolAddress(family int, type_ int, protocol int, address *NSData) *NSSocketPort {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSocketPortSelInitRemoteWithProtocolFamilySocketTypeProtocolAddress, family, type_, protocol, address.Ptr())
 	if _ret != 0 {
@@ -89,21 +95,25 @@ func (o *NSSocketPort) InitRemoteWithProtocolFamilySocketTypeProtocolAddress(fam
 	return NSSocketPortFromID(_ret)
 }
 
+// The protocol family of the receiver's socket.
 func (o *NSSocketPort) ProtocolFamily() int {
 	_ret := objc.Send[int](o.Ptr(), _nSSocketPortSelProtocolFamily)
 	return _ret
 }
 
+// The type of the receiver's socket.
 func (o *NSSocketPort) SocketType() int {
 	_ret := objc.Send[int](o.Ptr(), _nSSocketPortSelSocketType)
 	return _ret
 }
 
+// The protocol that the receiver's socket uses.
 func (o *NSSocketPort) Protocol() int {
 	_ret := objc.Send[int](o.Ptr(), _nSSocketPortSelProtocol)
 	return _ret
 }
 
+// The receiver's socket address structure stored inside an “NSData“ object.
 func (o *NSSocketPort) Address() *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSocketPortSelAddress)
 	if _ret != 0 {
@@ -112,6 +122,7 @@ func (o *NSSocketPort) Address() *NSData {
 	return NSDataFromID(_ret)
 }
 
+// The receiver's native socket identifier on the platform.
 func (o *NSSocketPort) Socket() int {
 	_ret := objc.Send[int](o.Ptr(), _nSSocketPortSelSocket)
 	return _ret

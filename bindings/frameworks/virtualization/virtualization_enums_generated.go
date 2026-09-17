@@ -86,7 +86,6 @@ func (e DiskSynchronizationMode) String() string {
 	}
 }
 
-// Constants that describe the options available when creating a new Extensible Firmware Interface (EFI) variable store.
 // Bitmask — values may be combined with |.
 type EFIVariableStoreInitializationOptions uint64
 
@@ -134,7 +133,6 @@ func (e LinuxRosettaAvailability) String() string {
 	}
 }
 
-// Options you can set when creating new auxiliary storage.
 // Bitmask — values may be combined with |.
 type MacAuxiliaryStorageInitializationOptions uint64
 
@@ -156,7 +154,6 @@ func (e MacAuxiliaryStorageInitializationOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// The execution states of the VM.
 type VirtualMachineState int64
 
 const (
@@ -174,7 +171,7 @@ const (
 	VirtualMachineStatePausing VirtualMachineState = 5
 	// The virtual machine is being resumed. This is the intermediate state between VZVirtualMachineStatePaused and VZVirtualMachineStateRunning.
 	VirtualMachineStateResuming VirtualMachineState = 6
-	// The virtual machine is being stopped. This is the intermediate state between VZVirtualMachineStateRunning and VZVirtualMachineStateStop.
+	// The virtual machine is being stopped. This is the intermediate state between VZVirtualMachineStateRunning and VZVirtualMachineStateStopped.
 	VirtualMachineStateStopping VirtualMachineState = 7
 	// The virtual machine is being saved. This is the intermediate state between VZVirtualMachineStatePaused and VZVirtualMachineStatePaused.
 	VirtualMachineStateSaving VirtualMachineState = 8
@@ -1151,35 +1148,89 @@ func (e QosClass) String() string {
 	}
 }
 
-// Errors you might encounter when configuring or using a virtual machine.
+type TaskSharedRegionStubs uint8
+
+const (
+	TaskSharedRegionStubsDev  TaskSharedRegionStubs = 1
+	TaskSharedRegionStubsProd TaskSharedRegionStubs = 2
+)
+
+// String returns the TaskSharedRegionStubs constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TaskSharedRegionStubs) String() string {
+	switch e {
+	case TaskSharedRegionStubsDev:
+		return "TaskSharedRegionStubsDev"
+	case TaskSharedRegionStubsProd:
+		return "TaskSharedRegionStubsProd"
+	default:
+		return fmt.Sprintf("TaskSharedRegionStubs(%d)", int64(e))
+	}
+}
+
 type ErrorCode int64
 
 const (
-	ErrorInternal                             ErrorCode = 1
-	ErrorInvalidVirtualMachineConfiguration   ErrorCode = 2
-	ErrorInvalidVirtualMachineState           ErrorCode = 3
+	// An error that indicates there was an internal error, such as the virtual machine unexpectedly stopping. The framework reports this error when the virtual machine unexpectedly stops.
+	ErrorInternal ErrorCode = 1
+	// An error that indicates the machine configuration was invalid. This error indicates that your ``VZVirtualMachineConfiguration`` object contains invalid data.
+	ErrorInvalidVirtualMachineConfiguration ErrorCode = 2
+	// An error that indicates the app used the API with a machine in the wrong state. This error occurs when the virtual machine is in the wrong state for the current operation. For example, you might receive this error when you attempt to interact with a stopped or paused virtual machine.
+	ErrorInvalidVirtualMachineState ErrorCode = 3
+	// An error that indicates there was an invalid change of state. This error occurs when you attempt to change the state of the virtual machine in an invalid way. For example, it occurs when you attempt to start a virtual machine when its ``VZVirtualMachine/canStart`` property is `false`.
 	ErrorInvalidVirtualMachineStateTransition ErrorCode = 4
-	ErrorInvalidDiskImage                     ErrorCode = 5
-	ErrorVirtualMachineLimitExceeded          ErrorCode = 6
-	ErrorNetworkError                         ErrorCode = 7
-	ErrorOutOfDiskSpace                       ErrorCode = 8
-	ErrorOperationCancelled                   ErrorCode = 9
-	ErrorNotSupported                         ErrorCode = 10
-	ErrorSave                                 ErrorCode = 11
-	ErrorRestore                              ErrorCode = 12
-	ErrorRestoreImageCatalogLoadFailed        ErrorCode = 10001
-	ErrorInvalidRestoreImageCatalog           ErrorCode = 10002
-	ErrorNoSupportedRestoreImagesInCatalog    ErrorCode = 10003
-	ErrorRestoreImageLoadFailed               ErrorCode = 10004
-	ErrorInvalidRestoreImage                  ErrorCode = 10005
-	ErrorInstallationRequiresUpdate           ErrorCode = 10006
-	ErrorInstallationFailed                   ErrorCode = 10007
-	ErrorNetworkBlockDeviceNegotiationFailed  ErrorCode = 20001
-	ErrorNetworkBlockDeviceDisconnected       ErrorCode = 20002
-	ErrorUSBControllerNotFound                ErrorCode = 30001
-	ErrorDeviceAlreadyAttached                ErrorCode = 30002
-	ErrorDeviceInitializationFailure          ErrorCode = 30003
-	ErrorDeviceNotFound                       ErrorCode = 30004
+	// An error that indicates an unrecognized disk image format or invalid disk image. This error occurs when you supply a disk image in an unrecognized format, when there’s damage to the disk image, or the disk image is invalid.
+	ErrorInvalidDiskImage ErrorCode = 5
+	// An error that indicates an attempt to start a virtual machine (VM) exceeded the limit of the number of running VMs the framework allows. This error occurs when starting a VM would exceed the system’s limit on the number of simultaneously running virtual machines.
+	ErrorVirtualMachineLimitExceeded ErrorCode = 6
+	// An error that indicates a network issue, such as a failed connection error, occurred.
+	ErrorNetworkError ErrorCode = 7
+	// An error that indicates the host ran out of disk space, such as while attempting to install Rosetta.
+	ErrorOutOfDiskSpace ErrorCode = 8
+	// An error that indicates the framework cancelled the operation.
+	ErrorOperationCancelled ErrorCode = 9
+	// An error that indicates the framework doesn't support the operation.
+	ErrorNotSupported ErrorCode = 10
+	// An error that indicates the VM failed to save to the save file.
+	ErrorSave ErrorCode = 11
+	// An error that indicates the restore operation failed.
+	ErrorRestore ErrorCode = 12
+	// An error that indicates the restore image catalog failed to load.
+	ErrorRestoreImageCatalogLoadFailed ErrorCode = 10001
+	// An error that indicates the restore image catalog is invalid.
+	ErrorInvalidRestoreImageCatalog ErrorCode = 10002
+	// An error that indicates the restore image catalog has no supported restore images.
+	ErrorNoSupportedRestoreImagesInCatalog ErrorCode = 10003
+	// An error that indicates the restore image failed to load.
+	ErrorRestoreImageLoadFailed ErrorCode = 10004
+	// An error that indicates the restore image is invalid.
+	ErrorInvalidRestoreImage ErrorCode = 10005
+	// An error that indicates the installation requires a software update in order to complete.
+	ErrorInstallationRequiresUpdate ErrorCode = 10006
+	// An error that indicates that an error occurred during installation.
+	ErrorInstallationFailed ErrorCode = 10007
+	// An error that indicates the connection or the negotiation with the Network Block Device (NBD) server failed.
+	ErrorNetworkBlockDeviceNegotiationFailed ErrorCode = 20001
+	// An error that indicates the Network Block Device (NBD) client disconnected from the server.
+	ErrorNetworkBlockDeviceDisconnected ErrorCode = 20002
+	// An error that indicates the framework wasn't able to find the controller.
+	ErrorUSBControllerNotFound ErrorCode = 30001
+	// An error that indicates the device is already attached.
+	ErrorDeviceAlreadyAttached ErrorCode = 30002
+	// An error that indicates the device failed to initialize.
+	ErrorDeviceInitializationFailure ErrorCode = 30003
+	// An error that indicates the framework wasn't able to find the specified device.
+	ErrorDeviceNotFound ErrorCode = 30004
+	// An error that indicates the full name for guest provisioning is invalid.
+	ErrorGuestProvisioningInvalidFullName ErrorCode = 40001
+	// An error that indicates the username for guest provisioning is invalid.
+	ErrorGuestProvisioningInvalidUsername ErrorCode = 40002
+	// An error that indicates the password for guest provisioning is invalid.
+	ErrorGuestProvisioningInvalidPassword ErrorCode = 40003
+	// An error that indicates the Secure Boot signatures failed to enroll.
+	ErrorEFISecureBootEnrollmentFailed ErrorCode = 50001
+	// An error that indicates the framework can't access the EFI variable store.
+	ErrorEFIVariableInaccessible ErrorCode = 50002
 )
 
 // String returns the ErrorCode constant's name, or its numeric form when the
@@ -1236,6 +1287,16 @@ func (e ErrorCode) String() string {
 		return "ErrorDeviceInitializationFailure"
 	case ErrorDeviceNotFound:
 		return "ErrorDeviceNotFound"
+	case ErrorGuestProvisioningInvalidFullName:
+		return "ErrorGuestProvisioningInvalidFullName"
+	case ErrorGuestProvisioningInvalidUsername:
+		return "ErrorGuestProvisioningInvalidUsername"
+	case ErrorGuestProvisioningInvalidPassword:
+		return "ErrorGuestProvisioningInvalidPassword"
+	case ErrorEFISecureBootEnrollmentFailed:
+		return "ErrorEFISecureBootEnrollmentFailed"
+	case ErrorEFIVariableInaccessible:
+		return "ErrorEFIVariableInaccessible"
 	default:
 		return fmt.Sprintf("ErrorCode(%d)", int64(e))
 	}
@@ -1244,24 +1305,32 @@ func (e ErrorCode) String() string {
 type VirtualMemoryGuardExceptionCode uint32
 
 const (
-	KGUARD_EXC_DEALLOC_GAP                   VirtualMemoryGuardExceptionCode = 1
-	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        VirtualMemoryGuardExceptionCode = 2
-	KGUARD_EXC_RECLAIM_INDEX_FAILURE         VirtualMemoryGuardExceptionCode = 4
-	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    VirtualMemoryGuardExceptionCode = 8
-	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    VirtualMemoryGuardExceptionCode = 9
-	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         VirtualMemoryGuardExceptionCode = 10
-	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         VirtualMemoryGuardExceptionCode = 11
-	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  VirtualMemoryGuardExceptionCode = 12
-	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    VirtualMemoryGuardExceptionCode = 13
-	KGUARD_EXC_SEC_ACCESS_FAULT              VirtualMemoryGuardExceptionCode = 98
-	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        VirtualMemoryGuardExceptionCode = 99
-	KGUARD_EXC_SEC_COPY_DENIED               VirtualMemoryGuardExceptionCode = 100
-	KGUARD_EXC_SEC_SHARING_DENIED            VirtualMemoryGuardExceptionCode = 101
-	KGUARD_EXC_MTE_SYNC_FAULT                VirtualMemoryGuardExceptionCode = 200
-	KGUARD_EXC_MTE_ASYNC_USER_FAULT          VirtualMemoryGuardExceptionCode = 201
-	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          VirtualMemoryGuardExceptionCode = 202
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT VirtualMemoryGuardExceptionCode = 203
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT VirtualMemoryGuardExceptionCode = 204
+	KGUARD_EXC_DEALLOC_GAP                  VirtualMemoryGuardExceptionCode = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE       VirtualMemoryGuardExceptionCode = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE        VirtualMemoryGuardExceptionCode = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE   VirtualMemoryGuardExceptionCode = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE   VirtualMemoryGuardExceptionCode = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE        VirtualMemoryGuardExceptionCode = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE        VirtualMemoryGuardExceptionCode = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION VirtualMemoryGuardExceptionCode = 12
+	// Guard exception sent to a thread when a CoW defeatured map attempts to copy memory which is not permitted by system policy.
+	KGUARD_EXC_COW_DEFEATURED_COPY_DENIED VirtualMemoryGuardExceptionCode = 13
+	// Guard exception sent to a thread when it attempts to extract a given type of memory in a way which is not permitted for CoW defeatured maps.
+	KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED VirtualMemoryGuardExceptionCode = 14
+	// Guard exception sent to a thread when it attempts to copy-map a memory entry which was created for sharing by a CoW defeatured map.
+	KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED VirtualMemoryGuardExceptionCode = 15
+	KGUARD_EXC_COW_DEFEATURED_FIRST                    VirtualMemoryGuardExceptionCode = 13
+	KGUARD_EXC_COW_DEFEATURED_LAST                     VirtualMemoryGuardExceptionCode = 15
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY              VirtualMemoryGuardExceptionCode = 16
+	KGUARD_EXC_SEC_ACCESS_FAULT                        VirtualMemoryGuardExceptionCode = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT                  VirtualMemoryGuardExceptionCode = 99
+	KGUARD_EXC_SEC_COPY_DENIED                         VirtualMemoryGuardExceptionCode = 100
+	KGUARD_EXC_SEC_SHARING_DENIED                      VirtualMemoryGuardExceptionCode = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                          VirtualMemoryGuardExceptionCode = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT                    VirtualMemoryGuardExceptionCode = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT                    VirtualMemoryGuardExceptionCode = 202
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT           VirtualMemoryGuardExceptionCode = 203
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT           VirtualMemoryGuardExceptionCode = 204
 )
 
 // String returns the VirtualMemoryGuardExceptionCode constant's name, or its numeric form when the
@@ -1284,6 +1353,12 @@ func (e VirtualMemoryGuardExceptionCode) String() string {
 		return "KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE"
 	case KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION:
 		return "KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION"
+	case KGUARD_EXC_COW_DEFEATURED_COPY_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_COPY_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED"
 	case KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY:
 		return "KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY"
 	case KGUARD_EXC_SEC_ACCESS_FAULT:

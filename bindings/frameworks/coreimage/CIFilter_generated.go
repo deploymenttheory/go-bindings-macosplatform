@@ -17,8 +17,6 @@ import (
 // Filter is an idiomatic wrapper over the Objective-C class CIFilter.
 //
 // Filter is an abstract base — you do not construct it directly. Construct one of [RAWFilter] and pass it where a Filter is accepted.
-//
-// An image processor that produces an image by manipulating one or more input images or by generating new image data.
 type Filter struct {
 	objref.Handle
 }

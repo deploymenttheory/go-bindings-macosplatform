@@ -87,6 +87,9 @@ func EmitExterns(
 		// spellings to their fixed-width form (mach_port_t/unsigned int → uint32,
 		// not uint — an 8-byte read of a 4-byte global returns garbage high bits).
 		goType = mapper.GoABIType(ext.ObjCType, goType)
+		if goType == "string" {
+			imports["rtpurego"] = "github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+		}
 		// A slice type is never the layout of a C global — it arises from an
 		// unsized C array extern (const char kSBXProfileNoInternet[]), where the
 		// dlsym'd symbol IS the array storage. Dereferencing it at a Go slice

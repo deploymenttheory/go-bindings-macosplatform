@@ -17,8 +17,6 @@ import (
 // UnitPressure is an idiomatic wrapper over the Objective-C class NSUnitPressure.
 //
 // It embeds [Dimension], promoting that type's methods.
-//
-// A unit of measure for pressure.
 type UnitPressure struct {
 	Dimension
 }

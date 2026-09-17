@@ -60,21 +60,25 @@ func (o *NSMethodSignature) IsOneway() bool {
 	return _ret
 }
 
+// The number of arguments recorded in the receiver.
 func (o *NSMethodSignature) NumberOfArguments() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSMethodSignatureSelNumberOfArguments)
 	return _ret
 }
 
+// The number of bytes required by the receiver to store its arguments on the stack frame.
 func (o *NSMethodSignature) FrameLength() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSMethodSignatureSelFrameLength)
 	return _ret
 }
 
+// A C string encoding the return type of the method.
 func (o *NSMethodSignature) MethodReturnType() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSMethodSignatureSelMethodReturnType)
 	return _ret
 }
 
+// The number of bytes required for the return value.
 func (o *NSMethodSignature) MethodReturnLength() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSMethodSignatureSelMethodReturnLength)
 	return _ret

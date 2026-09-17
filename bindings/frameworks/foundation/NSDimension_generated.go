@@ -18,8 +18,6 @@ import (
 // Dimension is an idiomatic wrapper over the Objective-C class NSDimension.
 //
 // Dimension is an abstract base — you do not construct it directly. Construct one of [UnitAcceleration], [UnitAngle], [UnitArea], [UnitConcentrationMass], [UnitDispersion], [UnitDuration], [UnitElectricCharge], [UnitElectricCurrent], [UnitElectricPotentialDifference], [UnitElectricResistance], [UnitEnergy], [UnitFrequency], [UnitFuelEfficiency], [UnitIlluminance], [UnitInformationStorage], [UnitLength], [UnitMass], [UnitPower], [UnitPressure], [UnitSpeed], [UnitTemperature], [UnitVolume] and pass it where a Dimension is accepted.
-//
-// An abstract class representing a dimensional unit of measure.
 type Dimension struct {
 	Unit
 }
@@ -50,7 +48,7 @@ func dimensionAdopt(id objc.ID) *Dimension {
 	return x
 }
 
-// NewDimensionWithSymbolConverter creates a new Dimension.
+// NewDimensionWithSymbolConverter initializes a dimensional unit with the specified symbol and unit converter.
 func NewDimensionWithSymbolConverter(symbol string, converter *UnitConverter) *Dimension {
 	defer runtime.KeepAlive(converter)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDimension")), objc.RegisterName("alloc"))
@@ -70,7 +68,7 @@ func (d *Dimension) WithScriptingProperties(scriptingProperties map[string]obj.O
 	return d
 }
 
-// Converter returns the converter.
+// Converter returns the unit converter that describes how this unit converts to and from the base unit of its dimension.
 func (d *Dimension) Converter() *UnitConverter {
 	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("converter"))

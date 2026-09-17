@@ -105,6 +105,7 @@ func (o *NSSet[ObjectType]) InitWithCoder(coder *NSCoder) *NSSet[ObjectType] {
 	return NSSetFromID[ObjectType](_ret)
 }
 
+// The number of members in the set.
 func (o *NSSet[ObjectType]) Count() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSSetSelCount)
 	return _ret
@@ -214,6 +215,7 @@ func (o *NSSet[ObjectType]) ObjectsWithOptionsPassingTest(opts NSEnumerationOpti
 	return NSSetFromID[ObjectType](_ret)
 }
 
+// An array containing the set's members, or an empty array if the set has no members. The order of the objects in the array is undefined.
 func (o *NSSet[ObjectType]) AllObjects() *NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSetSelAllObjects)
 	if _ret != 0 {

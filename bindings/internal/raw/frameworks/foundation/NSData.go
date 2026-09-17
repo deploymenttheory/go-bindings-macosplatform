@@ -73,11 +73,13 @@ func NSDataFromID(id objc.ID) *NSData {
 	return o
 }
 
+// The number of bytes contained by the data object.
 func (o *NSData) Length() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSDataSelLength)
 	return _ret
 }
 
+// A pointer to the data object's contents. If the “NSData/length“ of the [NSData](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/PropertyLists/OldStylePlists/OldStylePLists.html#//apple_ref/doc/uid/20001012-47169) object is 0, this property returns `nil`. For an immutable data object, the returned pointer is valid until the data object is deallocated. For a mutable data object, the returned pointer is valid until the data object is deallocated or the data is mutated.
 func (o *NSData) Bytes() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSDataSelBytes)
 	return _ret

@@ -7,7 +7,7 @@ import (
 	"github.com/ebitengine/purego"
 )
 
-// @constant kCFErrorDomainCGImageMetadata @discussion Error domain for all errors originating in ImageIO for CGImageMetadata APIs. Error codes may be interpreted using the list below.
+// The domain for metadata-related errors that originate in the Image I/O framework.
 func KCFErrorDomainCGImageMetadata() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCFErrorDomainCGImageMetadata")
 	return ptr
@@ -18,16 +18,19 @@ func KCGComputeHDRStats() uintptr {
 	return ptr
 }
 
+// The number of seconds to wait before displaying the next image in an animated sequence. The value of this property is a <doc://com.apple.documentation/documentation/corefoundation/cfnumber> with a floating-point value. To override the delay time value in the image file, include this property in the options dictionary when animating an image.
 func KCGImageAnimationDelayTime() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageAnimationDelayTime")
 	return ptr
 }
 
+// The number of times to repeat the animated sequence. The value of this property is a <doc://com.apple.documentation/documentation/corefoundation/cfnumber> that contains an unsigned integer. To override the loop count value in the image file, include this property in the options dictionary when animating an image. You may specify <doc://com.apple.documentation/documentation/corefoundation/kcfnumberpositiveinfinity> for this property to animate the images continuously.
 func KCGImageAnimationLoopCount() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageAnimationLoopCount")
 	return ptr
 }
 
+// A property that specifies the index of the first frame of an animation. The value of this property is a <doc://com.apple.documentation/documentation/corefoundation/cfnumber> that contains an unsigned integer. To override the start index value in the image file, include this property in the options dictionary when animating an image.
 func KCGImageAnimationStartIndex() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageAnimationStartIndex")
 	return ptr
@@ -38,31 +41,37 @@ func KCGImageAuxiliaryDataInfoColorSpace() uintptr {
 	return ptr
 }
 
+// The auxiliary data for the image. The value of this property is a <doc://com.apple.documentation/documentation/corefoundation/cfdata>. Use the “kCGImagePropertyAuxiliaryDataType“ property to determine the format of this data.
 func KCGImageAuxiliaryDataInfoData() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageAuxiliaryDataInfoData")
 	return ptr
 }
 
+// A dictionary of keys that describe the auxiliary data. The value of this property is a <doc://com.apple.documentation/documentation/corefoundation/cfdictionary>. The keys in this dictionary may include “kCGImagePropertyWidth“, “kCGImagePropertyHeight“, and “kCGImagePropertyBytesPerRow“.
 func KCGImageAuxiliaryDataInfoDataDescription() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageAuxiliaryDataInfoDataDescription")
 	return ptr
 }
 
+// The metadata for any auxiliary data. The value of this property is a “CGImageMetadata“ type. Use it to obtain any metadata associated with the auxiliary data.
 func KCGImageAuxiliaryDataInfoMetadata() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageAuxiliaryDataInfoMetadata")
 	return ptr
 }
 
+// The type for depth map information.
 func KCGImageAuxiliaryDataTypeDepth() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageAuxiliaryDataTypeDepth")
 	return ptr
 }
 
+// The type for image disparity information.
 func KCGImageAuxiliaryDataTypeDisparity() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageAuxiliaryDataTypeDisparity")
 	return ptr
 }
 
+// The type for High Dynamic Range (HDR) gain map information.
 func KCGImageAuxiliaryDataTypeHDRGainMap() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageAuxiliaryDataTypeHDRGainMap")
 	return ptr
@@ -73,46 +82,55 @@ func KCGImageAuxiliaryDataTypeISOGainMap() uintptr {
 	return ptr
 }
 
+// The type for portrait effects matte information.
 func KCGImageAuxiliaryDataTypePortraitEffectsMatte() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageAuxiliaryDataTypePortraitEffectsMatte")
 	return ptr
 }
 
+// The type for glasses matte informaton.
 func KCGImageAuxiliaryDataTypeSemanticSegmentationGlassesMatte() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageAuxiliaryDataTypeSemanticSegmentationGlassesMatte")
 	return ptr
 }
 
+// The type for hair matte information.
 func KCGImageAuxiliaryDataTypeSemanticSegmentationHairMatte() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageAuxiliaryDataTypeSemanticSegmentationHairMatte")
 	return ptr
 }
 
+// The type for skin matte informaton.
 func KCGImageAuxiliaryDataTypeSemanticSegmentationSkinMatte() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageAuxiliaryDataTypeSemanticSegmentationSkinMatte")
 	return ptr
 }
 
+// The type for sky matte information.
 func KCGImageAuxiliaryDataTypeSemanticSegmentationSkyMatte() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageAuxiliaryDataTypeSemanticSegmentationSkyMatte")
 	return ptr
 }
 
+// The type for teeth matte information.
 func KCGImageAuxiliaryDataTypeSemanticSegmentationTeethMatte() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageAuxiliaryDataTypeSemanticSegmentationTeethMatte")
 	return ptr
 }
 
+// The background color to use when the image has an alpha component, but the destination format doesn't support alpha. If present, the value associated with this key must be a <doc://com.apple.documentation/documentation/coregraphics/cgcolor> data type without an alpha component of its own. If not present, and if a background color is needed, a white color is used.
 func KCGImageDestinationBackgroundColor() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageDestinationBackgroundColor")
 	return ptr
 }
 
+// The date and time information to associate with the image. This property puts the specified date and time information into the DateTime parameters of the image's metadata. Specify the value of this key using a <doc://com.apple.documentation/documentation/corefoundation/cfstring> or <doc://com.apple.documentation/documentation/corefoundation/cfdata>. For strings, the value must be in EXIF DateTime or ISO 8601 DateTime format. This option is mutually exclusive with “kCGImageDestinationMetadata“.
 func KCGImageDestinationDateTime() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageDestinationDateTime")
 	return ptr
 }
 
+// A Boolean value that indicates whether to embed a thumbnail for JPEG and HEIF images. The value of this key must be a <doc://com.apple.documentation/documentation/corefoundation/cfboolean> value. The default value is <doc://com.apple.documentation/documentation/corefoundation/kcfbooleanfalse>.
 func KCGImageDestinationEmbedThumbnail() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageDestinationEmbedThumbnail")
 	return ptr
@@ -188,66 +206,79 @@ func KCGImageDestinationEncodeTonemapMode() uintptr {
 	return ptr
 }
 
+// The maximum width and height of the image, in pixels. The value of this key must be a <doc://com.apple.documentation/documentation/corefoundation/cfnumber>. If present, the destination rescales the image as needed to fit within the maximum width and height. If this key isn't present, the destination retains the native image size.
 func KCGImageDestinationImageMaxPixelSize() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageDestinationImageMaxPixelSize")
 	return ptr
 }
 
+// The desired compression quality to use when writing the image data. If present, the value associated with this key must be a `CFNumberRef` data type in the range `0.0` to `1.0`. A value of `1.0` specifies to use lossless compression if destination format supports it. A value of 0.0 implies to use maximum compression.
 func KCGImageDestinationLossyCompressionQuality() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageDestinationLossyCompressionQuality")
 	return ptr
 }
 
+// A Boolean value that indicates whether to merge new metadata with the image's existing metadata. The value of this key must be a <doc://com.apple.documentation/documentation/corefoundation/cfboolean> value. The default value is <doc://com.apple.documentation/documentation/corefoundation/kcfbooleanfalse>. If you set this key to <doc://com.apple.documentation/documentation/corefoundation/kcfbooleantrue>, the image destination merges the information in the “kCGImageDestinationMetadata“ key with the image's existing metadata. Specifically, if a tag doesn't exist in the source, the destination adds it. If the tag exists in the source, the destination updates its value. To remove a tag, set the value of the appropriate key to <doc://com.apple.documentation/documentation/corefoundation/kcfnull>.
 func KCGImageDestinationMergeMetadata() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageDestinationMergeMetadata")
 	return ptr
 }
 
+// The metadata tags to include with the image. The value of this key is a “CGImageMetadata“ type. When you specify this key, the image destination ovewrites all EXIF, IPTC, and XMP metadata. If you want to merge the new tags with the existing metadata, include the “kCGImageDestinationMergeMetadata“ key in addition to this key.
 func KCGImageDestinationMetadata() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageDestinationMetadata")
 	return ptr
 }
 
+// A Boolean value that indicates whether to create the image using a colorspace. The value of this key must be a <doc://com.apple.documentation/documentation/corefoundation/cfboolean> value. The default value is <doc://com.apple.documentation/documentation/corefoundation/kcfbooleanfalse>. Include this key and set it to <doc://com.apple.documentation/documentation/corefoundation/kcfbooleantrue> to color convert the image using its colorspace, which provides better compatibility with older devices.
 func KCGImageDestinationOptimizeColorForSharing() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageDestinationOptimizeColorForSharing")
 	return ptr
 }
 
+// The orientation of the image, specified as an EXIF value in the range 1 to 8. The value of this key must be a <doc://com.apple.documentation/documentation/corefoundation/cfnumber>, and the number must be an integer in the range `1`–`8`. For more information about the meaning of each number, see the orientation field in the EXIF specification. This option is mutually exclusive with “kCGImageDestinationMetadata“.
 func KCGImageDestinationOrientation() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageDestinationOrientation")
 	return ptr
 }
 
+// A Boolean value that indicates whether to include a HEIF-embedded gain map in the image data. The value of this key must be a <doc://com.apple.documentation/documentation/corefoundation/cfboolean> value. The default value is <doc://com.apple.documentation/documentation/corefoundation/kcfbooleanfalse>. If you scale the destination image using the “kCGImageDestinationImageMaxPixelSize“ key, the destination also scales the gain map.
 func KCGImageDestinationPreserveGainMap() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageDestinationPreserveGainMap")
 	return ptr
 }
 
+// An option to enumerate recursively through a set of metadata tags. The value of this key is a <doc://com.apple.documentation/documentation/corefoundation/cfboolean>. Set the value to <doc://com.apple.documentation/documentation/driverkit/kosbooleantrue> to enumerate all tags recursively. Set the value to <doc://com.apple.documentation/documentation/corefoundation/kcfbooleanfalse> to enumerate only the direct children of the root path you specify. When you call “CGImageMetadataEnumerateTagsUsingBlock(_:_:_:_:)“, include this option if you want the enumeration behavior to search recursively through the available tags. If you don't specify this key, the function behaves as if the value is false.
 func KCGImageMetadataEnumerateRecursively() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageMetadataEnumerateRecursively")
 	return ptr
 }
 
+// The namespace for the Dublin Core Metadata Element Set.
 func KCGImageMetadataNamespaceDublinCore() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageMetadataNamespaceDublinCore")
 	return ptr
 }
 
+// The namespace for the Exchangeable Image File (EXIF) format.
 func KCGImageMetadataNamespaceExif() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageMetadataNamespaceExif")
 	return ptr
 }
 
+// The namespace for EXIF auxiliary keys.
 func KCGImageMetadataNamespaceExifAux() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageMetadataNamespaceExifAux")
 	return ptr
 }
 
+// The namespace for the exifEX format.
 func KCGImageMetadataNamespaceExifEX() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageMetadataNamespaceExifEX")
 	return ptr
 }
 
+// The namespace for the IPTC format.
 func KCGImageMetadataNamespaceIPTCCore() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageMetadataNamespaceIPTCCore")
 	return ptr
@@ -258,46 +289,55 @@ func KCGImageMetadataNamespaceIPTCExtension() uintptr {
 	return ptr
 }
 
+// The namespace for Photoshop image metadata.
 func KCGImageMetadataNamespacePhotoshop() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageMetadataNamespacePhotoshop")
 	return ptr
 }
 
+// The namespace for TIFF image metadata.
 func KCGImageMetadataNamespaceTIFF() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageMetadataNamespaceTIFF")
 	return ptr
 }
 
+// The namespace for the Extensible Metadata Platform (XMP) format.
 func KCGImageMetadataNamespaceXMPBasic() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageMetadataNamespaceXMPBasic")
 	return ptr
 }
 
+// The namespace for XMP metadata that conveys legal restrictions associated with a resource.
 func KCGImageMetadataNamespaceXMPRights() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageMetadataNamespaceXMPRights")
 	return ptr
 }
 
+// The prefix string for tags in the Dublin Core Metadata Element Set.
 func KCGImageMetadataPrefixDublinCore() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageMetadataPrefixDublinCore")
 	return ptr
 }
 
+// The prefix string for tags in the Exchangeable Image File (EXIF) metadata.
 func KCGImageMetadataPrefixExif() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageMetadataPrefixExif")
 	return ptr
 }
 
+// The prefix string for tags in the EXIF auxiliary metadata collection.
 func KCGImageMetadataPrefixExifAux() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageMetadataPrefixExifAux")
 	return ptr
 }
 
+// The prefix string for tags in the exifEX metadata.
 func KCGImageMetadataPrefixExifEX() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageMetadataPrefixExifEX")
 	return ptr
 }
 
+// The prefix string for tags in the IPTC metadata.
 func KCGImageMetadataPrefixIPTCCore() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageMetadataPrefixIPTCCore")
 	return ptr
@@ -308,76 +348,91 @@ func KCGImageMetadataPrefixIPTCExtension() uintptr {
 	return ptr
 }
 
+// The prefix string for tags in the Photoshop image metadata.
 func KCGImageMetadataPrefixPhotoshop() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageMetadataPrefixPhotoshop")
 	return ptr
 }
 
+// The prefix string for tags in the TIFF image metadata.
 func KCGImageMetadataPrefixTIFF() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageMetadataPrefixTIFF")
 	return ptr
 }
 
+// The prefix string for tags in the XMP metadata.
 func KCGImageMetadataPrefixXMPBasic() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageMetadataPrefixXMPBasic")
 	return ptr
 }
 
+// The prefix string for tags in the XMP metadata that convey legal restrictions for the resource.
 func KCGImageMetadataPrefixXMPRights() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageMetadataPrefixXMPRights")
 	return ptr
 }
 
+// A Boolean value that indicates whether to exclude GPS metadata from EXIF data or the corresponding XMP tags. The value of this key must be a <doc://com.apple.documentation/documentation/corefoundation/cfboolean> value. The default value is <doc://com.apple.documentation/documentation/corefoundation/kcfbooleanfalse>, which includes GPS information in the metadata. This flag doesn't filter any proprietary location data in the manufacturer's EXIF MakerNote or in custom XMP properties.
 func KCGImageMetadataShouldExcludeGPS() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageMetadataShouldExcludeGPS")
 	return ptr
 }
 
+// A Boolean value that indicates whether to exclude XMP data from the destination. The value of this key must be a <doc://com.apple.documentation/documentation/corefoundation/cfboolean> value. The default value is <doc://com.apple.documentation/documentation/corefoundation/kcfbooleanfalse>, which causes the destination to include XMP metadata. If you use this flag in conjunction with the “kCGImageDestinationMetadata“ flag, the image destination preserves EXIF and IPTC tags but doesn't write XMP packets to the file.
 func KCGImageMetadataShouldExcludeXMP() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageMetadataShouldExcludeXMP")
 	return ptr
 }
 
+// A dictionary of key-value pairs for an Adobe Photoshop image. For more information about the available metadata keys, see <doc:8bim-image-properties>.
 func KCGImageProperty8BIMDictionary() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageProperty8BIMDictionary")
 	return ptr
 }
 
+// The layer names for an Adobe Photoshop file.
 func KCGImageProperty8BIMLayerNames() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageProperty8BIMLayerNames")
 	return ptr
 }
 
+// The Adobe Photoshop file version.
 func KCGImageProperty8BIMVersion() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageProperty8BIMVersion")
 	return ptr
 }
 
+// The height of the main image, in pixels.
 func KCGImagePropertyAPNGCanvasPixelHeight() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyAPNGCanvasPixelHeight")
 	return ptr
 }
 
+// The width of the main image, in pixels.
 func KCGImagePropertyAPNGCanvasPixelWidth() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyAPNGCanvasPixelWidth")
 	return ptr
 }
 
+// The number of seconds to wait before displaying the next image in an animated sequence. The value of this key is a <doc://com.apple.documentation/documentation/corefoundation/cfnumber> with a floating-point value. The value of this key is never less than 50 millseconds, and the system adjusts values less than that amount to 50 milliseconds, as needed. See “kCGImagePropertyAPNGUnclampedDelayTime“.
 func KCGImagePropertyAPNGDelayTime() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyAPNGDelayTime")
 	return ptr
 }
 
+// An array of dictionaries that contain timing information for the image sequence. The value of this property is a <doc://com.apple.documentation/documentation/corefoundation/cfarray>. Each <doc://com.apple.documentation/documentation/corefoundation/cfdictionary> in the array contains timing information about an image in the sequence.
 func KCGImagePropertyAPNGFrameInfoArray() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyAPNGFrameInfoArray")
 	return ptr
 }
 
+// The number of times that an animated PNG should play through its frames before stopping. A value of `0` means the PNG repeats forever.
 func KCGImagePropertyAPNGLoopCount() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyAPNGLoopCount")
 	return ptr
 }
 
+// The number of seconds to wait before displaying the next image in an animated sequence. This value may be `0` milliseconds or higher. Unlike the “kCGImagePropertyAPNGDelayTime“ property, this value is not clamped at the low end of the range.
 func KCGImagePropertyAPNGUnclampedDelayTime() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyAPNGUnclampedDelayTime")
 	return ptr
@@ -408,11 +463,13 @@ func KCGImagePropertyAVISDictionary() uintptr {
 	return ptr
 }
 
+// An array of dictionaries that contain auxiliary data for the images. The value of this key is a <doc://com.apple.documentation/documentation/corefoundation/cfarray>. Each <doc://com.apple.documentation/documentation/corefoundation/cfdictionary> in the array contains auxiliary data for one of the images in the file. Use the “kCGImagePropertyAuxiliaryDataType“ key to determine the type of data associated with the image.
 func KCGImagePropertyAuxiliaryData() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyAuxiliaryData")
 	return ptr
 }
 
+// The type of the auxiliary data. The value of this property is a <doc://com.apple.documentation/documentation/corefoundation/cfstring>. The value of this key might be “kCGImageAuxiliaryDataTypeDisparity“, “kCGImageAuxiliaryDataTypeDepth“, or another auxiliary data type.
 func KCGImagePropertyAuxiliaryDataType() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyAuxiliaryDataType")
 	return ptr
@@ -428,621 +485,745 @@ func KCGImagePropertyBCFormat() uintptr {
 	return ptr
 }
 
+// The total number of bytes in each row of the image. The value of this property is a <doc://com.apple.documentation/documentation/corefoundation/cfnumber>.
 func KCGImagePropertyBytesPerRow() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyBytesPerRow")
 	return ptr
 }
 
+// The camera serial number.
 func KCGImagePropertyCIFFCameraSerialNumber() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyCIFFCameraSerialNumber")
 	return ptr
 }
 
+// The continuous drive mode.
 func KCGImagePropertyCIFFContinuousDrive() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyCIFFContinuousDrive")
 	return ptr
 }
 
+// The camera description.
 func KCGImagePropertyCIFFDescription() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyCIFFDescription")
 	return ptr
 }
 
+// A dictionary of key-value pairs for an image that uses Camera Image File Format (CIFF). For more information about the available metadata keys, see <doc:ciff-image-properties>.
 func KCGImagePropertyCIFFDictionary() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyCIFFDictionary")
 	return ptr
 }
 
+// The firmware version of the camera.
 func KCGImagePropertyCIFFFirmware() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyCIFFFirmware")
 	return ptr
 }
 
+// The flash exposure compensation.
 func KCGImagePropertyCIFFFlashExposureComp() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyCIFFFlashExposureComp")
 	return ptr
 }
 
+// The focus mode.
 func KCGImagePropertyCIFFFocusMode() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyCIFFFocusMode")
 	return ptr
 }
 
+// The image file name.
 func KCGImagePropertyCIFFImageFileName() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyCIFFImageFileName")
 	return ptr
 }
 
+// The image name.
 func KCGImagePropertyCIFFImageName() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyCIFFImageName")
 	return ptr
 }
 
+// The image serial number.
 func KCGImagePropertyCIFFImageSerialNumber() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyCIFFImageSerialNumber")
 	return ptr
 }
 
+// The maximum lens length in millimeters.
 func KCGImagePropertyCIFFLensMaxMM() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyCIFFLensMaxMM")
 	return ptr
 }
 
+// The minimum lens length in millimeters.
 func KCGImagePropertyCIFFLensMinMM() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyCIFFLensMinMM")
 	return ptr
 }
 
+// The lens model.
 func KCGImagePropertyCIFFLensModel() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyCIFFLensModel")
 	return ptr
 }
 
+// The measured exposure value.
 func KCGImagePropertyCIFFMeasuredEV() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyCIFFMeasuredEV")
 	return ptr
 }
 
+// The metering mode.
 func KCGImagePropertyCIFFMeteringMode() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyCIFFMeteringMode")
 	return ptr
 }
 
+// The name of the camera's owner.
 func KCGImagePropertyCIFFOwnerName() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyCIFFOwnerName")
 	return ptr
 }
 
+// The number of images taken since the camera shipped.
 func KCGImagePropertyCIFFRecordID() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyCIFFRecordID")
 	return ptr
 }
 
+// The method of shutter release—single-shot or continuous.
 func KCGImagePropertyCIFFReleaseMethod() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyCIFFReleaseMethod")
 	return ptr
 }
 
+// The priority for shutter release timing—shutter or focus.
 func KCGImagePropertyCIFFReleaseTiming() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyCIFFReleaseTiming")
 	return ptr
 }
 
+// The time in milliseconds until shutter release when using the self-timer.
 func KCGImagePropertyCIFFSelfTimingTime() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyCIFFSelfTimingTime")
 	return ptr
 }
 
+// The shooting mode.
 func KCGImagePropertyCIFFShootingMode() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyCIFFShootingMode")
 	return ptr
 }
 
+// The white balance index.
 func KCGImagePropertyCIFFWhiteBalanceIndex() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyCIFFWhiteBalanceIndex")
 	return ptr
 }
 
+// The color model of the image, such as RGB, CMYK, grayscale, or Lab. The value of this key is of type <doc://com.apple.documentation/documentation/corefoundation/cfstring>. Typically, the value corresponds to the “kCGImagePropertyColorModelRGB“, “kCGImagePropertyColorModelCMYK“, “kCGImagePropertyColorModelGray“, or “kCGImagePropertyColorModelLab“ constant. A color model describes how color values are represented mathematically. A color space is a color model combined with a definition of how to interpret values within the model.
 func KCGImagePropertyColorModel() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyColorModel")
 	return ptr
 }
 
+// A Cyan Magenta Yellow Black (CMYK) color model. Use this value with the “kCGImagePropertyColorModel“ key.
 func KCGImagePropertyColorModelCMYK() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyColorModelCMYK")
 	return ptr
 }
 
+// A grayscale color model. Use this value with the “kCGImagePropertyColorModel“ key.
 func KCGImagePropertyColorModelGray() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyColorModelGray")
 	return ptr
 }
 
+// A Lab color model, where color values contain the amount of light and the amounts of four human-perceivable colors. Use this value with the “kCGImagePropertyColorModel“ key.
 func KCGImagePropertyColorModelLab() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyColorModelLab")
 	return ptr
 }
 
+// A Red Green Blue (RGB) color model. Use this value with the “kCGImagePropertyColorModel“ key.
 func KCGImagePropertyColorModelRGB() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyColorModelRGB")
 	return ptr
 }
 
+// The rectangle that defines the non-masked pixels of the sensor.
 func KCGImagePropertyDNGActiveArea() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGActiveArea")
 	return ptr
 }
 
+// The analog or digital gain that applies to the stored raw values.
 func KCGImagePropertyDNGAnalogBalance() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGAnalogBalance")
 	return ptr
 }
 
+// A hint to the DNG reader about how strong the camera's antialias filter is.
 func KCGImagePropertyDNGAntiAliasStrength() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGAntiAliasStrength")
 	return ptr
 }
 
+// A profile that specifies default color rendering from camera color-space coordinates into the ICC profile space.
 func KCGImagePropertyDNGAsShotICCProfile() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGAsShotICCProfile")
 	return ptr
 }
 
+// The selected white balance at the time of capture, encoded as the coordinates of a neutral color in linear reference space values.
 func KCGImagePropertyDNGAsShotNeutral() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGAsShotNeutral")
 	return ptr
 }
 
+// A matrix to apply to the camera color-space coordinates before processing values through the ICC profile.
 func KCGImagePropertyDNGAsShotPreProfileMatrix() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGAsShotPreProfileMatrix")
 	return ptr
 }
 
+// A string containing the name of the "as shot" camera profile, if any.
 func KCGImagePropertyDNGAsShotProfileName() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGAsShotProfileName")
 	return ptr
 }
 
+// The selected white balance at the time of capture, encoded as x-y chromaticity coordinates.
 func KCGImagePropertyDNGAsShotWhiteXY() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGAsShotWhiteXY")
 	return ptr
 }
 
+// The oldest version for which a file is compatible.
 func KCGImagePropertyDNGBackwardVersion() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGBackwardVersion")
 	return ptr
 }
 
+// The amount by which to adjust the zero point of the exposure, specified in EV units.
 func KCGImagePropertyDNGBaselineExposure() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGBaselineExposure")
 	return ptr
 }
 
+// The amount of EV units to add to the baseline exposure during image rendering.
 func KCGImagePropertyDNGBaselineExposureOffset() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGBaselineExposureOffset")
 	return ptr
 }
 
+// The relative noise level of the camera model at an ISO of 100.
 func KCGImagePropertyDNGBaselineNoise() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGBaselineNoise")
 	return ptr
 }
 
+// The amount of sharpening required for this camera model.
 func KCGImagePropertyDNGBaselineSharpness() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGBaselineSharpness")
 	return ptr
 }
 
+// A value that specifies how closely green pixels in the blue/green rows track the green pixels in red/green rows.
 func KCGImagePropertyDNGBayerGreenSplit() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGBayerGreenSplit")
 	return ptr
 }
 
+// The scale factor to apply to the default scale to achieve the best quality image size.
 func KCGImagePropertyDNGBestQualityScale() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGBestQualityScale")
 	return ptr
 }
 
+// The zero light encoding level, specified as a repeating pattern.
 func KCGImagePropertyDNGBlackLevel() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGBlackLevel")
 	return ptr
 }
 
+// The difference between the zero-light encoding level for each column and the baseline zero-light encoding level.
 func KCGImagePropertyDNGBlackLevelDeltaH() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGBlackLevelDeltaH")
 	return ptr
 }
 
+// The difference between the zero-light encodoing level for each row and the baseline zero-light encoding level.
 func KCGImagePropertyDNGBlackLevelDeltaV() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGBlackLevelDeltaV")
 	return ptr
 }
 
+// The repeat pattern size for the black level tag.
 func KCGImagePropertyDNGBlackLevelRepeatDim() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGBlackLevelRepeatDim")
 	return ptr
 }
 
+// The spatial layout of the CFA.
 func KCGImagePropertyDNGCFALayout() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGCFALayout")
 	return ptr
 }
 
+// A mapping between the values in the CFA pattern tag and the plane numbers in linear raw space.
 func KCGImagePropertyDNGCFAPlaneColor() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGCFAPlaneColor")
 	return ptr
 }
 
+// The illuminant for the first set of color calibration tags.
 func KCGImagePropertyDNGCalibrationIlluminant1() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGCalibrationIlluminant1")
 	return ptr
 }
 
+// The illuminant for an optional second set of color calibration tags.
 func KCGImagePropertyDNGCalibrationIlluminant2() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGCalibrationIlluminant2")
 	return ptr
 }
 
+// A matrix that transforms reference camera native space values to camera-native space values under the first calibration illuminant.
 func KCGImagePropertyDNGCameraCalibration1() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGCameraCalibration1")
 	return ptr
 }
 
+// A matrix that transforms reference camera native space values to camera-native space values under the second calibration illuminant.
 func KCGImagePropertyDNGCameraCalibration2() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGCameraCalibration2")
 	return ptr
 }
 
+// A string to match against the profile calibration signature for the selected camera profile.
 func KCGImagePropertyDNGCameraCalibrationSignature() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGCameraCalibrationSignature")
 	return ptr
 }
 
+// The camera serial number.
 func KCGImagePropertyDNGCameraSerialNumber() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGCameraSerialNumber")
 	return ptr
 }
 
+// A hint to the DNG reader about how much chroma blur to apply to the image.
 func KCGImagePropertyDNGChromaBlurRadius() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGChromaBlurRadius")
 	return ptr
 }
 
+// A transformation matrix that converts XYZ values to reference camera native color spaces, under the first calibration illuminant.
 func KCGImagePropertyDNGColorMatrix1() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGColorMatrix1")
 	return ptr
 }
 
+// A transformation matrix that converts XYZ values to reference camera native color spaces, under the second calibration illuminant.
 func KCGImagePropertyDNGColorMatrix2() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGColorMatrix2")
 	return ptr
 }
 
+// The colorimetric reference for the CIE XYZ values.
 func KCGImagePropertyDNGColorimetricReference() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGColorimetricReference")
 	return ptr
 }
 
+// A profile that specifies default color rendering from camera color-space coordinates into the ICC profile space.
 func KCGImagePropertyDNGCurrentICCProfile() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGCurrentICCProfile")
 	return ptr
 }
 
+// A matrix to apply to the current camera color-space coordinates before processing values through the ICC profile.
 func KCGImagePropertyDNGCurrentPreProfileMatrix() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGCurrentPreProfileMatrix")
 	return ptr
 }
 
+// A hint to the raw converter about how to handle the black point during rendering.
 func KCGImagePropertyDNGDefaultBlackRender() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGDefaultBlackRender")
 	return ptr
 }
 
+// The origin of the final image area, relative to the top-left corner of the active area rectangle.
 func KCGImagePropertyDNGDefaultCropOrigin() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGDefaultCropOrigin")
 	return ptr
 }
 
+// The size of the final image area, in raw image coordinates.
 func KCGImagePropertyDNGDefaultCropSize() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGDefaultCropSize")
 	return ptr
 }
 
+// The default scale factors for each direction to convert the image to square pixels.
 func KCGImagePropertyDNGDefaultScale() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGDefaultScale")
 	return ptr
 }
 
+// A default user-crop rectangle in relative coordinates.
 func KCGImagePropertyDNGDefaultUserCrop() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGDefaultUserCrop")
 	return ptr
 }
 
+// A dictionary of key-value pairs for an image that uses the Digital Negative (DNG) archival format. For more information about the available metadata keys, see <doc:dng-image-properties>.
 func KCGImagePropertyDNGDictionary() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGDictionary")
 	return ptr
 }
 
+// A list of file offsets to extra camera profiles.
 func KCGImagePropertyDNGExtraCameraProfiles() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGExtraCameraProfiles")
 	return ptr
 }
 
+// An opcode to apply a gain function to an image to correct vignetting.
 func KCGImagePropertyDNGFixVignetteRadial() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGFixVignetteRadial")
 	return ptr
 }
 
+// A matrix that maps white balanced camera colors to XYZ D50 colors.
 func KCGImagePropertyDNGForwardMatrix1() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGForwardMatrix1")
 	return ptr
 }
 
+// A matrix that maps white balanced camera colors to XYZ D50 colors.
 func KCGImagePropertyDNGForwardMatrix2() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGForwardMatrix2")
 	return ptr
 }
 
+// Information about the lens used for the image.
 func KCGImagePropertyDNGLensInfo() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGLensInfo")
 	return ptr
 }
 
+// The fraction of the encoding range, above which the response may become significantly non-linear.
 func KCGImagePropertyDNGLinearResponseLimit() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGLinearResponseLimit")
 	return ptr
 }
 
+// A lookup table that maps stored values into linear values.
 func KCGImagePropertyDNGLinearizationTable() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGLinearizationTable")
 	return ptr
 }
 
+// The localized camera model name.
 func KCGImagePropertyDNGLocalizedCameraModel() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGLocalizedCameraModel")
 	return ptr
 }
 
+// A Boolean value that tells the DNG reader whether the EXIF MakerNote tag is safe to preserve.
 func KCGImagePropertyDNGMakerNoteSafety() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGMakerNoteSafety")
 	return ptr
 }
 
+// A list of non-overlapping rectangles that contain fully masked pixels in the image.
 func KCGImagePropertyDNGMaskedAreas() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGMaskedAreas")
 	return ptr
 }
 
+// An MD5 digest of the raw image data.
 func KCGImagePropertyDNGNewRawImageDigest() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGNewRawImageDigest")
 	return ptr
 }
 
+// The amount of noise in the raw image.
 func KCGImagePropertyDNGNoiseProfile() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGNoiseProfile")
 	return ptr
 }
 
+// The amount of noise reduction applied to the raw data on a scale of 0.0 to 1.0.
 func KCGImagePropertyDNGNoiseReductionApplied() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGNoiseReductionApplied")
 	return ptr
 }
 
+// The list of opcodes to apply to the raw image, as read directly from the file.
 func KCGImagePropertyDNGOpcodeList1() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGOpcodeList1")
 	return ptr
 }
 
+// THe list of opcodes to apply to the raw image, after mapping it to linear reference values.
 func KCGImagePropertyDNGOpcodeList2() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGOpcodeList2")
 	return ptr
 }
 
+// The list of opcodes to apply to the raw image, after demosaicing it.
 func KCGImagePropertyDNGOpcodeList3() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGOpcodeList3")
 	return ptr
 }
 
+// The best-quality final size of the larger original file that was the source of this proxy.
 func KCGImagePropertyDNGOriginalBestQualityFinalSize() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGOriginalBestQualityFinalSize")
 	return ptr
 }
 
+// The default crop size of the larger original file that was the source of this proxy.
 func KCGImagePropertyDNGOriginalDefaultCropSize() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGOriginalDefaultCropSize")
 	return ptr
 }
 
+// THe default final size of the larger original file that was the source of this proxy.
 func KCGImagePropertyDNGOriginalDefaultFinalSize() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGOriginalDefaultFinalSize")
 	return ptr
 }
 
+// The compressed contents of the original raw file.
 func KCGImagePropertyDNGOriginalRawFileData() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGOriginalRawFileData")
 	return ptr
 }
 
+// An MD5 digest of the data stored for the original raw file data.
 func KCGImagePropertyDNGOriginalRawFileDigest() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGOriginalRawFileDigest")
 	return ptr
 }
 
+// The file name of the original raw file.
 func KCGImagePropertyDNGOriginalRawFileName() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGOriginalRawFileName")
 	return ptr
 }
 
+// The name of the app that created the preview stored in the IFD.
 func KCGImagePropertyDNGPreviewApplicationName() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGPreviewApplicationName")
 	return ptr
 }
 
+// The version number of the app that created the preview stored in the IFD.
 func KCGImagePropertyDNGPreviewApplicationVersion() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGPreviewApplicationVersion")
 	return ptr
 }
 
+// The color space associated with the rendered preview.
 func KCGImagePropertyDNGPreviewColorSpace() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGPreviewColorSpace")
 	return ptr
 }
 
+// The date and time for the render of the preview.
 func KCGImagePropertyDNGPreviewDateTime() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGPreviewDateTime")
 	return ptr
 }
 
+// A unique ID of the conversion settings used to render the preview.
 func KCGImagePropertyDNGPreviewSettingsDigest() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGPreviewSettingsDigest")
 	return ptr
 }
 
+// The name of the conversion settings for the preview.
 func KCGImagePropertyDNGPreviewSettingsName() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGPreviewSettingsName")
 	return ptr
 }
 
+// Private data that manufacturers may store with an image and use in their own converters.
 func KCGImagePropertyDNGPrivateData() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGPrivateData")
 	return ptr
 }
 
+// A string that describes the calibration for the current profile.
 func KCGImagePropertyDNGProfileCalibrationSignature() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGProfileCalibrationSignature")
 	return ptr
 }
 
+// The copyright information for the camera profile.
 func KCGImagePropertyDNGProfileCopyright() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGProfileCopyright")
 	return ptr
 }
 
+// The usage rules for the camera profile.
 func KCGImagePropertyDNGProfileEmbedPolicy() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGProfileEmbedPolicy")
 	return ptr
 }
 
+// The data for the first hue/saturation/value mapping table.
 func KCGImagePropertyDNGProfileHueSatMapData1() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGProfileHueSatMapData1")
 	return ptr
 }
 
+// The data for the second hue/saturation/value mapping table.
 func KCGImagePropertyDNGProfileHueSatMapData2() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGProfileHueSatMapData2")
 	return ptr
 }
 
+// The number of input samples in each dimension of the hue/saturation/value mapping tables.
 func KCGImagePropertyDNGProfileHueSatMapDims() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGProfileHueSatMapDims")
 	return ptr
 }
 
+// The encoding option to use when indexing into a 3D look table during raw conversion.
 func KCGImagePropertyDNGProfileHueSatMapEncoding() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGProfileHueSatMapEncoding")
 	return ptr
 }
 
+// The default "look" table to apply when processing the image as a starting point for user adjustment.
 func KCGImagePropertyDNGProfileLookTableData() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGProfileLookTableData")
 	return ptr
 }
 
+// The number of input samples in each dimentsion of a default "look" table.
 func KCGImagePropertyDNGProfileLookTableDims() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGProfileLookTableDims")
 	return ptr
 }
 
+// The encoding option to use when indexing into a 3D look table during raw conversion.
 func KCGImagePropertyDNGProfileLookTableEncoding() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGProfileLookTableEncoding")
 	return ptr
 }
 
+// A string containing the name of the camera profile.
 func KCGImagePropertyDNGProfileName() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGProfileName")
 	return ptr
 }
 
+// The default tone curve to apply when processing the image as a starting point for user adjustments.
 func KCGImagePropertyDNGProfileToneCurve() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGProfileToneCurve")
 	return ptr
 }
 
+// A 16-byte unique identifier for the raw image data.
 func KCGImagePropertyDNGRawDataUniqueID() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGRawDataUniqueID")
 	return ptr
 }
 
+// A modified MD5 digest of the raw image data.
 func KCGImagePropertyDNGRawImageDigest() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGRawImageDigest")
 	return ptr
 }
 
+// The gain between the main raw IFD and the preview IFD that contains this tag.
 func KCGImagePropertyDNGRawToPreviewGain() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGRawToPreviewGain")
 	return ptr
 }
 
+// A reduction matrix that converts color camera-native space values to XYZ values, under the first calibration illuminant.
 func KCGImagePropertyDNGReductionMatrix1() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGReductionMatrix1")
 	return ptr
 }
 
+// A reduction matrix that converts color camera-native space values to XYZ values, under the second calibration illuminant.
 func KCGImagePropertyDNGReductionMatrix2() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGReductionMatrix2")
 	return ptr
 }
 
+// The number of interleaved fields for the rows of the image.
 func KCGImagePropertyDNGRowInterleaveFactor() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGRowInterleaveFactor")
 	return ptr
 }
 
+// A tag that Adobe Camera Raw uses to control the sensitivity of its Shadows slider.
 func KCGImagePropertyDNGShadowScale() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGShadowScale")
 	return ptr
 }
 
+// The size of rectangular blocks that tiles use to group pixels.
 func KCGImagePropertyDNGSubTileBlockSize() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGSubTileBlockSize")
 	return ptr
 }
 
+// A unique, nonlocalized name for the camera model.
 func KCGImagePropertyDNGUniqueCameraModel() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGUniqueCameraModel")
 	return ptr
 }
 
+// An encoding of the four-tier version number.
 func KCGImagePropertyDNGVersion() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGVersion")
 	return ptr
 }
 
+// An opcode to unwrap an image captued with a fisheye lens and map it to a perspective projection.
 func KCGImagePropertyDNGWarpFisheye() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGWarpFisheye")
 	return ptr
 }
 
+// An opcode to apply a warp to an image to correct for geometric distortion and lateral chromatic aberration for rectilinear lenses.
 func KCGImagePropertyDNGWarpRectilinear() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGWarpRectilinear")
 	return ptr
 }
 
+// The saturated encoding level for the raw sample values.
 func KCGImagePropertyDNGWhiteLevel() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDNGWhiteLevel")
 	return ptr
 }
 
+// The resolution, in dots per inch, in the y dimension. The value of this property is a <doc://com.apple.documentation/documentation/corefoundation/cfnumber>.
 func KCGImagePropertyDPIHeight() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDPIHeight")
 	return ptr
 }
 
+// The resolution, in dots per inch, in the x dimension. The value of this property is a <doc://com.apple.documentation/documentation/corefoundation/cfnumber>.
 func KCGImagePropertyDPIWidth() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDPIWidth")
 	return ptr
 }
 
+// The number of bits in the color sample of a pixel. The value of this key is a <doc://com.apple.documentation/documentation/corefoundation/cfnumber>.
 func KCGImagePropertyDepth() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyDepth")
 	return ptr
@@ -1053,86 +1234,103 @@ func KCGImagePropertyEncoder() uintptr {
 	return ptr
 }
 
+// The aperture value.
 func KCGImagePropertyExifApertureValue() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifApertureValue")
 	return ptr
 }
 
+// An auxiliary dictionary of key-value pairs for an image that uses Exchangeable Image File Format (EXIF).
 func KCGImagePropertyExifAuxDictionary() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifAuxDictionary")
 	return ptr
 }
 
+// Firmware information.
 func KCGImagePropertyExifAuxFirmware() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifAuxFirmware")
 	return ptr
 }
 
+// Flash compensation.
 func KCGImagePropertyExifAuxFlashCompensation() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifAuxFlashCompensation")
 	return ptr
 }
 
+// The image number.
 func KCGImagePropertyExifAuxImageNumber() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifAuxImageNumber")
 	return ptr
 }
 
+// The lens ID.
 func KCGImagePropertyExifAuxLensID() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifAuxLensID")
 	return ptr
 }
 
+// Lens information.
 func KCGImagePropertyExifAuxLensInfo() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifAuxLensInfo")
 	return ptr
 }
 
+// The lens model.
 func KCGImagePropertyExifAuxLensModel() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifAuxLensModel")
 	return ptr
 }
 
+// The lens serial number.
 func KCGImagePropertyExifAuxLensSerialNumber() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifAuxLensSerialNumber")
 	return ptr
 }
 
+// The owner name.
 func KCGImagePropertyExifAuxOwnerName() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifAuxOwnerName")
 	return ptr
 }
 
+// The serial number.
 func KCGImagePropertyExifAuxSerialNumber() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifAuxSerialNumber")
 	return ptr
 }
 
+// A string with the serial number of the camera.
 func KCGImagePropertyExifBodySerialNumber() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifBodySerialNumber")
 	return ptr
 }
 
+// The brightness value.
 func KCGImagePropertyExifBrightnessValue() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifBrightnessValue")
 	return ptr
 }
 
+// The color filter array (CFA) pattern, which is the geometric pattern of the image sensor for a 1-chip color sensor area.
 func KCGImagePropertyExifCFAPattern() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifCFAPattern")
 	return ptr
 }
 
+// A string with the name of the camera's owner.
 func KCGImagePropertyExifCameraOwnerName() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifCameraOwnerName")
 	return ptr
 }
 
+// The color space.
 func KCGImagePropertyExifColorSpace() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifColorSpace")
 	return ptr
 }
 
+// The components configuration for compressed data. For compressed data, specifies that the channels of each component are arranged in increasing numeric order (from first component to the fourth).
 func KCGImagePropertyExifComponentsConfiguration() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifComponentsConfiguration")
 	return ptr
@@ -1143,196 +1341,235 @@ func KCGImagePropertyExifCompositeImage() uintptr {
 	return ptr
 }
 
+// The bits per pixel of the compression mode.
 func KCGImagePropertyExifCompressedBitsPerPixel() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifCompressedBitsPerPixel")
 	return ptr
 }
 
+// The contrast setting.
 func KCGImagePropertyExifContrast() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifContrast")
 	return ptr
 }
 
+// Special  rendering performed on the image data.
 func KCGImagePropertyExifCustomRendered() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifCustomRendered")
 	return ptr
 }
 
+// The digitized date and time.
 func KCGImagePropertyExifDateTimeDigitized() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifDateTimeDigitized")
 	return ptr
 }
 
+// The original date and time.
 func KCGImagePropertyExifDateTimeOriginal() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifDateTimeOriginal")
 	return ptr
 }
 
+// For a particular camera mode, indicates the conditions for taking the picture.
 func KCGImagePropertyExifDeviceSettingDescription() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifDeviceSettingDescription")
 	return ptr
 }
 
+// A dictionary of key-value pairs for an image that uses Exchangeable Image File Format (EXIF).
 func KCGImagePropertyExifDictionary() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifDictionary")
 	return ptr
 }
 
+// The digital zoom ratio.
 func KCGImagePropertyExifDigitalZoomRatio() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifDigitalZoomRatio")
 	return ptr
 }
 
+// The exposure bias value.
 func KCGImagePropertyExifExposureBiasValue() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifExposureBiasValue")
 	return ptr
 }
 
+// The selected exposure index.
 func KCGImagePropertyExifExposureIndex() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifExposureIndex")
 	return ptr
 }
 
+// The exposure mode setting.
 func KCGImagePropertyExifExposureMode() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifExposureMode")
 	return ptr
 }
 
+// The exposure program.
 func KCGImagePropertyExifExposureProgram() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifExposureProgram")
 	return ptr
 }
 
+// The exposure time.
 func KCGImagePropertyExifExposureTime() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifExposureTime")
 	return ptr
 }
 
+// The F-number.
 func KCGImagePropertyExifFNumber() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifFNumber")
 	return ptr
 }
 
+// The image source.
 func KCGImagePropertyExifFileSource() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifFileSource")
 	return ptr
 }
 
+// The flash status when the image was shot.
 func KCGImagePropertyExifFlash() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifFlash")
 	return ptr
 }
 
+// The strobe energy when the image was captured, in beam candle power seconds.
 func KCGImagePropertyExifFlashEnergy() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifFlashEnergy")
 	return ptr
 }
 
+// The FlashPix version supported by an FPXR file. FlashPix is a format for multiresolution tiled images that facilitates fast onscreen viewing.
 func KCGImagePropertyExifFlashPixVersion() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifFlashPixVersion")
 	return ptr
 }
 
+// The equivalent focal length in 35 mm film.
 func KCGImagePropertyExifFocalLenIn35mmFilm() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifFocalLenIn35mmFilm")
 	return ptr
 }
 
+// The focal length.
 func KCGImagePropertyExifFocalLength() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifFocalLength")
 	return ptr
 }
 
+// The unit of measurement for the focal plane x and y resolutions.
 func KCGImagePropertyExifFocalPlaneResolutionUnit() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifFocalPlaneResolutionUnit")
 	return ptr
 }
 
+// The number of image-width pixels (x-axis) per focal plane resolution unit.
 func KCGImagePropertyExifFocalPlaneXResolution() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifFocalPlaneXResolution")
 	return ptr
 }
 
+// The number of image-height pixels (y-axis) per focal plane resolution unit.
 func KCGImagePropertyExifFocalPlaneYResolution() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifFocalPlaneYResolution")
 	return ptr
 }
 
+// The gain adjustment setting.
 func KCGImagePropertyExifGainControl() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifGainControl")
 	return ptr
 }
 
+// The gamma setting.
 func KCGImagePropertyExifGamma() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifGamma")
 	return ptr
 }
 
+// The ISO speed setting used to capture the image.
 func KCGImagePropertyExifISOSpeed() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifISOSpeed")
 	return ptr
 }
 
+// The ISO speed latitude yyy value.
 func KCGImagePropertyExifISOSpeedLatitudeyyy() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifISOSpeedLatitudeyyy")
 	return ptr
 }
 
+// The ISO speed latitude zzz value.
 func KCGImagePropertyExifISOSpeedLatitudezzz() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifISOSpeedLatitudezzz")
 	return ptr
 }
 
+// The ISO speed ratings.
 func KCGImagePropertyExifISOSpeedRatings() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifISOSpeedRatings")
 	return ptr
 }
 
+// The unique ID of the image.
 func KCGImagePropertyExifImageUniqueID() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifImageUniqueID")
 	return ptr
 }
 
+// A string with the name of the lens manufacturer.
 func KCGImagePropertyExifLensMake() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifLensMake")
 	return ptr
 }
 
+// A string with the lens model information.
 func KCGImagePropertyExifLensModel() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifLensModel")
 	return ptr
 }
 
+// A string with the lens's serial number.
 func KCGImagePropertyExifLensSerialNumber() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifLensSerialNumber")
 	return ptr
 }
 
+// The specification information for the camera lens.
 func KCGImagePropertyExifLensSpecification() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifLensSpecification")
 	return ptr
 }
 
+// The light source.
 func KCGImagePropertyExifLightSource() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifLightSource")
 	return ptr
 }
 
+// Information specified by the camera manufacturer.
 func KCGImagePropertyExifMakerNote() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifMakerNote")
 	return ptr
 }
 
+// The maximum aperture value.
 func KCGImagePropertyExifMaxApertureValue() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifMaxApertureValue")
 	return ptr
 }
 
+// The metering mode.
 func KCGImagePropertyExifMeteringMode() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifMeteringMode")
 	return ptr
 }
 
+// The opto-electric conversion function (OECF) that defines the relationship between the optical input of the camera and the resulting image.
 func KCGImagePropertyExifOECF() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifOECF")
 	return ptr
@@ -1353,356 +1590,427 @@ func KCGImagePropertyExifOffsetTimeOriginal() uintptr {
 	return ptr
 }
 
+// The x dimension of a pixel.
 func KCGImagePropertyExifPixelXDimension() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifPixelXDimension")
 	return ptr
 }
 
+// The y dimension of a pixel.
 func KCGImagePropertyExifPixelYDimension() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifPixelYDimension")
 	return ptr
 }
 
+// The recommended exposure index.
 func KCGImagePropertyExifRecommendedExposureIndex() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifRecommendedExposureIndex")
 	return ptr
 }
 
+// A sound file related to the image.
 func KCGImagePropertyExifRelatedSoundFile() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifRelatedSoundFile")
 	return ptr
 }
 
+// The saturation setting.
 func KCGImagePropertyExifSaturation() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifSaturation")
 	return ptr
 }
 
+// The scene capture type; for example, standard, landscape, portrait, or night.
 func KCGImagePropertyExifSceneCaptureType() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifSceneCaptureType")
 	return ptr
 }
 
+// The scene type.
 func KCGImagePropertyExifSceneType() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifSceneType")
 	return ptr
 }
 
+// The sensor type of the camera or input device.
 func KCGImagePropertyExifSensingMethod() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifSensingMethod")
 	return ptr
 }
 
+// The type of sensitivity data stored for the image.
 func KCGImagePropertyExifSensitivityType() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifSensitivityType")
 	return ptr
 }
 
+// The sharpness setting.
 func KCGImagePropertyExifSharpness() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifSharpness")
 	return ptr
 }
 
+// The shutter speed value.
 func KCGImagePropertyExifShutterSpeedValue() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifShutterSpeedValue")
 	return ptr
 }
 
+// The exposure times for composite images.
 func KCGImagePropertyExifSourceExposureTimesOfCompositeImage() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifSourceExposureTimesOfCompositeImage")
 	return ptr
 }
 
+// The number of images that make up a composite image.
 func KCGImagePropertyExifSourceImageNumberOfCompositeImage() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifSourceImageNumberOfCompositeImage")
 	return ptr
 }
 
+// The spatial frequency table and spatial frequency response values in the width, height, and diagonal directions. For more information, see ISO 12233.
 func KCGImagePropertyExifSpatialFrequencyResponse() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifSpatialFrequencyResponse")
 	return ptr
 }
 
+// The spectral sensitivity of each channel.
 func KCGImagePropertyExifSpectralSensitivity() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifSpectralSensitivity")
 	return ptr
 }
 
+// The sensitivity data for the image.
 func KCGImagePropertyExifStandardOutputSensitivity() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifStandardOutputSensitivity")
 	return ptr
 }
 
+// The subject area.
 func KCGImagePropertyExifSubjectArea() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifSubjectArea")
 	return ptr
 }
 
+// The distance to the subject.
 func KCGImagePropertyExifSubjectDistRange() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifSubjectDistRange")
 	return ptr
 }
 
+// The distance to the subject, in meters.
 func KCGImagePropertyExifSubjectDistance() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifSubjectDistance")
 	return ptr
 }
 
+// The location of the image's primary subject.
 func KCGImagePropertyExifSubjectLocation() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifSubjectLocation")
 	return ptr
 }
 
+// The fraction of seconds for the date and time tag.
 func KCGImagePropertyExifSubsecTime() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifSubsecTime")
 	return ptr
 }
 
+// The fraction of seconds for the digitized date and time tag.
 func KCGImagePropertyExifSubsecTimeDigitized() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifSubsecTimeDigitized")
 	return ptr
 }
 
+// The fraction of seconds for the original date and time tag.
 func KCGImagePropertyExifSubsecTimeOrginal() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifSubsecTimeOrginal")
 	return ptr
 }
 
+// The fraction of seconds for the original date and time tag.
 func KCGImagePropertyExifSubsecTimeOriginal() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifSubsecTimeOriginal")
 	return ptr
 }
 
+// A user comment.
 func KCGImagePropertyExifUserComment() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifUserComment")
 	return ptr
 }
 
+// The EXIF version.
 func KCGImagePropertyExifVersion() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifVersion")
 	return ptr
 }
 
+// The white balance mode.
 func KCGImagePropertyExifWhiteBalance() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyExifWhiteBalance")
 	return ptr
 }
 
+// A dictionary of properties related to the image's on-disk file. The value of this property is a <doc://com.apple.documentation/documentation/corefoundation/cfdictionary>.
 func KCGImagePropertyFileContentsDictionary() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyFileContentsDictionary")
 	return ptr
 }
 
+// The size of the image file in bytes, if known. The value of this key is a <doc://com.apple.documentation/documentation/corefoundation/cfnumber>.
 func KCGImagePropertyFileSize() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyFileSize")
 	return ptr
 }
 
+// The height of the main image, in pixels.
 func KCGImagePropertyGIFCanvasPixelHeight() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyGIFCanvasPixelHeight")
 	return ptr
 }
 
+// The width of the main image, in pixels.
 func KCGImagePropertyGIFCanvasPixelWidth() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyGIFCanvasPixelWidth")
 	return ptr
 }
 
+// The number of seconds to wait before displaying the next image in an animated sequence, clamped to a minimum of 100 milliseconds. The value of this key is a <doc://com.apple.documentation/documentation/corefoundation/cfnumber> with a floating-point value. The value of this key is never less than 100 millseconds, and the system adjusts values less than that amount to 100 milliseconds, as needed. See “kCGImagePropertyGIFUnclampedDelayTime“.
 func KCGImagePropertyGIFDelayTime() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyGIFDelayTime")
 	return ptr
 }
 
+// A dictionary of key-value pairs for an image that uses Graphics Interchange Format (GIF). For more information about the available metadata keys, see <doc:gif-image-properties>.
 func KCGImagePropertyGIFDictionary() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyGIFDictionary")
 	return ptr
 }
 
+// An array of dictionaries that contain timing information for the image sequence. The value of this property is a <doc://com.apple.documentation/documentation/corefoundation/cfarray>. Each <doc://com.apple.documentation/documentation/corefoundation/cfdictionary> in the array contains timing information about an image in the sequence.
 func KCGImagePropertyGIFFrameInfoArray() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyGIFFrameInfoArray")
 	return ptr
 }
 
+// A Boolean value that indicates whether the GIF has a global color map. The value of this key is a <doc://com.apple.documentation/documentation/corefoundation/cfboolean>.
 func KCGImagePropertyGIFHasGlobalColorMap() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyGIFHasGlobalColorMap")
 	return ptr
 }
 
+// The image color map.
 func KCGImagePropertyGIFImageColorMap() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyGIFImageColorMap")
 	return ptr
 }
 
+// The number of times to repeat an animated sequence.
 func KCGImagePropertyGIFLoopCount() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyGIFLoopCount")
 	return ptr
 }
 
+// The number of seconds to wait before displaying the next image in an animated sequence. This value may be `0` milliseconds or higher. Unlike the “kCGImagePropertyGIFDelayTime“ property, this value is not clamped at the low end of the range.
 func KCGImagePropertyGIFUnclampedDelayTime() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyGIFUnclampedDelayTime")
 	return ptr
 }
 
+// The altitude.
 func KCGImagePropertyGPSAltitude() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyGPSAltitude")
 	return ptr
 }
 
+// The altitude point of reference.
 func KCGImagePropertyGPSAltitudeRef() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyGPSAltitudeRef")
 	return ptr
 }
 
+// The name of the GPS area.
 func KCGImagePropertyGPSAreaInformation() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyGPSAreaInformation")
 	return ptr
 }
 
+// The degree of precision (DOP) of the data.
 func KCGImagePropertyGPSDOP() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyGPSDOP")
 	return ptr
 }
 
+// The date and time information relative to Coordinated Universal Time (UTC).
 func KCGImagePropertyGPSDateStamp() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyGPSDateStamp")
 	return ptr
 }
 
+// The bearing to the destination point.
 func KCGImagePropertyGPSDestBearing() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyGPSDestBearing")
 	return ptr
 }
 
+// The reference for giving the bearing to the destination point.
 func KCGImagePropertyGPSDestBearingRef() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyGPSDestBearingRef")
 	return ptr
 }
 
+// The distance to the destination point.
 func KCGImagePropertyGPSDestDistance() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyGPSDestDistance")
 	return ptr
 }
 
+// The units for expressing the distance to the destination point.
 func KCGImagePropertyGPSDestDistanceRef() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyGPSDestDistanceRef")
 	return ptr
 }
 
+// The latitude of the destination point.
 func KCGImagePropertyGPSDestLatitude() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyGPSDestLatitude")
 	return ptr
 }
 
+// An indication of whether the latitude of the destination point is northern or southern.
 func KCGImagePropertyGPSDestLatitudeRef() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyGPSDestLatitudeRef")
 	return ptr
 }
 
+// The longitude of the destination point.
 func KCGImagePropertyGPSDestLongitude() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyGPSDestLongitude")
 	return ptr
 }
 
+// An indication of whether the longitude of the destination point is east or west.
 func KCGImagePropertyGPSDestLongitudeRef() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyGPSDestLongitudeRef")
 	return ptr
 }
 
+// A dictionary of key-value pairs for an image that has Global Positioning System (GPS) information.
 func KCGImagePropertyGPSDictionary() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyGPSDictionary")
 	return ptr
 }
 
+// An indication of whether differential correction is applied to the GPS receiver.
 func KCGImagePropertyGPSDifferental() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyGPSDifferental")
 	return ptr
 }
 
+// The horizontal error in the GPS position.
 func KCGImagePropertyGPSHPositioningError() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyGPSHPositioningError")
 	return ptr
 }
 
+// The direction of the image.
 func KCGImagePropertyGPSImgDirection() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyGPSImgDirection")
 	return ptr
 }
 
+// The reference for the direction of the image.
 func KCGImagePropertyGPSImgDirectionRef() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyGPSImgDirectionRef")
 	return ptr
 }
 
+// The latitude.
 func KCGImagePropertyGPSLatitude() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyGPSLatitude")
 	return ptr
 }
 
+// An indication of whether the latitude is north or south.
 func KCGImagePropertyGPSLatitudeRef() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyGPSLatitudeRef")
 	return ptr
 }
 
+// The longitude.
 func KCGImagePropertyGPSLongitude() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyGPSLongitude")
 	return ptr
 }
 
+// An indication of whether the longitude is east or west.
 func KCGImagePropertyGPSLongitudeRef() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyGPSLongitudeRef")
 	return ptr
 }
 
+// The geodetic survey data used by the GPS receiver.
 func KCGImagePropertyGPSMapDatum() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyGPSMapDatum")
 	return ptr
 }
 
+// The measurement mode.
 func KCGImagePropertyGPSMeasureMode() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyGPSMeasureMode")
 	return ptr
 }
 
+// The name of the method used to find a location.
 func KCGImagePropertyGPSProcessingMethod() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyGPSProcessingMethod")
 	return ptr
 }
 
+// The satellites used for GPS measurements.
 func KCGImagePropertyGPSSatellites() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyGPSSatellites")
 	return ptr
 }
 
+// The GPS receiver's speed of movement.
 func KCGImagePropertyGPSSpeed() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyGPSSpeed")
 	return ptr
 }
 
+// The unit for expressing the GPS receiver's speed of movement.
 func KCGImagePropertyGPSSpeedRef() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyGPSSpeedRef")
 	return ptr
 }
 
+// The status of the GPS receiver.
 func KCGImagePropertyGPSStatus() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyGPSStatus")
 	return ptr
 }
 
+// The time in UTC (Coordinated Universal Time).
 func KCGImagePropertyGPSTimeStamp() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyGPSTimeStamp")
 	return ptr
 }
 
+// The direction of GPS receiver's movement.
 func KCGImagePropertyGPSTrack() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyGPSTrack")
 	return ptr
 }
 
+// The reference for the direction of GPS receiver's movement.
 func KCGImagePropertyGPSTrackRef() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyGPSTrackRef")
 	return ptr
 }
 
+// The GPS version information.
 func KCGImagePropertyGPSVersion() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyGPSVersion")
 	return ptr
@@ -1793,36 +2101,43 @@ func KCGImagePropertyGroups() uintptr {
 	return ptr
 }
 
+// The height of the main image, in pixels.
 func KCGImagePropertyHEICSCanvasPixelHeight() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyHEICSCanvasPixelHeight")
 	return ptr
 }
 
+// The width of the main image, in pixels.
 func KCGImagePropertyHEICSCanvasPixelWidth() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyHEICSCanvasPixelWidth")
 	return ptr
 }
 
+// The number of seconds to wait before displaying the next image in the sequence, clamped to a minimum of `0.1` seconds. The value of this key is a <doc://com.apple.documentation/documentation/corefoundation/cfnumber> with a floating-point value. The value of this key is never less than 100 millseconds, and the system adjusts values less than that amount to 100 milliseconds, as needed. See “kCGImagePropertyHEICSUnclampedDelayTime“.
 func KCGImagePropertyHEICSDelayTime() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyHEICSDelayTime")
 	return ptr
 }
 
+// A dictionary of properties related to an HEIC container.
 func KCGImagePropertyHEICSDictionary() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyHEICSDictionary")
 	return ptr
 }
 
+// An array of dictionaries that contain timing information for the image sequence. The value of this property is a <doc://com.apple.documentation/documentation/corefoundation/cfarray>. Each <doc://com.apple.documentation/documentation/corefoundation/cfdictionary> in the array contains timing information about an image in the sequence.
 func KCGImagePropertyHEICSFrameInfoArray() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyHEICSFrameInfoArray")
 	return ptr
 }
 
+// The number of times to play the sequence. The value of this key is a <doc://com.apple.documentation/documentation/corefoundation/cfnumber>.
 func KCGImagePropertyHEICSLoopCount() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyHEICSLoopCount")
 	return ptr
 }
 
+// The unclamped number of seconds to wait before displaying the next image in the sequence. The value of this key is a <doc://com.apple.documentation/documentation/corefoundation/cfnumber> with a floating-point value.
 func KCGImagePropertyHEICSUnclampedDelayTime() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyHEICSUnclampedDelayTime")
 	return ptr
@@ -1833,161 +2148,193 @@ func KCGImagePropertyHEIFDictionary() uintptr {
 	return ptr
 }
 
+// A Boolean value that indicates whether the image has an alpha channel. The value of this key is a <doc://com.apple.documentation/documentation/corefoundation/cfboolean>. The value is <doc://com.apple.documentation/documentation/corefoundation/kcfbooleantrue> when the image contains an alpha channel.
 func KCGImagePropertyHasAlpha() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyHasAlpha")
 	return ptr
 }
 
+// The height of the image, in the image's coordinate space. The value of this property is a <doc://com.apple.documentation/documentation/corefoundation/cfnumber>.
 func KCGImagePropertyHeight() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyHeight")
 	return ptr
 }
 
+// The advised action.
 func KCGImagePropertyIPTCActionAdvised() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCActionAdvised")
 	return ptr
 }
 
+// The name of the person who created the image.
 func KCGImagePropertyIPTCByline() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCByline")
 	return ptr
 }
 
+// The title of the person who created the image.
 func KCGImagePropertyIPTCBylineTitle() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCBylineTitle")
 	return ptr
 }
 
+// The description of the image.
 func KCGImagePropertyIPTCCaptionAbstract() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCCaptionAbstract")
 	return ptr
 }
 
+// The category.
 func KCGImagePropertyIPTCCategory() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCCategory")
 	return ptr
 }
 
+// The city where the image was created.
 func KCGImagePropertyIPTCCity() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCCity")
 	return ptr
 }
 
+// The contact information for getting details about the image.
 func KCGImagePropertyIPTCContact() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCContact")
 	return ptr
 }
 
+// The address portion of the contact information.
 func KCGImagePropertyIPTCContactInfoAddress() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCContactInfoAddress")
 	return ptr
 }
 
+// The city portion of the contact information.
 func KCGImagePropertyIPTCContactInfoCity() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCContactInfoCity")
 	return ptr
 }
 
+// The country or region portion of the contact information.
 func KCGImagePropertyIPTCContactInfoCountry() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCContactInfoCountry")
 	return ptr
 }
 
+// Email addresses for the contact.
 func KCGImagePropertyIPTCContactInfoEmails() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCContactInfoEmails")
 	return ptr
 }
 
+// Phone numbers for the contact.
 func KCGImagePropertyIPTCContactInfoPhones() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCContactInfoPhones")
 	return ptr
 }
 
+// The postal code portion of the contact.
 func KCGImagePropertyIPTCContactInfoPostalCode() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCContactInfoPostalCode")
 	return ptr
 }
 
+// The state or province of the contact.
 func KCGImagePropertyIPTCContactInfoStateProvince() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCContactInfoStateProvince")
 	return ptr
 }
 
+// Web addresses for the contact.
 func KCGImagePropertyIPTCContactInfoWebURLs() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCContactInfoWebURLs")
 	return ptr
 }
 
+// The content location code.
 func KCGImagePropertyIPTCContentLocationCode() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCContentLocationCode")
 	return ptr
 }
 
+// The content location name.
 func KCGImagePropertyIPTCContentLocationName() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCContentLocationName")
 	return ptr
 }
 
+// The copyright notice.
 func KCGImagePropertyIPTCCopyrightNotice() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCCopyrightNotice")
 	return ptr
 }
 
+// The primary country code, a three-letter code defined by ISO 3166-1.
 func KCGImagePropertyIPTCCountryPrimaryLocationCode() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCCountryPrimaryLocationCode")
 	return ptr
 }
 
+// The primary country name.
 func KCGImagePropertyIPTCCountryPrimaryLocationName() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCCountryPrimaryLocationName")
 	return ptr
 }
 
+// The creator's contact info. For a list of keys to include in the contact dictionary, see <doc:iptc-creator-contact-info-dictionary-keys>.
 func KCGImagePropertyIPTCCreatorContactInfo() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCCreatorContactInfo")
 	return ptr
 }
 
+// The name of the service that provided the image.
 func KCGImagePropertyIPTCCredit() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCCredit")
 	return ptr
 }
 
+// The creation date.
 func KCGImagePropertyIPTCDateCreated() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCDateCreated")
 	return ptr
 }
 
+// A dictionary of key-value pairs for an image that uses International Press Telecommunications Council (IPTC) metadata.
 func KCGImagePropertyIPTCDictionary() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCDictionary")
 	return ptr
 }
 
+// The digital creation date.
 func KCGImagePropertyIPTCDigitalCreationDate() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCDigitalCreationDate")
 	return ptr
 }
 
+// The digital creation time.
 func KCGImagePropertyIPTCDigitalCreationTime() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCDigitalCreationTime")
 	return ptr
 }
 
+// The edit status.
 func KCGImagePropertyIPTCEditStatus() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCEditStatus")
 	return ptr
 }
 
+// An editorial update.
 func KCGImagePropertyIPTCEditorialUpdate() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCEditorialUpdate")
 	return ptr
 }
 
+// The latest date you can use the image, in the form CCYYMMDD.
 func KCGImagePropertyIPTCExpirationDate() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCExpirationDate")
 	return ptr
 }
 
+// The latest time on the expiration date you can use the image, in the form HHMMSS.
 func KCGImagePropertyIPTCExpirationTime() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCExpirationTime")
 	return ptr
@@ -2893,156 +3240,187 @@ func KCGImagePropertyIPTCExtWorkflowTagCvTermRefinedAbout() uintptr {
 	return ptr
 }
 
+// A fixture identifier.
 func KCGImagePropertyIPTCFixtureIdentifier() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCFixtureIdentifier")
 	return ptr
 }
 
+// A summary of the contents of the image.
 func KCGImagePropertyIPTCHeadline() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCHeadline")
 	return ptr
 }
 
+// The image orientation (portrait, landscape, or square).
 func KCGImagePropertyIPTCImageOrientation() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCImageOrientation")
 	return ptr
 }
 
+// The image type.
 func KCGImagePropertyIPTCImageType() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCImageType")
 	return ptr
 }
 
+// Keywords relevant to the image.
 func KCGImagePropertyIPTCKeywords() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCKeywords")
 	return ptr
 }
 
+// The language identifier, a two-letter code defined by ISO 639:1988.
 func KCGImagePropertyIPTCLanguageIdentifier() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCLanguageIdentifier")
 	return ptr
 }
 
+// The object attribute.
 func KCGImagePropertyIPTCObjectAttributeReference() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCObjectAttributeReference")
 	return ptr
 }
 
+// The editorial cycle (morning, evening, or both) of the image.
 func KCGImagePropertyIPTCObjectCycle() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCObjectCycle")
 	return ptr
 }
 
+// The object name.
 func KCGImagePropertyIPTCObjectName() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCObjectName")
 	return ptr
 }
 
+// The object type.
 func KCGImagePropertyIPTCObjectTypeReference() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCObjectTypeReference")
 	return ptr
 }
 
+// The call letter or number combination associated with the originating point of an image.
 func KCGImagePropertyIPTCOriginalTransmissionReference() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCOriginalTransmissionReference")
 	return ptr
 }
 
+// The originating application.
 func KCGImagePropertyIPTCOriginatingProgram() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCOriginatingProgram")
 	return ptr
 }
 
+// The application version.
 func KCGImagePropertyIPTCProgramVersion() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCProgramVersion")
 	return ptr
 }
 
+// The province or state.
 func KCGImagePropertyIPTCProvinceState() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCProvinceState")
 	return ptr
 }
 
+// The reference date.
 func KCGImagePropertyIPTCReferenceDate() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCReferenceDate")
 	return ptr
 }
 
+// The reference number.
 func KCGImagePropertyIPTCReferenceNumber() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCReferenceNumber")
 	return ptr
 }
 
+// The reference service.
 func KCGImagePropertyIPTCReferenceService() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCReferenceService")
 	return ptr
 }
 
+// The earliest day on which you can use the image, in the form CCYYMMDD.
 func KCGImagePropertyIPTCReleaseDate() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCReleaseDate")
 	return ptr
 }
 
+// The earliest time at which you can use the image, in the form HHMMSS. This time is valid on the release date, which is available in the “kCGImagePropertyIPTCReleaseDate“ property.
 func KCGImagePropertyIPTCReleaseTime() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCReleaseTime")
 	return ptr
 }
 
+// The usage rights for the image.
 func KCGImagePropertyIPTCRightsUsageTerms() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCRightsUsageTerms")
 	return ptr
 }
 
+// The scene codes for the image; a scene code is a six-digit string.
 func KCGImagePropertyIPTCScene() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCScene")
 	return ptr
 }
 
+// The original owner of the image.
 func KCGImagePropertyIPTCSource() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCSource")
 	return ptr
 }
 
+// Special instructions about the use of the image.
 func KCGImagePropertyIPTCSpecialInstructions() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCSpecialInstructions")
 	return ptr
 }
 
+// The star rating.
 func KCGImagePropertyIPTCStarRating() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCStarRating")
 	return ptr
 }
 
+// The location within the city where the image was created.
 func KCGImagePropertyIPTCSubLocation() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCSubLocation")
 	return ptr
 }
 
+// The subject.
 func KCGImagePropertyIPTCSubjectReference() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCSubjectReference")
 	return ptr
 }
 
+// A supplemental category.
 func KCGImagePropertyIPTCSupplementalCategory() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCSupplementalCategory")
 	return ptr
 }
 
+// The creation time.
 func KCGImagePropertyIPTCTimeCreated() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCTimeCreated")
 	return ptr
 }
 
+// The urgency level.
 func KCGImagePropertyIPTCUrgency() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCUrgency")
 	return ptr
 }
 
+// The name of the person who wrote or edited the description of the image.
 func KCGImagePropertyIPTCWriterEditor() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIPTCWriterEditor")
 	return ptr
 }
 
+// The number of images in the file. The value of this property is a <doc://com.apple.documentation/documentation/corefoundation/cfnumber>.
 func KCGImagePropertyImageCount() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyImageCount")
 	return ptr
@@ -3053,221 +3431,265 @@ func KCGImagePropertyImageIndex() uintptr {
 	return ptr
 }
 
+// An array of dictionaries, each of which contains metadata for one of the images in the file. The value of this property is a <doc://com.apple.documentation/documentation/corefoundation/cfarray>. Each element in the array is a <doc://com.apple.documentation/documentation/corefoundation/cfdictionary> that contains metadata for one of the images. For example, the dictionary might contain the width and height of the image, the image's color space name, thumbnail image information, and any auxiliary data.
 func KCGImagePropertyImages() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyImages")
 	return ptr
 }
 
+// A Boolean value that indicates whether the image contains floating-point pixel samples. The value of this property is <doc://com.apple.documentation/documentation/corefoundation/kcfbooleantrue> if the image contains floating-point pixel samples.
 func KCGImagePropertyIsFloat() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIsFloat")
 	return ptr
 }
 
+// A Boolean value that indicates whether the image contains indexed pixel samples. Indexed pixel samples are also known as paletted samples. The value of this property is <doc://com.apple.documentation/documentation/corefoundation/kcfbooleantrue> if the image contains indexed pixel samples.
 func KCGImagePropertyIsIndexed() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyIsIndexed")
 	return ptr
 }
 
+// The units for the x and y density fields.
 func KCGImagePropertyJFIFDensityUnit() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyJFIFDensityUnit")
 	return ptr
 }
 
+// A dictionary of key-value pairs for an image that uses JPEG File Interchange Format (JFIF). For more information about the available metadata keys, see <doc:jfif-image-properties>.
 func KCGImagePropertyJFIFDictionary() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyJFIFDictionary")
 	return ptr
 }
 
+// Whether there are versions of the image of increasing quality.
 func KCGImagePropertyJFIFIsProgressive() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyJFIFIsProgressive")
 	return ptr
 }
 
+// The version of JFIF.
 func KCGImagePropertyJFIFVersion() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyJFIFVersion")
 	return ptr
 }
 
+// The x pixel density.
 func KCGImagePropertyJFIFXDensity() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyJFIFXDensity")
 	return ptr
 }
 
+// The y pixel density.
 func KCGImagePropertyJFIFYDensity() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyJFIFYDensity")
 	return ptr
 }
 
+// A dictionary of key-value pairs for an image from an Apple camera.
 func KCGImagePropertyMakerAppleDictionary() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyMakerAppleDictionary")
 	return ptr
 }
 
+// The image aspect ratio.
 func KCGImagePropertyMakerCanonAspectRatioInfo() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyMakerCanonAspectRatioInfo")
 	return ptr
 }
 
+// The camera serial number.
 func KCGImagePropertyMakerCanonCameraSerialNumber() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyMakerCanonCameraSerialNumber")
 	return ptr
 }
 
+// The presence of a continuous drive.
 func KCGImagePropertyMakerCanonContinuousDrive() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyMakerCanonContinuousDrive")
 	return ptr
 }
 
+// A dictionary of key-value pairs for an image from a Canon camera.
 func KCGImagePropertyMakerCanonDictionary() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyMakerCanonDictionary")
 	return ptr
 }
 
+// The firmware version.
 func KCGImagePropertyMakerCanonFirmware() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyMakerCanonFirmware")
 	return ptr
 }
 
+// The flash exposure compensation setting.
 func KCGImagePropertyMakerCanonFlashExposureComp() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyMakerCanonFlashExposureComp")
 	return ptr
 }
 
+// The image serial number.
 func KCGImagePropertyMakerCanonImageSerialNumber() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyMakerCanonImageSerialNumber")
 	return ptr
 }
 
+// The lens model.
 func KCGImagePropertyMakerCanonLensModel() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyMakerCanonLensModel")
 	return ptr
 }
 
+// The name of the camera's owner.
 func KCGImagePropertyMakerCanonOwnerName() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyMakerCanonOwnerName")
 	return ptr
 }
 
+// A dictionary of key-value pairs for an image from a Fuji camera.
 func KCGImagePropertyMakerFujiDictionary() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyMakerFujiDictionary")
 	return ptr
 }
 
+// A dictionary of key-value pairs for an image from a Minolta camera.
 func KCGImagePropertyMakerMinoltaDictionary() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyMakerMinoltaDictionary")
 	return ptr
 }
 
+// The camera serial number.
 func KCGImagePropertyMakerNikonCameraSerialNumber() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyMakerNikonCameraSerialNumber")
 	return ptr
 }
 
+// The color mode.
 func KCGImagePropertyMakerNikonColorMode() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyMakerNikonColorMode")
 	return ptr
 }
 
+// A dictionary of key-value pairs for an image from a Nikon camera.
 func KCGImagePropertyMakerNikonDictionary() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyMakerNikonDictionary")
 	return ptr
 }
 
+// The digital zoom setting.
 func KCGImagePropertyMakerNikonDigitalZoom() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyMakerNikonDigitalZoom")
 	return ptr
 }
 
+// The flash exposure compensation.
 func KCGImagePropertyMakerNikonFlashExposureComp() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyMakerNikonFlashExposureComp")
 	return ptr
 }
 
+// The flash setting.
 func KCGImagePropertyMakerNikonFlashSetting() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyMakerNikonFlashSetting")
 	return ptr
 }
 
+// The focus distance.
 func KCGImagePropertyMakerNikonFocusDistance() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyMakerNikonFocusDistance")
 	return ptr
 }
 
+// The focus mode.
 func KCGImagePropertyMakerNikonFocusMode() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyMakerNikonFocusMode")
 	return ptr
 }
 
+// The ISO selection.
 func KCGImagePropertyMakerNikonISOSelection() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyMakerNikonISOSelection")
 	return ptr
 }
 
+// The ISO setting.
 func KCGImagePropertyMakerNikonISOSetting() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyMakerNikonISOSetting")
 	return ptr
 }
 
+// The image adjustment setting.
 func KCGImagePropertyMakerNikonImageAdjustment() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyMakerNikonImageAdjustment")
 	return ptr
 }
 
+// The lens adapter.
 func KCGImagePropertyMakerNikonLensAdapter() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyMakerNikonLensAdapter")
 	return ptr
 }
 
+// Lens information.
 func KCGImagePropertyMakerNikonLensInfo() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyMakerNikonLensInfo")
 	return ptr
 }
 
+// The lens type.
 func KCGImagePropertyMakerNikonLensType() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyMakerNikonLensType")
 	return ptr
 }
 
+// The quality setting.
 func KCGImagePropertyMakerNikonQuality() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyMakerNikonQuality")
 	return ptr
 }
 
+// The sharpening mode.
 func KCGImagePropertyMakerNikonSharpenMode() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyMakerNikonSharpenMode")
 	return ptr
 }
 
+// The shooting mode.
 func KCGImagePropertyMakerNikonShootingMode() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyMakerNikonShootingMode")
 	return ptr
 }
 
+// The number of times the shutter has been actuated.
 func KCGImagePropertyMakerNikonShutterCount() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyMakerNikonShutterCount")
 	return ptr
 }
 
+// The white balance mode.
 func KCGImagePropertyMakerNikonWhiteBalanceMode() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyMakerNikonWhiteBalanceMode")
 	return ptr
 }
 
+// A dictionary of key-value pairs for an image from a Olympus camera.
 func KCGImagePropertyMakerOlympusDictionary() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyMakerOlympusDictionary")
 	return ptr
 }
 
+// A dictionary of key-value pairs for an image from a Pentax camera.
 func KCGImagePropertyMakerPentaxDictionary() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyMakerPentaxDictionary")
 	return ptr
 }
 
+// The name of the image's color space. The value of this key is a <doc://com.apple.documentation/documentation/corefoundation/cfstring>.
 func KCGImagePropertyNamedColorSpace() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyNamedColorSpace")
 	return ptr
 }
 
+// The aspect ratio of the image. The value of this property is a <doc://com.apple.documentation/documentation/corefoundation/cfnumber>.
 func KCGImagePropertyOpenEXRAspectRatio() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyOpenEXRAspectRatio")
 	return ptr
@@ -3278,71 +3700,85 @@ func KCGImagePropertyOpenEXRCompression() uintptr {
 	return ptr
 }
 
+// A dictionary of properties specific to the OpenEXR metadata standard.
 func KCGImagePropertyOpenEXRDictionary() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyOpenEXRDictionary")
 	return ptr
 }
 
+// The intended display orientation of the image. The value of this property is a <doc://com.apple.documentation/documentation/corefoundation/cfnumber>. The value encodes the intended display orientation for the image according to the TIFF and EXIF specifications. See the “CGImagePropertyOrientation“ type for possible values and their meanings.
 func KCGImagePropertyOrientation() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyOrientation")
 	return ptr
 }
 
+// A string that identifies the author of the image.
 func KCGImagePropertyPNGAuthor() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyPNGAuthor")
 	return ptr
 }
 
+// The chromaticities.
 func KCGImagePropertyPNGChromaticities() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyPNGChromaticities")
 	return ptr
 }
 
+// A string that contains image comments.
 func KCGImagePropertyPNGComment() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyPNGComment")
 	return ptr
 }
 
+// The PNG filter to apply prior to compression. The value of this key is a <doc://com.apple.documentation/documentation/corefoundation/cfnumber>. The number contains a bitwise-OR of one or more filter constants, such as “IMAGEIO_PNG_FILTER_AVG“ or “IMAGEIO_PNG_FILTER_SUB“. The value has no effect on formats other than PNG.
 func KCGImagePropertyPNGCompressionFilter() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyPNGCompressionFilter")
 	return ptr
 }
 
+// A string that identifies the copyright of the image.
 func KCGImagePropertyPNGCopyright() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyPNGCopyright")
 	return ptr
 }
 
+// A string that identifies the date and time the image was created.
 func KCGImagePropertyPNGCreationTime() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyPNGCreationTime")
 	return ptr
 }
 
+// A string that describes the image.
 func KCGImagePropertyPNGDescription() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyPNGDescription")
 	return ptr
 }
 
+// A dictionary of key-value pairs for an image that uses Portable Network Graphics (PNG) format. For more information about the available metadata keys, see <doc:png-image-properties>.
 func KCGImagePropertyPNGDictionary() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyPNGDictionary")
 	return ptr
 }
 
+// A disclaimer string.
 func KCGImagePropertyPNGDisclaimer() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyPNGDisclaimer")
 	return ptr
 }
 
+// The gamma value.
 func KCGImagePropertyPNGGamma() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyPNGGamma")
 	return ptr
 }
 
+// The interlace type.
 func KCGImagePropertyPNGInterlaceType() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyPNGInterlaceType")
 	return ptr
 }
 
+// A string that identifies the last date and time the image was modified.
 func KCGImagePropertyPNGModificationTime() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyPNGModificationTime")
 	return ptr
@@ -3353,6 +3789,7 @@ func KCGImagePropertyPNGPixelsAspectRatio() uintptr {
 	return ptr
 }
 
+// A string that identifies the software used to create the image.
 func KCGImagePropertyPNGSoftware() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyPNGSoftware")
 	return ptr
@@ -3363,6 +3800,7 @@ func KCGImagePropertyPNGSource() uintptr {
 	return ptr
 }
 
+// A string that holds the image's title.
 func KCGImagePropertyPNGTitle() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyPNGTitle")
 	return ptr
@@ -3373,21 +3811,25 @@ func KCGImagePropertyPNGTransparency() uintptr {
 	return ptr
 }
 
+// A warning string.
 func KCGImagePropertyPNGWarning() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyPNGWarning")
 	return ptr
 }
 
+// The number of x pixels per meter.
 func KCGImagePropertyPNGXPixelsPerMeter() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyPNGXPixelsPerMeter")
 	return ptr
 }
 
+// The number of y pixels per meter.
 func KCGImagePropertyPNGYPixelsPerMeter() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyPNGYPixelsPerMeter")
 	return ptr
 }
 
+// The sRGB intent.
 func KCGImagePropertyPNGsRGBIntent() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyPNGsRGBIntent")
 	return ptr
@@ -3398,31 +3840,37 @@ func KCGImagePropertyPVREncoder() uintptr {
 	return ptr
 }
 
+// The format of the image's individual pixels. The value of this property is a <doc://com.apple.documentation/documentation/corefoundation/cfnumber>. For information about how to interpret this value, see the `PixelFormat` tag in the EXIF specification.
 func KCGImagePropertyPixelFormat() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyPixelFormat")
 	return ptr
 }
 
+// The number of pixels along the y-axis of the image. The value of this property is a <doc://com.apple.documentation/documentation/corefoundation/cfnumber>.
 func KCGImagePropertyPixelHeight() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyPixelHeight")
 	return ptr
 }
 
+// The number of pixels along the x-axis of the image. The value of this property is a <doc://com.apple.documentation/documentation/corefoundation/cfnumber>.
 func KCGImagePropertyPixelWidth() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyPixelWidth")
 	return ptr
 }
 
+// The index of the primary image in the file.
 func KCGImagePropertyPrimaryImage() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyPrimaryImage")
 	return ptr
 }
 
+// The name of the optional International Color Consortium (ICC) profile embedded in the image, if known. The value of this key is a <doc://com.apple.documentation/documentation/corefoundation/cfstring>.
 func KCGImagePropertyProfileName() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyProfileName")
 	return ptr
 }
 
+// A dictionary of key-value pairs for an image that contains minimally processed, or raw, data.
 func KCGImagePropertyRawDictionary() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyRawDictionary")
 	return ptr
@@ -3438,76 +3886,91 @@ func KCGImagePropertyTGADictionary() uintptr {
 	return ptr
 }
 
+// The artist who created the image.
 func KCGImagePropertyTIFFArtist() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyTIFFArtist")
 	return ptr
 }
 
+// The compression scheme used on the image data.
 func KCGImagePropertyTIFFCompression() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyTIFFCompression")
 	return ptr
 }
 
+// Copyright information.
 func KCGImagePropertyTIFFCopyright() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyTIFFCopyright")
 	return ptr
 }
 
+// The date and time that the image was created.
 func KCGImagePropertyTIFFDateTime() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyTIFFDateTime")
 	return ptr
 }
 
+// A dictionary of key-value pairs for an image that uses Tagged Image File Format (TIFF). For more information about the available metadata keys, see <doc:tiff-image-properties>.
 func KCGImagePropertyTIFFDictionary() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyTIFFDictionary")
 	return ptr
 }
 
+// The document name.
 func KCGImagePropertyTIFFDocumentName() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyTIFFDocumentName")
 	return ptr
 }
 
+// The computer or operating system used when the image was created.
 func KCGImagePropertyTIFFHostComputer() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyTIFFHostComputer")
 	return ptr
 }
 
+// The image description.
 func KCGImagePropertyTIFFImageDescription() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyTIFFImageDescription")
 	return ptr
 }
 
+// The name of the manufacturer of the camera or input device.
 func KCGImagePropertyTIFFMake() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyTIFFMake")
 	return ptr
 }
 
+// The camera or input device model.
 func KCGImagePropertyTIFFModel() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyTIFFModel")
 	return ptr
 }
 
+// The image orientation.
 func KCGImagePropertyTIFFOrientation() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyTIFFOrientation")
 	return ptr
 }
 
+// The color space of the image data.
 func KCGImagePropertyTIFFPhotometricInterpretation() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyTIFFPhotometricInterpretation")
 	return ptr
 }
 
+// The chromaticities of the primaries of the image.
 func KCGImagePropertyTIFFPrimaryChromaticities() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyTIFFPrimaryChromaticities")
 	return ptr
 }
 
+// The units of resolution.
 func KCGImagePropertyTIFFResolutionUnit() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyTIFFResolutionUnit")
 	return ptr
 }
 
+// The name and version of the software used for image creation.
 func KCGImagePropertyTIFFSoftware() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyTIFFSoftware")
 	return ptr
@@ -3523,11 +3986,13 @@ func KCGImagePropertyTIFFTileWidth() uintptr {
 	return ptr
 }
 
+// The transfer function, in tabular format, used to map pixel components from a nonlinear form into a linear form.
 func KCGImagePropertyTIFFTransferFunction() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyTIFFTransferFunction")
 	return ptr
 }
 
+// The white point of the image.
 func KCGImagePropertyTIFFWhitePoint() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyTIFFWhitePoint")
 	return ptr
@@ -3538,6 +4003,7 @@ func KCGImagePropertyTIFFXPosition() uintptr {
 	return ptr
 }
 
+// The number of pixels per resolution unit in the image width direction.
 func KCGImagePropertyTIFFXResolution() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyTIFFXResolution")
 	return ptr
@@ -3548,6 +4014,7 @@ func KCGImagePropertyTIFFYPosition() uintptr {
 	return ptr
 }
 
+// The number of pixels per resolution unit in the image height direction.
 func KCGImagePropertyTIFFYResolution() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyTIFFYResolution")
 	return ptr
@@ -3558,41 +4025,49 @@ func KCGImagePropertyThumbnailImages() uintptr {
 	return ptr
 }
 
+// The height of the main image, in pixels.
 func KCGImagePropertyWebPCanvasPixelHeight() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyWebPCanvasPixelHeight")
 	return ptr
 }
 
+// The width of the main image, in pixels.
 func KCGImagePropertyWebPCanvasPixelWidth() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyWebPCanvasPixelWidth")
 	return ptr
 }
 
+// The number of seconds to wait before displaying the next image in the sequence. The value of this key is a <doc://com.apple.documentation/documentation/corefoundation/cfnumber> with a floating-point value. The value of this key is never less than 100 millseconds, and the system adjusts values less than that amount to 100 milliseconds, as needed. See “kCGImagePropertyGIFUnclampedDelayTime“.
 func KCGImagePropertyWebPDelayTime() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyWebPDelayTime")
 	return ptr
 }
 
+// A dictionary of properties related to a WebP container.
 func KCGImagePropertyWebPDictionary() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyWebPDictionary")
 	return ptr
 }
 
+// An array of dictionaries that contain timing information for the image sequence. The value of this property is a <doc://com.apple.documentation/documentation/corefoundation/cfarray>. Each <doc://com.apple.documentation/documentation/corefoundation/cfdictionary> in the array contains timing information about an image in the sequence.
 func KCGImagePropertyWebPFrameInfoArray() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyWebPFrameInfoArray")
 	return ptr
 }
 
+// The number of times to play the sequence. The value of this key is a <doc://com.apple.documentation/documentation/corefoundation/cfnumber>.
 func KCGImagePropertyWebPLoopCount() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyWebPLoopCount")
 	return ptr
 }
 
+// The unadjusted number of seconds to wait before displaying the next image in the sequence. The value of this key is a <doc://com.apple.documentation/documentation/corefoundation/cfnumber> with a floating-point value.
 func KCGImagePropertyWebPUnclampedDelayTime() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyWebPUnclampedDelayTime")
 	return ptr
 }
 
+// The width of the image, in the image's coordinate space. The value of this property is a <doc://com.apple.documentation/documentation/corefoundation/cfnumber>.
 func KCGImagePropertyWidth() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImagePropertyWidth")
 	return ptr
@@ -3608,21 +4083,31 @@ func KCGImageProviderPreferredTileWidth() uintptr {
 	return ptr
 }
 
+// Option key for restricting which image formats can be decoded. The value is a <doc://com.apple.documentation/documentation/corefoundation/cfarray> containing <doc://com.apple.documentation/documentation/corefoundation/cfstring> Uniform Type Identifiers (UTIs) of allowed image formats. When specified, ImageIO will only decode images whose format matches one of the entries in the allow list. If no matching reader is found, decoding fails. Unknown format identifiers are ignored. If not specified, all supported ImageIO formats are allowed (default behavior). If process-wide format restrictions were set via “CGImageSourceSetAllowableTypes“, only formats allowed by both mechanisms are permitted. See also <doc://com.apple.documentation/documentation/uniformtypeidentifiers/system-declared-uniform-type-identifiers>. ## Example @TabNavigator { @Tab("Swift") { ```swift let allowedTypes = ["public.jpeg" as CFString, "public.png" as CFString] let options = [ kCGImageSourceAllowableTypes: allowedTypes ] as CFDictionary ``` } @Tab("Objective-C") { ```objc NSArray *allowedTypes = @[@"public.jpeg", @"public.png"]; NSDictionary *options = @{ (id)kCGImageSourceAllowableTypes: allowedTypes }; ``` } }
+func KCGImageSourceAllowableTypes() uintptr {
+	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageSourceAllowableTypes")
+	return ptr
+}
+
+// A Boolean value that indicates whether to always create a thumbnail image. The value of this key is a <doc://com.apple.documentation/documentation/corefoundation/cfboolean>. The default value is <doc://com.apple.documentation/documentation/corefoundation/kcfbooleanfalse>. If you set the value of this key to <doc://com.apple.documentation/documentation/corefoundation/kcfbooleantrue>, the image source creates the thumbnail from the full image, subject to the limit specified by “kCGImageSourceThumbnailMaxPixelSize“. If you don't specify a maximum pixel size, the image source creates the thumbnail using the image's full size, which in most cases is not desirable. Include this key in the options dictionary you pass to the function “CGImageSourceCreateThumbnailAtIndex(_:_:_:)“.
 func KCGImageSourceCreateThumbnailFromImageAlways() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageSourceCreateThumbnailFromImageAlways")
 	return ptr
 }
 
+// A Boolean value that indicates whether to create a thumbnail image automatically if the data source doesn't contain one. The value of this key is a <doc://com.apple.documentation/documentation/corefoundation/cfboolean>. The default value is <doc://com.apple.documentation/documentation/corefoundation/kcfbooleanfalse>. If you set the value of this key to <doc://com.apple.documentation/documentation/corefoundation/kcfbooleantrue>, the image source creates the thumbnail from the full image, subject to the limit specified by “kCGImageSourceThumbnailMaxPixelSize“. If you don't specify a maximum pixel size, the image soucre creates the thumbnail using the image's full size, which in most cases is not desirable. Include this key in the options dictionary you pass to the function “CGImageSourceCreateThumbnailAtIndex(_:_:_:)“.
 func KCGImageSourceCreateThumbnailFromImageIfAbsent() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageSourceCreateThumbnailFromImageIfAbsent")
 	return ptr
 }
 
+// A Boolean value that indicates whether to rotate and scale the thumbnail image to match the image's orientation and aspect ratio. The value of this key must be a CFBoolean value. The default value is <doc://com.apple.documentation/documentation/corefoundation/kcfbooleanfalse>.
 func KCGImageSourceCreateThumbnailWithTransform() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageSourceCreateThumbnailWithTransform")
 	return ptr
 }
 
+// ## Overview For more information, see [Image I/O Programming Guide](https://developer.apple.com/library/archive/documentation/GraphicsImaging/Conceptual/ImageIOGuide/imageio_intro/ikpg_intro.html#//apple_ref/doc/uid/TP40005462).
 func KCGImageSourceDecodeRequest() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageSourceDecodeRequest")
 	return ptr
@@ -3648,31 +4133,43 @@ func KCGImageSourceGenerateImageSpecificLumaScaling() uintptr {
 	return ptr
 }
 
+// A Boolean value that indicates whether to prioritize image quality over decode speed. When you set this key to <doc://com.apple.documentation/documentation/corefoundation/kcfbooleantrue>, the image source decodes the full-size image using the highest-quality decode method available for the file. The value of this key is a <doc://com.apple.documentation/documentation/corefoundation/cfboolean>. The default value is <doc://com.apple.documentation/documentation/corefoundation/kcfbooleanfalse>. Currently, image sources support this option only for camera RAW images. This key is a no-op when it is absent or <doc://com.apple.documentation/documentation/corefoundation/kcfbooleanfalse>, when the image isn't a camera RAW format, or when no higher-quality decode method is available, so it is always safe to set. Include this key in the options dictionary you pass to the functions “CGImageSourceCopyPropertiesAtIndex(_:_:_:)“ and “CGImageSourceCreateImageAtIndex(_:_:_:)“. ## Example @TabNavigator { @Tab("Swift") { ```swift let options = [ kCGImageSourcePrioritizeQuality: true ] as CFDictionary let image = CGImageSourceCreateImageAtIndex(source, 0, options) ``` } @Tab("Objective-C") { ```objc NSDictionary *options = @{ (id)kCGImageSourcePrioritizeQuality: @YES }; CGImageRef image = CGImageSourceCreateImageAtIndex(source, 0, (CFDictionaryRef)options); ``` } }
+func KCGImageSourcePrioritizeQuality() uintptr {
+	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageSourcePrioritizeQuality")
+	return ptr
+}
+
+// A Boolean that indicates whether to use floating-point values in returned images. The value of this key is a <doc://com.apple.documentation/documentation/corefoundation/cfboolean>. The default value is <doc://com.apple.documentation/documentation/corefoundation/kcfbooleanfalse>, which tells the image source not to use floating-point values. If the image format supports floating-point values, this key tells the image source to format <doc://com.apple.documentation/documentation/coregraphics/cgimage> types using those values. The use of extended-range floating-point values may require additional processing to render in a pleasing manner.
 func KCGImageSourceShouldAllowFloat() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageSourceShouldAllowFloat")
 	return ptr
 }
 
+// A Boolean value that indicates whether to cache the decoded image. The value of this key is a <doc://com.apple.documentation/documentation/corefoundation/cfboolean>. The default value is <doc://com.apple.documentation/documentation/corefoundation/kcfbooleantrue> for 64-bit architectures, and <doc://com.apple.documentation/documentation/corefoundation/kcfbooleanfalse> for 32-bit architectures. Include this key in the options dictionary you pass to the functions “CGImageSourceCopyPropertiesAtIndex(_:_:_:)“ and “CGImageSourceCreateImageAtIndex(_:_:_:)“.
 func KCGImageSourceShouldCache() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageSourceShouldCache")
 	return ptr
 }
 
+// A Boolean value that indicates whether image decoding and caching happens at image creation time. The value of this key is a <doc://com.apple.documentation/documentation/corefoundation/cfboolean>. The default value is <doc://com.apple.documentation/documentation/corefoundation/kcfbooleanfalse>, which causes decoding and caching to happen only when you render the image. Include this key in the options dictionary you pass to the functions “CGImageSourceCopyPropertiesAtIndex(_:_:_:)“ and “CGImageSourceCreateImageAtIndex(_:_:_:)“.
 func KCGImageSourceShouldCacheImmediately() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageSourceShouldCacheImmediately")
 	return ptr
 }
 
+// The factor by which to scale down any returned images. When you specify this key, the image source scales down the image data by the specified numerical factor. The value of this key must be a <doc://com.apple.documentation/documentation/corefoundation/cfnumber> containing the integer value 2, 4, or 8. If the image doesn't support the specified scale factor, the image source provides a larger or full-size normal image. Image sources support this option only for JPEG, HEIF, TIFF, and PNG images.
 func KCGImageSourceSubsampleFactor() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageSourceSubsampleFactor")
 	return ptr
 }
 
+// The maximum width and height of a thumbnail image, specified in pixels. If this key is not specified, the width and height of a thumbnail is not limited and thumbnails may be as big as the image itself. If present, this key must be a CFNumber value. This key can be provided in the options dictionary that you pass to the function “CGImageSourceCreateThumbnailAtIndex(_:_:_:)“.
 func KCGImageSourceThumbnailMaxPixelSize() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageSourceThumbnailMaxPixelSize")
 	return ptr
 }
 
+// The uniform type identifier that represents your best guess for the image's type. The value of this key is a <doc://com.apple.documentation/documentation/corefoundation/cfstring> object. Add this key to the options dictionary when you create a “CGImageSource“ object.
 func KCGImageSourceTypeIdentifierHint() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kCGImageSourceTypeIdentifierHint")
 	return ptr

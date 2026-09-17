@@ -16,8 +16,6 @@ import (
 )
 
 // URLAuthenticationChallenge is an idiomatic wrapper over the Objective-C class NSURLAuthenticationChallenge.
-//
-// A challenge from a server requiring authentication from the client.
 type URLAuthenticationChallenge struct {
 	objref.Handle
 }
@@ -92,35 +90,35 @@ func (uac *URLAuthenticationChallenge) WithScriptingProperties(scriptingProperti
 	return uac
 }
 
-// ProtectionSpace get a description of the protection space that requires authentication
+// ProtectionSpace returns a description of the protection space that requires authentication.
 func (uac *URLAuthenticationChallenge) ProtectionSpace() *URLProtectionSpace {
 	defer runtime.KeepAlive(uac)
 	_r := objc.Send[objc.ID](objref.IDOf(uac), objc.RegisterName("protectionSpace"))
 	return URLProtectionSpaceFromID(_r)
 }
 
-// ProposedCredential get the proposed credential for this challenge proposedCredential may be nil, if there is no default credential to use for this challenge (either stored or in the URL). If the credential is not nil and returns YES for hasPassword, this means the NSURLConnection thinks the credential is ready to use as-is. If it returns NO for hasPassword, then the credential is not ready to use as-is, but provides a default username the client could use when prompting.
+// ProposedCredential returns the proposed credential for this challenge. The proposed credential may be `nil`, if there is no default credential to use for this challenge (either stored or in the URL). If the credential is not `nil` and returns `YES` for `hasPassword`, it is ready to use as-is. If it returns `NO` for `hasPassword`, it provides a default username the client could use when prompting.
 func (uac *URLAuthenticationChallenge) ProposedCredential() *URLCredential {
 	defer runtime.KeepAlive(uac)
 	_r := objc.Send[objc.ID](objref.IDOf(uac), objc.RegisterName("proposedCredential"))
 	return URLCredentialFromID(_r)
 }
 
-// PreviousFailureCount get count of previous failed authentication attempts
+// PreviousFailureCount returns the count of previous failed authentication attempts.
 func (uac *URLAuthenticationChallenge) PreviousFailureCount() int {
 	defer runtime.KeepAlive(uac)
 	_r := objc.Send[int](objref.IDOf(uac), objc.RegisterName("previousFailureCount"))
 	return _r
 }
 
-// FailureResponse get the response representing authentication failure. If there was a previous authentication failure, and this protocol uses responses to indicate authentication failure, then this method will return the response. Otherwise it will return nil.
+// FailureResponse returns the response representing authentication failure. If there was a previous authentication failure, and this protocol uses responses to indicate authentication failure, then this method will return the response. Otherwise it will return `nil`.
 func (uac *URLAuthenticationChallenge) FailureResponse() *URLResponse {
 	defer runtime.KeepAlive(uac)
 	_r := objc.Send[objc.ID](objref.IDOf(uac), objc.RegisterName("failureResponse"))
 	return URLResponseFromID(_r)
 }
 
-// Error get the error representing authentication failure. If there was a previous authentication failure, and this protocol uses errors to indicate authentication failure, then this method will return the error. Otherwise it will return nil.
+// Error returns the error representing authentication failure. If there was a previous authentication failure, and this protocol uses errors to indicate authentication failure, then this method will return the error. Otherwise it will return `nil`.
 func (uac *URLAuthenticationChallenge) Error() unsafe.Pointer {
 	defer runtime.KeepAlive(uac)
 	_r := objc.Send[unsafe.Pointer](objref.IDOf(uac), objc.RegisterName("error"))

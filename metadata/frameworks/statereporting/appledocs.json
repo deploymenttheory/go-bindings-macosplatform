@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "framework": "StateReporting",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "SRStateReporter": {
+      "doc": "An object unique per domain that records state transitions and volatile metadata updates.",
+      "url": "https://developer.apple.com/documentation/statereporting/srstatereporter"
+    }
+  },
+  "methods": {
+    "SRStateReporter": {
+      "+reporterForDomain:": {
+        "doc": "Returns the reporter instance unique to the given domain name.",
+        "url": "https://developer.apple.com/documentation/statereporting/srstatereporter/reporterfordomain:"
+      },
+      "-reportTransitionToStateLabel:stableMetadata:volatileMetadata:": {
+        "doc": "Reports a transition to a new state.",
+        "url": "https://developer.apple.com/documentation/statereporting/srstatereporter/reporttransitiontostatelabel:stablemetadata:volatilemetadata:"
+      },
+      "-reportVolatileMetadataUpdate:": {
+        "doc": "Updates the volatile metadata within the current state without beginning a new transition.",
+        "url": "https://developer.apple.com/documentation/statereporting/srstatereporter/reportvolatilemetadataupdate:"
+      }
+    }
+  },
+  "properties": {
+    "SRStateReporter": {
+      "domain": {
+        "doc": "The reverse DNS-style domain name that identifies this reporter.",
+        "url": "https://developer.apple.com/documentation/statereporting/srstatereporter/domain"
+      }
+    }
+  }
+}

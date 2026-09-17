@@ -17,8 +17,6 @@ import (
 )
 
 // OperationQueue is an idiomatic wrapper over the Objective-C class NSOperationQueue.
-//
-// A queue that regulates the execution of operations.
 type OperationQueue struct {
 	objref.Handle
 }
@@ -81,32 +79,32 @@ func NewOperationQueue() *OperationQueue {
 	return operationQueueAdopt(_id)
 }
 
-// WithMaxConcurrentOperationCount sets the max concurrent operation count.
+// WithMaxConcurrentOperationCount sets the maximum number of queued operations that can run at the same time. The value in this property affects only the operations that the current queue has executing at the same time. Other operation queues can also execute their maximum number of operations in parallel. Reducing the number of concurrent operations does not affect any operations that are currently executing. Specifying the value `NSOperationQueueDefaultMaxConcurrentOperationCount` (which is recommended) causes the system to set the maximum number of operations based on system conditions. The default value of this property is “NSOperationQueueDefaultMaxConcurrentOperationCount“.
 func (oq *OperationQueue) WithMaxConcurrentOperationCount(maxConcurrentOperationCount int) *OperationQueue {
 	objc.Send[objc.ID](objref.IDOf(oq), objc.RegisterName("setMaxConcurrentOperationCount:"), maxConcurrentOperationCount)
 	return oq
 }
 
-// WithSuspended sets the suspended.
+// WithSuspended sets a Boolean value indicating whether the queue is actively scheduling operations for execution. When the value of this property is `NO`, the queue actively starts operations that are in the queue and ready to execute. Setting this property to `YES` prevents the queue from starting any queued operations, but already executing operations continue to execute. You may continue to add operations to a queue that is suspended but those operations are not scheduled for execution until you change this property to `NO`. Operations are removed from the queue only when they finish executing. However, in order to finish executing, an operation must first be started. Because a suspended queue does not start any new operations, it does not remove any operations (including cancelled operations) that are currently queued and not executing. The default value of this property is `NO`.
 func (oq *OperationQueue) WithSuspended(suspended bool) *OperationQueue {
 	objc.Send[objc.ID](objref.IDOf(oq), objc.RegisterName("setSuspended:"), suspended)
 	return oq
 }
 
-// WithName sets the name.
+// WithName sets the name of the operation queue. Names provide a way for you to identify your operation queues at run time. Tools may also use this name to provide additional context during debugging or analysis of your code. The default value of this property is a string containing the memory address of the operation queue.
 func (oq *OperationQueue) WithName(name StringProvider) *OperationQueue {
 	defer runtime.KeepAlive(name)
 	objc.Send[objc.ID](objref.IDOf(oq), objc.RegisterName("setName:"), objref.IDOf(name))
 	return oq
 }
 
-// WithQualityOfService sets the quality of service.
+// WithQualityOfService sets the default service level to apply to operations that the queue invokes. This property specifies the service level applied to operation objects added to the queue. If the operation object has an explicit service level set, that value is used instead. For queues you create yourself, the default value is `NSOperationQualityOfServiceBackground`. For the queue returned by the `mainQueue` method, the default value is `NSOperationQualityOfServiceUserInteractive` and cannot be changed.
 func (oq *OperationQueue) WithQualityOfService(qualityOfService QualityOfService) *OperationQueue {
 	objc.Send[objc.ID](objref.IDOf(oq), objc.RegisterName("setQualityOfService:"), qualityOfService)
 	return oq
 }
 
-// WithUnderlyingQueue sets the underlying queue.
+// WithUnderlyingQueue sets the dispatch queue that the operation queue uses to invoke operations. The default value of this property is `nil`. You can set the value of this property to an existing dispatch queue to have enqueued operations interspersed with blocks submitted to that dispatch queue. The value of this property should only be set if there are no operations in the queue; setting the value of this property when `operationCount` is not equal to `0` raises an `NSInvalidArgumentException`. The value of this property must not be the value returned by `dispatch_get_main_queue`. The quality-of-service level set for the underlying dispatch queue overrides any value set for the operation queue's `qualityOfService` property.
 func (oq *OperationQueue) WithUnderlyingQueue(underlyingQueue ObjectProvider) *OperationQueue {
 	defer runtime.KeepAlive(underlyingQueue)
 	objc.Send[objc.ID](objref.IDOf(oq), objc.RegisterName("setUnderlyingQueue:"), objref.IDOf(underlyingQueue))
@@ -125,20 +123,20 @@ func (oq *OperationQueue) WithScriptingProperties(scriptingProperties map[string
 	return oq
 }
 
-// AddOperation adds operation.
+// AddOperation adds the specified operation to the receiver. Once added, the specified operation remains in the queue until it finishes executing. An operation object can be in at most one operation queue at a time and this method throws an `NSInvalidArgumentException` exception if the operation is already in another queue. Similarly, this method throws an `NSInvalidArgumentException` exception if the operation is currently executing or has already finished executing. - Parameter op: The operation to be added to the queue.
 func (oq *OperationQueue) AddOperation(op *Operation) {
 	defer runtime.KeepAlive(oq)
 	defer runtime.KeepAlive(op)
 	objc.Send[objc.ID](objref.IDOf(oq), objc.RegisterName("addOperation:"), objref.IDOf(op))
 }
 
-// AddOperationsWaitUntilFinished adds operations wait until finished.
+// AddOperationsWaitUntilFinished adds the specified operations to the queue. An operation object can be in at most one operation queue at a time and cannot be added if it is currently executing or finished. This method throws an `NSInvalidArgumentException` exception if any of those error conditions are true for any of the operations in the `ops` parameter. - Parameters: - ops: The operations to be added to the queue. - wait: If `YES`, the current thread is blocked until all of the specified operations finish executing. If `NO`, the operations are added to the queue and control returns immediately to the caller.
 func (oq *OperationQueue) AddOperationsWaitUntilFinished(ops []*Operation, wait bool) {
 	defer runtime.KeepAlive(oq)
 	objc.Send[objc.ID](objref.IDOf(oq), objc.RegisterName("addOperations:waitUntilFinished:"), purego.SliceToNSArray(ops, func(_v *Operation) objc.ID { return objref.IDOf(_v) }), wait)
 }
 
-// AddOperationWith adds operation with.
+// AddOperationWith wraps the specified block in an operation and adds it to the receiver. This method adds a single block to the receiver by first wrapping it in an operation object. You should not attempt to get a reference to the newly created operation object or determine its type information. - Parameter block: The block to execute from the operation. The block takes no parameters and has no return value.
 //
 // AddOperationWith blocks until the operation completes or ctx is cancelled.
 func (oq *OperationQueue) AddOperationWith(ctx context.Context) error {
@@ -156,7 +154,7 @@ func (oq *OperationQueue) AddOperationWith(ctx context.Context) error {
 	}
 }
 
-// AddBarrierBlock the `addBarrierBlock:` method executes the block when the NSOperationQueue has finished all enqueued operations and prevents any subsequent operations to be executed until the barrier has been completed. This acts similarly to the `dispatch_barrier_async` function.
+// AddBarrierBlock invokes a block when the queue finishes all enqueued operations, and prevents subsequent operations from starting until the block has completed. This method is similar to `dispatch_barrier_async`. - Parameters: - barrier: The block to invoke after all currently enqueued operations have finished. Operations you add after the barrier block don't start until the block has completed.
 //
 // AddBarrierBlock blocks until the operation completes or ctx is cancelled.
 func (oq *OperationQueue) AddBarrierBlock(ctx context.Context) error {
@@ -174,40 +172,40 @@ func (oq *OperationQueue) AddBarrierBlock(ctx context.Context) error {
 	}
 }
 
-// CancelAllOperations cancels all operations.
+// CancelAllOperations cancels all queued and executing operations. This method calls the `cancel` method on all operations currently in the queue. Canceling the operations does not automatically remove them from the queue or stop those that are currently executing. For operations that are queued and waiting execution, the queue must still attempt to execute the operation before recognizing that it is canceled and moving it to the finished state. For operations that are already executing, the operation object itself must check for cancellation and stop what it is doing so that it can move to the finished state.
 func (oq *OperationQueue) CancelAllOperations() {
 	defer runtime.KeepAlive(oq)
 	objc.Send[objc.ID](objref.IDOf(oq), objc.RegisterName("cancelAllOperations"))
 }
 
-// WaitUntilAllOperationsAreFinished wraps the corresponding Objective-C method.
+// WaitUntilAllOperationsAreFinished blocks the current thread until all the receiver's queued and executing operations finish executing. When called, this method blocks the current thread and waits for the receiver's current and queued operations to finish executing. While the current thread is blocked, the receiver continues to launch already queued operations and monitor those that are executing. During this time, the current thread cannot add operations to the queue, but other threads may. Once all of the pending operations are finished, this method returns. If there are no operations in the queue, this method returns immediately.
 func (oq *OperationQueue) WaitUntilAllOperationsAreFinished() {
 	defer runtime.KeepAlive(oq)
 	objc.Send[objc.ID](objref.IDOf(oq), objc.RegisterName("waitUntilAllOperationsAreFinished"))
 }
 
-// Progress returns the `progress` property represents a total progress of the operations executed in the queue. By default NSOperationQueue does not report progress until the `totalUnitCount` of the progress is set. When the `totalUnitCount` property of the progress is set the queue then opts into participating in progress reporting. When enabled, each operation will contribute 1 unit of completion to the overall progress of the queue for operations that are finished by the end of main (operations that override start and do not invoke super will not contribute to progress). Special attention to race conditions should be made when updating the `totalUnitCount` of the progress as well as care should be taken to avoid 'backwards progress'. For example; when a NSOperationQueue's progress is 5/10, representing 50% completed, and there are 90 more operations about to be added and the `totalUnitCount` that would then make the progress report as 5/100 which represents 5%. In this example it would mean that any progress bar would jump from displaying 50% back to 5%, which might not be desirable. In the cases where the `totalUnitCount` needs to be adjusted it is suggested to do this for thread-safety in a barrier by using the `addBarrierBlock:` API. This ensures that no un-expected execution state occurs adjusting into a potentially backwards moving progress scenario.
+// Progress returns an object that represents the total progress of the operations executing in the queue. By default, “NSOperationQueue“ doesn't report progress until the `totalUnitCount` of the progress is set. When `totalUnitCount` is set, the queue begins reporting progress. Each operation in the queue contributes one unit of completion to the overall progress of the queue for operations that are finished by the end of `main`. Operations that override `start` and don't invoke super don't contribute to the queue's progress. > Warning: > Be careful to avoid race conditions and backward progress when updating `totalUnitCount`. Consider a queue with a progress that has a `completedUnitCount` equal to `5` and a `totalUnitCount` equal to `10`, representing 50% completion. If you add 90 more operations to the queue, the `totalUnitCount` is now `100`, and the progress completion reports 5%. If the progress object is connected to a progress bar, the bar would visibly jump backward from 50% to 5%, which may not be desirable. To update `totalUnitCount` in a thread-safe manner, use the `addBarrierBlock:` method. This method ensures that the operation queue completes the operations in the queue, preventing an inadvertent backward jump in progress.
 func (oq *OperationQueue) Progress() *Progress {
 	defer runtime.KeepAlive(oq)
 	_r := objc.Send[objc.ID](objref.IDOf(oq), objc.RegisterName("progress"))
 	return ProgressFromID(_r)
 }
 
-// MaxConcurrentOperationCount returns the max concurrent operation count.
+// MaxConcurrentOperationCount returns the maximum number of queued operations that can run at the same time. The value in this property affects only the operations that the current queue has executing at the same time. Other operation queues can also execute their maximum number of operations in parallel. Reducing the number of concurrent operations does not affect any operations that are currently executing. Specifying the value `NSOperationQueueDefaultMaxConcurrentOperationCount` (which is recommended) causes the system to set the maximum number of operations based on system conditions. The default value of this property is “NSOperationQueueDefaultMaxConcurrentOperationCount“.
 func (oq *OperationQueue) MaxConcurrentOperationCount() int {
 	defer runtime.KeepAlive(oq)
 	_r := objc.Send[int](objref.IDOf(oq), objc.RegisterName("maxConcurrentOperationCount"))
 	return _r
 }
 
-// IsSuspended reports whether the object is suspended.
+// IsSuspended reports whether the queue is actively scheduling operations for execution. When the value of this property is `NO`, the queue actively starts operations that are in the queue and ready to execute. Setting this property to `YES` prevents the queue from starting any queued operations, but already executing operations continue to execute. You may continue to add operations to a queue that is suspended but those operations are not scheduled for execution until you change this property to `NO`. Operations are removed from the queue only when they finish executing. However, in order to finish executing, an operation must first be started. Because a suspended queue does not start any new operations, it does not remove any operations (including cancelled operations) that are currently queued and not executing. The default value of this property is `NO`.
 func (oq *OperationQueue) IsSuspended() bool {
 	defer runtime.KeepAlive(oq)
 	_r := objc.Send[bool](objref.IDOf(oq), objc.RegisterName("isSuspended"))
 	return _r
 }
 
-// Name returns the name.
+// Name returns the name of the operation queue. Names provide a way for you to identify your operation queues at run time. Tools may also use this name to provide additional context during debugging or analysis of your code. The default value of this property is a string containing the memory address of the operation queue.
 func (oq *OperationQueue) Name() string {
 	defer runtime.KeepAlive(oq)
 	_r := objc.Send[objc.ID](objref.IDOf(oq), objc.RegisterName("name"))
@@ -217,21 +215,21 @@ func (oq *OperationQueue) Name() string {
 	return purego.GoString(_r)
 }
 
-// QualityOfService returns the quality of service.
+// QualityOfService returns the default service level to apply to operations that the queue invokes. This property specifies the service level applied to operation objects added to the queue. If the operation object has an explicit service level set, that value is used instead. For queues you create yourself, the default value is `NSOperationQualityOfServiceBackground`. For the queue returned by the `mainQueue` method, the default value is `NSOperationQualityOfServiceUserInteractive` and cannot be changed.
 func (oq *OperationQueue) QualityOfService() QualityOfService {
 	defer runtime.KeepAlive(oq)
 	_r := objc.Send[QualityOfService](objref.IDOf(oq), objc.RegisterName("qualityOfService"))
 	return _r
 }
 
-// UnderlyingQueue returns the underlying queue.
+// UnderlyingQueue returns the dispatch queue that the operation queue uses to invoke operations. The default value of this property is `nil`. You can set the value of this property to an existing dispatch queue to have enqueued operations interspersed with blocks submitted to that dispatch queue. The value of this property should only be set if there are no operations in the queue; setting the value of this property when `operationCount` is not equal to `0` raises an `NSInvalidArgumentException`. The value of this property must not be the value returned by `dispatch_get_main_queue`. The quality-of-service level set for the underlying dispatch queue overrides any value set for the operation queue's `qualityOfService` property.
 func (oq *OperationQueue) UnderlyingQueue() *Object {
 	defer runtime.KeepAlive(oq)
 	_r := objc.Send[objc.ID](objref.IDOf(oq), objc.RegisterName("underlyingQueue"))
 	return ObjectFromID(_r)
 }
 
-// Operations returns the operations.
+// Operations returns the operations currently in the queue. The array in this property contains zero or more `NSOperation` objects in the order you added them to the queue. This order doesn't necessarily reflect the order in which the queue invokes those operations.
 //
 // Operations returns the collection as a Go slice.
 func (oq *OperationQueue) Operations() []*Operation {
@@ -240,7 +238,7 @@ func (oq *OperationQueue) Operations() []*Operation {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Operation { return OperationFromID(_id) })
 }
 
-// OperationCount returns the operation count.
+// OperationCount returns the number of operations currently in the queue. Because the number of operations in the queue changes as those operations finish executing, the value returned by this property reflects the instantaneous number of operations at the time the property was accessed. By the time you use the value, the actual number of operations may be different. As a result, do not use this value for object enumerations or other precise calculations.
 func (oq *OperationQueue) OperationCount() int {
 	defer runtime.KeepAlive(oq)
 	_r := objc.Send[int](objref.IDOf(oq), objc.RegisterName("operationCount"))

@@ -82,14 +82,14 @@ func NewProtocolCheckerWithTargetProtocol(anObject *Object, aProtocol unsafe.Poi
 	return protocolCheckerAdopt(_id)
 }
 
-// Protocol returns the protocol.
+// Protocol returns the protocol object the receiver uses to verify whether a given message should be forwarded to its target.
 func (pc *ProtocolChecker) Protocol() unsafe.Pointer {
 	defer runtime.KeepAlive(pc)
 	_r := objc.Send[unsafe.Pointer](objref.IDOf(pc), objc.RegisterName("protocol"))
 	return _r
 }
 
-// Target returns the target.
+// Target returns the target of the receiver.
 func (pc *ProtocolChecker) Target() *Object {
 	defer runtime.KeepAlive(pc)
 	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("target"))

@@ -59,14 +59,14 @@ func NewMTRBaseClusterBooleanStateConfigurationWithDeviceEndpointIDQueue(device 
 	return mTRBaseClusterBooleanStateConfigurationAdopt(_id)
 }
 
-// SuppressAlarmWithParamsCompletion command SuppressAlarm This command is used to suppress the specified alarm mode.
+// SuppressAlarmWithParamsCompletion command SuppressAlarm This command will suppress the alarm modes specified.
 func (mbcbsc *MTRBaseClusterBooleanStateConfiguration) SuppressAlarmWithParamsCompletion(params *MTRBooleanStateConfigurationClusterSuppressAlarmParams, completion func(unsafe.Pointer)) {
 	defer runtime.KeepAlive(mbcbsc)
 	defer runtime.KeepAlive(params)
 	objc.Send[objc.ID](objref.IDOf(mbcbsc), objc.RegisterName("suppressAlarmWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
-// EnableDisableAlarmWithParamsCompletion command EnableDisableAlarm This command is used to enable or disable the specified alarm mode.
+// EnableDisableAlarmWithParamsCompletion command EnableDisableAlarm This command allows setting the enable or disable value for the specified alarm modes.
 func (mbcbsc *MTRBaseClusterBooleanStateConfiguration) EnableDisableAlarmWithParamsCompletion(params *MTRBooleanStateConfigurationClusterEnableDisableAlarmParams, completion func(unsafe.Pointer)) {
 	defer runtime.KeepAlive(mbcbsc)
 	defer runtime.KeepAlive(params)

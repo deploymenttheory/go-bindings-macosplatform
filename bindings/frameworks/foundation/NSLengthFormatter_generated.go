@@ -18,8 +18,6 @@ import (
 // LengthFormatter is an idiomatic wrapper over the Objective-C class NSLengthFormatter.
 //
 // It embeds [Formatter], promoting that type's methods.
-//
-// A formatter that provides localized descriptions of linear distances, such as length and height measurements.
 type LengthFormatter struct {
 	Formatter
 }
@@ -56,20 +54,20 @@ func NewLengthFormatter() *LengthFormatter {
 	return lengthFormatterAdopt(_id)
 }
 
-// WithNumberFormatter sets the number formatter.
+// WithNumberFormatter sets the number formatter used to format the numbers in a length string. The default value is an `NSNumberFormatter` with `NSNumberFormatterDecimalStyle`.
 func (lf *LengthFormatter) WithNumberFormatter(numberFormatter *NumberFormatter) *LengthFormatter {
 	defer runtime.KeepAlive(numberFormatter)
 	objc.Send[objc.ID](objref.IDOf(lf), objc.RegisterName("setNumberFormatter:"), objref.IDOf(numberFormatter))
 	return lf
 }
 
-// WithUnitStyle sets the unit style.
+// WithUnitStyle sets the unit style used when creating string representations of length values. The default value is `NSFormattingUnitStyleMedium`.
 func (lf *LengthFormatter) WithUnitStyle(unitStyle FormattingUnitStyle) *LengthFormatter {
 	objc.Send[objc.ID](objref.IDOf(lf), objc.RegisterName("setUnitStyle:"), unitStyle)
 	return lf
 }
 
-// WithForPersonHeightUse sets the for person height use.
+// WithForPersonHeightUse sets a Boolean value that indicates whether the resulting string represents a person's height. The default value is `NO`. If set to `YES`, the number argument for `stringFromMeters:` and `unitStringFromMeters:usedUnit:` is considered as a person's height.
 func (lf *LengthFormatter) WithForPersonHeightUse(forPersonHeightUse bool) *LengthFormatter {
 	objc.Send[objc.ID](objref.IDOf(lf), objc.RegisterName("setForPersonHeightUse:"), forPersonHeightUse)
 	return lf
@@ -87,7 +85,7 @@ func (lf *LengthFormatter) WithScriptingProperties(scriptingProperties map[strin
 	return lf
 }
 
-// StringFromValueUnit wraps the corresponding Objective-C method.
+// StringFromValueUnit returns a length string for the provided value and unit.
 func (lf *LengthFormatter) StringFromValueUnit(value float64, unit LengthFormatterUnit) string {
 	defer runtime.KeepAlive(lf)
 	_r := objc.Send[objc.ID](objref.IDOf(lf), objc.RegisterName("stringFromValue:unit:"), value, unit)
@@ -97,7 +95,7 @@ func (lf *LengthFormatter) StringFromValueUnit(value float64, unit LengthFormatt
 	return purego.GoString(_r)
 }
 
-// StringFromMeters wraps the corresponding Objective-C method.
+// StringFromMeters returns a length string for the provided value in meters. Formats a number in meters to a localized string with the locale-appropriate unit and an appropriate scale (e.g. 4.3m = 14.1ft in the US locale).
 func (lf *LengthFormatter) StringFromMeters(numberInMeters float64) string {
 	defer runtime.KeepAlive(lf)
 	_r := objc.Send[objc.ID](objref.IDOf(lf), objc.RegisterName("stringFromMeters:"), numberInMeters)
@@ -107,7 +105,7 @@ func (lf *LengthFormatter) StringFromMeters(numberInMeters float64) string {
 	return purego.GoString(_r)
 }
 
-// UnitStringFromValueUnit wraps the corresponding Objective-C method.
+// UnitStringFromValueUnit returns a unit string for the provided value and unit. Returns a localized string of the given unit, and if the unit is singular or plural is based on the given number.
 func (lf *LengthFormatter) UnitStringFromValueUnit(value float64, unit LengthFormatterUnit) string {
 	defer runtime.KeepAlive(lf)
 	_r := objc.Send[objc.ID](objref.IDOf(lf), objc.RegisterName("unitStringFromValue:unit:"), value, unit)
@@ -117,7 +115,7 @@ func (lf *LengthFormatter) UnitStringFromValueUnit(value float64, unit LengthFor
 	return purego.GoString(_r)
 }
 
-// UnitStringFromMetersUsedUnit wraps the corresponding Objective-C method.
+// UnitStringFromMetersUsedUnit returns a unit string based on the provided value in meters. Returns the locale-appropriate unit, the same unit used by `stringFromMeters:`.
 func (lf *LengthFormatter) UnitStringFromMetersUsedUnit(numberInMeters float64) (result string, unitp LengthFormatterUnit) {
 	defer runtime.KeepAlive(lf)
 	var _out0 LengthFormatterUnit
@@ -129,21 +127,21 @@ func (lf *LengthFormatter) UnitStringFromMetersUsedUnit(numberInMeters float64) 
 	return _v, _out0
 }
 
-// NumberFormatter returns the number formatter.
+// NumberFormatter returns the number formatter used to format the numbers in a length string. The default value is an `NSNumberFormatter` with `NSNumberFormatterDecimalStyle`.
 func (lf *LengthFormatter) NumberFormatter() *NumberFormatter {
 	defer runtime.KeepAlive(lf)
 	_r := objc.Send[objc.ID](objref.IDOf(lf), objc.RegisterName("numberFormatter"))
 	return NumberFormatterFromID(_r)
 }
 
-// UnitStyle returns the unit style.
+// UnitStyle returns the unit style used when creating string representations of length values. The default value is `NSFormattingUnitStyleMedium`.
 func (lf *LengthFormatter) UnitStyle() FormattingUnitStyle {
 	defer runtime.KeepAlive(lf)
 	_r := objc.Send[FormattingUnitStyle](objref.IDOf(lf), objc.RegisterName("unitStyle"))
 	return _r
 }
 
-// IsForPersonHeightUse reports whether the object is for person height use.
+// IsForPersonHeightUse reports whether the resulting string represents a person's height. The default value is `NO`. If set to `YES`, the number argument for `stringFromMeters:` and `unitStringFromMeters:usedUnit:` is considered as a person's height.
 func (lf *LengthFormatter) IsForPersonHeightUse() bool {
 	defer runtime.KeepAlive(lf)
 	_r := objc.Send[bool](objref.IDOf(lf), objc.RegisterName("isForPersonHeightUse"))

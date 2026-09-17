@@ -66,26 +66,6 @@
       "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamsource"
     }
   },
-  "enums": {
-    "CMIOExtensionStreamClockType": {
-      "doc": "Constants that indicate the clock type of a stream.",
-      "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamclocktype"
-    },
-    "CMIOExtensionStreamDirection": {
-      "doc": "Constants that define the data-flow direction of the stream.",
-      "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamdirection"
-    },
-    "CMIOExtensionStreamDiscontinuityFlags": {
-      "doc": "Constants that specify the types of discontinuities that can occur in a media stream.",
-      "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamdiscontinuityflags",
-      "members": {
-        "CMIOExtensionStreamDiscontinuityFlagNone": {
-          "doc": "A flag that indicates there’s no discontinuity in the stream.",
-          "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamdiscontinuityflags/cmioextensionstreamdiscontinuityflagnone"
-        }
-      }
-    }
-  },
   "structs": {
     "CMIODeviceAVCCommand": {
       "url": "https://developer.apple.com/documentation/coremediaio/cmiodeviceavccommand"
@@ -353,7 +333,7 @@
       },
       "transportType": {
         "doc": "The transport type of the device, such as USB or HDMI.",
-        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensiondeviceproperties/transporttype-96gm"
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensiondeviceproperties/transporttype-25qzh"
       }
     },
     "CMIOExtensionPropertyAttributes": {
@@ -519,7 +499,7 @@
     "CMIOExtensionStreamProperties": {
       "activeFormatIndex": {
         "doc": "The index of the active format.",
-        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamproperties/activeformatindex-8czm7"
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamproperties/activeformatindex-83u7z"
       },
       "frameDuration": {
         "doc": "The duration of the frame.",
@@ -535,7 +515,7 @@
       },
       "sinkBufferQueueSize": {
         "doc": "The buffer queue size.",
-        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamproperties/sinkbufferqueuesize-4kpug"
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamproperties/sinkbufferqueuesize-9b80c"
       },
       "sinkBufferUnderrunCount": {
         "doc": "The buffer underrun count.",
@@ -543,7 +523,7 @@
       },
       "sinkBuffersRequiredForStartup": {
         "doc": "The number of buffers the stream requires for startup.",
-        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamproperties/sinkbuffersrequiredforstartup-1bgyq"
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamproperties/sinkbuffersrequiredforstartup-4b5te"
       },
       "sinkEndOfData": {
         "doc": "A value that indicates whether the stream has reached its end.",

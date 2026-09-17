@@ -137,15 +137,18 @@ var (
 	// @function	CMBufferQueueSetValidationHandler @abstract	Sets a block that CMBufferQueueEnqueue will call to validate buffers before adding them to the queue. @discussion Both a validation callback and a validation handler can be set at the same time, in which case they will both be called when enqueueing buffers. They both need to return noErr for the buffer to be enqueued.
 	_fnCMBufferQueueSetValidationHandler func(unsafe.Pointer, objc.Block) int
 	// @function	CMBufferQueueTestTrigger @abstract	Tests whether the trigger condition is true. @discussion	Whereas the trigger callback will only be called when the condition goes from false to true, CMBufferQueueTestTrigger always returns the condition's current status. The triggerToken must be one that has been installed on this queue.
-	_fnCMBufferQueueTestTrigger            func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnCMClockConvertHostTimeToSystemUnits func(CMTime) uint64
-	_fnCMClockGetAnchorTime                func(unsafe.Pointer, *CMTime, *CMTime) int
-	_fnCMClockGetHostTimeClock             func() unsafe.Pointer
-	_fnCMClockGetTime                      func(unsafe.Pointer) CMTime
-	_fnCMClockGetTypeID                    func() uint
-	_fnCMClockInvalidate                   func(unsafe.Pointer)
-	_fnCMClockMakeHostTimeFromSystemUnits  func(uint64) CMTime
-	_fnCMClockMightDrift                   func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCMBufferQueueTestTrigger                      func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCMClockConvertHostTimeToSystemUnits           func(CMTime) uint64
+	_fnCMClockCreateGenlockClock                     func() unsafe.Pointer
+	_fnCMClockGetAnchorTime                          func(unsafe.Pointer, *CMTime, *CMTime) int
+	_fnCMClockGetHostTimeClock                       func() unsafe.Pointer
+	_fnCMClockGetPreferredStartTimePattern           func(unsafe.Pointer, *CMTime, *CMTime, *CMTime) int
+	_fnCMClockGetTime                                func(unsafe.Pointer) CMTime
+	_fnCMClockGetTypeID                              func() uint
+	_fnCMClockImplementsGetPreferredStartTimePattern func(unsafe.Pointer) uint8
+	_fnCMClockInvalidate                             func(unsafe.Pointer)
+	_fnCMClockMakeHostTimeFromSystemUnits            func(uint64) CMTime
+	_fnCMClockMightDrift                             func(unsafe.Pointer, unsafe.Pointer) uint8
 	// @function	CMClosedCaptionFormatDescriptionCopyAsBigEndianClosedCaptionDescriptionBlockBuffer @abstract	Copies the contents of a CMClosedCaptionFormatDescription to a CMBlockBuffer in big-endian byte ordering. @discussion	On return, the caller owns the returned CMBlockBuffer, and must release it when done with it. Note that the dataRefIndex field of the SampleDescription is intentionally filled with garbage values (0xFFFF).  The caller must overwrite these values with a valid dataRefIndex if writing the SampleDescription to a QuickTime/ISO file. @param	allocator							Allocator to use for allocating the CMBlockBuffer object. May be NULL. @param	closedCaptionFormatDescription		CMClosedCaptionFormatDescription to be copied. @param	flavor								Reserved for future use. Pass NULL for QuickTime Movie or ISO flavor. @param	blockBufferOut						Receives new CMBlockBuffer containing ClosedCaptionDescription data structure in big-endian byte ordering.
 	_fnCMClosedCaptionFormatDescriptionCopyAsBigEndianClosedCaptionDescriptionBlockBuffer func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 	// @function	CMClosedCaptionFormatDescriptionCreateFromBigEndianClosedCaptionDescriptionBlockBuffer @abstract	Creates a CMClosedCaptionFormatDescription from a big-endian ClosedCaptionDescription data structure in a CMBlockBuffer. @param	allocator							Allocator to use for allocating the CMClosedCaptionFormatDescription object. May be NULL. @param	closedCaptionDescriptionBlockBuffer	CMBlockBuffer containing ClosedCaptionDescription data structure in big-endian byte ordering. @param	flavor								Reserved for future use. Pass NULL for QuickTime Movie or ISO flavor. @param	formatDescriptionOut				Receives new CMClosedCaptionFormatDescription.
@@ -165,7 +168,8 @@ var (
 	_fnCMFormatDescriptionGetMediaType                                  func(unsafe.Pointer) uint
 	_fnCMFormatDescriptionGetTypeID                                     func() uint
 	// @function   CMGetAttachment @abstract   Returns a specific attachment of a CMAttachmentBearer @discussion You can attach any CF object to a CMAttachmentBearer to store additional information. CMGetAttachment retrieves an attachment identified by a key.  Given a CVBufferRef, CMGetAttachment is equivalent to CVBufferGetAttachment. @param      target  Target CMAttachmentBearer. @param      key	Key in form of a CFString identifying the desired attachment. @param      attachmentModeOut  Returns the mode of the attachment, if desired.  May be NULL. @result     If found the attachment object; else NULL.
-	_fnCMGetAttachment func(unsafe.Pointer, unsafe.Pointer, *uint32) unsafe.Pointer
+	_fnCMGetAttachment                                 func(unsafe.Pointer, unsafe.Pointer, *uint32) unsafe.Pointer
+	_fnCMIsAnyDisplaySynchronizedToLockedGenlockSignal func() uint8
 	// @function	CMMemoryPoolCreate @abstract	Creates a new CMMemoryPool.
 	_fnCMMemoryPoolCreate func(unsafe.Pointer) unsafe.Pointer
 	// @function	CMMemoryPoolFlush @abstract	Deallocates all memory the pool was holding for recycling.
@@ -576,7 +580,7 @@ var (
 	_fnCMTimebaseSetTimerToFireImmediately               func(unsafe.Pointer, unsafe.Pointer) int
 	// @function	CMVideoFormatDescriptionCopyAsBigEndianImageDescriptionBlockBuffer @abstract	Copies the contents of a CMVideoFormatDescription to a CMBlockBuffer in big-endian byte ordering. @discussion	On return, the caller owns the returned CMBlockBuffer, and must release it when done with it. Note that the dataRefIndex field of the SampleDescription is intentionally filled with garbage values (0xFFFF).  The caller must overwrite these values with a valid dataRefIndex if writing the SampleDescription to a QuickTime/ISO file. @param	allocator						Allocator to use for allocating the CMBlockBuffer object. May be NULL. @param	videoFormatDescription			CMVideoFormatDescription to be copied. @param	stringEncoding					Pass CFStringGetSystemEncoding() or GetApplicationTextEncoding(). @param	flavor							kCMImageDescriptionFlavor constant or NULL for QuickTimeMovie flavor. @param	blockBufferOut					Receives new CMBlockBuffer containing ImageDescription data structure in big-endian byte ordering.
 	_fnCMVideoFormatDescriptionCopyAsBigEndianImageDescriptionBlockBuffer func(unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer) int
-	// @function    CMVideoFormatDescriptionCopyTagCollectionArray @abstract    Copies the multi-image encoding properties as an array of CMTagCollections. @param formatDescription    CMVideoFormatDescription being interrogated. @param tagCollectionsOut    Returned TagCollections with CMTags such as kCMTagCategory_VideoLayerID and kCMTagCategory_StereoViewType. @discussion	On return, the caller owns the returned CFArrayRef and must release it when done with it. This function copies the VideoLayerIDs and LeftAndRightViewIDs from hvcC and 3D Reference Displays Info SEI in the formatDescription. The returned values can be used to enable the multi-image decoding with kVTDecompressionPropertyKey_RequestedMVHEVCVideoLayerIDs. It also gives the eye mapping information for the pixel buffers of the decoded CMTaggedBufferGroups. @result      Array of CMTagCollections. The result will be NULL if the CMVideoFormatDescription does not contain multi-image encoding parameters, or if there is some other error.
+	// @function    CMVideoFormatDescriptionCopyTagCollectionArray @abstract    Copies the multi-image encoding properties as an array of CMTagCollections. @param formatDescription    CMVideoFormatDescription being interrogated. @param tagCollectionsOut     A pointer to receive the CMTagCollection array with CMTags such as kCMTagCategory_VideoLayerID and kCMTagCategory_StereoViewType. The value will be NULL if the CMVideoFormatDescription does not contain proper multi-layer encoding parameters. @discussion	On return, the caller owns the returned CFArrayRef and must release it when done with it. This function copies the VideoLayerIDs and LeftAndRightViewIDs from hvcC and 3D Reference Displays Info SEI in the formatDescription. The returned values can be used to enable the multi-image decoding with kVTDecompressionPropertyKey_RequestedMVHEVCVideoLayerIDs. It also gives the eye mapping information for the pixel buffers of the decoded CMTaggedBufferGroups. @result	OSStatus with an error or noErr if successful.
 	_fnCMVideoFormatDescriptionCopyTagCollectionArray func(unsafe.Pointer, unsafe.Pointer) int
 	_fnCMVideoFormatDescriptionCreate                 func(unsafe.Pointer, uint, int32, int32, unsafe.Pointer, unsafe.Pointer) int
 	_fnCMVideoFormatDescriptionCreateForImageBuffer   func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
@@ -961,6 +965,10 @@ func CMClockConvertHostTimeToSystemUnits(hostTime CMTime) uint64 {
 	return _fnCMClockConvertHostTimeToSystemUnits(hostTime)
 }
 
+func CMClockCreateGenlockClock() unsafe.Pointer {
+	return _fnCMClockCreateGenlockClock()
+}
+
 func CMClockGetAnchorTime(clock unsafe.Pointer, clockTimeOut *CMTime, referenceClockTimeOut *CMTime) int {
 	return _fnCMClockGetAnchorTime(clock, clockTimeOut, referenceClockTimeOut)
 }
@@ -969,12 +977,20 @@ func CMClockGetHostTimeClock() unsafe.Pointer {
 	return _fnCMClockGetHostTimeClock()
 }
 
+func CMClockGetPreferredStartTimePattern(clock unsafe.Pointer, outClockStartTime *CMTime, outHostClockStartTime *CMTime, outDeltaBetweenPreferredStartTimes *CMTime) int {
+	return _fnCMClockGetPreferredStartTimePattern(clock, outClockStartTime, outHostClockStartTime, outDeltaBetweenPreferredStartTimes)
+}
+
 func CMClockGetTime(clock unsafe.Pointer) CMTime {
 	return _fnCMClockGetTime(clock)
 }
 
 func CMClockGetTypeID() uint {
 	return _fnCMClockGetTypeID()
+}
+
+func CMClockImplementsGetPreferredStartTimePattern(clock unsafe.Pointer) uint8 {
+	return _fnCMClockImplementsGetPreferredStartTimePattern(clock)
 }
 
 func CMClockInvalidate(clock unsafe.Pointer) {
@@ -1049,6 +1065,10 @@ func CMFormatDescriptionGetTypeID() uint {
 // @function   CMGetAttachment @abstract   Returns a specific attachment of a CMAttachmentBearer @discussion You can attach any CF object to a CMAttachmentBearer to store additional information. CMGetAttachment retrieves an attachment identified by a key.  Given a CVBufferRef, CMGetAttachment is equivalent to CVBufferGetAttachment. @param      target  Target CMAttachmentBearer. @param      key	Key in form of a CFString identifying the desired attachment. @param      attachmentModeOut  Returns the mode of the attachment, if desired.  May be NULL. @result     If found the attachment object; else NULL.
 func CMGetAttachment(target unsafe.Pointer, key unsafe.Pointer, attachmentModeOut *uint32) unsafe.Pointer {
 	return _fnCMGetAttachment(target, key, attachmentModeOut)
+}
+
+func CMIsAnyDisplaySynchronizedToLockedGenlockSignal() uint8 {
+	return _fnCMIsAnyDisplaySynchronizedToLockedGenlockSignal()
 }
 
 // @function	CMMemoryPoolCreate @abstract	Creates a new CMMemoryPool.
@@ -2311,7 +2331,7 @@ func CMVideoFormatDescriptionCopyAsBigEndianImageDescriptionBlockBuffer(allocato
 	return _fnCMVideoFormatDescriptionCopyAsBigEndianImageDescriptionBlockBuffer(allocator, videoFormatDescription, stringEncoding, flavor, blockBufferOut)
 }
 
-// @function    CMVideoFormatDescriptionCopyTagCollectionArray @abstract    Copies the multi-image encoding properties as an array of CMTagCollections. @param formatDescription    CMVideoFormatDescription being interrogated. @param tagCollectionsOut    Returned TagCollections with CMTags such as kCMTagCategory_VideoLayerID and kCMTagCategory_StereoViewType. @discussion	On return, the caller owns the returned CFArrayRef and must release it when done with it. This function copies the VideoLayerIDs and LeftAndRightViewIDs from hvcC and 3D Reference Displays Info SEI in the formatDescription. The returned values can be used to enable the multi-image decoding with kVTDecompressionPropertyKey_RequestedMVHEVCVideoLayerIDs. It also gives the eye mapping information for the pixel buffers of the decoded CMTaggedBufferGroups. @result      Array of CMTagCollections. The result will be NULL if the CMVideoFormatDescription does not contain multi-image encoding parameters, or if there is some other error.
+// @function    CMVideoFormatDescriptionCopyTagCollectionArray @abstract    Copies the multi-image encoding properties as an array of CMTagCollections. @param formatDescription    CMVideoFormatDescription being interrogated. @param tagCollectionsOut     A pointer to receive the CMTagCollection array with CMTags such as kCMTagCategory_VideoLayerID and kCMTagCategory_StereoViewType. The value will be NULL if the CMVideoFormatDescription does not contain proper multi-layer encoding parameters. @discussion	On return, the caller owns the returned CFArrayRef and must release it when done with it. This function copies the VideoLayerIDs and LeftAndRightViewIDs from hvcC and 3D Reference Displays Info SEI in the formatDescription. The returned values can be used to enable the multi-image decoding with kVTDecompressionPropertyKey_RequestedMVHEVCVideoLayerIDs. It also gives the eye mapping information for the pixel buffers of the decoded CMTaggedBufferGroups. @result	OSStatus with an error or noErr if successful.
 func CMVideoFormatDescriptionCopyTagCollectionArray(formatDescription unsafe.Pointer, tagCollectionsOut unsafe.Pointer) int {
 	return _fnCMVideoFormatDescriptionCopyTagCollectionArray(formatDescription, tagCollectionsOut)
 }

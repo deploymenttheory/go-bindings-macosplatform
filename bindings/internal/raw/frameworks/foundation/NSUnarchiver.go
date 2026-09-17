@@ -92,6 +92,7 @@ func (o *NSUnarchiver) ReplaceObjectWithObject(object objc.ID, newObject objc.ID
 	o.Ptr().Send(_nSUnarchiverSelReplaceObjectWithObject, object, newObject)
 }
 
+// A Boolean value that indicates whether the receiver has reached the end of the encoded data while decoding. You can invoke this after invoking `decodeObject` to discover whether the archive contains extra data following the encoded object graph. If it does, you can either ignore this anomaly or consider it an error.
 func (o *NSUnarchiver) IsAtEnd() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSUnarchiverSelIsAtEnd)
 	return _ret

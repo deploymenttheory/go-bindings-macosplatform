@@ -141,14 +141,14 @@ func (rs *RangeSpecifier) WithScriptingProperties(scriptingProperties map[string
 	return rs
 }
 
-// StartSpecifier returns the start specifier.
+// StartSpecifier returns the specifier for the beginning of the range.
 func (rs *RangeSpecifier) StartSpecifier() *ScriptObjectSpecifier {
 	defer runtime.KeepAlive(rs)
 	_r := objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("startSpecifier"))
 	return ScriptObjectSpecifierFromID(_r)
 }
 
-// EndSpecifier returns the end specifier.
+// EndSpecifier returns the specifier for the end of the range.
 func (rs *RangeSpecifier) EndSpecifier() *ScriptObjectSpecifier {
 	defer runtime.KeepAlive(rs)
 	_r := objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("endSpecifier"))

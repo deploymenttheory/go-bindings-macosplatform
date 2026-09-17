@@ -106,41 +106,9 @@
     "ASAuthorizationProviderExtensionUserLoginConfiguration": {
       "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionuserloginconfiguration"
     },
-    "ASAuthorizationPublicKeyCredentialLargeBlobAssertionInput": {
-      "doc": "A type that represents input for the binary large object extension in passkey assertion requests.",
-      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationpublickeycredentiallargeblobassertioninput"
-    },
-    "ASAuthorizationPublicKeyCredentialLargeBlobAssertionOutput": {
-      "doc": "A type to represent the output of the requested large binary object operation, which returns in a passkey sign-in response.",
-      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationpublickeycredentiallargeblobassertionoutput"
-    },
-    "ASAuthorizationPublicKeyCredentialLargeBlobRegistrationInput": {
-      "doc": "A type that encapsulates input for large binary object extensions during registration.",
-      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationpublickeycredentiallargeblobregistrationinput"
-    },
-    "ASAuthorizationPublicKeyCredentialLargeBlobRegistrationOutput": {
-      "doc": "The result of the large binary object support check, resulting from a passkey registration response.",
-      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationpublickeycredentiallargeblobregistrationoutput"
-    },
-    "ASAuthorizationPublicKeyCredentialPRFAssertionInput": {
-      "doc": "A type that represents input for the web authentication PRF extension in passkey assertion requests.",
-      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationpublickeycredentialprfassertioninput"
-    },
     "ASAuthorizationPublicKeyCredentialPRFAssertionInputValues": {
       "doc": "The values to use as inputs to the salts for deriving the symmetric key.",
       "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationpublickeycredentialprfassertioninputvalues"
-    },
-    "ASAuthorizationPublicKeyCredentialPRFAssertionOutput": {
-      "doc": "A type to represent outputs of the web authentication PRF extension, when requesting them during an assertion.",
-      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationpublickeycredentialprfassertionoutput"
-    },
-    "ASAuthorizationPublicKeyCredentialPRFRegistrationInput": {
-      "doc": "A type that encapsulates input for PRF extensions during registration.",
-      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationpublickeycredentialprfregistrationinput"
-    },
-    "ASAuthorizationPublicKeyCredentialPRFRegistrationOutput": {
-      "doc": "A type to represent outputs of the web authentication PRF extension, when requesting them during a registration.",
-      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationpublickeycredentialprfregistrationoutput"
     },
     "ASAuthorizationPublicKeyCredentialParameters": {
       "doc": "An object that provides required parameters for the credential during registration.",
@@ -186,10 +154,6 @@
       "doc": "An OpenID authorization request that provides single sign-on (SSO) functionality.",
       "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationsinglesignonrequest"
     },
-    "ASAuthorizationWebBrowserPlatformPublicKeyCredential": {
-      "doc": "A structure that describes a passkey stored in the keychain, or managed by a third-party credential manager.",
-      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationwebbrowserplatformpublickeycredential"
-    },
     "ASAuthorizationWebBrowserPublicKeyCredentialManager": {
       "doc": "A class that you use to request access to a person’s passkeys in a web browser, and that reports on the access status.",
       "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationwebbrowserpublickeycredentialmanager"
@@ -234,14 +198,6 @@
       "doc": "A passkey assertion credential.",
       "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeyassertioncredential"
     },
-    "ASPasskeyAssertionCredentialExtensionInput": {
-      "doc": "A type that encapsulates input for various WebAuthn extensions during passkey assertion.",
-      "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeyassertioncredentialextensioninput"
-    },
-    "ASPasskeyAssertionCredentialExtensionOutput": {
-      "doc": "A type that encapsulates output for various WebAuthn extensions during passkey assertion.",
-      "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeyassertioncredentialextensionoutput"
-    },
     "ASPasskeyCredentialIdentity": {
       "doc": "A description that uniquely identifies a particular passkey credential.",
       "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeycredentialidentity"
@@ -258,14 +214,6 @@
       "doc": "A passkey registration credential.",
       "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeyregistrationcredential"
     },
-    "ASPasskeyRegistrationCredentialExtensionInput": {
-      "doc": "A type that encapsulates input for various WebAuthn extensions during passkey registration.",
-      "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeyregistrationcredentialextensioninput"
-    },
-    "ASPasskeyRegistrationCredentialExtensionOutput": {
-      "doc": "A type that encapsulates output for various WebAuthn extensions during passkey assertion.",
-      "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeyregistrationcredentialextensionoutput"
-    },
     "ASPasswordCredential": {
       "doc": "A password credential.",
       "url": "https://developer.apple.com/documentation/authenticationservices/aspasswordcredential"
@@ -278,9 +226,6 @@
       "doc": "A class that represents a request to supply a password credential.",
       "url": "https://developer.apple.com/documentation/authenticationservices/aspasswordcredentialrequest"
     },
-    "ASPublicKeyCredentialClientData": {
-      "url": "https://developer.apple.com/documentation/authenticationservices/aspublickeycredentialclientdata"
-    },
     "ASSavePasswordRequest": {
       "url": "https://developer.apple.com/documentation/authenticationservices/assavepasswordrequest"
     },
@@ -291,10 +236,6 @@
     "ASWebAuthenticationSession": {
       "doc": "A session that an app uses to authenticate a user through a web service.",
       "url": "https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsession"
-    },
-    "ASWebAuthenticationSessionCallback": {
-      "doc": "An object for evaluating navigation events in an authentication session.",
-      "url": "https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsessioncallback"
     },
     "ASWebAuthenticationSessionRequest": {
       "doc": "A login session request that a web browser receives from an app.",
@@ -366,10 +307,6 @@
       "doc": "An interface you use to respond to authentication challenges in a web browser.",
       "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationwebbrowserplatformpublickeycredentialassertionrequest"
     },
-    "ASAuthorizationWebBrowserPlatformPublicKeyCredentialProvider": {
-      "doc": "A mechanism you use to provide public key credential requests to a browser app.",
-      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationwebbrowserplatformpublickeycredentialprovider"
-    },
     "ASAuthorizationWebBrowserPlatformPublicKeyCredentialRegistrationRequest": {
       "doc": "An interface you use to respond to passkey-creation challenges in a web browser.",
       "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationwebbrowserplatformpublickeycredentialregistrationrequest"
@@ -377,10 +314,6 @@
     "ASAuthorizationWebBrowserSecurityKeyPublicKeyCredentialAssertionRequest": {
       "doc": "An interface you use to respond to authentication challenges in a web browser.",
       "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationwebbrowsersecuritykeypublickeycredentialassertionrequest"
-    },
-    "ASAuthorizationWebBrowserSecurityKeyPublicKeyCredentialProvider": {
-      "doc": "A protocol for creating passkey requests.",
-      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationwebbrowsersecuritykeypublickeycredentialprovider"
     },
     "ASAuthorizationWebBrowserSecurityKeyPublicKeyCredentialRegistrationRequest": {
       "doc": "An interface you use to respond to password-creation challenges in a web browser.",
@@ -412,29 +345,6 @@
     }
   },
   "enums": {
-    "ASAuthorizationAppleIDButtonStyle": {
-      "doc": "A style for the authorization button.",
-      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationappleidbuttonstyle"
-    },
-    "ASAuthorizationAppleIDButtonType": {
-      "doc": "A type for the authorization button.",
-      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationappleidbuttontype"
-    },
-    "ASAuthorizationAppleIDProviderCredentialState": {
-      "doc": "Possible values for the credential state of a user.",
-      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationappleidprovidercredentialstate"
-    },
-    "ASAuthorizationControllerRequestOptions": {
-      "doc": "Options that modify how a controller performs authorization requests.",
-      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationcontrollerrequestoptions"
-    },
-    "ASAuthorizationError": {
-      "doc": "Errors that can occur during authorization.",
-      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationerror"
-    },
-    "ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle": {
-      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationplatformpublickeycredentialregistrationrequeststyle"
-    },
     "ASAuthorizationProviderExtensionAuthenticationMethod": {
       "doc": "The platform single sign-on method for the user.",
       "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionauthenticationmethod",
@@ -448,9 +358,6 @@
           "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionauthenticationmethod/usersecureenclavekey"
         }
       }
-    },
-    "ASAuthorizationProviderExtensionFederationType": {
-      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionfederationtype"
     },
     "ASAuthorizationProviderExtensionKeyType": {
       "doc": "The key types for platform single sign-on.",
@@ -520,9 +427,6 @@
     "ASAuthorizationProviderExtensionSupportedGrantTypes": {
       "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionsupportedgranttypes"
     },
-    "ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy": {
-      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionusersecureenclavekeybiometricpolicy"
-    },
     "ASAuthorizationPublicKeyCredentialAttachment": {
       "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationpublickeycredentialattachment"
     },
@@ -554,24 +458,6 @@
         }
       }
     },
-    "ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState": {
-      "doc": "An enumeration of values that indicate whether the browser app has access to a person’s passkeys.",
-      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationwebbrowserpublickeycredentialmanagerauthorizationstate"
-    },
-    "ASCredentialIdentityStoreErrorCode": {
-      "doc": "Constants that represent credential identity store error codes.",
-      "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialidentitystoreerrorcode"
-    },
-    "ASCredentialIdentityTypes": {
-      "doc": "The defined identity types for use in retrieving credentials.",
-      "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialidentitytypes",
-      "members": {
-        "ASCredentialIdentityTypesAll": {
-          "doc": "A value that matches all identity types.",
-          "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialidentitytypes/ascredentialidentitytypesall"
-        }
-      }
-    },
     "ASCredentialRequestType": {
       "doc": "An enumeration that identifies different types of credentials that apps and websites can request.",
       "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialrequesttype",
@@ -593,14 +479,6 @@
           "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialrequesttype/password"
         }
       }
-    },
-    "ASCredentialServiceIdentifierType": {
-      "doc": "Possible values for the service identifier type.",
-      "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialserviceidentifiertype"
-    },
-    "ASExtensionErrorCode": {
-      "doc": "The codes for a credential provider extension error.",
-      "url": "https://developer.apple.com/documentation/authenticationservices/asextensionerrorcode"
     },
     "ASPublicKeyCredentialClientDataCrossOriginValue": {
       "url": "https://developer.apple.com/documentation/authenticationservices/aspublickeycredentialclientdatacrossoriginvalue"
@@ -625,10 +503,6 @@
           "url": "https://developer.apple.com/documentation/authenticationservices/asuserdetectionstatus/unsupported"
         }
       }
-    },
-    "ASWebAuthenticationSessionErrorCode": {
-      "doc": "The error code for a web authentication session error.",
-      "url": "https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsessionerrorcode"
     }
   },
   "methods": {
@@ -842,7 +716,7 @@
         "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionloginmanager/presentregistrationviewcontroller(completion:)"
       },
       "-resetKeys": {
-        "doc": "Creates new encryption, signing, and Secure Enclave keys for the user.",
+        "doc": "Creates new encryption, signing, and Secure Enclave keys.",
         "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionloginmanager/resetkeys()"
       },
       "-saveCertificate:keyType:": {
@@ -1387,7 +1261,7 @@
     "ASAuthorizationPlatformPublicKeyCredentialAssertion": {
       "largeBlob": {
         "doc": "The request’s binary large object value.",
-        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationplatformpublickeycredentialassertion/largeblob-97tbp"
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationplatformpublickeycredentialassertion/largeblob-29ggs"
       }
     },
     "ASAuthorizationPlatformPublicKeyCredentialAssertionRequest": {
@@ -1409,7 +1283,7 @@
     "ASAuthorizationPlatformPublicKeyCredentialRegistration": {
       "largeBlob": {
         "doc": "The request’s binary large object value.",
-        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationplatformpublickeycredentialregistration/largeblob-jhnw"
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationplatformpublickeycredentialregistration/largeblob-5nvj9"
       }
     },
     "ASAuthorizationPlatformPublicKeyCredentialRegistrationRequest": {
@@ -1904,8 +1778,8 @@
         "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeycredentialrequest/init(credentialidentity:clientdatahash:userverificationpreference:supportedalgorithms:)-52txr"
       },
       "init(credentialIdentity:clientDataHash:userVerificationPreference:supportedAlgorithms:extensionInput:)": {
-        "doc": "Initializes a passkey credential request, providing additional passkey registration data.",
-        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeycredentialrequest/init(credentialidentity:clientdatahash:userverificationpreference:supportedalgorithms:extensioninput:)-1258o"
+        "doc": "Initializes a passkey credential request, providing additional passkey assertion data.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeycredentialrequest/init(credentialidentity:clientdatahash:userverificationpreference:supportedalgorithms:extensioninput:)-9hsyv"
       },
       "registrationExtensionInput": {
         "doc": "An input for WebAuthn extensions.",
@@ -1913,7 +1787,7 @@
       },
       "supportedAlgorithms": {
         "doc": "A list of cryptographic signature algorithms that the relying party supports.",
-        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeycredentialrequest/supportedalgorithms-27z68"
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeycredentialrequest/supportedalgorithms-74mad"
       },
       "userVerificationPreference": {
         "doc": "The relying party’s user verification preference.",

@@ -13,6 +13,7 @@ import (
 // An object representing metrics about the amount of time the app is active.
 //
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxappruntimemetric
+// Deprecated: Use MetricResult instead.
 type MXAppRunTimeMetric struct {
 	MXMetric
 }

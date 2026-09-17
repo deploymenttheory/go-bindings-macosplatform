@@ -18,37 +18,39 @@ type MTLCompileOptions struct {
 }
 
 var (
-	_clsMTLCompileOptions                                    = _objcClass("MTLCompileOptions")
-	_mTLCompileOptionsSelPreprocessorMacros                  = objc.RegisterName("preprocessorMacros")
-	_mTLCompileOptionsSelSetPreprocessorMacros               = objc.RegisterName("setPreprocessorMacros:")
-	_mTLCompileOptionsSelFastMathEnabled                     = objc.RegisterName("fastMathEnabled")
-	_mTLCompileOptionsSelSetFastMathEnabled                  = objc.RegisterName("setFastMathEnabled:")
-	_mTLCompileOptionsSelMathMode                            = objc.RegisterName("mathMode")
-	_mTLCompileOptionsSelSetMathMode                         = objc.RegisterName("setMathMode:")
-	_mTLCompileOptionsSelMathFloatingPointFunctions          = objc.RegisterName("mathFloatingPointFunctions")
-	_mTLCompileOptionsSelSetMathFloatingPointFunctions       = objc.RegisterName("setMathFloatingPointFunctions:")
-	_mTLCompileOptionsSelLanguageVersion                     = objc.RegisterName("languageVersion")
-	_mTLCompileOptionsSelSetLanguageVersion                  = objc.RegisterName("setLanguageVersion:")
-	_mTLCompileOptionsSelLibraryType                         = objc.RegisterName("libraryType")
-	_mTLCompileOptionsSelSetLibraryType                      = objc.RegisterName("setLibraryType:")
-	_mTLCompileOptionsSelInstallName                         = objc.RegisterName("installName")
-	_mTLCompileOptionsSelSetInstallName                      = objc.RegisterName("setInstallName:")
-	_mTLCompileOptionsSelLibraries                           = objc.RegisterName("libraries")
-	_mTLCompileOptionsSelSetLibraries                        = objc.RegisterName("setLibraries:")
-	_mTLCompileOptionsSelPreserveInvariance                  = objc.RegisterName("preserveInvariance")
-	_mTLCompileOptionsSelSetPreserveInvariance               = objc.RegisterName("setPreserveInvariance:")
-	_mTLCompileOptionsSelOptimizationLevel                   = objc.RegisterName("optimizationLevel")
-	_mTLCompileOptionsSelSetOptimizationLevel                = objc.RegisterName("setOptimizationLevel:")
-	_mTLCompileOptionsSelCompileSymbolVisibility             = objc.RegisterName("compileSymbolVisibility")
-	_mTLCompileOptionsSelSetCompileSymbolVisibility          = objc.RegisterName("setCompileSymbolVisibility:")
-	_mTLCompileOptionsSelAllowReferencingUndefinedSymbols    = objc.RegisterName("allowReferencingUndefinedSymbols")
-	_mTLCompileOptionsSelSetAllowReferencingUndefinedSymbols = objc.RegisterName("setAllowReferencingUndefinedSymbols:")
-	_mTLCompileOptionsSelMaxTotalThreadsPerThreadgroup       = objc.RegisterName("maxTotalThreadsPerThreadgroup")
-	_mTLCompileOptionsSelSetMaxTotalThreadsPerThreadgroup    = objc.RegisterName("setMaxTotalThreadsPerThreadgroup:")
-	_mTLCompileOptionsSelRequiredThreadsPerThreadgroup       = objc.RegisterName("requiredThreadsPerThreadgroup")
-	_mTLCompileOptionsSelSetRequiredThreadsPerThreadgroup    = objc.RegisterName("setRequiredThreadsPerThreadgroup:")
-	_mTLCompileOptionsSelEnableLogging                       = objc.RegisterName("enableLogging")
-	_mTLCompileOptionsSelSetEnableLogging                    = objc.RegisterName("setEnableLogging:")
+	_clsMTLCompileOptions                                       = _objcClass("MTLCompileOptions")
+	_mTLCompileOptionsSelPreprocessorMacros                     = objc.RegisterName("preprocessorMacros")
+	_mTLCompileOptionsSelSetPreprocessorMacros                  = objc.RegisterName("setPreprocessorMacros:")
+	_mTLCompileOptionsSelFastMathEnabled                        = objc.RegisterName("fastMathEnabled")
+	_mTLCompileOptionsSelSetFastMathEnabled                     = objc.RegisterName("setFastMathEnabled:")
+	_mTLCompileOptionsSelMathMode                               = objc.RegisterName("mathMode")
+	_mTLCompileOptionsSelSetMathMode                            = objc.RegisterName("setMathMode:")
+	_mTLCompileOptionsSelMathFloatingPointFunctions             = objc.RegisterName("mathFloatingPointFunctions")
+	_mTLCompileOptionsSelSetMathFloatingPointFunctions          = objc.RegisterName("setMathFloatingPointFunctions:")
+	_mTLCompileOptionsSelLanguageVersion                        = objc.RegisterName("languageVersion")
+	_mTLCompileOptionsSelSetLanguageVersion                     = objc.RegisterName("setLanguageVersion:")
+	_mTLCompileOptionsSelLibraryType                            = objc.RegisterName("libraryType")
+	_mTLCompileOptionsSelSetLibraryType                         = objc.RegisterName("setLibraryType:")
+	_mTLCompileOptionsSelInstallName                            = objc.RegisterName("installName")
+	_mTLCompileOptionsSelSetInstallName                         = objc.RegisterName("setInstallName:")
+	_mTLCompileOptionsSelLibraries                              = objc.RegisterName("libraries")
+	_mTLCompileOptionsSelSetLibraries                           = objc.RegisterName("setLibraries:")
+	_mTLCompileOptionsSelPreserveInvariance                     = objc.RegisterName("preserveInvariance")
+	_mTLCompileOptionsSelSetPreserveInvariance                  = objc.RegisterName("setPreserveInvariance:")
+	_mTLCompileOptionsSelOptimizationLevel                      = objc.RegisterName("optimizationLevel")
+	_mTLCompileOptionsSelSetOptimizationLevel                   = objc.RegisterName("setOptimizationLevel:")
+	_mTLCompileOptionsSelCompileSymbolVisibility                = objc.RegisterName("compileSymbolVisibility")
+	_mTLCompileOptionsSelSetCompileSymbolVisibility             = objc.RegisterName("setCompileSymbolVisibility:")
+	_mTLCompileOptionsSelAllowReferencingUndefinedSymbols       = objc.RegisterName("allowReferencingUndefinedSymbols")
+	_mTLCompileOptionsSelSetAllowReferencingUndefinedSymbols    = objc.RegisterName("setAllowReferencingUndefinedSymbols:")
+	_mTLCompileOptionsSelMaxTotalThreadsPerThreadgroup          = objc.RegisterName("maxTotalThreadsPerThreadgroup")
+	_mTLCompileOptionsSelSetMaxTotalThreadsPerThreadgroup       = objc.RegisterName("setMaxTotalThreadsPerThreadgroup:")
+	_mTLCompileOptionsSelRequiredThreadsPerThreadgroup          = objc.RegisterName("requiredThreadsPerThreadgroup")
+	_mTLCompileOptionsSelSetRequiredThreadsPerThreadgroup       = objc.RegisterName("setRequiredThreadsPerThreadgroup:")
+	_mTLCompileOptionsSelEnableLogging                          = objc.RegisterName("enableLogging")
+	_mTLCompileOptionsSelSetEnableLogging                       = objc.RegisterName("setEnableLogging:")
+	_mTLCompileOptionsSelFloatingPointConversionRoundingMode    = objc.RegisterName("floatingPointConversionRoundingMode")
+	_mTLCompileOptionsSelSetFloatingPointConversionRoundingMode = objc.RegisterName("setFloatingPointConversionRoundingMode:")
 )
 
 func MTLCompileOptionsFromID(id objc.ID) *MTLCompileOptions {
@@ -220,4 +222,14 @@ func (o *MTLCompileOptions) EnableLogging() bool {
 
 func (o *MTLCompileOptions) SetEnableLogging(enableLogging bool) {
 	o.Ptr().Send(_mTLCompileOptionsSelSetEnableLogging, enableLogging)
+}
+
+// @property floatingPointConversionRoundingMode @abstract Sets the rounding mode for narrowing floating-point conversions. Default is MTLFloatingPointConversionRoundingModeToNearestEven.
+func (o *MTLCompileOptions) FloatingPointConversionRoundingMode() MTLFloatingPointConversionRoundingMode {
+	_ret := objc.Send[MTLFloatingPointConversionRoundingMode](o.Ptr(), _mTLCompileOptionsSelFloatingPointConversionRoundingMode)
+	return _ret
+}
+
+func (o *MTLCompileOptions) SetFloatingPointConversionRoundingMode(floatingPointConversionRoundingMode MTLFloatingPointConversionRoundingMode) {
+	o.Ptr().Send(_mTLCompileOptionsSelSetFloatingPointConversionRoundingMode, floatingPointConversionRoundingMode)
 }

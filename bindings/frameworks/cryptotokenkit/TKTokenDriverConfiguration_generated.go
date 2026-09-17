@@ -16,8 +16,6 @@ import (
 )
 
 // TokenDriverConfiguration is an idiomatic wrapper over the Objective-C class TKTokenDriverConfiguration.
-//
-// A configuration for one class of token.
 type TokenDriverConfiguration struct {
 	objref.Handle
 }

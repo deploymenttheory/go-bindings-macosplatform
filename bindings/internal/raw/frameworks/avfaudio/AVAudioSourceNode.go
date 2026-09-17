@@ -18,9 +18,11 @@ type AVAudioSourceNode struct {
 }
 
 var (
-	_clsAVAudioSourceNode                          = _objcClass("AVAudioSourceNode")
-	_aVAudioSourceNodeSelInitWithRenderBlock       = objc.RegisterName("initWithRenderBlock:")
-	_aVAudioSourceNodeSelInitWithFormatRenderBlock = objc.RegisterName("initWithFormat:renderBlock:")
+	_clsAVAudioSourceNode                                      = _objcClass("AVAudioSourceNode")
+	_aVAudioSourceNodeSelInitWithRenderBlock                   = objc.RegisterName("initWithRenderBlock:")
+	_aVAudioSourceNodeSelInitWithRealtimeSafeRenderBlock       = objc.RegisterName("initWithRealtimeSafeRenderBlock:")
+	_aVAudioSourceNodeSelInitWithFormatRenderBlock             = objc.RegisterName("initWithFormat:renderBlock:")
+	_aVAudioSourceNodeSelInitWithFormatRealtimeSafeRenderBlock = objc.RegisterName("initWithFormat:realtimeSafeRenderBlock:")
 )
 
 func AVAudioSourceNodeFromID(id objc.ID) *AVAudioSourceNode {
@@ -49,6 +51,22 @@ func (o *AVAudioSourceNode) InitWithRenderBlock(block func(*bool, *coreaudiotype
 	return AVAudioSourceNodeFromID(_ret)
 }
 
+// @method initWithRealtimeSafeRenderBlock: @abstract Identical to initWithRenderBlock:, but requires a realtime-safe block. When the the engine is configured for realtime use (rendering to a device, or using `AVAudioEngineManualRenderingModeRealtime`) this initializer is preferred.
+func (o *AVAudioSourceNode) InitWithRealtimeSafeRenderBlock(block func(*bool, *coreaudiotypes.AudioTimeStamp, uint32, *coreaudiotypes.AudioBufferList) int) *AVAudioSourceNode {
+	var __block_block objc.Block
+	if block != nil {
+		__block_block = objc.NewBlock(func(_ objc.Block, blockParam0 *bool, blockParam1 *coreaudiotypes.AudioTimeStamp, blockParam2 uint32, blockParam3 *coreaudiotypes.AudioBufferList) int {
+			return block(blockParam0, blockParam1, blockParam2, blockParam3)
+		})
+		defer __block_block.Release()
+	}
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioSourceNodeSelInitWithRealtimeSafeRenderBlock, __block_block)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return AVAudioSourceNodeFromID(_ret)
+}
+
 // Creates an audio source node with the audio format and a block that supplies audio data.
 func (o *AVAudioSourceNode) InitWithFormatRenderBlock(format *AVAudioFormat, block func(*bool, *coreaudiotypes.AudioTimeStamp, uint32, *coreaudiotypes.AudioBufferList) int) *AVAudioSourceNode {
 	var __block_block objc.Block
@@ -59,6 +77,22 @@ func (o *AVAudioSourceNode) InitWithFormatRenderBlock(format *AVAudioFormat, blo
 		defer __block_block.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioSourceNodeSelInitWithFormatRenderBlock, format.Ptr(), __block_block)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return AVAudioSourceNodeFromID(_ret)
+}
+
+// @method initWithFormat:realtimeSafeRenderBlock: @abstract Identical to initWithFormat:renderBlock:, but requires a realtime-safe block. When the the engine is configured for realtime use (rendering to a device, or using `AVAudioEngineManualRenderingModeRealtime`) this initializer is preferred.
+func (o *AVAudioSourceNode) InitWithFormatRealtimeSafeRenderBlock(format *AVAudioFormat, block func(*bool, *coreaudiotypes.AudioTimeStamp, uint32, *coreaudiotypes.AudioBufferList) int) *AVAudioSourceNode {
+	var __block_block objc.Block
+	if block != nil {
+		__block_block = objc.NewBlock(func(_ objc.Block, blockParam0 *bool, blockParam1 *coreaudiotypes.AudioTimeStamp, blockParam2 uint32, blockParam3 *coreaudiotypes.AudioBufferList) int {
+			return block(blockParam0, blockParam1, blockParam2, blockParam3)
+		})
+		defer __block_block.Release()
+	}
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioSourceNodeSelInitWithFormatRealtimeSafeRenderBlock, format.Ptr(), __block_block)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

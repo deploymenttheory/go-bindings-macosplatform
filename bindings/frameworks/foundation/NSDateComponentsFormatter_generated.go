@@ -19,8 +19,6 @@ import (
 // DateComponentsFormatter is an idiomatic wrapper over the Objective-C class NSDateComponentsFormatter.
 //
 // It embeds [Formatter], promoting that type's methods.
-//
-// A formatter that creates string representations of quantities of time.
 type DateComponentsFormatter struct {
 	Formatter
 }
@@ -57,69 +55,69 @@ func NewDateComponentsFormatter() *DateComponentsFormatter {
 	return dateComponentsFormatterAdopt(_id)
 }
 
-// WithUnitsStyle sets the units style.
+// WithUnitsStyle sets the formatting style for unit names. Configures the strings to use (if any) for unit names such as days, hours, minutes, and seconds. Use this property to specify whether you want abbreviated or shortened versions of unit names---for example, "hrs" instead of "hours". The default value of this property is `NSDateComponentsFormatterUnitsStylePositional`.
 func (dcf *DateComponentsFormatter) WithUnitsStyle(unitsStyle DateComponentsFormatterUnitsStyle) *DateComponentsFormatter {
 	objc.Send[objc.ID](objref.IDOf(dcf), objc.RegisterName("setUnitsStyle:"), unitsStyle)
 	return dcf
 }
 
-// WithAllowedUnits sets the allowed units.
+// WithAllowedUnits sets the bitmask of calendrical units such as day and month to include in the output string. The allowed calendar units are: - `NSCalendarUnitYear` - `NSCalendarUnitMonth` - `NSCalendarUnitWeekOfMonth` (used to mean "quantity of weeks") - `NSCalendarUnitDay` - `NSCalendarUnitHour` - `NSCalendarUnitMinute` - `NSCalendarUnitSecond` Assigning any other calendar units to this property results in an exception.
 func (dcf *DateComponentsFormatter) WithAllowedUnits(allowedUnits CalendarUnit) *DateComponentsFormatter {
 	objc.Send[objc.ID](objref.IDOf(dcf), objc.RegisterName("setAllowedUnits:"), allowedUnits)
 	return dcf
 }
 
-// WithZeroFormattingBehavior sets the zero formatting behavior.
+// WithZeroFormattingBehavior sets the formatting style for units whose value is 0. When the value for a particular unit is 0, the zero formatting behavior determines whether that value is retained or omitted from any resulting strings. For example, when the formatting behavior is `NSDateComponentsFormatterZeroFormattingBehaviorDropTrailing`, the value of one hour, ten minutes, and zero seconds would omit the mention of seconds. The default value of this property is `NSDateComponentsFormatterZeroFormattingBehaviorDefault`.
 func (dcf *DateComponentsFormatter) WithZeroFormattingBehavior(zeroFormattingBehavior DateComponentsFormatterZeroFormattingBehavior) *DateComponentsFormatter {
 	objc.Send[objc.ID](objref.IDOf(dcf), objc.RegisterName("setZeroFormattingBehavior:"), zeroFormattingBehavior)
 	return dcf
 }
 
-// WithCalendar sets the calendar.
+// WithCalendar sets the default calendar to use when formatting date components. The formatter uses the calendar in this property to format values that do not have an inherent calendar of their own. For example, the formatter uses this calendar when formatting an `NSTimeInterval` value. The default value of this property is the autoupdating current calendar. Setting this property to `nil` causes the formatter to use the Gregorian calendar with the `en_US_POSIX` locale.
 func (dcf *DateComponentsFormatter) WithCalendar(calendar *Calendar) *DateComponentsFormatter {
 	defer runtime.KeepAlive(calendar)
 	objc.Send[objc.ID](objref.IDOf(dcf), objc.RegisterName("setCalendar:"), objref.IDOf(calendar))
 	return dcf
 }
 
-// WithReferenceDate sets the reference date.
+// WithReferenceDate sets where units have variable length (number of days in a month, number of hours in a day, etc.), `NSDateComponentsFormatter` will calculate as though counting from the date specified by the `referenceDate` in the appropriate calendar. Defaults to `[NSDate dateWithTimeIntervalSinceReferenceDate:0]` at the time of the `-stringForObjectValue:` call if not set. Set to `nil` to get the default behavior.
 func (dcf *DateComponentsFormatter) WithReferenceDate(referenceDate DateProvider) *DateComponentsFormatter {
 	defer runtime.KeepAlive(referenceDate)
 	objc.Send[objc.ID](objref.IDOf(dcf), objc.RegisterName("setReferenceDate:"), objref.IDOf(referenceDate))
 	return dcf
 }
 
-// WithAllowsFractionalUnits sets the allows fractional units.
+// WithAllowsFractionalUnits sets a Boolean indicating whether non-integer units may be used for values. Fractional units may be used when a value cannot be exactly represented using the available units. For example, if minutes are not allowed, the value "1h 30m" could be formatted as "1.5h". The default value of this property is `NO`.
 func (dcf *DateComponentsFormatter) WithAllowsFractionalUnits(allowsFractionalUnits bool) *DateComponentsFormatter {
 	objc.Send[objc.ID](objref.IDOf(dcf), objc.RegisterName("setAllowsFractionalUnits:"), allowsFractionalUnits)
 	return dcf
 }
 
-// WithMaximumUnitCount sets the maximum unit count.
+// WithMaximumUnitCount sets the maximum number of time units to include in the output string. Use this property to limit the number of units displayed in the resulting string. For example, with this property set to 2, instead of "1h 10m, 30s", the resulting string would be "1h 10m". Use this property when you are constrained for space or want to round up values to the nearest large unit. The default value of this property is `0`, which does not cause the elimination of any units.
 func (dcf *DateComponentsFormatter) WithMaximumUnitCount(maximumUnitCount int) *DateComponentsFormatter {
 	objc.Send[objc.ID](objref.IDOf(dcf), objc.RegisterName("setMaximumUnitCount:"), maximumUnitCount)
 	return dcf
 }
 
-// WithCollapsesLargestUnit sets the collapses largest unit.
+// WithCollapsesLargestUnit sets a Boolean value indicating whether to collapse the largest unit into smaller units when a certain threshold is met. An example of when this property might apply is when expressing 63 seconds worth of time. When this property is set to `YES`, the formatted value would be "63s". When the value of this property is `NO`, the formatted value would be "1m 3s". The default value of this property is `NO`.
 func (dcf *DateComponentsFormatter) WithCollapsesLargestUnit(collapsesLargestUnit bool) *DateComponentsFormatter {
 	objc.Send[objc.ID](objref.IDOf(dcf), objc.RegisterName("setCollapsesLargestUnit:"), collapsesLargestUnit)
 	return dcf
 }
 
-// WithIncludesApproximationPhrase sets the includes approximation phrase.
+// WithIncludesApproximationPhrase sets a Boolean value indicating whether the resulting phrase reflects an inexact time value. Setting the value of this property to `YES` adds phrasing to output strings to reflect that the given time value is approximate and not exact. Using this property yields more correct phrasing than simply prepending the string "About" to an output string. The default value of this property is `NO`.
 func (dcf *DateComponentsFormatter) WithIncludesApproximationPhrase(includesApproximationPhrase bool) *DateComponentsFormatter {
 	objc.Send[objc.ID](objref.IDOf(dcf), objc.RegisterName("setIncludesApproximationPhrase:"), includesApproximationPhrase)
 	return dcf
 }
 
-// WithIncludesTimeRemainingPhrase sets the includes time remaining phrase.
+// WithIncludesTimeRemainingPhrase sets a Boolean value indicating whether output strings reflect the amount of time remaining. Setting this property to `YES` results in output strings like "30 minutes remaining". The default value of this property is `NO`.
 func (dcf *DateComponentsFormatter) WithIncludesTimeRemainingPhrase(includesTimeRemainingPhrase bool) *DateComponentsFormatter {
 	objc.Send[objc.ID](objref.IDOf(dcf), objc.RegisterName("setIncludesTimeRemainingPhrase:"), includesTimeRemainingPhrase)
 	return dcf
 }
 
-// WithFormattingContext sets the formatting context.
+// WithFormattingContext sets not yet supported.
 func (dcf *DateComponentsFormatter) WithFormattingContext(formattingContext FormattingContext) *DateComponentsFormatter {
 	objc.Send[objc.ID](objref.IDOf(dcf), objc.RegisterName("setFormattingContext:"), formattingContext)
 	return dcf
@@ -137,7 +135,7 @@ func (dcf *DateComponentsFormatter) WithScriptingProperties(scriptingProperties 
 	return dcf
 }
 
-// StringFromDateComponents wraps the corresponding Objective-C method.
+// StringFromDateComponents returns a formatted string based on the specified date component information. Use this method to format date information that is already broken down into the component day and time values.
 func (dcf *DateComponentsFormatter) StringFromDateComponents(components *DateComponents) string {
 	defer runtime.KeepAlive(dcf)
 	defer runtime.KeepAlive(components)
@@ -148,7 +146,7 @@ func (dcf *DateComponentsFormatter) StringFromDateComponents(components *DateCom
 	return purego.GoString(_r)
 }
 
-// StringFromDateToDate wraps the corresponding Objective-C method.
+// StringFromDateToDate returns a formatted string based on the time difference between two dates. This method calculates the elapsed time between the `startDate` and `endDate` values and uses that information to generate the string. For example, if there is exactly one hour and ten minutes difference between the start and end dates, generating an abbreviated string would result in a string of "1h 10m". Note that this is still formatting the quantity of time between the dates, not the pair of dates itself. For strings like "Feb 22nd - Feb 28th", use `NSDateIntervalFormatter`.
 func (dcf *DateComponentsFormatter) StringFromDateToDate(startDate time.Time, endDate time.Time) string {
 	defer runtime.KeepAlive(dcf)
 	_r := objc.Send[objc.ID](objref.IDOf(dcf), objc.RegisterName("stringFromDate:toDate:"), rt.TimeToNSDate(startDate), rt.TimeToNSDate(endDate))
@@ -158,7 +156,7 @@ func (dcf *DateComponentsFormatter) StringFromDateToDate(startDate time.Time, en
 	return purego.GoString(_r)
 }
 
-// StringFromTimeInterval wraps the corresponding Objective-C method.
+// StringFromTimeInterval returns a formatted string based on the specified number of seconds. This method formats the specified number of seconds into the appropriate units. For example, if the formatter allows the display of minutes and seconds, creating an abbreviated string for the value 70 seconds results in the string "1m 10s".
 func (dcf *DateComponentsFormatter) StringFromTimeInterval(ti float64) string {
 	defer runtime.KeepAlive(dcf)
 	_r := objc.Send[objc.ID](objref.IDOf(dcf), objc.RegisterName("stringFromTimeInterval:"), ti)
@@ -168,77 +166,77 @@ func (dcf *DateComponentsFormatter) StringFromTimeInterval(ti float64) string {
 	return purego.GoString(_r)
 }
 
-// UnitsStyle returns the units style.
+// UnitsStyle returns the formatting style for unit names. Configures the strings to use (if any) for unit names such as days, hours, minutes, and seconds. Use this property to specify whether you want abbreviated or shortened versions of unit names---for example, "hrs" instead of "hours". The default value of this property is `NSDateComponentsFormatterUnitsStylePositional`.
 func (dcf *DateComponentsFormatter) UnitsStyle() DateComponentsFormatterUnitsStyle {
 	defer runtime.KeepAlive(dcf)
 	_r := objc.Send[DateComponentsFormatterUnitsStyle](objref.IDOf(dcf), objc.RegisterName("unitsStyle"))
 	return _r
 }
 
-// AllowedUnits returns the allowed units.
+// AllowedUnits returns the bitmask of calendrical units such as day and month to include in the output string. The allowed calendar units are: - `NSCalendarUnitYear` - `NSCalendarUnitMonth` - `NSCalendarUnitWeekOfMonth` (used to mean "quantity of weeks") - `NSCalendarUnitDay` - `NSCalendarUnitHour` - `NSCalendarUnitMinute` - `NSCalendarUnitSecond` Assigning any other calendar units to this property results in an exception.
 func (dcf *DateComponentsFormatter) AllowedUnits() CalendarUnit {
 	defer runtime.KeepAlive(dcf)
 	_r := objc.Send[CalendarUnit](objref.IDOf(dcf), objc.RegisterName("allowedUnits"))
 	return _r
 }
 
-// ZeroFormattingBehavior returns the zero formatting behavior.
+// ZeroFormattingBehavior returns the formatting style for units whose value is 0. When the value for a particular unit is 0, the zero formatting behavior determines whether that value is retained or omitted from any resulting strings. For example, when the formatting behavior is `NSDateComponentsFormatterZeroFormattingBehaviorDropTrailing`, the value of one hour, ten minutes, and zero seconds would omit the mention of seconds. The default value of this property is `NSDateComponentsFormatterZeroFormattingBehaviorDefault`.
 func (dcf *DateComponentsFormatter) ZeroFormattingBehavior() DateComponentsFormatterZeroFormattingBehavior {
 	defer runtime.KeepAlive(dcf)
 	_r := objc.Send[DateComponentsFormatterZeroFormattingBehavior](objref.IDOf(dcf), objc.RegisterName("zeroFormattingBehavior"))
 	return _r
 }
 
-// Calendar returns the calendar.
+// Calendar returns the default calendar to use when formatting date components. The formatter uses the calendar in this property to format values that do not have an inherent calendar of their own. For example, the formatter uses this calendar when formatting an `NSTimeInterval` value. The default value of this property is the autoupdating current calendar. Setting this property to `nil` causes the formatter to use the Gregorian calendar with the `en_US_POSIX` locale.
 func (dcf *DateComponentsFormatter) Calendar() *Calendar {
 	defer runtime.KeepAlive(dcf)
 	_r := objc.Send[objc.ID](objref.IDOf(dcf), objc.RegisterName("calendar"))
 	return CalendarFromID(_r)
 }
 
-// ReferenceDate returns the reference date.
+// ReferenceDate returns where units have variable length (number of days in a month, number of hours in a day, etc.), `NSDateComponentsFormatter` will calculate as though counting from the date specified by the `referenceDate` in the appropriate calendar. Defaults to `[NSDate dateWithTimeIntervalSinceReferenceDate:0]` at the time of the `-stringForObjectValue:` call if not set. Set to `nil` to get the default behavior.
 func (dcf *DateComponentsFormatter) ReferenceDate() time.Time {
 	defer runtime.KeepAlive(dcf)
 	_r := objc.Send[objc.ID](objref.IDOf(dcf), objc.RegisterName("referenceDate"))
 	return rt.NSDateToTime(_r)
 }
 
-// AllowsFractionalUnits wraps the corresponding Objective-C method.
+// AllowsFractionalUnits reports whether a Boolean indicating whether non-integer units may be used for values. Fractional units may be used when a value cannot be exactly represented using the available units. For example, if minutes are not allowed, the value "1h 30m" could be formatted as "1.5h". The default value of this property is `NO`.
 func (dcf *DateComponentsFormatter) AllowsFractionalUnits() bool {
 	defer runtime.KeepAlive(dcf)
 	_r := objc.Send[bool](objref.IDOf(dcf), objc.RegisterName("allowsFractionalUnits"))
 	return _r
 }
 
-// MaximumUnitCount returns the maximum unit count.
+// MaximumUnitCount returns the maximum number of time units to include in the output string. Use this property to limit the number of units displayed in the resulting string. For example, with this property set to 2, instead of "1h 10m, 30s", the resulting string would be "1h 10m". Use this property when you are constrained for space or want to round up values to the nearest large unit. The default value of this property is `0`, which does not cause the elimination of any units.
 func (dcf *DateComponentsFormatter) MaximumUnitCount() int {
 	defer runtime.KeepAlive(dcf)
 	_r := objc.Send[int](objref.IDOf(dcf), objc.RegisterName("maximumUnitCount"))
 	return _r
 }
 
-// CollapsesLargestUnit wraps the corresponding Objective-C method.
+// CollapsesLargestUnit reports whether to collapse the largest unit into smaller units when a certain threshold is met. An example of when this property might apply is when expressing 63 seconds worth of time. When this property is set to `YES`, the formatted value would be "63s". When the value of this property is `NO`, the formatted value would be "1m 3s". The default value of this property is `NO`.
 func (dcf *DateComponentsFormatter) CollapsesLargestUnit() bool {
 	defer runtime.KeepAlive(dcf)
 	_r := objc.Send[bool](objref.IDOf(dcf), objc.RegisterName("collapsesLargestUnit"))
 	return _r
 }
 
-// IncludesApproximationPhrase wraps the corresponding Objective-C method.
+// IncludesApproximationPhrase reports whether the resulting phrase reflects an inexact time value. Setting the value of this property to `YES` adds phrasing to output strings to reflect that the given time value is approximate and not exact. Using this property yields more correct phrasing than simply prepending the string "About" to an output string. The default value of this property is `NO`.
 func (dcf *DateComponentsFormatter) IncludesApproximationPhrase() bool {
 	defer runtime.KeepAlive(dcf)
 	_r := objc.Send[bool](objref.IDOf(dcf), objc.RegisterName("includesApproximationPhrase"))
 	return _r
 }
 
-// IncludesTimeRemainingPhrase wraps the corresponding Objective-C method.
+// IncludesTimeRemainingPhrase reports whether output strings reflect the amount of time remaining. Setting this property to `YES` results in output strings like "30 minutes remaining". The default value of this property is `NO`.
 func (dcf *DateComponentsFormatter) IncludesTimeRemainingPhrase() bool {
 	defer runtime.KeepAlive(dcf)
 	_r := objc.Send[bool](objref.IDOf(dcf), objc.RegisterName("includesTimeRemainingPhrase"))
 	return _r
 }
 
-// FormattingContext returns the formatting context.
+// FormattingContext returns not yet supported.
 func (dcf *DateComponentsFormatter) FormattingContext() FormattingContext {
 	defer runtime.KeepAlive(dcf)
 	_r := objc.Send[FormattingContext](objref.IDOf(dcf), objc.RegisterName("formattingContext"))

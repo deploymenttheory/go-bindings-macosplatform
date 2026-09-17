@@ -190,6 +190,17 @@ func ColorSyncIterateInstalledProfilesWithOptions(callBack unsafe.Pointer, userI
 	return _out0
 }
 
+var _fnColorSyncProfileContainsHeadroomAdaptiveGainCurve func(objc.ID) bool
+
+// ColorSyncProfileContainsHeadroomAdaptiveGainCurve calls the ColorSync framework function ColorSyncProfileContainsHeadroomAdaptiveGainCurve.
+func ColorSyncProfileContainsHeadroomAdaptiveGainCurve(profile ColorSyncProfileRef) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnColorSyncProfileContainsHeadroomAdaptiveGainCurve == nil {
+		ebipurego.RegisterLibFunc(&_fnColorSyncProfileContainsHeadroomAdaptiveGainCurve, _lib, "ColorSyncProfileContainsHeadroomAdaptiveGainCurve")
+	}
+	return _fnColorSyncProfileContainsHeadroomAdaptiveGainCurve(objref.IDOf(profile.Object))
+}
+
 var _fnColorSyncProfileContainsTag func(objc.ID, objc.ID) bool
 
 // ColorSyncProfileContainsTag calls the ColorSync framework function ColorSyncProfileContainsTag.
@@ -225,6 +236,30 @@ func ColorSyncProfileCopyHeader(prof ColorSyncProfileRef) corefoundation.CFDataR
 	return corefoundation.CFDataRef{Object: obj.Adopt(_ret)}
 }
 
+var _fnColorSyncProfileCopyHeadroomAdaptiveGainCurveInfoDictionary func(objc.ID) objc.ID
+
+// ColorSyncProfileCopyHeadroomAdaptiveGainCurveInfoDictionary calls the ColorSync framework function ColorSyncProfileCopyHeadroomAdaptiveGainCurveInfoDictionary.
+func ColorSyncProfileCopyHeadroomAdaptiveGainCurveInfoDictionary(profile ColorSyncProfileRef) corefoundation.CFDictionaryRef {
+	_loadOnce.Do(_loadLibrary)
+	if _fnColorSyncProfileCopyHeadroomAdaptiveGainCurveInfoDictionary == nil {
+		ebipurego.RegisterLibFunc(&_fnColorSyncProfileCopyHeadroomAdaptiveGainCurveInfoDictionary, _lib, "ColorSyncProfileCopyHeadroomAdaptiveGainCurveInfoDictionary")
+	}
+	_ret := _fnColorSyncProfileCopyHeadroomAdaptiveGainCurveInfoDictionary(objref.IDOf(profile.Object))
+	return corefoundation.CFDictionaryRef{Object: obj.Adopt(_ret)}
+}
+
+var _fnColorSyncProfileCopyHeadroomAdaptiveGainCurveMetadata func(objc.ID) objc.ID
+
+// ColorSyncProfileCopyHeadroomAdaptiveGainCurveMetadata calls the ColorSync framework function ColorSyncProfileCopyHeadroomAdaptiveGainCurveMetadata.
+func ColorSyncProfileCopyHeadroomAdaptiveGainCurveMetadata(profile ColorSyncProfileRef) corefoundation.CFDataRef {
+	_loadOnce.Do(_loadLibrary)
+	if _fnColorSyncProfileCopyHeadroomAdaptiveGainCurveMetadata == nil {
+		ebipurego.RegisterLibFunc(&_fnColorSyncProfileCopyHeadroomAdaptiveGainCurveMetadata, _lib, "ColorSyncProfileCopyHeadroomAdaptiveGainCurveMetadata")
+	}
+	_ret := _fnColorSyncProfileCopyHeadroomAdaptiveGainCurveMetadata(objref.IDOf(profile.Object))
+	return corefoundation.CFDataRef{Object: obj.Adopt(_ret)}
+}
+
 var _fnColorSyncProfileCopyTag func(objc.ID, objc.ID) objc.ID
 
 // ColorSyncProfileCopyTag calls the ColorSync framework function ColorSyncProfileCopyTag.
@@ -247,6 +282,30 @@ func ColorSyncProfileCopyTagSignatures(prof ColorSyncProfileRef) corefoundation.
 	}
 	_ret := _fnColorSyncProfileCopyTagSignatures(objref.IDOf(prof.Object))
 	return corefoundation.CFArrayRef{Object: obj.Adopt(_ret)}
+}
+
+var _fnColorSyncProfileCreateCopyWithHeadroomAdaptiveGainCurveInfoDictionary func(objc.ID, objc.ID) objc.ID
+
+// ColorSyncProfileCreateCopyWithHeadroomAdaptiveGainCurveInfoDictionary calls the ColorSync framework function ColorSyncProfileCreateCopyWithHeadroomAdaptiveGainCurveInfoDictionary.
+func ColorSyncProfileCreateCopyWithHeadroomAdaptiveGainCurveInfoDictionary(profile ColorSyncProfileRef, info corefoundation.CFDictionaryRef) ColorSyncProfileRef {
+	_loadOnce.Do(_loadLibrary)
+	if _fnColorSyncProfileCreateCopyWithHeadroomAdaptiveGainCurveInfoDictionary == nil {
+		ebipurego.RegisterLibFunc(&_fnColorSyncProfileCreateCopyWithHeadroomAdaptiveGainCurveInfoDictionary, _lib, "ColorSyncProfileCreateCopyWithHeadroomAdaptiveGainCurveInfoDictionary")
+	}
+	_ret := _fnColorSyncProfileCreateCopyWithHeadroomAdaptiveGainCurveInfoDictionary(objref.IDOf(profile.Object), objref.IDOf(info.Object))
+	return ColorSyncProfileRef{Object: obj.WrapUnmanaged(_ret)}
+}
+
+var _fnColorSyncProfileCreateCopyWithHeadroomAdaptiveGainCurveMetadata func(objc.ID, objc.ID, objc.ID) objc.ID
+
+// ColorSyncProfileCreateCopyWithHeadroomAdaptiveGainCurveMetadata calls the ColorSync framework function ColorSyncProfileCreateCopyWithHeadroomAdaptiveGainCurveMetadata.
+func ColorSyncProfileCreateCopyWithHeadroomAdaptiveGainCurveMetadata(profile ColorSyncProfileRef, data corefoundation.CFDataRef, options corefoundation.CFDictionaryRef) ColorSyncProfileRef {
+	_loadOnce.Do(_loadLibrary)
+	if _fnColorSyncProfileCreateCopyWithHeadroomAdaptiveGainCurveMetadata == nil {
+		ebipurego.RegisterLibFunc(&_fnColorSyncProfileCreateCopyWithHeadroomAdaptiveGainCurveMetadata, _lib, "ColorSyncProfileCreateCopyWithHeadroomAdaptiveGainCurveMetadata")
+	}
+	_ret := _fnColorSyncProfileCreateCopyWithHeadroomAdaptiveGainCurveMetadata(objref.IDOf(profile.Object), objref.IDOf(data.Object), objref.IDOf(options.Object))
+	return ColorSyncProfileRef{Object: obj.WrapUnmanaged(_ret)}
 }
 
 var _fnColorSyncProfileCreateDeviceProfile func(objc.ID, objc.ID, objc.ID) objc.ID

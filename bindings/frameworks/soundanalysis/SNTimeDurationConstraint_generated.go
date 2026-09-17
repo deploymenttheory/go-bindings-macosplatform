@@ -17,8 +17,6 @@ import (
 )
 
 // TimeDurationConstraint is an idiomatic wrapper over the Objective-C class SNTimeDurationConstraint.
-//
-// Defines the time duration windows the request’s underlying sound classifier accepts with a range, or an array, of durations.
 type TimeDurationConstraint struct {
 	objref.Handle
 }

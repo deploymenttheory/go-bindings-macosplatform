@@ -100,17 +100,17 @@ var (
 	// @function   CVIsCompressedPixelFormatAvailable @abstract   Checks if a compressed pixel format is supported on the current platform. @param      pixelFormatType compressed pixel format. @result     True if pixel format is supported on the current platform.
 	_fnCVIsCompressedPixelFormatAvailable func(uint) uint8
 	// @function   CVMetalBufferCacheCreate @abstract   Creates a new Buffer Cache. @param      allocator The CFAllocatorRef to use for allocating the cache.  May be NULL. @param      cacheAttributes A CFDictionaryRef containing the attributes of the cache itself. May be NULL. @param      metalDevice The Metal device for which the buffer objects will be created. @param      cacheOut   The newly created buffer cache will be placed here @result     Returns kCVReturnSuccess on success
-	_fnCVMetalBufferCacheCreate func(unsafe.Pointer, unsafe.Pointer, metal.MTLDevice, unsafe.Pointer) int32
+	_fnCVMetalBufferCacheCreate func(unsafe.Pointer, unsafe.Pointer, objc.ID, unsafe.Pointer) int32
 	// @function   CVMetalBufferCacheCreateBuffer @abstract   Creates a CVMetalBuffer object from an existing CVImageBuffer @param      allocator The CFAllocatorRef to use for allocating the CVMetalBuffer object. May be NULL. @param      bufferCache The buffer cache object that will manage the buffer. @param      buffer The CVImageBuffer that you want to create a CVMetalBuffer from. @param      bufferOut The newly created buffer object will be placed here. @result     Returns kCVReturnSuccess on success @discussion Creates or returns a cached CVMetalBuffer object mapped to the CVImageBuffer. This creates a live binding between the CVImageBuffer and underlying CVMetalBuffer buffer object. IMPORTANT NOTE: Clients should retain CVMetalBuffer objects until they are done using the images in them. Retaining a CVMetalBuffer is your way to indicate that you're still using the image in the buffer, and that it should not be recycled yet.
 	_fnCVMetalBufferCacheCreateBufferFromImage func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 	// @function   CVMetalBufferCacheFlush @abstract   Performs internal housekeeping/recycling operations @discussion This call must be made periodically to give the buffer cache a chance to do internal housekeeping operations. @param      bufferCache The buffer cache object to flush @param      options Currently unused, set to 0.
 	_fnCVMetalBufferCacheFlush     func(unsafe.Pointer, uint64)
 	_fnCVMetalBufferCacheGetTypeID func() uint
 	// @function   CVMetalBufferGetBuffer @abstract   Returns the Metal MTLBuffer object of the CVMetalBufferRef @param      buffer Target CVMetalBuffer @result     Metal buffer
-	_fnCVMetalBufferGetBuffer func(unsafe.Pointer) metal.MTLBuffer
+	_fnCVMetalBufferGetBuffer func(unsafe.Pointer) objc.ID
 	_fnCVMetalBufferGetTypeID func() uint
 	// @function   CVMetalTextureCacheCreate @abstract   Creates a new Texture Cache. @param      allocator The CFAllocatorRef to use for allocating the cache.  May be NULL. @param      cacheAttributes A CFDictionaryRef containing the attributes of the cache itself.   May be NULL. @param      metalDevice The Metal device for which the texture objects will be created. @param      textureAttributes A CFDictionaryRef containing the attributes to be used for creating the CVMetalTexture objects.  May be NULL. @param      cacheOut   The newly created texture cache will be placed here @result     Returns kCVReturnSuccess on success
-	_fnCVMetalTextureCacheCreate func(unsafe.Pointer, unsafe.Pointer, metal.MTLDevice, unsafe.Pointer, unsafe.Pointer) int32
+	_fnCVMetalTextureCacheCreate func(unsafe.Pointer, unsafe.Pointer, objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 	// @function   CVMetalTextureCacheCreateTextureFromImage @abstract   Creates a CVMetalTexture object from an existing CVImageBuffer @param      allocator The CFAllocatorRef to use for allocating the CVMetalTexture object.  May be NULL. @param      textureCache The texture cache object that will manage the texture. @param      sourceImage The CVImageBuffer that you want to create a CVMetalTexture from. @param      textureAttributes A CFDictionaryRef containing attributes to be used for creating the CVMetalTexture objects.  May be NULL. @param      pixelFormat Specifies the Metal pixel format. @param      width Specifies the width of the texture image. @param      height Specifies the height of the texture image. @param      planeIndex Specifies the plane of the CVImageBuffer to map bind.  Ignored for non-planar CVImageBuffers. @param      textureOut The newly created texture object will be placed here. @result     Returns kCVReturnSuccess on success @discussion Creates or returns a cached CVMetalTexture texture object mapped to the CVImageBuffer and associated params.  This creates a live binding between the CVImageBuffer and underlying CVMetalTexture texture object. IMPORTANT NOTE: Clients should retain CVMetalTexture objects until they are done using the images in them. Retaining a CVMetalTexture is your way to indicate that you're still using the image in the buffer, and that it should not be recycled yet. Note that CoreVideo does not explicitly declare any pixel format types to be Metal compatible.  The assumption is that if the CVPixelBufferMetalCompatibilityKey has been specified, all buffers will be Metal compatible (IOSurface backed), and thus it is the developer's responsibility to choose an appropriate Metal pixel format for the CVPixelBuffers. Here are some example mappings: Mapping a BGRA buffer: CVMetalTextureCacheCreateTextureFromImage(kCFAllocatorDefault, textureCache, pixelBuffer, NULL, MTLPixelFormatBGRA8Unorm, width, height, 0, &outTexture); Mapping the luma plane of a 420v buffer: CVMetalTextureCacheCreateTextureFromImage(kCFAllocatorDefault, textureCache, pixelBuffer, NULL, MTLPixelFormatR8Unorm, width, height, 0, &outTexture); Mapping the chroma plane of a 420v buffer as a source texture: CVMetalTextureCacheCreateTextureFromImage(kCFAllocatorDefault, textureCache, pixelBuffer, NULL, MTLPixelFormatRG8Unorm width/2, height/2, 1, &outTexture); Mapping a yuvs buffer as a source texture (note: yuvs/f and 2vuy are unpacked and resampled -- not colorspace converted) CVMetalTextureCacheCreateTextureFromImage(kCFAllocatorDefault, textureCache, pixelBuffer, NULL, MTLPixelFormatGBGR422, width, height, 1, &outTexture);
 	_fnCVMetalTextureCacheCreateTextureFromImage func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, metal.MTLPixelFormat, uint, uint, uint, unsafe.Pointer) int32
 	// @function   CVMetalTextureCacheFlush @abstract   Performs internal housekeeping/recycling operations @discussion This call must be made periodically to give the texture cache a chance to do internal housekeeping operations. @param      textureCache The texture cache object to flush @param      options Currently unused, set to 0.
@@ -119,7 +119,7 @@ var (
 	// @function   CVMetalTextureGetCleanTexCoords @abstract   Returns convenient normalized texture coordinates for the part of the image that should be displayed @discussion This function automatically takes into account whether or not the texture is flipped. @param      image Target CVMetalTexture @param      lowerLeft  - array of two floats where the s and t normalized texture coordinates of the lower left corner of the image will be stored @param      lowerRight - array of two floats where the s and t normalized texture coordinates of the lower right corner of the image will be stored @param      upperRight - array of two floats where the s and t normalized texture coordinates of the upper right corner of the image will be stored @param      upperLeft  - array of two floats where the s and t normalized texture coordinates of the upper right corner of the image will be stored
 	_fnCVMetalTextureGetCleanTexCoords func(unsafe.Pointer, *float32, *float32, *float32, *float32)
 	// @function   CVMetalTextureGetTexture @abstract   Returns the Metal MTLTexture object of the CVMetalTextureRef @param      image Target CVMetalTexture @result     Metal texture
-	_fnCVMetalTextureGetTexture func(unsafe.Pointer) metal.MTLTexture
+	_fnCVMetalTextureGetTexture func(unsafe.Pointer) objc.ID
 	_fnCVMetalTextureGetTypeID  func() uint
 	// @function   CVMetalTextureIsFlipped @abstract   Returns whether the image is flipped vertically or not. @param      image Target CVMetalTexture @result     True if 0,0 in the texture is upper left, false if 0,0 is lower left
 	_fnCVMetalTextureIsFlipped func(unsafe.Pointer) uint8
@@ -477,7 +477,7 @@ func CVIsCompressedPixelFormatAvailable(pixelFormatType uint) uint8 {
 }
 
 // @function   CVMetalBufferCacheCreate @abstract   Creates a new Buffer Cache. @param      allocator The CFAllocatorRef to use for allocating the cache.  May be NULL. @param      cacheAttributes A CFDictionaryRef containing the attributes of the cache itself. May be NULL. @param      metalDevice The Metal device for which the buffer objects will be created. @param      cacheOut   The newly created buffer cache will be placed here @result     Returns kCVReturnSuccess on success
-func CVMetalBufferCacheCreate(allocator unsafe.Pointer, cacheAttributes unsafe.Pointer, metalDevice metal.MTLDevice, cacheOut unsafe.Pointer) int32 {
+func CVMetalBufferCacheCreate(allocator unsafe.Pointer, cacheAttributes unsafe.Pointer, metalDevice objc.ID, cacheOut unsafe.Pointer) int32 {
 	return _fnCVMetalBufferCacheCreate(allocator, cacheAttributes, metalDevice, cacheOut)
 }
 
@@ -496,7 +496,7 @@ func CVMetalBufferCacheGetTypeID() uint {
 }
 
 // @function   CVMetalBufferGetBuffer @abstract   Returns the Metal MTLBuffer object of the CVMetalBufferRef @param      buffer Target CVMetalBuffer @result     Metal buffer
-func CVMetalBufferGetBuffer(buffer unsafe.Pointer) metal.MTLBuffer {
+func CVMetalBufferGetBuffer(buffer unsafe.Pointer) objc.ID {
 	return _fnCVMetalBufferGetBuffer(buffer)
 }
 
@@ -505,7 +505,7 @@ func CVMetalBufferGetTypeID() uint {
 }
 
 // @function   CVMetalTextureCacheCreate @abstract   Creates a new Texture Cache. @param      allocator The CFAllocatorRef to use for allocating the cache.  May be NULL. @param      cacheAttributes A CFDictionaryRef containing the attributes of the cache itself.   May be NULL. @param      metalDevice The Metal device for which the texture objects will be created. @param      textureAttributes A CFDictionaryRef containing the attributes to be used for creating the CVMetalTexture objects.  May be NULL. @param      cacheOut   The newly created texture cache will be placed here @result     Returns kCVReturnSuccess on success
-func CVMetalTextureCacheCreate(allocator unsafe.Pointer, cacheAttributes unsafe.Pointer, metalDevice metal.MTLDevice, textureAttributes unsafe.Pointer, cacheOut unsafe.Pointer) int32 {
+func CVMetalTextureCacheCreate(allocator unsafe.Pointer, cacheAttributes unsafe.Pointer, metalDevice objc.ID, textureAttributes unsafe.Pointer, cacheOut unsafe.Pointer) int32 {
 	return _fnCVMetalTextureCacheCreate(allocator, cacheAttributes, metalDevice, textureAttributes, cacheOut)
 }
 
@@ -529,7 +529,7 @@ func CVMetalTextureGetCleanTexCoords(image unsafe.Pointer, lowerLeft *float32, l
 }
 
 // @function   CVMetalTextureGetTexture @abstract   Returns the Metal MTLTexture object of the CVMetalTextureRef @param      image Target CVMetalTexture @result     Metal texture
-func CVMetalTextureGetTexture(image unsafe.Pointer) metal.MTLTexture {
+func CVMetalTextureGetTexture(image unsafe.Pointer) objc.ID {
 	return _fnCVMetalTextureGetTexture(image)
 }
 

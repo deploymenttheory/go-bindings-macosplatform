@@ -18,8 +18,6 @@ import (
 )
 
 // PersistentCloudKitContainerEvent is an idiomatic wrapper over the Objective-C class NSPersistentCloudKitContainerEvent.
-//
-// An object that represents activity in a persistent CloudKit container.
 type PersistentCloudKitContainerEvent struct {
 	objref.Handle
 }

@@ -134,7 +134,7 @@ func (xl *XPCListener) SetConnectionCodeSigningRequirement(requirement string) {
 	objc.Send[objc.ID](objref.IDOf(xl), objc.RegisterName("setConnectionCodeSigningRequirement:"), purego.NSString(requirement))
 }
 
-// Endpoint returns the endpoint.
+// Endpoint returns an endpoint object which may be sent over an existing connection. This allows the receiver of the endpoint to create a new connection to this `NSXPCListener`. The `NSXPCListenerEndpoint` uniquely names this listener object across connections.
 func (xl *XPCListener) Endpoint() *XPCListenerEndpoint {
 	defer runtime.KeepAlive(xl)
 	_r := objc.Send[objc.ID](objref.IDOf(xl), objc.RegisterName("endpoint"))

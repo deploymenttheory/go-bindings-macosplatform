@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A URL session that creates and executes asset download tasks.
+// A URL session that creates and manages asset download tasks.
 //
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avassetdownloadurlsession
 type AVAssetDownloadURLSession struct {

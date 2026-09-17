@@ -16,7 +16,7 @@ import (
 
 // TrackingManager is an idiomatic wrapper over the Objective-C class ATTrackingManager.
 //
-// A class that provides a tracking authorization request and the tracking authorization status of the app.
+// A class that requests tracking authorization and provides the current authorization status.
 type TrackingManager struct {
 	objref.Handle
 }

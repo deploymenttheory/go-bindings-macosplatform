@@ -15,8 +15,6 @@ import (
 )
 
 // PhysicalInputElementCollection is an idiomatic wrapper over the Objective-C class GCPhysicalInputElementCollection.
-//
-// A collection of physical input elements.
 type PhysicalInputElementCollection struct {
 	objref.Handle
 }

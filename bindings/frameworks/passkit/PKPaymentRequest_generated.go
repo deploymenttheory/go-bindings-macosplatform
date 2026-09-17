@@ -105,6 +105,13 @@ func (pr *PaymentRequest) WithSupportedNetworks(items ...obj.Object) *PaymentReq
 	return pr
 }
 
+// WithUnsupportedPrimaryAccountIdentifiers sets an array of Apple Pay cards to exclude from payment.
+func (pr *PaymentRequest) WithUnsupportedPrimaryAccountIdentifiers(items ...obj.Object) *PaymentRequest {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(pr), objc.RegisterName("setUnsupportedPrimaryAccountIdentifiers:"), _arr)
+	return pr
+}
+
 // WithMerchantCapabilities sets a bit field of the payment-processing protocols and card types that you support.
 func (pr *PaymentRequest) WithMerchantCapabilities(merchantCapabilities MerchantCapability) *PaymentRequest {
 	objc.Send[objc.ID](objref.IDOf(pr), objc.RegisterName("setMerchantCapabilities:"), merchantCapabilities)
@@ -288,6 +295,15 @@ func (pr *PaymentRequest) SupportedNetworks() []obj.Object {
 	defer runtime.KeepAlive(pr)
 	_arr := objc.Send[objc.ID](objref.IDOf(pr), objc.RegisterName("supportedNetworks"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
+// UnsupportedPrimaryAccountIdentifiers returns the unsupported primary account identifiers.
+//
+// UnsupportedPrimaryAccountIdentifiers returns the collection as a Go slice.
+func (pr *PaymentRequest) UnsupportedPrimaryAccountIdentifiers() []string {
+	defer runtime.KeepAlive(pr)
+	_arr := objc.Send[objc.ID](objref.IDOf(pr), objc.RegisterName("unsupportedPrimaryAccountIdentifiers"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // MerchantCapabilities returns the merchant capabilities.

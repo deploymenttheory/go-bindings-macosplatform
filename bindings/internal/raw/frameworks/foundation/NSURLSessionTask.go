@@ -11,8 +11,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A task, like downloading a specific resource, performed in a URL session.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsurlsessiontask
 type NSURLSessionTask struct {
 	NSObject
@@ -62,18 +60,22 @@ func NSURLSessionTaskFromID(id objc.ID) *NSURLSessionTask {
 	return o
 }
 
+// Cancels the task. This method returns immediately, marking the task as being canceled. Once a task is marked as being canceled, `URLSession:task:didCompleteWithError:` will be sent to the task delegate, passing an error in the domain `NSURLErrorDomain` with the code `NSURLErrorCancelled`. A task may, under some circumstances, send messages to its delegate before the cancelation is acknowledged. This method may be called on a task that is suspended.
 func (o *NSURLSessionTask) Cancel() {
 	o.Ptr().Send(_nSURLSessionTaskSelCancel)
 }
 
+// Temporarily suspends the task. Suspending a task will prevent the `NSURLSession` from continuing to load data. There may still be delegate calls made on behalf of this task (for instance, to report data received while suspending) but no further transmissions will be made on behalf of the task until `-resume` is sent. The timeout timer associated with the task will be disabled while a task is suspended. `-suspend` and `-resume` are nestable.
 func (o *NSURLSessionTask) Suspend() {
 	o.Ptr().Send(_nSURLSessionTaskSelSuspend)
 }
 
+// Resumes the task, if it is suspended. Newly-initialized tasks begin in a suspended state, so you need to call this method to start the task.
 func (o *NSURLSessionTask) Resume() {
 	o.Ptr().Send(_nSURLSessionTaskSelResume)
 }
 
+// Initializes an empty URL session task. Don't use this initializer directly. Instead, create tasks from a “NSURLSession“.
 // Deprecated: Not supported
 func (o *NSURLSessionTask) Init() *NSURLSessionTask {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskSelInit)
@@ -83,17 +85,20 @@ func (o *NSURLSessionTask) Init() *NSURLSessionTask {
 	return NSURLSessionTaskFromID(_ret)
 }
 
+// Creates a new URL session task. Don't call this method directly. Instead, create tasks from a “NSURLSession“.
 // Deprecated: Not supported
 func NSURLSessionTaskNew() *NSURLSessionTask {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLSessionTask), _nSURLSessionTaskSelNew)
 	return NSURLSessionTaskFromID(_ret)
 }
 
+// An identifier uniquely identifying the task within a given session. This value is unique only within the context of a single session; tasks in other sessions may have the same `taskIdentifier` value.
 func (o *NSURLSessionTask) TaskIdentifier() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSURLSessionTaskSelTaskIdentifier)
 	return _ret
 }
 
+// The original request object passed when the task was created. This value is typically the same as the currently active request (`currentRequest`) except when the server has responded to the initial request with a redirect to a different URL.
 func (o *NSURLSessionTask) OriginalRequest() *NSURLRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskSelOriginalRequest)
 	if _ret != 0 {
@@ -102,6 +107,7 @@ func (o *NSURLSessionTask) OriginalRequest() *NSURLRequest {
 	return NSURLRequestFromID(_ret)
 }
 
+// The URL request object currently being handled by the task. This value is typically the same as the initial request (`originalRequest`) except when the server has responded to the initial request with a redirect to a different URL.
 func (o *NSURLSessionTask) CurrentRequest() *NSURLRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskSelCurrentRequest)
 	if _ret != 0 {
@@ -110,6 +116,7 @@ func (o *NSURLSessionTask) CurrentRequest() *NSURLRequest {
 	return NSURLRequestFromID(_ret)
 }
 
+// The server's response to the currently active request. This object provides information about the request as provided by the server. This information always includes the original URL. It may also include an expected length, MIME type information, encoding information, a suggested filename, or a combination of these.
 func (o *NSURLSessionTask) Response() *NSURLResponse {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskSelResponse)
 	if _ret != 0 {
@@ -118,6 +125,7 @@ func (o *NSURLSessionTask) Response() *NSURLResponse {
 	return NSURLResponseFromID(_ret)
 }
 
+// A delegate specific to the task. This task-specific delegate receives messages from the task before the session's delegate receives them. Methods not implemented on this delegate will still be forwarded to the session delegate. Cannot be modified after task resumes. Not supported on background session. Delegate is strongly referenced until the task completes, after which it is reset to `nil`.
 func (o *NSURLSessionTask) Delegate() NSURLSessionTaskDelegate {
 	_ret := objc.Send[NSURLSessionTaskDelegate](o.Ptr(), _nSURLSessionTaskSelDelegate)
 	return _ret
@@ -127,6 +135,7 @@ func (o *NSURLSessionTask) SetDelegate(delegate NSURLSessionTaskDelegate) {
 	o.Ptr().Send(_nSURLSessionTaskSelSetDelegate, delegate)
 }
 
+// A representation of the overall task progress. It can be used for task progress tracking.
 func (o *NSURLSessionTask) Progress() *NSProgress {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskSelProgress)
 	if _ret != 0 {
@@ -135,6 +144,7 @@ func (o *NSURLSessionTask) Progress() *NSProgress {
 	return NSProgressFromID(_ret)
 }
 
+// The earliest date at which the network load should begin. For tasks created from background `NSURLSession` instances, this property indicates that the network load should not begin any earlier than this date. Setting this property does not guarantee that the load will begin at the specified date, but only that it will not begin sooner. If not specified, no start delay is used. This property has no effect for tasks created from nonbackground sessions.
 func (o *NSURLSessionTask) EarliestBeginDate() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskSelEarliestBeginDate)
 	if _ret != 0 {
@@ -147,6 +157,7 @@ func (o *NSURLSessionTask) SetEarliestBeginDate(earliestBeginDate *NSDate) {
 	o.Ptr().Send(_nSURLSessionTaskSelSetEarliestBeginDate, earliestBeginDate.Ptr())
 }
 
+// A best-guess upper bound on the number of bytes the client expects to send. The value set for this property should account for the size of HTTP headers and body data or body stream. If no value is specified, the system uses `NSURLSessionTransferSizeUnknown` instead. This property is used by the system to optimize the scheduling of URL session tasks. Developers are strongly encouraged to provide an approximate upper bound, or an exact byte count, if possible, rather than accept the default.
 func (o *NSURLSessionTask) CountOfBytesClientExpectsToSend() int64 {
 	_ret := objc.Send[int64](o.Ptr(), _nSURLSessionTaskSelCountOfBytesClientExpectsToSend)
 	return _ret
@@ -156,6 +167,7 @@ func (o *NSURLSessionTask) SetCountOfBytesClientExpectsToSend(countOfBytesClient
 	o.Ptr().Send(_nSURLSessionTaskSelSetCountOfBytesClientExpectsToSend, countOfBytesClientExpectsToSend)
 }
 
+// A best-guess upper bound on the number of bytes the client expects to receive. The value set for this property should account for the size of both HTTP response headers and the response body. If no value is specified, the system uses `NSURLSessionTransferSizeUnknown` instead. This property is used by the system to optimize the scheduling of URL session tasks. Developers are strongly encouraged to provide an approximate upper bound, or an exact byte count, if possible, rather than accept the default.
 func (o *NSURLSessionTask) CountOfBytesClientExpectsToReceive() int64 {
 	_ret := objc.Send[int64](o.Ptr(), _nSURLSessionTaskSelCountOfBytesClientExpectsToReceive)
 	return _ret
@@ -165,26 +177,31 @@ func (o *NSURLSessionTask) SetCountOfBytesClientExpectsToReceive(countOfBytesCli
 	o.Ptr().Send(_nSURLSessionTaskSelSetCountOfBytesClientExpectsToReceive, countOfBytesClientExpectsToReceive)
 }
 
+// The number of bytes that the task has sent to the server in the request body. This byte count includes _only_ the length of the request body itself, not the request headers. To be notified when this value changes, implement the `URLSession:task:didSendBodyData:totalBytesSent:totalBytesExpectedToSend:` delegate method.
 func (o *NSURLSessionTask) CountOfBytesSent() int64 {
 	_ret := objc.Send[int64](o.Ptr(), _nSURLSessionTaskSelCountOfBytesSent)
 	return _ret
 }
 
+// The number of bytes that the task has received from the server in the response body. To be notified when this value changes, implement the `URLSession:dataTask:didReceiveData:` delegate method (for data and upload tasks) or the `URLSession:downloadTask:didWriteData:totalBytesWritten:totalBytesExpectedToWrite:` method (for download tasks).
 func (o *NSURLSessionTask) CountOfBytesReceived() int64 {
 	_ret := objc.Send[int64](o.Ptr(), _nSURLSessionTaskSelCountOfBytesReceived)
 	return _ret
 }
 
+// The number of bytes that the task expects to send in the request body. The URL loading system can determine the length of the upload data in three ways: - From the length of the data object provided as the upload body. - From the length of the file on disk provided as the upload body of an upload task (_not_ a download task). - From the `Content-Length` in the request object, if you explicitly set it. Otherwise, the value is `NSURLSessionTransferSizeUnknown` (`-1`) if you provided a stream or body data object, or zero (`0`) if you did not.
 func (o *NSURLSessionTask) CountOfBytesExpectedToSend() int64 {
 	_ret := objc.Send[int64](o.Ptr(), _nSURLSessionTaskSelCountOfBytesExpectedToSend)
 	return _ret
 }
 
+// The number of bytes that the task expects to receive in the response body. This value is determined based on the `Content-Length` header received from the server. If that header is absent, the value is `NSURLSessionTransferSizeUnknown`.
 func (o *NSURLSessionTask) CountOfBytesExpectedToReceive() int64 {
 	_ret := objc.Send[int64](o.Ptr(), _nSURLSessionTaskSelCountOfBytesExpectedToReceive)
 	return _ret
 }
 
+// An app-provided string value for the current task. The system doesn't interpret this value; use it for whatever purpose you see fit. For example, you could store a description of the task for debugging purposes, or a key to track the task in your own data structures.
 func (o *NSURLSessionTask) TaskDescription() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskSelTaskDescription)
 	if _ret != 0 {
@@ -197,16 +214,19 @@ func (o *NSURLSessionTask) SetTaskDescription(taskDescription *NSString) {
 	o.Ptr().Send(_nSURLSessionTaskSelSetTaskDescription, taskDescription.Ptr())
 }
 
+// The current state of the task---active, suspended, in the process of being canceled, or completed.
 func (o *NSURLSessionTask) State() NSURLSessionTaskState {
 	_ret := objc.Send[NSURLSessionTaskState](o.Ptr(), _nSURLSessionTaskSelState)
 	return _ret
 }
 
+// An error object that indicates why the task failed. This value is `nil` if the task is still active or if the transfer completed successfully.
 func (o *NSURLSessionTask) Error() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSURLSessionTaskSelError)
 	return _ret
 }
 
+// The relative priority at which you'd like a host to handle the task, specified as a floating point value between `0.0` (lowest priority) and `1.0` (highest priority). To provide hints to a host on how to prioritize URL session tasks from your app, specify a priority for each task. Specifying a priority provides only a hint and does not guarantee performance. If you don't specify a priority, a URL session task has a priority of `NSURLSessionTaskPriorityDefault`, with a value of `0.5`. There are three named priorities you can employ: `NSURLSessionTaskPriorityDefault`, `NSURLSessionTaskPriorityLow`, and `NSURLSessionTaskPriorityHigh`. You can specify or change a task's priority at any time, but not all networking protocols respond to changes after a task has started. There is no API to let you determine the effective priority for a task from a host's perspective.
 func (o *NSURLSessionTask) Priority() float32 {
 	_ret := objc.Send[float32](o.Ptr(), _nSURLSessionTaskSelPriority)
 	return _ret
@@ -216,6 +236,7 @@ func (o *NSURLSessionTask) SetPriority(priority float32) {
 	o.Ptr().Send(_nSURLSessionTaskSelSetPriority, priority)
 }
 
+// A Boolean value that determines whether to deliver a partial response body in increments. Set this property to `true` to tell the task that the app would benefit from receiving a partial response body in increments. If the app can't process the response until it has all the data, set this property to `false`. Task performance may improve when this value is `false`, in which case the task only delivers data when complete. This property defaults to `true`, except in the following cases which default to `false`: - The task delivers results to a completion handler rather than to a delegate. - The task is a download task.
 func (o *NSURLSessionTask) PrefersIncrementalDelivery() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSURLSessionTaskSelPrefersIncrementalDelivery)
 	return _ret

@@ -4,7 +4,12 @@
 package glkit
 
 import (
+	"unsafe"
+
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/foundation"
 )
 
 func GLKMatrix3Identity() uintptr {
@@ -22,9 +27,16 @@ func GLKQuaternionIdentity() uintptr {
 	return ptr
 }
 
-func GLKTextureLoaderApplyPremultiplication() uintptr {
+func GLKTextureLoaderApplyPremultiplication() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_glkitLib, "GLKTextureLoaderApplyPremultiplication")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func GLKTextureLoaderErrorDomain() uintptr {
@@ -42,14 +54,28 @@ func GLKTextureLoaderGLErrorKey() uintptr {
 	return ptr
 }
 
-func GLKTextureLoaderGenerateMipmaps() uintptr {
+func GLKTextureLoaderGenerateMipmaps() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_glkitLib, "GLKTextureLoaderGenerateMipmaps")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GLKTextureLoaderOriginBottomLeft() uintptr {
+func GLKTextureLoaderOriginBottomLeft() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_glkitLib, "GLKTextureLoaderOriginBottomLeft")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func GLKTextureLoaderSRGB() uintptr {

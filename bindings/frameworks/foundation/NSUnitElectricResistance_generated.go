@@ -17,8 +17,6 @@ import (
 // UnitElectricResistance is an idiomatic wrapper over the Objective-C class NSUnitElectricResistance.
 //
 // It embeds [Dimension], promoting that type's methods.
-//
-// A unit of measure for electric resistance.
 type UnitElectricResistance struct {
 	Dimension
 }

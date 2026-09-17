@@ -18,8 +18,6 @@ import (
 // ListFormatter is an idiomatic wrapper over the Objective-C class NSListFormatter.
 //
 // It embeds [Formatter], promoting that type's methods.
-//
-// An object that provides locale-correct formatting of a list of items using the appropriate separator and conjunction.
 type ListFormatter struct {
 	Formatter
 }
@@ -56,14 +54,14 @@ func NewListFormatter() *ListFormatter {
 	return listFormatterAdopt(_id)
 }
 
-// WithLocale sets the locale.
+// WithLocale sets specifies the locale to format the items. Defaults to `autoupdatingCurrentLocale`. Also resets to `autoupdatingCurrentLocale` on assignment of `nil`.
 func (lf *ListFormatter) WithLocale(locale *Locale) *ListFormatter {
 	defer runtime.KeepAlive(locale)
 	objc.Send[objc.ID](objref.IDOf(lf), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 	return lf
 }
 
-// WithItemFormatter sets the item formatter.
+// WithItemFormatter sets specifies how each object should be formatted. If not set, the object is formatted using its instance method in the following order: `descriptionWithLocale:`, `localizedDescription`, and `description`.
 func (lf *ListFormatter) WithItemFormatter(itemFormatter FormatterProvider) *ListFormatter {
 	defer runtime.KeepAlive(itemFormatter)
 	objc.Send[objc.ID](objref.IDOf(lf), objc.RegisterName("setItemFormatter:"), objref.IDOf(itemFormatter))
@@ -82,7 +80,7 @@ func (lf *ListFormatter) WithScriptingProperties(scriptingProperties map[string]
 	return lf
 }
 
-// StringFromItems wraps the corresponding Objective-C method.
+// StringFromItems returns a string constructed from an array using the locale-aware format. Each item is formatted using the `itemFormatter`. If the `itemFormatter` does not apply to a particular item, the method will fall back to the item's `descriptionWithLocale:` or `localizedDescription` if implemented, or `description` if not. Returns `nil` if `items` is `nil` or if the list formatter cannot generate a string representation for all items in the array.
 func (lf *ListFormatter) StringFromItems(items obj.Object) string {
 	defer runtime.KeepAlive(lf)
 	defer runtime.KeepAlive(items)
@@ -93,14 +91,14 @@ func (lf *ListFormatter) StringFromItems(items obj.Object) string {
 	return purego.GoString(_r)
 }
 
-// Locale returns the locale.
+// Locale specifies the locale to format the items. Defaults to `autoupdatingCurrentLocale`. Also resets to `autoupdatingCurrentLocale` on assignment of `nil`.
 func (lf *ListFormatter) Locale() *Locale {
 	defer runtime.KeepAlive(lf)
 	_r := objc.Send[objc.ID](objref.IDOf(lf), objc.RegisterName("locale"))
 	return LocaleFromID(_r)
 }
 
-// ItemFormatter returns the item formatter.
+// ItemFormatter specifies how each object should be formatted. If not set, the object is formatted using its instance method in the following order: `descriptionWithLocale:`, `localizedDescription`, and `description`.
 func (lf *ListFormatter) ItemFormatter() *Formatter {
 	defer runtime.KeepAlive(lf)
 	_r := objc.Send[objc.ID](objref.IDOf(lf), objc.RegisterName("itemFormatter"))

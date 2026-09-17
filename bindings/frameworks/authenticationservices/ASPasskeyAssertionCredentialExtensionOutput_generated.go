@@ -15,8 +15,6 @@ import (
 )
 
 // PasskeyAssertionCredentialExtensionOutput is an idiomatic wrapper over the Objective-C class ASPasskeyAssertionCredentialExtensionOutput.
-//
-// A type that encapsulates output for various WebAuthn extensions during passkey assertion.
 type PasskeyAssertionCredentialExtensionOutput struct {
 	objref.Handle
 }

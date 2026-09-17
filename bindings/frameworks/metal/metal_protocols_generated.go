@@ -117,6 +117,7 @@ type MTL4ComputeCommandEncoder interface {
 	CopyFromBufferSourceOffsetSourceBytesPerRowSourceBytesPerImageSourceSizeToTextureDestinationSliceDestinationLevelDestinationOrigin(sourceBuffer obj.Object, sourceOffset int, sourceBytesPerRow int, sourceBytesPerImage int, sourceSize MTLSize, destinationTexture obj.Object, destinationSlice int, destinationLevel int, destinationOrigin MTLOrigin)
 	CopyFromBufferSourceOffsetSourceBytesPerRowSourceBytesPerImageSourceSizeToTextureDestinationSliceDestinationLevelDestinationOriginOptions(sourceBuffer obj.Object, sourceOffset int, sourceBytesPerRow int, sourceBytesPerImage int, sourceSize MTLSize, destinationTexture obj.Object, destinationSlice int, destinationLevel int, destinationOrigin MTLOrigin, options BlitOption)
 	CopyFromTensorSourceOriginSourceDimensionsToTensorDestinationOriginDestinationDimensions(sourceTensor obj.Object, sourceOrigin *TensorExtents, sourceDimensions *TensorExtents, destinationTensor obj.Object, destinationOrigin *TensorExtents, destinationDimensions *TensorExtents)
+	CopyFromTensorSourceOriginSourceDimensionsSourcePlaneToTensorDestinationOriginDestinationDimensionsDestinationPlane(sourceTensor obj.Object, sourceOrigin *TensorExtents, sourceDimensions *TensorExtents, sourcePlane TensorPlaneType, destinationTensor obj.Object, destinationOrigin *TensorExtents, destinationDimensions *TensorExtents, destinationPlane TensorPlaneType)
 	GenerateMipmapsForTexture(texture obj.Object)
 	FillBufferRangeValue(buffer obj.Object, range_ foundation.NSRange, value uint8)
 	OptimizeContentsForGPUAccess(texture obj.Object)
@@ -571,7 +572,7 @@ type IndirectRenderCommand interface {
 	SetDepthBiasSlopeScaleClamp(depthBias float32, slopeScale float32, clamp float32)
 	SetDepthClipMode(depthClipMode DepthClipMode)
 	SetCullMode(cullMode CullMode)
-	SetFrontFacingWinding(frontFacingWindning Winding)
+	SetFrontFacingWinding(frontFacingWinding Winding)
 	SetTriangleFillMode(fillMode TriangleFillMode)
 	Reset()
 }
@@ -699,6 +700,8 @@ type SharedEvent interface {
 type Tensor interface {
 	ReplaceSliceOriginSliceDimensionsWithBytesStrides(sliceOrigin *TensorExtents, sliceDimensions *TensorExtents, data unsafe.Pointer, strides *TensorExtents)
 	GetBytesStridesFromSliceOriginSliceDimensions(data unsafe.Pointer, strides *TensorExtents, sliceOrigin *TensorExtents, sliceDimensions *TensorExtents)
+	GetBytesStridesFromSliceOriginSliceDimensionsPlane(data unsafe.Pointer, strides *TensorExtents, sliceOrigin *TensorExtents, sliceDimensions *TensorExtents, plane TensorPlaneType)
+	ReplaceSliceOriginSliceDimensionsPlaneWithBytesStrides(sliceOrigin *TensorExtents, sliceDimensions *TensorExtents, plane TensorPlaneType, data unsafe.Pointer, strides *TensorExtents)
 	GPUResourceID() MTLResourceID
 	Buffer() obj.Object
 	BufferOffset() int
@@ -706,6 +709,16 @@ type Tensor interface {
 	Dimensions() *TensorExtents
 	DataType() TensorDataType
 	Usage() TensorUsage
+	AuxiliaryPlanes() []obj.Object
+}
+
+// TensorAuxiliaryPlane is the Go form of the Objective-C protocol MTLTensorAuxiliaryPlane.
+type TensorAuxiliaryPlane interface {
+	DataType() TensorDataType
+	BlockFactors() *TensorExtents
+	Buffer() obj.Object
+	BufferOffset() int
+	PlaneType() TensorPlaneType
 }
 
 // TensorBinding is the Go form of the Objective-C protocol MTLTensorBinding.
@@ -713,6 +726,7 @@ type TensorBinding interface {
 	TensorDataType() TensorDataType
 	IndexType() DataType
 	Dimensions() *TensorExtents
+	AuxiliaryPlanes() []*TensorAuxiliaryPlaneType
 }
 
 // Texture is the Go form of the Objective-C protocol MTLTexture.

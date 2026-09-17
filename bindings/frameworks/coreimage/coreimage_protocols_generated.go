@@ -37,6 +37,8 @@ type ImageProcessorInput interface {
 
 // ImageProcessorOutput is the Go form of the Objective-C protocol CIImageProcessorOutput.
 type ImageProcessorOutput interface {
+	TemporarySurfaceWithIdentifierFormatWidthHeight(identifier string, format int, width int, height int) unsafe.Pointer
+	TemporaryPixelBufferWithIdentifierFormatWidthHeightAttributes(identifier string, format int, width int, height int, attributes obj.Object) unsafe.Pointer
 	Region() corefoundation.CGRect
 	BytesPerRow() int
 	Format() int

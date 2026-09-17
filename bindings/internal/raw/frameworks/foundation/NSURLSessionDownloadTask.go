@@ -9,8 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A URL session task that stores downloaded data to a file.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsurlsessiondownloadtask
 type NSURLSessionDownloadTask struct {
 	NSURLSessionTask
@@ -33,6 +31,7 @@ func NSURLSessionDownloadTaskFromID(id objc.ID) *NSURLSessionDownloadTask {
 	return o
 }
 
+// Cancels a download and calls the completion handler with resume data for later use. If conditions will allow for resuming the download in the future, the callback will be called with an opaque data blob, which may be used with `-downloadTaskWithResumeData:` to attempt to resume the download. If resume data cannot be created, the completion handler will be called with `nil` resumeData. - Parameter completionHandler: The completion handler to call when the cancel operation is complete. The `resumeData` parameter contains data that can be used to resume the download at a later time, or `nil` if resuming is not possible.
 func (o *NSURLSessionDownloadTask) CancelByProducingResumeData(completionHandler func(*NSData)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -47,6 +46,7 @@ func (o *NSURLSessionDownloadTask) CancelByProducingResumeData(completionHandler
 	o.Ptr().Send(_nSURLSessionDownloadTaskSelCancelByProducingResumeData, __block_completionHandler)
 }
 
+// Initializes a download task. Don't use this initializer to manually create download tasks. Instead, use the factory methods on “NSURLSession“ to add tasks to an existing URL session.
 // Deprecated: Please use -[NSURLSession downloadTaskWithRequest:] or other NSURLSession methods to create instances
 func (o *NSURLSessionDownloadTask) Init() *NSURLSessionDownloadTask {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionDownloadTaskSelInit)
@@ -56,6 +56,7 @@ func (o *NSURLSessionDownloadTask) Init() *NSURLSessionDownloadTask {
 	return NSURLSessionDownloadTaskFromID(_ret)
 }
 
+// Creates and initializes a download task. Don't use this method to manually create download tasks. Instead, use the factory methods on “NSURLSession“ to add tasks to an existing URL session.
 // Deprecated: Please use -[NSURLSession downloadTaskWithRequest:] or other NSURLSession methods to create instances
 func NSURLSessionDownloadTaskNew() *NSURLSessionDownloadTask {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLSessionDownloadTask), _nSURLSessionDownloadTaskSelNew)

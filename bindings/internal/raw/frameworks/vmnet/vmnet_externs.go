@@ -4,121 +4,194 @@
 package vmnet
 
 import (
+	"unsafe"
+
 	"github.com/ebitengine/purego"
+
+	rtpurego "github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-func Vmnet_allocate_mac_address_key() uintptr {
+func Vmnet_allocate_mac_address_key() string {
 	ptr, _ := purego.Dlsym(_vmnetLib, "vmnet_allocate_mac_address_key")
-	return ptr
+	if ptr == 0 {
+		return ""
+	}
+	return rtpurego.GoCString(*(*uintptr)(unsafe.Pointer(ptr)))
 }
 
-func Vmnet_enable_checksum_offload_key() uintptr {
+func Vmnet_enable_checksum_offload_key() string {
 	ptr, _ := purego.Dlsym(_vmnetLib, "vmnet_enable_checksum_offload_key")
-	return ptr
+	if ptr == 0 {
+		return ""
+	}
+	return rtpurego.GoCString(*(*uintptr)(unsafe.Pointer(ptr)))
 }
 
-func Vmnet_enable_isolation_key() uintptr {
+func Vmnet_enable_isolation_key() string {
 	ptr, _ := purego.Dlsym(_vmnetLib, "vmnet_enable_isolation_key")
-	return ptr
+	if ptr == 0 {
+		return ""
+	}
+	return rtpurego.GoCString(*(*uintptr)(unsafe.Pointer(ptr)))
 }
 
-func Vmnet_enable_tso_key() uintptr {
+func Vmnet_enable_tso_key() string {
 	ptr, _ := purego.Dlsym(_vmnetLib, "vmnet_enable_tso_key")
-	return ptr
+	if ptr == 0 {
+		return ""
+	}
+	return rtpurego.GoCString(*(*uintptr)(unsafe.Pointer(ptr)))
 }
 
-func Vmnet_enable_virtio_header_key() uintptr {
+func Vmnet_enable_virtio_header_key() string {
 	ptr, _ := purego.Dlsym(_vmnetLib, "vmnet_enable_virtio_header_key")
-	return ptr
+	if ptr == 0 {
+		return ""
+	}
+	return rtpurego.GoCString(*(*uintptr)(unsafe.Pointer(ptr)))
 }
 
-func Vmnet_end_address_key() uintptr {
+func Vmnet_end_address_key() string {
 	ptr, _ := purego.Dlsym(_vmnetLib, "vmnet_end_address_key")
-	return ptr
+	if ptr == 0 {
+		return ""
+	}
+	return rtpurego.GoCString(*(*uintptr)(unsafe.Pointer(ptr)))
 }
 
-func Vmnet_estimated_packets_available_key() uintptr {
+func Vmnet_estimated_packets_available_key() string {
 	ptr, _ := purego.Dlsym(_vmnetLib, "vmnet_estimated_packets_available_key")
-	return ptr
+	if ptr == 0 {
+		return ""
+	}
+	return rtpurego.GoCString(*(*uintptr)(unsafe.Pointer(ptr)))
 }
 
-func Vmnet_host_ip_address_key() uintptr {
+func Vmnet_host_ip_address_key() string {
 	ptr, _ := purego.Dlsym(_vmnetLib, "vmnet_host_ip_address_key")
-	return ptr
+	if ptr == 0 {
+		return ""
+	}
+	return rtpurego.GoCString(*(*uintptr)(unsafe.Pointer(ptr)))
 }
 
-func Vmnet_host_ipv6_address_key() uintptr {
+func Vmnet_host_ipv6_address_key() string {
 	ptr, _ := purego.Dlsym(_vmnetLib, "vmnet_host_ipv6_address_key")
-	return ptr
+	if ptr == 0 {
+		return ""
+	}
+	return rtpurego.GoCString(*(*uintptr)(unsafe.Pointer(ptr)))
 }
 
-func Vmnet_host_subnet_mask_key() uintptr {
+func Vmnet_host_subnet_mask_key() string {
 	ptr, _ := purego.Dlsym(_vmnetLib, "vmnet_host_subnet_mask_key")
-	return ptr
+	if ptr == 0 {
+		return ""
+	}
+	return rtpurego.GoCString(*(*uintptr)(unsafe.Pointer(ptr)))
 }
 
-func Vmnet_interface_id_key() uintptr {
+func Vmnet_interface_id_key() string {
 	ptr, _ := purego.Dlsym(_vmnetLib, "vmnet_interface_id_key")
-	return ptr
+	if ptr == 0 {
+		return ""
+	}
+	return rtpurego.GoCString(*(*uintptr)(unsafe.Pointer(ptr)))
 }
 
-func Vmnet_mac_address_key() uintptr {
+func Vmnet_mac_address_key() string {
 	ptr, _ := purego.Dlsym(_vmnetLib, "vmnet_mac_address_key")
-	return ptr
+	if ptr == 0 {
+		return ""
+	}
+	return rtpurego.GoCString(*(*uintptr)(unsafe.Pointer(ptr)))
 }
 
-func Vmnet_max_packet_size_key() uintptr {
+func Vmnet_max_packet_size_key() string {
 	ptr, _ := purego.Dlsym(_vmnetLib, "vmnet_max_packet_size_key")
-	return ptr
+	if ptr == 0 {
+		return ""
+	}
+	return rtpurego.GoCString(*(*uintptr)(unsafe.Pointer(ptr)))
 }
 
-func Vmnet_mtu_key() uintptr {
+func Vmnet_mtu_key() string {
 	ptr, _ := purego.Dlsym(_vmnetLib, "vmnet_mtu_key")
-	return ptr
+	if ptr == 0 {
+		return ""
+	}
+	return rtpurego.GoCString(*(*uintptr)(unsafe.Pointer(ptr)))
 }
 
-func Vmnet_nat66_prefix_key() uintptr {
+func Vmnet_nat66_prefix_key() string {
 	ptr, _ := purego.Dlsym(_vmnetLib, "vmnet_nat66_prefix_key")
-	return ptr
+	if ptr == 0 {
+		return ""
+	}
+	return rtpurego.GoCString(*(*uintptr)(unsafe.Pointer(ptr)))
 }
 
 // Deprecated: No longer supported
-func Vmnet_nat66_prefix_length_key() uintptr {
+func Vmnet_nat66_prefix_length_key() string {
 	ptr, _ := purego.Dlsym(_vmnetLib, "vmnet_nat66_prefix_length_key")
-	return ptr
+	if ptr == 0 {
+		return ""
+	}
+	return rtpurego.GoCString(*(*uintptr)(unsafe.Pointer(ptr)))
 }
 
-func Vmnet_network_identifier_key() uintptr {
+func Vmnet_network_identifier_key() string {
 	ptr, _ := purego.Dlsym(_vmnetLib, "vmnet_network_identifier_key")
-	return ptr
+	if ptr == 0 {
+		return ""
+	}
+	return rtpurego.GoCString(*(*uintptr)(unsafe.Pointer(ptr)))
 }
 
-func Vmnet_operation_mode_key() uintptr {
+func Vmnet_operation_mode_key() string {
 	ptr, _ := purego.Dlsym(_vmnetLib, "vmnet_operation_mode_key")
-	return ptr
+	if ptr == 0 {
+		return ""
+	}
+	return rtpurego.GoCString(*(*uintptr)(unsafe.Pointer(ptr)))
 }
 
-func Vmnet_read_max_packets_key() uintptr {
+func Vmnet_read_max_packets_key() string {
 	ptr, _ := purego.Dlsym(_vmnetLib, "vmnet_read_max_packets_key")
-	return ptr
+	if ptr == 0 {
+		return ""
+	}
+	return rtpurego.GoCString(*(*uintptr)(unsafe.Pointer(ptr)))
 }
 
-func Vmnet_shared_interface_name_key() uintptr {
+func Vmnet_shared_interface_name_key() string {
 	ptr, _ := purego.Dlsym(_vmnetLib, "vmnet_shared_interface_name_key")
-	return ptr
+	if ptr == 0 {
+		return ""
+	}
+	return rtpurego.GoCString(*(*uintptr)(unsafe.Pointer(ptr)))
 }
 
-func Vmnet_start_address_key() uintptr {
+func Vmnet_start_address_key() string {
 	ptr, _ := purego.Dlsym(_vmnetLib, "vmnet_start_address_key")
-	return ptr
+	if ptr == 0 {
+		return ""
+	}
+	return rtpurego.GoCString(*(*uintptr)(unsafe.Pointer(ptr)))
 }
 
-func Vmnet_subnet_mask_key() uintptr {
+func Vmnet_subnet_mask_key() string {
 	ptr, _ := purego.Dlsym(_vmnetLib, "vmnet_subnet_mask_key")
-	return ptr
+	if ptr == 0 {
+		return ""
+	}
+	return rtpurego.GoCString(*(*uintptr)(unsafe.Pointer(ptr)))
 }
 
-func Vmnet_write_max_packets_key() uintptr {
+func Vmnet_write_max_packets_key() string {
 	ptr, _ := purego.Dlsym(_vmnetLib, "vmnet_write_max_packets_key")
-	return ptr
+	if ptr == 0 {
+		return ""
+	}
+	return rtpurego.GoCString(*(*uintptr)(unsafe.Pointer(ptr)))
 }

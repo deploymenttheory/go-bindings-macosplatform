@@ -19,8 +19,6 @@ import (
 // BlockOperation is an idiomatic wrapper over the Objective-C class NSBlockOperation.
 //
 // It embeds [Operation], promoting that type's methods.
-//
-// An operation that manages the concurrent execution of one or more blocks.
 type BlockOperation struct {
 	Operation
 }
@@ -57,31 +55,31 @@ func NewBlockOperation() *BlockOperation {
 	return blockOperationAdopt(_id)
 }
 
-// WithQueuePriority sets the queue priority.
+// WithQueuePriority sets the execution priority of the operation in an operation queue. This property contains the relative priority of the operation. This value is used to influence the order in which operations are dequeued and executed. You should use priority values only as needed to classify the relative priority of non-dependent operations. Priority values should not be used to implement dependency management among different operation objects. If you need to establish dependencies between operations, use the “addDependency:“ method instead.
 func (bo *BlockOperation) WithQueuePriority(queuePriority OperationQueuePriority) *BlockOperation {
 	objc.Send[objc.ID](objref.IDOf(bo), objc.RegisterName("setQueuePriority:"), queuePriority)
 	return bo
 }
 
-// WithCompletionBlock sets the completion block.
+// WithCompletionBlock sets the block to execute after the operation's main task is completed. The completion block takes no parameters and has no return value. The exact execution context for your completion block is not guaranteed but is typically a secondary thread. Therefore, you should not use this block to do any work that requires a very specific execution context. Instead, you should shunt that work to your application's main thread or to the specific thread that is capable of doing it. Because the completion block executes after the operation indicates it has finished its task, you must not use a completion block to queue additional work considered to be part of that task. A finished operation may finish either because it was cancelled or because it successfully completed its task. You should take that fact into account when writing your block code. In iOS 8 and later and macOS 10.10 and later, this property is set to `nil` after the completion block begins executing.
 func (bo *BlockOperation) WithCompletionBlock(completionBlock func()) *BlockOperation {
 	objc.Send[objc.ID](objref.IDOf(bo), objc.RegisterName("setCompletionBlock:"), objc.NewBlock(func(_ objc.Block) { completionBlock() }))
 	return bo
 }
 
-// WithThreadPriority sets the thread priority.
+// WithThreadPriority sets the thread priority to use when executing the operation. Use `qualityOfService` instead.
 func (bo *BlockOperation) WithThreadPriority(threadPriority float64) *BlockOperation {
 	objc.Send[objc.ID](objref.IDOf(bo), objc.RegisterName("setThreadPriority:"), threadPriority)
 	return bo
 }
 
-// WithQualityOfService sets the quality of service.
+// WithQualityOfService sets the relative amount of importance for granting system resources to the operation. Service levels affect the priority with which an operation object is given access to system resources such as CPU time, network resources, disk resources, and so on. Operations with a higher quality of service level are given greater priority over system resources so that they may perform their task more quickly.
 func (bo *BlockOperation) WithQualityOfService(qualityOfService QualityOfService) *BlockOperation {
 	objc.Send[objc.ID](objref.IDOf(bo), objc.RegisterName("setQualityOfService:"), qualityOfService)
 	return bo
 }
 
-// WithName sets the name.
+// WithName sets the name of the operation. Assign a name to the operation object to help identify it during debugging.
 func (bo *BlockOperation) WithName(name StringProvider) *BlockOperation {
 	defer runtime.KeepAlive(name)
 	objc.Send[objc.ID](objref.IDOf(bo), objc.RegisterName("setName:"), objref.IDOf(name))
@@ -100,7 +98,7 @@ func (bo *BlockOperation) WithScriptingProperties(scriptingProperties map[string
 	return bo
 }
 
-// AddExecutionBlock adds execution block.
+// AddExecutionBlock adds the specified block to the receiver's list of blocks to perform. The specified block should not make any assumptions about its execution environment. Calling this method while the receiver is executing or has already finished causes an `NSInvalidArgumentException` exception to be thrown. - Parameter block: The block to add to the receiver's list. The block should take no parameters and have no return value.
 //
 // AddExecutionBlock blocks until the operation completes or ctx is cancelled.
 func (bo *BlockOperation) AddExecutionBlock(ctx context.Context) error {
@@ -116,13 +114,6 @@ func (bo *BlockOperation) AddExecutionBlock(ctx context.Context) error {
 	case <-ctx.Done():
 		return ctx.Err()
 	}
-}
-
-// ExecutionBlocks returns the execution blocks.
-func (bo *BlockOperation) ExecutionBlocks() unsafe.Pointer {
-	defer runtime.KeepAlive(bo)
-	_r := objc.Send[unsafe.Pointer](objref.IDOf(bo), objc.RegisterName("executionBlocks"))
-	return _r
 }
 
 var _ OperationProvider = (*BlockOperation)(nil)

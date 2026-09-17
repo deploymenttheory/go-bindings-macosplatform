@@ -8,7 +8,7 @@ import (
 
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/accelerate"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/_screencapturekit_swiftui"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/foundation"
 )
@@ -50,7 +50,7 @@ var (
 	// @function MDLabelCopyAttributeName @abstract Copy the MDItem attribute name of a label. The attribute name can be used in an MDQuery string to search for MDItems that have the label set. The value of the MDItem attribute is a CFDate corresponding to the time the label was set on the item. @param label The label. @result A CFStringRef, or NULL on failure.
 	_fnMDLabelCopyAttributeName func(unsafe.Pointer) unsafe.Pointer
 	// @function MDLabelCreate @abstract Returns a label with the specified parameters. If there is already a label that exactly matches the parameters, a reference to the existing label will be returned; otherwise this will attempt to create a new label.  A successful creation of a new private label definition will generate a kMDLabelAddedNotification. Note that this function can only create labels with "Private" visibility. Creating "Public" labels requires creating and installing a label bundle. @param allocator The CFAllocator which should be used to allocate memory for the label. This parameter may be NULL in which case the current default CFAllocator is used. Use kCFAllocatorNull to request a reference to an existing label only. @param displayName The label's display name. @param kind The label's kind string. @param domain The domain of the label (normally kMDLabelUserDomain). @result An MDLabelRef, or NULL on failure.
-	_fnMDLabelCreate func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, accelerate.MDLabelDomain) unsafe.Pointer
+	_fnMDLabelCreate func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, _screencapturekit_swiftui.MDLabelDomain) unsafe.Pointer
 	// @function MDLabelDelete @abstract Deletes the user's definition or override of the specified label from ~/Library/Metadata. Labels defined in bundles elsewhere in the filesystem cannot be deleted using this API. Deleting an override of a label merely makes the original definition of the label visible again and thus will generate a kMDLabelChangedNotification. A successful deletion of a private label definition will generate a kMDLabelRemovedNotification. @param label The label. @result True if a label definition or override was successfully deleted.
 	_fnMDLabelDelete    func(unsafe.Pointer) uint8
 	_fnMDLabelGetTypeID func() uint
@@ -222,7 +222,7 @@ func MDLabelCopyAttributeName(label unsafe.Pointer) unsafe.Pointer {
 }
 
 // @function MDLabelCreate @abstract Returns a label with the specified parameters. If there is already a label that exactly matches the parameters, a reference to the existing label will be returned; otherwise this will attempt to create a new label.  A successful creation of a new private label definition will generate a kMDLabelAddedNotification. Note that this function can only create labels with "Private" visibility. Creating "Public" labels requires creating and installing a label bundle. @param allocator The CFAllocator which should be used to allocate memory for the label. This parameter may be NULL in which case the current default CFAllocator is used. Use kCFAllocatorNull to request a reference to an existing label only. @param displayName The label's display name. @param kind The label's kind string. @param domain The domain of the label (normally kMDLabelUserDomain). @result An MDLabelRef, or NULL on failure.
-func MDLabelCreate(allocator unsafe.Pointer, displayName unsafe.Pointer, kind unsafe.Pointer, domain accelerate.MDLabelDomain) unsafe.Pointer {
+func MDLabelCreate(allocator unsafe.Pointer, displayName unsafe.Pointer, kind unsafe.Pointer, domain _screencapturekit_swiftui.MDLabelDomain) unsafe.Pointer {
 	return _fnMDLabelCreate(allocator, displayName, kind, domain)
 }
 

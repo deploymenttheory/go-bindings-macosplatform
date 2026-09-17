@@ -101,14 +101,14 @@ func (e *Exception) Raise() {
 	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("raise"))
 }
 
-// Name returns the name.
+// Name returns a string used to uniquely identify the receiver.
 func (e *Exception) Name() *String {
 	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("name"))
 	return StringFromID(_r)
 }
 
-// Reason returns the reason.
+// Reason returns a human-readable message string summarizing the reason for the exception.
 func (e *Exception) Reason() string {
 	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("reason"))
@@ -118,14 +118,14 @@ func (e *Exception) Reason() string {
 	return purego.GoString(_r)
 }
 
-// UserInfo returns the user info.
+// UserInfo returns a dictionary containing application-specific data pertaining to the receiver.
 func (e *Exception) UserInfo() obj.Object {
 	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)
 }
 
-// CallStackReturnAddresses returns the call stack return addresses.
+// CallStackReturnAddresses returns an array of return addresses from the call stack when the exception was first raised.
 //
 // CallStackReturnAddresses returns the collection as a Go slice.
 func (e *Exception) CallStackReturnAddresses() []*Number {
@@ -134,7 +134,7 @@ func (e *Exception) CallStackReturnAddresses() []*Number {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Number { return NumberFromID(_id) })
 }
 
-// CallStackSymbols returns the call stack symbols.
+// CallStackSymbols returns an array of strings describing the call stack backtrace at the point the exception was first raised.
 //
 // CallStackSymbols returns the collection as a Go slice.
 func (e *Exception) CallStackSymbols() []string {

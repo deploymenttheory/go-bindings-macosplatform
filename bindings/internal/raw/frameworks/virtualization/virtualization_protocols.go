@@ -7,12 +7,24 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/foundation"
 )
 
+// VZCustomVirtioDeviceConfigurationDelegate wraps the ObjC protocol VZCustomVirtioDeviceConfigurationDelegate.
+type VZCustomVirtioDeviceConfigurationDelegate interface {
+}
+
+// VZCustomVirtioDeviceDelegate wraps the ObjC protocol VZCustomVirtioDeviceDelegate.
+type VZCustomVirtioDeviceDelegate interface {
+}
+
 // VZGraphicsDisplayObserver wraps the ObjC protocol VZGraphicsDisplayObserver.
 type VZGraphicsDisplayObserver interface {
 }
 
 // VZNetworkBlockDeviceStorageDeviceAttachmentDelegate wraps the ObjC protocol VZNetworkBlockDeviceStorageDeviceAttachmentDelegate.
 type VZNetworkBlockDeviceStorageDeviceAttachmentDelegate interface {
+}
+
+// VZUSBControllerDelegate wraps the ObjC protocol VZUSBControllerDelegate.
+type VZUSBControllerDelegate interface {
 }
 
 // VZUSBDevice wraps the ObjC protocol VZUSBDevice.

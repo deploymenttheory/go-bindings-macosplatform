@@ -18,7 +18,7 @@ import (
 
 // MetricEvent is an idiomatic wrapper over the Objective-C class AVMetricEvent.
 //
-// MetricEvent is an abstract base — you do not construct it directly. Construct one of [MetricContentKeyRequestEvent], [MetricDownloadSummaryEvent], [MetricErrorEvent], [MetricHLSMediaSegmentRequestEvent], [MetricHLSPlaylistRequestEvent], [MetricMediaResourceRequestEvent], [MetricPlayerItemLikelyToKeepUpEvent], [MetricPlayerItemPlaybackSummaryEvent], [MetricPlayerItemRateChangeEvent], [MetricPlayerItemVariantSwitchEvent], [MetricPlayerItemVariantSwitchStartEvent] and pass it where a MetricEvent is accepted.
+// MetricEvent is an abstract base — you do not construct it directly. Construct one of [MetricContentKeyRequestEvent], [MetricDownloadSummaryEvent], [MetricErrorEvent], [MetricHLSMediaSegmentRequestEvent], [MetricHLSPlaylistRequestEvent], [MetricMediaResourceRequestEvent], [MetricPlaybackModeSwitchEvent], [MetricPlayerItemLikelyToKeepUpEvent], [MetricPlayerItemPlaybackSummaryEvent], [MetricPlayerItemRateChangeEvent], [MetricPlayerItemVariantSwitchEvent], [MetricPlayerItemVariantSwitchStartEvent] and pass it where a MetricEvent is accepted.
 //
 // A base class that represents a metric event.
 type MetricEvent struct {

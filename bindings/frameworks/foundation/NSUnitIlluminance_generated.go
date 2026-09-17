@@ -17,8 +17,6 @@ import (
 // UnitIlluminance is an idiomatic wrapper over the Objective-C class NSUnitIlluminance.
 //
 // It embeds [Dimension], promoting that type's methods.
-//
-// A unit of measure for illuminance.
 type UnitIlluminance struct {
 	Dimension
 }

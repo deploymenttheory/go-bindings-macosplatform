@@ -16,8 +16,6 @@ import (
 )
 
 // JSONSerialization is an idiomatic wrapper over the Objective-C class NSJSONSerialization.
-//
-// An object that converts between JSON and the equivalent Foundation objects.
 type JSONSerialization struct {
 	objref.Handle
 }

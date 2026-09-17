@@ -4,6 +4,8 @@
 package avfaudio
 
 import (
+	"unsafe"
+
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/foundation"
@@ -18,21 +20,22 @@ type AVAudioNode struct {
 }
 
 var (
-	_clsAVAudioNode                                     = _objcClass("AVAudioNode")
-	_aVAudioNodeSelReset                                = objc.RegisterName("reset")
-	_aVAudioNodeSelInputFormatForBus                    = objc.RegisterName("inputFormatForBus:")
-	_aVAudioNodeSelOutputFormatForBus                   = objc.RegisterName("outputFormatForBus:")
-	_aVAudioNodeSelNameForInputBus                      = objc.RegisterName("nameForInputBus:")
-	_aVAudioNodeSelNameForOutputBus                     = objc.RegisterName("nameForOutputBus:")
-	_aVAudioNodeSelInstallTapOnBusBufferSizeFormatBlock = objc.RegisterName("installTapOnBus:bufferSize:format:block:")
-	_aVAudioNodeSelRemoveTapOnBus                       = objc.RegisterName("removeTapOnBus:")
-	_aVAudioNodeSelEngine                               = objc.RegisterName("engine")
-	_aVAudioNodeSelNumberOfInputs                       = objc.RegisterName("numberOfInputs")
-	_aVAudioNodeSelNumberOfOutputs                      = objc.RegisterName("numberOfOutputs")
-	_aVAudioNodeSelLastRenderTime                       = objc.RegisterName("lastRenderTime")
-	_aVAudioNodeSelAUAudioUnit                          = objc.RegisterName("AUAudioUnit")
-	_aVAudioNodeSelLatency                              = objc.RegisterName("latency")
-	_aVAudioNodeSelOutputPresentationLatency            = objc.RegisterName("outputPresentationLatency")
+	_clsAVAudioNode                                          = _objcClass("AVAudioNode")
+	_aVAudioNodeSelReset                                     = objc.RegisterName("reset")
+	_aVAudioNodeSelInputFormatForBus                         = objc.RegisterName("inputFormatForBus:")
+	_aVAudioNodeSelOutputFormatForBus                        = objc.RegisterName("outputFormatForBus:")
+	_aVAudioNodeSelNameForInputBus                           = objc.RegisterName("nameForInputBus:")
+	_aVAudioNodeSelNameForOutputBus                          = objc.RegisterName("nameForOutputBus:")
+	_aVAudioNodeSelInstallTapOnBusBufferSizeFormatBlock      = objc.RegisterName("installTapOnBus:bufferSize:format:block:")
+	_aVAudioNodeSelInstallTapOnBusBufferSizeFormatErrorBlock = objc.RegisterName("installTapOnBus:bufferSize:format:error:block:")
+	_aVAudioNodeSelRemoveTapOnBus                            = objc.RegisterName("removeTapOnBus:")
+	_aVAudioNodeSelEngine                                    = objc.RegisterName("engine")
+	_aVAudioNodeSelNumberOfInputs                            = objc.RegisterName("numberOfInputs")
+	_aVAudioNodeSelNumberOfOutputs                           = objc.RegisterName("numberOfOutputs")
+	_aVAudioNodeSelLastRenderTime                            = objc.RegisterName("lastRenderTime")
+	_aVAudioNodeSelAUAudioUnit                               = objc.RegisterName("AUAudioUnit")
+	_aVAudioNodeSelLatency                                   = objc.RegisterName("latency")
+	_aVAudioNodeSelOutputPresentationLatency                 = objc.RegisterName("outputPresentationLatency")
 )
 
 func AVAudioNodeFromID(id objc.ID) *AVAudioNode {
@@ -87,6 +90,7 @@ func (o *AVAudioNode) NameForOutputBus(bus uint) *foundation.NSString {
 }
 
 // Installs an audio tap on a bus you specify to record, monitor, and observe the output of the node.
+// Deprecated: since macOS 27.0.
 func (o *AVAudioNode) InstallTapOnBusBufferSizeFormatBlock(bus uint, bufferSize uint32, format *AVAudioFormat, tapBlock func(*AVAudioPCMBuffer, *AVAudioTime)) {
 	var __block_tapBlock objc.Block
 	if tapBlock != nil {
@@ -102,6 +106,25 @@ func (o *AVAudioNode) InstallTapOnBusBufferSizeFormatBlock(bus uint, bufferSize 
 		defer __block_tapBlock.Release()
 	}
 	o.Ptr().Send(_aVAudioNodeSelInstallTapOnBusBufferSizeFormatBlock, bus, bufferSize, format.Ptr(), __block_tapBlock)
+}
+
+// @method installTapOnBus:bufferSize:forma:errort:block: @abstract Create a "tap" to record/monitor/observe the output of the node. @param bus the node output bus to which to attach the tap @param bufferSize the requested size of the incoming buffers in sample frames. Supported range is [100, 400] ms. @param format If non-nil, attempts to apply this as the format of the specified output bus. This should only be done when attaching to an output bus which is not connected to another node; an error will result otherwise. The tap and connection formats (if non-nil) on the specified bus should be identical. Otherwise, the latter operation will override any previously set format. @param outError on exit, if an error occurs, a description of the error. @param tapBlock a block to be called with audio buffers. @return YES for success. @discussion Only one tap may be installed on any bus. Taps may be safely installed and removed while the engine is running. Note that if you have a tap installed on AVAudioOutputNode, there could be a mismatch between the tap buffer format and AVAudioOutputNode's output format, depending on the underlying physical device. Hence, instead of tapping the AVAudioOutputNode, it is advised to tap the node connected to it. E.g. to capture audio from input node: <pre> AVAudioEngine *engine = [[AVAudioEngine alloc] init]; AVAudioInputNode *input = [engine inputNode]; AVAudioFormat *format = [input outputFormatForBus: 0]; NSError *error = nil; BOOL success = [input installTapOnBus: 0 bufferSize: 8192 format: format error:&error block: ^(AVAudioPCMBuffer *buf, AVAudioTime *when) { // ‘buf' contains audio captured from input node at time 'when' }]; .... // start engine </pre>
+func (o *AVAudioNode) InstallTapOnBusBufferSizeFormatErrorBlock(bus uint, bufferSize uint32, format *AVAudioFormat, outError unsafe.Pointer, tapBlock func(*AVAudioPCMBuffer, *AVAudioTime)) bool {
+	var __block_tapBlock objc.Block
+	if tapBlock != nil {
+		__block_tapBlock = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 objc.ID) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			if blockParam1 != 0 {
+				blockParam1.Send(objc.RegisterName("retain"))
+			}
+			tapBlock(AVAudioPCMBufferFromID(blockParam0), AVAudioTimeFromID(blockParam1))
+		})
+		defer __block_tapBlock.Release()
+	}
+	_ret := objc.Send[bool](o.Ptr(), _aVAudioNodeSelInstallTapOnBusBufferSizeFormatErrorBlock, bus, bufferSize, format.Ptr(), outError, __block_tapBlock)
+	return _ret
 }
 
 // Removes an audio tap on a bus you specify.

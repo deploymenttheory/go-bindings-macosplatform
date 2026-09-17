@@ -117,6 +117,16 @@ func MTRPreviousDataKey() obj.Object {
 // MTRDataVersionKey returns the string constant MTRDataVersionKey, for use as a dictionary key or argument.
 func MTRDataVersionKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("MTRDataVersionKey"))) }
 
+// MTRCommissioningSessionTransportType returns the string constant MTRCommissioningSessionTransportType, for use as a dictionary key or argument.
+func MTRCommissioningSessionTransportType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTRCommissioningSessionTransportType")))
+}
+
+// MTRUnpoweredInitialPhase returns the string constant MTRUnpoweredInitialPhase, for use as a dictionary key or argument.
+func MTRUnpoweredInitialPhase() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTRUnpoweredInitialPhase")))
+}
+
 // MTRErrorDomain returns the string constant MTRErrorDomain, for use as a dictionary key or argument.
 func MTRErrorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("MTRErrorDomain"))) }
 

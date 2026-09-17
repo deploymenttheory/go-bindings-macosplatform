@@ -32,15 +32,20 @@ var (
 	_nSStatusItemSelSetVisible                                 = objc.RegisterName("setVisible:")
 	_nSStatusItemSelAutosaveName                               = objc.RegisterName("autosaveName")
 	_nSStatusItemSelSetAutosaveName                            = objc.RegisterName("setAutosaveName:")
+	_nSStatusItemSelExpandedInterfaceDelegate                  = objc.RegisterName("expandedInterfaceDelegate")
+	_nSStatusItemSelSetExpandedInterfaceDelegate               = objc.RegisterName("setExpandedInterfaceDelegate:")
+	_nSStatusItemSelExpandedInterfaceSession                   = objc.RegisterName("expandedInterfaceSession")
+	_nSStatusItemSelView                                       = objc.RegisterName("view")
+	_nSStatusItemSelSetView                                    = objc.RegisterName("setView:")
+	_nSStatusItemSelTarget                                     = objc.RegisterName("target")
+	_nSStatusItemSelSetTarget                                  = objc.RegisterName("setTarget:")
+	_nSStatusItemSelAction                                     = objc.RegisterName("action")
+	_nSStatusItemSelSetAction                                  = objc.RegisterName("setAction:")
 	_nSStatusItemSelSendActionOn                               = objc.RegisterName("sendActionOn:")
 	_nSStatusItemSelDrawStatusBarBackgroundInRectWithHighlight = objc.RegisterName("drawStatusBarBackgroundInRect:withHighlight:")
 	_nSStatusItemSelPopUpStatusItemMenu                        = objc.RegisterName("popUpStatusItemMenu:")
-	_nSStatusItemSelAction                                     = objc.RegisterName("action")
-	_nSStatusItemSelSetAction                                  = objc.RegisterName("setAction:")
 	_nSStatusItemSelDoubleAction                               = objc.RegisterName("doubleAction")
 	_nSStatusItemSelSetDoubleAction                            = objc.RegisterName("setDoubleAction:")
-	_nSStatusItemSelTarget                                     = objc.RegisterName("target")
-	_nSStatusItemSelSetTarget                                  = objc.RegisterName("setTarget:")
 	_nSStatusItemSelTitle                                      = objc.RegisterName("title")
 	_nSStatusItemSelSetTitle                                   = objc.RegisterName("setTitle:")
 	_nSStatusItemSelAttributedTitle                            = objc.RegisterName("attributedTitle")
@@ -55,8 +60,6 @@ var (
 	_nSStatusItemSelSetHighlightMode                           = objc.RegisterName("setHighlightMode:")
 	_nSStatusItemSelToolTip                                    = objc.RegisterName("toolTip")
 	_nSStatusItemSelSetToolTip                                 = objc.RegisterName("setToolTip:")
-	_nSStatusItemSelView                                       = objc.RegisterName("view")
-	_nSStatusItemSelSetView                                    = objc.RegisterName("setView:")
 )
 
 func NSStatusItemFromID(id objc.ID) *NSStatusItem {
@@ -136,6 +139,53 @@ func (o *NSStatusItem) SetAutosaveName(autosaveName *foundation.NSString) {
 	o.Ptr().Send(_nSStatusItemSelSetAutosaveName, autosaveName.Ptr())
 }
 
+func (o *NSStatusItem) ExpandedInterfaceDelegate() NSStatusItemExpandedInterfaceDelegate {
+	_ret := objc.Send[NSStatusItemExpandedInterfaceDelegate](o.Ptr(), _nSStatusItemSelExpandedInterfaceDelegate)
+	return _ret
+}
+
+func (o *NSStatusItem) SetExpandedInterfaceDelegate(expandedInterfaceDelegate NSStatusItemExpandedInterfaceDelegate) {
+	o.Ptr().Send(_nSStatusItemSelSetExpandedInterfaceDelegate, expandedInterfaceDelegate)
+}
+
+func (o *NSStatusItem) ExpandedInterfaceSession() *NSStatusItemExpandedInterfaceSession {
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSStatusItemSelExpandedInterfaceSession)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSStatusItemExpandedInterfaceSessionFromID(_ret)
+}
+
+func (o *NSStatusItem) View() *NSView {
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSStatusItemSelView)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSViewFromID(_ret)
+}
+
+func (o *NSStatusItem) SetView(view *NSView) {
+	o.Ptr().Send(_nSStatusItemSelSetView, view.Ptr())
+}
+
+func (o *NSStatusItem) Target() objc.ID {
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSStatusItemSelTarget)
+	return _ret
+}
+
+func (o *NSStatusItem) SetTarget(target objc.ID) {
+	o.Ptr().Send(_nSStatusItemSelSetTarget, target)
+}
+
+func (o *NSStatusItem) Action() objc.SEL {
+	_ret := objc.Send[objc.SEL](o.Ptr(), _nSStatusItemSelAction)
+	return _ret
+}
+
+func (o *NSStatusItem) SetAction(action objc.SEL) {
+	o.Ptr().Send(_nSStatusItemSelSetAction, action)
+}
+
 // Sets the conditions on which the status item sends action messages to its target.
 // Deprecated: Use the receiver's button's -sendActionOn: instead
 func (o *NSStatusItem) SendActionOn(mask NSEventMask) int {
@@ -155,17 +205,6 @@ func (o *NSStatusItem) PopUpStatusItemMenu(menu *NSMenu) {
 	o.Ptr().Send(_nSStatusItemSelPopUpStatusItemMenu, menu.Ptr())
 }
 
-// Deprecated: Use the receiver's button.action instead
-func (o *NSStatusItem) Action() objc.SEL {
-	_ret := objc.Send[objc.SEL](o.Ptr(), _nSStatusItemSelAction)
-	return _ret
-}
-
-// Deprecated: Use the receiver's button.action instead
-func (o *NSStatusItem) SetAction(action objc.SEL) {
-	o.Ptr().Send(_nSStatusItemSelSetAction, action)
-}
-
 // Deprecated: Use the receiver's button.doubleAction instead
 func (o *NSStatusItem) DoubleAction() objc.SEL {
 	_ret := objc.Send[objc.SEL](o.Ptr(), _nSStatusItemSelDoubleAction)
@@ -175,17 +214,6 @@ func (o *NSStatusItem) DoubleAction() objc.SEL {
 // Deprecated: Use the receiver's button.doubleAction instead
 func (o *NSStatusItem) SetDoubleAction(doubleAction objc.SEL) {
 	o.Ptr().Send(_nSStatusItemSelSetDoubleAction, doubleAction)
-}
-
-// Deprecated: Use the receiver's button.target instead
-func (o *NSStatusItem) Target() objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSStatusItemSelTarget)
-	return _ret
-}
-
-// Deprecated: Use the receiver's button.target instead
-func (o *NSStatusItem) SetTarget(target objc.ID) {
-	o.Ptr().Send(_nSStatusItemSelSetTarget, target)
 }
 
 // Deprecated: Use the receiver's button.title instead
@@ -278,18 +306,4 @@ func (o *NSStatusItem) ToolTip() *foundation.NSString {
 // Deprecated: Use the receiver's button.toolTip instead
 func (o *NSStatusItem) SetToolTip(toolTip *foundation.NSString) {
 	o.Ptr().Send(_nSStatusItemSelSetToolTip, toolTip.Ptr())
-}
-
-// Deprecated: Use the standard button property instead
-func (o *NSStatusItem) View() *NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSStatusItemSelView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewFromID(_ret)
-}
-
-// Deprecated: Use the standard button property instead
-func (o *NSStatusItem) SetView(view *NSView) {
-	o.Ptr().Send(_nSStatusItemSelSetView, view.Ptr())
 }

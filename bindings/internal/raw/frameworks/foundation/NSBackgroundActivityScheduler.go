@@ -69,6 +69,7 @@ func (o *NSBackgroundActivityScheduler) Invalidate() {
 	o.Ptr().Send(_nSBackgroundActivitySchedulerSelInvalidate)
 }
 
+// A unique reverse DNS notation string, such as `com.example.MyApp.updatecheck`, that identifies the activity. This string should remain constant for an activity across launches of your app because the system uses this unique identifier to track the number of times the activity has run and to improve the heuristics for deciding when to run it again in the future. `nil` and zero-length strings are not allowed.
 func (o *NSBackgroundActivityScheduler) Identifier() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBackgroundActivitySchedulerSelIdentifier)
 	if _ret != 0 {
@@ -77,6 +78,7 @@ func (o *NSBackgroundActivityScheduler) Identifier() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// A value of type `NSQualityOfService`, which controls how aggressively the system schedules the activity. The default value is `NSQualityOfServiceBackground`. If you upgrade the quality of service above this level, the system schedules the activity more aggressively. The default value is the recommended value for most activities.
 func (o *NSBackgroundActivityScheduler) QualityOfService() NSQualityOfService {
 	_ret := objc.Send[NSQualityOfService](o.Ptr(), _nSBackgroundActivitySchedulerSelQualityOfService)
 	return _ret
@@ -86,6 +88,7 @@ func (o *NSBackgroundActivityScheduler) SetQualityOfService(qualityOfService NSQ
 	o.Ptr().Send(_nSBackgroundActivitySchedulerSelSetQualityOfService, qualityOfService)
 }
 
+// A Boolean value indicating whether the activity should be rescheduled after it completes. The default value for this property is `NO`.
 func (o *NSBackgroundActivityScheduler) Repeats() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSBackgroundActivitySchedulerSelRepeats)
 	return _ret
@@ -95,6 +98,7 @@ func (o *NSBackgroundActivityScheduler) SetRepeats(repeats bool) {
 	o.Ptr().Send(_nSBackgroundActivitySchedulerSelSetRepeats, repeats)
 }
 
+// An integer providing a suggested interval between scheduling and invoking the activity. For repeating activities, the value of this property is also the suggested interval between invocations.
 func (o *NSBackgroundActivityScheduler) Interval() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSBackgroundActivitySchedulerSelInterval)
 	return _ret
@@ -104,6 +108,7 @@ func (o *NSBackgroundActivityScheduler) SetInterval(interval float64) {
 	o.Ptr().Send(_nSBackgroundActivitySchedulerSelSetInterval, interval)
 }
 
+// A value of type `NSTimeInterval`, which specifies a range of time during which the background activity may occur. A nominal fire date for scheduled background activity is calculated based on a combination of the `interval` property value and the time the activity began or the last execution date. The `tolerance` property specifies a grace period -- a range of time before and after the nominal fire date, during which the activity may be invoked. As the activity nears the end of its grace period, the system schedules the activity more aggressively. The default tolerance period is half the value of the `interval` property.
 func (o *NSBackgroundActivityScheduler) Tolerance() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSBackgroundActivitySchedulerSelTolerance)
 	return _ret
@@ -113,6 +118,7 @@ func (o *NSBackgroundActivityScheduler) SetTolerance(tolerance float64) {
 	o.Ptr().Send(_nSBackgroundActivitySchedulerSelSetTolerance, tolerance)
 }
 
+// A Boolean value indicating whether your app should stop performing background activity and resume at a more optimal time. Your app can check the `shouldDefer` property while executing scheduled background activity. If this property contains a value of `YES`, system conditions have changed since the time the activity started and deferral is recommended. For example, perhaps the user unplugged the Mac and it's now running on battery power. In this case, your app should finish what it's currently doing, save its state, and invoke its completion handler with a value of `NSBackgroundActivityResultDeferred`. The system will invoke your activity again at a more optimal time, and your app can restore its previous state and resume where it left off.
 func (o *NSBackgroundActivityScheduler) ShouldDefer() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSBackgroundActivitySchedulerSelShouldDefer)
 	return _ret

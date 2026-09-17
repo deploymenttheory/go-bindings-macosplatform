@@ -7,71 +7,165 @@ import (
 	"unsafe"
 
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/foundation"
 )
 
-func CSIndexErrorDomain() uintptr {
+func CSIndexErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corespotlightLib, "CSIndexErrorDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CSMailboxArchive() uintptr {
+func CSMailboxArchive() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corespotlightLib, "CSMailboxArchive")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CSMailboxDrafts() uintptr {
+func CSMailboxDrafts() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corespotlightLib, "CSMailboxDrafts")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CSMailboxInbox() uintptr {
+func CSMailboxInbox() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corespotlightLib, "CSMailboxInbox")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CSMailboxJunk() uintptr {
+func CSMailboxJunk() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corespotlightLib, "CSMailboxJunk")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CSMailboxSent() uintptr {
+func CSMailboxSent() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corespotlightLib, "CSMailboxSent")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CSMailboxTrash() uintptr {
+func CSMailboxTrash() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corespotlightLib, "CSMailboxTrash")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CSQueryContinuationActionType() uintptr {
+func CSQueryContinuationActionType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corespotlightLib, "CSQueryContinuationActionType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CSSearchQueryErrorDomain() uintptr {
+func CSSearchQueryErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corespotlightLib, "CSSearchQueryErrorDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CSSearchQueryString() uintptr {
+func CSSearchQueryString() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corespotlightLib, "CSSearchQueryString")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CSSearchableItemActionType() uintptr {
+func CSSearchableItemActionType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corespotlightLib, "CSSearchableItemActionType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CSSearchableItemActivityIdentifier() uintptr {
+func CSSearchableItemActivityIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corespotlightLib, "CSSearchableItemActivityIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CSSuggestionHighlightAttributeName() uintptr {
+func CSSuggestionHighlightAttributeName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corespotlightLib, "CSSuggestionHighlightAttributeName")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func CoreSpotlightVersionNumber() float64 {

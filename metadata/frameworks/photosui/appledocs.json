@@ -4,7 +4,7 @@
   "source": "developer.apple.com DocC render API",
   "classes": {
     "PHLivePhotoView": {
-      "doc": "A view that displays a Live Photo—a picture that also includes motion and sound from the moments just before and after its capture.",
+      "doc": "A view that displays a Live Photo.",
       "url": "https://developer.apple.com/documentation/photosui/phlivephotoview"
     },
     "PHPickerUpdateConfiguration": {
@@ -58,6 +58,15 @@
     "PHProjectTypeDescription": {
       "doc": "An extensible enumerator for PHProjectType that’s presented to users in the project picker.",
       "url": "https://developer.apple.com/documentation/photosui/phprojecttypedescription"
+    },
+    "PHSharedAlbumCreationViewController": {
+      "url": "https://developer.apple.com/documentation/photosui/phsharedalbumcreationviewcontroller"
+    },
+    "PHSharedAlbumCustomizationViewController": {
+      "url": "https://developer.apple.com/documentation/photosui/phsharedalbumcustomizationviewcontroller"
+    },
+    "PHSharedAlbumPostingViewController": {
+      "url": "https://developer.apple.com/documentation/photosui/phsharedalbumpostingviewcontroller"
     }
   },
   "protocols": {
@@ -189,17 +198,37 @@
         }
       }
     },
-    "PHProjectCreationSource": {
-      "doc": "Defines the source of a project extension.",
-      "url": "https://developer.apple.com/documentation/photosui/phprojectcreationsource"
+    "PHPickerMetadataOptions": {
+      "doc": "Constants that specify metadata options for \\c PHPickerViewController.",
+      "url": "https://developer.apple.com/documentation/photosui/phpickermetadataoptions",
+      "members": {
+        "PHPickerMetadataOptionsNone": {
+          "doc": "No metadata options.",
+          "url": "https://developer.apple.com/documentation/photosui/phpickermetadataoptions/phpickermetadataoptionsnone"
+        },
+        "PHPickerMetadataOptionsRemoveCaptions": {
+          "doc": "Remove captions metadata.",
+          "url": "https://developer.apple.com/documentation/photosui/phpickermetadataoptions/removecaptions"
+        },
+        "PHPickerMetadataOptionsRemoveLocation": {
+          "doc": "Remove location metadata.",
+          "url": "https://developer.apple.com/documentation/photosui/phpickermetadataoptions/removelocation"
+        }
+      }
     },
-    "PHProjectSectionType": {
-      "doc": "The intended usage of the section: cover, content, or auxiliary.",
-      "url": "https://developer.apple.com/documentation/photosui/phprojectsectiontype"
-    },
-    "PHProjectTextElementType": {
-      "doc": "An enumeration of the type of text element.",
-      "url": "https://developer.apple.com/documentation/photosui/phprojecttextelementtype"
+    "PHSharedAlbumCreationSharingPolicy": {
+      "doc": "The sharing policy for creating shared albums.",
+      "url": "https://developer.apple.com/documentation/photosui/phsharedalbumcreationsharingpolicy",
+      "members": {
+        "PHSharedAlbumCreationSharingPolicyPrivate": {
+          "doc": "The policy for requiring that only people the user approves or invites are allowed to access the shared album.",
+          "url": "https://developer.apple.com/documentation/photosui/phsharedalbumcreationsharingpolicy/private"
+        },
+        "PHSharedAlbumCreationSharingPolicyPublic": {
+          "doc": "The policy for allowing anyone, without approval, to access the shared album.",
+          "url": "https://developer.apple.com/documentation/photosui/phsharedalbumcreationsharingpolicy/public"
+        }
+      }
     }
   },
   "methods": {
@@ -332,7 +361,7 @@
     "PHPickerViewController": {
       "configuration": {
         "doc": "The configuration you specify when creating the picker.",
-        "url": "https://developer.apple.com/documentation/photosui/phpickerviewcontroller/configuration-3vf53"
+        "url": "https://developer.apple.com/documentation/photosui/phpickerviewcontroller/configuration-17a8p"
       },
       "delegate": {
         "doc": "The picker’s delegate object.",
@@ -575,6 +604,44 @@
       "subtypeDescriptions": {
         "doc": "An array of type descriptions used for subtype descriptions.",
         "url": "https://developer.apple.com/documentation/photosui/phprojecttypedescription/subtypedescriptions"
+      }
+    },
+    "PHSharedAlbumCreationViewController": {
+      "creationResult": {
+        "doc": "Upon successful album creation, creationResult will be non-nil and provide information about the just-created shared album.",
+        "url": "https://developer.apple.com/documentation/photosui/phsharedalbumcreationviewcontroller/creationresult"
+      },
+      "delegate": {
+        "doc": "The delegate to respond to PHSharedAlbumCreationViewController events.",
+        "url": "https://developer.apple.com/documentation/photosui/phsharedalbumcreationviewcontroller/delegate-swift.property"
+      },
+      "init(configuration:)": {
+        "doc": "Returns a view controller that allows the user to create a new shared album.",
+        "url": "https://developer.apple.com/documentation/photosui/phsharedalbumcreationviewcontroller/init(configuration:)"
+      }
+    },
+    "PHSharedAlbumCustomizationViewController": {
+      "albumIdentifier": {
+        "doc": "The identifier of the shared album to be customized.",
+        "url": "https://developer.apple.com/documentation/photosui/phsharedalbumcustomizationviewcontroller/albumidentifier"
+      },
+      "delegate": {
+        "doc": "The delegate to respond to PHSharedAlbumCustomizationViewController events.",
+        "url": "https://developer.apple.com/documentation/photosui/phsharedalbumcustomizationviewcontroller/delegate-swift.property"
+      }
+    },
+    "PHSharedAlbumPostingViewController": {
+      "albumIdentifier": {
+        "doc": "The identifier of the shared album that was posted to.",
+        "url": "https://developer.apple.com/documentation/photosui/phsharedalbumpostingviewcontroller/albumidentifier"
+      },
+      "delegate": {
+        "doc": "The delegate to respond to PHSharedAlbumPostingViewController events.",
+        "url": "https://developer.apple.com/documentation/photosui/phsharedalbumpostingviewcontroller/delegate-swift.property"
+      },
+      "init(items:defaultAlbumIdentifier:photoLibrary:)": {
+        "doc": "Returns a view controller that allows the user to create a new shared album.",
+        "url": "https://developer.apple.com/documentation/photosui/phsharedalbumpostingviewcontroller/init(items:defaultalbumidentifier:photolibrary:)"
       }
     }
   }

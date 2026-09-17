@@ -13,6 +13,7 @@ import (
 // An object representing a diagnostic report for a fatal or nonfatal CPU exception.
 //
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxcpuexceptiondiagnostic
+// Deprecated: Use DiagnosticResult instead.
 type MXCPUExceptionDiagnostic struct {
 	MXDiagnostic
 }

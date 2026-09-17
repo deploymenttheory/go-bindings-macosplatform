@@ -74,12 +74,6 @@ func (cbi *ControllerButtonInput) WithValue(value float32) *ControllerButtonInpu
 	return cbi
 }
 
-// WithPreferredSystemGestureState sets the preferred state for handling input when the user binds the element to a system gesture.
-func (cbi *ControllerButtonInput) WithPreferredSystemGestureState(preferredSystemGestureState SystemGestureState) *ControllerButtonInput {
-	objc.Send[objc.ID](objref.IDOf(cbi), objc.RegisterName("setPreferredSystemGestureState:"), preferredSystemGestureState)
-	return cbi
-}
-
 // WithSfSymbolsName sets a system symbol for the element or the remapped element.
 func (cbi *ControllerButtonInput) WithSfSymbolsName(sfSymbolsName string) *ControllerButtonInput {
 	objc.Send[objc.ID](objref.IDOf(cbi), objc.RegisterName("setSfSymbolsName:"), purego.NSString(sfSymbolsName))
@@ -101,6 +95,12 @@ func (cbi *ControllerButtonInput) WithUnmappedSfSymbolsName(unmappedSfSymbolsNam
 // WithUnmappedLocalizedName sets the element’s localized name, not the remapped name.
 func (cbi *ControllerButtonInput) WithUnmappedLocalizedName(unmappedLocalizedName string) *ControllerButtonInput {
 	objc.Send[objc.ID](objref.IDOf(cbi), objc.RegisterName("setUnmappedLocalizedName:"), purego.NSString(unmappedLocalizedName))
+	return cbi
+}
+
+// WithPreferredSystemGestureState sets the preferred state for handling input when the user binds the element to a system gesture.
+func (cbi *ControllerButtonInput) WithPreferredSystemGestureState(preferredSystemGestureState SystemGestureState) *ControllerButtonInput {
+	objc.Send[objc.ID](objref.IDOf(cbi), objc.RegisterName("setPreferredSystemGestureState:"), preferredSystemGestureState)
 	return cbi
 }
 

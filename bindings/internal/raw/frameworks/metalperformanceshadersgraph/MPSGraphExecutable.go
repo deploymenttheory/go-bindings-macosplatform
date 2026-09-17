@@ -20,19 +20,21 @@ type MPSGraphExecutable struct {
 }
 
 var (
-	_clsMPSGraphExecutable                                                                      = _objcClass("MPSGraphExecutable")
-	_mPSGraphExecutableSelSpecializeWithDeviceInputTypesCompilationDescriptor                   = objc.RegisterName("specializeWithDevice:inputTypes:compilationDescriptor:")
-	_mPSGraphExecutableSelGetOutputTypesWithDeviceInputTypesCompilationDescriptor               = objc.RegisterName("getOutputTypesWithDevice:inputTypes:compilationDescriptor:")
-	_mPSGraphExecutableSelRunWithMTLCommandQueueInputsArrayResultsArrayExecutionDescriptor      = objc.RegisterName("runWithMTLCommandQueue:inputsArray:resultsArray:executionDescriptor:")
-	_mPSGraphExecutableSelRunAsyncWithMTLCommandQueueInputsArrayResultsArrayExecutionDescriptor = objc.RegisterName("runAsyncWithMTLCommandQueue:inputsArray:resultsArray:executionDescriptor:")
-	_mPSGraphExecutableSelEncodeToCommandBufferInputsArrayResultsArrayExecutionDescriptor       = objc.RegisterName("encodeToCommandBuffer:inputsArray:resultsArray:executionDescriptor:")
-	_mPSGraphExecutableSelSerializeToMPSGraphPackageAtURLDescriptor                             = objc.RegisterName("serializeToMPSGraphPackageAtURL:descriptor:")
-	_mPSGraphExecutableSelInitWithMPSGraphPackageAtURLCompilationDescriptor                     = objc.RegisterName("initWithMPSGraphPackageAtURL:compilationDescriptor:")
-	_mPSGraphExecutableSelInitWithCoreMLPackageAtURLCompilationDescriptor                       = objc.RegisterName("initWithCoreMLPackageAtURL:compilationDescriptor:")
-	_mPSGraphExecutableSelOptions                                                               = objc.RegisterName("options")
-	_mPSGraphExecutableSelSetOptions                                                            = objc.RegisterName("setOptions:")
-	_mPSGraphExecutableSelFeedTensors                                                           = objc.RegisterName("feedTensors")
-	_mPSGraphExecutableSelTargetTensors                                                         = objc.RegisterName("targetTensors")
+	_clsMPSGraphExecutable                                                                       = _objcClass("MPSGraphExecutable")
+	_mPSGraphExecutableSelSpecializeWithDeviceInputTypesCompilationDescriptor                    = objc.RegisterName("specializeWithDevice:inputTypes:compilationDescriptor:")
+	_mPSGraphExecutableSelGetOutputTypesWithDeviceInputTypesCompilationDescriptor                = objc.RegisterName("getOutputTypesWithDevice:inputTypes:compilationDescriptor:")
+	_mPSGraphExecutableSelRunWithMTLCommandQueueInputsArrayResultsArrayExecutionDescriptor       = objc.RegisterName("runWithMTLCommandQueue:inputsArray:resultsArray:executionDescriptor:")
+	_mPSGraphExecutableSelRunAsyncWithMTLCommandQueueInputsArrayResultsArrayExecutionDescriptor  = objc.RegisterName("runAsyncWithMTLCommandQueue:inputsArray:resultsArray:executionDescriptor:")
+	_mPSGraphExecutableSelRunWithMTL4CommandQueueInputsArrayResultsArrayExecutionDescriptor      = objc.RegisterName("runWithMTL4CommandQueue:inputsArray:resultsArray:executionDescriptor:")
+	_mPSGraphExecutableSelRunAsyncWithMTL4CommandQueueInputsArrayResultsArrayExecutionDescriptor = objc.RegisterName("runAsyncWithMTL4CommandQueue:inputsArray:resultsArray:executionDescriptor:")
+	_mPSGraphExecutableSelEncodeToCommandBufferInputsArrayResultsArrayExecutionDescriptor        = objc.RegisterName("encodeToCommandBuffer:inputsArray:resultsArray:executionDescriptor:")
+	_mPSGraphExecutableSelSerializeToMPSGraphPackageAtURLDescriptor                              = objc.RegisterName("serializeToMPSGraphPackageAtURL:descriptor:")
+	_mPSGraphExecutableSelInitWithMPSGraphPackageAtURLCompilationDescriptor                      = objc.RegisterName("initWithMPSGraphPackageAtURL:compilationDescriptor:")
+	_mPSGraphExecutableSelInitWithCoreMLPackageAtURLCompilationDescriptor                        = objc.RegisterName("initWithCoreMLPackageAtURL:compilationDescriptor:")
+	_mPSGraphExecutableSelOptions                                                                = objc.RegisterName("options")
+	_mPSGraphExecutableSelSetOptions                                                             = objc.RegisterName("setOptions:")
+	_mPSGraphExecutableSelFeedTensors                                                            = objc.RegisterName("feedTensors")
+	_mPSGraphExecutableSelTargetTensors                                                          = objc.RegisterName("targetTensors")
 )
 
 func MPSGraphExecutableFromID(id objc.ID) *MPSGraphExecutable {
@@ -71,6 +73,24 @@ func (o *MPSGraphExecutable) RunWithMTLCommandQueueInputsArrayResultsArrayExecut
 // Runs the graph for the given feeds and returns the target tensor values, ensuring all target operations also executed. This call is asynchronous and will return immediately.
 func (o *MPSGraphExecutable) RunAsyncWithMTLCommandQueueInputsArrayResultsArrayExecutionDescriptor(commandQueue metal.MTLCommandQueue, inputsArray *foundation.NSArray[*MPSGraphTensorData], resultsArray *foundation.NSArray[*MPSGraphTensorData], executionDescriptor *MPSGraphExecutableExecutionDescriptor) *foundation.NSArray[*MPSGraphTensorData] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSGraphExecutableSelRunAsyncWithMTLCommandQueueInputsArrayResultsArrayExecutionDescriptor, commandQueue, inputsArray.Ptr(), resultsArray.Ptr(), executionDescriptor.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*MPSGraphTensorData](_ret)
+}
+
+// Runs the graph for the given feeds and returns the target tensor values, ensuring all target operations also executed.
+func (o *MPSGraphExecutable) RunWithMTL4CommandQueueInputsArrayResultsArrayExecutionDescriptor(commandQueue metal.MTL4CommandQueue, inputsArray *foundation.NSArray[*MPSGraphTensorData], resultsArray *foundation.NSArray[*MPSGraphTensorData], executionDescriptor *MPSGraphExecutableExecutionDescriptor) *foundation.NSArray[*MPSGraphTensorData] {
+	_ret := objc.Send[objc.ID](o.Ptr(), _mPSGraphExecutableSelRunWithMTL4CommandQueueInputsArrayResultsArrayExecutionDescriptor, commandQueue, inputsArray.Ptr(), resultsArray.Ptr(), executionDescriptor.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*MPSGraphTensorData](_ret)
+}
+
+// Runs the graph for the given feeds and returns the target tensor values, ensuring all target operations also executed. This call is asynchronous and will return immediately.
+func (o *MPSGraphExecutable) RunAsyncWithMTL4CommandQueueInputsArrayResultsArrayExecutionDescriptor(commandQueue metal.MTL4CommandQueue, inputsArray *foundation.NSArray[*MPSGraphTensorData], resultsArray *foundation.NSArray[*MPSGraphTensorData], executionDescriptor *MPSGraphExecutableExecutionDescriptor) *foundation.NSArray[*MPSGraphTensorData] {
+	_ret := objc.Send[objc.ID](o.Ptr(), _mPSGraphExecutableSelRunAsyncWithMTL4CommandQueueInputsArrayResultsArrayExecutionDescriptor, commandQueue, inputsArray.Ptr(), resultsArray.Ptr(), executionDescriptor.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

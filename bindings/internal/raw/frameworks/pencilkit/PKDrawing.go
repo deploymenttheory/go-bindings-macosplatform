@@ -14,26 +14,25 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A structure representing the drawing information captured by a canvas view.
-//
 // Apple documentation: https://developer.apple.com/documentation/pencilkit/pkdrawing
 type PKDrawing struct {
 	foundation.NSObject
 }
 
 var (
-	_clsPKDrawing                           = _objcClass("PKDrawing")
-	_pKDrawingSelInit                       = objc.RegisterName("init")
-	_pKDrawingSelInitWithStrokes            = objc.RegisterName("initWithStrokes:")
-	_pKDrawingSelInitWithDataError          = objc.RegisterName("initWithData:error:")
-	_pKDrawingSelDataRepresentation         = objc.RegisterName("dataRepresentation")
-	_pKDrawingSelImageFromRectScale         = objc.RegisterName("imageFromRect:scale:")
-	_pKDrawingSelDrawingByApplyingTransform = objc.RegisterName("drawingByApplyingTransform:")
-	_pKDrawingSelDrawingByAppendingDrawing  = objc.RegisterName("drawingByAppendingDrawing:")
-	_pKDrawingSelDrawingByAppendingStrokes  = objc.RegisterName("drawingByAppendingStrokes:")
-	_pKDrawingSelStrokes                    = objc.RegisterName("strokes")
-	_pKDrawingSelBounds                     = objc.RegisterName("bounds")
-	_pKDrawingSelRequiredContentVersion     = objc.RegisterName("requiredContentVersion")
+	_clsPKDrawing                                        = _objcClass("PKDrawing")
+	_pKDrawingSelInit                                    = objc.RegisterName("init")
+	_pKDrawingSelInitWithStrokes                         = objc.RegisterName("initWithStrokes:")
+	_pKDrawingSelInitWithDataError                       = objc.RegisterName("initWithData:error:")
+	_pKDrawingSelDataRepresentation                      = objc.RegisterName("dataRepresentation")
+	_pKDrawingSelImageFromRectScale                      = objc.RegisterName("imageFromRect:scale:")
+	_pKDrawingSelDrawingByApplyingTransform              = objc.RegisterName("drawingByApplyingTransform:")
+	_pKDrawingSelDrawingByAppendingDrawing               = objc.RegisterName("drawingByAppendingDrawing:")
+	_pKDrawingSelDrawingByAppendingStrokes               = objc.RegisterName("drawingByAppendingStrokes:")
+	_pKDrawingSelDrawingByErasingStrokePathMaskTransform = objc.RegisterName("drawingByErasingStrokePath:mask:transform:")
+	_pKDrawingSelStrokes                                 = objc.RegisterName("strokes")
+	_pKDrawingSelBounds                                  = objc.RegisterName("bounds")
+	_pKDrawingSelRequiredContentVersion                  = objc.RegisterName("requiredContentVersion")
 )
 
 func PKDrawingFromID(id objc.ID) *PKDrawing {
@@ -46,7 +45,7 @@ func PKDrawingFromID(id objc.ID) *PKDrawing {
 	return o
 }
 
-// Initializes and returns a blank drawing.
+// Creates a blank drawing.
 func (o *PKDrawing) Init() *PKDrawing {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKDrawingSelInit)
 	if _ret != 0 {
@@ -55,7 +54,7 @@ func (o *PKDrawing) Init() *PKDrawing {
 	return PKDrawingFromID(_ret)
 }
 
-// Initializes a drawing with an array of strokes.
+// Creates a drawing with the specified strokes. When setting strokes, duplicate IDs are automatically resolved by generating new UUIDs for conflicting strokes. The first occurrence keeps its original ID.
 func (o *PKDrawing) InitWithStrokes(strokes *foundation.NSArray[*PKStroke]) *PKDrawing {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKDrawingSelInitWithStrokes, strokes.Ptr())
 	if _ret != 0 {
@@ -64,7 +63,7 @@ func (o *PKDrawing) InitWithStrokes(strokes *foundation.NSArray[*PKStroke]) *PKD
 	return PKDrawingFromID(_ret)
 }
 
-// Initializes and returns the drawing with the specified data. @param data The data containing the drawing data. @param error If an error occurs, upon return the NSError object describes the error. Set to NULL to ignore errors. @return On success, an initialized PKDrawing object. If nil, the outError parameter contains an NSError instance describing the problem.
+// Creates a drawing from the specified encoded data. @param data The data containing the encoded drawing. @param error If an error occurs, upon return the `NSError` object describes the error. Pass `NULL` to ignore errors. @return An initialized `PKDrawing` object on success, or `nil` if the data is invalid.
 func (o *PKDrawing) InitWithDataError(data *foundation.NSData) (*PKDrawing, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKDrawingSelInitWithDataError, data.Ptr(), unsafe.Pointer(&_nsErr))
@@ -77,7 +76,7 @@ func (o *PKDrawing) InitWithDataError(data *foundation.NSData) (*PKDrawing, erro
 	return PKDrawingFromID(_ret), nil
 }
 
-// Generate a data representation of the drawing. @return A NSData object containing a representation of the drawing.
+// Returns a data representation of the drawing. @return An `NSData` object containing the drawing data.
 func (o *PKDrawing) DataRepresentation() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKDrawingSelDataRepresentation)
 	if _ret != 0 {
@@ -94,7 +93,7 @@ func (o *PKDrawing) ImageFromRectScale(rect corefoundation.CGRect, scale float64
 	return appkit.NSImageFromID(_ret)
 }
 
-// Returns a new drawing with `transform` applied. @param transform The transform to apply to this drawing. @return A new copy of this drawing with `transform` applied.
+// Returns a new drawing with the specified transform applied. @param transform The transform to apply to this drawing. @return A new copy of this drawing with `transform` applied.
 func (o *PKDrawing) DrawingByApplyingTransform(transform corefoundation.CGAffineTransform) *PKDrawing {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKDrawingSelDrawingByApplyingTransform, transform)
 	if _ret != 0 {
@@ -103,7 +102,7 @@ func (o *PKDrawing) DrawingByApplyingTransform(transform corefoundation.CGAffine
 	return PKDrawingFromID(_ret)
 }
 
-// Returns a new drawing by appending the contents of `drawing` on top of the receiver’s contents. @param drawing The drawing to append. @return A new copy of this drawing with `drawing` appended onto it.
+// Returns a new drawing by appending the contents of the specified drawing on top of the receiver's contents. @param drawing The drawing to append. @return A new copy of this drawing with `drawing` appended. The combined array of strokes is uniqued by `strokeID`.
 func (o *PKDrawing) DrawingByAppendingDrawing(drawing *PKDrawing) *PKDrawing {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKDrawingSelDrawingByAppendingDrawing, drawing.Ptr())
 	if _ret != 0 {
@@ -112,7 +111,7 @@ func (o *PKDrawing) DrawingByAppendingDrawing(drawing *PKDrawing) *PKDrawing {
 	return PKDrawingFromID(_ret)
 }
 
-// Create a new drawing by appending an array of strokes to this drawing. This is a convenience method, to quickly add strokes to a drawing. @param strokes The strokes to append. @return A new copy of this drawing with `strokes` appended onto it.
+// Returns a new drawing with the specified strokes appended. @param strokes The strokes to append. @return A new copy of this drawing with `strokes` appended. The combined array of strokes is uniqued by `strokeID`.
 func (o *PKDrawing) DrawingByAppendingStrokes(strokes *foundation.NSArray[*PKStroke]) *PKDrawing {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKDrawingSelDrawingByAppendingStrokes, strokes.Ptr())
 	if _ret != 0 {
@@ -121,7 +120,15 @@ func (o *PKDrawing) DrawingByAppendingStrokes(strokes *foundation.NSArray[*PKStr
 	return PKDrawingFromID(_ret)
 }
 
-// The strokes that this drawing contains.
+func (o *PKDrawing) DrawingByErasingStrokePathMaskTransform(eraserPath *PKStrokePath, mask *appkit.NSBezierPath, transform corefoundation.CGAffineTransform) *PKDrawing {
+	_ret := objc.Send[objc.ID](o.Ptr(), _pKDrawingSelDrawingByErasingStrokePathMaskTransform, eraserPath.Ptr(), mask.Ptr(), transform)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return PKDrawingFromID(_ret)
+}
+
+// The strokes the drawing contains.
 func (o *PKDrawing) Strokes() *foundation.NSArray[*PKStroke] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKDrawingSelStrokes)
 	if _ret != 0 {
@@ -130,7 +137,7 @@ func (o *PKDrawing) Strokes() *foundation.NSArray[*PKStroke] {
 	return foundation.NSArrayFromID[*PKStroke](_ret)
 }
 
-// The bounds of the drawing's contents, taking into account the rendered width of all content. If these bounds are used to render an image with `imageFromRect:scale:`, no contents will be cropped.
+// The bounds of the drawing's contents, accounting for the rendered width of all strokes. Passing these bounds to `imageFromRect:scale:` produces an image that includes all content without cropping.
 func (o *PKDrawing) Bounds() corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _pKDrawingSelBounds)
 	return _ret

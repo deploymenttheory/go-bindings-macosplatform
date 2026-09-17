@@ -44,6 +44,10 @@ var (
 	_mTLFXFrameInterpolatorDescriptorSelSetOutputWidth                         = objc.RegisterName("setOutputWidth:")
 	_mTLFXFrameInterpolatorDescriptorSelOutputHeight                           = objc.RegisterName("outputHeight")
 	_mTLFXFrameInterpolatorDescriptorSelSetOutputHeight                        = objc.RegisterName("setOutputHeight:")
+	_mTLFXFrameInterpolatorDescriptorSelIsDistortionTextureEnabled             = objc.RegisterName("isDistortionTextureEnabled")
+	_mTLFXFrameInterpolatorDescriptorSelSetDistortionTextureEnabled            = objc.RegisterName("setDistortionTextureEnabled:")
+	_mTLFXFrameInterpolatorDescriptorSelRequiresPrevColorTexture               = objc.RegisterName("requiresPrevColorTexture")
+	_mTLFXFrameInterpolatorDescriptorSelSetRequiresPrevColorTexture            = objc.RegisterName("setRequiresPrevColorTexture:")
 )
 
 func MTLFXFrameInterpolatorDescriptorFromID(id objc.ID) *MTLFXFrameInterpolatorDescriptor {
@@ -177,4 +181,24 @@ func (o *MTLFXFrameInterpolatorDescriptor) OutputHeight() uint {
 
 func (o *MTLFXFrameInterpolatorDescriptor) SetOutputHeight(outputHeight uint) {
 	o.Ptr().Send(_mTLFXFrameInterpolatorDescriptorSelSetOutputHeight, outputHeight)
+}
+
+// A Boolean value that indicates whether the frame interpolator supports barrel distortion correction. Set this property to <doc://com.apple.documentation/documentation/swift/true> to create a frame interpolator that can apply barrel distortion correction using a distortion field texture. When you enable this property, you can assign a distortion texture to the interpolator's “MTLFXFrameInterpolatorBase/distortionTexture“ property to correct lens distortion artifacts during frame interpolation. This property's default value is <doc://com.apple.documentation/documentation/swift/false>.
+func (o *MTLFXFrameInterpolatorDescriptor) IsDistortionTextureEnabled() bool {
+	_ret := objc.Send[bool](o.Ptr(), _mTLFXFrameInterpolatorDescriptorSelIsDistortionTextureEnabled)
+	return _ret
+}
+
+func (o *MTLFXFrameInterpolatorDescriptor) SetDistortionTextureEnabled(distortionTextureEnabled bool) {
+	o.Ptr().Send(_mTLFXFrameInterpolatorDescriptorSelSetDistortionTextureEnabled, distortionTextureEnabled)
+}
+
+// A Boolean value that indicates whether the frame interpolator requires the client to provide a previous color texture. When this property is YES (the default), you must assign a valid texture to the interpolator's “prevColorTexture“ property before encoding. When NO, the frame interpolator internally manages the previous color data and “prevColorTexture“ may be nil. This property's default value is <doc://com.apple.documentation/documentation/swift/true>.
+func (o *MTLFXFrameInterpolatorDescriptor) RequiresPrevColorTexture() bool {
+	_ret := objc.Send[bool](o.Ptr(), _mTLFXFrameInterpolatorDescriptorSelRequiresPrevColorTexture)
+	return _ret
+}
+
+func (o *MTLFXFrameInterpolatorDescriptor) SetRequiresPrevColorTexture(requiresPrevColorTexture bool) {
+	o.Ptr().Send(_mTLFXFrameInterpolatorDescriptorSelSetRequiresPrevColorTexture, requiresPrevColorTexture)
 }

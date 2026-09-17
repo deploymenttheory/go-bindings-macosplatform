@@ -16,8 +16,6 @@ import (
 )
 
 // CachedURLResponse is an idiomatic wrapper over the Objective-C class NSCachedURLResponse.
-//
-// A cached response to a URL request.
 type CachedURLResponse struct {
 	objref.Handle
 }
@@ -74,7 +72,7 @@ func (cur *CachedURLResponse) String() string {
 	return rt.Description(objref.IDOf(cur))
 }
 
-// NewCachedURLResponseWithResponseData initializes an NSCachedURLResponse with the given response and data. A default NSURLCacheStoragePolicy is used for NSCachedURLResponse objects initialized with this method: NSURLCacheStorageAllowed.
+// NewCachedURLResponseWithResponseData creates a cached URL response instance. The cache storage policy is set to the default, `NSURLCacheStorageAllowed`. - Parameters: - response: The response to cache. - data: The data to cache. - Returns: A cached URL response object, containing the response and data.
 func NewCachedURLResponseWithResponseData(response *URLResponse, data []byte) *CachedURLResponse {
 	defer runtime.KeepAlive(response)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSCachedURLResponse")), objc.RegisterName("alloc"))
@@ -82,7 +80,7 @@ func NewCachedURLResponseWithResponseData(response *URLResponse, data []byte) *C
 	return cachedURLResponseAdopt(_id)
 }
 
-// NewCachedURLResponseWithResponseDataUserInfoStoragePolicy initializes an NSCachedURLResponse with the given response, data, user-info dictionary, and storage policy.
+// NewCachedURLResponseWithResponseDataUserInfoStoragePolicy creates a cached URL response with a given server response, data, user-info dictionary, and storage policy. - Parameters: - response: The response to cache. - data: The data to cache. - userInfo: An optional dictionary of user information. May be `nil`. - storagePolicy: An `NSURLCacheStoragePolicy` constant. - Returns: A cached URL response object, containing the response and data.
 func NewCachedURLResponseWithResponseDataUserInfoStoragePolicy(response *URLResponse, data []byte, userInfo obj.Object, storagePolicy URLCacheStoragePolicy) *CachedURLResponse {
 	defer runtime.KeepAlive(response)
 	defer runtime.KeepAlive(userInfo)
@@ -103,28 +101,28 @@ func (cur *CachedURLResponse) WithScriptingProperties(scriptingProperties map[st
 	return cur
 }
 
-// Response returns the response wrapped by this instance.
+// Response returns the URL response object associated with the instance.
 func (cur *CachedURLResponse) Response() *URLResponse {
 	defer runtime.KeepAlive(cur)
 	_r := objc.Send[objc.ID](objref.IDOf(cur), objc.RegisterName("response"))
 	return URLResponseFromID(_r)
 }
 
-// Data returns the data of the receiver.
+// Data returns the cached response's data.
 func (cur *CachedURLResponse) Data() []byte {
 	defer runtime.KeepAlive(cur)
 	_r := objc.Send[objc.ID](objref.IDOf(cur), objc.RegisterName("data"))
 	return rt.NSDataToBytes(_r)
 }
 
-// UserInfo returns the userInfo dictionary of the receiver.
+// UserInfo returns the cached response's user info dictionary.
 func (cur *CachedURLResponse) UserInfo() obj.Object {
 	defer runtime.KeepAlive(cur)
 	_r := objc.Send[objc.ID](objref.IDOf(cur), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)
 }
 
-// StoragePolicy returns the NSURLCacheStoragePolicy constant of the receiver.
+// StoragePolicy returns the cached response's storage policy.
 func (cur *CachedURLResponse) StoragePolicy() URLCacheStoragePolicy {
 	defer runtime.KeepAlive(cur)
 	_r := objc.Send[URLCacheStoragePolicy](objref.IDOf(cur), objc.RegisterName("storagePolicy"))

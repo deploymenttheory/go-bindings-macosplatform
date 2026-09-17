@@ -49,7 +49,7 @@ type CMSampleTimingInfo struct {
 	DecodeTimeStamp       CMTime
 }
 
-// A tag to set additional metadata on media buffers.
+// @typedef CMTag @abstract An efficient structure used to label something about a resource or other media construct. @discussion A structure holding a CMTagCategory, CMTagDataType, and a CMTagValue serving to represent a particular tag that might be assigned to or associated with another resource. There is only one of each of the category, the dataType and the value so any notion of "has" is about the respective singular element.  CMTags are a value type. No lifetime management such as allocation or retain and release semantics are needed. CMTags can be passed by value, returned by value and stored in other structures or arrays or on the stack.  CMTags carry a single value that can be carried in 64 bits. This can include data types such as signed 64-bit integers, floating point values fitting in 64 bits, up to 64 bit of flags, and other data types fitting within 64 bits. Signaling of the data type is carried in the CMTagDataType. The data types can be extended through registration with the CoreMedia team.  A CMTag value should not be used to carry pointers. If such a reference is needed, it is okay to carry an index into an out-of-band data structure that itself has a memory reference or an object reference. @field category CMTagCategory for the tag. @field dataType CMTagDataType for the tag indicating the data type of the value. @field value CMTagValue for the value of the CMTag (e.g., a signed 64-bit integer.)
 type CMTag struct {
 	Category CMTagCategory
 	DataType CMTagDataType

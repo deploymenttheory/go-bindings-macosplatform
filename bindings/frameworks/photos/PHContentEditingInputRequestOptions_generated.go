@@ -98,9 +98,35 @@ func (ceiro *ContentEditingInputRequestOptions) WithProgressHandler(progressHand
 	return ceiro
 }
 
+// WithSkipsDisplaySizeImage sets set this value to true if you don’t want a displaySizeImage on the PHContentEditingInput. This can give performance wins when the image will not be used.
+func (ceiro *ContentEditingInputRequestOptions) WithSkipsDisplaySizeImage(skipsDisplaySizeImage bool) *ContentEditingInputRequestOptions {
+	objc.Send[objc.ID](objref.IDOf(ceiro), objc.RegisterName("setSkipsDisplaySizeImage:"), skipsDisplaySizeImage)
+	return ceiro
+}
+
+// WithOriginalResourceChoice sets the original resource to use as the unadjusted base when fulfilling the request.
+func (ceiro *ContentEditingInputRequestOptions) WithOriginalResourceChoice(originalResourceChoice OriginalResourceChoice) *ContentEditingInputRequestOptions {
+	objc.Send[objc.ID](objref.IDOf(ceiro), objc.RegisterName("setOriginalResourceChoice:"), originalResourceChoice)
+	return ceiro
+}
+
 // IsNetworkAccessAllowed reports whether the object is network access allowed.
 func (ceiro *ContentEditingInputRequestOptions) IsNetworkAccessAllowed() bool {
 	defer runtime.KeepAlive(ceiro)
 	_r := objc.Send[bool](objref.IDOf(ceiro), objc.RegisterName("isNetworkAccessAllowed"))
+	return _r
+}
+
+// SkipsDisplaySizeImage reports whether set this value to `true` if you don't want a `displaySizeImage` on the `PHContentEditingInput`. This can give performance wins when the image will not be used.
+func (ceiro *ContentEditingInputRequestOptions) SkipsDisplaySizeImage() bool {
+	defer runtime.KeepAlive(ceiro)
+	_r := objc.Send[bool](objref.IDOf(ceiro), objc.RegisterName("skipsDisplaySizeImage"))
+	return _r
+}
+
+// OriginalResourceChoice returns the original resource to use as the unadjusted base when fulfilling the request. When set, the content editing input request is fulfilled as though the asset's original resource choice were the value specified here. This property applies to RAW+JPEG assets only, and is intended for switching between the RAW and compressed resource of such an asset. Setting it for an asset that has only a RAW resource is an error.
+func (ceiro *ContentEditingInputRequestOptions) OriginalResourceChoice() OriginalResourceChoice {
+	defer runtime.KeepAlive(ceiro)
+	_r := objc.Send[OriginalResourceChoice](objref.IDOf(ceiro), objc.RegisterName("originalResourceChoice"))
 	return _r
 }

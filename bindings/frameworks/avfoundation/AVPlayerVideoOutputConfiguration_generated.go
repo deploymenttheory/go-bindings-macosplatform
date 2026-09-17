@@ -17,8 +17,6 @@ import (
 )
 
 // PlayerVideoOutputConfiguration is an idiomatic wrapper over the Objective-C class AVPlayerVideoOutputConfiguration.
-//
-// An object that provides configuration information for the related player item.
 type PlayerVideoOutputConfiguration struct {
 	objref.Handle
 }

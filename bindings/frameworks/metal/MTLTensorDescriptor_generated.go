@@ -86,7 +86,7 @@ func (td *TensorDescriptor) WithDimensions(dimensions *TensorExtents) *TensorDes
 	return td
 }
 
-// WithStrides sets an array of strides, in elements, one for each dimension in the tensors you create with this descriptor, if applicable.
+// WithStrides sets an array of strides, in elements, one for each dimension of this tensor, if applicable.
 func (td *TensorDescriptor) WithStrides(strides *TensorExtents) *TensorDescriptor {
 	defer runtime.KeepAlive(strides)
 	objc.Send[objc.ID](objref.IDOf(td), objc.RegisterName("setStrides:"), objref.IDOf(strides))
@@ -105,7 +105,14 @@ func (td *TensorDescriptor) WithUsage(usage TensorUsage) *TensorDescriptor {
 	return td
 }
 
-// WithResourceOptions sets a packed set of the storageMode, cpuCacheMode and hazardTrackingMode properties.
+// WithAuxiliaryPlanes sets the auxiliary plane configurations for this tensor.
+func (td *TensorDescriptor) WithAuxiliaryPlanes(auxiliaryPlanes *TensorAuxiliaryPlaneDescriptorMap) *TensorDescriptor {
+	defer runtime.KeepAlive(auxiliaryPlanes)
+	objc.Send[objc.ID](objref.IDOf(td), objc.RegisterName("setAuxiliaryPlanes:"), objref.IDOf(auxiliaryPlanes))
+	return td
+}
+
+// WithResourceOptions sets a packed set of the storageMode, cpuCacheMode, and hazardTrackingMode properties.
 func (td *TensorDescriptor) WithResourceOptions(resourceOptions ResourceOptions) *TensorDescriptor {
 	objc.Send[objc.ID](objref.IDOf(td), objc.RegisterName("setResourceOptions:"), resourceOptions)
 	return td
@@ -129,21 +136,21 @@ func (td *TensorDescriptor) WithHazardTrackingMode(hazardTrackingMode HazardTrac
 	return td
 }
 
-// Dimensions returns an array of sizes, in elements, one for each dimension of the tensors you create with this descriptor. The default value of this property is a rank one extents with size one.
+// Dimensions returns an array of sizes, in elements, one for each dimension of the tensors you create with this descriptor. Every element of the array needs to be greater than `0`. When “dataType“ is “MTLTensorDataType/MTLTensorDataTypeInt2“, “MTLTensorDataType/MTLTensorDataTypeUInt2“, “MTLTensorDataType/MTLTensorDataTypeInt4“, “MTLTensorDataType/MTLTensorDataTypeUInt4“, “MTLTensorDataType/MTLTensorDataTypeMetalFloat4E2M1“, “MTLTensorDataType/MTLTensorDataTypeMetalFloat8E4M3“, “MTLTensorDataType/MTLTensorDataTypeMetalFloat8E5M2“, or “MTLTensorDataType/MTLTensorDataTypeMetalFloat8UE8M0“: - The dimension value of the array's first element needs to be a multiple of 32 elements. - The extents needs to have at least one dimension. If the tensor has auxiliary planes, each dimension needs to be evenly divisible by its corresponding block factor. The default value of this property is a rank one extents with size one.
 func (td *TensorDescriptor) Dimensions() *TensorExtents {
 	defer runtime.KeepAlive(td)
 	_r := objc.Send[objc.ID](objref.IDOf(td), objc.RegisterName("dimensions"))
 	return TensorExtentsFromID(_r)
 }
 
-// Strides returns an array of strides, in elements, one for each dimension in the tensors you create with this descriptor, if applicable. You are responsible for ensuring `strides` meets the following requirements: - The first element of `strides` is one. - If “usage“ contains “MTLTensorUsage/MTLTensorUsageMachineLearning“, the second element of `strides` is aligned to 64 bytes, and for any `i` larger than one, `strides[i]` is equal to `strides[i-1] * dimensions[i-1]`. - If “dataType“ is a sub-byte “MTLTensorDataType“, for any `i` greater than or equal to 1, `strides[i]` is aligned to 128 bytes. This is not a requirement for non-sub-byte data types, but following this convention improves performance. Only set this property when creating tensors from a buffer.
+// Strides returns an array of strides, in elements, one for each dimension of this tensor, if applicable. The stride value of the array's first element needs to be exactly `1`, because it is the innermost dimension. The strides for the subsequent dimensions can have different requirements based on the value of other properties. When the “usage“ property includes the “MTLTensorUsage/MTLTensorUsageMachineLearning“ option: - The second element of the array needs to be a multiple of 64 bytes. - The rest of the elements in the array need to equal the product of the previous stride multiplied with the size of the previous dimension. For example: `strides[i] = strides[i - 1] * dimensions[i - 1]`. When “dataType“ is “MTLTensorDataType/MTLTensorDataTypeInt2“, “MTLTensorDataType/MTLTensorDataTypeUInt2“, “MTLTensorDataType/MTLTensorDataTypeInt4“, “MTLTensorDataType/MTLTensorDataTypeUInt4“, “MTLTensorDataType/MTLTensorDataTypeMetalFloat4E2M1“, “MTLTensorDataType/MTLTensorDataTypeMetalFloat8E4M3“, “MTLTensorDataType/MTLTensorDataTypeMetalFloat8E5M2“, or “MTLTensorDataType/MTLTensorDataTypeMetalFloat8UE8M0“, all elements of the array, except for the first element, need to be a multiple of 128 bytes. > Tip: You can improve runtime performance by using strides that are multiples of 128, even when it's not a requirement. Only set this property when creating tensors from a buffer.
 func (td *TensorDescriptor) Strides() *TensorExtents {
 	defer runtime.KeepAlive(td)
 	_r := objc.Send[objc.ID](objref.IDOf(td), objc.RegisterName("strides"))
 	return TensorExtentsFromID(_r)
 }
 
-// DataType returns a data format for the tensors you create with this descriptor. The default value of this property is “MTLTensorDataType/MTLTensorDataTypeFloat32“.
+// DataType returns the data format of all elements in the data plane. The default value of this property is “MTLTensorDataType/MTLTensorDataTypeFloat32“. “MTLTensorDataType/MTLTensorDataTypeMetalFloat8UE8M0“ is not a valid data type for this property.
 func (td *TensorDescriptor) DataType() TensorDataType {
 	defer runtime.KeepAlive(td)
 	_r := objc.Send[TensorDataType](objref.IDOf(td), objc.RegisterName("dataType"))
@@ -157,7 +164,14 @@ func (td *TensorDescriptor) Usage() TensorUsage {
 	return _r
 }
 
-// ResourceOptions returns a packed set of the `storageMode`, `cpuCacheMode` and `hazardTrackingMode` properties.
+// AuxiliaryPlanes returns the auxiliary plane configurations for this tensor. Set this property with a populated “MTLTensorAuxiliaryPlaneDescriptorMap“ to create a multi-plane tensor. When `nil`, the tensor has only a data plane. Multi-plane tensors do not support “MTLTensorUsage/MTLTensorUsageMachineLearning“. Use “MTLTensorUsage/MTLTensorUsageCompute“ or “MTLTensorUsage/MTLTensorUsageRender“. Multi-plane tensors do not support data types larger than one byte as the data plane type. Multi-plane tensors do not support rank zero. The default value is `nil`.
+func (td *TensorDescriptor) AuxiliaryPlanes() *TensorAuxiliaryPlaneDescriptorMap {
+	defer runtime.KeepAlive(td)
+	_r := objc.Send[objc.ID](objref.IDOf(td), objc.RegisterName("auxiliaryPlanes"))
+	return TensorAuxiliaryPlaneDescriptorMapFromID(_r)
+}
+
+// ResourceOptions returns a packed set of the “storageMode“, “cpuCacheMode“, and “hazardTrackingMode“ properties.
 func (td *TensorDescriptor) ResourceOptions() ResourceOptions {
 	defer runtime.KeepAlive(td)
 	_r := objc.Send[ResourceOptions](objref.IDOf(td), objc.RegisterName("resourceOptions"))
@@ -171,7 +185,7 @@ func (td *TensorDescriptor) CPUCacheMode() CPUCacheMode {
 	return _r
 }
 
-// StorageMode returns a value that configures the memory location and access permissions of tensors you create with this descriptor. The default value of this property defaults to “MTLStorageMode/MTLStorageModeShared“.
+// StorageMode returns a value that configures the memory location and access permissions of tensors you create with this descriptor. The default value of this property is “MTLStorageMode/MTLStorageModeShared“.
 func (td *TensorDescriptor) StorageMode() StorageMode {
 	defer runtime.KeepAlive(td)
 	_r := objc.Send[StorageMode](objref.IDOf(td), objc.RegisterName("storageMode"))

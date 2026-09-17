@@ -87,7 +87,7 @@ func EmitFunctions(
 				"purego.RegisterLibFunc(&%s, %s, %q)",
 				funcVarName,
 				dylibVarName,
-				fn.Name,
+				fn.LinkSymbol(),
 			),
 		})
 	}
@@ -125,7 +125,7 @@ func buildFunctionVarView(
 	if _, retIsBlock := mapper.ResolveBlockSignature(fn.Return.ObjCType); retIsBlock {
 		retType = "objc.Block"
 	} else if fn.Return.ObjCType != "void" && fn.Return.ObjCType != "" {
-		retType = mapper.GoReturnType(fn.Return.ObjCType, ctx, imports)
+		retType = rawFunctionGoType(fn.Return.ObjCType, ctx, mapper, imports, true)
 		if retType == "" || isUnexportedXPkg(retType) {
 			retType = "unsafe.Pointer"
 		}
@@ -138,7 +138,7 @@ func buildFunctionVarView(
 			params = append(params, "objc.Block")
 			continue
 		}
-		goType := mapper.GoType(param.ObjCType, ctx, imports)
+		goType := rawFunctionGoType(param.ObjCType, ctx, mapper, imports, false)
 		if goType == "" || isUnexportedXPkg(goType) {
 			goType = "unsafe.Pointer"
 		}
@@ -200,7 +200,7 @@ func buildFunctionWrapperView(
 		// surface the raw block object.
 		retType = "objc.Block"
 	} else if fn.Return.ObjCType != "void" && fn.Return.ObjCType != "" {
-		retType = mapper.GoReturnType(fn.Return.ObjCType, ctx, imports)
+		retType = rawFunctionGoType(fn.Return.ObjCType, ctx, mapper, imports, true)
 		if retType == "" || isUnexportedXPkg(retType) {
 			retType = "unsafe.Pointer"
 		}
@@ -241,7 +241,7 @@ func buildFunctionWrapperView(
 			continue
 		}
 
-		goType := mapper.GoType(param.ObjCType, ctx, imports)
+		goType := rawFunctionGoType(param.ObjCType, ctx, mapper, imports, false)
 		if goType == "" || isUnexportedXPkg(goType) {
 			goType = "unsafe.Pointer"
 		}
@@ -293,6 +293,35 @@ func buildFunctionWrapperView(
 		built.ReturnKind = 1
 	}
 	return built
+}
+
+// Protocol-qualified objects have the C ABI of id, not a Go interface. The raw
+// protocol interfaces have no concrete FromID wrapper; expose the native handle
+// instead. Preserve pointer depth for out-parameters such as id<NSObject> *.
+func rawFunctionGoType(
+	qt string,
+	ctx typemap.Context,
+	mapper *typemap.Mapper,
+	imports typemap.ImportSet,
+	isReturn bool,
+) string {
+	resolved := strings.TrimSpace(qt)
+	for depth := 0; depth < 12; depth++ {
+		if strings.HasPrefix(resolved, "id<") {
+			if end := strings.LastIndexByte(resolved, '>'); end >= 0 {
+				return strings.Repeat("*", strings.Count(resolved[end+1:], "*")) + "objc.ID"
+			}
+		}
+		next, ok := mapper.TypedefIndex[resolved]
+		if !ok || next == resolved {
+			break
+		}
+		resolved = strings.TrimSpace(next)
+	}
+	if isReturn {
+		return mapper.GoReturnType(qt, ctx, imports)
+	}
+	return mapper.GoType(qt, ctx, imports)
 }
 
 // EmittableFunctions returns the free C functions the raw emitter emits for

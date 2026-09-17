@@ -9,8 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A general-purpose recorder of operations that enables undo and redo.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsundomanager
 type NSUndoManager struct {
 	NSObject
@@ -83,7 +81,7 @@ func (o *NSUndoManager) EndUndoGrouping() {
 	})
 }
 
-// Disables the recording of undo operations, whether by “registerUndoWithTarget:selector:object:“ or by invocation-based undo. This method can be invoked multiple times by multiple clients. The “enableUndoRegistration“ method must be invoked an equal number of times to re-enable undo registration.
+// Disables the recording of undo operations. This method can be invoked multiple times by multiple clients. The “enableUndoRegistration“ method must be invoked an equal number of times to re-enable undo registration.
 func (o *NSUndoManager) DisableUndoRegistration() {
 	purego.Main(func() {
 		o.Ptr().Send(_nSUndoManagerSelDisableUndoRegistration)
@@ -97,7 +95,7 @@ func (o *NSUndoManager) EnableUndoRegistration() {
 	})
 }
 
-// Closes the top-level undo group if necessary and invokes “undoNestedGroup“. This method also invokes “endUndoGrouping“ if the nesting level is 1. Raises an “NSInternalInconsistencyException“ if more than one undo group is open (that is, if the last group isn’t at the top level). This method posts an “NSUndoManagerCheckpointNotification“.
+// Closes the top-level undo group if necessary, and then performs undo operations on the group. This method also invokes “endUndoGrouping“ if the nesting level is 1. Raises an “NSInternalInconsistencyException“ if more than one undo group is open (that is, if the last group isn’t at the top level). This method posts an “NSUndoManagerCheckpointNotification“.
 func (o *NSUndoManager) Undo() {
 	purego.Main(func() {
 		o.Ptr().Send(_nSUndoManagerSelUndo)
@@ -118,7 +116,7 @@ func (o *NSUndoManager) UndoNestedGroup() {
 	})
 }
 
-// Clears the undo and redo stacks and re-enables the receiver.
+// Clears the undo and redo stacks and reenables the manager.
 func (o *NSUndoManager) RemoveAllActions() {
 	purego.Main(func() {
 		o.Ptr().Send(_nSUndoManagerSelRemoveAllActions)
@@ -151,7 +149,7 @@ func (o *NSUndoManager) PrepareWithInvocationTarget(target objc.ID) objc.ID {
 	return _mainthread0
 }
 
-// Records a single undo operation for a given target so that when the manager performs an undo, it executes the specified block.
+// Registers the specified closure to implement a single undo operation that the target receives. As with other undo operations, this does not strongly retain target. Care should be taken to avoid introducing retain cycles by other references captured by the block. - Parameter target: The target of the undo operation. - Parameter undoHandler: The block to be executed when an operation is undone. The block takes a single argument, the target of the undo operation.
 func (o *NSUndoManager) RegisterUndoWithTargetHandler(target objc.ID, undoHandler func(objc.ID)) {
 	var __block_undoHandler objc.Block
 	if undoHandler != nil {
@@ -179,7 +177,7 @@ func (o *NSUndoManager) SetActionName(actionName *NSString) {
 	})
 }
 
-// Get a value from the undo action's user info - Parameter key: Which value should be retrieved
+// Retrieves the undo action's user info value for the given key. - Parameter key: Which value should be retrieved
 func (o *NSUndoManager) UndoActionUserInfoValueForKey(key *NSString) objc.ID {
 	var _mainthread0 objc.ID
 	purego.Main(func() {
@@ -191,7 +189,7 @@ func (o *NSUndoManager) UndoActionUserInfoValueForKey(key *NSString) objc.ID {
 	return _mainthread0
 }
 
-// Get a value from the redo action's user info - Parameter key: Which value should be retrieved
+// Retrieves the redo action's user info value for the given key. - Parameter key: Which value should be retrieved
 func (o *NSUndoManager) RedoActionUserInfoValueForKey(key *NSString) objc.ID {
 	var _mainthread0 objc.ID
 	purego.Main(func() {
@@ -203,14 +201,14 @@ func (o *NSUndoManager) RedoActionUserInfoValueForKey(key *NSString) objc.ID {
 	return _mainthread0
 }
 
-// Set user info for the Undo or Redo command. - Parameter info: Value to be saved in the user info - Parameter key: Key at which the object should be saved
+// Sets a user info value for an undo or redo action. - Parameter info: Value to be saved in the user info - Parameter key: Key at which the object should be saved
 func (o *NSUndoManager) SetActionUserInfoValueForKey(info objc.ID, key *NSString) {
 	purego.Main(func() {
 		o.Ptr().Send(_nSUndoManagerSelSetActionUserInfoValueForKey, info, key.Ptr())
 	})
 }
 
-// Returns the complete, localized title of the Undo menu command for the action identified by the given name. Override this method if you want to customize the localization behaviour. This method is invoked by “undoMenuItemTitle“. - Parameter actionName: The name of the undo action. - Returns: The localized title of the undo menu item.
+// Returns the localized title of the Undo menu command for the identified action. Override this method if you want to customize the localization behaviour. This method is invoked by “undoMenuItemTitle“. - Parameter actionName: The name of the undo action. - Returns: The localized title of the undo menu item.
 func (o *NSUndoManager) UndoMenuTitleForUndoActionName(actionName *NSString) *NSString {
 	var _mainthread0 *NSString
 	purego.Main(func() {
@@ -225,7 +223,7 @@ func (o *NSUndoManager) UndoMenuTitleForUndoActionName(actionName *NSString) *NS
 	return _mainthread0
 }
 
-// Returns the complete, localized title of the Redo menu command for the action identified by the given name. Override this method if you want to customize the localization behaviour. This method is invoked by “redoMenuItemTitle“. - Parameter actionName: The name of the redo action. - Returns: The localized title of the redo menu item.
+// Returns the localized title of the Redo menu command for the identified action. Override this method if you want to customize the localization behaviour. This method is invoked by “redoMenuItemTitle“. - Parameter actionName: The name of the redo action. - Returns: The localized title of the redo menu item.
 func (o *NSUndoManager) RedoMenuTitleForUndoActionName(actionName *NSString) *NSString {
 	var _mainthread0 *NSString
 	purego.Main(func() {
@@ -240,7 +238,7 @@ func (o *NSUndoManager) RedoMenuTitleForUndoActionName(actionName *NSString) *NS
 	return _mainthread0
 }
 
-// The number of nested undo groups (or redo groups, if Redo was invoked last) in the current event loop. An integer indicating the number of nested groups. If `0` is returned, there is no open undo or redo group.
+// The number of nested undo groups (or redo groups, if redo is the most recent operation) in the current event loop. An integer indicating the number of nested groups. If `0` is returned, there is no open undo or redo group.
 func (o *NSUndoManager) GroupingLevel() int {
 	var _mainthread0 int
 	purego.Main(func() {
@@ -252,7 +250,7 @@ func (o *NSUndoManager) GroupingLevel() int {
 	return _mainthread0
 }
 
-// Whether the recording of undo operations is enabled.
+// A Boolean value that indicates whether the recording of undo operations is enabled.
 func (o *NSUndoManager) IsUndoRegistrationEnabled() bool {
 	var _mainthread0 bool
 	purego.Main(func() {
@@ -264,7 +262,7 @@ func (o *NSUndoManager) IsUndoRegistrationEnabled() bool {
 	return _mainthread0
 }
 
-// A Boolean value that indicates whether the receiver automatically creates undo groups around each pass of the run loop. If `true`, the receiver automatically creates undo groups around each pass of the run loop. The default is `true`. If you turn automatic grouping off, you must close groups explicitly before invoking either “undo“ or “undoNestedGroup“.
+// A Boolean value that indicates whether the manager automatically creates undo groups around each pass of the run loop. If `true`, the receiver automatically creates undo groups around each pass of the run loop. The default is `true`. If you turn automatic grouping off, you must close groups explicitly before invoking either “undo“ or “undoNestedGroup“.
 func (o *NSUndoManager) GroupsByEvent() bool {
 	var _mainthread0 bool
 	purego.Main(func() {
@@ -321,7 +319,7 @@ func (o *NSUndoManager) SetRunLoopModes(runLoopModes *NSArray[*NSString]) {
 	})
 }
 
-// Whether the receiver has any actions to undo. The return value does not mean you can safely invoke “undo“ or “undoNestedGroup“ — you may have to close open undo groups first.
+// A Boolean value that indicates whether the manager has any actions to undo. The return value does not mean you can safely invoke “undo“ or “undoNestedGroup“ — you may have to close open undo groups first.
 func (o *NSUndoManager) CanUndo() bool {
 	var _mainthread0 bool
 	purego.Main(func() {
@@ -333,7 +331,7 @@ func (o *NSUndoManager) CanUndo() bool {
 	return _mainthread0
 }
 
-// Whether the receiver has any actions to redo. Because any undo operation registered clears the redo stack, this method posts an NSUndoManagerCheckpointNotification to allow clients to apply their pending operations before testing the redo stack.
+// A Boolean value that indicates whether the manager has any actions to redo. Because any undo operation registered clears the redo stack, this method posts an NSUndoManagerCheckpointNotification to allow clients to apply their pending operations before testing the redo stack.
 func (o *NSUndoManager) CanRedo() bool {
 	var _mainthread0 bool
 	purego.Main(func() {
@@ -345,7 +343,7 @@ func (o *NSUndoManager) CanRedo() bool {
 	return _mainthread0
 }
 
-// How many times `undo` can be invoked before there are no more actions left to be undone
+// The number of times you can invoke undo before there are no actions left to undo. A nonzero value doesn't imply you can safely invoke “undo“ immediately, because you may have to close open undo groups first.
 func (o *NSUndoManager) UndoCount() uint {
 	var _mainthread0 uint
 	purego.Main(func() {
@@ -357,7 +355,7 @@ func (o *NSUndoManager) UndoCount() uint {
 	return _mainthread0
 }
 
-// How many times `redo` can be invoked before there are no more actions left to be redone
+// The number of times you can invoke redo before there are no actions left to redo.
 func (o *NSUndoManager) RedoCount() uint {
 	var _mainthread0 uint
 	purego.Main(func() {
@@ -369,7 +367,7 @@ func (o *NSUndoManager) RedoCount() uint {
 	return _mainthread0
 }
 
-// Whether the receiver is in the process of performing its “undo“ or “undoNestedGroup“ method.
+// Returns a Boolean value that indicates whether the manager is in the process of performing an undo action.
 func (o *NSUndoManager) IsUndoing() bool {
 	var _mainthread0 bool
 	purego.Main(func() {
@@ -381,7 +379,7 @@ func (o *NSUndoManager) IsUndoing() bool {
 	return _mainthread0
 }
 
-// Whether the receiver is in the process of performing its “redo“ method.
+// Returns a Boolean value that indicates whether the manager is in the process of performing a redo action.
 func (o *NSUndoManager) IsRedoing() bool {
 	var _mainthread0 bool
 	purego.Main(func() {
@@ -447,7 +445,7 @@ func (o *NSUndoManager) RedoActionName() *NSString {
 	return _mainthread0
 }
 
-// The complete title of the Undo menu command, for example, “Undo Paste.” Returns “Undo” if no action name has been assigned or nil if there is nothing to undo.
+// The title of the Undo menu command, such as Undo Paste. Returns “Undo” if no action name has been assigned or nil if there is nothing to undo.
 func (o *NSUndoManager) UndoMenuItemTitle() *NSString {
 	var _mainthread0 *NSString
 	purego.Main(func() {
@@ -462,7 +460,7 @@ func (o *NSUndoManager) UndoMenuItemTitle() *NSString {
 	return _mainthread0
 }
 
-// The complete title of the Redo menu command, for example, “Redo Paste.” Returns “Redo” if no action name has been assigned or nil if there is nothing to redo.
+// The title of the Redo menu command, such as Redo Paste. Returns “Redo” if no action name has been assigned or nil if there is nothing to redo.
 func (o *NSUndoManager) RedoMenuItemTitle() *NSString {
 	var _mainthread0 *NSString
 	purego.Main(func() {

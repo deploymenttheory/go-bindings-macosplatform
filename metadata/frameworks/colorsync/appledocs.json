@@ -4,23 +4,29 @@
   "source": "developer.apple.com DocC render API",
   "enums": {
     "ColorSyncAlphaInfo": {
+      "doc": "The location of the alpha component in a pixel, and whether it’s premultiplied.",
       "url": "https://developer.apple.com/documentation/colorsync/colorsyncalphainfo"
     },
     "ColorSyncDataDepth": {
+      "doc": "The bit depth and numeric type of a color component in a pixel.",
       "url": "https://developer.apple.com/documentation/colorsync/colorsyncdatadepth"
     }
   },
   "structs": {
     "ColorSyncCMM": {
+      "doc": "A reference to a Color Management Module (CMM).",
       "url": "https://developer.apple.com/documentation/colorsync/colorsynccmm"
     },
     "ColorSyncMD5": {
+      "doc": "An MD5 digest that uniquely identifies a profile, as defined by the ICC specification.",
       "url": "https://developer.apple.com/documentation/colorsync/colorsyncmd5"
     },
     "ColorSyncProfile": {
+      "doc": "A reference to an immutable International Color Consortium (ICC) color profile.",
       "url": "https://developer.apple.com/documentation/colorsync/colorsyncprofile"
     },
     "ColorSyncTransform": {
+      "doc": "A reference to a color transform that converts color data between profiles.",
       "url": "https://developer.apple.com/documentation/colorsync/colorsynctransform"
     }
   }

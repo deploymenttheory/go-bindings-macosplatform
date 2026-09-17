@@ -11,8 +11,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// The basic infrastructure necessary for interacting with an assistive app.
-//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsaccessibilityelement
 type NSAccessibilityElement struct {
 	foundation.NSObject

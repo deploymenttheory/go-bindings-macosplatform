@@ -99,21 +99,21 @@ func (dor *DistantObjectRequest) Reply(exception *Exception) {
 	objc.Send[objc.ID](objref.IDOf(dor), objc.RegisterName("replyWithException:"), objref.IDOf(exception))
 }
 
-// Invocation returns the invocation.
+// Invocation returns the invocation object for the request.
 func (dor *DistantObjectRequest) Invocation() *Invocation {
 	defer runtime.KeepAlive(dor)
 	_r := objc.Send[objc.ID](objref.IDOf(dor), objc.RegisterName("invocation"))
 	return InvocationFromID(_r)
 }
 
-// Connection returns the connection.
+// Connection returns the connection over which the request was received.
 func (dor *DistantObjectRequest) Connection() *Connection {
 	defer runtime.KeepAlive(dor)
 	_r := objc.Send[objc.ID](objref.IDOf(dor), objc.RegisterName("connection"))
 	return ConnectionFromID(_r)
 }
 
-// Conversation returns the conversation.
+// Conversation returns the token object representing the conversation in which the request was received.
 func (dor *DistantObjectRequest) Conversation() obj.Object {
 	defer runtime.KeepAlive(dor)
 	_r := objc.Send[objc.ID](objref.IDOf(dor), objc.RegisterName("conversation"))

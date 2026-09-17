@@ -36,6 +36,8 @@ var (
 	_pKPaymentRequestSelSetCountryCode                                                   = objc.RegisterName("setCountryCode:")
 	_pKPaymentRequestSelSupportedNetworks                                                = objc.RegisterName("supportedNetworks")
 	_pKPaymentRequestSelSetSupportedNetworks                                             = objc.RegisterName("setSupportedNetworks:")
+	_pKPaymentRequestSelUnsupportedPrimaryAccountIdentifiers                             = objc.RegisterName("unsupportedPrimaryAccountIdentifiers")
+	_pKPaymentRequestSelSetUnsupportedPrimaryAccountIdentifiers                          = objc.RegisterName("setUnsupportedPrimaryAccountIdentifiers:")
 	_pKPaymentRequestSelMerchantCapabilities                                             = objc.RegisterName("merchantCapabilities")
 	_pKPaymentRequestSelSetMerchantCapabilities                                          = objc.RegisterName("setMerchantCapabilities:")
 	_pKPaymentRequestSelSupportsCouponCode                                               = objc.RegisterName("supportsCouponCode")
@@ -185,6 +187,18 @@ func (o *PKPaymentRequest) SupportedNetworks() *foundation.NSArray[*foundation.N
 
 func (o *PKPaymentRequest) SetSupportedNetworks(supportedNetworks *foundation.NSArray[*foundation.NSString]) {
 	o.Ptr().Send(_pKPaymentRequestSelSetSupportedNetworks, supportedNetworks.Ptr())
+}
+
+func (o *PKPaymentRequest) UnsupportedPrimaryAccountIdentifiers() *foundation.NSArray[*foundation.NSString] {
+	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentRequestSelUnsupportedPrimaryAccountIdentifiers)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
+}
+
+func (o *PKPaymentRequest) SetUnsupportedPrimaryAccountIdentifiers(unsupportedPrimaryAccountIdentifiers *foundation.NSArray[*foundation.NSString]) {
+	o.Ptr().Send(_pKPaymentRequestSelSetUnsupportedPrimaryAccountIdentifiers, unsupportedPrimaryAccountIdentifiers.Ptr())
 }
 
 func (o *PKPaymentRequest) MerchantCapabilities() PKMerchantCapability {

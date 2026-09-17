@@ -9,7 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A notification center buffer.
+// A notification center buffer. Whereas a notification center distributes notifications when posted, notifications placed into the queue can be delayed until the end of the current pass through the run loop or until the run loop is idle. Duplicate notifications can be coalesced so that only one notification is sent although multiple notifications are posted. A notification queue maintains notifications in first in, first out (FIFO) order. When a notification moves to the front of the queue, the queue posts it to the notification center, which in turn dispatches the notification to all objects registered as observers. Every thread has a default notification queue, which is associated with the default notification center for the process. You can create your own notification queues and have multiple queues per center and thread.
 //
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsnotificationqueue
 type NSNotificationQueue struct {
@@ -35,6 +35,7 @@ func NSNotificationQueueFromID(id objc.ID) *NSNotificationQueue {
 	return o
 }
 
+// Initializes and returns a notification queue for the specified notification center.
 func (o *NSNotificationQueue) InitWithNotificationCenter(notificationCenter *NSNotificationCenter) *NSNotificationQueue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNotificationQueueSelInitWithNotificationCenter, notificationCenter.Ptr())
 	if _ret != 0 {
@@ -43,18 +44,22 @@ func (o *NSNotificationQueue) InitWithNotificationCenter(notificationCenter *NSN
 	return NSNotificationQueueFromID(_ret)
 }
 
+// Adds a notification to the notification queue with a specified posting style.
 func (o *NSNotificationQueue) EnqueueNotificationPostingStyle(notification *NSNotification, postingStyle NSPostingStyle) {
 	o.Ptr().Send(_nSNotificationQueueSelEnqueueNotificationPostingStyle, notification.Ptr(), postingStyle)
 }
 
+// Adds a notification to the notification queue with a specified posting style, criteria for coalescing, and run loop mode. The notification queue will only post the notification to its notification center if the run loop is in one of the modes provided in the array. The modes parameter may be nil, in which case it defaults to NSDefaultRunLoopMode.
 func (o *NSNotificationQueue) EnqueueNotificationPostingStyleCoalesceMaskForModes(notification *NSNotification, postingStyle NSPostingStyle, coalesceMask NSNotificationCoalescing, modes *NSArray[*NSString]) {
 	o.Ptr().Send(_nSNotificationQueueSelEnqueueNotificationPostingStyleCoalesceMaskForModes, notification.Ptr(), postingStyle, coalesceMask, modes.Ptr())
 }
 
+// Removes all notifications from the queue that match a provided notification using provided matching criteria.
 func (o *NSNotificationQueue) DequeueNotificationsMatchingCoalesceMask(notification *NSNotification, coalesceMask uint) {
 	o.Ptr().Send(_nSNotificationQueueSelDequeueNotificationsMatchingCoalesceMask, notification.Ptr(), coalesceMask)
 }
 
+// Returns the default notification queue for the current thread. This notification queue uses the default notification center.
 func NSNotificationQueueDefaultQueue() *NSNotificationQueue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSNotificationQueue), _nSNotificationQueueSelDefaultQueue)
 	if _ret != 0 {

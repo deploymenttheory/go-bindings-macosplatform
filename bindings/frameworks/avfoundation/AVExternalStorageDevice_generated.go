@@ -131,6 +131,14 @@ func (esd *ExternalStorageDevice) UUID() *foundation.UUID {
 	return foundation.UUIDFromID(_r)
 }
 
+// ReasonsNotRecommendedForCaptureUse returns a set of reasons why the storage device is not recommended for capture. Contains one or more AVExternalStorageDeviceReasonNotRecommendedForCaptureUse values indicating the issues with the device. Returns an empty set if there are no known issues.
+// The order of the returned elements is unspecified.
+func (esd *ExternalStorageDevice) ReasonsNotRecommendedForCaptureUse() []*foundation.String {
+	defer runtime.KeepAlive(esd)
+	_r := objc.Send[objc.ID](objref.IDOf(esd), objc.RegisterName("reasonsNotRecommendedForCaptureUse"))
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *foundation.String { return foundation.StringFromID(_id) })
+}
+
 // IsNotRecommendedForCaptureUse reports whether the external storage device is not recommended for capture use. This property is used to let the client know if the external storage device is not suitable for camera capture.
 func (esd *ExternalStorageDevice) IsNotRecommendedForCaptureUse() bool {
 	defer runtime.KeepAlive(esd)

@@ -60,6 +60,7 @@ func (o *NSUserScriptTask) ExecuteWithCompletionHandler(handler func(unsafe.Poin
 	o.Ptr().Send(_nSUserScriptTaskSelExecuteWithCompletionHandler, __block_handler)
 }
 
+// The URL of the script file.
 func (o *NSUserScriptTask) ScriptURL() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserScriptTaskSelScriptURL)
 	if _ret != 0 {

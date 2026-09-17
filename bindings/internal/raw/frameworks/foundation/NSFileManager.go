@@ -11,7 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A convenient interface to the contents of the file system, and the primary means of interacting with it.
+// A convenient interface to the contents of the file system, and the primary means of interacting with it. A file manager object lets you examine the contents of the file system and make changes to it. The “FileManager“ class provides convenient access to a shared file manager object that is suitable for most types of file-related manipulations. A file manager object is typically your primary mode of interaction with the file system. You use it to locate, create, copy, and move files and directories. You also use it to get information about a file or directory or change some of its attributes. When specifying the location of files, you can use either “NSURL“ or “NSString“ objects. The use of the “NSURL“ class is generally preferred for specifying file-system items because URLs can convert path information to a more efficient representation internally. You can also obtain a bookmark from an “NSURL“ object, which is similar to an alias and offers a more sure way of locating the file or directory later. If you are moving, copying, linking, or removing files or directories, you can use a delegate in conjunction with a file manager object to manage those operations. The delegate's role is to affirm the operation and to decide whether to proceed when errors occur. In macOS 10.7 and later, the delegate must conform to the “FileManagerDelegate“ protocol. In iOS 5.0 and later and in macOS 10.7 and later, “FileManager“ includes methods for managing items stored in iCloud. Files and directories tagged for cloud storage are synced to iCloud so that they can be made available to the user's iOS devices and Macintosh computers. Changes to an item in one location are propagated to all other locations to ensure the items stay in sync. ### Threading considerations The methods of the shared “FileManager“ object can be called from multiple threads safely. However, if you use a delegate to receive notifications about the status of move, copy, remove, and link operations, you should create a unique instance of the file manager object, assign your delegate to that object, and use that file manager to initiate your operations.
 //
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsfilemanager
 type NSFileManager struct {
@@ -107,6 +107,7 @@ func NSFileManagerFromID(id objc.ID) *NSFileManager {
 	return o
 }
 
+// Returns an array of URLs that identify the mounted volumes available on the device. - Parameters: - propertyKeys: An array of keys that identify the file properties that you want pre-fetched for each volume. For each returned URL, the values for these keys are cached in the corresponding “NSURL“ objects. You may specify `nil` for this parameter. For a list of keys you can specify, see Common File System Resource Keys. - options: Option flags for the enumeration. For a list of possible values, see “FileManager/VolumeEnumerationOptions“. - Returns: An array of `NSURL` objects identifying the mounted volumes. > Important: > This method returns `nil` on platforms other than macOS. This call may block if I/O is required to determine values for the requested `propertyKeys`.
 func (o *NSFileManager) MountedVolumeURLsIncludingResourceValuesForKeysOptions(propertyKeys *NSArray[*NSString], options NSVolumeEnumerationOptions) *NSArray[*NSURL] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelMountedVolumeURLsIncludingResourceValuesForKeysOptions, propertyKeys.Ptr(), options)
 	if _ret != 0 {
@@ -115,6 +116,7 @@ func (o *NSFileManager) MountedVolumeURLsIncludingResourceValuesForKeysOptions(p
 	return NSArrayFromID[*NSURL](_ret)
 }
 
+// Starts the process of unmounting the specified volume. - Parameters: - url: A file URL specifying the volume to be unmounted. - mask: A bitmask of “FileManager/UnmountOptions“ that you can use to customize the unmount operation’s behavior. - completionHandler: A block executed when the unmount operation completes. The block receives an error parameter which is `nil` if unmounting was successful. Otherwise, it indicates why unmounting failed. If the volume is encrypted, it is relocked after being unmounted.
 func (o *NSFileManager) UnmountVolumeAtURLOptionsCompletionHandler(url *NSURL, mask NSFileManagerUnmountOptions, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -126,6 +128,7 @@ func (o *NSFileManager) UnmountVolumeAtURLOptionsCompletionHandler(url *NSURL, m
 	o.Ptr().Send(_nSFileManagerSelUnmountVolumeAtURLOptionsCompletionHandler, url.Ptr(), mask, __block_completionHandler)
 }
 
+// Performs a shallow search of the specified directory and returns URLs for the contained items. - Parameters: - url: The URL for the directory whose contents you want to enumerate. - keys: An array of keys that identify the file properties that you want pre-fetched for each item in the directory. For each returned URL, the specified properties are fetched and cached in the “NSURL“ object. For a list of keys you can specify, see Common File System Resource Keys. If you want directory contents to have no pre-fetched file properties, pass an empty array to this parameter. If you want directory contents to have default set of pre-fetched file properties, pass `nil` to this parameter. - mask: Options for the enumeration. Because this method performs only shallow enumerations, options that prevent descending into subdirectories or packages are not allowed; the only supported option is “FileManager/DirectoryEnumerationOptions/skipsHiddenFiles“. - error: On input, a pointer to an error object. If an error occurs, this pointer is set to an actual error object containing the error information. You may specify `nil` for this parameter if you do not want the error information. - Returns: An array of “NSURL“ objects, each of which identifies a file, directory, or symbolic link contained in `url`. If the directory contains no entries, this method returns an empty array. When using Objective-C, if an error occurs, this method returns `nil` and assigns an appropriate error object to the `error` parameter. This method performs a shallow search of the directory and therefore does not traverse symbolic links or return the contents of any subdirectories. This method also does not return URLs for the current directory ("`.`"), parent directory ("`..`"), or resource forks (files that begin with "`._`") but it does return other hidden files. If you need to perform a deep enumeration, use the “NSFileManager/enumeratorAtURL:includingPropertiesForKeys:options:errorHandler:“ method instead. The order of the files in the returned array is undefined.
 func (o *NSFileManager) ContentsOfDirectoryAtURLIncludingPropertiesForKeysOptionsError(url *NSURL, keys *NSArray[*NSString], mask NSDirectoryEnumerationOptions) (*NSArray[*NSURL], error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelContentsOfDirectoryAtURLIncludingPropertiesForKeysOptionsError, url.Ptr(), keys.Ptr(), mask, unsafe.Pointer(&_nsErr))
@@ -138,6 +141,7 @@ func (o *NSFileManager) ContentsOfDirectoryAtURLIncludingPropertiesForKeysOption
 	return NSArrayFromID[*NSURL](_ret), nil
 }
 
+// Returns an array of URLs for the specified common directory in the requested domains. - Parameters: - directory: The search path directory. The supported values are described in “FileManager/SearchPathDirectory“. - domainMask: The file system domain to search. The value for this parameter is one or more of the constants described in “FileManager/SearchPathDomainMask“. - Returns: An array of “NSURL“ objects identifying the requested directories. The directories are ordered according to the order of the domain mask constants, with items in the user domain first and items in the system domain last. This method is intended to locate known and common directories in the system. For example, setting the directory to “FileManager/SearchPathDirectory/applicationDirectory“, will return the Applications directories in the requested domain. There are a number of common directories available in the “FileManager/SearchPathDirectory“, including: “FileManager/SearchPathDirectory/desktopDirectory“, “FileManager/SearchPathDirectory/applicationSupportDirectory“, and many more.
 func (o *NSFileManager) URLsForDirectoryInDomains(directory NSSearchPathDirectory, domainMask NSSearchPathDomainMask) *NSArray[*NSURL] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelURLsForDirectoryInDomains, directory, domainMask)
 	if _ret != 0 {
@@ -146,6 +150,7 @@ func (o *NSFileManager) URLsForDirectoryInDomains(directory NSSearchPathDirector
 	return NSArrayFromID[*NSURL](_ret)
 }
 
+// Locates and optionally creates the specified common directory in a domain. - Parameters: - directory: The search path directory. The supported values are described in “FileManager/SearchPathDirectory“. - domain: The file system domain to search. The value for this parameter is one of the constants described in “FileManager/SearchPathDomainMask“. You should specify only one domain for your search and you may not specify the “FileManager/SearchPathDomainMask/allDomainsMask“ constant for this parameter. - url: The file URL used to determine the location of the returned URL. Only the volume of this parameter is used. This parameter is ignored unless the `directory` parameter contains the value “FileManager/SearchPathDirectory/itemReplacementDirectory“ and the `domain` parameter contains the value “FileManager/SearchPathDomainMask/userDomainMask“. - shouldCreate: Whether to create the directory if it does not already exist. When creating a temporary directory, this parameter is ignored and the directory is always created. - error: On input, a pointer to an error object. If an error occurs, this pointer is set to an actual error object containing the error information. You may specify `nil` for this parameter if you do not want the error information. - Returns: The “NSURL“ for the requested directory. When using Objective-C, if an error occurs, this method returns `nil` and assigns an appropriate error object to the `error` parameter. You typically use this method to locate one of the standard system directories, such as the `Documents`, `Application Support` or `Caches` directories. After locating (or creating) the desired directory, this method returns the URL for that directory. If more than one appropriate directory exists in the specified domain, this method returns only the first one it finds. > Important: > Passing a directory and domain pair that makes no sense (for example “FileManager/SearchPathDirectory/desktopDirectory“ and “FileManager/SearchPathDomainMask/networkDomainMask“) raises an exception. You can use this method to create a new temporary directory. To do so, specify “FileManager/SearchPathDirectory/itemReplacementDirectory“ for the `directory` parameter, “FileManager/SearchPathDomainMask/userDomainMask“ for the `domain` parameter, and a URL for the `url` parameter which determines the volume of the returned URL. > Important: > If you use this method to create a temporary directory, you should not rely on the existence of that temporary directory after the app is exited. It is recommended that you remove any temporary directories that are created after they're no longer needed.
 func (o *NSFileManager) URLForDirectoryInDomainAppropriateForURLCreateError(directory NSSearchPathDirectory, domain NSSearchPathDomainMask, url *NSURL, shouldCreate bool) (*NSURL, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelURLForDirectoryInDomainAppropriateForURLCreateError, directory, domain, url.Ptr(), shouldCreate, unsafe.Pointer(&_nsErr))
@@ -158,6 +163,7 @@ func (o *NSFileManager) URLForDirectoryInDomainAppropriateForURLCreateError(dire
 	return NSURLFromID(_ret), nil
 }
 
+// Determines the type of relationship that exists between a directory and an item. - Parameters: - outRelationship: A pointer to a variable in which to put the relationship between `directoryURL` and `otherURL`. For a list of possible values, see “FileManager/URLRelationship“. - directoryURL: The URL of the directory that potentially contains the item in `otherURL`. The URL in this parameter must specify a directory. This parameter must not be `nil`. - otherURL: The URL of the file or directory whose relationship to `directoryURL` is being tested. This parameter must not be `nil`. - error: On input, a pointer to an error object. If an error occurs, this pointer is set to an actual error object containing the error information. You may specify `nil` for this parameter if you do not want the error information. - Returns: `YES` if the relationship between the items was successfully determined, or `NO` if an error occurred. Use this method to determine the relationship between an item and a directory whose location you already know. If the relationship between the items is determined successfully, this method sets the value of the `outRelationship` parameter to an appropriate value. The directory may contain the item, it may be the same as the item, or it may not have a direct relationship to the item.
 func (o *NSFileManager) GetRelationshipOfDirectoryAtURLToItemAtURLError(outRelationship *NSURLRelationship, directoryURL *NSURL, otherURL *NSURL) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelGetRelationshipOfDirectoryAtURLToItemAtURLError, outRelationship, directoryURL.Ptr(), otherURL.Ptr(), unsafe.Pointer(&_nsErr))
@@ -167,6 +173,7 @@ func (o *NSFileManager) GetRelationshipOfDirectoryAtURLToItemAtURLError(outRelat
 	return _ret, nil
 }
 
+// Determines the type of relationship that exists between a system directory and the specified item. - Parameters: - outRelationship: A pointer to a variable in which to put the relationship between `directoryURL` and `otherURL`. For a list of possible values, see “FileManager/URLRelationship“. - directory: The search path directory. For a list of possible values, see “FileManager/SearchPathDirectory“. - domainMask: The file system domain to search. Specify `0` for this parameter if you want the file manager to choose the domain appropriate for `url`. - url: The URL of the file or directory whose relationship to `directoryURL` is being tested. This parameter must not be `nil`. - error: On input, a pointer to an error object. If an error occurs, this pointer is set to an actual error object containing the error information. You may specify `nil` for this parameter if you do not want the error information. - Returns: `YES` if the relationship between the items was successfully determined, or `NO` if an error occurred. Use this method to determine the relationship between an item and one of the system-specific directories. For example, you might use this method to determine if the specified item is in the user's `Documents` directory or is in the trash. If the relationship between the items is determined successfully, this method sets the value of the `outRelationship` parameter to an appropriate value. The directory may contain the item, it may be the same as the item, or it may not have a direct relationship to the item.
 func (o *NSFileManager) GetRelationshipOfDirectoryInDomainToItemAtURLError(outRelationship *NSURLRelationship, directory NSSearchPathDirectory, domainMask NSSearchPathDomainMask, url *NSURL) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelGetRelationshipOfDirectoryInDomainToItemAtURLError, outRelationship, directory, domainMask, url.Ptr(), unsafe.Pointer(&_nsErr))
@@ -176,6 +183,7 @@ func (o *NSFileManager) GetRelationshipOfDirectoryInDomainToItemAtURLError(outRe
 	return _ret, nil
 }
 
+// Creates a directory with the given attributes at the specified URL. - Parameters: - url: A file URL that specifies the directory to create. If you want to specify a relative path, you must set the current working directory before creating the corresponding “NSURL“ object. This parameter must not be `nil`. - createIntermediates: If `YES`, this method creates any nonexistent parent directories as part of creating the directory in `url`. If `NO`, this method fails if any of the intermediate parent directories does not exist. - attributes: The file attributes for the new directory. You can set the owner and group numbers, file permissions, and modification date. If you specify `nil` for this parameter, the directory is created according to the umask(2) of the process. Some of the keys, such as `NSFileHFSCreatorCode` and `NSFileHFSTypeCode`, do not apply to directories. - error: On input, a pointer to an error object. If an error occurs, this pointer is set to an actual error object containing the error information. You may specify `nil` for this parameter if you do not want the error information. - Returns: `YES` if the directory was created, `YES` if `createIntermediates` is set and the directory already exists, or `NO` if an error occurred. If you specify `nil` for the `attributes` parameter, this method uses a default set of values for the owner, group, and permissions of any newly created directories in the path. Similarly, if you omit a specific attribute, the default value is used. The default values for newly created directories are as follows: - Permissions are set according to the umask of the current process. For more information, see umask. - The owner ID is set to the effective user ID of the process. - The group ID is set to that of the parent directory. If you want to specify a relative path for url, you must set the current working directory before creating the corresponding “NSURL“ object.
 func (o *NSFileManager) CreateDirectoryAtURLWithIntermediateDirectoriesAttributesError(url *NSURL, createIntermediates bool, attributes *NSDictionary[*NSString, objc.ID]) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelCreateDirectoryAtURLWithIntermediateDirectoriesAttributesError, url.Ptr(), createIntermediates, attributes.Ptr(), unsafe.Pointer(&_nsErr))
@@ -185,6 +193,7 @@ func (o *NSFileManager) CreateDirectoryAtURLWithIntermediateDirectoriesAttribute
 	return _ret, nil
 }
 
+// Creates a symbolic link at the specified URL that points to an item at the given URL. - Parameters: - url: The file URL at which to create the new symbolic link. The last path component of the URL issued as the name of the link. - destURL: The file URL that contains the item to be pointed to by the link. In other words, this is the destination of the link. - error: On input, a pointer to an error object. If an error occurs, this pointer is set to an actual error object containing the error information. You may specify `nil` for this parameter if you do not want the error information. - Returns: `YES` if the symbolic link was created or `NO` if an error occurred. This method also returns `NO` if a file, directory, or link already exists at `url`. This method does not traverse symbolic links contained in `destURL`, making it possible to create symbolic links to locations that do not yet exist. Also, if the final path component in `url` is a symbolic link, that link is not followed.
 func (o *NSFileManager) CreateSymbolicLinkAtURLWithDestinationURLError(url *NSURL, destURL *NSURL) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelCreateSymbolicLinkAtURLWithDestinationURLError, url.Ptr(), destURL.Ptr(), unsafe.Pointer(&_nsErr))
@@ -194,6 +203,7 @@ func (o *NSFileManager) CreateSymbolicLinkAtURLWithDestinationURLError(url *NSUR
 	return _ret, nil
 }
 
+// Sets the attributes of the specified file or directory. - Parameters: - attributes: A dictionary containing as keys the attributes to set for `path` and as values the corresponding value for the attribute. You can set the following attributes: `NSFileBusy`, `NSFileCreationDate`, `NSFileExtensionHidden`, `NSFileGroupOwnerAccountID`, `NSFileGroupOwnerAccountName`, `NSFileHFSCreatorCode`, `NSFileHFSTypeCode`, `NSFileImmutable`, `NSFileModificationDate`, `NSFileOwnerAccountID`, `NSFileOwnerAccountName`, `NSFilePosixPermissions`. You can change single attributes or any combination of attributes; you need not specify keys for all attributes. - path: The path of a file or directory. - error: On input, a pointer to an error object. If an error occurs, this pointer is set to an actual error object containing the error information. You may specify `nil` for this parameter if you do not want the error information. - Returns: `YES` if _all_ changes succeed. If any change fails, returns `NO`, but it is undefined whether any changes actually occurred. As in the POSIX standard, the app either must own the file or directory or must be running as superuser for attribute changes to take effect. The method attempts to make all changes specified in attributes and ignores any rejection of an attempted modification. If the last component of the path is a symbolic link, the system traverses it. You must initialize the `NSFilePosixPermissions` value with the code representing the POSIX file-permissions bit pattern. The system sets `NSFileHFSCreatorCode` and `NSFileHFSTypeCode` only when `path` specifies a file.
 func (o *NSFileManager) SetAttributesOfItemAtPathError(attributes *NSDictionary[*NSString, objc.ID], path *NSString) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelSetAttributesOfItemAtPathError, attributes.Ptr(), path.Ptr(), unsafe.Pointer(&_nsErr))
@@ -203,6 +213,7 @@ func (o *NSFileManager) SetAttributesOfItemAtPathError(attributes *NSDictionary[
 	return _ret, nil
 }
 
+// Creates a directory with given attributes at the specified path. - Parameters: - path: A path string identifying the directory to create. You may specify a full path or a path that is relative to the current working directory. This parameter must not be `nil`. - createIntermediates: If `YES`, this method creates any nonexistent parent directories as part of creating the directory in `path`. If `NO`, this method fails if any of the intermediate parent directories does not exist. This method also fails if any of the intermediate path elements corresponds to a file and not a directory. - attributes: The file attributes for the new directory and any newly created intermediate directories. You can set the owner and group numbers, file permissions, and modification date. If you specify `nil` for this parameter or omit a particular value, one or more default values are used as described in the discussion. Some of the keys, such as `NSFileHFSCreatorCode` and `NSFileHFSTypeCode`, do not apply to directories. - error: On input, a pointer to an error object. If an error occurs, this pointer is set to an actual error object containing the error information. You may specify `nil` for this parameter if you do not want the error information. - Returns: `YES` if the directory was created, `YES` if `createIntermediates` is set and the directory already exists, or `NO` if an error occurred. If you specify `nil` for the `attributes` parameter, this method uses a default set of values for the owner, group, and permissions of any newly created directories in the path. Similarly, if you omit a specific attribute, the default value is used. The default values for newly created directories are as follows: - Permissions are set according to the umask of the current process. For more information, see umask. - The owner ID is set to the effective user ID of the process. - The group ID is set to that of the parent directory.
 func (o *NSFileManager) CreateDirectoryAtPathWithIntermediateDirectoriesAttributesError(path *NSString, createIntermediates bool, attributes *NSDictionary[*NSString, objc.ID]) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelCreateDirectoryAtPathWithIntermediateDirectoriesAttributesError, path.Ptr(), createIntermediates, attributes.Ptr(), unsafe.Pointer(&_nsErr))
@@ -212,6 +223,7 @@ func (o *NSFileManager) CreateDirectoryAtPathWithIntermediateDirectoriesAttribut
 	return _ret, nil
 }
 
+// Performs a shallow search of the specified directory and returns the paths of any contained items. - Parameters: - path: The path to the directory whose contents you want to enumerate. - error: On input, a pointer to an error object. If an error occurs, this pointer is set to an actual error object containing the error information. You may specify `nil` for this parameter if you do not want the error information. - Returns: An array of “NSString“ objects, each of which identifies a file, directory, or symbolic link contained in `path`. Returns an empty array if the directory exists but has no contents. In Objective-C, if an error occurs, this method returns `nil` and assigns an appropriate error object to the `error` parameter. This method performs a shallow search of the directory and therefore does not traverse symbolic links or return the contents of any subdirectories. This method also does not return URLs for the current directory ("`.`"), parent directory ("`..`"), or resource forks (files that begin with "`._`") but it does return other hidden files (files that begin with a period character). If you need to perform a deep enumeration, use the “NSFileManager/enumeratorAtURL:includingPropertiesForKeys:options:errorHandler:“ method instead. The order of the files in the returned array is undefined.
 func (o *NSFileManager) ContentsOfDirectoryAtPathError(path *NSString) (*NSArray[*NSString], error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelContentsOfDirectoryAtPathError, path.Ptr(), unsafe.Pointer(&_nsErr))
@@ -224,6 +236,7 @@ func (o *NSFileManager) ContentsOfDirectoryAtPathError(path *NSString) (*NSArray
 	return NSArrayFromID[*NSString](_ret), nil
 }
 
+// Performs a deep enumeration of the specified directory and returns the paths of all of the contained subdirectories. - Parameters: - path: The path of the directory to list. - error: If an error occurs, upon return contains an “NSError“ object that describes the problem. Pass `NULL` if you don't want error information. - Returns: An array of strings, each containing the path of an item in the directory specified by `path`. When using Objective-C, returns `nil` if an error occurred. This method recurses the specified directory and its subdirectories. The method skips the "`.`" and "`..`" directories at each level of the recursion. Because this method recurses the directory's contents, you might not want to use it in performance-critical code. Instead, consider using the “NSFileManager/enumeratorAtURL:includingPropertiesForKeys:options:errorHandler:“ or “FileManager/enumerator(atPath:)“ method to enumerate the directory contents yourself. Doing so gives you more control over the retrieval of items and more opportunities to complete the enumeration or perform other tasks at the same time.
 func (o *NSFileManager) SubpathsOfDirectoryAtPathError(path *NSString) (*NSArray[*NSString], error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelSubpathsOfDirectoryAtPathError, path.Ptr(), unsafe.Pointer(&_nsErr))
@@ -236,6 +249,7 @@ func (o *NSFileManager) SubpathsOfDirectoryAtPathError(path *NSString) (*NSArray
 	return NSArrayFromID[*NSString](_ret), nil
 }
 
+// Returns the attributes of the item at a given path. - Parameters: - path: The path of a file or directory. - error: On input, a pointer to an error object. If an error occurs, this pointer is set to an actual error object containing the error information. You may specify `nil` for this parameter if you do not want the error information. - Returns: A dictionary object that describes the attributes (file, directory, symlink, and so on) of the file specified by `path` (or `nil` if an error occurred in Objective-C). The keys in the dictionary are described in `File Attribute Keys`. If the item at the path is a symbolic link---that is, the value of the `NSFileType` key in the attributes dictionary is `NSFileTypeSymbolicLink`---you can use the “FileManager/destinationOfSymbolicLink(atPath:)“ method to retrieve the path of the item pointed to by the link. You can also use the `stringByResolvingSymlinksInPath` method of “NSString“ to resolve links in the path before retrieving the item's attributes. As a convenience, “NSDictionary“ provides a set of methods (declared as a category on “NSDictionary“) for quickly and efficiently obtaining attribute information from the returned dictionary: `fileGroupOwnerAccountName`, `fileModificationDate`, `fileOwnerAccountName`, `filePosixPermissions`, `fileSize`, `fileSystemFileNumber`, `fileSystemNumber`, and `fileType`.
 func (o *NSFileManager) AttributesOfItemAtPathError(path *NSString) (*NSDictionary[*NSString, objc.ID], error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelAttributesOfItemAtPathError, path.Ptr(), unsafe.Pointer(&_nsErr))
@@ -248,6 +262,7 @@ func (o *NSFileManager) AttributesOfItemAtPathError(path *NSString) (*NSDictiona
 	return NSDictionaryFromID[*NSString, objc.ID](_ret), nil
 }
 
+// Returns a dictionary that describes the attributes of the mounted file system on which a given path resides. - Parameters: - path: Any pathname within the mounted file system. - error: On input, a pointer to an error object. If an error occurs, this pointer is set to an actual error object containing the error information. You may specify `nil` for this parameter if you do not want the error information. - Returns: A dictionary object that describes the attributes of the mounted file system on which `path` resides. See `File-System Attribute Keys` for a description of the keys available in the dictionary. This method does not traverse a terminal symbolic link.
 func (o *NSFileManager) AttributesOfFileSystemForPathError(path *NSString) (*NSDictionary[*NSString, objc.ID], error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelAttributesOfFileSystemForPathError, path.Ptr(), unsafe.Pointer(&_nsErr))
@@ -260,6 +275,7 @@ func (o *NSFileManager) AttributesOfFileSystemForPathError(path *NSString) (*NSD
 	return NSDictionaryFromID[*NSString, objc.ID](_ret), nil
 }
 
+// Creates a symbolic link that points to the specified destination. - Parameters: - path: The path at which to create the new symbolic link. The last path component is used as the name of the link. - destPath: The path that contains the item to be pointed to by the link. In other words, this is the destination of the link. - error: If an error occurs, upon return contains an “NSError“ object that describes the problem. Pass `NULL` if you do not want error information. - Returns: `YES` if the symbolic link was created or `NO` if an error occurred. This method also returns `NO` if a file, directory, or link already exists at `path`. This method does not traverse symbolic links contained in `destPath`, making it possible to create symbolic links to locations that do not yet exist. Also, if the final path component in `path` is a symbolic link, that link is not followed.
 func (o *NSFileManager) CreateSymbolicLinkAtPathWithDestinationPathError(path *NSString, destPath *NSString) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelCreateSymbolicLinkAtPathWithDestinationPathError, path.Ptr(), destPath.Ptr(), unsafe.Pointer(&_nsErr))
@@ -269,6 +285,7 @@ func (o *NSFileManager) CreateSymbolicLinkAtPathWithDestinationPathError(path *N
 	return _ret, nil
 }
 
+// Returns the path of the item pointed to by a symbolic link. - Parameters: - path: The path of a file or directory. - error: If an error occurs, upon return contains an “NSError“ object that describes the problem. Pass `NULL` if you do not want error information. - Returns: An “NSString“ object containing the path of the directory or file to which the symbolic link `path` refers. When using Objective-C, returns `nil` upon failure. If the symbolic link is specified as a relative path, that relative path is returned.
 func (o *NSFileManager) DestinationOfSymbolicLinkAtPathError(path *NSString) (*NSString, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelDestinationOfSymbolicLinkAtPathError, path.Ptr(), unsafe.Pointer(&_nsErr))
@@ -281,6 +298,7 @@ func (o *NSFileManager) DestinationOfSymbolicLinkAtPathError(path *NSString) (*N
 	return NSStringFromID(_ret), nil
 }
 
+// Copies the item at the specified path to a new location synchronously. - Parameters: - srcPath: The path to the file or directory you want to copy. This parameter must not be `nil`. - dstPath: The path at which to place the copy of `srcPath`. This path must include the name of the file or directory in its new location. This parameter must not be `nil`. - error: On input, a pointer to an error object. If an error occurs, this pointer is set to an actual error object containing the error information. You may specify `nil` for this parameter if you do not want the error information. - Returns: `YES` if the item was copied successfully or the file manager's delegate stopped the operation deliberately. Returns `NO` if an error occurred. When copying items, the current process must have permission to read the file or directory at `srcPath` and write the parent directory of `dstPath`. If the item at `srcPath` is a directory, this method copies the directory and all of its contents, including any hidden files. If a file with the same name already exists at `dstPath`, this method stops the copy attempt and returns an appropriate error. If the last component of `srcPath` is a symbolic link, only the link is copied to the new path. Prior to copying an item, the file manager asks its delegate if it should actually do so for each item. It does this by calling the `fileManager:shouldCopyItemAtURL:toURL:` method; if that method is not implemented it calls the `fileManager:shouldCopyItemAtPath:toPath:` method instead. If the delegate method returns `YES`, or if the delegate does not implement the appropriate methods, the file manager copies the given file or directory. If there is an error copying an item, the file manager may also call the delegate's `fileManager:shouldProceedAfterError:copyingItemAtURL:toURL:` or `fileManager:shouldProceedAfterError:copyingItemAtPath:toPath:` method to determine how to proceed.
 func (o *NSFileManager) CopyItemAtPathToPathError(srcPath *NSString, dstPath *NSString) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelCopyItemAtPathToPathError, srcPath.Ptr(), dstPath.Ptr(), unsafe.Pointer(&_nsErr))
@@ -290,6 +308,7 @@ func (o *NSFileManager) CopyItemAtPathToPathError(srcPath *NSString, dstPath *NS
 	return _ret, nil
 }
 
+// Moves the file or directory at the specified path to a new location synchronously. - Parameters: - srcPath: The path to the file or directory you want to move. This parameter must not be `nil`. - dstPath: The new path for the item in `srcPath`. This path must include the name of the file or directory in its new location. This parameter must not be `nil`. - error: On input, a pointer to an error object. If an error occurs, this pointer is set to an actual error object containing the error information. You may specify `nil` for this parameter if you do not want the error information. - Returns: `YES` if the item was moved successfully or the file manager's delegate stopped the operation deliberately. Returns `NO` if an error occurred. When moving items, the current process must have permission to read the item at `srcPath` and write the parent directory of `dstPath`. If the item at `srcPath` is a directory, this method moves the directory and all of its contents, including any hidden files. If an item with the same name already exists at `dstPath`, this method stops the move attempt and returns an appropriate error. If the last component of `srcPath` is a symbolic link, only the link is moved to the new path; the item pointed to by the link remains at its current location. Prior to moving the item, the file manager asks its delegate if it should actually move it. It does this by calling the `fileManager:shouldMoveItemAtURL:toURL:` method; if that method is not implemented it calls the `fileManager:shouldMoveItemAtPath:toPath:` method instead. If the item being moved is a directory, the file manager notifies the delegate only for the directory itself and not for any of its contents. If the delegate method returns `YES`, or if the delegate does not implement the appropriate methods, the file manager moves the file. If there is an error moving one out of several items, the file manager may also call the delegate's `fileManager:shouldProceedAfterError:movingItemAtURL:toURL:` or `fileManager:shouldProceedAfterError:movingItemAtPath:toPath:` method to determine how to proceed. If the source and destination of the move operation are not on the same volume, this method copies the item first and then removes it from its current location. This behavior may trigger additional delegate notifications related to copying and removing individual items.
 func (o *NSFileManager) MoveItemAtPathToPathError(srcPath *NSString, dstPath *NSString) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelMoveItemAtPathToPathError, srcPath.Ptr(), dstPath.Ptr(), unsafe.Pointer(&_nsErr))
@@ -299,6 +318,7 @@ func (o *NSFileManager) MoveItemAtPathToPathError(srcPath *NSString, dstPath *NS
 	return _ret, nil
 }
 
+// Creates a hard link between the items at the specified paths. - Parameters: - srcPath: The path that specifies the item you wish to link to. The value in this parameter must not be `nil`. - dstPath: The path that identifies the location where the link will be created. The value in this parameter must not be `nil`. - error: On input, a pointer to an error object. If an error occurs, this pointer is set to an actual error object containing the error information. You may specify `nil` for this parameter if you do not want the error information. - Returns: `YES` if the hard link was created or `NO` if an error occurred. This method also returns `NO` if a file, directory, or link already exists at `dstPath`. Use this method to create hard links between files in the current file system. If `srcPath` is a directory, this method creates a new directory at `dstPath` and then creates hard links for the items in that directory. If `srcPath` is (or contains) a symbolic link, the symbolic link is copied to the new location and not converted to a hard link. Prior to linking each item, the file manager asks its delegate if it should actually create the link. It does this by calling the `fileManager:shouldLinkItemAtURL:toURL:` method; if that method is not implemented it calls the `fileManager:shouldLinkItemAtPath:toPath:` method instead. If the delegate method returns `YES`, or if the delegate does not implement the appropriate methods, the file manager creates the hard link. If there is an error linking one out of several items, the file manager may also call the delegate's `fileManager:shouldProceedAfterError:linkingItemAtURL:toURL:` or `fileManager:shouldProceedAfterError:linkingItemAtPath:toPath:` method to determine how to proceed.
 func (o *NSFileManager) LinkItemAtPathToPathError(srcPath *NSString, dstPath *NSString) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelLinkItemAtPathToPathError, srcPath.Ptr(), dstPath.Ptr(), unsafe.Pointer(&_nsErr))
@@ -308,6 +328,7 @@ func (o *NSFileManager) LinkItemAtPathToPathError(srcPath *NSString, dstPath *NS
 	return _ret, nil
 }
 
+// Removes the file or directory at the specified path. - Parameters: - path: A path string indicating the file or directory to remove. If the path specifies a directory, the contents of that directory are recursively removed. You may specify `nil` for this parameter in Objective-C. - error: On input, a pointer to an error object. If an error occurs, this pointer is set to an actual error object containing the error information. You may specify `nil` for this parameter if you do not want the error information. - Returns: `YES` if the item was removed successfully or if `path` was `nil`. Returns `NO` if an error occurred. If the delegate stops the operation for a file, this method returns `YES`. However, if the delegate stops the operation for a directory, this method returns `NO`. Prior to removing each item, the file manager asks its delegate if it should actually do so. It does this by calling the `fileManager:shouldRemoveItemAtURL:` method; if that method is not implemented it calls the `fileManager:shouldRemoveItemAtPath:` method instead. If the delegate method returns `YES`, or if the delegate does not implement the appropriate methods, the file manager proceeds to remove the file or directory. If there is an error removing an item, the file manager may also call the delegate's `fileManager:shouldProceedAfterError:removingItemAtURL:` or `fileManager:shouldProceedAfterError:removingItemAtPath:` method to determine how to proceed. Removing an item also removes all old versions of that item, invalidating any URLs returned by the `URLForPublishingUbiquitousItemAtURL:expirationDate:error:` method to old versions.
 func (o *NSFileManager) RemoveItemAtPathError(path *NSString) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelRemoveItemAtPathError, path.Ptr(), unsafe.Pointer(&_nsErr))
@@ -317,6 +338,7 @@ func (o *NSFileManager) RemoveItemAtPathError(path *NSString) (bool, error) {
 	return _ret, nil
 }
 
+// Copies the file at the specified URL to a new location synchronously. - Parameters: - srcURL: The file URL that identifies the file you want to copy. The URL in this parameter must not be a file reference URL. This parameter must not be `nil`. - dstURL: The URL at which to place the copy of `srcURL`. The URL in this parameter must not be a file reference URL and must include the name of the file in its new location. This parameter must not be `nil`. - error: On input, a pointer to an error object. If an error occurs, this pointer is set to an actual error object containing the error information. You may specify `nil` for this parameter if you do not want the error information. - Returns: `YES` if the item was copied successfully or the file manager's delegate stopped the operation deliberately. Returns `NO` if an error occurred. When copying items, the current process must have permission to read the file or directory at `srcURL` and write the parent directory of `dstURL`. If the item at `srcURL` is a directory, this method copies the directory and all of its contents, including any hidden files. If a file with the same name already exists at `dstURL`, this method stops the copy attempt and returns an appropriate error. If the last component of `srcURL` is a symbolic link, only the link is copied to the new path.
 func (o *NSFileManager) CopyItemAtURLToURLError(srcURL *NSURL, dstURL *NSURL) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelCopyItemAtURLToURLError, srcURL.Ptr(), dstURL.Ptr(), unsafe.Pointer(&_nsErr))
@@ -326,6 +348,7 @@ func (o *NSFileManager) CopyItemAtURLToURLError(srcURL *NSURL, dstURL *NSURL) (b
 	return _ret, nil
 }
 
+// Moves the file or directory at the specified URL to a new location synchronously. - Parameters: - srcURL: The file URL that identifies the file or directory you want to move. The URL in this parameter must not be a file reference URL. This parameter must not be `nil`. - dstURL: The new location for the item in `srcURL`. The URL in this parameter must not be a file reference URL and must include the name of the file or directory in its new location. This parameter must not be `nil`. - error: On input, a pointer to an error object. If an error occurs, this pointer is set to an actual error object containing the error information. You may specify `nil` for this parameter if you do not want the error information. - Returns: `YES` if the item was moved successfully or the file manager's delegate stopped the operation deliberately. Returns `NO` if an error occurred. When moving items, the current process must have permission to read the item at `srcURL` and write the parent directory of `dstURL`. If the item at `srcURL` is a directory, this method moves the directory and all of its contents, including any hidden files. If an item with the same name already exists at `dstURL`, this method stops the move attempt and returns an appropriate error. If the last component of `srcURL` is a symbolic link, only the link is moved to the new path; the item pointed to by the link remains at its current location. If the source and destination of the move operation are not on the same volume, this method copies the item first and then removes it from its current location. This behavior may trigger additional delegate notifications related to copying and removing individual items.
 func (o *NSFileManager) MoveItemAtURLToURLError(srcURL *NSURL, dstURL *NSURL) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelMoveItemAtURLToURLError, srcURL.Ptr(), dstURL.Ptr(), unsafe.Pointer(&_nsErr))
@@ -335,6 +358,7 @@ func (o *NSFileManager) MoveItemAtURLToURLError(srcURL *NSURL, dstURL *NSURL) (b
 	return _ret, nil
 }
 
+// Creates a hard link between the items at the specified URLs. - Parameters: - srcURL: The file URL that identifies the source of the link. The URL in this parameter must not be a file reference URL; it must specify the actual path to the item. The value in this parameter must not be `nil`. - dstURL: The file URL that specifies where you want to create the hard link. The URL in this parameter must not be a file reference URL; it must specify the actual path to the item. The value in this parameter must not be `nil`. - error: On input, a pointer to an error object. If an error occurs, this pointer is set to an actual error object containing the error information. You may specify `nil` for this parameter if you do not want the error information. - Returns: `YES` if the hard link was created or `NO` if an error occurred. This method also returns `NO` if a file, directory, or link already exists at `dstURL`. Use this method to create hard links between files in the current file system. If `srcURL` is a directory, this method creates a new directory at `dstURL` and then creates hard links for the items in that directory. If `srcURL` is (or contains) a symbolic link, the symbolic link is copied and not converted to a hard link at `dstURL`.
 func (o *NSFileManager) LinkItemAtURLToURLError(srcURL *NSURL, dstURL *NSURL) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelLinkItemAtURLToURLError, srcURL.Ptr(), dstURL.Ptr(), unsafe.Pointer(&_nsErr))
@@ -344,6 +368,7 @@ func (o *NSFileManager) LinkItemAtURLToURLError(srcURL *NSURL, dstURL *NSURL) (b
 	return _ret, nil
 }
 
+// Removes the file or directory at the specified URL. - Parameters: - URL: A file URL specifying the file or directory to remove. If the URL specifies a directory, the contents of that directory are recursively removed. You may specify `nil` for this parameter in Objective-C. - error: On input, a pointer to an error object. If an error occurs, this pointer is set to an actual error object containing the error information. You may specify `nil` for this parameter if you do not want the error information. - Returns: `YES` if the item was removed successfully or if `URL` was `nil`. Returns `NO` if an error occurred. If the delegate stops the operation for a file, this method returns `YES`. However, if the delegate stops the operation for a directory, this method returns `NO`. Prior to removing each item, the file manager asks its delegate if it should actually do so. It does this by calling the `fileManager:shouldRemoveItemAtURL:` method; if that method is not implemented it calls the `fileManager:shouldRemoveItemAtPath:` method instead. Removing an item also removes all old versions of that item, invalidating any URLs returned by the `URLForPublishingUbiquitousItemAtURL:expirationDate:error:` method to old versions.
 func (o *NSFileManager) RemoveItemAtURLError(url *NSURL) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelRemoveItemAtURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
@@ -353,6 +378,7 @@ func (o *NSFileManager) RemoveItemAtURLError(url *NSURL) (bool, error) {
 	return _ret, nil
 }
 
+// Moves an item to the trash. - Parameters: - url: The item to move to the trash. - outResultingURL: On input, a pointer to a URL object. On output, this pointer is set to the item's location in the trash. The actual name of the item may be changed when moving it to the trash, so use this URL to access it. You may specify `nil` for this parameter if you do not want the information. - error: On input, a pointer to an error object. If an error occurs, this pointer is set to an actual error object containing the error information. You may specify `nil` for this parameter if you do not want the error information. - Returns: `YES` if the item at `url` was successfully moved to the trash, or `NO` if the item was not moved to the trash.
 func (o *NSFileManager) TrashItemAtURLResultingItemURLError(url *NSURL, outResultingURL *NSURL) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelTrashItemAtURLResultingItemURLError, url.Ptr(), outResultingURL.Ptr(), unsafe.Pointer(&_nsErr))
@@ -362,6 +388,7 @@ func (o *NSFileManager) TrashItemAtURLResultingItemURLError(url *NSURL, outResul
 	return _ret, nil
 }
 
+// Returns a dictionary that describes the POSIX attributes of the file specified at a given path. - Parameters: - path: A file path. - yorn: If `path` is not a symbolic link, this parameter has no effect. If `path` is a symbolic link, then: if `YES` the attributes of the linked-to file are returned, or if the link points to a nonexistent file the method returns `nil`; if `NO`, the attributes of the symbolic link are returned. - Returns: An `NSDictionary` object that describes the POSIX attributes of the file specified at `path`. The keys in the dictionary are described in `File Attribute Keys`. If there is no item at `path`, returns `nil`.
 // Deprecated: Use -attributesOfItemAtPath:error: instead
 func (o *NSFileManager) FileAttributesAtPathTraverseLink(path *NSString, yorn bool) *NSDictionary[objc.ID, objc.ID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelFileAttributesAtPathTraverseLink, path.Ptr(), yorn)
@@ -371,12 +398,14 @@ func (o *NSFileManager) FileAttributesAtPathTraverseLink(path *NSString, yorn bo
 	return NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
+// Changes the attributes of a given file or directory. - Parameters: - attributes: A dictionary containing as keys the attributes to set for `path` and as values the corresponding value for the attribute. You can set following: `NSFileBusy`, `NSFileCreationDate`, `NSFileExtensionHidden`, `NSFileGroupOwnerAccountID`, `NSFileGroupOwnerAccountName`, `NSFileHFSCreatorCode`, `NSFileHFSTypeCode`, `NSFileImmutable`, `NSFileModificationDate`, `NSFileOwnerAccountID`, `NSFileOwnerAccountName`, `NSFilePosixPermissions`. You can change single attributes or any combination of attributes; you need not specify keys for all attributes. - path: A path to a file or directory. - Returns: `YES` if _all_ changes succeed. If any change fails, returns `NO`, but it is undefined whether any changes actually occurred. As in the POSIX standard, the app either must own the file or directory or must be running as superuser for attribute changes to take effect. The method attempts to make all changes specified in attributes and ignores any rejection of an attempted modification.
 // Deprecated: Use -setAttributes:ofItemAtPath:error: instead
 func (o *NSFileManager) ChangeFileAttributesAtPath(attributes *NSDictionary[objc.ID, objc.ID], path *NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelChangeFileAttributesAtPath, attributes.Ptr(), path.Ptr())
 	return _ret
 }
 
+// Returns the directories and files (including symbolic links) contained in a given directory. - Parameters: - path: A path to a directory. - Returns: An array of “NSString“ objects identifying the directories and files (including symbolic links) contained in `path`. Returns an empty array if the directory exists but has no contents. Returns `nil` if the directory specified at `path` does not exist or there is some other error accessing it. The search is shallow, and therefore does not return the contents of any subdirectories and does not traverse symbolic links in the specified directory. This returned array does not contain strings for the current directory ("`.`"), parent directory ("`..`"), or resource forks (begin with "`._`").
 // Deprecated: Use -contentsOfDirectoryAtPath:error: instead
 func (o *NSFileManager) DirectoryContentsAtPath(path *NSString) *NSArray[objc.ID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelDirectoryContentsAtPath, path.Ptr())
@@ -386,6 +415,7 @@ func (o *NSFileManager) DirectoryContentsAtPath(path *NSString) *NSArray[objc.ID
 	return NSArrayFromID[objc.ID](_ret)
 }
 
+// Returns a dictionary that describes the attributes of the mounted file system on which a given path resides. - Parameters: - path: Any pathname within the mounted file system. - Returns: An `NSDictionary` object that describes the attributes of the mounted file system on which `path` resides. See `File-System Attribute Keys` for a description of the keys available in the dictionary.
 // Deprecated: Use -attributesOfFileSystemForPath:error: instead
 func (o *NSFileManager) FileSystemAttributesAtPath(path *NSString) *NSDictionary[objc.ID, objc.ID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelFileSystemAttributesAtPath, path.Ptr())
@@ -395,6 +425,7 @@ func (o *NSFileManager) FileSystemAttributesAtPath(path *NSString) *NSDictionary
 	return NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
+// Returns the path of the directory or file that a symbolic link at a given path refers to. - Parameters: - path: The path of a symbolic link. - Returns: The path of the directory or file to which the symbolic link `path` refers, or `nil` upon failure. If the symbolic link is specified as a relative path, that relative path is returned.
 // Deprecated: Use -destinationOfSymbolicLinkAtPath:error:
 func (o *NSFileManager) PathContentOfSymbolicLinkAtPath(path *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelPathContentOfSymbolicLinkAtPath, path.Ptr())
@@ -404,86 +435,97 @@ func (o *NSFileManager) PathContentOfSymbolicLinkAtPath(path *NSString) *NSStrin
 	return NSStringFromID(_ret)
 }
 
+// Creates a symbolic link identified by a given path that refers to a given location. - Parameters: - path: The path for a symbolic link. - otherpath: The path to which `path` should refer. - Returns: `YES` if the operation is successful, otherwise `NO`. Returns `NO` if a file, directory, or symbolic link identical to `path` already exists. Creates a symbolic link identified by `path` that refers to the location `otherPath` in the file system.
 // Deprecated: Use -createSymbolicLinkAtPath:error: instead
 func (o *NSFileManager) CreateSymbolicLinkAtPathPathContent(path *NSString, otherpath *NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelCreateSymbolicLinkAtPathPathContent, path.Ptr(), otherpath.Ptr())
 	return _ret
 }
 
+// Creates a directory (without contents) at a given path with given attributes. - Parameters: - path: The path at which to create the new directory. The directory to be created must not yet exist, but its parent directory must exist. - attributes: The file attributes for the new directory. The attributes you can set are owner and group numbers, file permissions, and modification date. If you specify `nil` for `attributes`, default values for these attributes are set (particularly write access for the creator and read access for others). Some of the keys, such as `NSFileHFSCreatorCode` and `NSFileHFSTypeCode`, do not apply to directories. - Returns: `YES` if the operation was successful, otherwise `NO`.
 // Deprecated: Use -createDirectoryAtPath:withIntermediateDirectories:attributes:error: instead
 func (o *NSFileManager) CreateDirectoryAtPathAttributes(path *NSString, attributes *NSDictionary[objc.ID, objc.ID]) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelCreateDirectoryAtPathAttributes, path.Ptr(), attributes.Ptr())
 	return _ret
 }
 
-// Creates a link from a source to a destination.
+// Creates a link from a source to a destination. - Parameters: - src: A path that identifies a source file or directory. The file, link, or directory specified by `source` must exist. - dest: A path that identifies a destination file or directory. The destination should not yet exist. The destination path must end in a filename; there is no implicit adoption of the source filename. - handler: An object that responds to the callback messages `fileManager:willProcessPath:` and `fileManager:shouldProceedAfterError:`. You can specify `nil` for `handler`; if you do so and an error occurs, the method automatically returns `NO`. - Returns: `YES` if the link operation is successful. If the operation is not successful, but the handler method `fileManager:shouldProceedAfterError:` returns `YES`, also returns `YES`. Otherwise returns `NO`.
 // Deprecated: Not supported
 func (o *NSFileManager) LinkPathToPathHandler(src *NSString, dest *NSString, handler objc.ID) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelLinkPathToPathHandler, src.Ptr(), dest.Ptr(), handler)
 	return _ret
 }
 
-// Copies the directory or file specified in a given path to a different location in the file system identified by another path.
+// Copies the directory or file specified in a given path to a different location in the file system identified by another path. - Parameters: - src: The location of the source file. - dest: The location to which to copy the file specified by `source`. - handler: An object that responds to the callback messages `fileManager:willProcessPath:` and `fileManager:shouldProceedAfterError:`. You can specify `nil` for `handler`; if you do so and an error occurs, the method automatically returns `NO`. - Returns: `YES` if the copy operation is successful. If the operation is not successful, but the callback handler of `fileManager:shouldProceedAfterError:` returns `YES`, also returns `YES`. Otherwise this method returns `NO`. If `source` is a file, the method creates a file at `destination` that holds the exact contents of the original file (this includes BSD special files). If `source` is a directory, the method creates a new directory at `destination` and recursively populates it with duplicates of the files and directories contained in `source`, preserving all links. The file specified in `source` must exist, while `destination` must not exist prior to the operation.
 // Deprecated: Not supported
 func (o *NSFileManager) CopyPathToPathHandler(src *NSString, dest *NSString, handler objc.ID) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelCopyPathToPathHandler, src.Ptr(), dest.Ptr(), handler)
 	return _ret
 }
 
-// Moves the directory or file specified by a given path to a different location in the file system identified by another path.
+// Moves the directory or file specified by a given path to a different location in the file system identified by another path. - Parameters: - src: The path of a file or directory to move. `source` must exist. - dest: The path to which `source` is moved. `destination` must not yet exist. The destination path must end in a filename; there is no implicit adoption of the source filename. - handler: An object that responds to the callback messages `fileManager:willProcessPath:` and `fileManager:shouldProceedAfterError:`. You can specify `nil` for `handler`; if you do so and an error occurs, the method automatically returns `NO`. - Returns: `YES` if the move operation is successful. If the operation is not successful, but the handler method `fileManager:shouldProceedAfterError:` returns `YES`, also returns `YES`; otherwise returns `NO`. If `source` is a file, the method creates a file at `destination` that holds the exact contents of the original file and then deletes the original file. If `source` is a directory, the method creates a new directory at `destination` and recursively populates it with duplicates of the files and directories contained in `source`. It then deletes the old directory and its contents. Symbolic links are not traversed, however links are preserved.
 // Deprecated: Not supported
 func (o *NSFileManager) MovePathToPathHandler(src *NSString, dest *NSString, handler objc.ID) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelMovePathToPathHandler, src.Ptr(), dest.Ptr(), handler)
 	return _ret
 }
 
-// Deletes the file, link, or directory (including, recursively, all subdirectories, files, and links in the directory) identified by a given path.
+// Deletes the file, link, or directory (including, recursively, all subdirectories, files, and links in the directory) identified by a given path. - Parameters: - path: The path of a file, link, or directory to delete. The value must not be "`.`" or "`..`". - handler: An object that responds to the callback messages `fileManager:willProcessPath:` and `fileManager:shouldProceedAfterError:`. You can specify `nil` for `handler`; if you do so and an error occurs, the deletion stops and the method automatically returns `NO`. - Returns: `YES` if the removal operation is successful. If the operation is not successful, but the handler method `fileManager:shouldProceedAfterError:` returns `YES`, also returns `YES`; otherwise returns `NO`. Since the removal of directory contents is so thorough and final, be careful when using this method. If you specify "`.`" or "`..`" for `path` an `NSInvalidArgumentException` exception is raised. This method does not traverse symbolic links.
 // Deprecated: Not supported
 func (o *NSFileManager) RemoveFileAtPathHandler(path *NSString, handler objc.ID) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelRemoveFileAtPathHandler, path.Ptr(), handler)
 	return _ret
 }
 
+// Changes the path of the current working directory to the specified path. - Parameters: - path: The path of the directory to which to change. - Returns: `YES` if successful, otherwise `NO`. All relative pathnames refer implicitly to the current working directory. > Warning: > This method changes the current working directory for the current process, not just the receiver.
 func (o *NSFileManager) ChangeCurrentDirectoryPath(path *NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelChangeCurrentDirectoryPath, path.Ptr())
 	return _ret
 }
 
+// Returns a Boolean value that indicates whether a file or directory exists at a specified path. - Parameters: - path: The path of the file or directory. If `path` begins with a tilde (`~`), it must first be expanded with `stringByExpandingTildeInPath`; otherwise, this method returns `NO`. - Returns: `YES` if a file at the specified path exists, or `NO` if the file does not exist or its existence could not be determined. If the file at `path` is inaccessible to your app, perhaps because one or more parent directories are inaccessible, this method returns `NO`. If the final element in `path` specifies a symbolic link, this method traverses the link and returns `YES` or `NO` based on the existence of the file at the link destination. > Note: > Attempting to predicate behavior based on the current state of the file system or a particular file on the file system is not recommended. Doing so can cause odd behavior or race conditions. It's far better to attempt an operation (such as loading a file or creating a directory), check for errors, and handle those errors gracefully than it is to try to figure out ahead of time whether the operation will succeed.
 func (o *NSFileManager) FileExistsAtPath(path *NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelFileExistsAtPath, path.Ptr())
 	return _ret
 }
 
+// Returns a Boolean value that indicates whether a file or directory exists at a specified path. - Parameters: - path: The path of a file or directory. If `path` begins with a tilde (`~`), it must first be expanded with `stringByExpandingTildeInPath`, or this method will return `NO`. - isDirectory: Upon return, contains `YES` if `path` is a directory or if the final path element is a symbolic link that points to a directory; otherwise, contains `NO`. If `path` doesn't exist, this value is undefined upon return. Pass `NULL` if you do not need this information. - Returns: `YES` if a file at the specified path exists, or `NO` if the file's does not exist or its existence could not be determined. If the file at `path` is inaccessible to your app, perhaps because one or more parent directories are inaccessible, this method returns `NO`. If the final element in `path` specifies a symbolic link, this method traverses the link and returns `YES` or `NO` based on the existence of the file at the link destination. > Note: > Attempting to predicate behavior based on the current state of the file system or a particular file on the file system is not recommended. Doing so can cause odd behavior or race conditions. It's far better to attempt an operation (such as loading a file or creating a directory), check for errors, and handle those errors gracefully than it is to try to figure out ahead of time whether the operation will succeed.
 func (o *NSFileManager) FileExistsAtPathIsDirectory(path *NSString, isDirectory *bool) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelFileExistsAtPathIsDirectory, path.Ptr(), isDirectory)
 	return _ret
 }
 
+// Returns a Boolean value that indicates whether the invoking object appears able to read a specified file. - Parameters: - path: A file path. - Returns: `YES` if the current process has read privileges for the file at `path`; otherwise `NO` if the process does not have read privileges or the existence of the file could not be determined. If the file at `path` is inaccessible to your app, perhaps because it does not have search privileges for one or more parent directories, this method returns `NO`. This method traverses symbolic links in the path. This method also uses the real user ID and group ID, as opposed to the effective user and group IDs, to determine if the file is readable.
 func (o *NSFileManager) IsReadableFileAtPath(path *NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelIsReadableFileAtPath, path.Ptr())
 	return _ret
 }
 
+// Returns a Boolean value that indicates whether the invoking object appears able to write to a specified file. - Parameters: - path: A file path. - Returns: `YES` if the current process has write privileges for the file at `path`; otherwise `NO` if the process does not have write privileges or the existence of the file could not be determined. If the file at `path` is inaccessible to your app, perhaps because it does not have search privileges for one or more parent directories, this method returns `NO`. This method traverses symbolic links in the path. This method also uses the real user ID and group ID, as opposed to the effective user and group IDs, to determine if the file is writable.
 func (o *NSFileManager) IsWritableFileAtPath(path *NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelIsWritableFileAtPath, path.Ptr())
 	return _ret
 }
 
+// Returns a Boolean value that indicates whether the operating system appears able to execute a specified file. - Parameters: - path: A file path. - Returns: `YES` if the current process has execute privileges for the file at `path`; otherwise `NO` if the process does not have execute privileges or the existence of the file could not be determined. If the file at `path` is inaccessible to your app, perhaps because it does not have search privileges for one or more parent directories, this method returns `NO`. This method traverses symbolic links in the path. This method also uses the real user ID and group ID, as opposed to the effective user and group IDs, to determine if the file is executable.
 func (o *NSFileManager) IsExecutableFileAtPath(path *NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelIsExecutableFileAtPath, path.Ptr())
 	return _ret
 }
 
+// Returns a Boolean value that indicates whether the invoking object appears able to delete a specified file. - Parameters: - path: A file path. - Returns: `YES` if the current process has delete privileges for the file at `path`; otherwise `NO` if the process does not have delete privileges or the existence of the file could not be determined. For a directory or file to be deletable, the current process must either be able to write to the parent directory of `path` or it must have the same owner as the item at `path`. If `path` is a directory, every item contained in `path` must be deletable by the current process. If the file at `path` is inaccessible to your app, perhaps because it does not have search privileges for one or more parent directories, this method returns `NO`. If the item at `path` is a symbolic link, it is not traversed.
 func (o *NSFileManager) IsDeletableFileAtPath(path *NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelIsDeletableFileAtPath, path.Ptr())
 	return _ret
 }
 
+// Returns a Boolean value that indicates whether the files or directories in specified paths have the same contents. - Parameters: - path1: The path of a file or directory to compare with the contents of `path2`. - path2: The path of a file or directory to compare with the contents of `path1`. - Returns: `YES` if file or directory specified in `path1` has the same contents as that specified in `path2`, otherwise `NO`. If `path1` and `path2` are directories, the contents are the list of files and subdirectories each contains---contents of subdirectories are also compared. For files, this method checks to see if they're the same file, then compares their size, and finally compares their contents. This method does not traverse symbolic links, but compares the links themselves.
 func (o *NSFileManager) ContentsEqualAtPathAndPath(path1 *NSString, path2 *NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelContentsEqualAtPathAndPath, path1.Ptr(), path2.Ptr())
 	return _ret
 }
 
+// Returns the display name of the file or directory at a specified path. - Parameters: - path: The path of a file or directory. - Returns: The name of the file or directory at `path` in a localized form appropriate for presentation to the user. If there is no file or directory at `path`, or if an error occurs, returns `path` as is. Display names are user-friendly names for files. They are typically used to localize standard file and directory names according to the user's language settings. They may also reflect other modifications, such as the removal of filename extensions. Such modifications are used only when displaying the file or directory to the user and do not reflect the actual path to the item in the file system.
 func (o *NSFileManager) DisplayNameAtPath(path *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelDisplayNameAtPath, path.Ptr())
 	if _ret != 0 {
@@ -492,6 +534,7 @@ func (o *NSFileManager) DisplayNameAtPath(path *NSString) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns an array of strings representing the user-visible components of a given path. - Parameters: - path: A pathname. - Returns: An array of “NSString“ objects representing the user-visible (for the Finder, Open and Save panels, and so on) components of `path`. Returns `nil` if path does not exist. These components cannot be used for path operations and are only suitable for display to the user.
 func (o *NSFileManager) ComponentsToDisplayForPath(path *NSString) *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelComponentsToDisplayForPath, path.Ptr())
 	if _ret != 0 {
@@ -500,6 +543,7 @@ func (o *NSFileManager) ComponentsToDisplayForPath(path *NSString) *NSArray[*NSS
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// Returns a directory enumerator object that can be used to perform a deep enumeration of the directory at the specified path. - Parameters: - path: The path of the directory to enumerate. - Returns: A “FileManager/DirectoryEnumerator“ object that enumerates the contents of the directory at `path`. If `path` is a filename, the method returns an enumerator object that enumerates no files---the first call to `nextObject` will return `nil`. Because the enumeration is deep---that is, it lists the contents of all subdirectories---this enumerator object is useful for performing actions that involve large file-system subtrees. This method does not resolve symbolic links encountered in the traversal process, nor does it recurse through them if they point to a directory. The “FileManager/DirectoryEnumerator“ class has methods for obtaining the attributes of the existing path and of the parent directory and for skipping descendants of the existing path.
 func (o *NSFileManager) EnumeratorAtPath(path *NSString) *NSDirectoryEnumerator[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelEnumeratorAtPath, path.Ptr())
 	if _ret != 0 {
@@ -508,7 +552,7 @@ func (o *NSFileManager) EnumeratorAtPath(path *NSString) *NSDirectoryEnumerator[
 	return NSDirectoryEnumeratorFromID[*NSString](_ret)
 }
 
-// Returns a directory enumerator object that can be used to perform a deep enumeration of the directory at the specified URL.
+// Returns a directory enumerator object that can be used to perform a deep enumeration of the directory at the specified URL. - Parameters: - url: The location of the directory for which you want an enumeration. This URL must not be a symbolic link that points to the desired directory. You can use the `resolvingSymlinksInPath` method to resolve any symlinks in the URL. - keys: An array of keys that identify the properties that you want pre-fetched for each item in the enumeration. The values for these keys are cached in the corresponding “NSURL“ objects. You may specify `nil` for this parameter. For a list of keys you can specify, see “URLResourceKey“. - mask: Options for the enumeration. For a list of valid options, see `NSDirectoryEnumerationOptions`. - handler: An optional error handler block for the file manager to call when an error occurs. The handler block should return `YES` if you want the enumeration to continue or `NO` if you want the enumeration to stop. If you specify `nil` for this parameter, the enumerator object continues to enumerate items as if you had specified a block that returned `YES`. - Returns: A directory enumerator object that enumerates the contents of the directory at `url`. If `url` is a filename, the method returns an enumerator object that enumerates no files---the first call to `nextObject` returns `nil`. Because the enumeration is deep---that is, it lists the contents of all subdirectories---this enumerator object is useful for performing actions that involve large file-system subtrees. If the method is passed a directory on which another file system is mounted (a mount point), it traverses the mount point. This method does not resolve symbolic links or mount points encountered in the enumeration process, nor does it recurse through them if they point to a directory. The “FileManager/DirectoryEnumerator“ class has methods for skipping descendants of the existing path and for returning the number of levels deep the current object is in the directory hierarchy being enumerated (where the directory passed to this method is considered to be level 0).
 func (o *NSFileManager) EnumeratorAtURLIncludingPropertiesForKeysOptionsErrorHandler(url *NSURL, keys *NSArray[*NSString], mask NSDirectoryEnumerationOptions, handler func(*NSURL, unsafe.Pointer) bool) *NSDirectoryEnumerator[*NSURL] {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -527,6 +571,7 @@ func (o *NSFileManager) EnumeratorAtURLIncludingPropertiesForKeysOptionsErrorHan
 	return NSDirectoryEnumeratorFromID[*NSURL](_ret)
 }
 
+// Returns an array of strings identifying the paths for all items in the specified directory. - Parameters: - path: The path of the directory to list. - Returns: An array of “NSString“ objects, each of which contains the path of an item in the directory specified by `path`. If `path` is a symbolic link, this method traverses the link. This method returns `nil` if it cannot retrieve the device of the linked-to file. This method recurses the specified directory and its subdirectories. The method skips the "`.`" and "`..`" directories at each level of the recursion. This method reveals every element of the subtree at `path`, including the contents of file packages (such as apps, nib files, and RTFD files). In macOS 10.5 and later, use `subpathsOfDirectoryAtPath:error:` instead.
 func (o *NSFileManager) SubpathsAtPath(path *NSString) *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelSubpathsAtPath, path.Ptr())
 	if _ret != 0 {
@@ -535,6 +580,7 @@ func (o *NSFileManager) SubpathsAtPath(path *NSString) *NSArray[*NSString] {
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// Returns the contents of the file at the specified path. - Parameters: - path: The path of the file whose contents you want. - Returns: An “NSData“ object with the contents of the file. If `path` specifies a directory, or if some other error occurs, this method returns `nil`.
 func (o *NSFileManager) ContentsAtPath(path *NSString) *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelContentsAtPath, path.Ptr())
 	if _ret != 0 {
@@ -543,16 +589,19 @@ func (o *NSFileManager) ContentsAtPath(path *NSString) *NSData {
 	return NSDataFromID(_ret)
 }
 
+// Creates a file with the specified content and attributes at the given location. - Parameters: - path: The path for the new file. - data: A data object containing the contents of the new file. - attr: A dictionary containing the attributes to associate with the new file. You can use these attributes to set the owner and group numbers, file permissions, and modification date. For a list of keys, see `NSFileAttributeKey`. If you specify `nil` for `attributes`, the file is created with a set of default attributes. - Returns: `YES` if the operation was successful or if the item already exists, otherwise `NO`. If you specify `nil` for the `attributes` parameter, this method uses a default set of values for the owner, group, and permissions of any newly created directories in the path. Similarly, if you omit a specific attribute, the default value is used. The default values for newly created files are as follows: - Permissions are set according to the umask of the current process. For more information, see umask. - The owner ID is set to the effective user ID of the process. - The group ID is set to that of the parent directory. If a file already exists at `path`, this method overwrites the contents of that file if the current process has the appropriate privileges to do so.
 func (o *NSFileManager) CreateFileAtPathContentsAttributes(path *NSString, data *NSData, attr *NSDictionary[*NSString, objc.ID]) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelCreateFileAtPathContentsAttributes, path.Ptr(), data.Ptr(), attr.Ptr())
 	return _ret
 }
 
+// Returns a C-string representation of a given path that properly encodes Unicode strings for use by the file system. - Parameters: - path: A string object containing a path to a file. This parameter must not be `nil` or contain the empty string. - Returns: A C-string representation of `path` that properly encodes Unicode strings for use by the file system. Use this method if your code calls system routines that expect C-string path arguments. If you use the C string beyond the scope of the current autorelease pool, you must copy it. This method raises an exception if `path` is `nil` or contains the empty string. This method also throws an exception if the conversion of the string fails.
 func (o *NSFileManager) FileSystemRepresentationWithPath(path *NSString) string {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelFileSystemRepresentationWithPath, path.Ptr())
 	return purego.GoString(_ret)
 }
 
+// Returns an “NSString“ object whose contents are derived from the specified C-string path. - Parameters: - str: A C string representation of a pathname. - len: The number of characters in `string`. - Returns: An “NSString“ object converted from the C-string representation `string` with length `len` of a pathname in the current file system. Use this method if your code receives paths as C strings from system routines.
 func (o *NSFileManager) StringWithFileSystemRepresentationLength(str string, len_ uint) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelStringWithFileSystemRepresentationLength, str, len_)
 	if _ret != 0 {
@@ -561,6 +610,7 @@ func (o *NSFileManager) StringWithFileSystemRepresentationLength(str string, len
 	return NSStringFromID(_ret)
 }
 
+// Replaces the contents of the item at the specified URL in a manner that ensures no data loss occurs. - Parameters: - originalItemURL: The item containing the content you want to replace. - newItemURL: The item containing the new content for `originalItemURL`. It is recommended that you put this item in a temporary directory as provided by the OS. If a temporary directory is not available, put this item in a uniquely named directory that is in the same directory as the original item. - backupItemName: If provided, the name used to create a backup of the original item. The backup is placed in the same directory as the original item. If an error occurs during the creation of the backup item, the operation fails. If there is already an item with the same name as the backup item, that item will be removed. The backup item will be removed in the event of success unless the `NSFileManagerItemReplacementWithoutDeletingBackupItem` option is provided in `options`. - options: The options to use during the replacement. Typically, you pass `NSFileManagerItemReplacementUsingNewMetadataOnly` for this parameter, which uses only the metadata from the new item. Pass `0` to get the default behavior, which uses only the metadata from the new item while adjusting some properties using values from the original item. - resultingURL: On input, a pointer for a URL object. When the item is replaced, this pointer is set to the URL of the new item. If no new file system object is required, the URL object in this parameter may be the same passed to the `originalItemURL` parameter. However, if a new file system object is required, the URL object may be different. - error: On input, a pointer to an error object. If an error occurs, this pointer is set to an error object containing the error information. You may specify `nil` for this parameter if you do not want the error information. - Returns: `YES` if the replacement was successful or `NO` if an error occurred. By default, the creation date, permissions, Finder label and color, and Spotlight comments of the original item are preserved on the new item. You can configure which metadata is preserved using the `options` parameter. This method works only when the `originalItemURL` and `newItemURL` parameters are located on the same volume. Attempting to call this method by passing `originalItemURL` and `newItemURL` parameters that have locations on different volumes results in an error. Instead, you can call the `URLForDirectory:inDomain:appropriateForURL:create:error:` method, passing `NSItemReplacementDirectory` as the search path directory, to get a temporary URL on the destination's volume that is suitable for use with this method. If an error occurs and the original item is not in the original location or a temporary location, the resulting error object contains a user info dictionary with the key `"NSFileOriginalItemLocationKey"`. The value assigned to that key is an “NSURL“ object with the location of the item.
 func (o *NSFileManager) ReplaceItemAtURLWithItemAtURLBackupItemNameOptionsResultingItemURLError(originalItemURL *NSURL, newItemURL *NSURL, backupItemName *NSString, options NSFileManagerItemReplacementOptions, resultingURL *NSURL) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelReplaceItemAtURLWithItemAtURLBackupItemNameOptionsResultingItemURLError, originalItemURL.Ptr(), newItemURL.Ptr(), backupItemName.Ptr(), options, resultingURL.Ptr(), unsafe.Pointer(&_nsErr))
@@ -570,6 +620,7 @@ func (o *NSFileManager) ReplaceItemAtURLWithItemAtURLBackupItemNameOptionsResult
 	return _ret, nil
 }
 
+// Indicates whether the item at the specified URL should be stored in iCloud. - Parameters: - flag: `YES` to move the item to iCloud or `NO` to remove it from iCloud (if it is there currently). - url: The URL of the item (file or directory) that you want to store in iCloud. - destinationURL: When moving a file into iCloud, this is the location in iCloud at which to store the file or directory. This URL must be constructed from a URL returned by the `URLForUbiquityContainerIdentifier:` method. When moving a file out of iCloud, this is the location on the local device. - error: On input, a pointer to variable for an “NSError“ object. If an error occurs, this pointer is set to an “NSError“ object containing information about the error. You may specify `nil` to ignore the error information. - Returns: `YES` if the item's status was updated successfully or `NO` if an error occurred. Use this method to move a file from its current location to iCloud. For files located in an app's sandbox, this involves physically removing the file from the sandbox container. You can also use this method to move files out of iCloud and back into a local directory. > Important: > Avoid calling this method from your app's main thread. This method performs a coordinated write operation on the specified file, which can block for a long time. Instead, use a dispatch queue to call this method from background thread.
 func (o *NSFileManager) SetUbiquitousItemAtURLDestinationURLError(flag bool, url *NSURL, destinationURL *NSURL) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelSetUbiquitousItemAtURLDestinationURLError, flag, url.Ptr(), destinationURL.Ptr(), unsafe.Pointer(&_nsErr))
@@ -579,11 +630,13 @@ func (o *NSFileManager) SetUbiquitousItemAtURLDestinationURLError(flag bool, url
 	return _ret, nil
 }
 
+// Returns a Boolean indicating whether the item is targeted for storage in iCloud. - Parameters: - url: Specify the URL for the file or directory whose status you want to check. - Returns: `YES` if the item is targeted for iCloud storage or `NO` if it is not. This method also returns `NO` if no item exists at `url`. This method reflects only whether the item should be stored in iCloud because a call was made to the `setUbiquitous:itemAtURL:destinationURL:error:` method with a value of `YES` for its `flag` parameter. This method does not reflect whether the file has actually been uploaded to any iCloud servers. To determine a file's upload status, check the `NSURLUbiquitousItemIsUploadedKey` attribute of the corresponding “NSURL“ object.
 func (o *NSFileManager) IsUbiquitousItemAtURL(url *NSURL) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelIsUbiquitousItemAtURL, url.Ptr())
 	return _ret
 }
 
+// Starts downloading (if necessary) the specified item to the local system. - Parameters: - url: The URL for the file or directory in the cloud that you want to download. - error: On input, a pointer to variable for an “NSError“ object. If an error occurs, this pointer is set to an “NSError“ object containing information about the error. You may specify `nil` to ignore the error information. - Returns: `YES` if the download started successfully or was not necessary, `NO` otherwise. If a cloud-based file or directory has not been downloaded yet, calling this method starts the download process. If the item exists locally, calling this method synchronizes the local copy with the version in the cloud.
 func (o *NSFileManager) StartDownloadingUbiquitousItemAtURLError(url *NSURL) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelStartDownloadingUbiquitousItemAtURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
@@ -593,6 +646,7 @@ func (o *NSFileManager) StartDownloadingUbiquitousItemAtURLError(url *NSURL) (bo
 	return _ret, nil
 }
 
+// Removes the local copy of the specified item that's stored in iCloud. - Parameters: - url: The URL to a file or directory in iCloud storage. - error: On input, a pointer to variable for an “NSError“ object. If an error occurs, this pointer is set to an “NSError“ object containing information about the error. You may specify `nil` to ignore the error information. - Returns: `YES` if the local item was removed successfully or `NO` if it was not. Don't use a coordinated write to perform this operation. This method doesn't remove the item from iCloud. It removes only the local version. You can then use `startDownloadingUbiquitousItemAtURL:error:` to force iCloud to download a new version of the file or directory from the server. To delete a file permanently from the user's iCloud storage, use the regular “NSFileManager“ routines for deleting files and directories. Remember that deleting items from iCloud can't be undone. Once deleted, the item is gone forever.
 func (o *NSFileManager) EvictUbiquitousItemAtURLError(url *NSURL) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelEvictUbiquitousItemAtURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
@@ -602,6 +656,7 @@ func (o *NSFileManager) EvictUbiquitousItemAtURLError(url *NSURL) (bool, error) 
 	return _ret, nil
 }
 
+// Returns the URL for the iCloud container associated with the specified identifier and establishes access to that container. - Parameters: - containerIdentifier: The fully-qualified container identifier for an iCloud container directory. The string you specify must not contain wildcards and must be of the form `<TEAMID>.<CONTAINER>`, where `<TEAMID>` is your development team ID and `<CONTAINER>` is the bundle identifier of the container you want to access. If you specify `nil` for this parameter, this method returns the first container listed in the `com.apple.developer.ubiquity-container-identifiers` entitlement array. - Returns: A URL pointing to the specified ubiquity container, or `nil` if the container could not be located or if iCloud storage is unavailable for the current user or device. You use this method to determine the location of your app's ubiquity container directories and to configure your app's initial iCloud access. The first time you call this method for a given ubiquity container, the system extends your app's sandbox to include that container. > Important: > Do not call this method from your app's main thread. Because this method might take a nontrivial amount of time to set up iCloud and return the requested URL, you should always call it from a secondary thread. To determine if iCloud is available, especially at launch time, check the value of the `ubiquityIdentityToken` property instead.
 func (o *NSFileManager) URLForUbiquityContainerIdentifier(containerIdentifier *NSString) *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelURLForUbiquityContainerIdentifier, containerIdentifier.Ptr())
 	if _ret != 0 {
@@ -610,6 +665,7 @@ func (o *NSFileManager) URLForUbiquityContainerIdentifier(containerIdentifier *N
 	return NSURLFromID(_ret)
 }
 
+// Returns a URL that can be emailed to users to allow them to download a copy of a flat file item from iCloud. - Parameters: - url: The URL of the item in the cloud that you want to share. The URL must be prefixed with the base URL returned from the `URLForUbiquityContainerIdentifier:` method that corresponds to the item's location. The file must be a flat file, not a bundle. The file at the specified URL must already be uploaded to iCloud when you call this method. - outDate: On input, a pointer to a variable for a date object. On output, this parameter contains the date after which the item is no longer available at the returned URL. You may specify `nil` for this parameter if you are not interested in the date. - error: On input, a pointer to variable for an “NSError“ object. If an error occurs, this pointer is set to an “NSError“ object containing information about the error. You may specify `nil` for this parameter if you do not want the error information. - Returns: A URL with which users can download a copy of the item at `url`. In Objective-C, returns `nil` if the URL could not be created for any reason. This method creates a snapshot of the specified flat file and places that copy in a temporary iCloud location where it can be accessed by other users using the returned URL. The snapshot reflects the contents of the file at the time the URL was generated and is not updated when subsequent changes are made to the original file in the user's iCloud storage. Your app must have access to the network for this call to succeed. If the specified file is in the process of being uploaded to iCloud, you must not call this method until the upload has finished. > Important: > As of iOS 8.0 and macOS 10.10 The `url` must specify a flat file, not a bundle. Bundles have a folder as the root item.
 func (o *NSFileManager) URLForPublishingUbiquitousItemAtURLExpirationDateError(url *NSURL, outDate *NSDate) (*NSURL, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelURLForPublishingUbiquitousItemAtURLExpirationDateError, url.Ptr(), outDate.Ptr(), unsafe.Pointer(&_nsErr))
@@ -676,6 +732,7 @@ func (o *NSFileManager) UploadLocalVersionOfUbiquitousItemAtURLWithConflictResol
 	o.Ptr().Send(_nSFileManagerSelUploadLocalVersionOfUbiquitousItemAtURLWithConflictResolutionPolicyCompletionHandler, url.Ptr(), conflictResolutionPolicy, __block_completionHandler)
 }
 
+// Returns the services provided by the File Provider extension that manages the item at the given URL. - Parameters: - url: The file URL of a document or directory. - completionHandler: A block that is called on an anonymous background queue. The system passes this block the following parameters: `services` (if the request is successful, a dictionary with zero or more `NSFileProviderServiceName` keys and their corresponding `NSFileProviderService` values; otherwise, `nil`) and `error` (if an error occurs, an object that describes the error; otherwise, `nil`). Use the returned services to perform custom actions defined by the services' protocol. To access a service, get the `NSFileProviderService` object for the desired service name, get an `NSXPCConnection` from it, set up its `remoteObjectInterface` with the protocol that matches the service's name, call `resume` on the connection, and then call custom action methods on the proxy object.
 func (o *NSFileManager) GetFileProviderServicesForItemAtURLCompletionHandler(url *NSURL, completionHandler func(*NSDictionary[*NSString, *NSFileProviderService], unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -690,6 +747,7 @@ func (o *NSFileManager) GetFileProviderServicesForItemAtURLCompletionHandler(url
 	o.Ptr().Send(_nSFileManagerSelGetFileProviderServicesForItemAtURLCompletionHandler, url.Ptr(), __block_completionHandler)
 }
 
+// Returns the container directory associated with the specified security application group identifier. - Parameters: - groupIdentifier: A string that names the group whose shared directory you want to obtain. This input should exactly match one of the strings in the app's App Groups entitlement. - Returns: A URL indicating the location of the group's shared directory in the file system. In iOS, the value is `nil` when the group identifier is invalid. In macOS, a URL of the expected form is always returned, even if the app group is invalid, so be sure to test that you can access the underlying directory before attempting to use it. Sandboxed apps in macOS and all apps in iOS that need to share files with other apps from the same developer on a given device use the App Groups entitlement to join one or more application groups.
 func (o *NSFileManager) ContainerURLForSecurityApplicationGroupIdentifier(groupIdentifier *NSString) *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelContainerURLForSecurityApplicationGroupIdentifier, groupIdentifier.Ptr())
 	if _ret != 0 {
@@ -698,6 +756,7 @@ func (o *NSFileManager) ContainerURLForSecurityApplicationGroupIdentifier(groupI
 	return NSURLFromID(_ret)
 }
 
+// The shared file manager object for the process. This method always represents the same file manager object. If you plan to use a delegate with the file manager to receive notifications about the completion of file-based operations, you should create a new instance of “FileManager“ rather than using the shared object.
 func NSFileManagerDefaultManager() *NSFileManager {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFileManager), _nSFileManagerSelDefaultManager)
 	if _ret != 0 {
@@ -706,6 +765,7 @@ func NSFileManagerDefaultManager() *NSFileManager {
 	return NSFileManagerFromID(_ret)
 }
 
+// The delegate of the file manager object. It is recommended that you assign a delegate to the file manager object only if you allocated and initialized the object yourself. Avoid assigning a delegate to the shared file manager obtained from the “FileManager/default“ method. The default value of this property is `nil`. When assigning a delegate to this property, your object must conform to the “FileManagerDelegate“ protocol.
 func (o *NSFileManager) Delegate() NSFileManagerDelegate {
 	_ret := objc.Send[NSFileManagerDelegate](o.Ptr(), _nSFileManagerSelDelegate)
 	return _ret
@@ -715,6 +775,7 @@ func (o *NSFileManager) SetDelegate(delegate NSFileManagerDelegate) {
 	o.Ptr().Send(_nSFileManagerSelSetDelegate, delegate)
 }
 
+// The path to the program's current directory. The current directory path is the starting point for any relative paths you specify. For example, if the current directory is `/tmp` and you specify a relative pathname of `reports/info.txt`, the resulting full path for the item is `/tmp/reports/info.txt`. When an app is launched, this property is initially set to the app's current working directory. If the current working directory is not accessible for any reason, the value of this property is `nil`. You can change the value of this property by calling the `changeCurrentDirectoryPath:` method. > Warning: > This property reports the current working directory for the current process, not just the receiver.
 func (o *NSFileManager) CurrentDirectoryPath() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelCurrentDirectoryPath)
 	if _ret != 0 {
@@ -723,11 +784,13 @@ func (o *NSFileManager) CurrentDirectoryPath() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// An opaque token that represents the current user's iCloud Drive Documents identity. In iCloud Drive Documents, when iCloud is available, this property contains an opaque object representing the identity of the current user. If iCloud is unavailable or there is no logged-in user, the value of this property is `nil`. Accessing the value of this property is relatively fast, so you can check the value at launch time from your app's main thread. You can use the token in this property, together with the `NSUbiquityIdentityDidChangeNotification` notification, to detect when the user logs in or out of iCloud and to detect changes to the active iCloud account. When the user logs in with a different iCloud account, the identity token changes, and the system posts the notification. If you stored or archived the previous token, compare that token to the newly obtained one using the `isEqual:` method to determine if the users are the same or different. Accessing the token in this property doesn't connect your app to its ubiquity containers. To establish access to a ubiquity container, call the `URLForUbiquityContainerIdentifier:` method.
 func (o *NSFileManager) UbiquityIdentityToken() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelUbiquityIdentityToken)
 	return _ret
 }
 
+// Returns the home directory for the specified user. - Parameters: - userName: The username of the owner of the desired home directory. - Returns: A URL object containing the location of the specified user's home directory, or `nil` if no such user exists or the user's home directory is not available.
 func (o *NSFileManager) HomeDirectoryForUser(userName *NSString) *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelHomeDirectoryForUser, userName.Ptr())
 	if _ret != 0 {
@@ -736,6 +799,7 @@ func (o *NSFileManager) HomeDirectoryForUser(userName *NSString) *NSURL {
 	return NSURLFromID(_ret)
 }
 
+// The home directory for the current user.
 func (o *NSFileManager) HomeDirectoryForCurrentUser() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelHomeDirectoryForCurrentUser)
 	if _ret != 0 {
@@ -744,6 +808,7 @@ func (o *NSFileManager) HomeDirectoryForCurrentUser() *NSURL {
 	return NSURLFromID(_ret)
 }
 
+// The temporary directory for the current user.
 func (o *NSFileManager) TemporaryDirectory() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelTemporaryDirectory)
 	if _ret != 0 {

@@ -37,7 +37,6 @@ func NSPortNameServerFromID(id objc.ID) *NSPortNameServer {
 }
 
 // Returns the single instance of NSPortNameServer for the application.
-// Deprecated: Use NSXPCConnection instead
 func NSPortNameServerSystemDefaultPortNameServer() *NSPortNameServer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPortNameServer), _nSPortNameServerSelSystemDefaultPortNameServer)
 	if _ret != 0 {

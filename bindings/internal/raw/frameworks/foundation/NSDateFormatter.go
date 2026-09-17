@@ -11,8 +11,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A formatter that converts between dates and their textual representations.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsdateformatter
 type NSDateFormatter struct {
 	NSFormatter
@@ -110,6 +108,7 @@ func NSDateFormatterFromID(id objc.ID) *NSDateFormatter {
 	return o
 }
 
+// Returns by reference a date representation of a specified string and its date range, as well as a Boolean value that indicates whether the system can parse the string. - Parameters: - obj: If the receiver is able to parse `string`, upon return contains a date representation of `string`. - string: The string to parse. - rangep: If the receiver is able to parse `string`, upon return contains the range of `string` used to create the date. - error: If the receiver is unable to create a date by parsing `string`, upon return contains an `NSError` object that describes the problem. - Returns: `YES` if the receiver can create a date by parsing `string`, otherwise `NO`.
 func (o *NSDateFormatter) GetObjectValueForStringRangeError(obj **ObjcObject, string_ *NSString, rangep *NSRange) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSDateFormatterSelGetObjectValueForStringRangeError, obj, string_.Ptr(), rangep, unsafe.Pointer(&_nsErr))
@@ -119,6 +118,7 @@ func (o *NSDateFormatter) GetObjectValueForStringRangeError(obj **ObjcObject, st
 	return _ret, nil
 }
 
+// Returns a string representation of a specified date that the system formats using the receiver's current settings. - Parameter date: The date to format. - Returns: A string representation of `date`.
 func (o *NSDateFormatter) StringFromDate(date *NSDate) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelStringFromDate, date.Ptr())
 	if _ret != 0 {
@@ -127,6 +127,7 @@ func (o *NSDateFormatter) StringFromDate(date *NSDate) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns a date representation of a specified string that the system interprets using the receiver's current settings. - Parameter string: The string to parse. - Returns: A date representation of `string`. If `dateFromString:` can't parse the string, returns `nil`.
 func (o *NSDateFormatter) DateFromString(string_ *NSString) *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelDateFromString, string_.Ptr())
 	if _ret != 0 {
@@ -135,6 +136,7 @@ func (o *NSDateFormatter) DateFromString(string_ *NSString) *NSDate {
 	return NSDateFromID(_ret)
 }
 
+// Returns a string representation of a specified date, that the system formats for the current locale using the specified date and time styles. - Parameters: - date: A date. - dstyle: A format style for the date. For possible values, see `NSDateFormatterStyle`. - tstyle: A format style for the time. For possible values, see `NSDateFormatterStyle`. - Returns: A localized string representation of `date` using the specified date and time styles. This method uses a date formatter configured with the current default settings. The returned string is the same as if you configured and used a date formatter as shown in the following example: NSDateFormatter *formatter = [[NSDateFormatter alloc] init]; formatter.formatterBehavior = NSDateFormatterBehavior10_4; formatter.dateStyle = dateStyle; formatter.timeStyle = timeStyle; NSString *result = [formatter stringForObjectValue:date];
 func NSDateFormatterLocalizedStringFromDateDateStyleTimeStyle(date *NSDate, dstyle NSDateFormatterStyle, tstyle NSDateFormatterStyle) *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDateFormatter), _nSDateFormatterSelLocalizedStringFromDateDateStyleTimeStyle, date.Ptr(), dstyle, tstyle)
 	if _ret != 0 {
@@ -143,6 +145,7 @@ func NSDateFormatterLocalizedStringFromDateDateStyleTimeStyle(date *NSDate, dsty
 	return NSStringFromID(_ret)
 }
 
+// Returns a localized date format string representing the given date format components arranged appropriately for the specified locale. - Parameters: - tmplate: A string containing date format patterns (such as "MM" or "h"). - opts: No options are currently defined — pass `0`. - locale: The locale for which the template is required. - Returns: A localized date format string representing the date format components given in `tmplate`, arranged appropriately for the locale specified by `locale`. The returned string may not contain exactly those components given in `tmplate`, but may — for example — have locale-specific adjustments applied. Different locales have different conventions for the ordering of date components. You use this method to get an appropriate format string for a given set of components for a specified locale (typically you use the current locale).
 func NSDateFormatterDateFormatFromTemplateOptionsLocale(tmplate *NSString, opts uint, locale *NSLocale) *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDateFormatter), _nSDateFormatterSelDateFormatFromTemplateOptionsLocale, tmplate.Ptr(), opts, locale.Ptr())
 	if _ret != 0 {
@@ -151,10 +154,12 @@ func NSDateFormatterDateFormatFromTemplateOptionsLocale(tmplate *NSString, opts 
 	return NSStringFromID(_ret)
 }
 
+// Sets the date format from a template using the specified locale for the receiver. - Parameter dateFormatTemplate: A string containing date format patterns (such as "MM" or "h"). Calling this method is equivalent to, but not necessarily implemented as, setting the `dateFormat` property to the result of calling the `dateFormatFromTemplate:options:locale:` method, passing no options and the `locale` property value. > Important: You should call this method only after setting the `locale` of the receiver.
 func (o *NSDateFormatter) SetLocalizedDateFormatFromTemplate(dateFormatTemplate *NSString) {
 	o.Ptr().Send(_nSDateFormatterSelSetLocalizedDateFormatFromTemplate, dateFormatTemplate.Ptr())
 }
 
+// The capitalization formatting context used when formatting a date. The formatting context allows the formatter to apply appropriate capitalization depending on how the string will be used, and whether the locale makes capitalization distinctions.
 func (o *NSDateFormatter) FormattingContext() NSFormattingContext {
 	_ret := objc.Send[NSFormattingContext](o.Ptr(), _nSDateFormatterSelFormattingContext)
 	return _ret
@@ -164,6 +169,7 @@ func (o *NSDateFormatter) SetFormattingContext(formattingContext NSFormattingCon
 	o.Ptr().Send(_nSDateFormatterSelSetFormattingContext, formattingContext)
 }
 
+// Returns the default formatting behavior for instances of the class. For iOS and for macOS applications linked against macOS 10.5 and later, the default is `NSDateFormatterBehavior10_4`.
 func NSDateFormatterDefaultFormatterBehavior() NSDateFormatterBehavior {
 	_ret := objc.Send[NSDateFormatterBehavior](objc.ID(_clsNSDateFormatter), _nSDateFormatterSelDefaultFormatterBehavior)
 	return _ret
@@ -173,6 +179,7 @@ func NSDateFormatterSetDefaultFormatterBehavior(defaultFormatterBehavior NSDateF
 	objc.ID(_clsNSDateFormatter).Send(_nSDateFormatterSelSetDefaultFormatterBehavior, defaultFormatterBehavior)
 }
 
+// The date format string used by the receiver. You should only set this property when working with fixed format representations. For user-visible representations, you should use the `dateStyle` and `timeStyle` properties, or the `setLocalizedDateFormatFromTemplate:` method if your desired format cannot be achieved using the predefined styles; both of these properties and this method provide a localized date representation appropriate for display to the user.
 func (o *NSDateFormatter) DateFormat() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelDateFormat)
 	if _ret != 0 {
@@ -185,6 +192,7 @@ func (o *NSDateFormatter) SetDateFormat(dateFormat *NSString) {
 	o.Ptr().Send(_nSDateFormatterSelSetDateFormat, dateFormat.Ptr())
 }
 
+// The date style of the receiver.
 func (o *NSDateFormatter) DateStyle() NSDateFormatterStyle {
 	_ret := objc.Send[NSDateFormatterStyle](o.Ptr(), _nSDateFormatterSelDateStyle)
 	return _ret
@@ -194,6 +202,7 @@ func (o *NSDateFormatter) SetDateStyle(dateStyle NSDateFormatterStyle) {
 	o.Ptr().Send(_nSDateFormatterSelSetDateStyle, dateStyle)
 }
 
+// The time style of the receiver.
 func (o *NSDateFormatter) TimeStyle() NSDateFormatterStyle {
 	_ret := objc.Send[NSDateFormatterStyle](o.Ptr(), _nSDateFormatterSelTimeStyle)
 	return _ret
@@ -203,6 +212,7 @@ func (o *NSDateFormatter) SetTimeStyle(timeStyle NSDateFormatterStyle) {
 	o.Ptr().Send(_nSDateFormatterSelSetTimeStyle, timeStyle)
 }
 
+// The locale for the receiver.
 func (o *NSDateFormatter) Locale() *NSLocale {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelLocale)
 	if _ret != 0 {
@@ -215,6 +225,7 @@ func (o *NSDateFormatter) SetLocale(locale *NSLocale) {
 	o.Ptr().Send(_nSDateFormatterSelSetLocale, locale.Ptr())
 }
 
+// Indicates whether the formatter generates the deprecated calendar date type. This property is `YES` if the formatter generates the deprecated `NSCalendarDate` type, and is `NO` otherwise. You should use `NSDate` and `NSCalendar` rather than `NSCalendarDate`.
 func (o *NSDateFormatter) GeneratesCalendarDates() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSDateFormatterSelGeneratesCalendarDates)
 	return _ret
@@ -224,6 +235,7 @@ func (o *NSDateFormatter) SetGeneratesCalendarDates(generatesCalendarDates bool)
 	o.Ptr().Send(_nSDateFormatterSelSetGeneratesCalendarDates, generatesCalendarDates)
 }
 
+// The formatter behavior for the receiver.
 func (o *NSDateFormatter) FormatterBehavior() NSDateFormatterBehavior {
 	_ret := objc.Send[NSDateFormatterBehavior](o.Ptr(), _nSDateFormatterSelFormatterBehavior)
 	return _ret
@@ -233,6 +245,7 @@ func (o *NSDateFormatter) SetFormatterBehavior(formatterBehavior NSDateFormatter
 	o.Ptr().Send(_nSDateFormatterSelSetFormatterBehavior, formatterBehavior)
 }
 
+// The time zone for the receiver. If unspecified, the system time zone is used.
 func (o *NSDateFormatter) TimeZone() *NSTimeZone {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelTimeZone)
 	if _ret != 0 {
@@ -245,6 +258,7 @@ func (o *NSDateFormatter) SetTimeZone(timeZone *NSTimeZone) {
 	o.Ptr().Send(_nSDateFormatterSelSetTimeZone, timeZone.Ptr())
 }
 
+// The calendar for the receiver. If unspecified, the logical calendar for the current user is used.
 func (o *NSDateFormatter) Calendar() *NSCalendar {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelCalendar)
 	if _ret != 0 {
@@ -257,6 +271,7 @@ func (o *NSDateFormatter) SetCalendar(calendar *NSCalendar) {
 	o.Ptr().Send(_nSDateFormatterSelSetCalendar, calendar.Ptr())
 }
 
+// A Boolean value that indicates whether the receiver uses heuristics when parsing a string. `YES` if the receiver has been set to use heuristics when parsing a string to guess at the date which is intended, otherwise `NO`. If a formatter is set to be lenient, when parsing a string it uses heuristics to guess at the date which is intended. As with any guessing, it may get the result date wrong (that is, a date other than that which was intended).
 func (o *NSDateFormatter) IsLenient() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSDateFormatterSelIsLenient)
 	return _ret
@@ -266,6 +281,7 @@ func (o *NSDateFormatter) SetLenient(lenient bool) {
 	o.Ptr().Send(_nSDateFormatterSelSetLenient, lenient)
 }
 
+// The earliest date that can be denoted by a two-digit year specifier. If the two-digit start date is set to January 6, 1976, then "January 1, 76" is interpreted as New Year's Day in 2076, whereas "February 14, 76" is interpreted as Valentine's Day in 1976. By default, this property is equal to December 31, 1949.
 func (o *NSDateFormatter) TwoDigitStartDate() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelTwoDigitStartDate)
 	if _ret != 0 {
@@ -278,6 +294,7 @@ func (o *NSDateFormatter) SetTwoDigitStartDate(twoDigitStartDate *NSDate) {
 	o.Ptr().Send(_nSDateFormatterSelSetTwoDigitStartDate, twoDigitStartDate.Ptr())
 }
 
+// The default date for the receiver. By default, this property is `nil`.
 func (o *NSDateFormatter) DefaultDate() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelDefaultDate)
 	if _ret != 0 {
@@ -290,6 +307,7 @@ func (o *NSDateFormatter) SetDefaultDate(defaultDate *NSDate) {
 	o.Ptr().Send(_nSDateFormatterSelSetDefaultDate, defaultDate.Ptr())
 }
 
+// The era symbols for the receiver. An array containing `NSString` objects representing the era symbols for the receiver (for example, {"B.C.E.", "C.E."}).
 func (o *NSDateFormatter) EraSymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelEraSymbols)
 	if _ret != 0 {
@@ -302,6 +320,7 @@ func (o *NSDateFormatter) SetEraSymbols(eraSymbols *NSArray[*NSString]) {
 	o.Ptr().Send(_nSDateFormatterSelSetEraSymbols, eraSymbols.Ptr())
 }
 
+// The month symbols for the receiver.
 func (o *NSDateFormatter) MonthSymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelMonthSymbols)
 	if _ret != 0 {
@@ -314,6 +333,7 @@ func (o *NSDateFormatter) SetMonthSymbols(monthSymbols *NSArray[*NSString]) {
 	o.Ptr().Send(_nSDateFormatterSelSetMonthSymbols, monthSymbols.Ptr())
 }
 
+// The array of short month symbols for the receiver.
 func (o *NSDateFormatter) ShortMonthSymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelShortMonthSymbols)
 	if _ret != 0 {
@@ -326,6 +346,7 @@ func (o *NSDateFormatter) SetShortMonthSymbols(shortMonthSymbols *NSArray[*NSStr
 	o.Ptr().Send(_nSDateFormatterSelSetShortMonthSymbols, shortMonthSymbols.Ptr())
 }
 
+// The array of weekday symbols for the receiver.
 func (o *NSDateFormatter) WeekdaySymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelWeekdaySymbols)
 	if _ret != 0 {
@@ -338,6 +359,7 @@ func (o *NSDateFormatter) SetWeekdaySymbols(weekdaySymbols *NSArray[*NSString]) 
 	o.Ptr().Send(_nSDateFormatterSelSetWeekdaySymbols, weekdaySymbols.Ptr())
 }
 
+// The array of short weekday symbols for the receiver.
 func (o *NSDateFormatter) ShortWeekdaySymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelShortWeekdaySymbols)
 	if _ret != 0 {
@@ -350,6 +372,7 @@ func (o *NSDateFormatter) SetShortWeekdaySymbols(shortWeekdaySymbols *NSArray[*N
 	o.Ptr().Send(_nSDateFormatterSelSetShortWeekdaySymbols, shortWeekdaySymbols.Ptr())
 }
 
+// The AM symbol for the receiver.
 func (o *NSDateFormatter) AMSymbol() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelAMSymbol)
 	if _ret != 0 {
@@ -362,6 +385,7 @@ func (o *NSDateFormatter) SetAMSymbol(amSymbol *NSString) {
 	o.Ptr().Send(_nSDateFormatterSelSetAMSymbol, amSymbol.Ptr())
 }
 
+// The PM symbol for the receiver.
 func (o *NSDateFormatter) PMSymbol() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelPMSymbol)
 	if _ret != 0 {
@@ -374,6 +398,7 @@ func (o *NSDateFormatter) SetPMSymbol(pmSymbol *NSString) {
 	o.Ptr().Send(_nSDateFormatterSelSetPMSymbol, pmSymbol.Ptr())
 }
 
+// The long era symbols for the receiver. An array containing `NSString` objects representing the era symbols for the receiver (for example, {"Before Common Era", "Common Era"}).
 func (o *NSDateFormatter) LongEraSymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelLongEraSymbols)
 	if _ret != 0 {
@@ -386,6 +411,7 @@ func (o *NSDateFormatter) SetLongEraSymbols(longEraSymbols *NSArray[*NSString]) 
 	o.Ptr().Send(_nSDateFormatterSelSetLongEraSymbols, longEraSymbols.Ptr())
 }
 
+// The very short month symbols for the receiver.
 func (o *NSDateFormatter) VeryShortMonthSymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelVeryShortMonthSymbols)
 	if _ret != 0 {
@@ -398,6 +424,7 @@ func (o *NSDateFormatter) SetVeryShortMonthSymbols(veryShortMonthSymbols *NSArra
 	o.Ptr().Send(_nSDateFormatterSelSetVeryShortMonthSymbols, veryShortMonthSymbols.Ptr())
 }
 
+// The standalone month symbols for the receiver.
 func (o *NSDateFormatter) StandaloneMonthSymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelStandaloneMonthSymbols)
 	if _ret != 0 {
@@ -410,6 +437,7 @@ func (o *NSDateFormatter) SetStandaloneMonthSymbols(standaloneMonthSymbols *NSAr
 	o.Ptr().Send(_nSDateFormatterSelSetStandaloneMonthSymbols, standaloneMonthSymbols.Ptr())
 }
 
+// The short standalone month symbols for the receiver.
 func (o *NSDateFormatter) ShortStandaloneMonthSymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelShortStandaloneMonthSymbols)
 	if _ret != 0 {
@@ -422,6 +450,7 @@ func (o *NSDateFormatter) SetShortStandaloneMonthSymbols(shortStandaloneMonthSym
 	o.Ptr().Send(_nSDateFormatterSelSetShortStandaloneMonthSymbols, shortStandaloneMonthSymbols.Ptr())
 }
 
+// The very short month symbols for the receiver.
 func (o *NSDateFormatter) VeryShortStandaloneMonthSymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelVeryShortStandaloneMonthSymbols)
 	if _ret != 0 {
@@ -434,6 +463,7 @@ func (o *NSDateFormatter) SetVeryShortStandaloneMonthSymbols(veryShortStandalone
 	o.Ptr().Send(_nSDateFormatterSelSetVeryShortStandaloneMonthSymbols, veryShortStandaloneMonthSymbols.Ptr())
 }
 
+// The array of very short weekday symbols for the receiver.
 func (o *NSDateFormatter) VeryShortWeekdaySymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelVeryShortWeekdaySymbols)
 	if _ret != 0 {
@@ -446,6 +476,7 @@ func (o *NSDateFormatter) SetVeryShortWeekdaySymbols(veryShortWeekdaySymbols *NS
 	o.Ptr().Send(_nSDateFormatterSelSetVeryShortWeekdaySymbols, veryShortWeekdaySymbols.Ptr())
 }
 
+// The array of standalone weekday symbols for the receiver.
 func (o *NSDateFormatter) StandaloneWeekdaySymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelStandaloneWeekdaySymbols)
 	if _ret != 0 {
@@ -458,6 +489,7 @@ func (o *NSDateFormatter) SetStandaloneWeekdaySymbols(standaloneWeekdaySymbols *
 	o.Ptr().Send(_nSDateFormatterSelSetStandaloneWeekdaySymbols, standaloneWeekdaySymbols.Ptr())
 }
 
+// The array of short standalone weekday symbols for the receiver.
 func (o *NSDateFormatter) ShortStandaloneWeekdaySymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelShortStandaloneWeekdaySymbols)
 	if _ret != 0 {
@@ -470,6 +502,7 @@ func (o *NSDateFormatter) SetShortStandaloneWeekdaySymbols(shortStandaloneWeekda
 	o.Ptr().Send(_nSDateFormatterSelSetShortStandaloneWeekdaySymbols, shortStandaloneWeekdaySymbols.Ptr())
 }
 
+// The array of very short standalone weekday symbols for the receiver.
 func (o *NSDateFormatter) VeryShortStandaloneWeekdaySymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelVeryShortStandaloneWeekdaySymbols)
 	if _ret != 0 {
@@ -482,6 +515,7 @@ func (o *NSDateFormatter) SetVeryShortStandaloneWeekdaySymbols(veryShortStandalo
 	o.Ptr().Send(_nSDateFormatterSelSetVeryShortStandaloneWeekdaySymbols, veryShortStandaloneWeekdaySymbols.Ptr())
 }
 
+// The quarter symbols for the receiver.
 func (o *NSDateFormatter) QuarterSymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelQuarterSymbols)
 	if _ret != 0 {
@@ -494,6 +528,7 @@ func (o *NSDateFormatter) SetQuarterSymbols(quarterSymbols *NSArray[*NSString]) 
 	o.Ptr().Send(_nSDateFormatterSelSetQuarterSymbols, quarterSymbols.Ptr())
 }
 
+// The short quarter symbols for the receiver.
 func (o *NSDateFormatter) ShortQuarterSymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelShortQuarterSymbols)
 	if _ret != 0 {
@@ -506,6 +541,7 @@ func (o *NSDateFormatter) SetShortQuarterSymbols(shortQuarterSymbols *NSArray[*N
 	o.Ptr().Send(_nSDateFormatterSelSetShortQuarterSymbols, shortQuarterSymbols.Ptr())
 }
 
+// The standalone quarter symbols for the receiver.
 func (o *NSDateFormatter) StandaloneQuarterSymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelStandaloneQuarterSymbols)
 	if _ret != 0 {
@@ -518,6 +554,7 @@ func (o *NSDateFormatter) SetStandaloneQuarterSymbols(standaloneQuarterSymbols *
 	o.Ptr().Send(_nSDateFormatterSelSetStandaloneQuarterSymbols, standaloneQuarterSymbols.Ptr())
 }
 
+// The short standalone quarter symbols for the receiver.
 func (o *NSDateFormatter) ShortStandaloneQuarterSymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelShortStandaloneQuarterSymbols)
 	if _ret != 0 {
@@ -530,6 +567,7 @@ func (o *NSDateFormatter) SetShortStandaloneQuarterSymbols(shortStandaloneQuarte
 	o.Ptr().Send(_nSDateFormatterSelSetShortStandaloneQuarterSymbols, shortStandaloneQuarterSymbols.Ptr())
 }
 
+// The start date of the Gregorian calendar for the receiver. This is used to specify the start date for the Gregorian calendar switch from the Julian calendar. Different locales switched at different times. Normally you should just accept the locale's default date for the switch.
 func (o *NSDateFormatter) GregorianStartDate() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelGregorianStartDate)
 	if _ret != 0 {
@@ -542,6 +580,7 @@ func (o *NSDateFormatter) SetGregorianStartDate(gregorianStartDate *NSDate) {
 	o.Ptr().Send(_nSDateFormatterSelSetGregorianStartDate, gregorianStartDate.Ptr())
 }
 
+// A Boolean value that indicates whether the receiver uses phrases such as "today" and "tomorrow" for the date component. `YES` if the receiver uses relative date formatting, otherwise `NO`. If a date formatter uses relative date formatting, where possible it replaces the date component of its output with a phrase — such as "today" or "tomorrow" — that indicates a relative date. The available phrases depend on the locale for the date formatter; whereas, for dates in the future, English may only allow "tomorrow," French may allow "the day after the day after tomorrow."
 func (o *NSDateFormatter) DoesRelativeDateFormatting() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSDateFormatterSelDoesRelativeDateFormatting)
 	return _ret
@@ -551,14 +590,14 @@ func (o *NSDateFormatter) SetDoesRelativeDateFormatting(doesRelativeDateFormatti
 	o.Ptr().Send(_nSDateFormatterSelSetDoesRelativeDateFormatting, doesRelativeDateFormatting)
 }
 
-// Initializes and returns an NSDateFormatter instance that uses the OS X 10.0 formatting behavior and the given date format string in its conversions.
+// Initializes and returns an `NSDateFormatter` instance that uses the OS X 10.0 formatting behavior and the given date format string in its conversions. - Parameters: - format: The format for the receiver. - flag: A flag that specifies whether the receiver should process dates entered as expressions in the vernacular (for example, "tomorrow") — `YES` means that it should. - Returns: An initialized `NSDateFormatter` instance that uses `format` in its conversions and that uses the OS X 10.0 formatting behavior. `NSDateFormatter` attempts natural-language processing only after it fails to interpret an entered string according to `format`. Natural-language processing supports only a limited set of colloquial phrases, primarily in English. It may give unexpected results, and its use is strongly discouraged. > Important: You cannot use this method to initialize a formatter with the OS X 10.4 > formatting behavior, you must use `init`.
 // Deprecated: Create an NSDateFormatter with `init` and set the dateFormat property instead.
 func (o *NSDateFormatter) InitWithDateFormatAllowNaturalLanguage(format *NSString, flag bool) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelInitWithDateFormatAllowNaturalLanguage, format.Ptr(), flag)
 	return _ret
 }
 
-// Returns a Boolean value that indicates whether the receiver attempts to process dates entered as a vernacular string.
+// Returns a Boolean value that indicates whether the receiver attempts to process dates entered as a vernacular string. - Returns: `YES` if the receiver attempts to process dates entered as a vernacular string ("today," "next week," "dinner time," and so on), otherwise `NO`. Natural-language processing supports only a limited set of colloquial phrases, primarily in English. It may give unexpected results, and its use is strongly discouraged. > Note: This method is for use with formatters using `NSDateFormatterBehavior10_0` > behavior.
 // Deprecated: There is no replacement
 func (o *NSDateFormatter) AllowsNaturalLanguage() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSDateFormatterSelAllowsNaturalLanguage)

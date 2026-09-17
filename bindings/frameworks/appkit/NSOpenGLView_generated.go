@@ -362,6 +362,14 @@ func (ogv *OpenGLView) WithGestureRecognizers(items ...GestureRecognizerProvider
 	return ogv
 }
 
+// WithExclusiveGestureBehavior sets declares whether gesture recognizers should be exclusive in this view and its subviews.
+func (ogv *OpenGLView) WithExclusiveGestureBehavior(exclusiveGestureBehavior ViewExclusiveGestureBehavior) *OpenGLView {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setExclusiveGestureBehavior:"), exclusiveGestureBehavior)
+	})
+	return ogv
+}
+
 // WithAllowedTouchTypes sets the allowed touch types.
 func (ogv *OpenGLView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *OpenGLView {
 	purego.Main(func() {
@@ -423,6 +431,15 @@ func (ogv *OpenGLView) WithHorizontalContentSizeConstraintActive(horizontalConte
 func (ogv *OpenGLView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *OpenGLView {
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
+	return ogv
+}
+
+// WithTextSelectionManager sets the text selection manager for this view.
+func (ogv *OpenGLView) WithTextSelectionManager(textSelectionManager *TextSelectionManager) *OpenGLView {
+	defer runtime.KeepAlive(textSelectionManager)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setTextSelectionManager:"), objref.IDOf(textSelectionManager))
 	})
 	return ogv
 }

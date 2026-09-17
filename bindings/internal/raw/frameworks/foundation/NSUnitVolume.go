@@ -9,8 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A unit of measure for volume.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsunitvolume
 type NSUnitVolume struct {
 	NSDimension
@@ -61,6 +59,7 @@ func NSUnitVolumeFromID(id objc.ID) *NSUnitVolume {
 	return o
 }
 
+// The megaliters unit of volume.
 func NSUnitVolumeMegaliters() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelMegaliters)
 	if _ret != 0 {
@@ -69,6 +68,7 @@ func NSUnitVolumeMegaliters() *NSUnitVolume {
 	return NSUnitVolumeFromID(_ret)
 }
 
+// The kiloliters unit of volume.
 func NSUnitVolumeKiloliters() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelKiloliters)
 	if _ret != 0 {
@@ -77,6 +77,7 @@ func NSUnitVolumeKiloliters() *NSUnitVolume {
 	return NSUnitVolumeFromID(_ret)
 }
 
+// The liters unit of volume.
 func NSUnitVolumeLiters() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelLiters)
 	if _ret != 0 {
@@ -85,6 +86,7 @@ func NSUnitVolumeLiters() *NSUnitVolume {
 	return NSUnitVolumeFromID(_ret)
 }
 
+// The deciliters unit of volume.
 func NSUnitVolumeDeciliters() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelDeciliters)
 	if _ret != 0 {
@@ -93,6 +95,7 @@ func NSUnitVolumeDeciliters() *NSUnitVolume {
 	return NSUnitVolumeFromID(_ret)
 }
 
+// The centiliters unit of volume.
 func NSUnitVolumeCentiliters() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelCentiliters)
 	if _ret != 0 {
@@ -101,6 +104,7 @@ func NSUnitVolumeCentiliters() *NSUnitVolume {
 	return NSUnitVolumeFromID(_ret)
 }
 
+// The milliliters unit of volume.
 func NSUnitVolumeMilliliters() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelMilliliters)
 	if _ret != 0 {
@@ -109,6 +113,7 @@ func NSUnitVolumeMilliliters() *NSUnitVolume {
 	return NSUnitVolumeFromID(_ret)
 }
 
+// The cubic kilometers unit of volume.
 func NSUnitVolumeCubicKilometers() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelCubicKilometers)
 	if _ret != 0 {
@@ -117,6 +122,7 @@ func NSUnitVolumeCubicKilometers() *NSUnitVolume {
 	return NSUnitVolumeFromID(_ret)
 }
 
+// The cubic meters unit of volume.
 func NSUnitVolumeCubicMeters() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelCubicMeters)
 	if _ret != 0 {
@@ -125,6 +131,7 @@ func NSUnitVolumeCubicMeters() *NSUnitVolume {
 	return NSUnitVolumeFromID(_ret)
 }
 
+// The cubic decimeters unit of volume.
 func NSUnitVolumeCubicDecimeters() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelCubicDecimeters)
 	if _ret != 0 {
@@ -133,6 +140,7 @@ func NSUnitVolumeCubicDecimeters() *NSUnitVolume {
 	return NSUnitVolumeFromID(_ret)
 }
 
+// The cubic centimeters unit of volume.
 func NSUnitVolumeCubicCentimeters() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelCubicCentimeters)
 	if _ret != 0 {
@@ -141,6 +149,7 @@ func NSUnitVolumeCubicCentimeters() *NSUnitVolume {
 	return NSUnitVolumeFromID(_ret)
 }
 
+// The cubic millimeters unit of volume.
 func NSUnitVolumeCubicMillimeters() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelCubicMillimeters)
 	if _ret != 0 {
@@ -149,6 +158,7 @@ func NSUnitVolumeCubicMillimeters() *NSUnitVolume {
 	return NSUnitVolumeFromID(_ret)
 }
 
+// The cubic inches unit of volume.
 func NSUnitVolumeCubicInches() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelCubicInches)
 	if _ret != 0 {
@@ -157,6 +167,7 @@ func NSUnitVolumeCubicInches() *NSUnitVolume {
 	return NSUnitVolumeFromID(_ret)
 }
 
+// The cubic feet unit of volume.
 func NSUnitVolumeCubicFeet() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelCubicFeet)
 	if _ret != 0 {
@@ -165,6 +176,7 @@ func NSUnitVolumeCubicFeet() *NSUnitVolume {
 	return NSUnitVolumeFromID(_ret)
 }
 
+// The cubic yards unit of volume.
 func NSUnitVolumeCubicYards() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelCubicYards)
 	if _ret != 0 {
@@ -173,6 +185,7 @@ func NSUnitVolumeCubicYards() *NSUnitVolume {
 	return NSUnitVolumeFromID(_ret)
 }
 
+// The cubic miles unit of volume.
 func NSUnitVolumeCubicMiles() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelCubicMiles)
 	if _ret != 0 {
@@ -181,6 +194,7 @@ func NSUnitVolumeCubicMiles() *NSUnitVolume {
 	return NSUnitVolumeFromID(_ret)
 }
 
+// The acre-feet unit of volume.
 func NSUnitVolumeAcreFeet() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelAcreFeet)
 	if _ret != 0 {
@@ -189,6 +203,7 @@ func NSUnitVolumeAcreFeet() *NSUnitVolume {
 	return NSUnitVolumeFromID(_ret)
 }
 
+// The bushels unit of volume.
 func NSUnitVolumeBushels() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelBushels)
 	if _ret != 0 {
@@ -197,6 +212,7 @@ func NSUnitVolumeBushels() *NSUnitVolume {
 	return NSUnitVolumeFromID(_ret)
 }
 
+// The teaspoons unit of volume.
 func NSUnitVolumeTeaspoons() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelTeaspoons)
 	if _ret != 0 {
@@ -205,6 +221,7 @@ func NSUnitVolumeTeaspoons() *NSUnitVolume {
 	return NSUnitVolumeFromID(_ret)
 }
 
+// The tablespoons unit of volume.
 func NSUnitVolumeTablespoons() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelTablespoons)
 	if _ret != 0 {
@@ -213,6 +230,7 @@ func NSUnitVolumeTablespoons() *NSUnitVolume {
 	return NSUnitVolumeFromID(_ret)
 }
 
+// The fluid ounces unit of volume.
 func NSUnitVolumeFluidOunces() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelFluidOunces)
 	if _ret != 0 {
@@ -221,6 +239,7 @@ func NSUnitVolumeFluidOunces() *NSUnitVolume {
 	return NSUnitVolumeFromID(_ret)
 }
 
+// The cups unit of volume.
 func NSUnitVolumeCups() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelCups)
 	if _ret != 0 {
@@ -229,6 +248,7 @@ func NSUnitVolumeCups() *NSUnitVolume {
 	return NSUnitVolumeFromID(_ret)
 }
 
+// The pints unit of volume.
 func NSUnitVolumePints() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelPints)
 	if _ret != 0 {
@@ -237,6 +257,7 @@ func NSUnitVolumePints() *NSUnitVolume {
 	return NSUnitVolumeFromID(_ret)
 }
 
+// The quarts unit of volume.
 func NSUnitVolumeQuarts() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelQuarts)
 	if _ret != 0 {
@@ -245,6 +266,7 @@ func NSUnitVolumeQuarts() *NSUnitVolume {
 	return NSUnitVolumeFromID(_ret)
 }
 
+// The gallons unit of volume.
 func NSUnitVolumeGallons() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelGallons)
 	if _ret != 0 {
@@ -253,6 +275,7 @@ func NSUnitVolumeGallons() *NSUnitVolume {
 	return NSUnitVolumeFromID(_ret)
 }
 
+// The imperial teaspoons unit of volume.
 func NSUnitVolumeImperialTeaspoons() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelImperialTeaspoons)
 	if _ret != 0 {
@@ -261,6 +284,7 @@ func NSUnitVolumeImperialTeaspoons() *NSUnitVolume {
 	return NSUnitVolumeFromID(_ret)
 }
 
+// The imperial tablespoons unit of volume.
 func NSUnitVolumeImperialTablespoons() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelImperialTablespoons)
 	if _ret != 0 {
@@ -269,6 +293,7 @@ func NSUnitVolumeImperialTablespoons() *NSUnitVolume {
 	return NSUnitVolumeFromID(_ret)
 }
 
+// The imperial fluid ounces unit of volume.
 func NSUnitVolumeImperialFluidOunces() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelImperialFluidOunces)
 	if _ret != 0 {
@@ -277,6 +302,7 @@ func NSUnitVolumeImperialFluidOunces() *NSUnitVolume {
 	return NSUnitVolumeFromID(_ret)
 }
 
+// The imperial pints unit of volume.
 func NSUnitVolumeImperialPints() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelImperialPints)
 	if _ret != 0 {
@@ -285,6 +311,7 @@ func NSUnitVolumeImperialPints() *NSUnitVolume {
 	return NSUnitVolumeFromID(_ret)
 }
 
+// The imperial quarts unit of volume.
 func NSUnitVolumeImperialQuarts() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelImperialQuarts)
 	if _ret != 0 {
@@ -293,6 +320,7 @@ func NSUnitVolumeImperialQuarts() *NSUnitVolume {
 	return NSUnitVolumeFromID(_ret)
 }
 
+// The imperial gallons unit of volume.
 func NSUnitVolumeImperialGallons() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelImperialGallons)
 	if _ret != 0 {
@@ -301,6 +329,7 @@ func NSUnitVolumeImperialGallons() *NSUnitVolume {
 	return NSUnitVolumeFromID(_ret)
 }
 
+// The metric cups unit of volume.
 func NSUnitVolumeMetricCups() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelMetricCups)
 	if _ret != 0 {

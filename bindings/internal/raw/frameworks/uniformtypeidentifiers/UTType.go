@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A structure that represents a type of data to load, send, or receive.
+// \brief A class representing a type in a type hierarchy. Types may represent files on disk, abstract data types with no on-disk representation, or even entirely unrelated hierarchical classification systems such as hardware. Older API that does not use \c UTType typically uses an untyped \c NSString or \c CFStringRef to refer to a type by its identifier. To get the identifier of a type for use with these APIs, use the \c identifier property of this class. \sa https://developer.apple.com/library/archive/documentation/FileManagement/Conceptual/understanding_utis/
 //
 // Apple documentation: https://developer.apple.com/documentation/uniformtypeidentifiers/uttype
 type UTType struct {
@@ -20,6 +20,7 @@ type UTType struct {
 var (
 	_clsUTType                                           = _objcClass("UTType")
 	_uTTypeSelTypeWithIdentifier                         = objc.RegisterName("typeWithIdentifier:")
+	_uTTypeSelTypeWithIdentifierAllowUndeclared          = objc.RegisterName("typeWithIdentifier:allowUndeclared:")
 	_uTTypeSelTypeWithFilenameExtension                  = objc.RegisterName("typeWithFilenameExtension:")
 	_uTTypeSelTypeWithFilenameExtensionConformingToType  = objc.RegisterName("typeWithFilenameExtension:conformingToType:")
 	_uTTypeSelTypeWithMIMEType                           = objc.RegisterName("typeWithMIMEType:")
@@ -58,6 +59,15 @@ func UTTypeFromID(id objc.ID) *UTType {
 // \brief Create a type given a type identifier. \param identifier The type identifier. \result A type, or \c nil if the type identifier is not known to the system.
 func UTTypeTypeWithIdentifier(identifier *foundation.NSString) *UTType {
 	_ret := objc.Send[objc.ID](objc.ID(_clsUTType), _uTTypeSelTypeWithIdentifier, identifier.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return UTTypeFromID(_ret)
+}
+
+// \brief Create a type given a type identifier, optionally allowing identifiers that do not have an active declaration on the current system. When `allowUndeclared` is `YES`, this initializer can be used to obtain a type object that keeps the "identity" of the input identifier even if no type with that identifier is (currently) known to the system. In that case, the type is neither dynamic nor declared, and has no conformances or tags (or any other properties). If a type with the input identifier is known to the system, or if the input identifier is in the dynamic namespace, it returns the same type object that \c typeWithIdentifier: would return. If `allowUndeclared` is `NO`, this initializer behaves identically to \c typeWithIdentifier: given the same identifier. One may use this, for instance, to create a concrete type object using an identifier that may have been obtained from another system, and round-trip it through a subsystem without losing the identity of the type. If the input \c identifier is not a valid Uniform Type Identifier, the method returns \c nil . See https://developer.apple.com/library/archive/documentation/FileManagement/Conceptual/understanding_utis/understand_utis_conc/understand_utis_conc.html#//apple_ref/doc/uid/TP40001319-CH202-SW2 \param identifier The type identifier. \param allowUndeclared Whether to return an object if no type with the provided identifier is known to the system. \result A type object, or \c nil if the input \c identifier was not a Uniform Type Identifier.
+func UTTypeTypeWithIdentifierAllowUndeclared(identifier *foundation.NSString, allowUndeclared bool) *UTType {
+	_ret := objc.Send[objc.ID](objc.ID(_clsUTType), _uTTypeSelTypeWithIdentifierAllowUndeclared, identifier.Ptr(), allowUndeclared)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

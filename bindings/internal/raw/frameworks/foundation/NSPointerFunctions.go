@@ -68,6 +68,7 @@ func NSPointerFunctionsPointerFunctionsWithOptions(options NSPointerFunctionsOpt
 	return NSPointerFunctionsFromID(_ret)
 }
 
+// The hash function.
 func (o *NSPointerFunctions) HashFunction() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSPointerFunctionsSelHashFunction)
 	return _ret
@@ -77,6 +78,7 @@ func (o *NSPointerFunctions) SetHashFunction(hashFunction unsafe.Pointer) {
 	o.Ptr().Send(_nSPointerFunctionsSelSetHashFunction, hashFunction)
 }
 
+// The function used to compare pointers.
 func (o *NSPointerFunctions) IsEqualFunction() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSPointerFunctionsSelIsEqualFunction)
 	return _ret
@@ -86,6 +88,7 @@ func (o *NSPointerFunctions) SetIsEqualFunction(isEqualFunction unsafe.Pointer) 
 	o.Ptr().Send(_nSPointerFunctionsSelSetIsEqualFunction, isEqualFunction)
 }
 
+// The function used to determine the size of pointers. This function is used for copy-in operations (unless the collection has an object personality).
 func (o *NSPointerFunctions) SizeFunction() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSPointerFunctionsSelSizeFunction)
 	return _ret
@@ -95,6 +98,7 @@ func (o *NSPointerFunctions) SetSizeFunction(sizeFunction unsafe.Pointer) {
 	o.Ptr().Send(_nSPointerFunctionsSelSetSizeFunction, sizeFunction)
 }
 
+// The function used to describe elements. This function is used by description methods for hash and map tables.
 func (o *NSPointerFunctions) DescriptionFunction() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSPointerFunctionsSelDescriptionFunction)
 	return _ret
@@ -104,6 +108,7 @@ func (o *NSPointerFunctions) SetDescriptionFunction(descriptionFunction unsafe.P
 	o.Ptr().Send(_nSPointerFunctionsSelSetDescriptionFunction, descriptionFunction)
 }
 
+// The function used to relinquish memory. This specifies the function to use when an item is removed from a table or pointer array.
 func (o *NSPointerFunctions) RelinquishFunction() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSPointerFunctionsSelRelinquishFunction)
 	return _ret
@@ -113,6 +118,7 @@ func (o *NSPointerFunctions) SetRelinquishFunction(relinquishFunction unsafe.Poi
 	o.Ptr().Send(_nSPointerFunctionsSelSetRelinquishFunction, relinquishFunction)
 }
 
+// The function used to acquire memory. This specifies the function to use for copy-in operations.
 func (o *NSPointerFunctions) AcquireFunction() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSPointerFunctionsSelAcquireFunction)
 	return _ret
@@ -122,23 +128,27 @@ func (o *NSPointerFunctions) SetAcquireFunction(acquireFunction unsafe.Pointer) 
 	o.Ptr().Send(_nSPointerFunctionsSelSetAcquireFunction, acquireFunction)
 }
 
+// Specifies whether, in a garbage collected environment, pointers should be assigned using a strong write barrier. If you use garbage collection, read and write barrier functions must be used when pointers are from memory scanned by the collector.
 // Deprecated: Garbage collection no longer supported
 func (o *NSPointerFunctions) UsesStrongWriteBarrier() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSPointerFunctionsSelUsesStrongWriteBarrier)
 	return _ret
 }
 
+// Specifies whether, in a garbage collected environment, pointers should be assigned using a strong write barrier. If you use garbage collection, read and write barrier functions must be used when pointers are from memory scanned by the collector.
 // Deprecated: Garbage collection no longer supported
 func (o *NSPointerFunctions) SetUsesStrongWriteBarrier(usesStrongWriteBarrier bool) {
 	o.Ptr().Send(_nSPointerFunctionsSelSetUsesStrongWriteBarrier, usesStrongWriteBarrier)
 }
 
+// Specifies whether, in a garbage collected environment, pointers should use weak read and write barriers. If you use garbage collection, read and write barrier functions must be used when pointers are from memory scanned by the collector.
 // Deprecated: Garbage collection no longer supported
 func (o *NSPointerFunctions) UsesWeakReadAndWriteBarriers() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSPointerFunctionsSelUsesWeakReadAndWriteBarriers)
 	return _ret
 }
 
+// Specifies whether, in a garbage collected environment, pointers should use weak read and write barriers. If you use garbage collection, read and write barrier functions must be used when pointers are from memory scanned by the collector.
 // Deprecated: Garbage collection no longer supported
 func (o *NSPointerFunctions) SetUsesWeakReadAndWriteBarriers(usesWeakReadAndWriteBarriers bool) {
 	o.Ptr().Send(_nSPointerFunctionsSelSetUsesWeakReadAndWriteBarriers, usesWeakReadAndWriteBarriers)

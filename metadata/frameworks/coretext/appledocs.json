@@ -1159,6 +1159,9 @@
     "BslnFormat3Part": {
       "url": "https://developer.apple.com/documentation/coretext/bslnformat3part"
     },
+    "BslnFormatUnion": {
+      "url": "https://developer.apple.com/documentation/coretext/bslnformatunion"
+    },
     "BslnTable": {
       "url": "https://developer.apple.com/documentation/coretext/bslntable"
     },
@@ -1205,6 +1208,9 @@
     },
     "JustWidthDeltaGroup": {
       "url": "https://developer.apple.com/documentation/coretext/justwidthdeltagroup"
+    },
+    "KernFormatSpecificHeader": {
+      "url": "https://developer.apple.com/documentation/coretext/kernformatspecificheader"
     },
     "KernIndexArrayHeader": {
       "url": "https://developer.apple.com/documentation/coretext/kernindexarrayheader"
@@ -1256,6 +1262,9 @@
     },
     "KerxCoordinateAction": {
       "url": "https://developer.apple.com/documentation/coretext/kerxcoordinateaction"
+    },
+    "KerxFormatSpecificHeader": {
+      "url": "https://developer.apple.com/documentation/coretext/kerxformatspecificheader"
     },
     "KerxIndexArrayHeader": {
       "url": "https://developer.apple.com/documentation/coretext/kerxindexarrayheader"
@@ -1314,6 +1323,9 @@
     "MortRearrangementSubtable": {
       "url": "https://developer.apple.com/documentation/coretext/mortrearrangementsubtable"
     },
+    "MortSpecificSubtable": {
+      "url": "https://developer.apple.com/documentation/coretext/mortspecificsubtable"
+    },
     "MortSubtable": {
       "url": "https://developer.apple.com/documentation/coretext/mortsubtable"
     },
@@ -1337,6 +1349,9 @@
     },
     "MorxRearrangementSubtable": {
       "url": "https://developer.apple.com/documentation/coretext/morxrearrangementsubtable"
+    },
+    "MorxSpecificSubtable": {
+      "url": "https://developer.apple.com/documentation/coretext/morxspecificsubtable"
     },
     "MorxSubtable": {
       "url": "https://developer.apple.com/documentation/coretext/morxsubtable"
@@ -1370,6 +1385,9 @@
     },
     "SFNTLookupBinarySearchHeader": {
       "url": "https://developer.apple.com/documentation/coretext/sfntlookupbinarysearchheader"
+    },
+    "SFNTLookupFormatSpecificHeader": {
+      "url": "https://developer.apple.com/documentation/coretext/sfntlookupformatspecificheader"
     },
     "SFNTLookupSegment": {
       "url": "https://developer.apple.com/documentation/coretext/sfntlookupsegment"

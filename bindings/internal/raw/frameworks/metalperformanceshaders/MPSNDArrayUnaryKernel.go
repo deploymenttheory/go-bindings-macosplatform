@@ -24,6 +24,7 @@ var (
 	_mPSNDArrayUnaryKernelSelEncodeToCommandBufferSourceArrayDestinationArray                  = objc.RegisterName("encodeToCommandBuffer:sourceArray:destinationArray:")
 	_mPSNDArrayUnaryKernelSelEncodeToCommandBufferSourceArrayResultStateOutputStateIsTemporary = objc.RegisterName("encodeToCommandBuffer:sourceArray:resultState:outputStateIsTemporary:")
 	_mPSNDArrayUnaryKernelSelEncodeToCommandBufferSourceArrayResultStateDestinationArray       = objc.RegisterName("encodeToCommandBuffer:sourceArray:resultState:destinationArray:")
+	_mPSNDArrayUnaryKernelSelEncodeWithMTL4CommandEncoderSourceArrayDestinationArray           = objc.RegisterName("encodeWithMTL4CommandEncoder:sourceArray:destinationArray:")
 	_mPSNDArrayUnaryKernelSelOffsets                                                           = objc.RegisterName("offsets")
 	_mPSNDArrayUnaryKernelSelEdgeMode                                                          = objc.RegisterName("edgeMode")
 	_mPSNDArrayUnaryKernelSelKernelSizes                                                       = objc.RegisterName("kernelSizes")
@@ -75,6 +76,11 @@ func (o *MPSNDArrayUnaryKernel) EncodeToCommandBufferSourceArrayResultStateOutpu
 // @abstract   Encode a simple inference NDArray kernel and return a NDArray to hold the result @param      cmdBuf          The command buffer into which to encode the kernel @param      sourceArray     The source for the filter in an NSArray. @param      outGradientState The output gradient state to record the operation for later use by gradient @param      destination     A destination array to contain the result of the calculation when the command buffer completes successfully.
 func (o *MPSNDArrayUnaryKernel) EncodeToCommandBufferSourceArrayResultStateDestinationArray(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, outGradientState *mpscore.MPSState, destination *mpscore.MPSNDArray) {
 	o.Ptr().Send(_mPSNDArrayUnaryKernelSelEncodeToCommandBufferSourceArrayResultStateDestinationArray, cmdBuf, sourceArray.Ptr(), outGradientState.Ptr(), destination.Ptr())
+}
+
+// @abstract   Encode a simple inference NDArray kernel. The encoder associates the commands with MTLStageDispatch. Synchronize your workloads against this stage when using this function to prevent race conditions. @param      encoder     The MTL4ComputeCommandEncoder to encode the kernel with. @param      sourceArray The source NDArray. @param      destination The destination NDArray.
+func (o *MPSNDArrayUnaryKernel) EncodeWithMTL4CommandEncoderSourceArrayDestinationArray(encoder metal.MTL4ComputeCommandEncoder, sourceArray *mpscore.MPSNDArray, destination *mpscore.MPSNDArray) {
+	o.Ptr().Send(_mPSNDArrayUnaryKernelSelEncodeWithMTL4CommandEncoderSourceArrayDestinationArray, encoder, sourceArray.Ptr(), destination.Ptr())
 }
 
 // @property  offsets @abstract  The coordinate of the position read from this source array which is used to calculate the result value at [0,0,0,....] If the position read is actually a contiguous region (e.g. the area covered by a convolution kernel) then this is the center of that region, rounded down, for each dimension. Default: 0,0,0...

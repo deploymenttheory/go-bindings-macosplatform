@@ -12,8 +12,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An object that represents a stream of data that a capture input provides.
-//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avcaptureinputport
 type AVCaptureInputPort struct {
 	foundation.NSObject

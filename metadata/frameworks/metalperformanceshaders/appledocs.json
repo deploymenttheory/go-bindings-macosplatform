@@ -622,6 +622,12 @@
     "MPSCommandBuffer": {
       "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscommandbuffer"
     },
+    "MPSFColorConversion": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsfcolorconversion"
+    },
+    "MPSFunction": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsfunction"
+    },
     "MPSGRUDescriptor": {
       "doc": "A description of a gated recurrent unit block or layer.",
       "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsgrudescriptor"
@@ -1510,6 +1516,16 @@
       "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagetype"
     }
   },
+  "structs": {
+    "MPSMatrixCopyOffsets": {
+      "doc": "A description of matrix copy operations.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixcopyoffsets"
+    },
+    "MPSScaleTransform": {
+      "doc": "A transform matrix for explicit resampling control with a Lanczos kernel.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsscaletransform"
+    }
+  },
   "methods": {
     "MPSBinaryImageKernel": {
       "-encodeToCommandBuffer:inPlacePrimaryTexture:secondaryTexture:fallbackCopyAllocator:": {
@@ -2135,6 +2151,16 @@
       "delta": {
         "doc": "The “delta” variable of the kernel function.",
         "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnspatialnormalization/delta"
+      }
+    },
+    "MPSFunction": {
+      "error": {
+        "doc": "The error produced when attempting to build the function",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsfunction/error"
+      },
+      "function": {
+        "doc": "A MTLFunction that you can link into your shader",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsfunction/function"
       }
     },
     "MPSImage": {

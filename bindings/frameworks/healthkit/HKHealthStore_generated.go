@@ -137,6 +137,12 @@ func (hs *HealthStore) EarliestPermittedSampleDate() time.Time {
 	return rt.NSDateToTime(_r)
 }
 
+// GetEarliestAuthorizedSampleDateForTypesCompletion returns the earliest date that the person permits your app to read samples for the given data types.
+func (hs *HealthStore) GetEarliestAuthorizedSampleDateForTypesCompletion(types []*ObjectType, completion func(obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(hs)
+	objc.Send[objc.ID](objref.IDOf(hs), objc.RegisterName("getEarliestAuthorizedSampleDateForTypes:completion:"), rt.SliceToNSSet(types, func(_v *ObjectType) objc.ID { return objref.IDOf(_v) }), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completion(obj.Wrap(_b0), _b1) }))
+}
+
 // SaveObjectWithCompletion saves the provided object to the HealthKit store.
 func (hs *HealthStore) SaveObjectWithCompletion(object *Object, completion func(bool, unsafe.Pointer)) {
 	defer runtime.KeepAlive(hs)

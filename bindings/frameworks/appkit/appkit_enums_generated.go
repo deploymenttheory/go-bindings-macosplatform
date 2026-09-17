@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-// Constants that describe the direction to search for an item result.
+// Direction to search for an NSAccessibilityCustomRotorItemResult.
 type AccessibilityCustomRotorSearchDirection int64
 
 const (
@@ -30,7 +30,7 @@ func (e AccessibilityCustomRotorSearchDirection) String() string {
 	}
 }
 
-// Constants that indicate the type of content that the rotor represents.
+// Use NSAccessibilityCustomRotorType when providing results for the following types. This allows assistive technologies to assign keyboard commands and gestures for these common search types.
 type AccessibilityCustomRotorType int64
 
 const (
@@ -111,7 +111,7 @@ func (e AccessibilityCustomRotorType) String() string {
 	}
 }
 
-// The set of alert styles to style alerts in your app.
+// The alert styles used by the `alertStyle` property on instances of `NSAlert`.
 type AlertStyle uint64
 
 const (
@@ -138,7 +138,6 @@ func (e AlertStyle) String() string {
 	}
 }
 
-// These constants indicate the blocking mode of an NSAnimation object when it is running.
 type AnimationBlockingMode uint64
 
 const (
@@ -162,7 +161,6 @@ func (e AnimationBlockingMode) String() string {
 	}
 }
 
-// These constants describe the curve of an animation—that is, the relative speed of an animation from start to finish.
 type AnimationCurve uint64
 
 const (
@@ -267,7 +265,6 @@ func (e ApplicationActivationPolicy) String() string {
 	}
 }
 
-// Constants that indicate whether a copy or print operation was successful, was canceled, or failed.
 type ApplicationDelegateReply uint64
 
 const (
@@ -291,7 +288,6 @@ func (e ApplicationDelegateReply) String() string {
 	}
 }
 
-// This constant indicates whether at least part of any window owned by this app is visible.
 // Bitmask — values may be combined with |.
 type ApplicationOcclusionState uint64
 
@@ -313,12 +309,11 @@ func (e ApplicationOcclusionState) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Constants that control the presentation of the app, typically for fullscreen apps such as games or kiosks.
+// Flags that comprise an application's
 // Bitmask — values may be combined with |.
 type ApplicationPresentationOptions uint64
 
 const (
-	// This is the default presentation mode.
 	ApplicationPresentationDefault ApplicationPresentationOptions = 0
 	// Dock appears when moused to.
 	ApplicationPresentationAutoHideDock ApplicationPresentationOptions = 1
@@ -346,6 +341,8 @@ const (
 	ApplicationPresentationAutoHideToolbar ApplicationPresentationOptions = 2048
 	// "Shake mouse pointer to locate" is disabled for this application.
 	ApplicationPresentationDisableCursorLocationAssistance ApplicationPresentationOptions = 4096
+	// Disable screen corner interactions when the application is frontmost. `.autoHideDock` or `.hideDock` must also be set for this option to take effect.
+	ApplicationPresentationDisableScreenCornerInteractions ApplicationPresentationOptions = 32768
 )
 
 // String returns the ApplicationPresentationOptions constant's name, or its numeric form when the
@@ -391,13 +388,16 @@ func (e ApplicationPresentationOptions) String() string {
 	if e&ApplicationPresentationDisableCursorLocationAssistance != 0 {
 		parts = append(parts, "ApplicationPresentationDisableCursorLocationAssistance")
 	}
+	if e&ApplicationPresentationDisableScreenCornerInteractions != 0 {
+		parts = append(parts, "ApplicationPresentationDisableScreenCornerInteractions")
+	}
 	if len(parts) == 0 {
 		return "0"
 	}
 	return strings.Join(parts, "|")
 }
 
-// Constants that indicate the outcome of a print request.
+// Return values for `-application:printFiles:withSettings:showPrintPanels:`.
 type ApplicationPrintReply uint64
 
 const (
@@ -424,7 +424,7 @@ func (e ApplicationPrintReply) String() string {
 	}
 }
 
-// Constants that determine whether an app should terminate.
+// Return values for `-applicationShouldTerminate:`.
 type ApplicationTerminateReply uint64
 
 const (
@@ -448,7 +448,6 @@ func (e ApplicationTerminateReply) String() string {
 	}
 }
 
-// Constants that specify the autoresizing behaviors for views.
 // Bitmask — values may be combined with |.
 type AutoresizingMaskOptions uint64
 
@@ -490,7 +489,6 @@ func (e AutoresizingMaskOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Background styles to apply to a view’s cell.
 type BackgroundStyle int64
 
 const (
@@ -517,7 +515,6 @@ func (e BackgroundStyle) String() string {
 	}
 }
 
-// Constants that specify how the window device buffers the drawing done in a window.
 type BackingStoreType uint64
 
 const (
@@ -544,7 +541,6 @@ func (e BackingStoreType) String() string {
 	}
 }
 
-// The set of bezel styles to style buttons in your app.
 type BezelStyle uint64
 
 const (
@@ -633,7 +629,6 @@ func (e BezelStyle) String() string {
 	}
 }
 
-// Constants that specify basic path element commands.
 type BezierPathElement uint64
 
 const (
@@ -665,7 +660,6 @@ func (e BezierPathElement) String() string {
 	}
 }
 
-// Constants that represent bitmap component formats.
 // Bitmask — values may be combined with |.
 type BitmapFormat uint64
 
@@ -710,7 +704,6 @@ func (e BitmapFormat) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Constants that specify bitmap file types.
 type BitmapImageFileType uint64
 
 const (
@@ -774,7 +767,6 @@ func (e BorderType) String() string {
 	}
 }
 
-// These constants and data type identifies box types, which, in conjunction with a box’s border type, define the appearance of the box.
 type BoxType uint64
 
 const (
@@ -798,7 +790,6 @@ func (e BoxType) String() string {
 	}
 }
 
-// Types of browser column resizing.
 type BrowserColumnResizingType uint64
 
 const (
@@ -960,7 +951,6 @@ func (e CellHitResult) String() string {
 	return strings.Join(parts, "|")
 }
 
-// A constant for specifying the position of a button’s image relative to its title.
 type CellImagePosition uint64
 
 const (
@@ -1097,7 +1087,6 @@ func (e CharacterCollection) String() string {
 	}
 }
 
-// Constants that describe how a participant can configure a CloudKit share.
 // Bitmask — values may be combined with |.
 type CloudKitSharingServiceOptions uint64
 
@@ -1206,7 +1195,6 @@ func (e CollectionLayoutSectionOrthogonalScrollingBehavior) String() string {
 	}
 }
 
-// Constants indicating the type of action being performed on an item.
 type CollectionUpdateAction int64
 
 const (
@@ -1236,7 +1224,6 @@ func (e CollectionUpdateAction) String() string {
 	}
 }
 
-// Constants indicating the type of highlight applied to an item.
 type CollectionViewItemHighlightState int64
 
 const (
@@ -1263,7 +1250,6 @@ func (e CollectionViewItemHighlightState) String() string {
 	}
 }
 
-// Constants indicating the scrolling direction for the layout.
 type CollectionViewScrollDirection int64
 
 const (
@@ -1284,12 +1270,10 @@ func (e CollectionViewScrollDirection) String() string {
 	}
 }
 
-// Constants indicating the options for scrolling the collection view’s content.
 // Bitmask — values may be combined with |.
 type CollectionViewScrollPosition uint64
 
 const (
-	// Do not scroll.
 	CollectionViewScrollPositionNone                  CollectionViewScrollPosition = 0
 	CollectionViewScrollPositionTop                   CollectionViewScrollPosition = 1
 	CollectionViewScrollPositionCenteredVertically    CollectionViewScrollPosition = 2
@@ -1343,7 +1327,6 @@ func (e CollectionViewScrollPosition) String() string {
 	return strings.Join(parts, "|")
 }
 
-// A type defined for the enum constants specifying color panel modes.
 type ColorPanelMode int64
 
 const (
@@ -1385,7 +1368,6 @@ func (e ColorPanelMode) String() string {
 	}
 }
 
-// The color modes that are enabled for a color panel.
 // Bitmask — values may be combined with |.
 type ColorPanelOptions uint64
 
@@ -1473,7 +1455,6 @@ func (e ColorRenderingIntent) String() string {
 	}
 }
 
-// Constants that describe the abstract model on which color space objects are based.
 type ColorSpaceModel int64
 
 const (
@@ -1512,7 +1493,6 @@ func (e ColorSpaceModel) String() string {
 	}
 }
 
-// Constants for user interactions that change the appearance of a view or control.
 type ColorSystemEffect int64
 
 const (
@@ -1542,7 +1522,6 @@ func (e ColorSystemEffect) String() string {
 	}
 }
 
-// Constants that indicate the color’s type, and which methods may be called on the color object.
 type ColorType int64
 
 const (
@@ -1566,7 +1545,6 @@ func (e ColorType) String() string {
 	}
 }
 
-// Constants that specify the appearance and interaction modes for a color well.
 type ColorWellStyle int64
 
 const (
@@ -1590,7 +1568,6 @@ func (e ColorWellStyle) String() string {
 	}
 }
 
-// Constants that indicate how a combo button presents its menu.
 type ComboButtonStyle int64
 
 const (
@@ -1775,7 +1752,6 @@ func (e ControlBorderShape) String() string {
 	}
 }
 
-// Constants that describe actions for control characters.
 // Bitmask — values may be combined with |.
 type ControlCharacterAction int64
 
@@ -1816,7 +1792,6 @@ func (e ControlCharacterAction) String() string {
 	return strings.Join(parts, "|")
 }
 
-// A constant for specifying a cell’s size.
 type ControlSize uint64
 
 const (
@@ -1877,7 +1852,6 @@ func (e ControlTint) String() string {
 	}
 }
 
-// Constants that allow an app to specify the correction indicator type displayed.
 type CorrectionIndicatorType int64
 
 const (
@@ -1965,7 +1939,6 @@ func (e CursorFrameResizeDirections) String() string {
 	return strings.Join(parts, "|")
 }
 
-// The position along the perimeter of a rectangular frame (its edges and corners) from which it’s resized.
 type CursorFrameResizePosition uint64
 
 const (
@@ -2012,7 +1985,6 @@ func (e CursorFrameResizePosition) String() string {
 	}
 }
 
-// Constants that specify the date and time elements displayed by the picker.
 // Bitmask — values may be combined with |.
 type DatePickerElementFlags uint64
 
@@ -2053,7 +2025,6 @@ func (e DatePickerElementFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Constants that define whether the picker provides a single date, or a range of dates.
 type DatePickerMode uint64
 
 const (
@@ -2074,7 +2045,6 @@ func (e DatePickerMode) String() string {
 	}
 }
 
-// Constants that define the visual appearance of the date picker cell.
 type DatePickerStyle uint64
 
 const (
@@ -2155,7 +2125,6 @@ func (e DisplayGamut) String() string {
 	}
 }
 
-// Values that indicate a document’s edit status.
 type DocumentChangeType uint64
 
 const (
@@ -2323,8 +2292,6 @@ func (e DraggingItemEnumerationOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Constants you use to identify the activated tablet buttons in an event.
-//
 // Deprecated: since macOS 10.12.
 // Bitmask — values may be combined with |.
 type EventButtonMask uint64
@@ -2355,7 +2322,6 @@ func (e EventButtonMask) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Constants that specify the direction of travel for a gesture.
 type EventGestureAxis int64
 
 const (
@@ -2379,8 +2345,6 @@ func (e EventGestureAxis) String() string {
 	}
 }
 
-// Constants that you use to filter out specific event types from the stream of incoming events.
-//
 // Deprecated: since macOS 10.12.
 // Bitmask — values may be combined with |.
 type EventMask uint64
@@ -2413,14 +2377,16 @@ const (
 	EventMaskMagnify            EventMask = 1073741824
 	EventMaskSwipe              EventMask = 2147483648
 	EventMaskRotate             EventMask = 262144
-	EventMaskBeginGesture       EventMask = 524288
-	EventMaskEndGesture         EventMask = 1048576
-	EventMaskSmartMagnify       EventMask = 4294967296
-	EventMaskPressure           EventMask = 17179869184
-	EventMaskDirectTouch        EventMask = 137438953472
-	EventMaskChangeMode         EventMask = 274877906944
-	EventMaskMouseCancelled     EventMask = 1099511627776
-	EventMaskAny                EventMask = 18446744073709551615
+	// Deprecated: NSEventMaskBeginGesture is no longer delivered. Use the phase property on NSEvent or NSGestureRecognizer instead.
+	EventMaskBeginGesture EventMask = 524288
+	// Deprecated: NSEventMaskEndGesture is no longer delivered. Use the phase property on NSEvent or NSGestureRecognizer instead.
+	EventMaskEndGesture     EventMask = 1048576
+	EventMaskSmartMagnify   EventMask = 4294967296
+	EventMaskPressure       EventMask = 17179869184
+	EventMaskDirectTouch    EventMask = 137438953472
+	EventMaskChangeMode     EventMask = 274877906944
+	EventMaskMouseCancelled EventMask = 1099511627776
+	EventMaskAny            EventMask = 18446744073709551615
 )
 
 // String returns the EventMask constant's name, or its numeric form when the
@@ -2538,7 +2504,6 @@ func (e EventMask) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Flags that represent key states in an event object.
 // Bitmask — values may be combined with |.
 type EventModifierFlags uint64
 
@@ -2591,13 +2556,10 @@ func (e EventModifierFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Constants that represent the possible phases during an event phase.
 // Bitmask — values may be combined with |.
 type EventPhase uint64
 
 const (
-	// The event is not associated with a phase.
-	//
 	// Deprecated: since macOS 10.12.
 	EventPhaseNone EventPhase = 0
 	// Deprecated: since macOS 10.12.
@@ -2637,7 +2599,6 @@ func (e EventPhase) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Subtypes for various types of events.
 type EventSubtype int16
 
 const (
@@ -2674,7 +2635,6 @@ func (e EventSubtype) String() string {
 	}
 }
 
-// Constants that specify swipe-tracking options.
 // Bitmask — values may be combined with |.
 type EventSwipeTrackingOptions uint64
 
@@ -2699,7 +2659,6 @@ func (e EventSwipeTrackingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Constants for the types of events that responder objects can handle.
 type EventType uint64
 
 const (
@@ -2730,14 +2689,16 @@ const (
 	EventTypeMagnify            EventType = 30
 	EventTypeSwipe              EventType = 31
 	EventTypeRotate             EventType = 18
-	EventTypeBeginGesture       EventType = 19
-	EventTypeEndGesture         EventType = 20
-	EventTypeSmartMagnify       EventType = 32
-	EventTypeQuickLook          EventType = 33
-	EventTypePressure           EventType = 34
-	EventTypeDirectTouch        EventType = 37
-	EventTypeChangeMode         EventType = 38
-	EventTypeMouseCancelled     EventType = 40
+	// Deprecated: NSEventTypeBeginGesture is no longer delivered. Use the phase property on NSEvent or NSGestureRecognizer instead.
+	EventTypeBeginGesture EventType = 19
+	// Deprecated: NSEventTypeEndGesture is no longer delivered. Use the phase property on NSEvent or NSGestureRecognizer instead.
+	EventTypeEndGesture     EventType = 20
+	EventTypeSmartMagnify   EventType = 32
+	EventTypeQuickLook      EventType = 33
+	EventTypePressure       EventType = 34
+	EventTypeDirectTouch    EventType = 37
+	EventTypeChangeMode     EventType = 38
+	EventTypeMouseCancelled EventType = 40
 )
 
 // String returns the EventType constant's name, or its numeric form when the
@@ -2962,7 +2923,6 @@ func (e FontCollectionOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Constants that specify the visibility of font collections.
 // Bitmask — values may be combined with |.
 type FontCollectionVisibility uint64
 
@@ -2991,7 +2951,6 @@ func (e FontCollectionVisibility) String() string {
 	return strings.Join(parts, "|")
 }
 
-// A symbolic description of the stylistic aspects of a font.
 // Bitmask — values may be combined with |.
 type FontDescriptorSymbolicTraits uint32
 
@@ -3192,7 +3151,6 @@ func (e FontTraitMask) String() string {
 	return strings.Join(parts, "|")
 }
 
-// The current state of the gesture recognizer.
 type GestureRecognizerState int64
 
 const (
@@ -3295,7 +3253,6 @@ func (e GlyphInscription) String() string {
 	}
 }
 
-// Glyph properties.
 // Bitmask — values may be combined with |.
 type GlyphProperty int64
 
@@ -3328,7 +3285,6 @@ func (e GlyphProperty) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Constants that specify gradient drawing options.
 // Bitmask — values may be combined with |.
 type GradientDrawingOptions uint64
 
@@ -3443,7 +3399,6 @@ func (e GridRowAlignment) String() string {
 	}
 }
 
-// A time at which to provide haptic feedback to the user.
 type HapticFeedbackPerformanceTime uint64
 
 const (
@@ -3541,7 +3496,6 @@ func (e ImageAlignment) String() string {
 	}
 }
 
-// Constants that specify the caching policy on a per-image basis.
 type ImageCacheMode uint64
 
 const (
@@ -3568,7 +3522,7 @@ func (e ImageCacheMode) String() string {
 	}
 }
 
-// Describes how High Dynamic Range (HDR) image content displays.
+// Values that can be used to enable or constrain display of High Dynamic Range (HDR) content in NSImageViews. Displaying HDR content in an NSImageView requires that the assigned NSImage has HDR content in the ITU-R 2100 color space and also that the output device has Extended Dynamic Range (EDR) capabilities.
 type ImageDynamicRange int64
 
 const (
@@ -3598,7 +3552,6 @@ func (e ImageDynamicRange) String() string {
 	}
 }
 
-// Constants that allow you to specify the kind of frame bordering the image.
 type ImageFrameStyle uint64
 
 const (
@@ -3663,7 +3616,6 @@ func (e ImageInterpolation) String() string {
 	}
 }
 
-// Constants that describe the layout direction for the image.
 type ImageLayoutDirection int64
 
 const (
@@ -3687,7 +3639,6 @@ func (e ImageLayoutDirection) String() string {
 	}
 }
 
-// Status values for incremental image loading.
 type ImageLoadStatus uint64
 
 const (
@@ -3717,7 +3668,6 @@ func (e ImageLoadStatus) String() string {
 	}
 }
 
-// Constants that describe the resizing mode for the image.
 type ImageResizingMode int64
 
 const (
@@ -3801,7 +3751,6 @@ func (e ImageSymbolColorRenderingMode) String() string {
 	}
 }
 
-// Constants that specify which scale variant of a symbol image to use.
 type ImageSymbolScale int64
 
 const (
@@ -3851,7 +3800,6 @@ func (e ImageSymbolVariableValueMode) String() string {
 	}
 }
 
-// The part of the object’s visual representation that should be used to get the value for the constraint.
 type LayoutAttribute int64
 
 const (
@@ -3906,7 +3854,6 @@ func (e LayoutAttribute) String() string {
 	}
 }
 
-// The layout constraint orientation, either horizontal or vertical, that the constraint uses to enforce layout between objects.
 type LayoutConstraintOrientation int64
 
 const (
@@ -3927,7 +3874,6 @@ func (e LayoutConstraintOrientation) String() string {
 	}
 }
 
-// A bit mask that specifies both a part of an interface element to align and a direction for the alignment between two interface elements.
 // Bitmask — values may be combined with |.
 type LayoutFormatOptions uint64
 
@@ -4005,7 +3951,6 @@ func (e LayoutFormatOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// The relation between the first attribute and the modified second attribute in a constraint.
 type LayoutRelation int64
 
 const (
@@ -4052,7 +3997,6 @@ func (e LevelIndicatorPlaceholderVisibility) String() string {
 	}
 }
 
-// Constants that specify a level indicator’s appearance.
 type LevelIndicatorStyle uint64
 
 const (
@@ -4118,16 +4062,18 @@ func (e LineBreakMode) String() string {
 	}
 }
 
-// Constants that specify how the text system breaks lines while laying out paragraphs.
 // Bitmask — values may be combined with |.
 type LineBreakStrategy uint64
 
 const (
-	// The text system doesn’t use any line-break strategies.
-	LineBreakStrategyNone               LineBreakStrategy = 0
-	LineBreakStrategyPushOut            LineBreakStrategy = 1
+	// The text system doesn't use any non-default line-break strategies.
+	LineBreakStrategyNone LineBreakStrategy = 0
+	// The text system pushes out individual lines to avoid an orphan word on the last line of the paragraph. To avoid an orphan word on the last line of a paragraph before a page break, the text system may extend individual lines by one or more words. Typically, the text system only pushes out the last line by one word.
+	LineBreakStrategyPushOut LineBreakStrategy = 1
+	// The text system prohibits breaking between Hangul syllables. To avoid breaking between Hangul syllables, this strategy is preferred for typesetting modern Korean documents that display UI strings.
 	LineBreakStrategyHangulWordPriority LineBreakStrategy = 2
-	LineBreakStrategyStandard           LineBreakStrategy = 65535
+	// The text system uses the same configuration of line-break strategies that it uses for standard UI labels. This strategy optimizes for displaying shorter strings that are common in UI labels. This strategy may be unsuitable for large amounts of text.
+	LineBreakStrategyStandard LineBreakStrategy = 65535
 )
 
 // String returns the LineBreakStrategy constant's name, or its numeric form when the
@@ -4149,7 +4095,6 @@ func (e LineBreakStrategy) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Constants that specify the shape of endpoints for an open path when it is stroked.
 type LineCapStyle uint64
 
 const (
@@ -4173,7 +4118,6 @@ func (e LineCapStyle) String() string {
 	}
 }
 
-// Constants that specify the shape of the joins between connected segments of a stroked path.
 type LineJoinStyle uint64
 
 const (
@@ -4198,12 +4142,18 @@ func (e LineJoinStyle) String() string {
 }
 
 // The direction in which a line moves.
+//
+// Deprecated: since macOS API_TO_BE_DEPRECATED.
 type LineMovementDirection uint64
 
 const (
 	// Line has no movement.
+	//
+	// Deprecated: since macOS API_TO_BE_DEPRECATED.
 	LineDoesntMove LineMovementDirection = 0
 	// Lines move from right to left.
+	//
+	// Deprecated: since macOS API_TO_BE_DEPRECATED.
 	LineMovesLeft LineMovementDirection = 1
 	// Lines move from left to right.
 	LineMovesRight LineMovementDirection = 2
@@ -4233,6 +4183,8 @@ func (e LineMovementDirection) String() string {
 }
 
 // Values that describe the progression of text on a page.
+//
+// Deprecated: since macOS API_TO_BE_DEPRECATED.
 type LineSweepDirection uint64
 
 const (
@@ -4263,7 +4215,6 @@ func (e LineSweepDirection) String() string {
 	}
 }
 
-// These constants determine how NSCell objects behave when an NSMatrix object is tracking the mouse.
 type MatrixMode uint64
 
 const (
@@ -4290,7 +4241,7 @@ func (e MatrixMode) String() string {
 	}
 }
 
-// These constants are masks used to configure a Media Library Browser to display specific types of media. Combined masks are not yet supported. In other words, only one nonzero mask value is supported at a time. If masks are combined, the lowest mask value is used.
+// This type is used to configure a media browser for individual media types.
 // Bitmask — values may be combined with |.
 type MediaLibrary uint64
 
@@ -4319,7 +4270,7 @@ func (e MediaLibrary) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Constants that define types of badges for display.
+// The badge type is used to specify one of the pre-defined or custom string portions of a menu item badge, ensuring appropriate localization and pluralization behaviors automatically when using a pre-defined type.
 type MenuItemBadgeType int64
 
 const (
@@ -4350,7 +4301,34 @@ func (e MenuItemBadgeType) String() string {
 	}
 }
 
-// Specifies the style of a menu.
+// Values for the `preferredImageVisibility` property of NSMenuItem. When a menu item is initialized, the default value for the item's image visibility is Automatic.
+type MenuItemImageVisibility int64
+
+const (
+	// AppKit should choose whether the item's image is visible, considering the system configuration.
+	MenuItemImageVisibilityAutomatic MenuItemImageVisibility = 0
+	// The item image should always be visible. Note that in some cases, AppKit may still hide the image, overriding this preference.
+	MenuItemImageVisibilityVisible MenuItemImageVisibility = 1
+	// The item image should not be visible.
+	MenuItemImageVisibilityHidden MenuItemImageVisibility = 2
+)
+
+// String returns the MenuItemImageVisibility constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MenuItemImageVisibility) String() string {
+	switch e {
+	case MenuItemImageVisibilityAutomatic:
+		return "MenuItemImageVisibilityAutomatic"
+	case MenuItemImageVisibilityVisible:
+		return "MenuItemImageVisibilityVisible"
+	case MenuItemImageVisibilityHidden:
+		return "MenuItemImageVisibilityHidden"
+	default:
+		return fmt.Sprintf("MenuItemImageVisibility(%d)", int64(e))
+	}
+}
+
+// When set as a value on `NSMenu.presentationStyle`, determines how the given menu is presented.
 type MenuPresentationStyle int64
 
 const (
@@ -4373,7 +4351,6 @@ func (e MenuPresentationStyle) String() string {
 	}
 }
 
-// These constants are used as a bitmask for specifying a set of menu or menu item properties, and are contained by the propertiesToUpdate property.
 // Bitmask — values may be combined with |.
 type MenuProperties uint64
 
@@ -4414,7 +4391,7 @@ func (e MenuProperties) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Describes how the menu manages selection states of the menu items that belong to the same selection group.
+// When set as a value on `NSMenu.selectionMode`, determines how the menu manages selection states of the menu items that belong to the same selection group. This does not apply to menu items that have distinct target/action values.
 type MenuSelectionMode int64
 
 const (
@@ -4464,8 +4441,6 @@ func (e MultibyteGlyphPacking) String() string {
 	}
 }
 
-// Constants that specify context parameters.
-//
 // Deprecated: since macOS 10.14.
 type OpenGLContextParameter int64
 
@@ -4570,7 +4545,6 @@ func (e OpenGLGlobalOption) String() string {
 	}
 }
 
-// Constants used to configure the contents of a PDF panel.
 // Bitmask — values may be combined with |.
 type PDFPanelOptions int64
 
@@ -4599,7 +4573,6 @@ func (e PDFPanelOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// These constants control the transition style of the page controller.
 type PageControllerTransitionStyle int64
 
 const (
@@ -4643,7 +4616,6 @@ func (e PageLayoutResult) String() string {
 	}
 }
 
-// Constants that describe the orientation of printing on a page.
 type PaperOrientation int64
 
 const (
@@ -4695,7 +4667,6 @@ func (e PasteboardAccessBehavior) String() string {
 	}
 }
 
-// Options for preparing the pasteboard.
 // Bitmask — values may be combined with |.
 type PasteboardContentsOptions uint64
 
@@ -4716,7 +4687,6 @@ func (e PasteboardContentsOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// NSPathStyle constants represent the different visual and behavioral styles an NSPathControl or NSPathCell object can have.
 type PathStyle int64
 
 const (
@@ -4741,7 +4711,6 @@ func (e PathStyle) String() string {
 	}
 }
 
-// Constants that specify display styles for picker bar items.
 type PickerTouchBarItemControlRepresentation int64
 
 const (
@@ -4765,7 +4734,6 @@ func (e PickerTouchBarItemControlRepresentation) String() string {
 	}
 }
 
-// Constants that specify selection modes for picker bar items.
 type PickerTouchBarItemSelectionMode int64
 
 const (
@@ -4789,8 +4757,6 @@ func (e PickerTouchBarItemSelectionMode) String() string {
 	}
 }
 
-// The pointing-device types for tablet-proximity events or mouse events with a proximity event subtype.
-//
 // Deprecated: since macOS 10.12.
 type PointingDeviceType uint64
 
@@ -4819,7 +4785,6 @@ func (e PointingDeviceType) String() string {
 	}
 }
 
-// These constants are defined for use with the arrowPosition property.
 type PopUpArrowPosition uint64
 
 const (
@@ -4843,8 +4808,6 @@ func (e PopUpArrowPosition) String() string {
 	}
 }
 
-// The appearance and disappearance behavior of a popover.
-//
 // Deprecated: since macOS 10.10.
 type PopoverBehavior int64
 
@@ -4869,7 +4832,6 @@ func (e PopoverBehavior) String() string {
 	}
 }
 
-// These constants describe the behavior and progression of a pressure gesture.
 type PressureBehavior int64
 
 const (
@@ -4905,7 +4867,6 @@ func (e PressureBehavior) String() string {
 	}
 }
 
-// Constants that specify options for configuring the contents of the main Print panel.
 // Bitmask — values may be combined with |.
 type PrintPanelOptions uint64
 
@@ -4974,7 +4935,6 @@ func (e PrintPanelResult) String() string {
 	}
 }
 
-// Constants that specify the print quality in use.
 type PrintRenderingQuality int64
 
 const (
@@ -4995,7 +4955,6 @@ func (e PrintRenderingQuality) String() string {
 	}
 }
 
-// Constants that describe the state of a printer information table stored by a printer object.
 type PrinterTableStatus uint64
 
 const (
@@ -5019,7 +4978,6 @@ func (e PrinterTableStatus) String() string {
 	}
 }
 
-// Constants that specify the page order.
 type PrintingPageOrder int64
 
 const (
@@ -5046,7 +5004,6 @@ func (e PrintingPageOrder) String() string {
 	}
 }
 
-// Constants that specify the different ways in which an image is divided into pages.
 type PrintingPaginationMode uint64
 
 const (
@@ -5070,7 +5027,6 @@ func (e PrintingPaginationMode) String() string {
 	}
 }
 
-// Constants that specify the progress indicator’s style.
 type ProgressIndicatorStyle uint64
 
 const (
@@ -5142,12 +5098,11 @@ func (e RectAlignment) String() string {
 	}
 }
 
-// These constants determine whether apps launched by remote notifications display a badge.
+// Soft deprecated. Please use `NSApplication`'s `-registerForRemoteNotifications` along with `-requestAuthorizationWithOptions:` from the `UserNotifications.framework` to specify allowable notification types.
 // Bitmask — values may be combined with |.
 type RemoteNotificationType uint64
 
 const (
-	// The app shouldn’t display a badge.
 	RemoteNotificationTypeNone  RemoteNotificationType = 0
 	RemoteNotificationTypeBadge RemoteNotificationType = 1
 	RemoteNotificationTypeSound RemoteNotificationType = 2
@@ -5193,7 +5148,6 @@ func (e RequestUserAttentionType) String() string {
 	}
 }
 
-// Specifies a type for nesting modes.
 type RuleEditorNestingMode uint64
 
 const (
@@ -5220,7 +5174,6 @@ func (e RuleEditorNestingMode) String() string {
 	}
 }
 
-// Specifies a type for row types.
 type RuleEditorRowType uint64
 
 const (
@@ -5261,7 +5214,6 @@ func (e RulerOrientation) String() string {
 	}
 }
 
-// Constants for specifying the type of document-save operation to perform.
 type SaveOperationType uint64
 
 const (
@@ -5271,8 +5223,6 @@ const (
 	AutosaveInPlaceOperation   SaveOperationType = 4
 	AutosaveElsewhereOperation SaveOperationType = 3
 	AutosaveAsOperation        SaveOperationType = 5
-	// Old name for the NSAutosaveElsewhereOperation operation type.
-	//
 	// Deprecated: Use NSAutosaveElsewhereOperation instead
 	AutosaveOperation SaveOperationType = 3
 )
@@ -5296,6 +5246,27 @@ func (e SaveOperationType) String() string {
 	default:
 		return fmt.Sprintf("SaveOperationType(%d)", int64(e))
 	}
+}
+
+// Bitmask — values may be combined with |.
+type ScreenTouchCapabilities uint64
+
+const (
+	ScreenTouchCapabilitiesNone       ScreenTouchCapabilities = 0
+	ScreenTouchCapabilitiesMultiTouch ScreenTouchCapabilities = 1
+)
+
+// String returns the ScreenTouchCapabilities constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ScreenTouchCapabilities) String() string {
+	var parts []string
+	if e&ScreenTouchCapabilitiesMultiTouch != 0 {
+		parts = append(parts, "ScreenTouchCapabilitiesMultiTouch")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
 }
 
 // Deprecated: Scroller arrows are not used anymore.
@@ -5323,7 +5294,6 @@ func (e ScrollArrowPosition) String() string {
 	}
 }
 
-// These constants determine the elasticity behavior for an axis of the scrollview.
 type ScrollElasticity int64
 
 const (
@@ -5347,7 +5317,6 @@ func (e ScrollElasticity) String() string {
 	}
 }
 
-// These constants define the position of the find bar in relation to the scroll view.
 type ScrollViewFindBarPosition int64
 
 const (
@@ -5394,7 +5363,6 @@ func (e ScrollerArrow) String() string {
 	}
 }
 
-// Specify different knob styles.
 type ScrollerKnobStyle int64
 
 const (
@@ -5418,8 +5386,6 @@ func (e ScrollerKnobStyle) String() string {
 	}
 }
 
-// These constants specify the different parts of the scroller:
-//
 // Deprecated: Scroller arrows are not used anymore.
 type ScrollerPart uint64
 
@@ -5459,7 +5425,6 @@ func (e ScrollerPart) String() string {
 	}
 }
 
-// Constants to specify the scroller style.
 type ScrollerStyle int64
 
 const (
@@ -5480,7 +5445,7 @@ func (e ScrollerStyle) String() string {
 	}
 }
 
-// The specified preferred alignment of items within the scrubber, when they come to rest following a user’s scrolling or paging interaction.
+// NSScrubberAlignment specifies the preferred alignment of elements within the control.
 type ScrubberAlignment int64
 
 const (
@@ -5507,7 +5472,7 @@ func (e ScrubberAlignment) String() string {
 	}
 }
 
-// The scrolling behavior for a scrubber.
+// Determines the interaction mode for a NSScrubber control.
 type ScrubberMode int64
 
 const (
@@ -5622,6 +5587,29 @@ func (e SegmentSwitchTracking) String() string {
 	}
 }
 
+type SegmentedControlRole int64
+
+const (
+	SegmentedControlRoleAutomatic      SegmentedControlRole = 0
+	SegmentedControlRoleTabs           SegmentedControlRole = 1
+	SegmentedControlRoleValueSelection SegmentedControlRole = 2
+)
+
+// String returns the SegmentedControlRole constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SegmentedControlRole) String() string {
+	switch e {
+	case SegmentedControlRoleAutomatic:
+		return "SegmentedControlRoleAutomatic"
+	case SegmentedControlRoleTabs:
+		return "SegmentedControlRoleTabs"
+	case SegmentedControlRoleValueSelection:
+		return "SegmentedControlRoleValueSelection"
+	default:
+		return fmt.Sprintf("SegmentedControlRole(%d)", int64(e))
+	}
+}
+
 // These constants specify the preferred direction of selection. They’re used by selectionAffinity and setSelectedRange:affinity:stillSelecting:.
 type SelectionAffinity uint64
 
@@ -5645,7 +5633,6 @@ func (e SelectionAffinity) String() string {
 	}
 }
 
-// Constants that specify the direction a window is currently using to change the key view.
 type SelectionDirection uint64
 
 const (
@@ -5717,7 +5704,6 @@ func (e SharingCollaborationMode) String() string {
 	}
 }
 
-// The types of sliders, used by sliderType.
 type SliderType uint64
 
 const (
@@ -5762,7 +5748,6 @@ func (e SpeechBoundary) String() string {
 	}
 }
 
-// Constants that specify the style of the split view’s dividers.
 type SplitViewDividerStyle int64
 
 const (
@@ -5786,7 +5771,6 @@ func (e SplitViewDividerStyle) String() string {
 	}
 }
 
-// Constants that describe the behavior of the split view item.
 type SplitViewItemBehavior int64
 
 const (
@@ -5813,7 +5797,6 @@ func (e SplitViewItemBehavior) String() string {
 	}
 }
 
-// Constants that describe the split view item’s collapsing behavior.
 type SplitViewItemCollapseBehavior int64
 
 const (
@@ -5882,7 +5865,6 @@ func (e StackViewDistribution) String() string {
 	}
 }
 
-// The gravity areas available in a stack view.
 type StackViewGravity int64
 
 const (
@@ -5908,7 +5890,6 @@ func (e StackViewGravity) String() string {
 	}
 }
 
-// A set of optional status item behaviors.
 // Bitmask — values may be combined with |.
 type StatusItemBehavior uint64
 
@@ -5933,7 +5914,6 @@ func (e StatusItemBehavior) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Constants that represent the supported TIFF data-compression schemes.
 type TIFFCompression uint64
 
 const (
@@ -6001,7 +5981,6 @@ func (e TabPosition) String() string {
 	}
 }
 
-// These constants describe the current display state of a tab:
 type TabState uint64
 
 const (
@@ -6048,7 +6027,6 @@ func (e TabViewBorderType) String() string {
 	}
 }
 
-// Tab control style options for a tab view controller.
 type TabViewControllerTabStyle int64
 
 const (
@@ -6118,7 +6096,6 @@ func (e TabViewType) String() string {
 type TableColumnResizingOptions uint64
 
 const (
-	// Prevents the table column from resizing.
 	TableColumnNoResizing       TableColumnResizingOptions = 0
 	TableColumnAutoresizingMask TableColumnResizingOptions = 1
 	TableColumnUserResizingMask TableColumnResizingOptions = 2
@@ -6140,7 +6117,6 @@ func (e TableColumnResizingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// These constants define table row edges on which row actions are attached. They are used by the tableView:rowActionsForRow:edge: delegate method.
 type TableRowActionEdge int64
 
 const (
@@ -6161,12 +6137,10 @@ func (e TableRowActionEdge) String() string {
 	}
 }
 
-// Specifies the animation effects to apply when inserting or removing rows.
 // Bitmask — values may be combined with |.
 type TableViewAnimationOptions uint64
 
 const (
-	// Use no animation effects.
 	TableViewAnimationEffectNone TableViewAnimationOptions = 0
 	TableViewAnimationEffectFade TableViewAnimationOptions = 1
 	TableViewAnimationEffectGap  TableViewAnimationOptions = 2
@@ -6262,7 +6236,6 @@ func (e TableViewDraggingDestinationFeedbackStyle) String() string {
 	}
 }
 
-// NSTableView defines these constants to specify drop operations.
 type TableViewDropOperation uint64
 
 const (
@@ -6312,7 +6285,6 @@ func (e TableViewGridLineStyle) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Constants that help define the appearance and behavior of action buttons.
 type TableViewRowActionStyle int64
 
 const (
@@ -6386,7 +6358,6 @@ func (e TableViewSelectionHighlightStyle) String() string {
 	}
 }
 
-// Contains the possible style values for a table view.
 type TableViewStyle int64
 
 const (
@@ -6451,14 +6422,50 @@ func (e TextAlignment) String() string {
 	}
 }
 
-type TextBlockDimension uint64
+// Bitmask — values may be combined with |.
+type TextAttachmentViewProviderReusePolicy uint64
 
 const (
-	TextBlockWidth         TextBlockDimension = 0
-	TextBlockMinimumWidth  TextBlockDimension = 1
-	TextBlockMaximumWidth  TextBlockDimension = 2
-	TextBlockHeight        TextBlockDimension = 4
+	TextAttachmentViewProviderReusePolicyOnScrollingOutOfViewport  TextAttachmentViewProviderReusePolicy = 1
+	TextAttachmentViewProviderReusePolicyOnEditingInlineParagraphs TextAttachmentViewProviderReusePolicy = 2
+)
+
+// String returns the TextAttachmentViewProviderReusePolicy constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TextAttachmentViewProviderReusePolicy) String() string {
+	var parts []string
+	if e&TextAttachmentViewProviderReusePolicyOnScrollingOutOfViewport != 0 {
+		parts = append(parts, "TextAttachmentViewProviderReusePolicyOnScrollingOutOfViewport")
+	}
+	if e&TextAttachmentViewProviderReusePolicyOnEditingInlineParagraphs != 0 {
+		parts = append(parts, "TextAttachmentViewProviderReusePolicyOnEditingInlineParagraphs")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type TextBlockDimension int64
+
+const (
+	TextBlockDimensionWidth         TextBlockDimension = 0
+	TextBlockDimensionMinimumWidth  TextBlockDimension = 1
+	TextBlockDimensionMaximumWidth  TextBlockDimension = 2
+	TextBlockDimensionHeight        TextBlockDimension = 4
+	TextBlockDimensionMinimumHeight TextBlockDimension = 5
+	TextBlockDimensionMaximumHeight TextBlockDimension = 6
+	// Deprecated: since macOS API_TO_BE_DEPRECATED.
+	TextBlockWidth TextBlockDimension = 0
+	// Deprecated: since macOS API_TO_BE_DEPRECATED.
+	TextBlockMinimumWidth TextBlockDimension = 1
+	// Deprecated: since macOS API_TO_BE_DEPRECATED.
+	TextBlockMaximumWidth TextBlockDimension = 2
+	// Deprecated: since macOS API_TO_BE_DEPRECATED.
+	TextBlockHeight TextBlockDimension = 4
+	// Deprecated: since macOS API_TO_BE_DEPRECATED.
 	TextBlockMinimumHeight TextBlockDimension = 5
+	// Deprecated: since macOS API_TO_BE_DEPRECATED.
 	TextBlockMaximumHeight TextBlockDimension = 6
 )
 
@@ -6466,18 +6473,18 @@ const (
 // value is not a known constant.
 func (e TextBlockDimension) String() string {
 	switch e {
-	case TextBlockWidth:
-		return "TextBlockWidth"
-	case TextBlockMinimumWidth:
-		return "TextBlockMinimumWidth"
-	case TextBlockMaximumWidth:
-		return "TextBlockMaximumWidth"
-	case TextBlockHeight:
-		return "TextBlockHeight"
-	case TextBlockMinimumHeight:
-		return "TextBlockMinimumHeight"
-	case TextBlockMaximumHeight:
-		return "TextBlockMaximumHeight"
+	case TextBlockDimensionWidth:
+		return "TextBlockDimensionWidth"
+	case TextBlockDimensionMinimumWidth:
+		return "TextBlockDimensionMinimumWidth"
+	case TextBlockDimensionMaximumWidth:
+		return "TextBlockDimensionMaximumWidth"
+	case TextBlockDimensionHeight:
+		return "TextBlockDimensionHeight"
+	case TextBlockDimensionMinimumHeight:
+		return "TextBlockDimensionMinimumHeight"
+	case TextBlockDimensionMaximumHeight:
+		return "TextBlockDimensionMaximumHeight"
 	default:
 		return fmt.Sprintf("TextBlockDimension(%d)", int64(e))
 	}
@@ -6486,30 +6493,40 @@ func (e TextBlockDimension) String() string {
 type TextBlockLayer int64
 
 const (
+	TextBlockLayerPadding TextBlockLayer = -1
+	TextBlockLayerBorder  TextBlockLayer = 0
+	TextBlockLayerMargin  TextBlockLayer = 1
+	// Deprecated: since macOS API_TO_BE_DEPRECATED.
 	TextBlockPadding TextBlockLayer = -1
-	TextBlockBorder  TextBlockLayer = 0
-	TextBlockMargin  TextBlockLayer = 1
+	// Deprecated: since macOS API_TO_BE_DEPRECATED.
+	TextBlockBorder TextBlockLayer = 0
+	// Deprecated: since macOS API_TO_BE_DEPRECATED.
+	TextBlockMargin TextBlockLayer = 1
 )
 
 // String returns the TextBlockLayer constant's name, or its numeric form when the
 // value is not a known constant.
 func (e TextBlockLayer) String() string {
 	switch e {
-	case TextBlockPadding:
-		return "TextBlockPadding"
-	case TextBlockBorder:
-		return "TextBlockBorder"
-	case TextBlockMargin:
-		return "TextBlockMargin"
+	case TextBlockLayerPadding:
+		return "TextBlockLayerPadding"
+	case TextBlockLayerBorder:
+		return "TextBlockLayerBorder"
+	case TextBlockLayerMargin:
+		return "TextBlockLayerMargin"
 	default:
 		return fmt.Sprintf("TextBlockLayer(%d)", int64(e))
 	}
 }
 
-type TextBlockValueType uint64
+type TextBlockValueType int64
 
 const (
-	TextBlockAbsoluteValueType   TextBlockValueType = 0
+	TextBlockValueTypeAbsolute   TextBlockValueType = 0
+	TextBlockValueTypePercentage TextBlockValueType = 1
+	// Deprecated: since macOS API_TO_BE_DEPRECATED.
+	TextBlockAbsoluteValueType TextBlockValueType = 0
+	// Deprecated: since macOS API_TO_BE_DEPRECATED.
 	TextBlockPercentageValueType TextBlockValueType = 1
 )
 
@@ -6517,21 +6534,29 @@ const (
 // value is not a known constant.
 func (e TextBlockValueType) String() string {
 	switch e {
-	case TextBlockAbsoluteValueType:
-		return "TextBlockAbsoluteValueType"
-	case TextBlockPercentageValueType:
-		return "TextBlockPercentageValueType"
+	case TextBlockValueTypeAbsolute:
+		return "TextBlockValueTypeAbsolute"
+	case TextBlockValueTypePercentage:
+		return "TextBlockValueTypePercentage"
 	default:
 		return fmt.Sprintf("TextBlockValueType(%d)", int64(e))
 	}
 }
 
-type TextBlockVerticalAlignment uint64
+type TextBlockVerticalAlignment int64
 
 const (
-	TextBlockTopAlignment      TextBlockVerticalAlignment = 0
-	TextBlockMiddleAlignment   TextBlockVerticalAlignment = 1
-	TextBlockBottomAlignment   TextBlockVerticalAlignment = 2
+	TextBlockVerticalAlignmentTop      TextBlockVerticalAlignment = 0
+	TextBlockVerticalAlignmentMiddle   TextBlockVerticalAlignment = 1
+	TextBlockVerticalAlignmentBottom   TextBlockVerticalAlignment = 2
+	TextBlockVerticalAlignmentBaseline TextBlockVerticalAlignment = 3
+	// Deprecated: since macOS API_TO_BE_DEPRECATED.
+	TextBlockTopAlignment TextBlockVerticalAlignment = 0
+	// Deprecated: since macOS API_TO_BE_DEPRECATED.
+	TextBlockMiddleAlignment TextBlockVerticalAlignment = 1
+	// Deprecated: since macOS API_TO_BE_DEPRECATED.
+	TextBlockBottomAlignment TextBlockVerticalAlignment = 2
+	// Deprecated: since macOS API_TO_BE_DEPRECATED.
 	TextBlockBaselineAlignment TextBlockVerticalAlignment = 3
 )
 
@@ -6539,26 +6564,26 @@ const (
 // value is not a known constant.
 func (e TextBlockVerticalAlignment) String() string {
 	switch e {
-	case TextBlockTopAlignment:
-		return "TextBlockTopAlignment"
-	case TextBlockMiddleAlignment:
-		return "TextBlockMiddleAlignment"
-	case TextBlockBottomAlignment:
-		return "TextBlockBottomAlignment"
-	case TextBlockBaselineAlignment:
-		return "TextBlockBaselineAlignment"
+	case TextBlockVerticalAlignmentTop:
+		return "TextBlockVerticalAlignmentTop"
+	case TextBlockVerticalAlignmentMiddle:
+		return "TextBlockVerticalAlignmentMiddle"
+	case TextBlockVerticalAlignmentBottom:
+		return "TextBlockVerticalAlignmentBottom"
+	case TextBlockVerticalAlignmentBaseline:
+		return "TextBlockVerticalAlignmentBaseline"
 	default:
 		return fmt.Sprintf("TextBlockVerticalAlignment(%d)", int64(e))
 	}
 }
 
-// Values that control the order in which the framework enumerates text elements.
 // Bitmask — values may be combined with |.
 type TextContentManagerEnumerationOptions uint64
 
 const (
 	// The value that represents no custom enumeration handling.
-	TextContentManagerEnumerationOptionsNone    TextContentManagerEnumerationOptions = 0
+	TextContentManagerEnumerationOptionsNone TextContentManagerEnumerationOptions = 0
+	// Causes enumerations to start from the end of the text element.
 	TextContentManagerEnumerationOptionsReverse TextContentManagerEnumerationOptions = 1
 )
 
@@ -6575,7 +6600,6 @@ func (e TextContentManagerEnumerationOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// The style of bezel the text field displays.
 type TextFieldBezelStyle uint64
 
 const (
@@ -6672,7 +6696,6 @@ func (e TextInputTraitType) String() string {
 	}
 }
 
-// Options that affect the automatic display mode.
 // Bitmask — values may be combined with |.
 type TextInsertionIndicatorAutomaticModeOptions int64
 
@@ -6697,7 +6720,6 @@ func (e TextInsertionIndicatorAutomaticModeOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Constants that determine how to display the system text cursor in a custom text UI.
 type TextInsertionIndicatorDisplayMode int64
 
 const (
@@ -6721,14 +6743,17 @@ func (e TextInsertionIndicatorDisplayMode) String() string {
 	}
 }
 
-// Values that describe the possible layout states.
 type TextLayoutFragmentState uint64
 
 const (
-	TextLayoutFragmentStateNone                  TextLayoutFragmentState = 0
-	TextLayoutFragmentStateEstimatedUsageBounds  TextLayoutFragmentState = 1
+	// No layout information is available.
+	TextLayoutFragmentStateNone TextLayoutFragmentState = 0
+	// The text layout manager hasn't performed a full layout yet for the region covered by this layout fragment and is returning estimated bounds.
+	TextLayoutFragmentStateEstimatedUsageBounds TextLayoutFragmentState = 1
+	// The layout fragment measurements are available without text line fragments.
 	TextLayoutFragmentStateCalculatedUsageBounds TextLayoutFragmentState = 2
-	TextLayoutFragmentStateLayoutAvailable       TextLayoutFragmentState = 3
+	// Measurements for the text line fragments and layout fragment are available.
+	TextLayoutFragmentStateLayoutAvailable TextLayoutFragmentState = 3
 )
 
 // String returns the TextLayoutFragmentState constant's name, or its numeric form when the
@@ -6748,18 +6773,22 @@ func (e TextLayoutFragmentState) String() string {
 	}
 }
 
-// Values that describe where and how the framework extends segments of a selection.
 // Bitmask — values may be combined with |.
 type TextLayoutManagerSegmentOptions uint64
 
 const (
 	// The value that represents the empty options set.
-	TextLayoutManagerSegmentOptionsNone                    TextLayoutManagerSegmentOptions = 0
-	TextLayoutManagerSegmentOptionsRangeNotRequired        TextLayoutManagerSegmentOptions = 1
+	TextLayoutManagerSegmentOptionsNone TextLayoutManagerSegmentOptions = 0
+	// Causes the framework to enumerate text segment rectangles, but avoids preparing a range object.
+	TextLayoutManagerSegmentOptionsRangeNotRequired TextLayoutManagerSegmentOptions = 1
+	// Causes the framework to enumerate segments only in the first and last line fragments.
 	TextLayoutManagerSegmentOptionsMiddleFragmentsExcluded TextLayoutManagerSegmentOptions = 2
-	TextLayoutManagerSegmentOptionsHeadSegmentExtended     TextLayoutManagerSegmentOptions = 4
-	TextLayoutManagerSegmentOptionsTailSegmentExtended     TextLayoutManagerSegmentOptions = 8
-	TextLayoutManagerSegmentOptionsUpstreamAffinity        TextLayoutManagerSegmentOptions = 16
+	// Causes the framework to extend the segment to the head edge.
+	TextLayoutManagerSegmentOptionsHeadSegmentExtended TextLayoutManagerSegmentOptions = 4
+	// Causes the framework to extend the segment to the tail edge.
+	TextLayoutManagerSegmentOptionsTailSegmentExtended TextLayoutManagerSegmentOptions = 8
+	// Causes the framework to place the segment based on the upstream affinity for an empty range.
+	TextLayoutManagerSegmentOptionsUpstreamAffinity TextLayoutManagerSegmentOptions = 16
 )
 
 // String returns the TextLayoutManagerSegmentOptions constant's name, or its numeric form when the
@@ -6787,12 +6816,14 @@ func (e TextLayoutManagerSegmentOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Values that describe the rendering of selection boundaries.
 type TextLayoutManagerSegmentType int64
 
 const (
-	TextLayoutManagerSegmentTypeStandard  TextLayoutManagerSegmentType = 0
+	// The standard segment, matching the typographic bounds of the range.
+	TextLayoutManagerSegmentTypeStandard TextLayoutManagerSegmentType = 0
+	// The segment behavior suitable for selection rendering. This segment type extends the last segment in a line fragment to the trailing edge if continuing to the next line.
 	TextLayoutManagerSegmentTypeSelection TextLayoutManagerSegmentType = 1
+	// The segment behavior suitable for highlighting.
 	TextLayoutManagerSegmentTypeHighlight TextLayoutManagerSegmentType = 2
 )
 
@@ -6811,7 +6842,6 @@ func (e TextLayoutManagerSegmentType) String() string {
 	}
 }
 
-// Constants that describe the text layout orientation.
 type TextLayoutOrientation int64
 
 const (
@@ -6832,11 +6862,11 @@ func (e TextLayoutOrientation) String() string {
 	}
 }
 
-// Values that available options for text list items.
 // Bitmask — values may be combined with |.
 type TextListOptions uint64
 
 const (
+	// Specifies that a nested list should include the marker for its enclosing superlist before its own marker.
 	TextListPrependEnclosingMarker TextListOptions = 1
 )
 
@@ -6853,11 +6883,12 @@ func (e TextListOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Values that describe the visual location of the text cursor, or the direction of the non-anchored edge of the selection.
 type TextSelectionAffinity int64
 
 const (
-	TextSelectionAffinityUpstream   TextSelectionAffinity = 0
+	// The value that defines the visual location of the text cursor at the tail of the previous line.
+	TextSelectionAffinityUpstream TextSelectionAffinity = 0
+	// The value that defines the visual location of the text cursor at the head of the line containing the selection location.
 	TextSelectionAffinityDownstream TextSelectionAffinity = 1
 )
 
@@ -6874,15 +6905,19 @@ func (e TextSelectionAffinity) String() string {
 	}
 }
 
-// Values that describe the different granularities available to make a selection.
 type TextSelectionGranularity int64
 
 const (
+	// A value that represents selection by character.
 	TextSelectionGranularityCharacter TextSelectionGranularity = 0
-	TextSelectionGranularityWord      TextSelectionGranularity = 1
+	// A value that represents selection by word.
+	TextSelectionGranularityWord TextSelectionGranularity = 1
+	// A value that represents selection by paragraph.
 	TextSelectionGranularityParagraph TextSelectionGranularity = 2
-	TextSelectionGranularityLine      TextSelectionGranularity = 3
-	TextSelectionGranularitySentence  TextSelectionGranularity = 4
+	// A value that represents selection by line.
+	TextSelectionGranularityLine TextSelectionGranularity = 3
+	// A value that represents selection by sentence.
+	TextSelectionGranularitySentence TextSelectionGranularity = 4
 )
 
 // String returns the TextSelectionGranularity constant's name, or its numeric form when the
@@ -6904,17 +6939,50 @@ func (e TextSelectionGranularity) String() string {
 	}
 }
 
-// Values that affect how the framework handles navigation across different textual boundaries during a selection.
+// Values for text selection interaction modes. These modes determine how the text selection manager handles user interaction with text content.
+type TextSelectionMode int64
+
+const (
+	// Text is editable and selectable.
+	TextSelectionModeEditable TextSelectionMode = 0
+	// Text is selectable but not editable.
+	TextSelectionModeSelectable TextSelectionMode = 1
+	// Text is neither selectable nor editable.
+	TextSelectionModeNonInteractive TextSelectionMode = 2
+)
+
+// String returns the TextSelectionMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TextSelectionMode) String() string {
+	switch e {
+	case TextSelectionModeEditable:
+		return "TextSelectionModeEditable"
+	case TextSelectionModeSelectable:
+		return "TextSelectionModeSelectable"
+	case TextSelectionModeNonInteractive:
+		return "TextSelectionModeNonInteractive"
+	default:
+		return fmt.Sprintf("TextSelectionMode(%d)", int64(e))
+	}
+}
+
 type TextSelectionNavigationDestination int64
 
 const (
+	// The selection moves to the next extended grapheme cluster boundary. When the movement direction isn't along the line (for example up and down for a horizontal line), it moves to the adjacent line using the anchor point instead of resolving to the logical direction. This could result in a location inside a cluster depending on the specific characteristics of a given script. For example, certain Indic scripts combine characters in specific ways depending on usage and position to form composite characters. The framework returns a location consistent with the rules of the script and the direction of movement.
 	TextSelectionNavigationDestinationCharacter TextSelectionNavigationDestination = 0
-	TextSelectionNavigationDestinationWord      TextSelectionNavigationDestination = 1
-	TextSelectionNavigationDestinationLine      TextSelectionNavigationDestination = 2
-	TextSelectionNavigationDestinationSentence  TextSelectionNavigationDestination = 3
+	// The selection moves to the next word boundary, ignoring punctuation, whitespace, and format characters preceding the next word.
+	TextSelectionNavigationDestinationWord TextSelectionNavigationDestination = 1
+	// The selection moves to the next line boundary. The boundary of a line can be logical, based on the line separator characters, as well as visual using soft line wrapping.
+	TextSelectionNavigationDestinationLine TextSelectionNavigationDestination = 2
+	// The selection moves to the next sentence boundary, ignoring punctuation, whitespace, and format characters preceding the next sentence.
+	TextSelectionNavigationDestinationSentence TextSelectionNavigationDestination = 3
+	// The selection moves to the next paragraph boundary, ignoring the end-of-line elastic characters and paragraph separators.
 	TextSelectionNavigationDestinationParagraph TextSelectionNavigationDestination = 4
+	// The selection moves to the next container or page boundary, ignoring the end-of-line elastic characters and container/page separators.
 	TextSelectionNavigationDestinationContainer TextSelectionNavigationDestination = 5
-	TextSelectionNavigationDestinationDocument  TextSelectionNavigationDestination = 6
+	// The selection moves to the document boundary.
+	TextSelectionNavigationDestinationDocument TextSelectionNavigationDestination = 6
 )
 
 // String returns the TextSelectionNavigationDestination constant's name, or its numeric form when the
@@ -6940,16 +7008,21 @@ func (e TextSelectionNavigationDestination) String() string {
 	}
 }
 
-// Values that describe the direction of a selection.
 type TextSelectionNavigationDirection int64
 
 const (
-	TextSelectionNavigationDirectionForward  TextSelectionNavigationDirection = 0
+	// The value that represents a logical forward selection based on the flow of text stored in the document.
+	TextSelectionNavigationDirectionForward TextSelectionNavigationDirection = 0
+	// The value that represents a logical backward selection based on the flow of text stored in the document.
 	TextSelectionNavigationDirectionBackward TextSelectionNavigationDirection = 1
-	TextSelectionNavigationDirectionRight    TextSelectionNavigationDirection = 2
-	TextSelectionNavigationDirectionLeft     TextSelectionNavigationDirection = 3
-	TextSelectionNavigationDirectionUp       TextSelectionNavigationDirection = 4
-	TextSelectionNavigationDirectionDown     TextSelectionNavigationDirection = 5
+	// The value that represents a selection in the right direction along the current line.
+	TextSelectionNavigationDirectionRight TextSelectionNavigationDirection = 2
+	// The value that represents a selection in the left direction along the current line.
+	TextSelectionNavigationDirectionLeft TextSelectionNavigationDirection = 3
+	// The value that represents a selection in the up direction, above the current line.
+	TextSelectionNavigationDirectionUp TextSelectionNavigationDirection = 4
+	// The value that represents a selection in the down direction, below the current line.
+	TextSelectionNavigationDirectionDown TextSelectionNavigationDirection = 5
 )
 
 // String returns the TextSelectionNavigationDirection constant's name, or its numeric form when the
@@ -6973,11 +7046,12 @@ func (e TextSelectionNavigationDirection) String() string {
 	}
 }
 
-// Values that describe the writing direction inside a text selection.
 type TextSelectionNavigationWritingDirection int64
 
 const (
+	// Left-to-right writing direction.
 	TextSelectionNavigationWritingDirectionLeftToRight TextSelectionNavigationWritingDirection = 0
+	// Right-to-left writing direction.
 	TextSelectionNavigationWritingDirectionRightToLeft TextSelectionNavigationWritingDirection = 1
 )
 
@@ -7021,7 +7095,7 @@ func (e TextStorageEditActions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Constants that specify the type of tab stop.
+// Deprecated: Use NSTextAlignment-based API.
 type TextTabType uint64
 
 const (
@@ -7048,28 +7122,30 @@ func (e TextTabType) String() string {
 	}
 }
 
-// These constants, specifying the type of text table layout algorithm, are used with layoutAlgorithm.
-type TextTableLayoutAlgorithm uint64
+type TextTableLayoutAlgorithm int64
 
 const (
+	TextTableLayoutAlgorithmAutomatic TextTableLayoutAlgorithm = 0
+	TextTableLayoutAlgorithmFixed     TextTableLayoutAlgorithm = 1
+	// Deprecated: since macOS API_TO_BE_DEPRECATED.
 	TextTableAutomaticLayoutAlgorithm TextTableLayoutAlgorithm = 0
-	TextTableFixedLayoutAlgorithm     TextTableLayoutAlgorithm = 1
+	// Deprecated: since macOS API_TO_BE_DEPRECATED.
+	TextTableFixedLayoutAlgorithm TextTableLayoutAlgorithm = 1
 )
 
 // String returns the TextTableLayoutAlgorithm constant's name, or its numeric form when the
 // value is not a known constant.
 func (e TextTableLayoutAlgorithm) String() string {
 	switch e {
-	case TextTableAutomaticLayoutAlgorithm:
-		return "TextTableAutomaticLayoutAlgorithm"
-	case TextTableFixedLayoutAlgorithm:
-		return "TextTableFixedLayoutAlgorithm"
+	case TextTableLayoutAlgorithmAutomatic:
+		return "TextTableLayoutAlgorithmAutomatic"
+	case TextTableLayoutAlgorithmFixed:
+		return "TextTableLayoutAlgorithmFixed"
 	default:
 		return fmt.Sprintf("TextTableLayoutAlgorithm(%d)", int64(e))
 	}
 }
 
-// The position where a linear slider’s tick marks appear (above, below, leading, or trailing).
 type TickMarkPosition uint64
 
 const (
@@ -7119,7 +7195,6 @@ func (e TintProminence) String() string {
 	}
 }
 
-// Specify the location of a box’s title with respect to its border.
 type TitlePosition uint64
 
 const (
@@ -7186,7 +7261,6 @@ func (e TitlebarSeparatorStyle) String() string {
 	}
 }
 
-// The NSTokenStyle constants define how tokens are displayed and editable in the NSTokenFieldCell. These values are used by tokenStyle and the delegate method tokenFieldCell:styleForRepresentedObject:.
 type TokenStyle uint64
 
 const (
@@ -7216,7 +7290,6 @@ func (e TokenStyle) String() string {
 	}
 }
 
-// Constants that indicate whether the toolbar displays items using a name, icon, or combination of elements.
 type ToolbarDisplayMode uint64
 
 const (
@@ -7266,7 +7339,29 @@ func (e ToolbarItemGroupControlRepresentation) String() string {
 	}
 }
 
-// A value that indicates how a grouped toolbar item selects its subitems.
+type ToolbarItemGroupRole int64
+
+const (
+	ToolbarItemGroupRoleAutomatic      ToolbarItemGroupRole = 0
+	ToolbarItemGroupRoleTabs           ToolbarItemGroupRole = 1
+	ToolbarItemGroupRoleValueSelection ToolbarItemGroupRole = 2
+)
+
+// String returns the ToolbarItemGroupRole constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ToolbarItemGroupRole) String() string {
+	switch e {
+	case ToolbarItemGroupRoleAutomatic:
+		return "ToolbarItemGroupRoleAutomatic"
+	case ToolbarItemGroupRoleTabs:
+		return "ToolbarItemGroupRoleTabs"
+	case ToolbarItemGroupRoleValueSelection:
+		return "ToolbarItemGroupRoleValueSelection"
+	default:
+		return fmt.Sprintf("ToolbarItemGroupRole(%d)", int64(e))
+	}
+}
+
 type ToolbarItemGroupSelectionMode int64
 
 const (
@@ -7310,8 +7405,6 @@ func (e ToolbarItemStyle) String() string {
 	}
 }
 
-// Constants that specify toolbar display modes.
-//
 // Deprecated: NSToolbarSizeMode is no longer recommended and will be ignored in the future
 type ToolbarSizeMode uint64
 
@@ -7336,7 +7429,6 @@ func (e ToolbarSizeMode) String() string {
 	}
 }
 
-// The possible phases of a touch.
 // Bitmask — values may be combined with |.
 type TouchPhase uint64
 
@@ -7381,7 +7473,6 @@ func (e TouchPhase) String() string {
 	return strings.Join(parts, "|")
 }
 
-// A bit mask identifying a direct or indirect touch type.
 type TouchType int64
 
 const (
@@ -7402,7 +7493,6 @@ func (e TouchType) String() string {
 	}
 }
 
-// A bit mask identifying a direct or indirect touch type.
 // Bitmask — values may be combined with |.
 type TouchTypeMask uint64
 
@@ -7427,7 +7517,6 @@ func (e TouchTypeMask) String() string {
 	return strings.Join(parts, "|")
 }
 
-// The data type defined for the constants specified in the options parameter of init(rect:options:owner:userInfo:). These constants are described below; you can specify multiple constants by performing a bitwise-OR operation with them. In particular, you must supply one or more of the tracking-type constants (that is, NSTrackingMouseEnteredAndExited, NSTrackingMouseMoved, and NSTrackingCursorUpdate) and one of the active constants (that is, NSTrackingActiveWhenFirstResponder, NSTrackingActiveInKeyWindow, NSTrackingActiveInActiveApp, and NSTrackingActiveAlways). In addition, you may specify any of the behavior constants (that is, NSTrackingAssumeInside, NSTrackingInVisibleRect, and NSTrackingEnabledDuringMouseDrag).
 // Bitmask — values may be combined with |.
 type TrackingAreaOptions uint64
 
@@ -7484,7 +7573,6 @@ func (e TrackingAreaOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Constants that determine the layout manager’s behavior during layout.
 type TypesetterBehavior int64
 
 const (
@@ -7625,7 +7713,6 @@ func (e UnderlineStyle) String() string {
 	return strings.Join(parts, "|")
 }
 
-// These constants specify which parts of the scroller are visible.
 type UsableScrollerParts uint64
 
 const (
@@ -7729,12 +7816,10 @@ func (e VerticalDirections) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Animation options for view transitions in a view controller.
 // Bitmask — values may be combined with |.
 type ViewControllerTransitionOptions uint64
 
 const (
-	// A transition with no animation (the default). Specifying another animation option from this enumeration overrides this option.
 	ViewControllerTransitionNone                 ViewControllerTransitionOptions = 0
 	ViewControllerTransitionCrossfade            ViewControllerTransitionOptions = 1
 	ViewControllerTransitionSlideUp              ViewControllerTransitionOptions = 16
@@ -7778,6 +7863,33 @@ func (e ViewControllerTransitionOptions) String() string {
 		return "0"
 	}
 	return strings.Join(parts, "|")
+}
+
+// Exclusive gesture behavior See the `exclusiveGestureBehavior` property of `NSView` more information.
+type ViewExclusiveGestureBehavior int64
+
+const (
+	// Inherit from superview
+	ViewExclusiveGestureBehaviorInherit ViewExclusiveGestureBehavior = 0
+	// This view and its subviews have exclusive gestures
+	ViewExclusiveGestureBehaviorExclusive ViewExclusiveGestureBehavior = 1
+	// This view and its subviews do not have exclusive gestures
+	ViewExclusiveGestureBehaviorNotExclusive ViewExclusiveGestureBehavior = 2
+)
+
+// String returns the ViewExclusiveGestureBehavior constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ViewExclusiveGestureBehavior) String() string {
+	switch e {
+	case ViewExclusiveGestureBehaviorInherit:
+		return "ViewExclusiveGestureBehaviorInherit"
+	case ViewExclusiveGestureBehaviorExclusive:
+		return "ViewExclusiveGestureBehaviorExclusive"
+	case ViewExclusiveGestureBehaviorNotExclusive:
+		return "ViewExclusiveGestureBehaviorNotExclusive"
+	default:
+		return fmt.Sprintf("ViewExclusiveGestureBehavior(%d)", int64(e))
+	}
 }
 
 type ViewLayerContentsPlacement int64
@@ -7882,7 +7994,6 @@ func (e ViewLayoutRegionAdaptivityAxis) String() string {
 	}
 }
 
-// Constants that specify whether the visual effect view blends with what’s either behind or within the window.
 type VisualEffectBlendingMode int64
 
 const (
@@ -7905,7 +8016,7 @@ func (e VisualEffectBlendingMode) String() string {
 	}
 }
 
-// Constants to specify the material shown by the visual effect view.
+// The main material that this view displays.  Materials are dynamic, and their exact look depends on the view's effectiveAppearance, blendingMode, state, emphasized, and possibly other factors.
 type VisualEffectMaterial int64
 
 const (
@@ -7998,7 +8109,6 @@ func (e VisualEffectMaterial) String() string {
 	}
 }
 
-// Constants to specify how the material appearance should reflect window activity state.
 type VisualEffectState int64
 
 const (
@@ -8025,7 +8135,6 @@ func (e VisualEffectState) String() string {
 	}
 }
 
-// Constants that specify the winding rule a Bézier path uses.
 type WindingRule uint64
 
 const (
@@ -8046,7 +8155,6 @@ func (e WindingRule) String() string {
 	}
 }
 
-// Constants that control the automatic window animation behavior windows use when ordering to the front or out of view.
 type WindowAnimationBehavior int64
 
 const (
@@ -8076,8 +8184,6 @@ func (e WindowAnimationBehavior) String() string {
 	}
 }
 
-// The following constants and the related data type represent a window’s possible backing locations.
-//
 // Deprecated: since macOS 10.14.
 type WindowBackingLocation uint64
 
@@ -8104,7 +8210,6 @@ func (e WindowBackingLocation) String() string {
 	}
 }
 
-// Constants that provide a way to access standard title bar buttons.
 type WindowButton uint64
 
 const (
@@ -8137,12 +8242,11 @@ func (e WindowButton) String() string {
 	}
 }
 
-// Window collection behaviors related to Mission Control, Spaces, and Stage Manager.
+// You may specify at most one of You may specify at most one of \c NSWindowCollectionBehaviorManaged, \c NSWindowCollectionBehaviorTransient, or \c NSWindowCollectionBehaviorStationary.  If neither is specified, the window gets the default behavior determined by its window level. You may specify at most one of \c NSWindowCollectionBehaviorParticipatesInCycle or \c NSWindowCollectionBehaviorIgnoresCycle.  If unspecified, the window gets the default behavior determined by its window level. You may specify at most one of \c NSWindowCollectionBehaviorFullScreenPrimary, \c NSWindowCollectionBehaviorFullScreenAuxiliary, or \c NSWindowCollectionBehaviorFullScreenNone. You may specify at most one of \c NSWindowCollectionBehaviorFullScreenAllowsTiling or \c NSWindowCollectionBehaviorFullScreenDisallowsTiling, or an assertion will be raised. The default behavior is to allow any window to participate in full screen tiling, as long as it meets certain requirements, such as being resizable and not a panel or sheet. Windows which are not full screen capable can still become a secondary tile in full screen. A window can explicitly allow itself to be placed into a full screen tile by including \c NSWindowCollectionBehaviorFullScreenAllowsTiling. Even if a window allows itself to be placed in a tile, it still may not be put in the tile if its \c minFullScreenContentSize is too large to fit. A window can explicitly disallow itself from being placed in a full screen tile by including \c NSWindowCollectionBehaviorFullScreenDisallowsTiling. This is useful for non-full screen capable windows to explicitly prevent themselves from being tiled. It can also be used by a full screen window to prevent any other windows from being placed in its full screen tile.
 // Bitmask — values may be combined with |.
 type WindowCollectionBehavior uint64
 
 const (
-	// The window appears in only one space at a time.
 	WindowCollectionBehaviorDefault                   WindowCollectionBehavior = 0
 	WindowCollectionBehaviorCanJoinAllSpaces          WindowCollectionBehavior = 1
 	WindowCollectionBehaviorMoveToActiveSpace         WindowCollectionBehavior = 2
@@ -8216,7 +8320,6 @@ func (e WindowCollectionBehavior) String() string {
 	return strings.Join(parts, "|")
 }
 
-// A type that represents the depth, or amount of memory, for a single pixel in a window or screen.
 type WindowDepth int32
 
 const (
@@ -8240,7 +8343,6 @@ func (e WindowDepth) String() string {
 	}
 }
 
-// This constant indicates a window ordering.
 // Bitmask — values may be combined with |.
 type WindowListOptions int64
 
@@ -8262,7 +8364,6 @@ func (e WindowListOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Options to use when retrieving window numbers from the system.
 // Bitmask — values may be combined with |.
 type WindowNumberListOptions uint64
 
@@ -8287,7 +8388,6 @@ func (e WindowNumberListOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Specifies whether the window is occluded.
 // Bitmask — values may be combined with |.
 type WindowOcclusionState uint64
 
@@ -8308,7 +8408,6 @@ func (e WindowOcclusionState) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Constants that let you specify how a window is ordered relative to another window.
 type WindowOrderingMode int64
 
 const (
@@ -8332,7 +8431,6 @@ func (e WindowOrderingMode) String() string {
 	}
 }
 
-// Constants that represent the access levels other processes can have to a window’s content.
 type WindowSharingType uint64
 
 const (
@@ -8353,7 +8451,6 @@ func (e WindowSharingType) String() string {
 	}
 }
 
-// Constants that specify the style of a window, and that you can combine with the C bitwise OR operator.
 // Bitmask — values may be combined with |.
 type WindowStyleMask uint64
 
@@ -8421,7 +8518,6 @@ func (e WindowStyleMask) String() string {
 	return strings.Join(parts, "|")
 }
 
-// The preferred tabbing behavior of a window.
 type WindowTabbingMode int64
 
 const (
@@ -8445,7 +8541,6 @@ func (e WindowTabbingMode) String() string {
 	}
 }
 
-// Specifies the appearance of the window’s title bar area.
 type WindowTitleVisibility int64
 
 const (
@@ -8466,7 +8561,6 @@ func (e WindowTitleVisibility) String() string {
 	}
 }
 
-// Styles that determine the appearance and location of the toolbar in relation to the title bar.
 type WindowToolbarStyle int64
 
 const (
@@ -8496,7 +8590,6 @@ func (e WindowToolbarStyle) String() string {
 	}
 }
 
-// A value that indicates the user’s preference for window tabbing.
 type WindowUserTabbingPreference int64
 
 const (
@@ -8520,7 +8613,6 @@ func (e WindowUserTabbingPreference) String() string {
 	}
 }
 
-// The types of privileged file operations that can be authorized by the user.
 type WorkspaceAuthorizationType int64
 
 const (
@@ -8544,7 +8636,6 @@ func (e WorkspaceAuthorizationType) String() string {
 	}
 }
 
-// Constants that describe options for creating icons.
 // Bitmask — values may be combined with |.
 type WorkspaceIconCreationOptions uint64
 
@@ -8569,8 +8660,6 @@ func (e WorkspaceIconCreationOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Constants specifying how you want to launch an app
-//
 // Deprecated: since macOS 10.11.
 // Bitmask — values may be combined with |.
 type WorkspaceLaunchOptions uint64
@@ -8761,6 +8850,45 @@ func (e WritingToolsCoordinatorState) String() string {
 		return "WritingToolsCoordinatorStateInteractiveStreaming"
 	default:
 		return fmt.Sprintf("WritingToolsCoordinatorState(%d)", int64(e))
+	}
+}
+
+// Use the `NSWritingToolsCoordinator.TextAnimation` constants to determine the type of animation that is occurring. During an interactive change to your view, Writing Tools creates animations to provide feedback about what’s happening. During the setup for each animation, Writing Tools reports the type of animation to the coordinator’s delegate, so that you can perform additional actions related to that animation. For example, during an insertion animation, you might animate changes to other views in your interface.
+type WritingToolsCoordinatorTextAnimation int64
+
+const (
+	// The animation that Writing Tools performs when waiting to receive results from the large language model. This type of animation applies a visual effect to the text that Writing Tools is evaluating. When preparing for this animation, hide the text that Writing Tools is about to evaluate. In the same space where that text appears, Writing Tools displays a preview image that you provide and animates changes to that image.
+	WritingToolsCoordinatorTextAnimationAnticipate WritingToolsCoordinatorTextAnimation = 0
+	// The animation that Writing Tools performs when removing text from your view. This type of animation shows the removal of text from your view. When preparing for this animation, hide the text in the provided range if you haven’t already. If you support animating the reflow of your view’s text, you can also prepare any other animations you need. Writing Tools uses a preview object you provide to animate the removal of the text.
+	WritingToolsCoordinatorTextAnimationRemove WritingToolsCoordinatorTextAnimation = 1
+	// The animation that Writing Tools performs when inserting text into your view. This type of animation shows the insertion of text to your view. When preparing for this animation, hide the text in the provided range if you haven’t already. If you support animating the reflow of your view’s text, you can also prepare any other animations you need. Writing Tools uses a preview object you provide to animate the insertion of the text.
+	WritingToolsCoordinatorTextAnimationInsert WritingToolsCoordinatorTextAnimation = 2
+	// The animation effect that Writing Tools performs when the view is waiting for results, but the system isn’t actively evaluating the text. When Writing Tools isn’t actively evaluating your text, it creates this animation. When preparing for this animation, display the text in the specified range with a foreground color of 50% grey.
+	WritingToolsCoordinatorTextAnimationAnticipateInactive WritingToolsCoordinatorTextAnimation = 8
+	// The animation effect that Writing Tools performs on text situated after the insertion point. When Writing Tools inserts text at a given location, it creates an animation to make room for the new text. When preparing for this animation, hide the text between the insertion point and the end of your text storage. When finishing the animation, show the text again.
+	WritingToolsCoordinatorTextAnimationTranslate WritingToolsCoordinatorTextAnimation = 9
+	// The animation effect that Writing Tools performs on grammar issues when they are first indicated. When preparing for this animation, hide the portion of the text for which the grammar issue is going to be indicated. When finishing the animation, show the text again.
+	WritingToolsCoordinatorTextAnimationIndicateGrammar WritingToolsCoordinatorTextAnimation = 10
+)
+
+// String returns the WritingToolsCoordinatorTextAnimation constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WritingToolsCoordinatorTextAnimation) String() string {
+	switch e {
+	case WritingToolsCoordinatorTextAnimationAnticipate:
+		return "WritingToolsCoordinatorTextAnimationAnticipate"
+	case WritingToolsCoordinatorTextAnimationRemove:
+		return "WritingToolsCoordinatorTextAnimationRemove"
+	case WritingToolsCoordinatorTextAnimationInsert:
+		return "WritingToolsCoordinatorTextAnimationInsert"
+	case WritingToolsCoordinatorTextAnimationAnticipateInactive:
+		return "WritingToolsCoordinatorTextAnimationAnticipateInactive"
+	case WritingToolsCoordinatorTextAnimationTranslate:
+		return "WritingToolsCoordinatorTextAnimationTranslate"
+	case WritingToolsCoordinatorTextAnimationIndicateGrammar:
+		return "WritingToolsCoordinatorTextAnimationIndicateGrammar"
+	default:
+		return fmt.Sprintf("WritingToolsCoordinatorTextAnimation(%d)", int64(e))
 	}
 }
 
@@ -9838,6 +9966,103 @@ func (e CollectionViewDropOperation) String() string {
 	}
 }
 
+// Constants describing the types of events possible for controls. Associate both a target and action with one or more control events by calling “addTarget(_:action:for:)“ for each target-action pair you want to specify.
+// Bitmask — values may be combined with |.
+type ControlEvents uint64
+
+const (
+	// A tracking began event in the control.
+	ControlEventTrackingBegan ControlEvents = 1
+	// A repeated tracking began event in the control. For this event the click count is greater than one.
+	ControlEventTrackingRepeated ControlEvents = 2
+	// An event where the pointer or touch moves inside the bounds of the control.
+	ControlEventTrackingInside ControlEvents = 4
+	// An event where the pointer or touch moves outside the bounds of the control.
+	ControlEventTrackingOutside ControlEvents = 8
+	// An event where tracking transitions from outside to inside the bounds of the control.
+	ControlEventTrackingEntered ControlEvents = 16
+	// An event where tracking transitions from inside to outside the bounds of the control.
+	ControlEventTrackingExited ControlEvents = 32
+	// A tracking ended event where the pointer or touch is inside the bounds of the control.
+	ControlEventTrackingEndedInside ControlEvents = 64
+	// A tracking ended event where the pointer or touch is outside the bounds of the control.
+	ControlEventTrackingEndedOutside ControlEvents = 128
+	// A system event canceling the current tracking for the control.
+	ControlEventTrackingCancelled ControlEvents = 256
+	// An event where dragging or otherwise manipulating a control causes it to emit a series of different values.
+	ControlEventValueChanged ControlEvents = 4096
+	// A semantic action triggered by buttons.
+	ControlEventPrimaryActionTriggered ControlEvents = 8192
+	// A menu action has triggered prior to the menu being presented.
+	ControlEventMenuActionTriggered ControlEvents = 16384
+	// All tracking events.
+	ControlEventAllTrackingEvents ControlEvents = 4095
+	// A range of control-event values available for app use.
+	ControlEventApplicationReserved ControlEvents = 251658240
+	// A range of control-event values reserved for internal framework use.
+	ControlEventSystemReserved ControlEvents = 4026531840
+	// All events, including system events.
+	ControlEventAllEvents ControlEvents = 4294967295
+)
+
+// String returns the ControlEvents constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ControlEvents) String() string {
+	var parts []string
+	if e&ControlEventTrackingBegan != 0 {
+		parts = append(parts, "ControlEventTrackingBegan")
+	}
+	if e&ControlEventTrackingRepeated != 0 {
+		parts = append(parts, "ControlEventTrackingRepeated")
+	}
+	if e&ControlEventTrackingInside != 0 {
+		parts = append(parts, "ControlEventTrackingInside")
+	}
+	if e&ControlEventTrackingOutside != 0 {
+		parts = append(parts, "ControlEventTrackingOutside")
+	}
+	if e&ControlEventTrackingEntered != 0 {
+		parts = append(parts, "ControlEventTrackingEntered")
+	}
+	if e&ControlEventTrackingExited != 0 {
+		parts = append(parts, "ControlEventTrackingExited")
+	}
+	if e&ControlEventTrackingEndedInside != 0 {
+		parts = append(parts, "ControlEventTrackingEndedInside")
+	}
+	if e&ControlEventTrackingEndedOutside != 0 {
+		parts = append(parts, "ControlEventTrackingEndedOutside")
+	}
+	if e&ControlEventTrackingCancelled != 0 {
+		parts = append(parts, "ControlEventTrackingCancelled")
+	}
+	if e&ControlEventValueChanged != 0 {
+		parts = append(parts, "ControlEventValueChanged")
+	}
+	if e&ControlEventPrimaryActionTriggered != 0 {
+		parts = append(parts, "ControlEventPrimaryActionTriggered")
+	}
+	if e&ControlEventMenuActionTriggered != 0 {
+		parts = append(parts, "ControlEventMenuActionTriggered")
+	}
+	if e&ControlEventAllTrackingEvents != 0 {
+		parts = append(parts, "ControlEventAllTrackingEvents")
+	}
+	if e&ControlEventApplicationReserved != 0 {
+		parts = append(parts, "ControlEventApplicationReserved")
+	}
+	if e&ControlEventSystemReserved != 0 {
+		parts = append(parts, "ControlEventSystemReserved")
+	}
+	if e&ControlEventAllEvents != 0 {
+		parts = append(parts, "ControlEventAllEvents")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // Constants that specify whether a drag terminates within or outside the application.
 type DraggingContext int64
 
@@ -9861,7 +10086,6 @@ func (e DraggingContext) String() string {
 	}
 }
 
-// These constants specify the possible states of a drawer.
 type DrawerState uint64
 
 const (
@@ -10034,7 +10258,6 @@ func (e FontPanelModeMask) String() string {
 	return strings.Join(parts, "|")
 }
 
-// A pattern of haptic feedback to be provided to the user.
 type HapticFeedbackPattern int64
 
 const (
@@ -10058,7 +10281,6 @@ func (e HapticFeedbackPattern) String() string {
 	}
 }
 
-// Constants that identify the loading status of the image.
 type ImageRepLoadStatus int64
 
 const (
@@ -10091,7 +10313,6 @@ func (e ImageRepLoadStatus) String() string {
 	}
 }
 
-// Options that specify how to interpret data on the pasteboard when initializing pasteboard data.
 // Bitmask — values may be combined with |.
 type PasteboardReadingOptions uint64
 
@@ -10121,7 +10342,6 @@ func (e PasteboardReadingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Type to specify options for writing to a pasteboard.
 // Bitmask — values may be combined with |.
 type PasteboardWritingOptions uint64
 
@@ -10142,8 +10362,6 @@ func (e PasteboardWritingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// The set of predefined appearances for a popover.
-//
 // Deprecated: since macOS 10.10.
 type PopoverAppearance int64
 
@@ -10171,8 +10389,6 @@ func (e PopoverAppearance) String() string {
 	}
 }
 
-// Constants that specify page orientations.
-//
 // Deprecated: since macOS 10.14.
 type PrintingOrientation uint64
 
@@ -10229,7 +10445,7 @@ func (e ProgressIndicatorThickness) String() string {
 	}
 }
 
-// The sharing scope constants specify the nature of the things you are sharing.
+// Use the sharing scope to specify the nature of the things you are sharing. The sharing scope can be modified from the default value of NSSharingContentScopeItem by setting a different value in the out parameter in sharingService:sourceWindowForShareItems:sharingContentScope:.
 type SharingContentScope int64
 
 const (
@@ -10437,7 +10653,6 @@ func (e TextCursorAccessoryPlacement) String() string {
 	}
 }
 
-// The following constants indicate the type of search anchor an action should perform.
 type TextFinderMatchingType int64
 
 const (
@@ -10464,16 +10679,19 @@ func (e TextFinderMatchingType) String() string {
 	}
 }
 
-// Values that describe options for enumerating text layout fragments.
 // Bitmask — values may be combined with |.
 type TextLayoutFragmentEnumerationOptions uint64
 
 const (
 	// The value that represents no selected enumeration options.
-	TextLayoutFragmentEnumerationOptionsNone                     TextLayoutFragmentEnumerationOptions = 0
-	TextLayoutFragmentEnumerationOptionsReverse                  TextLayoutFragmentEnumerationOptions = 1
-	TextLayoutFragmentEnumerationOptionsEstimatesSize            TextLayoutFragmentEnumerationOptions = 2
-	TextLayoutFragmentEnumerationOptionsEnsuresLayout            TextLayoutFragmentEnumerationOptions = 4
+	TextLayoutFragmentEnumerationOptionsNone TextLayoutFragmentEnumerationOptions = 0
+	// Enumerates in reverse from the layout fragment before the one containing this location.
+	TextLayoutFragmentEnumerationOptionsReverse TextLayoutFragmentEnumerationOptions = 1
+	// When enumerating, tells the layout fragments to estimate their size.
+	TextLayoutFragmentEnumerationOptionsEstimatesSize TextLayoutFragmentEnumerationOptions = 2
+	// When enumerating, tells the layout fragments to lay out their contents.
+	TextLayoutFragmentEnumerationOptionsEnsuresLayout TextLayoutFragmentEnumerationOptions = 4
+	// Synthesizes the extra line fragment when necessary.
 	TextLayoutFragmentEnumerationOptionsEnsuresExtraLineFragment TextLayoutFragmentEnumerationOptions = 8
 )
 
@@ -10563,12 +10781,13 @@ func (e TextScalingType) String() string {
 	}
 }
 
-// Values that describe the possible layout orientations.
 type TextSelectionNavigationLayoutOrientation int64
 
 const (
+	// Lines render horizontally and grow from top to bottom.
 	TextSelectionNavigationLayoutOrientationHorizontal TextSelectionNavigationLayoutOrientation = 0
-	TextSelectionNavigationLayoutOrientationVertical   TextSelectionNavigationLayoutOrientation = 1
+	// Lines render vertically and grow from right to left.
+	TextSelectionNavigationLayoutOrientationVertical TextSelectionNavigationLayoutOrientation = 1
 )
 
 // String returns the TextSelectionNavigationLayoutOrientation constant's name, or its numeric form when the
@@ -10584,13 +10803,15 @@ func (e TextSelectionNavigationLayoutOrientation) String() string {
 	}
 }
 
-// Values that describe how the framework handles different kinds of selection modifiers.
 // Bitmask — values may be combined with |.
 type TextSelectionNavigationModifier uint64
 
 const (
-	TextSelectionNavigationModifierExtend   TextSelectionNavigationModifier = 1
-	TextSelectionNavigationModifierVisual   TextSelectionNavigationModifier = 2
+	// The value that indicates the framework extends the selection by not moving the initial location while in a drag selection.
+	TextSelectionNavigationModifierExtend TextSelectionNavigationModifier = 1
+	// The value that indicates the framework extends the selection visually inside the rectangular area defined by the anchor and drag positions.
+	TextSelectionNavigationModifierVisual TextSelectionNavigationModifier = 2
+	// The value that indicates the framework extends the selection visually inside the rectangular area defined by the anchor and dragged positions. This produces an ``NSTextSelection`` per line.
 	TextSelectionNavigationModifierMultiple TextSelectionNavigationModifier = 4
 )
 
@@ -10636,38 +10857,26 @@ func (e WritingDirectionFormatType) String() string {
 	}
 }
 
-// Use the `NSWritingToolsCoordinator.TextAnimation` constants to determine the type of animation that is occurring. During an interactive change to your view, Writing Tools creates animations to provide feedback about what’s happening. During the setup for each animation, Writing Tools reports the type of animation to the coordinator’s delegate, so that you can perform additional actions related to that animation. For example, during an insertion animation, you might animate changes to other views in your interface.
-type WritingToolsCoordinatorTextAnimation int64
+// Use the `NSWritingToolsCoordinator.TextDecoration` constants to determine the type of decoration to be applied to a preview for grammar animation. The grammar animation needs previews of the text of the issue in two forms, without and with the grammar indication underline applied. If you use grammar animation, you must implement the delegate method “NSWritingToolsCoordinator/Delegate/writingToolsCoordinator(_:requestsPreviewFor:of:in:textDecoration:completion:)“ to provide both forms of previews, based on the specified decoration.
+type WritingToolsCoordinatorTextDecoration int64
 
 const (
-	// The animation that Writing Tools performs when waiting to receive results from the large language model. This type of animation applies a visual effect to the text that Writing Tools is evaluating. When preparing for this animation, hide the text that Writing Tools is about to evaluate. In the same space where that text appears, Writing Tools displays a preview image that you provide and animates changes to that image.
-	WritingToolsCoordinatorTextAnimationAnticipate WritingToolsCoordinatorTextAnimation = 0
-	// The animation that Writing Tools performs when removing text from your view. This type of animation shows the removal of text from your view. When preparing for this animation, hide the text in the provided range if you haven’t already. If you support animating the reflow of your view’s text, you can also prepare any other animations you need. Writing Tools uses a preview object you provide to animate the removal of the text.
-	WritingToolsCoordinatorTextAnimationRemove WritingToolsCoordinatorTextAnimation = 1
-	// The animation that Writing Tools performs when inserting text into your view. This type of animation shows the insertion of text to your view. When preparing for this animation, hide the text in the provided range if you haven’t already. If you support animating the reflow of your view’s text, you can also prepare any other animations you need. Writing Tools uses a preview object you provide to animate the insertion of the text.
-	WritingToolsCoordinatorTextAnimationInsert WritingToolsCoordinatorTextAnimation = 2
-	// The animation effect that Writing Tools performs when the view is waiting for results, but the system isn’t actively evaluating the text. When Writing Tools isn’t actively evaluating your text, it creates this animation. When preparing for this animation, display the text in the specified range with a foreground color of 50% grey.
-	WritingToolsCoordinatorTextAnimationAnticipateInactive WritingToolsCoordinatorTextAnimation = 8
-	// The animation effect that Writing Tools performs on text situated after the insertion point. When Writing Tools inserts text at a given location, it creates an animation to make room for the new text. When preparing for this animation, hide the text between the insertion point and the end of your text storage. When finishing the animation, show the text again.
-	WritingToolsCoordinatorTextAnimationTranslate WritingToolsCoordinatorTextAnimation = 9
+	// Requests a preview of the text without any additional decoration.
+	WritingToolsCoordinatorTextDecorationNone WritingToolsCoordinatorTextDecoration = 0
+	// Requests a preview of the text with the grammar indication underline.
+	WritingToolsCoordinatorTextDecorationGrammarUnderline WritingToolsCoordinatorTextDecoration = 1
 )
 
-// String returns the WritingToolsCoordinatorTextAnimation constant's name, or its numeric form when the
+// String returns the WritingToolsCoordinatorTextDecoration constant's name, or its numeric form when the
 // value is not a known constant.
-func (e WritingToolsCoordinatorTextAnimation) String() string {
+func (e WritingToolsCoordinatorTextDecoration) String() string {
 	switch e {
-	case WritingToolsCoordinatorTextAnimationAnticipate:
-		return "WritingToolsCoordinatorTextAnimationAnticipate"
-	case WritingToolsCoordinatorTextAnimationRemove:
-		return "WritingToolsCoordinatorTextAnimationRemove"
-	case WritingToolsCoordinatorTextAnimationInsert:
-		return "WritingToolsCoordinatorTextAnimationInsert"
-	case WritingToolsCoordinatorTextAnimationAnticipateInactive:
-		return "WritingToolsCoordinatorTextAnimationAnticipateInactive"
-	case WritingToolsCoordinatorTextAnimationTranslate:
-		return "WritingToolsCoordinatorTextAnimationTranslate"
+	case WritingToolsCoordinatorTextDecorationNone:
+		return "WritingToolsCoordinatorTextDecorationNone"
+	case WritingToolsCoordinatorTextDecorationGrammarUnderline:
+		return "WritingToolsCoordinatorTextDecorationGrammarUnderline"
 	default:
-		return fmt.Sprintf("WritingToolsCoordinatorTextAnimation(%d)", int64(e))
+		return fmt.Sprintf("WritingToolsCoordinatorTextDecoration(%d)", int64(e))
 	}
 }
 
@@ -10679,6 +10888,12 @@ const (
 	WritingToolsCoordinatorTextReplacementReasonInteractive WritingToolsCoordinatorTextReplacementReason = 0
 	// An option to replace the text in your view without animating the change. When Writing Tools requests a noninteractive change in your delegate’s ``NSWritingToolsCoordinator/Delegate/writingToolsCoordinator(_:replace:in:proposedText:reason:animationParameters:completion:)`` method, update your view’s text storage without animating the change.
 	WritingToolsCoordinatorTextReplacementReasonNoninteractive WritingToolsCoordinatorTextReplacementReason = 1
+	// An option to replace the text in your view when a grammar suggestion is accepted. When the user interacts with a grammar issue and the UI is shown, and the option to accept a suggestion is chosen, this reason will be used. Update your view's text storage without animating the change.
+	WritingToolsCoordinatorTextReplacementReasonAccepted WritingToolsCoordinatorTextReplacementReason = 2
+	// An option to replace the text in your view when a grammar suggestion is rejected. When the user interacts with a grammar issue and the UI is shown, and the option to ignore a suggestion is chosen, this reason will be used. Update your view's text storage without animating the change. In addition, use ``ignoreGrammarRange`` on ``NSSpellChecker`` to make sure that the suggestion will continue to be ignored.
+	WritingToolsCoordinatorTextReplacementReasonRejected WritingToolsCoordinatorTextReplacementReason = 3
+	// An option to replace the text in your view when a grammar suggestion is temporarily shown to preview the proposed change in the text. When the user interacts with a grammar issue and the UI is shown, in some cases the suggestion needs to be shown temporarily. Update your view's text storage without animating the change.
+	WritingToolsCoordinatorTextReplacementReasonTemporary WritingToolsCoordinatorTextReplacementReason = 4
 )
 
 // String returns the WritingToolsCoordinatorTextReplacementReason constant's name, or its numeric form when the
@@ -10689,6 +10904,12 @@ func (e WritingToolsCoordinatorTextReplacementReason) String() string {
 		return "WritingToolsCoordinatorTextReplacementReasonInteractive"
 	case WritingToolsCoordinatorTextReplacementReasonNoninteractive:
 		return "WritingToolsCoordinatorTextReplacementReasonNoninteractive"
+	case WritingToolsCoordinatorTextReplacementReasonAccepted:
+		return "WritingToolsCoordinatorTextReplacementReasonAccepted"
+	case WritingToolsCoordinatorTextReplacementReasonRejected:
+		return "WritingToolsCoordinatorTextReplacementReasonRejected"
+	case WritingToolsCoordinatorTextReplacementReasonTemporary:
+		return "WritingToolsCoordinatorTextReplacementReasonTemporary"
 	default:
 		return fmt.Sprintf("WritingToolsCoordinatorTextReplacementReason(%d)", int64(e))
 	}
@@ -10852,27 +11073,55 @@ func (e QosClass) String() string {
 	}
 }
 
+type TaskSharedRegionStubs uint8
+
+const (
+	TaskSharedRegionStubsDev  TaskSharedRegionStubs = 1
+	TaskSharedRegionStubsProd TaskSharedRegionStubs = 2
+)
+
+// String returns the TaskSharedRegionStubs constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TaskSharedRegionStubs) String() string {
+	switch e {
+	case TaskSharedRegionStubsDev:
+		return "TaskSharedRegionStubsDev"
+	case TaskSharedRegionStubsProd:
+		return "TaskSharedRegionStubsProd"
+	default:
+		return fmt.Sprintf("TaskSharedRegionStubs(%d)", int64(e))
+	}
+}
+
 type VirtualMemoryGuardExceptionCode uint32
 
 const (
-	KGUARD_EXC_DEALLOC_GAP                   VirtualMemoryGuardExceptionCode = 1
-	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        VirtualMemoryGuardExceptionCode = 2
-	KGUARD_EXC_RECLAIM_INDEX_FAILURE         VirtualMemoryGuardExceptionCode = 4
-	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    VirtualMemoryGuardExceptionCode = 8
-	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    VirtualMemoryGuardExceptionCode = 9
-	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         VirtualMemoryGuardExceptionCode = 10
-	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         VirtualMemoryGuardExceptionCode = 11
-	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  VirtualMemoryGuardExceptionCode = 12
-	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    VirtualMemoryGuardExceptionCode = 13
-	KGUARD_EXC_SEC_ACCESS_FAULT              VirtualMemoryGuardExceptionCode = 98
-	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        VirtualMemoryGuardExceptionCode = 99
-	KGUARD_EXC_SEC_COPY_DENIED               VirtualMemoryGuardExceptionCode = 100
-	KGUARD_EXC_SEC_SHARING_DENIED            VirtualMemoryGuardExceptionCode = 101
-	KGUARD_EXC_MTE_SYNC_FAULT                VirtualMemoryGuardExceptionCode = 200
-	KGUARD_EXC_MTE_ASYNC_USER_FAULT          VirtualMemoryGuardExceptionCode = 201
-	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          VirtualMemoryGuardExceptionCode = 202
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT VirtualMemoryGuardExceptionCode = 203
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT VirtualMemoryGuardExceptionCode = 204
+	KGUARD_EXC_DEALLOC_GAP                  VirtualMemoryGuardExceptionCode = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE       VirtualMemoryGuardExceptionCode = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE        VirtualMemoryGuardExceptionCode = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE   VirtualMemoryGuardExceptionCode = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE   VirtualMemoryGuardExceptionCode = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE        VirtualMemoryGuardExceptionCode = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE        VirtualMemoryGuardExceptionCode = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION VirtualMemoryGuardExceptionCode = 12
+	// Guard exception sent to a thread when a CoW defeatured map attempts to copy memory which is not permitted by system policy.
+	KGUARD_EXC_COW_DEFEATURED_COPY_DENIED VirtualMemoryGuardExceptionCode = 13
+	// Guard exception sent to a thread when it attempts to extract a given type of memory in a way which is not permitted for CoW defeatured maps.
+	KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED VirtualMemoryGuardExceptionCode = 14
+	// Guard exception sent to a thread when it attempts to copy-map a memory entry which was created for sharing by a CoW defeatured map.
+	KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED VirtualMemoryGuardExceptionCode = 15
+	KGUARD_EXC_COW_DEFEATURED_FIRST                    VirtualMemoryGuardExceptionCode = 13
+	KGUARD_EXC_COW_DEFEATURED_LAST                     VirtualMemoryGuardExceptionCode = 15
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY              VirtualMemoryGuardExceptionCode = 16
+	KGUARD_EXC_SEC_ACCESS_FAULT                        VirtualMemoryGuardExceptionCode = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT                  VirtualMemoryGuardExceptionCode = 99
+	KGUARD_EXC_SEC_COPY_DENIED                         VirtualMemoryGuardExceptionCode = 100
+	KGUARD_EXC_SEC_SHARING_DENIED                      VirtualMemoryGuardExceptionCode = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                          VirtualMemoryGuardExceptionCode = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT                    VirtualMemoryGuardExceptionCode = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT                    VirtualMemoryGuardExceptionCode = 202
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT           VirtualMemoryGuardExceptionCode = 203
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT           VirtualMemoryGuardExceptionCode = 204
 )
 
 // String returns the VirtualMemoryGuardExceptionCode constant's name, or its numeric form when the
@@ -10895,6 +11144,12 @@ func (e VirtualMemoryGuardExceptionCode) String() string {
 		return "KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE"
 	case KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION:
 		return "KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION"
+	case KGUARD_EXC_COW_DEFEATURED_COPY_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_COPY_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED:
+		return "KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED"
 	case KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY:
 		return "KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY"
 	case KGUARD_EXC_SEC_ACCESS_FAULT:
@@ -10992,11 +11247,13 @@ const (
 	AttachmentCharacter = 65532
 	BackTabCharacter    = 25
 	BackspaceCharacter  = 8
+	// Deprecated: since macOS API_TO_BE_DEPRECATED.
 	BacktabTextMovement = 18
 	BeginFunctionKey    = 63274
 	BreakFunctionKey    = 63282
 	// Deprecated: since macOS 10.10.
-	CancelButton                 = 0
+	CancelButton = 0
+	// Deprecated: since macOS API_TO_BE_DEPRECATED.
 	CancelTextMovement           = 23
 	CarriageReturnCharacter      = 13
 	ClearDisplayFunctionKey      = 63290
@@ -11010,52 +11267,53 @@ const (
 	// Deprecated: Use formatters instead
 	DoubleType           = 6
 	DownArrowFunctionKey = 63233
-	DownTextMovement     = 22
-	EndFunctionKey       = 63275
-	EnterCharacter       = 3
-	ExecuteFunctionKey   = 63298
-	F10FunctionKey       = 63245
-	F11FunctionKey       = 63246
-	F12FunctionKey       = 63247
-	F13FunctionKey       = 63248
-	F14FunctionKey       = 63249
-	F15FunctionKey       = 63250
-	F16FunctionKey       = 63251
-	F17FunctionKey       = 63252
-	F18FunctionKey       = 63253
-	F19FunctionKey       = 63254
-	F1FunctionKey        = 63236
-	F20FunctionKey       = 63255
-	F21FunctionKey       = 63256
-	F22FunctionKey       = 63257
-	F23FunctionKey       = 63258
-	F24FunctionKey       = 63259
-	F25FunctionKey       = 63260
-	F26FunctionKey       = 63261
-	F27FunctionKey       = 63262
-	F28FunctionKey       = 63263
-	F29FunctionKey       = 63264
-	F2FunctionKey        = 63237
-	F30FunctionKey       = 63265
-	F31FunctionKey       = 63266
-	F32FunctionKey       = 63267
-	F33FunctionKey       = 63268
-	F34FunctionKey       = 63269
-	F35FunctionKey       = 63270
-	F3FunctionKey        = 63238
-	F4FunctionKey        = 63239
-	F5FunctionKey        = 63240
-	F6FunctionKey        = 63241
-	F7FunctionKey        = 63242
-	F8FunctionKey        = 63243
-	F9FunctionKey        = 63244
-	FPCurrentField       = 134
-	FPPreviewButton      = 131
-	FPPreviewField       = 128
-	FPRevertButton       = 130
-	FPSetButton          = 132
-	FPSizeField          = 129
-	FPSizeTitle          = 133
+	// Deprecated: since macOS API_TO_BE_DEPRECATED.
+	DownTextMovement   = 22
+	EndFunctionKey     = 63275
+	EnterCharacter     = 3
+	ExecuteFunctionKey = 63298
+	F10FunctionKey     = 63245
+	F11FunctionKey     = 63246
+	F12FunctionKey     = 63247
+	F13FunctionKey     = 63248
+	F14FunctionKey     = 63249
+	F15FunctionKey     = 63250
+	F16FunctionKey     = 63251
+	F17FunctionKey     = 63252
+	F18FunctionKey     = 63253
+	F19FunctionKey     = 63254
+	F1FunctionKey      = 63236
+	F20FunctionKey     = 63255
+	F21FunctionKey     = 63256
+	F22FunctionKey     = 63257
+	F23FunctionKey     = 63258
+	F24FunctionKey     = 63259
+	F25FunctionKey     = 63260
+	F26FunctionKey     = 63261
+	F27FunctionKey     = 63262
+	F28FunctionKey     = 63263
+	F29FunctionKey     = 63264
+	F2FunctionKey      = 63237
+	F30FunctionKey     = 63265
+	F31FunctionKey     = 63266
+	F32FunctionKey     = 63267
+	F33FunctionKey     = 63268
+	F34FunctionKey     = 63269
+	F35FunctionKey     = 63270
+	F3FunctionKey      = 63238
+	F4FunctionKey      = 63239
+	F5FunctionKey      = 63240
+	F6FunctionKey      = 63241
+	F7FunctionKey      = 63242
+	F8FunctionKey      = 63243
+	F9FunctionKey      = 63244
+	FPCurrentField     = 134
+	FPPreviewButton    = 131
+	FPPreviewField     = 128
+	FPRevertButton     = 130
+	FPSetButton        = 132
+	FPSizeField        = 129
+	FPSizeTitle        = 133
 	// Deprecated: since macOS 10.13.
 	FileHandlingPanelCancelButton = 0
 	// Deprecated: since macOS 10.13.
@@ -11104,17 +11362,19 @@ const (
 	// Deprecated: since macOS 10.11.
 	GlyphAttributeInscribe = 5
 	// Deprecated: since macOS 10.11.
-	GlyphAttributeSoft    = 0
-	HelpFunctionKey       = 63302
-	HomeFunctionKey       = 63273
+	GlyphAttributeSoft = 0
+	HelpFunctionKey    = 63302
+	HomeFunctionKey    = 63273
+	// Deprecated: since macOS API_TO_BE_DEPRECATED.
 	IllegalTextMovement   = 0
 	ImageRepMatchesDevice = 0
 	InsertCharFunctionKey = 63293
 	InsertFunctionKey     = 63271
 	InsertLineFunctionKey = 63291
 	// Deprecated: Use formatters instead
-	IntType                = 1
-	LeftArrowFunctionKey   = 63234
+	IntType              = 1
+	LeftArrowFunctionKey = 63234
+	// Deprecated: since macOS API_TO_BE_DEPRECATED.
 	LeftTextMovement       = 19
 	LineSeparatorCharacter = 8232
 	// Deprecated: since macOS 10.8.
@@ -11181,10 +11441,11 @@ const (
 	OpenGLPFATripleBuffer       = 3
 	OpenGLPFAVirtualScreenCount = 128
 	// Deprecated: since macOS 10.9.
-	OpenGLPFAWindow                     = 80
-	OpenGLProfileVersion3_2Core         = 12800
-	OpenGLProfileVersion4_1Core         = 16640
-	OpenGLProfileVersionLegacy          = 4096
+	OpenGLPFAWindow             = 80
+	OpenGLProfileVersion3_2Core = 12800
+	OpenGLProfileVersion4_1Core = 16640
+	OpenGLProfileVersionLegacy  = 4096
+	// Deprecated: since macOS API_TO_BE_DEPRECATED.
 	OtherTextMovement                   = 0
 	OutlineViewDropOnItemIndex          = -1
 	PageDownFunctionKey                 = 63277
@@ -11209,9 +11470,11 @@ const (
 	RedoFunctionKey                 = 63300
 	ResetCursorRectsRunLoopOrdering = 700000
 	ResetFunctionKey                = 63283
-	ReturnTextMovement              = 16
-	RightArrowFunctionKey           = 63235
-	RightTextMovement               = 20
+	// Deprecated: since macOS API_TO_BE_DEPRECATED.
+	ReturnTextMovement    = 16
+	RightArrowFunctionKey = 63235
+	// Deprecated: since macOS API_TO_BE_DEPRECATED.
+	RightTextMovement = 20
 	// Deprecated: Use NSModalResponseAbort instead
 	RunAbortedResponse = -1001
 	// Deprecated: Use NSModalResponseContinue instead
@@ -11234,11 +11497,12 @@ const (
 	ShowControlGlyphs                      = 1
 	ShowInvisibleGlyphs                    = 2
 	// Deprecated: Use NSUnderlineStyleSingle instead
-	SingleUnderlineStyle                   = 1
-	StopFunctionKey                        = 63284
-	SysReqFunctionKey                      = 63281
-	SystemFunctionKey                      = 63287
-	TabCharacter                           = 9
+	SingleUnderlineStyle = 1
+	StopFunctionKey      = 63284
+	SysReqFunctionKey    = 63281
+	SystemFunctionKey    = 63287
+	TabCharacter         = 9
+	// Deprecated: since macOS API_TO_BE_DEPRECATED.
 	TabTextMovement                        = 17
 	TextReadInapplicableDocumentTypeError  = 65806
 	TextReadWriteErrorMaximum              = 66303
@@ -11247,9 +11511,10 @@ const (
 	// Deprecated: Use NSWritingDirectionEmbedding instead
 	TextWritingDirectionEmbedding = 0
 	// Deprecated: Use NSWritingDirectionOverride instead
-	TextWritingDirectionOverride          = 2
-	UndoFunctionKey                       = 63299
-	UpArrowFunctionKey                    = 63232
+	TextWritingDirectionOverride = 2
+	UndoFunctionKey              = 63299
+	UpArrowFunctionKey           = 63232
+	// Deprecated: since macOS API_TO_BE_DEPRECATED.
 	UpTextMovement                        = 21
 	UpdateWindowsRunLoopOrdering          = 500000
 	UserFunctionKey                       = 63286

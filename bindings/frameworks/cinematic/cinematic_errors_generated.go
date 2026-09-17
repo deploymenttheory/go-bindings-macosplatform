@@ -11,6 +11,9 @@ import (
 // ErrCodeCancelled matches the Cinematic error CNCinematicErrorCodeCancelled.
 var ErrCodeCancelled = errkit.New("CNCinematicErrorDomain", 7)
 
+// ErrCodeDownloadFailed matches the Cinematic error CNCinematicErrorCodeDownloadFailed.
+var ErrCodeDownloadFailed = errkit.New("CNCinematicErrorDomain", 8)
+
 // ErrCodeIncompatible matches the Cinematic error CNCinematicErrorCodeIncompatible.
 var ErrCodeIncompatible = errkit.New("CNCinematicErrorDomain", 6)
 

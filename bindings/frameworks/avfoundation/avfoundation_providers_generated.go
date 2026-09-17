@@ -38,6 +38,12 @@ type AssetTrackProvider interface {
 	isAssetTrack()
 }
 
+// AssetTrackPlanProvider is accepted wherever a AVAssetTrackPlan (or one of its subclasses) is expected.
+type AssetTrackPlanProvider interface {
+	objref.Object
+	isAssetTrackPlan()
+}
+
 // AssetTrackSegmentProvider is accepted wherever a AVAssetTrackSegment (or one of its subclasses) is expected.
 type AssetTrackSegmentProvider interface {
 	objref.Object
@@ -200,6 +206,18 @@ type MovieTrackProvider interface {
 	isMovieTrack()
 }
 
+// PlannedSegmentConfigurationProvider is accepted wherever a AVPlannedSegmentConfiguration (or one of its subclasses) is expected.
+type PlannedSegmentConfigurationProvider interface {
+	objref.Object
+	isPlannedSegmentConfiguration()
+}
+
+// PlannedSegmentWritingRequestProvider is accepted wherever a AVPlannedSegmentWritingRequest (or one of its subclasses) is expected.
+type PlannedSegmentWritingRequestProvider interface {
+	objref.Object
+	isPlannedSegmentWritingRequest()
+}
+
 // PlaybackCoordinatorProvider is accepted wherever a AVPlaybackCoordinator (or one of its subclasses) is expected.
 type PlaybackCoordinatorProvider interface {
 	objref.Object
@@ -228,6 +246,12 @@ type PlayerItemMediaDataCollectorProvider interface {
 type PlayerItemOutputProvider interface {
 	objref.Object
 	isPlayerItemOutput()
+}
+
+// PlayerItemSampleBufferOutputConfigurationProvider is accepted wherever a AVPlayerItemSampleBufferOutputConfiguration (or one of its subclasses) is expected.
+type PlayerItemSampleBufferOutputConfigurationProvider interface {
+	objref.Object
+	isPlayerItemSampleBufferOutputConfiguration()
 }
 
 // TimedMetadataGroupProvider is accepted wherever a AVTimedMetadataGroup (or one of its subclasses) is expected.

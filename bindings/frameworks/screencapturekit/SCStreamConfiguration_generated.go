@@ -253,7 +253,7 @@ func (sc *StreamConfiguration) WithIncludeChildWindows(includeChildWindows bool)
 	return sc
 }
 
-// WithCaptureMicrophone sets SCStreamProperty that specifies whether the microphone audio will be captured.  By default microphone is not captured.
+// WithCaptureMicrophone sets SCStreamProperty that specifies whether the microphone audio will be captured.  By default microphone is not captured. on iOS and visionos, client can configure showsMicrophoneControl in SCContentSharingPickerConfiguration for user to choose enable microphone capture or not
 func (sc *StreamConfiguration) WithCaptureMicrophone(captureMicrophone bool) *StreamConfiguration {
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setCaptureMicrophone:"), captureMicrophone)
 	return sc
@@ -271,14 +271,14 @@ func (sc *StreamConfiguration) WithCaptureDynamicRange(captureDynamicRange Captu
 	return sc
 }
 
-// Width returns SCStreamProperty for output width as measured in pixels. Default is set to 1920.
+// Width returns SCStreamProperty for output width as measured in pixels. On macOS default is set to 1920. In iOS/tvOS platforms, default is the native resolution width of the captured content. On supported embedded platforms, if either width or height is greater than native resolution, resulting frame will be capped at native resolution.
 func (sc *StreamConfiguration) Width() int {
 	defer runtime.KeepAlive(sc)
 	_r := objc.Send[int](objref.IDOf(sc), objc.RegisterName("width"))
 	return _r
 }
 
-// Height returns SCStreamProperty for output height as measured in pixels. Default is set to 1080.
+// Height returns SCStreamProperty for output height as measured in pixels. on macOS default is set to 1080. In iOS/tvOS platforms, default is the native resolution width of the captured content. On supported embedded platforms, if either width or height is greater than native resolution, resulting frame will be capped at native resolution.
 func (sc *StreamConfiguration) Height() int {
 	defer runtime.KeepAlive(sc)
 	_r := objc.Send[int](objref.IDOf(sc), objc.RegisterName("height"))
@@ -292,7 +292,7 @@ func (sc *StreamConfiguration) MinimumFrameInterval() coremedia.CMTime {
 	return _r
 }
 
-// PixelFormat returns SCStreamProperty for output pixel format. Supported pixel formats are: 'BGRA': Packed Little Endian ARGB8888 'l10r': Packed Little Endian ARGB2101010 '420v': 2-plane "video" range YCbCr 4:2:0 '420f': 2-plane "full" range YCbCr 4:2:0 'xf44': 2 plane "full" range YCbCr10 4:4:4 'RGhA': 64 bit RGBA IEEE half-precision float, 16-bit little-endian See https://developer.apple.com/documentation/coregraphics/1455170-cgdisplaystreamcreate
+// PixelFormat returns SCStreamProperty for output pixel format. Supported pixel formats are: 'BGRA': Packed Little Endian ARGB8888 (macOS, iOS) 'l10r': Packed Little Endian ARGB2101010 (macOS) '420v': 2-plane "video" range YCbCr 4:2:0 (macOS, iOS) '420f': 2-plane "full" range YCbCr 4:2:0 (macOS, iOS) 'xf44': 2 plane "full" range YCbCr10 4:4:4 (macOS) 'RGhA': 64 bit RGBA IEEE half-precision float, 16-bit little-endian (macOS) 'x420': 2 plane "video" range YCbCr10 4:2:0 (macOS, iOS) See https://developer.apple.com/documentation/coregraphics/1455170-cgdisplaystreamcreate
 func (sc *StreamConfiguration) PixelFormat() int {
 	defer runtime.KeepAlive(sc)
 	_r := objc.Send[int](objref.IDOf(sc), objc.RegisterName("pixelFormat"))
@@ -470,7 +470,7 @@ func (sc *StreamConfiguration) IncludeChildWindows() bool {
 	return _r
 }
 
-// CaptureMicrophone reports whether SCStreamProperty that specifies whether the microphone audio will be captured. By default microphone is not captured.
+// CaptureMicrophone reports whether SCStreamProperty that specifies whether the microphone audio will be captured. By default microphone is not captured. on iOS and visionos, client can configure showsMicrophoneControl in SCContentSharingPickerConfiguration for user to choose enable microphone capture or not
 func (sc *StreamConfiguration) CaptureMicrophone() bool {
 	defer runtime.KeepAlive(sc)
 	_r := objc.Send[bool](objref.IDOf(sc), objc.RegisterName("captureMicrophone"))

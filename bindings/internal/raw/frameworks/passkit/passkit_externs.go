@@ -12,9 +12,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/foundation"
 )
 
-func PKAddSecureElementPassErrorDomain() uintptr {
+func PKAddSecureElementPassErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_passkitLib, "PKAddSecureElementPassErrorDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKContactFieldEmailAddress() *foundation.NSString {
@@ -289,6 +296,7 @@ func PKPaymentNetworkAmex() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
+// Deprecated: Use PKPaymentNetworkPagoBancomat instead.
 func PKPaymentNetworkBancomat() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_passkitLib, "PKPaymentNetworkBancomat")
 	if ptr == 0 {
@@ -447,6 +455,18 @@ func PKPaymentNetworkElCorteIngles() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
+func PKPaymentNetworkElcard() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_passkitLib, "PKPaymentNetworkElcard")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
 func PKPaymentNetworkElectron() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_passkitLib, "PKPaymentNetworkElectron")
 	if ptr == 0 {
@@ -495,6 +515,18 @@ func PKPaymentNetworkHimyan() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
+func PKPaymentNetworkHumo() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_passkitLib, "PKPaymentNetworkHumo")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
 func PKPaymentNetworkIDCredit() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_passkitLib, "PKPaymentNetworkIDCredit")
 	if ptr == 0 {
@@ -533,6 +565,18 @@ func PKPaymentNetworkJCB() *foundation.NSString {
 
 func PKPaymentNetworkJaywan() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_passkitLib, "PKPaymentNetworkJaywan")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
+func PKPaymentNetworkMaal() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_passkitLib, "PKPaymentNetworkMaal")
 	if ptr == 0 {
 		return nil
 	}
@@ -639,9 +683,20 @@ func PKPaymentNetworkNanaco() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
-// Deprecated: Use PKPaymentNetworkBancomat instead.
 func PKPaymentNetworkPagoBancomat() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_passkitLib, "PKPaymentNetworkPagoBancomat")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
+func PKPaymentNetworkPayPak() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_passkitLib, "PKPaymentNetworkPayPak")
 	if ptr == 0 {
 		return nil
 	}
@@ -688,6 +743,18 @@ func PKPaymentNetworkQuicPay() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
+func PKPaymentNetworkRuPay() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_passkitLib, "PKPaymentNetworkRuPay")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
 func PKPaymentNetworkSuica() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_passkitLib, "PKPaymentNetworkSuica")
 	if ptr == 0 {
@@ -712,8 +779,32 @@ func PKPaymentNetworkTmoney() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
+func PKPaymentNetworkUzCard() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_passkitLib, "PKPaymentNetworkUzCard")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
 func PKPaymentNetworkVPay() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_passkitLib, "PKPaymentNetworkVPay")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
+func PKPaymentNetworkVerve() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_passkitLib, "PKPaymentNetworkVerve")
 	if ptr == 0 {
 		return nil
 	}
@@ -748,9 +839,16 @@ func PKPaymentNetworkWaon() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
-func PKShareSecureElementPassErrorDomain() uintptr {
+func PKShareSecureElementPassErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_passkitLib, "PKShareSecureElementPassErrorDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKStoredValuePassBalanceTypeCash() *foundation.NSString {

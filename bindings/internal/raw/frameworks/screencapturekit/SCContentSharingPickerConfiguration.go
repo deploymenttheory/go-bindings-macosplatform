@@ -10,8 +10,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An instance for configuring the system content-sharing picker.
-//
 // Apple documentation: https://developer.apple.com/documentation/screencapturekit/sccontentsharingpickerconfiguration
 type SCContentSharingPickerConfiguration[NSCopying purego.AnyObject] struct {
 	foundation.NSObject

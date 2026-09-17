@@ -7,21 +7,25 @@ import (
 	"github.com/ebitengine/purego"
 )
 
+// the visible name to this application, in the localization supplied by the server, a CFStringRef.
 func KAERemoteProcessNameKey() uintptr {
 	ptr, _ := purego.Dlsym(_aeLib, "kAERemoteProcessNameKey")
 	return ptr
 }
 
+// the process id of this application, if available.  If present, a CFNumberRef.
 func KAERemoteProcessProcessIDKey() uintptr {
 	ptr, _ := purego.Dlsym(_aeLib, "kAERemoteProcessProcessIDKey")
 	return ptr
 }
 
+// the full URL to this application, a CFURLRef.
 func KAERemoteProcessURLKey() uintptr {
 	ptr, _ := purego.Dlsym(_aeLib, "kAERemoteProcessURLKey")
 	return ptr
 }
 
+// the userid of this application, if available.  If present, a CFNumberRef.
 func KAERemoteProcessUserIDKey() uintptr {
 	ptr, _ := purego.Dlsym(_aeLib, "kAERemoteProcessUserIDKey")
 	return ptr

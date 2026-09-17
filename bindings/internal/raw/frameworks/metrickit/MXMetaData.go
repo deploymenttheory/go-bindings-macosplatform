@@ -13,6 +13,7 @@ import (
 // An object containing system-level information about the device.
 //
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxmetadata
+// Deprecated: Use MetricReport.Environment or DiagnosticReport.Environment instead.
 type MXMetaData struct {
 	foundation.NSObject
 }
@@ -43,6 +44,7 @@ func MXMetaDataFromID(id objc.ID) *MXMetaData {
 }
 
 // Returns the contents of the metadata in JSON format.
+// Deprecated: Use MetricReport.Environment or DiagnosticReport.Environment instead.
 func (o *MXMetaData) JSONRepresentation() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXMetaDataSelJSONRepresentation)
 	if _ret != 0 {
@@ -52,6 +54,7 @@ func (o *MXMetaData) JSONRepresentation() *foundation.NSData {
 }
 
 // Returns the contents of the metadata as a dictionary.
+// Deprecated: Use MetricReport.Environment or DiagnosticReport.Environment instead.
 func (o *MXMetaData) DictionaryRepresentation() *foundation.NSDictionary[objc.ID, objc.ID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXMetaDataSelDictionaryRepresentation)
 	if _ret != 0 {

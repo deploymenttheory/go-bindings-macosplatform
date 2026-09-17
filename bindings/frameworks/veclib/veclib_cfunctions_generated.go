@@ -25,10 +25,10 @@ func BLASGetThreading() BlasThreading {
 	return _fnBLASGetThreading()
 }
 
-var _fnBLASSetThreading func(unsafe.Pointer) int32
+var _fnBLASSetThreading func(BlasThreading) int32
 
 // BLASSetThreading calls the vecLib framework function BLASSetThreading.
-func BLASSetThreading(threading unsafe.Pointer) int {
+func BLASSetThreading(threading BlasThreading) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnBLASSetThreading == nil {
 		ebipurego.RegisterLibFunc(&_fnBLASSetThreading, _lib, "BLASSetThreading")
@@ -85,10 +85,10 @@ func BNNSArithmeticFilterApplyBatch(filter unsafe.Pointer, batchSize int, number
 	return int(_fnBNNSArithmeticFilterApplyBatch(filter, batchSize, numberOfInputs, in, inStride, out, outStride))
 }
 
-var _fnBNNSBandPart func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+var _fnBNNSBandPart func(int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // BNNSBandPart calls the vecLib framework function BNNSBandPart.
-func BNNSBandPart(numLower unsafe.Pointer, numUpper unsafe.Pointer, input unsafe.Pointer, output unsafe.Pointer, filterParams unsafe.Pointer) int {
+func BNNSBandPart(numLower int, numUpper int, input unsafe.Pointer, output unsafe.Pointer, filterParams unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnBNNSBandPart == nil {
 		ebipurego.RegisterLibFunc(&_fnBNNSBandPart, _lib, "BNNSBandPart")
@@ -184,10 +184,10 @@ func BNNSCopy(dest unsafe.Pointer, src unsafe.Pointer, filterParams unsafe.Point
 	return int(_fnBNNSCopy(dest, src, filterParams))
 }
 
-var _fnBNNSCreateNearestNeighbors func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+var _fnBNNSCreateNearestNeighbors func(int, int, int, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 
 // BNNSCreateNearestNeighbors calls the vecLib framework function BNNSCreateNearestNeighbors.
-func BNNSCreateNearestNeighbors(maxNSamples unsafe.Pointer, nFeatures unsafe.Pointer, nNeighbors unsafe.Pointer, dataType unsafe.Pointer, filterParams unsafe.Pointer) unsafe.Pointer {
+func BNNSCreateNearestNeighbors(maxNSamples int, nFeatures int, nNeighbors int, dataType unsafe.Pointer, filterParams unsafe.Pointer) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnBNNSCreateNearestNeighbors == nil {
 		ebipurego.RegisterLibFunc(&_fnBNNSCreateNearestNeighbors, _lib, "BNNSCreateNearestNeighbors")
@@ -283,10 +283,10 @@ func BNNSDirectApplyActivationBatch(layerParams unsafe.Pointer, filterParams uns
 	return int(_fnBNNSDirectApplyActivationBatch(layerParams, filterParams, batchSize, inStride, outStride))
 }
 
-var _fnBNNSDirectApplyBroadcastMatMul func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnBNNSDirectApplyBroadcastMatMul func(bool, bool, float32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // BNNSDirectApplyBroadcastMatMul calls the vecLib framework function BNNSDirectApplyBroadcastMatMul.
-func BNNSDirectApplyBroadcastMatMul(transA unsafe.Pointer, transB unsafe.Pointer, alpha unsafe.Pointer, inputA unsafe.Pointer, inputB unsafe.Pointer, output unsafe.Pointer, filterParams unsafe.Pointer) {
+func BNNSDirectApplyBroadcastMatMul(transA bool, transB bool, alpha float32, inputA unsafe.Pointer, inputB unsafe.Pointer, output unsafe.Pointer, filterParams unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnBNNSDirectApplyBroadcastMatMul == nil {
 		ebipurego.RegisterLibFunc(&_fnBNNSDirectApplyBroadcastMatMul, _lib, "BNNSDirectApplyBroadcastMatMul")
@@ -773,7 +773,7 @@ var _fnBNNSGraphCompileFromFile func(string, string, unsafe.Pointer) unsafe.Poin
 func BNNSGraphCompileFromFile(filename string, function string, options unsafe.Pointer) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnBNNSGraphCompileFromFile == nil {
-		ebipurego.RegisterLibFunc(&_fnBNNSGraphCompileFromFile, _lib, "BNNSGraphCompileFromFile")
+		ebipurego.RegisterLibFunc(&_fnBNNSGraphCompileFromFile, _lib, "BNNSGraphCompileFromFile_v2")
 	}
 	return _fnBNNSGraphCompileFromFile(filename, function, options)
 }
@@ -938,7 +938,7 @@ var _fnBNNSGraphContextDestroy func(unsafe.Pointer)
 func BNNSGraphContextDestroy(context_ unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnBNNSGraphContextDestroy == nil {
-		ebipurego.RegisterLibFunc(&_fnBNNSGraphContextDestroy, _lib, "BNNSGraphContextDestroy")
+		ebipurego.RegisterLibFunc(&_fnBNNSGraphContextDestroy, _lib, "BNNSGraphContextDestroy_v2")
 	}
 	_fnBNNSGraphContextDestroy(context_)
 }
@@ -960,7 +960,7 @@ var _fnBNNSGraphContextExecute func(unsafe.Pointer, unsafe.Pointer, int, unsafe.
 func BNNSGraphContextExecute(context_ unsafe.Pointer, function unsafe.Pointer, argumentCount int, arguments unsafe.Pointer, workspaceSize int, workspace string) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnBNNSGraphContextExecute == nil {
-		ebipurego.RegisterLibFunc(&_fnBNNSGraphContextExecute, _lib, "BNNSGraphContextExecute")
+		ebipurego.RegisterLibFunc(&_fnBNNSGraphContextExecute, _lib, "BNNSGraphContextExecute_v2")
 	}
 	return int(_fnBNNSGraphContextExecute(context_, function, argumentCount, arguments, workspaceSize, workspace))
 }
@@ -982,7 +982,7 @@ var _fnBNNSGraphContextGetWorkspaceSize func(unsafe.Pointer, string) int
 func BNNSGraphContextGetWorkspaceSize(context_ unsafe.Pointer, function string) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnBNNSGraphContextGetWorkspaceSize == nil {
-		ebipurego.RegisterLibFunc(&_fnBNNSGraphContextGetWorkspaceSize, _lib, "BNNSGraphContextGetWorkspaceSize")
+		ebipurego.RegisterLibFunc(&_fnBNNSGraphContextGetWorkspaceSize, _lib, "BNNSGraphContextGetWorkspaceSize_v2")
 	}
 	return _fnBNNSGraphContextGetWorkspaceSize(context_, function)
 }
@@ -1026,7 +1026,7 @@ var _fnBNNSGraphContextSetBatchSize func(unsafe.Pointer, unsafe.Pointer, uint64)
 func BNNSGraphContextSetBatchSize(context_ unsafe.Pointer, function unsafe.Pointer, batchSize uint64) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnBNNSGraphContextSetBatchSize == nil {
-		ebipurego.RegisterLibFunc(&_fnBNNSGraphContextSetBatchSize, _lib, "BNNSGraphContextSetBatchSize")
+		ebipurego.RegisterLibFunc(&_fnBNNSGraphContextSetBatchSize, _lib, "BNNSGraphContextSetBatchSize_v2")
 	}
 	return int(_fnBNNSGraphContextSetBatchSize(context_, function, batchSize))
 }
@@ -1037,7 +1037,7 @@ var _fnBNNSGraphContextSetDynamicShapes func(unsafe.Pointer, unsafe.Pointer, int
 func BNNSGraphContextSetDynamicShapes(context_ unsafe.Pointer, function unsafe.Pointer, shapesCount int, shapes unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnBNNSGraphContextSetDynamicShapes == nil {
-		ebipurego.RegisterLibFunc(&_fnBNNSGraphContextSetDynamicShapes, _lib, "BNNSGraphContextSetDynamicShapes")
+		ebipurego.RegisterLibFunc(&_fnBNNSGraphContextSetDynamicShapes, _lib, "BNNSGraphContextSetDynamicShapes_v2")
 	}
 	return int(_fnBNNSGraphContextSetDynamicShapes(context_, function, shapesCount, shapes))
 }
@@ -1070,7 +1070,7 @@ var _fnBNNSGraphContextSetOutputAllocationCallback func(unsafe.Pointer, unsafe.P
 func BNNSGraphContextSetOutputAllocationCallback(context_ unsafe.Pointer, realloc unsafe.Pointer, free unsafe.Pointer, userMemoryContextSize int, userMemoryContext unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnBNNSGraphContextSetOutputAllocationCallback == nil {
-		ebipurego.RegisterLibFunc(&_fnBNNSGraphContextSetOutputAllocationCallback, _lib, "BNNSGraphContextSetOutputAllocationCallback")
+		ebipurego.RegisterLibFunc(&_fnBNNSGraphContextSetOutputAllocationCallback, _lib, "BNNSGraphContextSetOutputAllocationCallback_v2")
 	}
 	return int(_fnBNNSGraphContextSetOutputAllocationCallback(context_, realloc, free, userMemoryContextSize, userMemoryContext))
 }
@@ -1092,7 +1092,7 @@ var _fnBNNSGraphContextSetWorkspaceAllocationCallback func(unsafe.Pointer, unsaf
 func BNNSGraphContextSetWorkspaceAllocationCallback(context_ unsafe.Pointer, realloc unsafe.Pointer, free unsafe.Pointer, userMemoryContextSize int, userMemoryContext unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnBNNSGraphContextSetWorkspaceAllocationCallback == nil {
-		ebipurego.RegisterLibFunc(&_fnBNNSGraphContextSetWorkspaceAllocationCallback, _lib, "BNNSGraphContextSetWorkspaceAllocationCallback")
+		ebipurego.RegisterLibFunc(&_fnBNNSGraphContextSetWorkspaceAllocationCallback, _lib, "BNNSGraphContextSetWorkspaceAllocationCallback_v2")
 	}
 	return int(_fnBNNSGraphContextSetWorkspaceAllocationCallback(context_, realloc, free, userMemoryContextSize, userMemoryContext))
 }
@@ -1193,7 +1193,7 @@ var _fnBNNSGraphGetInputNames func(unsafe.Pointer, unsafe.Pointer, int, string) 
 func BNNSGraphGetInputNames(graph unsafe.Pointer, function unsafe.Pointer, inputNamesCount int, inputNames string) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnBNNSGraphGetInputNames == nil {
-		ebipurego.RegisterLibFunc(&_fnBNNSGraphGetInputNames, _lib, "BNNSGraphGetInputNames")
+		ebipurego.RegisterLibFunc(&_fnBNNSGraphGetInputNames, _lib, "BNNSGraphGetInputNames_v2")
 	}
 	return int(_fnBNNSGraphGetInputNames(graph, function, inputNamesCount, inputNames))
 }
@@ -1215,7 +1215,7 @@ var _fnBNNSGraphGetOutputNames func(unsafe.Pointer, unsafe.Pointer, int, string)
 func BNNSGraphGetOutputNames(graph unsafe.Pointer, function unsafe.Pointer, outputNamesCount int, outputNames string) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnBNNSGraphGetOutputNames == nil {
-		ebipurego.RegisterLibFunc(&_fnBNNSGraphGetOutputNames, _lib, "BNNSGraphGetOutputNames")
+		ebipurego.RegisterLibFunc(&_fnBNNSGraphGetOutputNames, _lib, "BNNSGraphGetOutputNames_v2")
 	}
 	return int(_fnBNNSGraphGetOutputNames(graph, function, outputNamesCount, outputNames))
 }
@@ -1253,10 +1253,10 @@ func BNNSLossFilterApplyBatch(filter unsafe.Pointer, batchSize int, in unsafe.Po
 	return int(_fnBNNSLossFilterApplyBatch(filter, batchSize, in, inStride, labels, labelsStride, weights, weightsSize, out, inDelta, inDeltaStride))
 }
 
-var _fnBNNSMatMul func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+var _fnBNNSMatMul func(bool, bool, float32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // BNNSMatMul calls the vecLib framework function BNNSMatMul.
-func BNNSMatMul(transA unsafe.Pointer, transB unsafe.Pointer, alpha unsafe.Pointer, inputA unsafe.Pointer, inputB unsafe.Pointer, output unsafe.Pointer, workspace unsafe.Pointer, filterParams unsafe.Pointer) int {
+func BNNSMatMul(transA bool, transB bool, alpha float32, inputA unsafe.Pointer, inputB unsafe.Pointer, output unsafe.Pointer, workspace unsafe.Pointer, filterParams unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnBNNSMatMul == nil {
 		ebipurego.RegisterLibFunc(&_fnBNNSMatMul, _lib, "BNNSMatMul")
@@ -1264,10 +1264,10 @@ func BNNSMatMul(transA unsafe.Pointer, transB unsafe.Pointer, alpha unsafe.Point
 	return int(_fnBNNSMatMul(transA, transB, alpha, inputA, inputB, output, workspace, filterParams))
 }
 
-var _fnBNNSMatMulWorkspaceSize func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnBNNSMatMulWorkspaceSize func(bool, bool, float32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // BNNSMatMulWorkspaceSize calls the vecLib framework function BNNSMatMulWorkspaceSize.
-func BNNSMatMulWorkspaceSize(transA unsafe.Pointer, transB unsafe.Pointer, alpha unsafe.Pointer, inputA unsafe.Pointer, inputB unsafe.Pointer, output unsafe.Pointer, filterParams unsafe.Pointer) int {
+func BNNSMatMulWorkspaceSize(transA bool, transB bool, alpha float32, inputA unsafe.Pointer, inputB unsafe.Pointer, output unsafe.Pointer, filterParams unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnBNNSMatMulWorkspaceSize == nil {
 		ebipurego.RegisterLibFunc(&_fnBNNSMatMulWorkspaceSize, _lib, "BNNSMatMulWorkspaceSize")
@@ -1308,10 +1308,10 @@ func BNNSNDArrayGetDataSize(array unsafe.Pointer) int {
 	return _fnBNNSNDArrayGetDataSize(array)
 }
 
-var _fnBNNSNearestNeighborsGetInfo func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+var _fnBNNSNearestNeighborsGetInfo func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // BNNSNearestNeighborsGetInfo calls the vecLib framework function BNNSNearestNeighborsGetInfo.
-func BNNSNearestNeighborsGetInfo(knn unsafe.Pointer, sampleNumber unsafe.Pointer, distances unsafe.Pointer) (result int, indices int32) {
+func BNNSNearestNeighborsGetInfo(knn unsafe.Pointer, sampleNumber int, distances unsafe.Pointer) (result int, indices int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnBNNSNearestNeighborsGetInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnBNNSNearestNeighborsGetInfo, _lib, "BNNSNearestNeighborsGetInfo")
@@ -1321,10 +1321,10 @@ func BNNSNearestNeighborsGetInfo(knn unsafe.Pointer, sampleNumber unsafe.Pointer
 	return _ret, _out0
 }
 
-var _fnBNNSNearestNeighborsLoad func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+var _fnBNNSNearestNeighborsLoad func(unsafe.Pointer, int, unsafe.Pointer) int32
 
 // BNNSNearestNeighborsLoad calls the vecLib framework function BNNSNearestNeighborsLoad.
-func BNNSNearestNeighborsLoad(knn unsafe.Pointer, nNewSamples unsafe.Pointer, dataPtr unsafe.Pointer) int {
+func BNNSNearestNeighborsLoad(knn unsafe.Pointer, nNewSamples int, dataPtr unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnBNNSNearestNeighborsLoad == nil {
 		ebipurego.RegisterLibFunc(&_fnBNNSNearestNeighborsLoad, _lib, "BNNSNearestNeighborsLoad")
@@ -3599,10 +3599,10 @@ func BuiltinVerboseTrap(arg string, arg2 string) {
 	_fnBuiltinVerboseTrap(arg, arg2)
 }
 
-var _fnAppleblasDgeadd func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnAppleblasDgeadd func(CblasOrder, CblasTranspose, CblasTranspose, int, int, float64, unsafe.Pointer, int, float64, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // AppleblasDgeadd calls the vecLib framework function appleblas_dgeadd.
-func AppleblasDgeadd(order unsafe.Pointer, transA unsafe.Pointer, transB unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, beta unsafe.Pointer, b unsafe.Pointer, ldb unsafe.Pointer, ldc unsafe.Pointer) (c float64) {
+func AppleblasDgeadd(order CblasOrder, transA CblasTranspose, transB CblasTranspose, m int, n int, alpha float64, a unsafe.Pointer, lda int, beta float64, b unsafe.Pointer, ldb int, ldc int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAppleblasDgeadd == nil {
 		ebipurego.RegisterLibFunc(&_fnAppleblasDgeadd, _lib, "appleblas_dgeadd")
@@ -3612,10 +3612,10 @@ func AppleblasDgeadd(order unsafe.Pointer, transA unsafe.Pointer, transB unsafe.
 	return _out0
 }
 
-var _fnAppleblasSgeadd func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnAppleblasSgeadd func(CblasOrder, CblasTranspose, CblasTranspose, int, int, float32, unsafe.Pointer, int, float32, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // AppleblasSgeadd calls the vecLib framework function appleblas_sgeadd.
-func AppleblasSgeadd(order unsafe.Pointer, transA unsafe.Pointer, transB unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, beta unsafe.Pointer, b unsafe.Pointer, ldb unsafe.Pointer, ldc unsafe.Pointer) (c float32) {
+func AppleblasSgeadd(order CblasOrder, transA CblasTranspose, transB CblasTranspose, m int, n int, alpha float32, a unsafe.Pointer, lda int, beta float32, b unsafe.Pointer, ldb int, ldc int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAppleblasSgeadd == nil {
 		ebipurego.RegisterLibFunc(&_fnAppleblasSgeadd, _lib, "appleblas_sgeadd")
@@ -3625,10 +3625,10 @@ func AppleblasSgeadd(order unsafe.Pointer, transA unsafe.Pointer, transB unsafe.
 	return _out0
 }
 
-var _fnCatlasCaxpby func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCatlasCaxpby func(int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 
 // CatlasCaxpby calls the vecLib framework function catlas_caxpby.
-func CatlasCaxpby(n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer) {
+func CatlasCaxpby(n int, alpha unsafe.Pointer, x unsafe.Pointer, incX int, beta unsafe.Pointer, y unsafe.Pointer, incY int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCatlasCaxpby == nil {
 		ebipurego.RegisterLibFunc(&_fnCatlasCaxpby, _lib, "catlas_caxpby")
@@ -3636,10 +3636,10 @@ func CatlasCaxpby(n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX
 	_fnCatlasCaxpby(n, alpha, x, incX, beta, y, incY)
 }
 
-var _fnCatlasCset func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCatlasCset func(int, unsafe.Pointer, unsafe.Pointer, int)
 
 // CatlasCset calls the vecLib framework function catlas_cset.
-func CatlasCset(n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) {
+func CatlasCset(n int, alpha unsafe.Pointer, x unsafe.Pointer, incX int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCatlasCset == nil {
 		ebipurego.RegisterLibFunc(&_fnCatlasCset, _lib, "catlas_cset")
@@ -3647,10 +3647,10 @@ func CatlasCset(n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX u
 	_fnCatlasCset(n, alpha, x, incX)
 }
 
-var _fnCatlasDaxpby func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCatlasDaxpby func(int, float64, unsafe.Pointer, int, float64, unsafe.Pointer, int)
 
 // CatlasDaxpby calls the vecLib framework function catlas_daxpby.
-func CatlasDaxpby(n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, incY unsafe.Pointer) (y float64) {
+func CatlasDaxpby(n int, alpha float64, x unsafe.Pointer, incX int, beta float64, incY int) (y float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCatlasDaxpby == nil {
 		ebipurego.RegisterLibFunc(&_fnCatlasDaxpby, _lib, "catlas_daxpby")
@@ -3660,10 +3660,10 @@ func CatlasDaxpby(n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX
 	return _out0
 }
 
-var _fnCatlasDset func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCatlasDset func(int, float64, unsafe.Pointer, int)
 
 // CatlasDset calls the vecLib framework function catlas_dset.
-func CatlasDset(n unsafe.Pointer, alpha unsafe.Pointer, incX unsafe.Pointer) (x float64) {
+func CatlasDset(n int, alpha float64, incX int) (x float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCatlasDset == nil {
 		ebipurego.RegisterLibFunc(&_fnCatlasDset, _lib, "catlas_dset")
@@ -3673,10 +3673,10 @@ func CatlasDset(n unsafe.Pointer, alpha unsafe.Pointer, incX unsafe.Pointer) (x 
 	return _out0
 }
 
-var _fnCatlasSaxpby func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCatlasSaxpby func(int, float32, unsafe.Pointer, int, float32, unsafe.Pointer, int)
 
 // CatlasSaxpby calls the vecLib framework function catlas_saxpby.
-func CatlasSaxpby(n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, incY unsafe.Pointer) (y float32) {
+func CatlasSaxpby(n int, alpha float32, x unsafe.Pointer, incX int, beta float32, incY int) (y float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCatlasSaxpby == nil {
 		ebipurego.RegisterLibFunc(&_fnCatlasSaxpby, _lib, "catlas_saxpby")
@@ -3686,10 +3686,10 @@ func CatlasSaxpby(n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX
 	return _out0
 }
 
-var _fnCatlasSset func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCatlasSset func(int, float32, unsafe.Pointer, int)
 
 // CatlasSset calls the vecLib framework function catlas_sset.
-func CatlasSset(n unsafe.Pointer, alpha unsafe.Pointer, incX unsafe.Pointer) (x float32) {
+func CatlasSset(n int, alpha float32, incX int) (x float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCatlasSset == nil {
 		ebipurego.RegisterLibFunc(&_fnCatlasSset, _lib, "catlas_sset")
@@ -3699,10 +3699,10 @@ func CatlasSset(n unsafe.Pointer, alpha unsafe.Pointer, incX unsafe.Pointer) (x 
 	return _out0
 }
 
-var _fnCatlasZaxpby func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCatlasZaxpby func(int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 
 // CatlasZaxpby calls the vecLib framework function catlas_zaxpby.
-func CatlasZaxpby(n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer) {
+func CatlasZaxpby(n int, alpha unsafe.Pointer, x unsafe.Pointer, incX int, beta unsafe.Pointer, y unsafe.Pointer, incY int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCatlasZaxpby == nil {
 		ebipurego.RegisterLibFunc(&_fnCatlasZaxpby, _lib, "catlas_zaxpby")
@@ -3710,10 +3710,10 @@ func CatlasZaxpby(n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX
 	_fnCatlasZaxpby(n, alpha, x, incX, beta, y, incY)
 }
 
-var _fnCatlasZset func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCatlasZset func(int, unsafe.Pointer, unsafe.Pointer, int)
 
 // CatlasZset calls the vecLib framework function catlas_zset.
-func CatlasZset(n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) {
+func CatlasZset(n int, alpha unsafe.Pointer, x unsafe.Pointer, incX int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCatlasZset == nil {
 		ebipurego.RegisterLibFunc(&_fnCatlasZset, _lib, "catlas_zset")
@@ -3762,10 +3762,10 @@ func Cbdsqr(uplo string) (result int, n int, ncvt int, nru int, ncc int, d float
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7, _out8, _out9, _out10, _out11, _out12, _out13
 }
 
-var _fnCblasCaxpy func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasCaxpy func(int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // CblasCaxpy calls the vecLib framework function cblas_caxpy.
-func CblasCaxpy(n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer) {
+func CblasCaxpy(n int, alpha unsafe.Pointer, x unsafe.Pointer, incX int, y unsafe.Pointer, incY int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasCaxpy == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasCaxpy, _lib, "cblas_caxpy")
@@ -3773,10 +3773,10 @@ func CblasCaxpy(n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX u
 	_fnCblasCaxpy(n, alpha, x, incX, y, incY)
 }
 
-var _fnCblasCcopy func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasCcopy func(int, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // CblasCcopy calls the vecLib framework function cblas_ccopy.
-func CblasCcopy(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer) {
+func CblasCcopy(n int, x unsafe.Pointer, incX int, y unsafe.Pointer, incY int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasCcopy == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasCcopy, _lib, "cblas_ccopy")
@@ -3784,10 +3784,10 @@ func CblasCcopy(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsaf
 	_fnCblasCcopy(n, x, incX, y, incY)
 }
 
-var _fnCblasCdotcSub func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasCdotcSub func(int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer)
 
 // CblasCdotcSub calls the vecLib framework function cblas_cdotc_sub.
-func CblasCdotcSub(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer, dotc unsafe.Pointer) {
+func CblasCdotcSub(n int, x unsafe.Pointer, incX int, y unsafe.Pointer, incY int, dotc unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasCdotcSub == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasCdotcSub, _lib, "cblas_cdotc_sub")
@@ -3795,10 +3795,10 @@ func CblasCdotcSub(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y un
 	_fnCblasCdotcSub(n, x, incX, y, incY, dotc)
 }
 
-var _fnCblasCdotuSub func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasCdotuSub func(int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer)
 
 // CblasCdotuSub calls the vecLib framework function cblas_cdotu_sub.
-func CblasCdotuSub(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer, dotu unsafe.Pointer) {
+func CblasCdotuSub(n int, x unsafe.Pointer, incX int, y unsafe.Pointer, incY int, dotu unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasCdotuSub == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasCdotuSub, _lib, "cblas_cdotu_sub")
@@ -3806,10 +3806,10 @@ func CblasCdotuSub(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y un
 	_fnCblasCdotuSub(n, x, incX, y, incY, dotu)
 }
 
-var _fnCblasCgbmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasCgbmv func(CblasOrder, CblasTranspose, int, int, int, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 
 // CblasCgbmv calls the vecLib framework function cblas_cgbmv.
-func CblasCgbmv(order unsafe.Pointer, transA unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, kl unsafe.Pointer, ku unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer) {
+func CblasCgbmv(order CblasOrder, transA CblasTranspose, m int, n int, kl int, ku int, alpha unsafe.Pointer, a unsafe.Pointer, lda int, x unsafe.Pointer, incX int, beta unsafe.Pointer, y unsafe.Pointer, incY int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasCgbmv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasCgbmv, _lib, "cblas_cgbmv")
@@ -3817,10 +3817,10 @@ func CblasCgbmv(order unsafe.Pointer, transA unsafe.Pointer, m unsafe.Pointer, n
 	_fnCblasCgbmv(order, transA, m, n, kl, ku, alpha, a, lda, x, incX, beta, y, incY)
 }
 
-var _fnCblasCgemm func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasCgemm func(CblasOrder, CblasTranspose, CblasTranspose, int, int, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 
 // CblasCgemm calls the vecLib framework function cblas_cgemm.
-func CblasCgemm(order unsafe.Pointer, transA unsafe.Pointer, transB unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, b unsafe.Pointer, ldb unsafe.Pointer, beta unsafe.Pointer, c unsafe.Pointer, ldc unsafe.Pointer) {
+func CblasCgemm(order CblasOrder, transA CblasTranspose, transB CblasTranspose, m int, n int, k int, alpha unsafe.Pointer, a unsafe.Pointer, lda int, b unsafe.Pointer, ldb int, beta unsafe.Pointer, c unsafe.Pointer, ldc int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasCgemm == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasCgemm, _lib, "cblas_cgemm")
@@ -3828,10 +3828,10 @@ func CblasCgemm(order unsafe.Pointer, transA unsafe.Pointer, transB unsafe.Point
 	_fnCblasCgemm(order, transA, transB, m, n, k, alpha, a, lda, b, ldb, beta, c, ldc)
 }
 
-var _fnCblasCgemv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasCgemv func(CblasOrder, CblasTranspose, int, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 
 // CblasCgemv calls the vecLib framework function cblas_cgemv.
-func CblasCgemv(order unsafe.Pointer, transA unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer) {
+func CblasCgemv(order CblasOrder, transA CblasTranspose, m int, n int, alpha unsafe.Pointer, a unsafe.Pointer, lda int, x unsafe.Pointer, incX int, beta unsafe.Pointer, y unsafe.Pointer, incY int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasCgemv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasCgemv, _lib, "cblas_cgemv")
@@ -3839,10 +3839,10 @@ func CblasCgemv(order unsafe.Pointer, transA unsafe.Pointer, m unsafe.Pointer, n
 	_fnCblasCgemv(order, transA, m, n, alpha, a, lda, x, incX, beta, y, incY)
 }
 
-var _fnCblasCgerc func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasCgerc func(CblasOrder, int, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // CblasCgerc calls the vecLib framework function cblas_cgerc.
-func CblasCgerc(order unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer) {
+func CblasCgerc(order CblasOrder, m int, n int, alpha unsafe.Pointer, x unsafe.Pointer, incX int, y unsafe.Pointer, incY int, a unsafe.Pointer, lda int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasCgerc == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasCgerc, _lib, "cblas_cgerc")
@@ -3850,10 +3850,10 @@ func CblasCgerc(order unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha 
 	_fnCblasCgerc(order, m, n, alpha, x, incX, y, incY, a, lda)
 }
 
-var _fnCblasCgeru func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasCgeru func(CblasOrder, int, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // CblasCgeru calls the vecLib framework function cblas_cgeru.
-func CblasCgeru(order unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer) {
+func CblasCgeru(order CblasOrder, m int, n int, alpha unsafe.Pointer, x unsafe.Pointer, incX int, y unsafe.Pointer, incY int, a unsafe.Pointer, lda int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasCgeru == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasCgeru, _lib, "cblas_cgeru")
@@ -3861,10 +3861,10 @@ func CblasCgeru(order unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha 
 	_fnCblasCgeru(order, m, n, alpha, x, incX, y, incY, a, lda)
 }
 
-var _fnCblasChbmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasChbmv func(CblasOrder, CblasUplo, int, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 
 // CblasChbmv calls the vecLib framework function cblas_chbmv.
-func CblasChbmv(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer) {
+func CblasChbmv(order CblasOrder, uplo CblasUplo, n int, k int, alpha unsafe.Pointer, a unsafe.Pointer, lda int, x unsafe.Pointer, incX int, beta unsafe.Pointer, y unsafe.Pointer, incY int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasChbmv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasChbmv, _lib, "cblas_chbmv")
@@ -3872,10 +3872,10 @@ func CblasChbmv(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, k u
 	_fnCblasChbmv(order, uplo, n, k, alpha, a, lda, x, incX, beta, y, incY)
 }
 
-var _fnCblasChemm func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasChemm func(CblasOrder, CblasSide, CblasUplo, int, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 
 // CblasChemm calls the vecLib framework function cblas_chemm.
-func CblasChemm(order unsafe.Pointer, side unsafe.Pointer, uplo unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, b unsafe.Pointer, ldb unsafe.Pointer, beta unsafe.Pointer, c unsafe.Pointer, ldc unsafe.Pointer) {
+func CblasChemm(order CblasOrder, side CblasSide, uplo CblasUplo, m int, n int, alpha unsafe.Pointer, a unsafe.Pointer, lda int, b unsafe.Pointer, ldb int, beta unsafe.Pointer, c unsafe.Pointer, ldc int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasChemm == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasChemm, _lib, "cblas_chemm")
@@ -3883,10 +3883,10 @@ func CblasChemm(order unsafe.Pointer, side unsafe.Pointer, uplo unsafe.Pointer, 
 	_fnCblasChemm(order, side, uplo, m, n, alpha, a, lda, b, ldb, beta, c, ldc)
 }
 
-var _fnCblasChemv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasChemv func(CblasOrder, CblasUplo, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 
 // CblasChemv calls the vecLib framework function cblas_chemv.
-func CblasChemv(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer) {
+func CblasChemv(order CblasOrder, uplo CblasUplo, n int, alpha unsafe.Pointer, a unsafe.Pointer, lda int, x unsafe.Pointer, incX int, beta unsafe.Pointer, y unsafe.Pointer, incY int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasChemv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasChemv, _lib, "cblas_chemv")
@@ -3894,10 +3894,10 @@ func CblasChemv(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alp
 	_fnCblasChemv(order, uplo, n, alpha, a, lda, x, incX, beta, y, incY)
 }
 
-var _fnCblasCher func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasCher func(CblasOrder, CblasUplo, int, float32, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // CblasCher calls the vecLib framework function cblas_cher.
-func CblasCher(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer) {
+func CblasCher(order CblasOrder, uplo CblasUplo, n int, alpha float32, x unsafe.Pointer, incX int, a unsafe.Pointer, lda int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasCher == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasCher, _lib, "cblas_cher")
@@ -3905,10 +3905,10 @@ func CblasCher(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alph
 	_fnCblasCher(order, uplo, n, alpha, x, incX, a, lda)
 }
 
-var _fnCblasCher2 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasCher2 func(CblasOrder, CblasUplo, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // CblasCher2 calls the vecLib framework function cblas_cher2.
-func CblasCher2(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer) {
+func CblasCher2(order CblasOrder, uplo CblasUplo, n int, alpha unsafe.Pointer, x unsafe.Pointer, incX int, y unsafe.Pointer, incY int, a unsafe.Pointer, lda int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasCher2 == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasCher2, _lib, "cblas_cher2")
@@ -3916,10 +3916,10 @@ func CblasCher2(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alp
 	_fnCblasCher2(order, uplo, n, alpha, x, incX, y, incY, a, lda)
 }
 
-var _fnCblasCher2k func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasCher2k func(CblasOrder, CblasUplo, CblasTranspose, int, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, float32, unsafe.Pointer, int)
 
 // CblasCher2k calls the vecLib framework function cblas_cher2k.
-func CblasCher2k(order unsafe.Pointer, uplo unsafe.Pointer, trans unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, b unsafe.Pointer, ldb unsafe.Pointer, beta unsafe.Pointer, c unsafe.Pointer, ldc unsafe.Pointer) {
+func CblasCher2k(order CblasOrder, uplo CblasUplo, trans CblasTranspose, n int, k int, alpha unsafe.Pointer, a unsafe.Pointer, lda int, b unsafe.Pointer, ldb int, beta float32, c unsafe.Pointer, ldc int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasCher2k == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasCher2k, _lib, "cblas_cher2k")
@@ -3927,10 +3927,10 @@ func CblasCher2k(order unsafe.Pointer, uplo unsafe.Pointer, trans unsafe.Pointer
 	_fnCblasCher2k(order, uplo, trans, n, k, alpha, a, lda, b, ldb, beta, c, ldc)
 }
 
-var _fnCblasCherk func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasCherk func(CblasOrder, CblasUplo, CblasTranspose, int, int, float32, unsafe.Pointer, int, float32, unsafe.Pointer, int)
 
 // CblasCherk calls the vecLib framework function cblas_cherk.
-func CblasCherk(order unsafe.Pointer, uplo unsafe.Pointer, trans unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, beta unsafe.Pointer, c unsafe.Pointer, ldc unsafe.Pointer) {
+func CblasCherk(order CblasOrder, uplo CblasUplo, trans CblasTranspose, n int, k int, alpha float32, a unsafe.Pointer, lda int, beta float32, c unsafe.Pointer, ldc int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasCherk == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasCherk, _lib, "cblas_cherk")
@@ -3938,10 +3938,10 @@ func CblasCherk(order unsafe.Pointer, uplo unsafe.Pointer, trans unsafe.Pointer,
 	_fnCblasCherk(order, uplo, trans, n, k, alpha, a, lda, beta, c, ldc)
 }
 
-var _fnCblasChpmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasChpmv func(CblasOrder, CblasUplo, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 
 // CblasChpmv calls the vecLib framework function cblas_chpmv.
-func CblasChpmv(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, ap unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer) {
+func CblasChpmv(order CblasOrder, uplo CblasUplo, n int, alpha unsafe.Pointer, ap unsafe.Pointer, x unsafe.Pointer, incX int, beta unsafe.Pointer, y unsafe.Pointer, incY int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasChpmv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasChpmv, _lib, "cblas_chpmv")
@@ -3949,10 +3949,10 @@ func CblasChpmv(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alp
 	_fnCblasChpmv(order, uplo, n, alpha, ap, x, incX, beta, y, incY)
 }
 
-var _fnCblasChpr func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasChpr func(CblasOrder, CblasUplo, int, float32, unsafe.Pointer, int, unsafe.Pointer)
 
 // CblasChpr calls the vecLib framework function cblas_chpr.
-func CblasChpr(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, a unsafe.Pointer) {
+func CblasChpr(order CblasOrder, uplo CblasUplo, n int, alpha float32, x unsafe.Pointer, incX int, a unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasChpr == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasChpr, _lib, "cblas_chpr")
@@ -3960,10 +3960,10 @@ func CblasChpr(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alph
 	_fnCblasChpr(order, uplo, n, alpha, x, incX, a)
 }
 
-var _fnCblasChpr2 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasChpr2 func(CblasOrder, CblasUplo, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer)
 
 // CblasChpr2 calls the vecLib framework function cblas_chpr2.
-func CblasChpr2(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer, ap unsafe.Pointer) {
+func CblasChpr2(order CblasOrder, uplo CblasUplo, n int, alpha unsafe.Pointer, x unsafe.Pointer, incX int, y unsafe.Pointer, incY int, ap unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasChpr2 == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasChpr2, _lib, "cblas_chpr2")
@@ -3982,10 +3982,10 @@ func CblasCrotg(a unsafe.Pointer, b unsafe.Pointer, c unsafe.Pointer, s unsafe.P
 	_fnCblasCrotg(a, b, c, s)
 }
 
-var _fnCblasCscal func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasCscal func(int, unsafe.Pointer, unsafe.Pointer, int)
 
 // CblasCscal calls the vecLib framework function cblas_cscal.
-func CblasCscal(n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) {
+func CblasCscal(n int, alpha unsafe.Pointer, x unsafe.Pointer, incX int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasCscal == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasCscal, _lib, "cblas_cscal")
@@ -3993,10 +3993,10 @@ func CblasCscal(n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX u
 	_fnCblasCscal(n, alpha, x, incX)
 }
 
-var _fnCblasCsrot func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasCsrot func(int, unsafe.Pointer, int, unsafe.Pointer, int, float32, float32)
 
 // CblasCsrot calls the vecLib framework function cblas_csrot.
-func CblasCsrot(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer, c unsafe.Pointer, s unsafe.Pointer) {
+func CblasCsrot(n int, x unsafe.Pointer, incX int, y unsafe.Pointer, incY int, c float32, s float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasCsrot == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasCsrot, _lib, "cblas_csrot")
@@ -4004,10 +4004,10 @@ func CblasCsrot(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsaf
 	_fnCblasCsrot(n, x, incX, y, incY, c, s)
 }
 
-var _fnCblasCsscal func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasCsscal func(int, float32, unsafe.Pointer, int)
 
 // CblasCsscal calls the vecLib framework function cblas_csscal.
-func CblasCsscal(n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) {
+func CblasCsscal(n int, alpha float32, x unsafe.Pointer, incX int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasCsscal == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasCsscal, _lib, "cblas_csscal")
@@ -4015,10 +4015,10 @@ func CblasCsscal(n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX 
 	_fnCblasCsscal(n, alpha, x, incX)
 }
 
-var _fnCblasCswap func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasCswap func(int, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // CblasCswap calls the vecLib framework function cblas_cswap.
-func CblasCswap(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer) {
+func CblasCswap(n int, x unsafe.Pointer, incX int, y unsafe.Pointer, incY int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasCswap == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasCswap, _lib, "cblas_cswap")
@@ -4026,10 +4026,10 @@ func CblasCswap(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsaf
 	_fnCblasCswap(n, x, incX, y, incY)
 }
 
-var _fnCblasCsymm func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasCsymm func(CblasOrder, CblasSide, CblasUplo, int, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 
 // CblasCsymm calls the vecLib framework function cblas_csymm.
-func CblasCsymm(order unsafe.Pointer, side unsafe.Pointer, uplo unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, b unsafe.Pointer, ldb unsafe.Pointer, beta unsafe.Pointer, c unsafe.Pointer, ldc unsafe.Pointer) {
+func CblasCsymm(order CblasOrder, side CblasSide, uplo CblasUplo, m int, n int, alpha unsafe.Pointer, a unsafe.Pointer, lda int, b unsafe.Pointer, ldb int, beta unsafe.Pointer, c unsafe.Pointer, ldc int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasCsymm == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasCsymm, _lib, "cblas_csymm")
@@ -4037,10 +4037,10 @@ func CblasCsymm(order unsafe.Pointer, side unsafe.Pointer, uplo unsafe.Pointer, 
 	_fnCblasCsymm(order, side, uplo, m, n, alpha, a, lda, b, ldb, beta, c, ldc)
 }
 
-var _fnCblasCsyr2k func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasCsyr2k func(CblasOrder, CblasUplo, CblasTranspose, int, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 
 // CblasCsyr2k calls the vecLib framework function cblas_csyr2k.
-func CblasCsyr2k(order unsafe.Pointer, uplo unsafe.Pointer, trans unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, b unsafe.Pointer, ldb unsafe.Pointer, beta unsafe.Pointer, c unsafe.Pointer, ldc unsafe.Pointer) {
+func CblasCsyr2k(order CblasOrder, uplo CblasUplo, trans CblasTranspose, n int, k int, alpha unsafe.Pointer, a unsafe.Pointer, lda int, b unsafe.Pointer, ldb int, beta unsafe.Pointer, c unsafe.Pointer, ldc int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasCsyr2k == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasCsyr2k, _lib, "cblas_csyr2k")
@@ -4048,10 +4048,10 @@ func CblasCsyr2k(order unsafe.Pointer, uplo unsafe.Pointer, trans unsafe.Pointer
 	_fnCblasCsyr2k(order, uplo, trans, n, k, alpha, a, lda, b, ldb, beta, c, ldc)
 }
 
-var _fnCblasCsyrk func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasCsyrk func(CblasOrder, CblasUplo, CblasTranspose, int, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 
 // CblasCsyrk calls the vecLib framework function cblas_csyrk.
-func CblasCsyrk(order unsafe.Pointer, uplo unsafe.Pointer, trans unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, beta unsafe.Pointer, c unsafe.Pointer, ldc unsafe.Pointer) {
+func CblasCsyrk(order CblasOrder, uplo CblasUplo, trans CblasTranspose, n int, k int, alpha unsafe.Pointer, a unsafe.Pointer, lda int, beta unsafe.Pointer, c unsafe.Pointer, ldc int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasCsyrk == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasCsyrk, _lib, "cblas_csyrk")
@@ -4059,10 +4059,10 @@ func CblasCsyrk(order unsafe.Pointer, uplo unsafe.Pointer, trans unsafe.Pointer,
 	_fnCblasCsyrk(order, uplo, trans, n, k, alpha, a, lda, beta, c, ldc)
 }
 
-var _fnCblasCtbmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasCtbmv func(CblasOrder, CblasUplo, CblasTranspose, CblasDiag, int, int, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // CblasCtbmv calls the vecLib framework function cblas_ctbmv.
-func CblasCtbmv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) {
+func CblasCtbmv(order CblasOrder, uplo CblasUplo, transA CblasTranspose, diag CblasDiag, n int, k int, a unsafe.Pointer, lda int, x unsafe.Pointer, incX int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasCtbmv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasCtbmv, _lib, "cblas_ctbmv")
@@ -4070,10 +4070,10 @@ func CblasCtbmv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer
 	_fnCblasCtbmv(order, uplo, transA, diag, n, k, a, lda, x, incX)
 }
 
-var _fnCblasCtbsv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasCtbsv func(CblasOrder, CblasUplo, CblasTranspose, CblasDiag, int, int, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // CblasCtbsv calls the vecLib framework function cblas_ctbsv.
-func CblasCtbsv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) {
+func CblasCtbsv(order CblasOrder, uplo CblasUplo, transA CblasTranspose, diag CblasDiag, n int, k int, a unsafe.Pointer, lda int, x unsafe.Pointer, incX int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasCtbsv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasCtbsv, _lib, "cblas_ctbsv")
@@ -4081,10 +4081,10 @@ func CblasCtbsv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer
 	_fnCblasCtbsv(order, uplo, transA, diag, n, k, a, lda, x, incX)
 }
 
-var _fnCblasCtpmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasCtpmv func(CblasOrder, CblasUplo, CblasTranspose, CblasDiag, int, unsafe.Pointer, unsafe.Pointer, int)
 
 // CblasCtpmv calls the vecLib framework function cblas_ctpmv.
-func CblasCtpmv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, ap unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) {
+func CblasCtpmv(order CblasOrder, uplo CblasUplo, transA CblasTranspose, diag CblasDiag, n int, ap unsafe.Pointer, x unsafe.Pointer, incX int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasCtpmv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasCtpmv, _lib, "cblas_ctpmv")
@@ -4092,10 +4092,10 @@ func CblasCtpmv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer
 	_fnCblasCtpmv(order, uplo, transA, diag, n, ap, x, incX)
 }
 
-var _fnCblasCtpsv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasCtpsv func(CblasOrder, CblasUplo, CblasTranspose, CblasDiag, int, unsafe.Pointer, unsafe.Pointer, int)
 
 // CblasCtpsv calls the vecLib framework function cblas_ctpsv.
-func CblasCtpsv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, ap unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) {
+func CblasCtpsv(order CblasOrder, uplo CblasUplo, transA CblasTranspose, diag CblasDiag, n int, ap unsafe.Pointer, x unsafe.Pointer, incX int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasCtpsv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasCtpsv, _lib, "cblas_ctpsv")
@@ -4103,10 +4103,10 @@ func CblasCtpsv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer
 	_fnCblasCtpsv(order, uplo, transA, diag, n, ap, x, incX)
 }
 
-var _fnCblasCtrmm func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasCtrmm func(CblasOrder, CblasSide, CblasUplo, CblasTranspose, CblasDiag, int, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // CblasCtrmm calls the vecLib framework function cblas_ctrmm.
-func CblasCtrmm(order unsafe.Pointer, side unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, b unsafe.Pointer, ldb unsafe.Pointer) {
+func CblasCtrmm(order CblasOrder, side CblasSide, uplo CblasUplo, transA CblasTranspose, diag CblasDiag, m int, n int, alpha unsafe.Pointer, a unsafe.Pointer, lda int, b unsafe.Pointer, ldb int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasCtrmm == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasCtrmm, _lib, "cblas_ctrmm")
@@ -4114,10 +4114,10 @@ func CblasCtrmm(order unsafe.Pointer, side unsafe.Pointer, uplo unsafe.Pointer, 
 	_fnCblasCtrmm(order, side, uplo, transA, diag, m, n, alpha, a, lda, b, ldb)
 }
 
-var _fnCblasCtrmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasCtrmv func(CblasOrder, CblasUplo, CblasTranspose, CblasDiag, int, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // CblasCtrmv calls the vecLib framework function cblas_ctrmv.
-func CblasCtrmv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) {
+func CblasCtrmv(order CblasOrder, uplo CblasUplo, transA CblasTranspose, diag CblasDiag, n int, a unsafe.Pointer, lda int, x unsafe.Pointer, incX int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasCtrmv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasCtrmv, _lib, "cblas_ctrmv")
@@ -4125,10 +4125,10 @@ func CblasCtrmv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer
 	_fnCblasCtrmv(order, uplo, transA, diag, n, a, lda, x, incX)
 }
 
-var _fnCblasCtrsm func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasCtrsm func(CblasOrder, CblasSide, CblasUplo, CblasTranspose, CblasDiag, int, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // CblasCtrsm calls the vecLib framework function cblas_ctrsm.
-func CblasCtrsm(order unsafe.Pointer, side unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, b unsafe.Pointer, ldb unsafe.Pointer) {
+func CblasCtrsm(order CblasOrder, side CblasSide, uplo CblasUplo, transA CblasTranspose, diag CblasDiag, m int, n int, alpha unsafe.Pointer, a unsafe.Pointer, lda int, b unsafe.Pointer, ldb int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasCtrsm == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasCtrsm, _lib, "cblas_ctrsm")
@@ -4136,10 +4136,10 @@ func CblasCtrsm(order unsafe.Pointer, side unsafe.Pointer, uplo unsafe.Pointer, 
 	_fnCblasCtrsm(order, side, uplo, transA, diag, m, n, alpha, a, lda, b, ldb)
 }
 
-var _fnCblasCtrsv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasCtrsv func(CblasOrder, CblasUplo, CblasTranspose, CblasDiag, int, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // CblasCtrsv calls the vecLib framework function cblas_ctrsv.
-func CblasCtrsv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) {
+func CblasCtrsv(order CblasOrder, uplo CblasUplo, transA CblasTranspose, diag CblasDiag, n int, a unsafe.Pointer, lda int, x unsafe.Pointer, incX int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasCtrsv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasCtrsv, _lib, "cblas_ctrsv")
@@ -4147,10 +4147,10 @@ func CblasCtrsv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer
 	_fnCblasCtrsv(order, uplo, transA, diag, n, a, lda, x, incX)
 }
 
-var _fnCblasDasum func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) float64
+var _fnCblasDasum func(int, unsafe.Pointer, int) float64
 
 // CblasDasum calls the vecLib framework function cblas_dasum.
-func CblasDasum(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) float64 {
+func CblasDasum(n int, x unsafe.Pointer, incX int) float64 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDasum == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDasum, _lib, "cblas_dasum")
@@ -4158,10 +4158,10 @@ func CblasDasum(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) float64
 	return _fnCblasDasum(n, x, incX)
 }
 
-var _fnCblasDaxpy func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasDaxpy func(int, float64, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // CblasDaxpy calls the vecLib framework function cblas_daxpy.
-func CblasDaxpy(n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, incY unsafe.Pointer) (y float64) {
+func CblasDaxpy(n int, alpha float64, x unsafe.Pointer, incX int, incY int) (y float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDaxpy == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDaxpy, _lib, "cblas_daxpy")
@@ -4171,10 +4171,10 @@ func CblasDaxpy(n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX u
 	return _out0
 }
 
-var _fnCblasDcopy func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasDcopy func(int, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // CblasDcopy calls the vecLib framework function cblas_dcopy.
-func CblasDcopy(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, incY unsafe.Pointer) (y float64) {
+func CblasDcopy(n int, x unsafe.Pointer, incX int, incY int) (y float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDcopy == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDcopy, _lib, "cblas_dcopy")
@@ -4184,10 +4184,10 @@ func CblasDcopy(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, incY un
 	return _out0
 }
 
-var _fnCblasDdot func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) float64
+var _fnCblasDdot func(int, unsafe.Pointer, int, unsafe.Pointer, int) float64
 
 // CblasDdot calls the vecLib framework function cblas_ddot.
-func CblasDdot(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer) float64 {
+func CblasDdot(n int, x unsafe.Pointer, incX int, y unsafe.Pointer, incY int) float64 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDdot == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDdot, _lib, "cblas_ddot")
@@ -4195,10 +4195,10 @@ func CblasDdot(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe
 	return _fnCblasDdot(n, x, incX, y, incY)
 }
 
-var _fnCblasDgbmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasDgbmv func(CblasOrder, CblasTranspose, int, int, int, int, float64, unsafe.Pointer, int, unsafe.Pointer, int, float64, unsafe.Pointer, int)
 
 // CblasDgbmv calls the vecLib framework function cblas_dgbmv.
-func CblasDgbmv(order unsafe.Pointer, transA unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, kl unsafe.Pointer, ku unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, incY unsafe.Pointer) (y float64) {
+func CblasDgbmv(order CblasOrder, transA CblasTranspose, m int, n int, kl int, ku int, alpha float64, a unsafe.Pointer, lda int, x unsafe.Pointer, incX int, beta float64, incY int) (y float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDgbmv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDgbmv, _lib, "cblas_dgbmv")
@@ -4208,10 +4208,10 @@ func CblasDgbmv(order unsafe.Pointer, transA unsafe.Pointer, m unsafe.Pointer, n
 	return _out0
 }
 
-var _fnCblasDgemm func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasDgemm func(CblasOrder, CblasTranspose, CblasTranspose, int, int, int, float64, unsafe.Pointer, int, unsafe.Pointer, int, float64, unsafe.Pointer, int)
 
 // CblasDgemm calls the vecLib framework function cblas_dgemm.
-func CblasDgemm(order unsafe.Pointer, transA unsafe.Pointer, transB unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, b unsafe.Pointer, ldb unsafe.Pointer, beta unsafe.Pointer, ldc unsafe.Pointer) (c float64) {
+func CblasDgemm(order CblasOrder, transA CblasTranspose, transB CblasTranspose, m int, n int, k int, alpha float64, a unsafe.Pointer, lda int, b unsafe.Pointer, ldb int, beta float64, ldc int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDgemm == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDgemm, _lib, "cblas_dgemm")
@@ -4221,10 +4221,10 @@ func CblasDgemm(order unsafe.Pointer, transA unsafe.Pointer, transB unsafe.Point
 	return _out0
 }
 
-var _fnCblasDgemv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasDgemv func(CblasOrder, CblasTranspose, int, int, float64, unsafe.Pointer, int, unsafe.Pointer, int, float64, unsafe.Pointer, int)
 
 // CblasDgemv calls the vecLib framework function cblas_dgemv.
-func CblasDgemv(order unsafe.Pointer, transA unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, incY unsafe.Pointer) (y float64) {
+func CblasDgemv(order CblasOrder, transA CblasTranspose, m int, n int, alpha float64, a unsafe.Pointer, lda int, x unsafe.Pointer, incX int, beta float64, incY int) (y float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDgemv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDgemv, _lib, "cblas_dgemv")
@@ -4234,10 +4234,10 @@ func CblasDgemv(order unsafe.Pointer, transA unsafe.Pointer, m unsafe.Pointer, n
 	return _out0
 }
 
-var _fnCblasDger func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasDger func(CblasOrder, int, int, float64, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // CblasDger calls the vecLib framework function cblas_dger.
-func CblasDger(order unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer, lda unsafe.Pointer) (a float64) {
+func CblasDger(order CblasOrder, m int, n int, alpha float64, x unsafe.Pointer, incX int, y unsafe.Pointer, incY int, lda int) (a float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDger == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDger, _lib, "cblas_dger")
@@ -4247,10 +4247,10 @@ func CblasDger(order unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha u
 	return _out0
 }
 
-var _fnCblasDnrm2 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) float64
+var _fnCblasDnrm2 func(int, unsafe.Pointer, int) float64
 
 // CblasDnrm2 calls the vecLib framework function cblas_dnrm2.
-func CblasDnrm2(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) float64 {
+func CblasDnrm2(n int, x unsafe.Pointer, incX int) float64 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDnrm2 == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDnrm2, _lib, "cblas_dnrm2")
@@ -4258,10 +4258,10 @@ func CblasDnrm2(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) float64
 	return _fnCblasDnrm2(n, x, incX)
 }
 
-var _fnCblasDrot func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasDrot func(int, unsafe.Pointer, int, unsafe.Pointer, int, float64, float64)
 
 // CblasDrot calls the vecLib framework function cblas_drot.
-func CblasDrot(n unsafe.Pointer, incX unsafe.Pointer, incY unsafe.Pointer, c unsafe.Pointer, s unsafe.Pointer) (x float64, y float64) {
+func CblasDrot(n int, incX int, incY int, c float64, s float64) (x float64, y float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDrot == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDrot, _lib, "cblas_drot")
@@ -4288,10 +4288,10 @@ func CblasDrotg() (a float64, b float64, c float64, s float64) {
 	return _out0, _out1, _out2, _out3
 }
 
-var _fnCblasDrotm func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasDrotm func(int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer)
 
 // CblasDrotm calls the vecLib framework function cblas_drotm.
-func CblasDrotm(n unsafe.Pointer, incX unsafe.Pointer, incY unsafe.Pointer, p unsafe.Pointer) (x float64, y float64) {
+func CblasDrotm(n int, incX int, incY int, p unsafe.Pointer) (x float64, y float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDrotm == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDrotm, _lib, "cblas_drotm")
@@ -4302,10 +4302,10 @@ func CblasDrotm(n unsafe.Pointer, incX unsafe.Pointer, incY unsafe.Pointer, p un
 	return _out0, _out1
 }
 
-var _fnCblasDrotmg func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasDrotmg func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, float64, unsafe.Pointer)
 
 // CblasDrotmg calls the vecLib framework function cblas_drotmg.
-func CblasDrotmg(b2 unsafe.Pointer) (d1 float64, d2 float64, b1 float64, p float64) {
+func CblasDrotmg(b2 float64) (d1 float64, d2 float64, b1 float64, p float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDrotmg == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDrotmg, _lib, "cblas_drotmg")
@@ -4318,10 +4318,10 @@ func CblasDrotmg(b2 unsafe.Pointer) (d1 float64, d2 float64, b1 float64, p float
 	return _out0, _out1, _out2, _out3
 }
 
-var _fnCblasDsbmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasDsbmv func(CblasOrder, CblasUplo, int, int, float64, unsafe.Pointer, int, unsafe.Pointer, int, float64, unsafe.Pointer, int)
 
 // CblasDsbmv calls the vecLib framework function cblas_dsbmv.
-func CblasDsbmv(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, incY unsafe.Pointer) (y float64) {
+func CblasDsbmv(order CblasOrder, uplo CblasUplo, n int, k int, alpha float64, a unsafe.Pointer, lda int, x unsafe.Pointer, incX int, beta float64, incY int) (y float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDsbmv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDsbmv, _lib, "cblas_dsbmv")
@@ -4331,10 +4331,10 @@ func CblasDsbmv(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, k u
 	return _out0
 }
 
-var _fnCblasDscal func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasDscal func(int, float64, unsafe.Pointer, int)
 
 // CblasDscal calls the vecLib framework function cblas_dscal.
-func CblasDscal(n unsafe.Pointer, alpha unsafe.Pointer, incX unsafe.Pointer) (x float64) {
+func CblasDscal(n int, alpha float64, incX int) (x float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDscal == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDscal, _lib, "cblas_dscal")
@@ -4344,10 +4344,10 @@ func CblasDscal(n unsafe.Pointer, alpha unsafe.Pointer, incX unsafe.Pointer) (x 
 	return _out0
 }
 
-var _fnCblasDsdot func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) float64
+var _fnCblasDsdot func(int, unsafe.Pointer, int, unsafe.Pointer, int) float64
 
 // CblasDsdot calls the vecLib framework function cblas_dsdot.
-func CblasDsdot(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer) float64 {
+func CblasDsdot(n int, x unsafe.Pointer, incX int, y unsafe.Pointer, incY int) float64 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDsdot == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDsdot, _lib, "cblas_dsdot")
@@ -4355,10 +4355,10 @@ func CblasDsdot(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsaf
 	return _fnCblasDsdot(n, x, incX, y, incY)
 }
 
-var _fnCblasDspmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasDspmv func(CblasOrder, CblasUplo, int, float64, unsafe.Pointer, unsafe.Pointer, int, float64, unsafe.Pointer, int)
 
 // CblasDspmv calls the vecLib framework function cblas_dspmv.
-func CblasDspmv(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, ap unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, incY unsafe.Pointer) (y float64) {
+func CblasDspmv(order CblasOrder, uplo CblasUplo, n int, alpha float64, ap unsafe.Pointer, x unsafe.Pointer, incX int, beta float64, incY int) (y float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDspmv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDspmv, _lib, "cblas_dspmv")
@@ -4368,10 +4368,10 @@ func CblasDspmv(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alp
 	return _out0
 }
 
-var _fnCblasDspr func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasDspr func(CblasOrder, CblasUplo, int, float64, unsafe.Pointer, int, unsafe.Pointer)
 
 // CblasDspr calls the vecLib framework function cblas_dspr.
-func CblasDspr(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) (ap float64) {
+func CblasDspr(order CblasOrder, uplo CblasUplo, n int, alpha float64, x unsafe.Pointer, incX int) (ap float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDspr == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDspr, _lib, "cblas_dspr")
@@ -4381,10 +4381,10 @@ func CblasDspr(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alph
 	return _out0
 }
 
-var _fnCblasDspr2 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasDspr2 func(CblasOrder, CblasUplo, int, float64, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer)
 
 // CblasDspr2 calls the vecLib framework function cblas_dspr2.
-func CblasDspr2(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer) (a float64) {
+func CblasDspr2(order CblasOrder, uplo CblasUplo, n int, alpha float64, x unsafe.Pointer, incX int, y unsafe.Pointer, incY int) (a float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDspr2 == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDspr2, _lib, "cblas_dspr2")
@@ -4394,10 +4394,10 @@ func CblasDspr2(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alp
 	return _out0
 }
 
-var _fnCblasDswap func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasDswap func(int, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // CblasDswap calls the vecLib framework function cblas_dswap.
-func CblasDswap(n unsafe.Pointer, incX unsafe.Pointer, incY unsafe.Pointer) (x float64, y float64) {
+func CblasDswap(n int, incX int, incY int) (x float64, y float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDswap == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDswap, _lib, "cblas_dswap")
@@ -4408,10 +4408,10 @@ func CblasDswap(n unsafe.Pointer, incX unsafe.Pointer, incY unsafe.Pointer) (x f
 	return _out0, _out1
 }
 
-var _fnCblasDsymm func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasDsymm func(CblasOrder, CblasSide, CblasUplo, int, int, float64, unsafe.Pointer, int, unsafe.Pointer, int, float64, unsafe.Pointer, int)
 
 // CblasDsymm calls the vecLib framework function cblas_dsymm.
-func CblasDsymm(order unsafe.Pointer, side unsafe.Pointer, uplo unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, b unsafe.Pointer, ldb unsafe.Pointer, beta unsafe.Pointer, ldc unsafe.Pointer) (c float64) {
+func CblasDsymm(order CblasOrder, side CblasSide, uplo CblasUplo, m int, n int, alpha float64, a unsafe.Pointer, lda int, b unsafe.Pointer, ldb int, beta float64, ldc int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDsymm == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDsymm, _lib, "cblas_dsymm")
@@ -4421,10 +4421,10 @@ func CblasDsymm(order unsafe.Pointer, side unsafe.Pointer, uplo unsafe.Pointer, 
 	return _out0
 }
 
-var _fnCblasDsymv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasDsymv func(CblasOrder, CblasUplo, int, float64, unsafe.Pointer, int, unsafe.Pointer, int, float64, unsafe.Pointer, int)
 
 // CblasDsymv calls the vecLib framework function cblas_dsymv.
-func CblasDsymv(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, incY unsafe.Pointer) (y float64) {
+func CblasDsymv(order CblasOrder, uplo CblasUplo, n int, alpha float64, a unsafe.Pointer, lda int, x unsafe.Pointer, incX int, beta float64, incY int) (y float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDsymv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDsymv, _lib, "cblas_dsymv")
@@ -4434,10 +4434,10 @@ func CblasDsymv(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alp
 	return _out0
 }
 
-var _fnCblasDsyr func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasDsyr func(CblasOrder, CblasUplo, int, float64, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // CblasDsyr calls the vecLib framework function cblas_dsyr.
-func CblasDsyr(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, lda unsafe.Pointer) (a float64) {
+func CblasDsyr(order CblasOrder, uplo CblasUplo, n int, alpha float64, x unsafe.Pointer, incX int, lda int) (a float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDsyr == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDsyr, _lib, "cblas_dsyr")
@@ -4447,10 +4447,10 @@ func CblasDsyr(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alph
 	return _out0
 }
 
-var _fnCblasDsyr2 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasDsyr2 func(CblasOrder, CblasUplo, int, float64, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // CblasDsyr2 calls the vecLib framework function cblas_dsyr2.
-func CblasDsyr2(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer, lda unsafe.Pointer) (a float64) {
+func CblasDsyr2(order CblasOrder, uplo CblasUplo, n int, alpha float64, x unsafe.Pointer, incX int, y unsafe.Pointer, incY int, lda int) (a float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDsyr2 == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDsyr2, _lib, "cblas_dsyr2")
@@ -4460,10 +4460,10 @@ func CblasDsyr2(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alp
 	return _out0
 }
 
-var _fnCblasDsyr2k func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasDsyr2k func(CblasOrder, CblasUplo, CblasTranspose, int, int, float64, unsafe.Pointer, int, unsafe.Pointer, int, float64, unsafe.Pointer, int)
 
 // CblasDsyr2k calls the vecLib framework function cblas_dsyr2k.
-func CblasDsyr2k(order unsafe.Pointer, uplo unsafe.Pointer, trans unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, b unsafe.Pointer, ldb unsafe.Pointer, beta unsafe.Pointer, ldc unsafe.Pointer) (c float64) {
+func CblasDsyr2k(order CblasOrder, uplo CblasUplo, trans CblasTranspose, n int, k int, alpha float64, a unsafe.Pointer, lda int, b unsafe.Pointer, ldb int, beta float64, ldc int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDsyr2k == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDsyr2k, _lib, "cblas_dsyr2k")
@@ -4473,10 +4473,10 @@ func CblasDsyr2k(order unsafe.Pointer, uplo unsafe.Pointer, trans unsafe.Pointer
 	return _out0
 }
 
-var _fnCblasDsyrk func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasDsyrk func(CblasOrder, CblasUplo, CblasTranspose, int, int, float64, unsafe.Pointer, int, float64, unsafe.Pointer, int)
 
 // CblasDsyrk calls the vecLib framework function cblas_dsyrk.
-func CblasDsyrk(order unsafe.Pointer, uplo unsafe.Pointer, trans unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, beta unsafe.Pointer, ldc unsafe.Pointer) (c float64) {
+func CblasDsyrk(order CblasOrder, uplo CblasUplo, trans CblasTranspose, n int, k int, alpha float64, a unsafe.Pointer, lda int, beta float64, ldc int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDsyrk == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDsyrk, _lib, "cblas_dsyrk")
@@ -4486,10 +4486,10 @@ func CblasDsyrk(order unsafe.Pointer, uplo unsafe.Pointer, trans unsafe.Pointer,
 	return _out0
 }
 
-var _fnCblasDtbmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasDtbmv func(CblasOrder, CblasUplo, CblasTranspose, CblasDiag, int, int, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // CblasDtbmv calls the vecLib framework function cblas_dtbmv.
-func CblasDtbmv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, incX unsafe.Pointer) (x float64) {
+func CblasDtbmv(order CblasOrder, uplo CblasUplo, transA CblasTranspose, diag CblasDiag, n int, k int, a unsafe.Pointer, lda int, incX int) (x float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDtbmv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDtbmv, _lib, "cblas_dtbmv")
@@ -4499,10 +4499,10 @@ func CblasDtbmv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer
 	return _out0
 }
 
-var _fnCblasDtbsv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasDtbsv func(CblasOrder, CblasUplo, CblasTranspose, CblasDiag, int, int, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // CblasDtbsv calls the vecLib framework function cblas_dtbsv.
-func CblasDtbsv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, incX unsafe.Pointer) (x float64) {
+func CblasDtbsv(order CblasOrder, uplo CblasUplo, transA CblasTranspose, diag CblasDiag, n int, k int, a unsafe.Pointer, lda int, incX int) (x float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDtbsv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDtbsv, _lib, "cblas_dtbsv")
@@ -4512,10 +4512,10 @@ func CblasDtbsv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer
 	return _out0
 }
 
-var _fnCblasDtpmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasDtpmv func(CblasOrder, CblasUplo, CblasTranspose, CblasDiag, int, unsafe.Pointer, unsafe.Pointer, int)
 
 // CblasDtpmv calls the vecLib framework function cblas_dtpmv.
-func CblasDtpmv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, ap unsafe.Pointer, incX unsafe.Pointer) (x float64) {
+func CblasDtpmv(order CblasOrder, uplo CblasUplo, transA CblasTranspose, diag CblasDiag, n int, ap unsafe.Pointer, incX int) (x float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDtpmv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDtpmv, _lib, "cblas_dtpmv")
@@ -4525,10 +4525,10 @@ func CblasDtpmv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer
 	return _out0
 }
 
-var _fnCblasDtpsv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasDtpsv func(CblasOrder, CblasUplo, CblasTranspose, CblasDiag, int, unsafe.Pointer, unsafe.Pointer, int)
 
 // CblasDtpsv calls the vecLib framework function cblas_dtpsv.
-func CblasDtpsv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, ap unsafe.Pointer, incX unsafe.Pointer) (x float64) {
+func CblasDtpsv(order CblasOrder, uplo CblasUplo, transA CblasTranspose, diag CblasDiag, n int, ap unsafe.Pointer, incX int) (x float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDtpsv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDtpsv, _lib, "cblas_dtpsv")
@@ -4538,10 +4538,10 @@ func CblasDtpsv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer
 	return _out0
 }
 
-var _fnCblasDtrmm func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasDtrmm func(CblasOrder, CblasSide, CblasUplo, CblasTranspose, CblasDiag, int, int, float64, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // CblasDtrmm calls the vecLib framework function cblas_dtrmm.
-func CblasDtrmm(order unsafe.Pointer, side unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, ldb unsafe.Pointer) (b float64) {
+func CblasDtrmm(order CblasOrder, side CblasSide, uplo CblasUplo, transA CblasTranspose, diag CblasDiag, m int, n int, alpha float64, a unsafe.Pointer, lda int, ldb int) (b float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDtrmm == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDtrmm, _lib, "cblas_dtrmm")
@@ -4551,10 +4551,10 @@ func CblasDtrmm(order unsafe.Pointer, side unsafe.Pointer, uplo unsafe.Pointer, 
 	return _out0
 }
 
-var _fnCblasDtrmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasDtrmv func(CblasOrder, CblasUplo, CblasTranspose, CblasDiag, int, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // CblasDtrmv calls the vecLib framework function cblas_dtrmv.
-func CblasDtrmv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, incX unsafe.Pointer) (x float64) {
+func CblasDtrmv(order CblasOrder, uplo CblasUplo, transA CblasTranspose, diag CblasDiag, n int, a unsafe.Pointer, lda int, incX int) (x float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDtrmv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDtrmv, _lib, "cblas_dtrmv")
@@ -4564,10 +4564,10 @@ func CblasDtrmv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer
 	return _out0
 }
 
-var _fnCblasDtrsm func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasDtrsm func(CblasOrder, CblasSide, CblasUplo, CblasTranspose, CblasDiag, int, int, float64, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // CblasDtrsm calls the vecLib framework function cblas_dtrsm.
-func CblasDtrsm(order unsafe.Pointer, side unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, ldb unsafe.Pointer) (b float64) {
+func CblasDtrsm(order CblasOrder, side CblasSide, uplo CblasUplo, transA CblasTranspose, diag CblasDiag, m int, n int, alpha float64, a unsafe.Pointer, lda int, ldb int) (b float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDtrsm == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDtrsm, _lib, "cblas_dtrsm")
@@ -4577,10 +4577,10 @@ func CblasDtrsm(order unsafe.Pointer, side unsafe.Pointer, uplo unsafe.Pointer, 
 	return _out0
 }
 
-var _fnCblasDtrsv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasDtrsv func(CblasOrder, CblasUplo, CblasTranspose, CblasDiag, int, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // CblasDtrsv calls the vecLib framework function cblas_dtrsv.
-func CblasDtrsv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, incX unsafe.Pointer) (x float64) {
+func CblasDtrsv(order CblasOrder, uplo CblasUplo, transA CblasTranspose, diag CblasDiag, n int, a unsafe.Pointer, lda int, incX int) (x float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDtrsv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDtrsv, _lib, "cblas_dtrsv")
@@ -4590,10 +4590,10 @@ func CblasDtrsv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer
 	return _out0
 }
 
-var _fnCblasDzasum func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) float64
+var _fnCblasDzasum func(int, unsafe.Pointer, int) float64
 
 // CblasDzasum calls the vecLib framework function cblas_dzasum.
-func CblasDzasum(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) float64 {
+func CblasDzasum(n int, x unsafe.Pointer, incX int) float64 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDzasum == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDzasum, _lib, "cblas_dzasum")
@@ -4601,10 +4601,10 @@ func CblasDzasum(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) float6
 	return _fnCblasDzasum(n, x, incX)
 }
 
-var _fnCblasDznrm2 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) float64
+var _fnCblasDznrm2 func(int, unsafe.Pointer, int) float64
 
 // CblasDznrm2 calls the vecLib framework function cblas_dznrm2.
-func CblasDznrm2(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) float64 {
+func CblasDznrm2(n int, x unsafe.Pointer, incX int) float64 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDznrm2 == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDznrm2, _lib, "cblas_dznrm2")
@@ -4612,10 +4612,10 @@ func CblasDznrm2(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) float6
 	return _fnCblasDznrm2(n, x, incX)
 }
 
-var _fnCblasIcamax func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+var _fnCblasIcamax func(int, unsafe.Pointer, int) int32
 
 // CblasIcamax calls the vecLib framework function cblas_icamax.
-func CblasIcamax(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) int {
+func CblasIcamax(n int, x unsafe.Pointer, incX int) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasIcamax == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasIcamax, _lib, "cblas_icamax")
@@ -4623,10 +4623,10 @@ func CblasIcamax(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) int {
 	return int(_fnCblasIcamax(n, x, incX))
 }
 
-var _fnCblasIdamax func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+var _fnCblasIdamax func(int, unsafe.Pointer, int) int32
 
 // CblasIdamax calls the vecLib framework function cblas_idamax.
-func CblasIdamax(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) int {
+func CblasIdamax(n int, x unsafe.Pointer, incX int) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasIdamax == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasIdamax, _lib, "cblas_idamax")
@@ -4634,10 +4634,10 @@ func CblasIdamax(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) int {
 	return int(_fnCblasIdamax(n, x, incX))
 }
 
-var _fnCblasIsamax func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+var _fnCblasIsamax func(int, unsafe.Pointer, int) int32
 
 // CblasIsamax calls the vecLib framework function cblas_isamax.
-func CblasIsamax(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) int {
+func CblasIsamax(n int, x unsafe.Pointer, incX int) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasIsamax == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasIsamax, _lib, "cblas_isamax")
@@ -4645,10 +4645,10 @@ func CblasIsamax(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) int {
 	return int(_fnCblasIsamax(n, x, incX))
 }
 
-var _fnCblasIzamax func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+var _fnCblasIzamax func(int, unsafe.Pointer, int) int32
 
 // CblasIzamax calls the vecLib framework function cblas_izamax.
-func CblasIzamax(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) int {
+func CblasIzamax(n int, x unsafe.Pointer, incX int) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasIzamax == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasIzamax, _lib, "cblas_izamax")
@@ -4656,10 +4656,10 @@ func CblasIzamax(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) int {
 	return int(_fnCblasIzamax(n, x, incX))
 }
 
-var _fnCblasSasum func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) float32
+var _fnCblasSasum func(int, unsafe.Pointer, int) float32
 
 // CblasSasum calls the vecLib framework function cblas_sasum.
-func CblasSasum(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) float32 {
+func CblasSasum(n int, x unsafe.Pointer, incX int) float32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasSasum == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasSasum, _lib, "cblas_sasum")
@@ -4667,10 +4667,10 @@ func CblasSasum(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) float32
 	return _fnCblasSasum(n, x, incX)
 }
 
-var _fnCblasSaxpy func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasSaxpy func(int, float32, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // CblasSaxpy calls the vecLib framework function cblas_saxpy.
-func CblasSaxpy(n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, incY unsafe.Pointer) (y float32) {
+func CblasSaxpy(n int, alpha float32, x unsafe.Pointer, incX int, incY int) (y float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasSaxpy == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasSaxpy, _lib, "cblas_saxpy")
@@ -4680,10 +4680,10 @@ func CblasSaxpy(n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX u
 	return _out0
 }
 
-var _fnCblasScasum func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) float32
+var _fnCblasScasum func(int, unsafe.Pointer, int) float32
 
 // CblasScasum calls the vecLib framework function cblas_scasum.
-func CblasScasum(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) float32 {
+func CblasScasum(n int, x unsafe.Pointer, incX int) float32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasScasum == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasScasum, _lib, "cblas_scasum")
@@ -4691,10 +4691,10 @@ func CblasScasum(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) float3
 	return _fnCblasScasum(n, x, incX)
 }
 
-var _fnCblasScnrm2 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) float32
+var _fnCblasScnrm2 func(int, unsafe.Pointer, int) float32
 
 // CblasScnrm2 calls the vecLib framework function cblas_scnrm2.
-func CblasScnrm2(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) float32 {
+func CblasScnrm2(n int, x unsafe.Pointer, incX int) float32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasScnrm2 == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasScnrm2, _lib, "cblas_scnrm2")
@@ -4702,10 +4702,10 @@ func CblasScnrm2(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) float3
 	return _fnCblasScnrm2(n, x, incX)
 }
 
-var _fnCblasScopy func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasScopy func(int, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // CblasScopy calls the vecLib framework function cblas_scopy.
-func CblasScopy(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, incY unsafe.Pointer) (y float32) {
+func CblasScopy(n int, x unsafe.Pointer, incX int, incY int) (y float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasScopy == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasScopy, _lib, "cblas_scopy")
@@ -4715,10 +4715,10 @@ func CblasScopy(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, incY un
 	return _out0
 }
 
-var _fnCblasSdot func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) float32
+var _fnCblasSdot func(int, unsafe.Pointer, int, unsafe.Pointer, int) float32
 
 // CblasSdot calls the vecLib framework function cblas_sdot.
-func CblasSdot(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer) float32 {
+func CblasSdot(n int, x unsafe.Pointer, incX int, y unsafe.Pointer, incY int) float32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasSdot == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasSdot, _lib, "cblas_sdot")
@@ -4726,10 +4726,10 @@ func CblasSdot(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe
 	return _fnCblasSdot(n, x, incX, y, incY)
 }
 
-var _fnCblasSdsdot func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) float32
+var _fnCblasSdsdot func(int, float32, unsafe.Pointer, int, unsafe.Pointer, int) float32
 
 // CblasSdsdot calls the vecLib framework function cblas_sdsdot.
-func CblasSdsdot(n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer) float32 {
+func CblasSdsdot(n int, alpha float32, x unsafe.Pointer, incX int, y unsafe.Pointer, incY int) float32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasSdsdot == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasSdsdot, _lib, "cblas_sdsdot")
@@ -4737,10 +4737,10 @@ func CblasSdsdot(n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX 
 	return _fnCblasSdsdot(n, alpha, x, incX, y, incY)
 }
 
-var _fnCblasSgbmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasSgbmv func(CblasOrder, CblasTranspose, int, int, int, int, float32, unsafe.Pointer, int, unsafe.Pointer, int, float32, unsafe.Pointer, int)
 
 // CblasSgbmv calls the vecLib framework function cblas_sgbmv.
-func CblasSgbmv(order unsafe.Pointer, transA unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, kl unsafe.Pointer, ku unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, incY unsafe.Pointer) (y float32) {
+func CblasSgbmv(order CblasOrder, transA CblasTranspose, m int, n int, kl int, ku int, alpha float32, a unsafe.Pointer, lda int, x unsafe.Pointer, incX int, beta float32, incY int) (y float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasSgbmv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasSgbmv, _lib, "cblas_sgbmv")
@@ -4750,10 +4750,10 @@ func CblasSgbmv(order unsafe.Pointer, transA unsafe.Pointer, m unsafe.Pointer, n
 	return _out0
 }
 
-var _fnCblasSgemm func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasSgemm func(CblasOrder, CblasTranspose, CblasTranspose, int, int, int, float32, unsafe.Pointer, int, unsafe.Pointer, int, float32, unsafe.Pointer, int)
 
 // CblasSgemm calls the vecLib framework function cblas_sgemm.
-func CblasSgemm(order unsafe.Pointer, transA unsafe.Pointer, transB unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, b unsafe.Pointer, ldb unsafe.Pointer, beta unsafe.Pointer, ldc unsafe.Pointer) (c float32) {
+func CblasSgemm(order CblasOrder, transA CblasTranspose, transB CblasTranspose, m int, n int, k int, alpha float32, a unsafe.Pointer, lda int, b unsafe.Pointer, ldb int, beta float32, ldc int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasSgemm == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasSgemm, _lib, "cblas_sgemm")
@@ -4763,10 +4763,10 @@ func CblasSgemm(order unsafe.Pointer, transA unsafe.Pointer, transB unsafe.Point
 	return _out0
 }
 
-var _fnCblasSgemv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasSgemv func(CblasOrder, CblasTranspose, int, int, float32, unsafe.Pointer, int, unsafe.Pointer, int, float32, unsafe.Pointer, int)
 
 // CblasSgemv calls the vecLib framework function cblas_sgemv.
-func CblasSgemv(order unsafe.Pointer, transA unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, incY unsafe.Pointer) (y float32) {
+func CblasSgemv(order CblasOrder, transA CblasTranspose, m int, n int, alpha float32, a unsafe.Pointer, lda int, x unsafe.Pointer, incX int, beta float32, incY int) (y float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasSgemv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasSgemv, _lib, "cblas_sgemv")
@@ -4776,10 +4776,10 @@ func CblasSgemv(order unsafe.Pointer, transA unsafe.Pointer, m unsafe.Pointer, n
 	return _out0
 }
 
-var _fnCblasSger func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasSger func(CblasOrder, int, int, float32, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // CblasSger calls the vecLib framework function cblas_sger.
-func CblasSger(order unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer, lda unsafe.Pointer) (a float32) {
+func CblasSger(order CblasOrder, m int, n int, alpha float32, x unsafe.Pointer, incX int, y unsafe.Pointer, incY int, lda int) (a float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasSger == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasSger, _lib, "cblas_sger")
@@ -4789,10 +4789,10 @@ func CblasSger(order unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha u
 	return _out0
 }
 
-var _fnCblasSnrm2 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) float32
+var _fnCblasSnrm2 func(int, unsafe.Pointer, int) float32
 
 // CblasSnrm2 calls the vecLib framework function cblas_snrm2.
-func CblasSnrm2(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) float32 {
+func CblasSnrm2(n int, x unsafe.Pointer, incX int) float32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasSnrm2 == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasSnrm2, _lib, "cblas_snrm2")
@@ -4800,10 +4800,10 @@ func CblasSnrm2(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) float32
 	return _fnCblasSnrm2(n, x, incX)
 }
 
-var _fnCblasSrot func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasSrot func(int, unsafe.Pointer, int, unsafe.Pointer, int, float32, float32)
 
 // CblasSrot calls the vecLib framework function cblas_srot.
-func CblasSrot(n unsafe.Pointer, incX unsafe.Pointer, incY unsafe.Pointer, c unsafe.Pointer, s unsafe.Pointer) (x float32, y float32) {
+func CblasSrot(n int, incX int, incY int, c float32, s float32) (x float32, y float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasSrot == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasSrot, _lib, "cblas_srot")
@@ -4830,10 +4830,10 @@ func CblasSrotg() (a float32, b float32, c float32, s float32) {
 	return _out0, _out1, _out2, _out3
 }
 
-var _fnCblasSrotm func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasSrotm func(int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer)
 
 // CblasSrotm calls the vecLib framework function cblas_srotm.
-func CblasSrotm(n unsafe.Pointer, incX unsafe.Pointer, incY unsafe.Pointer, p unsafe.Pointer) (x float32, y float32) {
+func CblasSrotm(n int, incX int, incY int, p unsafe.Pointer) (x float32, y float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasSrotm == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasSrotm, _lib, "cblas_srotm")
@@ -4844,10 +4844,10 @@ func CblasSrotm(n unsafe.Pointer, incX unsafe.Pointer, incY unsafe.Pointer, p un
 	return _out0, _out1
 }
 
-var _fnCblasSrotmg func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasSrotmg func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, float32, unsafe.Pointer)
 
 // CblasSrotmg calls the vecLib framework function cblas_srotmg.
-func CblasSrotmg(b2 unsafe.Pointer) (d1 float32, d2 float32, b1 float32, p float32) {
+func CblasSrotmg(b2 float32) (d1 float32, d2 float32, b1 float32, p float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasSrotmg == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasSrotmg, _lib, "cblas_srotmg")
@@ -4860,10 +4860,10 @@ func CblasSrotmg(b2 unsafe.Pointer) (d1 float32, d2 float32, b1 float32, p float
 	return _out0, _out1, _out2, _out3
 }
 
-var _fnCblasSsbmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasSsbmv func(CblasOrder, CblasUplo, int, int, float32, unsafe.Pointer, int, unsafe.Pointer, int, float32, unsafe.Pointer, int)
 
 // CblasSsbmv calls the vecLib framework function cblas_ssbmv.
-func CblasSsbmv(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, incY unsafe.Pointer) (y float32) {
+func CblasSsbmv(order CblasOrder, uplo CblasUplo, n int, k int, alpha float32, a unsafe.Pointer, lda int, x unsafe.Pointer, incX int, beta float32, incY int) (y float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasSsbmv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasSsbmv, _lib, "cblas_ssbmv")
@@ -4873,10 +4873,10 @@ func CblasSsbmv(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, k u
 	return _out0
 }
 
-var _fnCblasSscal func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasSscal func(int, float32, unsafe.Pointer, int)
 
 // CblasSscal calls the vecLib framework function cblas_sscal.
-func CblasSscal(n unsafe.Pointer, alpha unsafe.Pointer, incX unsafe.Pointer) (x float32) {
+func CblasSscal(n int, alpha float32, incX int) (x float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasSscal == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasSscal, _lib, "cblas_sscal")
@@ -4886,10 +4886,10 @@ func CblasSscal(n unsafe.Pointer, alpha unsafe.Pointer, incX unsafe.Pointer) (x 
 	return _out0
 }
 
-var _fnCblasSspmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasSspmv func(CblasOrder, CblasUplo, int, float32, unsafe.Pointer, unsafe.Pointer, int, float32, unsafe.Pointer, int)
 
 // CblasSspmv calls the vecLib framework function cblas_sspmv.
-func CblasSspmv(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, ap unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, incY unsafe.Pointer) (y float32) {
+func CblasSspmv(order CblasOrder, uplo CblasUplo, n int, alpha float32, ap unsafe.Pointer, x unsafe.Pointer, incX int, beta float32, incY int) (y float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasSspmv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasSspmv, _lib, "cblas_sspmv")
@@ -4899,10 +4899,10 @@ func CblasSspmv(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alp
 	return _out0
 }
 
-var _fnCblasSspr func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasSspr func(CblasOrder, CblasUplo, int, float32, unsafe.Pointer, int, unsafe.Pointer)
 
 // CblasSspr calls the vecLib framework function cblas_sspr.
-func CblasSspr(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) (ap float32) {
+func CblasSspr(order CblasOrder, uplo CblasUplo, n int, alpha float32, x unsafe.Pointer, incX int) (ap float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasSspr == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasSspr, _lib, "cblas_sspr")
@@ -4912,10 +4912,10 @@ func CblasSspr(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alph
 	return _out0
 }
 
-var _fnCblasSspr2 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasSspr2 func(CblasOrder, CblasUplo, int, float32, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer)
 
 // CblasSspr2 calls the vecLib framework function cblas_sspr2.
-func CblasSspr2(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer) (a float32) {
+func CblasSspr2(order CblasOrder, uplo CblasUplo, n int, alpha float32, x unsafe.Pointer, incX int, y unsafe.Pointer, incY int) (a float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasSspr2 == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasSspr2, _lib, "cblas_sspr2")
@@ -4925,10 +4925,10 @@ func CblasSspr2(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alp
 	return _out0
 }
 
-var _fnCblasSswap func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasSswap func(int, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // CblasSswap calls the vecLib framework function cblas_sswap.
-func CblasSswap(n unsafe.Pointer, incX unsafe.Pointer, incY unsafe.Pointer) (x float32, y float32) {
+func CblasSswap(n int, incX int, incY int) (x float32, y float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasSswap == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasSswap, _lib, "cblas_sswap")
@@ -4939,10 +4939,10 @@ func CblasSswap(n unsafe.Pointer, incX unsafe.Pointer, incY unsafe.Pointer) (x f
 	return _out0, _out1
 }
 
-var _fnCblasSsymm func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasSsymm func(CblasOrder, CblasSide, CblasUplo, int, int, float32, unsafe.Pointer, int, unsafe.Pointer, int, float32, unsafe.Pointer, int)
 
 // CblasSsymm calls the vecLib framework function cblas_ssymm.
-func CblasSsymm(order unsafe.Pointer, side unsafe.Pointer, uplo unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, b unsafe.Pointer, ldb unsafe.Pointer, beta unsafe.Pointer, ldc unsafe.Pointer) (c float32) {
+func CblasSsymm(order CblasOrder, side CblasSide, uplo CblasUplo, m int, n int, alpha float32, a unsafe.Pointer, lda int, b unsafe.Pointer, ldb int, beta float32, ldc int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasSsymm == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasSsymm, _lib, "cblas_ssymm")
@@ -4952,10 +4952,10 @@ func CblasSsymm(order unsafe.Pointer, side unsafe.Pointer, uplo unsafe.Pointer, 
 	return _out0
 }
 
-var _fnCblasSsymv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasSsymv func(CblasOrder, CblasUplo, int, float32, unsafe.Pointer, int, unsafe.Pointer, int, float32, unsafe.Pointer, int)
 
 // CblasSsymv calls the vecLib framework function cblas_ssymv.
-func CblasSsymv(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, incY unsafe.Pointer) (y float32) {
+func CblasSsymv(order CblasOrder, uplo CblasUplo, n int, alpha float32, a unsafe.Pointer, lda int, x unsafe.Pointer, incX int, beta float32, incY int) (y float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasSsymv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasSsymv, _lib, "cblas_ssymv")
@@ -4965,10 +4965,10 @@ func CblasSsymv(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alp
 	return _out0
 }
 
-var _fnCblasSsyr func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasSsyr func(CblasOrder, CblasUplo, int, float32, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // CblasSsyr calls the vecLib framework function cblas_ssyr.
-func CblasSsyr(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, lda unsafe.Pointer) (a float32) {
+func CblasSsyr(order CblasOrder, uplo CblasUplo, n int, alpha float32, x unsafe.Pointer, incX int, lda int) (a float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasSsyr == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasSsyr, _lib, "cblas_ssyr")
@@ -4978,10 +4978,10 @@ func CblasSsyr(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alph
 	return _out0
 }
 
-var _fnCblasSsyr2 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasSsyr2 func(CblasOrder, CblasUplo, int, float32, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // CblasSsyr2 calls the vecLib framework function cblas_ssyr2.
-func CblasSsyr2(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer, lda unsafe.Pointer) (a float32) {
+func CblasSsyr2(order CblasOrder, uplo CblasUplo, n int, alpha float32, x unsafe.Pointer, incX int, y unsafe.Pointer, incY int, lda int) (a float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasSsyr2 == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasSsyr2, _lib, "cblas_ssyr2")
@@ -4991,10 +4991,10 @@ func CblasSsyr2(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alp
 	return _out0
 }
 
-var _fnCblasSsyr2k func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasSsyr2k func(CblasOrder, CblasUplo, CblasTranspose, int, int, float32, unsafe.Pointer, int, unsafe.Pointer, int, float32, unsafe.Pointer, int)
 
 // CblasSsyr2k calls the vecLib framework function cblas_ssyr2k.
-func CblasSsyr2k(order unsafe.Pointer, uplo unsafe.Pointer, trans unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, b unsafe.Pointer, ldb unsafe.Pointer, beta unsafe.Pointer, ldc unsafe.Pointer) (c float32) {
+func CblasSsyr2k(order CblasOrder, uplo CblasUplo, trans CblasTranspose, n int, k int, alpha float32, a unsafe.Pointer, lda int, b unsafe.Pointer, ldb int, beta float32, ldc int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasSsyr2k == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasSsyr2k, _lib, "cblas_ssyr2k")
@@ -5004,10 +5004,10 @@ func CblasSsyr2k(order unsafe.Pointer, uplo unsafe.Pointer, trans unsafe.Pointer
 	return _out0
 }
 
-var _fnCblasSsyrk func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasSsyrk func(CblasOrder, CblasUplo, CblasTranspose, int, int, float32, unsafe.Pointer, int, float32, unsafe.Pointer, int)
 
 // CblasSsyrk calls the vecLib framework function cblas_ssyrk.
-func CblasSsyrk(order unsafe.Pointer, uplo unsafe.Pointer, trans unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, beta unsafe.Pointer, ldc unsafe.Pointer) (c float32) {
+func CblasSsyrk(order CblasOrder, uplo CblasUplo, trans CblasTranspose, n int, k int, alpha float32, a unsafe.Pointer, lda int, beta float32, ldc int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasSsyrk == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasSsyrk, _lib, "cblas_ssyrk")
@@ -5017,10 +5017,10 @@ func CblasSsyrk(order unsafe.Pointer, uplo unsafe.Pointer, trans unsafe.Pointer,
 	return _out0
 }
 
-var _fnCblasStbmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasStbmv func(CblasOrder, CblasUplo, CblasTranspose, CblasDiag, int, int, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // CblasStbmv calls the vecLib framework function cblas_stbmv.
-func CblasStbmv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, incX unsafe.Pointer) (x float32) {
+func CblasStbmv(order CblasOrder, uplo CblasUplo, transA CblasTranspose, diag CblasDiag, n int, k int, a unsafe.Pointer, lda int, incX int) (x float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasStbmv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasStbmv, _lib, "cblas_stbmv")
@@ -5030,10 +5030,10 @@ func CblasStbmv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer
 	return _out0
 }
 
-var _fnCblasStbsv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasStbsv func(CblasOrder, CblasUplo, CblasTranspose, CblasDiag, int, int, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // CblasStbsv calls the vecLib framework function cblas_stbsv.
-func CblasStbsv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, incX unsafe.Pointer) (x float32) {
+func CblasStbsv(order CblasOrder, uplo CblasUplo, transA CblasTranspose, diag CblasDiag, n int, k int, a unsafe.Pointer, lda int, incX int) (x float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasStbsv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasStbsv, _lib, "cblas_stbsv")
@@ -5043,10 +5043,10 @@ func CblasStbsv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer
 	return _out0
 }
 
-var _fnCblasStpmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasStpmv func(CblasOrder, CblasUplo, CblasTranspose, CblasDiag, int, unsafe.Pointer, unsafe.Pointer, int)
 
 // CblasStpmv calls the vecLib framework function cblas_stpmv.
-func CblasStpmv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, ap unsafe.Pointer, incX unsafe.Pointer) (x float32) {
+func CblasStpmv(order CblasOrder, uplo CblasUplo, transA CblasTranspose, diag CblasDiag, n int, ap unsafe.Pointer, incX int) (x float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasStpmv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasStpmv, _lib, "cblas_stpmv")
@@ -5056,10 +5056,10 @@ func CblasStpmv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer
 	return _out0
 }
 
-var _fnCblasStpsv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasStpsv func(CblasOrder, CblasUplo, CblasTranspose, CblasDiag, int, unsafe.Pointer, unsafe.Pointer, int)
 
 // CblasStpsv calls the vecLib framework function cblas_stpsv.
-func CblasStpsv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, ap unsafe.Pointer, incX unsafe.Pointer) (x float32) {
+func CblasStpsv(order CblasOrder, uplo CblasUplo, transA CblasTranspose, diag CblasDiag, n int, ap unsafe.Pointer, incX int) (x float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasStpsv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasStpsv, _lib, "cblas_stpsv")
@@ -5069,10 +5069,10 @@ func CblasStpsv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer
 	return _out0
 }
 
-var _fnCblasStrmm func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasStrmm func(CblasOrder, CblasSide, CblasUplo, CblasTranspose, CblasDiag, int, int, float32, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // CblasStrmm calls the vecLib framework function cblas_strmm.
-func CblasStrmm(order unsafe.Pointer, side unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, ldb unsafe.Pointer) (b float32) {
+func CblasStrmm(order CblasOrder, side CblasSide, uplo CblasUplo, transA CblasTranspose, diag CblasDiag, m int, n int, alpha float32, a unsafe.Pointer, lda int, ldb int) (b float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasStrmm == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasStrmm, _lib, "cblas_strmm")
@@ -5082,10 +5082,10 @@ func CblasStrmm(order unsafe.Pointer, side unsafe.Pointer, uplo unsafe.Pointer, 
 	return _out0
 }
 
-var _fnCblasStrmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasStrmv func(CblasOrder, CblasUplo, CblasTranspose, CblasDiag, int, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // CblasStrmv calls the vecLib framework function cblas_strmv.
-func CblasStrmv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, incX unsafe.Pointer) (x float32) {
+func CblasStrmv(order CblasOrder, uplo CblasUplo, transA CblasTranspose, diag CblasDiag, n int, a unsafe.Pointer, lda int, incX int) (x float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasStrmv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasStrmv, _lib, "cblas_strmv")
@@ -5095,10 +5095,10 @@ func CblasStrmv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer
 	return _out0
 }
 
-var _fnCblasStrsm func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasStrsm func(CblasOrder, CblasSide, CblasUplo, CblasTranspose, CblasDiag, int, int, float32, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // CblasStrsm calls the vecLib framework function cblas_strsm.
-func CblasStrsm(order unsafe.Pointer, side unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, ldb unsafe.Pointer) (b float32) {
+func CblasStrsm(order CblasOrder, side CblasSide, uplo CblasUplo, transA CblasTranspose, diag CblasDiag, m int, n int, alpha float32, a unsafe.Pointer, lda int, ldb int) (b float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasStrsm == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasStrsm, _lib, "cblas_strsm")
@@ -5108,10 +5108,10 @@ func CblasStrsm(order unsafe.Pointer, side unsafe.Pointer, uplo unsafe.Pointer, 
 	return _out0
 }
 
-var _fnCblasStrsv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasStrsv func(CblasOrder, CblasUplo, CblasTranspose, CblasDiag, int, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // CblasStrsv calls the vecLib framework function cblas_strsv.
-func CblasStrsv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, incX unsafe.Pointer) (x float32) {
+func CblasStrsv(order CblasOrder, uplo CblasUplo, transA CblasTranspose, diag CblasDiag, n int, a unsafe.Pointer, lda int, incX int) (x float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasStrsv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasStrsv, _lib, "cblas_strsv")
@@ -5121,10 +5121,10 @@ func CblasStrsv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer
 	return _out0
 }
 
-var _fnCblasZaxpy func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasZaxpy func(int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // CblasZaxpy calls the vecLib framework function cblas_zaxpy.
-func CblasZaxpy(n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer) {
+func CblasZaxpy(n int, alpha unsafe.Pointer, x unsafe.Pointer, incX int, y unsafe.Pointer, incY int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasZaxpy == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasZaxpy, _lib, "cblas_zaxpy")
@@ -5132,10 +5132,10 @@ func CblasZaxpy(n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX u
 	_fnCblasZaxpy(n, alpha, x, incX, y, incY)
 }
 
-var _fnCblasZcopy func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasZcopy func(int, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // CblasZcopy calls the vecLib framework function cblas_zcopy.
-func CblasZcopy(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer) {
+func CblasZcopy(n int, x unsafe.Pointer, incX int, y unsafe.Pointer, incY int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasZcopy == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasZcopy, _lib, "cblas_zcopy")
@@ -5143,10 +5143,10 @@ func CblasZcopy(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsaf
 	_fnCblasZcopy(n, x, incX, y, incY)
 }
 
-var _fnCblasZdotcSub func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasZdotcSub func(int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer)
 
 // CblasZdotcSub calls the vecLib framework function cblas_zdotc_sub.
-func CblasZdotcSub(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer, dotc unsafe.Pointer) {
+func CblasZdotcSub(n int, x unsafe.Pointer, incX int, y unsafe.Pointer, incY int, dotc unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasZdotcSub == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasZdotcSub, _lib, "cblas_zdotc_sub")
@@ -5154,10 +5154,10 @@ func CblasZdotcSub(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y un
 	_fnCblasZdotcSub(n, x, incX, y, incY, dotc)
 }
 
-var _fnCblasZdotuSub func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasZdotuSub func(int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer)
 
 // CblasZdotuSub calls the vecLib framework function cblas_zdotu_sub.
-func CblasZdotuSub(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer, dotu unsafe.Pointer) {
+func CblasZdotuSub(n int, x unsafe.Pointer, incX int, y unsafe.Pointer, incY int, dotu unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasZdotuSub == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasZdotuSub, _lib, "cblas_zdotu_sub")
@@ -5165,10 +5165,10 @@ func CblasZdotuSub(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y un
 	_fnCblasZdotuSub(n, x, incX, y, incY, dotu)
 }
 
-var _fnCblasZdrot func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasZdrot func(int, unsafe.Pointer, int, unsafe.Pointer, int, float64, float64)
 
 // CblasZdrot calls the vecLib framework function cblas_zdrot.
-func CblasZdrot(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer, c unsafe.Pointer, s unsafe.Pointer) {
+func CblasZdrot(n int, x unsafe.Pointer, incX int, y unsafe.Pointer, incY int, c float64, s float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasZdrot == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasZdrot, _lib, "cblas_zdrot")
@@ -5176,10 +5176,10 @@ func CblasZdrot(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsaf
 	_fnCblasZdrot(n, x, incX, y, incY, c, s)
 }
 
-var _fnCblasZdscal func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasZdscal func(int, float64, unsafe.Pointer, int)
 
 // CblasZdscal calls the vecLib framework function cblas_zdscal.
-func CblasZdscal(n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) {
+func CblasZdscal(n int, alpha float64, x unsafe.Pointer, incX int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasZdscal == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasZdscal, _lib, "cblas_zdscal")
@@ -5187,10 +5187,10 @@ func CblasZdscal(n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX 
 	_fnCblasZdscal(n, alpha, x, incX)
 }
 
-var _fnCblasZgbmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasZgbmv func(CblasOrder, CblasTranspose, int, int, int, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 
 // CblasZgbmv calls the vecLib framework function cblas_zgbmv.
-func CblasZgbmv(order unsafe.Pointer, transA unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, kl unsafe.Pointer, ku unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer) {
+func CblasZgbmv(order CblasOrder, transA CblasTranspose, m int, n int, kl int, ku int, alpha unsafe.Pointer, a unsafe.Pointer, lda int, x unsafe.Pointer, incX int, beta unsafe.Pointer, y unsafe.Pointer, incY int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasZgbmv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasZgbmv, _lib, "cblas_zgbmv")
@@ -5198,10 +5198,10 @@ func CblasZgbmv(order unsafe.Pointer, transA unsafe.Pointer, m unsafe.Pointer, n
 	_fnCblasZgbmv(order, transA, m, n, kl, ku, alpha, a, lda, x, incX, beta, y, incY)
 }
 
-var _fnCblasZgemm func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasZgemm func(CblasOrder, CblasTranspose, CblasTranspose, int, int, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 
 // CblasZgemm calls the vecLib framework function cblas_zgemm.
-func CblasZgemm(order unsafe.Pointer, transA unsafe.Pointer, transB unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, b unsafe.Pointer, ldb unsafe.Pointer, beta unsafe.Pointer, c unsafe.Pointer, ldc unsafe.Pointer) {
+func CblasZgemm(order CblasOrder, transA CblasTranspose, transB CblasTranspose, m int, n int, k int, alpha unsafe.Pointer, a unsafe.Pointer, lda int, b unsafe.Pointer, ldb int, beta unsafe.Pointer, c unsafe.Pointer, ldc int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasZgemm == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasZgemm, _lib, "cblas_zgemm")
@@ -5209,10 +5209,10 @@ func CblasZgemm(order unsafe.Pointer, transA unsafe.Pointer, transB unsafe.Point
 	_fnCblasZgemm(order, transA, transB, m, n, k, alpha, a, lda, b, ldb, beta, c, ldc)
 }
 
-var _fnCblasZgemv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasZgemv func(CblasOrder, CblasTranspose, int, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 
 // CblasZgemv calls the vecLib framework function cblas_zgemv.
-func CblasZgemv(order unsafe.Pointer, transA unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer) {
+func CblasZgemv(order CblasOrder, transA CblasTranspose, m int, n int, alpha unsafe.Pointer, a unsafe.Pointer, lda int, x unsafe.Pointer, incX int, beta unsafe.Pointer, y unsafe.Pointer, incY int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasZgemv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasZgemv, _lib, "cblas_zgemv")
@@ -5220,10 +5220,10 @@ func CblasZgemv(order unsafe.Pointer, transA unsafe.Pointer, m unsafe.Pointer, n
 	_fnCblasZgemv(order, transA, m, n, alpha, a, lda, x, incX, beta, y, incY)
 }
 
-var _fnCblasZgerc func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasZgerc func(CblasOrder, int, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // CblasZgerc calls the vecLib framework function cblas_zgerc.
-func CblasZgerc(order unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer) {
+func CblasZgerc(order CblasOrder, m int, n int, alpha unsafe.Pointer, x unsafe.Pointer, incX int, y unsafe.Pointer, incY int, a unsafe.Pointer, lda int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasZgerc == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasZgerc, _lib, "cblas_zgerc")
@@ -5231,10 +5231,10 @@ func CblasZgerc(order unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha 
 	_fnCblasZgerc(order, m, n, alpha, x, incX, y, incY, a, lda)
 }
 
-var _fnCblasZgeru func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasZgeru func(CblasOrder, int, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // CblasZgeru calls the vecLib framework function cblas_zgeru.
-func CblasZgeru(order unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer) {
+func CblasZgeru(order CblasOrder, m int, n int, alpha unsafe.Pointer, x unsafe.Pointer, incX int, y unsafe.Pointer, incY int, a unsafe.Pointer, lda int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasZgeru == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasZgeru, _lib, "cblas_zgeru")
@@ -5242,10 +5242,10 @@ func CblasZgeru(order unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha 
 	_fnCblasZgeru(order, m, n, alpha, x, incX, y, incY, a, lda)
 }
 
-var _fnCblasZhbmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasZhbmv func(CblasOrder, CblasUplo, int, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 
 // CblasZhbmv calls the vecLib framework function cblas_zhbmv.
-func CblasZhbmv(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer) {
+func CblasZhbmv(order CblasOrder, uplo CblasUplo, n int, k int, alpha unsafe.Pointer, a unsafe.Pointer, lda int, x unsafe.Pointer, incX int, beta unsafe.Pointer, y unsafe.Pointer, incY int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasZhbmv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasZhbmv, _lib, "cblas_zhbmv")
@@ -5253,10 +5253,10 @@ func CblasZhbmv(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, k u
 	_fnCblasZhbmv(order, uplo, n, k, alpha, a, lda, x, incX, beta, y, incY)
 }
 
-var _fnCblasZhemm func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasZhemm func(CblasOrder, CblasSide, CblasUplo, int, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 
 // CblasZhemm calls the vecLib framework function cblas_zhemm.
-func CblasZhemm(order unsafe.Pointer, side unsafe.Pointer, uplo unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, b unsafe.Pointer, ldb unsafe.Pointer, beta unsafe.Pointer, c unsafe.Pointer, ldc unsafe.Pointer) {
+func CblasZhemm(order CblasOrder, side CblasSide, uplo CblasUplo, m int, n int, alpha unsafe.Pointer, a unsafe.Pointer, lda int, b unsafe.Pointer, ldb int, beta unsafe.Pointer, c unsafe.Pointer, ldc int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasZhemm == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasZhemm, _lib, "cblas_zhemm")
@@ -5264,10 +5264,10 @@ func CblasZhemm(order unsafe.Pointer, side unsafe.Pointer, uplo unsafe.Pointer, 
 	_fnCblasZhemm(order, side, uplo, m, n, alpha, a, lda, b, ldb, beta, c, ldc)
 }
 
-var _fnCblasZhemv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasZhemv func(CblasOrder, CblasUplo, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 
 // CblasZhemv calls the vecLib framework function cblas_zhemv.
-func CblasZhemv(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer) {
+func CblasZhemv(order CblasOrder, uplo CblasUplo, n int, alpha unsafe.Pointer, a unsafe.Pointer, lda int, x unsafe.Pointer, incX int, beta unsafe.Pointer, y unsafe.Pointer, incY int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasZhemv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasZhemv, _lib, "cblas_zhemv")
@@ -5275,10 +5275,10 @@ func CblasZhemv(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alp
 	_fnCblasZhemv(order, uplo, n, alpha, a, lda, x, incX, beta, y, incY)
 }
 
-var _fnCblasZher func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasZher func(CblasOrder, CblasUplo, int, float64, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // CblasZher calls the vecLib framework function cblas_zher.
-func CblasZher(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer) {
+func CblasZher(order CblasOrder, uplo CblasUplo, n int, alpha float64, x unsafe.Pointer, incX int, a unsafe.Pointer, lda int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasZher == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasZher, _lib, "cblas_zher")
@@ -5286,10 +5286,10 @@ func CblasZher(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alph
 	_fnCblasZher(order, uplo, n, alpha, x, incX, a, lda)
 }
 
-var _fnCblasZher2 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasZher2 func(CblasOrder, CblasUplo, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // CblasZher2 calls the vecLib framework function cblas_zher2.
-func CblasZher2(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer) {
+func CblasZher2(order CblasOrder, uplo CblasUplo, n int, alpha unsafe.Pointer, x unsafe.Pointer, incX int, y unsafe.Pointer, incY int, a unsafe.Pointer, lda int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasZher2 == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasZher2, _lib, "cblas_zher2")
@@ -5297,10 +5297,10 @@ func CblasZher2(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alp
 	_fnCblasZher2(order, uplo, n, alpha, x, incX, y, incY, a, lda)
 }
 
-var _fnCblasZher2k func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasZher2k func(CblasOrder, CblasUplo, CblasTranspose, int, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, float64, unsafe.Pointer, int)
 
 // CblasZher2k calls the vecLib framework function cblas_zher2k.
-func CblasZher2k(order unsafe.Pointer, uplo unsafe.Pointer, trans unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, b unsafe.Pointer, ldb unsafe.Pointer, beta unsafe.Pointer, c unsafe.Pointer, ldc unsafe.Pointer) {
+func CblasZher2k(order CblasOrder, uplo CblasUplo, trans CblasTranspose, n int, k int, alpha unsafe.Pointer, a unsafe.Pointer, lda int, b unsafe.Pointer, ldb int, beta float64, c unsafe.Pointer, ldc int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasZher2k == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasZher2k, _lib, "cblas_zher2k")
@@ -5308,10 +5308,10 @@ func CblasZher2k(order unsafe.Pointer, uplo unsafe.Pointer, trans unsafe.Pointer
 	_fnCblasZher2k(order, uplo, trans, n, k, alpha, a, lda, b, ldb, beta, c, ldc)
 }
 
-var _fnCblasZherk func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasZherk func(CblasOrder, CblasUplo, CblasTranspose, int, int, float64, unsafe.Pointer, int, float64, unsafe.Pointer, int)
 
 // CblasZherk calls the vecLib framework function cblas_zherk.
-func CblasZherk(order unsafe.Pointer, uplo unsafe.Pointer, trans unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, beta unsafe.Pointer, c unsafe.Pointer, ldc unsafe.Pointer) {
+func CblasZherk(order CblasOrder, uplo CblasUplo, trans CblasTranspose, n int, k int, alpha float64, a unsafe.Pointer, lda int, beta float64, c unsafe.Pointer, ldc int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasZherk == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasZherk, _lib, "cblas_zherk")
@@ -5319,10 +5319,10 @@ func CblasZherk(order unsafe.Pointer, uplo unsafe.Pointer, trans unsafe.Pointer,
 	_fnCblasZherk(order, uplo, trans, n, k, alpha, a, lda, beta, c, ldc)
 }
 
-var _fnCblasZhpmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasZhpmv func(CblasOrder, CblasUplo, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 
 // CblasZhpmv calls the vecLib framework function cblas_zhpmv.
-func CblasZhpmv(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, ap unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer) {
+func CblasZhpmv(order CblasOrder, uplo CblasUplo, n int, alpha unsafe.Pointer, ap unsafe.Pointer, x unsafe.Pointer, incX int, beta unsafe.Pointer, y unsafe.Pointer, incY int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasZhpmv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasZhpmv, _lib, "cblas_zhpmv")
@@ -5330,10 +5330,10 @@ func CblasZhpmv(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alp
 	_fnCblasZhpmv(order, uplo, n, alpha, ap, x, incX, beta, y, incY)
 }
 
-var _fnCblasZhpr func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasZhpr func(CblasOrder, CblasUplo, int, float64, unsafe.Pointer, int, unsafe.Pointer)
 
 // CblasZhpr calls the vecLib framework function cblas_zhpr.
-func CblasZhpr(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, a unsafe.Pointer) {
+func CblasZhpr(order CblasOrder, uplo CblasUplo, n int, alpha float64, x unsafe.Pointer, incX int, a unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasZhpr == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasZhpr, _lib, "cblas_zhpr")
@@ -5341,10 +5341,10 @@ func CblasZhpr(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alph
 	_fnCblasZhpr(order, uplo, n, alpha, x, incX, a)
 }
 
-var _fnCblasZhpr2 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasZhpr2 func(CblasOrder, CblasUplo, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer)
 
 // CblasZhpr2 calls the vecLib framework function cblas_zhpr2.
-func CblasZhpr2(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer, ap unsafe.Pointer) {
+func CblasZhpr2(order CblasOrder, uplo CblasUplo, n int, alpha unsafe.Pointer, x unsafe.Pointer, incX int, y unsafe.Pointer, incY int, ap unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasZhpr2 == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasZhpr2, _lib, "cblas_zhpr2")
@@ -5363,10 +5363,10 @@ func CblasZrotg(a unsafe.Pointer, b unsafe.Pointer, c unsafe.Pointer, s unsafe.P
 	_fnCblasZrotg(a, b, c, s)
 }
 
-var _fnCblasZscal func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasZscal func(int, unsafe.Pointer, unsafe.Pointer, int)
 
 // CblasZscal calls the vecLib framework function cblas_zscal.
-func CblasZscal(n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) {
+func CblasZscal(n int, alpha unsafe.Pointer, x unsafe.Pointer, incX int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasZscal == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasZscal, _lib, "cblas_zscal")
@@ -5374,10 +5374,10 @@ func CblasZscal(n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX u
 	_fnCblasZscal(n, alpha, x, incX)
 }
 
-var _fnCblasZswap func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasZswap func(int, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // CblasZswap calls the vecLib framework function cblas_zswap.
-func CblasZswap(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer) {
+func CblasZswap(n int, x unsafe.Pointer, incX int, y unsafe.Pointer, incY int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasZswap == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasZswap, _lib, "cblas_zswap")
@@ -5385,10 +5385,10 @@ func CblasZswap(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsaf
 	_fnCblasZswap(n, x, incX, y, incY)
 }
 
-var _fnCblasZsymm func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasZsymm func(CblasOrder, CblasSide, CblasUplo, int, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 
 // CblasZsymm calls the vecLib framework function cblas_zsymm.
-func CblasZsymm(order unsafe.Pointer, side unsafe.Pointer, uplo unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, b unsafe.Pointer, ldb unsafe.Pointer, beta unsafe.Pointer, c unsafe.Pointer, ldc unsafe.Pointer) {
+func CblasZsymm(order CblasOrder, side CblasSide, uplo CblasUplo, m int, n int, alpha unsafe.Pointer, a unsafe.Pointer, lda int, b unsafe.Pointer, ldb int, beta unsafe.Pointer, c unsafe.Pointer, ldc int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasZsymm == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasZsymm, _lib, "cblas_zsymm")
@@ -5396,10 +5396,10 @@ func CblasZsymm(order unsafe.Pointer, side unsafe.Pointer, uplo unsafe.Pointer, 
 	_fnCblasZsymm(order, side, uplo, m, n, alpha, a, lda, b, ldb, beta, c, ldc)
 }
 
-var _fnCblasZsyr2k func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasZsyr2k func(CblasOrder, CblasUplo, CblasTranspose, int, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 
 // CblasZsyr2k calls the vecLib framework function cblas_zsyr2k.
-func CblasZsyr2k(order unsafe.Pointer, uplo unsafe.Pointer, trans unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, b unsafe.Pointer, ldb unsafe.Pointer, beta unsafe.Pointer, c unsafe.Pointer, ldc unsafe.Pointer) {
+func CblasZsyr2k(order CblasOrder, uplo CblasUplo, trans CblasTranspose, n int, k int, alpha unsafe.Pointer, a unsafe.Pointer, lda int, b unsafe.Pointer, ldb int, beta unsafe.Pointer, c unsafe.Pointer, ldc int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasZsyr2k == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasZsyr2k, _lib, "cblas_zsyr2k")
@@ -5407,10 +5407,10 @@ func CblasZsyr2k(order unsafe.Pointer, uplo unsafe.Pointer, trans unsafe.Pointer
 	_fnCblasZsyr2k(order, uplo, trans, n, k, alpha, a, lda, b, ldb, beta, c, ldc)
 }
 
-var _fnCblasZsyrk func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasZsyrk func(CblasOrder, CblasUplo, CblasTranspose, int, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 
 // CblasZsyrk calls the vecLib framework function cblas_zsyrk.
-func CblasZsyrk(order unsafe.Pointer, uplo unsafe.Pointer, trans unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, beta unsafe.Pointer, c unsafe.Pointer, ldc unsafe.Pointer) {
+func CblasZsyrk(order CblasOrder, uplo CblasUplo, trans CblasTranspose, n int, k int, alpha unsafe.Pointer, a unsafe.Pointer, lda int, beta unsafe.Pointer, c unsafe.Pointer, ldc int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasZsyrk == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasZsyrk, _lib, "cblas_zsyrk")
@@ -5418,10 +5418,10 @@ func CblasZsyrk(order unsafe.Pointer, uplo unsafe.Pointer, trans unsafe.Pointer,
 	_fnCblasZsyrk(order, uplo, trans, n, k, alpha, a, lda, beta, c, ldc)
 }
 
-var _fnCblasZtbmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasZtbmv func(CblasOrder, CblasUplo, CblasTranspose, CblasDiag, int, int, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // CblasZtbmv calls the vecLib framework function cblas_ztbmv.
-func CblasZtbmv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) {
+func CblasZtbmv(order CblasOrder, uplo CblasUplo, transA CblasTranspose, diag CblasDiag, n int, k int, a unsafe.Pointer, lda int, x unsafe.Pointer, incX int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasZtbmv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasZtbmv, _lib, "cblas_ztbmv")
@@ -5429,10 +5429,10 @@ func CblasZtbmv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer
 	_fnCblasZtbmv(order, uplo, transA, diag, n, k, a, lda, x, incX)
 }
 
-var _fnCblasZtbsv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasZtbsv func(CblasOrder, CblasUplo, CblasTranspose, CblasDiag, int, int, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // CblasZtbsv calls the vecLib framework function cblas_ztbsv.
-func CblasZtbsv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) {
+func CblasZtbsv(order CblasOrder, uplo CblasUplo, transA CblasTranspose, diag CblasDiag, n int, k int, a unsafe.Pointer, lda int, x unsafe.Pointer, incX int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasZtbsv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasZtbsv, _lib, "cblas_ztbsv")
@@ -5440,10 +5440,10 @@ func CblasZtbsv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer
 	_fnCblasZtbsv(order, uplo, transA, diag, n, k, a, lda, x, incX)
 }
 
-var _fnCblasZtpmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasZtpmv func(CblasOrder, CblasUplo, CblasTranspose, CblasDiag, int, unsafe.Pointer, unsafe.Pointer, int)
 
 // CblasZtpmv calls the vecLib framework function cblas_ztpmv.
-func CblasZtpmv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, ap unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) {
+func CblasZtpmv(order CblasOrder, uplo CblasUplo, transA CblasTranspose, diag CblasDiag, n int, ap unsafe.Pointer, x unsafe.Pointer, incX int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasZtpmv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasZtpmv, _lib, "cblas_ztpmv")
@@ -5451,10 +5451,10 @@ func CblasZtpmv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer
 	_fnCblasZtpmv(order, uplo, transA, diag, n, ap, x, incX)
 }
 
-var _fnCblasZtpsv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasZtpsv func(CblasOrder, CblasUplo, CblasTranspose, CblasDiag, int, unsafe.Pointer, unsafe.Pointer, int)
 
 // CblasZtpsv calls the vecLib framework function cblas_ztpsv.
-func CblasZtpsv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, ap unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) {
+func CblasZtpsv(order CblasOrder, uplo CblasUplo, transA CblasTranspose, diag CblasDiag, n int, ap unsafe.Pointer, x unsafe.Pointer, incX int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasZtpsv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasZtpsv, _lib, "cblas_ztpsv")
@@ -5462,10 +5462,10 @@ func CblasZtpsv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer
 	_fnCblasZtpsv(order, uplo, transA, diag, n, ap, x, incX)
 }
 
-var _fnCblasZtrmm func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasZtrmm func(CblasOrder, CblasSide, CblasUplo, CblasTranspose, CblasDiag, int, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // CblasZtrmm calls the vecLib framework function cblas_ztrmm.
-func CblasZtrmm(order unsafe.Pointer, side unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, b unsafe.Pointer, ldb unsafe.Pointer) {
+func CblasZtrmm(order CblasOrder, side CblasSide, uplo CblasUplo, transA CblasTranspose, diag CblasDiag, m int, n int, alpha unsafe.Pointer, a unsafe.Pointer, lda int, b unsafe.Pointer, ldb int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasZtrmm == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasZtrmm, _lib, "cblas_ztrmm")
@@ -5473,10 +5473,10 @@ func CblasZtrmm(order unsafe.Pointer, side unsafe.Pointer, uplo unsafe.Pointer, 
 	_fnCblasZtrmm(order, side, uplo, transA, diag, m, n, alpha, a, lda, b, ldb)
 }
 
-var _fnCblasZtrmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasZtrmv func(CblasOrder, CblasUplo, CblasTranspose, CblasDiag, int, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // CblasZtrmv calls the vecLib framework function cblas_ztrmv.
-func CblasZtrmv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) {
+func CblasZtrmv(order CblasOrder, uplo CblasUplo, transA CblasTranspose, diag CblasDiag, n int, a unsafe.Pointer, lda int, x unsafe.Pointer, incX int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasZtrmv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasZtrmv, _lib, "cblas_ztrmv")
@@ -5484,10 +5484,10 @@ func CblasZtrmv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer
 	_fnCblasZtrmv(order, uplo, transA, diag, n, a, lda, x, incX)
 }
 
-var _fnCblasZtrsm func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasZtrsm func(CblasOrder, CblasSide, CblasUplo, CblasTranspose, CblasDiag, int, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // CblasZtrsm calls the vecLib framework function cblas_ztrsm.
-func CblasZtrsm(order unsafe.Pointer, side unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, b unsafe.Pointer, ldb unsafe.Pointer) {
+func CblasZtrsm(order CblasOrder, side CblasSide, uplo CblasUplo, transA CblasTranspose, diag CblasDiag, m int, n int, alpha unsafe.Pointer, a unsafe.Pointer, lda int, b unsafe.Pointer, ldb int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasZtrsm == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasZtrsm, _lib, "cblas_ztrsm")
@@ -5495,10 +5495,10 @@ func CblasZtrsm(order unsafe.Pointer, side unsafe.Pointer, uplo unsafe.Pointer, 
 	_fnCblasZtrsm(order, side, uplo, transA, diag, m, n, alpha, a, lda, b, ldb)
 }
 
-var _fnCblasZtrsv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+var _fnCblasZtrsv func(CblasOrder, CblasUplo, CblasTranspose, CblasDiag, int, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // CblasZtrsv calls the vecLib framework function cblas_ztrsv.
-func CblasZtrsv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) {
+func CblasZtrsv(order CblasOrder, uplo CblasUplo, transA CblasTranspose, diag CblasDiag, n int, a unsafe.Pointer, lda int, x unsafe.Pointer, incX int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasZtrsv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasZtrsv, _lib, "cblas_ztrsv")

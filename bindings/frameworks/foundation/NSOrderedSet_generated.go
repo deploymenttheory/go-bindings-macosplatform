@@ -195,7 +195,7 @@ func (os *OrderedSet) IndexOfObject(object obj.Object) int {
 	return _r
 }
 
-// Count returns the count.
+// Count returns the number of members in the set.
 func (os *OrderedSet) Count() int {
 	defer runtime.KeepAlive(os)
 	_r := objc.Send[int](objref.IDOf(os), objc.RegisterName("count"))
@@ -403,35 +403,36 @@ func (os *OrderedSet) DescriptionWithLocaleIndent(locale obj.Object, level int) 
 	return purego.GoString(_r)
 }
 
-// FirstObject returns the first object.
+// FirstObject returns the first object in the ordered set.
 func (os *OrderedSet) FirstObject() obj.Object {
 	defer runtime.KeepAlive(os)
 	_r := objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("firstObject"))
 	return obj.Wrap(_r)
 }
 
-// LastObject returns the last object.
+// LastObject returns the last object in the ordered set.
 func (os *OrderedSet) LastObject() obj.Object {
 	defer runtime.KeepAlive(os)
 	_r := objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("lastObject"))
 	return obj.Wrap(_r)
 }
 
-// ReversedOrderedSet returns the reversed ordered set.
+// ReversedOrderedSet returns an ordered set in the reverse order.
 func (os *OrderedSet) ReversedOrderedSet() obj.Object {
 	defer runtime.KeepAlive(os)
 	_r := objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("reversedOrderedSet"))
 	return obj.Wrap(_r)
 }
 
-// Array returns the array.
+// Array returns a representation of the ordered set as an array. This returns a proxy object for the receiving ordered set, which acts like an immutable array. While you cannot mutate the ordered set through this proxy, mutations to the original ordered set will be reflected in the proxy and it will appear to change spontaneously, because a copy of the ordered set is not being made.
 func (os *OrderedSet) Array() []obj.Object {
 	defer runtime.KeepAlive(os)
 	_r := objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("array"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Set returns the order of the returned elements is unspecified.
+// Set returns a representation of the set containing the contents of the ordered set. This returns a proxy object for the receiving ordered set, which acts like an immutable set. While you cannot mutate the ordered set through this proxy, mutations to the original ordered set will be reflected in the proxy and it will appear to change spontaneously, because a copy of the ordered set is not being made.
+// The order of the returned elements is unspecified.
 func (os *OrderedSet) Set() []obj.Object {
 	defer runtime.KeepAlive(os)
 	_r := objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("set"))

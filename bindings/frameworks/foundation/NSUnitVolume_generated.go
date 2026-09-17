@@ -17,8 +17,6 @@ import (
 // UnitVolume is an idiomatic wrapper over the Objective-C class NSUnitVolume.
 //
 // It embeds [Dimension], promoting that type's methods.
-//
-// A unit of measure for volume.
 type UnitVolume struct {
 	Dimension
 }

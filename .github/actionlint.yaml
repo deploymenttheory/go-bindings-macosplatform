@@ -1,0 +1,4 @@
+# SDK preview runner used by the acceptance matrix.
+self-hosted-runner:
+  labels:
+    - xcode-27

@@ -18,15 +18,16 @@ type FSEntityIdentifier struct {
 }
 
 var (
-	_clsFSEntityIdentifier                      = _objcClass("FSEntityIdentifier")
-	_fSEntityIdentifierSelInit                  = objc.RegisterName("init")
-	_fSEntityIdentifierSelInitWithUUID          = objc.RegisterName("initWithUUID:")
-	_fSEntityIdentifierSelInitWithUUIDQualifier = objc.RegisterName("initWithUUID:qualifier:")
-	_fSEntityIdentifierSelInitWithUUIDData      = objc.RegisterName("initWithUUID:data:")
-	_fSEntityIdentifierSelUuid                  = objc.RegisterName("uuid")
-	_fSEntityIdentifierSelSetUuid               = objc.RegisterName("setUuid:")
-	_fSEntityIdentifierSelQualifier             = objc.RegisterName("qualifier")
-	_fSEntityIdentifierSelSetQualifier          = objc.RegisterName("setQualifier:")
+	_clsFSEntityIdentifier                          = _objcClass("FSEntityIdentifier")
+	_fSEntityIdentifierSelInit                      = objc.RegisterName("init")
+	_fSEntityIdentifierSelInitWithUUID              = objc.RegisterName("initWithUUID:")
+	_fSEntityIdentifierSelInitWithUUIDQualifier     = objc.RegisterName("initWithUUID:qualifier:")
+	_fSEntityIdentifierSelInitWithUUIDData          = objc.RegisterName("initWithUUID:data:")
+	_fSEntityIdentifierSelInitWithUUIDQualifierData = objc.RegisterName("initWithUUID:qualifierData:")
+	_fSEntityIdentifierSelUuid                      = objc.RegisterName("uuid")
+	_fSEntityIdentifierSelSetUuid                   = objc.RegisterName("setUuid:")
+	_fSEntityIdentifierSelQualifier                 = objc.RegisterName("qualifier")
+	_fSEntityIdentifierSelSetQualifier              = objc.RegisterName("setQualifier:")
 )
 
 func FSEntityIdentifierFromID(id objc.ID) *FSEntityIdentifier {
@@ -69,6 +70,15 @@ func (o *FSEntityIdentifier) InitWithUUIDQualifier(uuid *foundation.NSUUID, qual
 // Creates an entity identifier with the given UUID and qualifier data.
 func (o *FSEntityIdentifier) InitWithUUIDData(uuid *foundation.NSUUID, qualifierData *foundation.NSData) *FSEntityIdentifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _fSEntityIdentifierSelInitWithUUIDData, uuid.Ptr(), qualifierData.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return FSEntityIdentifierFromID(_ret)
+}
+
+// Creates an entity identifier with the given UUID and qualifier data.
+func (o *FSEntityIdentifier) InitWithUUIDQualifierData(uuid *foundation.NSUUID, qualifierData *foundation.NSData) *FSEntityIdentifier {
+	_ret := objc.Send[objc.ID](o.Ptr(), _fSEntityIdentifierSelInitWithUUIDQualifierData, uuid.Ptr(), qualifierData.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

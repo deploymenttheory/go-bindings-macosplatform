@@ -414,12 +414,6 @@
     "MTRBaseClusterNitrogenDioxideConcentrationMeasurement": {
       "url": "https://developer.apple.com/documentation/matter/mtrbaseclusternitrogendioxideconcentrationmeasurement"
     },
-    "MTRBaseClusterOTASoftwareUpdateProvider": {
-      "url": "https://developer.apple.com/documentation/matter/mtrbaseclusterotasoftwareupdateprovider"
-    },
-    "MTRBaseClusterOTASoftwareUpdateRequestor": {
-      "url": "https://developer.apple.com/documentation/matter/mtrbaseclusterotasoftwareupdaterequestor"
-    },
     "MTRBaseClusterOccupancySensing": {
       "url": "https://developer.apple.com/documentation/matter/mtrbaseclusteroccupancysensing"
     },
@@ -434,12 +428,6 @@
     },
     "MTRBaseClusterOperationalState": {
       "url": "https://developer.apple.com/documentation/matter/mtrbaseclusteroperationalstate"
-    },
-    "MTRBaseClusterOtaSoftwareUpdateProvider": {
-      "url": "https://developer.apple.com/documentation/matter/mtrbaseclusterotasoftwareupdateprovider"
-    },
-    "MTRBaseClusterOtaSoftwareUpdateRequestor": {
-      "url": "https://developer.apple.com/documentation/matter/mtrbaseclusterotasoftwareupdaterequestor"
     },
     "MTRBaseClusterOvenCavityOperationalState": {
       "doc": "Cluster Oven Cavity Operational State",
@@ -564,12 +552,6 @@
     },
     "MTRBaseClusterValveConfigurationAndControl": {
       "url": "https://developer.apple.com/documentation/matter/mtrbaseclustervalveconfigurationandcontrol"
-    },
-    "MTRBaseClusterWakeOnLAN": {
-      "url": "https://developer.apple.com/documentation/matter/mtrbaseclusterwakeonlan"
-    },
-    "MTRBaseClusterWakeOnLan": {
-      "url": "https://developer.apple.com/documentation/matter/mtrbaseclusterwakeonlan"
     },
     "MTRBaseClusterWaterHeaterManagement": {
       "doc": "Cluster Water Heater Management",
@@ -955,12 +937,6 @@
     "MTRClusterNitrogenDioxideConcentrationMeasurement": {
       "url": "https://developer.apple.com/documentation/matter/mtrclusternitrogendioxideconcentrationmeasurement"
     },
-    "MTRClusterOTASoftwareUpdateProvider": {
-      "url": "https://developer.apple.com/documentation/matter/mtrclusterotasoftwareupdateprovider"
-    },
-    "MTRClusterOTASoftwareUpdateRequestor": {
-      "url": "https://developer.apple.com/documentation/matter/mtrclusterotasoftwareupdaterequestor"
-    },
     "MTRClusterOccupancySensing": {
       "url": "https://developer.apple.com/documentation/matter/mtrclusteroccupancysensing"
     },
@@ -975,12 +951,6 @@
     },
     "MTRClusterOperationalState": {
       "url": "https://developer.apple.com/documentation/matter/mtrclusteroperationalstate"
-    },
-    "MTRClusterOtaSoftwareUpdateProvider": {
-      "url": "https://developer.apple.com/documentation/matter/mtrclusterotasoftwareupdateprovider"
-    },
-    "MTRClusterOtaSoftwareUpdateRequestor": {
-      "url": "https://developer.apple.com/documentation/matter/mtrclusterotasoftwareupdaterequestor"
     },
     "MTRClusterOvenCavityOperationalState": {
       "doc": "Cluster Oven Cavity Operational State This cluster supports remotely monitoring and, where supported, changing the operational state of an Oven.",
@@ -1111,12 +1081,6 @@
     },
     "MTRClusterValveConfigurationAndControl": {
       "url": "https://developer.apple.com/documentation/matter/mtrclustervalveconfigurationandcontrol"
-    },
-    "MTRClusterWakeOnLAN": {
-      "url": "https://developer.apple.com/documentation/matter/mtrclusterwakeonlan"
-    },
-    "MTRClusterWakeOnLan": {
-      "url": "https://developer.apple.com/documentation/matter/mtrclusterwakeonlan"
     },
     "MTRClusterWaterHeaterManagement": {
       "doc": "Cluster Water Heater Management This cluster is used to allow clients to control the operation of a hot water heating appliance so that it can be used with energy management.",
@@ -2041,36 +2005,6 @@
     "MTROTAHeaderParser": {
       "url": "https://developer.apple.com/documentation/matter/mtrotaheaderparser"
     },
-    "MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams": {
-      "url": "https://developer.apple.com/documentation/matter/mtrotasoftwareupdateproviderclusterapplyupdaterequestparams"
-    },
-    "MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams": {
-      "url": "https://developer.apple.com/documentation/matter/mtrotasoftwareupdateproviderclusterapplyupdateresponseparams"
-    },
-    "MTROTASoftwareUpdateProviderClusterNotifyUpdateAppliedParams": {
-      "url": "https://developer.apple.com/documentation/matter/mtrotasoftwareupdateproviderclusternotifyupdateappliedparams"
-    },
-    "MTROTASoftwareUpdateProviderClusterQueryImageParams": {
-      "url": "https://developer.apple.com/documentation/matter/mtrotasoftwareupdateproviderclusterqueryimageparams"
-    },
-    "MTROTASoftwareUpdateProviderClusterQueryImageResponseParams": {
-      "url": "https://developer.apple.com/documentation/matter/mtrotasoftwareupdateproviderclusterqueryimageresponseparams"
-    },
-    "MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams": {
-      "url": "https://developer.apple.com/documentation/matter/mtrotasoftwareupdaterequestorclusterannounceotaproviderparams"
-    },
-    "MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent": {
-      "url": "https://developer.apple.com/documentation/matter/mtrotasoftwareupdaterequestorclusterdownloaderrorevent"
-    },
-    "MTROTASoftwareUpdateRequestorClusterProviderLocation": {
-      "url": "https://developer.apple.com/documentation/matter/mtrotasoftwareupdaterequestorclusterproviderlocation"
-    },
-    "MTROTASoftwareUpdateRequestorClusterStateTransitionEvent": {
-      "url": "https://developer.apple.com/documentation/matter/mtrotasoftwareupdaterequestorclusterstatetransitionevent"
-    },
-    "MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent": {
-      "url": "https://developer.apple.com/documentation/matter/mtrotasoftwareupdaterequestorclusterversionappliedevent"
-    },
     "MTROccupancySensingClusterHoldTimeLimitsStruct": {
       "url": "https://developer.apple.com/documentation/matter/mtroccupancysensingclusterholdtimelimitsstruct"
     },
@@ -2178,36 +2112,6 @@
     },
     "MTROptionalQRCodeInfo": {
       "url": "https://developer.apple.com/documentation/matter/mtroptionalqrcodeinfo"
-    },
-    "MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams": {
-      "url": "https://developer.apple.com/documentation/matter/mtrotasoftwareupdateproviderclusterapplyupdaterequestparams"
-    },
-    "MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams": {
-      "url": "https://developer.apple.com/documentation/matter/mtrotasoftwareupdateproviderclusterapplyupdateresponseparams"
-    },
-    "MTROtaSoftwareUpdateProviderClusterNotifyUpdateAppliedParams": {
-      "url": "https://developer.apple.com/documentation/matter/mtrotasoftwareupdateproviderclusternotifyupdateappliedparams"
-    },
-    "MTROtaSoftwareUpdateProviderClusterQueryImageParams": {
-      "url": "https://developer.apple.com/documentation/matter/mtrotasoftwareupdateproviderclusterqueryimageparams"
-    },
-    "MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams": {
-      "url": "https://developer.apple.com/documentation/matter/mtrotasoftwareupdateproviderclusterqueryimageresponseparams"
-    },
-    "MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams": {
-      "url": "https://developer.apple.com/documentation/matter/mtrotasoftwareupdaterequestorclusterannounceotaproviderparams"
-    },
-    "MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent": {
-      "url": "https://developer.apple.com/documentation/matter/mtrotasoftwareupdaterequestorclusterdownloaderrorevent"
-    },
-    "MTROtaSoftwareUpdateRequestorClusterProviderLocation": {
-      "url": "https://developer.apple.com/documentation/matter/mtrotasoftwareupdaterequestorclusterproviderlocation"
-    },
-    "MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent": {
-      "url": "https://developer.apple.com/documentation/matter/mtrotasoftwareupdaterequestorclusterstatetransitionevent"
-    },
-    "MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent": {
-      "url": "https://developer.apple.com/documentation/matter/mtrotasoftwareupdaterequestorclusterversionappliedevent"
     },
     "MTROvenCavityOperationalStateClusterErrorStateStruct": {
       "url": "https://developer.apple.com/documentation/matter/mtrovencavityoperationalstateclustererrorstatestruct"
@@ -2781,12 +2685,6 @@
     },
     "MTRTimeSynchronizationClusterSetTrustedTimeSourceParams": {
       "url": "https://developer.apple.com/documentation/matter/mtrtimesynchronizationclustersettrustedtimesourceparams"
-    },
-    "MTRTimeSynchronizationClusterSetUTCTimeParams": {
-      "url": "https://developer.apple.com/documentation/matter/mtrtimesynchronizationclustersetutctimeparams"
-    },
-    "MTRTimeSynchronizationClusterSetUtcTimeParams": {
-      "url": "https://developer.apple.com/documentation/matter/mtrtimesynchronizationclustersetutctimeparams"
     },
     "MTRTimeSynchronizationClusterTimeFailureEvent": {
       "url": "https://developer.apple.com/documentation/matter/mtrtimesynchronizationclustertimefailureevent"
@@ -3581,9 +3479,6 @@
     "MTREnergyEVSETargetDayOfWeekBitmap": {
       "url": "https://developer.apple.com/documentation/matter/mtrenergyevsetargetdayofweekbitmap"
     },
-    "MTRErrorCode": {
-      "url": "https://developer.apple.com/documentation/matter/mtrerrorcode"
-    },
     "MTREthernetNetworkDiagnosticsFeature": {
       "url": "https://developer.apple.com/documentation/matter/mtrethernetnetworkdiagnosticsfeature"
     },
@@ -3686,9 +3581,6 @@
     "MTRGeneralDiagnosticsRadioFaultType": {
       "url": "https://developer.apple.com/documentation/matter/mtrgeneraldiagnosticsradiofaulttype"
     },
-    "MTRGroupKeyManagementFeature": {
-      "url": "https://developer.apple.com/documentation/matter/mtrgroupkeymanagementfeature"
-    },
     "MTRGroupKeyManagementGroupKeySecurityPolicy": {
       "url": "https://developer.apple.com/documentation/matter/mtrgroupkeymanagementgroupkeysecuritypolicy"
     },
@@ -3736,15 +3628,6 @@
     },
     "MTRIlluminanceMeasurementLightSensorType": {
       "url": "https://developer.apple.com/documentation/matter/mtrilluminancemeasurementlightsensortype"
-    },
-    "MTRInteractionErrorCode": {
-      "url": "https://developer.apple.com/documentation/matter/mtrinteractionerrorcode"
-    },
-    "MTRKeypadInputCECKeyCode": {
-      "url": "https://developer.apple.com/documentation/matter/mtrkeypadinputceckeycode"
-    },
-    "MTRKeypadInputCecKeyCode": {
-      "url": "https://developer.apple.com/documentation/matter/mtrkeypadinputceckeycode"
     },
     "MTRKeypadInputFeature": {
       "url": "https://developer.apple.com/documentation/matter/mtrkeypadinputfeature"
@@ -3860,15 +3743,6 @@
     "MTROTASoftwareUpdateProviderDownloadProtocol": {
       "url": "https://developer.apple.com/documentation/matter/mtrotasoftwareupdateproviderdownloadprotocol"
     },
-    "MTROTASoftwareUpdateProviderOTAApplyUpdateAction": {
-      "url": "https://developer.apple.com/documentation/matter/mtrotasoftwareupdateproviderotaapplyupdateaction"
-    },
-    "MTROTASoftwareUpdateProviderOTADownloadProtocol": {
-      "url": "https://developer.apple.com/documentation/matter/mtrotasoftwareupdateproviderotadownloadprotocol"
-    },
-    "MTROTASoftwareUpdateProviderOTAQueryStatus": {
-      "url": "https://developer.apple.com/documentation/matter/mtrotasoftwareupdateproviderotaquerystatus"
-    },
     "MTROTASoftwareUpdateProviderStatus": {
       "url": "https://developer.apple.com/documentation/matter/mtrotasoftwareupdateproviderstatus"
     },
@@ -3877,15 +3751,6 @@
     },
     "MTROTASoftwareUpdateRequestorChangeReason": {
       "url": "https://developer.apple.com/documentation/matter/mtrotasoftwareupdaterequestorchangereason"
-    },
-    "MTROTASoftwareUpdateRequestorOTAAnnouncementReason": {
-      "url": "https://developer.apple.com/documentation/matter/mtrotasoftwareupdaterequestorotaannouncementreason"
-    },
-    "MTROTASoftwareUpdateRequestorOTAChangeReason": {
-      "url": "https://developer.apple.com/documentation/matter/mtrotasoftwareupdaterequestorotachangereason"
-    },
-    "MTROTASoftwareUpdateRequestorOTAUpdateState": {
-      "url": "https://developer.apple.com/documentation/matter/mtrotasoftwareupdaterequestorotaupdatestate"
     },
     "MTROTASoftwareUpdateRequestorUpdateState": {
       "url": "https://developer.apple.com/documentation/matter/mtrotasoftwareupdaterequestorupdatestate"
@@ -3943,24 +3808,6 @@
     },
     "MTROptionalQRCodeInfoType": {
       "url": "https://developer.apple.com/documentation/matter/mtroptionalqrcodeinfotype"
-    },
-    "MTROtaSoftwareUpdateProviderOTAApplyUpdateAction": {
-      "url": "https://developer.apple.com/documentation/matter/mtrotasoftwareupdateproviderotaapplyupdateaction"
-    },
-    "MTROtaSoftwareUpdateProviderOTADownloadProtocol": {
-      "url": "https://developer.apple.com/documentation/matter/mtrotasoftwareupdateproviderotadownloadprotocol"
-    },
-    "MTROtaSoftwareUpdateProviderOTAQueryStatus": {
-      "url": "https://developer.apple.com/documentation/matter/mtrotasoftwareupdateproviderotaquerystatus"
-    },
-    "MTROtaSoftwareUpdateRequestorOTAAnnouncementReason": {
-      "url": "https://developer.apple.com/documentation/matter/mtrotasoftwareupdaterequestorotaannouncementreason"
-    },
-    "MTROtaSoftwareUpdateRequestorOTAChangeReason": {
-      "url": "https://developer.apple.com/documentation/matter/mtrotasoftwareupdaterequestorotachangereason"
-    },
-    "MTROtaSoftwareUpdateRequestorOTAUpdateState": {
-      "url": "https://developer.apple.com/documentation/matter/mtrotasoftwareupdaterequestorotaupdatestate"
     },
     "MTROvenCavityOperationalStateErrorState": {
       "url": "https://developer.apple.com/documentation/matter/mtrovencavityoperationalstateerrorstate"

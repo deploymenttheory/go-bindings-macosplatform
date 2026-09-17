@@ -51,7 +51,7 @@ func (o *AVVideoOutputSpecification) InitWithTagCollections(tagCollections *foun
 }
 
 // @method 		setOutputPixelBufferAttributes:forTagCollection: @abstract   	Specifies a mapping between a tag collection and a set of pixel buffer attributes. @param			pixelBufferAttributes The client requirements for CVPixelBuffers related to the tags in tagCollection, expressed using the constants in <CoreVideo/CVPixelBuffer.h>. @param			tagCollection A single tag collection for which these pixel buffer attributes should map to. @discussion 	If this method is called twice on the same tag collection, the first requested pixel buffer attributes will be overridden. @note			Pixel buffer attributes are translated into output settings, therefore, the rules of `-setOutputSettings:forTagCollection` apply to this method as well. Namely, if you set pixel buffer attributes for a tag collection and then output settings for that same tag collection, your pixel buffer attributes will be overridden and vice-versa.
-// Deprecated: since macOS API_TO_BE_DEPRECATED.
+// Deprecated: since macOS 27.0.
 func (o *AVVideoOutputSpecification) SetOutputPixelBufferAttributesForTagCollection(pixelBufferAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID], tagCollection unsafe.Pointer) {
 	o.Ptr().Send(_aVVideoOutputSpecificationSelSetOutputPixelBufferAttributesForTagCollection, pixelBufferAttributes.Ptr(), tagCollection)
 }
@@ -71,7 +71,7 @@ func (o *AVVideoOutputSpecification) PreferredTagCollections() *foundation.NSArr
 }
 
 // @property		defaultPixelBufferAttributes @abstract		The default client requirements for CVPixelBuffers related to all tag collections not explicitly set with setOutputPixelBufferAttributes:forTagCollection:, expressed using the constants in <CoreVideo/CVPixelBuffer.h>. @discussion		NSDictionary where keys are of type NSString, values should match the type specified by the corresponding keys documentation in <CoreVideo/CVPixelBuffer.h> @note 			Pixel buffer attributes are translated into output settings, therefore, the rules of defaultOutputSettings apply to defaultPixelBufferAttributes as well.  If defaultPixelBufferAttributes are set after setting defaultOutputSettings, the set output settings will be overridden and vice-versa.
-// Deprecated: since macOS API_TO_BE_DEPRECATED.
+// Deprecated: since macOS 27.0.
 func (o *AVVideoOutputSpecification) DefaultPixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVVideoOutputSpecificationSelDefaultPixelBufferAttributes)
 	if _ret != 0 {
@@ -81,7 +81,7 @@ func (o *AVVideoOutputSpecification) DefaultPixelBufferAttributes() *foundation.
 }
 
 // @property		defaultPixelBufferAttributes @abstract		The default client requirements for CVPixelBuffers related to all tag collections not explicitly set with setOutputPixelBufferAttributes:forTagCollection:, expressed using the constants in <CoreVideo/CVPixelBuffer.h>. @discussion		NSDictionary where keys are of type NSString, values should match the type specified by the corresponding keys documentation in <CoreVideo/CVPixelBuffer.h> @note 			Pixel buffer attributes are translated into output settings, therefore, the rules of defaultOutputSettings apply to defaultPixelBufferAttributes as well.  If defaultPixelBufferAttributes are set after setting defaultOutputSettings, the set output settings will be overridden and vice-versa.
-// Deprecated: since macOS API_TO_BE_DEPRECATED.
+// Deprecated: since macOS 27.0.
 func (o *AVVideoOutputSpecification) SetDefaultPixelBufferAttributes(defaultPixelBufferAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
 	o.Ptr().Send(_aVVideoOutputSpecificationSelSetDefaultPixelBufferAttributes, defaultPixelBufferAttributes.Ptr())
 }

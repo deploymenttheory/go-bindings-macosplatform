@@ -66,12 +66,6 @@ func (cai *ControllerAxisInput) WithValue(value float32) *ControllerAxisInput {
 	return cai
 }
 
-// WithPreferredSystemGestureState sets the preferred state for handling input when the user binds the element to a system gesture.
-func (cai *ControllerAxisInput) WithPreferredSystemGestureState(preferredSystemGestureState SystemGestureState) *ControllerAxisInput {
-	objc.Send[objc.ID](objref.IDOf(cai), objc.RegisterName("setPreferredSystemGestureState:"), preferredSystemGestureState)
-	return cai
-}
-
 // WithSfSymbolsName sets a system symbol for the element or the remapped element.
 func (cai *ControllerAxisInput) WithSfSymbolsName(sfSymbolsName string) *ControllerAxisInput {
 	objc.Send[objc.ID](objref.IDOf(cai), objc.RegisterName("setSfSymbolsName:"), purego.NSString(sfSymbolsName))
@@ -93,6 +87,12 @@ func (cai *ControllerAxisInput) WithUnmappedSfSymbolsName(unmappedSfSymbolsName 
 // WithUnmappedLocalizedName sets the element’s localized name, not the remapped name.
 func (cai *ControllerAxisInput) WithUnmappedLocalizedName(unmappedLocalizedName string) *ControllerAxisInput {
 	objc.Send[objc.ID](objref.IDOf(cai), objc.RegisterName("setUnmappedLocalizedName:"), purego.NSString(unmappedLocalizedName))
+	return cai
+}
+
+// WithPreferredSystemGestureState sets the preferred state for handling input when the user binds the element to a system gesture.
+func (cai *ControllerAxisInput) WithPreferredSystemGestureState(preferredSystemGestureState SystemGestureState) *ControllerAxisInput {
+	objc.Send[objc.ID](objref.IDOf(cai), objc.RegisterName("setPreferredSystemGestureState:"), preferredSystemGestureState)
 	return cai
 }
 

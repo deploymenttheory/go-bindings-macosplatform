@@ -84,12 +84,6 @@ func (ct *ControllerTouchpad) WithReportsAbsoluteTouchSurfaceValues(reportsAbsol
 	return ct
 }
 
-// WithPreferredSystemGestureState sets the preferred state for handling input when the user binds the element to a system gesture.
-func (ct *ControllerTouchpad) WithPreferredSystemGestureState(preferredSystemGestureState SystemGestureState) *ControllerTouchpad {
-	objc.Send[objc.ID](objref.IDOf(ct), objc.RegisterName("setPreferredSystemGestureState:"), preferredSystemGestureState)
-	return ct
-}
-
 // WithSfSymbolsName sets a system symbol for the element or the remapped element.
 func (ct *ControllerTouchpad) WithSfSymbolsName(sfSymbolsName string) *ControllerTouchpad {
 	objc.Send[objc.ID](objref.IDOf(ct), objc.RegisterName("setSfSymbolsName:"), purego.NSString(sfSymbolsName))
@@ -111,6 +105,12 @@ func (ct *ControllerTouchpad) WithUnmappedSfSymbolsName(unmappedSfSymbolsName st
 // WithUnmappedLocalizedName sets the element’s localized name, not the remapped name.
 func (ct *ControllerTouchpad) WithUnmappedLocalizedName(unmappedLocalizedName string) *ControllerTouchpad {
 	objc.Send[objc.ID](objref.IDOf(ct), objc.RegisterName("setUnmappedLocalizedName:"), purego.NSString(unmappedLocalizedName))
+	return ct
+}
+
+// WithPreferredSystemGestureState sets the preferred state for handling input when the user binds the element to a system gesture.
+func (ct *ControllerTouchpad) WithPreferredSystemGestureState(preferredSystemGestureState SystemGestureState) *ControllerTouchpad {
+	objc.Send[objc.ID](objref.IDOf(ct), objc.RegisterName("setPreferredSystemGestureState:"), preferredSystemGestureState)
 	return ct
 }
 

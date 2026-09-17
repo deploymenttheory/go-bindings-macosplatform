@@ -33,3 +33,8 @@ func SFExtensionProfileKey() uintptr {
 	ptr, _ := purego.Dlsym(_safariservicesLib, "SFExtensionProfileKey")
 	return ptr
 }
+
+func SFSafariSettingsErrorDomain() uintptr {
+	ptr, _ := purego.Dlsym(_safariservicesLib, "SFSafariSettingsErrorDomain")
+	return ptr
+}

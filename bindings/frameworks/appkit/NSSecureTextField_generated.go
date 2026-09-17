@@ -158,6 +158,14 @@ func (stf *SecureTextField) WithBezelStyle(bezelStyle TextFieldBezelStyle) *Secu
 	return stf
 }
 
+// WithBorderShape sets set border shape NSControlBorderShapeAutomatic sets text field or subclass to default system shape. NSControlBorderShapeCircle sets text field or subclass to NSControlBorderShapeAutomatic.
+func (stf *SecureTextField) WithBorderShape(borderShape ControlBorderShape) *SecureTextField {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setBorderShape:"), borderShape)
+	})
+	return stf
+}
+
 // WithPreferredMaxLayoutWidth sets the maximum width of the text field’s intrinsic content size.
 func (stf *SecureTextField) WithPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64) *SecureTextField {
 	purego.Main(func() {
@@ -734,6 +742,14 @@ func (stf *SecureTextField) WithGestureRecognizers(items ...GestureRecognizerPro
 	return stf
 }
 
+// WithExclusiveGestureBehavior sets declares whether gesture recognizers should be exclusive in this view and its subviews.
+func (stf *SecureTextField) WithExclusiveGestureBehavior(exclusiveGestureBehavior ViewExclusiveGestureBehavior) *SecureTextField {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setExclusiveGestureBehavior:"), exclusiveGestureBehavior)
+	})
+	return stf
+}
+
 // WithAllowedTouchTypes sets the allowed touch types.
 func (stf *SecureTextField) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *SecureTextField {
 	purego.Main(func() {
@@ -795,6 +811,15 @@ func (stf *SecureTextField) WithHorizontalContentSizeConstraintActive(horizontal
 func (stf *SecureTextField) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *SecureTextField {
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
+	return stf
+}
+
+// WithTextSelectionManager sets the text selection manager for this view.
+func (stf *SecureTextField) WithTextSelectionManager(textSelectionManager *TextSelectionManager) *SecureTextField {
+	defer runtime.KeepAlive(textSelectionManager)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setTextSelectionManager:"), objref.IDOf(textSelectionManager))
 	})
 	return stf
 }

@@ -237,10 +237,6 @@
         }
       }
     },
-    "MPErrorCode": {
-      "doc": "An enumeration that represents error codes for framework operations.",
-      "url": "https://developer.apple.com/documentation/mediaplayer/mperrorcode"
-    },
     "MPMediaGrouping": {
       "doc": "Keys used to configure a media query.",
       "url": "https://developer.apple.com/documentation/mediaplayer/mpmediagrouping",

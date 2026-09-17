@@ -9,8 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A network service that broadcasts its availability using multicast DNS.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsnetservice
 // Deprecated: Use nw_connection_t or nw_listener_t in Network framework instead
 type NSNetService struct {
@@ -57,6 +55,7 @@ func NSNetServiceFromID(id objc.ID) *NSNetService {
 	return o
 }
 
+// Initializes the receiver for publishing a network service of type `type` at the socket location specified by `domain`, `name`, and `port`. - Parameters: - domain: The domain for the service. To use the default registration domains, pass in an empty string (`@""`). To limit registration to the local domain, use `@"local."`. - type: The network service type. Must contain both the service type and transport layer information (e.g. `_http._tcp.`). - name: The name by which the service is identified to the network. If you pass the empty string (`@""`), the system automatically advertises your service using the computer name as the service name. - port: The port on which the service is published. You use this method to create a service that you wish to publish on the network. This method is the designated initializer.
 func (o *NSNetService) InitWithDomainTypeNamePort(domain *NSString, type_ *NSString, name *NSString, port int) *NSNetService {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNetServiceSelInitWithDomainTypeNamePort, domain.Ptr(), type_.Ptr(), name.Ptr(), port)
 	if _ret != 0 {
@@ -65,6 +64,7 @@ func (o *NSNetService) InitWithDomainTypeNamePort(domain *NSString, type_ *NSStr
 	return NSNetServiceFromID(_ret)
 }
 
+// Returns the receiver, initialized as a network service of a given type and sets the initial host information. - Parameters: - domain: The domain for the service. To resolve in the default domains, pass in an empty string (`@""`). To limit resolution to the local domain, use `@"local."`. - type: The network service type. Must contain both the service type and transport layer information (e.g. `_http._tcp.`). - name: The name of the service to resolve. This method is the appropriate initializer to use to resolve a service. To publish a service, use `-initWithDomain:type:name:port:` instead. You cannot use this initializer to publish a service. Calling `-publish` on an `NSNetService` object initialized with this method generates a call to your delegate's `-netService:didNotPublish:` method with an `NSNetServicesBadArgumentError` error.
 func (o *NSNetService) InitWithDomainTypeName(domain *NSString, type_ *NSString, name *NSString) *NSNetService {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNetServiceSelInitWithDomainTypeName, domain.Ptr(), type_.Ptr(), name.Ptr())
 	if _ret != 0 {
@@ -73,32 +73,38 @@ func (o *NSNetService) InitWithDomainTypeName(domain *NSString, type_ *NSString,
 	return NSNetServiceFromID(_ret)
 }
 
+// Adds the service to the specified run loop. - Parameters: - aRunLoop: The run loop to which to add the receiver. - mode: The run loop mode to which to add the receiver. You can use this method in conjunction with `-removeFromRunLoop:forMode:` to transfer a service to a different run loop. You should not attempt to run a service on multiple run loops.
 func (o *NSNetService) ScheduleInRunLoopForMode(aRunLoop *NSRunLoop, mode *NSString) {
 	o.Ptr().Send(_nSNetServiceSelScheduleInRunLoopForMode, aRunLoop.Ptr(), mode.Ptr())
 }
 
+// Removes the service from the given run loop for a given mode. - Parameters: - aRunLoop: The run loop from which to remove the receiver. - mode: The run loop mode from which to remove the receiver. You can use this method in conjunction with `-scheduleInRunLoop:forMode:` to transfer the service to a different run loop. Although it is possible to remove an `NSNetService` object completely from any run loop and then attempt actions on it, it is an error to do so.
 func (o *NSNetService) RemoveFromRunLoopForMode(aRunLoop *NSRunLoop, mode *NSString) {
 	o.Ptr().Send(_nSNetServiceSelRemoveFromRunLoopForMode, aRunLoop.Ptr(), mode.Ptr())
 }
 
+// Attempts to advertise the receiver's on the network. This method returns immediately, with success or failure indicated by the callbacks to the delegate. This is equivalent to calling `-publishWithOptions:` with the default options (`0`).
 func (o *NSNetService) Publish() {
 	o.Ptr().Send(_nSNetServiceSelPublish)
 }
 
+// Attempts to advertise the receiver on the network, with the given options. - Parameters: - options: Options for the receiver. The supported options are described in `NSNetServiceOptions`. This method returns immediately, with success or failure indicated by the callbacks to the delegate.
 func (o *NSNetService) PublishWithOptions(options NSNetServiceOptions) {
 	o.Ptr().Send(_nSNetServiceSelPublishWithOptions, options)
 }
 
+// Starts a resolve process for the service. Attempts to determine at least one address for the service. This method returns immediately, with success or failure indicated by the callbacks to the delegate. In OS X v10.4, this method calls `-resolveWithTimeout:` with a timeout value of `5`.
 // Deprecated: Not supported
 func (o *NSNetService) Resolve() {
 	o.Ptr().Send(_nSNetServiceSelResolve)
 }
 
-// Deprecated: Not supported
+// Halts a currently running attempt to publish or resolve a service. The delegate will receive `-netServiceDidStop:` after the service stops. It is safe to remove all strong references to the service immediately after calling this method.
 func (o *NSNetService) Stop() {
 	o.Ptr().Send(_nSNetServiceSelStop)
 }
 
+// Returns a dictionary representing a TXT record given as an `NSData` object. - Parameters: - txtData: A data object encoding a TXT record. - Returns: A dictionary representing `txtData`. The dictionary's keys are UTF8-encoded `NSString` objects. The values associated with all the dictionary's keys are `NSData` objects that encapsulate strings or data. Fails an assertion if `txtData` cannot be represented as an `NSDictionary` object.
 func NSNetServiceDictionaryFromTXTRecordData(txtData *NSData) *NSDictionary[*NSString, *NSData] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSNetService), _nSNetServiceSelDictionaryFromTXTRecordData, txtData.Ptr())
 	if _ret != 0 {
@@ -107,6 +113,7 @@ func NSNetServiceDictionaryFromTXTRecordData(txtData *NSData) *NSDictionary[*NSS
 	return NSDictionaryFromID[*NSString, *NSData](_ret)
 }
 
+// Returns an `NSData` object representing a TXT record formed from a given dictionary. - Parameters: - txtDictionary: A dictionary containing a TXT record. - Returns: An `NSData` object representing TXT data formed from `txtDictionary`. Fails an assertion if `txtDictionary` cannot be represented as an `NSData` object.
 func NSNetServiceDataFromTXTRecordDictionary(txtDictionary *NSDictionary[*NSString, *NSData]) *NSData {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSNetService), _nSNetServiceSelDataFromTXTRecordDictionary, txtDictionary.Ptr())
 	if _ret != 0 {
@@ -115,20 +122,24 @@ func NSNetServiceDataFromTXTRecordDictionary(txtDictionary *NSDictionary[*NSStri
 	return NSDataFromID(_ret)
 }
 
+// Starts a resolve process of a finite duration for the service. - Parameters: - timeout: The maximum number of seconds to attempt a resolve. A value of `0.0` indicates no timeout and a resolve process of indefinite duration. During the resolve period, the service sends `-netServiceDidResolveAddress:` to the delegate for each address it discovers that matches the service parameters. Once the timeout is hit, the service sends `-netServiceDidStop:` to the delegate. If no addresses resolve during the timeout period, the service sends `-netService:didNotResolve:` to the delegate.
 func (o *NSNetService) ResolveWithTimeout(timeout float64) {
 	o.Ptr().Send(_nSNetServiceSelResolveWithTimeout, timeout)
 }
 
+// Creates a pair of input and output streams for the receiver and returns a Boolean value that indicates whether they were retrieved successfully. - Parameters: - inputStream: Upon return, the input stream for the receiver. Pass `NULL` if you do not need this stream. - outputStream: Upon return, the output stream for the receiver. Pass `NULL` if you do not need this stream. - Returns: `YES` if the streams are created successfully, otherwise `NO`. After this method is called, no delegate callbacks are called by the receiver. The streams that are created are not open, and are not scheduled in any run loop for any mode.
 func (o *NSNetService) GetInputStreamOutputStream(inputStream *NSInputStream, outputStream *NSOutputStream) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSNetServiceSelGetInputStreamOutputStream, inputStream.Ptr(), outputStream.Ptr())
 	return _ret
 }
 
+// Sets the TXT record for the receiver, and returns a Boolean value that indicates whether the operation was successful. - Parameters: - recordData: The TXT record for the receiver. Pass `nil` to remove the TXT record from the instance. - Returns: `YES` if `recordData` is successfully set as the TXT record, otherwise `NO`.
 func (o *NSNetService) SetTXTRecordData(recordData *NSData) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSNetServiceSelSetTXTRecordData, recordData.Ptr())
 	return _ret
 }
 
+// Returns the TXT record for the receiver. If the instance has not been resolved, or the delegate's `-netService:didUpdateTXTRecordData:` has not been called, this will return `nil`. It is permitted to have a zero-length TXT record.
 func (o *NSNetService) TXTRecordData() *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNetServiceSelTXTRecordData)
 	if _ret != 0 {
@@ -137,14 +148,17 @@ func (o *NSNetService) TXTRecordData() *NSData {
 	return NSDataFromID(_ret)
 }
 
+// Starts the monitoring of TXT-record updates for the receiver. The delegate must implement `-netService:didUpdateTXTRecordData:`, which is called when the TXT record for the receiver is updated.
 func (o *NSNetService) StartMonitoring() {
 	o.Ptr().Send(_nSNetServiceSelStartMonitoring)
 }
 
+// Stops the monitoring of TXT-record updates for the receiver.
 func (o *NSNetService) StopMonitoring() {
 	o.Ptr().Send(_nSNetServiceSelStopMonitoring)
 }
 
+// The delegate for the receiver. The delegate must conform to the `NSNetServiceDelegate` protocol, and is not retained.
 func (o *NSNetService) Delegate() NSNetServiceDelegate {
 	_ret := objc.Send[NSNetServiceDelegate](o.Ptr(), _nSNetServiceSelDelegate)
 	return _ret
@@ -154,6 +168,7 @@ func (o *NSNetService) SetDelegate(delegate NSNetServiceDelegate) {
 	o.Ptr().Send(_nSNetServiceSelSetDelegate, delegate)
 }
 
+// Specifies whether to also publish, resolve, or monitor this service over peer-to-peer Bluetooth and Wi-Fi, if available. This property must be set before calling `-publish`, `-publishWithOptions:`, `-resolveWithTimeout:`, or `-startMonitoring` in order to take effect. Initially set to `NO`.
 func (o *NSNetService) IncludesPeerToPeer() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSNetServiceSelIncludesPeerToPeer)
 	return _ret
@@ -163,6 +178,7 @@ func (o *NSNetService) SetIncludesPeerToPeer(includesPeerToPeer bool) {
 	o.Ptr().Send(_nSNetServiceSelSetIncludesPeerToPeer, includesPeerToPeer)
 }
 
+// A string containing the name of this service. This value is set when the object is first initialized, whether by your code or by a browser object.
 func (o *NSNetService) Name() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNetServiceSelName)
 	if _ret != 0 {
@@ -171,6 +187,7 @@ func (o *NSNetService) Name() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The type of the published service. This value is set when the object is first initialized, whether by your code or by a browser object.
 func (o *NSNetService) Type() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNetServiceSelType)
 	if _ret != 0 {
@@ -179,6 +196,7 @@ func (o *NSNetService) Type() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// A string containing the domain for this service. This can be an explicit domain name or it can contain the generic local domain name, `@"local."` (note the trailing period, which indicates an absolute name).
 func (o *NSNetService) Domain() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNetServiceSelDomain)
 	if _ret != 0 {
@@ -187,6 +205,7 @@ func (o *NSNetService) Domain() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// A string containing the DNS hostname for this service. This value is `nil` until the service has been resolved (when `addresses` is non-`nil`).
 func (o *NSNetService) HostName() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNetServiceSelHostName)
 	if _ret != 0 {
@@ -195,6 +214,7 @@ func (o *NSNetService) HostName() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// A read-only array containing `NSData` objects, each of which contains a socket address for the service. Each `NSData` object in the returned array contains an appropriate `sockaddr` structure that you can use to connect to the socket. The exact type of this structure depends on the service to which you are connecting. If no addresses were resolved for the service, the returned array contains zero elements. It is possible for a single service to resolve to more than one address or not resolve to any addresses. A service might resolve to multiple addresses if the computer publishing the service is currently multihoming.
 func (o *NSNetService) Addresses() *NSArray[*NSData] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNetServiceSelAddresses)
 	if _ret != 0 {
@@ -203,6 +223,7 @@ func (o *NSNetService) Addresses() *NSArray[*NSData] {
 	return NSArrayFromID[*NSData](_ret)
 }
 
+// The port on which the service is listening for connections. If the object was initialized by calling `-initWithDomain:type:name:port:`, then the value was set when the object was first initialized. If the object was initialized by calling `-initWithDomain:type:name:`, the value of this property is not valid (`-1`) until after the service has successfully been resolved (when `addresses` is non-`nil`).
 func (o *NSNetService) Port() int {
 	_ret := objc.Send[int](o.Ptr(), _nSNetServiceSelPort)
 	return _ret

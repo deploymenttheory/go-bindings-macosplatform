@@ -4,6 +4,10 @@
 
 package arkit
 
+// GCDevice is the Go form of the Objective-C protocol GCDevice.
+type GCDevice interface {
+}
+
 // OS_ar_anchor is the Go form of the Objective-C protocol OS_ar_anchor.
 type OS_ar_anchor interface {
 }
@@ -14,6 +18,10 @@ type OS_ar_authorization_result interface {
 
 // OS_ar_authorization_results is the Go form of the Objective-C protocol OS_ar_authorization_results.
 type OS_ar_authorization_results interface {
+}
+
+// OS_ar_data is the Go form of the Objective-C protocol OS_ar_data.
+type OS_ar_data interface {
 }
 
 // OS_ar_data_provider is the Go form of the Objective-C protocol OS_ar_data_provider.
@@ -36,8 +44,24 @@ type OS_ar_device_anchor interface {
 type OS_ar_error interface {
 }
 
+// OS_ar_hand_anchor is the Go form of the Objective-C protocol OS_ar_hand_anchor.
+type OS_ar_hand_anchor interface {
+}
+
+// OS_ar_hand_skeleton is the Go form of the Objective-C protocol OS_ar_hand_skeleton.
+type OS_ar_hand_skeleton interface {
+}
+
+// OS_ar_hand_tracking_provider is the Go form of the Objective-C protocol OS_ar_hand_tracking_provider.
+type OS_ar_hand_tracking_provider interface {
+}
+
 // OS_ar_session is the Go form of the Objective-C protocol OS_ar_session.
 type OS_ar_session interface {
+}
+
+// OS_ar_skeleton_joint is the Go form of the Objective-C protocol OS_ar_skeleton_joint.
+type OS_ar_skeleton_joint interface {
 }
 
 // OS_ar_strings is the Go form of the Objective-C protocol OS_ar_strings.
@@ -48,8 +72,8 @@ type OS_ar_strings interface {
 type OS_ar_trackable_anchor interface {
 }
 
-// OS_ar_world_anchors is the Go form of the Objective-C protocol OS_ar_world_anchors.
-type OS_ar_world_anchors interface {
+// OS_ar_world_tracking_configuration is the Go form of the Objective-C protocol OS_ar_world_tracking_configuration.
+type OS_ar_world_tracking_configuration interface {
 }
 
 // OS_ar_world_tracking_provider is the Go form of the Objective-C protocol OS_ar_world_tracking_provider.

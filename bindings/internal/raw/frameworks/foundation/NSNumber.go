@@ -245,81 +245,97 @@ func (o *NSNumber) DescriptionWithLocale(locale objc.ID) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The number object's value expressed as a `char`.
 func (o *NSNumber) CharValue() int8 {
 	_ret := objc.Send[int8](o.Ptr(), _nSNumberSelCharValue)
 	return _ret
 }
 
+// The number object's value expressed as an `unsigned char`.
 func (o *NSNumber) UnsignedCharValue() uint8 {
 	_ret := objc.Send[uint8](o.Ptr(), _nSNumberSelUnsignedCharValue)
 	return _ret
 }
 
+// The number object's value expressed as a `short`.
 func (o *NSNumber) ShortValue() int16 {
 	_ret := objc.Send[int16](o.Ptr(), _nSNumberSelShortValue)
 	return _ret
 }
 
+// The number object's value expressed as an `unsigned short`.
 func (o *NSNumber) UnsignedShortValue() uint16 {
 	_ret := objc.Send[uint16](o.Ptr(), _nSNumberSelUnsignedShortValue)
 	return _ret
 }
 
+// The number object's value expressed as an `int`.
 func (o *NSNumber) IntValue() int {
 	_ret := objc.Send[int](o.Ptr(), _nSNumberSelIntValue)
 	return _ret
 }
 
+// The number object's value expressed as an `unsigned int`.
 func (o *NSNumber) UnsignedIntValue() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSNumberSelUnsignedIntValue)
 	return _ret
 }
 
+// The number object's value expressed as a `long`.
 func (o *NSNumber) LongValue() int {
 	_ret := objc.Send[int](o.Ptr(), _nSNumberSelLongValue)
 	return _ret
 }
 
+// The number object's value expressed as an `unsigned long`.
 func (o *NSNumber) UnsignedLongValue() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSNumberSelUnsignedLongValue)
 	return _ret
 }
 
+// The number object's value expressed as a `long long`.
 func (o *NSNumber) LongLongValue() int64 {
 	_ret := objc.Send[int64](o.Ptr(), _nSNumberSelLongLongValue)
 	return _ret
 }
 
+// The number object's value expressed as an `unsigned long long`.
 func (o *NSNumber) UnsignedLongLongValue() uint64 {
 	_ret := objc.Send[uint64](o.Ptr(), _nSNumberSelUnsignedLongLongValue)
 	return _ret
 }
 
+// The number object's value expressed as a `float`.
 func (o *NSNumber) FloatValue() float32 {
 	_ret := objc.Send[float32](o.Ptr(), _nSNumberSelFloatValue)
 	return _ret
 }
 
+// The number object's value expressed as a `double`.
 func (o *NSNumber) DoubleValue() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSNumberSelDoubleValue)
 	return _ret
 }
 
+// The number object's value expressed as a Boolean value. A `0` value always means `NO`, and any nonzero value is interpreted as `YES`.
 func (o *NSNumber) BoolValue() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSNumberSelBoolValue)
 	return _ret
 }
 
+// The number object's value expressed as an `NSInteger`.
 func (o *NSNumber) IntegerValue() int {
 	_ret := objc.Send[int](o.Ptr(), _nSNumberSelIntegerValue)
 	return _ret
 }
 
+// The number object's value expressed as an `NSUInteger`.
 func (o *NSNumber) UnsignedIntegerValue() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSNumberSelUnsignedIntegerValue)
 	return _ret
 }
 
+// The number object's value expressed as a human-readable string. The string is created by invoking “NSNumber/descriptionWithLocale:“ where locale is `nil`.
 func (o *NSNumber) StringValue() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberSelStringValue)
 	if _ret != 0 {

@@ -16,8 +16,6 @@ import (
 )
 
 // URLSessionTaskMetrics is an idiomatic wrapper over the Objective-C class NSURLSessionTaskMetrics.
-//
-// An object encapsulating the metrics for a session task.
 type URLSessionTaskMetrics struct {
 	objref.Handle
 }
@@ -92,7 +90,7 @@ func (ustm *URLSessionTaskMetrics) WithScriptingProperties(scriptingProperties m
 	return ustm
 }
 
-// TransactionMetrics returns the transaction metrics.
+// TransactionMetrics returns an array containing the metrics collected for every request/response transaction created during the task execution.
 //
 // TransactionMetrics returns the collection as a Go slice.
 func (ustm *URLSessionTaskMetrics) TransactionMetrics() []*URLSessionTaskTransactionMetrics {
@@ -103,14 +101,14 @@ func (ustm *URLSessionTaskMetrics) TransactionMetrics() []*URLSessionTaskTransac
 	})
 }
 
-// TaskInterval returns the task interval.
+// TaskInterval returns interval from the task creation time to the task completion time. Task creation time is the time when the task was instantiated. Task completion time is the time when the task is about to change its internal state to completed.
 func (ustm *URLSessionTaskMetrics) TaskInterval() *DateInterval {
 	defer runtime.KeepAlive(ustm)
 	_r := objc.Send[objc.ID](objref.IDOf(ustm), objc.RegisterName("taskInterval"))
 	return DateIntervalFromID(_r)
 }
 
-// RedirectCount returns the redirect count.
+// RedirectCount returns the number of redirects that were recorded.
 func (ustm *URLSessionTaskMetrics) RedirectCount() int {
 	defer runtime.KeepAlive(ustm)
 	_r := objc.Send[int](objref.IDOf(ustm), objc.RegisterName("redirectCount"))

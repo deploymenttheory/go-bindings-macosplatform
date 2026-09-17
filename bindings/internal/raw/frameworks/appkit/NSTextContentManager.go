@@ -117,6 +117,7 @@ func (o *NSTextContentManager) RecordEditActionInRangeNewTextRange(originalTextR
 	o.Ptr().Send(_nSTextContentManagerSelRecordEditActionInRangeNewTextRange, originalTextRange.Ptr(), newTextRange.Ptr())
 }
 
+// The delegate for the content manager object.
 func (o *NSTextContentManager) Delegate() NSTextContentManagerDelegate {
 	_ret := objc.Send[NSTextContentManagerDelegate](o.Ptr(), _nSTextContentManagerSelDelegate)
 	return _ret
@@ -126,6 +127,7 @@ func (o *NSTextContentManager) SetDelegate(delegate NSTextContentManagerDelegate
 	o.Ptr().Send(_nSTextContentManagerSelSetDelegate, delegate)
 }
 
+// The array of text layout managers associated with this text content manager. This property is KVO-compliant.
 func (o *NSTextContentManager) TextLayoutManagers() *foundation.NSArray[*NSTextLayoutManager] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextContentManagerSelTextLayoutManagers)
 	if _ret != 0 {
@@ -134,6 +136,7 @@ func (o *NSTextContentManager) TextLayoutManagers() *foundation.NSArray[*NSTextL
 	return foundation.NSArrayFromID[*NSTextLayoutManager](_ret)
 }
 
+// The primary text layout manager for this content. The primary “NSTextLayoutManager“ interacts with the user, allowing edits. Setting this property to an “NSTextLayoutManager“ not in “textLayoutManagers“ resets it to `nil`. It automatically synchronizes pending edits before switching to a new primary object. The operation is synchronous. This property is KVO-compliant.
 func (o *NSTextContentManager) PrimaryTextLayoutManager() *NSTextLayoutManager {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextContentManagerSelPrimaryTextLayoutManager)
 	if _ret != 0 {
@@ -146,11 +149,13 @@ func (o *NSTextContentManager) SetPrimaryTextLayoutManager(primaryTextLayoutMana
 	o.Ptr().Send(_nSTextContentManagerSelSetPrimaryTextLayoutManager, primaryTextLayoutManager.Ptr())
 }
 
+// Indicates there's an active editing transaction from the primary text layout manager. The synchronization operations to non-primary text layout managers and the backing store block (or fail when synchronous) while this property is `true`. Non-primary text layout managers should avoid accessing the elements while this is `true`. KVO-compliant.
 func (o *NSTextContentManager) HasEditingTransaction() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTextContentManagerSelHasEditingTransaction)
 	return _ret
 }
 
+// Determines if the framework should automatically synchronize all text layout managers when exiting an editing transaction. The default value is `true`.
 func (o *NSTextContentManager) AutomaticallySynchronizesTextLayoutManagers() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTextContentManagerSelAutomaticallySynchronizesTextLayoutManagers)
 	return _ret
@@ -160,6 +165,7 @@ func (o *NSTextContentManager) SetAutomaticallySynchronizesTextLayoutManagers(au
 	o.Ptr().Send(_nSTextContentManagerSelSetAutomaticallySynchronizesTextLayoutManagers, automaticallySynchronizesTextLayoutManagers)
 }
 
+// Determines whether to automatically synchronize with the backing store when an editing transaction finishes. The default value is `false`.
 func (o *NSTextContentManager) AutomaticallySynchronizesToBackingStore() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTextContentManagerSelAutomaticallySynchronizesToBackingStore)
 	return _ret

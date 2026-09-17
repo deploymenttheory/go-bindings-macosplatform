@@ -37,6 +37,10 @@ type AVAsynchronousKeyValueLoading interface {
 type AVCaptureAudioDataOutputSampleBufferDelegate interface {
 }
 
+// AVCaptureBroadcastVideoOutputDelegate wraps the ObjC protocol AVCaptureBroadcastVideoOutputDelegate.
+type AVCaptureBroadcastVideoOutputDelegate interface {
+}
+
 // AVCaptureFileOutputDelegate wraps the ObjC protocol AVCaptureFileOutputDelegate.
 type AVCaptureFileOutputDelegate interface {
 	CaptureOutputShouldProvideSampleAccurateRecordingStart(output *AVCaptureOutput) bool
@@ -150,6 +154,10 @@ type AVPlayerItemOutputPushDelegate interface {
 // AVPlayerItemRenderedLegibleOutputPushDelegate wraps the ObjC protocol AVPlayerItemRenderedLegibleOutputPushDelegate.
 type AVPlayerItemRenderedLegibleOutputPushDelegate interface {
 	AVPlayerItemOutputPushDelegate
+}
+
+// AVPlayerItemSampleBufferOutputDelegate wraps the ObjC protocol AVPlayerItemSampleBufferOutputDelegate.
+type AVPlayerItemSampleBufferOutputDelegate interface {
 }
 
 // AVPlayerPlaybackCoordinatorDelegate wraps the ObjC protocol AVPlayerPlaybackCoordinatorDelegate.

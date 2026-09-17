@@ -19,7 +19,7 @@ import (
 //
 // It embeds [Port], promoting that type's methods.
 //
-// A port that represents a BSD socket.
+// A port that represents a BSD socket. A “NSSocketPort“ object can be used as an endpoint for distributed object connections. Companion classes, “NSMachPort“ and “NSMessagePort“, allow for local (on the same machine) communication only. The “NSSocketPort“ class allows for both local and remote communication, but may be more expensive than the others for the local case.
 type SocketPort struct {
 	Port
 }
@@ -56,35 +56,35 @@ func NewSocketPort() *SocketPort {
 	return socketPortAdopt(_id)
 }
 
-// NewSocketPortWithTCPPort creates a new SocketPort.
+// NewSocketPortWithTCPPort initializes the receiver as a local TCP/IP socket of type `SOCK_STREAM`, listening on a given port number.
 func NewSocketPortWithTCPPort(port uint16) *SocketPort {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSSocketPort")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTCPPort:"), port)
 	return socketPortAdopt(_id)
 }
 
-// NewSocketPortWithProtocolFamilySocketTypeProtocolAddress creates a new SocketPort.
+// NewSocketPortWithProtocolFamilySocketTypeProtocolAddress initializes the receiver as a local socket with the provided arguments.
 func NewSocketPortWithProtocolFamilySocketTypeProtocolAddress(family int, type_ int, protocol int, address []byte) *SocketPort {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSSocketPort")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProtocolFamily:socketType:protocol:address:"), family, type_, protocol, rt.BytesToNSData(address))
 	return socketPortAdopt(_id)
 }
 
-// NewSocketPortWithProtocolFamilySocketTypeProtocolSocket creates a new SocketPort.
+// NewSocketPortWithProtocolFamilySocketTypeProtocolSocket initializes the receiver with a previously created local socket.
 func NewSocketPortWithProtocolFamilySocketTypeProtocolSocket(family int, type_ int, protocol int, sock int) *SocketPort {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSSocketPort")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProtocolFamily:socketType:protocol:socket:"), family, type_, protocol, sock)
 	return socketPortAdopt(_id)
 }
 
-// NewSocketPortRemoteWithTCPPortHost creates a new SocketPort.
+// NewSocketPortRemoteWithTCPPortHost initializes the receiver as a TCP/IP socket of type `SOCK_STREAM` that can connect to a remote host on a given port.
 func NewSocketPortRemoteWithTCPPortHost(port uint16, hostName string) *SocketPort {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSSocketPort")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initRemoteWithTCPPort:host:"), port, purego.NSString(hostName))
 	return socketPortAdopt(_id)
 }
 
-// NewSocketPortRemoteWithProtocolFamilySocketTypeProtocolAddress creates a new SocketPort.
+// NewSocketPortRemoteWithProtocolFamilySocketTypeProtocolAddress initializes the receiver as a remote socket with the provided arguments.
 func NewSocketPortRemoteWithProtocolFamilySocketTypeProtocolAddress(family int, type_ int, protocol int, address []byte) *SocketPort {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSSocketPort")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initRemoteWithProtocolFamily:socketType:protocol:address:"), family, type_, protocol, rt.BytesToNSData(address))
@@ -103,35 +103,35 @@ func (sp *SocketPort) WithScriptingProperties(scriptingProperties map[string]obj
 	return sp
 }
 
-// ProtocolFamily returns the protocol family.
+// ProtocolFamily returns the protocol family of the receiver's socket.
 func (sp *SocketPort) ProtocolFamily() int {
 	defer runtime.KeepAlive(sp)
 	_r := objc.Send[int](objref.IDOf(sp), objc.RegisterName("protocolFamily"))
 	return _r
 }
 
-// SocketType returns the socket type.
+// SocketType returns the type of the receiver's socket.
 func (sp *SocketPort) SocketType() int {
 	defer runtime.KeepAlive(sp)
 	_r := objc.Send[int](objref.IDOf(sp), objc.RegisterName("socketType"))
 	return _r
 }
 
-// Protocol returns the protocol.
+// Protocol returns the protocol that the receiver's socket uses.
 func (sp *SocketPort) Protocol() int {
 	defer runtime.KeepAlive(sp)
 	_r := objc.Send[int](objref.IDOf(sp), objc.RegisterName("protocol"))
 	return _r
 }
 
-// Address returns the address.
+// Address returns the receiver's socket address structure stored inside an “NSData“ object.
 func (sp *SocketPort) Address() []byte {
 	defer runtime.KeepAlive(sp)
 	_r := objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("address"))
 	return rt.NSDataToBytes(_r)
 }
 
-// Socket returns the socket.
+// Socket returns the receiver's native socket identifier on the platform.
 func (sp *SocketPort) Socket() int {
 	defer runtime.KeepAlive(sp)
 	_r := objc.Send[int](objref.IDOf(sp), objc.RegisterName("socket"))

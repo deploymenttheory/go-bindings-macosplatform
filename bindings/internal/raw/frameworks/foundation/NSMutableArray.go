@@ -162,25 +162,21 @@ func (o *NSMutableArray[ObjectType]) RemoveObjectsFromIndicesNumIndices(indices 
 }
 
 // Removes from the receiving array the objects in another given array.
-// Deprecated: Not supported
 func (o *NSMutableArray[ObjectType]) RemoveObjectsInArray(otherArray *NSArray[ObjectType]) {
 	o.Ptr().Send(_nSMutableArraySelRemoveObjectsInArray, otherArray.Ptr())
 }
 
 // Removes from the array each of the objects within a given range.
-// Deprecated: Not supported
 func (o *NSMutableArray[ObjectType]) RemoveObjectsInRange(range_ NSRange) {
 	o.Ptr().Send(_nSMutableArraySelRemoveObjectsInRange, range_)
 }
 
 // Replaces the objects in the receiving array specified by one given range with the objects in another array specified by another range.
-// Deprecated: Not supported
 func (o *NSMutableArray[ObjectType]) ReplaceObjectsInRangeWithObjectsFromArrayRange(range_ NSRange, otherArray *NSArray[ObjectType], otherRange NSRange) {
 	o.Ptr().Send(_nSMutableArraySelReplaceObjectsInRangeWithObjectsFromArrayRange, range_, otherArray.Ptr(), otherRange)
 }
 
 // Replaces the objects in the receiving array specified by a given range with all of the objects from a given array.
-// Deprecated: Not supported
 func (o *NSMutableArray[ObjectType]) ReplaceObjectsInRangeWithObjectsFromArray(range_ NSRange, otherArray *NSArray[ObjectType]) {
 	o.Ptr().Send(_nSMutableArraySelReplaceObjectsInRangeWithObjectsFromArray, range_, otherArray.Ptr())
 }

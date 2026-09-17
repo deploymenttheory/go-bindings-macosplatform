@@ -97,6 +97,24 @@ func (mcpd *MTL4ComputePipelineDescriptor) WithSupportIndirectCommandBuffers(sup
 	return mcpd
 }
 
+// WithForwardProgressUsage sets the forward progress usage.
+func (mcpd *MTL4ComputePipelineDescriptor) WithForwardProgressUsage(forwardProgressUsage ForwardProgressUsage) *MTL4ComputePipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mcpd), objc.RegisterName("setForwardProgressUsage:"), forwardProgressUsage)
+	return mcpd
+}
+
+// WithContentionRelief sets the contention relief.
+func (mcpd *MTL4ComputePipelineDescriptor) WithContentionRelief(contentionRelief ContentionRelief) *MTL4ComputePipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mcpd), objc.RegisterName("setContentionRelief:"), contentionRelief)
+	return mcpd
+}
+
+// WithOptimizeForPersistentKernel sets the optimize for persistent kernel.
+func (mcpd *MTL4ComputePipelineDescriptor) WithOptimizeForPersistentKernel(optimizeForPersistentKernel bool) *MTL4ComputePipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mcpd), objc.RegisterName("setOptimizeForPersistentKernel:"), optimizeForPersistentKernel)
+	return mcpd
+}
+
 // WithLabel sets assigns an optional string that uniquely identifies a pipeline descriptor.
 func (mcpd *MTL4ComputePipelineDescriptor) WithLabel(label string) *MTL4ComputePipelineDescriptor {
 	objc.Send[objc.ID](objref.IDOf(mcpd), objc.RegisterName("setLabel:"), purego.NSString(label))
@@ -162,6 +180,27 @@ func (mcpd *MTL4ComputePipelineDescriptor) StaticLinkingDescriptor() *MTL4Static
 func (mcpd *MTL4ComputePipelineDescriptor) SupportIndirectCommandBuffers() MTL4IndirectCommandBufferSupportState {
 	defer runtime.KeepAlive(mcpd)
 	_r := objc.Send[MTL4IndirectCommandBufferSupportState](objref.IDOf(mcpd), objc.RegisterName("supportIndirectCommandBuffers"))
+	return _r
+}
+
+// ForwardProgressUsage returns the forward progress usage.
+func (mcpd *MTL4ComputePipelineDescriptor) ForwardProgressUsage() ForwardProgressUsage {
+	defer runtime.KeepAlive(mcpd)
+	_r := objc.Send[ForwardProgressUsage](objref.IDOf(mcpd), objc.RegisterName("forwardProgressUsage"))
+	return _r
+}
+
+// ContentionRelief returns the contention relief.
+func (mcpd *MTL4ComputePipelineDescriptor) ContentionRelief() ContentionRelief {
+	defer runtime.KeepAlive(mcpd)
+	_r := objc.Send[ContentionRelief](objref.IDOf(mcpd), objc.RegisterName("contentionRelief"))
+	return _r
+}
+
+// OptimizeForPersistentKernel wraps the corresponding Objective-C method.
+func (mcpd *MTL4ComputePipelineDescriptor) OptimizeForPersistentKernel() bool {
+	defer runtime.KeepAlive(mcpd)
+	_r := objc.Send[bool](objref.IDOf(mcpd), objc.RegisterName("optimizeForPersistentKernel"))
 	return _r
 }
 

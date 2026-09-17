@@ -110,11 +110,13 @@ func (o *NSTextSelectionNavigation) DeletionRangesForTextSelectionDirectionDesti
 	return foundation.NSArrayFromID[*NSTextRange](_ret)
 }
 
+// The data source object providing the layout and document content information.
 func (o *NSTextSelectionNavigation) TextSelectionDataSource() NSTextSelectionDataSource {
 	_ret := objc.Send[NSTextSelectionDataSource](o.Ptr(), _nSTextSelectionNavigationSelTextSelectionDataSource)
 	return _ret
 }
 
+// A Boolean value that indicates whether the object could produce selections with multiple disjoint ranges.
 func (o *NSTextSelectionNavigation) AllowsNonContiguousRanges() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTextSelectionNavigationSelAllowsNonContiguousRanges)
 	return _ret
@@ -124,6 +126,7 @@ func (o *NSTextSelectionNavigation) SetAllowsNonContiguousRanges(allowsNonContig
 	o.Ptr().Send(_nSTextSelectionNavigationSelSetAllowsNonContiguousRanges, allowsNonContiguousRanges)
 }
 
+// A Boolean value that indicates whether the coordinate system rotates for navigation methods based on the text container layout orientation. The default value is `false`.
 func (o *NSTextSelectionNavigation) RotatesCoordinateSystemForLayoutOrientation() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTextSelectionNavigationSelRotatesCoordinateSystemForLayoutOrientation)
 	return _ret

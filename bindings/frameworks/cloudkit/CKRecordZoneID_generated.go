@@ -15,8 +15,6 @@ import (
 )
 
 // RecordZoneID is an idiomatic wrapper over the Objective-C class CKRecordZoneID.
-//
-// An object that uniquely identifies a record zone in a database.
 type RecordZoneID struct {
 	objref.Handle
 }
@@ -73,7 +71,7 @@ func (rzi *RecordZoneID) String() string {
 	return rt.Description(objref.IDOf(rzi))
 }
 
-// NewRecordZoneIDWithZoneNameOwnerName creates a record zone ID with the specified name and owner.
+// NewRecordZoneIDWithZoneNameOwnerName creates a record zone ID with the specified name and owner. - Parameters: - zoneName: The name that identifies the record zone. Zone names consist of up to 255 ASCII characters, and don't start with an underscore. To specify the default zone of the current database, use “CKRecordZoneDefaultName-8mfij“. This parameter must not be `nil` or an empty string. - ownerName: The user who creates the record zone. To specify the current user, use “CKCurrentUserDefaultName“. If you provide `nil` or an empty string for this parameter, the method throws an exception. - Returns: A new record zone ID.
 func NewRecordZoneIDWithZoneNameOwnerName(zoneName string, ownerName string) *RecordZoneID {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKRecordZoneID")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithZoneName:ownerName:"), purego.NSString(zoneName), purego.NSString(ownerName))

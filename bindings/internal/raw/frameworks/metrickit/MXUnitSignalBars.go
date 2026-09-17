@@ -13,6 +13,7 @@ import (
 // A unit of measure for the number of bars of cellular network connectivity.
 //
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxunitsignalbars
+// Deprecated: Use SignalBars instead.
 type MXUnitSignalBars struct {
 	foundation.NSDimension
 }

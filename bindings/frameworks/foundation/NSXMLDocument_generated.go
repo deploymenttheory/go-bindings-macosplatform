@@ -20,7 +20,7 @@ import (
 //
 // It embeds [XMLNode], promoting that type's methods.
 //
-// An XML document as internalized into a logical tree structure.
+// An XML document as internalized into a logical tree structure. An “XMLDocument“ object can have multiple child nodes but only one element, the root element. Any other node must be a “XMLNode“ object representing a comment or a processing instruction. If you attempt to add any other kind of child node to an “XMLDocument“ object, such as an attribute, namespace, another document object, or an element other than the root, “XMLDocument“ raises an exception. If you add a valid child node and that object already has a parent, “XMLDocument“ raises an exception. An “XMLDocument“ object may also have document-global attributes, such as XML version, character encoding, referenced DTD, and MIME type. The initializers of the “XMLDocument“ class read an external source of XML, whether it be a local file or remote website, parse it, and process it into the tree representation. You can also construct an “XMLDocument“ programmatically. There are accessor methods for getting and setting document attributes, methods for transforming documents using XSLT, a method for dynamically validating a document, and methods for printing out the content of an “XMLDocument“ as XML, XHTML, HTML, or plain text. The “XMLDocument“ class is thread-safe as long as any given instance is used only in one thread. ### Subclassing Notes #### Methods to Override To subclass `NSXMLDocument` you need to override the primary initializer, “init(data:options:)“, and the methods listed below. In most cases, you need only invoke the superclass implementation, adding any subclass-specific code before or after the invocation, as necessary. - “rootElement()“ - “setChildren(_:)“ - “removeChild(at:)“ - “insertChild(_:at:)“ - “characterEncoding“ - “characterEncoding“ - “documentContentKind“ - “documentContentKind“ - “dtd“ - “mimeType“ - “isStandalone“ - “version“ - “version“ By default `NSXMLDocument` implements the `NSObject` <doc://com.apple.documentation/documentation/objectivec/nsobjectprotocol/isequal(_:)> method to perform a deep comparison: two `NSXMLDocument` objects are not considered equal unless they have the same name, same child nodes, same attributes, and so on. The comparison does not consider the parent node (and hence the node's location). If you want a different standard of comparison, override `isEqual:`. #### Special Considerations Because of the architecture and data model of NSXML, when it parses and processes a source of XML it cannot know about your subclass unless you override the class method “replacementClass(for:)“ to return your custom class in place of an `NSXML` class. If your custom class has no direct `NSXML` counterpart—for example, it is a subclass of `NSXMLNode` that represents CDATA sections—then you can walk the tree after it has been created and insert the new node where appropriate.
 type XMLDocument struct {
 	XMLNode
 }
@@ -57,7 +57,7 @@ func NewXMLDocument() *XMLDocument {
 	return xMLDocumentAdopt(_id)
 }
 
-// NewXMLDocumentWithXMLStringOptions returns a document created from either XML or HTML, if the HTMLTidy option is set. Parse errors are returned in <tt>error</tt>.
+// NewXMLDocumentWithXMLStringOptions initializes and returns an
 func NewXMLDocumentWithXMLStringOptions(str string, mask XMLNodeOptions) (result *XMLDocument, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSXMLDocument")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
@@ -68,7 +68,7 @@ func NewXMLDocumentWithXMLStringOptions(str string, mask XMLNodeOptions) (result
 	return xMLDocumentAdopt(_id), nil
 }
 
-// NewXMLDocumentWithContentsOfURLOptions returns a document created from the contents of an XML or HTML URL. Connection problems such as 404, parse errors are returned in <tt>error</tt>.
+// NewXMLDocumentWithContentsOfURLOptions initializes and returns an
 func NewXMLDocumentWithContentsOfURLOptions(url string, mask XMLNodeOptions) (result *XMLDocument, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSXMLDocument")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
@@ -79,7 +79,7 @@ func NewXMLDocumentWithContentsOfURLOptions(url string, mask XMLNodeOptions) (re
 	return xMLDocumentAdopt(_id), nil
 }
 
-// NewXMLDocumentWithDataOptions returns a document created from data. Parse errors are returned in <tt>error</tt>.
+// NewXMLDocumentWithDataOptions initializes and returns an
 func NewXMLDocumentWithDataOptions(data []byte, mask XMLNodeOptions) (result *XMLDocument, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSXMLDocument")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
@@ -90,7 +90,7 @@ func NewXMLDocumentWithDataOptions(data []byte, mask XMLNodeOptions) (result *XM
 	return xMLDocumentAdopt(_id), nil
 }
 
-// NewXMLDocumentWithRootElement returns a document with a single child, the root element.
+// NewXMLDocumentWithRootElement returns an
 func NewXMLDocumentWithRootElement(element *XMLElement) *XMLDocument {
 	defer runtime.KeepAlive(element)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSXMLDocument")), objc.RegisterName("alloc"))
@@ -98,61 +98,61 @@ func NewXMLDocumentWithRootElement(element *XMLElement) *XMLDocument {
 	return xMLDocumentAdopt(_id)
 }
 
-// WithCharacterEncoding sets sets the character encoding to an IANA type.
+// WithCharacterEncoding sets the character encoding of the receiver. The encoding must match the name of an IANA character set. Typically the encoding is specified in the XML declaration of a document that is processed, but it can be set at any time. If the specified encoding does not match the actual encoding, parsing of the document might fail.
 func (xd *XMLDocument) WithCharacterEncoding(characterEncoding StringProvider) *XMLDocument {
 	defer runtime.KeepAlive(characterEncoding)
 	objc.Send[objc.ID](objref.IDOf(xd), objc.RegisterName("setCharacterEncoding:"), objref.IDOf(characterEncoding))
 	return xd
 }
 
-// WithStandalone sets set whether this document depends on an external DTD. If this option is set the standalone declaration will appear on output.
+// WithStandalone sets a Boolean value that specifies whether the receiver represents a standalone XML document. A standalone document does not have an external DTD associated with it. If this option is set the standalone declaration will appear on output.
 func (xd *XMLDocument) WithStandalone(standalone bool) *XMLDocument {
 	objc.Send[objc.ID](objref.IDOf(xd), objc.RegisterName("setStandalone:"), standalone)
 	return xd
 }
 
-// WithDocumentContentKind sets the kind of document.
+// WithDocumentContentKind sets the kind of output content for the receiver. Most of the differences among document-content kind have to do with the handling of content-less tags such as
 func (xd *XMLDocument) WithDocumentContentKind(documentContentKind XMLDocumentContentKind) *XMLDocument {
 	objc.Send[objc.ID](objref.IDOf(xd), objc.RegisterName("setDocumentContentKind:"), documentContentKind)
 	return xd
 }
 
-// WithMIMEType sets set the MIME type, eg text/xml.
+// WithMIMEType sets the MIME type for the receiver (for example, "text/xml").
 func (xd *XMLDocument) WithMIMEType(mimeType StringProvider) *XMLDocument {
 	defer runtime.KeepAlive(mimeType)
 	objc.Send[objc.ID](objref.IDOf(xd), objc.RegisterName("setMIMEType:"), objref.IDOf(mimeType))
 	return xd
 }
 
-// WithDTD sets set the associated DTD. This DTD will be output with the document.
+// WithDTD sets the internal DTD associated with the receiver. Returns an
 func (xd *XMLDocument) WithDTD(dtd *XMLDTD) *XMLDocument {
 	defer runtime.KeepAlive(dtd)
 	objc.Send[objc.ID](objref.IDOf(xd), objc.RegisterName("setDTD:"), objref.IDOf(dtd))
 	return xd
 }
 
-// WithName sets sets the nodes name. Applicable for element, attribute, namespace, processing-instruction, document type declaration, element declaration, attribute declaration, entity declaration, and notation declaration.
+// WithName sets the name of the receiver. This property is applicable only to
 func (xd *XMLDocument) WithName(name StringProvider) *XMLDocument {
 	defer runtime.KeepAlive(name)
 	objc.Send[objc.ID](objref.IDOf(xd), objc.RegisterName("setName:"), objref.IDOf(name))
 	return xd
 }
 
-// WithObjectValue sets sets the content of the node. Setting the objectValue removes all existing children including processing instructions and comments. Setting the object value on an element creates a single text node child.
+// WithObjectValue sets the object value of the receiver. The object value may be the same as the value returned by
 func (xd *XMLDocument) WithObjectValue(objectValue obj.Object) *XMLDocument {
 	defer runtime.KeepAlive(objectValue)
 	objc.Send[objc.ID](objref.IDOf(xd), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	return xd
 }
 
-// WithStringValue sets sets the content of the node. Setting the stringValue removes all existing children including processing instructions and comments. Setting the string value on an element creates a single text node child. The getter returns the string value of the node, which may be either its content or child text nodes, depending on the type of node. Elements are recursed and text nodes concatenated in document order with no intervening spaces.
+// WithStringValue sets the content of the receiver as a string value. If the receiver is a node object of element kind, the content is that of any text-node children. This method recursively visits element nodes and concatenates their text nodes in document order with no intervening spaces.
 func (xd *XMLDocument) WithStringValue(stringValue StringProvider) *XMLDocument {
 	defer runtime.KeepAlive(stringValue)
 	objc.Send[objc.ID](objref.IDOf(xd), objc.RegisterName("setStringValue:"), objref.IDOf(stringValue))
 	return xd
 }
 
-// WithURI sets set the URI of this element, attribute, or document. For documents it is the URI of document origin. Getter returns the URI of this element, attribute, or document. For documents it is the URI of document origin and is automatically set when using initWithContentsOfURL.
+// WithURI sets the URI associated with the receiver. A node's URI is derived from its namespace or a document's URI; for documents, the URI comes either from the parsed XML or is explicitly set. You cannot change the URI for a particular node other than for a namespace or document node.
 func (xd *XMLDocument) WithURI(uri StringProvider) *XMLDocument {
 	defer runtime.KeepAlive(uri)
 	objc.Send[objc.ID](objref.IDOf(xd), objc.RegisterName("setURI:"), objref.IDOf(uri))
@@ -171,67 +171,67 @@ func (xd *XMLDocument) WithScriptingProperties(scriptingProperties map[string]ob
 	return xd
 }
 
-// SetRootElement set the root element. Removes all other children including comments and processing-instructions.
+// SetRootElement sets the root element of the receiver. As a side effect, this method removes all other children, including
 func (xd *XMLDocument) SetRootElement(root *XMLElement) {
 	defer runtime.KeepAlive(xd)
 	defer runtime.KeepAlive(root)
 	objc.Send[objc.ID](objref.IDOf(xd), objc.RegisterName("setRootElement:"), objref.IDOf(root))
 }
 
-// RootElement returns the root element.
+// RootElement returns the root element of the receiver.
 func (xd *XMLDocument) RootElement() *XMLElement {
 	defer runtime.KeepAlive(xd)
 	_r := objc.Send[objc.ID](objref.IDOf(xd), objc.RegisterName("rootElement"))
 	return XMLElementFromID(_r)
 }
 
-// InsertChildAtIndex inserts a child at a particular index.
+// InsertChildAtIndex inserts a node object at a specified position in the receiver's array of children.
 func (xd *XMLDocument) InsertChildAtIndex(child *XMLNode, index int) {
 	defer runtime.KeepAlive(xd)
 	defer runtime.KeepAlive(child)
 	objc.Send[objc.ID](objref.IDOf(xd), objc.RegisterName("insertChild:atIndex:"), objref.IDOf(child), index)
 }
 
-// InsertChildrenAtIndex insert several children at a particular index.
+// InsertChildrenAtIndex inserts an array of children at a specified position in the receiver's array of children.
 func (xd *XMLDocument) InsertChildrenAtIndex(children []*XMLNode, index int) {
 	defer runtime.KeepAlive(xd)
 	objc.Send[objc.ID](objref.IDOf(xd), objc.RegisterName("insertChildren:atIndex:"), purego.SliceToNSArray(children, func(_v *XMLNode) objc.ID { return objref.IDOf(_v) }), index)
 }
 
-// RemoveChildAtIndex removes a child at a particular index.
+// RemoveChildAtIndex removes the child node of the receiver located at a specified position in its array of children. Subsequent children have their indexes decreased by one. The removed
 func (xd *XMLDocument) RemoveChildAtIndex(index int) {
 	defer runtime.KeepAlive(xd)
 	objc.Send[objc.ID](objref.IDOf(xd), objc.RegisterName("removeChildAtIndex:"), index)
 }
 
-// SetChildren removes all existing children and replaces them with the new children. Set children to nil to simply remove all children.
+// SetChildren sets the child nodes of the receiver. Each of these objects must represent comments, processing instructions, or the root element; otherwise, an exception is raised. Pass in
 func (xd *XMLDocument) SetChildren(children []*XMLNode) {
 	defer runtime.KeepAlive(xd)
 	objc.Send[objc.ID](objref.IDOf(xd), objc.RegisterName("setChildren:"), purego.SliceToNSArray(children, func(_v *XMLNode) objc.ID { return objref.IDOf(_v) }))
 }
 
-// AddChild adds a child to the end of the existing children.
+// AddChild adds a child node after the last of the receiver's existing children.
 func (xd *XMLDocument) AddChild(child *XMLNode) {
 	defer runtime.KeepAlive(xd)
 	defer runtime.KeepAlive(child)
 	objc.Send[objc.ID](objref.IDOf(xd), objc.RegisterName("addChild:"), objref.IDOf(child))
 }
 
-// ReplaceChildAtIndexWithNode replaces a child at a particular index with another child.
+// ReplaceChildAtIndexWithNode replaces the child node of the receiver located at a specified position with another node. The removed
 func (xd *XMLDocument) ReplaceChildAtIndexWithNode(index int, node *XMLNode) {
 	defer runtime.KeepAlive(xd)
 	defer runtime.KeepAlive(node)
 	objc.Send[objc.ID](objref.IDOf(xd), objc.RegisterName("replaceChildAtIndex:withNode:"), index, objref.IDOf(node))
 }
 
-// XMLDataWith the representation of this node as it would appear in an XML document, encoded based on characterEncoding.
+// XMLDataWith returns the XML string representation of the receiver—that is, the entire document—encapsulated in a data object. The encoding used is based on the value returned from
 func (xd *XMLDocument) XMLDataWith(options XMLNodeOptions) []byte {
 	defer runtime.KeepAlive(xd)
 	_r := objc.Send[objc.ID](objref.IDOf(xd), objc.RegisterName("XMLDataWithOptions:"), options)
 	return rt.NSDataToBytes(_r)
 }
 
-// ObjectByApplyingXSLTArguments applies XSLT with arguments (NSString key/value pairs) to this document, returning a new document.
+// ObjectByApplyingXSLTArguments applies the XSLT pattern rules and templates (specified as a data object) to the receiver and returns a document object containing transformed XML or HTML markup. Depending on intended output, the method returns an
 func (xd *XMLDocument) ObjectByApplyingXSLTArguments(xslt []byte, arguments map[string]string) (result obj.Object, err error) {
 	defer runtime.KeepAlive(xd)
 	var _nsErr uintptr
@@ -242,7 +242,7 @@ func (xd *XMLDocument) ObjectByApplyingXSLTArguments(xslt []byte, arguments map[
 	return obj.Wrap(_r), nil
 }
 
-// ObjectByApplyingXSLTStringArguments applies XSLT as expressed by a string with arguments (NSString key/value pairs) to this document, returning a new document.
+// ObjectByApplyingXSLTStringArguments applies the XSLT pattern rules and templates (specified as a string) to the receiver and returns a document object containing transformed XML or HTML markup. Depending on intended output, the method returns an
 func (xd *XMLDocument) ObjectByApplyingXSLTStringArguments(xslt string, arguments map[string]string) (result obj.Object, err error) {
 	defer runtime.KeepAlive(xd)
 	var _nsErr uintptr
@@ -253,7 +253,7 @@ func (xd *XMLDocument) ObjectByApplyingXSLTStringArguments(xslt string, argument
 	return obj.Wrap(_r), nil
 }
 
-// ObjectByApplyingXSLTAtURLArguments applies the XSLT at a URL with arguments (NSString key/value pairs) to this document, returning a new document. Error may contain a connection error from the URL.
+// ObjectByApplyingXSLTAtURLArguments applies the XSLT pattern rules and templates located at a specified URL to the receiver and returns a document object containing transformed XML markup. Depending on intended output, the method returns an
 func (xd *XMLDocument) ObjectByApplyingXSLTAtURLArguments(xsltURL string, argument map[string]string) (result obj.Object, err error) {
 	defer runtime.KeepAlive(xd)
 	var _nsErr uintptr
@@ -264,7 +264,7 @@ func (xd *XMLDocument) ObjectByApplyingXSLTAtURLArguments(xsltURL string, argume
 	return obj.Wrap(_r), nil
 }
 
-// ValidateAndReturnError validates and return error.
+// ValidateAndReturnError validates the document against the governing schema and returns whether the document conforms to the schema. If the schema is defined with a DTD, this method uses the
 //
 // ValidateAndReturnError returns an error if the operation did not succeed.
 func (xd *XMLDocument) ValidateAndReturnError() error {
@@ -277,7 +277,7 @@ func (xd *XMLDocument) ValidateAndReturnError() error {
 	return nil
 }
 
-// CharacterEncoding sets the character encoding to an IANA type.
+// CharacterEncoding returns the character encoding of the receiver. The encoding must match the name of an IANA character set. Typically the encoding is specified in the XML declaration of a document that is processed, but it can be set at any time. If the specified encoding does not match the actual encoding, parsing of the document might fail.
 func (xd *XMLDocument) CharacterEncoding() string {
 	defer runtime.KeepAlive(xd)
 	_r := objc.Send[objc.ID](objref.IDOf(xd), objc.RegisterName("characterEncoding"))
@@ -287,21 +287,21 @@ func (xd *XMLDocument) CharacterEncoding() string {
 	return purego.GoString(_r)
 }
 
-// IsStandalone reports whether set whether this document depends on an external DTD. If this option is set the standalone declaration will appear on output.
+// IsStandalone reports whether a Boolean value that specifies whether the receiver represents a standalone XML document. A standalone document does not have an external DTD associated with it. If this option is set the standalone declaration will appear on output.
 func (xd *XMLDocument) IsStandalone() bool {
 	defer runtime.KeepAlive(xd)
 	_r := objc.Send[bool](objref.IDOf(xd), objc.RegisterName("isStandalone"))
 	return _r
 }
 
-// DocumentContentKind returns the kind of document.
+// DocumentContentKind returns the kind of output content for the receiver. Most of the differences among document-content kind have to do with the handling of content-less tags such as
 func (xd *XMLDocument) DocumentContentKind() XMLDocumentContentKind {
 	defer runtime.KeepAlive(xd)
 	_r := objc.Send[XMLDocumentContentKind](objref.IDOf(xd), objc.RegisterName("documentContentKind"))
 	return _r
 }
 
-// MIMEType set the MIME type, eg text/xml.
+// MIMEType returns the MIME type for the receiver (for example, "text/xml").
 func (xd *XMLDocument) MIMEType() string {
 	defer runtime.KeepAlive(xd)
 	_r := objc.Send[objc.ID](objref.IDOf(xd), objc.RegisterName("MIMEType"))
@@ -311,14 +311,14 @@ func (xd *XMLDocument) MIMEType() string {
 	return purego.GoString(_r)
 }
 
-// DTD set the associated DTD. This DTD will be output with the document.
+// DTD returns the internal DTD associated with the receiver. Returns an
 func (xd *XMLDocument) DTD() *XMLDTD {
 	defer runtime.KeepAlive(xd)
 	_r := objc.Send[objc.ID](objref.IDOf(xd), objc.RegisterName("DTD"))
 	return XMLDTDFromID(_r)
 }
 
-// XMLData returns invokes XMLDataWithOptions with NSXMLNodeOptionsNone.
+// XMLData returns the XML string representation of the receiver—that is, the entire document—encapsulated in a data object. This property invokes
 func (xd *XMLDocument) XMLData() []byte {
 	defer runtime.KeepAlive(xd)
 	_r := objc.Send[objc.ID](objref.IDOf(xd), objc.RegisterName("XMLData"))

@@ -67,7 +67,7 @@ func NewMTRBaseClusterWindowCoveringWithDeviceEndpointQueue(device *MTRBaseDevic
 	return mTRBaseClusterWindowCoveringAdopt(_id)
 }
 
-// UpOrOpenWithParamsCompletion command UpOrOpen Moves window covering to InstalledOpenLimitLift and InstalledOpenLimitTilt
+// UpOrOpenWithParamsCompletion command UpOrOpen Upon receipt of this command, the window covering will adjust its position so the physical lift/slide and tilt is at the maximum open/up position.
 func (mbcwc *MTRBaseClusterWindowCovering) UpOrOpenWithParamsCompletion(params *MTRWindowCoveringClusterUpOrOpenParams, completion func(unsafe.Pointer)) {
 	defer runtime.KeepAlive(mbcwc)
 	defer runtime.KeepAlive(params)
@@ -80,7 +80,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) UpOrOpenWithCompletion(completion fun
 	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("upOrOpenWithCompletion:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
-// DownOrCloseWithParamsCompletion command DownOrClose Moves window covering to InstalledClosedLimitLift and InstalledCloseLimitTilt
+// DownOrCloseWithParamsCompletion command DownOrClose Upon receipt of this command, the window covering will adjust its position so the physical lift/slide and tilt is at the maximum closed/down position.
 func (mbcwc *MTRBaseClusterWindowCovering) DownOrCloseWithParamsCompletion(params *MTRWindowCoveringClusterDownOrCloseParams, completion func(unsafe.Pointer)) {
 	defer runtime.KeepAlive(mbcwc)
 	defer runtime.KeepAlive(params)
@@ -93,7 +93,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) DownOrCloseWithCompletion(completion 
 	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("downOrCloseWithCompletion:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
-// StopMotionWithParamsCompletion command StopMotion Stop any adjusting of window covering
+// StopMotionWithParamsCompletion command StopMotion Upon receipt of this command, the window covering will stop any adjusting to the physical tilt and lift/slide that is currently occurring.
 func (mbcwc *MTRBaseClusterWindowCovering) StopMotionWithParamsCompletion(params *MTRWindowCoveringClusterStopMotionParams, completion func(unsafe.Pointer)) {
 	defer runtime.KeepAlive(mbcwc)
 	defer runtime.KeepAlive(params)
@@ -113,7 +113,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) GoToLiftValueWithParamsCompletion(par
 	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("goToLiftValueWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
-// GoToLiftPercentageWithParamsCompletion command GoToLiftPercentage Go to lift percentage specified
+// GoToLiftPercentageWithParamsCompletion command GoToLiftPercentage This command is used to set the target lift position of the window covering to the percentage value specified in the command.
 func (mbcwc *MTRBaseClusterWindowCovering) GoToLiftPercentageWithParamsCompletion(params *MTRWindowCoveringClusterGoToLiftPercentageParams, completion func(unsafe.Pointer)) {
 	defer runtime.KeepAlive(mbcwc)
 	defer runtime.KeepAlive(params)
@@ -127,7 +127,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) GoToTiltValueWithParamsCompletion(par
 	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("goToTiltValueWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
-// GoToTiltPercentageWithParamsCompletion command GoToTiltPercentage Go to tilt percentage specified
+// GoToTiltPercentageWithParamsCompletion command GoToTiltPercentage This command is used to set the target tilt position of the window covering to the percentage value specified in the command.
 func (mbcwc *MTRBaseClusterWindowCovering) GoToTiltPercentageWithParamsCompletion(params *MTRWindowCoveringClusterGoToTiltPercentageParams, completion func(unsafe.Pointer)) {
 	defer runtime.KeepAlive(mbcwc)
 	defer runtime.KeepAlive(params)

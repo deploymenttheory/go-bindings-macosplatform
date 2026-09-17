@@ -21,8 +21,6 @@ import (
 // URLSessionWebSocketTask is an idiomatic wrapper over the Objective-C class NSURLSessionWebSocketTask.
 //
 // It embeds [URLSessionTask], promoting that type's methods.
-//
-// A URL session task that communicates over the WebSockets protocol standard.
 type URLSessionWebSocketTask struct {
 	URLSessionTask
 }
@@ -59,13 +57,13 @@ func NewURLSessionWebSocketTask() *URLSessionWebSocketTask {
 	return uRLSessionWebSocketTaskAdopt(_id)
 }
 
-// WithMaximumMessageSize sets the maximum message size.
+// WithMaximumMessageSize sets the maximum number of bytes to be buffered before erroring out. This includes the sum of all bytes from continuation frames. Receive calls will error out if this value is reached.
 func (uswst *URLSessionWebSocketTask) WithMaximumMessageSize(maximumMessageSize int) *URLSessionWebSocketTask {
 	objc.Send[objc.ID](objref.IDOf(uswst), objc.RegisterName("setMaximumMessageSize:"), maximumMessageSize)
 	return uswst
 }
 
-// WithDelegate sets the delegate.
+// WithDelegate sets a delegate specific to the task. This task-specific delegate receives messages from the task before the session's delegate receives them. Methods not implemented on this delegate will still be forwarded to the session delegate. Cannot be modified after task resumes. Not supported on background session. Delegate is strongly referenced until the task completes, after which it is reset to `nil`.
 func (uswst *URLSessionWebSocketTask) WithDelegate(delegate URLSessionTaskDelegate) *URLSessionWebSocketTask {
 	_shim := newURLSessionTaskDelegateShim(delegate)
 	_sel := objc.RegisterName("setDelegate:")
@@ -75,39 +73,39 @@ func (uswst *URLSessionWebSocketTask) WithDelegate(delegate URLSessionTaskDelega
 	return uswst
 }
 
-// WithEarliestBeginDate sets the earliest begin date.
+// WithEarliestBeginDate sets the earliest date at which the network load should begin. For tasks created from background `NSURLSession` instances, this property indicates that the network load should not begin any earlier than this date. Setting this property does not guarantee that the load will begin at the specified date, but only that it will not begin sooner. If not specified, no start delay is used. This property has no effect for tasks created from nonbackground sessions.
 func (uswst *URLSessionWebSocketTask) WithEarliestBeginDate(earliestBeginDate DateProvider) *URLSessionWebSocketTask {
 	defer runtime.KeepAlive(earliestBeginDate)
 	objc.Send[objc.ID](objref.IDOf(uswst), objc.RegisterName("setEarliestBeginDate:"), objref.IDOf(earliestBeginDate))
 	return uswst
 }
 
-// WithCountOfBytesClientExpectsToSend sets the count of bytes client expects to send.
+// WithCountOfBytesClientExpectsToSend sets a best-guess upper bound on the number of bytes the client expects to send. The value set for this property should account for the size of HTTP headers and body data or body stream. If no value is specified, the system uses `NSURLSessionTransferSizeUnknown` instead. This property is used by the system to optimize the scheduling of URL session tasks. Developers are strongly encouraged to provide an approximate upper bound, or an exact byte count, if possible, rather than accept the default.
 func (uswst *URLSessionWebSocketTask) WithCountOfBytesClientExpectsToSend(countOfBytesClientExpectsToSend int64) *URLSessionWebSocketTask {
 	objc.Send[objc.ID](objref.IDOf(uswst), objc.RegisterName("setCountOfBytesClientExpectsToSend:"), countOfBytesClientExpectsToSend)
 	return uswst
 }
 
-// WithCountOfBytesClientExpectsToReceive sets the count of bytes client expects to receive.
+// WithCountOfBytesClientExpectsToReceive sets a best-guess upper bound on the number of bytes the client expects to receive. The value set for this property should account for the size of both HTTP response headers and the response body. If no value is specified, the system uses `NSURLSessionTransferSizeUnknown` instead. This property is used by the system to optimize the scheduling of URL session tasks. Developers are strongly encouraged to provide an approximate upper bound, or an exact byte count, if possible, rather than accept the default.
 func (uswst *URLSessionWebSocketTask) WithCountOfBytesClientExpectsToReceive(countOfBytesClientExpectsToReceive int64) *URLSessionWebSocketTask {
 	objc.Send[objc.ID](objref.IDOf(uswst), objc.RegisterName("setCountOfBytesClientExpectsToReceive:"), countOfBytesClientExpectsToReceive)
 	return uswst
 }
 
-// WithTaskDescription sets the task description.
+// WithTaskDescription sets an app-provided string value for the current task. The system doesn't interpret this value; use it for whatever purpose you see fit. For example, you could store a description of the task for debugging purposes, or a key to track the task in your own data structures.
 func (uswst *URLSessionWebSocketTask) WithTaskDescription(taskDescription StringProvider) *URLSessionWebSocketTask {
 	defer runtime.KeepAlive(taskDescription)
 	objc.Send[objc.ID](objref.IDOf(uswst), objc.RegisterName("setTaskDescription:"), objref.IDOf(taskDescription))
 	return uswst
 }
 
-// WithPriority sets the priority.
+// WithPriority sets the relative priority at which you'd like a host to handle the task, specified as a floating point value between `0.0` (lowest priority) and `1.0` (highest priority). To provide hints to a host on how to prioritize URL session tasks from your app, specify a priority for each task. Specifying a priority provides only a hint and does not guarantee performance. If you don't specify a priority, a URL session task has a priority of `NSURLSessionTaskPriorityDefault`, with a value of `0.5`. There are three named priorities you can employ: `NSURLSessionTaskPriorityDefault`, `NSURLSessionTaskPriorityLow`, and `NSURLSessionTaskPriorityHigh`. You can specify or change a task's priority at any time, but not all networking protocols respond to changes after a task has started. There is no API to let you determine the effective priority for a task from a host's perspective.
 func (uswst *URLSessionWebSocketTask) WithPriority(priority float32) *URLSessionWebSocketTask {
 	objc.Send[objc.ID](objref.IDOf(uswst), objc.RegisterName("setPriority:"), priority)
 	return uswst
 }
 
-// WithPrefersIncrementalDelivery sets the prefers incremental delivery.
+// WithPrefersIncrementalDelivery sets a Boolean value that determines whether to deliver a partial response body in increments. Set this property to `true` to tell the task that the app would benefit from receiving a partial response body in increments. If the app can't process the response until it has all the data, set this property to `false`. Task performance may improve when this value is `false`, in which case the task only delivers data when complete. This property defaults to `true`, except in the following cases which default to `false`: - The task delivers results to a completion handler rather than to a delegate. - The task is a download task.
 func (uswst *URLSessionWebSocketTask) WithPrefersIncrementalDelivery(prefersIncrementalDelivery bool) *URLSessionWebSocketTask {
 	objc.Send[objc.ID](objref.IDOf(uswst), objc.RegisterName("setPrefersIncrementalDelivery:"), prefersIncrementalDelivery)
 	return uswst
@@ -125,7 +123,7 @@ func (uswst *URLSessionWebSocketTask) WithScriptingProperties(scriptingPropertie
 	return uswst
 }
 
-// SendMessage sends a WebSocket message, receiving the result in a completion handler.
+// SendMessage sends a WebSocket message, receiving the result in a completion handler. If an error occurs while sending the message, any outstanding work also fails. Note that invocation of the completion handler does not guarantee that the remote side has received all the bytes, only that they have been written to the kernel. - Parameters: - message: The WebSocket message to send to the other endpoint. - completionHandler: A closure that receives an `NSError` that indicates an error encountered while sending, or `nil` if no error occurred.
 //
 // SendMessage blocks until the operation completes or ctx is cancelled.
 func (uswst *URLSessionWebSocketTask) SendMessage(ctx context.Context, message *URLSessionWebSocketMessage) error {
@@ -146,7 +144,7 @@ func (uswst *URLSessionWebSocketTask) SendMessage(ctx context.Context, message *
 	}
 }
 
-// ReceiveMessage reads a WebSocket message once all the frames of the message are available.
+// ReceiveMessage reads a WebSocket message once all the frames of the message are available. If the task reaches the “maximumMessageSize“ while buffering the frames, the receive call will error out and all outstanding work will also fail, resulting in the end of the task. - Parameters: - completionHandler: A closure that receives the WebSocket message and an `NSError` that indicates an error encountered while receiving, or `nil` if no error occurred.
 //
 // ReceiveMessage blocks until the operation completes or ctx is cancelled.
 func (uswst *URLSessionWebSocketTask) ReceiveMessage(ctx context.Context) (result *URLSessionWebSocketMessage, err error) {
@@ -172,7 +170,7 @@ func (uswst *URLSessionWebSocketTask) ReceiveMessage(ctx context.Context) (resul
 	}
 }
 
-// SendPingWithPongReceiveHandler sends ping with pong receive handler.
+// SendPingWithPongReceiveHandler sends a ping frame from the client side. The `pongReceiveHandler` is invoked when the client receives a pong from the server endpoint. If a connection is lost or an error occurs before receiving the pong from the endpoint, the handler will be invoked with an error. The handler will always be called in the order in which the pings were sent. - Parameter pongReceiveHandler: The handler to call when a pong is received or an error occurs.
 //
 // SendPingWithPongReceiveHandler blocks until the operation completes or ctx is cancelled.
 func (uswst *URLSessionWebSocketTask) SendPingWithPongReceiveHandler(ctx context.Context) error {
@@ -192,27 +190,27 @@ func (uswst *URLSessionWebSocketTask) SendPingWithPongReceiveHandler(ctx context
 	}
 }
 
-// CancelWithCloseCodeReason cancels with close code reason.
+// CancelWithCloseCodeReason sends a close frame with the given close code. An optional reason can be provided while sending the close frame. Simply calling `-cancel` on the task will result in a cancellation frame being sent without any reason. - Parameter closeCode: The close code to send. - Parameter reason: An optional data object containing the close reason.
 func (uswst *URLSessionWebSocketTask) CancelWithCloseCodeReason(closeCode URLSessionWebSocketCloseCode, reason []byte) {
 	defer runtime.KeepAlive(uswst)
 	objc.Send[objc.ID](objref.IDOf(uswst), objc.RegisterName("cancelWithCloseCode:reason:"), closeCode, rt.BytesToNSData(reason))
 }
 
-// MaximumMessageSize returns the maximum message size.
+// MaximumMessageSize returns the maximum number of bytes to be buffered before erroring out. This includes the sum of all bytes from continuation frames. Receive calls will error out if this value is reached.
 func (uswst *URLSessionWebSocketTask) MaximumMessageSize() int {
 	defer runtime.KeepAlive(uswst)
 	_r := objc.Send[int](objref.IDOf(uswst), objc.RegisterName("maximumMessageSize"))
 	return _r
 }
 
-// CloseCode returns the close code.
+// CloseCode returns a code that indicates the reason a connection closed. You can retrieve the close code at any time. When the task is not yet closed, this value is `NSURLSessionWebSocketCloseCodeInvalid`.
 func (uswst *URLSessionWebSocketTask) CloseCode() URLSessionWebSocketCloseCode {
 	defer runtime.KeepAlive(uswst)
 	_r := objc.Send[URLSessionWebSocketCloseCode](objref.IDOf(uswst), objc.RegisterName("closeCode"))
 	return _r
 }
 
-// CloseReason returns the close reason.
+// CloseReason returns the close reason received from the server. A task can be queried for its close reason at any point. A `nil` value indicates no close reason or that the task is still running.
 func (uswst *URLSessionWebSocketTask) CloseReason() []byte {
 	defer runtime.KeepAlive(uswst)
 	_r := objc.Send[objc.ID](objref.IDOf(uswst), objc.RegisterName("closeReason"))

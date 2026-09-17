@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io"
 	"sort"
+	"strconv"
 	"strings"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks/render"
@@ -257,45 +258,29 @@ func memberCommentBlock(member meta.EnumMember) string {
 // upgradeEnumTypeIfOverflow upgrades a signed int type to unsigned if any
 // member value would overflow a signed integer (e.g. very large bitmask values).
 func upgradeEnumTypeIfOverflow(goType string, members []meta.EnumMember) string {
-	var signed, bitWidth int
+	var bitWidth int
 	switch goType {
 	case "int":
-		signed, bitWidth = 1, 64
+		bitWidth = 64
 	case "int64":
-		signed, bitWidth = 1, 64
+		bitWidth = 64
 	case "int32":
-		signed, bitWidth = 1, 32
+		bitWidth = 32
 	case "int16":
-		signed, bitWidth = 1, 16
+		bitWidth = 16
 	case "int8":
-		signed, bitWidth = 1, 8
+		bitWidth = 8
 	default:
 		return goType
 	}
-	_ = bitWidth
-	if signed == 0 {
-		return goType
-	}
+	maxSigned := uint64(1)<<(bitWidth-1) - 1
 	for _, m := range members {
 		v := strings.TrimSpace(m.Value)
 		if strings.HasPrefix(v, "-") {
 			continue // negative — fine for signed
 		}
-		// Check if value string represents a number larger than int64 max.
-		// Numbers >= 2^63 are represented as unsigned hex or large decimals.
-		if len(v) >= 19 && !strings.HasPrefix(v, "0x") {
-			// Decimal >= 10^18 likely overflows int64
+		if value, err := strconv.ParseUint(v, 0, 64); err == nil && value > maxSigned {
 			return unsignedVariant(goType)
-		}
-		if strings.HasPrefix(v, "0x") || strings.HasPrefix(v, "0X") {
-			// Hex value: if more than 16 hex digits or starts with 8-f in high nibble
-			hex := v[2:]
-			if len(hex) > 16 {
-				return unsignedVariant(goType)
-			}
-			if len(hex) == 16 && hex[0] >= '8' {
-				return unsignedVariant(goType)
-			}
 		}
 	}
 	return goType

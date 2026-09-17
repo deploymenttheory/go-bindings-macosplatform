@@ -643,10 +643,10 @@ func _loadLibrary() {
 		purego.RegisterLibFunc(&_fnSecCertificateCopyPreferred, _securityLib, "SecCertificateCopyPreferred")
 	})
 	_register("SecCertificateCopyPublicKey", func() {
-		purego.RegisterLibFunc(&_fnSecCertificateCopyPublicKey, _securityLib, "SecCertificateCopyPublicKey")
+		purego.RegisterLibFunc(&_fnSecCertificateCopyPublicKey, _securityLib, "SecCertificateCopyPublicKey$LEGACYMAC")
 	})
 	_register("SecCertificateCopySerialNumber", func() {
-		purego.RegisterLibFunc(&_fnSecCertificateCopySerialNumber, _securityLib, "SecCertificateCopySerialNumber")
+		purego.RegisterLibFunc(&_fnSecCertificateCopySerialNumber, _securityLib, "SecCertificateCopySerialNumber$LEGACYMAC")
 	})
 	_register("SecCertificateCopySerialNumberData", func() {
 		purego.RegisterLibFunc(&_fnSecCertificateCopySerialNumberData, _securityLib, "SecCertificateCopySerialNumberData")
@@ -1018,7 +1018,7 @@ func _loadLibrary() {
 		purego.RegisterLibFunc(&_fnSecTransformCreateReadTransformWithReadStream, _securityLib, "SecTransformCreateReadTransformWithReadStream")
 	})
 	_register("SecTransformCustomGetAttribute", func() {
-		purego.RegisterLibFunc(&_fnSecTransformCustomGetAttribute, _securityLib, "SecTransformCustomGetAttribute")
+		purego.RegisterLibFunc(&_fnSecTransformCustomGetAttribute, _securityLib, "SecTranformCustomGetAttribute")
 	})
 	_register("SecTransformCustomSetAttribute", func() {
 		purego.RegisterLibFunc(&_fnSecTransformCustomSetAttribute, _securityLib, "SecTransformCustomSetAttribute")

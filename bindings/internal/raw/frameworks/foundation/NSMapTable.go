@@ -190,6 +190,7 @@ func (o *NSMapTable[KeyType, ObjectType]) DictionaryRepresentation() *NSDictiona
 	return NSDictionaryFromID[KeyType, ObjectType](_ret)
 }
 
+// The pointer functions the map table uses to manage keys.
 func (o *NSMapTable[KeyType, ObjectType]) KeyPointerFunctions() *NSPointerFunctions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMapTableSelKeyPointerFunctions)
 	if _ret != 0 {
@@ -198,6 +199,7 @@ func (o *NSMapTable[KeyType, ObjectType]) KeyPointerFunctions() *NSPointerFuncti
 	return NSPointerFunctionsFromID(_ret)
 }
 
+// The pointer functions the map table uses to manage values.
 func (o *NSMapTable[KeyType, ObjectType]) ValuePointerFunctions() *NSPointerFunctions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMapTableSelValuePointerFunctions)
 	if _ret != 0 {
@@ -206,6 +208,7 @@ func (o *NSMapTable[KeyType, ObjectType]) ValuePointerFunctions() *NSPointerFunc
 	return NSPointerFunctionsFromID(_ret)
 }
 
+// The number of key-value pairs in the map table.
 func (o *NSMapTable[KeyType, ObjectType]) Count() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSMapTableSelCount)
 	return _ret

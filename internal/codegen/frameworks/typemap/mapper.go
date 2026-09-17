@@ -196,7 +196,14 @@ func normalise(qt string) string {
 	for strings.Contains(qt, "  ") {
 		qt = strings.ReplaceAll(qt, "  ", " ")
 	}
-	return strings.TrimSpace(qt)
+	qt = strings.TrimSpace(qt)
+	// Top-level const on scalar/typedef values has no Go representation.
+	// Keep pointee const spellings intact for pointer classification below.
+	if !strings.ContainsAny(qt, "*^") {
+		qt = strings.TrimPrefix(qt, "const ")
+		qt = strings.TrimSuffix(qt, " const")
+	}
+	return qt
 }
 
 // GoType resolves an ObjC qualType string to a Go type string.
@@ -618,10 +625,25 @@ func parseCallableComponents(n, marker string) (BlockSignature, bool) {
 		// No param list.
 		return signature, true
 	}
-	if !strings.HasSuffix(rest, ")") {
+	// Find the parameter list's matching close, not the end of the type:
+	// SDK 27 adds trailing __attribute__((nonblocking)) to realtime blocks.
+	end, depth := -1, 0
+	for i, c := range rest {
+		switch c {
+		case '(':
+			depth++
+		case ')':
+			depth--
+		}
+		if depth == 0 {
+			end = i
+			break
+		}
+	}
+	if end < 0 {
 		return BlockSignature{}, false
 	}
-	params := strings.TrimSpace(rest[1 : len(rest)-1])
+	params := strings.TrimSpace(rest[1:end])
 	if params == "" || params == "void" {
 		return signature, true
 	}

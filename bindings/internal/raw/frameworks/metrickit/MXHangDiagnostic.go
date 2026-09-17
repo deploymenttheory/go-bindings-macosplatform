@@ -13,6 +13,7 @@ import (
 // An object representing a diagnostic report for an app that is too busy to handle user input responsively.
 //
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxhangdiagnostic
+// Deprecated: Use DiagnosticResult instead.
 type MXHangDiagnostic struct {
 	MXDiagnostic
 }

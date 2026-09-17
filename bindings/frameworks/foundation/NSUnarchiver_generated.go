@@ -93,7 +93,7 @@ func (u *Unarchiver) ReplaceObjectWithObject(object obj.Object, newObject obj.Ob
 	objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("replaceObject:withObject:"), objref.IDOf(object), objref.IDOf(newObject))
 }
 
-// IsAtEnd reports whether the object is at end.
+// IsAtEnd reports whether the receiver has reached the end of the encoded data while decoding. You can invoke this after invoking `decodeObject` to discover whether the archive contains extra data following the encoded object graph. If it does, you can either ignore this anomaly or consider it an error.
 func (u *Unarchiver) IsAtEnd() bool {
 	defer runtime.KeepAlive(u)
 	_r := objc.Send[bool](objref.IDOf(u), objc.RegisterName("isAtEnd"))

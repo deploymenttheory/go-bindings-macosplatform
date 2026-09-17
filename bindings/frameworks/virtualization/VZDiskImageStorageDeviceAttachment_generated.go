@@ -72,7 +72,7 @@ func NewDiskImageStorageDeviceAttachmentWithURLReadOnlyCachingModeSynchronizatio
 	return diskImageStorageDeviceAttachmentAdopt(_id), nil
 }
 
-// URL returns URL of the underlying disk image.
+// URL returns URL of the underlying disk image. If the attachment was created with `initWithDiskImage:`, this is the URL of the top image in the stack.
 func (disda *DiskImageStorageDeviceAttachment) URL() string {
 	defer runtime.KeepAlive(disda)
 	_r := objc.Send[objc.ID](objref.IDOf(disda), objc.RegisterName("URL"))

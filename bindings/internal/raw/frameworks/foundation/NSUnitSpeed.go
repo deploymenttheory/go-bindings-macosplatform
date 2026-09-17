@@ -9,8 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A unit of measure for speed.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsunitspeed
 type NSUnitSpeed struct {
 	NSDimension
@@ -34,6 +32,7 @@ func NSUnitSpeedFromID(id objc.ID) *NSUnitSpeed {
 	return o
 }
 
+// The meters per second unit of speed.
 func NSUnitSpeedMetersPerSecond() *NSUnitSpeed {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitSpeed), _nSUnitSpeedSelMetersPerSecond)
 	if _ret != 0 {
@@ -42,6 +41,7 @@ func NSUnitSpeedMetersPerSecond() *NSUnitSpeed {
 	return NSUnitSpeedFromID(_ret)
 }
 
+// The kilometers per hour unit of speed.
 func NSUnitSpeedKilometersPerHour() *NSUnitSpeed {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitSpeed), _nSUnitSpeedSelKilometersPerHour)
 	if _ret != 0 {
@@ -50,6 +50,7 @@ func NSUnitSpeedKilometersPerHour() *NSUnitSpeed {
 	return NSUnitSpeedFromID(_ret)
 }
 
+// The miles per hour unit of speed.
 func NSUnitSpeedMilesPerHour() *NSUnitSpeed {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitSpeed), _nSUnitSpeedSelMilesPerHour)
 	if _ret != 0 {
@@ -58,6 +59,7 @@ func NSUnitSpeedMilesPerHour() *NSUnitSpeed {
 	return NSUnitSpeedFromID(_ret)
 }
 
+// The knots unit of speed.
 func NSUnitSpeedKnots() *NSUnitSpeed {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitSpeed), _nSUnitSpeedSelKnots)
 	if _ret != 0 {

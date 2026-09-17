@@ -53,6 +53,7 @@ func (o *NSRangeSpecifier) InitWithContainerClassDescriptionContainerSpecifierKe
 	return NSRangeSpecifierFromID(_ret)
 }
 
+// The specifier for the beginning of the range.
 func (o *NSRangeSpecifier) StartSpecifier() *NSScriptObjectSpecifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRangeSpecifierSelStartSpecifier)
 	if _ret != 0 {
@@ -65,6 +66,7 @@ func (o *NSRangeSpecifier) SetStartSpecifier(startSpecifier *NSScriptObjectSpeci
 	o.Ptr().Send(_nSRangeSpecifierSelSetStartSpecifier, startSpecifier.Ptr())
 }
 
+// The specifier for the end of the range.
 func (o *NSRangeSpecifier) EndSpecifier() *NSScriptObjectSpecifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRangeSpecifierSelEndSpecifier)
 	if _ret != 0 {

@@ -15,8 +15,6 @@ import (
 )
 
 // ShareMetadata is an idiomatic wrapper over the Objective-C class CKShareMetadata.
-//
-// An object that describes a shared record’s metadata.
 type ShareMetadata struct {
 	objref.Handle
 }

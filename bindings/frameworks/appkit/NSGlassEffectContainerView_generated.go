@@ -359,6 +359,14 @@ func (gecv *GlassEffectContainerView) WithGestureRecognizers(items ...GestureRec
 	return gecv
 }
 
+// WithExclusiveGestureBehavior sets declares whether gesture recognizers should be exclusive in this view and its subviews.
+func (gecv *GlassEffectContainerView) WithExclusiveGestureBehavior(exclusiveGestureBehavior ViewExclusiveGestureBehavior) *GlassEffectContainerView {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gecv), objc.RegisterName("setExclusiveGestureBehavior:"), exclusiveGestureBehavior)
+	})
+	return gecv
+}
+
 // WithAllowedTouchTypes sets the allowed touch types.
 func (gecv *GlassEffectContainerView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *GlassEffectContainerView {
 	purego.Main(func() {
@@ -420,6 +428,15 @@ func (gecv *GlassEffectContainerView) WithHorizontalContentSizeConstraintActive(
 func (gecv *GlassEffectContainerView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *GlassEffectContainerView {
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gecv), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
+	return gecv
+}
+
+// WithTextSelectionManager sets the text selection manager for this view.
+func (gecv *GlassEffectContainerView) WithTextSelectionManager(textSelectionManager *TextSelectionManager) *GlassEffectContainerView {
+	defer runtime.KeepAlive(textSelectionManager)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gecv), objc.RegisterName("setTextSelectionManager:"), objref.IDOf(textSelectionManager))
 	})
 	return gecv
 }

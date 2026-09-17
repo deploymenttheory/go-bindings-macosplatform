@@ -11,6 +11,7 @@ import (
 )
 
 // Apple documentation: https://developer.apple.com/documentation/syncservices/isyncsession
+// Deprecated: since macOS 10.7.
 type ISyncSession struct {
 	foundation.NSObject
 }

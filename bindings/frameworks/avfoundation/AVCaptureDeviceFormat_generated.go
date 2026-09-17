@@ -16,8 +16,6 @@ import (
 )
 
 // CaptureDeviceFormat is an idiomatic wrapper over the Objective-C class AVCaptureDeviceFormat.
-//
-// A class that defines media formats and capture settings that capture devices support.
 type CaptureDeviceFormat struct {
 	objref.Handle
 }
@@ -328,6 +326,13 @@ func (cdf *CaptureDeviceFormat) VideoFrameRateRangeForCinematicVideo() *FrameRat
 	return FrameRateRangeFromID(_r)
 }
 
+// IsCinematicVideoMetadataCaptureSupported reports whether the format supports Cinematic Video Metadata capture. This property returns `true` if the format supports capturing cinematic video metadata alongside video. The metadata enables post-capture cinematic video editing using the Cinematic framework.
+func (cdf *CaptureDeviceFormat) IsCinematicVideoMetadataCaptureSupported() bool {
+	defer runtime.KeepAlive(cdf)
+	_r := objc.Send[bool](objref.IDOf(cdf), objc.RegisterName("isCinematicVideoMetadataCaptureSupported"))
+	return _r
+}
+
 // VideoFieldOfViewForAspectRatioGeometricDistortionCorrected indicates the horizontal field of view for an aspect ratio, either uncorrected or corrected for geometric distortion. A float indicating the field of view for the corresponding “AVCaptureAspectRatio“. Set “AVCaptureDevice/geometricDistortionCorrected“ to `true` to receive the field of view corrected for geometric distortion. If this device format does not support dynamic aspect ratio, this function returns `0`.
 func (cdf *CaptureDeviceFormat) VideoFieldOfViewForAspectRatioGeometricDistortionCorrected(aspectRatio obj.Object, geometricDistortionCorrected bool) float32 {
 	defer runtime.KeepAlive(cdf)
@@ -356,5 +361,19 @@ func (cdf *CaptureDeviceFormat) IsSmartFramingSupported() bool {
 func (cdf *CaptureDeviceFormat) IsCameraLensSmudgeDetectionSupported() bool {
 	defer runtime.KeepAlive(cdf)
 	_r := objc.Send[bool](objref.IDOf(cdf), objc.RegisterName("isCameraLensSmudgeDetectionSupported"))
+	return _r
+}
+
+// IsContinuousAutoFocusTrackingSupported reports whether the object is continuous auto focus tracking supported.
+func (cdf *CaptureDeviceFormat) IsContinuousAutoFocusTrackingSupported() bool {
+	defer runtime.KeepAlive(cdf)
+	_r := objc.Send[bool](objref.IDOf(cdf), objc.RegisterName("isContinuousAutoFocusTrackingSupported"))
+	return _r
+}
+
+// IsLowLightVideoNoiseReductionSupported reports whether the object is low light video noise reduction supported.
+func (cdf *CaptureDeviceFormat) IsLowLightVideoNoiseReductionSupported() bool {
+	defer runtime.KeepAlive(cdf)
+	_r := objc.Send[bool](objref.IDOf(cdf), objc.RegisterName("isLowLightVideoNoiseReductionSupported"))
 	return _r
 }

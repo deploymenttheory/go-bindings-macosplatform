@@ -91,7 +91,7 @@ func (mso *ModifySubscriptionsOperation) WithPerSubscriptionDeleteBlock(perSubsc
 	return mso
 }
 
-// WithModifySubscriptionsCompletionBlock sets the block to execute after the operation modifies the subscriptions.
+// WithModifySubscriptionsCompletionBlock sets the closure to execute after the operation modifies the subscriptions.
 func (mso *ModifySubscriptionsOperation) WithModifySubscriptionsCompletionBlock(modifySubscriptionsCompletionBlock func(obj.Object, obj.Object, unsafe.Pointer)) *ModifySubscriptionsOperation {
 	objc.Send[objc.ID](objref.IDOf(mso), objc.RegisterName("setModifySubscriptionsCompletionBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
 		modifySubscriptionsCompletionBlock(obj.Wrap(_b0), obj.Wrap(_b1), _b2)

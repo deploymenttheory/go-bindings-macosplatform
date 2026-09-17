@@ -84,7 +84,7 @@ func NewArrayWithObjectsCount(objects unsafe.Pointer, cnt int) *Array {
 	return arrayAdopt(_id)
 }
 
-// NewArrayWithCoder creates a new Array.
+// NewArrayWithCoder - Parameter coder: The coder.
 func NewArrayWithCoder(coder *Coder) *Array {
 	defer runtime.KeepAlive(coder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSArray")), objc.RegisterName("alloc"))
@@ -159,7 +159,7 @@ func (a *Array) ObjectAtIndex(index int) obj.Object {
 	return obj.Wrap(_r)
 }
 
-// Count returns the count.
+// Count returns the number of objects in the array.
 func (a *Array) Count() int {
 	defer runtime.KeepAlive(a)
 	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("count"))
@@ -432,21 +432,21 @@ func (a *Array) IndexOfObjectInSortedRangeOptionsUsingComparator(object obj.Obje
 	return _r
 }
 
-// FirstObject returns the first object.
+// FirstObject returns the first object in the array. If the array is empty, returns `nil`.
 func (a *Array) FirstObject() obj.Object {
 	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("firstObject"))
 	return obj.Wrap(_r)
 }
 
-// LastObject returns the last object.
+// LastObject returns the last object in the array. If the array is empty, returns `nil`.
 func (a *Array) LastObject() obj.Object {
 	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("lastObject"))
 	return obj.Wrap(_r)
 }
 
-// SortedArrayHint returns the sorted array hint.
+// SortedArrayHint returns analyzes the array and returns a "hint" that speeds the sorting of the array when the hint is supplied to `sortedArrayUsingFunction:context:hint:`.
 func (a *Array) SortedArrayHint() []byte {
 	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("sortedArrayHint"))

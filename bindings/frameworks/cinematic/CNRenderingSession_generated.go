@@ -16,8 +16,6 @@ import (
 )
 
 // RenderingSession is an idiomatic wrapper over the Objective-C class CNRenderingSession.
-//
-// An object representing the context in which rendering occurs.
 type RenderingSession struct {
 	objref.Handle
 }

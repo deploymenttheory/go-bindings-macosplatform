@@ -199,7 +199,7 @@ func (aes *AssetExportSession) CancelExport() {
 	objc.Send[objc.ID](objref.IDOf(aes), objc.RegisterName("cancelExport"))
 }
 
-// PresetName returns the preset name.
+// PresetName indicates the name of the preset with which the export session was initialized.
 func (aes *AssetExportSession) PresetName() string {
 	defer runtime.KeepAlive(aes)
 	_r := objc.Send[objc.ID](objref.IDOf(aes), objc.RegisterName("presetName"))
@@ -209,28 +209,28 @@ func (aes *AssetExportSession) PresetName() string {
 	return purego.GoString(_r)
 }
 
-// Asset returns the asset.
+// Asset indicates the instance of AVAsset with which the export session was initialized.
 func (aes *AssetExportSession) Asset() *Asset {
 	defer runtime.KeepAlive(aes)
 	_r := objc.Send[objc.ID](objref.IDOf(aes), objc.RegisterName("asset"))
 	return AssetFromID(_r)
 }
 
-// OutputFileType returns the output file type.
+// OutputFileType indicates the type of file to be written by the export session. The value of this property must be set before you invoke -exportAsynchronouslyWithCompletionHandler:; otherwise -exportAsynchronouslyWithCompletionHandler: will raise an NSInternalInconsistencyException. Setting the value of this property to a file type that's not among the session's supported file types will result in an NSInvalidArgumentException. See supportedFileTypes.
 func (aes *AssetExportSession) OutputFileType() *foundation.String {
 	defer runtime.KeepAlive(aes)
 	_r := objc.Send[objc.ID](objref.IDOf(aes), objc.RegisterName("outputFileType"))
 	return foundation.StringFromID(_r)
 }
 
-// OutputURL returns the output URL.
+// OutputURL indicates the URL of the export session's output. You may use [[UTType typeWithIdentifier:outputFileType] preferredFilenameExtension] to obtain an appropriate path extension for the outputFileType you have specified. For more information, see <UniformTypeIdentifiers/UTType.h>.
 func (aes *AssetExportSession) OutputURL() string {
 	defer runtime.KeepAlive(aes)
 	_r := objc.Send[objc.ID](objref.IDOf(aes), objc.RegisterName("outputURL"))
 	return rt.URLString(_r)
 }
 
-// ShouldOptimizeForNetworkUse wraps the corresponding Objective-C method.
+// ShouldOptimizeForNetworkUse reports whether indicates that the output file should be optimized for network use, e.g. that a QuickTime movie file should support "fast start".
 func (aes *AssetExportSession) ShouldOptimizeForNetworkUse() bool {
 	defer runtime.KeepAlive(aes)
 	_r := objc.Send[bool](objref.IDOf(aes), objc.RegisterName("shouldOptimizeForNetworkUse"))
@@ -244,21 +244,21 @@ func (aes *AssetExportSession) AllowsParallelizedExport() bool {
 	return _r
 }
 
-// Status returns the status.
+// Status indicates the status of the export session.
 func (aes *AssetExportSession) Status() AssetExportSessionStatus {
 	defer runtime.KeepAlive(aes)
 	_r := objc.Send[AssetExportSessionStatus](objref.IDOf(aes), objc.RegisterName("status"))
 	return _r
 }
 
-// Error returns the error.
+// Error describes the error that occured if the export status is AVAssetExportSessionStatusFailed.
 func (aes *AssetExportSession) Error() unsafe.Pointer {
 	defer runtime.KeepAlive(aes)
 	_r := objc.Send[unsafe.Pointer](objref.IDOf(aes), objc.RegisterName("error"))
 	return _r
 }
 
-// Progress returns the progress.
+// Progress specifies the progress of the export on a scale from 0 to 1.0. A value of 0 means the export has not yet begun, A value of 1.0 means the export is complete. This property is not key-value observable.
 func (aes *AssetExportSession) Progress() float32 {
 	defer runtime.KeepAlive(aes)
 	_r := objc.Send[float32](objref.IDOf(aes), objc.RegisterName("progress"))
@@ -290,7 +290,7 @@ func (aes *AssetExportSession) DetermineCompatibleFileTypes(ctx context.Context)
 	}
 }
 
-// SupportedFileTypes returns the supported file types.
+// SupportedFileTypes indicates the types of files the target can write, according to the preset the target was initialized with. Does not perform an inspection of the AVAsset to determine whether its contents are compatible with the supported file types. If you need to make that determination before initiating the export, use - (void)determineCompatibleFileTypesWithCompletionHandler:(void (^)(NSArray *compatibleFileTypes))handler:.
 //
 // SupportedFileTypes returns the collection as a Go slice.
 func (aes *AssetExportSession) SupportedFileTypes() []obj.Object {
@@ -305,35 +305,35 @@ func (aes *AssetExportSession) EstimateOutputFileLengthWithCompletionHandler(han
 	objc.Send[objc.ID](objref.IDOf(aes), objc.RegisterName("estimateOutputFileLengthWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 int64, _b1 unsafe.Pointer) { handler(_b0, _b1) }))
 }
 
-// TimeRange returns the time range.
+// TimeRange specifies a time range to be exported from the source. The default timeRange of an export session is kCMTimeZero..kCMTimePositiveInfinity, meaning that the full duration of the asset will be exported.
 func (aes *AssetExportSession) TimeRange() coremedia.CMTimeRange {
 	defer runtime.KeepAlive(aes)
 	_r := objc.Send[coremedia.CMTimeRange](objref.IDOf(aes), objc.RegisterName("timeRange"))
 	return _r
 }
 
-// MaxDuration returns the max duration.
+// MaxDuration provides an estimate of the maximum duration of exported media that is possible given the source asset, the export preset, and the current value of fileLengthLimit. The export will not stop when it reaches this maximum duration; set the timeRange property to export only a certain time range.
 func (aes *AssetExportSession) MaxDuration() coremedia.CMTime {
 	defer runtime.KeepAlive(aes)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(aes), objc.RegisterName("maxDuration"))
 	return _r
 }
 
-// EstimatedOutputFileLength returns the estimated output file length.
+// EstimatedOutputFileLength indicates the estimated byte size of exported file. Returns zero when export preset is AVAssetExportPresetPassthrough, AVAssetExportPresetAppleProRes422LPCM or AVAssetExportPresetAppleProRes4444LPCM. This property will also return zero if a numeric value (ie. not invalid, indefinite, or infinite) for the timeRange property has not been set. Note that the returned value does not take into account the source asset information. For a more accurate estimation, use estimateOutputFileLengthWithCompletionHandler.
 func (aes *AssetExportSession) EstimatedOutputFileLength() int64 {
 	defer runtime.KeepAlive(aes)
 	_r := objc.Send[int64](objref.IDOf(aes), objc.RegisterName("estimatedOutputFileLength"))
 	return _r
 }
 
-// FileLengthLimit returns the file length limit.
+// FileLengthLimit indicates the file length that the output of the session should not exceed. Depending on the content of the source asset, it is possible for the output to slightly exceed the file length limit. The length of the output file should be tested if you require that a strict limit be observed before making use of the output. See also maxDuration and timeRange.
 func (aes *AssetExportSession) FileLengthLimit() int64 {
 	defer runtime.KeepAlive(aes)
 	_r := objc.Send[int64](objref.IDOf(aes), objc.RegisterName("fileLengthLimit"))
 	return _r
 }
 
-// Metadata returns the metadata.
+// Metadata specifies an NSArray of AVMetadataItems that are to be written to the output file by the export session. If the value of this key is nil, any existing metadata in the exported asset will be translated as accurately as possible into the appropriate metadata keyspace for the output file and written to the output.
 //
 // Metadata returns the collection as a Go slice.
 func (aes *AssetExportSession) Metadata() []*MetadataItem {
@@ -342,35 +342,35 @@ func (aes *AssetExportSession) Metadata() []*MetadataItem {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MetadataItem { return MetadataItemFromID(_id) })
 }
 
-// MetadataItemFilter returns the metadata item filter.
+// MetadataItemFilter specifies a filter object to be used during export to determine which metadata items should be transferred from the source asset. If the value of this key is nil, no filter will be applied. This is the default. The filter will not be applied to metadata set with via the metadata property. To apply the filter to metadata before it is set on the metadata property, see the methods in AVMetadataItem's AVMetadataItemArrayFiltering category.
 func (aes *AssetExportSession) MetadataItemFilter() *MetadataItemFilter {
 	defer runtime.KeepAlive(aes)
 	_r := objc.Send[objc.ID](objref.IDOf(aes), objc.RegisterName("metadataItemFilter"))
 	return MetadataItemFilterFromID(_r)
 }
 
-// AudioTimePitchAlgorithm returns the audio time pitch algorithm.
+// AudioTimePitchAlgorithm indicates the processing algorithm used to manage audio pitch for scaled audio edits. Constants for various time pitch algorithms, e.g. AVAudioTimePitchAlgorithmSpectral, are defined in AVAudioProcessingSettings.h. An NSInvalidArgumentException will be raised if this property is set to a value other than the constants defined in that file. The default value is AVAudioTimePitchAlgorithmSpectral.
 func (aes *AssetExportSession) AudioTimePitchAlgorithm() *foundation.String {
 	defer runtime.KeepAlive(aes)
 	_r := objc.Send[objc.ID](objref.IDOf(aes), objc.RegisterName("audioTimePitchAlgorithm"))
 	return foundation.StringFromID(_r)
 }
 
-// AudioMix returns the audio mix.
+// AudioMix indicates whether non-default audio mixing is enabled for export and supplies the parameters for audio mixing. Ignored when export preset is AVAssetExportPresetPassthrough.
 func (aes *AssetExportSession) AudioMix() *AudioMix {
 	defer runtime.KeepAlive(aes)
 	_r := objc.Send[objc.ID](objref.IDOf(aes), objc.RegisterName("audioMix"))
 	return AudioMixFromID(_r)
 }
 
-// VideoComposition returns the video composition.
+// VideoComposition indicates whether video composition is enabled for export and supplies the instructions for video composition. Ignored when export preset is AVAssetExportPresetPassthrough.
 func (aes *AssetExportSession) VideoComposition() *VideoComposition {
 	defer runtime.KeepAlive(aes)
 	_r := objc.Send[objc.ID](objref.IDOf(aes), objc.RegisterName("videoComposition"))
 	return VideoCompositionFromID(_r)
 }
 
-// AudioTrackGroupHandling defines export policy for handling alternate audio tracks Specifies the handling of audio tracks that are members of the same alternate track group corresponding to an exported audio track in the source asset. If no audio track group is present, the value of this property has no effect. If necessary, use the trackGroups property of AVAsset to determine whether any audio track groups are present. The AVAudioMix property is not allowed to be used when also specifying alternate track output handling.  An exception will be thrown if both are specified.
+// AudioTrackGroupHandling defines export policy for handling alternate audio tracks Specifies the handling of audio tracks that are members of the same alternate track group corresponding to an exported audio track in the source asset. If no audio track group is present, the value of this property has no effect. If necessary, use the trackGroups property of AVAsset to determine whether any audio track groups are present. The AVAudioMix property is not allowed to be used when also specifying alternate track output handling. An exception will be thrown if both are specified.
 func (aes *AssetExportSession) AudioTrackGroupHandling() AssetTrackGroupOutputHandling {
 	defer runtime.KeepAlive(aes)
 	_r := objc.Send[AssetTrackGroupOutputHandling](objref.IDOf(aes), objc.RegisterName("audioTrackGroupHandling"))
@@ -384,9 +384,34 @@ func (aes *AssetExportSession) CanPerformMultiplePassesOverSourceMediaData() boo
 	return _r
 }
 
-// DirectoryForTemporaryFiles specifies a directory that is suitable for containing temporary files generated during the export process AVAssetExportSession may need to write temporary files when configured in certain ways, such as when canPerformMultiplePassesOverSourceMediaData is set to YES.  This property can be used to control where in the filesystem those temporary files are created.  All temporary files will be deleted when the export is completed, is canceled, or fails. When the value of this property is nil, the export session will choose a suitable location when writing temporary files.  The default value is nil. This property cannot be set after the export has started.  The export will fail if the URL points to a location that is not a directory, does not exist, is not on the local file system, or if a file cannot be created in this directory (for example, due to insufficient permissions or sandboxing restrictions).
+// DirectoryForTemporaryFiles specifies a directory that is suitable for containing temporary files generated during the export process AVAssetExportSession may need to write temporary files when configured in certain ways, such as when canPerformMultiplePassesOverSourceMediaData is set to YES. This property can be used to control where in the filesystem those temporary files are created. All temporary files will be deleted when the export is completed, is canceled, or fails. When the value of this property is nil, the export session will choose a suitable location when writing temporary files. The default value is nil. This property cannot be set after the export has started. The export will fail if the URL points to a location that is not a directory, does not exist, is not on the local file system, or if a file cannot be created in this directory (for example, due to insufficient permissions or sandboxing restrictions).
 func (aes *AssetExportSession) DirectoryForTemporaryFiles() string {
 	defer runtime.KeepAlive(aes)
 	_r := objc.Send[objc.ID](objref.IDOf(aes), objc.RegisterName("directoryForTemporaryFiles"))
 	return rt.URLString(_r)
+}
+
+// ConfigureForResumableExport attempts to configure the export session into resumption mode.
+//
+// ConfigureForResumableExport blocks until the operation completes or ctx is cancelled.
+func (aes *AssetExportSession) ConfigureForResumableExport(ctx context.Context) (result *AssetExportSessionResumptionState, err error) {
+	defer runtime.KeepAlive(aes)
+	type _result struct {
+		val *AssetExportSessionResumptionState
+		err error
+	}
+	_ch := make(chan _result, 1)
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
+		var _o _result
+		_o.val = AssetExportSessionResumptionStateFromID(_p0)
+		_ch <- _o
+	})
+	objc.Send[objc.ID](objref.IDOf(aes), objc.RegisterName("configureForResumableExportWithCompletionHandler:"), _block)
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *AssetExportSessionResumptionState
+		return _zero, ctx.Err()
+	}
 }

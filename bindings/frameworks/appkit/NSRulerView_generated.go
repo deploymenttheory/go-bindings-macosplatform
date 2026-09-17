@@ -443,6 +443,14 @@ func (rv *RulerView) WithGestureRecognizers(items ...GestureRecognizerProvider) 
 	return rv
 }
 
+// WithExclusiveGestureBehavior sets declares whether gesture recognizers should be exclusive in this view and its subviews.
+func (rv *RulerView) WithExclusiveGestureBehavior(exclusiveGestureBehavior ViewExclusiveGestureBehavior) *RulerView {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setExclusiveGestureBehavior:"), exclusiveGestureBehavior)
+	})
+	return rv
+}
+
 // WithAllowedTouchTypes sets the allowed touch types.
 func (rv *RulerView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *RulerView {
 	purego.Main(func() {
@@ -504,6 +512,15 @@ func (rv *RulerView) WithHorizontalContentSizeConstraintActive(horizontalContent
 func (rv *RulerView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *RulerView {
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
+	return rv
+}
+
+// WithTextSelectionManager sets the text selection manager for this view.
+func (rv *RulerView) WithTextSelectionManager(textSelectionManager *TextSelectionManager) *RulerView {
+	defer runtime.KeepAlive(textSelectionManager)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setTextSelectionManager:"), objref.IDOf(textSelectionManager))
 	})
 	return rv
 }

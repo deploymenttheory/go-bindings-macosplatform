@@ -36,10 +36,6 @@
       "doc": "An interface for reacting to asset download events and processing concluded downloads.",
       "url": "https://developer.apple.com/documentation/backgroundassets/badownloadmanagerdelegate"
     },
-    "BADownloaderExtension": {
-      "doc": "An interface for reacting to app life-cycle events and processing concluded asset downloads while your app isn’t running.",
-      "url": "https://developer.apple.com/documentation/backgroundassets/badownloaderextension"
-    },
     "BAManagedAssetPackDownloadDelegate": {
       "doc": "An object that handles status updates when downloading an asset pack.",
       "url": "https://developer.apple.com/documentation/backgroundassets/bamanagedassetpackdownloaddelegate"
@@ -85,7 +81,7 @@
       }
     },
     "BAContentRequest": {
-      "doc": "The content request type used in the downloader extension.",
+      "doc": "A type that indicates the purpose of a content download request.",
       "url": "https://developer.apple.com/documentation/backgroundassets/bacontentrequest",
       "members": {
         "BAContentRequestInstall": {
@@ -105,10 +101,6 @@
           "url": "https://developer.apple.com/documentation/backgroundassets/bacontentrequest/update"
         }
       }
-    },
-    "BADownloadState": {
-      "doc": "Constants that indicate the state of a download.",
-      "url": "https://developer.apple.com/documentation/backgroundassets/badownloadstate"
     },
     "BAErrorCode": {
       "url": "https://developer.apple.com/documentation/backgroundassets/baerrorcode"
@@ -169,7 +161,7 @@
         "url": "https://developer.apple.com/documentation/backgroundassets/baassetpackmanager/contentsatpath:searchinginassetpackwithidentifier:options:error:"
       },
       "-ensureLocalAvailabilityOfAssetPack:completionHandler:": {
-        "doc": "Ensures that the specified asset pack be available locally.",
+        "doc": "Ensures that the specified asset pack is available locally, performing a download if necessary.",
         "url": "https://developer.apple.com/documentation/backgroundassets/baassetpackmanager/ensurelocalavailabilityofassetpack:completionhandler:"
       },
       "-ensureLocalAvailabilityOfAssetPack:requireLatestVersion:completionHandler:": {
@@ -263,10 +255,6 @@
       "-fetchCurrentDownloadsWithCompletionHandler:": {
         "doc": "Fetches the contents of the manager’s download queue.",
         "url": "https://developer.apple.com/documentation/backgroundassets/badownloadmanager/fetchcurrentdownloads(completionhandler:)"
-      },
-      "-performWithExclusiveControl:": {
-        "doc": "Attempts to acquire immediate, exclusive access to the download manager.",
-        "url": "https://developer.apple.com/documentation/backgroundassets/badownloadmanager/withexclusivecontrol(_:)"
       },
       "-scheduleDownload:error:": {
         "doc": "Schedules an asset download to execute in the background at a nonspecific time in the future.",
@@ -381,6 +369,14 @@
       "sharedManager": {
         "doc": "The download manager that both the app and the extension share.",
         "url": "https://developer.apple.com/documentation/backgroundassets/badownloadmanager/shared"
+      },
+      "withExclusiveControl(_:)": {
+        "doc": "Attempts to acquire immediate, exclusive control over the download manager.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/badownloadmanager/withexclusivecontrol(_:)-1rf9w"
+      },
+      "withExclusiveControl(before:_:)": {
+        "doc": "Attempts to acquire immediate, exclusive control over the download manager before the specified date.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/badownloadmanager/withexclusivecontrol(before:_:)"
       }
     }
   }

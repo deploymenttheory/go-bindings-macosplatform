@@ -96,6 +96,18 @@ func HKCategoryTypeIdentifierBladderIncontinence() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
+func HKCategoryTypeIdentifierBleedingAfterMenopause() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierBleedingAfterMenopause")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
 func HKCategoryTypeIdentifierBleedingAfterPregnancy() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierBleedingAfterPregnancy")
 	if ptr == 0 {
@@ -530,6 +542,18 @@ func HKCategoryTypeIdentifierLowerBackPain() *foundation.NSString {
 
 func HKCategoryTypeIdentifierMemoryLapse() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierMemoryLapse")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
+func HKCategoryTypeIdentifierMenopausalState() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierMenopausalState")
 	if ptr == 0 {
 		return nil
 	}
@@ -1245,81 +1269,186 @@ func HKErrorDomain() *foundation.NSString {
 }
 
 // @abstract      The "DSTU2" release: http://hl7.org/fhir/DSTU2/
-func HKFHIRReleaseDSTU2() uintptr {
+func HKFHIRReleaseDSTU2() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKFHIRReleaseDSTU2")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @abstract      The "R4" release: http://hl7.org/fhir/R4/
-func HKFHIRReleaseR4() uintptr {
+func HKFHIRReleaseR4() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKFHIRReleaseR4")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @abstract      An unknown release
-func HKFHIRReleaseUnknown() uintptr {
+func HKFHIRReleaseUnknown() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKFHIRReleaseUnknown")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKFHIRResourceTypeAllergyIntolerance() uintptr {
+func HKFHIRResourceTypeAllergyIntolerance() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKFHIRResourceTypeAllergyIntolerance")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKFHIRResourceTypeCondition() uintptr {
+func HKFHIRResourceTypeCondition() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKFHIRResourceTypeCondition")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKFHIRResourceTypeCoverage() uintptr {
+func HKFHIRResourceTypeCoverage() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKFHIRResourceTypeCoverage")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKFHIRResourceTypeDiagnosticReport() uintptr {
+func HKFHIRResourceTypeDiagnosticReport() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKFHIRResourceTypeDiagnosticReport")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKFHIRResourceTypeDocumentReference() uintptr {
+func HKFHIRResourceTypeDocumentReference() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKFHIRResourceTypeDocumentReference")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKFHIRResourceTypeImmunization() uintptr {
+func HKFHIRResourceTypeImmunization() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKFHIRResourceTypeImmunization")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKFHIRResourceTypeMedicationDispense() uintptr {
+func HKFHIRResourceTypeMedicationDispense() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKFHIRResourceTypeMedicationDispense")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKFHIRResourceTypeMedicationOrder() uintptr {
+func HKFHIRResourceTypeMedicationOrder() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKFHIRResourceTypeMedicationOrder")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKFHIRResourceTypeMedicationRequest() uintptr {
+func HKFHIRResourceTypeMedicationRequest() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKFHIRResourceTypeMedicationRequest")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKFHIRResourceTypeMedicationStatement() uintptr {
+func HKFHIRResourceTypeMedicationStatement() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKFHIRResourceTypeMedicationStatement")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKFHIRResourceTypeObservation() uintptr {
+func HKFHIRResourceTypeObservation() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKFHIRResourceTypeObservation")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKFHIRResourceTypeProcedure() uintptr {
+func HKFHIRResourceTypeProcedure() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKFHIRResourceTypeProcedure")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The domain that represents medication concepts. Use with identifiers for medications, such as ibuprofen or insulin.
@@ -4124,6 +4253,18 @@ func HKQuantityTypeIdentifierHeartRateRecoveryOneMinute() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
+func HKQuantityTypeIdentifierHeartRateVariabilityRMSSD() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierHeartRateVariabilityRMSSD")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
 func HKQuantityTypeIdentifierHeartRateVariabilitySDNN() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierHeartRateVariabilitySDNN")
 	if ptr == 0 {
@@ -4712,9 +4853,16 @@ func HKUserPreferencesDidChangeNotification() *foundation.NSString {
 }
 
 // @constant      HKVerifiableClinicalRecordCredentialTypeCOVID19 @abstract      Represents the COVID-19 credential type for a verifiable record.
-func HKVerifiableClinicalRecordCredentialTypeCOVID19() uintptr {
+func HKVerifiableClinicalRecordCredentialTypeCOVID19() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKVerifiableClinicalRecordCredentialTypeCOVID19")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKVerifiableClinicalRecordCredentialTypeImmunization @abstract      Represents the immunization credential type for a verifiable record.

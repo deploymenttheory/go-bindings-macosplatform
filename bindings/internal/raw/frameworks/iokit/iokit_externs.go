@@ -9,19 +9,19 @@ import (
 	"github.com/ebitengine/purego"
 )
 
-func KIOMainPortDefault() uint {
+func KIOMainPortDefault() uint32 {
 	ptr, _ := purego.Dlsym(_iokitLib, "kIOMainPortDefault")
 	if ptr == 0 {
 		return 0
 	}
-	return *(*uint)(unsafe.Pointer(ptr))
+	return *(*uint32)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: since macOS 12.0.
-func KIOMasterPortDefault() uint {
+func KIOMasterPortDefault() uint32 {
 	ptr, _ := purego.Dlsym(_iokitLib, "kIOMasterPortDefault")
 	if ptr == 0 {
 		return 0
 	}
-	return *(*uint)(unsafe.Pointer(ptr))
+	return *(*uint32)(unsafe.Pointer(ptr))
 }

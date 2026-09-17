@@ -33,6 +33,7 @@ var (
 	_sCContentSharingPickerSelSetMaximumStreamCount                   = objc.RegisterName("setMaximumStreamCount:")
 	_sCContentSharingPickerSelIsActive                                = objc.RegisterName("isActive")
 	_sCContentSharingPickerSelSetActive                               = objc.RegisterName("setActive:")
+	_sCContentSharingPickerSelIsAvailable                             = objc.RegisterName("isAvailable")
 )
 
 func SCContentSharingPickerFromID(id objc.ID) *SCContentSharingPicker {
@@ -115,7 +116,7 @@ func (o *SCContentSharingPicker) SetMaximumStreamCount(maximumStreamCount *found
 	o.Ptr().Send(_sCContentSharingPickerSelSetMaximumStreamCount, maximumStreamCount.Ptr())
 }
 
-// @abstract active A picker needs to be marked as active for its UI to appear. If `startPickingContent` is called and the picker is not marked as active, the picker will not appear.
+// @abstract active A picker needs to be marked as active to enable user interaction with system UI (displayed picker, video menu bar, directly from a window). If the picker is not marked as active, when present is called, the displayed picker UI will not appear, and user will not be able to share content from system UI to your application.
 func (o *SCContentSharingPicker) IsActive() bool {
 	_ret := objc.Send[bool](o.Ptr(), _sCContentSharingPickerSelIsActive)
 	return _ret
@@ -123,4 +124,10 @@ func (o *SCContentSharingPicker) IsActive() bool {
 
 func (o *SCContentSharingPicker) SetActive(active bool) {
 	o.Ptr().Send(_sCContentSharingPickerSelSetActive, active)
+}
+
+// @abstract available Indicates whether screen recording is available on this device. @discussion Returns YES if screen recording is supported and allowed on this device.
+func (o *SCContentSharingPicker) IsAvailable() bool {
+	_ret := objc.Send[bool](o.Ptr(), _sCContentSharingPickerSelIsAvailable)
+	return _ret
 }

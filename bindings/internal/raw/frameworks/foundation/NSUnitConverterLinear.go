@@ -9,8 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A description of how to convert between units using a linear equation.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsunitconverterlinear
 type NSUnitConverterLinear struct {
 	NSUnitConverter
@@ -34,6 +32,7 @@ func NSUnitConverterLinearFromID(id objc.ID) *NSUnitConverterLinear {
 	return o
 }
 
+// Initializes a linear unit converter with the specified coefficient, using a constant of `0`.
 func (o *NSUnitConverterLinear) InitWithCoefficient(coefficient float64) *NSUnitConverterLinear {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUnitConverterLinearSelInitWithCoefficient, coefficient)
 	if _ret != 0 {
@@ -42,6 +41,7 @@ func (o *NSUnitConverterLinear) InitWithCoefficient(coefficient float64) *NSUnit
 	return NSUnitConverterLinearFromID(_ret)
 }
 
+// Initializes a linear unit converter with the specified coefficient and constant.
 func (o *NSUnitConverterLinear) InitWithCoefficientConstant(coefficient float64, constant float64) *NSUnitConverterLinear {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUnitConverterLinearSelInitWithCoefficientConstant, coefficient, constant)
 	if _ret != 0 {
@@ -50,11 +50,13 @@ func (o *NSUnitConverterLinear) InitWithCoefficientConstant(coefficient float64,
 	return NSUnitConverterLinearFromID(_ret)
 }
 
+// The coefficient to use in the linear unit conversion calculation.
 func (o *NSUnitConverterLinear) Coefficient() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSUnitConverterLinearSelCoefficient)
 	return _ret
 }
 
+// The constant to use in the linear unit conversion calculation.
 func (o *NSUnitConverterLinear) Constant() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSUnitConverterLinearSelConstant)
 	return _ret

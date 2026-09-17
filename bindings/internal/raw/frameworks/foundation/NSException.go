@@ -63,6 +63,7 @@ func (o *NSException) Raise() {
 	o.Ptr().Send(_nSExceptionSelRaise)
 }
 
+// A string used to uniquely identify the receiver.
 func (o *NSException) Name() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSExceptionSelName)
 	if _ret != 0 {
@@ -71,6 +72,7 @@ func (o *NSException) Name() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// A human-readable message string summarizing the reason for the exception.
 func (o *NSException) Reason() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSExceptionSelReason)
 	if _ret != 0 {
@@ -79,6 +81,7 @@ func (o *NSException) Reason() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// A dictionary containing application-specific data pertaining to the receiver.
 func (o *NSException) UserInfo() *NSDictionary[objc.ID, objc.ID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSExceptionSelUserInfo)
 	if _ret != 0 {
@@ -87,6 +90,7 @@ func (o *NSException) UserInfo() *NSDictionary[objc.ID, objc.ID] {
 	return NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
+// An array of return addresses from the call stack when the exception was first raised.
 func (o *NSException) CallStackReturnAddresses() *NSArray[*NSNumber] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSExceptionSelCallStackReturnAddresses)
 	if _ret != 0 {
@@ -95,6 +99,7 @@ func (o *NSException) CallStackReturnAddresses() *NSArray[*NSNumber] {
 	return NSArrayFromID[*NSNumber](_ret)
 }
 
+// An array of strings describing the call stack backtrace at the point the exception was first raised.
 func (o *NSException) CallStackSymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSExceptionSelCallStackSymbols)
 	if _ret != 0 {

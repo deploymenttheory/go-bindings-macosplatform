@@ -22,9 +22,9 @@
         "doc": "Deletes Thread network credentials from the framework database for a Border Agent.",
         "url": "https://developer.apple.com/documentation/threadnetwork/thclient/deletecredentials(forborderagent:completion:)"
       },
-      "-enableCredentialSharingModeWithExtendedPANId:completion:": {
+      "-enableCredentialSharingModeForExtendedPANID:completion:": {
         "doc": "Triggers Credential Share mode on a nearby eligible Apple Border Router (tvOS(27.0)).",
-        "url": "https://developer.apple.com/documentation/threadnetwork/thclient/enablecredentialsharingmode(withextendedpanid:completion:)"
+        "url": "https://developer.apple.com/documentation/threadnetwork/thclient/enablecredentialsharingmode(forextendedpanid:completion:)"
       },
       "-init": {
         "doc": "Creates the client object.",
@@ -33,6 +33,10 @@
       "-isPreferredNetworkAvailableWithCompletion:": {
         "doc": "Indicates whether a preferred network is available.",
         "url": "https://developer.apple.com/documentation/threadnetwork/thclient/ispreferrednetworkavailable(completion:)"
+      },
+      "-retrieveActiveCredentialsForNearbyNetworksWithCompletion:": {
+        "doc": "Requests all active Thread credentials with active border routers around from the framework.",
+        "url": "https://developer.apple.com/documentation/threadnetwork/thclient/retrieveactivecredentialsfornearbynetworks(completion:)"
       },
       "-retrieveAllActiveCredentials:": {
         "doc": "Returns a set of the active credentials.",

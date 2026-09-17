@@ -619,6 +619,11 @@ func KVTCompressionPropertyKey_YCbCrMatrix() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_YCbCrMatrix")))
 }
 
+// KVTCompressionPropertyKey_LogTransferFunction returns the value of the constant kVTCompressionPropertyKey_LogTransferFunction.
+func KVTCompressionPropertyKey_LogTransferFunction() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_LogTransferFunction")))
+}
+
 // KVTCompressionPropertyKey_ICCProfile returns the value of the constant kVTCompressionPropertyKey_ICCProfile.
 func KVTCompressionPropertyKey_ICCProfile() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_ICCProfile")))
@@ -800,6 +805,11 @@ func KVTProjectionKind_ParametricImmersive() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kVTProjectionKind_ParametricImmersive")))
 }
 
+// KVTProjectionKind_AppleImmersiveVideo returns the value of the constant kVTProjectionKind_AppleImmersiveVideo.
+func KVTProjectionKind_AppleImmersiveVideo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProjectionKind_AppleImmersiveVideo")))
+}
+
 // KVTCompressionPropertyKey_ViewPackingKind returns the value of the constant kVTCompressionPropertyKey_ViewPackingKind.
 func KVTCompressionPropertyKey_ViewPackingKind() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_ViewPackingKind")))
@@ -870,11 +880,6 @@ func KVTCompressionPropertyCameraCalibrationKey_LensDistortions() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyCameraCalibrationKey_LensDistortions")))
 }
 
-// KVTCompressionPropertyCameraCalibrationKey_RadialAngleLimit returns the value of the constant kVTCompressionPropertyCameraCalibrationKey_RadialAngleLimit.
-func KVTCompressionPropertyCameraCalibrationKey_RadialAngleLimit() obj.Object {
-	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyCameraCalibrationKey_RadialAngleLimit")))
-}
-
 // KVTCompressionPropertyCameraCalibrationKey_LensFrameAdjustmentsPolynomialX returns the value of the constant kVTCompressionPropertyCameraCalibrationKey_LensFrameAdjustmentsPolynomialX.
 func KVTCompressionPropertyCameraCalibrationKey_LensFrameAdjustmentsPolynomialX() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyCameraCalibrationKey_LensFrameAdjustmentsPolynomialX")))
@@ -883,6 +888,11 @@ func KVTCompressionPropertyCameraCalibrationKey_LensFrameAdjustmentsPolynomialX(
 // KVTCompressionPropertyCameraCalibrationKey_LensFrameAdjustmentsPolynomialY returns the value of the constant kVTCompressionPropertyCameraCalibrationKey_LensFrameAdjustmentsPolynomialY.
 func KVTCompressionPropertyCameraCalibrationKey_LensFrameAdjustmentsPolynomialY() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyCameraCalibrationKey_LensFrameAdjustmentsPolynomialY")))
+}
+
+// KVTCompressionPropertyCameraCalibrationKey_RadialAngleLimit returns the value of the constant kVTCompressionPropertyCameraCalibrationKey_RadialAngleLimit.
+func KVTCompressionPropertyCameraCalibrationKey_RadialAngleLimit() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyCameraCalibrationKey_RadialAngleLimit")))
 }
 
 // KVTCompressionPropertyCameraCalibrationKey_IntrinsicMatrix returns the value of the constant kVTCompressionPropertyCameraCalibrationKey_IntrinsicMatrix.
@@ -925,6 +935,11 @@ func KVTCompressionPropertyKey_SpatialAdaptiveQPLevel() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_SpatialAdaptiveQPLevel")))
 }
 
+// KVTCompressionPropertyKey_ConstantQualityFactor returns the value of the constant kVTCompressionPropertyKey_ConstantQualityFactor.
+func KVTCompressionPropertyKey_ConstantQualityFactor() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_ConstantQualityFactor")))
+}
+
 // KVTCompressionPropertyKey_SupportedPresetDictionaries returns the value of the constant kVTCompressionPropertyKey_SupportedPresetDictionaries.
 func KVTCompressionPropertyKey_SupportedPresetDictionaries() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_SupportedPresetDictionaries")))
@@ -948,6 +963,11 @@ func KVTCompressionPreset_HighSpeed() obj.Object {
 // KVTCompressionPreset_VideoConferencing returns the value of the constant kVTCompressionPreset_VideoConferencing.
 func KVTCompressionPreset_VideoConferencing() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPreset_VideoConferencing")))
+}
+
+// KVTCompressionPreset_ConsistentQuality returns the value of the constant kVTCompressionPreset_ConsistentQuality.
+func KVTCompressionPreset_ConsistentQuality() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPreset_ConsistentQuality")))
 }
 
 // KVTPropertyTypeKey returns the value of the constant kVTPropertyTypeKey.
@@ -1260,76 +1280,6 @@ func KVTDecodeFrameOptionKey_ContentAnalyzerCropRectangle() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kVTDecodeFrameOptionKey_ContentAnalyzerCropRectangle")))
 }
 
-// KVTMultiPassStorageCreationOption_DoNotDelete returns the value of the constant kVTMultiPassStorageCreationOption_DoNotDelete.
-func KVTMultiPassStorageCreationOption_DoNotDelete() obj.Object {
-	return obj.Wrap(purego.CFConstant(_symbol("kVTMultiPassStorageCreationOption_DoNotDelete")))
-}
-
-// KVTVideoEncoderListOption_IncludeStandardDefinitionDVEncoders returns the value of the constant kVTVideoEncoderListOption_IncludeStandardDefinitionDVEncoders.
-func KVTVideoEncoderListOption_IncludeStandardDefinitionDVEncoders() obj.Object {
-	return obj.Wrap(purego.CFConstant(_symbol("kVTVideoEncoderListOption_IncludeStandardDefinitionDVEncoders")))
-}
-
-// KVTVideoEncoderList_CodecType returns the value of the constant kVTVideoEncoderList_CodecType.
-func KVTVideoEncoderList_CodecType() obj.Object {
-	return obj.Wrap(purego.CFConstant(_symbol("kVTVideoEncoderList_CodecType")))
-}
-
-// KVTVideoEncoderList_EncoderID returns the value of the constant kVTVideoEncoderList_EncoderID.
-func KVTVideoEncoderList_EncoderID() obj.Object {
-	return obj.Wrap(purego.CFConstant(_symbol("kVTVideoEncoderList_EncoderID")))
-}
-
-// KVTVideoEncoderList_CodecName returns the value of the constant kVTVideoEncoderList_CodecName.
-func KVTVideoEncoderList_CodecName() obj.Object {
-	return obj.Wrap(purego.CFConstant(_symbol("kVTVideoEncoderList_CodecName")))
-}
-
-// KVTVideoEncoderList_EncoderName returns the value of the constant kVTVideoEncoderList_EncoderName.
-func KVTVideoEncoderList_EncoderName() obj.Object {
-	return obj.Wrap(purego.CFConstant(_symbol("kVTVideoEncoderList_EncoderName")))
-}
-
-// KVTVideoEncoderList_DisplayName returns the value of the constant kVTVideoEncoderList_DisplayName.
-func KVTVideoEncoderList_DisplayName() obj.Object {
-	return obj.Wrap(purego.CFConstant(_symbol("kVTVideoEncoderList_DisplayName")))
-}
-
-// KVTVideoEncoderList_GPURegistryID returns the value of the constant kVTVideoEncoderList_GPURegistryID.
-func KVTVideoEncoderList_GPURegistryID() obj.Object {
-	return obj.Wrap(purego.CFConstant(_symbol("kVTVideoEncoderList_GPURegistryID")))
-}
-
-// KVTVideoEncoderList_SupportedSelectionProperties returns the value of the constant kVTVideoEncoderList_SupportedSelectionProperties.
-func KVTVideoEncoderList_SupportedSelectionProperties() obj.Object {
-	return obj.Wrap(purego.CFConstant(_symbol("kVTVideoEncoderList_SupportedSelectionProperties")))
-}
-
-// KVTVideoEncoderList_PerformanceRating returns the value of the constant kVTVideoEncoderList_PerformanceRating.
-func KVTVideoEncoderList_PerformanceRating() obj.Object {
-	return obj.Wrap(purego.CFConstant(_symbol("kVTVideoEncoderList_PerformanceRating")))
-}
-
-// KVTVideoEncoderList_QualityRating returns the value of the constant kVTVideoEncoderList_QualityRating.
-func KVTVideoEncoderList_QualityRating() obj.Object {
-	return obj.Wrap(purego.CFConstant(_symbol("kVTVideoEncoderList_QualityRating")))
-}
-
-// KVTVideoEncoderList_InstanceLimit returns the value of the constant kVTVideoEncoderList_InstanceLimit.
-func KVTVideoEncoderList_InstanceLimit() obj.Object {
-	return obj.Wrap(purego.CFConstant(_symbol("kVTVideoEncoderList_InstanceLimit")))
-}
-
-// KVTVideoEncoderList_IsHardwareAccelerated returns the value of the constant kVTVideoEncoderList_IsHardwareAccelerated.
-func KVTVideoEncoderList_IsHardwareAccelerated() obj.Object {
-	return obj.Wrap(purego.CFConstant(_symbol("kVTVideoEncoderList_IsHardwareAccelerated")))
-}
-
-// KVTVideoEncoderList_SupportsFrameReordering returns the value of the constant kVTVideoEncoderList_SupportsFrameReordering.
-func KVTVideoEncoderList_SupportsFrameReordering() obj.Object {
-	return obj.Wrap(purego.CFConstant(_symbol("kVTVideoEncoderList_SupportsFrameReordering")))
-}
-
 // KVTPixelTransferPropertyKey_ScalingMode returns the value of the constant kVTPixelTransferPropertyKey_ScalingMode.
 func KVTPixelTransferPropertyKey_ScalingMode() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kVTPixelTransferPropertyKey_ScalingMode")))
@@ -1403,6 +1353,76 @@ func KVTPixelTransferPropertyKey_DestinationYCbCrMatrix() obj.Object {
 // KVTPixelTransferPropertyKey_RealTime returns the value of the constant kVTPixelTransferPropertyKey_RealTime.
 func KVTPixelTransferPropertyKey_RealTime() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kVTPixelTransferPropertyKey_RealTime")))
+}
+
+// KVTVideoEncoderListOption_IncludeStandardDefinitionDVEncoders returns the value of the constant kVTVideoEncoderListOption_IncludeStandardDefinitionDVEncoders.
+func KVTVideoEncoderListOption_IncludeStandardDefinitionDVEncoders() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTVideoEncoderListOption_IncludeStandardDefinitionDVEncoders")))
+}
+
+// KVTVideoEncoderList_CodecType returns the value of the constant kVTVideoEncoderList_CodecType.
+func KVTVideoEncoderList_CodecType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTVideoEncoderList_CodecType")))
+}
+
+// KVTVideoEncoderList_EncoderID returns the value of the constant kVTVideoEncoderList_EncoderID.
+func KVTVideoEncoderList_EncoderID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTVideoEncoderList_EncoderID")))
+}
+
+// KVTVideoEncoderList_CodecName returns the value of the constant kVTVideoEncoderList_CodecName.
+func KVTVideoEncoderList_CodecName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTVideoEncoderList_CodecName")))
+}
+
+// KVTVideoEncoderList_EncoderName returns the value of the constant kVTVideoEncoderList_EncoderName.
+func KVTVideoEncoderList_EncoderName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTVideoEncoderList_EncoderName")))
+}
+
+// KVTVideoEncoderList_DisplayName returns the value of the constant kVTVideoEncoderList_DisplayName.
+func KVTVideoEncoderList_DisplayName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTVideoEncoderList_DisplayName")))
+}
+
+// KVTVideoEncoderList_GPURegistryID returns the value of the constant kVTVideoEncoderList_GPURegistryID.
+func KVTVideoEncoderList_GPURegistryID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTVideoEncoderList_GPURegistryID")))
+}
+
+// KVTVideoEncoderList_SupportedSelectionProperties returns the value of the constant kVTVideoEncoderList_SupportedSelectionProperties.
+func KVTVideoEncoderList_SupportedSelectionProperties() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTVideoEncoderList_SupportedSelectionProperties")))
+}
+
+// KVTVideoEncoderList_PerformanceRating returns the value of the constant kVTVideoEncoderList_PerformanceRating.
+func KVTVideoEncoderList_PerformanceRating() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTVideoEncoderList_PerformanceRating")))
+}
+
+// KVTVideoEncoderList_QualityRating returns the value of the constant kVTVideoEncoderList_QualityRating.
+func KVTVideoEncoderList_QualityRating() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTVideoEncoderList_QualityRating")))
+}
+
+// KVTVideoEncoderList_InstanceLimit returns the value of the constant kVTVideoEncoderList_InstanceLimit.
+func KVTVideoEncoderList_InstanceLimit() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTVideoEncoderList_InstanceLimit")))
+}
+
+// KVTVideoEncoderList_IsHardwareAccelerated returns the value of the constant kVTVideoEncoderList_IsHardwareAccelerated.
+func KVTVideoEncoderList_IsHardwareAccelerated() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTVideoEncoderList_IsHardwareAccelerated")))
+}
+
+// KVTVideoEncoderList_SupportsFrameReordering returns the value of the constant kVTVideoEncoderList_SupportsFrameReordering.
+func KVTVideoEncoderList_SupportsFrameReordering() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTVideoEncoderList_SupportsFrameReordering")))
+}
+
+// KVTMultiPassStorageCreationOption_DoNotDelete returns the value of the constant kVTMultiPassStorageCreationOption_DoNotDelete.
+func KVTMultiPassStorageCreationOption_DoNotDelete() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTMultiPassStorageCreationOption_DoNotDelete")))
 }
 
 // KVTPixelRotationPropertyKey_Rotation returns the value of the constant kVTPixelRotationPropertyKey_Rotation.
@@ -1572,6 +1592,11 @@ func KVTMotionEstimationSessionCreationOption_Label() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kVTMotionEstimationSessionCreationOption_Label")))
 }
 
+// VTFrameProcessorErrorDomain returns the string constant VTFrameProcessorErrorDomain, for use as a dictionary key or argument.
+func VTFrameProcessorErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VTFrameProcessorErrorDomain")))
+}
+
 // KVTExtensionProperties_ExtensionIdentifierKey returns the address of the symbol kVTExtensionProperties_ExtensionIdentifierKey.
 func KVTExtensionProperties_ExtensionIdentifierKey() uintptr {
 	return _symbol("kVTExtensionProperties_ExtensionIdentifierKey")
@@ -1606,6 +1631,3 @@ func KVTExtensionProperties_CodecNameKey() uintptr {
 func KVTHDRPerFrameMetadataGenerationHDRFormatType_DolbyVision() uintptr {
 	return _symbol("kVTHDRPerFrameMetadataGenerationHDRFormatType_DolbyVision")
 }
-
-// VTFrameProcessorErrorDomain returns the address of the symbol VTFrameProcessorErrorDomain.
-func VTFrameProcessorErrorDomain() uintptr { return _symbol("VTFrameProcessorErrorDomain") }

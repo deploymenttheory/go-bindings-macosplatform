@@ -65,7 +65,7 @@ func (o *AVCaptionRenderer) RenderInContextForTime(ctx unsafe.Pointer, time_ cor
 	o.Ptr().Send(_aVCaptionRendererSelRenderInContextForTime, ctx, time_)
 }
 
-// @property captions @abstract A NSArray holding captions to consider for rendering. @discussion This is the array of AVCaptions to consider when drawing. The array can contain no captions.
+// A NSArray holding captions to consider for rendering. This is the array of AVCaptions to consider when drawing. The array can contain no captions.
 func (o *AVCaptionRenderer) Captions() *foundation.NSArray[*AVCaption] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptionRendererSelCaptions)
 	if _ret != 0 {
@@ -78,7 +78,7 @@ func (o *AVCaptionRenderer) SetCaptions(captions *foundation.NSArray[*AVCaption]
 	o.Ptr().Send(_aVCaptionRendererSelSetCaptions, captions.Ptr())
 }
 
-// @property bounds @abstract A CGRect holding bounds for the drawing of caption scene(s). @discussion This is a CGRect indicating where captions are drawn using renderInContext:atTime: Once established, this CGRect is used in each call to renderInContext:atTime: until it is changed to another value. This should be set up earlier than drawing.
+// A CGRect holding bounds for the drawing of caption scene(s). This is a CGRect indicating where captions are drawn using renderInContext:atTime: Once established, this CGRect is used in each call to renderInContext:atTime: until it is changed to another value. This should be set up earlier than drawing.
 func (o *AVCaptionRenderer) Bounds() corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _aVCaptionRendererSelBounds)
 	return _ret

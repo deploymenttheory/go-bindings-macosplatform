@@ -377,6 +377,11 @@ func AVAudioUnitComponentTagsDidChangeNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVAudioUnitComponentTagsDidChangeNotification")))
 }
 
+// AVAudioUnitComponentManagerRegistrationsChangedNotification returns the string constant AVAudioUnitComponentManagerRegistrationsChangedNotification, for use as a dictionary key or argument.
+func AVAudioUnitComponentManagerRegistrationsChangedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioUnitComponentManagerRegistrationsChangedNotification")))
+}
+
 // AVSpeechSynthesisVoiceIdentifierAlex returns the string constant AVSpeechSynthesisVoiceIdentifierAlex, for use as a dictionary key or argument.
 func AVSpeechSynthesisVoiceIdentifierAlex() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVSpeechSynthesisVoiceIdentifierAlex")))
@@ -392,14 +397,14 @@ func AVSpeechSynthesisAvailableVoicesDidChangeNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVSpeechSynthesisAvailableVoicesDidChangeNotification")))
 }
 
+// AVAudioApplicationInputMuteStateChangeNotification returns the string constant AVAudioApplicationInputMuteStateChangeNotification, for use as a dictionary key or argument.
+func AVAudioApplicationInputMuteStateChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioApplicationInputMuteStateChangeNotification")))
+}
+
 // AVAudioApplicationMuteStateKey returns the string constant AVAudioApplicationMuteStateKey, for use as a dictionary key or argument.
 func AVAudioApplicationMuteStateKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVAudioApplicationMuteStateKey")))
-}
-
-// AVAudioUnitComponentManagerRegistrationsChangedNotification returns the address of the symbol AVAudioUnitComponentManagerRegistrationsChangedNotification.
-func AVAudioUnitComponentManagerRegistrationsChangedNotification() uintptr {
-	return _symbol("AVAudioUnitComponentManagerRegistrationsChangedNotification")
 }
 
 // AVExtendedNoteOnEventDefaultInstrument returns the value of the constant AVExtendedNoteOnEventDefaultInstrument.
@@ -411,22 +416,29 @@ func AVExtendedNoteOnEventDefaultInstrument() uint {
 	return *(*uint)(unsafe.Pointer(addr))
 }
 
-// AVSpeechUtteranceMinimumSpeechRate returns the address of the symbol AVSpeechUtteranceMinimumSpeechRate.
-func AVSpeechUtteranceMinimumSpeechRate() uintptr {
-	return _symbol("AVSpeechUtteranceMinimumSpeechRate")
+// AVSpeechUtteranceMinimumSpeechRate returns the value of the constant AVSpeechUtteranceMinimumSpeechRate.
+func AVSpeechUtteranceMinimumSpeechRate() float32 {
+	addr := _symbol("AVSpeechUtteranceMinimumSpeechRate")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float32)(unsafe.Pointer(addr))
 }
 
-// AVSpeechUtteranceMaximumSpeechRate returns the address of the symbol AVSpeechUtteranceMaximumSpeechRate.
-func AVSpeechUtteranceMaximumSpeechRate() uintptr {
-	return _symbol("AVSpeechUtteranceMaximumSpeechRate")
+// AVSpeechUtteranceMaximumSpeechRate returns the value of the constant AVSpeechUtteranceMaximumSpeechRate.
+func AVSpeechUtteranceMaximumSpeechRate() float32 {
+	addr := _symbol("AVSpeechUtteranceMaximumSpeechRate")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float32)(unsafe.Pointer(addr))
 }
 
-// AVSpeechUtteranceDefaultSpeechRate returns the address of the symbol AVSpeechUtteranceDefaultSpeechRate.
-func AVSpeechUtteranceDefaultSpeechRate() uintptr {
-	return _symbol("AVSpeechUtteranceDefaultSpeechRate")
-}
-
-// AVAudioApplicationInputMuteStateChangeNotification returns the address of the symbol AVAudioApplicationInputMuteStateChangeNotification.
-func AVAudioApplicationInputMuteStateChangeNotification() uintptr {
-	return _symbol("AVAudioApplicationInputMuteStateChangeNotification")
+// AVSpeechUtteranceDefaultSpeechRate returns the value of the constant AVSpeechUtteranceDefaultSpeechRate.
+func AVSpeechUtteranceDefaultSpeechRate() float32 {
+	addr := _symbol("AVSpeechUtteranceDefaultSpeechRate")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float32)(unsafe.Pointer(addr))
 }

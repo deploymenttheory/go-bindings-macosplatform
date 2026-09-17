@@ -141,14 +141,14 @@ func (cl *ConditionLock) LockWhenConditionBeforeDate(condition int, limit time.T
 	return _r
 }
 
-// Condition returns the condition.
+// Condition returns the condition associated with the receiver.
 func (cl *ConditionLock) Condition() int {
 	defer runtime.KeepAlive(cl)
 	_r := objc.Send[int](objref.IDOf(cl), objc.RegisterName("condition"))
 	return _r
 }
 
-// Name returns the name.
+// Name returns the name associated with the receiver.
 func (cl *ConditionLock) Name() string {
 	defer runtime.KeepAlive(cl)
 	_r := objc.Send[objc.ID](objref.IDOf(cl), objc.RegisterName("name"))

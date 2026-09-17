@@ -17,8 +17,6 @@ import (
 // UnitDispersion is an idiomatic wrapper over the Objective-C class NSUnitDispersion.
 //
 // It embeds [Dimension], promoting that type's methods.
-//
-// A unit of measure for specific quantities of dispersion.
 type UnitDispersion struct {
 	Dimension
 }

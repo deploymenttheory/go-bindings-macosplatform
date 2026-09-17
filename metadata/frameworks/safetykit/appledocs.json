@@ -44,18 +44,6 @@
           "url": "https://developer.apple.com/documentation/safetykit/saauthorizationstatus/notdetermined"
         }
       }
-    },
-    "SACrashDetectionEventResponse": {
-      "doc": "An enumeration that defines possible emergency responses to a Crash Detection event.",
-      "url": "https://developer.apple.com/documentation/safetykit/sacrashdetectioneventresponse"
-    },
-    "SAEmergencyResponseManagerVoiceCallStatus": {
-      "doc": "An enumeration that defines the status of a requested voice call.",
-      "url": "https://developer.apple.com/documentation/safetykit/saemergencyresponsemanagervoicecallstatus"
-    },
-    "SAErrorCode": {
-      "doc": "Codes for identifying errors in SafetyKit.",
-      "url": "https://developer.apple.com/documentation/safetykit/saerrorcode"
     }
   },
   "methods": {

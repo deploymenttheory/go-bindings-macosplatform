@@ -231,10 +231,6 @@
         }
       }
     },
-    "EKErrorCode": {
-      "doc": "Error codes for EventKit errors.",
-      "url": "https://developer.apple.com/documentation/eventkit/ekerrorcode"
-    },
     "EKEventAvailability": {
       "doc": "The event’s availability setting for scheduling purposes.",
       "url": "https://developer.apple.com/documentation/eventkit/ekeventavailability",

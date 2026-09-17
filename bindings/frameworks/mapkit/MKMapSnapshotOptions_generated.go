@@ -16,8 +16,6 @@ import (
 )
 
 // MapSnapshotOptions is an idiomatic wrapper over the Objective-C class MKMapSnapshotOptions.
-//
-// The options the snapshotter initializer uses to create a snapshotter to capture map-based imagery.
 type MapSnapshotOptions struct {
 	objref.Handle
 }

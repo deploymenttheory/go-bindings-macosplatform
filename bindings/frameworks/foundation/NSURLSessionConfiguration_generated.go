@@ -16,8 +16,6 @@ import (
 )
 
 // URLSessionConfiguration is an idiomatic wrapper over the Objective-C class NSURLSessionConfiguration.
-//
-// A configuration object that defines behavior and policies for a URL session.
 type URLSessionConfiguration struct {
 	objref.Handle
 }
@@ -80,43 +78,43 @@ func NewURLSessionConfiguration() *URLSessionConfiguration {
 	return uRLSessionConfigurationAdopt(_id)
 }
 
-// WithRequestCachePolicy sets the request cache policy.
+// WithRequestCachePolicy sets a predefined constant that determines when to return a response from the cache. This property determines the request caching policy used by tasks within sessions based on this configuration. The default value is `NSURLRequestUseProtocolCachePolicy`.
 func (usc *URLSessionConfiguration) WithRequestCachePolicy(requestCachePolicy URLRequestCachePolicy) *URLSessionConfiguration {
 	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setRequestCachePolicy:"), requestCachePolicy)
 	return usc
 }
 
-// WithTimeoutIntervalForRequest sets the timeout interval for request.
+// WithTimeoutIntervalForRequest sets the timeout interval to use when waiting for additional data. This property determines the request timeout interval for all tasks within sessions based on this configuration. The request timeout interval controls how long (in seconds) a task should wait for additional data to arrive before giving up. The timer associated with this value is reset whenever new data arrives. When the request timer reaches the specified interval without receiving any new data, it triggers a timeout. The default value is `60`. > Important: Any upload or download tasks created by a background session are automatically > retried if the original request fails due to a timeout. To configure how long an upload > or download task should be allowed to be retried or transferred, use the > `timeoutIntervalForResource` property.
 func (usc *URLSessionConfiguration) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *URLSessionConfiguration {
 	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
 	return usc
 }
 
-// WithTimeoutIntervalForResource sets the timeout interval for resource.
+// WithTimeoutIntervalForResource sets the maximum amount of time that a resource request should be allowed to take. This property determines the resource timeout interval for all tasks within sessions based on this configuration. The resource timeout interval controls how long (in seconds) to wait for an entire resource to transfer before giving up. The resource timer starts when the request is initiated and counts until either the request completes or this timeout interval is reached, whichever comes first. The default value is 7 days.
 func (usc *URLSessionConfiguration) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *URLSessionConfiguration {
 	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
 	return usc
 }
 
-// WithNetworkServiceType sets the network service type.
+// WithNetworkServiceType sets the type of network service for all tasks within network sessions to enable Cellular Network Slicing.
 func (usc *URLSessionConfiguration) WithNetworkServiceType(networkServiceType URLRequestNetworkServiceType) *URLSessionConfiguration {
 	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setNetworkServiceType:"), networkServiceType)
 	return usc
 }
 
-// WithAllowsCellularAccess sets the allows cellular access.
+// WithAllowsCellularAccess sets a Boolean value that determines whether connections should be made over a cellular network. This property controls whether tasks in sessions based on this session configuration are allowed to make connections over a cellular network. The default value is `YES`.
 func (usc *URLSessionConfiguration) WithAllowsCellularAccess(allowsCellularAccess bool) *URLSessionConfiguration {
 	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
 	return usc
 }
 
-// WithAllowsExpensiveNetworkAccess sets the allows expensive network access.
+// WithAllowsExpensiveNetworkAccess sets a Boolean value that indicates whether connections may use a network interface that the system considers expensive. The default value is `YES`.
 func (usc *URLSessionConfiguration) WithAllowsExpensiveNetworkAccess(allowsExpensiveNetworkAccess bool) *URLSessionConfiguration {
 	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setAllowsExpensiveNetworkAccess:"), allowsExpensiveNetworkAccess)
 	return usc
 }
 
-// WithAllowsConstrainedNetworkAccess sets the allows constrained network access.
+// WithAllowsConstrainedNetworkAccess sets a Boolean value that indicates whether connections may use the network when the user has specified Low Data Mode. The default value is `YES`.
 func (usc *URLSessionConfiguration) WithAllowsConstrainedNetworkAccess(allowsConstrainedNetworkAccess bool) *URLSessionConfiguration {
 	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setAllowsConstrainedNetworkAccess:"), allowsConstrainedNetworkAccess)
 	return usc
@@ -134,91 +132,91 @@ func (usc *URLSessionConfiguration) WithRequiresDNSSECValidation(requiresDNSSECV
 	return usc
 }
 
-// WithWaitsForConnectivity sets the waits for connectivity.
+// WithWaitsForConnectivity sets a Boolean value that indicates whether the session should wait for connectivity to become available, or fail immediately. Connectivity might be temporarily unavailable for several reasons. For example, a device might only have a cellular connection when `allowsCellularAccess` is set to `NO`, or the device might require a VPN connection but none is available. If the value of this property is `YES` and sufficient connectivity is unavailable, the session calls the `URLSession:taskIsWaitingForConnectivity:` delegate method and waits for connectivity. If the value is `NO` and connectivity is unavailable, the connection fails immediately with an error. Default value is `NO`. Ignored by background sessions, as background sessions always wait for connectivity.
 func (usc *URLSessionConfiguration) WithWaitsForConnectivity(waitsForConnectivity bool) *URLSessionConfiguration {
 	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setWaitsForConnectivity:"), waitsForConnectivity)
 	return usc
 }
 
-// WithDiscretionary sets the discretionary.
+// WithDiscretionary sets a Boolean value that determines whether background tasks can be scheduled at the discretion of the system for optimal performance. For configuration objects created using `+backgroundSessionConfigurationWithIdentifier:`, use this property to give the system control over when transfers should occur. This property is ignored for configuration objects created using other methods. When transferring large amounts of data, you are encouraged to set this to `YES`. Doing so lets the system schedule those transfers at times that are more optimal for the device. The default value is `NO`.
 func (usc *URLSessionConfiguration) WithDiscretionary(discretionary bool) *URLSessionConfiguration {
 	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setDiscretionary:"), discretionary)
 	return usc
 }
 
-// WithSharedContainerIdentifier sets the shared container identifier.
+// WithSharedContainerIdentifier sets the identifier for the shared container into which files in background URL sessions should be downloaded. To create a URL session for use by an app extension, set this property to a valid identifier for a container shared between the app extension and its containing app. > Important: If you try to create a URL session from your app extension but fail to set > this property to a valid value, the URL session is invalidated upon creation.
 func (usc *URLSessionConfiguration) WithSharedContainerIdentifier(sharedContainerIdentifier StringProvider) *URLSessionConfiguration {
 	defer runtime.KeepAlive(sharedContainerIdentifier)
 	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setSharedContainerIdentifier:"), objref.IDOf(sharedContainerIdentifier))
 	return usc
 }
 
-// WithSessionSendsLaunchEvents sets the session sends launch events.
+// WithSessionSendsLaunchEvents sets a Boolean value that indicates whether the app should be resumed or launched in the background when transfers finish. For configuration objects created using `+backgroundSessionConfigurationWithIdentifier:`, you can use this property to control the launching behavior for an iOS app. This property is ignored for configuration objects created using other methods. The default value is `YES`. When `YES`, the system automatically wakes up or launches the iOS app in the background when the session's tasks finish or require authentication. > Note: macOS apps based on AppKit do not support background launch.
 func (usc *URLSessionConfiguration) WithSessionSendsLaunchEvents(sessionSendsLaunchEvents bool) *URLSessionConfiguration {
 	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setSessionSendsLaunchEvents:"), sessionSendsLaunchEvents)
 	return usc
 }
 
-// WithConnectionProxyDictionary sets the connection proxy dictionary.
+// WithConnectionProxyDictionary sets a dictionary containing information about the proxy to use within this session. Prefer using `proxyConfigurations`, which supports secure proxy and relay types. The default value is `NULL`, which means that tasks use the default system settings.
 func (usc *URLSessionConfiguration) WithConnectionProxyDictionary(connectionProxyDictionary obj.Object) *URLSessionConfiguration {
 	defer runtime.KeepAlive(connectionProxyDictionary)
 	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setConnectionProxyDictionary:"), objref.IDOf(connectionProxyDictionary))
 	return usc
 }
 
-// WithHTTPShouldUsePipelining sets the HTTP should use pipelining.
+// WithHTTPShouldUsePipelining sets a Boolean value that determines whether the session should use HTTP pipelining. The default value is `NO`.
 func (usc *URLSessionConfiguration) WithHTTPShouldUsePipelining(httpShouldUsePipelining bool) *URLSessionConfiguration {
 	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setHTTPShouldUsePipelining:"), httpShouldUsePipelining)
 	return usc
 }
 
-// WithHTTPShouldSetCookies sets the HTTP should set cookies.
+// WithHTTPShouldSetCookies sets a Boolean value that determines whether requests should contain cookies from the cookie store. The default value is `YES`.
 func (usc *URLSessionConfiguration) WithHTTPShouldSetCookies(httpShouldSetCookies bool) *URLSessionConfiguration {
 	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setHTTPShouldSetCookies:"), httpShouldSetCookies)
 	return usc
 }
 
-// WithHTTPCookieAcceptPolicy sets the HTTP cookie accept policy.
+// WithHTTPCookieAcceptPolicy sets a policy constant that determines when cookies should be accepted. This property determines the cookie accept policy for all tasks within sessions based on this configuration.
 func (usc *URLSessionConfiguration) WithHTTPCookieAcceptPolicy(httpCookieAcceptPolicy HTTPCookieAcceptPolicy) *URLSessionConfiguration {
 	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setHTTPCookieAcceptPolicy:"), httpCookieAcceptPolicy)
 	return usc
 }
 
-// WithHTTPAdditionalHeaders sets the HTTP additional headers.
+// WithHTTPAdditionalHeaders sets a dictionary of additional headers to send with requests. This property specifies additional headers that are added to all tasks within sessions based on this configuration. If the same header appears in both this dictionary and the request object (where applicable), the request object's value takes precedence. An `NSURLSession` object is designed to handle various aspects of the HTTP protocol for you. As a result, you should not modify the following headers: `Authorization`, `Connection`, `Host`, `Proxy-Authenticate`, `Proxy-Authorization`, `WWW-Authenticate`.
 func (usc *URLSessionConfiguration) WithHTTPAdditionalHeaders(httpAdditionalHeaders obj.Object) *URLSessionConfiguration {
 	defer runtime.KeepAlive(httpAdditionalHeaders)
 	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setHTTPAdditionalHeaders:"), objref.IDOf(httpAdditionalHeaders))
 	return usc
 }
 
-// WithHTTPMaximumConnectionsPerHost sets the HTTP maximum connections per host.
+// WithHTTPMaximumConnectionsPerHost sets the maximum number of simultaneous connections to make to a given host. This limit is per session, so if you use multiple sessions, your app as a whole may exceed this limit. The default value is `6`.
 func (usc *URLSessionConfiguration) WithHTTPMaximumConnectionsPerHost(httpMaximumConnectionsPerHost int) *URLSessionConfiguration {
 	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setHTTPMaximumConnectionsPerHost:"), httpMaximumConnectionsPerHost)
 	return usc
 }
 
-// WithHTTPCookieStorage sets the HTTP cookie storage.
+// WithHTTPCookieStorage sets the cookie store for storing cookies within this session. To disable cookie storage, set this property to `nil`. For default and background sessions, the default value is the shared cookie storage object. For ephemeral sessions, the default value is a private cookie storage object that stores data in memory only, and is destroyed when you invalidate the session.
 func (usc *URLSessionConfiguration) WithHTTPCookieStorage(httpCookieStorage *HTTPCookieStorage) *URLSessionConfiguration {
 	defer runtime.KeepAlive(httpCookieStorage)
 	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setHTTPCookieStorage:"), objref.IDOf(httpCookieStorage))
 	return usc
 }
 
-// WithURLCredentialStorage sets the URL credential storage.
+// WithURLCredentialStorage sets a credential store that provides credentials for authentication. To not use a credential store, set this property to `nil`. For default and background sessions, the default value is the shared credential storage object. For ephemeral sessions, the default value is a private credential store object that stores data in memory only, and is destroyed when you invalidate the session.
 func (usc *URLSessionConfiguration) WithURLCredentialStorage(urlCredentialStorage *URLCredentialStorage) *URLSessionConfiguration {
 	defer runtime.KeepAlive(urlCredentialStorage)
 	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setURLCredentialStorage:"), objref.IDOf(urlCredentialStorage))
 	return usc
 }
 
-// WithURLCache sets the URL cache.
+// WithURLCache sets the URL cache for providing cached responses to requests within the session. To disable caching, set this property to `nil`. For default sessions, the default value is the shared URL cache object. For background sessions, the default value is `nil`. For ephemeral sessions, the default value is a private cache object that stores data in memory only, and is destroyed when you invalidate the session.
 func (usc *URLSessionConfiguration) WithURLCache(urlCache *URLCache) *URLSessionConfiguration {
 	defer runtime.KeepAlive(urlCache)
 	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setURLCache:"), objref.IDOf(urlCache))
 	return usc
 }
 
-// WithShouldUseExtendedBackgroundIdleMode sets the should use extended background idle mode.
+// WithShouldUseExtendedBackgroundIdleMode sets a Boolean value that indicates whether TCP connections should be kept open when the app moves to the background.
 func (usc *URLSessionConfiguration) WithShouldUseExtendedBackgroundIdleMode(shouldUseExtendedBackgroundIdleMode bool) *URLSessionConfiguration {
 	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setShouldUseExtendedBackgroundIdleMode:"), shouldUseExtendedBackgroundIdleMode)
 	return usc
@@ -248,7 +246,7 @@ func (usc *URLSessionConfiguration) WithScriptingProperties(scriptingProperties 
 	return usc
 }
 
-// Identifier returns the identifier.
+// Identifier returns the background session identifier of the configuration object. The value of this property is set only when you use `+backgroundSessionConfigurationWithIdentifier:` to create the configuration object. The string uniquely identifies a background session object. In iOS, you use this string in cases where the app was terminated while transfers were occurring in the background. When the app relaunches, it uses the string to recreate the configuration and session objects associated with the transfers.
 func (usc *URLSessionConfiguration) Identifier() string {
 	defer runtime.KeepAlive(usc)
 	_r := objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("identifier"))
@@ -258,49 +256,49 @@ func (usc *URLSessionConfiguration) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// RequestCachePolicy returns the request cache policy.
+// RequestCachePolicy returns a predefined constant that determines when to return a response from the cache. This property determines the request caching policy used by tasks within sessions based on this configuration. The default value is `NSURLRequestUseProtocolCachePolicy`.
 func (usc *URLSessionConfiguration) RequestCachePolicy() URLRequestCachePolicy {
 	defer runtime.KeepAlive(usc)
 	_r := objc.Send[URLRequestCachePolicy](objref.IDOf(usc), objc.RegisterName("requestCachePolicy"))
 	return _r
 }
 
-// TimeoutIntervalForRequest returns the timeout interval for request.
+// TimeoutIntervalForRequest returns the timeout interval to use when waiting for additional data. This property determines the request timeout interval for all tasks within sessions based on this configuration. The request timeout interval controls how long (in seconds) a task should wait for additional data to arrive before giving up. The timer associated with this value is reset whenever new data arrives. When the request timer reaches the specified interval without receiving any new data, it triggers a timeout. The default value is `60`. > Important: Any upload or download tasks created by a background session are automatically > retried if the original request fails due to a timeout. To configure how long an upload > or download task should be allowed to be retried or transferred, use the > `timeoutIntervalForResource` property.
 func (usc *URLSessionConfiguration) TimeoutIntervalForRequest() float64 {
 	defer runtime.KeepAlive(usc)
 	_r := objc.Send[float64](objref.IDOf(usc), objc.RegisterName("timeoutIntervalForRequest"))
 	return _r
 }
 
-// TimeoutIntervalForResource returns the timeout interval for resource.
+// TimeoutIntervalForResource returns the maximum amount of time that a resource request should be allowed to take. This property determines the resource timeout interval for all tasks within sessions based on this configuration. The resource timeout interval controls how long (in seconds) to wait for an entire resource to transfer before giving up. The resource timer starts when the request is initiated and counts until either the request completes or this timeout interval is reached, whichever comes first. The default value is 7 days.
 func (usc *URLSessionConfiguration) TimeoutIntervalForResource() float64 {
 	defer runtime.KeepAlive(usc)
 	_r := objc.Send[float64](objref.IDOf(usc), objc.RegisterName("timeoutIntervalForResource"))
 	return _r
 }
 
-// NetworkServiceType returns the network service type.
+// NetworkServiceType returns the type of network service for all tasks within network sessions to enable Cellular Network Slicing.
 func (usc *URLSessionConfiguration) NetworkServiceType() URLRequestNetworkServiceType {
 	defer runtime.KeepAlive(usc)
 	_r := objc.Send[URLRequestNetworkServiceType](objref.IDOf(usc), objc.RegisterName("networkServiceType"))
 	return _r
 }
 
-// AllowsCellularAccess wraps the corresponding Objective-C method.
+// AllowsCellularAccess reports whether a Boolean value that determines whether connections should be made over a cellular network. This property controls whether tasks in sessions based on this session configuration are allowed to make connections over a cellular network. The default value is `YES`.
 func (usc *URLSessionConfiguration) AllowsCellularAccess() bool {
 	defer runtime.KeepAlive(usc)
 	_r := objc.Send[bool](objref.IDOf(usc), objc.RegisterName("allowsCellularAccess"))
 	return _r
 }
 
-// AllowsExpensiveNetworkAccess wraps the corresponding Objective-C method.
+// AllowsExpensiveNetworkAccess reports whether connections may use a network interface that the system considers expensive. The default value is `YES`.
 func (usc *URLSessionConfiguration) AllowsExpensiveNetworkAccess() bool {
 	defer runtime.KeepAlive(usc)
 	_r := objc.Send[bool](objref.IDOf(usc), objc.RegisterName("allowsExpensiveNetworkAccess"))
 	return _r
 }
 
-// AllowsConstrainedNetworkAccess wraps the corresponding Objective-C method.
+// AllowsConstrainedNetworkAccess reports whether connections may use the network when the user has specified Low Data Mode. The default value is `YES`.
 func (usc *URLSessionConfiguration) AllowsConstrainedNetworkAccess() bool {
 	defer runtime.KeepAlive(usc)
 	_r := objc.Send[bool](objref.IDOf(usc), objc.RegisterName("allowsConstrainedNetworkAccess"))
@@ -321,21 +319,21 @@ func (usc *URLSessionConfiguration) RequiresDNSSECValidation() bool {
 	return _r
 }
 
-// WaitsForConnectivity wraps the corresponding Objective-C method.
+// WaitsForConnectivity reports whether the session should wait for connectivity to become available, or fail immediately. Connectivity might be temporarily unavailable for several reasons. For example, a device might only have a cellular connection when `allowsCellularAccess` is set to `NO`, or the device might require a VPN connection but none is available. If the value of this property is `YES` and sufficient connectivity is unavailable, the session calls the `URLSession:taskIsWaitingForConnectivity:` delegate method and waits for connectivity. If the value is `NO` and connectivity is unavailable, the connection fails immediately with an error. Default value is `NO`. Ignored by background sessions, as background sessions always wait for connectivity.
 func (usc *URLSessionConfiguration) WaitsForConnectivity() bool {
 	defer runtime.KeepAlive(usc)
 	_r := objc.Send[bool](objref.IDOf(usc), objc.RegisterName("waitsForConnectivity"))
 	return _r
 }
 
-// IsDiscretionary reports whether the object is discretionary.
+// IsDiscretionary reports whether a Boolean value that determines whether background tasks can be scheduled at the discretion of the system for optimal performance. For configuration objects created using `+backgroundSessionConfigurationWithIdentifier:`, use this property to give the system control over when transfers should occur. This property is ignored for configuration objects created using other methods. When transferring large amounts of data, you are encouraged to set this to `YES`. Doing so lets the system schedule those transfers at times that are more optimal for the device. The default value is `NO`.
 func (usc *URLSessionConfiguration) IsDiscretionary() bool {
 	defer runtime.KeepAlive(usc)
 	_r := objc.Send[bool](objref.IDOf(usc), objc.RegisterName("isDiscretionary"))
 	return _r
 }
 
-// SharedContainerIdentifier returns the shared container identifier.
+// SharedContainerIdentifier returns the identifier for the shared container into which files in background URL sessions should be downloaded. To create a URL session for use by an app extension, set this property to a valid identifier for a container shared between the app extension and its containing app. > Important: If you try to create a URL session from your app extension but fail to set > this property to a valid value, the URL session is invalidated upon creation.
 func (usc *URLSessionConfiguration) SharedContainerIdentifier() string {
 	defer runtime.KeepAlive(usc)
 	_r := objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("sharedContainerIdentifier"))
@@ -345,84 +343,84 @@ func (usc *URLSessionConfiguration) SharedContainerIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// SessionSendsLaunchEvents wraps the corresponding Objective-C method.
+// SessionSendsLaunchEvents reports whether the app should be resumed or launched in the background when transfers finish. For configuration objects created using `+backgroundSessionConfigurationWithIdentifier:`, you can use this property to control the launching behavior for an iOS app. This property is ignored for configuration objects created using other methods. The default value is `YES`. When `YES`, the system automatically wakes up or launches the iOS app in the background when the session's tasks finish or require authentication. > Note: macOS apps based on AppKit do not support background launch.
 func (usc *URLSessionConfiguration) SessionSendsLaunchEvents() bool {
 	defer runtime.KeepAlive(usc)
 	_r := objc.Send[bool](objref.IDOf(usc), objc.RegisterName("sessionSendsLaunchEvents"))
 	return _r
 }
 
-// ConnectionProxyDictionary returns the connection proxy dictionary.
+// ConnectionProxyDictionary returns a dictionary containing information about the proxy to use within this session. Prefer using `proxyConfigurations`, which supports secure proxy and relay types. The default value is `NULL`, which means that tasks use the default system settings.
 func (usc *URLSessionConfiguration) ConnectionProxyDictionary() obj.Object {
 	defer runtime.KeepAlive(usc)
 	_r := objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("connectionProxyDictionary"))
 	return obj.Wrap(_r)
 }
 
-// HTTPShouldUsePipelining wraps the corresponding Objective-C method.
+// HTTPShouldUsePipelining reports whether a Boolean value that determines whether the session should use HTTP pipelining. The default value is `NO`.
 func (usc *URLSessionConfiguration) HTTPShouldUsePipelining() bool {
 	defer runtime.KeepAlive(usc)
 	_r := objc.Send[bool](objref.IDOf(usc), objc.RegisterName("HTTPShouldUsePipelining"))
 	return _r
 }
 
-// HTTPShouldSetCookies wraps the corresponding Objective-C method.
+// HTTPShouldSetCookies reports whether a Boolean value that determines whether requests should contain cookies from the cookie store. The default value is `YES`.
 func (usc *URLSessionConfiguration) HTTPShouldSetCookies() bool {
 	defer runtime.KeepAlive(usc)
 	_r := objc.Send[bool](objref.IDOf(usc), objc.RegisterName("HTTPShouldSetCookies"))
 	return _r
 }
 
-// HTTPCookieAcceptPolicy returns the HTTP cookie accept policy.
+// HTTPCookieAcceptPolicy returns a policy constant that determines when cookies should be accepted. This property determines the cookie accept policy for all tasks within sessions based on this configuration.
 func (usc *URLSessionConfiguration) HTTPCookieAcceptPolicy() HTTPCookieAcceptPolicy {
 	defer runtime.KeepAlive(usc)
 	_r := objc.Send[HTTPCookieAcceptPolicy](objref.IDOf(usc), objc.RegisterName("HTTPCookieAcceptPolicy"))
 	return _r
 }
 
-// HTTPAdditionalHeaders returns the HTTP additional headers.
+// HTTPAdditionalHeaders returns a dictionary of additional headers to send with requests. This property specifies additional headers that are added to all tasks within sessions based on this configuration. If the same header appears in both this dictionary and the request object (where applicable), the request object's value takes precedence. An `NSURLSession` object is designed to handle various aspects of the HTTP protocol for you. As a result, you should not modify the following headers: `Authorization`, `Connection`, `Host`, `Proxy-Authenticate`, `Proxy-Authorization`, `WWW-Authenticate`.
 func (usc *URLSessionConfiguration) HTTPAdditionalHeaders() obj.Object {
 	defer runtime.KeepAlive(usc)
 	_r := objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("HTTPAdditionalHeaders"))
 	return obj.Wrap(_r)
 }
 
-// HTTPMaximumConnectionsPerHost returns the HTTP maximum connections per host.
+// HTTPMaximumConnectionsPerHost returns the maximum number of simultaneous connections to make to a given host. This limit is per session, so if you use multiple sessions, your app as a whole may exceed this limit. The default value is `6`.
 func (usc *URLSessionConfiguration) HTTPMaximumConnectionsPerHost() int {
 	defer runtime.KeepAlive(usc)
 	_r := objc.Send[int](objref.IDOf(usc), objc.RegisterName("HTTPMaximumConnectionsPerHost"))
 	return _r
 }
 
-// HTTPCookieStorage returns the HTTP cookie storage.
+// HTTPCookieStorage returns the cookie store for storing cookies within this session. To disable cookie storage, set this property to `nil`. For default and background sessions, the default value is the shared cookie storage object. For ephemeral sessions, the default value is a private cookie storage object that stores data in memory only, and is destroyed when you invalidate the session.
 func (usc *URLSessionConfiguration) HTTPCookieStorage() *HTTPCookieStorage {
 	defer runtime.KeepAlive(usc)
 	_r := objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("HTTPCookieStorage"))
 	return HTTPCookieStorageFromID(_r)
 }
 
-// URLCredentialStorage returns the URL credential storage.
+// URLCredentialStorage returns a credential store that provides credentials for authentication. To not use a credential store, set this property to `nil`. For default and background sessions, the default value is the shared credential storage object. For ephemeral sessions, the default value is a private credential store object that stores data in memory only, and is destroyed when you invalidate the session.
 func (usc *URLSessionConfiguration) URLCredentialStorage() *URLCredentialStorage {
 	defer runtime.KeepAlive(usc)
 	_r := objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("URLCredentialStorage"))
 	return URLCredentialStorageFromID(_r)
 }
 
-// URLCache returns the URL cache.
+// URLCache returns the URL cache for providing cached responses to requests within the session. To disable caching, set this property to `nil`. For default sessions, the default value is the shared URL cache object. For background sessions, the default value is `nil`. For ephemeral sessions, the default value is a private cache object that stores data in memory only, and is destroyed when you invalidate the session.
 func (usc *URLSessionConfiguration) URLCache() *URLCache {
 	defer runtime.KeepAlive(usc)
 	_r := objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("URLCache"))
 	return URLCacheFromID(_r)
 }
 
-// ShouldUseExtendedBackgroundIdleMode wraps the corresponding Objective-C method.
+// ShouldUseExtendedBackgroundIdleMode reports whether TCP connections should be kept open when the app moves to the background.
 func (usc *URLSessionConfiguration) ShouldUseExtendedBackgroundIdleMode() bool {
 	defer runtime.KeepAlive(usc)
 	_r := objc.Send[bool](objref.IDOf(usc), objc.RegisterName("shouldUseExtendedBackgroundIdleMode"))
 	return _r
 }
 
-// ProtocolClasses returns the protocol classes.
+// ProtocolClasses returns an array of extra protocol subclasses that handle requests in a session. Use this array to extend the default set of common networking protocols available for use by a session with one or more custom protocols that you define. You should not use `+[NSURLProtocol registerClass:]`, as that method will register your class with the default session rather than with an instance of `NSURLSession`. > Note: You cannot use custom `NSURLProtocol` subclasses in conjunction with background > sessions.
 func (usc *URLSessionConfiguration) ProtocolClasses() []obj.Object {
 	defer runtime.KeepAlive(usc)
 	_r := objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("protocolClasses"))

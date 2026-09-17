@@ -7,6 +7,7 @@ package sensitivecontentanalysis
 import (
 	"runtime"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -84,6 +85,14 @@ func (sa *SensitivityAnalysis) IsSensitive() bool {
 	defer runtime.KeepAlive(sa)
 	_r := objc.Send[bool](objref.IDOf(sa), objc.RegisterName("isSensitive"))
 	return _r
+}
+
+// DetectedTypes returns type of sensitive content the analyzed media contains
+// The order of the returned elements is unspecified.
+func (sa *SensitivityAnalysis) DetectedTypes() []*foundation.String {
+	defer runtime.KeepAlive(sa)
+	_r := objc.Send[objc.ID](objref.IDOf(sa), objc.RegisterName("detectedTypes"))
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *foundation.String { return foundation.StringFromID(_id) })
 }
 
 // ShouldIndicateSensitivity reports whether intervention guidance that suggests the app indicate the presence of sensitive content.

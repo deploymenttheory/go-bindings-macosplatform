@@ -94,21 +94,21 @@ func (tvlc *TextViewportLayoutController) AdjustViewportByVerticalOffset(vertica
 	objc.Send[objc.ID](objref.IDOf(tvlc), objc.RegisterName("adjustViewportByVerticalOffset:"), verticalOffset)
 }
 
-// TextLayoutManager returns the text layout manager.
+// TextLayoutManager returns the text layout manager for this viewport layout controller.
 func (tvlc *TextViewportLayoutController) TextLayoutManager() *TextLayoutManager {
 	defer runtime.KeepAlive(tvlc)
 	_r := objc.Send[objc.ID](objref.IDOf(tvlc), objc.RegisterName("textLayoutManager"))
 	return TextLayoutManagerFromID(_r)
 }
 
-// ViewportBounds returns the viewport bounds.
+// ViewportBounds returns the visible bounds of the view, plus the overdraw area. Not KVO-compliant.
 func (tvlc *TextViewportLayoutController) ViewportBounds() corefoundation.CGRect {
 	defer runtime.KeepAlive(tvlc)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(tvlc), objc.RegisterName("viewportBounds"))
 	return _r
 }
 
-// ViewportRange returns the viewport range.
+// ViewportRange returns the text range of the current viewport layout. Not KVO-compliant.
 func (tvlc *TextViewportLayoutController) ViewportRange() *TextRange {
 	defer runtime.KeepAlive(tvlc)
 	_r := objc.Send[objc.ID](objref.IDOf(tvlc), objc.RegisterName("viewportRange"))

@@ -127,6 +127,7 @@ func (o *NSMetadataQuery) ValueOfAttributeForResultAtIndex(attrName *NSString, i
 	return _ret
 }
 
+// The query's delegate. This property contains an object that acts as the query's delegate, or nil. The delegate must implement the NSMetadataQueryDelegate protocol. Pass nil to remove the current delegate.
 func (o *NSMetadataQuery) Delegate() NSMetadataQueryDelegate {
 	_ret := objc.Send[NSMetadataQueryDelegate](o.Ptr(), _nSMetadataQuerySelDelegate)
 	return _ret
@@ -136,6 +137,7 @@ func (o *NSMetadataQuery) SetDelegate(delegate NSMetadataQueryDelegate) {
 	o.Ptr().Send(_nSMetadataQuerySelSetDelegate, delegate)
 }
 
+// The predicate used to filter query results. Setting this property while a query is running stops the query and discards the current results. The receiver immediately starts a new query.
 func (o *NSMetadataQuery) Predicate() *NSPredicate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMetadataQuerySelPredicate)
 	if _ret != 0 {
@@ -148,6 +150,7 @@ func (o *NSMetadataQuery) SetPredicate(predicate *NSPredicate) {
 	o.Ptr().Send(_nSMetadataQuerySelSetPredicate, predicate.Ptr())
 }
 
+// An array of sort descriptors to use when sorting the query results.
 func (o *NSMetadataQuery) SortDescriptors() *NSArray[*NSSortDescriptor] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMetadataQuerySelSortDescriptors)
 	if _ret != 0 {
@@ -160,6 +163,7 @@ func (o *NSMetadataQuery) SetSortDescriptors(sortDescriptors *NSArray[*NSSortDes
 	o.Ptr().Send(_nSMetadataQuerySelSetSortDescriptors, sortDescriptors.Ptr())
 }
 
+// An array of attributes whose values are gathered by the query.
 func (o *NSMetadataQuery) ValueListAttributes() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMetadataQuerySelValueListAttributes)
 	if _ret != 0 {
@@ -172,6 +176,7 @@ func (o *NSMetadataQuery) SetValueListAttributes(valueListAttributes *NSArray[*N
 	o.Ptr().Send(_nSMetadataQuerySelSetValueListAttributes, valueListAttributes.Ptr())
 }
 
+// An array of attributes used to group query results.
 func (o *NSMetadataQuery) GroupingAttributes() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMetadataQuerySelGroupingAttributes)
 	if _ret != 0 {
@@ -184,6 +189,7 @@ func (o *NSMetadataQuery) SetGroupingAttributes(groupingAttributes *NSArray[*NSS
 	o.Ptr().Send(_nSMetadataQuerySelSetGroupingAttributes, groupingAttributes.Ptr())
 }
 
+// The interval at which notification of updated results occurs.
 func (o *NSMetadataQuery) NotificationBatchingInterval() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSMetadataQuerySelNotificationBatchingInterval)
 	return _ret
@@ -193,6 +199,7 @@ func (o *NSMetadataQuery) SetNotificationBatchingInterval(notificationBatchingIn
 	o.Ptr().Send(_nSMetadataQuerySelSetNotificationBatchingInterval, notificationBatchingInterval)
 }
 
+// An array of search scopes that limits where the query searches for results. Scopes is an NSArray of NSURL objects (file URLs only) and/or string paths and/or the special string constants below, which specifies the locations to which the search is limited; an empty array means no limits, which is the default state.
 func (o *NSMetadataQuery) SearchScopes() *NSArray[objc.ID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMetadataQuerySelSearchScopes)
 	if _ret != 0 {
@@ -205,6 +212,7 @@ func (o *NSMetadataQuery) SetSearchScopes(searchScopes *NSArray[objc.ID]) {
 	o.Ptr().Send(_nSMetadataQuerySelSetSearchScopes, searchScopes.Ptr())
 }
 
+// An array of objects that the query will search. Items can be a mixture of NSMetadataItem, NSURL objects (file URLs only) and/or string paths; the getter returns the same mixture as was set.
 func (o *NSMetadataQuery) SearchItems() *NSArray[objc.ID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMetadataQuerySelSearchItems)
 	if _ret != 0 {
@@ -217,6 +225,7 @@ func (o *NSMetadataQuery) SetSearchItems(searchItems *NSArray[objc.ID]) {
 	o.Ptr().Send(_nSMetadataQuerySelSetSearchItems, searchItems.Ptr())
 }
 
+// An optional operation queue for notifications and delegate method calls.
 func (o *NSMetadataQuery) OperationQueue() *NSOperationQueue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMetadataQuerySelOperationQueue)
 	if _ret != 0 {
@@ -229,26 +238,31 @@ func (o *NSMetadataQuery) SetOperationQueue(operationQueue *NSOperationQueue) {
 	o.Ptr().Send(_nSMetadataQuerySelSetOperationQueue, operationQueue.Ptr())
 }
 
+// A Boolean value that indicates whether the query has started.
 func (o *NSMetadataQuery) IsStarted() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSMetadataQuerySelIsStarted)
 	return _ret
 }
 
+// A Boolean value that indicates whether the query is in its initial gathering phase.
 func (o *NSMetadataQuery) IsGathering() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSMetadataQuerySelIsGathering)
 	return _ret
 }
 
+// A Boolean value that indicates whether the query has been stopped.
 func (o *NSMetadataQuery) IsStopped() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSMetadataQuerySelIsStopped)
 	return _ret
 }
 
+// The number of results returned by the query.
 func (o *NSMetadataQuery) ResultCount() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSMetadataQuerySelResultCount)
 	return _ret
 }
 
+// An array containing the query's results. This is for key-value bindings, and causes side-effects on the query.
 func (o *NSMetadataQuery) Results() *NSArray[objc.ID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMetadataQuerySelResults)
 	if _ret != 0 {
@@ -257,6 +271,7 @@ func (o *NSMetadataQuery) Results() *NSArray[objc.ID] {
 	return NSArrayFromID[objc.ID](_ret)
 }
 
+// A dictionary containing arrays of attribute value tuples, keyed by attribute name. Values are arrays of `NSMetadataQueryAttributeValueTuple`.
 func (o *NSMetadataQuery) ValueLists() *NSDictionary[*NSString, objc.ID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMetadataQuerySelValueLists)
 	if _ret != 0 {
@@ -265,6 +280,7 @@ func (o *NSMetadataQuery) ValueLists() *NSDictionary[*NSString, objc.ID] {
 	return NSDictionaryFromID[*NSString, objc.ID](_ret)
 }
 
+// An array of NSMetadataQueryResultGroups, for the first grouping attribute.
 func (o *NSMetadataQuery) GroupedResults() *NSArray[*NSMetadataQueryResultGroup] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMetadataQuerySelGroupedResults)
 	if _ret != 0 {

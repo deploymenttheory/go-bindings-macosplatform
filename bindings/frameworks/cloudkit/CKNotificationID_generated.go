@@ -15,8 +15,6 @@ import (
 )
 
 // NotificationID is an idiomatic wrapper over the Objective-C class CKNotificationID.
-//
-// An object that uniquely identifies a push notification that a container sends.
 type NotificationID struct {
 	objref.Handle
 }

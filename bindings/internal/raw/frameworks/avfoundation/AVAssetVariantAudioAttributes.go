@@ -10,8 +10,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An object that defines the audio attributes for an asset variant.
-//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avassetvariantaudioattributes
 type AVAssetVariantAudioAttributes struct {
 	foundation.NSObject

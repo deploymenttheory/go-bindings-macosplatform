@@ -34,7 +34,7 @@ func ASOneTimeCodeCredentialFromID(id objc.ID) *ASOneTimeCodeCredential {
 	return o
 }
 
-// @abstract Creates and initializes a new ASOneTimeCodeCredential object. @param code the one time code.
+// @abstract Creates and initializes a new ASOneTimeCodeCredential object. @param code the one-time code.
 func ASOneTimeCodeCredentialCredentialWithCode(code *foundation.NSString) *ASOneTimeCodeCredential {
 	_ret := objc.Send[objc.ID](objc.ID(_clsASOneTimeCodeCredential), _aSOneTimeCodeCredentialSelCredentialWithCode, code.Ptr())
 	if _ret != 0 {

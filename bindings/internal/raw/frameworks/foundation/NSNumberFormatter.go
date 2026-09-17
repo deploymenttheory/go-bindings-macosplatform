@@ -11,8 +11,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A formatter that converts between numeric values and their textual representations.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsnumberformatter
 type NSNumberFormatter struct {
 	NSFormatter
@@ -170,6 +168,7 @@ func NSNumberFormatterFromID(id objc.ID) *NSNumberFormatter {
 	return o
 }
 
+// Returns by reference a cell-content object after creating it from a range of characters in a given string. If a string contains any characters other than numerical digits or locale-appropriate group or decimal separators, parsing will fail. Any leading or trailing space separator characters in a string are ignored. For example, the strings " 5", "5 ", and "5" all produce the number \c 5. If there is an error, this method calls \c control:didFailToFormatString:errorDescription: on the delegate. @param obj On return, contains an instance of \c NSDecimalNumber or \c NSNumber based on the current value of the \c generatesDecimalNumbers property. Returns \c nil by reference if conversion failed. @param string A string object with the range of characters specified in \c rangep that is used to create \c anObject. @param rangep A range of characters in \c aString. On return, contains the actual range of characters used to create the object. @param error If an error occurs, upon return contains an \c NSError object that explains why the conversion failed. @return \c YES if the conversion from string to cell-content object was successful, otherwise \c NO.
 func (o *NSNumberFormatter) GetObjectValueForStringRangeError(obj **ObjcObject, string_ *NSString, rangep *NSRange) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSNumberFormatterSelGetObjectValueForStringRangeError, obj, string_.Ptr(), rangep, unsafe.Pointer(&_nsErr))
@@ -179,6 +178,7 @@ func (o *NSNumberFormatter) GetObjectValueForStringRangeError(obj **ObjcObject, 
 	return _ret, nil
 }
 
+// Returns a string containing the formatted value of the provided number object. @param number An \c NSNumber object that is parsed to create the returned string object. @return A string containing the formatted value of \c number using the receiver's current settings.
 func (o *NSNumberFormatter) StringFromNumber(number *NSNumber) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelStringFromNumber, number.Ptr())
 	if _ret != 0 {
@@ -187,6 +187,7 @@ func (o *NSNumberFormatter) StringFromNumber(number *NSNumber) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns an \c NSNumber object created by parsing a given string. If a string contains any characters other than numerical digits or locale-appropriate group or decimal separators, parsing will fail. Any leading or trailing space separator characters in a string are ignored. For example, the strings " 5", "5 ", and "5" all produce the number \c 5. @param string An \c NSString object that is parsed to generate the returned number object. @return An \c NSNumber object created by parsing \c string using the receiver's format, or \c nil if no single number could be parsed.
 func (o *NSNumberFormatter) NumberFromString(string_ *NSString) *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelNumberFromString, string_.Ptr())
 	if _ret != 0 {
@@ -195,6 +196,7 @@ func (o *NSNumberFormatter) NumberFromString(string_ *NSString) *NSNumber {
 	return NSNumberFromID(_ret)
 }
 
+// Returns a localized number string with the specified style. @param num The number to localize. @param nstyle The localization style to use. @return An appropriately formatted \c NSString.
 func NSNumberFormatterLocalizedStringFromNumberNumberStyle(num *NSNumber, nstyle NSNumberFormatterStyle) *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSNumberFormatter), _nSNumberFormatterSelLocalizedStringFromNumberNumberStyle, num.Ptr(), nstyle)
 	if _ret != 0 {
@@ -203,15 +205,18 @@ func NSNumberFormatterLocalizedStringFromNumberNumberStyle(num *NSNumber, nstyle
 	return NSStringFromID(_ret)
 }
 
+// Returns an \c NSNumberFormatterBehavior constant that indicates default formatter behavior for new instances of \c NSNumberFormatter.
 func NSNumberFormatterDefaultFormatterBehavior() NSNumberFormatterBehavior {
 	_ret := objc.Send[NSNumberFormatterBehavior](objc.ID(_clsNSNumberFormatter), _nSNumberFormatterSelDefaultFormatterBehavior)
 	return _ret
 }
 
+// Sets the default formatter behavior for new instances of \c NSNumberFormatter. @param behavior An \c NSNumberFormatterBehavior constant that indicates the revision of the class providing the default behavior.
 func NSNumberFormatterSetDefaultFormatterBehavior(behavior NSNumberFormatterBehavior) {
 	objc.ID(_clsNSNumberFormatter).Send(_nSNumberFormatterSelSetDefaultFormatterBehavior, behavior)
 }
 
+// The capitalization formatting context used when formatting a number. Defaults to \c NSFormattingContextUnknown.
 func (o *NSNumberFormatter) FormattingContext() NSFormattingContext {
 	_ret := objc.Send[NSFormattingContext](o.Ptr(), _nSNumberFormatterSelFormattingContext)
 	return _ret
@@ -221,6 +226,7 @@ func (o *NSNumberFormatter) SetFormattingContext(formattingContext NSFormattingC
 	o.Ptr().Send(_nSNumberFormatterSelSetFormattingContext, formattingContext)
 }
 
+// See \c kCFNumberFormatterMinGroupingDigits in \c CFNumberFormatter for an explanation on how minimum grouping digits is used.
 func (o *NSNumberFormatter) MinimumGroupingDigits() int {
 	_ret := objc.Send[int](o.Ptr(), _nSNumberFormatterSelMinimumGroupingDigits)
 	return _ret
@@ -230,6 +236,7 @@ func (o *NSNumberFormatter) SetMinimumGroupingDigits(minimumGroupingDigits int) 
 	o.Ptr().Send(_nSNumberFormatterSelSetMinimumGroupingDigits, minimumGroupingDigits)
 }
 
+// The number style used by the receiver. Styles are essentially predetermined sets of values for certain properties. Examples of number-formatter styles are those used for decimal values, percentage values, and currency.
 func (o *NSNumberFormatter) NumberStyle() NSNumberFormatterStyle {
 	_ret := objc.Send[NSNumberFormatterStyle](o.Ptr(), _nSNumberFormatterSelNumberStyle)
 	return _ret
@@ -239,6 +246,7 @@ func (o *NSNumberFormatter) SetNumberStyle(numberStyle NSNumberFormatterStyle) {
 	o.Ptr().Send(_nSNumberFormatterSelSetNumberStyle, numberStyle)
 }
 
+// The locale of the receiver. The locale determines the default values for many formatter attributes, such as ISO region and language codes, currency code, calendar, system of measurement, and decimal separator.
 func (o *NSNumberFormatter) Locale() *NSLocale {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelLocale)
 	if _ret != 0 {
@@ -251,6 +259,7 @@ func (o *NSNumberFormatter) SetLocale(locale *NSLocale) {
 	o.Ptr().Send(_nSNumberFormatterSelSetLocale, locale.Ptr())
 }
 
+// Determines whether the receiver creates instances of \c NSDecimalNumber when it converts strings to number objects.
 func (o *NSNumberFormatter) GeneratesDecimalNumbers() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSNumberFormatterSelGeneratesDecimalNumbers)
 	return _ret
@@ -260,6 +269,7 @@ func (o *NSNumberFormatter) SetGeneratesDecimalNumbers(generatesDecimalNumbers b
 	o.Ptr().Send(_nSNumberFormatterSelSetGeneratesDecimalNumbers, generatesDecimalNumbers)
 }
 
+// The formatter behavior of the receiver.
 func (o *NSNumberFormatter) FormatterBehavior() NSNumberFormatterBehavior {
 	_ret := objc.Send[NSNumberFormatterBehavior](o.Ptr(), _nSNumberFormatterSelFormatterBehavior)
 	return _ret
@@ -269,6 +279,7 @@ func (o *NSNumberFormatter) SetFormatterBehavior(formatterBehavior NSNumberForma
 	o.Ptr().Send(_nSNumberFormatterSelSetFormatterBehavior, formatterBehavior)
 }
 
+// The format the receiver uses to display negative values.
 func (o *NSNumberFormatter) NegativeFormat() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelNegativeFormat)
 	if _ret != 0 {
@@ -281,6 +292,7 @@ func (o *NSNumberFormatter) SetNegativeFormat(negativeFormat *NSString) {
 	o.Ptr().Send(_nSNumberFormatterSelSetNegativeFormat, negativeFormat.Ptr())
 }
 
+// The text attributes to be used in displaying negative values. This property is a dictionary that contains the attributes used to display negative values.
 func (o *NSNumberFormatter) TextAttributesForNegativeValues() *NSDictionary[*NSString, objc.ID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelTextAttributesForNegativeValues)
 	if _ret != 0 {
@@ -293,6 +305,7 @@ func (o *NSNumberFormatter) SetTextAttributesForNegativeValues(textAttributesFor
 	o.Ptr().Send(_nSNumberFormatterSelSetTextAttributesForNegativeValues, textAttributesForNegativeValues.Ptr())
 }
 
+// The format the receiver uses to display positive values.
 func (o *NSNumberFormatter) PositiveFormat() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelPositiveFormat)
 	if _ret != 0 {
@@ -305,6 +318,7 @@ func (o *NSNumberFormatter) SetPositiveFormat(positiveFormat *NSString) {
 	o.Ptr().Send(_nSNumberFormatterSelSetPositiveFormat, positiveFormat.Ptr())
 }
 
+// The text attributes to be used in displaying positive values. This property is a dictionary that contains the attributes used to display positive values.
 func (o *NSNumberFormatter) TextAttributesForPositiveValues() *NSDictionary[*NSString, objc.ID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelTextAttributesForPositiveValues)
 	if _ret != 0 {
@@ -317,6 +331,7 @@ func (o *NSNumberFormatter) SetTextAttributesForPositiveValues(textAttributesFor
 	o.Ptr().Send(_nSNumberFormatterSelSetTextAttributesForPositiveValues, textAttributesForPositiveValues.Ptr())
 }
 
+// Determines whether the receiver allows as input floating-point values (that is, values that include the period character (\c .)). By default, floating point values are allowed.
 func (o *NSNumberFormatter) AllowsFloats() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSNumberFormatterSelAllowsFloats)
 	return _ret
@@ -326,6 +341,7 @@ func (o *NSNumberFormatter) SetAllowsFloats(allowsFloats bool) {
 	o.Ptr().Send(_nSNumberFormatterSelSetAllowsFloats, allowsFloats)
 }
 
+// The character the receiver uses as a decimal separator.
 func (o *NSNumberFormatter) DecimalSeparator() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelDecimalSeparator)
 	if _ret != 0 {
@@ -338,6 +354,7 @@ func (o *NSNumberFormatter) SetDecimalSeparator(decimalSeparator *NSString) {
 	o.Ptr().Send(_nSNumberFormatterSelSetDecimalSeparator, decimalSeparator.Ptr())
 }
 
+// Determines whether the receiver always shows the decimal separator, even for integer numbers.
 func (o *NSNumberFormatter) AlwaysShowsDecimalSeparator() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSNumberFormatterSelAlwaysShowsDecimalSeparator)
 	return _ret
@@ -347,6 +364,7 @@ func (o *NSNumberFormatter) SetAlwaysShowsDecimalSeparator(alwaysShowsDecimalSep
 	o.Ptr().Send(_nSNumberFormatterSelSetAlwaysShowsDecimalSeparator, alwaysShowsDecimalSeparator)
 }
 
+// The string used by the receiver as a currency decimal separator.
 func (o *NSNumberFormatter) CurrencyDecimalSeparator() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelCurrencyDecimalSeparator)
 	if _ret != 0 {
@@ -359,6 +377,7 @@ func (o *NSNumberFormatter) SetCurrencyDecimalSeparator(currencyDecimalSeparator
 	o.Ptr().Send(_nSNumberFormatterSelSetCurrencyDecimalSeparator, currencyDecimalSeparator.Ptr())
 }
 
+// Determines whether the receiver displays the group separator.
 func (o *NSNumberFormatter) UsesGroupingSeparator() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSNumberFormatterSelUsesGroupingSeparator)
 	return _ret
@@ -368,6 +387,7 @@ func (o *NSNumberFormatter) SetUsesGroupingSeparator(usesGroupingSeparator bool)
 	o.Ptr().Send(_nSNumberFormatterSelSetUsesGroupingSeparator, usesGroupingSeparator)
 }
 
+// The string used by the receiver for a grouping separator. For example, the grouping separator used in the United States is the comma ("10,000") whereas in France it is the space ("10 000").
 func (o *NSNumberFormatter) GroupingSeparator() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelGroupingSeparator)
 	if _ret != 0 {
@@ -380,6 +400,7 @@ func (o *NSNumberFormatter) SetGroupingSeparator(groupingSeparator *NSString) {
 	o.Ptr().Send(_nSNumberFormatterSelSetGroupingSeparator, groupingSeparator.Ptr())
 }
 
+// The string used to represent a zero value. If not specified, zero values are formatted normally. You might, for example, set this property to \c "-" in a spreadsheet used for accounting.
 func (o *NSNumberFormatter) ZeroSymbol() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelZeroSymbol)
 	if _ret != 0 {
@@ -392,6 +413,7 @@ func (o *NSNumberFormatter) SetZeroSymbol(zeroSymbol *NSString) {
 	o.Ptr().Send(_nSNumberFormatterSelSetZeroSymbol, zeroSymbol.Ptr())
 }
 
+// The text attributes used to display a zero value. This property is a dictionary that contains the text attributes used to display zero values.
 func (o *NSNumberFormatter) TextAttributesForZero() *NSDictionary[*NSString, objc.ID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelTextAttributesForZero)
 	if _ret != 0 {
@@ -404,6 +426,7 @@ func (o *NSNumberFormatter) SetTextAttributesForZero(textAttributesForZero *NSDi
 	o.Ptr().Send(_nSNumberFormatterSelSetTextAttributesForZero, textAttributesForZero.Ptr())
 }
 
+// The string used to represent a \c nil value. By default, this property is set to an empty string ("").
 func (o *NSNumberFormatter) NilSymbol() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelNilSymbol)
 	if _ret != 0 {
@@ -416,6 +439,7 @@ func (o *NSNumberFormatter) SetNilSymbol(nilSymbol *NSString) {
 	o.Ptr().Send(_nSNumberFormatterSelSetNilSymbol, nilSymbol.Ptr())
 }
 
+// The text attributes used to display the \c nil symbol.
 func (o *NSNumberFormatter) TextAttributesForNil() *NSDictionary[*NSString, objc.ID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelTextAttributesForNil)
 	if _ret != 0 {
@@ -428,6 +452,7 @@ func (o *NSNumberFormatter) SetTextAttributesForNil(textAttributesForNil *NSDict
 	o.Ptr().Send(_nSNumberFormatterSelSetTextAttributesForNil, textAttributesForNil.Ptr())
 }
 
+// The string used to represent a NaN ("not a number") value. By default, this property is set to the string "NaN".
 func (o *NSNumberFormatter) NotANumberSymbol() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelNotANumberSymbol)
 	if _ret != 0 {
@@ -440,6 +465,7 @@ func (o *NSNumberFormatter) SetNotANumberSymbol(notANumberSymbol *NSString) {
 	o.Ptr().Send(_nSNumberFormatterSelSetNotANumberSymbol, notANumberSymbol.Ptr())
 }
 
+// The text attributes used to display the NaN ("not a number") string.
 func (o *NSNumberFormatter) TextAttributesForNotANumber() *NSDictionary[*NSString, objc.ID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelTextAttributesForNotANumber)
 	if _ret != 0 {
@@ -452,6 +478,7 @@ func (o *NSNumberFormatter) SetTextAttributesForNotANumber(textAttributesForNotA
 	o.Ptr().Send(_nSNumberFormatterSelSetTextAttributesForNotANumber, textAttributesForNotANumber.Ptr())
 }
 
+// The string used to represent a positive infinity symbol. By default, this property is set to the string "+\u221e".
 func (o *NSNumberFormatter) PositiveInfinitySymbol() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelPositiveInfinitySymbol)
 	if _ret != 0 {
@@ -464,6 +491,7 @@ func (o *NSNumberFormatter) SetPositiveInfinitySymbol(positiveInfinitySymbol *NS
 	o.Ptr().Send(_nSNumberFormatterSelSetPositiveInfinitySymbol, positiveInfinitySymbol.Ptr())
 }
 
+// The text attributes used to display the positive infinity symbol. This property is a dictionary that contains the text attributes used to display the positive infinity string.
 func (o *NSNumberFormatter) TextAttributesForPositiveInfinity() *NSDictionary[*NSString, objc.ID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelTextAttributesForPositiveInfinity)
 	if _ret != 0 {
@@ -476,6 +504,7 @@ func (o *NSNumberFormatter) SetTextAttributesForPositiveInfinity(textAttributesF
 	o.Ptr().Send(_nSNumberFormatterSelSetTextAttributesForPositiveInfinity, textAttributesForPositiveInfinity.Ptr())
 }
 
+// The string used to represent a negative infinity symbol. By default, this property is set to the string "-\u221e".
 func (o *NSNumberFormatter) NegativeInfinitySymbol() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelNegativeInfinitySymbol)
 	if _ret != 0 {
@@ -488,6 +517,7 @@ func (o *NSNumberFormatter) SetNegativeInfinitySymbol(negativeInfinitySymbol *NS
 	o.Ptr().Send(_nSNumberFormatterSelSetNegativeInfinitySymbol, negativeInfinitySymbol.Ptr())
 }
 
+// The text attributes used to display the negative infinity symbol. This property is a dictionary that contains the text attributes used to display the negative infinity string.
 func (o *NSNumberFormatter) TextAttributesForNegativeInfinity() *NSDictionary[*NSString, objc.ID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelTextAttributesForNegativeInfinity)
 	if _ret != 0 {
@@ -500,6 +530,7 @@ func (o *NSNumberFormatter) SetTextAttributesForNegativeInfinity(textAttributesF
 	o.Ptr().Send(_nSNumberFormatterSelSetTextAttributesForNegativeInfinity, textAttributesForNegativeInfinity.Ptr())
 }
 
+// The string the receiver uses as the prefix for positive values.
 func (o *NSNumberFormatter) PositivePrefix() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelPositivePrefix)
 	if _ret != 0 {
@@ -512,6 +543,7 @@ func (o *NSNumberFormatter) SetPositivePrefix(positivePrefix *NSString) {
 	o.Ptr().Send(_nSNumberFormatterSelSetPositivePrefix, positivePrefix.Ptr())
 }
 
+// The string the receiver uses as the suffix for positive values.
 func (o *NSNumberFormatter) PositiveSuffix() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelPositiveSuffix)
 	if _ret != 0 {
@@ -524,6 +556,7 @@ func (o *NSNumberFormatter) SetPositiveSuffix(positiveSuffix *NSString) {
 	o.Ptr().Send(_nSNumberFormatterSelSetPositiveSuffix, positiveSuffix.Ptr())
 }
 
+// The string the receiver uses as a prefix for negative values.
 func (o *NSNumberFormatter) NegativePrefix() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelNegativePrefix)
 	if _ret != 0 {
@@ -536,6 +569,7 @@ func (o *NSNumberFormatter) SetNegativePrefix(negativePrefix *NSString) {
 	o.Ptr().Send(_nSNumberFormatterSelSetNegativePrefix, negativePrefix.Ptr())
 }
 
+// The string the receiver uses as a suffix for negative values.
 func (o *NSNumberFormatter) NegativeSuffix() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelNegativeSuffix)
 	if _ret != 0 {
@@ -548,6 +582,7 @@ func (o *NSNumberFormatter) SetNegativeSuffix(negativeSuffix *NSString) {
 	o.Ptr().Send(_nSNumberFormatterSelSetNegativeSuffix, negativeSuffix.Ptr())
 }
 
+// The receiver's currency code. A currency code is a three-letter code that is, in most cases, composed of a region's two-character Internet region code plus an extra character to denote the currency unit. For example, the currency code for the Australian dollar is "AUD". Currency codes are based on the ISO 4217 standard.
 func (o *NSNumberFormatter) CurrencyCode() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelCurrencyCode)
 	if _ret != 0 {
@@ -560,6 +595,7 @@ func (o *NSNumberFormatter) SetCurrencyCode(currencyCode *NSString) {
 	o.Ptr().Send(_nSNumberFormatterSelSetCurrencyCode, currencyCode.Ptr())
 }
 
+// The string used by the receiver as a local currency symbol. A region typically has a local currency symbol and an international currency symbol. The local symbol is used within the region, while the international currency symbol is used in international contexts to specify that region's currency unambiguously. The local currency symbol is often represented by a Unicode code point.
 func (o *NSNumberFormatter) CurrencySymbol() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelCurrencySymbol)
 	if _ret != 0 {
@@ -572,6 +608,7 @@ func (o *NSNumberFormatter) SetCurrencySymbol(currencySymbol *NSString) {
 	o.Ptr().Send(_nSNumberFormatterSelSetCurrencySymbol, currencySymbol.Ptr())
 }
 
+// The international currency symbol used by the receiver. A region typically has a local currency symbol and an international currency symbol. The local symbol is used within the region, while the international currency symbol is used in international contexts to specify that region's currency unambiguously. The international currency symbol is often represented by a Unicode code point.
 func (o *NSNumberFormatter) InternationalCurrencySymbol() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelInternationalCurrencySymbol)
 	if _ret != 0 {
@@ -584,6 +621,7 @@ func (o *NSNumberFormatter) SetInternationalCurrencySymbol(internationalCurrency
 	o.Ptr().Send(_nSNumberFormatterSelSetInternationalCurrencySymbol, internationalCurrencySymbol.Ptr())
 }
 
+// The string used to represent a percent symbol. By default, this property is set to the percent sign (%).
 func (o *NSNumberFormatter) PercentSymbol() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelPercentSymbol)
 	if _ret != 0 {
@@ -596,6 +634,7 @@ func (o *NSNumberFormatter) SetPercentSymbol(percentSymbol *NSString) {
 	o.Ptr().Send(_nSNumberFormatterSelSetPercentSymbol, percentSymbol.Ptr())
 }
 
+// The string used to represent a per-mill (per-thousand) symbol. By default, this property is set to the per mille sign (\u2030).
 func (o *NSNumberFormatter) PerMillSymbol() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelPerMillSymbol)
 	if _ret != 0 {
@@ -608,6 +647,7 @@ func (o *NSNumberFormatter) SetPerMillSymbol(perMillSymbol *NSString) {
 	o.Ptr().Send(_nSNumberFormatterSelSetPerMillSymbol, perMillSymbol.Ptr())
 }
 
+// The string used to represent a minus sign. By default, this property is set to the minus sign (-).
 func (o *NSNumberFormatter) MinusSign() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelMinusSign)
 	if _ret != 0 {
@@ -620,6 +660,7 @@ func (o *NSNumberFormatter) SetMinusSign(minusSign *NSString) {
 	o.Ptr().Send(_nSNumberFormatterSelSetMinusSign, minusSign.Ptr())
 }
 
+// The string used to represent a plus sign. By default, this property is set to the plus sign (+).
 func (o *NSNumberFormatter) PlusSign() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelPlusSign)
 	if _ret != 0 {
@@ -632,6 +673,7 @@ func (o *NSNumberFormatter) SetPlusSign(plusSign *NSString) {
 	o.Ptr().Send(_nSNumberFormatterSelSetPlusSign, plusSign.Ptr())
 }
 
+// The string used to represent an exponent symbol. By default, this property is set to the latin capital letter E. The exponent symbol is the "E" or "e" in the scientific notation of numbers, as in "1.0E+42".
 func (o *NSNumberFormatter) ExponentSymbol() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelExponentSymbol)
 	if _ret != 0 {
@@ -644,6 +686,7 @@ func (o *NSNumberFormatter) SetExponentSymbol(exponentSymbol *NSString) {
 	o.Ptr().Send(_nSNumberFormatterSelSetExponentSymbol, exponentSymbol.Ptr())
 }
 
+// The grouping size of the receiver.
 func (o *NSNumberFormatter) GroupingSize() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSNumberFormatterSelGroupingSize)
 	return _ret
@@ -653,6 +696,7 @@ func (o *NSNumberFormatter) SetGroupingSize(groupingSize uint) {
 	o.Ptr().Send(_nSNumberFormatterSelSetGroupingSize, groupingSize)
 }
 
+// The secondary grouping size of the receiver. Some locales allow the specification of another grouping size for larger numbers. For example, some locales may represent a number such as 61, 242, 378.46 (as in the United States) as 6,12,42,378.46. In this case, the secondary grouping size (covering the groups of digits furthest from the decimal point) is 2.
 func (o *NSNumberFormatter) SecondaryGroupingSize() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSNumberFormatterSelSecondaryGroupingSize)
 	return _ret
@@ -662,6 +706,7 @@ func (o *NSNumberFormatter) SetSecondaryGroupingSize(secondaryGroupingSize uint)
 	o.Ptr().Send(_nSNumberFormatterSelSetSecondaryGroupingSize, secondaryGroupingSize)
 }
 
+// The multiplier of the receiver. A multiplier is a factor used in conversions between numbers and strings (that is, numbers as stored and numbers as displayed). When the input value is a string, the multiplier is used to divide, and when the input value is a number, the multiplier is used to multiply. These operations allow the formatted values to be different from the values that a program manipulates internally.
 func (o *NSNumberFormatter) Multiplier() *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelMultiplier)
 	if _ret != 0 {
@@ -674,6 +719,7 @@ func (o *NSNumberFormatter) SetMultiplier(multiplier *NSNumber) {
 	o.Ptr().Send(_nSNumberFormatterSelSetMultiplier, multiplier.Ptr())
 }
 
+// The format width used by the receiver. The format width is the number of characters of a formatted number within a string that is either left justified or right justified based on the value contained in \c paddingPosition.
 func (o *NSNumberFormatter) FormatWidth() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSNumberFormatterSelFormatWidth)
 	return _ret
@@ -683,6 +729,7 @@ func (o *NSNumberFormatter) SetFormatWidth(formatWidth uint) {
 	o.Ptr().Send(_nSNumberFormatterSelSetFormatWidth, formatWidth)
 }
 
+// The string that the receiver uses to pad numbers in the formatted string representation.
 func (o *NSNumberFormatter) PaddingCharacter() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelPaddingCharacter)
 	if _ret != 0 {
@@ -695,6 +742,7 @@ func (o *NSNumberFormatter) SetPaddingCharacter(paddingCharacter *NSString) {
 	o.Ptr().Send(_nSNumberFormatterSelSetPaddingCharacter, paddingCharacter.Ptr())
 }
 
+// The padding position used by the receiver.
 func (o *NSNumberFormatter) PaddingPosition() NSNumberFormatterPadPosition {
 	_ret := objc.Send[NSNumberFormatterPadPosition](o.Ptr(), _nSNumberFormatterSelPaddingPosition)
 	return _ret
@@ -704,6 +752,7 @@ func (o *NSNumberFormatter) SetPaddingPosition(paddingPosition NSNumberFormatter
 	o.Ptr().Send(_nSNumberFormatterSelSetPaddingPosition, paddingPosition)
 }
 
+// The rounding mode used by the receiver.
 func (o *NSNumberFormatter) RoundingMode() NSNumberFormatterRoundingMode {
 	_ret := objc.Send[NSNumberFormatterRoundingMode](o.Ptr(), _nSNumberFormatterSelRoundingMode)
 	return _ret
@@ -713,6 +762,7 @@ func (o *NSNumberFormatter) SetRoundingMode(roundingMode NSNumberFormatterRoundi
 	o.Ptr().Send(_nSNumberFormatterSelSetRoundingMode, roundingMode)
 }
 
+// The rounding increment used by the receiver.
 func (o *NSNumberFormatter) RoundingIncrement() *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelRoundingIncrement)
 	if _ret != 0 {
@@ -725,6 +775,7 @@ func (o *NSNumberFormatter) SetRoundingIncrement(roundingIncrement *NSNumber) {
 	o.Ptr().Send(_nSNumberFormatterSelSetRoundingIncrement, roundingIncrement.Ptr())
 }
 
+// The minimum number of digits before the decimal separator. By default, this property is set to \c 0.
 func (o *NSNumberFormatter) MinimumIntegerDigits() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSNumberFormatterSelMinimumIntegerDigits)
 	return _ret
@@ -734,6 +785,7 @@ func (o *NSNumberFormatter) SetMinimumIntegerDigits(minimumIntegerDigits uint) {
 	o.Ptr().Send(_nSNumberFormatterSelSetMinimumIntegerDigits, minimumIntegerDigits)
 }
 
+// The maximum number of digits before the decimal separator. By default, this property is set to \c 42.
 func (o *NSNumberFormatter) MaximumIntegerDigits() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSNumberFormatterSelMaximumIntegerDigits)
 	return _ret
@@ -743,6 +795,7 @@ func (o *NSNumberFormatter) SetMaximumIntegerDigits(maximumIntegerDigits uint) {
 	o.Ptr().Send(_nSNumberFormatterSelSetMaximumIntegerDigits, maximumIntegerDigits)
 }
 
+// The minimum number of digits after the decimal separator. By default, this property is set to \c 0.
 func (o *NSNumberFormatter) MinimumFractionDigits() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSNumberFormatterSelMinimumFractionDigits)
 	return _ret
@@ -752,6 +805,7 @@ func (o *NSNumberFormatter) SetMinimumFractionDigits(minimumFractionDigits uint)
 	o.Ptr().Send(_nSNumberFormatterSelSetMinimumFractionDigits, minimumFractionDigits)
 }
 
+// The maximum number of digits after the decimal separator. By default, this property is set to \c 0.
 func (o *NSNumberFormatter) MaximumFractionDigits() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSNumberFormatterSelMaximumFractionDigits)
 	return _ret
@@ -761,6 +815,7 @@ func (o *NSNumberFormatter) SetMaximumFractionDigits(maximumFractionDigits uint)
 	o.Ptr().Send(_nSNumberFormatterSelSetMaximumFractionDigits, maximumFractionDigits)
 }
 
+// The lowest number allowed as input by the receiver.
 func (o *NSNumberFormatter) Minimum() *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelMinimum)
 	if _ret != 0 {
@@ -773,6 +828,7 @@ func (o *NSNumberFormatter) SetMinimum(minimum *NSNumber) {
 	o.Ptr().Send(_nSNumberFormatterSelSetMinimum, minimum.Ptr())
 }
 
+// The highest number allowed as input by the receiver.
 func (o *NSNumberFormatter) Maximum() *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelMaximum)
 	if _ret != 0 {
@@ -785,6 +841,7 @@ func (o *NSNumberFormatter) SetMaximum(maximum *NSNumber) {
 	o.Ptr().Send(_nSNumberFormatterSelSetMaximum, maximum.Ptr())
 }
 
+// The currency grouping separator for the receiver.
 func (o *NSNumberFormatter) CurrencyGroupingSeparator() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelCurrencyGroupingSeparator)
 	if _ret != 0 {
@@ -797,6 +854,7 @@ func (o *NSNumberFormatter) SetCurrencyGroupingSeparator(currencyGroupingSeparat
 	o.Ptr().Send(_nSNumberFormatterSelSetCurrencyGroupingSeparator, currencyGroupingSeparator.Ptr())
 }
 
+// Determines whether the receiver will use heuristics to guess at the number which is intended by a string. If the formatter is set to be lenient, as with any guessing it may get the result number wrong (that is, a number other than that which was intended).
 func (o *NSNumberFormatter) IsLenient() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSNumberFormatterSelIsLenient)
 	return _ret
@@ -806,6 +864,7 @@ func (o *NSNumberFormatter) SetLenient(lenient bool) {
 	o.Ptr().Send(_nSNumberFormatterSelSetLenient, lenient)
 }
 
+// A Boolean value indicating whether the formatter uses minimum and maximum significant digits when formatting numbers. The \c NSNumberFormatter class has two ways of determining how many digits to represent: using integer and fraction digits and using significant digits. When this property is set to \c NO, numbers are formatted according to whether you want them formatted as fractions or as integers. This property is \c NO by default. Set this property to \c YES to format numbers according to the significant digits configuration specified by the \c minimumSignificantDigits and \c maximumSignificantDigits properties. By default, the minimum number of significant digits is 1, and the maximum number of significant digits is 6. When a number formatter is configured to use significant digits, it ignores any minimum or maximum values used to set integer or fraction digits.
 func (o *NSNumberFormatter) UsesSignificantDigits() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSNumberFormatterSelUsesSignificantDigits)
 	return _ret
@@ -815,6 +874,7 @@ func (o *NSNumberFormatter) SetUsesSignificantDigits(usesSignificantDigits bool)
 	o.Ptr().Send(_nSNumberFormatterSelSetUsesSignificantDigits, usesSignificantDigits)
 }
 
+// The minimum number of significant digits for the number formatter. You must set the \c usesSignificantDigits property to \c YES in order for this property to affect formatting behavior. By default, the minimum number of significant digits is 1.
 func (o *NSNumberFormatter) MinimumSignificantDigits() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSNumberFormatterSelMinimumSignificantDigits)
 	return _ret
@@ -824,6 +884,7 @@ func (o *NSNumberFormatter) SetMinimumSignificantDigits(minimumSignificantDigits
 	o.Ptr().Send(_nSNumberFormatterSelSetMinimumSignificantDigits, minimumSignificantDigits)
 }
 
+// The maximum number of significant digits for the number formatter. You must set the \c usesSignificantDigits property to \c YES in order for this property to affect formatting behavior. By default, the maximum number of significant digits is 6. Values less than 1 are ignored.
 func (o *NSNumberFormatter) MaximumSignificantDigits() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSNumberFormatterSelMaximumSignificantDigits)
 	return _ret
@@ -833,6 +894,7 @@ func (o *NSNumberFormatter) SetMaximumSignificantDigits(maximumSignificantDigits
 	o.Ptr().Send(_nSNumberFormatterSelSetMaximumSignificantDigits, maximumSignificantDigits)
 }
 
+// Determines whether partial string validation is enabled for the receiver.
 func (o *NSNumberFormatter) IsPartialStringValidationEnabled() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSNumberFormatterSelIsPartialStringValidationEnabled)
 	return _ret
@@ -842,6 +904,7 @@ func (o *NSNumberFormatter) SetPartialStringValidationEnabled(partialStringValid
 	o.Ptr().Send(_nSNumberFormatterSelSetPartialStringValidationEnabled, partialStringValidationEnabled)
 }
 
+// Determines whether the receiver uses thousand separators.
 func (o *NSNumberFormatter) HasThousandSeparators() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSNumberFormatterSelHasThousandSeparators)
 	return _ret
@@ -851,6 +914,7 @@ func (o *NSNumberFormatter) SetHasThousandSeparators(hasThousandSeparators bool)
 	o.Ptr().Send(_nSNumberFormatterSelSetHasThousandSeparators, hasThousandSeparators)
 }
 
+// The character the receiver uses as a thousand separator. If you don't have thousand separators enabled through any other means (such as \c format), using this method enables them. This method is for use with formatters using \c NSNumberFormatterBehavior10_0 behavior.
 func (o *NSNumberFormatter) ThousandSeparator() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelThousandSeparator)
 	if _ret != 0 {
@@ -863,6 +927,7 @@ func (o *NSNumberFormatter) SetThousandSeparator(thousandSeparator *NSString) {
 	o.Ptr().Send(_nSNumberFormatterSelSetThousandSeparator, thousandSeparator.Ptr())
 }
 
+// Determines whether the dollar sign character (\c $), decimal separator character (\c .), and thousand separator character (\c ,) are converted to appropriately localized characters as specified by the user's localization preference. While the currency-symbol part of this feature may be useful in certain types of applications, it's probably more likely that you would tie a particular application to a particular currency (that is, that you would "hard-code" the currency symbol and separators instead of having them dynamically change based on the user's configuration). The reason for this, of course, is that \c NSNumberFormatter doesn't perform currency conversions, it just formats numeric data. You wouldn't want one user interpreting the value "56324" as US currency and another user who's accessing the same data interpreting it as Japanese currency, simply based on each user's localization preferences.
 func (o *NSNumberFormatter) LocalizesFormat() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSNumberFormatterSelLocalizesFormat)
 	return _ret
@@ -872,6 +937,7 @@ func (o *NSNumberFormatter) SetLocalizesFormat(localizesFormat bool) {
 	o.Ptr().Send(_nSNumberFormatterSelSetLocalizesFormat, localizesFormat)
 }
 
+// The receiver's format. The format string uses the format patterns from the Unicode Technical Standard #35. For more information, see the Data Formatting Guide.
 func (o *NSNumberFormatter) Format() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelFormat)
 	if _ret != 0 {
@@ -884,6 +950,7 @@ func (o *NSNumberFormatter) SetFormat(format *NSString) {
 	o.Ptr().Send(_nSNumberFormatterSelSetFormat, format.Ptr())
 }
 
+// The attributed string that the receiver uses to display zero values. By default zero values are displayed according to the format specified for positive values. This method is for use with formatters using \c NSNumberFormatterBehavior10_0 behavior.
 func (o *NSNumberFormatter) AttributedStringForZero() *NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelAttributedStringForZero)
 	if _ret != 0 {
@@ -896,6 +963,7 @@ func (o *NSNumberFormatter) SetAttributedStringForZero(attributedStringForZero *
 	o.Ptr().Send(_nSNumberFormatterSelSetAttributedStringForZero, attributedStringForZero.Ptr())
 }
 
+// The attributed string the receiver uses to display \c nil values. By default \c nil values are displayed as an empty string. This method is for use with formatters using \c NSNumberFormatterBehavior10_0 behavior.
 func (o *NSNumberFormatter) AttributedStringForNil() *NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelAttributedStringForNil)
 	if _ret != 0 {
@@ -908,6 +976,7 @@ func (o *NSNumberFormatter) SetAttributedStringForNil(attributedStringForNil *NS
 	o.Ptr().Send(_nSNumberFormatterSelSetAttributedStringForNil, attributedStringForNil.Ptr())
 }
 
+// The attributed string the receiver uses to display "not a number" values. By default "not a number" values are displayed as the string "NaN". This method is for use with formatters using \c NSNumberFormatterBehavior10_0 behavior.
 func (o *NSNumberFormatter) AttributedStringForNotANumber() *NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelAttributedStringForNotANumber)
 	if _ret != 0 {
@@ -920,6 +989,7 @@ func (o *NSNumberFormatter) SetAttributedStringForNotANumber(attributedStringFor
 	o.Ptr().Send(_nSNumberFormatterSelSetAttributedStringForNotANumber, attributedStringForNotANumber.Ptr())
 }
 
+// The rounding behavior used by the receiver.
 func (o *NSNumberFormatter) RoundingBehavior() *NSDecimalNumberHandler {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelRoundingBehavior)
 	if _ret != 0 {

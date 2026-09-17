@@ -15,8 +15,6 @@ import (
 )
 
 // UserIdentityLookupInfo is an idiomatic wrapper over the Objective-C class CKUserIdentityLookupInfo.
-//
-// The criteria to use when searching for discoverable iCloud users.
 type UserIdentityLookupInfo struct {
 	objref.Handle
 }

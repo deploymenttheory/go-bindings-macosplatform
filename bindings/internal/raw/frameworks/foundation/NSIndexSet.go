@@ -320,16 +320,19 @@ func (o *NSIndexSet) EnumerateRangesInRangeOptionsUsing(range_ NSRange, opts NSE
 	o.Ptr().Send(_nSIndexSetSelEnumerateRangesInRangeOptionsUsing, range_, opts, block)
 }
 
+// The number of indexes in the index set.
 func (o *NSIndexSet) Count() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSIndexSetSelCount)
 	return _ret
 }
 
+// The first index in the index set, or `NSNotFound` when the index set is empty.
 func (o *NSIndexSet) FirstIndex() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSIndexSetSelFirstIndex)
 	return _ret
 }
 
+// The last index in the index set, or `NSNotFound` when the index set is empty.
 func (o *NSIndexSet) LastIndex() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSIndexSetSelLastIndex)
 	return _ret

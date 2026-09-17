@@ -101,7 +101,7 @@ func (amip *AudioMixInputParameters) AudioTimePitchAlgorithm() *foundation.Strin
 	return foundation.StringFromID(_r)
 }
 
-// AudioTapProcessor indicates the audio processing tap that will be used for the audio track.
+// AudioTapProcessor indicates the audio processing tap that will be used for the audio track or tracks. If you wish to tap the mix of audio tracks (i.e. if trackID is equal to AVAudioMixInputParametersTrackMixID), use the function MTAudioProcessingTapCreateWithPreferredFormat to create the instance of MTAudioProcessingTap to set as the value of audioTapProcessor. Created otherwise, the processing format of a tap of a track mix is undefined (but may be observed via the use of your MTAudioProcessingTapPrepareCallback).
 func (amip *AudioMixInputParameters) AudioTapProcessor() obj.Object {
 	defer runtime.KeepAlive(amip)
 	_r := objc.Send[objc.ID](objref.IDOf(amip), objc.RegisterName("audioTapProcessor"))

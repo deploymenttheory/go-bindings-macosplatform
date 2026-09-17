@@ -7,751 +7,1051 @@ import (
 	"github.com/ebitengine/purego"
 )
 
+// The CMM bundle info-dictionary key whose value is the name of the function that applies a color transform.
 func KCMMApplyTransformProcName() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kCMMApplyTransformProcName")
 	return ptr
 }
 
+// The CMM bundle info-dictionary key whose value is the name of the function that creates a transform property.
 func KCMMCreateTransformPropertyProcName() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kCMMCreateTransformPropertyProcName")
 	return ptr
 }
 
+// The CMM bundle info-dictionary key whose value is the name of the function that initializes a device-link profile.
 func KCMMInitializeLinkProfileProcName() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kCMMInitializeLinkProfileProcName")
 	return ptr
 }
 
+// The CMM bundle info-dictionary key whose value is the name of the function that initializes a color transform.
 func KCMMInitializeTransformProcName() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kCMMInitializeTransformProcName")
 	return ptr
 }
 
+// The ACEScg linear color profile.
 func KColorSyncACESCGLinearProfile() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncACESCGLinearProfile")
 	return ptr
 }
 
+// The Adobe RGB (1998) color profile.
 func KColorSyncAdobeRGB1998Profile() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncAdobeRGB1998Profile")
 	return ptr
 }
 
+// Number of alternate (tone-mapped) curves encoded in the metadata (uint8_t in the range [0, 4]). Each alternate targets a different display headroom.
+func KColorSyncAlternateCurveCount() uintptr {
+	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncAlternateCurveCount")
+	return ptr
+}
+
+// Target headroom of this alternate curve in stops (log2) above reference white (float in the range [0.0, 6.0]). The renderer selects the closest alternate to the actual display headroom.
+func KColorSyncAlternateCurveHeadroomStops() uintptr {
+	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncAlternateCurveHeadroomStops")
+	return ptr
+}
+
+// CFArrayRef of per-alternate dictionaries. Count equals “kColorSyncAlternateCurveCount“. Only present when the alternate curve count is greater than 0. See the alternate curve keys below.
+func KColorSyncAlternateGainCurveInfo() uintptr {
+	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncAlternateGainCurveInfo")
+	return ptr
+}
+
+// Headroom of the source (baseline) curve in stops (log2) above reference white (float in the range [0.0, 6.0]).
+func KColorSyncBaselineHeadroomStops() uintptr {
+	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncBaselineHeadroomStops")
+	return ptr
+}
+
+// A “kColorSyncConvertQuality“ value that does not coalesce profile transforms; the default.
 func KColorSyncBestQuality() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncBestQuality")
 	return ptr
 }
 
+// A key whose `CFBooleanRef` value enables or disables black point compensation.
 func KColorSyncBlackPointCompensation() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncBlackPointCompensation")
 	return ptr
 }
 
+// The device class for a camera device. The string that represents a camera device is `cmra`.
 func KColorSyncCameraDeviceClass() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncCameraDeviceClass")
 	return ptr
 }
 
+// Weight for the blue channel in the free-style component mixing sum.
+func KColorSyncCoefficientBlue() uintptr {
+	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncCoefficientBlue")
+	return ptr
+}
+
+// Weight for the 'component' term in the free-style component mixing sum.
+func KColorSyncCoefficientComponent() uintptr {
+	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncCoefficientComponent")
+	return ptr
+}
+
+// Weight for the green channel in the free-style component mixing sum.
+func KColorSyncCoefficientGreen() uintptr {
+	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncCoefficientGreen")
+	return ptr
+}
+
+// Weight for the MAX(R,G,B) term in the free-style component mixing sum.
+func KColorSyncCoefficientMaxRGB() uintptr {
+	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncCoefficientMaxRGB")
+	return ptr
+}
+
+// Weight for the MIN(R,G,B) term in the free-style component mixing sum.
+func KColorSyncCoefficientMinRGB() uintptr {
+	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncCoefficientMinRGB")
+	return ptr
+}
+
+// Weight for the red channel in the free-style component mixing sum.
+func KColorSyncCoefficientRed() uintptr {
+	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncCoefficientRed")
+	return ptr
+}
+
+// CFBooleanRef indicating whether alternate curves share one component-mixing configuration. When true, all alternate curves share the component mixing configuration from array index 0, reducing bitstream size.
+func KColorSyncCommonComponentMixing() uintptr {
+	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncCommonComponentMixing")
+	return ptr
+}
+
+// CFBooleanRef indicating whether alternate curves share common gain-curve parameters. When true, all alternate curves share the gain curve x control points and slope interpolate flag from array index 0, reducing bitstream size.
+func KColorSyncCommonCurveParameters() uintptr {
+	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncCommonCurveParameters")
+	return ptr
+}
+
+// Sub-dictionary of custom linear-combination coefficients for free-style component mixing. Each present key contributes its value as a weight in: `signal = R*red + G*green + B*blue + MAX*maxRGB + MIN*minRGB + C*component`. Only present when `kColorSyncComponentMix == 3`.
+func KColorSyncComponentCoefficients() uintptr {
+	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncComponentCoefficients")
+	return ptr
+}
+
+// Component mixing type (uint8_t) matching `component_mixing_value` in ST 2094-50. Determines how the framework derives the scalar driving signal from the RGB pixel: - 0 = MAX(R, G, B) - 1 = single component (the framework applies the gain curve to individual components) - 2 = luma_A (sum of 1/6 of each color channel and 1/2 of MAX(R, G, B)) - 3 = free-style (custom linear combination via “kColorSyncComponentCoefficients“) Shared across all alternates from index 0 when “kColorSyncCommonComponentMixing“ is true.
+func KColorSyncComponentMix() uintptr {
+	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncComponentMix")
+	return ptr
+}
+
+// CFArrayRef of floats — explicit tangent slopes at each control point, expressed as tan(slope_angle). Only present when “kColorSyncInterpolateSlopes“ is false.
+func KColorSyncControlPointSlopes() uintptr {
+	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncControlPointSlopes")
+	return ptr
+}
+
+// CFArrayRef of floats — the X-axis coordinates of the gain-curve control points. The coordinates are normalized by the reference white, so a value of `1.0` corresponds to the signal value at reference white. Shared across all alternates from index 0 when “kColorSyncCommonCurveParameters“ is true.
+func KColorSyncControlPointsX() uintptr {
+	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncControlPointsX")
+	return ptr
+}
+
+// CFArrayRef of floats — the Y-axis gain offsets at the control points. Values are in stops (float in the range [0.0, 6.0]) and must be non-negative; the framework infers the gain direction (expand vs. compress) from the relationship between this alternate's headroom and the baseline headroom.
+func KColorSyncControlPointsY() uintptr {
+	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncControlPointsY")
+	return ptr
+}
+
+// A key for a one-dimensional lookup table with interpolation, represented as `CFData` containing a `Float32` table.
 func KColorSyncConversion1DLut() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncConversion1DLut")
 	return ptr
 }
 
+// A key for a three-dimensional lookup table with interpolation, represented as `CFData`.
 func KColorSyncConversion3DLut() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncConversion3DLut")
 	return ptr
 }
 
+// A key for a black point compensation component, represented as a `CFArray` of `Float32` `CFNumber`s.
 func KColorSyncConversionBPC() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncConversionBPC")
 	return ptr
 }
 
+// A key for the identifier of the channel a conversion component applies to.
 func KColorSyncConversionChannelID() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncConversionChannelID")
 	return ptr
 }
 
+// A key for the number of grid points in a lookup table.
 func KColorSyncConversionGridPoints() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncConversionGridPoints")
 	return ptr
 }
 
+// A key for the number of input channels of a lookup table.
 func KColorSyncConversionInpChan() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncConversionInpChan")
 	return ptr
 }
 
+// A key for a conversion matrix component, represented as a `CFArray` of three `CFArray`s of four `Float32` `CFNumber`s.
 func KColorSyncConversionMatrix() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncConversionMatrix")
 	return ptr
 }
 
+// A key for a multi-dimensional lookup table with interpolation, represented as `CFData` for N inputs and M outputs.
 func KColorSyncConversionNDLut() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncConversionNDLut")
 	return ptr
 }
 
+// A key for the number of output channels of a lookup table.
 func KColorSyncConversionOutChan() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncConversionOutChan")
 	return ptr
 }
 
+// A key for a parametric tone rendering curve of type 0, represented as a `CFArray` of seven `Float32` `CFNumber`s.
 func KColorSyncConversionParamCurve0() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncConversionParamCurve0")
 	return ptr
 }
 
+// A key for a parametric tone rendering curve of type 1, represented as a `CFArray` of seven `Float32` `CFNumber`s.
 func KColorSyncConversionParamCurve1() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncConversionParamCurve1")
 	return ptr
 }
 
+// A key for a parametric tone rendering curve of type 2, represented as a `CFArray` of seven `Float32` `CFNumber`s.
 func KColorSyncConversionParamCurve2() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncConversionParamCurve2")
 	return ptr
 }
 
+// A key for a parametric tone rendering curve of type 3, represented as a `CFArray` of seven `Float32` `CFNumber`s.
 func KColorSyncConversionParamCurve3() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncConversionParamCurve3")
 	return ptr
 }
 
+// A key for a parametric tone rendering curve of type 4, represented as a `CFArray` of seven `Float32` `CFNumber`s.
 func KColorSyncConversionParamCurve4() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncConversionParamCurve4")
 	return ptr
 }
 
+// A key for the quality of the conversion performed by the transform.
 func KColorSyncConvertQuality() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncConvertQuality")
 	return ptr
 }
 
+// A key whose `CFBooleanRef` value allows float data to exceed the `[0.0, 1.0]` range.
 func KColorSyncConvertUseExtendedRange() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncConvertUseExtendedRange")
 	return ptr
 }
 
+// Custom reference white luminance in nits (float), overriding the standard 203-nit reference white. Must be greater than `0`. The encoding has a resolution of 0.2 nits and a maximum of 10000 nits; the framework clamps values to that range.
+func KColorSyncCustomHDRReferenceWhite() uintptr {
+	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncCustomHDRReferenceWhite")
+	return ptr
+}
+
+// A key whose value is a `CFDictionary` describing the device's custom profiles.
 func KColorSyncCustomProfiles() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncCustomProfiles")
 	return ptr
 }
 
+// The DCI-P3 color profile.
 func KColorSyncDCIP3Profile() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncDCIP3Profile")
 	return ptr
 }
 
+// A key whose value is one of the device-class constants below.
 func KColorSyncDeviceClass() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncDeviceClass")
 	return ptr
 }
 
+// A key whose value is the ProfileID of the device's default profile.
 func KColorSyncDeviceDefaultProfileID() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncDeviceDefaultProfileID")
 	return ptr
 }
 
+// A key whose value is the device's localized name in the current locale.
 func KColorSyncDeviceDescription() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncDeviceDescription")
 	return ptr
 }
 
+// A key whose value is a `CFDictionary` of the device's localized names.
 func KColorSyncDeviceDescriptions() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncDeviceDescriptions")
 	return ptr
 }
 
+// A key specifying the host preference scope of a device; currently only `kCFPreferencesCurrentHost` is supported.
 func KColorSyncDeviceHostScope() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncDeviceHostScope")
 	return ptr
 }
 
+// A key whose value is the `CFUUIDRef` identifying the device.
 func KColorSyncDeviceID() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncDeviceID")
 	return ptr
 }
 
+// A key whose value is the device mode's localized name in the current locale.
 func KColorSyncDeviceModeDescription() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncDeviceModeDescription")
 	return ptr
 }
 
+// A key whose value is a `CFDictionary` of the device mode's localized names.
 func KColorSyncDeviceModeDescriptions() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncDeviceModeDescriptions")
 	return ptr
 }
 
+// A key in the device-profile-info dictionary whose value is the profile's ProfileID.
 func KColorSyncDeviceProfileID() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncDeviceProfileID")
 	return ptr
 }
 
+// A key in the device-profile-info dictionary whose value indicates whether the profile is the current profile.
 func KColorSyncDeviceProfileIsCurrent() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncDeviceProfileIsCurrent")
 	return ptr
 }
 
+// A key in the device-profile-info dictionary whose value indicates whether the profile is the default profile.
 func KColorSyncDeviceProfileIsDefault() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncDeviceProfileIsDefault")
 	return ptr
 }
 
+// A key in the device-profile-info dictionary whose value indicates whether the profile is a factory profile.
 func KColorSyncDeviceProfileIsFactory() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncDeviceProfileIsFactory")
 	return ptr
 }
 
+// A key whose value is the `CFURLRef` of a device profile.
 func KColorSyncDeviceProfileURL() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncDeviceProfileURL")
 	return ptr
 }
 
+// A notification that ColorSync posts when a device's profiles change.
 func KColorSyncDeviceProfilesNotification() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncDeviceProfilesNotification")
 	return ptr
 }
 
+// A notification that ColorSync posts when a device is registered.
 func KColorSyncDeviceRegisteredNotification() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncDeviceRegisteredNotification")
 	return ptr
 }
 
+// A notification that ColorSync posts when a device is unregistered.
 func KColorSyncDeviceUnregisteredNotification() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncDeviceUnregisteredNotification")
 	return ptr
 }
 
+// A key specifying the user preference scope of a device; one of `kCFPreferencesCurrentUser` or `kCFPreferencesAnyUser`.
 func KColorSyncDeviceUserScope() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncDeviceUserScope")
 	return ptr
 }
 
+// The device class for a display device. The string that represents a display device is `mntr`.
 func KColorSyncDisplayDeviceClass() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncDisplayDeviceClass")
 	return ptr
 }
 
+// A notification that ColorSync posts when a display device's profiles change.
 func KColorSyncDisplayDeviceProfilesNotification() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncDisplayDeviceProfilesNotification")
 	return ptr
 }
 
+// The Display P3 color profile.
 func KColorSyncDisplayP3Profile() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncDisplayP3Profile")
 	return ptr
 }
 
+// An option that, when set to `kCFBooleanTrue`, skips substituting a matching system-provided profile.
 func KColorSyncDoNotSubstituteProfiles() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncDoNotSubstituteProfiles")
 	return ptr
 }
 
+// A “kColorSyncConvertQuality“ value that coalesces all transforms and does not interpolate.
 func KColorSyncDraftQuality() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncDraftQuality")
 	return ptr
 }
 
+// A key whose `CFBooleanRef` value enables or disables extended range.
 func KColorSyncExtendedRange() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncExtendedRange")
 	return ptr
 }
 
+// A key whose value is a `CFDictionary` describing the device's factory profiles.
 func KColorSyncFactoryProfiles() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncFactoryProfiles")
 	return ptr
 }
 
+// A key for the fixed-point range of the conversion data.
 func KColorSyncFixedPointRange() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncFixedPointRange")
 	return ptr
 }
 
+// Chromaticity primaries used to compute the driving signal for the gain curve. For standard primaries, pass a `CFNumberRef` (`uint8_t`): 0 = BT.709, 1 = Display P3, 2 = BT.2020. For custom primaries, pass a `CFArrayRef` of 8 `float` values encoding four xy chromaticity pairs in order R, G, B, white point; each component in [0, 1] with x + y ≤ 1. The framework rejects any numeric value other than 0, 1, or 2.
+func KColorSyncGainCurveChromaticities() uintptr {
+	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncGainCurveChromaticities")
+	return ptr
+}
+
+// The generic CMYK color profile.
 func KColorSyncGenericCMYKProfile() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncGenericCMYKProfile")
 	return ptr
 }
 
+// The generic gray color profile with a gamma of 2.2.
 func KColorSyncGenericGrayGamma22Profile() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncGenericGrayGamma22Profile")
 	return ptr
 }
 
+// The generic gray color profile.
 func KColorSyncGenericGrayProfile() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncGenericGrayProfile")
 	return ptr
 }
 
+// The generic CIELAB color profile.
 func KColorSyncGenericLabProfile() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncGenericLabProfile")
 	return ptr
 }
 
+// The generic RGB color profile.
 func KColorSyncGenericRGBProfile() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncGenericRGBProfile")
 	return ptr
 }
 
+// The generic CIEXYZ color profile.
 func KColorSyncGenericXYZProfile() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncGenericXYZProfile")
 	return ptr
 }
 
+// A key for the HDR derivative to apply to the profile in a profile-sequence dictionary.
 func KColorSyncHDRDerivative() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncHDRDerivative")
 	return ptr
 }
 
+// A “kColorSyncHDRDerivative“ value selecting the HLG HDR derivative.
 func KColorSyncHLGDerivative() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncHLGDerivative")
 	return ptr
 }
 
+// Application version (uint8_t). 3-bit field from ST 2094-50 Table C.1. Must be `0`; the framework rejects any other value.
+func KColorSyncHeadroomAdaptiveGainCurveApplicationVersion() uintptr {
+	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncHeadroomAdaptiveGainCurveApplicationVersion")
+	return ptr
+}
+
+// Top-level container (CFDictionaryRef) for the color volume transform. It may contain parameters for Headroom-Adaptive tone mapping or indicate usage of the Reference-White Tone Mapping Method. It allows for specifying a custom HDR Reference White luminance.
+func KColorSyncHeadroomAdaptiveGainCurveColorVolumeTransform() uintptr {
+	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncHeadroomAdaptiveGainCurveColorVolumeTransform")
+	return ptr
+}
+
+// Container (CFDictionaryRef) for the adaptive gain curve data. Contains the alternate curve count, sharing flags, chromaticities, and the per-alternate curve info array. When set to `kCFBooleanFalse` instead of a CFDictionary, indicates the Reference-White Tone Mapping Operator (RWTMO) method.
+func KColorSyncHeadroomAdaptiveGainCurveInfo() uintptr {
+	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncHeadroomAdaptiveGainCurveInfo")
+	return ptr
+}
+
+// Container (CFDictionaryRef) for Headroom-Adaptive tone mapping parameters. Present when Headroom-Adaptive tone mapping is encoded. Contains “kColorSyncBaselineHeadroomStops“ and either “kColorSyncHeadroomAdaptiveGainCurveInfo“ or, when set to `kCFBooleanFalse`, indicates the Reference-White Tone Mapping Operator (RWTMO) method.
+func KColorSyncHeadroomAdaptiveToneMappingInfo() uintptr {
+	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncHeadroomAdaptiveToneMappingInfo")
+	return ptr
+}
+
+// The ITU-R BT.2020 color profile.
 func KColorSyncITUR2020Profile() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncITUR2020Profile")
 	return ptr
 }
 
+// The ITU-R BT.709 color profile.
 func KColorSyncITUR709Profile() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncITUR709Profile")
 	return ptr
 }
 
+// CFBooleanRef controlling how the framework determines control-point slopes. When true, the framework computes slopes at control points by Piecewise Cubic Hermite Interpolating Polynomial from the X,Y control point coordinates, and you must omit “kColorSyncControlPointSlopes“. When false, you must supply explicit slopes in “kColorSyncControlPointSlopes“ (see below). Shared across all alternates from index 0 when “kColorSyncCommonCurveParameters“ is true.
+func KColorSyncInterpolateSlopes() uintptr {
+	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncInterpolateSlopes")
+	return ptr
+}
+
+// Index of the last control point (uint8_t, 0–31), i.e. the number of control points minus 1. Shared across all alternates from index 0 when “kColorSyncCommonCurveParameters“ is true.
+func KColorSyncMaxControlPointIndex() uintptr {
+	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncMaxControlPointIndex")
+	return ptr
+}
+
+// A “kColorSyncConvertQuality“ value that coalesces all transforms.
 func KColorSyncNormalQuality() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncNormalQuality")
 	return ptr
 }
 
+// A “kColorSyncHDRDerivative“ value selecting the PQ HDR derivative.
 func KColorSyncPQDerivative() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncPQDerivative")
 	return ptr
 }
 
+// A key whose value is the “ColorSyncCMMRef“ of the preferred CMM.
 func KColorSyncPreferredCMM() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncPreferredCMM")
 	return ptr
 }
 
+// The device class for a printer device. The string that represents a printer device is `prtr`.
 func KColorSyncPrinterDeviceClass() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncPrinterDeviceClass")
 	return ptr
 }
 
+// A key for the profile object in a profile-sequence dictionary passed to “ColorSyncTransformCreate“.
 func KColorSyncProfile() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncProfile")
 	return ptr
 }
 
+// The current profile-cache seed (uint32_t), sent with “kColorSyncProfileRepositoryChangeNotification“.
 func KColorSyncProfileCacheSeed() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncProfileCacheSeed")
 	return ptr
 }
 
+// A key for the profile's class.
 func KColorSyncProfileClass() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncProfileClass")
 	return ptr
 }
 
+// A key for the profile's color space.
 func KColorSyncProfileColorSpace() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncProfileColorSpace")
 	return ptr
 }
 
+// The profile domain for profiles shared by all users of the computer. On macOS, these profiles are in the `/Library/ColorSync/Profiles` folder.
 func KColorSyncProfileComputerDomain() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncProfileComputerDomain")
 	return ptr
 }
 
+// A key for the profile's localized description.
 func KColorSyncProfileDescription() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncProfileDescription")
 	return ptr
 }
 
+// A key for the profile's header data.
 func KColorSyncProfileHeader() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncProfileHeader")
 	return ptr
 }
 
+// A key specifying the host preference scope of a profile; currently only `kCFPreferencesCurrentHost` is supported.
 func KColorSyncProfileHostScope() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncProfileHostScope")
 	return ptr
 }
 
+// A key indicating whether the profile is valid.
 func KColorSyncProfileIsValid() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncProfileIsValid")
 	return ptr
 }
 
+// A key for the profile's MD5 digest.
 func KColorSyncProfileMD5Digest() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncProfileMD5Digest")
 	return ptr
 }
 
+// A key for the profile's connection space (PCS).
 func KColorSyncProfilePCS() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncProfilePCS")
 	return ptr
 }
 
+// A notification that ColorSync posts when the profile repository changes.
 func KColorSyncProfileRepositoryChangeNotification() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncProfileRepositoryChangeNotification")
 	return ptr
 }
 
+// A key for the profile's URL.
 func KColorSyncProfileURL() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncProfileURL")
 	return ptr
 }
 
+// The profile domain for the current user's profiles. On macOS, these profiles are in the `~/Library/ColorSync/Profiles` folder.
 func KColorSyncProfileUserDomain() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncProfileUserDomain")
 	return ptr
 }
 
+// A key specifying the user preference scope of a profile; one of `kCFPreferencesCurrentUser` or `kCFPreferencesAnyUser`.
 func KColorSyncProfileUserScope() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncProfileUserScope")
 	return ptr
 }
 
+// The ROMM RGB (ProPhoto RGB) color profile.
 func KColorSyncROMMRGBProfile() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncROMMRGBProfile")
 	return ptr
 }
 
+// A notification concerning the window server's device registration.
 func KColorSyncRegistrationUpdateWindowServer() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncRegistrationUpdateWindowServer")
 	return ptr
 }
 
+// A key for the rendering intent to use for the profile in a profile-sequence dictionary.
 func KColorSyncRenderingIntent() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncRenderingIntent")
 	return ptr
 }
 
+// A “kColorSyncRenderingIntent“ value selecting the ICC-absolute colorimetric rendering intent.
 func KColorSyncRenderingIntentAbsolute() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncRenderingIntentAbsolute")
 	return ptr
 }
 
+// A “kColorSyncRenderingIntent“ value selecting the perceptual rendering intent.
 func KColorSyncRenderingIntentPerceptual() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncRenderingIntentPerceptual")
 	return ptr
 }
 
+// A “kColorSyncRenderingIntent“ value selecting the media-relative colorimetric rendering intent.
 func KColorSyncRenderingIntentRelative() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncRenderingIntentRelative")
 	return ptr
 }
 
+// A “kColorSyncRenderingIntent“ value selecting the saturation rendering intent.
 func KColorSyncRenderingIntentSaturation() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncRenderingIntentSaturation")
 	return ptr
 }
 
+// A “kColorSyncRenderingIntent“ value selecting the rendering intent stored in the profile header.
 func KColorSyncRenderingIntentUseProfileHeader() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncRenderingIntentUseProfileHeader")
 	return ptr
 }
 
+// The sRGB color profile.
 func KColorSyncSRGBProfile() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncSRGBProfile")
 	return ptr
 }
 
+// The device class for a scanner device. The string that represents a scanner device is `scnr`.
 func KColorSyncScannerDeviceClass() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncScannerDeviceClass")
 	return ptr
 }
 
+// The signature of the device-to-PCS transform tag for the perceptual rendering intent.
 func KColorSyncSigAToB0Tag() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncSigAToB0Tag")
 	return ptr
 }
 
+// The signature of the device-to-PCS transform tag for the media-relative colorimetric rendering intent.
 func KColorSyncSigAToB1Tag() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncSigAToB1Tag")
 	return ptr
 }
 
+// The signature of the device-to-PCS transform tag for the saturation rendering intent.
 func KColorSyncSigAToB2Tag() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncSigAToB2Tag")
 	return ptr
 }
 
+// The signature identifying an abstract profile class.
 func KColorSyncSigAbstractClass() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncSigAbstractClass")
 	return ptr
 }
 
+// The signature of the PCS-to-device transform tag for the perceptual rendering intent.
 func KColorSyncSigBToA0Tag() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncSigBToA0Tag")
 	return ptr
 }
 
+// The signature of the PCS-to-device transform tag for the media-relative colorimetric rendering intent.
 func KColorSyncSigBToA1Tag() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncSigBToA1Tag")
 	return ptr
 }
 
+// The signature of the PCS-to-device transform tag for the saturation rendering intent.
 func KColorSyncSigBToA2Tag() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncSigBToA2Tag")
 	return ptr
 }
 
+// The signature of the blue colorant tag, giving the blue channel's PCSXYZ values.
 func KColorSyncSigBlueColorantTag() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncSigBlueColorantTag")
 	return ptr
 }
 
+// The signature of the blue channel's tone reproduction curve (TRC) tag.
 func KColorSyncSigBlueTRCTag() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncSigBlueTRCTag")
 	return ptr
 }
 
+// The signature identifying the CMYK data color space.
 func KColorSyncSigCmykData() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncSigCmykData")
 	return ptr
 }
 
+// The signature identifying a color-space conversion profile class.
 func KColorSyncSigColorSpaceClass() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncSigColorSpaceClass")
 	return ptr
 }
 
+// The signature of the profile copyright tag.
 func KColorSyncSigCopyrightTag() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncSigCopyrightTag")
 	return ptr
 }
 
+// The signature of the device manufacturer description tag.
 func KColorSyncSigDeviceMfgDescTag() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncSigDeviceMfgDescTag")
 	return ptr
 }
 
+// The signature of the device model description tag.
 func KColorSyncSigDeviceModelDescTag() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncSigDeviceModelDescTag")
 	return ptr
 }
 
+// The signature identifying a display device profile class.
 func KColorSyncSigDisplayClass() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncSigDisplayClass")
 	return ptr
 }
 
+// The signature of the gamut tag, marking which PCS colors fall outside the device gamut.
 func KColorSyncSigGamutTag() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncSigGamutTag")
 	return ptr
 }
 
+// The signature identifying the grayscale data color space.
 func KColorSyncSigGrayData() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncSigGrayData")
 	return ptr
 }
 
+// The signature of the grayscale tone reproduction curve (TRC) tag.
 func KColorSyncSigGrayTRCTag() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncSigGrayTRCTag")
 	return ptr
 }
 
+// The signature of the green colorant tag, giving the green channel's PCSXYZ values.
 func KColorSyncSigGreenColorantTag() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncSigGreenColorantTag")
 	return ptr
 }
 
+// The signature of the green channel's tone reproduction curve (TRC) tag.
 func KColorSyncSigGreenTRCTag() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncSigGreenTRCTag")
 	return ptr
 }
 
+// The signature identifying an input (scanner or camera) device profile class.
 func KColorSyncSigInputClass() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncSigInputClass")
 	return ptr
 }
 
+// The signature identifying the CIELAB data color space.
 func KColorSyncSigLabData() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncSigLabData")
 	return ptr
 }
 
+// The signature identifying a device-link profile class.
 func KColorSyncSigLinkClass() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncSigLinkClass")
 	return ptr
 }
 
+// The signature of the media black point tag.
 func KColorSyncSigMediaBlackPointTag() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncSigMediaBlackPointTag")
 	return ptr
 }
 
+// The signature of the media white point tag.
 func KColorSyncSigMediaWhitePointTag() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncSigMediaWhitePointTag")
 	return ptr
 }
 
+// The signature of the named color (version 2) tag.
 func KColorSyncSigNamedColor2Tag() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncSigNamedColor2Tag")
 	return ptr
 }
 
+// The signature identifying a named color profile class.
 func KColorSyncSigNamedColorClass() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncSigNamedColorClass")
 	return ptr
 }
 
+// The signature identifying an output (printer) device profile class.
 func KColorSyncSigOutputClass() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncSigOutputClass")
 	return ptr
 }
 
+// The signature of the preview tag for the perceptual rendering intent.
 func KColorSyncSigPreview0Tag() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncSigPreview0Tag")
 	return ptr
 }
 
+// The signature of the preview tag for the media-relative colorimetric rendering intent.
 func KColorSyncSigPreview1Tag() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncSigPreview1Tag")
 	return ptr
 }
 
+// The signature of the preview tag for the saturation rendering intent.
 func KColorSyncSigPreview2Tag() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncSigPreview2Tag")
 	return ptr
 }
 
+// The signature of the profile description tag.
 func KColorSyncSigProfileDescriptionTag() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncSigProfileDescriptionTag")
 	return ptr
 }
 
+// The signature of the profile sequence description tag.
 func KColorSyncSigProfileSequenceDescTag() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncSigProfileSequenceDescTag")
 	return ptr
 }
 
+// The signature of the red colorant tag, giving the red channel's PCSXYZ values.
 func KColorSyncSigRedColorantTag() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncSigRedColorantTag")
 	return ptr
 }
 
+// The signature of the red channel's tone reproduction curve (TRC) tag.
 func KColorSyncSigRedTRCTag() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncSigRedTRCTag")
 	return ptr
 }
 
+// The signature identifying the RGB data color space.
 func KColorSyncSigRgbData() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncSigRgbData")
 	return ptr
 }
 
+// The signature of the technology tag, identifying the device technology.
 func KColorSyncSigTechnologyTag() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncSigTechnologyTag")
 	return ptr
 }
 
+// The signature of the viewing conditions description tag.
 func KColorSyncSigViewingCondDescTag() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncSigViewingCondDescTag")
 	return ptr
 }
 
+// The signature of the viewing conditions tag.
 func KColorSyncSigViewingConditionsTag() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncSigViewingConditionsTag")
 	return ptr
 }
 
+// The signature identifying the CIEXYZ data color space.
 func KColorSyncSigXYZData() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncSigXYZData")
 	return ptr
 }
 
+// A key for the MD5 checksum of the code fragment.
 func KColorSyncTransformCodeFragmentMD5() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncTransformCodeFragmentMD5")
 	return ptr
 }
 
+// A key for the type of code fragment to create, or that the framework created.
 func KColorSyncTransformCodeFragmentType() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncTransformCodeFragmentType")
 	return ptr
 }
 
+// A key for the name of the CMM that created the transform.
 func KColorSyncTransformCreator() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncTransformCreator")
 	return ptr
 }
 
+// A “kColorSyncTransformTag“ value selecting the device-to-device conversion direction.
 func KColorSyncTransformDeviceToDevice() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncTransformDeviceToDevice")
 	return ptr
 }
 
+// A “kColorSyncTransformTag“ value selecting the device-to-PCS conversion direction.
 func KColorSyncTransformDeviceToPCS() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncTransformDeviceToPCS")
 	return ptr
 }
 
+// A key for the transform's destination color space.
 func KColorSyncTransformDstSpace() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncTransformDstSpace")
 	return ptr
 }
 
+// A key for the full-conversion code fragment, containing all non-`NULL` components from the profile sequence.
 func KColorSyncTransformFullConversionData() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncTransformFullConversionData")
 	return ptr
 }
 
+// A “kColorSyncTransformTag“ value that checks whether colors fall outside the destination gamut.
 func KColorSyncTransformGamutCheck() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncTransformGamutCheck")
 	return ptr
 }
 
+// A key for a dictionary of information about the transform.
 func KColorSyncTransformInfo() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncTransformInfo")
 	return ptr
 }
 
+// A “kColorSyncTransformTag“ value selecting the PCS-to-device conversion direction.
 func KColorSyncTransformPCSToDevice() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncTransformPCSToDevice")
 	return ptr
 }
 
+// A “kColorSyncTransformTag“ value selecting the PCS-to-PCS conversion direction.
 func KColorSyncTransformPCSToPCS() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncTransformPCSToPCS")
 	return ptr
 }
 
+// A key for the parametric code fragment, consisting only of parametric curves, matrices, and BPC components.
 func KColorSyncTransformParametricConversionData() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncTransformParametricConversionData")
 	return ptr
 }
 
+// A key for the profile sequence used to create the transform.
 func KColorSyncTransformProfileSequnce() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncTransformProfileSequnce")
 	return ptr
 }
 
+// A key for the simplified code fragment, collapsing the full conversion into one multi-dimensional table.
 func KColorSyncTransformSimplifiedConversionData() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncTransformSimplifiedConversionData")
 	return ptr
 }
 
+// A key for the transform's source color space.
 func KColorSyncTransformSrcSpace() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncTransformSrcSpace")
 	return ptr
 }
 
+// A key for the tag identifying which tags of the profile to use in a profile-sequence dictionary.
 func KColorSyncTransformTag() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncTransformTag")
 	return ptr
 }
 
+// A key whose `CFBooleanRef` value uses the ITU-R BT.709 opto-electronic transfer function.
 func KColorSyncTransformUseITU709OETF() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncTransformUseITU709OETF")
 	return ptr
 }
 
+// An iteration option that waits for the profile cache to finish updating before returning.
 func KColorSyncWaitForCacheReply() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncWaitForCacheReply")
 	return ptr
 }
 
+// The web-safe colors profile.
 func KColorSyncWebSafeColorsProfile() uintptr {
 	ptr, _ := purego.Dlsym(_colorsyncLib, "kColorSyncWebSafeColorsProfile")
 	return ptr

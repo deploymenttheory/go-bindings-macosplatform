@@ -20,8 +20,6 @@ import (
 // URLSessionTask is an idiomatic wrapper over the Objective-C class NSURLSessionTask.
 //
 // URLSessionTask is an abstract base — you do not construct it directly. Construct one of [URLSessionDataTask], [URLSessionDownloadTask], [URLSessionStreamTask], [URLSessionWebSocketTask] and pass it where a URLSessionTask is accepted.
-//
-// A task, like downloading a specific resource, performed in a URL session.
 type URLSessionTask struct {
 	objref.Handle
 }
@@ -78,7 +76,7 @@ func (ust *URLSessionTask) String() string {
 	return rt.Description(objref.IDOf(ust))
 }
 
-// WithDelegate sets the delegate.
+// WithDelegate sets a delegate specific to the task. This task-specific delegate receives messages from the task before the session's delegate receives them. Methods not implemented on this delegate will still be forwarded to the session delegate. Cannot be modified after task resumes. Not supported on background session. Delegate is strongly referenced until the task completes, after which it is reset to `nil`.
 func (ust *URLSessionTask) WithDelegate(delegate URLSessionTaskDelegate) *URLSessionTask {
 	_shim := newURLSessionTaskDelegateShim(delegate)
 	_sel := objc.RegisterName("setDelegate:")
@@ -88,39 +86,39 @@ func (ust *URLSessionTask) WithDelegate(delegate URLSessionTaskDelegate) *URLSes
 	return ust
 }
 
-// WithEarliestBeginDate sets the earliest begin date.
+// WithEarliestBeginDate sets the earliest date at which the network load should begin. For tasks created from background `NSURLSession` instances, this property indicates that the network load should not begin any earlier than this date. Setting this property does not guarantee that the load will begin at the specified date, but only that it will not begin sooner. If not specified, no start delay is used. This property has no effect for tasks created from nonbackground sessions.
 func (ust *URLSessionTask) WithEarliestBeginDate(earliestBeginDate DateProvider) *URLSessionTask {
 	defer runtime.KeepAlive(earliestBeginDate)
 	objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("setEarliestBeginDate:"), objref.IDOf(earliestBeginDate))
 	return ust
 }
 
-// WithCountOfBytesClientExpectsToSend sets the count of bytes client expects to send.
+// WithCountOfBytesClientExpectsToSend sets a best-guess upper bound on the number of bytes the client expects to send. The value set for this property should account for the size of HTTP headers and body data or body stream. If no value is specified, the system uses `NSURLSessionTransferSizeUnknown` instead. This property is used by the system to optimize the scheduling of URL session tasks. Developers are strongly encouraged to provide an approximate upper bound, or an exact byte count, if possible, rather than accept the default.
 func (ust *URLSessionTask) WithCountOfBytesClientExpectsToSend(countOfBytesClientExpectsToSend int64) *URLSessionTask {
 	objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("setCountOfBytesClientExpectsToSend:"), countOfBytesClientExpectsToSend)
 	return ust
 }
 
-// WithCountOfBytesClientExpectsToReceive sets the count of bytes client expects to receive.
+// WithCountOfBytesClientExpectsToReceive sets a best-guess upper bound on the number of bytes the client expects to receive. The value set for this property should account for the size of both HTTP response headers and the response body. If no value is specified, the system uses `NSURLSessionTransferSizeUnknown` instead. This property is used by the system to optimize the scheduling of URL session tasks. Developers are strongly encouraged to provide an approximate upper bound, or an exact byte count, if possible, rather than accept the default.
 func (ust *URLSessionTask) WithCountOfBytesClientExpectsToReceive(countOfBytesClientExpectsToReceive int64) *URLSessionTask {
 	objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("setCountOfBytesClientExpectsToReceive:"), countOfBytesClientExpectsToReceive)
 	return ust
 }
 
-// WithTaskDescription sets the task description.
+// WithTaskDescription sets an app-provided string value for the current task. The system doesn't interpret this value; use it for whatever purpose you see fit. For example, you could store a description of the task for debugging purposes, or a key to track the task in your own data structures.
 func (ust *URLSessionTask) WithTaskDescription(taskDescription StringProvider) *URLSessionTask {
 	defer runtime.KeepAlive(taskDescription)
 	objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("setTaskDescription:"), objref.IDOf(taskDescription))
 	return ust
 }
 
-// WithPriority sets the priority.
+// WithPriority sets the relative priority at which you'd like a host to handle the task, specified as a floating point value between `0.0` (lowest priority) and `1.0` (highest priority). To provide hints to a host on how to prioritize URL session tasks from your app, specify a priority for each task. Specifying a priority provides only a hint and does not guarantee performance. If you don't specify a priority, a URL session task has a priority of `NSURLSessionTaskPriorityDefault`, with a value of `0.5`. There are three named priorities you can employ: `NSURLSessionTaskPriorityDefault`, `NSURLSessionTaskPriorityLow`, and `NSURLSessionTaskPriorityHigh`. You can specify or change a task's priority at any time, but not all networking protocols respond to changes after a task has started. There is no API to let you determine the effective priority for a task from a host's perspective.
 func (ust *URLSessionTask) WithPriority(priority float32) *URLSessionTask {
 	objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("setPriority:"), priority)
 	return ust
 }
 
-// WithPrefersIncrementalDelivery sets the prefers incremental delivery.
+// WithPrefersIncrementalDelivery sets a Boolean value that determines whether to deliver a partial response body in increments. Set this property to `true` to tell the task that the app would benefit from receiving a partial response body in increments. If the app can't process the response until it has all the data, set this property to `false`. Task performance may improve when this value is `false`, in which case the task only delivers data when complete. This property defaults to `true`, except in the following cases which default to `false`: - The task delivers results to a completion handler rather than to a delegate. - The task is a download task.
 func (ust *URLSessionTask) WithPrefersIncrementalDelivery(prefersIncrementalDelivery bool) *URLSessionTask {
 	objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("setPrefersIncrementalDelivery:"), prefersIncrementalDelivery)
 	return ust
@@ -138,109 +136,109 @@ func (ust *URLSessionTask) WithScriptingProperties(scriptingProperties map[strin
 	return ust
 }
 
-// Cancel wraps the corresponding Objective-C method.
+// Cancel cancels the task. This method returns immediately, marking the task as being canceled. Once a task is marked as being canceled, `URLSession:task:didCompleteWithError:` will be sent to the task delegate, passing an error in the domain `NSURLErrorDomain` with the code `NSURLErrorCancelled`. A task may, under some circumstances, send messages to its delegate before the cancelation is acknowledged. This method may be called on a task that is suspended.
 func (ust *URLSessionTask) Cancel() {
 	defer runtime.KeepAlive(ust)
 	objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("cancel"))
 }
 
-// Suspend wraps the corresponding Objective-C method.
+// Suspend temporarily suspends the task. Suspending a task will prevent the `NSURLSession` from continuing to load data. There may still be delegate calls made on behalf of this task (for instance, to report data received while suspending) but no further transmissions will be made on behalf of the task until `-resume` is sent. The timeout timer associated with the task will be disabled while a task is suspended. `-suspend` and `-resume` are nestable.
 func (ust *URLSessionTask) Suspend() {
 	defer runtime.KeepAlive(ust)
 	objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("suspend"))
 }
 
-// Resume wraps the corresponding Objective-C method.
+// Resume resumes the task, if it is suspended. Newly-initialized tasks begin in a suspended state, so you need to call this method to start the task.
 func (ust *URLSessionTask) Resume() {
 	defer runtime.KeepAlive(ust)
 	objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("resume"))
 }
 
-// TaskIdentifier returns the task identifier.
+// TaskIdentifier returns an identifier uniquely identifying the task within a given session. This value is unique only within the context of a single session; tasks in other sessions may have the same `taskIdentifier` value.
 func (ust *URLSessionTask) TaskIdentifier() int {
 	defer runtime.KeepAlive(ust)
 	_r := objc.Send[int](objref.IDOf(ust), objc.RegisterName("taskIdentifier"))
 	return _r
 }
 
-// OriginalRequest returns the original request.
+// OriginalRequest returns the original request object passed when the task was created. This value is typically the same as the currently active request (`currentRequest`) except when the server has responded to the initial request with a redirect to a different URL.
 func (ust *URLSessionTask) OriginalRequest() *URLRequest {
 	defer runtime.KeepAlive(ust)
 	_r := objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("originalRequest"))
 	return URLRequestFromID(_r)
 }
 
-// CurrentRequest returns the current request.
+// CurrentRequest returns the URL request object currently being handled by the task. This value is typically the same as the initial request (`originalRequest`) except when the server has responded to the initial request with a redirect to a different URL.
 func (ust *URLSessionTask) CurrentRequest() *URLRequest {
 	defer runtime.KeepAlive(ust)
 	_r := objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("currentRequest"))
 	return URLRequestFromID(_r)
 }
 
-// Response returns the response.
+// Response returns the server's response to the currently active request. This object provides information about the request as provided by the server. This information always includes the original URL. It may also include an expected length, MIME type information, encoding information, a suggested filename, or a combination of these.
 func (ust *URLSessionTask) Response() *URLResponse {
 	defer runtime.KeepAlive(ust)
 	_r := objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("response"))
 	return URLResponseFromID(_r)
 }
 
-// Progress returns the progress.
+// Progress returns a representation of the overall task progress. It can be used for task progress tracking.
 func (ust *URLSessionTask) Progress() *Progress {
 	defer runtime.KeepAlive(ust)
 	_r := objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("progress"))
 	return ProgressFromID(_r)
 }
 
-// EarliestBeginDate returns the earliest begin date.
+// EarliestBeginDate returns the earliest date at which the network load should begin. For tasks created from background `NSURLSession` instances, this property indicates that the network load should not begin any earlier than this date. Setting this property does not guarantee that the load will begin at the specified date, but only that it will not begin sooner. If not specified, no start delay is used. This property has no effect for tasks created from nonbackground sessions.
 func (ust *URLSessionTask) EarliestBeginDate() time.Time {
 	defer runtime.KeepAlive(ust)
 	_r := objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("earliestBeginDate"))
 	return rt.NSDateToTime(_r)
 }
 
-// CountOfBytesClientExpectsToSend returns the count of bytes client expects to send.
+// CountOfBytesClientExpectsToSend returns a best-guess upper bound on the number of bytes the client expects to send. The value set for this property should account for the size of HTTP headers and body data or body stream. If no value is specified, the system uses `NSURLSessionTransferSizeUnknown` instead. This property is used by the system to optimize the scheduling of URL session tasks. Developers are strongly encouraged to provide an approximate upper bound, or an exact byte count, if possible, rather than accept the default.
 func (ust *URLSessionTask) CountOfBytesClientExpectsToSend() int64 {
 	defer runtime.KeepAlive(ust)
 	_r := objc.Send[int64](objref.IDOf(ust), objc.RegisterName("countOfBytesClientExpectsToSend"))
 	return _r
 }
 
-// CountOfBytesClientExpectsToReceive returns the count of bytes client expects to receive.
+// CountOfBytesClientExpectsToReceive returns a best-guess upper bound on the number of bytes the client expects to receive. The value set for this property should account for the size of both HTTP response headers and the response body. If no value is specified, the system uses `NSURLSessionTransferSizeUnknown` instead. This property is used by the system to optimize the scheduling of URL session tasks. Developers are strongly encouraged to provide an approximate upper bound, or an exact byte count, if possible, rather than accept the default.
 func (ust *URLSessionTask) CountOfBytesClientExpectsToReceive() int64 {
 	defer runtime.KeepAlive(ust)
 	_r := objc.Send[int64](objref.IDOf(ust), objc.RegisterName("countOfBytesClientExpectsToReceive"))
 	return _r
 }
 
-// CountOfBytesSent returns the count of bytes sent.
+// CountOfBytesSent returns the number of bytes that the task has sent to the server in the request body. This byte count includes _only_ the length of the request body itself, not the request headers. To be notified when this value changes, implement the `URLSession:task:didSendBodyData:totalBytesSent:totalBytesExpectedToSend:` delegate method.
 func (ust *URLSessionTask) CountOfBytesSent() int64 {
 	defer runtime.KeepAlive(ust)
 	_r := objc.Send[int64](objref.IDOf(ust), objc.RegisterName("countOfBytesSent"))
 	return _r
 }
 
-// CountOfBytesReceived returns the count of bytes received.
+// CountOfBytesReceived returns the number of bytes that the task has received from the server in the response body. To be notified when this value changes, implement the `URLSession:dataTask:didReceiveData:` delegate method (for data and upload tasks) or the `URLSession:downloadTask:didWriteData:totalBytesWritten:totalBytesExpectedToWrite:` method (for download tasks).
 func (ust *URLSessionTask) CountOfBytesReceived() int64 {
 	defer runtime.KeepAlive(ust)
 	_r := objc.Send[int64](objref.IDOf(ust), objc.RegisterName("countOfBytesReceived"))
 	return _r
 }
 
-// CountOfBytesExpectedToSend returns the count of bytes expected to send.
+// CountOfBytesExpectedToSend returns the number of bytes that the task expects to send in the request body. The URL loading system can determine the length of the upload data in three ways: - From the length of the data object provided as the upload body. - From the length of the file on disk provided as the upload body of an upload task (_not_ a download task). - From the `Content-Length` in the request object, if you explicitly set it. Otherwise, the value is `NSURLSessionTransferSizeUnknown` (`-1`) if you provided a stream or body data object, or zero (`0`) if you did not.
 func (ust *URLSessionTask) CountOfBytesExpectedToSend() int64 {
 	defer runtime.KeepAlive(ust)
 	_r := objc.Send[int64](objref.IDOf(ust), objc.RegisterName("countOfBytesExpectedToSend"))
 	return _r
 }
 
-// CountOfBytesExpectedToReceive returns the count of bytes expected to receive.
+// CountOfBytesExpectedToReceive returns the number of bytes that the task expects to receive in the response body. This value is determined based on the `Content-Length` header received from the server. If that header is absent, the value is `NSURLSessionTransferSizeUnknown`.
 func (ust *URLSessionTask) CountOfBytesExpectedToReceive() int64 {
 	defer runtime.KeepAlive(ust)
 	_r := objc.Send[int64](objref.IDOf(ust), objc.RegisterName("countOfBytesExpectedToReceive"))
 	return _r
 }
 
-// TaskDescription returns the task description.
+// TaskDescription returns an app-provided string value for the current task. The system doesn't interpret this value; use it for whatever purpose you see fit. For example, you could store a description of the task for debugging purposes, or a key to track the task in your own data structures.
 func (ust *URLSessionTask) TaskDescription() string {
 	defer runtime.KeepAlive(ust)
 	_r := objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("taskDescription"))
@@ -250,28 +248,28 @@ func (ust *URLSessionTask) TaskDescription() string {
 	return purego.GoString(_r)
 }
 
-// State returns the state.
+// State returns the current state of the task---active, suspended, in the process of being canceled, or completed.
 func (ust *URLSessionTask) State() URLSessionTaskState {
 	defer runtime.KeepAlive(ust)
 	_r := objc.Send[URLSessionTaskState](objref.IDOf(ust), objc.RegisterName("state"))
 	return _r
 }
 
-// Error returns the error.
+// Error returns an error object that indicates why the task failed. This value is `nil` if the task is still active or if the transfer completed successfully.
 func (ust *URLSessionTask) Error() unsafe.Pointer {
 	defer runtime.KeepAlive(ust)
 	_r := objc.Send[unsafe.Pointer](objref.IDOf(ust), objc.RegisterName("error"))
 	return _r
 }
 
-// Priority returns the priority.
+// Priority returns the relative priority at which you'd like a host to handle the task, specified as a floating point value between `0.0` (lowest priority) and `1.0` (highest priority). To provide hints to a host on how to prioritize URL session tasks from your app, specify a priority for each task. Specifying a priority provides only a hint and does not guarantee performance. If you don't specify a priority, a URL session task has a priority of `NSURLSessionTaskPriorityDefault`, with a value of `0.5`. There are three named priorities you can employ: `NSURLSessionTaskPriorityDefault`, `NSURLSessionTaskPriorityLow`, and `NSURLSessionTaskPriorityHigh`. You can specify or change a task's priority at any time, but not all networking protocols respond to changes after a task has started. There is no API to let you determine the effective priority for a task from a host's perspective.
 func (ust *URLSessionTask) Priority() float32 {
 	defer runtime.KeepAlive(ust)
 	_r := objc.Send[float32](objref.IDOf(ust), objc.RegisterName("priority"))
 	return _r
 }
 
-// PrefersIncrementalDelivery wraps the corresponding Objective-C method.
+// PrefersIncrementalDelivery reports whether a Boolean value that determines whether to deliver a partial response body in increments. Set this property to `true` to tell the task that the app would benefit from receiving a partial response body in increments. If the app can't process the response until it has all the data, set this property to `false`. Task performance may improve when this value is `false`, in which case the task only delivers data when complete. This property defaults to `true`, except in the following cases which default to `false`: - The task delivers results to a completion handler rather than to a delegate. - The task is a download task.
 func (ust *URLSessionTask) PrefersIncrementalDelivery() bool {
 	defer runtime.KeepAlive(ust)
 	_r := objc.Send[bool](objref.IDOf(ust), objc.RegisterName("prefersIncrementalDelivery"))

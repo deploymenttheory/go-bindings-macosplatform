@@ -27,6 +27,7 @@ var (
 	_aVExternalStorageDeviceSelTotalSize                                = objc.RegisterName("totalSize")
 	_aVExternalStorageDeviceSelIsConnected                              = objc.RegisterName("isConnected")
 	_aVExternalStorageDeviceSelUuid                                     = objc.RegisterName("uuid")
+	_aVExternalStorageDeviceSelReasonsNotRecommendedForCaptureUse       = objc.RegisterName("reasonsNotRecommendedForCaptureUse")
 	_aVExternalStorageDeviceSelIsNotRecommendedForCaptureUse            = objc.RegisterName("isNotRecommendedForCaptureUse")
 	_aVExternalStorageDeviceSelRequestAccessWithCompletionHandler       = objc.RegisterName("requestAccessWithCompletionHandler:")
 	_aVExternalStorageDeviceSelAuthorizationStatus                      = objc.RegisterName("authorizationStatus")
@@ -91,7 +92,17 @@ func (o *AVExternalStorageDevice) Uuid() *foundation.NSUUID {
 	return foundation.NSUUIDFromID(_ret)
 }
 
+// @property reasonsNotRecommendedForCaptureUse @abstract A set of reasons why the storage device is not recommended for capture. @discussion Contains one or more AVExternalStorageDeviceReasonNotRecommendedForCaptureUse values indicating the issues with the device. Returns an empty set if there are no known issues.
+func (o *AVExternalStorageDevice) ReasonsNotRecommendedForCaptureUse() *foundation.NSSet[*foundation.NSString] {
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVExternalStorageDeviceSelReasonsNotRecommendedForCaptureUse)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSSetFromID[*foundation.NSString](_ret)
+}
+
 // @property notRecommendedForCaptureUse @abstract Indicates whether the external storage device is not recommended for capture use. @discussion This property is used to let the client know if the external storage device is not suitable for camera capture.
+// Deprecated: Use reasonsNotRecommendedForCaptureUse instead
 func (o *AVExternalStorageDevice) IsNotRecommendedForCaptureUse() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVExternalStorageDeviceSelIsNotRecommendedForCaptureUse)
 	return _ret

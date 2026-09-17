@@ -9,8 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A unit of measure for area.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsunitarea
 type NSUnitArea struct {
 	NSDimension
@@ -44,6 +42,7 @@ func NSUnitAreaFromID(id objc.ID) *NSUnitArea {
 	return o
 }
 
+// The square megameters unit of area.
 func NSUnitAreaSquareMegameters() *NSUnitArea {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitArea), _nSUnitAreaSelSquareMegameters)
 	if _ret != 0 {
@@ -52,6 +51,7 @@ func NSUnitAreaSquareMegameters() *NSUnitArea {
 	return NSUnitAreaFromID(_ret)
 }
 
+// The square kilometers unit of area.
 func NSUnitAreaSquareKilometers() *NSUnitArea {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitArea), _nSUnitAreaSelSquareKilometers)
 	if _ret != 0 {
@@ -60,6 +60,7 @@ func NSUnitAreaSquareKilometers() *NSUnitArea {
 	return NSUnitAreaFromID(_ret)
 }
 
+// The square meters unit of area.
 func NSUnitAreaSquareMeters() *NSUnitArea {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitArea), _nSUnitAreaSelSquareMeters)
 	if _ret != 0 {
@@ -68,6 +69,7 @@ func NSUnitAreaSquareMeters() *NSUnitArea {
 	return NSUnitAreaFromID(_ret)
 }
 
+// The square centimeters unit of area.
 func NSUnitAreaSquareCentimeters() *NSUnitArea {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitArea), _nSUnitAreaSelSquareCentimeters)
 	if _ret != 0 {
@@ -76,6 +78,7 @@ func NSUnitAreaSquareCentimeters() *NSUnitArea {
 	return NSUnitAreaFromID(_ret)
 }
 
+// The square millimeters unit of area.
 func NSUnitAreaSquareMillimeters() *NSUnitArea {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitArea), _nSUnitAreaSelSquareMillimeters)
 	if _ret != 0 {
@@ -84,6 +87,7 @@ func NSUnitAreaSquareMillimeters() *NSUnitArea {
 	return NSUnitAreaFromID(_ret)
 }
 
+// The square micrometers unit of area.
 func NSUnitAreaSquareMicrometers() *NSUnitArea {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitArea), _nSUnitAreaSelSquareMicrometers)
 	if _ret != 0 {
@@ -92,6 +96,7 @@ func NSUnitAreaSquareMicrometers() *NSUnitArea {
 	return NSUnitAreaFromID(_ret)
 }
 
+// The square nanometers unit of area.
 func NSUnitAreaSquareNanometers() *NSUnitArea {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitArea), _nSUnitAreaSelSquareNanometers)
 	if _ret != 0 {
@@ -100,6 +105,7 @@ func NSUnitAreaSquareNanometers() *NSUnitArea {
 	return NSUnitAreaFromID(_ret)
 }
 
+// The square inches unit of area.
 func NSUnitAreaSquareInches() *NSUnitArea {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitArea), _nSUnitAreaSelSquareInches)
 	if _ret != 0 {
@@ -108,6 +114,7 @@ func NSUnitAreaSquareInches() *NSUnitArea {
 	return NSUnitAreaFromID(_ret)
 }
 
+// The square feet unit of area.
 func NSUnitAreaSquareFeet() *NSUnitArea {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitArea), _nSUnitAreaSelSquareFeet)
 	if _ret != 0 {
@@ -116,6 +123,7 @@ func NSUnitAreaSquareFeet() *NSUnitArea {
 	return NSUnitAreaFromID(_ret)
 }
 
+// The square yards unit of area.
 func NSUnitAreaSquareYards() *NSUnitArea {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitArea), _nSUnitAreaSelSquareYards)
 	if _ret != 0 {
@@ -124,6 +132,7 @@ func NSUnitAreaSquareYards() *NSUnitArea {
 	return NSUnitAreaFromID(_ret)
 }
 
+// The square miles unit of area.
 func NSUnitAreaSquareMiles() *NSUnitArea {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitArea), _nSUnitAreaSelSquareMiles)
 	if _ret != 0 {
@@ -132,6 +141,7 @@ func NSUnitAreaSquareMiles() *NSUnitArea {
 	return NSUnitAreaFromID(_ret)
 }
 
+// The acres unit of area.
 func NSUnitAreaAcres() *NSUnitArea {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitArea), _nSUnitAreaSelAcres)
 	if _ret != 0 {
@@ -140,6 +150,7 @@ func NSUnitAreaAcres() *NSUnitArea {
 	return NSUnitAreaFromID(_ret)
 }
 
+// The ares unit of area.
 func NSUnitAreaAres() *NSUnitArea {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitArea), _nSUnitAreaSelAres)
 	if _ret != 0 {
@@ -148,6 +159,7 @@ func NSUnitAreaAres() *NSUnitArea {
 	return NSUnitAreaFromID(_ret)
 }
 
+// The hectares unit of area.
 func NSUnitAreaHectares() *NSUnitArea {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitArea), _nSUnitAreaSelHectares)
 	if _ret != 0 {

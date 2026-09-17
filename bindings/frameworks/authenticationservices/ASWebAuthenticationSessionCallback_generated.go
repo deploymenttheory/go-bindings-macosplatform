@@ -15,8 +15,6 @@ import (
 )
 
 // WebAuthenticationSessionCallback is an idiomatic wrapper over the Objective-C class ASWebAuthenticationSessionCallback.
-//
-// An object for evaluating navigation events in an authentication session.
 type WebAuthenticationSessionCallback struct {
 	objref.Handle
 }

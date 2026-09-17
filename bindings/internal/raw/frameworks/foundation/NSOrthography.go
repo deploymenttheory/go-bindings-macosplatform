@@ -58,6 +58,7 @@ func (o *NSOrthography) InitWithCoder(coder *NSCoder) *NSOrthography {
 	return NSOrthographyFromID(_ret)
 }
 
+// The dominant script for the text. The value of this property is an ISO 15924 script code, such as `"Latn"` or `"Cyrl"`, that identifies the dominant script.
 func (o *NSOrthography) DominantScript() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrthographySelDominantScript)
 	if _ret != 0 {
@@ -66,6 +67,7 @@ func (o *NSOrthography) DominantScript() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// A dictionary that maps script tags to arrays of language tags. The dictionary's keys are ISO 15924 script codes (such as `"Latn"` or `"Cyrl"`) and its values are arrays of BCP-47 language tags (such as `"en"`, `"fr"`, or `"de"`).
 func (o *NSOrthography) LanguageMap() *NSDictionary[*NSString, objc.ID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrthographySelLanguageMap)
 	if _ret != 0 {
@@ -101,6 +103,7 @@ func NSOrthographyDefaultOrthographyForLanguage(language *NSString) *NSOrthograp
 	return NSOrthographyFromID(_ret)
 }
 
+// The first language in the list of languages for the dominant script.
 func (o *NSOrthography) DominantLanguage() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrthographySelDominantLanguage)
 	if _ret != 0 {
@@ -109,6 +112,7 @@ func (o *NSOrthography) DominantLanguage() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The scripts appearing as keys in the language map.
 func (o *NSOrthography) AllScripts() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrthographySelAllScripts)
 	if _ret != 0 {
@@ -117,6 +121,7 @@ func (o *NSOrthography) AllScripts() *NSArray[*NSString] {
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// The languages appearing in values of the language map.
 func (o *NSOrthography) AllLanguages() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrthographySelAllLanguages)
 	if _ret != 0 {

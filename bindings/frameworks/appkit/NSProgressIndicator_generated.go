@@ -431,6 +431,14 @@ func (pi *ProgressIndicator) WithGestureRecognizers(items ...GestureRecognizerPr
 	return pi
 }
 
+// WithExclusiveGestureBehavior sets declares whether gesture recognizers should be exclusive in this view and its subviews.
+func (pi *ProgressIndicator) WithExclusiveGestureBehavior(exclusiveGestureBehavior ViewExclusiveGestureBehavior) *ProgressIndicator {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setExclusiveGestureBehavior:"), exclusiveGestureBehavior)
+	})
+	return pi
+}
+
 // WithAllowedTouchTypes sets the allowed touch types.
 func (pi *ProgressIndicator) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *ProgressIndicator {
 	purego.Main(func() {
@@ -492,6 +500,15 @@ func (pi *ProgressIndicator) WithHorizontalContentSizeConstraintActive(horizonta
 func (pi *ProgressIndicator) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ProgressIndicator {
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
+	return pi
+}
+
+// WithTextSelectionManager sets the text selection manager for this view.
+func (pi *ProgressIndicator) WithTextSelectionManager(textSelectionManager *TextSelectionManager) *ProgressIndicator {
+	defer runtime.KeepAlive(textSelectionManager)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setTextSelectionManager:"), objref.IDOf(textSelectionManager))
 	})
 	return pi
 }

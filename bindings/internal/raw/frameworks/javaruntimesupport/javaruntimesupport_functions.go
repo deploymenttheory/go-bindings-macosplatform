@@ -19,7 +19,7 @@ var (
 	_fnJRSFontGetAdvancesForGlyphsAndStyle            func(unsafe.Pointer, *corefoundation.CGAffineTransform, uint32, *uint16, uint, *corefoundation.CGSize) float64
 	_fnJRSFontGetBoundingBoxesForGlyphsAndStyle       func(unsafe.Pointer, *corefoundation.CGAffineTransform, uint32, *uint16, uint, *corefoundation.CGRect) corefoundation.CGRect
 	_fnJRSFontGetRenderingStyleForContext             func(unsafe.Pointer) uint32
-	_fnJRSFontGetRenderingStyleForHints               func(unsafe.Pointer, unsafe.Pointer) uint32
+	_fnJRSFontGetRenderingStyleForHints               func(int, int) uint32
 	_fnJRSFontSetRenderingStyleOnContext              func(unsafe.Pointer, uint32)
 	_fnJRSFontStyleIsAntialiased                      func(uint32) bool
 	_fnJRSFontStyleUsesFractionalMetrics              func(uint32) bool
@@ -79,7 +79,7 @@ func JRSFontGetRenderingStyleForContext(context_ unsafe.Pointer) uint32 {
 	return _fnJRSFontGetRenderingStyleForContext(context_)
 }
 
-func JRSFontGetRenderingStyleForHints(fmHint unsafe.Pointer, aaHint unsafe.Pointer) uint32 {
+func JRSFontGetRenderingStyleForHints(fmHint int, aaHint int) uint32 {
 	return _fnJRSFontGetRenderingStyleForHints(fmHint, aaHint)
 }
 

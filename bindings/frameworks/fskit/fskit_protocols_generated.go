@@ -31,10 +31,54 @@ type UnaryFileSystemOperations interface {
 	UnloadResourceOptionsReplyHandler(resource *Resource, options *TaskOptions, reply func(unsafe.Pointer))
 }
 
+// VolumeAccessCheckHandler is the Go form of the Objective-C protocol FSVolumeAccessCheckHandler.
+type VolumeAccessCheckHandler interface {
+	CheckAccessToItemRequestedAccessContextReplyHandler(theItem *Item, access AccessMask, context_ *Context, reply func(obj.Object, unsafe.Pointer))
+}
+
 // VolumeAccessCheckOperations is the Go form of the Objective-C protocol FSVolumeAccessCheckOperations.
 type VolumeAccessCheckOperations interface {
 	CheckAccessToItemRequestedAccessReplyHandler(theItem *Item, access AccessMask, reply func(bool, unsafe.Pointer))
 	SetAccessCheckInhibited(accessCheckInhibited bool)
+}
+
+// VolumeCommonOperations is the Go form of the Objective-C protocol FSVolumeCommonOperations.
+type VolumeCommonOperations interface {
+	MountWithOptionsReplyHandler(options *TaskOptions, reply func(unsafe.Pointer))
+	UnmountWithReplyHandler(reply func())
+	SynchronizeWithFlagsReplyHandler(flags SyncFlags, reply func(unsafe.Pointer))
+	ReclaimItemReplyHandler(item *Item, reply func(unsafe.Pointer))
+	SupportedVolumeCapabilities() *VolumeSupportedCapabilities
+	VolumeStatistics() *StatFSResult
+}
+
+// VolumeDataCacheHandler is the Go form of the Objective-C protocol FSVolumeDataCacheHandler.
+type VolumeDataCacheHandler interface {
+	OpenItemModesCacheModeContextReplyHandler(item *Item, modes VolumeOpenModes, cacheMode DataCacheMode, context_ *Context, reply func(obj.Object, unsafe.Pointer))
+	CloseItemContextReplyHandler(item *Item, context_ *Context, reply func())
+	UpgradeItemCacheModeContextReplyHandler(item *Item, cacheMode DataCacheMode, context_ *Context, reply func(obj.Object, unsafe.Pointer))
+}
+
+// VolumeHandler is the Go form of the Objective-C protocol FSVolumeHandler.
+type VolumeHandler interface {
+	ActivateVolumeWithOptionsReplyHandler(options *TaskOptions, reply func(obj.Object, unsafe.Pointer))
+	DeactivateVolumeWithOptionsReplyHandler(options DeactivateOptions, reply func(unsafe.Pointer))
+	MountWithOptionsReplyHandler(options *TaskOptions, reply func(unsafe.Pointer))
+	UnmountWithReplyHandler(reply func())
+	SynchronizeWithFlagsReplyHandler(flags SyncFlags, reply func(unsafe.Pointer))
+	LookupItemNamedInDirectoryContextReplyHandler(name *FileName, directory *Item, context_ *Context, reply func(obj.Object, unsafe.Pointer))
+	ReclaimItemReplyHandler(item *Item, reply func(unsafe.Pointer))
+	CreateItemNamedTypeInDirectoryAttributesContextReplyHandler(name *FileName, type_ ItemType, directory *Item, newAttributes *ItemSetAttributesRequest, context_ *Context, reply func(obj.Object, unsafe.Pointer))
+	CreateSymbolicLinkNamedInDirectoryAttributesLinkContentsContextReplyHandler(name *FileName, directory *Item, newAttributes *ItemSetAttributesRequest, contents *FileName, context_ *Context, reply func(obj.Object, unsafe.Pointer))
+	CreateLinkToItemNamedInDirectoryContextReplyHandler(item *Item, name *FileName, directory *Item, context_ *Context, reply func(obj.Object, unsafe.Pointer))
+	RenameItemInDirectoryNamedToNewNameInDirectoryOverItemContextReplyHandler(item *Item, sourceDirectory *Item, sourceName *FileName, destinationName *FileName, destinationDirectory *Item, overItem *Item, context_ *Context, reply func(obj.Object, unsafe.Pointer))
+	RemoveItemNamedFromDirectoryContextReplyHandler(item *Item, name *FileName, directory *Item, context_ *Context, reply func(obj.Object, unsafe.Pointer))
+	GetAttributesOfItemContextReplyHandler(desiredAttributes *ItemGetAttributesRequest, item *Item, context_ *Context, reply func(obj.Object, unsafe.Pointer))
+	SetAttributesOnItemContextReplyHandler(newAttributes *ItemSetAttributesRequest, item *Item, context_ *Context, reply func(obj.Object, unsafe.Pointer))
+	EnumerateDirectoryStartingAtCookieVerifierProvidingAttributesUsingPackerContextReplyHandler(directory *Item, cookie uint64, verifier uint64, attributes *ItemGetAttributesRequest, packer *DirectoryEntryPacker, context_ *Context, reply func(obj.Object, unsafe.Pointer))
+	ReadSymbolicLinkContextReplyHandler(item *Item, context_ *Context, reply func(obj.Object, unsafe.Pointer))
+	SupportedVolumeCapabilities() *VolumeSupportedCapabilities
+	VolumeStatistics() *StatFSResult
 }
 
 // VolumeItemDeactivation is the Go form of the Objective-C protocol FSVolumeItemDeactivation.
@@ -43,12 +87,32 @@ type VolumeItemDeactivation interface {
 	ItemDeactivationPolicy() ItemDeactivationOptions
 }
 
+// VolumeItemDeactivationHandler is the Go form of the Objective-C protocol FSVolumeItemDeactivationHandler.
+type VolumeItemDeactivationHandler interface {
+	DeactivateItemContextReplyHandler(item *Item, context_ *Context, reply func(obj.Object, unsafe.Pointer))
+	ItemDeactivationPolicy() ItemDeactivationOptions
+}
+
+// VolumeKernelOffloadedIOHandler is the Go form of the Objective-C protocol FSVolumeKernelOffloadedIOHandler.
+type VolumeKernelOffloadedIOHandler interface {
+	BlockmapFileOffsetLengthFlagsOperationIDPackerReplyHandler(file *Item, offset int64, length int, flags BlockmapFlags, operationID int, packer *ExtentPacker, reply func(obj.Object, unsafe.Pointer))
+	CompleteIOForFileOffsetLengthStatusFlagsOperationIDReplyHandler(file *Item, offset int64, length int, status unsafe.Pointer, flags CompleteIOFlags, operationID int, reply func(obj.Object, unsafe.Pointer))
+	CreateFileNamedInDirectoryAttributesPackerContextReplyHandler(name *FileName, directory *Item, newAttributes *ItemSetAttributesRequest, packer *ExtentPacker, context_ *Context, reply func(obj.Object, unsafe.Pointer))
+	LookupItemNamedInDirectoryPackerContextReplyHandler(name *FileName, directory *Item, packer *ExtentPacker, context_ *Context, reply func(obj.Object, unsafe.Pointer))
+}
+
 // VolumeKernelOffloadedIOOperations is the Go form of the Objective-C protocol FSVolumeKernelOffloadedIOOperations.
 type VolumeKernelOffloadedIOOperations interface {
 	BlockmapFileOffsetLengthFlagsOperationIDPackerReplyHandler(file *Item, offset int64, length int, flags BlockmapFlags, operationID int, packer *ExtentPacker, reply func(unsafe.Pointer))
 	CompleteIOForFileOffsetLengthStatusFlagsOperationIDReplyHandler(file *Item, offset int64, length int, status unsafe.Pointer, flags CompleteIOFlags, operationID int, reply func(unsafe.Pointer))
 	CreateFileNamedInDirectoryAttributesPackerReplyHandler(name *FileName, directory *Item, attributes *ItemSetAttributesRequest, packer *ExtentPacker, reply func(obj.Object, obj.Object, unsafe.Pointer))
 	LookupItemNamedInDirectoryPackerReplyHandler(name *FileName, directory *Item, packer *ExtentPacker, reply func(obj.Object, obj.Object, unsafe.Pointer))
+}
+
+// VolumeOpenCloseHandler is the Go form of the Objective-C protocol FSVolumeOpenCloseHandler.
+type VolumeOpenCloseHandler interface {
+	OpenItemWithModesContextReplyHandler(item *Item, modes VolumeOpenModes, context_ *Context, reply func(unsafe.Pointer))
+	CloseItemKeepingModesContextReplyHandler(item *Item, modes VolumeOpenModes, context_ *Context, reply func(unsafe.Pointer))
 }
 
 // VolumeOpenCloseOperations is the Go form of the Objective-C protocol FSVolumeOpenCloseOperations.
@@ -60,26 +124,18 @@ type VolumeOpenCloseOperations interface {
 
 // VolumeOperations is the Go form of the Objective-C protocol FSVolumeOperations.
 type VolumeOperations interface {
-	MountWithOptionsReplyHandler(options *TaskOptions, reply func(unsafe.Pointer))
-	UnmountWithReplyHandler(reply func())
-	SynchronizeWithFlagsReplyHandler(flags SyncFlags, reply func(unsafe.Pointer))
-	GetAttributesOfItemReplyHandler(desiredAttributes *ItemGetAttributesRequest, item *Item, reply func(obj.Object, unsafe.Pointer))
-	SetAttributesOnItemReplyHandler(newAttributes *ItemSetAttributesRequest, item *Item, reply func(obj.Object, unsafe.Pointer))
+	ActivateWithOptionsReplyHandler(options *TaskOptions, reply func(obj.Object, unsafe.Pointer))
+	DeactivateWithOptionsReplyHandler(options DeactivateOptions, reply func(unsafe.Pointer))
 	LookupItemNamedInDirectoryReplyHandler(name *FileName, directory *Item, reply func(obj.Object, obj.Object, unsafe.Pointer))
-	ReclaimItemReplyHandler(item *Item, reply func(unsafe.Pointer))
-	ReadSymbolicLinkReplyHandler(item *Item, reply func(obj.Object, unsafe.Pointer))
 	CreateItemNamedTypeInDirectoryAttributesReplyHandler(name *FileName, type_ ItemType, directory *Item, newAttributes *ItemSetAttributesRequest, reply func(obj.Object, obj.Object, unsafe.Pointer))
 	CreateSymbolicLinkNamedInDirectoryAttributesLinkContentsReplyHandler(name *FileName, directory *Item, newAttributes *ItemSetAttributesRequest, contents *FileName, reply func(obj.Object, obj.Object, unsafe.Pointer))
 	CreateLinkToItemNamedInDirectoryReplyHandler(item *Item, name *FileName, directory *Item, reply func(obj.Object, unsafe.Pointer))
-	RemoveItemNamedFromDirectoryReplyHandler(item *Item, name *FileName, directory *Item, reply func(unsafe.Pointer))
 	RenameItemInDirectoryNamedToNewNameInDirectoryOverItemReplyHandler(item *Item, sourceDirectory *Item, sourceName *FileName, destinationName *FileName, destinationDirectory *Item, overItem *Item, reply func(obj.Object, unsafe.Pointer))
+	RemoveItemNamedFromDirectoryReplyHandler(item *Item, name *FileName, directory *Item, reply func(unsafe.Pointer))
+	GetAttributesOfItemReplyHandler(desiredAttributes *ItemGetAttributesRequest, item *Item, reply func(obj.Object, unsafe.Pointer))
+	SetAttributesOnItemReplyHandler(newAttributes *ItemSetAttributesRequest, item *Item, reply func(obj.Object, unsafe.Pointer))
 	EnumerateDirectoryStartingAtCookieVerifierProvidingAttributesUsingPackerReplyHandler(directory *Item, cookie uint64, verifier uint64, attributes *ItemGetAttributesRequest, packer *DirectoryEntryPacker, reply func(uint64, unsafe.Pointer))
-	ActivateWithOptionsReplyHandler(options *TaskOptions, reply func(obj.Object, unsafe.Pointer))
-	DeactivateWithOptionsReplyHandler(options DeactivateOptions, reply func(unsafe.Pointer))
-	SupportedVolumeCapabilities() *VolumeSupportedCapabilities
-	VolumeStatistics() *StatFSResult
-	SetEnableOpenUnlinkEmulation(enableOpenUnlinkEmulation bool)
-	SetRequestedMountOptions(requestedMountOptions MountOptions)
+	ReadSymbolicLinkReplyHandler(item *Item, reply func(obj.Object, unsafe.Pointer))
 }
 
 // VolumePathConfOperations is the Go form of the Objective-C protocol FSVolumePathConfOperations.
@@ -90,10 +146,21 @@ type VolumePathConfOperations interface {
 	TruncatesLongNames() bool
 }
 
+// VolumePreallocateHandler is the Go form of the Objective-C protocol FSVolumePreallocateHandler.
+type VolumePreallocateHandler interface {
+	PreallocateSpaceForItemAtOffsetLengthFlagsContextReplyHandler(item *Item, offset int64, length int, flags PreallocateFlags, context_ *Context, reply func(obj.Object, unsafe.Pointer))
+}
+
 // VolumePreallocateOperations is the Go form of the Objective-C protocol FSVolumePreallocateOperations.
 type VolumePreallocateOperations interface {
 	PreallocateSpaceForItemAtOffsetLengthFlagsReplyHandler(item *Item, offset int64, length int, flags PreallocateFlags, reply func(int, unsafe.Pointer))
 	SetPreallocateInhibited(preallocateInhibited bool)
+}
+
+// VolumeReadWriteHandler is the Go form of the Objective-C protocol FSVolumeReadWriteHandler.
+type VolumeReadWriteHandler interface {
+	ReadFromFileOffsetLengthIntoBufferReplyHandler(item *Item, offset int64, length int, buffer *MutableFileDataBuffer, reply func(obj.Object, unsafe.Pointer))
+	WriteContentsToFileAtOffsetReplyHandler(contents []byte, item *Item, offset int64, reply func(obj.Object, unsafe.Pointer))
 }
 
 // VolumeReadWriteOperations is the Go form of the Objective-C protocol FSVolumeReadWriteOperations.
@@ -102,10 +169,27 @@ type VolumeReadWriteOperations interface {
 	WriteContentsToFileAtOffsetReplyHandler(contents []byte, item *Item, offset int64, reply func(int, unsafe.Pointer))
 }
 
+// VolumeRenameHandler is the Go form of the Objective-C protocol FSVolumeRenameHandler.
+type VolumeRenameHandler interface {
+	SetVolumeNameContextReplyHandler(name *FileName, context_ *Context, reply func(obj.Object, unsafe.Pointer))
+}
+
 // VolumeRenameOperations is the Go form of the Objective-C protocol FSVolumeRenameOperations.
 type VolumeRenameOperations interface {
 	SetVolumeNameReplyHandler(name *FileName, reply func(obj.Object, unsafe.Pointer))
 	SetVolumeRenameInhibited(volumeRenameInhibited bool)
+}
+
+// VolumeSeekRegionHandler is the Go form of the Objective-C protocol FSVolumeSeekRegionHandler.
+type VolumeSeekRegionHandler interface {
+	SeekWithinItemFromOffsetRegionContextReplyHandler(item *Item, offset int64, region SeekRegion, context_ *Context, reply func(obj.Object, unsafe.Pointer))
+}
+
+// VolumeXattrHandler is the Go form of the Objective-C protocol FSVolumeXattrHandler.
+type VolumeXattrHandler interface {
+	GetXattrNamedOfItemContextReplyHandler(name *FileName, item *Item, context_ *Context, reply func(obj.Object, unsafe.Pointer))
+	SetXattrNamedToDataOnItemPolicyContextReplyHandler(name *FileName, value []byte, item *Item, policy SetXattrPolicy, context_ *Context, reply func(obj.Object, unsafe.Pointer))
+	ListXattrsOfItemContextReplyHandler(item *Item, context_ *Context, reply func(obj.Object, unsafe.Pointer))
 }
 
 // VolumeXattrOperations is the Go form of the Objective-C protocol FSVolumeXattrOperations.

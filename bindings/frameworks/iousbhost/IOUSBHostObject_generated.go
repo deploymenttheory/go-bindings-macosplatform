@@ -316,6 +316,17 @@ func (ho *HostObject) IODataWithCapacity(capacity int) (result *foundation.Mutab
 	return foundation.MutableDataFromID(_r), nil
 }
 
+// DataWithCapacity allocate a buffer to be used for I/O or an isochronous frame list. This method will allocate and map an IOBufferMemoryDescriptor optimized for use by the underlying controller hardware. A buffer allocated by this method will not be bounced to perform DMA operations. Because the NSMutableData is backed by kernel memory, the length and capacity are not mutable. Any changes to the length or capacity will cause an exception to be thrown.
+func (ho *HostObject) DataWithCapacity(capacity int, options HostObjectDataOptions) (result *foundation.MutableData, err error) {
+	defer runtime.KeepAlive(ho)
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(ho), objc.RegisterName("dataWithCapacity:options:error:"), capacity, options, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return foundation.MutableDataFromID(_r), nil
+}
+
 // IOService returns retrieve the IOUSBHostObject's io_service_t.
 func (ho *HostObject) IOService() int {
 	defer runtime.KeepAlive(ho)

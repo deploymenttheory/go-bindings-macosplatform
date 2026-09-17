@@ -163,10 +163,6 @@
       "doc": "A container that encapsulates the Core Data stack in your app, and mirrors select persistent stores to a CloudKit private database.",
       "url": "https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontainer"
     },
-    "NSPersistentCloudKitContainerEvent": {
-      "doc": "An object that represents activity in a persistent CloudKit container.",
-      "url": "https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontainerevent"
-    },
     "NSPersistentCloudKitContainerEventRequest": {
       "doc": "A request to fetch setup, import, or export events in a persistent CloudKit container.",
       "url": "https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontainereventrequest"
@@ -548,14 +544,6 @@
           "url": "https://developer.apple.com/documentation/coredata/nsmergepolicytype/rollbackmergepolicytype"
         }
       }
-    },
-    "NSPersistentCloudKitContainerEventResultType": {
-      "doc": "The types of results from a persistent CloudKit container event fetch request.",
-      "url": "https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontainereventresulttype"
-    },
-    "NSPersistentCloudKitContainerEventType": {
-      "doc": "The type of event in a persistent CloudKit container, either setup, import, or export.",
-      "url": "https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontainereventtype"
     },
     "NSPersistentCloudKitContainerSchemaInitializationOptions": {
       "doc": "Options that control the behavior when promoting the container’s schema to CloudKit.",
@@ -2481,8 +2469,8 @@
         "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/didsaveobjectsnotification"
       },
       "fetch(_:)": {
-        "doc": "Returns an array of objects that meet the criteria of the specified fetch request.",
-        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/fetch(_:)-38ys1"
+        "doc": "Returns an array of items of the specified type that meet the fetch request’s critieria.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/fetch(_:)-4xeoz"
       },
       "hasChanges": {
         "doc": "A Boolean value that indicates whether the context has uncommitted changes.",

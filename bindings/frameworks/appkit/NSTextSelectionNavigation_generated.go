@@ -121,14 +121,14 @@ func (tsn *TextSelectionNavigation) DeletionRangesForTextSelectionDirectionDesti
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *TextRange { return TextRangeFromID(_id) })
 }
 
-// AllowsNonContiguousRanges wraps the corresponding Objective-C method.
+// AllowsNonContiguousRanges reports whether the object could produce selections with multiple disjoint ranges.
 func (tsn *TextSelectionNavigation) AllowsNonContiguousRanges() bool {
 	defer runtime.KeepAlive(tsn)
 	_r := objc.Send[bool](objref.IDOf(tsn), objc.RegisterName("allowsNonContiguousRanges"))
 	return _r
 }
 
-// RotatesCoordinateSystemForLayoutOrientation wraps the corresponding Objective-C method.
+// RotatesCoordinateSystemForLayoutOrientation reports whether the coordinate system rotates for navigation methods based on the text container layout orientation. The default value is `false`.
 func (tsn *TextSelectionNavigation) RotatesCoordinateSystemForLayoutOrientation() bool {
 	defer runtime.KeepAlive(tsn)
 	_r := objc.Send[bool](objref.IDOf(tsn), objc.RegisterName("rotatesCoordinateSystemForLayoutOrientation"))

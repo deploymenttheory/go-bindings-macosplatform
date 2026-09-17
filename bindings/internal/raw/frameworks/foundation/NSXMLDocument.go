@@ -11,7 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An XML document as internalized into a logical tree structure.
+// An XML document as internalized into a logical tree structure. An “XMLDocument“ object can have multiple child nodes but only one element, the root element. Any other node must be a “XMLNode“ object representing a comment or a processing instruction. If you attempt to add any other kind of child node to an “XMLDocument“ object, such as an attribute, namespace, another document object, or an element other than the root, “XMLDocument“ raises an exception. If you add a valid child node and that object already has a parent, “XMLDocument“ raises an exception. An “XMLDocument“ object may also have document-global attributes, such as XML version, character encoding, referenced DTD, and MIME type. The initializers of the “XMLDocument“ class read an external source of XML, whether it be a local file or remote website, parse it, and process it into the tree representation. You can also construct an “XMLDocument“ programmatically. There are accessor methods for getting and setting document attributes, methods for transforming documents using XSLT, a method for dynamically validating a document, and methods for printing out the content of an “XMLDocument“ as XML, XHTML, HTML, or plain text. The “XMLDocument“ class is thread-safe as long as any given instance is used only in one thread. ### Subclassing Notes #### Methods to Override To subclass `NSXMLDocument` you need to override the primary initializer, “init(data:options:)“, and the methods listed below. In most cases, you need only invoke the superclass implementation, adding any subclass-specific code before or after the invocation, as necessary. - “rootElement()“ - “setChildren(_:)“ - “removeChild(at:)“ - “insertChild(_:at:)“ - “characterEncoding“ - “characterEncoding“ - “documentContentKind“ - “documentContentKind“ - “dtd“ - “mimeType“ - “isStandalone“ - “version“ - “version“ By default `NSXMLDocument` implements the `NSObject` <doc://com.apple.documentation/documentation/objectivec/nsobjectprotocol/isequal(_:)> method to perform a deep comparison: two `NSXMLDocument` objects are not considered equal unless they have the same name, same child nodes, same attributes, and so on. The comparison does not consider the parent node (and hence the node's location). If you want a different standard of comparison, override `isEqual:`. #### Special Considerations Because of the architecture and data model of NSXML, when it parses and processes a source of XML it cannot know about your subclass unless you override the class method “replacementClass(for:)“ to return your custom class in place of an `NSXML` class. If your custom class has no direct `NSXML` counterpart—for example, it is a subclass of `NSXMLNode` that represents CDATA sections—then you can walk the tree after it has been created and insert the new node where appropriate.
 //
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsxmldocument
 type NSXMLDocument struct {
@@ -70,7 +70,7 @@ func (o *NSXMLDocument) Init() *NSXMLDocument {
 	return NSXMLDocumentFromID(_ret)
 }
 
-// @method initWithXMLString:options:error: @abstract Returns a document created from either XML or HTML, if the HTMLTidy option is set. Parse errors are returned in <tt>error</tt>.
+// Initializes and returns an @c NSXMLDocument object created from a string containing XML markup text. The encoding of the document is set to UTF-8. @param string A string object containing XML markup text. @param mask A bit mask for input options. You can specify multiple options by bit-OR'ing them. @param error An error object that, on return, identifies any parsing errors and warnings or connection problems.
 func (o *NSXMLDocument) InitWithXMLStringOptionsError(string_ *NSString, mask NSXMLNodeOptions) (*NSXMLDocument, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDocumentSelInitWithXMLStringOptionsError, string_.Ptr(), mask, unsafe.Pointer(&_nsErr))
@@ -83,7 +83,7 @@ func (o *NSXMLDocument) InitWithXMLStringOptionsError(string_ *NSString, mask NS
 	return NSXMLDocumentFromID(_ret), nil
 }
 
-// @method initWithContentsOfURL:options:error: @abstract Returns a document created from the contents of an XML or HTML URL. Connection problems such as 404, parse errors are returned in <tt>error</tt>.
+// Initializes and returns an @c NSXMLDocument object created from the XML or HTML contents of a URL-referenced source. @param url An @c NSURL object specifying a URL source. @param mask A bit mask for input options. You can specify multiple options by bit-OR'ing them. @param error An error object that, on return, identifies any parsing errors and warnings or connection problems.
 func (o *NSXMLDocument) InitWithContentsOfURLOptionsError(url *NSURL, mask NSXMLNodeOptions) (*NSXMLDocument, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDocumentSelInitWithContentsOfURLOptionsError, url.Ptr(), mask, unsafe.Pointer(&_nsErr))
@@ -96,7 +96,7 @@ func (o *NSXMLDocument) InitWithContentsOfURLOptionsError(url *NSURL, mask NSXML
 	return NSXMLDocumentFromID(_ret), nil
 }
 
-// @method initWithData:options:error: @abstract Returns a document created from data. Parse errors are returned in <tt>error</tt>.
+// Initializes and returns an @c NSXMLDocument object created from data. This method is the designated initializer for the @c NSXMLDocument class. If you specify @c NSXMLDocumentTidyXML as one of the options, @c NSXMLDocument performs several clean-up operations on the document XML (such as removing leading tabs). It does respect the @c xml:space="preserve" attribute when it attempts to tidy the XML. @param data A data object with XML content. @param mask A bit mask for input options. You can specify multiple options by bit-OR'ing them. @param error An error object that, on return, identifies any parsing errors and warnings or connection problems.
 func (o *NSXMLDocument) InitWithDataOptionsError(data *NSData, mask NSXMLNodeOptions) (*NSXMLDocument, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDocumentSelInitWithDataOptionsError, data.Ptr(), mask, unsafe.Pointer(&_nsErr))
@@ -109,7 +109,7 @@ func (o *NSXMLDocument) InitWithDataOptionsError(data *NSData, mask NSXMLNodeOpt
 	return NSXMLDocumentFromID(_ret), nil
 }
 
-// @method initWithRootElement: @abstract Returns a document with a single child, the root element.
+// Returns an @c NSXMLDocument object initialized with a single child, the root element. @param element An @c NSXMLElement object representing an XML element.
 func (o *NSXMLDocument) InitWithRootElement(element *NSXMLElement) *NSXMLDocument {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDocumentSelInitWithRootElement, element.Ptr())
 	if _ret != 0 {
@@ -118,17 +118,18 @@ func (o *NSXMLDocument) InitWithRootElement(element *NSXMLElement) *NSXMLDocumen
 	return NSXMLDocumentFromID(_ret)
 }
 
+// Overridden by subclasses to substitute a custom class for an NSXML class that the parser uses to create node instances. This method is invoked before a document is parsed. The substituted class must be a subclass of @c NSXMLNode, @c NSXMLDocument, @c NSXMLElement, @c NSXMLDTD, or @c NSXMLDTDNode. @param cls A @c Class object identifying an NSXML class that is to be replaced by your custom class. @return The substituted class.
 func NSXMLDocumentReplacementClassForClass(cls objc.Class) objc.Class {
 	_ret := objc.Send[objc.Class](objc.ID(_clsNSXMLDocument), _nSXMLDocumentSelReplacementClassForClass, cls)
 	return _ret
 }
 
-// @method setRootElement: @abstract Set the root element. Removes all other children including comments and processing-instructions.
+// Sets the root element of the receiver. As a side effect, this method removes all other children, including @c NSXMLNode objects representing comments and processing-instructions. @param root An @c NSXMLElement object that is to be the root element.
 func (o *NSXMLDocument) SetRootElement(root *NSXMLElement) {
 	o.Ptr().Send(_nSXMLDocumentSelSetRootElement, root.Ptr())
 }
 
-// @method rootElement @abstract The root element.
+// Returns the root element of the receiver.
 func (o *NSXMLDocument) RootElement() *NSXMLElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDocumentSelRootElement)
 	if _ret != 0 {
@@ -137,37 +138,37 @@ func (o *NSXMLDocument) RootElement() *NSXMLElement {
 	return NSXMLElementFromID(_ret)
 }
 
-// @method insertChild:atIndex: @abstract Inserts a child at a particular index.
+// Inserts a node object at a specified position in the receiver's array of children. @param child The @c NSXMLNode object to be inserted. The added node must represent a comment, processing instruction, or the root element. @param index An integer specifying the index of the children array to insert @c child. The indexes of children after the new child are incremented. If @c index is out of bounds, an exception is raised.
 func (o *NSXMLDocument) InsertChildAtIndex(child *NSXMLNode, index uint) {
 	o.Ptr().Send(_nSXMLDocumentSelInsertChildAtIndex, child.Ptr(), index)
 }
 
-// @method insertChildren:atIndex: @abstract Insert several children at a particular index.
+// Inserts an array of children at a specified position in the receiver's array of children. @param children An array of @c NSXMLNode objects representing comments, processing instructions, or the root element. @param index An integer identifying the location in the receiver's children array for insertion. If @c index is out of bounds, an exception is raised.
 func (o *NSXMLDocument) InsertChildrenAtIndex(children *NSArray[*NSXMLNode], index uint) {
 	o.Ptr().Send(_nSXMLDocumentSelInsertChildrenAtIndex, children.Ptr(), index)
 }
 
-// @method removeChildAtIndex:atIndex: @abstract Removes a child at a particular index.
+// Removes the child node of the receiver located at a specified position in its array of children. Subsequent children have their indexes decreased by one. The removed @c NSXMLNode object is autoreleased. @param index An integer identifying the position of a child in the receiver's array. If @c index is out of bounds, an exception is raised.
 func (o *NSXMLDocument) RemoveChildAtIndex(index uint) {
 	o.Ptr().Send(_nSXMLDocumentSelRemoveChildAtIndex, index)
 }
 
-// @method setChildren: @abstract Removes all existing children and replaces them with the new children. Set children to nil to simply remove all children.
+// Sets the child nodes of the receiver. Each of these objects must represent comments, processing instructions, or the root element; otherwise, an exception is raised. Pass in @c nil to remove all children. @param children An array of @c NSXMLNode objects.
 func (o *NSXMLDocument) SetChildren(children *NSArray[*NSXMLNode]) {
 	o.Ptr().Send(_nSXMLDocumentSelSetChildren, children.Ptr())
 }
 
-// @method addChild: @abstract Adds a child to the end of the existing children.
+// Adds a child node after the last of the receiver's existing children. @param child The @c NSXMLNode object to be added.
 func (o *NSXMLDocument) AddChild(child *NSXMLNode) {
 	o.Ptr().Send(_nSXMLDocumentSelAddChild, child.Ptr())
 }
 
-// @method replaceChildAtIndex:withNode: @abstract Replaces a child at a particular index with another child.
+// Replaces the child node of the receiver located at a specified position with another node. The removed @c NSXMLNode object is autoreleased. @param index An integer identifying a position in the receiver's array of children. If @c index is out of bounds, an exception is raised. @param node An @c NSXMLNode object to replace the one at @c index; it must represent a comment, a processing instruction, or the root element.
 func (o *NSXMLDocument) ReplaceChildAtIndexWithNode(index uint, node *NSXMLNode) {
 	o.Ptr().Send(_nSXMLDocumentSelReplaceChildAtIndexWithNode, index, node.Ptr())
 }
 
-// @method XMLDataWithOptions: @abstract The representation of this node as it would appear in an XML document, encoded based on characterEncoding.
+// Returns the XML string representation of the receiver—that is, the entire document—encapsulated in a data object. The encoding used is based on the value returned from @c characterEncoding. @param options One or more options (bit-OR'd if multiple) to affect the output of the document.
 func (o *NSXMLDocument) XMLDataWithOptions(options NSXMLNodeOptions) *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDocumentSelXMLDataWithOptions, options)
 	if _ret != 0 {
@@ -176,7 +177,7 @@ func (o *NSXMLDocument) XMLDataWithOptions(options NSXMLNodeOptions) *NSData {
 	return NSDataFromID(_ret)
 }
 
-// @method objectByApplyingXSLT:arguments:error: @abstract Applies XSLT with arguments (NSString key/value pairs) to this document, returning a new document.
+// Applies the XSLT pattern rules and templates (specified as a data object) to the receiver and returns a document object containing transformed XML or HTML markup. Depending on intended output, the method returns an @c NSXMLDocument object or an @c NSData object containing transformed XML or HTML markup. @param xslt A data object containing the XSLT pattern rules and templates. @param arguments A dictionary containing @c NSString key-value pairs that are passed as runtime parameters to the XSLT processor. Pass in @c nil if you have no parameters to pass. @param error If an error occurs, indirectly returns an @c NSError object encapsulating error or warning messages generated by XSLT processing.
 func (o *NSXMLDocument) ObjectByApplyingXSLTArgumentsError(xslt *NSData, arguments *NSDictionary[*NSString, *NSString]) (objc.ID, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDocumentSelObjectByApplyingXSLTArgumentsError, xslt.Ptr(), arguments.Ptr(), unsafe.Pointer(&_nsErr))
@@ -186,7 +187,7 @@ func (o *NSXMLDocument) ObjectByApplyingXSLTArgumentsError(xslt *NSData, argumen
 	return _ret, nil
 }
 
-// @method objectByApplyingXSLTString:arguments:error: @abstract Applies XSLT as expressed by a string with arguments (NSString key/value pairs) to this document, returning a new document.
+// Applies the XSLT pattern rules and templates (specified as a string) to the receiver and returns a document object containing transformed XML or HTML markup. Depending on intended output, the method returns an @c NSXMLDocument object or an @c NSData object containing transformed XML or HTML markup. @param xslt A string object containing the XSLT pattern rules and templates. @param arguments A dictionary containing @c NSString key-value pairs that are passed as runtime parameters to the XSLT processor. Pass in @c nil if you have no parameters to pass. @param error If an error occurs, indirectly returns an @c NSError object encapsulating error or warning messages generated by XSLT processing.
 func (o *NSXMLDocument) ObjectByApplyingXSLTStringArgumentsError(xslt *NSString, arguments *NSDictionary[*NSString, *NSString]) (objc.ID, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDocumentSelObjectByApplyingXSLTStringArgumentsError, xslt.Ptr(), arguments.Ptr(), unsafe.Pointer(&_nsErr))
@@ -196,7 +197,7 @@ func (o *NSXMLDocument) ObjectByApplyingXSLTStringArgumentsError(xslt *NSString,
 	return _ret, nil
 }
 
-// @method objectByApplyingXSLTAtURL:arguments:error: @abstract Applies the XSLT at a URL with arguments (NSString key/value pairs) to this document, returning a new document. Error may contain a connection error from the URL.
+// Applies the XSLT pattern rules and templates located at a specified URL to the receiver and returns a document object containing transformed XML markup. Depending on intended output, the method returns an @c NSXMLDocument object or an @c NSData object containing transformed XML or HTML markup. @param xsltURL An @c NSURL object specifying a valid URL. @param argument A dictionary containing @c NSString key-value pairs that are passed as runtime parameters to the XSLT processor. Pass in @c nil if you have no parameters to pass. @param error If an error occurs, indirectly returns an @c NSError object encapsulating error or warning messages generated by XSLT processing or from an attempt to connect to a website identified by the URL.
 func (o *NSXMLDocument) ObjectByApplyingXSLTAtURLArgumentsError(xsltURL *NSURL, argument *NSDictionary[*NSString, *NSString]) (objc.ID, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDocumentSelObjectByApplyingXSLTAtURLArgumentsError, xsltURL.Ptr(), argument.Ptr(), unsafe.Pointer(&_nsErr))
@@ -206,6 +207,7 @@ func (o *NSXMLDocument) ObjectByApplyingXSLTAtURLArgumentsError(xsltURL *NSURL, 
 	return _ret, nil
 }
 
+// Validates the document against the governing schema and returns whether the document conforms to the schema. If the schema is defined with a DTD, this method uses the @c NSXMLDTD object set for the receiver for validation. If the schema is based on XML Schema, the method uses the URL specified as the value of the @c xsi:schemaLocation attribute of the root element. You can validate an XML document when it is first processed by specifying the @c NSXMLDocumentValidate option in the initializer methods. @param error If validation fails, on return contains an @c NSError object describing the reason or reasons for failure.
 func (o *NSXMLDocument) ValidateAndReturnError() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSXMLDocumentSelValidateAndReturnError, unsafe.Pointer(&_nsErr))
@@ -215,7 +217,7 @@ func (o *NSXMLDocument) ValidateAndReturnError() (bool, error) {
 	return _ret, nil
 }
 
-// @abstract Sets the character encoding to an IANA type.
+// The character encoding of the receiver. The encoding must match the name of an IANA character set. Typically the encoding is specified in the XML declaration of a document that is processed, but it can be set at any time. If the specified encoding does not match the actual encoding, parsing of the document might fail.
 func (o *NSXMLDocument) CharacterEncoding() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDocumentSelCharacterEncoding)
 	if _ret != 0 {
@@ -228,7 +230,7 @@ func (o *NSXMLDocument) SetCharacterEncoding(characterEncoding *NSString) {
 	o.Ptr().Send(_nSXMLDocumentSelSetCharacterEncoding, characterEncoding.Ptr())
 }
 
-// @abstract Set whether this document depends on an external DTD. If this option is set the standalone declaration will appear on output.
+// A Boolean value that specifies whether the receiver represents a standalone XML document. A standalone document does not have an external DTD associated with it. If this option is set the standalone declaration will appear on output.
 func (o *NSXMLDocument) IsStandalone() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSXMLDocumentSelIsStandalone)
 	return _ret
@@ -238,7 +240,7 @@ func (o *NSXMLDocument) SetStandalone(standalone bool) {
 	o.Ptr().Send(_nSXMLDocumentSelSetStandalone, standalone)
 }
 
-// @abstract The kind of document.
+// The kind of output content for the receiver. Most of the differences among document-content kind have to do with the handling of content-less tags such as @c \<br\> .
 func (o *NSXMLDocument) DocumentContentKind() NSXMLDocumentContentKind {
 	_ret := objc.Send[NSXMLDocumentContentKind](o.Ptr(), _nSXMLDocumentSelDocumentContentKind)
 	return _ret
@@ -248,7 +250,7 @@ func (o *NSXMLDocument) SetDocumentContentKind(documentContentKind NSXMLDocument
 	o.Ptr().Send(_nSXMLDocumentSelSetDocumentContentKind, documentContentKind)
 }
 
-// @abstract Set the MIME type, eg text/xml.
+// The MIME type for the receiver (for example, "text/xml").
 func (o *NSXMLDocument) MIMEType() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDocumentSelMIMEType)
 	if _ret != 0 {
@@ -261,7 +263,7 @@ func (o *NSXMLDocument) SetMIMEType(mimeType *NSString) {
 	o.Ptr().Send(_nSXMLDocumentSelSetMIMEType, mimeType.Ptr())
 }
 
-// @abstract Set the associated DTD. This DTD will be output with the document.
+// The internal DTD associated with the receiver. Returns an @c NSXMLDTD object representing the internal DTD associated with the receiver or @c nil if no DTD has been associated. This DTD will be output with the document.
 func (o *NSXMLDocument) DTD() *NSXMLDTD {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDocumentSelDTD)
 	if _ret != 0 {
@@ -274,7 +276,7 @@ func (o *NSXMLDocument) SetDTD(dtd *NSXMLDTD) {
 	o.Ptr().Send(_nSXMLDocumentSelSetDTD, dtd.Ptr())
 }
 
-// @abstract Invokes XMLDataWithOptions with NSXMLNodeOptionsNone.
+// The XML string representation of the receiver—that is, the entire document—encapsulated in a data object. This property invokes @c XMLDataWithOptions: with an option of @c NSXMLNodeOptionsNone. The encoding used is based on the value returned from @c characterEncoding or UTF-8 if no valid encoding is returned.
 func (o *NSXMLDocument) XMLData() *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDocumentSelXMLData)
 	if _ret != 0 {

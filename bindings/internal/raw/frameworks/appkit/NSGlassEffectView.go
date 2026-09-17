@@ -17,15 +17,17 @@ type NSGlassEffectView struct {
 }
 
 var (
-	_clsNSGlassEffectView                = _objcClass("NSGlassEffectView")
-	_nSGlassEffectViewSelContentView     = objc.RegisterName("contentView")
-	_nSGlassEffectViewSelSetContentView  = objc.RegisterName("setContentView:")
-	_nSGlassEffectViewSelCornerRadius    = objc.RegisterName("cornerRadius")
-	_nSGlassEffectViewSelSetCornerRadius = objc.RegisterName("setCornerRadius:")
-	_nSGlassEffectViewSelTintColor       = objc.RegisterName("tintColor")
-	_nSGlassEffectViewSelSetTintColor    = objc.RegisterName("setTintColor:")
-	_nSGlassEffectViewSelStyle           = objc.RegisterName("style")
-	_nSGlassEffectViewSelSetStyle        = objc.RegisterName("setStyle:")
+	_clsNSGlassEffectView                       = _objcClass("NSGlassEffectView")
+	_nSGlassEffectViewSelContentView            = objc.RegisterName("contentView")
+	_nSGlassEffectViewSelSetContentView         = objc.RegisterName("setContentView:")
+	_nSGlassEffectViewSelCornerRadius           = objc.RegisterName("cornerRadius")
+	_nSGlassEffectViewSelSetCornerRadius        = objc.RegisterName("setCornerRadius:")
+	_nSGlassEffectViewSelTintColor              = objc.RegisterName("tintColor")
+	_nSGlassEffectViewSelSetTintColor           = objc.RegisterName("setTintColor:")
+	_nSGlassEffectViewSelStyle                  = objc.RegisterName("style")
+	_nSGlassEffectViewSelSetStyle               = objc.RegisterName("setStyle:")
+	_nSGlassEffectViewSelEffectIsInteractive    = objc.RegisterName("effectIsInteractive")
+	_nSGlassEffectViewSelSetEffectIsInteractive = objc.RegisterName("setEffectIsInteractive:")
 )
 
 func NSGlassEffectViewFromID(id objc.ID) *NSGlassEffectView {
@@ -117,5 +119,24 @@ func (o *NSGlassEffectView) Style() NSGlassEffectViewStyle {
 func (o *NSGlassEffectView) SetStyle(style NSGlassEffectViewStyle) {
 	purego.Main(func() {
 		o.Ptr().Send(_nSGlassEffectViewSelSetStyle, style)
+	})
+}
+
+// Enables interactive glass behavior, which adds a visual response to user interactions. This should be enabled for glass that is used as the background for interactive controls or when used as the container of interactive controls. When `YES`, the glass effect will provide visual feedback when it is interacted with. When `NO`, the glass effect remains static. The default value is `NO`.
+func (o *NSGlassEffectView) EffectIsInteractive() bool {
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSGlassEffectViewSelEffectIsInteractive)
+			return _ret
+		}()
+	})
+	return _mainthread0
+}
+
+// Enables interactive glass behavior, which adds a visual response to user interactions. This should be enabled for glass that is used as the background for interactive controls or when used as the container of interactive controls. When `YES`, the glass effect will provide visual feedback when it is interacted with. When `NO`, the glass effect remains static. The default value is `NO`.
+func (o *NSGlassEffectView) SetEffectIsInteractive(effectIsInteractive bool) {
+	purego.Main(func() {
+		o.Ptr().Send(_nSGlassEffectViewSelSetEffectIsInteractive, effectIsInteractive)
 	})
 }

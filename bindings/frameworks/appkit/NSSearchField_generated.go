@@ -217,6 +217,14 @@ func (sf *SearchField) WithBezelStyle(bezelStyle TextFieldBezelStyle) *SearchFie
 	return sf
 }
 
+// WithBorderShape sets set border shape NSControlBorderShapeAutomatic sets text field or subclass to default system shape. NSControlBorderShapeCircle sets text field or subclass to NSControlBorderShapeAutomatic.
+func (sf *SearchField) WithBorderShape(borderShape ControlBorderShape) *SearchField {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setBorderShape:"), borderShape)
+	})
+	return sf
+}
+
 // WithPreferredMaxLayoutWidth sets the maximum width of the text field’s intrinsic content size.
 func (sf *SearchField) WithPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64) *SearchField {
 	purego.Main(func() {
@@ -793,6 +801,14 @@ func (sf *SearchField) WithGestureRecognizers(items ...GestureRecognizerProvider
 	return sf
 }
 
+// WithExclusiveGestureBehavior sets declares whether gesture recognizers should be exclusive in this view and its subviews.
+func (sf *SearchField) WithExclusiveGestureBehavior(exclusiveGestureBehavior ViewExclusiveGestureBehavior) *SearchField {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setExclusiveGestureBehavior:"), exclusiveGestureBehavior)
+	})
+	return sf
+}
+
 // WithAllowedTouchTypes sets the allowed touch types.
 func (sf *SearchField) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *SearchField {
 	purego.Main(func() {
@@ -854,6 +870,15 @@ func (sf *SearchField) WithHorizontalContentSizeConstraintActive(horizontalConte
 func (sf *SearchField) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *SearchField {
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
+	return sf
+}
+
+// WithTextSelectionManager sets the text selection manager for this view.
+func (sf *SearchField) WithTextSelectionManager(textSelectionManager *TextSelectionManager) *SearchField {
+	defer runtime.KeepAlive(textSelectionManager)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setTextSelectionManager:"), objref.IDOf(textSelectionManager))
 	})
 	return sf
 }

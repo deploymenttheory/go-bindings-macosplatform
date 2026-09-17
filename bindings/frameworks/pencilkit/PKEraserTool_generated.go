@@ -15,8 +15,6 @@ import (
 // EraserTool is an idiomatic wrapper over the Objective-C class PKEraserTool.
 //
 // It embeds [Tool], promoting that type's methods.
-//
-// A tool for erasing previously drawn content in a canvas view.
 type EraserTool struct {
 	Tool
 }

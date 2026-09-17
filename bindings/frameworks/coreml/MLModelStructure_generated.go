@@ -15,8 +15,6 @@ import (
 )
 
 // ModelStructure is an idiomatic wrapper over the Objective-C class MLModelStructure.
-//
-// An enum representing the structure of a model.
 type ModelStructure struct {
 	objref.Handle
 }

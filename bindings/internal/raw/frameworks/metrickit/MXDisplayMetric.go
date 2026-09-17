@@ -12,6 +12,7 @@ import (
 // An object representing metrics about the power used to display the app on the screen.
 //
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxdisplaymetric
+// Deprecated: Use MetricResult instead.
 type MXDisplayMetric struct {
 	MXMetric
 }

@@ -857,14 +857,20 @@ func KCFSocketValueKey() uintptr {
 	return ptr
 }
 
-func KCFStreamErrorDomainSOCKS() uintptr {
+func KCFStreamErrorDomainSOCKS() int32 {
 	ptr, _ := purego.Dlsym(_corefoundationLib, "kCFStreamErrorDomainSOCKS")
-	return ptr
+	if ptr == 0 {
+		return 0
+	}
+	return *(*int32)(unsafe.Pointer(ptr))
 }
 
-func KCFStreamErrorDomainSSL() uintptr {
+func KCFStreamErrorDomainSSL() int32 {
 	ptr, _ := purego.Dlsym(_corefoundationLib, "kCFStreamErrorDomainSSL")
-	return ptr
+	if ptr == 0 {
+		return 0
+	}
+	return *(*int32)(unsafe.Pointer(ptr))
 }
 
 func KCFStreamPropertyAppendToFile() uintptr {

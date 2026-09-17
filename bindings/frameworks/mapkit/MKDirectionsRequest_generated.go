@@ -16,8 +16,6 @@ import (
 )
 
 // DirectionsRequest is an idiomatic wrapper over the Objective-C class MKDirectionsRequest.
-//
-// The start and end points of a route, along with the planned mode of transportation.
 type DirectionsRequest struct {
 	objref.Handle
 }

@@ -13,6 +13,7 @@ import (
 // An object that encapsulates a diagnostic report.
 //
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxdiagnosticpayload
+// Deprecated: Use DiagnosticReport instead.
 type MXDiagnosticPayload struct {
 	foundation.NSObject
 }
@@ -40,6 +41,7 @@ func MXDiagnosticPayloadFromID(id objc.ID) *MXDiagnosticPayload {
 }
 
 // Returns the contents of the payload in JSON format.
+// Deprecated: Use DiagnosticReport instead.
 func (o *MXDiagnosticPayload) JSONRepresentation() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXDiagnosticPayloadSelJSONRepresentation)
 	if _ret != 0 {
@@ -49,6 +51,7 @@ func (o *MXDiagnosticPayload) JSONRepresentation() *foundation.NSData {
 }
 
 // Returns the results of the payload as a dictionary.
+// Deprecated: Use DiagnosticReport instead.
 func (o *MXDiagnosticPayload) DictionaryRepresentation() *foundation.NSDictionary[objc.ID, objc.ID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXDiagnosticPayloadSelDictionaryRepresentation)
 	if _ret != 0 {

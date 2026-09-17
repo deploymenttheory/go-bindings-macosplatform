@@ -9,8 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A unit of measure for electric resistance.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsunitelectricresistance
 type NSUnitElectricResistance struct {
 	NSDimension
@@ -35,6 +33,7 @@ func NSUnitElectricResistanceFromID(id objc.ID) *NSUnitElectricResistance {
 	return o
 }
 
+// The megaohms unit of electric resistance.
 func NSUnitElectricResistanceMegaohms() *NSUnitElectricResistance {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitElectricResistance), _nSUnitElectricResistanceSelMegaohms)
 	if _ret != 0 {
@@ -43,6 +42,7 @@ func NSUnitElectricResistanceMegaohms() *NSUnitElectricResistance {
 	return NSUnitElectricResistanceFromID(_ret)
 }
 
+// The kiloohms unit of electric resistance.
 func NSUnitElectricResistanceKiloohms() *NSUnitElectricResistance {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitElectricResistance), _nSUnitElectricResistanceSelKiloohms)
 	if _ret != 0 {
@@ -51,6 +51,7 @@ func NSUnitElectricResistanceKiloohms() *NSUnitElectricResistance {
 	return NSUnitElectricResistanceFromID(_ret)
 }
 
+// The ohms unit of electric resistance.
 func NSUnitElectricResistanceOhms() *NSUnitElectricResistance {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitElectricResistance), _nSUnitElectricResistanceSelOhms)
 	if _ret != 0 {
@@ -59,6 +60,7 @@ func NSUnitElectricResistanceOhms() *NSUnitElectricResistance {
 	return NSUnitElectricResistanceFromID(_ret)
 }
 
+// The milliohms unit of electric resistance.
 func NSUnitElectricResistanceMilliohms() *NSUnitElectricResistance {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitElectricResistance), _nSUnitElectricResistanceSelMilliohms)
 	if _ret != 0 {
@@ -67,6 +69,7 @@ func NSUnitElectricResistanceMilliohms() *NSUnitElectricResistance {
 	return NSUnitElectricResistanceFromID(_ret)
 }
 
+// The microohms unit of electric resistance.
 func NSUnitElectricResistanceMicroohms() *NSUnitElectricResistance {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitElectricResistance), _nSUnitElectricResistanceSelMicroohms)
 	if _ret != 0 {

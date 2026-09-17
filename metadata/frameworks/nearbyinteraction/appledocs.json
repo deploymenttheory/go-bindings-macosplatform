@@ -51,10 +51,6 @@
     }
   },
   "enums": {
-    "NIAlgorithmConvergenceStatus": {
-      "doc": "The possible states of Camera Assistance.",
-      "url": "https://developer.apple.com/documentation/nearbyinteraction/nialgorithmconvergencestatus"
-    },
     "NIDLTDOACoordinatesType": {
       "doc": "The possible coordinate types for Downlink Time-Difference-of-Arrival measurement updates.",
       "url": "https://developer.apple.com/documentation/nearbyinteraction/nidltdoacoordinatestype",
@@ -95,17 +91,27 @@
         }
       }
     },
-    "NIErrorCode": {
-      "doc": "Codes that identify errors in Nearby Interaction.",
-      "url": "https://developer.apple.com/documentation/nearbyinteraction/nierrorcode"
-    },
-    "NINearbyObjectRemovalReason": {
-      "doc": "The reason a session removed a nearby object.",
-      "url": "https://developer.apple.com/documentation/nearbyinteraction/ninearbyobjectremovalreason"
-    },
-    "NINearbyObjectVerticalDirectionEstimate": {
-      "doc": "Estimations of a nearby object’s vertical position in relation to the user’s device.",
-      "url": "https://developer.apple.com/documentation/nearbyinteraction/ninearbyobjectverticaldirectionestimate"
+    "NIMotionActivityState": {
+      "doc": "Motion states for a nearby accessory.",
+      "url": "https://developer.apple.com/documentation/nearbyinteraction/nimotionactivitystate",
+      "members": {
+        "NIMotionActivityStateMoving": {
+          "doc": "A value that indicates the accessory is moving.",
+          "url": "https://developer.apple.com/documentation/nearbyinteraction/nimotionactivitystate/moving"
+        },
+        "NIMotionActivityStateStationary": {
+          "doc": "A value that indicates the accessory isn’t moving.",
+          "url": "https://developer.apple.com/documentation/nearbyinteraction/nimotionactivitystate/stationary"
+        },
+        "NIMotionActivityStateUnknown": {
+          "doc": "A value that indicates the accessory’s motion state is unknown.",
+          "url": "https://developer.apple.com/documentation/nearbyinteraction/nimotionactivitystate/unknown"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates a motion state with the specified underlying value.",
+          "url": "https://developer.apple.com/documentation/nearbyinteraction/nimotionactivitystate/init(rawvalue:)"
+        }
+      }
     }
   },
   "methods": {
@@ -174,7 +180,7 @@
       },
       "status": {
         "doc": "The current state of the framework’s Camera Assistance feature.",
-        "url": "https://developer.apple.com/documentation/nearbyinteraction/nialgorithmconvergence/status-j61c"
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/nialgorithmconvergence/status-654t"
       }
     },
     "NIDLTDOAConfiguration": {
@@ -224,13 +230,21 @@
         "doc": "The type of anchor message that the measurement derives from.",
         "url": "https://developer.apple.com/documentation/nearbyinteraction/nidltdoameasurement/measurementtype"
       },
+      "rawReceiveTime": {
+        "doc": "Indicates the raw reception timestamp (in units of 15.65 picoseconds).",
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/nidltdoameasurement/rawreceivetime"
+      },
+      "rawTransmitTime": {
+        "doc": "Indicates the raw transmission timestamp (in units of 15.65 picoseconds).",
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/nidltdoameasurement/rawtransmittime"
+      },
       "receiveTime": {
         "doc": "A timestamp, in seconds, for the time that the device receives the measurement.",
         "url": "https://developer.apple.com/documentation/nearbyinteraction/nidltdoameasurement/receivetime"
       },
       "responderClockFrequencyOffset": {
-        "doc": "The clock frequency offset of the responder anchor relative to the initiator anchor.",
-        "url": "https://developer.apple.com/documentation/nearbyinteraction/nidltdoameasurement/responderclockfrequencyoffset-8wu5r"
+        "doc": "Indicates the clock frequency offset (CFO) fraction of the responder anchor relative to the initiator anchor (dimensionless). For example, a positive value means for every 1 clock cycle, the responder runs fewer cycles than initiator. Returns nil when measurementType is not NIDLTDOAMeasurementTypeResponse, or when the value is not available.",
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/nidltdoameasurement/responderclockfrequencyoffset-899dj"
       },
       "signalStrength": {
         "doc": "A value that represents the received signal strength, in dBm, from the anchor that provides the measurement.",
@@ -268,7 +282,7 @@
       },
       "direction": {
         "doc": "A vector that points from the user’s device in the direction of the peer device.",
-        "url": "https://developer.apple.com/documentation/nearbyinteraction/ninearbyobject/direction-5xcld"
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/ninearbyobject/direction-4qh5w"
       },
       "discoveryToken": {
         "doc": "A unique identifier for a peer device in the session.",
@@ -280,7 +294,7 @@
       },
       "horizontalAngle": {
         "doc": "An angle in radians that indicates the azimuthal direction to the nearby object.",
-        "url": "https://developer.apple.com/documentation/nearbyinteraction/ninearbyobject/horizontalangle-hsg"
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/ninearbyobject/horizontalangle-9ibky"
       },
       "verticalDirectionEstimate": {
         "doc": "The estimation of a nearby object’s vertical position as it relates to the user’s device.",

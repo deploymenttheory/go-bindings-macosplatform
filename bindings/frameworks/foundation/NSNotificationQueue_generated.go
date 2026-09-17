@@ -17,7 +17,7 @@ import (
 
 // NotificationQueue is an idiomatic wrapper over the Objective-C class NSNotificationQueue.
 //
-// A notification center buffer.
+// A notification center buffer. Whereas a notification center distributes notifications when posted, notifications placed into the queue can be delayed until the end of the current pass through the run loop or until the run loop is idle. Duplicate notifications can be coalesced so that only one notification is sent although multiple notifications are posted. A notification queue maintains notifications in first in, first out (FIFO) order. When a notification moves to the front of the queue, the queue posts it to the notification center, which in turn dispatches the notification to all objects registered as observers. Every thread has a default notification queue, which is associated with the default notification center for the process. You can create your own notification queues and have multiple queues per center and thread.
 type NotificationQueue struct {
 	objref.Handle
 }
@@ -74,7 +74,7 @@ func (nq *NotificationQueue) String() string {
 	return rt.Description(objref.IDOf(nq))
 }
 
-// NewNotificationQueueWithNotificationCenter creates a new NotificationQueue.
+// NewNotificationQueueWithNotificationCenter initializes and returns a notification queue for the specified notification center.
 func NewNotificationQueueWithNotificationCenter(notificationCenter *NotificationCenter) *NotificationQueue {
 	defer runtime.KeepAlive(notificationCenter)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSNotificationQueue")), objc.RegisterName("alloc"))
@@ -94,21 +94,21 @@ func (nq *NotificationQueue) WithScriptingProperties(scriptingProperties map[str
 	return nq
 }
 
-// EnqueueNotificationPostingStyle wraps the corresponding Objective-C method.
+// EnqueueNotificationPostingStyle adds a notification to the notification queue with a specified posting style.
 func (nq *NotificationQueue) EnqueueNotificationPostingStyle(notification *Notification, postingStyle PostingStyle) {
 	defer runtime.KeepAlive(nq)
 	defer runtime.KeepAlive(notification)
 	objc.Send[objc.ID](objref.IDOf(nq), objc.RegisterName("enqueueNotification:postingStyle:"), objref.IDOf(notification), postingStyle)
 }
 
-// EnqueueNotificationPostingStyleCoalesceMaskForModes wraps the corresponding Objective-C method.
+// EnqueueNotificationPostingStyleCoalesceMaskForModes adds a notification to the notification queue with a specified posting style, criteria for coalescing, and run loop mode. The notification queue will only post the notification to its notification center if the run loop is in one of the modes provided in the array. The modes parameter may be nil, in which case it defaults to NSDefaultRunLoopMode.
 func (nq *NotificationQueue) EnqueueNotificationPostingStyleCoalesceMaskForModes(notification *Notification, postingStyle PostingStyle, coalesceMask NotificationCoalescing, modes []*String) {
 	defer runtime.KeepAlive(nq)
 	defer runtime.KeepAlive(notification)
 	objc.Send[objc.ID](objref.IDOf(nq), objc.RegisterName("enqueueNotification:postingStyle:coalesceMask:forModes:"), objref.IDOf(notification), postingStyle, coalesceMask, purego.SliceToNSArray(modes, func(_v *String) objc.ID { return objref.IDOf(_v) }))
 }
 
-// DequeueNotificationsMatchingCoalesceMask wraps the corresponding Objective-C method.
+// DequeueNotificationsMatchingCoalesceMask removes all notifications from the queue that match a provided notification using provided matching criteria.
 func (nq *NotificationQueue) DequeueNotificationsMatchingCoalesceMask(notification *Notification, coalesceMask int) {
 	defer runtime.KeepAlive(nq)
 	defer runtime.KeepAlive(notification)

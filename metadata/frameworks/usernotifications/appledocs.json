@@ -184,10 +184,6 @@
         }
       }
     },
-    "UNErrorCode": {
-      "doc": "Constants that identify notification errors.",
-      "url": "https://developer.apple.com/documentation/usernotifications/unerrorcode"
-    },
     "UNNotificationActionOptions": {
       "doc": "The behaviors you can apply to an action.",
       "url": "https://developer.apple.com/documentation/usernotifications/unnotificationactionoptions",

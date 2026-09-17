@@ -136,7 +136,7 @@ func (o *ASAuthorizationProviderExtensionLoginManager) DecryptionKeysNeedRepair(
 	o.Ptr().Send(_aSAuthorizationProviderExtensionLoginManagerSelDecryptionKeysNeedRepair)
 }
 
-// Creates new encryption, signing, and Secure Enclave keys for the user.
+// Creates new encryption, signing, and Secure Enclave keys.
 func (o *ASAuthorizationProviderExtensionLoginManager) ResetKeys() {
 	o.Ptr().Send(_aSAuthorizationProviderExtensionLoginManagerSelResetKeys)
 }
@@ -231,14 +231,17 @@ func (o *ASAuthorizationProviderExtensionLoginManager) ExtensionData() *foundati
 
 // @abstract The user name to use when authenticating with the identity provider.
 // Deprecated: since macOS 14.0.
-func (o *ASAuthorizationProviderExtensionLoginManager) LoginUserName() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _aSAuthorizationProviderExtensionLoginManagerSelLoginUserName)
-	return _ret
+func (o *ASAuthorizationProviderExtensionLoginManager) LoginUserName() *foundation.NSString {
+	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionLoginManagerSelLoginUserName)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSStringFromID(_ret)
 }
 
 // Deprecated: since macOS 14.0.
-func (o *ASAuthorizationProviderExtensionLoginManager) SetLoginUserName(loginUserName unsafe.Pointer) {
-	o.Ptr().Send(_aSAuthorizationProviderExtensionLoginManagerSelSetLoginUserName, loginUserName)
+func (o *ASAuthorizationProviderExtensionLoginManager) SetLoginUserName(loginUserName *foundation.NSString) {
+	o.Ptr().Send(_aSAuthorizationProviderExtensionLoginManagerSelSetLoginUserName, loginUserName.Ptr())
 }
 
 // @abstract Retrieves the current user login configuration for the extension.

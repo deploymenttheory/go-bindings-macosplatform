@@ -10,8 +10,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An object that describes a shared record’s metadata.
-//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/cksharemetadata
 type CKShareMetadata struct {
 	foundation.NSObject

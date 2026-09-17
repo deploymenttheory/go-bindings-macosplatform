@@ -13,6 +13,7 @@ import (
 // An object representing a diagnostic report for a disk write exception.
 //
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxdiskwriteexceptiondiagnostic
+// Deprecated: Use DiagnosticResult instead.
 type MXDiskWriteExceptionDiagnostic struct {
 	MXDiagnostic
 }

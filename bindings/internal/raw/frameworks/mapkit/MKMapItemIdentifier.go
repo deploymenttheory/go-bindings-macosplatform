@@ -10,8 +10,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A unique identifier for a place.
-//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkmapitemidentifier
 type MKMapItemIdentifier struct {
 	foundation.NSObject

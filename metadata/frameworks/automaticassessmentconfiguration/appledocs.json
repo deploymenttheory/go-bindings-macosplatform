@@ -7,6 +7,14 @@
       "doc": "A representation of an app that users can access during an assessment.",
       "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentapplication"
     },
+    "AEAssessmentBinaryExecutable": {
+      "doc": "A non-bundled, non-UI executable (e.g. a launchd daemon) designated as an assessment participant by its on-disk path.",
+      "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentbinaryexecutable"
+    },
+    "AEAssessmentBinaryExecutableConfiguration": {
+      "doc": "The configuration applied to an AEAssessmentBinaryExecutable participant.",
+      "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentbinaryexecutableconfiguration"
+    },
     "AEAssessmentConfiguration": {
       "doc": "Configuration information for an assessment session.",
       "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration"
@@ -27,13 +35,23 @@
     }
   },
   "enums": {
-    "AEAssessmentErrorCode": {
-      "doc": "Error codes that the framework returns if a session fails.",
-      "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmenterrorcode"
-    },
-    "AEAutocorrectMode": {
-      "doc": "The set of autocorrect features that you can enable during an assessment.",
-      "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeautocorrectmode"
+    "AEUserAccountType": {
+      "doc": "Specifies the type of account required for an assessment session.",
+      "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeuseraccounttype",
+      "members": {
+        "AEUserAccountTypeAny": {
+          "doc": "No specific account type is required.",
+          "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeuseraccounttype/any"
+        },
+        "AEUserAccountTypeGuest": {
+          "doc": "Requires a guest user account.",
+          "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeuseraccounttype/guest"
+        },
+        "AEUserAccountTypeStandard": {
+          "doc": "Requires a standard user account.",
+          "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeuseraccounttype/standard"
+        }
+      }
     }
   },
   "methods": {
@@ -50,11 +68,19 @@
     "AEAssessmentConfiguration": {
       "-removeApplication:": {
         "doc": "Removes the availability of a previously allowed app.",
-        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/remove(_:)"
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/remove(_:)-313bq"
+      },
+      "-removeBinaryExecutable:": {
+        "doc": "Removes the availability of a previously added executable participant.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/remove(_:)-9pylg"
       },
       "-setConfiguration:forApplication:": {
         "doc": "Adds an app to the list of apps available during an assessment.",
-        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/setconfiguration(_:for:)"
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/setconfiguration(_:for:)-2tjgb"
+      },
+      "-setConfiguration:forBinaryExecutable:": {
+        "doc": "Adds an executable participant to the list of participants available during an assessment.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/setconfiguration(_:for:)-16sed"
       }
     },
     "AEAssessmentParticipantConfiguration": {
@@ -63,7 +89,7 @@
         "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentparticipantconfiguration/new()"
       },
       "-allowedMenuItemsForLanguageIdentifier:": {
-        "doc": "Returns the set of allowed menu item titles for the given language identifier, or @c nil if no items have been configured for that identifier.",
+        "doc": "Returns the set of allowed menu item titles for the given language identifier, or nil if no items have been configured for that identifier.",
         "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentparticipantconfiguration/allowedmenuitemsforlanguageidentifier:"
       },
       "-init": {
@@ -109,29 +135,41 @@
         "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentapplication/teamidentifier"
       }
     },
+    "AEAssessmentBinaryExecutable": {
+      "binaryExecutableURL": {
+        "doc": "On-disk path of the executable.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentbinaryexecutable/binaryexecutableurl"
+      },
+      "requiresSignatureValidation": {
+        "doc": "Whether the running executable’s code signature is validated. Defaults to YES.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentbinaryexecutable/requiressignaturevalidation"
+      },
+      "teamIdentifier": {
+        "doc": "Team identifier the running executable’s signature must match, or nil to skip the team check.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentbinaryexecutable/teamidentifier"
+      }
+    },
+    "AEAssessmentBinaryExecutableConfiguration": {
+      "allowsNetworkAccess": {
+        "doc": "Whether the executable may access the network during an assessment. Defaults to YES.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentbinaryexecutableconfiguration/allowsnetworkaccess"
+      },
+      "required": {
+        "doc": "Whether the assessment requires this executable. Defaults to NO.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentbinaryexecutableconfiguration/isrequired"
+      }
+    },
     "AEAssessmentConfiguration": {
       "AEAutocorrectMode": {
         "doc": "The set of autocorrect features that you can enable during an assessment.",
         "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/autocorrectmode-swift.struct"
-      },
-      "allowLockdownMode": {
-        "doc": "A Boolean value that indicates whether the assessment allows Lockdown Mode to be active.",
-        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/allowlockdownmode"
-      },
-      "allowOnlyParticipantsToRun": {
-        "doc": "A Boolean value that indicates whether only participant applications are allowed to run during an assessment.",
-        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/allowonlyparticipantstorun"
-      },
-      "allowPrivateRelay": {
-        "doc": "A Boolean value that indicates whether the assessment allows iCloud Private Relay to be active.",
-        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/allowprivaterelay"
       },
       "allowedAppleMenuItems": {
         "doc": "The set of allowed Apple menu items during an assessment.",
         "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/allowedapplemenuitems"
       },
       "allowedDirectoriesAndFiles": {
-        "doc": "The set of allowed directories and files that participants can access during an assessment.",
+        "doc": "The set of directories and files that remain visible in the Finder during an assessment.",
         "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/alloweddirectoriesandfiles"
       },
       "allowedMenuBarItems": {
@@ -145,6 +183,10 @@
       "allowsAccessibilityBackgroundSounds": {
         "doc": "A Boolean value that indicates whether to allow Background Sounds during an assessment.",
         "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/allowsaccessibilitybackgroundsounds"
+      },
+      "allowsAccessibilityFullKeyboardAccess": {
+        "doc": "A Boolean value that indicates whether to allow Full Keyboard Access during an assessment.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/allowsaccessibilityfullkeyboardaccess"
       },
       "allowsAccessibilityHoverText": {
         "doc": "A Boolean value that indicates whether to allow Hover Text during an assessment.",
@@ -218,13 +260,25 @@
         "doc": "A Boolean value that indicates whether to allow the emoji keyboard during an assessment.",
         "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/allowsemojikeyboard"
       },
+      "allowsForceQuitKeyboardShortcuts": {
+        "doc": "A Boolean value that indicates whether to allow force quitting apps during an assessment.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/allowsforcequitkeyboardshortcuts"
+      },
       "allowsKeyboardShortcuts": {
         "doc": "A Boolean value that indicates whether to allow keyboard shortcuts during an assessment.",
         "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/allowskeyboardshortcuts"
       },
+      "allowsLockdownMode": {
+        "doc": "A Boolean value that indicates whether the assessment allows Lockdown Mode to be active.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/allowslockdownmode"
+      },
       "allowsMenuBar": {
         "doc": "A Boolean value that indicates whether to allow the menu bar during an assessment.",
         "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/allowsmenubar"
+      },
+      "allowsOnlyParticipantsToRun": {
+        "doc": "A Boolean value that indicates whether only participant applications are allowed to run during an assessment.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/allowsonlyparticipantstorun"
       },
       "allowsPasswordAutoFill": {
         "doc": "A Boolean value that indicates whether to allow password autofill during an assessment.",
@@ -233,6 +287,10 @@
       "allowsPredictiveKeyboard": {
         "doc": "A Boolean value that indicates whether to enable the predictive keyboard during an assessment.",
         "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/allowspredictivekeyboard"
+      },
+      "allowsPrivateRelay": {
+        "doc": "A Boolean value that indicates whether the assessment allows iCloud Private Relay to be active.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/allowsprivaterelay"
       },
       "allowsScreenshots": {
         "doc": "A Boolean value that indicates whether to allow screenshots copied to the clipboard during an assessment.",
@@ -250,6 +308,10 @@
         "doc": "A Boolean value that indicates whether to allow user script execution during an assessment.",
         "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/allowsuserscriptexecution"
       },
+      "allowsVirtualMachine": {
+        "doc": "A Boolean value that indicates whether the assessment allows running inside a virtual machine.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/allowsvirtualmachine"
+      },
       "autocorrectMode": {
         "doc": "A Boolean value that indicates whether to allow Autocorrect during an assessment.",
         "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/autocorrectmode-swift.property"
@@ -258,6 +320,10 @@
         "doc": "The collection of apps available during an assessment, along with their associated configurations.",
         "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/configurationsbyapplication"
       },
+      "configurationsByBinaryExecutable": {
+        "doc": "The collection of executable participants available during an assessment, along with their associated configurations.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/configurationsbybinaryexecutable"
+      },
       "mainParticipantConfiguration": {
         "doc": "The app-specific configuration for the app that invokes the assessment.",
         "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/mainparticipantconfiguration"
@@ -265,6 +331,10 @@
       "requiresManagedDevice": {
         "doc": "A Boolean value that indicates whether the device must be managed to start an assessment.",
         "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/requiresmanageddevice"
+      },
+      "requiresReleaseOS": {
+        "doc": "A Boolean value that indicates whether the device must be running a final customer release of the operating system to start an assessment.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/requiresreleaseos"
       },
       "requiresSIP": {
         "doc": "A Boolean value that indicates whether System Integrity Protection (SIP) must be enabled to start an assessment.",

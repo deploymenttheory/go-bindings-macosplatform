@@ -4,8 +4,6 @@
 package corespotlight
 
 import (
-	"unsafe"
-
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/foundation"
@@ -536,13 +534,16 @@ func (o *CSSearchableItemAttributeSet) SetRelatedUniqueIdentifier(relatedUniqueI
 	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetRelatedUniqueIdentifier, relatedUniqueIdentifier.Ptr())
 }
 
-func (o *CSSearchableItemAttributeSet) WeakRelatedUniqueIdentifier() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _cSSearchableItemAttributeSetSelWeakRelatedUniqueIdentifier)
-	return _ret
+func (o *CSSearchableItemAttributeSet) WeakRelatedUniqueIdentifier() *foundation.NSString {
+	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelWeakRelatedUniqueIdentifier)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSStringFromID(_ret)
 }
 
-func (o *CSSearchableItemAttributeSet) SetWeakRelatedUniqueIdentifier(weakRelatedUniqueIdentifier unsafe.Pointer) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetWeakRelatedUniqueIdentifier, weakRelatedUniqueIdentifier)
+func (o *CSSearchableItemAttributeSet) SetWeakRelatedUniqueIdentifier(weakRelatedUniqueIdentifier *foundation.NSString) {
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetWeakRelatedUniqueIdentifier, weakRelatedUniqueIdentifier.Ptr())
 }
 
 func (o *CSSearchableItemAttributeSet) MetadataModificationDate() *foundation.NSDate {
@@ -605,49 +606,64 @@ func (o *CSSearchableItemAttributeSet) SetTitle(title *foundation.NSString) {
 	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetTitle, title.Ptr())
 }
 
-func (o *CSSearchableItemAttributeSet) IsUserCreated() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _cSSearchableItemAttributeSetSelIsUserCreated)
-	return _ret
+func (o *CSSearchableItemAttributeSet) IsUserCreated() *foundation.NSNumber {
+	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelIsUserCreated)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSNumberFromID(_ret)
 }
 
-func (o *CSSearchableItemAttributeSet) SetUserCreated(userCreated unsafe.Pointer) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetUserCreated, userCreated)
+func (o *CSSearchableItemAttributeSet) SetUserCreated(userCreated *foundation.NSNumber) {
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetUserCreated, userCreated.Ptr())
 }
 
-func (o *CSSearchableItemAttributeSet) IsUserOwned() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _cSSearchableItemAttributeSetSelIsUserOwned)
-	return _ret
+func (o *CSSearchableItemAttributeSet) IsUserOwned() *foundation.NSNumber {
+	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelIsUserOwned)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSNumberFromID(_ret)
 }
 
-func (o *CSSearchableItemAttributeSet) SetUserOwned(userOwned unsafe.Pointer) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetUserOwned, userOwned)
+func (o *CSSearchableItemAttributeSet) SetUserOwned(userOwned *foundation.NSNumber) {
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetUserOwned, userOwned.Ptr())
 }
 
-func (o *CSSearchableItemAttributeSet) IsUserCurated() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _cSSearchableItemAttributeSetSelIsUserCurated)
-	return _ret
+func (o *CSSearchableItemAttributeSet) IsUserCurated() *foundation.NSNumber {
+	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelIsUserCurated)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSNumberFromID(_ret)
 }
 
-func (o *CSSearchableItemAttributeSet) SetUserCurated(userCurated unsafe.Pointer) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetUserCurated, userCurated)
+func (o *CSSearchableItemAttributeSet) SetUserCurated(userCurated *foundation.NSNumber) {
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetUserCurated, userCurated.Ptr())
 }
 
-func (o *CSSearchableItemAttributeSet) RankingHint() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _cSSearchableItemAttributeSetSelRankingHint)
-	return _ret
+func (o *CSSearchableItemAttributeSet) RankingHint() *foundation.NSNumber {
+	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelRankingHint)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSNumberFromID(_ret)
 }
 
-func (o *CSSearchableItemAttributeSet) SetRankingHint(rankingHint unsafe.Pointer) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetRankingHint, rankingHint)
+func (o *CSSearchableItemAttributeSet) SetRankingHint(rankingHint *foundation.NSNumber) {
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetRankingHint, rankingHint.Ptr())
 }
 
-func (o *CSSearchableItemAttributeSet) DomainIdentifier() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _cSSearchableItemAttributeSetSelDomainIdentifier)
-	return _ret
+func (o *CSSearchableItemAttributeSet) DomainIdentifier() *foundation.NSString {
+	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelDomainIdentifier)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSStringFromID(_ret)
 }
 
-func (o *CSSearchableItemAttributeSet) SetDomainIdentifier(domainIdentifier unsafe.Pointer) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetDomainIdentifier, domainIdentifier)
+func (o *CSSearchableItemAttributeSet) SetDomainIdentifier(domainIdentifier *foundation.NSString) {
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetDomainIdentifier, domainIdentifier.Ptr())
 }
 
 func (o *CSSearchableItemAttributeSet) TextContentSummary() *foundation.NSString {
@@ -742,34 +758,42 @@ func (o *CSSearchableItemAttributeSet) SetContainerOrder(containerOrder *foundat
 	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetContainerOrder, containerOrder.Ptr())
 }
 
-func (o *CSSearchableItemAttributeSet) ProviderDataTypeIdentifiers() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _cSSearchableItemAttributeSetSelProviderDataTypeIdentifiers)
-	return _ret
+func (o *CSSearchableItemAttributeSet) ProviderDataTypeIdentifiers() *foundation.NSArray[*foundation.NSString] {
+	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelProviderDataTypeIdentifiers)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
-func (o *CSSearchableItemAttributeSet) SetProviderDataTypeIdentifiers(providerDataTypeIdentifiers unsafe.Pointer) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetProviderDataTypeIdentifiers, providerDataTypeIdentifiers)
+func (o *CSSearchableItemAttributeSet) SetProviderDataTypeIdentifiers(providerDataTypeIdentifiers *foundation.NSArray[*foundation.NSString]) {
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetProviderDataTypeIdentifiers, providerDataTypeIdentifiers.Ptr())
 }
 
-func (o *CSSearchableItemAttributeSet) ProviderFileTypeIdentifiers() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _cSSearchableItemAttributeSetSelProviderFileTypeIdentifiers)
-	return _ret
+func (o *CSSearchableItemAttributeSet) ProviderFileTypeIdentifiers() *foundation.NSArray[*foundation.NSString] {
+	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelProviderFileTypeIdentifiers)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
-func (o *CSSearchableItemAttributeSet) SetProviderFileTypeIdentifiers(providerFileTypeIdentifiers unsafe.Pointer) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetProviderFileTypeIdentifiers, providerFileTypeIdentifiers)
+func (o *CSSearchableItemAttributeSet) SetProviderFileTypeIdentifiers(providerFileTypeIdentifiers *foundation.NSArray[*foundation.NSString]) {
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetProviderFileTypeIdentifiers, providerFileTypeIdentifiers.Ptr())
 }
 
-func (o *CSSearchableItemAttributeSet) ProviderInPlaceFileTypeIdentifiers() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _cSSearchableItemAttributeSetSelProviderInPlaceFileTypeIdentifiers)
-	return _ret
+func (o *CSSearchableItemAttributeSet) ProviderInPlaceFileTypeIdentifiers() *foundation.NSArray[*foundation.NSString] {
+	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelProviderInPlaceFileTypeIdentifiers)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
-func (o *CSSearchableItemAttributeSet) SetProviderInPlaceFileTypeIdentifiers(providerInPlaceFileTypeIdentifiers unsafe.Pointer) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetProviderInPlaceFileTypeIdentifiers, providerInPlaceFileTypeIdentifiers)
+func (o *CSSearchableItemAttributeSet) SetProviderInPlaceFileTypeIdentifiers(providerInPlaceFileTypeIdentifiers *foundation.NSArray[*foundation.NSString]) {
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetProviderInPlaceFileTypeIdentifiers, providerInPlaceFileTypeIdentifiers.Ptr())
 }
 
-// Subject of the this item.
 func (o *CSSearchableItemAttributeSet) Subject() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelSubject)
 	if _ret != 0 {

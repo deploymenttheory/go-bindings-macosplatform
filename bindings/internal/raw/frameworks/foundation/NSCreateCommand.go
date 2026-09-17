@@ -32,6 +32,7 @@ func NSCreateCommandFromID(id objc.ID) *NSCreateCommand {
 	return o
 }
 
+// The class description for the class that is to be created.
 func (o *NSCreateCommand) CreateClassDescription() *NSScriptClassDescription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCreateCommandSelCreateClassDescription)
 	if _ret != 0 {
@@ -40,6 +41,7 @@ func (o *NSCreateCommand) CreateClassDescription() *NSScriptClassDescription {
 	return NSScriptClassDescriptionFromID(_ret)
 }
 
+// The key dictionary with Apple event codes resolved to actual key names.
 func (o *NSCreateCommand) ResolvedKeyDictionary() *NSDictionary[*NSString, objc.ID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCreateCommandSelResolvedKeyDictionary)
 	if _ret != 0 {

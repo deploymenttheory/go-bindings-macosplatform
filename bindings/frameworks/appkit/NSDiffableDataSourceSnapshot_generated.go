@@ -15,8 +15,6 @@ import (
 )
 
 // DiffableDataSourceSnapshot is an idiomatic wrapper over the Objective-C class NSDiffableDataSourceSnapshot.
-//
-// A representation of the state of the data in a view at a specific point in time.
 type DiffableDataSourceSnapshot struct {
 	objref.Handle
 }

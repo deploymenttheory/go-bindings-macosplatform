@@ -15,6 +15,7 @@ import (
 // An object containing methods for starting and controlling a broadcast.
 //
 // Apple documentation: https://developer.apple.com/documentation/replaykit/rpbroadcastcontroller
+// Deprecated: No longer supported
 type RPBroadcastController struct {
 	foundation.NSObject
 }
@@ -64,6 +65,7 @@ func (o *RPBroadcastController) FinishBroadcastWithHandler(handler func(unsafe.P
 	o.Ptr().Send(_rPBroadcastControllerSelFinishBroadcastWithHandler, __block_handler)
 }
 
+// Deprecated: No longer supported
 func (o *RPBroadcastController) IsBroadcasting() bool {
 	_ret := objc.Send[bool](o.Ptr(), _rPBroadcastControllerSelIsBroadcasting)
 	return _ret

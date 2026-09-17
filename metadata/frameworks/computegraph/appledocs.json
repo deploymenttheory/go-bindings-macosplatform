@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "framework": "ComputeGraph",
+  "source": "developer.apple.com DocC render API",
+  "structs": {
+    "MouseParams": {
+      "doc": "Parameters describing mouse interaction in 3D space.",
+      "url": "https://developer.apple.com/documentation/computegraph/mouseparams"
+    }
+  }
+}

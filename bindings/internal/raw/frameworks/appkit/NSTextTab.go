@@ -20,10 +20,10 @@ type NSTextTab struct {
 var (
 	_clsNSTextTab                                     = _objcClass("NSTextTab")
 	_nSTextTabSelColumnTerminatorsForLocale           = objc.RegisterName("columnTerminatorsForLocale:")
-	_nSTextTabSelLocation                             = objc.RegisterName("location")
-	_nSTextTabSelOptions                              = objc.RegisterName("options")
 	_nSTextTabSelInitWithTextAlignmentLocationOptions = objc.RegisterName("initWithTextAlignment:location:options:")
 	_nSTextTabSelAlignment                            = objc.RegisterName("alignment")
+	_nSTextTabSelLocation                             = objc.RegisterName("location")
+	_nSTextTabSelOptions                              = objc.RegisterName("options")
 	_nSTextTabSelInitWithTypeLocation                 = objc.RegisterName("initWithType:location:")
 	_nSTextTabSelTabStopType                          = objc.RegisterName("tabStopType")
 )
@@ -47,19 +47,6 @@ func NSTextTabColumnTerminatorsForLocale(aLocale *foundation.NSLocale) *foundati
 	return foundation.NSCharacterSetFromID(_ret)
 }
 
-func (o *NSTextTab) Location() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSTextTabSelLocation)
-	return _ret
-}
-
-func (o *NSTextTab) Options() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextTabSelOptions)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
-}
-
 // Initializes a text tab with the specified text alignment, location, and options.
 func (o *NSTextTab) InitWithTextAlignmentLocationOptions(alignment NSTextAlignment, loc float64, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *NSTextTab {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextTabSelInitWithTextAlignmentLocationOptions, alignment, loc, options.Ptr())
@@ -69,12 +56,29 @@ func (o *NSTextTab) InitWithTextAlignmentLocationOptions(alignment NSTextAlignme
 	return NSTextTabFromID(_ret)
 }
 
+// The text alignment of the text tab. `NSTextAlignmentNatural` and `NSTextAlignmentJustified` are resolved to either `NSTextAlignmentLeft` or `NSTextAlignmentRight` based on the user's preferred language.
 func (o *NSTextTab) Alignment() NSTextAlignment {
 	_ret := objc.Send[NSTextAlignment](o.Ptr(), _nSTextTabSelAlignment)
 	return _ret
 }
 
+// The text tab's ruler location relative to the back margin.
+func (o *NSTextTab) Location() float64 {
+	_ret := objc.Send[float64](o.Ptr(), _nSTextTabSelLocation)
+	return _ret
+}
+
+// The dictionary of attributes for the text tab.
+func (o *NSTextTab) Options() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextTabSelOptions)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
+}
+
 // Initializes a newly allocated text tab with the specified alignment and location.
+// Deprecated: since macOS API_TO_BE_DEPRECATED.
 func (o *NSTextTab) InitWithTypeLocation(type_ NSTextTabType, loc float64) *NSTextTab {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextTabSelInitWithTypeLocation, type_, loc)
 	if _ret != 0 {
@@ -83,6 +87,7 @@ func (o *NSTextTab) InitWithTypeLocation(type_ NSTextTabType, loc float64) *NSTe
 	return NSTextTabFromID(_ret)
 }
 
+// Deprecated: Use -alignment and -options.
 func (o *NSTextTab) TabStopType() NSTextTabType {
 	_ret := objc.Send[NSTextTabType](o.Ptr(), _nSTextTabSelTabStopType)
 	return _ret

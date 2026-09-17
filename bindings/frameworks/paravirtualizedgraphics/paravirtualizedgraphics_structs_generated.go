@@ -20,12 +20,6 @@ type PGPhysicalMemoryRange_s struct {
 	PhysicalLength  uint64
 }
 
-// Opaque type to represent a Task.  The ParavirtualizedGraphics framework will not access the contents of this type.
-type PGTask_s struct{}
-
-// Opaque type to represent a memory trace range.  The ParavirtualizedGraphics framework will not access the contents of this type.
-type PGTraceRange_s struct{}
-
 // PGPhysicalMemoryRange_t is an alias for the PGPhysicalMemoryRange_s value type.
 type PGPhysicalMemoryRange_t = PGPhysicalMemoryRange_s
 

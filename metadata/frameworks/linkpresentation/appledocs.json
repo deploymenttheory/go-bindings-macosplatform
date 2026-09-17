@@ -16,12 +16,6 @@
       "url": "https://developer.apple.com/documentation/linkpresentation/lpmetadataprovider"
     }
   },
-  "enums": {
-    "LPErrorCode": {
-      "doc": "Possible error values that can be returned from LinkPresentation APIs.",
-      "url": "https://developer.apple.com/documentation/linkpresentation/lperrorcode"
-    }
-  },
   "methods": {
     "LPLinkView": {
       "-initWithMetadata:": {

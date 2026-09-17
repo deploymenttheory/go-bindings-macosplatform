@@ -51,29 +51,13 @@
       "doc": "A task scheduler suitable for low priority operations that can run in the background.",
       "url": "https://developer.apple.com/documentation/foundation/nsbackgroundactivityscheduler"
     },
-    "NSBlockOperation": {
-      "doc": "An operation that manages the concurrent execution of one or more blocks.",
-      "url": "https://developer.apple.com/documentation/foundation/nsblockoperation"
-    },
-    "NSBundle": {
-      "doc": "A representation of the code and resources stored in a bundle directory on disk.",
-      "url": "https://developer.apple.com/documentation/foundation/nsbundle"
-    },
     "NSBundleResourceRequest": {
       "doc": "A resource manager you use to download content hosted on the App Store at the time your app needs it.",
       "url": "https://developer.apple.com/documentation/foundation/nsbundleresourcerequest"
     },
-    "NSByteCountFormatter": {
-      "doc": "A formatter that converts a byte count value into a localized description that is formatted with the appropriate byte modifier (KB, MB, GB and so on).",
-      "url": "https://developer.apple.com/documentation/foundation/nsbytecountformatter"
-    },
     "NSCache": {
       "doc": "A mutable collection you use to temporarily store transient key-value pairs that are subject to eviction when resources are low.",
       "url": "https://developer.apple.com/documentation/foundation/nscache"
-    },
-    "NSCachedURLResponse": {
-      "doc": "A cached response to a URL request.",
-      "url": "https://developer.apple.com/documentation/foundation/nscachedurlresponse"
     },
     "NSCalendar": {
       "doc": "A definition of the relationships between calendar units and absolute points in time, providing features for calculation and comparison of dates.",
@@ -150,21 +134,9 @@
       "doc": "An object that specifies a date or time in terms of units (such as year, month, day, hour, and minute) to be evaluated in a calendar system and time zone.",
       "url": "https://developer.apple.com/documentation/foundation/nsdatecomponents"
     },
-    "NSDateComponentsFormatter": {
-      "doc": "A formatter that creates string representations of quantities of time.",
-      "url": "https://developer.apple.com/documentation/foundation/nsdatecomponentsformatter"
-    },
-    "NSDateFormatter": {
-      "doc": "A formatter that converts between dates and their textual representations.",
-      "url": "https://developer.apple.com/documentation/foundation/nsdateformatter"
-    },
     "NSDateInterval": {
       "doc": "An object representing the span of time between a specific start date and end date.",
       "url": "https://developer.apple.com/documentation/foundation/nsdateinterval"
-    },
-    "NSDateIntervalFormatter": {
-      "doc": "A formatter that creates string representations of time intervals.",
-      "url": "https://developer.apple.com/documentation/foundation/nsdateintervalformatter"
     },
     "NSDecimalNumber": {
       "doc": "An object for representing and performing arithmetic on base-10 numbers.",
@@ -182,14 +154,6 @@
       "doc": "A static collection of objects associated with unique keys.",
       "url": "https://developer.apple.com/documentation/foundation/nsdictionary"
     },
-    "NSDimension": {
-      "doc": "An abstract class representing a dimensional unit of measure.",
-      "url": "https://developer.apple.com/documentation/foundation/nsdimension"
-    },
-    "NSDirectoryEnumerator": {
-      "doc": "An object that enumerates the contents of a directory.",
-      "url": "https://developer.apple.com/documentation/foundation/nsdirectoryenumerator"
-    },
     "NSDistantObject": {
       "doc": "A proxy for objects in other applications or threads.",
       "url": "https://developer.apple.com/documentation/foundation/nsdistantobject"
@@ -201,14 +165,6 @@
     "NSDistributedLock": {
       "doc": "A lock that multiple applications on multiple hosts can use to restrict access to some shared resource, such as a file.",
       "url": "https://developer.apple.com/documentation/foundation/nsdistributedlock"
-    },
-    "NSDistributedNotificationCenter": {
-      "doc": "A notification dispatch mechanism that enables the broadcast of notifications across task boundaries.",
-      "url": "https://developer.apple.com/documentation/foundation/nsdistributednotificationcenter"
-    },
-    "NSEnergyFormatter": {
-      "doc": "A formatter that provides localized descriptions of energy values.",
-      "url": "https://developer.apple.com/documentation/foundation/nsenergyformatter"
     },
     "NSEnumerator": {
       "doc": "An abstract class whose subclasses enumerate collections of objects, such as arrays and dictionaries.",
@@ -242,14 +198,6 @@
       "doc": "An object that coordinates the reading and writing of files and directories among file presenters.",
       "url": "https://developer.apple.com/documentation/foundation/nsfilecoordinator"
     },
-    "NSFileHandle": {
-      "doc": "An object-oriented wrapper for a file descriptor.",
-      "url": "https://developer.apple.com/documentation/foundation/nsfilehandle"
-    },
-    "NSFileManager": {
-      "doc": "A convenient interface to the contents of the file system, and the primary means of interacting with it.",
-      "url": "https://developer.apple.com/documentation/foundation/nsfilemanager"
-    },
     "NSFileProviderService": {
       "doc": "A service that provides a custom communication channel between your app and a File Provider extension.",
       "url": "https://developer.apple.com/documentation/foundation/nsfileproviderservice"
@@ -262,41 +210,13 @@
       "doc": "A snapshot of a file at a specific point in time.",
       "url": "https://developer.apple.com/documentation/foundation/nsfileversion"
     },
-    "NSFileWrapper": {
-      "doc": "A representation of a node (a file, directory, or symbolic link) in the file system.",
-      "url": "https://developer.apple.com/documentation/foundation/nsfilewrapper"
-    },
-    "NSFormatter": {
-      "doc": "An abstract class that declares an interface for objects that create, interpret, and validate the textual representation of values.",
-      "url": "https://developer.apple.com/documentation/foundation/nsformatter"
-    },
     "NSGarbageCollector": {
       "doc": "A convenient interface to the garbage collection system.",
       "url": "https://developer.apple.com/documentation/foundation/nsgarbagecollector"
     },
-    "NSHTTPCookie": {
-      "doc": "A representation of an HTTP cookie.",
-      "url": "https://developer.apple.com/documentation/foundation/nshttpcookie"
-    },
-    "NSHTTPCookieStorage": {
-      "doc": "A container that manages the storage of cookies.",
-      "url": "https://developer.apple.com/documentation/foundation/nshttpcookiestorage"
-    },
-    "NSHTTPURLResponse": {
-      "doc": "The metadata associated with the response to an HTTP protocol URL load request.",
-      "url": "https://developer.apple.com/documentation/foundation/nshttpurlresponse"
-    },
     "NSHashTable": {
       "doc": "A collection similar to a set, but with broader range of available memory semantics.",
       "url": "https://developer.apple.com/documentation/foundation/nshashtable"
-    },
-    "NSHost": {
-      "doc": "A representation of an individual host on the network.",
-      "url": "https://developer.apple.com/documentation/foundation/nshost"
-    },
-    "NSISO8601DateFormatter": {
-      "doc": "A formatter that converts between dates and their ISO 8601 string representations.",
-      "url": "https://developer.apple.com/documentation/foundation/nsiso8601dateformatter"
     },
     "NSIndexPath": {
       "doc": "A list of indexes that together represent the path to a specific location in a tree of nested arrays.",
@@ -318,10 +238,6 @@
       "doc": "An inflection rule that uses a morphology instance to determine how to inflect attribued strings.",
       "url": "https://developer.apple.com/documentation/foundation/nsinflectionruleexplicit"
     },
-    "NSInputStream": {
-      "doc": "A stream that provides read-only stream functionality.",
-      "url": "https://developer.apple.com/documentation/foundation/nsinputstream"
-    },
     "NSInvocation": {
       "doc": "An Objective-C message rendered as an object.",
       "url": "https://developer.apple.com/documentation/foundation/nsinvocation"
@@ -333,10 +249,6 @@
     "NSItemProvider": {
       "doc": "An item provider for conveying data or a file between processes during drag-and-drop or copy-and-paste activities, or from a host app to an app extension.",
       "url": "https://developer.apple.com/documentation/foundation/nsitemprovider"
-    },
-    "NSJSONSerialization": {
-      "doc": "An object that converts between JSON and the equivalent Foundation objects.",
-      "url": "https://developer.apple.com/documentation/foundation/nsjsonserialization"
     },
     "NSKeyValueSharedObservers": {
       "doc": "A collection of key-value observations which may be registered with multiple observable objects",
@@ -354,17 +266,9 @@
       "doc": "A decoder that restores data from an archive referenced by keys.",
       "url": "https://developer.apple.com/documentation/foundation/nskeyedunarchiver"
     },
-    "NSLengthFormatter": {
-      "doc": "A formatter that provides localized descriptions of linear distances, such as length and height measurements.",
-      "url": "https://developer.apple.com/documentation/foundation/nslengthformatter"
-    },
     "NSLinguisticTagger": {
       "doc": "Analyze natural language text to tag part of speech and lexical class, identify names, perform lemmatization, and determine the language and script.",
       "url": "https://developer.apple.com/documentation/foundation/nslinguistictagger"
-    },
-    "NSListFormatter": {
-      "doc": "An object that provides locale-correct formatting of a list of items using the appropriate separator and conjunction.",
-      "url": "https://developer.apple.com/documentation/foundation/nslistformatter"
     },
     "NSLocale": {
       "doc": "Information about linguistic, cultural, and technological conventions for use in formatting data for presentation.",
@@ -393,21 +297,9 @@
       "doc": "A collection similar to a dictionary, but with a broader range of available memory semantics.",
       "url": "https://developer.apple.com/documentation/foundation/nsmaptable"
     },
-    "NSMassFormatter": {
-      "doc": "A formatter that provides localized descriptions of mass and weight values.",
-      "url": "https://developer.apple.com/documentation/foundation/nsmassformatter"
-    },
     "NSMeasurement": {
       "doc": "A numeric quantity labeled with a unit of measure, with support for unit conversion and unit-aware calculations.",
       "url": "https://developer.apple.com/documentation/foundation/nsmeasurement"
-    },
-    "NSMeasurementFormatter": {
-      "doc": "A formatter that provides localized representations of units and measurements.",
-      "url": "https://developer.apple.com/documentation/foundation/nsmeasurementformatter"
-    },
-    "NSMessagePort": {
-      "doc": "A port that can be used as an endpoint for distributed object connections (or raw messaging).",
-      "url": "https://developer.apple.com/documentation/foundation/nsmessageport"
     },
     "NSMessagePortNameServer": {
       "doc": "A server takes and returns message ports.",
@@ -493,25 +385,9 @@
       "doc": "A specifier for an object in a collection (or container) by name.",
       "url": "https://developer.apple.com/documentation/foundation/nsnamespecifier"
     },
-    "NSNetService": {
-      "doc": "A network service that broadcasts its availability using multicast DNS.",
-      "url": "https://developer.apple.com/documentation/foundation/nsnetservice"
-    },
-    "NSNetServiceBrowser": {
-      "doc": "A network service browser that finds published services on a network using multicast DNS.",
-      "url": "https://developer.apple.com/documentation/foundation/nsnetservicebrowser"
-    },
     "NSNotification": {
       "doc": "A container for information broadcast through a notification center to all registered observers.",
       "url": "https://developer.apple.com/documentation/foundation/nsnotification"
-    },
-    "NSNotificationCenter": {
-      "doc": "A notification dispatch mechanism that enables the broadcast of information to registered observers.",
-      "url": "https://developer.apple.com/documentation/foundation/nsnotificationcenter"
-    },
-    "NSNotificationQueue": {
-      "doc": "A notification center buffer.",
-      "url": "https://developer.apple.com/documentation/foundation/nsnotificationqueue"
     },
     "NSNull": {
       "doc": "A singleton object used to represent null values in collection objects that don’t allow nil values.",
@@ -520,18 +396,6 @@
     "NSNumber": {
       "doc": "An object wrapper for primitive scalar numeric values.",
       "url": "https://developer.apple.com/documentation/foundation/nsnumber"
-    },
-    "NSNumberFormatter": {
-      "doc": "A formatter that converts between numeric values and their textual representations.",
-      "url": "https://developer.apple.com/documentation/foundation/nsnumberformatter"
-    },
-    "NSOperation": {
-      "doc": "An abstract class that represents the code and data associated with a single task.",
-      "url": "https://developer.apple.com/documentation/foundation/nsoperation"
-    },
-    "NSOperationQueue": {
-      "doc": "A queue that regulates the execution of operations.",
-      "url": "https://developer.apple.com/documentation/foundation/nsoperationqueue"
     },
     "NSOrderedCollectionChange": {
       "doc": "An object that represents an indexed change within an ordered collection.",
@@ -549,21 +413,9 @@
       "doc": "A description of the linguistic content of natural language text, typically used for spelling and grammar checking.",
       "url": "https://developer.apple.com/documentation/foundation/nsorthography"
     },
-    "NSOutputStream": {
-      "doc": "A stream that provides write-only stream functionality.",
-      "url": "https://developer.apple.com/documentation/foundation/nsoutputstream"
-    },
     "NSPersonNameComponents": {
       "doc": "An object that manages the separate parts of a person’s name to allow locale-aware formatting.",
       "url": "https://developer.apple.com/documentation/foundation/nspersonnamecomponents"
-    },
-    "NSPersonNameComponentsFormatter": {
-      "doc": "A formatter that provides localized representations of the components of a person’s name.",
-      "url": "https://developer.apple.com/documentation/foundation/nspersonnamecomponentsformatter"
-    },
-    "NSPipe": {
-      "doc": "A one-way communications channel between related processes.",
-      "url": "https://developer.apple.com/documentation/foundation/nspipe"
     },
     "NSPointerArray": {
       "doc": "A collection similar to an array, but with a broader range of available memory semantics.",
@@ -573,17 +425,9 @@
       "doc": "An instance of NSPointerFunctions defines callout functions appropriate for managing a pointer reference held somewhere else.",
       "url": "https://developer.apple.com/documentation/foundation/nspointerfunctions"
     },
-    "NSPort": {
-      "doc": "An abstract class that represents a communication channel.",
-      "url": "https://developer.apple.com/documentation/foundation/nsport"
-    },
     "NSPortCoder": {
       "doc": "A coder used to transmit object proxies (and sometimes objects themselves) between connections.",
       "url": "https://developer.apple.com/documentation/foundation/nsportcoder"
-    },
-    "NSPortMessage": {
-      "doc": "A low-level, operating system-independent type for inter-application (and inter-thread) messages.",
-      "url": "https://developer.apple.com/documentation/foundation/nsportmessage"
     },
     "NSPortNameServer": {
       "doc": "An object-oriented interface to the port registration service used by the distributed objects system.",
@@ -600,18 +444,6 @@
     "NSPresentationIntent": {
       "doc": "A type that contains the Markdown formatting for blocks of text, like paragraphs, lists, code blocks, and parts of tables.",
       "url": "https://developer.apple.com/documentation/foundation/nspresentationintent"
-    },
-    "NSProcessInfo": {
-      "doc": "A collection of information about the current process.",
-      "url": "https://developer.apple.com/documentation/foundation/nsprocessinfo"
-    },
-    "NSProgress": {
-      "doc": "An object that conveys ongoing progress to the user for a specified task.",
-      "url": "https://developer.apple.com/documentation/foundation/nsprogress"
-    },
-    "NSPropertyListSerialization": {
-      "doc": "An object that converts between a property list and one of several serialized representations.",
-      "url": "https://developer.apple.com/documentation/foundation/nspropertylistserialization"
     },
     "NSProtocolChecker": {
       "doc": "An object that restricts the messages that can be sent to another object (referred to as the checker’s delegate).",
@@ -641,21 +473,9 @@
       "doc": "An immutable representation of a compiled regular expression that you apply to Unicode strings.",
       "url": "https://developer.apple.com/documentation/foundation/nsregularexpression"
     },
-    "NSRelativeDateTimeFormatter": {
-      "doc": "A formatter that creates locale-aware string representations of a relative date or time.",
-      "url": "https://developer.apple.com/documentation/foundation/nsrelativedatetimeformatter"
-    },
     "NSRelativeSpecifier": {
       "doc": "A specifier that indicates an object in a collection by its position relative to another object.",
       "url": "https://developer.apple.com/documentation/foundation/nsrelativespecifier"
-    },
-    "NSRunLoop": {
-      "doc": "The programmatic interface to objects that manage input sources.",
-      "url": "https://developer.apple.com/documentation/foundation/nsrunloop"
-    },
-    "NSScanner": {
-      "doc": "A string parser that scans for substrings or characters in a character set, and for numeric values from decimal, hexadecimal, and floating-point representations.",
-      "url": "https://developer.apple.com/documentation/foundation/nsscanner"
     },
     "NSScriptClassDescription": {
       "doc": "A scriptable class that a macOS app supports.",
@@ -704,10 +524,6 @@
     "NSSimpleCString": {
       "url": "https://developer.apple.com/documentation/foundation/nssimplecstring"
     },
-    "NSSocketPort": {
-      "doc": "A port that represents a BSD socket.",
-      "url": "https://developer.apple.com/documentation/foundation/nssocketport"
-    },
     "NSSocketPortNameServer": {
       "doc": "A port name server that takes and returns socket ports.",
       "url": "https://developer.apple.com/documentation/foundation/nssocketportnameserver"
@@ -724,17 +540,9 @@
       "doc": "A server that your app uses to provide a spell checker service to other apps running in the system.",
       "url": "https://developer.apple.com/documentation/foundation/nsspellserver"
     },
-    "NSStream": {
-      "doc": "An abstract class representing a stream.",
-      "url": "https://developer.apple.com/documentation/foundation/nsstream"
-    },
     "NSString": {
       "doc": "A static, plain-text Unicode string object.",
       "url": "https://developer.apple.com/documentation/foundation/nsstring"
-    },
-    "NSTask": {
-      "doc": "An object that represents a subprocess of the current process.",
-      "url": "https://developer.apple.com/documentation/foundation/nstask"
     },
     "NSTermOfAddress": {
       "doc": "The type for representing grammatical gender in localized text.",
@@ -744,29 +552,13 @@
       "doc": "An occurrence of textual content found during the analysis of a block of text, such as when matching a regular expression.",
       "url": "https://developer.apple.com/documentation/foundation/nstextcheckingresult"
     },
-    "NSThread": {
-      "doc": "A thread of execution.",
-      "url": "https://developer.apple.com/documentation/foundation/nsthread"
-    },
     "NSTimeZone": {
       "doc": "Information about standard time conventions associated with a specific geopolitical region.",
       "url": "https://developer.apple.com/documentation/foundation/nstimezone"
     },
-    "NSTimer": {
-      "doc": "A timer that fires after a certain time interval has elapsed, sending a specified message to a target object.",
-      "url": "https://developer.apple.com/documentation/foundation/nstimer"
-    },
     "NSURL": {
       "doc": "An object that represents the location of a resource, such as an item on a remote server or the path to a local file.",
       "url": "https://developer.apple.com/documentation/foundation/nsurl"
-    },
-    "NSURLAuthenticationChallenge": {
-      "doc": "A challenge from a server requiring authentication from the client.",
-      "url": "https://developer.apple.com/documentation/foundation/nsurlauthenticationchallenge"
-    },
-    "NSURLCache": {
-      "doc": "An object that maps URL requests to cached response objects.",
-      "url": "https://developer.apple.com/documentation/foundation/nsurlcache"
     },
     "NSURLComponents": {
       "doc": "An object that parses URLs into and constructs URLs from their constituent parts.",
@@ -776,14 +568,6 @@
       "doc": "An object that enables you to start and stop URL requests.",
       "url": "https://developer.apple.com/documentation/foundation/nsurlconnection"
     },
-    "NSURLCredential": {
-      "doc": "An authentication credential consisting of information specific to the type of credential and the type of persistent storage to use, if any.",
-      "url": "https://developer.apple.com/documentation/foundation/nsurlcredential"
-    },
-    "NSURLCredentialStorage": {
-      "doc": "The manager of a shared credentials cache.",
-      "url": "https://developer.apple.com/documentation/foundation/nsurlcredentialstorage"
-    },
     "NSURLDownload": {
       "doc": "An object that downloads a resource asynchronously and saves the data to a file.",
       "url": "https://developer.apple.com/documentation/foundation/nsurldownload"
@@ -791,14 +575,6 @@
     "NSURLHandle": {
       "doc": "An object that accesses and manages resource data indicated by a URL.",
       "url": "https://developer.apple.com/documentation/foundation/nsurlhandle"
-    },
-    "NSURLProtectionSpace": {
-      "doc": "A server or an area on a server, commonly referred to as a realm, that requires authentication.",
-      "url": "https://developer.apple.com/documentation/foundation/nsurlprotectionspace"
-    },
-    "NSURLProtocol": {
-      "doc": "An abstract class that handles the loading of protocol-specific URL data.",
-      "url": "https://developer.apple.com/documentation/foundation/nsurlprotocol"
     },
     "NSURLQueryItem": {
       "doc": "An object representing a single name/value pair for an item in the query portion of a URL.",
@@ -808,52 +584,8 @@
       "doc": "A URL load request that is independent of protocol or URL scheme.",
       "url": "https://developer.apple.com/documentation/foundation/nsurlrequest"
     },
-    "NSURLResponse": {
-      "doc": "The metadata associated with the response to a URL load request, independent of protocol and URL scheme.",
-      "url": "https://developer.apple.com/documentation/foundation/nsurlresponse"
-    },
-    "NSURLSession": {
-      "doc": "An object that coordinates a group of related, network data transfer tasks.",
-      "url": "https://developer.apple.com/documentation/foundation/nsurlsession"
-    },
-    "NSURLSessionConfiguration": {
-      "doc": "A configuration object that defines behavior and policies for a URL session.",
-      "url": "https://developer.apple.com/documentation/foundation/nsurlsessionconfiguration"
-    },
-    "NSURLSessionDataTask": {
-      "doc": "A URL session task that returns downloaded data directly to the app in memory.",
-      "url": "https://developer.apple.com/documentation/foundation/nsurlsessiondatatask"
-    },
-    "NSURLSessionDownloadTask": {
-      "doc": "A URL session task that stores downloaded data to a file.",
-      "url": "https://developer.apple.com/documentation/foundation/nsurlsessiondownloadtask"
-    },
-    "NSURLSessionStreamTask": {
-      "doc": "A URL session task that is stream-based.",
-      "url": "https://developer.apple.com/documentation/foundation/nsurlsessionstreamtask"
-    },
-    "NSURLSessionTask": {
-      "doc": "A task, like downloading a specific resource, performed in a URL session.",
-      "url": "https://developer.apple.com/documentation/foundation/nsurlsessiontask"
-    },
-    "NSURLSessionTaskMetrics": {
-      "doc": "An object encapsulating the metrics for a session task.",
-      "url": "https://developer.apple.com/documentation/foundation/nsurlsessiontaskmetrics"
-    },
-    "NSURLSessionTaskTransactionMetrics": {
-      "doc": "An object that encapsualtes the performance metrics collected by the URL Loading System during the execution of a session task.",
-      "url": "https://developer.apple.com/documentation/foundation/nsurlsessiontasktransactionmetrics"
-    },
-    "NSURLSessionUploadTask": {
-      "doc": "A URL session task that uploads data to the network in a request body.",
-      "url": "https://developer.apple.com/documentation/foundation/nsurlsessionuploadtask"
-    },
     "NSURLSessionWebSocketMessage": {
       "url": "https://developer.apple.com/documentation/foundation/nsurlsessionwebsocketmessage"
-    },
-    "NSURLSessionWebSocketTask": {
-      "doc": "A URL session task that communicates over the WebSockets protocol standard.",
-      "url": "https://developer.apple.com/documentation/foundation/nsurlsessionwebsockettask"
     },
     "NSUUID": {
       "doc": "A universally unique value that can be used to identify types, interfaces, and other items.",
@@ -867,113 +599,9 @@
       "doc": "A decoder that restores data from an archive.",
       "url": "https://developer.apple.com/documentation/foundation/nsunarchiver"
     },
-    "NSUndoManager": {
-      "doc": "A general-purpose recorder of operations that enables undo and redo.",
-      "url": "https://developer.apple.com/documentation/foundation/nsundomanager"
-    },
     "NSUniqueIDSpecifier": {
       "doc": "A specifier for an object in a collection (or container) by unique ID.",
       "url": "https://developer.apple.com/documentation/foundation/nsuniqueidspecifier"
-    },
-    "NSUnit": {
-      "doc": "An abstract class representing a unit of measure.",
-      "url": "https://developer.apple.com/documentation/foundation/nsunit"
-    },
-    "NSUnitAcceleration": {
-      "doc": "A unit of measure for acceleration.",
-      "url": "https://developer.apple.com/documentation/foundation/nsunitacceleration"
-    },
-    "NSUnitAngle": {
-      "doc": "A unit of measure for planar angle and rotation.",
-      "url": "https://developer.apple.com/documentation/foundation/nsunitangle"
-    },
-    "NSUnitArea": {
-      "doc": "A unit of measure for area.",
-      "url": "https://developer.apple.com/documentation/foundation/nsunitarea"
-    },
-    "NSUnitConcentrationMass": {
-      "doc": "A unit of measure for concentration of mass.",
-      "url": "https://developer.apple.com/documentation/foundation/nsunitconcentrationmass"
-    },
-    "NSUnitConverter": {
-      "doc": "An abstract class that provides a description of how to convert a unit to and from the base unit of its dimension.",
-      "url": "https://developer.apple.com/documentation/foundation/nsunitconverter"
-    },
-    "NSUnitConverterLinear": {
-      "doc": "A description of how to convert between units using a linear equation.",
-      "url": "https://developer.apple.com/documentation/foundation/nsunitconverterlinear"
-    },
-    "NSUnitDispersion": {
-      "doc": "A unit of measure for specific quantities of dispersion.",
-      "url": "https://developer.apple.com/documentation/foundation/nsunitdispersion"
-    },
-    "NSUnitDuration": {
-      "doc": "A unit of measure for a duration of time.",
-      "url": "https://developer.apple.com/documentation/foundation/nsunitduration"
-    },
-    "NSUnitElectricCharge": {
-      "doc": "A unit of measure for electric charge.",
-      "url": "https://developer.apple.com/documentation/foundation/nsunitelectriccharge"
-    },
-    "NSUnitElectricCurrent": {
-      "doc": "A unit of measure for electric current.",
-      "url": "https://developer.apple.com/documentation/foundation/nsunitelectriccurrent"
-    },
-    "NSUnitElectricPotentialDifference": {
-      "doc": "A unit of measure for electric potential difference.",
-      "url": "https://developer.apple.com/documentation/foundation/nsunitelectricpotentialdifference"
-    },
-    "NSUnitElectricResistance": {
-      "doc": "A unit of measure for electric resistance.",
-      "url": "https://developer.apple.com/documentation/foundation/nsunitelectricresistance"
-    },
-    "NSUnitEnergy": {
-      "doc": "A unit of measure for energy.",
-      "url": "https://developer.apple.com/documentation/foundation/nsunitenergy"
-    },
-    "NSUnitFrequency": {
-      "doc": "A unit of measure for frequency.",
-      "url": "https://developer.apple.com/documentation/foundation/nsunitfrequency"
-    },
-    "NSUnitFuelEfficiency": {
-      "doc": "A unit of measure for fuel efficiency.",
-      "url": "https://developer.apple.com/documentation/foundation/nsunitfuelefficiency"
-    },
-    "NSUnitIlluminance": {
-      "doc": "A unit of measure for illuminance.",
-      "url": "https://developer.apple.com/documentation/foundation/nsunitilluminance"
-    },
-    "NSUnitInformationStorage": {
-      "doc": "A unit of measure for quantities of information.",
-      "url": "https://developer.apple.com/documentation/foundation/nsunitinformationstorage"
-    },
-    "NSUnitLength": {
-      "doc": "A unit of measure for length.",
-      "url": "https://developer.apple.com/documentation/foundation/nsunitlength"
-    },
-    "NSUnitMass": {
-      "doc": "A unit of measure for mass.",
-      "url": "https://developer.apple.com/documentation/foundation/nsunitmass"
-    },
-    "NSUnitPower": {
-      "doc": "A unit of measure for power.",
-      "url": "https://developer.apple.com/documentation/foundation/nsunitpower"
-    },
-    "NSUnitPressure": {
-      "doc": "A unit of measure for pressure.",
-      "url": "https://developer.apple.com/documentation/foundation/nsunitpressure"
-    },
-    "NSUnitSpeed": {
-      "doc": "A unit of measure for speed.",
-      "url": "https://developer.apple.com/documentation/foundation/nsunitspeed"
-    },
-    "NSUnitTemperature": {
-      "doc": "A unit of measure for temperature.",
-      "url": "https://developer.apple.com/documentation/foundation/nsunittemperature"
-    },
-    "NSUnitVolume": {
-      "doc": "A unit of measure for volume.",
-      "url": "https://developer.apple.com/documentation/foundation/nsunitvolume"
     },
     "NSUserActivity": {
       "doc": "A representation of the state of your app at a moment in time.",
@@ -986,10 +614,6 @@
     "NSUserAutomatorTask": {
       "doc": "An object that executes Automator workflows.",
       "url": "https://developer.apple.com/documentation/foundation/nsuserautomatortask"
-    },
-    "NSUserDefaults": {
-      "doc": "An interface to the user’s defaults database, which stores system-wide and app-specific settings.",
-      "url": "https://developer.apple.com/documentation/foundation/nsuserdefaults"
     },
     "NSUserNotification": {
       "doc": "A notification that can be scheduled for display in the notification center.",
@@ -1015,37 +639,9 @@
       "doc": "A simple container for a single C or Objective-C data item.",
       "url": "https://developer.apple.com/documentation/foundation/nsvalue"
     },
-    "NSValueTransformer": {
-      "doc": "An abstract class used to transform values from one representation to another.",
-      "url": "https://developer.apple.com/documentation/foundation/nsvaluetransformer"
-    },
     "NSWhoseSpecifier": {
       "doc": "A specifier that indicates every object in a collection matching a condition.",
       "url": "https://developer.apple.com/documentation/foundation/nswhosespecifier"
-    },
-    "NSXMLDTD": {
-      "doc": "A representation of a Document Type Definition.",
-      "url": "https://developer.apple.com/documentation/foundation/nsxmldtd"
-    },
-    "NSXMLDTDNode": {
-      "doc": "A representation of element, attribute-list, entity, and notation declarations in a Document Type Definition.",
-      "url": "https://developer.apple.com/documentation/foundation/nsxmldtdnode"
-    },
-    "NSXMLDocument": {
-      "doc": "An XML document as internalized into a logical tree structure.",
-      "url": "https://developer.apple.com/documentation/foundation/nsxmldocument"
-    },
-    "NSXMLElement": {
-      "doc": "The element nodes in an XML tree structure.",
-      "url": "https://developer.apple.com/documentation/foundation/nsxmlelement"
-    },
-    "NSXMLNode": {
-      "doc": "The nodes in the abstract, logical tree structure that represents an XML document.",
-      "url": "https://developer.apple.com/documentation/foundation/nsxmlnode"
-    },
-    "NSXMLParser": {
-      "doc": "An event driven parser of XML documents (including DTD declarations).",
-      "url": "https://developer.apple.com/documentation/foundation/nsxmlparser"
     },
     "NSXPCCoder": {
       "doc": "A coder that encodes and decodes objects that your app sends over an XPC connection.",
@@ -1101,10 +697,6 @@
       "doc": "A protocol that objects adopt to support fast enumeration.",
       "url": "https://developer.apple.com/documentation/foundation/nsfastenumeration"
     },
-    "NSFileManagerDelegate": {
-      "doc": "The interface a file manager’s delegate uses to intervene during operations or if an error occurs.",
-      "url": "https://developer.apple.com/documentation/foundation/nsfilemanagerdelegate"
-    },
     "NSFilePresenter": {
       "doc": "The interface a file coordinator uses to inform an object presenting a file about changes to that file made elsewhere in the system.",
       "url": "https://developer.apple.com/documentation/foundation/nsfilepresenter"
@@ -1141,24 +733,8 @@
       "doc": "A protocol that mutable objects adopt to provide functional copies of themselves.",
       "url": "https://developer.apple.com/documentation/foundation/nsmutablecopying"
     },
-    "NSNetServiceBrowserDelegate": {
-      "doc": "The interface a net service browser uses to inform a delegate about the state of service discovery.",
-      "url": "https://developer.apple.com/documentation/foundation/nsnetservicebrowserdelegate"
-    },
-    "NSNetServiceDelegate": {
-      "doc": "The interface a net service uses to inform its delegate about the state of the service it offers.",
-      "url": "https://developer.apple.com/documentation/foundation/nsnetservicedelegate"
-    },
-    "NSPortDelegate": {
-      "doc": "An interface for handling incoming messages.",
-      "url": "https://developer.apple.com/documentation/foundation/nsportdelegate"
-    },
     "NSPredicateValidating": {
       "url": "https://developer.apple.com/documentation/foundation/nspredicatevalidating"
-    },
-    "NSProgressReporting": {
-      "doc": "An interface for objects that report progress using a single progress instance.",
-      "url": "https://developer.apple.com/documentation/foundation/nsprogressreporting"
     },
     "NSSecureCoding": {
       "doc": "A protocol that enables encoding and decoding in a manner that is robust against object substitution attacks.",
@@ -1167,14 +743,6 @@
     "NSSpellServerDelegate": {
       "doc": "The optional methods implemented by the delegate of a spell server.",
       "url": "https://developer.apple.com/documentation/foundation/nsspellserverdelegate"
-    },
-    "NSStreamDelegate": {
-      "doc": "An interface that delegates of a stream instance use to handle events on the stream.",
-      "url": "https://developer.apple.com/documentation/foundation/nsstreamdelegate"
-    },
-    "NSURLAuthenticationChallengeSender": {
-      "doc": "The URLAuthenticationChallengeSender protocol represents the interface that the sender of an authentication challenge must implement.",
-      "url": "https://developer.apple.com/documentation/foundation/nsurlauthenticationchallengesender"
     },
     "NSURLConnectionDataDelegate": {
       "doc": "A protocol that most delegates of a URL connection implement to receive data associated with the connection.",
@@ -1196,30 +764,6 @@
       "doc": "The interface implemented by URL handle clients.",
       "url": "https://developer.apple.com/documentation/foundation/nsurlhandleclient"
     },
-    "NSURLSessionDataDelegate": {
-      "doc": "A protocol that defines methods that URL session instances call on their delegates to handle task-level events specific to data and upload tasks.",
-      "url": "https://developer.apple.com/documentation/foundation/nsurlsessiondatadelegate"
-    },
-    "NSURLSessionDelegate": {
-      "doc": "A protocol that defines methods that URL session instances call on their delegates to handle session-level events, like session life cycle changes.",
-      "url": "https://developer.apple.com/documentation/foundation/nsurlsessiondelegate"
-    },
-    "NSURLSessionDownloadDelegate": {
-      "doc": "A protocol that defines methods that URL session instances call on their delegates to handle task-level events specific to download tasks.",
-      "url": "https://developer.apple.com/documentation/foundation/nsurlsessiondownloaddelegate"
-    },
-    "NSURLSessionStreamDelegate": {
-      "doc": "A protocol that defines methods that URL session instances call on their delegates to handle task-level events specific to stream tasks.",
-      "url": "https://developer.apple.com/documentation/foundation/nsurlsessionstreamdelegate"
-    },
-    "NSURLSessionTaskDelegate": {
-      "doc": "A protocol that defines methods that URL session instances call on their delegates to handle task-level events.",
-      "url": "https://developer.apple.com/documentation/foundation/nsurlsessiontaskdelegate"
-    },
-    "NSURLSessionWebSocketDelegate": {
-      "doc": "A protocol that defines methods that URL session instances call on their delegates to handle task-level events specific to WebSocket tasks.",
-      "url": "https://developer.apple.com/documentation/foundation/nsurlsessionwebsocketdelegate"
-    },
     "NSUserActivityDelegate": {
       "doc": "The interface through which a user activity instance notifies its delegate of updates.",
       "url": "https://developer.apple.com/documentation/foundation/nsuseractivitydelegate"
@@ -1227,10 +771,6 @@
     "NSUserNotificationCenterDelegate": {
       "doc": "An interface that enables customizing the behavior of the default notification center.",
       "url": "https://developer.apple.com/documentation/foundation/nsusernotificationcenterdelegate"
-    },
-    "NSXMLParserDelegate": {
-      "doc": "The interface an XML parser uses to inform its delegate about the content of the parsed document.",
-      "url": "https://developer.apple.com/documentation/foundation/nsxmlparserdelegate"
     },
     "NSXPCListenerDelegate": {
       "doc": "The protocol that delegates to the XPC listener use to accept or reject new connections.",
@@ -1242,17 +782,6 @@
     }
   },
   "enums": {
-    "NSAlignmentOptions": {
-      "doc": "Values representing alignment operations.",
-      "url": "https://developer.apple.com/documentation/foundation/nsalignmentoptions"
-    },
-    "NSAppleEventSendOptions": {
-      "url": "https://developer.apple.com/documentation/foundation/nsappleeventsendoptions"
-    },
-    "NSAttributedStringEnumerationOptions": {
-      "doc": "Options for enumerating attributes.",
-      "url": "https://developer.apple.com/documentation/foundation/nsattributedstringenumerationoptions"
-    },
     "NSAttributedStringFormattingOptions": {
       "doc": "Options to use when creating an attributed string from a format string and variable list of arguments.",
       "url": "https://developer.apple.com/documentation/foundation/nsattributedstringformattingoptions",
@@ -1299,10 +828,6 @@
         }
       }
     },
-    "NSBackgroundActivityResult": {
-      "doc": "These constants indicate whether background activity has been completed successfully or whether additional processing should be deferred until a more optimal time.",
-      "url": "https://developer.apple.com/documentation/foundation/nsbackgroundactivityresult"
-    },
     "NSBinarySearchingOptions": {
       "doc": "Options for searches and insertions using indexOfObject:inSortedRange:options:usingComparator:.",
       "url": "https://developer.apple.com/documentation/foundation/nsbinarysearchingoptions",
@@ -1321,28 +846,6 @@
         }
       }
     },
-    "NSByteCountFormatterCountStyle": {
-      "doc": "Specifies display of file or storage byte counts. The display style is platform specific.",
-      "url": "https://developer.apple.com/documentation/foundation/nsbytecountformattercountstyle"
-    },
-    "NSByteCountFormatterUnits": {
-      "doc": "Specifies the units appropriate for the formatter to display. Specifying any units explicitly causes just those units to be used in showing the number.",
-      "url": "https://developer.apple.com/documentation/foundation/nsbytecountformatterunits",
-      "members": {
-        "NSByteCountFormatterUseDefault": {
-          "doc": "This causes default units appropriate for the platform to be used. This is the default.",
-          "url": "https://developer.apple.com/documentation/foundation/nsbytecountformatterunits/nsbytecountformatterusedefault"
-        }
-      }
-    },
-    "NSCalendarOptions": {
-      "doc": "The options for arithmetic operations involving calendars.",
-      "url": "https://developer.apple.com/documentation/foundation/nscalendaroptions"
-    },
-    "NSCalendarUnit": {
-      "doc": "Calendrical units such as year, month, day and hour.",
-      "url": "https://developer.apple.com/documentation/foundation/nscalendarunit"
-    },
     "NSCollectionChangeType": {
       "doc": "The type of change represented in computing the difference of an ordered collection.",
       "url": "https://developer.apple.com/documentation/foundation/nscollectionchangetype",
@@ -1357,84 +860,6 @@
         }
       }
     },
-    "NSComparisonPredicateModifier": {
-      "doc": "Constants that describe the possible types of modifier for a comparison predicate.",
-      "url": "https://developer.apple.com/documentation/foundation/nscomparisonpredicatemodifier"
-    },
-    "NSComparisonPredicateOptions": {
-      "doc": "Constants that describe the possible types of string comparison for comparison predicates.",
-      "url": "https://developer.apple.com/documentation/foundation/nscomparisonpredicateoptions"
-    },
-    "NSComparisonResult": {
-      "doc": "Constants that indicate sort order.",
-      "url": "https://developer.apple.com/documentation/foundation/nscomparisonresult"
-    },
-    "NSCompoundPredicateType": {
-      "doc": "Constants that describe the possible types of a compound predicate.",
-      "url": "https://developer.apple.com/documentation/foundation/nscompoundpredicatetype"
-    },
-    "NSDataBase64DecodingOptions": {
-      "doc": "Options to modify the decoding algorithm used to decode Base64 encoded data.",
-      "url": "https://developer.apple.com/documentation/foundation/nsdatabase64decodingoptions"
-    },
-    "NSDataBase64EncodingOptions": {
-      "doc": "Options for methods used to Base64 encode data.",
-      "url": "https://developer.apple.com/documentation/foundation/nsdatabase64encodingoptions"
-    },
-    "NSDataCompressionAlgorithm": {
-      "doc": "An algorithm that indicates how to compress or decompress data.",
-      "url": "https://developer.apple.com/documentation/foundation/nsdatacompressionalgorithm"
-    },
-    "NSDataReadingOptions": {
-      "doc": "Options for methods used to read data objects.",
-      "url": "https://developer.apple.com/documentation/foundation/nsdatareadingoptions"
-    },
-    "NSDataSearchOptions": {
-      "doc": "Options for method used to search data objects.",
-      "url": "https://developer.apple.com/documentation/foundation/nsdatasearchoptions"
-    },
-    "NSDataWritingOptions": {
-      "doc": "Options for methods used to write data objects.",
-      "url": "https://developer.apple.com/documentation/foundation/nsdatawritingoptions"
-    },
-    "NSDateComponentsFormatterUnitsStyle": {
-      "doc": "Constants for specifying how to represent quantities of time.",
-      "url": "https://developer.apple.com/documentation/foundation/nsdatecomponentsformatterunitsstyle"
-    },
-    "NSDateComponentsFormatterZeroFormattingBehavior": {
-      "doc": "Formatting constants for when values contain zeroes.",
-      "url": "https://developer.apple.com/documentation/foundation/nsdatecomponentsformatterzeroformattingbehavior",
-      "members": {
-        "NSDateComponentsFormatterZeroFormattingBehaviorNone": {
-          "doc": "No formatting behavior. This behavior prevents the dropping of zero values or adding of zeroes for padding. For example, with hours, minutes, and seconds displayed, the abbreviated value for one hour and 10 seconds is “1h 0m 10s”.",
-          "url": "https://developer.apple.com/documentation/foundation/nsdatecomponentsformatterzeroformattingbehavior/nsdatecomponentsformatterzeroformattingbehaviornone"
-        }
-      }
-    },
-    "NSDateFormatterBehavior": {
-      "doc": "Constants that specify the behavior NSDateFormatter should exhibit.",
-      "url": "https://developer.apple.com/documentation/foundation/nsdateformatterbehavior"
-    },
-    "NSDateFormatterStyle": {
-      "doc": "The following constants specify predefined format styles for dates and times.",
-      "url": "https://developer.apple.com/documentation/foundation/nsdateformatterstyle"
-    },
-    "NSDateIntervalFormatterStyle": {
-      "doc": "Formatting styles for individual date and time values.",
-      "url": "https://developer.apple.com/documentation/foundation/nsdateintervalformatterstyle"
-    },
-    "NSDecodingFailurePolicy": {
-      "doc": "Policies describing the action the coder should take when encountering decode failures.",
-      "url": "https://developer.apple.com/documentation/foundation/nsdecodingfailurepolicy"
-    },
-    "NSDirectoryEnumerationOptions": {
-      "doc": "Options for enumerating the contents of directories.",
-      "url": "https://developer.apple.com/documentation/foundation/nsdirectoryenumerationoptions"
-    },
-    "NSEnergyFormatterUnit": {
-      "doc": "The units supported by the NSEnergyFormatter class.",
-      "url": "https://developer.apple.com/documentation/foundation/nsenergyformatterunit"
-    },
     "NSEnumerationOptions": {
       "doc": "Options for block enumeration operations.",
       "url": "https://developer.apple.com/documentation/foundation/nsenumerationoptions",
@@ -1448,22 +873,6 @@
           "url": "https://developer.apple.com/documentation/foundation/nsenumerationoptions/reverse"
         }
       }
-    },
-    "NSExpressionType": {
-      "doc": "Defines the possible types of an expression.",
-      "url": "https://developer.apple.com/documentation/foundation/nsexpressiontype"
-    },
-    "NSFileCoordinatorReadingOptions": {
-      "doc": "Options to use when reading the contents or attributes of a file or directory.",
-      "url": "https://developer.apple.com/documentation/foundation/nsfilecoordinatorreadingoptions"
-    },
-    "NSFileCoordinatorWritingOptions": {
-      "doc": "Options to use when changing the contents or attributes of a file or directory.",
-      "url": "https://developer.apple.com/documentation/foundation/nsfilecoordinatorwritingoptions"
-    },
-    "NSFileManagerItemReplacementOptions": {
-      "doc": "Options for specifying the behavior of file replacement operations.",
-      "url": "https://developer.apple.com/documentation/foundation/nsfilemanageritemreplacementoptions"
     },
     "NSFileManagerResumeSyncBehavior": {
       "doc": "The behaviors the file manager can apply to resolve conflicts when resuming a sync.",
@@ -1510,30 +919,6 @@
           "url": "https://developer.apple.com/documentation/foundation/nsfilemanageruploadlocalversionconflictpolicy/conflictpolicyfailonconflict"
         }
       }
-    },
-    "NSFileVersionAddingOptions": {
-      "doc": "Options for adding a new file version.",
-      "url": "https://developer.apple.com/documentation/foundation/nsfileversionaddingoptions"
-    },
-    "NSFileVersionReplacingOptions": {
-      "doc": "Options for replacing a file version.",
-      "url": "https://developer.apple.com/documentation/foundation/nsfileversionreplacingoptions"
-    },
-    "NSFileWrapperReadingOptions": {
-      "doc": "Reading options that can be set by the initWithURL:options:error: and readFromURL:options:error: methods.",
-      "url": "https://developer.apple.com/documentation/foundation/nsfilewrapperreadingoptions"
-    },
-    "NSFileWrapperWritingOptions": {
-      "doc": "Writing options that can be set by the writeToURL:options:originalContentsURL:error: method.",
-      "url": "https://developer.apple.com/documentation/foundation/nsfilewrapperwritingoptions"
-    },
-    "NSFormattingContext": {
-      "doc": "The formatting context for a formatter.",
-      "url": "https://developer.apple.com/documentation/foundation/nsformattingcontext"
-    },
-    "NSFormattingUnitStyle": {
-      "doc": "Specifies the width of the unit, determining the textual representation.",
-      "url": "https://developer.apple.com/documentation/foundation/nsformattingunitstyle"
     },
     "NSGrammaticalCase": {
       "url": "https://developer.apple.com/documentation/foundation/nsgrammaticalcase"
@@ -1672,26 +1057,6 @@
     "NSGrammaticalPronounType": {
       "url": "https://developer.apple.com/documentation/foundation/nsgrammaticalpronountype"
     },
-    "NSHTTPCookieAcceptPolicy": {
-      "doc": "Cookie acceptance policies implemented by the NSHTTPCookieStorage class.",
-      "url": "https://developer.apple.com/documentation/foundation/nshttpcookieacceptpolicy"
-    },
-    "NSISO8601DateFormatOptions": {
-      "doc": "Options used to generate and parse ISO 8601 date representations.",
-      "url": "https://developer.apple.com/documentation/foundation/nsiso8601dateformatoptions"
-    },
-    "NSInlinePresentationIntent": {
-      "doc": "A type that defines presentation intent for runs of characters for traits like emphasis, strikethrough, and code voice.",
-      "url": "https://developer.apple.com/documentation/foundation/nsinlinepresentationintent"
-    },
-    "NSInsertionPosition": {
-      "doc": "The following constants are defined by NSPositionalSpecifier to specify an insertion position.",
-      "url": "https://developer.apple.com/documentation/foundation/nsinsertionposition"
-    },
-    "NSItemProviderErrorCode": {
-      "doc": "The error codes that describe problems with consuming data from an item provider.",
-      "url": "https://developer.apple.com/documentation/foundation/nsitemprovidererrorcode"
-    },
     "NSItemProviderFileOptions": {
       "doc": "Data-access specifications that declare how to handle items.",
       "url": "https://developer.apple.com/documentation/foundation/nsitemproviderfileoptions",
@@ -1723,14 +1088,6 @@
           "url": "https://developer.apple.com/documentation/foundation/nsitemproviderrepresentationvisibility/team"
         }
       }
-    },
-    "NSJSONReadingOptions": {
-      "doc": "Options used when creating Foundation objects from JSON data.",
-      "url": "https://developer.apple.com/documentation/foundation/nsjsonreadingoptions"
-    },
-    "NSJSONWritingOptions": {
-      "doc": "Options for writing JSON data.",
-      "url": "https://developer.apple.com/documentation/foundation/nsjsonwritingoptions"
     },
     "NSKeyValueChange": {
       "doc": "The kinds of changes that can be observed.",
@@ -1779,14 +1136,6 @@
     "NSKeyValueSetMutationKind": {
       "url": "https://developer.apple.com/documentation/foundation/nskeyvaluesetmutationkind"
     },
-    "NSLengthFormatterUnit": {
-      "doc": "The units supported by the NSLengthFormatter class.",
-      "url": "https://developer.apple.com/documentation/foundation/nslengthformatterunit"
-    },
-    "NSLinguisticTaggerOptions": {
-      "doc": "Constants for linguistic tagger enumeration specifying which tokens to omit and whether to join names.",
-      "url": "https://developer.apple.com/documentation/foundation/nslinguistictaggeroptions"
-    },
     "NSLinguisticTaggerUnit": {
       "doc": "Constants representing linguistic units.",
       "url": "https://developer.apple.com/documentation/foundation/nslinguistictaggerunit",
@@ -1809,68 +1158,6 @@
         }
       }
     },
-    "NSLocaleLanguageDirection": {
-      "doc": "The directions that a language may take across a page of text.",
-      "url": "https://developer.apple.com/documentation/foundation/nslocalelanguagedirection"
-    },
-    "NSMachPortOptions": {
-      "doc": "Used to remove access rights to a mach port when the NSMachPort object is invalidated or destroyed.",
-      "url": "https://developer.apple.com/documentation/foundation/nsmachportoptions",
-      "members": {
-        "NSMachPortDeallocateNone": {
-          "doc": "Do not remove any send or receive rights.",
-          "url": "https://developer.apple.com/documentation/foundation/nsmachportoptions/nsmachportdeallocatenone"
-        }
-      }
-    },
-    "NSMassFormatterUnit": {
-      "doc": "The units supported by the NSMassFormatter class.",
-      "url": "https://developer.apple.com/documentation/foundation/nsmassformatterunit"
-    },
-    "NSMatchingOptions": {
-      "doc": "The matching options constants specify the reporting, completion and matching rules to the expression matching methods. These constants are used by all methods that search for, or replace values, using a regular expression.",
-      "url": "https://developer.apple.com/documentation/foundation/nsmatchingoptions"
-    },
-    "NSMeasurementFormatterUnitOptions": {
-      "doc": "Measurement formatter options.",
-      "url": "https://developer.apple.com/documentation/foundation/nsmeasurementformatterunitoptions"
-    },
-    "NSNetServiceOptions": {
-      "doc": "These constants specify options for a network service.",
-      "url": "https://developer.apple.com/documentation/foundation/nsnetserviceoptions"
-    },
-    "NSNetServicesError": {
-      "doc": "These constants identify errors that can occur when accessing net services.",
-      "url": "https://developer.apple.com/documentation/foundation/nsnetserviceserror"
-    },
-    "NSNotificationCoalescing": {
-      "doc": "The constants that specify how notifications are coalesced.",
-      "url": "https://developer.apple.com/documentation/foundation/nsnotificationcoalescing"
-    },
-    "NSNotificationSuspensionBehavior": {
-      "doc": "These constants specify the types of notification delivery suspension behaviors.",
-      "url": "https://developer.apple.com/documentation/foundation/nsnotificationsuspensionbehavior"
-    },
-    "NSNumberFormatterBehavior": {
-      "doc": "These constants specify the behavior of a number formatter. These constants are returned by the defaultFormatterBehavior class method and the formatterBehavior property.",
-      "url": "https://developer.apple.com/documentation/foundation/nsnumberformatterbehavior"
-    },
-    "NSNumberFormatterPadPosition": {
-      "doc": "These constants are used to specify how numbers should be padded. These constants are used by the paddingPosition property.",
-      "url": "https://developer.apple.com/documentation/foundation/nsnumberformatterpadposition"
-    },
-    "NSNumberFormatterRoundingMode": {
-      "doc": "These constants are used to specify how numbers should be rounded. These constants are used by the roundingMode property.",
-      "url": "https://developer.apple.com/documentation/foundation/nsnumberformatterroundingmode"
-    },
-    "NSNumberFormatterStyle": {
-      "doc": "The predefined number format styles used by the numberStyle property.",
-      "url": "https://developer.apple.com/documentation/foundation/nsnumberformatterstyle"
-    },
-    "NSOperationQueuePriority": {
-      "doc": "These constants let you prioritize the order in which operations execute.",
-      "url": "https://developer.apple.com/documentation/foundation/nsoperationqueuepriority"
-    },
     "NSOrderedCollectionDifferenceCalculationOptions": {
       "doc": "Constants that specify the options to use when creating an ordered collection difference.",
       "url": "https://developer.apple.com/documentation/foundation/nsorderedcollectiondifferencecalculationoptions",
@@ -1892,32 +1179,6 @@
           "url": "https://developer.apple.com/documentation/foundation/nsorderedcollectiondifferencecalculationoptions/init(rawvalue:)"
         }
       }
-    },
-    "NSPersonNameComponentsFormatterOptions": {
-      "doc": "Options for formatting person name components.",
-      "url": "https://developer.apple.com/documentation/foundation/nspersonnamecomponentsformatteroptions"
-    },
-    "NSPersonNameComponentsFormatterStyle": {
-      "doc": "The formatting styles for person name components.",
-      "url": "https://developer.apple.com/documentation/foundation/nspersonnamecomponentsformatterstyle"
-    },
-    "NSPointerFunctionsOptions": {
-      "doc": "Defines the memory and personality options for an NSPointerFunctions object.",
-      "url": "https://developer.apple.com/documentation/foundation/nspointerfunctionsoptions",
-      "members": {
-        "NSPointerFunctionsZeroingWeakMemory": {
-          "doc": "Use weak read and write barriers; use garbage-collected memory on copyIn.",
-          "url": "https://developer.apple.com/documentation/foundation/nspointerfunctionsoptions/nspointerfunctionszeroingweakmemory"
-        }
-      }
-    },
-    "NSPostingStyle": {
-      "doc": "The constants that specify when notifications are posted.",
-      "url": "https://developer.apple.com/documentation/foundation/nspostingstyle"
-    },
-    "NSPredicateOperatorType": {
-      "doc": "Defines the type of comparison for a comparison predicate.",
-      "url": "https://developer.apple.com/documentation/foundation/nspredicateoperatortype"
     },
     "NSPresentationIntentKind": {
       "doc": "An enumeration of intended display styles for blocks of text like paragraphs, lists, and code blocks.",
@@ -1991,28 +1252,6 @@
         }
       }
     },
-    "NSProcessInfoThermalState": {
-      "doc": "Values used to indicate the system’s thermal state.",
-      "url": "https://developer.apple.com/documentation/foundation/nsprocessinfothermalstate"
-    },
-    "NSPropertyListFormat": {
-      "doc": "These constants are used to specify a property list serialization format.",
-      "url": "https://developer.apple.com/documentation/foundation/nspropertylistformat"
-    },
-    "NSPropertyListMutabilityOptions": {
-      "doc": "These constants specify mutability options in property lists.",
-      "url": "https://developer.apple.com/documentation/foundation/nspropertylistmutabilityoptions",
-      "members": {
-        "NSPropertyListImmutable": {
-          "doc": "Causes the returned property list to contain immutable objects.",
-          "url": "https://developer.apple.com/documentation/foundation/nspropertylistmutabilityoptions/nspropertylistimmutable"
-        }
-      }
-    },
-    "NSQualityOfService": {
-      "doc": "Constants that indicate the nature and importance of work to the system.",
-      "url": "https://developer.apple.com/documentation/foundation/nsqualityofservice"
-    },
     "NSRectEdge": {
       "url": "https://developer.apple.com/documentation/foundation/nsrectedge",
       "members": {
@@ -2050,22 +1289,6 @@
         }
       }
     },
-    "NSRelativeDateTimeFormatterStyle": {
-      "doc": "A type that represents the style to use when formatting relative dates, such as “1 week ago” or “last week”.",
-      "url": "https://developer.apple.com/documentation/foundation/nsrelativedatetimeformatterstyle"
-    },
-    "NSRelativeDateTimeFormatterUnitsStyle": {
-      "doc": "A type that represents the style to use when formatting the units of relative dates.",
-      "url": "https://developer.apple.com/documentation/foundation/nsrelativedatetimeformatterunitsstyle"
-    },
-    "NSRelativePosition": {
-      "doc": "These constants are used by relativePosition and relativePosition.",
-      "url": "https://developer.apple.com/documentation/foundation/nsrelativeposition"
-    },
-    "NSRoundingMode": {
-      "doc": "These constants specify rounding behaviors.",
-      "url": "https://developer.apple.com/documentation/foundation/nsroundingmode"
-    },
     "NSSaveOptions": {
       "doc": "The saveOptions method returns one of the following constants to indicate how to deal with saving any modified documents:",
       "url": "https://developer.apple.com/documentation/foundation/nssaveoptions",
@@ -2084,14 +1307,6 @@
         }
       }
     },
-    "NSSearchPathDirectory": {
-      "doc": "The location of significant directories.",
-      "url": "https://developer.apple.com/documentation/foundation/nssearchpathdirectory"
-    },
-    "NSSearchPathDomainMask": {
-      "doc": "Domain constants specifying base locations to use when you search for significant directories.",
-      "url": "https://developer.apple.com/documentation/foundation/nssearchpathdomainmask"
-    },
     "NSSortOptions": {
       "doc": "Options for block sorting operations.",
       "url": "https://developer.apple.com/documentation/foundation/nssortoptions",
@@ -2105,50 +1320,6 @@
           "url": "https://developer.apple.com/documentation/foundation/nssortoptions/stable"
         }
       }
-    },
-    "NSStreamStatus": {
-      "doc": "The type declared for the constants listed in doc:stream/stream_status_constants.",
-      "url": "https://developer.apple.com/documentation/foundation/nsstreamstatus"
-    },
-    "NSStringCompareOptions": {
-      "doc": "These values represent the options available to many of the string classes’ search and comparison methods.",
-      "url": "https://developer.apple.com/documentation/foundation/nsstringcompareoptions"
-    },
-    "NSStringEncodingConversionOptions": {
-      "doc": "Options for converting string encodings.",
-      "url": "https://developer.apple.com/documentation/foundation/nsstringencodingconversionoptions"
-    },
-    "NSStringEnumerationOptions": {
-      "doc": "Constants to specify kinds of substrings and styles of enumeration.",
-      "url": "https://developer.apple.com/documentation/foundation/nsstringenumerationoptions"
-    },
-    "NSTaskTerminationReason": {
-      "doc": "Constants that specify the termination reason values that the system returns.",
-      "url": "https://developer.apple.com/documentation/foundation/nstaskterminationreason"
-    },
-    "NSTestComparisonOperation": {
-      "doc": "These are passed to initWithObjectSpecifier:comparisonOperator:testObject: to specify the comparison operator.",
-      "url": "https://developer.apple.com/documentation/foundation/nstestcomparisonoperation"
-    },
-    "NSTimeZoneNameStyle": {
-      "doc": "Constants you use to specify a style when presenting time zone names.",
-      "url": "https://developer.apple.com/documentation/foundation/nstimezonenamestyle"
-    },
-    "NSURLBookmarkCreationOptions": {
-      "doc": "Options used when creating bookmark data.",
-      "url": "https://developer.apple.com/documentation/foundation/nsurlbookmarkcreationoptions"
-    },
-    "NSURLBookmarkResolutionOptions": {
-      "doc": "Options used when resolving bookmark data.",
-      "url": "https://developer.apple.com/documentation/foundation/nsurlbookmarkresolutionoptions"
-    },
-    "NSURLCacheStoragePolicy": {
-      "doc": "These constants specify the caching strategy used by an NSCachedURLResponse object.",
-      "url": "https://developer.apple.com/documentation/foundation/nsurlcachestoragepolicy"
-    },
-    "NSURLCredentialPersistence": {
-      "doc": "Constants that specify how long the credential will be kept.",
-      "url": "https://developer.apple.com/documentation/foundation/nsurlcredentialpersistence"
     },
     "NSURLErrorNetworkUnavailableReason": {
       "doc": "An enumeration of reasons why a task couldn’t satisfy networking constraints.",
@@ -2172,108 +1343,15 @@
         }
       }
     },
-    "NSURLHandleStatus": {
-      "doc": "These following constants are defined by NSURLHandle and are returned by status.",
-      "url": "https://developer.apple.com/documentation/foundation/nsurlhandlestatus"
-    },
-    "NSURLRelationship": {
-      "doc": "Constants indicating the relationship between a directory and an item.",
-      "url": "https://developer.apple.com/documentation/foundation/nsurlrelationship"
-    },
-    "NSURLRequestAttribution": {
-      "doc": "The entities that can make a network request.",
-      "url": "https://developer.apple.com/documentation/foundation/nsurlrequestattribution"
-    },
-    "NSURLRequestCachePolicy": {
-      "doc": "The constants used to specify interaction with the cached responses.",
-      "url": "https://developer.apple.com/documentation/foundation/nsurlrequestcachepolicy"
-    },
-    "NSURLRequestNetworkServiceType": {
-      "doc": "Constants that specify how a request uses network resources.",
-      "url": "https://developer.apple.com/documentation/foundation/nsurlrequestnetworkservicetype"
-    },
-    "NSURLSessionAuthChallengeDisposition": {
-      "doc": "Constants passed by session or task delegates to the provided continuation block in response to an authentication challenge.",
-      "url": "https://developer.apple.com/documentation/foundation/nsurlsessionauthchallengedisposition"
-    },
-    "NSURLSessionDelayedRequestDisposition": {
-      "doc": "The action to take on a delayed URL session task.",
-      "url": "https://developer.apple.com/documentation/foundation/nsurlsessiondelayedrequestdisposition"
-    },
-    "NSURLSessionResponseDisposition": {
-      "doc": "Constants indicating how a data or upload session should proceed after receiving the initial headers.",
-      "url": "https://developer.apple.com/documentation/foundation/nsurlsessionresponsedisposition"
-    },
-    "NSURLSessionTaskMetricsDomainResolutionProtocol": {
-      "url": "https://developer.apple.com/documentation/foundation/nsurlsessiontaskmetricsdomainresolutionprotocol"
-    },
-    "NSURLSessionTaskMetricsResourceFetchType": {
-      "doc": "The manner in which a resource is fetched.",
-      "url": "https://developer.apple.com/documentation/foundation/nsurlsessiontaskmetricsresourcefetchtype"
-    },
-    "NSURLSessionTaskState": {
-      "doc": "Constants for determining the current state of a task.",
-      "url": "https://developer.apple.com/documentation/foundation/nsurlsessiontaskstate"
-    },
-    "NSURLSessionWebSocketCloseCode": {
-      "doc": "A code that indicates why a WebSocket connection closed.",
-      "url": "https://developer.apple.com/documentation/foundation/nsurlsessionwebsocketclosecode"
-    },
     "NSURLSessionWebSocketMessageType": {
       "doc": "An enumeration of the types of messages sent and received.",
       "url": "https://developer.apple.com/documentation/foundation/nsurlsessionwebsocketmessagetype"
-    },
-    "NSUserNotificationActivationType": {
-      "doc": "These constants describe how the user notification was activated.",
-      "url": "https://developer.apple.com/documentation/foundation/nsusernotificationactivationtype"
-    },
-    "NSWhoseSubelementIdentifier": {
-      "doc": "NSWhoseSpecifier uses these constants to specify sub-elements within the collection of objects being tested that pass the specifier’s test.",
-      "url": "https://developer.apple.com/documentation/foundation/nswhosesubelementidentifier"
-    },
-    "NSXMLDTDNodeKind": {
-      "doc": "The type defined for the constants that specify the kind and subkind of DTD declaration represented by an NSXMLDTDNode object. You set the DTD-node kind using the doc:nsxmldtdnode/1806486-setdtdkind method.",
-      "url": "https://developer.apple.com/documentation/foundation/nsxmldtdnodekind"
-    },
-    "NSXMLDocumentContentKind": {
-      "doc": "Type used to define the kind of document content.",
-      "url": "https://developer.apple.com/documentation/foundation/nsxmldocumentcontentkind"
-    },
-    "NSXMLNodeKind": {
-      "doc": "NSXMLNode declares the following constants of type NSXMLNodeKind for specifying a node’s kind in the initializer methods initWithKind: and initWithKind:options::",
-      "url": "https://developer.apple.com/documentation/foundation/nsxmlnodekind"
-    },
-    "NSXMLNodeOptions": {
-      "doc": "These constants are input and output options for all NSXMLNode objects (unless otherwise indicated), including NSXMLDocument objects. You can specify these options in the NSXMLNode methods initWithKind:options: and XMLStringWithOptions:.",
-      "url": "https://developer.apple.com/documentation/foundation/nsxmlnodeoptions",
-      "members": {
-        "NSXMLNodeOptionsNone": {
-          "doc": "No options are requested for this input or output action.",
-          "url": "https://developer.apple.com/documentation/foundation/nsxmlnodeoptions/nsxmlnodeoptionsnone"
-        }
-      }
-    },
-    "NSXMLParserError": {
-      "doc": "The following error codes are defined by NSXMLParser. For error codes not listed here, see the \u003clibxml/xmlerror.h\u003e header file.",
-      "url": "https://developer.apple.com/documentation/foundation/nsxmlparsererror"
-    },
-    "NSXMLParserExternalEntityResolvingPolicy": {
-      "doc": "Defines the external entity resolving policy used by an NSXMLParser instance.",
-      "url": "https://developer.apple.com/documentation/foundation/nsxmlparserexternalentityresolvingpolicy"
-    },
-    "NSXPCConnectionOptions": {
-      "doc": "Options that you can pass to a connection.",
-      "url": "https://developer.apple.com/documentation/foundation/nsxpcconnectionoptions"
     }
   },
   "structs": {
     "NSAffineTransformStruct": {
       "doc": "A structure that defines the three-by-three matrix that performs an affine transform between two coordinate systems.",
       "url": "https://developer.apple.com/documentation/foundation/nsaffinetransformstruct"
-    },
-    "NSDecimal": {
-      "doc": "A structure representing a base-10 number.",
-      "url": "https://developer.apple.com/documentation/foundation/nsdecimal"
     },
     "NSEdgeInsets": {
       "doc": "A description of the distance between the edges of two rectangles.",
@@ -2302,10 +1380,6 @@
     "NSMapTableValueCallBacks": {
       "doc": "The function pointers used to configure behavior of NSMapTable with respect to value elements within a map table.",
       "url": "https://developer.apple.com/documentation/foundation/nsmaptablevaluecallbacks"
-    },
-    "NSOperatingSystemVersion": {
-      "doc": "A structure that contains version information about the currently executing operating system, including major, minor, and patch version numbers.",
-      "url": "https://developer.apple.com/documentation/foundation/nsoperatingsystemversion"
     },
     "NSSwappedDouble": {
       "doc": "Opaque structure containing endian-independent double value.",
@@ -2914,6 +1988,10 @@
       }
     },
     "NSAttributedString": {
+      "+loadFromHTMLWithRequest:options:completionHandler:": {
+        "doc": "Creates an attributed string by converting the contents of the specified HTML URL request.",
+        "url": "https://developer.apple.com/documentation/foundation/nsattributedstring/loadfromhtml(request:options:completionhandler:)"
+      },
       "-RTFDFileWrapperFromRange:documentAttributes:": {
         "doc": "Returns a file wrapper object that contains an RTFD document corresponding to the characters and attributes within the specified range.",
         "url": "https://developer.apple.com/documentation/foundation/nsattributedstring/rtfdfilewrapper(from:documentattributes:)"
@@ -3089,28 +2167,6 @@
       "-scheduleWithBlock:": {
         "doc": "Begins scheduling the background activity.",
         "url": "https://developer.apple.com/documentation/foundation/nsbackgroundactivityscheduler/schedule(_:)"
-      }
-    },
-    "NSBundle": {
-      "+bundleWithPath:": {
-        "doc": "Returns an NSBundle object that corresponds to the specified directory.",
-        "url": "https://developer.apple.com/documentation/foundation/nsbundle/bundlewithpath:"
-      },
-      "+loadNibFile:externalNameTable:withZone:": {
-        "doc": "Unarchives the contents of the nib file and links them to objects in your program.",
-        "url": "https://developer.apple.com/documentation/foundation/nsbundle/loadnibfile:externalnametable:withzone:-c.type.method"
-      },
-      "+loadNibNamed:owner:": {
-        "doc": "Unarchives the contents of the nib file and links them to a specific owner object.",
-        "url": "https://developer.apple.com/documentation/foundation/nsbundle/loadnibnamed:owner:"
-      },
-      "-loadNibFile:externalNameTable:withZone:": {
-        "doc": "Unarchives the contents of a nib file located in the receiver’s bundle.",
-        "url": "https://developer.apple.com/documentation/foundation/nsbundle/loadnibfile:externalnametable:withzone:-c.method"
-      },
-      "-localizedStringForKey:value:table:localizations:": {
-        "doc": "Look up a localized string given a list of available localizations.",
-        "url": "https://developer.apple.com/documentation/foundation/nsbundle/localizedstringforkey:value:table:localizations:"
       }
     },
     "NSBundleResourceRequest": {
@@ -4239,16 +3295,6 @@
         "url": "https://developer.apple.com/documentation/foundation/nsdatecomponents/week()"
       }
     },
-    "NSDateFormatter": {
-      "-allowsNaturalLanguage": {
-        "doc": "Returns a Boolean value that indicates whether the receiver attempts to process dates entered as a vernacular string.",
-        "url": "https://developer.apple.com/documentation/foundation/nsdateformatter/allowsnaturallanguage"
-      },
-      "-initWithDateFormat:allowNaturalLanguage:": {
-        "doc": "Initializes and returns an NSDateFormatter instance that uses the OS X 10.0 formatting behavior and the given date format string in its conversions.",
-        "url": "https://developer.apple.com/documentation/foundation/nsdateformatter/initwithdateformat:allownaturallanguage:"
-      }
-    },
     "NSDateInterval": {
       "-compare:": {
         "doc": "Compares the receiver with the specified date interval.",
@@ -4919,50 +3965,6 @@
         "url": "https://developer.apple.com/documentation/foundation/nsfilecoordinator/prepare(forreadingitemsat:options:writingitemsat:options:error:byaccessor:)"
       }
     },
-    "NSFileHandle": {
-      "-getOffset:error:": {
-        "doc": "Get the current position of the file pointer within the file.",
-        "url": "https://developer.apple.com/documentation/foundation/nsfilehandle/getoffset:error:"
-      },
-      "-readDataToEndOfFileAndReturnError:": {
-        "doc": "Reads the available data synchronously up to the end of file or maximum number of bytes.",
-        "url": "https://developer.apple.com/documentation/foundation/nsfilehandle/readdatatoendoffileandreturnerror:"
-      },
-      "-readDataUpToLength:error:": {
-        "doc": "Reads data synchronously up to the specified number of bytes.",
-        "url": "https://developer.apple.com/documentation/foundation/nsfilehandle/readdatauptolength:error:"
-      },
-      "-seekToEndReturningOffset:error:": {
-        "doc": "Places the file pointer at the end of the file referenced by the file handle and returns the new file offset.",
-        "url": "https://developer.apple.com/documentation/foundation/nsfilehandle/seektoendreturningoffset:error:"
-      },
-      "-writeData:error:": {
-        "doc": "Writes the specified data synchronously to the file handle.",
-        "url": "https://developer.apple.com/documentation/foundation/nsfilehandle/writedata:error:"
-      }
-    },
-    "NSFileManager": {
-      "-copyPath:toPath:handler:": {
-        "doc": "Copies the directory or file specified in a given path to a different location in the file system identified by another path.",
-        "url": "https://developer.apple.com/documentation/foundation/nsfilemanager/copypath:topath:handler:"
-      },
-      "-enumeratorAtURL:includingPropertiesForKeys:options:errorHandler:": {
-        "doc": "Returns a directory enumerator object that can be used to perform a deep enumeration of the directory at the specified URL.",
-        "url": "https://developer.apple.com/documentation/foundation/nsfilemanager/enumeratoraturl:includingpropertiesforkeys:options:errorhandler:"
-      },
-      "-linkPath:toPath:handler:": {
-        "doc": "Creates a link from a source to a destination.",
-        "url": "https://developer.apple.com/documentation/foundation/nsfilemanager/linkpath:topath:handler:"
-      },
-      "-movePath:toPath:handler:": {
-        "doc": "Moves the directory or file specified by a given path to a different location in the file system identified by another path.",
-        "url": "https://developer.apple.com/documentation/foundation/nsfilemanager/movepath:topath:handler:"
-      },
-      "-removeFileAtPath:handler:": {
-        "doc": "Deletes the file, link, or directory (including, recursively, all subdirectories, files, and links in the directory) identified by a given path.",
-        "url": "https://developer.apple.com/documentation/foundation/nsfilemanager/removefileatpath:handler:"
-      }
-    },
     "NSFileProviderService": {
       "-getFileProviderConnectionWithCompletionHandler:": {
         "doc": "Asynchronously returns the service’s connection object.",
@@ -5053,12 +4055,6 @@
         "url": "https://developer.apple.com/documentation/foundation/nsgarbagecollector/zone"
       }
     },
-    "NSHTTPCookie": {
-      "+cookieWithProperties:": {
-        "doc": "Creates and initializes an HTTP cookie object using the provided properties.",
-        "url": "https://developer.apple.com/documentation/foundation/nshttpcookie/cookiewithproperties:"
-      }
-    },
     "NSHashTable": {
       "+hashTableWithOptions:": {
         "doc": "Returns a hash table with given pointer functions options.",
@@ -5127,20 +4123,6 @@
       "-unionHashTable:": {
         "doc": "Adds each element in another given hash table to the receiving hash table, if not present.",
         "url": "https://developer.apple.com/documentation/foundation/nshashtable/union(_:)"
-      }
-    },
-    "NSHost": {
-      "+flushHostCache": {
-        "doc": "Releases the cache of existing NSHost objects so subsequent requests for NSHost objects create new ones.",
-        "url": "https://developer.apple.com/documentation/foundation/nshost/flushhostcache"
-      },
-      "+isHostCacheEnabled": {
-        "doc": "Indicates whether caching is turned on or off.",
-        "url": "https://developer.apple.com/documentation/foundation/nshost/ishostcacheenabled"
-      },
-      "+setHostCacheEnabled:": {
-        "doc": "Specifies whether the receiver is to cache instances as it creates them to avoid creating duplicate instances.",
-        "url": "https://developer.apple.com/documentation/foundation/nshost/sethostcacheenabled:"
       }
     },
     "NSIndexPath": {
@@ -5327,20 +4309,6 @@
       "-initWithMorphology:": {
         "doc": "Creates an inflection rule with the given morphology.",
         "url": "https://developer.apple.com/documentation/foundation/nsinflectionruleexplicit/initwithmorphology:"
-      }
-    },
-    "NSInputStream": {
-      "+inputStreamWithData:": {
-        "doc": "Creates and returns an initialized NSInputStream object for reading from a given NSData object.",
-        "url": "https://developer.apple.com/documentation/foundation/nsinputstream/inputstreamwithdata:"
-      },
-      "+inputStreamWithFileAtPath:": {
-        "doc": "Creates and returns an initialized NSInputStream object that reads data from the file at a given path.",
-        "url": "https://developer.apple.com/documentation/foundation/nsinputstream/inputstreamwithfileatpath:"
-      },
-      "+inputStreamWithURL:": {
-        "doc": "Creates and returns an initialized NSInputStream object that reads data from the file at a given URL.",
-        "url": "https://developer.apple.com/documentation/foundation/nsinputstream/inputstreamwithurl:"
       }
     },
     "NSInvocation": {
@@ -7375,26 +6343,6 @@
         "url": "https://developer.apple.com/documentation/foundation/nsorthography/languages(forscript:)"
       }
     },
-    "NSOutputStream": {
-      "+outputStreamToBuffer:capacity:": {
-        "doc": "Creates and returns an initialized output stream that can write to a provided buffer.",
-        "url": "https://developer.apple.com/documentation/foundation/nsoutputstream/outputstreamtobuffer:capacity:"
-      },
-      "+outputStreamToFileAtPath:append:": {
-        "doc": "Creates and returns an initialized output stream for writing to a specified file.",
-        "url": "https://developer.apple.com/documentation/foundation/nsoutputstream/outputstreamtofileatpath:append:"
-      },
-      "+outputStreamWithURL:append:": {
-        "doc": "Creates and returns an initialized output stream for writing to a specified URL.",
-        "url": "https://developer.apple.com/documentation/foundation/nsoutputstream/outputstreamwithurl:append:"
-      }
-    },
-    "NSPipe": {
-      "+pipe": {
-        "doc": "Returns an NSPipe object.",
-        "url": "https://developer.apple.com/documentation/foundation/nspipe/pipe"
-      }
-    },
     "NSPointerArray": {
       "+pointerArrayWithOptions:": {
         "doc": "Returns a new pointer array initialized to use the given options.",
@@ -7461,20 +6409,6 @@
       "-initWithOptions:": {
         "doc": "Returns an NSPointerFunctions object initialized with the given options.",
         "url": "https://developer.apple.com/documentation/foundation/nspointerfunctions/init(options:)"
-      }
-    },
-    "NSPort": {
-      "+port": {
-        "doc": "Creates and returns a new NSPort object capable of both sending and receiving messages.",
-        "url": "https://developer.apple.com/documentation/foundation/nsport/port"
-      },
-      "-addConnection:toRunLoop:forMode:": {
-        "doc": "Adds the receiver to the list of ports monitored by a given run loop for the given input mode.",
-        "url": "https://developer.apple.com/documentation/foundation/nsport/addconnection:torunloop:formode:"
-      },
-      "-removeConnection:fromRunLoop:forMode:": {
-        "doc": "Removes the receiver from the list of ports monitored by runLoop in the given input mode, mode.",
-        "url": "https://developer.apple.com/documentation/foundation/nsport/removeconnection:fromrunloop:formode:"
       }
     },
     "NSPortCoder": {
@@ -7643,12 +6577,6 @@
         "url": "https://developer.apple.com/documentation/foundation/nspresentationintent/isequivalenttopresentationintent:"
       }
     },
-    "NSProgress": {
-      "-performAsCurrentWithPendingUnitCount:usingBlock:": {
-        "doc": "Retrieves the current thread’s progress object, executes the specified block, and increments the progress object by the specified units of work.",
-        "url": "https://developer.apple.com/documentation/foundation/nsprogress/performascurrentwithpendingunitcount:usingblock:"
-      }
-    },
     "NSProtocolChecker": {
       "+protocolCheckerWithTarget:protocol:": {
         "doc": "Allocates and initializes an NSProtocolChecker instance that will forward any messages in aProtocol to anObject, the protocol checker’s target.",
@@ -7763,18 +6691,6 @@
       "-initWithContainerClassDescription:containerSpecifier:key:relativePosition:baseSpecifier:": {
         "doc": "Invokes the super class’s initWithContainerClassDescription:containerSpecifier:key: method and initializes the relative position and base specifier to relPos and baseSpecifier.",
         "url": "https://developer.apple.com/documentation/foundation/nsrelativespecifier/init(containerclassdescription:containerspecifier:key:relativeposition:basespecifier:)"
-      }
-    },
-    "NSRunLoop": {
-      "-configureAsServer": {
-        "doc": "Deprecated. Does nothing.",
-        "url": "https://developer.apple.com/documentation/foundation/nsrunloop/configureasserver"
-      }
-    },
-    "NSScanner": {
-      "+scannerWithString:": {
-        "doc": "Returns an NSScanner object that scans a given string.",
-        "url": "https://developer.apple.com/documentation/foundation/nsscanner/scannerwithstring:"
       }
     },
     "NSScriptClassDescription": {
@@ -9175,12 +8091,6 @@
         "url": "https://developer.apple.com/documentation/foundation/nsurl/write(to:)"
       }
     },
-    "NSURLCache": {
-      "-initWithMemoryCapacity:diskCapacity:directoryURL:": {
-        "doc": "Creates a URL cache object with the specified memory and disk capacities, in the specified directory.",
-        "url": "https://developer.apple.com/documentation/foundation/nsurlcache/initwithmemorycapacity:diskcapacity:directoryurl:"
-      }
-    },
     "NSURLComponents": {
       "+componentsWithString:": {
         "doc": "Returns a URL components object by parsing a URL in string form.",
@@ -9259,20 +8169,6 @@
       "-unscheduleFromRunLoop:forMode:": {
         "doc": "Causes the connection to stop calling delegate methods in the specified run loop and mode.",
         "url": "https://developer.apple.com/documentation/foundation/nsurlconnection/unschedule(from:formode:)"
-      }
-    },
-    "NSURLCredential": {
-      "+credentialForTrust:": {
-        "doc": "Creates a URL credential instance for server trust authentication with a given accepted trust.",
-        "url": "https://developer.apple.com/documentation/foundation/nsurlcredential/credentialfortrust:"
-      },
-      "+credentialWithIdentity:certificates:persistence:": {
-        "doc": "Creates a URL credential instance for resolving a client certificate authentication challenge.",
-        "url": "https://developer.apple.com/documentation/foundation/nsurlcredential/credentialwithidentity:certificates:persistence:"
-      },
-      "+credentialWithUser:password:persistence:": {
-        "doc": "Creates a URL credential instance for internet password authentication with a given user name and password, using a given persistence setting.",
-        "url": "https://developer.apple.com/documentation/foundation/nsurlcredential/credentialwithuser:password:persistence:"
       }
     },
     "NSURLDownload": {
@@ -9427,16 +8323,6 @@
         "url": "https://developer.apple.com/documentation/foundation/nsurlrequest/value(forhttpheaderfield:)"
       }
     },
-    "NSURLSessionWebSocketTask": {
-      "-receiveMessageWithCompletionHandler:": {
-        "doc": "Reads a WebSocket message once all the frames of the message are available.",
-        "url": "https://developer.apple.com/documentation/foundation/nsurlsessionwebsockettask/receivemessagewithcompletionhandler:"
-      },
-      "-sendMessage:completionHandler:": {
-        "doc": "Sends a WebSocket message, receiving the result in a completion handler.",
-        "url": "https://developer.apple.com/documentation/foundation/nsurlsessionwebsockettask/sendmessage:completionhandler:"
-      }
-    },
     "NSUUID": {
       "+UUID": {
         "doc": "Create and returns a new UUID with RFC 4122 version 4 random bytes.",
@@ -9577,12 +8463,6 @@
       "-setObjectZone:": {
         "doc": "Sets the memory zone used to allocate decoded objects.",
         "url": "https://developer.apple.com/documentation/foundation/nsunarchiver/setobjectzone:"
-      }
-    },
-    "NSUndoManager": {
-      "-registerUndoWithTarget:handler:": {
-        "doc": "Records a single undo operation for a given target so that when the manager performs an undo, it executes the specified block.",
-        "url": "https://developer.apple.com/documentation/foundation/nsundomanager/registerundowithtarget:handler:"
       }
     },
     "NSUniqueIDSpecifier": {
@@ -10553,8 +9433,8 @@
         "url": "https://developer.apple.com/documentation/foundation/nscoder/requiressecurecoding"
       },
       "string(for:)": {
-        "doc": "Returns a string formatted to contain the data from a rectangle.",
-        "url": "https://developer.apple.com/documentation/foundation/nscoder/string(for:)-4qz0a"
+        "doc": "Returns a string formatted to contain the data from an affine transform.",
+        "url": "https://developer.apple.com/documentation/foundation/nscoder/string(for:)-6yx6n"
       },
       "systemVersion": {
         "doc": "The system version in effect for the archive.",
@@ -12397,24 +11277,6 @@
         "url": "https://developer.apple.com/documentation/foundation/nspresentationintent/row"
       }
     },
-    "NSProgress": {
-      "estimatedTimeRemaining": {
-        "doc": "A value that indicates the estimated amount of time remaining to complete the progress.",
-        "url": "https://developer.apple.com/documentation/foundation/nsprogress/estimatedtimeremaining"
-      },
-      "fileCompletedCount": {
-        "doc": "The number of completed files for a file progress object.",
-        "url": "https://developer.apple.com/documentation/foundation/nsprogress/filecompletedcount"
-      },
-      "fileTotalCount": {
-        "doc": "The total number of files for a file progress object.",
-        "url": "https://developer.apple.com/documentation/foundation/nsprogress/filetotalcount"
-      },
-      "throughput": {
-        "doc": "A value that represents the speed of data processing, in bytes per second.",
-        "url": "https://developer.apple.com/documentation/foundation/nsprogress/throughput"
-      }
-    },
     "NSProtocolChecker": {
       "protocol": {
         "doc": "Returns the protocol object the receiver uses.",
@@ -13337,12 +12199,6 @@
         "url": "https://developer.apple.com/documentation/foundation/nsurlhandle/status-swift.enum"
       }
     },
-    "NSURLProtectionSpace": {
-      "isProxy": {
-        "doc": "A Boolean value that indicates whether the receiver represents a proxy server.",
-        "url": "https://developer.apple.com/documentation/foundation/nsurlprotectionspace/isproxy"
-      }
-    },
     "NSURLQueryItem": {
       "name": {
         "doc": "The name of the query item.",
@@ -13445,30 +12301,6 @@
       "timeoutInterval": {
         "doc": "The request’s timeout interval, in seconds.",
         "url": "https://developer.apple.com/documentation/foundation/nsurlrequest/timeoutinterval"
-      }
-    },
-    "NSURLSessionConfiguration": {
-      "proxyConfigurations": {
-        "doc": "An array of proxy configuration objects containing information about the proxies to use within this session.",
-        "url": "https://developer.apple.com/documentation/foundation/nsurlsessionconfiguration/proxyconfigurations"
-      }
-    },
-    "NSURLSessionTaskTransactionMetrics": {
-      "localPort": {
-        "doc": "The port number of the local interface for the connection.",
-        "url": "https://developer.apple.com/documentation/foundation/nsurlsessiontasktransactionmetrics/localport"
-      },
-      "negotiatedTLSCipherSuite": {
-        "doc": "The TLS cipher suite the task negotiated with the endpoint for the connection.",
-        "url": "https://developer.apple.com/documentation/foundation/nsurlsessiontasktransactionmetrics/negotiatedtlsciphersuite"
-      },
-      "negotiatedTLSProtocolVersion": {
-        "doc": "The TLS protocol version the task negotiated with the endpoint for the connection.",
-        "url": "https://developer.apple.com/documentation/foundation/nsurlsessiontasktransactionmetrics/negotiatedtlsprotocolversion"
-      },
-      "remotePort": {
-        "doc": "The port number of the remote interface for the connection.",
-        "url": "https://developer.apple.com/documentation/foundation/nsurlsessiontasktransactionmetrics/remoteport"
       }
     },
     "NSUUID": {

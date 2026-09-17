@@ -16,8 +16,6 @@ import (
 )
 
 // WorkspaceOpenConfiguration is an idiomatic wrapper over the Objective-C class NSWorkspaceOpenConfiguration.
-//
-// The configuration options for opening URLs or launching apps.
 type WorkspaceOpenConfiguration struct {
 	objref.Handle
 }

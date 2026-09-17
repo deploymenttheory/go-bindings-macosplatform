@@ -15,18 +15,6 @@
       "doc": "A context-sensitive function that helps VoiceOver users find the next instance of a related accessibility element.",
       "url": "https://developer.apple.com/documentation/appkit/nsaccessibilitycustomrotor"
     },
-    "NSAccessibilityCustomRotorItemResult": {
-      "doc": "A target accessibility element that a custom rotor references.",
-      "url": "https://developer.apple.com/documentation/appkit/nsaccessibilitycustomrotoritemresult"
-    },
-    "NSAccessibilityCustomRotorSearchParameters": {
-      "doc": "Search parameters for a custom rotor.",
-      "url": "https://developer.apple.com/documentation/appkit/nsaccessibilitycustomrotorsearchparameters"
-    },
-    "NSAccessibilityElement": {
-      "doc": "The basic infrastructure necessary for interacting with an assistive app.",
-      "url": "https://developer.apple.com/documentation/appkit/nsaccessibilityelement"
-    },
     "NSActionCell": {
       "doc": "An active area inside a control.",
       "url": "https://developer.apple.com/documentation/appkit/nsactioncell"
@@ -186,10 +174,6 @@
       "doc": "An object that defines scroll direction, section spacing, and headers or footers for the layout.",
       "url": "https://developer.apple.com/documentation/appkit/nscollectionviewcompositionallayoutconfiguration"
     },
-    "NSCollectionViewDiffableDataSource": {
-      "doc": "The object you use to manage data and provide items for a collection view.",
-      "url": "https://developer.apple.com/documentation/appkit/nscollectionviewdiffabledatasource"
-    },
     "NSCollectionViewFlowLayout": {
       "doc": "A layout that organizes items into a flexible and configurable arrangement.",
       "url": "https://developer.apple.com/documentation/appkit/nscollectionviewflowlayout"
@@ -309,10 +293,6 @@
     "NSDictionaryControllerKeyValuePair": {
       "doc": "A set of methods implemented by arranged objects to give access to information about those objects.",
       "url": "https://developer.apple.com/documentation/appkit/nsdictionarycontrollerkeyvaluepair"
-    },
-    "NSDiffableDataSourceSnapshot": {
-      "doc": "A representation of the state of the data in a view at a specific point in time.",
-      "url": "https://developer.apple.com/documentation/appkit/nsdiffabledatasourcesnapshot"
     },
     "NSDockTile": {
       "doc": "The visual representation of your app’s miniaturized windows and app icon as they appear in the Dock.",
@@ -456,10 +436,6 @@
     "NSImageRep": {
       "doc": "A semiabstract superclass that provides subclasses that you use to draw an image from a particular type of source data.",
       "url": "https://developer.apple.com/documentation/appkit/nsimagerep"
-    },
-    "NSImageSymbolConfiguration": {
-      "doc": "An object that contains the specific font, style, and weight attributes to apply to a symbol image.",
-      "url": "https://developer.apple.com/documentation/appkit/nsimagesymbolconfiguration"
     },
     "NSImageView": {
       "doc": "A display of image data in a frame.",
@@ -709,6 +685,10 @@
       "doc": "An interface that provides visual feedback to the user about the status of an ongoing task.",
       "url": "https://developer.apple.com/documentation/appkit/nsprogressindicator"
     },
+    "NSRefreshController": {
+      "doc": "A controller that provides pull-to-refresh functionality for scroll views.",
+      "url": "https://developer.apple.com/documentation/appkit/nsrefreshcontroller"
+    },
     "NSResponder": {
       "doc": "An abstract class that forms the basis of event and command processing in AppKit.",
       "url": "https://developer.apple.com/documentation/appkit/nsresponder"
@@ -829,10 +809,6 @@
       "doc": "An object you use to specify attributes to create and style a drop shadow during drawing operations.",
       "url": "https://developer.apple.com/documentation/appkit/nsshadow"
     },
-    "NSSharingCollaborationModeRestriction": {
-      "doc": "Specifies whether a specific type of sharing should be disabled in the share picker, and if so, whether a reason should be provided for the disablement.",
-      "url": "https://developer.apple.com/documentation/appkit/nssharingcollaborationmoderestriction"
-    },
     "NSSharingService": {
       "doc": "An object that facilitates the sharing of content with social media services, or with apps like Mail or Safari.",
       "url": "https://developer.apple.com/documentation/appkit/nssharingservice"
@@ -914,6 +890,9 @@
       "doc": "An individual element displayed in the system menu bar.",
       "url": "https://developer.apple.com/documentation/appkit/nsstatusitem"
     },
+    "NSStatusItemExpandedInterfaceSession": {
+      "url": "https://developer.apple.com/documentation/appkit/nsstatusitemexpandedinterfacesession"
+    },
     "NSStepper": {
       "doc": "An interface with up and down arrow buttons for incrementing or decrementing a value.",
       "url": "https://developer.apple.com/documentation/appkit/nsstepper"
@@ -978,10 +957,6 @@
       "doc": "A set of related records, displayed in rows that represent individual records and columns that represent the attributes of those records.",
       "url": "https://developer.apple.com/documentation/appkit/nstableview"
     },
-    "NSTableViewDiffableDataSource": {
-      "doc": "The object you use to manage data and provide items for a table view.",
-      "url": "https://developer.apple.com/documentation/appkit/nstableviewdiffabledatasource"
-    },
     "NSTableViewRowAction": {
       "doc": "A single action to present when the user swipes horizontally on a table row.",
       "url": "https://developer.apple.com/documentation/appkit/nstableviewrowaction"
@@ -997,10 +972,6 @@
     "NSTextAttachment": {
       "doc": "The values for the attachment characteristics of attributed strings and related objects.",
       "url": "https://developer.apple.com/documentation/appkit/nstextattachment"
-    },
-    "NSTextAttachmentCell": {
-      "doc": "An object that implements the functionality of the text attachment cell protocol.",
-      "url": "https://developer.apple.com/documentation/appkit/nstextattachmentcell"
     },
     "NSTextAttachmentViewProvider": {
       "doc": "A container object that associates a text attachment at a particular document location with a view object.",
@@ -1084,6 +1055,10 @@
     "NSTextSelection": {
       "doc": "A class that represents a single logical selection context that corresponds to an insertion point.",
       "url": "https://developer.apple.com/documentation/appkit/nstextselection"
+    },
+    "NSTextSelectionManager": {
+      "doc": "An object that coordinates text selection behavior for custom text views.",
+      "url": "https://developer.apple.com/documentation/appkit/nstextselectionmanager"
     },
     "NSTextSelectionNavigation": {
       "doc": "An interface you use to expose methods for obtaining results from actions performed on text selections.",
@@ -1193,6 +1168,18 @@
       "doc": "A controller that manages a view, typically loaded from a nib file.",
       "url": "https://developer.apple.com/documentation/appkit/nsviewcontroller"
     },
+    "NSViewCornerConfiguration": {
+      "doc": "A configuration object that defines the corner styles of a view’s overall shape.",
+      "url": "https://developer.apple.com/documentation/appkit/nsviewcornerconfiguration"
+    },
+    "NSViewCornerRadii": {
+      "doc": "Provides a structured way to define custom corner radii for each corner of a view, along with a corner curve.",
+      "url": "https://developer.apple.com/documentation/appkit/nsviewcornerradii"
+    },
+    "NSViewCornerRadius": {
+      "doc": "Represents a radius used to round a corner. It supports fixed and adaptive configurations.",
+      "url": "https://developer.apple.com/documentation/appkit/nsviewcornerradius"
+    },
     "NSViewLayoutRegion": {
       "url": "https://developer.apple.com/documentation/appkit/nsviewlayoutregion"
     },
@@ -1219,14 +1206,6 @@
     "NSWorkspace": {
       "doc": "A workspace that can launch other apps and perform a variety of file-handling services.",
       "url": "https://developer.apple.com/documentation/appkit/nsworkspace"
-    },
-    "NSWorkspaceAuthorization": {
-      "doc": "The authorization granted to the app by the user.",
-      "url": "https://developer.apple.com/documentation/appkit/nsworkspaceauthorization"
-    },
-    "NSWorkspaceOpenConfiguration": {
-      "doc": "The configuration options for opening URLs or launching apps.",
-      "url": "https://developer.apple.com/documentation/appkit/nsworkspaceopenconfiguration"
     },
     "NSWritingToolsCoordinator": {
       "doc": "An object that manages interactions between Writing Tools and your custom text view.",
@@ -1257,10 +1236,6 @@
     "NSAccessibilityCustomRotorItemSearchDelegate": {
       "doc": "A delegate for a custom rotor that finds the next item result after performing a search with the specified search parameters.",
       "url": "https://developer.apple.com/documentation/appkit/nsaccessibilitycustomrotoritemsearchdelegate"
-    },
-    "NSAccessibilityElement": {
-      "doc": "The basic infrastructure necessary for interacting with an assistive app.",
-      "url": "https://developer.apple.com/documentation/appkit/nsaccessibilityelement"
     },
     "NSAccessibilityElementLoading": {
       "doc": "A role-based protocol that declares the minimum interface necessary for an accessibility element to support loading.",
@@ -1636,6 +1611,9 @@
       "doc": "Methods that responder subclasses implement to support key binding commands, such as inserting tabs and newlines, or moving the insertion point.",
       "url": "https://developer.apple.com/documentation/appkit/nsstandardkeybindingresponding"
     },
+    "NSStatusItemExpandedInterfaceDelegate": {
+      "url": "https://developer.apple.com/documentation/appkit/nsstatusitemexpandedinterfacedelegate"
+    },
     "NSTabViewDelegate": {
       "doc": "The NSTabViewDelegate protocol defines the optional methods implemented by delegates of NSTabView objects.",
       "url": "https://developer.apple.com/documentation/appkit/nstabviewdelegate"
@@ -1647,10 +1625,6 @@
     "NSTableViewDelegate": {
       "doc": "A set of optional methods you implement in a table view delegate to customize the behavior of the table view.",
       "url": "https://developer.apple.com/documentation/appkit/nstableviewdelegate"
-    },
-    "NSTextAttachmentCell": {
-      "doc": "An object that implements the functionality of the text attachment cell protocol.",
-      "url": "https://developer.apple.com/documentation/appkit/nstextattachmentcell"
     },
     "NSTextAttachmentContainer": {
       "doc": "A set of methods that defines the interface to text attachment objects from a layout manager.",
@@ -1738,6 +1712,14 @@
       "doc": "Optional methods that delegates implement to respond to viewport layout changes.",
       "url": "https://developer.apple.com/documentation/appkit/nstextviewportlayoutcontrollerdelegate"
     },
+    "NSTextViewportRenderingSurface": {
+      "doc": "A protocol that identifies a view or layer as a drawable element for a text layout fragment.",
+      "url": "https://developer.apple.com/documentation/appkit/nstextviewportrenderingsurface"
+    },
+    "NSTextViewportRenderingSurfaceKey": {
+      "doc": "A protocol that lets you use an object to identify a rendering surface when storing or retrieving it.",
+      "url": "https://developer.apple.com/documentation/appkit/nstextviewportrenderingsurfacekey"
+    },
     "NSTokenFieldCellDelegate": {
       "doc": "A set of optional methods implemented by delegates of NSTokenFieldCell objects to work with tokenized strings.",
       "url": "https://developer.apple.com/documentation/appkit/nstokenfieldcelldelegate"
@@ -1814,14 +1796,6 @@
     "NSAccessibilityAnnotationPosition": {
       "doc": "Constants that specify the position where the annotation applies.",
       "url": "https://developer.apple.com/documentation/appkit/nsaccessibilityannotationposition"
-    },
-    "NSAccessibilityCustomRotorSearchDirection": {
-      "doc": "Constants that describe the direction to search for an item result.",
-      "url": "https://developer.apple.com/documentation/appkit/nsaccessibilitycustomrotorsearchdirection"
-    },
-    "NSAccessibilityCustomRotorType": {
-      "doc": "Constants that indicate the type of content that the rotor represents.",
-      "url": "https://developer.apple.com/documentation/appkit/nsaccessibilitycustomrotortype"
     },
     "NSAccessibilityOrientation": {
       "doc": "Values that indicate the orientation of accessibility elements, such as scroll bars and split views.",
@@ -1941,18 +1915,6 @@
         }
       }
     },
-    "NSAlertStyle": {
-      "doc": "The set of alert styles to style alerts in your app.",
-      "url": "https://developer.apple.com/documentation/appkit/nsalertstyle"
-    },
-    "NSAnimationBlockingMode": {
-      "doc": "These constants indicate the blocking mode of an NSAnimation object when it is running.",
-      "url": "https://developer.apple.com/documentation/appkit/nsanimationblockingmode"
-    },
-    "NSAnimationCurve": {
-      "doc": "These constants describe the curve of an animation—that is, the relative speed of an animation from start to finish.",
-      "url": "https://developer.apple.com/documentation/appkit/nsanimationcurve"
-    },
     "NSAnimationEffect": {
       "doc": "The type for standard system animation effects, which include both display and sound.",
       "url": "https://developer.apple.com/documentation/appkit/nsanimationeffect",
@@ -1966,60 +1928,6 @@
           "url": "https://developer.apple.com/documentation/appkit/nsanimationeffect/poof"
         }
       }
-    },
-    "NSApplicationDelegateReply": {
-      "doc": "Constants that indicate whether a copy or print operation was successful, was canceled, or failed.",
-      "url": "https://developer.apple.com/documentation/appkit/nsapplicationdelegatereply"
-    },
-    "NSApplicationOcclusionState": {
-      "doc": "This constant indicates whether at least part of any window owned by this app is visible.",
-      "url": "https://developer.apple.com/documentation/appkit/nsapplicationocclusionstate"
-    },
-    "NSApplicationPresentationOptions": {
-      "doc": "Constants that control the presentation of the app, typically for fullscreen apps such as games or kiosks.",
-      "url": "https://developer.apple.com/documentation/appkit/nsapplicationpresentationoptions",
-      "members": {
-        "NSApplicationPresentationDefault": {
-          "doc": "This is the default presentation mode.",
-          "url": "https://developer.apple.com/documentation/appkit/nsapplicationpresentationoptions/nsapplicationpresentationdefault"
-        }
-      }
-    },
-    "NSApplicationPrintReply": {
-      "doc": "Constants that indicate the outcome of a print request.",
-      "url": "https://developer.apple.com/documentation/appkit/nsapplicationprintreply"
-    },
-    "NSApplicationTerminateReply": {
-      "doc": "Constants that determine whether an app should terminate.",
-      "url": "https://developer.apple.com/documentation/appkit/nsapplicationterminatereply"
-    },
-    "NSAutoresizingMaskOptions": {
-      "doc": "Constants that specify the autoresizing behaviors for views.",
-      "url": "https://developer.apple.com/documentation/appkit/nsautoresizingmaskoptions"
-    },
-    "NSBackgroundStyle": {
-      "doc": "Background styles to apply to a view’s cell.",
-      "url": "https://developer.apple.com/documentation/appkit/nsbackgroundstyle"
-    },
-    "NSBackingStoreType": {
-      "doc": "Constants that specify how the window device buffers the drawing done in a window.",
-      "url": "https://developer.apple.com/documentation/appkit/nsbackingstoretype"
-    },
-    "NSBezelStyle": {
-      "doc": "The set of bezel styles to style buttons in your app.",
-      "url": "https://developer.apple.com/documentation/appkit/nsbezelstyle"
-    },
-    "NSBezierPathElement": {
-      "doc": "Constants that specify basic path element commands.",
-      "url": "https://developer.apple.com/documentation/appkit/nsbezierpathelement"
-    },
-    "NSBitmapFormat": {
-      "doc": "Constants that represent bitmap component formats.",
-      "url": "https://developer.apple.com/documentation/appkit/nsbitmapformat"
-    },
-    "NSBitmapImageFileType": {
-      "doc": "Constants that specify bitmap file types.",
-      "url": "https://developer.apple.com/documentation/appkit/nsbitmapimagefiletype"
     },
     "NSBorderType": {
       "doc": "These constants specify the type of a view’s border.",
@@ -2042,18 +1950,6 @@
           "url": "https://developer.apple.com/documentation/appkit/nsbordertype/noborder"
         }
       }
-    },
-    "NSBoxType": {
-      "doc": "These constants and data type identifies box types, which, in conjunction with a box’s border type, define the appearance of the box.",
-      "url": "https://developer.apple.com/documentation/appkit/nsboxtype"
-    },
-    "NSBrowserColumnResizingType": {
-      "doc": "Types of browser column resizing.",
-      "url": "https://developer.apple.com/documentation/appkit/nsbrowsercolumnresizingtype"
-    },
-    "NSCellImagePosition": {
-      "doc": "A constant for specifying the position of a button’s image relative to its title.",
-      "url": "https://developer.apple.com/documentation/appkit/nscellimageposition"
     },
     "NSCharacterCollection": {
       "doc": "Values that map character identifiers to glyphs.",
@@ -2084,10 +1980,6 @@
           "url": "https://developer.apple.com/documentation/appkit/nscharactercollection/identitymappingcharactercollection"
         }
       }
-    },
-    "NSCloudKitSharingServiceOptions": {
-      "doc": "Constants that describe how a participant can configure a CloudKit share.",
-      "url": "https://developer.apple.com/documentation/appkit/nscloudkitsharingserviceoptions"
     },
     "NSCollectionElementCategory": {
       "doc": "Constants specifying the type of element in the collection view.",
@@ -2141,36 +2033,6 @@
         }
       }
     },
-    "NSCollectionUpdateAction": {
-      "doc": "Constants indicating the type of action being performed on an item.",
-      "url": "https://developer.apple.com/documentation/appkit/nscollectionupdateaction"
-    },
-    "NSCollectionViewItemHighlightState": {
-      "doc": "Constants indicating the type of highlight applied to an item.",
-      "url": "https://developer.apple.com/documentation/appkit/nscollectionviewitemhighlightstate"
-    },
-    "NSCollectionViewScrollDirection": {
-      "doc": "Constants indicating the scrolling direction for the layout.",
-      "url": "https://developer.apple.com/documentation/appkit/nscollectionviewscrolldirection"
-    },
-    "NSCollectionViewScrollPosition": {
-      "doc": "Constants indicating the options for scrolling the collection view’s content.",
-      "url": "https://developer.apple.com/documentation/appkit/nscollectionviewscrollposition",
-      "members": {
-        "NSCollectionViewScrollPositionNone": {
-          "doc": "Do not scroll.",
-          "url": "https://developer.apple.com/documentation/appkit/nscollectionviewscrollposition/nscollectionviewscrollpositionnone"
-        }
-      }
-    },
-    "NSColorPanelMode": {
-      "doc": "A type defined for the enum constants specifying color panel modes.",
-      "url": "https://developer.apple.com/documentation/appkit/nscolorpanelmode"
-    },
-    "NSColorPanelOptions": {
-      "doc": "The color modes that are enabled for a color panel.",
-      "url": "https://developer.apple.com/documentation/appkit/nscolorpaneloptions"
-    },
     "NSColorRenderingIntent": {
       "doc": "Constants that specify how Cocoa should handle colors that are not located within the destination color space of a graphics context.",
       "url": "https://developer.apple.com/documentation/appkit/nscolorrenderingintent",
@@ -2196,26 +2058,6 @@
           "url": "https://developer.apple.com/documentation/appkit/nscolorrenderingintent/saturation"
         }
       }
-    },
-    "NSColorSpaceModel": {
-      "doc": "Constants that describe the abstract model on which color space objects are based.",
-      "url": "https://developer.apple.com/documentation/appkit/nscolorspacemodel"
-    },
-    "NSColorSystemEffect": {
-      "doc": "Constants for user interactions that change the appearance of a view or control.",
-      "url": "https://developer.apple.com/documentation/appkit/nscolorsystemeffect"
-    },
-    "NSColorType": {
-      "doc": "Constants that indicate the color’s type, and which methods may be called on the color object.",
-      "url": "https://developer.apple.com/documentation/appkit/nscolortype"
-    },
-    "NSColorWellStyle": {
-      "doc": "Constants that specify the appearance and interaction modes for a color well.",
-      "url": "https://developer.apple.com/documentation/appkit/nscolorwellstyle"
-    },
-    "NSComboButtonStyle": {
-      "doc": "Constants that indicate how a combo button presents its menu.",
-      "url": "https://developer.apple.com/documentation/appkit/nscombobuttonstyle"
     },
     "NSCompositingOperation": {
       "doc": "Constants that describe compositing operators in terms of source and destination images, each having an opaque and transparent region.",
@@ -2339,14 +2181,6 @@
         }
       }
     },
-    "NSControlCharacterAction": {
-      "doc": "Constants that describe actions for control characters.",
-      "url": "https://developer.apple.com/documentation/appkit/nscontrolcharacteraction"
-    },
-    "NSControlSize": {
-      "doc": "A constant for specifying a cell’s size.",
-      "url": "https://developer.apple.com/documentation/appkit/nscontrolsize"
-    },
     "NSControlTint": {
       "doc": "Constants for specifying a cell’s tint color.",
       "url": "https://developer.apple.com/documentation/appkit/nscontroltint",
@@ -2369,10 +2203,6 @@
         }
       }
     },
-    "NSCorrectionIndicatorType": {
-      "doc": "Constants that allow an app to specify the correction indicator type displayed.",
-      "url": "https://developer.apple.com/documentation/appkit/nscorrectionindicatortype"
-    },
     "NSCursorFrameResizeDirections": {
       "doc": "The directions in which a rectangular frame can be resized.",
       "url": "https://developer.apple.com/documentation/appkit/nscursorframeresizedirections",
@@ -2391,31 +2221,11 @@
         }
       }
     },
-    "NSCursorFrameResizePosition": {
-      "doc": "The position along the perimeter of a rectangular frame (its edges and corners) from which it’s resized.",
-      "url": "https://developer.apple.com/documentation/appkit/nscursorframeresizeposition"
-    },
-    "NSDatePickerElementFlags": {
-      "doc": "Constants that specify the date and time elements displayed by the picker.",
-      "url": "https://developer.apple.com/documentation/appkit/nsdatepickerelementflags"
-    },
-    "NSDatePickerMode": {
-      "doc": "Constants that define whether the picker provides a single date, or a range of dates.",
-      "url": "https://developer.apple.com/documentation/appkit/nsdatepickermode"
-    },
-    "NSDatePickerStyle": {
-      "doc": "Constants that define the visual appearance of the date picker cell.",
-      "url": "https://developer.apple.com/documentation/appkit/nsdatepickerstyle"
-    },
     "NSDirectionalRectEdge": {
       "url": "https://developer.apple.com/documentation/appkit/nsdirectionalrectedge"
     },
     "NSDisplayGamut": {
       "url": "https://developer.apple.com/documentation/appkit/nsdisplaygamut"
-    },
-    "NSDocumentChangeType": {
-      "doc": "Values that indicate a document’s edit status.",
-      "url": "https://developer.apple.com/documentation/appkit/nsdocumentchangetype"
     },
     "NSDragOperation": {
       "doc": "A group of constants that represent which operations the dragging source can perform on dragging items.",
@@ -2524,48 +2334,6 @@
           "url": "https://developer.apple.com/documentation/appkit/nsdraggingitemenumerationoptions/init(rawvalue:)"
         }
       }
-    },
-    "NSDrawerState": {
-      "doc": "These constants specify the possible states of a drawer.",
-      "url": "https://developer.apple.com/documentation/appkit/nsdrawerstate"
-    },
-    "NSEventButtonMask": {
-      "doc": "Constants you use to identify the activated tablet buttons in an event.",
-      "url": "https://developer.apple.com/documentation/appkit/nseventbuttonmask"
-    },
-    "NSEventGestureAxis": {
-      "doc": "Constants that specify the direction of travel for a gesture.",
-      "url": "https://developer.apple.com/documentation/appkit/nseventgestureaxis"
-    },
-    "NSEventMask": {
-      "doc": "Constants that you use to filter out specific event types from the stream of incoming events.",
-      "url": "https://developer.apple.com/documentation/appkit/nseventmask"
-    },
-    "NSEventModifierFlags": {
-      "doc": "Flags that represent key states in an event object.",
-      "url": "https://developer.apple.com/documentation/appkit/nseventmodifierflags"
-    },
-    "NSEventPhase": {
-      "doc": "Constants that represent the possible phases during an event phase.",
-      "url": "https://developer.apple.com/documentation/appkit/nseventphase",
-      "members": {
-        "NSEventPhaseNone": {
-          "doc": "The event is not associated with a phase.",
-          "url": "https://developer.apple.com/documentation/appkit/nseventphase/nseventphasenone"
-        }
-      }
-    },
-    "NSEventSubtype": {
-      "doc": "Subtypes for various types of events.",
-      "url": "https://developer.apple.com/documentation/appkit/nseventsubtype"
-    },
-    "NSEventSwipeTrackingOptions": {
-      "doc": "Constants that specify swipe-tracking options.",
-      "url": "https://developer.apple.com/documentation/appkit/nseventswipetrackingoptions"
-    },
-    "NSEventType": {
-      "doc": "Constants for the types of events that responder objects can handle.",
-      "url": "https://developer.apple.com/documentation/appkit/nseventtype"
     },
     "NSFindPanelAction": {
       "doc": "These constants define the tags for performFindPanelAction:.",
@@ -2695,9 +2463,6 @@
         }
       }
     },
-    "NSFontAssetRequestOptions": {
-      "url": "https://developer.apple.com/documentation/appkit/nsfontassetrequestoptions"
-    },
     "NSFontCollectionOptions": {
       "doc": "Constants that support font collection management.",
       "url": "https://developer.apple.com/documentation/appkit/nsfontcollectionoptions",
@@ -2707,23 +2472,6 @@
           "url": "https://developer.apple.com/documentation/appkit/nsfontcollectionoptions/applicationonlymask"
         }
       }
-    },
-    "NSFontCollectionVisibility": {
-      "doc": "Constants that specify the visibility of font collections.",
-      "url": "https://developer.apple.com/documentation/appkit/nsfontcollectionvisibility"
-    },
-    "NSFontDescriptorSymbolicTraits": {
-      "doc": "A symbolic description of the stylistic aspects of a font.",
-      "url": "https://developer.apple.com/documentation/appkit/nsfontdescriptorsymbolictraits",
-      "members": {
-        "NSFontDescriptorClassUnknown": {
-          "doc": "The font has no design classification.",
-          "url": "https://developer.apple.com/documentation/appkit/nsfontdescriptorsymbolictraits/nsfontdescriptorclassunknown"
-        }
-      }
-    },
-    "NSFontPanelModeMask": {
-      "url": "https://developer.apple.com/documentation/appkit/nsfontpanelmodemask"
     },
     "NSFontRenderingMode": {
       "doc": "The font rendering mode.",
@@ -2801,10 +2549,6 @@
         }
       }
     },
-    "NSGestureRecognizerState": {
-      "doc": "The current state of the gesture recognizer.",
-      "url": "https://developer.apple.com/documentation/appkit/nsgesturerecognizerstate"
-    },
     "NSGlyphInscription": {
       "doc": "Constants that specify how a glyph is laid out relative to the previous glyph.",
       "url": "https://developer.apple.com/documentation/appkit/nsglyphinscription",
@@ -2831,28 +2575,6 @@
         }
       }
     },
-    "NSGlyphProperty": {
-      "doc": "Glyph properties.",
-      "url": "https://developer.apple.com/documentation/appkit/nsglyphproperty"
-    },
-    "NSGradientDrawingOptions": {
-      "doc": "Constants that specify gradient drawing options.",
-      "url": "https://developer.apple.com/documentation/appkit/nsgradientdrawingoptions"
-    },
-    "NSGridCellPlacement": {
-      "url": "https://developer.apple.com/documentation/appkit/nsgridcellplacement"
-    },
-    "NSGridRowAlignment": {
-      "url": "https://developer.apple.com/documentation/appkit/nsgridrowalignment"
-    },
-    "NSHapticFeedbackPattern": {
-      "doc": "A pattern of haptic feedback to be provided to the user.",
-      "url": "https://developer.apple.com/documentation/appkit/nshapticfeedbackpattern"
-    },
-    "NSHapticFeedbackPerformanceTime": {
-      "doc": "A time at which to provide haptic feedback to the user.",
-      "url": "https://developer.apple.com/documentation/appkit/nshapticfeedbackperformancetime"
-    },
     "NSHorizontalDirections": {
       "doc": "The absolute directions on the horizontal axis.",
       "url": "https://developer.apple.com/documentation/appkit/nshorizontaldirections",
@@ -2874,18 +2596,6 @@
     "NSImageAlignment": {
       "doc": "Constants used by imageAlignment that allow you to specify the location of the image in the frame.",
       "url": "https://developer.apple.com/documentation/appkit/nsimagealignment"
-    },
-    "NSImageCacheMode": {
-      "doc": "Constants that specify the caching policy on a per-image basis.",
-      "url": "https://developer.apple.com/documentation/appkit/nsimagecachemode"
-    },
-    "NSImageDynamicRange": {
-      "doc": "Describes how High Dynamic Range (HDR) image content displays.",
-      "url": "https://developer.apple.com/documentation/appkit/nsimagedynamicrange"
-    },
-    "NSImageFrameStyle": {
-      "doc": "Constants that allow you to specify the kind of frame bordering the image.",
-      "url": "https://developer.apple.com/documentation/appkit/nsimageframestyle"
     },
     "NSImageInterpolation": {
       "doc": "Constants that specify the interpolation, or image smoothing, behavior used by the image interpolation property.",
@@ -2913,22 +2623,6 @@
         }
       }
     },
-    "NSImageLayoutDirection": {
-      "doc": "Constants that describe the layout direction for the image.",
-      "url": "https://developer.apple.com/documentation/appkit/nsimagelayoutdirection"
-    },
-    "NSImageLoadStatus": {
-      "doc": "Status values for incremental image loading.",
-      "url": "https://developer.apple.com/documentation/appkit/nsimageloadstatus"
-    },
-    "NSImageRepLoadStatus": {
-      "doc": "Constants that identify the loading status of the image.",
-      "url": "https://developer.apple.com/documentation/appkit/nsimagereploadstatus"
-    },
-    "NSImageResizingMode": {
-      "doc": "Constants that describe the resizing mode for the image.",
-      "url": "https://developer.apple.com/documentation/appkit/nsimageresizingmode"
-    },
     "NSImageScaling": {
       "doc": "Constants that specify a cell’s image scaling behavior.",
       "url": "https://developer.apple.com/documentation/appkit/nsimagescaling",
@@ -2950,33 +2644,6 @@
           "url": "https://developer.apple.com/documentation/appkit/nsimagescaling/scaleproportionallyupordown"
         }
       }
-    },
-    "NSImageSymbolScale": {
-      "doc": "Constants that specify which scale variant of a symbol image to use.",
-      "url": "https://developer.apple.com/documentation/appkit/nsimagesymbolscale"
-    },
-    "NSLayoutAttribute": {
-      "doc": "The part of the object’s visual representation that should be used to get the value for the constraint.",
-      "url": "https://developer.apple.com/documentation/appkit/nslayoutattribute"
-    },
-    "NSLayoutConstraintOrientation": {
-      "doc": "The layout constraint orientation, either horizontal or vertical, that the constraint uses to enforce layout between objects.",
-      "url": "https://developer.apple.com/documentation/appkit/nslayoutconstraintorientation"
-    },
-    "NSLayoutFormatOptions": {
-      "doc": "A bit mask that specifies both a part of an interface element to align and a direction for the alignment between two interface elements.",
-      "url": "https://developer.apple.com/documentation/appkit/nslayoutformatoptions"
-    },
-    "NSLayoutRelation": {
-      "doc": "The relation between the first attribute and the modified second attribute in a constraint.",
-      "url": "https://developer.apple.com/documentation/appkit/nslayoutrelation"
-    },
-    "NSLevelIndicatorPlaceholderVisibility": {
-      "url": "https://developer.apple.com/documentation/appkit/nslevelindicatorplaceholdervisibility"
-    },
-    "NSLevelIndicatorStyle": {
-      "doc": "Constants that specify a level indicator’s appearance.",
-      "url": "https://developer.apple.com/documentation/appkit/nslevelindicatorstyle"
     },
     "NSLineBreakMode": {
       "doc": "Constants that specify what happens when a line is too long for a container.",
@@ -3007,24 +2674,6 @@
           "url": "https://developer.apple.com/documentation/appkit/nslinebreakmode/bywordwrapping"
         }
       }
-    },
-    "NSLineBreakStrategy": {
-      "doc": "Constants that specify how the text system breaks lines while laying out paragraphs.",
-      "url": "https://developer.apple.com/documentation/appkit/nslinebreakstrategy",
-      "members": {
-        "NSLineBreakStrategyNone": {
-          "doc": "The text system doesn’t use any line-break strategies.",
-          "url": "https://developer.apple.com/documentation/appkit/nslinebreakstrategy/nslinebreakstrategynone"
-        }
-      }
-    },
-    "NSLineCapStyle": {
-      "doc": "Constants that specify the shape of endpoints for an open path when it is stroked.",
-      "url": "https://developer.apple.com/documentation/appkit/nslinecapstyle"
-    },
-    "NSLineJoinStyle": {
-      "doc": "Constants that specify the shape of the joins between connected segments of a stroked path.",
-      "url": "https://developer.apple.com/documentation/appkit/nslinejoinstyle"
     },
     "NSLineMovementDirection": {
       "doc": "The direction in which a line moves.",
@@ -3074,30 +2723,6 @@
         }
       }
     },
-    "NSMatrixMode": {
-      "doc": "These constants determine how NSCell objects behave when an NSMatrix object is tracking the mouse.",
-      "url": "https://developer.apple.com/documentation/appkit/nsmatrixmode"
-    },
-    "NSMediaLibrary": {
-      "doc": "These constants are masks used to configure a Media Library Browser to display specific types of media. Combined masks are not yet supported. In other words, only one nonzero mask value is supported at a time. If masks are combined, the lowest mask value is used.",
-      "url": "https://developer.apple.com/documentation/appkit/nsmedialibrary"
-    },
-    "NSMenuItemBadgeType": {
-      "doc": "Constants that define types of badges for display.",
-      "url": "https://developer.apple.com/documentation/appkit/nsmenuitembadgetype"
-    },
-    "NSMenuPresentationStyle": {
-      "doc": "Specifies the style of a menu.",
-      "url": "https://developer.apple.com/documentation/appkit/nsmenupresentationstyle"
-    },
-    "NSMenuProperties": {
-      "doc": "These constants are used as a bitmask for specifying a set of menu or menu item properties, and are contained by the propertiesToUpdate property.",
-      "url": "https://developer.apple.com/documentation/appkit/nsmenuproperties"
-    },
-    "NSMenuSelectionMode": {
-      "doc": "Describes how the menu manages selection states of the menu items that belong to the same selection group.",
-      "url": "https://developer.apple.com/documentation/appkit/nsmenuselectionmode"
-    },
     "NSMultibyteGlyphPacking": {
       "doc": "A constant for glyph packing.",
       "url": "https://developer.apple.com/documentation/appkit/nsmultibyteglyphpacking",
@@ -3107,10 +2732,6 @@
           "url": "https://developer.apple.com/documentation/appkit/nsmultibyteglyphpacking/nativeshortglyphpacking"
         }
       }
-    },
-    "NSOpenGLContextParameter": {
-      "doc": "Constants that specify context parameters.",
-      "url": "https://developer.apple.com/documentation/appkit/nsopenglcontextparameter"
     },
     "NSOpenGLGlobalOption": {
       "doc": "Constants that specify OpenGL options.",
@@ -3137,96 +2758,6 @@
           "url": "https://developer.apple.com/documentation/appkit/nsopenglglobaloption/usebuildcache"
         }
       }
-    },
-    "NSPDFPanelOptions": {
-      "doc": "Constants used to configure the contents of a PDF panel.",
-      "url": "https://developer.apple.com/documentation/appkit/nspdfpaneloptions"
-    },
-    "NSPageControllerTransitionStyle": {
-      "doc": "These constants control the transition style of the page controller.",
-      "url": "https://developer.apple.com/documentation/appkit/nspagecontrollertransitionstyle"
-    },
-    "NSPageLayoutResult": {
-      "url": "https://developer.apple.com/documentation/appkit/nspagelayoutresult"
-    },
-    "NSPaperOrientation": {
-      "doc": "Constants that describe the orientation of printing on a page.",
-      "url": "https://developer.apple.com/documentation/appkit/nspaperorientation"
-    },
-    "NSPasteboardContentsOptions": {
-      "doc": "Options for preparing the pasteboard.",
-      "url": "https://developer.apple.com/documentation/appkit/nspasteboardcontentsoptions"
-    },
-    "NSPasteboardReadingOptions": {
-      "doc": "Options that specify how to interpret data on the pasteboard when initializing pasteboard data.",
-      "url": "https://developer.apple.com/documentation/appkit/nspasteboardreadingoptions"
-    },
-    "NSPasteboardWritingOptions": {
-      "doc": "Type to specify options for writing to a pasteboard.",
-      "url": "https://developer.apple.com/documentation/appkit/nspasteboardwritingoptions"
-    },
-    "NSPathStyle": {
-      "doc": "NSPathStyle constants represent the different visual and behavioral styles an NSPathControl or NSPathCell object can have.",
-      "url": "https://developer.apple.com/documentation/appkit/nspathstyle"
-    },
-    "NSPickerTouchBarItemControlRepresentation": {
-      "doc": "Constants that specify display styles for picker bar items.",
-      "url": "https://developer.apple.com/documentation/appkit/nspickertouchbaritemcontrolrepresentation"
-    },
-    "NSPickerTouchBarItemSelectionMode": {
-      "doc": "Constants that specify selection modes for picker bar items.",
-      "url": "https://developer.apple.com/documentation/appkit/nspickertouchbaritemselectionmode"
-    },
-    "NSPointingDeviceType": {
-      "doc": "The pointing-device types for tablet-proximity events or mouse events with a proximity event subtype.",
-      "url": "https://developer.apple.com/documentation/appkit/nspointingdevicetype"
-    },
-    "NSPopUpArrowPosition": {
-      "doc": "These constants are defined for use with the arrowPosition property.",
-      "url": "https://developer.apple.com/documentation/appkit/nspopuparrowposition"
-    },
-    "NSPopoverAppearance": {
-      "doc": "The set of predefined appearances for a popover.",
-      "url": "https://developer.apple.com/documentation/appkit/nspopoverappearance"
-    },
-    "NSPopoverBehavior": {
-      "doc": "The appearance and disappearance behavior of a popover.",
-      "url": "https://developer.apple.com/documentation/appkit/nspopoverbehavior"
-    },
-    "NSPressureBehavior": {
-      "doc": "These constants describe the behavior and progression of a pressure gesture.",
-      "url": "https://developer.apple.com/documentation/appkit/nspressurebehavior"
-    },
-    "NSPrintPanelOptions": {
-      "doc": "Constants that specify options for configuring the contents of the main Print panel.",
-      "url": "https://developer.apple.com/documentation/appkit/nsprintpaneloptions"
-    },
-    "NSPrintPanelResult": {
-      "url": "https://developer.apple.com/documentation/appkit/nsprintpanelresult"
-    },
-    "NSPrintRenderingQuality": {
-      "doc": "Constants that specify the print quality in use.",
-      "url": "https://developer.apple.com/documentation/appkit/nsprintrenderingquality"
-    },
-    "NSPrinterTableStatus": {
-      "doc": "Constants that describe the state of a printer information table stored by a printer object.",
-      "url": "https://developer.apple.com/documentation/appkit/nsprintertablestatus"
-    },
-    "NSPrintingOrientation": {
-      "doc": "Constants that specify page orientations.",
-      "url": "https://developer.apple.com/documentation/appkit/nsprintingorientation"
-    },
-    "NSPrintingPageOrder": {
-      "doc": "Constants that specify the page order.",
-      "url": "https://developer.apple.com/documentation/appkit/nsprintingpageorder"
-    },
-    "NSPrintingPaginationMode": {
-      "doc": "Constants that specify the different ways in which an image is divided into pages.",
-      "url": "https://developer.apple.com/documentation/appkit/nsprintingpaginationmode"
-    },
-    "NSProgressIndicatorStyle": {
-      "doc": "Constants that specify the progress indicator’s style.",
-      "url": "https://developer.apple.com/documentation/appkit/nsprogressindicatorstyle"
     },
     "NSProgressIndicatorThickness": {
       "doc": "Specify the height of a progress indicator.",
@@ -3274,65 +2805,6 @@
         }
       }
     },
-    "NSRemoteNotificationType": {
-      "doc": "These constants determine whether apps launched by remote notifications display a badge.",
-      "url": "https://developer.apple.com/documentation/appkit/nsremotenotificationtype",
-      "members": {
-        "NSRemoteNotificationTypeNone": {
-          "doc": "The app shouldn’t display a badge.",
-          "url": "https://developer.apple.com/documentation/appkit/nsremotenotificationtype/nsremotenotificationtypenone"
-        }
-      }
-    },
-    "NSRuleEditorNestingMode": {
-      "doc": "Specifies a type for nesting modes.",
-      "url": "https://developer.apple.com/documentation/appkit/nsruleeditornestingmode"
-    },
-    "NSRuleEditorRowType": {
-      "doc": "Specifies a type for row types.",
-      "url": "https://developer.apple.com/documentation/appkit/nsruleeditorrowtype"
-    },
-    "NSSaveOperationType": {
-      "doc": "Constants for specifying the type of document-save operation to perform.",
-      "url": "https://developer.apple.com/documentation/appkit/nssaveoperationtype",
-      "members": {
-        "NSAutosaveOperation": {
-          "doc": "Old name for the NSAutosaveElsewhereOperation operation type.",
-          "url": "https://developer.apple.com/documentation/appkit/nssaveoperationtype/nsautosaveoperation"
-        }
-      }
-    },
-    "NSScrollElasticity": {
-      "doc": "These constants determine the elasticity behavior for an axis of the scrollview.",
-      "url": "https://developer.apple.com/documentation/appkit/nsscrollelasticity"
-    },
-    "NSScrollViewFindBarPosition": {
-      "doc": "These constants define the position of the find bar in relation to the scroll view.",
-      "url": "https://developer.apple.com/documentation/appkit/nsscrollviewfindbarposition"
-    },
-    "NSScrollerKnobStyle": {
-      "doc": "Specify different knob styles.",
-      "url": "https://developer.apple.com/documentation/appkit/nsscrollerknobstyle"
-    },
-    "NSScrollerPart": {
-      "doc": "These constants specify the different parts of the scroller:",
-      "url": "https://developer.apple.com/documentation/appkit/nsscrollerpart"
-    },
-    "NSScrollerStyle": {
-      "doc": "Constants to specify the scroller style.",
-      "url": "https://developer.apple.com/documentation/appkit/nsscrollerstyle"
-    },
-    "NSScrubberAlignment": {
-      "doc": "The specified preferred alignment of items within the scrubber, when they come to rest following a user’s scrolling or paging interaction.",
-      "url": "https://developer.apple.com/documentation/appkit/nsscrubberalignment"
-    },
-    "NSScrubberMode": {
-      "doc": "The scrolling behavior for a scrubber.",
-      "url": "https://developer.apple.com/documentation/appkit/nsscrubbermode"
-    },
-    "NSSegmentDistribution": {
-      "url": "https://developer.apple.com/documentation/appkit/nssegmentdistribution"
-    },
     "NSSelectionAffinity": {
       "doc": "These constants specify the preferred direction of selection. They’re used by selectionAffinity and setSelectedRange:affinity:stillSelecting:.",
       "url": "https://developer.apple.com/documentation/appkit/nsselectionaffinity",
@@ -3346,10 +2818,6 @@
           "url": "https://developer.apple.com/documentation/appkit/nsselectionaffinity/upstream"
         }
       }
-    },
-    "NSSelectionDirection": {
-      "doc": "Constants that specify the direction a window is currently using to change the key view.",
-      "url": "https://developer.apple.com/documentation/appkit/nsselectiondirection"
     },
     "NSSelectionGranularity": {
       "doc": "These constants specify how much the text view extends the selection when the user drags the mouse. They’re used by selectionGranularity, and selectionRangeForProposedRange:granularity::",
@@ -3373,14 +2841,6 @@
       "doc": "Represents the types of sharing (collaborating on an item vs. sending a copy of the item) The share picker supports up to two modes, each of which corresponds to one of these types",
       "url": "https://developer.apple.com/documentation/appkit/nssharingcollaborationmode"
     },
-    "NSSharingContentScope": {
-      "doc": "The sharing scope constants specify the nature of the things you are sharing.",
-      "url": "https://developer.apple.com/documentation/appkit/nssharingcontentscope"
-    },
-    "NSSliderType": {
-      "doc": "The types of sliders, used by sliderType.",
-      "url": "https://developer.apple.com/documentation/appkit/nsslidertype"
-    },
     "NSSpellingState": {
       "doc": "Constants for the spelling state attribute key.",
       "url": "https://developer.apple.com/documentation/appkit/nsspellingstate",
@@ -3394,18 +2854,6 @@
           "url": "https://developer.apple.com/documentation/appkit/nsspellingstate/nsspellingstatespellingflag"
         }
       }
-    },
-    "NSSplitViewDividerStyle": {
-      "doc": "Constants that specify the style of the split view’s dividers.",
-      "url": "https://developer.apple.com/documentation/appkit/nssplitviewdividerstyle"
-    },
-    "NSSplitViewItemBehavior": {
-      "doc": "Constants that describe the behavior of the split view item.",
-      "url": "https://developer.apple.com/documentation/appkit/nssplitviewitembehavior"
-    },
-    "NSSplitViewItemCollapseBehavior": {
-      "doc": "Constants that describe the split view item’s collapsing behavior.",
-      "url": "https://developer.apple.com/documentation/appkit/nssplitviewitemcollapsebehavior"
     },
     "NSSpringLoadingHighlight": {
       "doc": "A group of constants that indicate a highlighting style for your app’s user interface to display during a spring-loading operation.",
@@ -3447,17 +2895,6 @@
         }
       }
     },
-    "NSStackViewDistribution": {
-      "url": "https://developer.apple.com/documentation/appkit/nsstackviewdistribution"
-    },
-    "NSStackViewGravity": {
-      "doc": "The gravity areas available in a stack view.",
-      "url": "https://developer.apple.com/documentation/appkit/nsstackviewgravity"
-    },
-    "NSStatusItemBehavior": {
-      "doc": "A set of optional status item behaviors.",
-      "url": "https://developer.apple.com/documentation/appkit/nsstatusitembehavior"
-    },
     "NSStringDrawingOptions": {
       "doc": "Constants that specify the rendering options for drawing a string.",
       "url": "https://developer.apple.com/documentation/appkit/nsstringdrawingoptions",
@@ -3492,59 +2929,6 @@
         }
       }
     },
-    "NSTIFFCompression": {
-      "doc": "Constants that represent the supported TIFF data-compression schemes.",
-      "url": "https://developer.apple.com/documentation/appkit/nstiffcompression"
-    },
-    "NSTabPosition": {
-      "url": "https://developer.apple.com/documentation/appkit/nstabposition"
-    },
-    "NSTabState": {
-      "doc": "These constants describe the current display state of a tab:",
-      "url": "https://developer.apple.com/documentation/appkit/nstabstate"
-    },
-    "NSTabViewBorderType": {
-      "url": "https://developer.apple.com/documentation/appkit/nstabviewbordertype"
-    },
-    "NSTabViewControllerTabStyle": {
-      "doc": "Tab control style options for a tab view controller.",
-      "url": "https://developer.apple.com/documentation/appkit/nstabviewcontrollertabstyle"
-    },
-    "NSTableColumnResizingOptions": {
-      "url": "https://developer.apple.com/documentation/appkit/nstablecolumnresizingoptions",
-      "members": {
-        "NSTableColumnNoResizing": {
-          "doc": "Prevents the table column from resizing.",
-          "url": "https://developer.apple.com/documentation/appkit/nstablecolumnresizingoptions/nstablecolumnnoresizing"
-        }
-      }
-    },
-    "NSTableRowActionEdge": {
-      "doc": "These constants define table row edges on which row actions are attached. They are used by the tableView:rowActionsForRow:edge: delegate method.",
-      "url": "https://developer.apple.com/documentation/appkit/nstablerowactionedge"
-    },
-    "NSTableViewAnimationOptions": {
-      "doc": "Specifies the animation effects to apply when inserting or removing rows.",
-      "url": "https://developer.apple.com/documentation/appkit/nstableviewanimationoptions",
-      "members": {
-        "NSTableViewAnimationEffectNone": {
-          "doc": "Use no animation effects.",
-          "url": "https://developer.apple.com/documentation/appkit/nstableviewanimationoptions/nstableviewanimationeffectnone"
-        }
-      }
-    },
-    "NSTableViewDropOperation": {
-      "doc": "NSTableView defines these constants to specify drop operations.",
-      "url": "https://developer.apple.com/documentation/appkit/nstableviewdropoperation"
-    },
-    "NSTableViewRowActionStyle": {
-      "doc": "Constants that help define the appearance and behavior of action buttons.",
-      "url": "https://developer.apple.com/documentation/appkit/nstableviewrowactionstyle"
-    },
-    "NSTableViewStyle": {
-      "doc": "Contains the possible style values for a table view.",
-      "url": "https://developer.apple.com/documentation/appkit/nstableviewstyle"
-    },
     "NSTextAlignment": {
       "doc": "Constants that specify text alignment.",
       "url": "https://developer.apple.com/documentation/appkit/nstextalignment",
@@ -3571,73 +2955,14 @@
         }
       }
     },
-    "NSTextContentManagerEnumerationOptions": {
-      "doc": "Values that control the order in which the framework enumerates text elements.",
-      "url": "https://developer.apple.com/documentation/appkit/nstextcontentmanagerenumerationoptions",
-      "members": {
-        "NSTextContentManagerEnumerationOptionsNone": {
-          "doc": "The value that represents no custom enumeration handling.",
-          "url": "https://developer.apple.com/documentation/appkit/nstextcontentmanagerenumerationoptions/nstextcontentmanagerenumerationoptionsnone"
-        }
-      }
+    "NSTextAttachmentViewProviderReusePolicy": {
+      "url": "https://developer.apple.com/documentation/appkit/nstextattachmentviewproviderreusepolicy"
     },
     "NSTextCursorAccessoryPlacement": {
       "url": "https://developer.apple.com/documentation/appkit/nstextcursoraccessoryplacement"
     },
-    "NSTextFieldBezelStyle": {
-      "doc": "The style of bezel the text field displays.",
-      "url": "https://developer.apple.com/documentation/appkit/nstextfieldbezelstyle"
-    },
-    "NSTextFinderMatchingType": {
-      "doc": "The following constants indicate the type of search anchor an action should perform.",
-      "url": "https://developer.apple.com/documentation/appkit/nstextfindermatchingtype"
-    },
     "NSTextInputTraitType": {
       "url": "https://developer.apple.com/documentation/appkit/nstextinputtraittype"
-    },
-    "NSTextInsertionIndicatorAutomaticModeOptions": {
-      "doc": "Options that affect the automatic display mode.",
-      "url": "https://developer.apple.com/documentation/appkit/nstextinsertionindicatorautomaticmodeoptions"
-    },
-    "NSTextInsertionIndicatorDisplayMode": {
-      "doc": "Constants that determine how to display the system text cursor in a custom text UI.",
-      "url": "https://developer.apple.com/documentation/appkit/nstextinsertionindicatordisplaymode"
-    },
-    "NSTextLayoutFragmentEnumerationOptions": {
-      "doc": "Values that describe options for enumerating text layout fragments.",
-      "url": "https://developer.apple.com/documentation/appkit/nstextlayoutfragmentenumerationoptions",
-      "members": {
-        "NSTextLayoutFragmentEnumerationOptionsNone": {
-          "doc": "The value that represents no selected enumeration options.",
-          "url": "https://developer.apple.com/documentation/appkit/nstextlayoutfragmentenumerationoptions/nstextlayoutfragmentenumerationoptionsnone"
-        }
-      }
-    },
-    "NSTextLayoutFragmentState": {
-      "doc": "Values that describe the possible layout states.",
-      "url": "https://developer.apple.com/documentation/appkit/nstextlayoutfragmentstate"
-    },
-    "NSTextLayoutManagerSegmentOptions": {
-      "doc": "Values that describe where and how the framework extends segments of a selection.",
-      "url": "https://developer.apple.com/documentation/appkit/nstextlayoutmanagersegmentoptions",
-      "members": {
-        "NSTextLayoutManagerSegmentOptionsNone": {
-          "doc": "The value that represents the empty options set.",
-          "url": "https://developer.apple.com/documentation/appkit/nstextlayoutmanagersegmentoptions/nstextlayoutmanagersegmentoptionsnone"
-        }
-      }
-    },
-    "NSTextLayoutManagerSegmentType": {
-      "doc": "Values that describe the rendering of selection boundaries.",
-      "url": "https://developer.apple.com/documentation/appkit/nstextlayoutmanagersegmenttype"
-    },
-    "NSTextLayoutOrientation": {
-      "doc": "Constants that describe the text layout orientation.",
-      "url": "https://developer.apple.com/documentation/appkit/nstextlayoutorientation"
-    },
-    "NSTextListOptions": {
-      "doc": "Values that available options for text list items.",
-      "url": "https://developer.apple.com/documentation/appkit/nstextlistoptions"
     },
     "NSTextMovement": {
       "url": "https://developer.apple.com/documentation/appkit/nstextmovement"
@@ -3656,34 +2981,6 @@
         }
       }
     },
-    "NSTextSelectionAffinity": {
-      "doc": "Values that describe the visual location of the text cursor, or the direction of the non-anchored edge of the selection.",
-      "url": "https://developer.apple.com/documentation/appkit/nstextselectionaffinity"
-    },
-    "NSTextSelectionGranularity": {
-      "doc": "Values that describe the different granularities available to make a selection.",
-      "url": "https://developer.apple.com/documentation/appkit/nstextselectiongranularity"
-    },
-    "NSTextSelectionNavigationDestination": {
-      "doc": "Values that affect how the framework handles navigation across different textual boundaries during a selection.",
-      "url": "https://developer.apple.com/documentation/appkit/nstextselectionnavigationdestination"
-    },
-    "NSTextSelectionNavigationDirection": {
-      "doc": "Values that describe the direction of a selection.",
-      "url": "https://developer.apple.com/documentation/appkit/nstextselectionnavigationdirection"
-    },
-    "NSTextSelectionNavigationLayoutOrientation": {
-      "doc": "Values that describe the possible layout orientations.",
-      "url": "https://developer.apple.com/documentation/appkit/nstextselectionnavigationlayoutorientation"
-    },
-    "NSTextSelectionNavigationModifier": {
-      "doc": "Values that describe how the framework handles different kinds of selection modifiers.",
-      "url": "https://developer.apple.com/documentation/appkit/nstextselectionnavigationmodifier"
-    },
-    "NSTextSelectionNavigationWritingDirection": {
-      "doc": "Values that describe the writing direction inside a text selection.",
-      "url": "https://developer.apple.com/documentation/appkit/nstextselectionnavigationwritingdirection"
-    },
     "NSTextStorageEditActions": {
       "doc": "Constants that indicate the types of changes.",
       "url": "https://developer.apple.com/documentation/appkit/nstextstorageeditactions",
@@ -3698,25 +2995,9 @@
         }
       }
     },
-    "NSTextTabType": {
-      "doc": "Constants that specify the type of tab stop.",
-      "url": "https://developer.apple.com/documentation/appkit/nstexttabtype"
-    },
-    "NSTextTableLayoutAlgorithm": {
-      "doc": "These constants, specifying the type of text table layout algorithm, are used with layoutAlgorithm.",
-      "url": "https://developer.apple.com/documentation/appkit/nstexttablelayoutalgorithm"
-    },
-    "NSTickMarkPosition": {
-      "doc": "The position where a linear slider’s tick marks appear (above, below, leading, or trailing).",
-      "url": "https://developer.apple.com/documentation/appkit/nstickmarkposition"
-    },
     "NSTintProminence": {
       "doc": "Controls how strongly the tint color applies in a view.",
       "url": "https://developer.apple.com/documentation/appkit/nstintprominence"
-    },
-    "NSTitlePosition": {
-      "doc": "Specify the location of a box’s title with respect to its border.",
-      "url": "https://developer.apple.com/documentation/appkit/nstitleposition"
     },
     "NSTitlebarSeparatorStyle": {
       "doc": "Styles that determine the type of separator displayed between the title bar and content of a window.",
@@ -3739,45 +3020,6 @@
           "url": "https://developer.apple.com/documentation/appkit/nstitlebarseparatorstyle/shadow"
         }
       }
-    },
-    "NSTokenStyle": {
-      "doc": "The NSTokenStyle constants define how tokens are displayed and editable in the NSTokenFieldCell. These values are used by tokenStyle and the delegate method tokenFieldCell:styleForRepresentedObject:.",
-      "url": "https://developer.apple.com/documentation/appkit/nstokenstyle"
-    },
-    "NSToolbarDisplayMode": {
-      "doc": "Constants that indicate whether the toolbar displays items using a name, icon, or combination of elements.",
-      "url": "https://developer.apple.com/documentation/appkit/nstoolbardisplaymode"
-    },
-    "NSToolbarItemGroupControlRepresentation": {
-      "url": "https://developer.apple.com/documentation/appkit/nstoolbaritemgroupcontrolrepresentation"
-    },
-    "NSToolbarItemGroupSelectionMode": {
-      "doc": "A value that indicates how a grouped toolbar item selects its subitems.",
-      "url": "https://developer.apple.com/documentation/appkit/nstoolbaritemgroupselectionmode"
-    },
-    "NSToolbarSizeMode": {
-      "doc": "Constants that specify toolbar display modes.",
-      "url": "https://developer.apple.com/documentation/appkit/nstoolbarsizemode"
-    },
-    "NSTouchPhase": {
-      "doc": "The possible phases of a touch.",
-      "url": "https://developer.apple.com/documentation/appkit/nstouchphase"
-    },
-    "NSTouchType": {
-      "doc": "A bit mask identifying a direct or indirect touch type.",
-      "url": "https://developer.apple.com/documentation/appkit/nstouchtype"
-    },
-    "NSTouchTypeMask": {
-      "doc": "A bit mask identifying a direct or indirect touch type.",
-      "url": "https://developer.apple.com/documentation/appkit/nstouchtypemask"
-    },
-    "NSTrackingAreaOptions": {
-      "doc": "The data type defined for the constants specified in the options parameter of init(rect:options:owner:userInfo:). These constants are described below; you can specify multiple constants by performing a bitwise-OR operation with them. In particular, you must supply one or more of the tracking-type constants (that is, NSTrackingMouseEnteredAndExited, NSTrackingMouseMoved, and NSTrackingCursorUpdate) and one of the active constants (that is, NSTrackingActiveWhenFirstResponder, NSTrackingActiveInKeyWindow, NSTrackingActiveInActiveApp, and NSTrackingActiveAlways). In addition, you may specify any of the behavior constants (that is, NSTrackingAssumeInside, NSTrackingInVisibleRect, and NSTrackingEnabledDuringMouseDrag).",
-      "url": "https://developer.apple.com/documentation/appkit/nstrackingareaoptions"
-    },
-    "NSTypesetterBehavior": {
-      "doc": "Constants that determine the layout manager’s behavior during layout.",
-      "url": "https://developer.apple.com/documentation/appkit/nstypesetterbehavior"
     },
     "NSTypesetterControlCharacterAction": {
       "doc": "The following constants are possible values returned by the actionForControlCharacterAtIndex: method to determine the action associated with a control character.",
@@ -3859,10 +3101,6 @@
         }
       }
     },
-    "NSUsableScrollerParts": {
-      "doc": "These constants specify which parts of the scroller are visible.",
-      "url": "https://developer.apple.com/documentation/appkit/nsusablescrollerparts"
-    },
     "NSUserInterfaceLayoutDirection": {
       "doc": "Specifies the directional flow of the user interface.",
       "url": "https://developer.apple.com/documentation/appkit/nsuserinterfacelayoutdirection",
@@ -3909,112 +3147,8 @@
         }
       }
     },
-    "NSViewControllerTransitionOptions": {
-      "doc": "Animation options for view transitions in a view controller.",
-      "url": "https://developer.apple.com/documentation/appkit/nsviewcontrollertransitionoptions",
-      "members": {
-        "NSViewControllerTransitionNone": {
-          "doc": "A transition with no animation (the default). Specifying another animation option from this enumeration overrides this option.",
-          "url": "https://developer.apple.com/documentation/appkit/nsviewcontrollertransitionoptions/nsviewcontrollertransitionnone"
-        }
-      }
-    },
     "NSViewLayoutRegionAdaptivityAxis": {
       "url": "https://developer.apple.com/documentation/appkit/nsviewlayoutregionadaptivityaxis"
-    },
-    "NSVisualEffectBlendingMode": {
-      "doc": "Constants that specify whether the visual effect view blends with what’s either behind or within the window.",
-      "url": "https://developer.apple.com/documentation/appkit/nsvisualeffectblendingmode"
-    },
-    "NSVisualEffectMaterial": {
-      "doc": "Constants to specify the material shown by the visual effect view.",
-      "url": "https://developer.apple.com/documentation/appkit/nsvisualeffectmaterial"
-    },
-    "NSVisualEffectState": {
-      "doc": "Constants to specify how the material appearance should reflect window activity state.",
-      "url": "https://developer.apple.com/documentation/appkit/nsvisualeffectstate"
-    },
-    "NSWindingRule": {
-      "doc": "Constants that specify the winding rule a Bézier path uses.",
-      "url": "https://developer.apple.com/documentation/appkit/nswindingrule"
-    },
-    "NSWindowAnimationBehavior": {
-      "doc": "Constants that control the automatic window animation behavior windows use when ordering to the front or out of view.",
-      "url": "https://developer.apple.com/documentation/appkit/nswindowanimationbehavior"
-    },
-    "NSWindowBackingLocation": {
-      "doc": "The following constants and the related data type represent a window’s possible backing locations.",
-      "url": "https://developer.apple.com/documentation/appkit/nswindowbackinglocation"
-    },
-    "NSWindowButton": {
-      "doc": "Constants that provide a way to access standard title bar buttons.",
-      "url": "https://developer.apple.com/documentation/appkit/nswindowbutton"
-    },
-    "NSWindowCollectionBehavior": {
-      "doc": "Window collection behaviors related to Mission Control, Spaces, and Stage Manager.",
-      "url": "https://developer.apple.com/documentation/appkit/nswindowcollectionbehavior",
-      "members": {
-        "NSWindowCollectionBehaviorDefault": {
-          "doc": "The window appears in only one space at a time.",
-          "url": "https://developer.apple.com/documentation/appkit/nswindowcollectionbehavior/nswindowcollectionbehaviordefault"
-        }
-      }
-    },
-    "NSWindowDepth": {
-      "doc": "A type that represents the depth, or amount of memory, for a single pixel in a window or screen.",
-      "url": "https://developer.apple.com/documentation/appkit/nswindowdepth"
-    },
-    "NSWindowListOptions": {
-      "doc": "This constant indicates a window ordering.",
-      "url": "https://developer.apple.com/documentation/appkit/nswindowlistoptions"
-    },
-    "NSWindowNumberListOptions": {
-      "doc": "Options to use when retrieving window numbers from the system.",
-      "url": "https://developer.apple.com/documentation/appkit/nswindownumberlistoptions"
-    },
-    "NSWindowOcclusionState": {
-      "doc": "Specifies whether the window is occluded.",
-      "url": "https://developer.apple.com/documentation/appkit/nswindowocclusionstate"
-    },
-    "NSWindowOrderingMode": {
-      "doc": "Constants that let you specify how a window is ordered relative to another window.",
-      "url": "https://developer.apple.com/documentation/appkit/nswindoworderingmode"
-    },
-    "NSWindowSharingType": {
-      "doc": "Constants that represent the access levels other processes can have to a window’s content.",
-      "url": "https://developer.apple.com/documentation/appkit/nswindowsharingtype"
-    },
-    "NSWindowStyleMask": {
-      "doc": "Constants that specify the style of a window, and that you can combine with the C bitwise OR operator.",
-      "url": "https://developer.apple.com/documentation/appkit/nswindowstylemask"
-    },
-    "NSWindowTabbingMode": {
-      "doc": "The preferred tabbing behavior of a window.",
-      "url": "https://developer.apple.com/documentation/appkit/nswindowtabbingmode"
-    },
-    "NSWindowTitleVisibility": {
-      "doc": "Specifies the appearance of the window’s title bar area.",
-      "url": "https://developer.apple.com/documentation/appkit/nswindowtitlevisibility"
-    },
-    "NSWindowToolbarStyle": {
-      "doc": "Styles that determine the appearance and location of the toolbar in relation to the title bar.",
-      "url": "https://developer.apple.com/documentation/appkit/nswindowtoolbarstyle"
-    },
-    "NSWindowUserTabbingPreference": {
-      "doc": "A value that indicates the user’s preference for window tabbing.",
-      "url": "https://developer.apple.com/documentation/appkit/nswindowusertabbingpreference"
-    },
-    "NSWorkspaceAuthorizationType": {
-      "doc": "The types of privileged file operations that can be authorized by the user.",
-      "url": "https://developer.apple.com/documentation/appkit/nsworkspaceauthorizationtype"
-    },
-    "NSWorkspaceIconCreationOptions": {
-      "doc": "Constants that describe options for creating icons.",
-      "url": "https://developer.apple.com/documentation/appkit/nsworkspaceiconcreationoptions"
-    },
-    "NSWorkspaceLaunchOptions": {
-      "doc": "Constants specifying how you want to launch an app",
-      "url": "https://developer.apple.com/documentation/appkit/nsworkspacelaunchoptions"
     },
     "NSWritingDirection": {
       "doc": "Constants that specify the writing direction.",
@@ -10800,6 +9934,16 @@
         "url": "https://developer.apple.com/documentation/appkit/nsprogressindicator/stopanimation(_:)"
       }
     },
+    "NSRefreshController": {
+      "-beginRefreshing": {
+        "doc": "Tells the refresh controller that a refresh operation has begun.",
+        "url": "https://developer.apple.com/documentation/appkit/nsrefreshcontroller/beginrefreshing()"
+      },
+      "-endRefreshing": {
+        "doc": "Tells the refresh controller that a refresh operation has ended.",
+        "url": "https://developer.apple.com/documentation/appkit/nsrefreshcontroller/endrefreshing()"
+      }
+    },
     "NSResponder": {
       "+allowedClassesForRestorableStateKeyPath:": {
         "doc": "Returns the classes that support secure coding.",
@@ -14716,6 +13860,62 @@
         "url": "https://developer.apple.com/documentation/appkit/nsviewcontroller/viewwilltransition(to:)"
       }
     },
+    "NSViewCornerConfiguration": {
+      "+capsuleCornerConfigurationWithMaximumRadius:": {
+        "doc": "A configuration where the container is to take on a capsule shape, scaling with the view’s size. and clamped to the maximumRadius.",
+        "url": "https://developer.apple.com/documentation/appkit/nsviewcornerconfiguration/capsule(maximumradius:)"
+      },
+      "+configurationWithRadius:": {
+        "doc": "A configuration that applies the given radius independently to all corners.",
+        "url": "https://developer.apple.com/documentation/appkit/nsviewcornerconfiguration/corners(radius:)"
+      },
+      "+configurationWithTopLeftRadius:topRightRadius:bottomLeftRadius:bottomRightRadius:": {
+        "doc": "A configuration with independent radii for each corner.",
+        "url": "https://developer.apple.com/documentation/appkit/nsviewcornerconfiguration/corners(topleftradius:toprightradius:bottomleftradius:bottomrightradius:)"
+      },
+      "+configurationWithUniformBottomRadius:topLeftRadius:topRightRadius:": {
+        "doc": "A configuration that applies the bottomRadius uniformly to the bottom-left and bottom-right corners, with optional independent radii for the top-left and top-right corners. When the uniform corners differ, it uses the largest of the resolved corner radii.",
+        "url": "https://developer.apple.com/documentation/appkit/nsviewcornerconfiguration/uniformbottomradius(_:topleftradius:toprightradius:)"
+      },
+      "+configurationWithUniformLeftRadius:rightRadius:": {
+        "doc": "A configuration that applies the leftRadius uniformly to the top-left and bottom-left corners, and the rightRadius uniformly to the top-right and bottom-right corners. When the uniform corners differ, it uses the largest of the resolved corner radii.",
+        "url": "https://developer.apple.com/documentation/appkit/nsviewcornerconfiguration/uniformedges(leftradius:rightradius:)"
+      },
+      "+configurationWithUniformLeftRadius:topRightRadius:bottomRightRadius:": {
+        "doc": "A configuration that applies the leftRadius uniformly to the top-left and bottom-left corners, with optional independent radii for the top-right and bottom-right corners. When the uniform corners differ, it uses the largest of the resolved corner radii.",
+        "url": "https://developer.apple.com/documentation/appkit/nsviewcornerconfiguration/uniformleftradius(_:toprightradius:bottomrightradius:)"
+      },
+      "+configurationWithUniformRadius:": {
+        "doc": "A configuration that applies the given radius uniformly to all corners, using the largest of the resolved corner radii when they differ.",
+        "url": "https://developer.apple.com/documentation/appkit/nsviewcornerconfiguration/uniformcorners(radius:)"
+      },
+      "+configurationWithUniformRadius:topLeftRadius:topRightRadius:bottomLeftRadius:bottomRightRadius:": {
+        "doc": "A configuration that applies the given uniform radius uniformly to all corners that are otherwise unspecified. Any specified corner is independent of the others.",
+        "url": "https://developer.apple.com/documentation/appkit/nsviewcornerconfiguration/uniformcorners(radius:topleftradius:toprightradius:bottomleftradius:bottomrightradius:)"
+      },
+      "+configurationWithUniformRightRadius:topLeftRadius:bottomLeftRadius:": {
+        "doc": "A configuration that applies the rightRadius uniformly to the top-right and bottom-right corners, with optional independent radii for the top-left and bottom-left corners. When the uniform corners differ, it uses the largest of the resolved corner radii.",
+        "url": "https://developer.apple.com/documentation/appkit/nsviewcornerconfiguration/uniformrightradius(_:topleftradius:bottomleftradius:)"
+      },
+      "+configurationWithUniformTopRadius:bottomLeftRadius:bottomRightRadius:": {
+        "doc": "A configuration that applies the topRadius uniformly to the top-left and top-right corners, with optional independent radii for the bottom-left and bottom-right corners. When the uniform corners differ, it uses the largest of the resolved corner radii.",
+        "url": "https://developer.apple.com/documentation/appkit/nsviewcornerconfiguration/uniformtopradius(_:bottomleftradius:bottomrightradius:)"
+      },
+      "+configurationWithUniformTopRadius:bottomRadius:": {
+        "doc": "A configuration that applies the topRadius uniformly to the top-left and top-right corners, and the bottomRadius uniformly to the bottom-left and bottom-right corners. When the uniform corners differ, it uses the largest of the resolved corner radii.",
+        "url": "https://developer.apple.com/documentation/appkit/nsviewcornerconfiguration/uniformedges(topradius:bottomradius:)"
+      }
+    },
+    "NSViewCornerRadius": {
+      "+containerConcentricRadiusWithMinimum:": {
+        "doc": "A dynamic corner radius calculated based on the view’s container shape and limited to the provided minimum radius.",
+        "url": "https://developer.apple.com/documentation/appkit/nsviewcornerradius/containerconcentric(_:)"
+      },
+      "+fixedRadius:": {
+        "doc": "Shorthand initializer for a configuration where all four corners are using a fixed corner radius in points.",
+        "url": "https://developer.apple.com/documentation/appkit/nsviewcornerradius/fixed(_:)"
+      }
+    },
     "NSVisualEffectView": {
       "-viewDidMoveToWindow": {
         "doc": "Notifies the view that it moved to a new window.",
@@ -15482,16 +14682,18 @@
         "url": "https://developer.apple.com/documentation/appkit/nsworkspace/unmountandejectdevice(at:)"
       }
     },
-    "NSWorkspaceOpenConfiguration": {
-      "+configuration": {
-        "doc": "Creates and returns a new workspace configuration object containing default values.",
-        "url": "https://developer.apple.com/documentation/appkit/nsworkspaceopenconfiguration/configuration"
-      }
-    },
     "NSWritingToolsCoordinator": {
+      "-cancelTextAnimationsWithIdentifiers:": {
+        "doc": "Used to support the presentation of grammar issues in text. If it is necessary to cancel the animation of one or more issues, call this to cancel theanimations.",
+        "url": "https://developer.apple.com/documentation/appkit/nswritingtoolscoordinator/canceltextanimations(identifiers:)"
+      },
       "-initWithDelegate:": {
         "doc": "Creates a writing tools coordinator and assigns the specified delegate object to it.",
         "url": "https://developer.apple.com/documentation/appkit/nswritingtoolscoordinator/init(delegate:)"
+      },
+      "-showGrammarPresentationForRange:inContext:": {
+        "doc": "Used to support the presentation of grammar issues in text. When the user interacts with an issue, call this to bring up the relevant UI.",
+        "url": "https://developer.apple.com/documentation/appkit/nswritingtoolscoordinator/showgrammarpresentation(for:in:)"
       },
       "-stopWritingTools": {
         "doc": "Stops the current Writing Tools operation and dismisses the system UI.",
@@ -19060,8 +18262,8 @@
         "url": "https://developer.apple.com/documentation/appkit/nsevent/magnification"
       },
       "modifierFlags": {
-        "doc": "An integer bit field that indicates the pressed modifier keys.",
-        "url": "https://developer.apple.com/documentation/appkit/nsevent/modifierflags-swift.property"
+        "doc": "The currently pressed modifier keys.",
+        "url": "https://developer.apple.com/documentation/appkit/nsevent/modifierflags-swift.type.property"
       },
       "momentumPhase": {
         "doc": "The momentum phase for a scroll or flick gesture.",
@@ -19549,6 +18751,10 @@
         "doc": "A Boolean value indicating whether the gesture recognizer is able to handle events.",
         "url": "https://developer.apple.com/documentation/appkit/nsgesturerecognizer/isenabled"
       },
+      "modifierFlags": {
+        "doc": "The keyboard modifier flags in effect while the receiver last processed an event.",
+        "url": "https://developer.apple.com/documentation/appkit/nsgesturerecognizer/modifierflags"
+      },
       "pressureConfiguration": {
         "doc": "Configures the behavior and progression of the Force Touch trackpad when responding to recognized pressure gestures.",
         "url": "https://developer.apple.com/documentation/appkit/nsgesturerecognizer/pressureconfiguration"
@@ -19986,8 +19192,8 @@
     },
     "NSImageView": {
       "addSymbolEffect(_:options:animated:)": {
-        "doc": "Adds a discrete symbol effect to the image view with the specified options and animation.",
-        "url": "https://developer.apple.com/documentation/appkit/nsimageview/addsymboleffect(_:options:animated:)-4p7p7"
+        "doc": "Adds a discrete, indefinite symbol effect to the image view with the specified options and animation.",
+        "url": "https://developer.apple.com/documentation/appkit/nsimageview/addsymboleffect(_:options:animated:)-66ckm"
       },
       "allowsCutCopyPaste": {
         "doc": "A Boolean value indicating whether the image view lets the user cut, copy, and paste the image contents.",
@@ -22276,6 +21482,28 @@
         "url": "https://developer.apple.com/documentation/appkit/nsprogressindicator/usesthreadedanimation"
       }
     },
+    "NSRefreshController": {
+      "action": {
+        "doc": "The action method to call when refresh is triggered.",
+        "url": "https://developer.apple.com/documentation/appkit/nsrefreshcontroller/action"
+      },
+      "attributedTitle": {
+        "doc": "The styled text to display in the refresh controller.",
+        "url": "https://developer.apple.com/documentation/appkit/nsrefreshcontroller/attributedtitle"
+      },
+      "isRefreshing": {
+        "doc": "A Boolean value indicating whether a refresh operation is in progress.",
+        "url": "https://developer.apple.com/documentation/appkit/nsrefreshcontroller/isrefreshing"
+      },
+      "target": {
+        "doc": "The target object that receives action messages.",
+        "url": "https://developer.apple.com/documentation/appkit/nsrefreshcontroller/target"
+      },
+      "tintColor": {
+        "doc": "The tint color for the refresh controller.",
+        "url": "https://developer.apple.com/documentation/appkit/nsrefreshcontroller/tintcolor"
+      }
+    },
     "NSResponder": {
       "acceptsFirstResponder": {
         "doc": "A Boolean value that indicates whether the responder accepts first responder status.",
@@ -24288,8 +23516,8 @@
         "url": "https://developer.apple.com/documentation/appkit/nsstoryboard/instantiatecontroller(identifier:creator:)-7ddcf"
       },
       "instantiateInitialController(creator:)": {
-        "doc": "Creates the initial view controller from the storyboard and initializes it using your custom code.",
-        "url": "https://developer.apple.com/documentation/appkit/nsstoryboard/instantiateinitialcontroller(creator:)-pi04"
+        "doc": "Creates the initial window controller from the storyboard and initializes it using your custom code.",
+        "url": "https://developer.apple.com/documentation/appkit/nsstoryboard/instantiateinitialcontroller(creator:)-529r1"
       },
       "mainStoryboard": {
         "doc": "The app’s main storyboard.",
@@ -25227,6 +24455,10 @@
         "doc": "A Boolean value that controls whether the text field draws a bezeled background around its contents.",
         "url": "https://developer.apple.com/documentation/appkit/nstextfield/isbezeled"
       },
+      "borderShape": {
+        "doc": "Set border shape NSControlBorderShapeAutomatic sets text field or subclass to default system shape. NSControlBorderShapeCircle sets text field or subclass to NSControlBorderShapeAutomatic.",
+        "url": "https://developer.apple.com/documentation/appkit/nstextfield/bordershape"
+      },
       "bordered": {
         "doc": "A Boolean value that controls whether the text field draws a solid black border around its contents.",
         "url": "https://developer.apple.com/documentation/appkit/nstextfield/isbordered"
@@ -25684,6 +24916,32 @@
       "typingAttributes": {
         "doc": "The template attributes the framework uses for characters that replace the contents of this selection.",
         "url": "https://developer.apple.com/documentation/appkit/nstextselection/typingattributes"
+      }
+    },
+    "NSTextSelectionManager": {
+      "NSTextSelectionManagerDelegate": {
+        "doc": "A set of methods that manage text selection state and let you customize selection behavior.",
+        "url": "https://developer.apple.com/documentation/appkit/nstextselectionmanager/delegate-swift.protocol"
+      },
+      "NSTextSelectionMode": {
+        "doc": "Values for text selection interaction modes.",
+        "url": "https://developer.apple.com/documentation/appkit/nstextselectionmanager/mode"
+      },
+      "delegate": {
+        "doc": "The delegate of the text selection manager.",
+        "url": "https://developer.apple.com/documentation/appkit/nstextselectionmanager/delegate-swift.property"
+      },
+      "gesturesForFailureRequirements": {
+        "doc": "The gesture recognizers managed by the selection manager.",
+        "url": "https://developer.apple.com/documentation/appkit/nstextselectionmanager/gesturesforfailurerequirements"
+      },
+      "textSelectionDataSource": {
+        "doc": "The data source that provides text layout information to the selection manager.",
+        "url": "https://developer.apple.com/documentation/appkit/nstextselectionmanager/textselectiondatasource"
+      },
+      "textSelectionMode": {
+        "doc": "The interaction mode for text selection.",
+        "url": "https://developer.apple.com/documentation/appkit/nstextselectionmanager/textselectionmode"
       }
     },
     "NSTextSelectionNavigation": {
@@ -26357,7 +25615,7 @@
       },
       "badge": {
         "doc": "A badge that can be attached to an NSToolbarItem. This provides a way to display small visual indicators that can be used to highlight important information, such as unread notifications or status indicators.",
-        "url": "https://developer.apple.com/documentation/appkit/nstoolbaritem/badge-17r3r"
+        "url": "https://developer.apple.com/documentation/appkit/nstoolbaritem/badge-2b38p"
       },
       "bordered": {
         "doc": "A Boolean value that indicates whether the toolbar item has a bordered style.",
@@ -26986,6 +26244,36 @@
       "viewLoaded": {
         "doc": "A Boolean value indicating whether the view controller’s view is loaded into memory.",
         "url": "https://developer.apple.com/documentation/appkit/nsviewcontroller/isviewloaded"
+      }
+    },
+    "NSViewCornerConfiguration": {
+      "capsuleCornerConfiguration": {
+        "doc": "A configuration where the container is to take on a capsule shape, scaling with the view’s size.",
+        "url": "https://developer.apple.com/documentation/appkit/nsviewcornerconfiguration/capsule"
+      }
+    },
+    "NSViewCornerRadii": {
+      "bottomLeft": {
+        "doc": "Radius of the bottom left corner of the view.",
+        "url": "https://developer.apple.com/documentation/appkit/nsviewcornerradii/bottomleft"
+      },
+      "bottomRight": {
+        "doc": "Radius of the bottom right corner of the view.",
+        "url": "https://developer.apple.com/documentation/appkit/nsviewcornerradii/bottomright"
+      },
+      "topLeft": {
+        "doc": "Radius of the top left corner of the view.",
+        "url": "https://developer.apple.com/documentation/appkit/nsviewcornerradii/topleft"
+      },
+      "topRight": {
+        "doc": "Radius of the top right corner of the view.",
+        "url": "https://developer.apple.com/documentation/appkit/nsviewcornerradii/topright"
+      }
+    },
+    "NSViewCornerRadius": {
+      "containerConcentricRadius": {
+        "doc": "A dynamic corner radius calculated based on the view’s container shape.",
+        "url": "https://developer.apple.com/documentation/appkit/nsviewcornerradius/containerconcentric"
       }
     },
     "NSVisualEffectView": {
@@ -27980,6 +27268,10 @@
       "NSWritingToolsCoordinatorTextAnimation": {
         "doc": "The types of animations that Writing Tools performs during an interactive update of your view.",
         "url": "https://developer.apple.com/documentation/appkit/nswritingtoolscoordinator/textanimation"
+      },
+      "NSWritingToolsCoordinatorTextDecoration": {
+        "doc": "Use the NSWritingToolsCoordinator.TextDecoration constants to determine the type of decoration to be applied to a preview for grammar animation. The grammar animation needs previews of the text of the issue in two forms, without and with the grammar indication underline applied. If you use grammar animation, you must implement the delegate method writingToolsCoordinator:requestsPreviewForTextAnimation:ofRange:inContext:textDecoration:completion: to provide both forms of previews, based on the specified decoration.",
+        "url": "https://developer.apple.com/documentation/appkit/nswritingtoolscoordinator/textdecoration"
       },
       "NSWritingToolsCoordinatorTextReplacementReason": {
         "doc": "Options that indicate whether Writing Tools is animating changes to your view’s text.",

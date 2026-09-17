@@ -20,7 +20,7 @@ import (
 //
 // Port is an abstract base — you do not construct it directly. Construct one of [MachPort], [MessagePort], [SocketPort] and pass it where a Port is accepted.
 //
-// An abstract class that represents a communication channel.
+// An abstract class that represents a communication channel. Communication occurs between “NSPort“ objects, which typically reside in different threads or tasks. The distributed objects system uses “NSPort“ objects to send “NSPortMessage“ objects back and forth. Implement interapplication communication using distributed objects whenever possible and use “NSPort“ objects only when necessary. To receive incoming messages, add “NSPort“ objects to an instance of “NSRunLoop“ as input sources. “NSConnection“ objects automatically add their receive port when initialized.
 type Port struct {
 	objref.Handle
 }
@@ -89,13 +89,13 @@ func (p *Port) WithScriptingProperties(scriptingProperties map[string]obj.Object
 	return p
 }
 
-// Invalidate wraps the corresponding Objective-C method.
+// Invalidate marks the receiver as invalid and posts an “NSPortDidBecomeInvalidNotification“ to the default notification center.
 func (p *Port) Invalidate() {
 	defer runtime.KeepAlive(p)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("invalidate"))
 }
 
-// ScheduleInRunLoopForMode wraps the corresponding Objective-C method.
+// ScheduleInRunLoopForMode schedules the receiver into a given run loop. You should not directly invoke this method. Instead, you should add the port to a run loop.
 func (p *Port) ScheduleInRunLoopForMode(runLoop *RunLoop, mode *String) {
 	defer runtime.KeepAlive(p)
 	defer runtime.KeepAlive(runLoop)
@@ -103,7 +103,7 @@ func (p *Port) ScheduleInRunLoopForMode(runLoop *RunLoop, mode *String) {
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("scheduleInRunLoop:forMode:"), objref.IDOf(runLoop), objref.IDOf(mode))
 }
 
-// RemoveFromRunLoopForMode removes from run loop for mode.
+// RemoveFromRunLoopForMode removes the receiver from the run loop mode of the given run loop. You should not directly invoke this method. Instead, you should remove the port from the run loop.
 func (p *Port) RemoveFromRunLoopForMode(runLoop *RunLoop, mode *String) {
 	defer runtime.KeepAlive(p)
 	defer runtime.KeepAlive(runLoop)
@@ -111,7 +111,7 @@ func (p *Port) RemoveFromRunLoopForMode(runLoop *RunLoop, mode *String) {
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("removeFromRunLoop:forMode:"), objref.IDOf(runLoop), objref.IDOf(mode))
 }
 
-// SendBeforeDateComponentsFromReserved sends before date components from reserved.
+// SendBeforeDateComponentsFromReserved attempts to send the message before a given date, treating the receiver as the send port and the given port as the receive port.
 func (p *Port) SendBeforeDateComponentsFromReserved(limitDate time.Time, components obj.Object, receivePort *Port, headerSpaceReserved int) bool {
 	defer runtime.KeepAlive(p)
 	defer runtime.KeepAlive(components)
@@ -120,7 +120,7 @@ func (p *Port) SendBeforeDateComponentsFromReserved(limitDate time.Time, compone
 	return _r
 }
 
-// SendBeforeDateMsgidComponentsFromReserved sends before date msgid components from reserved.
+// SendBeforeDateMsgidComponentsFromReserved attempts to send the message with a given identifier before a given date, treating the receiver as the send port and the given port as the receive port.
 func (p *Port) SendBeforeDateMsgidComponentsFromReserved(limitDate time.Time, msgID int, components obj.Object, receivePort *Port, headerSpaceReserved int) bool {
 	defer runtime.KeepAlive(p)
 	defer runtime.KeepAlive(components)
@@ -129,7 +129,7 @@ func (p *Port) SendBeforeDateMsgidComponentsFromReserved(limitDate time.Time, ms
 	return _r
 }
 
-// AddConnectionToRunLoopForMode adds the receiver to the list of ports monitored by a given run loop for the given input mode.
+// AddConnectionToRunLoopForMode adds a given connection to the receiver in a given run loop mode.
 func (p *Port) AddConnectionToRunLoopForMode(conn *Connection, runLoop *RunLoop, mode *String) {
 	defer runtime.KeepAlive(p)
 	defer runtime.KeepAlive(conn)
@@ -138,7 +138,7 @@ func (p *Port) AddConnectionToRunLoopForMode(conn *Connection, runLoop *RunLoop,
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("addConnection:toRunLoop:forMode:"), objref.IDOf(conn), objref.IDOf(runLoop), objref.IDOf(mode))
 }
 
-// RemoveConnectionFromRunLoopForMode removes the receiver from the list of ports monitored by runLoop in the given input mode, mode.
+// RemoveConnectionFromRunLoopForMode removes a given connection from the receiver in a given run loop mode.
 func (p *Port) RemoveConnectionFromRunLoopForMode(conn *Connection, runLoop *RunLoop, mode *String) {
 	defer runtime.KeepAlive(p)
 	defer runtime.KeepAlive(conn)
@@ -147,14 +147,14 @@ func (p *Port) RemoveConnectionFromRunLoopForMode(conn *Connection, runLoop *Run
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("removeConnection:fromRunLoop:forMode:"), objref.IDOf(conn), objref.IDOf(runLoop), objref.IDOf(mode))
 }
 
-// IsValid reports whether the object is valid.
+// IsValid reports whether the receiver is valid.
 func (p *Port) IsValid() bool {
 	defer runtime.KeepAlive(p)
 	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isValid"))
 	return _r
 }
 
-// ReservedSpaceLength returns the reserved space length.
+// ReservedSpaceLength returns the number of bytes of space reserved by the receiver for sending data.
 func (p *Port) ReservedSpaceLength() int {
 	defer runtime.KeepAlive(p)
 	_r := objc.Send[int](objref.IDOf(p), objc.RegisterName("reservedSpaceLength"))

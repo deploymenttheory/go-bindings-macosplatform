@@ -63,6 +63,8 @@ var (
 	_aSAuthorizationProviderExtensionLoginConfigurationSelSetAdditionalScopes                                             = objc.RegisterName("setAdditionalScopes:")
 	_aSAuthorizationProviderExtensionLoginConfigurationSelAdditionalAuthorizationScopes                                   = objc.RegisterName("additionalAuthorizationScopes")
 	_aSAuthorizationProviderExtensionLoginConfigurationSelSetAdditionalAuthorizationScopes                                = objc.RegisterName("setAdditionalAuthorizationScopes:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelIncludePlatformSSOAuthorizationScopes                           = objc.RegisterName("includePlatformSSOAuthorizationScopes")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetIncludePlatformSSOAuthorizationScopes                        = objc.RegisterName("setIncludePlatformSSOAuthorizationScopes:")
 	_aSAuthorizationProviderExtensionLoginConfigurationSelIncludePreviousRefreshTokenInLoginRequest                       = objc.RegisterName("includePreviousRefreshTokenInLoginRequest")
 	_aSAuthorizationProviderExtensionLoginConfigurationSelSetIncludePreviousRefreshTokenInLoginRequest                    = objc.RegisterName("setIncludePreviousRefreshTokenInLoginRequest:")
 	_aSAuthorizationProviderExtensionLoginConfigurationSelPreviousRefreshTokenClaimName                                   = objc.RegisterName("previousRefreshTokenClaimName")
@@ -85,6 +87,8 @@ var (
 	_aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomRefreshRequestValues                                   = objc.RegisterName("setCustomRefreshRequestValues:")
 	_aSAuthorizationProviderExtensionLoginConfigurationSelFederationType                                                  = objc.RegisterName("federationType")
 	_aSAuthorizationProviderExtensionLoginConfigurationSelSetFederationType                                               = objc.RegisterName("setFederationType:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelFallbackFederationType                                          = objc.RegisterName("fallbackFederationType")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetFallbackFederationType                                       = objc.RegisterName("setFallbackFederationType:")
 	_aSAuthorizationProviderExtensionLoginConfigurationSelFederationRequestURN                                            = objc.RegisterName("federationRequestURN")
 	_aSAuthorizationProviderExtensionLoginConfigurationSelSetFederationRequestURN                                         = objc.RegisterName("setFederationRequestURN:")
 	_aSAuthorizationProviderExtensionLoginConfigurationSelFederationMEXURL                                                = objc.RegisterName("federationMEXURL")
@@ -97,6 +101,10 @@ var (
 	_aSAuthorizationProviderExtensionLoginConfigurationSelSetFederationPredicate                                          = objc.RegisterName("setFederationPredicate:")
 	_aSAuthorizationProviderExtensionLoginConfigurationSelCustomFederationUserPreauthenticationRequestValues              = objc.RegisterName("customFederationUserPreauthenticationRequestValues")
 	_aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomFederationUserPreauthenticationRequestValues           = objc.RegisterName("setCustomFederationUserPreauthenticationRequestValues:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelAuthorizationURL                                                = objc.RegisterName("authorizationURL")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetAuthorizationURL                                             = objc.RegisterName("setAuthorizationURL:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelAuthorizationURLKeypath                                         = objc.RegisterName("authorizationURLKeypath")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetAuthorizationURLKeypath                                      = objc.RegisterName("setAuthorizationURLKeypath:")
 	_aSAuthorizationProviderExtensionLoginConfigurationSelLoginRequestEncryptionPublicKey                                 = objc.RegisterName("loginRequestEncryptionPublicKey")
 	_aSAuthorizationProviderExtensionLoginConfigurationSelSetLoginRequestEncryptionPublicKey                              = objc.RegisterName("setLoginRequestEncryptionPublicKey:")
 	_aSAuthorizationProviderExtensionLoginConfigurationSelLoginRequestEncryptionAPVPrefix                                 = objc.RegisterName("loginRequestEncryptionAPVPrefix")
@@ -452,6 +460,16 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetAdditionalAuthor
 	o.Ptr().Send(_aSAuthorizationProviderExtensionLoginConfigurationSelSetAdditionalAuthorizationScopes, additionalAuthorizationScopes.Ptr())
 }
 
+// @abstract If true, the Platform SSO authorization scopes will be included in all requests.
+func (o *ASAuthorizationProviderExtensionLoginConfiguration) IncludePlatformSSOAuthorizationScopes() bool {
+	_ret := objc.Send[bool](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelIncludePlatformSSOAuthorizationScopes)
+	return _ret
+}
+
+func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetIncludePlatformSSOAuthorizationScopes(includePlatformSSOAuthorizationScopes bool) {
+	o.Ptr().Send(_aSAuthorizationProviderExtensionLoginConfigurationSelSetIncludePlatformSSOAuthorizationScopes, includePlatformSSOAuthorizationScopes)
+}
+
 // @abstract If true and there is a refresh token for the user in the SSO tokens, it will be included in the login request.
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) IncludePreviousRefreshTokenInLoginRequest() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelIncludePreviousRefreshTokenInLoginRequest)
@@ -589,6 +607,16 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetFederationType(f
 	o.Ptr().Send(_aSAuthorizationProviderExtensionLoginConfigurationSelSetFederationType, federationType)
 }
 
+// @abstract The federation method to use for fallback.
+func (o *ASAuthorizationProviderExtensionLoginConfiguration) FallbackFederationType() ASAuthorizationProviderExtensionFederationType {
+	_ret := objc.Send[ASAuthorizationProviderExtensionFederationType](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelFallbackFederationType)
+	return _ret
+}
+
+func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetFallbackFederationType(fallbackFederationType ASAuthorizationProviderExtensionFederationType) {
+	o.Ptr().Send(_aSAuthorizationProviderExtensionLoginConfigurationSelSetFallbackFederationType, fallbackFederationType)
+}
+
 // @abstract The URN to request when performing a federated login.
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) FederationRequestURN() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelFederationRequestURN)
@@ -665,6 +693,32 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) CustomFederationUse
 
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetCustomFederationUserPreauthenticationRequestValues(customFederationUserPreauthenticationRequestValues *foundation.NSArray[*foundation.NSURLQueryItem]) {
 	o.Ptr().Send(_aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomFederationUserPreauthenticationRequestValues, customFederationUserPreauthenticationRequestValues.Ptr())
+}
+
+// @abstract The OpenID authorization request URL.  This can be overwritten when using dynamic federation.
+func (o *ASAuthorizationProviderExtensionLoginConfiguration) AuthorizationURL() *foundation.NSURL {
+	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelAuthorizationURL)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSURLFromID(_ret)
+}
+
+func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetAuthorizationURL(authorizationURL *foundation.NSURL) {
+	o.Ptr().Send(_aSAuthorizationProviderExtensionLoginConfigurationSelSetAuthorizationURL, authorizationURL.Ptr())
+}
+
+// @abstract The claim in the preauthentication response that contains the OpenID authorization URL.
+func (o *ASAuthorizationProviderExtensionLoginConfiguration) AuthorizationURLKeypath() *foundation.NSString {
+	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelAuthorizationURLKeypath)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSStringFromID(_ret)
+}
+
+func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetAuthorizationURLKeypath(authorizationURLKeypath *foundation.NSString) {
+	o.Ptr().Send(_aSAuthorizationProviderExtensionLoginConfigurationSelSetAuthorizationURLKeypath, authorizationURLKeypath.Ptr())
 }
 
 // @abstract The public key to use for encrypting the embedded login assertion. @discussion Only applies to password authentication.  If set, the password will encrypted in an embedded assertion instead of the login request itself.

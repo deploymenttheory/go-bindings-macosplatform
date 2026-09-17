@@ -211,6 +211,7 @@ func (o *NSTextLayoutManager) ReplaceContentsInRangeWithAttributedString(range_ 
 	o.Ptr().Send(_nSTextLayoutManagerSelReplaceContentsInRangeWithAttributedString, range_.Ptr(), attributedString.Ptr())
 }
 
+// The delegate for the text layout manager object.
 func (o *NSTextLayoutManager) Delegate() NSTextLayoutManagerDelegate {
 	_ret := objc.Send[NSTextLayoutManagerDelegate](o.Ptr(), _nSTextLayoutManagerSelDelegate)
 	return _ret
@@ -220,6 +221,7 @@ func (o *NSTextLayoutManager) SetDelegate(delegate NSTextLayoutManagerDelegate) 
 	o.Ptr().Send(_nSTextLayoutManagerSelSetDelegate, delegate)
 }
 
+// A Boolean value that controls whether the framework uses the leading information specified by the font when laying out text. If set to `true`, uses the leading as specified by the font. However, this isn't appropriate for most UI text. The default value is `true`.
 func (o *NSTextLayoutManager) UsesFontLeading() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTextLayoutManagerSelUsesFontLeading)
 	return _ret
@@ -229,6 +231,7 @@ func (o *NSTextLayoutManager) SetUsesFontLeading(usesFontLeading bool) {
 	o.Ptr().Send(_nSTextLayoutManagerSelSetUsesFontLeading, usesFontLeading)
 }
 
+// A Boolean value that controls internal security analysis for malicious inputs and activates defensive behaviors. By enabling this functionality, it's possible certain text such as a very long paragraph might result in unexpected layout. The default value is `false`.
 func (o *NSTextLayoutManager) LimitsLayoutForSuspiciousContents() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTextLayoutManagerSelLimitsLayoutForSuspiciousContents)
 	return _ret
@@ -238,6 +241,7 @@ func (o *NSTextLayoutManager) SetLimitsLayoutForSuspiciousContents(limitsLayoutF
 	o.Ptr().Send(_nSTextLayoutManagerSelSetLimitsLayoutForSuspiciousContents, limitsLayoutForSuspiciousContents)
 }
 
+// A Boolean value that controls whether the text layout manager attempts to hyphenate when wrapping lines. May be overridden on a per-paragraph basis by the `NSParagraphStyle`'s `usesDefaultHyphenation`. The receiver makes the best effort to decide the exact logic including the hyphenation factor based on the context. The default value is `false`. Can be overridden by the preference key `"NSUsesDefaultHyphenation"`.
 func (o *NSTextLayoutManager) UsesHyphenation() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTextLayoutManagerSelUsesHyphenation)
 	return _ret
@@ -247,7 +251,7 @@ func (o *NSTextLayoutManager) SetUsesHyphenation(usesHyphenation bool) {
 	o.Ptr().Send(_nSTextLayoutManagerSelSetUsesHyphenation, usesHyphenation)
 }
 
-// Specifies the behavior for resolving “NSTextAlignment.natural“ to the visual alignment. When set to “true“, the resolved visual alignment is determined by the resolved base writing direction; otherwise, it is using the user’s preferred language. The default value is “true“.
+// Specifies the behavior for resolving “NSTextAlignment/natural“ to the visual alignment. When set to `true`, the resolved visual alignment is determined by the resolved base writing direction; otherwise, it is using the user’s preferred language. The default value is `true`.
 func (o *NSTextLayoutManager) ResolvesNaturalAlignmentWithBaseWritingDirection() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTextLayoutManagerSelResolvesNaturalAlignmentWithBaseWritingDirection)
 	return _ret
@@ -257,6 +261,7 @@ func (o *NSTextLayoutManager) SetResolvesNaturalAlignmentWithBaseWritingDirectio
 	o.Ptr().Send(_nSTextLayoutManagerSelSetResolvesNaturalAlignmentWithBaseWritingDirection, resolvesNaturalAlignmentWithBaseWritingDirection)
 }
 
+// Returns the text content manager associated with this text layout manager.
 func (o *NSTextLayoutManager) TextContentManager() *NSTextContentManager {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextLayoutManagerSelTextContentManager)
 	if _ret != 0 {
@@ -265,6 +270,7 @@ func (o *NSTextLayoutManager) TextContentManager() *NSTextContentManager {
 	return NSTextContentManagerFromID(_ret)
 }
 
+// The text container object that provides geometric information for the layout destination. If `isSimpleRectangularTextContainer` is `false`, “NSTextLayoutManager“ always fills from the top instead of allowing non-contiguous layout support.
 func (o *NSTextLayoutManager) TextContainer() *NSTextContainer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextLayoutManagerSelTextContainer)
 	if _ret != 0 {
@@ -277,11 +283,13 @@ func (o *NSTextLayoutManager) SetTextContainer(textContainer *NSTextContainer) {
 	o.Ptr().Send(_nSTextLayoutManagerSelSetTextContainer, textContainer.Ptr())
 }
 
+// Returns the usage bounds for the text container. KVO-compliant. Views can observe this property in order to trigger a resize operation. For example, `UIView`/`NSView` should call `setNeedsUpdateConstraints()` when the usage bounds changes.
 func (o *NSTextLayoutManager) UsageBoundsForTextContainer() corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSTextLayoutManagerSelUsageBoundsForTextContainer)
 	return _ret
 }
 
+// Returns the text viewport layout controller associated with the text layout manager's text container.
 func (o *NSTextLayoutManager) TextViewportLayoutController() *NSTextViewportLayoutController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextLayoutManagerSelTextViewportLayoutController)
 	if _ret != 0 {
@@ -290,6 +298,7 @@ func (o *NSTextLayoutManager) TextViewportLayoutController() *NSTextViewportLayo
 	return NSTextViewportLayoutControllerFromID(_ret)
 }
 
+// The queue that the framework dispatches layout operations on. If non-nil, it performs layout in the specified queue until `estimatedUsageBounds` is `false`.
 func (o *NSTextLayoutManager) LayoutQueue() *foundation.NSOperationQueue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextLayoutManagerSelLayoutQueue)
 	if _ret != 0 {
@@ -302,6 +311,7 @@ func (o *NSTextLayoutManager) SetLayoutQueue(layoutQueue *foundation.NSOperation
 	o.Ptr().Send(_nSTextLayoutManagerSelSetLayoutQueue, layoutQueue.Ptr())
 }
 
+// An array of text selections associated by the text layout manager. Each “NSTextSelection“ represents an insertion point. The selection state is shared among all view ports connected to the text layout manager via text containers.
 func (o *NSTextLayoutManager) TextSelections() *foundation.NSArray[*NSTextSelection] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextLayoutManagerSelTextSelections)
 	if _ret != 0 {
@@ -314,6 +324,7 @@ func (o *NSTextLayoutManager) SetTextSelections(textSelections *foundation.NSArr
 	o.Ptr().Send(_nSTextLayoutManagerSelSetTextSelections, textSelections.Ptr())
 }
 
+// Returns a text selection navigation configured to have the text layout manager as its data source.
 func (o *NSTextLayoutManager) TextSelectionNavigation() *NSTextSelectionNavigation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextLayoutManagerSelTextSelectionNavigation)
 	if _ret != 0 {
@@ -326,6 +337,7 @@ func (o *NSTextLayoutManager) SetTextSelectionNavigation(textSelectionNavigation
 	o.Ptr().Send(_nSTextLayoutManagerSelSetTextSelectionNavigation, textSelectionNavigation.Ptr())
 }
 
+// A callback block that the framework invokes whenever the text layout manager needs to validate the rendering attributes for the range. The validator should use “setRenderingAttributes:forTextRange:“ to fill the rendering attributes appropriate for the range inside `textLayoutFragment`.
 func (o *NSTextLayoutManager) RenderingAttributesValidator() objc.Block {
 	_ret := objc.Send[objc.Block](o.Ptr(), _nSTextLayoutManagerSelRenderingAttributesValidator)
 	return _ret
@@ -348,6 +360,7 @@ func (o *NSTextLayoutManager) SetRenderingAttributesValidator(renderingAttribute
 	o.Ptr().Send(_nSTextLayoutManagerSelSetRenderingAttributesValidator, __block_renderingAttributesValidator)
 }
 
+// Returns the default set of attributes for rendering `NSLinkAttributeName`. The base “NSTextLayoutManager“ class returns with “NSUnderlineStyle/single“ for <doc://com.apple.documentation/documentation/foundation/nsattributedstring/key/1524865-underlinestyle> in Swift or “NSUnderlineStyleAttributeName“ in Objective-C, and the platform link color for <doc://com.apple.documentation/documentation/foundation/nsattributedstring/key/1533563-foregroundcolor> in Swift or “NSForegroundColorAttributeName“ in Objective-C. The platform color for macOS is `linkColor`. Other platforms use `blueColor`.
 func NSTextLayoutManagerLinkRenderingAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextLayoutManager), _nSTextLayoutManagerSelLinkRenderingAttributes)
 	if _ret != 0 {

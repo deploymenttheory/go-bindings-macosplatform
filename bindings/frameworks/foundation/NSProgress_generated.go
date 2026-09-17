@@ -17,8 +17,6 @@ import (
 )
 
 // Progress is an idiomatic wrapper over the Objective-C class NSProgress.
-//
-// An object that conveys ongoing progress to the user for a specified task.
 type Progress struct {
 	objref.Handle
 }
@@ -75,7 +73,7 @@ func (p *Progress) String() string {
 	return rt.Description(objref.IDOf(p))
 }
 
-// NewProgressWithParentUserInfo creates a new Progress.
+// NewProgressWithParentUserInfo creates a new progress instance. - Parameters: - parentProgressOrNil: The containing `NSProgress` object, if any, to notify when reporting progress, or to consult when checking for cancellation. The only valid values are `+currentProgress` or `nil`. - userInfoOrNil: The optional user information dictionary for the progress object. This is the designated initializer for the `NSProgress` class.
 func NewProgressWithParentUserInfo(parentProgressOrNil *Progress, userInfoOrNil obj.Object) *Progress {
 	defer runtime.KeepAlive(parentProgressOrNil)
 	defer runtime.KeepAlive(userInfoOrNil)
@@ -84,104 +82,104 @@ func NewProgressWithParentUserInfo(parentProgressOrNil *Progress, userInfoOrNil 
 	return progressAdopt(_id)
 }
 
-// WithTotalUnitCount sets the total unit count.
+// WithTotalUnitCount sets the total number of tracked units of work for the current progress. For an `NSProgress` with a kind of `NSProgressKindFile`, the unit of this property is bytes, and the `NSProgressFileTotalCountKey` and `NSProgressFileCompletedCountKey` keys in the `userInfo` dictionary report the overall count of files. For any other kind of `NSProgress`, the unit of measurement doesn't matter as long as it's consistent. You can report the values to the user in the `localizedDescription` and `localizedAdditionalDescription`.
 func (p *Progress) WithTotalUnitCount(totalUnitCount int64) *Progress {
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setTotalUnitCount:"), totalUnitCount)
 	return p
 }
 
-// WithCompletedUnitCount sets the completed unit count.
+// WithCompletedUnitCount sets the number of completed units of work for the current job. For an `NSProgress` with a kind of `NSProgressKindFile`, the unit of this property is bytes, and the `NSProgressFileTotalCountKey` and `NSProgressFileCompletedCountKey` keys in the `userInfo` dictionary report the overall count of files. For any other kind of `NSProgress`, the unit of measurement doesn't matter as long as it's consistent. You can report the values to the user in the `localizedDescription` and `localizedAdditionalDescription`.
 func (p *Progress) WithCompletedUnitCount(completedUnitCount int64) *Progress {
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setCompletedUnitCount:"), completedUnitCount)
 	return p
 }
 
-// WithLocalizedDescription sets the localized description.
+// WithLocalizedDescription sets a localized description of tracked progress for the receiver. If you don't specify your own custom value for this property, `NSProgress` uses the value of the `kind` property to determine how to use the values of other properties, as well as values in the user info dictionary, to return an automatically computed string. If it fails to do that, it returns an empty string. The `localizedDescription` represents a general description of the work the receiver tracks. Depending on the kind of progress, the completed and total unit counts, and other parameters, localized descriptions resemble the following: - Copying 10 files... - 30% completed - Copying “TextEdit”... By default, `NSProgress` is KVO-compliant for this property. It sends notifications on the same thread that updates the property.
 func (p *Progress) WithLocalizedDescription(localizedDescription StringProvider) *Progress {
 	defer runtime.KeepAlive(localizedDescription)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setLocalizedDescription:"), objref.IDOf(localizedDescription))
 	return p
 }
 
-// WithLocalizedAdditionalDescription sets the localized additional description.
+// WithLocalizedAdditionalDescription sets a more specific localized description of tracked progress for the receiver. If you don't specify your own custom value for this property, `NSProgress` uses the value of the `kind` property to determine how to use the values of other properties, as well as values in the user info dictionary, to return an automatically computed string. If it fails to do that, it returns an empty string. The `localizedAdditionalDescription` is more specific than `localizedDescription` about the work the receiver is tracking at any particular moment. Depending on the kind of progress, the completed and total unit counts, and other parameters, localized additional descriptions resemble the following: - 3 of 10 files - 123 KB of 789.1 MB - 3.3 MB of 103.92 GB -- 2 hours remaining - 1.61 GB of 3.22 GB (2 KB/sec) -- 2 minutes remaining - 1 minute remaining (1 KB/sec)
 func (p *Progress) WithLocalizedAdditionalDescription(localizedAdditionalDescription StringProvider) *Progress {
 	defer runtime.KeepAlive(localizedAdditionalDescription)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setLocalizedAdditionalDescription:"), objref.IDOf(localizedAdditionalDescription))
 	return p
 }
 
-// WithCancellable sets the cancellable.
+// WithCancellable sets a Boolean value that indicates whether the receiver is tracking work that you can cancel. By default, `NSProgress` objects are cancelable. You typically use this property to communicate whether controls for canceling appear in a progress-reporting user interface. `NSProgress` itself doesn't do anything with this property other than help pass the value from progress reporters to progress observers. If an `NSProgress` is cancelable, implement the ability to cancel progress either by setting a block for the `cancellationHandler` property, or by polling the `isCancelled` property periodically while performing the relevant work. It's valid for the value of this property to change during the lifetime of an `NSProgress` object. By default, `NSProgress` is KVO-compliant for this property. It sends notifications on the same thread that updates the property.
 func (p *Progress) WithCancellable(cancellable bool) *Progress {
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setCancellable:"), cancellable)
 	return p
 }
 
-// WithPausable sets the pausable.
+// WithPausable sets a Boolean value that indicates whether the receiver is tracking work that you can pause. By default, `NSProgress` objects aren't pausable. You typically use this property to communicate whether controls for pausing appear in a progress-reporting user interface. `NSProgress` itself doesn't do anything with this property other than help pass the value from progress reporters to progress observers. If an `NSProgress` is pausable, implement the ability to pause either by setting a block for the `pausingHandler` property, or by polling the `isPaused` property periodically while performing the relevant work. It's valid for the value of this property to change during the lifetime of an `NSProgress` object. By default, `NSProgress` is KVO-compliant for this property. It sends notifications on the same thread that updates the property.
 func (p *Progress) WithPausable(pausable bool) *Progress {
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setPausable:"), pausable)
 	return p
 }
 
-// WithCancellationHandler sets the cancellation handler.
+// WithCancellationHandler sets the block to invoke when canceling progress. If the receiver is a suboperation of another progress object, the system invokes the `cancellationHandler` block when canceling the containing progress object. You're responsible for canceling any work for the progress object. You can invoke the cancellation handler on any queue. If you must do work on a specific queue, dispatch to that queue from within the cancellation handler block.
 func (p *Progress) WithCancellationHandler(cancellationHandler func()) *Progress {
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setCancellationHandler:"), objc.NewBlock(func(_ objc.Block) { cancellationHandler() }))
 	return p
 }
 
-// WithPausingHandler sets the pausing handler.
+// WithPausingHandler sets the block to invoke when pausing progress. If the receiver is a suboperation of another progress object, the system invokes the `pausingHandler` block when pausing the containing progress object. You're responsible for pausing any work for the progress object. You can invoke the pausing handler on any queue. If you must do work on a specific queue, dispatch to that queue from within the pausing handler block.
 func (p *Progress) WithPausingHandler(pausingHandler func()) *Progress {
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setPausingHandler:"), objc.NewBlock(func(_ objc.Block) { pausingHandler() }))
 	return p
 }
 
-// WithResumingHandler sets the resuming handler.
+// WithResumingHandler sets the block to invoke when progress resumes. If the receiver is a suboperation of another progress object, the system invokes the `resumingHandler` block when resuming the containing progress object. You're responsible for resuming any work for the progress object. You can invoke the resuming handler on any queue. If you must do work on a specific queue, dispatch to that queue from within the resuming handler block.
 func (p *Progress) WithResumingHandler(resumingHandler func()) *Progress {
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setResumingHandler:"), objc.NewBlock(func(_ objc.Block) { resumingHandler() }))
 	return p
 }
 
-// WithKind sets the kind.
+// WithKind sets an object that represents the kind of progress for the progress object. This property identifies the kind of progress for the progress object, such as `NSProgressKindFile`. It can be `nil`. If you set a non-`nil` value to `kind`, the default `localizedDescription` getter uses the kind of progress to determine how to use the values of other properties, along with values in the user info dictionary, to create a string representation.
 func (p *Progress) WithKind(kind StringProvider) *Progress {
 	defer runtime.KeepAlive(kind)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setKind:"), objref.IDOf(kind))
 	return p
 }
 
-// WithEstimatedTimeRemaining sets a value that indicates the estimated amount of time remaining to complete the progress.
+// WithEstimatedTimeRemaining sets how much time is probably left in the operation, as an `NSNumber` containing a number of seconds. This property is optional. If present, `NSProgress` will use the information to present more information in its localized description. This property sets a value in the user info dictionary.
 func (p *Progress) WithEstimatedTimeRemaining(estimatedTimeRemaining NumberProvider) *Progress {
 	defer runtime.KeepAlive(estimatedTimeRemaining)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setEstimatedTimeRemaining:"), objref.IDOf(estimatedTimeRemaining))
 	return p
 }
 
-// WithThroughput sets a value that represents the speed of data processing, in bytes per second.
+// WithThroughput sets how fast data is being processed, as an `NSNumber` containing bytes per second. This property is optional. If present, `NSProgress` will use the information to present more information in its localized description. This property sets a value in the user info dictionary.
 func (p *Progress) WithThroughput(throughput NumberProvider) *Progress {
 	defer runtime.KeepAlive(throughput)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setThroughput:"), objref.IDOf(throughput))
 	return p
 }
 
-// WithFileOperationKind sets the file operation kind.
+// WithFileOperationKind sets the kind of file operation for the progress object. Set this value when the `kind` property is `NSProgressKindFile` to describe the kind of file operation. If present, `NSProgress` presents additional information in its localized description by setting a value in the `userInfo` dictionary.
 func (p *Progress) WithFileOperationKind(fileOperationKind StringProvider) *Progress {
 	defer runtime.KeepAlive(fileOperationKind)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setFileOperationKind:"), objref.IDOf(fileOperationKind))
 	return p
 }
 
-// WithFileURL sets the file URL.
+// WithFileURL sets a URL that represents the file for the current progress object. Set this value for a progress that you publish to subscribers that register for updates using `+addSubscriberForFileURL:withPublishingHandler:`. If present, `NSProgress` presents additional information in its localized description by setting a value in the `userInfo` dictionary.
 func (p *Progress) WithFileURL(fileURL string) *Progress {
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setFileURL:"), rt.FileURL(fileURL))
 	return p
 }
 
-// WithFileTotalCount sets the total number of files for a file progress object.
+// WithFileTotalCount sets if the progress is operating on a set of files, the total number of files in the operation. This property is optional. If present, `NSProgress` will use the information to present more information in its localized description. This property sets a value in the user info dictionary.
 func (p *Progress) WithFileTotalCount(fileTotalCount NumberProvider) *Progress {
 	defer runtime.KeepAlive(fileTotalCount)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setFileTotalCount:"), objref.IDOf(fileTotalCount))
 	return p
 }
 
-// WithFileCompletedCount sets the number of completed files for a file progress object.
+// WithFileCompletedCount sets if the progress is operating on a set of files, the number of completed files in the operation. This property is optional. If present, `NSProgress` will use the information to present more information in its localized description. This property sets a value in the user info dictionary.
 func (p *Progress) WithFileCompletedCount(fileCompletedCount NumberProvider) *Progress {
 	defer runtime.KeepAlive(fileCompletedCount)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setFileCompletedCount:"), objref.IDOf(fileCompletedCount))
@@ -200,13 +198,13 @@ func (p *Progress) WithScriptingProperties(scriptingProperties map[string]obj.Ob
 	return p
 }
 
-// BecomeCurrentWithPendingUnitCount wraps the corresponding Objective-C method.
+// BecomeCurrentWithPendingUnitCount sets the progress object as the current object of the current thread, and assigns the amount of work for the next suboperation progress object to perform. - Parameter unitCount: The number of units of work for the next progress object that initializes when you invoke `-initWithParent:userInfo:` in the current thread with this progress object as the containing progress object. The number represents the portion of work to perform in relation to the total number of units of work, which is the value of the progress object's `totalUnitCount` property. The units of work for this parameter must be the same units of work in the progress object's `totalUnitCount` property. Use this method to build a tree of progress objects. You must always balance invocations of this method with invocations of `-resignCurrent`.
 func (p *Progress) BecomeCurrentWithPendingUnitCount(unitCount int64) {
 	defer runtime.KeepAlive(p)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("becomeCurrentWithPendingUnitCount:"), unitCount)
 }
 
-// PerformAsCurrentWithPendingUnitCountUsing retrieves the current thread’s progress object, executes the specified block, and increments the progress object by the specified units of work.
+// PerformAsCurrentWithPendingUnitCountUsing retrieves the current thread's progress object, executes the specified block, and increments the progress object by the specified units of work. - Parameters: - unitCount: The number of units of work to increment for the current progress object. - work: A block that wraps the work you specify to complete for incrementing the current progress. Use this function as a convenience method to wrap an existing method or block to increment the current progress object. This function is the same as calling `-becomeCurrentWithPendingUnitCount:`, doing the work you specify in the block, and calling `-resignCurrent`.
 //
 // PerformAsCurrentWithPendingUnitCountUsing blocks until the operation completes or ctx is cancelled.
 func (p *Progress) PerformAsCurrentWithPendingUnitCountUsing(ctx context.Context, unitCount int64) error {
@@ -224,20 +222,20 @@ func (p *Progress) PerformAsCurrentWithPendingUnitCountUsing(ctx context.Context
 	}
 }
 
-// ResignCurrent wraps the corresponding Objective-C method.
+// ResignCurrent restores the previous progress object to become the current progress object on the thread. This method restores the current progress object to what it was before invoking `-becomeCurrentWithPendingUnitCount:`.
 func (p *Progress) ResignCurrent() {
 	defer runtime.KeepAlive(p)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("resignCurrent"))
 }
 
-// AddChildWithPendingUnitCount adds child with pending unit count.
+// AddChildWithPendingUnitCount adds a process object as a suboperation of a progress tree. - Parameters: - child: The progress instance to add to the progress tree. - inUnitCount: The number of units of work for the new suboperation to complete. You assign the suboperation a portion of the receiver's total unit count according to `inUnitCount`.
 func (p *Progress) AddChildWithPendingUnitCount(child *Progress, inUnitCount int64) {
 	defer runtime.KeepAlive(p)
 	defer runtime.KeepAlive(child)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("addChild:withPendingUnitCount:"), objref.IDOf(child), inUnitCount)
 }
 
-// SetUserInfoObjectForKey wraps the corresponding Objective-C method.
+// SetUserInfoObjectForKey sets a value in the user info dictionary. - Parameters: - objectOrNil: The object to set for the specified key, or `nil` to remove an existing entry in the dictionary. - key: The key for storing the specified object. Use this method to set a value in the `userInfo` dictionary, with appropriate KVO notification for properties with values that can depend on values in the user info dictionary, like `localizedDescription`.
 func (p *Progress) SetUserInfoObjectForKey(objectOrNil obj.Object, key *String) {
 	defer runtime.KeepAlive(p)
 	defer runtime.KeepAlive(objectOrNil)
@@ -245,51 +243,51 @@ func (p *Progress) SetUserInfoObjectForKey(objectOrNil obj.Object, key *String) 
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setUserInfoObject:forKey:"), objref.IDOf(objectOrNil), objref.IDOf(key))
 }
 
-// Cancel wraps the corresponding Objective-C method.
+// Cancel cancels progress tracking. This method invokes the block for `cancellationHandler`, if there is one, and ensures that any subsequent reads of the `isCancelled` property return `YES`. If the receiver has suboperations, the system cancels their progress as well.
 func (p *Progress) Cancel() {
 	defer runtime.KeepAlive(p)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("cancel"))
 }
 
-// Pause wraps the corresponding Objective-C method.
+// Pause pauses progress tracking. This method invokes the block for `pausingHandler`, if there is one, and ensures that any subsequent reads of the `isPaused` property return `YES`. If the receiver has suboperations, the system pauses their progress as well.
 func (p *Progress) Pause() {
 	defer runtime.KeepAlive(p)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("pause"))
 }
 
-// Resume wraps the corresponding Objective-C method.
+// Resume resumes progress tracking. This method invokes the block for `resumingHandler`, if there is one, and ensures that any subsequent reads of the `isPaused` property return `NO`. If the receiver has suboperations, the system resumes their progress as well.
 func (p *Progress) Resume() {
 	defer runtime.KeepAlive(p)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("resume"))
 }
 
-// Publish wraps the corresponding Objective-C method.
+// Publish publishes the progress object for other processes to observe it. Entries in the user info dictionary determine whether another process can discover the progress object to observe it, and how it does that. For example, an `NSProgressFileURLKey` entry makes a progress object discoverable by corresponding invokers of `+addSubscriberForFileURL:withPublishingHandler:`. When you make a progress object observable by other processes, you must ensure that at least `localizedDescription`, `isIndeterminate`, and `fractionCompleted` always work when you send proxies of your progress object in other processes. You make `isIndeterminate` and `fractionCompleted` work by accurately setting the total and completed unit counts of the progress. You make `localizedDescription` work by setting the value of the kind property to something valid, like `NSProgressKindFile`, and then fulfilling the requirements for that kind of progress. You can publish an instance of `NSProgress` one time only.
 func (p *Progress) Publish() {
 	defer runtime.KeepAlive(p)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("publish"))
 }
 
-// Unpublish wraps the corresponding Objective-C method.
+// Unpublish removes a progress object from publication, making it unobservable by other processes.
 func (p *Progress) Unpublish() {
 	defer runtime.KeepAlive(p)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("unpublish"))
 }
 
-// TotalUnitCount returns the total unit count.
+// TotalUnitCount returns the total number of tracked units of work for the current progress. For an `NSProgress` with a kind of `NSProgressKindFile`, the unit of this property is bytes, and the `NSProgressFileTotalCountKey` and `NSProgressFileCompletedCountKey` keys in the `userInfo` dictionary report the overall count of files. For any other kind of `NSProgress`, the unit of measurement doesn't matter as long as it's consistent. You can report the values to the user in the `localizedDescription` and `localizedAdditionalDescription`.
 func (p *Progress) TotalUnitCount() int64 {
 	defer runtime.KeepAlive(p)
 	_r := objc.Send[int64](objref.IDOf(p), objc.RegisterName("totalUnitCount"))
 	return _r
 }
 
-// CompletedUnitCount returns the completed unit count.
+// CompletedUnitCount returns the number of completed units of work for the current job. For an `NSProgress` with a kind of `NSProgressKindFile`, the unit of this property is bytes, and the `NSProgressFileTotalCountKey` and `NSProgressFileCompletedCountKey` keys in the `userInfo` dictionary report the overall count of files. For any other kind of `NSProgress`, the unit of measurement doesn't matter as long as it's consistent. You can report the values to the user in the `localizedDescription` and `localizedAdditionalDescription`.
 func (p *Progress) CompletedUnitCount() int64 {
 	defer runtime.KeepAlive(p)
 	_r := objc.Send[int64](objref.IDOf(p), objc.RegisterName("completedUnitCount"))
 	return _r
 }
 
-// LocalizedDescription returns the localized description.
+// LocalizedDescription returns a localized description of tracked progress for the receiver. If you don't specify your own custom value for this property, `NSProgress` uses the value of the `kind` property to determine how to use the values of other properties, as well as values in the user info dictionary, to return an automatically computed string. If it fails to do that, it returns an empty string. The `localizedDescription` represents a general description of the work the receiver tracks. Depending on the kind of progress, the completed and total unit counts, and other parameters, localized descriptions resemble the following: - Copying 10 files... - 30% completed - Copying “TextEdit”... By default, `NSProgress` is KVO-compliant for this property. It sends notifications on the same thread that updates the property.
 func (p *Progress) LocalizedDescription() string {
 	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("localizedDescription"))
@@ -299,7 +297,7 @@ func (p *Progress) LocalizedDescription() string {
 	return purego.GoString(_r)
 }
 
-// LocalizedAdditionalDescription returns the localized additional description.
+// LocalizedAdditionalDescription returns a more specific localized description of tracked progress for the receiver. If you don't specify your own custom value for this property, `NSProgress` uses the value of the `kind` property to determine how to use the values of other properties, as well as values in the user info dictionary, to return an automatically computed string. If it fails to do that, it returns an empty string. The `localizedAdditionalDescription` is more specific than `localizedDescription` about the work the receiver is tracking at any particular moment. Depending on the kind of progress, the completed and total unit counts, and other parameters, localized additional descriptions resemble the following: - 3 of 10 files - 123 KB of 789.1 MB - 3.3 MB of 103.92 GB -- 2 hours remaining - 1.61 GB of 3.22 GB (2 KB/sec) -- 2 minutes remaining - 1 minute remaining (1 KB/sec)
 func (p *Progress) LocalizedAdditionalDescription() string {
 	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("localizedAdditionalDescription"))
@@ -309,112 +307,112 @@ func (p *Progress) LocalizedAdditionalDescription() string {
 	return purego.GoString(_r)
 }
 
-// IsCancellable reports whether the object is cancellable.
+// IsCancellable reports whether the receiver is tracking work that you can cancel. By default, `NSProgress` objects are cancelable. You typically use this property to communicate whether controls for canceling appear in a progress-reporting user interface. `NSProgress` itself doesn't do anything with this property other than help pass the value from progress reporters to progress observers. If an `NSProgress` is cancelable, implement the ability to cancel progress either by setting a block for the `cancellationHandler` property, or by polling the `isCancelled` property periodically while performing the relevant work. It's valid for the value of this property to change during the lifetime of an `NSProgress` object. By default, `NSProgress` is KVO-compliant for this property. It sends notifications on the same thread that updates the property.
 func (p *Progress) IsCancellable() bool {
 	defer runtime.KeepAlive(p)
 	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isCancellable"))
 	return _r
 }
 
-// IsPausable reports whether the object is pausable.
+// IsPausable reports whether the receiver is tracking work that you can pause. By default, `NSProgress` objects aren't pausable. You typically use this property to communicate whether controls for pausing appear in a progress-reporting user interface. `NSProgress` itself doesn't do anything with this property other than help pass the value from progress reporters to progress observers. If an `NSProgress` is pausable, implement the ability to pause either by setting a block for the `pausingHandler` property, or by polling the `isPaused` property periodically while performing the relevant work. It's valid for the value of this property to change during the lifetime of an `NSProgress` object. By default, `NSProgress` is KVO-compliant for this property. It sends notifications on the same thread that updates the property.
 func (p *Progress) IsPausable() bool {
 	defer runtime.KeepAlive(p)
 	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isPausable"))
 	return _r
 }
 
-// IsCancelled reports whether the object is cancelled.
+// IsCancelled reports whether the receiver is tracking canceled work. By default, `NSProgress` is KVO-compliant for this property. It sends notifications on the same thread that updates the property. If the receiver has a canceled containing progress object, the receiver reports a canceled status.
 func (p *Progress) IsCancelled() bool {
 	defer runtime.KeepAlive(p)
 	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isCancelled"))
 	return _r
 }
 
-// IsPaused reports whether the object is paused.
+// IsPaused reports whether the receiver is tracking paused work. By default, `NSProgress` is KVO-compliant for this property. It sends notifications on the same thread that updates the property. If the receiver has a paused containing progress object, the receiver reports a paused status.
 func (p *Progress) IsPaused() bool {
 	defer runtime.KeepAlive(p)
 	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isPaused"))
 	return _r
 }
 
-// IsIndeterminate reports whether the object is indeterminate.
+// IsIndeterminate reports whether the tracked progress is indeterminate. Use indeterminate progress only when you're unable to determine a reasonable value for either `completedUnitCount` or `totalUnitCount`. Progress is indeterminate when the value of the `totalUnitCount` or `completedUnitCount` is less than zero or if both values are zero. When progress is indeterminate, `fractionCompleted` returns `0.0` and `isFinished` returns `NO`. By default, `NSProgress` is KVO-compliant for this property. It sends notifications on the same thread that updates the property.
 func (p *Progress) IsIndeterminate() bool {
 	defer runtime.KeepAlive(p)
 	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isIndeterminate"))
 	return _r
 }
 
-// FractionCompleted returns the fraction completed.
+// FractionCompleted returns the fraction of the overall work completed by this progress object, including work done by any children it may have. If the receiver object doesn't have any suboperations, `fractionCompleted` is generally the result of dividing `completedUnitCount` by `totalUnitCount`. Setting both `totalUnitCount` and `completedUnitCount` to zero indicates that there is no progress to track. In this case, `isIndeterminate` returns `NO` and `fractionCompleted` returns `0.0`. If the receiver does have suboperations, `fractionCompleted` reflects progress from those progress objects in addition to its own `completedUnitCount`. When the suboperations finish, the `completedUnitCount` of the containing progress object updates.
 func (p *Progress) FractionCompleted() float64 {
 	defer runtime.KeepAlive(p)
 	_r := objc.Send[float64](objref.IDOf(p), objc.RegisterName("fractionCompleted"))
 	return _r
 }
 
-// IsFinished reports whether the object is finished.
+// IsFinished reports whether a Boolean value that indicates the progress object is complete. A progress object finishes when the `completedUnitCount` equals or exceeds the `totalUnitCount`. By default, `NSProgress` is KVO-compliant for this property. It sends notifications on the same thread that updates the property.
 func (p *Progress) IsFinished() bool {
 	defer runtime.KeepAlive(p)
 	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isFinished"))
 	return _r
 }
 
-// UserInfo returns the user info.
+// UserInfo returns a dictionary of arbitrary values for the receiver. A KVO-compliant dictionary that changes in response to `-setUserInfoObject:forKey:`. The dictionary sends all of its KVO notifications on the thread that updates the property. Some entries have meanings that the `NSProgress` class recognizes. See the `NSProgress...Key` string constants listed below.
 func (p *Progress) UserInfo() obj.Object {
 	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)
 }
 
-// Kind returns the kind.
+// Kind returns an object that represents the kind of progress for the progress object. This property identifies the kind of progress for the progress object, such as `NSProgressKindFile`. It can be `nil`. If you set a non-`nil` value to `kind`, the default `localizedDescription` getter uses the kind of progress to determine how to use the values of other properties, along with values in the user info dictionary, to create a string representation.
 func (p *Progress) Kind() *String {
 	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("kind"))
 	return StringFromID(_r)
 }
 
-// EstimatedTimeRemaining returns the estimated time remaining.
+// EstimatedTimeRemaining returns how much time is probably left in the operation, as an `NSNumber` containing a number of seconds. This property is optional. If present, `NSProgress` will use the information to present more information in its localized description. This property sets a value in the user info dictionary.
 func (p *Progress) EstimatedTimeRemaining() *Number {
 	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("estimatedTimeRemaining"))
 	return NumberFromID(_r)
 }
 
-// Throughput returns the throughput.
+// Throughput returns how fast data is being processed, as an `NSNumber` containing bytes per second. This property is optional. If present, `NSProgress` will use the information to present more information in its localized description. This property sets a value in the user info dictionary.
 func (p *Progress) Throughput() *Number {
 	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("throughput"))
 	return NumberFromID(_r)
 }
 
-// FileOperationKind returns the file operation kind.
+// FileOperationKind returns the kind of file operation for the progress object. Set this value when the `kind` property is `NSProgressKindFile` to describe the kind of file operation. If present, `NSProgress` presents additional information in its localized description by setting a value in the `userInfo` dictionary.
 func (p *Progress) FileOperationKind() *String {
 	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("fileOperationKind"))
 	return StringFromID(_r)
 }
 
-// FileURL returns the file URL.
+// FileURL returns a URL that represents the file for the current progress object. Set this value for a progress that you publish to subscribers that register for updates using `+addSubscriberForFileURL:withPublishingHandler:`. If present, `NSProgress` presents additional information in its localized description by setting a value in the `userInfo` dictionary.
 func (p *Progress) FileURL() string {
 	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("fileURL"))
 	return rt.URLString(_r)
 }
 
-// FileTotalCount returns the file total count.
+// FileTotalCount returns if the progress is operating on a set of files, the total number of files in the operation. This property is optional. If present, `NSProgress` will use the information to present more information in its localized description. This property sets a value in the user info dictionary.
 func (p *Progress) FileTotalCount() *Number {
 	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("fileTotalCount"))
 	return NumberFromID(_r)
 }
 
-// FileCompletedCount returns the file completed count.
+// FileCompletedCount returns if the progress is operating on a set of files, the number of completed files in the operation. This property is optional. If present, `NSProgress` will use the information to present more information in its localized description. This property sets a value in the user info dictionary.
 func (p *Progress) FileCompletedCount() *Number {
 	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("fileCompletedCount"))
 	return NumberFromID(_r)
 }
 
-// IsOld reports whether the object is old.
+// IsOld reports whether a Boolean value that indicates when the observed progress object invokes the publish method before you subscribe to it. The publish and subscribe mechanism is generally _level-triggered_, in that when you invoke `+addSubscriberForFileURL:withPublishingHandler:`, the system invokes your block for every relevant published and unpublished progress object. Sometimes you need to implement _edge-triggered_ behavior, in which you do something either exactly when new progress begins or not at all. There's no reliable definition of _before_ in this case, which involves multiple processes in a preemptively scheduled system. Don't use this method for anything more important than best efforts at animating. It can be inaccurate due to processes coming and going from unpredictable user actions.
 func (p *Progress) IsOld() bool {
 	defer runtime.KeepAlive(p)
 	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isOld"))

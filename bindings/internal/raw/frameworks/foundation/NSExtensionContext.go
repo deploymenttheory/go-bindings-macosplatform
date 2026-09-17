@@ -65,6 +65,7 @@ func (o *NSExtensionContext) OpenURLCompletionHandler(url *NSURL, completionHand
 	o.Ptr().Send(_nSExtensionContextSelOpenURLCompletionHandler, url.Ptr(), __block_completionHandler)
 }
 
+// The list of input NSExtensionItems associated with the context. If the context has no input items, this array will be empty.
 func (o *NSExtensionContext) InputItems() *NSArray[objc.ID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSExtensionContextSelInputItems)
 	if _ret != 0 {

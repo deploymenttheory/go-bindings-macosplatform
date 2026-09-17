@@ -178,77 +178,77 @@ func (sc *ScriptCommand) ResumeExecutionWithResult(result obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("resumeExecutionWithResult:"), objref.IDOf(result))
 }
 
-// CommandDescription returns the command description.
+// CommandDescription returns the description of this script command.
 func (sc *ScriptCommand) CommandDescription() *ScriptCommandDescription {
 	defer runtime.KeepAlive(sc)
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("commandDescription"))
 	return ScriptCommandDescriptionFromID(_r)
 }
 
-// DirectParameter returns the direct parameter.
+// DirectParameter returns the object that corresponds to the direct parameter of the Apple event from which this command derives.
 func (sc *ScriptCommand) DirectParameter() obj.Object {
 	defer runtime.KeepAlive(sc)
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("directParameter"))
 	return obj.Wrap(_r)
 }
 
-// ReceiversSpecifier returns the receivers specifier.
+// ReceiversSpecifier returns the object specifier for the object or objects that will be given a chance to handle the command. If the direct parameter of the original event was an object specifier, `setDirectParameter:` sends a `setReceiversSpecifier:` message.
 func (sc *ScriptCommand) ReceiversSpecifier() *ScriptObjectSpecifier {
 	defer runtime.KeepAlive(sc)
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("receiversSpecifier"))
 	return ScriptObjectSpecifierFromID(_r)
 }
 
-// EvaluatedReceivers returns the evaluated receivers.
+// EvaluatedReceivers returns if the direct parameter of the original event was an object specifier, returns the specified object or objects. Returns `nil` if the direct parameter was not an object specifier or could not be evaluated.
 func (sc *ScriptCommand) EvaluatedReceivers() obj.Object {
 	defer runtime.KeepAlive(sc)
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("evaluatedReceivers"))
 	return obj.Wrap(_r)
 }
 
-// Arguments returns the arguments.
+// Arguments returns the arguments of the command.
 func (sc *ScriptCommand) Arguments() map[string]obj.Object {
 	defer runtime.KeepAlive(sc)
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("arguments"))
 	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// EvaluatedArguments returns the evaluated arguments.
+// EvaluatedArguments returns the arguments of the command, with any object specifiers already evaluated.
 func (sc *ScriptCommand) EvaluatedArguments() map[string]obj.Object {
 	defer runtime.KeepAlive(sc)
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("evaluatedArguments"))
 	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// IsWellFormed reports whether the object is well formed.
+// IsWellFormed reports whether the command is well-formed according to its command description.
 func (sc *ScriptCommand) IsWellFormed() bool {
 	defer runtime.KeepAlive(sc)
 	_r := objc.Send[bool](objref.IDOf(sc), objc.RegisterName("isWellFormed"))
 	return _r
 }
 
-// ScriptErrorNumber returns the script error number.
+// ScriptErrorNumber returns the error number associated with this command, if any.
 func (sc *ScriptCommand) ScriptErrorNumber() int {
 	defer runtime.KeepAlive(sc)
 	_r := objc.Send[int](objref.IDOf(sc), objc.RegisterName("scriptErrorNumber"))
 	return _r
 }
 
-// ScriptErrorOffendingObjectDescriptor returns the script error offending object descriptor.
+// ScriptErrorOffendingObjectDescriptor returns an `NSAppleEventDescriptor` that identifies the offending object when an error occurs.
 func (sc *ScriptCommand) ScriptErrorOffendingObjectDescriptor() *AppleEventDescriptor {
 	defer runtime.KeepAlive(sc)
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("scriptErrorOffendingObjectDescriptor"))
 	return AppleEventDescriptorFromID(_r)
 }
 
-// ScriptErrorExpectedTypeDescriptor returns the script error expected type descriptor.
+// ScriptErrorExpectedTypeDescriptor returns an `NSAppleEventDescriptor` that identifies the expected type when a type mismatch error occurs.
 func (sc *ScriptCommand) ScriptErrorExpectedTypeDescriptor() *AppleEventDescriptor {
 	defer runtime.KeepAlive(sc)
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("scriptErrorExpectedTypeDescriptor"))
 	return AppleEventDescriptorFromID(_r)
 }
 
-// ScriptErrorString returns the script error string.
+// ScriptErrorString returns the error string associated with this command, if any.
 func (sc *ScriptCommand) ScriptErrorString() string {
 	defer runtime.KeepAlive(sc)
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("scriptErrorString"))
@@ -258,7 +258,7 @@ func (sc *ScriptCommand) ScriptErrorString() string {
 	return purego.GoString(_r)
 }
 
-// AppleEvent returns the apple event.
+// AppleEvent returns the Apple event descriptor from which this command was constructed. Only available if the receiver was constructed by Cocoa Scripting's built-in Apple event handling.
 func (sc *ScriptCommand) AppleEvent() *AppleEventDescriptor {
 	defer runtime.KeepAlive(sc)
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("appleEvent"))

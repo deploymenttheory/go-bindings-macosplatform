@@ -43,6 +43,7 @@ var (
 	_nSScreenSelAuxiliaryTopLeftArea                                    = objc.RegisterName("auxiliaryTopLeftArea")
 	_nSScreenSelAuxiliaryTopRightArea                                   = objc.RegisterName("auxiliaryTopRightArea")
 	_nSScreenSelCGDirectDisplayID                                       = objc.RegisterName("CGDirectDisplayID")
+	_nSScreenSelTouchCapabilities                                       = objc.RegisterName("touchCapabilities")
 	_nSScreenSelMaximumExtendedDynamicRangeColorComponentValue          = objc.RegisterName("maximumExtendedDynamicRangeColorComponentValue")
 	_nSScreenSelMaximumPotentialExtendedDynamicRangeColorComponentValue = objc.RegisterName("maximumPotentialExtendedDynamicRangeColorComponentValue")
 	_nSScreenSelMaximumReferenceExtendedDynamicRangeColorComponentValue = objc.RegisterName("maximumReferenceExtendedDynamicRangeColorComponentValue")
@@ -185,6 +186,11 @@ func (o *NSScreen) AuxiliaryTopRightArea() corefoundation.CGRect {
 // The CGDirectDisplayID for this screen. This will return kCGNullDirectDisplay if there isn't one.
 func (o *NSScreen) CGDirectDisplayID() uint32 {
 	_ret := objc.Send[uint32](o.Ptr(), _nSScreenSelCGDirectDisplayID)
+	return _ret
+}
+
+func (o *NSScreen) TouchCapabilities() NSScreenTouchCapabilities {
+	_ret := objc.Send[NSScreenTouchCapabilities](o.Ptr(), _nSScreenSelTouchCapabilities)
 	return _ret
 }
 

@@ -92,7 +92,7 @@ func (una *UserNotificationAction) WithScriptingProperties(scriptingProperties m
 	return una
 }
 
-// Identifier returns the identifier.
+// Identifier returns the identifier for the user notification action.
 func (una *UserNotificationAction) Identifier() string {
 	defer runtime.KeepAlive(una)
 	_r := objc.Send[objc.ID](objref.IDOf(una), objc.RegisterName("identifier"))
@@ -102,7 +102,7 @@ func (una *UserNotificationAction) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// Title returns the title.
+// Title returns the localized title shown to the user.
 func (una *UserNotificationAction) Title() string {
 	defer runtime.KeepAlive(una)
 	_r := objc.Send[objc.ID](objref.IDOf(una), objc.RegisterName("title"))

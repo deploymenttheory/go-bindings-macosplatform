@@ -17,7 +17,7 @@ import (
 
 // AccessibilityCustomRotorItemResult is an idiomatic wrapper over the Objective-C class NSAccessibilityCustomRotorItemResult.
 //
-// A target accessibility element that a custom rotor references.
+// NSAccessibilityCustomRotorItemResults are the objects returned to assistive technologies that match a search parameter criteria.
 type AccessibilityCustomRotorItemResult struct {
 	objref.Handle
 }

@@ -11,8 +11,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A URL session task that is stream-based.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsurlsessionstreamtask
 type NSURLSessionStreamTask struct {
 	NSURLSessionTask
@@ -41,6 +39,7 @@ func NSURLSessionStreamTaskFromID(id objc.ID) *NSURLSessionStreamTask {
 	return o
 }
 
+// Reads minimum `minBytes`, or at most `maxBytes` bytes and invokes the completion handler on the session's delegate queue with the data or an error. If an error occurs, any outstanding reads will also fail, and new read requests will error out immediately. - Parameter minBytes: The minimum number of bytes to read. - Parameter maxBytes: The maximum number of bytes to read. - Parameter timeout: The timeout interval for the read operation. - Parameter completionHandler: The completion handler to call when the read operation completes.
 func (o *NSURLSessionStreamTask) ReadDataOfMinLengthMaxLengthTimeoutCompletionHandler(minBytes uint, maxBytes uint, timeout float64, completionHandler func(unsafe.Pointer, bool, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -52,6 +51,7 @@ func (o *NSURLSessionStreamTask) ReadDataOfMinLengthMaxLengthTimeoutCompletionHa
 	o.Ptr().Send(_nSURLSessionStreamTaskSelReadDataOfMinLengthMaxLengthTimeoutCompletionHandler, minBytes, maxBytes, timeout, __block_completionHandler)
 }
 
+// Writes the data completely to the underlying socket. If all the bytes have not been written by the timeout, a timeout error will occur. Note that invocation of the completion handler does not guarantee that the remote side has received all the bytes, only that they have been written to the kernel. - Parameter data: The data to write to the stream. - Parameter timeout: The timeout interval for the write operation. - Parameter completionHandler: The completion handler to call when the write operation completes.
 func (o *NSURLSessionStreamTask) WriteDataTimeoutCompletionHandler(data *NSData, timeout float64, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -63,22 +63,27 @@ func (o *NSURLSessionStreamTask) WriteDataTimeoutCompletionHandler(data *NSData,
 	o.Ptr().Send(_nSURLSessionStreamTaskSelWriteDataTimeoutCompletionHandler, data.Ptr(), timeout, __block_completionHandler)
 }
 
+// Completes any already enqueued reads and writes, then invokes the `URLSession:streamTask:didBecomeInputStream:outputStream:` delegate message. When that message is received, the task object is considered completed and will not receive any more delegate messages.
 func (o *NSURLSessionStreamTask) CaptureStreams() {
 	o.Ptr().Send(_nSURLSessionStreamTaskSelCaptureStreams)
 }
 
+// Enqueues a request to close the write end of the underlying socket. All outstanding IO will complete before the write side of the socket is closed. The server, however, may continue to write bytes back to the client, so best practice is to continue reading from the server until you receive EOF.
 func (o *NSURLSessionStreamTask) CloseWrite() {
 	o.Ptr().Send(_nSURLSessionStreamTaskSelCloseWrite)
 }
 
+// Enqueues a request to close the read side of the underlying socket. All outstanding IO will complete before the read side is closed. You may continue writing to the server.
 func (o *NSURLSessionStreamTask) CloseRead() {
 	o.Ptr().Send(_nSURLSessionStreamTaskSelCloseRead)
 }
 
+// Begins encrypted handshake. The handshake begins after all pending IO has completed. TLS authentication callbacks are sent to the session's `URLSession:task:didReceiveChallenge:completionHandler:` delegate method.
 func (o *NSURLSessionStreamTask) StartSecureConnection() {
 	o.Ptr().Send(_nSURLSessionStreamTaskSelStartSecureConnection)
 }
 
+// Completes any enqueued reads and writes, and closes the secure connection.
 // Deprecated: TLS cannot be disabled once it is enabled
 func (o *NSURLSessionStreamTask) StopSecureConnection() {
 	o.Ptr().Send(_nSURLSessionStreamTaskSelStopSecureConnection)

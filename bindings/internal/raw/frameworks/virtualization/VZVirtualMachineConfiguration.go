@@ -33,6 +33,8 @@ var (
 	_vZVirtualMachineConfigurationSelSetAudioDevices                     = objc.RegisterName("setAudioDevices:")
 	_vZVirtualMachineConfigurationSelConsoleDevices                      = objc.RegisterName("consoleDevices")
 	_vZVirtualMachineConfigurationSelSetConsoleDevices                   = objc.RegisterName("setConsoleDevices:")
+	_vZVirtualMachineConfigurationSelCustomVirtioDevices                 = objc.RegisterName("customVirtioDevices")
+	_vZVirtualMachineConfigurationSelSetCustomVirtioDevices              = objc.RegisterName("setCustomVirtioDevices:")
 	_vZVirtualMachineConfigurationSelDirectorySharingDevices             = objc.RegisterName("directorySharingDevices")
 	_vZVirtualMachineConfigurationSelSetDirectorySharingDevices          = objc.RegisterName("setDirectorySharingDevices:")
 	_vZVirtualMachineConfigurationSelEntropyDevices                      = objc.RegisterName("entropyDevices")
@@ -55,6 +57,8 @@ var (
 	_vZVirtualMachineConfigurationSelSetGraphicsDevices                  = objc.RegisterName("setGraphicsDevices:")
 	_vZVirtualMachineConfigurationSelUsbControllers                      = objc.RegisterName("usbControllers")
 	_vZVirtualMachineConfigurationSelSetUsbControllers                   = objc.RegisterName("setUsbControllers:")
+	_vZVirtualMachineConfigurationSelLabel                               = objc.RegisterName("label")
+	_vZVirtualMachineConfigurationSelSetLabel                            = objc.RegisterName("setLabel:")
 	_vZVirtualMachineConfigurationSelValidateWithError                   = objc.RegisterName("validateWithError:")
 	_vZVirtualMachineConfigurationSelValidateSaveRestoreSupportWithError = objc.RegisterName("validateSaveRestoreSupportWithError:")
 	_vZVirtualMachineConfigurationSelMinimumAllowedMemorySize            = objc.RegisterName("minimumAllowedMemorySize")
@@ -143,6 +147,19 @@ func (o *VZVirtualMachineConfiguration) ConsoleDevices() *foundation.NSArray[*VZ
 
 func (o *VZVirtualMachineConfiguration) SetConsoleDevices(consoleDevices *foundation.NSArray[*VZConsoleDeviceConfiguration]) {
 	o.Ptr().Send(_vZVirtualMachineConfigurationSelSetConsoleDevices, consoleDevices.Ptr())
+}
+
+// A list of custom Virtio devices. The list is empty by default. ## See Also - “VZCustomVirtioDeviceConfiguration“
+func (o *VZVirtualMachineConfiguration) CustomVirtioDevices() *foundation.NSArray[*VZCustomVirtioDeviceConfiguration] {
+	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtualMachineConfigurationSelCustomVirtioDevices)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*VZCustomVirtioDeviceConfiguration](_ret)
+}
+
+func (o *VZVirtualMachineConfiguration) SetCustomVirtioDevices(customVirtioDevices *foundation.NSArray[*VZCustomVirtioDeviceConfiguration]) {
+	o.Ptr().Send(_vZVirtualMachineConfigurationSelSetCustomVirtioDevices, customVirtioDevices.Ptr())
 }
 
 // @abstract List of directory sharing devices. Empty by default. @see VZVirtioFileSystemDeviceConfiguration
@@ -286,6 +303,19 @@ func (o *VZVirtualMachineConfiguration) UsbControllers() *foundation.NSArray[*VZ
 
 func (o *VZVirtualMachineConfiguration) SetUsbControllers(usbControllers *foundation.NSArray[*VZUSBControllerConfiguration]) {
 	o.Ptr().Send(_vZVirtualMachineConfigurationSelSetUsbControllers, usbControllers.Ptr())
+}
+
+// An optional label for the virtual machine. The framework uses this string as part of the name of the virtual machine in some system services. The label must be non-empty, less than or equal to 64 characters in length, and contain at least one non-whitespace character.
+func (o *VZVirtualMachineConfiguration) Label() *foundation.NSString {
+	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtualMachineConfigurationSelLabel)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSStringFromID(_ret)
+}
+
+func (o *VZVirtualMachineConfiguration) SetLabel(label *foundation.NSString) {
+	o.Ptr().Send(_vZVirtualMachineConfigurationSelSetLabel, label.Ptr())
 }
 
 // Validates the current configuration settings and reports any issues that might prevent the successful initialization of the VM.

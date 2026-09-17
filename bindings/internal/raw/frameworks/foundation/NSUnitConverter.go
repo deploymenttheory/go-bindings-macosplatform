@@ -9,8 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An abstract class that provides a description of how to convert a unit to and from the base unit of its dimension.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsunitconverter
 type NSUnitConverter struct {
 	NSObject
@@ -32,11 +30,13 @@ func NSUnitConverterFromID(id objc.ID) *NSUnitConverter {
 	return o
 }
 
+// For a given unit, returns the specified value of that unit in terms of the base unit of its dimension. This method takes a value in a particular unit and returns the result of converting it into the base unit of that unit's dimension. For example, a converter for the miles unit calling this method, passing `1.0` to the `value` parameter, results in `1609.34` (_1 mi = 1609.34 m_). @param value Value in terms of the unit class. @return Value in terms of the base unit.
 func (o *NSUnitConverter) BaseUnitValueFromValue(value float64) float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSUnitConverterSelBaseUnitValueFromValue, value)
 	return _ret
 }
 
+// For a given unit, returns the specified base unit value in terms of that unit. This method takes in a value in terms of the base unit of a unit's dimension and returns the equivalent value in terms of the unit. @param baseUnitValue Value in terms of the base unit. @return Value in terms of the unit class.
 func (o *NSUnitConverter) ValueFromBaseUnitValue(baseUnitValue float64) float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSUnitConverterSelValueFromBaseUnitValue, baseUnitValue)
 	return _ret

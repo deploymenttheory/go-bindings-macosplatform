@@ -66,6 +66,7 @@ func (o *NSAttributedString) AttributesAtIndexEffectiveRange(location uint, rang
 	return NSDictionaryFromID[*NSString, objc.ID](_ret)
 }
 
+// The character contents of the receiver as a string.
 func (o *NSAttributedString) String() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAttributedStringSelString)
 	if _ret != 0 {
@@ -110,6 +111,7 @@ func (o *NSAttributedString) IsEqualToAttributedString(other *NSAttributedString
 	return _ret
 }
 
+// Creates an attributed string with the specified text and no attribute information. - Parameter str: The text for the new attributed string. - Returns: An `NSAttributedString` object initialized with the characters of `str` and no attribute information.
 func (o *NSAttributedString) InitWithString(str *NSString) *NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAttributedStringSelInitWithString, str.Ptr())
 	if _ret != 0 {
@@ -118,6 +120,7 @@ func (o *NSAttributedString) InitWithString(str *NSString) *NSAttributedString {
 	return NSAttributedStringFromID(_ret)
 }
 
+// Creates an attributed string with the specified text and attributes. Returns an `NSAttributedString` object initialized with the characters of `str` and the attributes of `attrs`. - Parameters: - str: The text for the new attributed string. - attrs: The attributes for the new attributed string. This method applies the attributes to the entire string.
 func (o *NSAttributedString) InitWithStringAttributes(str *NSString, attrs *NSDictionary[*NSString, objc.ID]) *NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAttributedStringSelInitWithStringAttributes, str.Ptr(), attrs.Ptr())
 	if _ret != 0 {
@@ -126,6 +129,7 @@ func (o *NSAttributedString) InitWithStringAttributes(str *NSString, attrs *NSDi
 	return NSAttributedStringFromID(_ret)
 }
 
+// Creates a new attributed string from the contents of another attributed string. - Parameter attrStr: An attributed string. - Returns: An `NSAttributedString` object initialized with the characters and attributes of `attrStr`.
 func (o *NSAttributedString) InitWithAttributedString(attrStr *NSAttributedString) *NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAttributedStringSelInitWithAttributedString, attrStr.Ptr())
 	if _ret != 0 {
@@ -144,11 +148,13 @@ func (o *NSAttributedString) EnumerateAttributeInRangeOptionsUsing(attrName *NSS
 	o.Ptr().Send(_nSAttributedStringSelEnumerateAttributeInRangeOptionsUsing, attrName.Ptr(), enumerationRange, opts, block)
 }
 
+// The length of the attributed string.
 func (o *NSAttributedString) Length() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSAttributedStringSelLength)
 	return _ret
 }
 
+// Creates an attributed string from the contents of a specified URL that contains Markdown-formatted data using the provided options. - Parameters: - markdownFile: The URL to load Markdown-formatted data from. - options: Options that affect how the initializer interprets formatting in the Markdown string. This parameter defaults to no options. - baseURL: The base URL to use when resolving Markdown URLs. The initializer treats URLs as being relative to this URL. If this value is `nil`, the initializer doesn't resolve URLs. The default is `nil`. - error: On return, if an error occurs, this pointer contains an actual error object with the error information. You may specify `nil` for this parameter if you don't want the error information. - Returns: An attributed string with the parsed Markdown text and styling, or `nil` if parsing the data fails.
 func (o *NSAttributedString) InitWithContentsOfMarkdownFileAtURLOptionsBaseURLError(markdownFile *NSURL, options *NSAttributedStringMarkdownParsingOptions, baseURL *NSURL) (*NSAttributedString, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAttributedStringSelInitWithContentsOfMarkdownFileAtURLOptionsBaseURLError, markdownFile.Ptr(), options.Ptr(), baseURL.Ptr(), unsafe.Pointer(&_nsErr))
@@ -161,6 +167,7 @@ func (o *NSAttributedString) InitWithContentsOfMarkdownFileAtURLOptionsBaseURLEr
 	return NSAttributedStringFromID(_ret), nil
 }
 
+// Creates an attributed string from Markdown-formatted data using the provided options. - Parameters: - markdown: The `NSData` instance that contains the Markdown formatting. - options: Options that affect how the initializer interprets formatting in the Markdown string. This parameter defaults to no options. - baseURL: The base URL to use when resolving Markdown URLs. The initializer treats URLs as being relative to this URL. If this value is `nil`, the initializer doesn't resolve URLs. The default is `nil`. - error: On return, if an error occurs, this pointer contains an actual error object with the error information. You may specify `nil` for this parameter if you don't want the error information. - Returns: An attributed string with the parsed Markdown text and styling, or `nil` if parsing the data fails.
 func (o *NSAttributedString) InitWithMarkdownOptionsBaseURLError(markdown *NSData, options *NSAttributedStringMarkdownParsingOptions, baseURL *NSURL) (*NSAttributedString, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAttributedStringSelInitWithMarkdownOptionsBaseURLError, markdown.Ptr(), options.Ptr(), baseURL.Ptr(), unsafe.Pointer(&_nsErr))
@@ -173,6 +180,7 @@ func (o *NSAttributedString) InitWithMarkdownOptionsBaseURLError(markdown *NSDat
 	return NSAttributedStringFromID(_ret), nil
 }
 
+// Creates an attributed string from a Markdown-formatted string using the provided options. - Parameters: - markdownString: The string that contains the Markdown formatting. - options: Options that affect how the initializer interprets formatting in the Markdown string. This parameter defaults to no options. - baseURL: The base URL to use when resolving Markdown URLs. The initializer treats URLs as being relative to this URL. If this value is `nil`, the initializer doesn't resolve URLs. The default is `nil`. - error: On return, if an error occurs, this pointer contains an actual error object with the error information. You may specify `nil` for this parameter if you don't want the error information. - Returns: An attributed string with the parsed Markdown text and styling, or `nil` if parsing the data fails.
 func (o *NSAttributedString) InitWithMarkdownStringOptionsBaseURLError(markdownString *NSString, options *NSAttributedStringMarkdownParsingOptions, baseURL *NSURL) (*NSAttributedString, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAttributedStringSelInitWithMarkdownStringOptionsBaseURLError, markdownString.Ptr(), options.Ptr(), baseURL.Ptr(), unsafe.Pointer(&_nsErr))

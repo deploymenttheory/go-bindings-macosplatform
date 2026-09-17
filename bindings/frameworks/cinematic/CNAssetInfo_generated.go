@@ -6,9 +6,11 @@ package cinematic
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -20,7 +22,7 @@ import (
 //
 // AssetInfo is an abstract base — you do not construct it directly. Construct one of [CompositionInfo] and pass it where a AssetInfo is accepted.
 //
-// An object that provides Cinematic-specific information about an asset, including its tracks.
+// Information associated with an AVAsset for a cinematic video.
 type AssetInfo struct {
 	objref.Handle
 }
@@ -174,6 +176,42 @@ func (ai *AssetInfo) SampleDataTrackIDs() []obj.Object {
 	defer runtime.KeepAlive(ai)
 	_arr := objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("sampleDataTrackIDs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
+// DownloadResourcesWithTimeoutCompletionHandler downloads the resources required to render cinematic effects for the given asset Resources are device-wide and are cached once downloaded
+func (ai *AssetInfo) DownloadResourcesWithTimeoutCompletionHandler(downloadTimeout float64, completionHandler func(obj.Object, unsafe.Pointer)) *foundation.Progress {
+	defer runtime.KeepAlive(ai)
+	_r := objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("downloadResourcesWithTimeout:completionHandler:"), downloadTimeout, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
+	return foundation.ProgressFromID(_r)
+}
+
+// PreprocessAssetWithConfigurationCompletionHandler preprocesses the asset by generating a disparity track, writing the result to the URL specified in `configuration`. Required for assets whose `cinematicCapability` is \c CNCinematicCapabilityNeedsPreprocessing; on success \c assetInfo will be \c CNCinematicCapabilityRenderable. Ensure \c resourceStatus is ready before calling — download resources first if needed.
+func (ai *AssetInfo) PreprocessAssetWithConfigurationCompletionHandler(configuration *AssetPreprocessConfiguration, completionHandler func(obj.Object, unsafe.Pointer)) *foundation.Progress {
+	defer runtime.KeepAlive(ai)
+	defer runtime.KeepAlive(configuration)
+	_r := objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("preprocessAssetWithConfiguration:completionHandler:"), objref.IDOf(configuration), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
+	return foundation.ProgressFromID(_r)
+}
+
+// IsPreprocessed reports whether true only when an asset has been preprocessed
+func (ai *AssetInfo) IsPreprocessed() bool {
+	defer runtime.KeepAlive(ai)
+	_r := objc.Send[bool](objref.IDOf(ai), objc.RegisterName("isPreprocessed"))
+	return _r
+}
+
+// CinematicCapability returns the cinematic capability.
+func (ai *AssetInfo) CinematicCapability() CinematicCapability {
+	defer runtime.KeepAlive(ai)
+	_r := objc.Send[CinematicCapability](objref.IDOf(ai), objc.RegisterName("cinematicCapability"))
+	return _r
+}
+
+// ResourceStatus returns the resource status.
+func (ai *AssetInfo) ResourceStatus() ResourceStatus {
+	defer runtime.KeepAlive(ai)
+	_r := objc.Send[ResourceStatus](objref.IDOf(ai), objc.RegisterName("resourceStatus"))
+	return _r
 }
 
 // isAssetInfo marks AssetInfo — and, by embedding promotion, its

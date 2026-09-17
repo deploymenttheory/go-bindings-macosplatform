@@ -35,6 +35,18 @@ func ProcessorSupported() uint8 {
 	return _r
 }
 
+// MaximumDimensionForSpatialScaleFactor the maximum value for either dimension of the source frame, in pixels, for a given spatial scale factor.
+func MaximumDimensionForSpatialScaleFactor(spatialScaleFactor int) int {
+	_r := objc.Send[int](objc.ID(_class("VTLowLatencyFrameInterpolationConfiguration")), objc.RegisterName("maximumDimensionForSpatialScaleFactor:"), spatialScaleFactor)
+	return _r
+}
+
+// MaximumPixelCountForSpatialScaleFactor the maximum total number of pixels in the source frame for a given spatial scale factor.
+func MaximumPixelCountForSpatialScaleFactor(spatialScaleFactor int) int {
+	_r := objc.Send[int](objc.ID(_class("VTLowLatencyFrameInterpolationConfiguration")), objc.RegisterName("maximumPixelCountForSpatialScaleFactor:"), spatialScaleFactor)
+	return _r
+}
+
 // VTLowLatencyFrameInterpolationConfigurationIsSupported reports whether reports whether the system supports this processor.
 func VTLowLatencyFrameInterpolationConfigurationIsSupported() bool {
 	_r := objc.Send[bool](objc.ID(_class("VTLowLatencyFrameInterpolationConfiguration")), objc.RegisterName("isSupported"))
@@ -45,6 +57,18 @@ func VTLowLatencyFrameInterpolationConfigurationIsSupported() bool {
 func SupportedScaleFactorsForFrameWidthFrameHeight(frameWidth int, frameHeight int) []*foundation.Number {
 	_r := objc.Send[objc.ID](objc.ID(_class("VTLowLatencySuperResolutionScalerConfiguration")), objc.RegisterName("supportedScaleFactorsForFrameWidth:frameHeight:"), frameWidth, frameHeight)
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *foundation.Number { return foundation.NumberFromID(_id) })
+}
+
+// VTLowLatencySuperResolutionScalerConfigurationMaximumDimensionForSpatialScaleFactor the maximum value for either dimension of the source frame, in pixels, for a given spatial scale factor.
+func VTLowLatencySuperResolutionScalerConfigurationMaximumDimensionForSpatialScaleFactor(spatialScaleFactor float32) int {
+	_r := objc.Send[int](objc.ID(_class("VTLowLatencySuperResolutionScalerConfiguration")), objc.RegisterName("maximumDimensionForSpatialScaleFactor:"), spatialScaleFactor)
+	return _r
+}
+
+// VTLowLatencySuperResolutionScalerConfigurationMaximumPixelCountForSpatialScaleFactor the maximum total number of pixels in the source frame for a given spatial scale factor.
+func VTLowLatencySuperResolutionScalerConfigurationMaximumPixelCountForSpatialScaleFactor(spatialScaleFactor float32) int {
+	_r := objc.Send[int](objc.ID(_class("VTLowLatencySuperResolutionScalerConfiguration")), objc.RegisterName("maximumPixelCountForSpatialScaleFactor:"), spatialScaleFactor)
+	return _r
 }
 
 // MaximumDimensions returns maximum dimensions for a source frame for the processor.
@@ -63,6 +87,14 @@ func MinimumDimensions() CMVideoDimensions {
 func VTLowLatencySuperResolutionScalerConfigurationIsSupported() bool {
 	_r := objc.Send[bool](objc.ID(_class("VTLowLatencySuperResolutionScalerConfiguration")), objc.RegisterName("isSupported"))
 	return _r
+}
+
+// SupportedScaleFactors returns reports the set of supported scale factors to use when initializing a low latency super-resolution scaler configuration. Note: not all scale factors are available for all source dimensions.
+//
+// SupportedScaleFactors returns the collection as a Go slice.
+func SupportedScaleFactors() []obj.Object {
+	_arr := objc.Send[objc.ID](objc.ID(_class("VTLowLatencySuperResolutionScalerConfiguration")), objc.RegisterName("supportedScaleFactors"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // VTMotionBlurConfigurationSupportedRevisions provides the collection of currently supported algorithms or configuration revisions for the class of configuration. A property you use to introspect at runtime which revisions are available for each configuration.
@@ -131,10 +163,10 @@ func VTSuperResolutionScalerConfigurationIsSupported() bool {
 	return _r
 }
 
-// SupportedScaleFactors returns reports the set of supported scale factors to use when initializing a super-resolution scaler configuration.
+// VTSuperResolutionScalerConfigurationSupportedScaleFactors returns reports the set of supported scale factors to use when initializing a super-resolution scaler configuration.
 //
-// SupportedScaleFactors returns the collection as a Go slice.
-func SupportedScaleFactors() []obj.Object {
+// VTSuperResolutionScalerConfigurationSupportedScaleFactors returns the collection as a Go slice.
+func VTSuperResolutionScalerConfigurationSupportedScaleFactors() []obj.Object {
 	_arr := objc.Send[objc.ID](objc.ID(_class("VTSuperResolutionScalerConfiguration")), objc.RegisterName("supportedScaleFactors"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

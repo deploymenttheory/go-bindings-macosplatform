@@ -20,6 +20,8 @@ import (
 // errMissingLinkLib is returned when a C library registry entry has no link_lib field.
 var errMissingLinkLib = errors.New("missing link_lib")
 
+var errUnknownBackend = errors.New("unknown backend")
+
 // SDKPath returns the path to the active macOS SDK via xcrun.
 func SDKPath() (string, error) {
 	out, err := exec.CommandContext(context.Background(), "xcrun", "--show-sdk-path").Output()
@@ -310,9 +312,10 @@ func LoadCLibrariesFile(path string) (bool, error) {
 		}
 		if def.Backend != "" && def.Backend != "cgo" && def.Backend != BackendPurego {
 			return false, fmt.Errorf(
-				"parsing C library config %s: entry %q: unknown backend %q (want \"cgo\" or %q)",
+				"parsing C library config %s: entry %q: %w %q (want \"cgo\" or %q)",
 				path,
 				name,
+				errUnknownBackend,
 				def.Backend,
 				BackendPurego,
 			)
@@ -434,8 +437,9 @@ func DumpAST(sdkPath, framework, arch string) (*ASTNode, error) {
 		"-fsyntax-only",
 		"-Wno-everything", // suppress all warnings; we only want the AST
 		"-fno-color-diagnostics",
-		header,
 	}
+	args = appendScanDefines(args, framework)
+	args = append(args, header)
 
 	cmd := exec.CommandContext(context.Background(), "xcrun", args...)
 
@@ -490,8 +494,9 @@ func DumpRecordLayouts(sdkPath, framework, arch string) (map[string]RecordLayout
 		"-fno-color-diagnostics",
 		"-Xclang", "-fdump-record-layouts-simple",
 		"-o", os.DevNull,
-		header,
 	}
+	args = appendScanDefines(args, framework)
+	args = append(args, header)
 
 	cmd := exec.CommandContext(context.Background(), "xcrun", args...)
 	var stdout, stderr bytes.Buffer
@@ -505,6 +510,14 @@ func DumpRecordLayouts(sdkPath, framework, arch string) (map[string]RecordLayout
 		}
 	}
 	return parseRecordLayouts(stdout.String()), nil
+}
+
+// appendScanDefines keeps header selection identical in both Clang passes.
+func appendScanDefines(args []string, framework string) []string {
+	for _, define := range scanConfigs[framework].Defines {
+		args = append(args, "-D"+define)
+	}
+	return args
 }
 
 // parseRecordLayouts parses clang's -fdump-record-layouts-simple output. Each AST

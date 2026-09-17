@@ -128,28 +128,28 @@ func (tlf *TextLineFragment) FractionOfDistanceThroughGlyphForPoint(point corefo
 	return _r
 }
 
-// AttributedString returns the attributed string.
+// AttributedString returns the source attributed string.
 func (tlf *TextLineFragment) AttributedString() *foundation.AttributedString {
 	defer runtime.KeepAlive(tlf)
 	_r := objc.Send[objc.ID](objref.IDOf(tlf), objc.RegisterName("attributedString"))
 	return foundation.AttributedStringFromID(_r)
 }
 
-// CharacterRange returns the character range.
+// CharacterRange returns the string range for the source attributed string corresponding to this line fragment.
 func (tlf *TextLineFragment) CharacterRange() foundation.NSRange {
 	defer runtime.KeepAlive(tlf)
 	_r := objc.Send[foundation.NSRange](objref.IDOf(tlf), objc.RegisterName("characterRange"))
 	return _r
 }
 
-// TypographicBounds returns the typographic bounds.
+// TypographicBounds returns the typographic bounds specifying the dimensions of the line fragment for laying out line fragments to each other. The origin value is offset from the beginning of the line fragment group belonging to the parent layout fragment.
 func (tlf *TextLineFragment) TypographicBounds() corefoundation.CGRect {
 	defer runtime.KeepAlive(tlf)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(tlf), objc.RegisterName("typographicBounds"))
 	return _r
 }
 
-// GlyphOrigin returns the glyph origin.
+// GlyphOrigin returns the rendering origin for the leftmost glyph in the line fragment coordinate system.
 func (tlf *TextLineFragment) GlyphOrigin() corefoundation.CGPoint {
 	defer runtime.KeepAlive(tlf)
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(tlf), objc.RegisterName("glyphOrigin"))

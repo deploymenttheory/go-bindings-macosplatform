@@ -1388,23 +1388,32 @@ func NSColorHeaderColor() *NSColor {
 
 // The background color of selected content or text that is unemphasized. Older alias for +unemphasizedSelectedContentBackgroundColor and +unemphasizedSelectedTextBackgroundColor
 // Deprecated: since macOS 11.0.
-func NSColorSecondarySelectedControlColor() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](objc.ID(_clsNSColor), _nSColorSelSecondarySelectedControlColor)
-	return _ret
+func NSColorSecondarySelectedControlColor() *NSColor {
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSColor), _nSColorSelSecondarySelectedControlColor)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSColorFromID(_ret)
 }
 
 // The background color of selected and emphasized (focused) content: table views rows, collection views, etc. Older alias for +selectedContentBackgroundColor
 // Deprecated: since macOS 11.0.
-func NSColorAlternateSelectedControlColor() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](objc.ID(_clsNSColor), _nSColorSelAlternateSelectedControlColor)
-	return _ret
+func NSColorAlternateSelectedControlColor() *NSColor {
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSColor), _nSColorSelAlternateSelectedControlColor)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSColorFromID(_ret)
 }
 
 // The background colors for alternating content items: such as table view rows, collection view items. Older alias for +alternatingContentBackgroundColors
 // Deprecated: since macOS 11.0.
-func NSColorControlAlternatingRowBackgroundColors() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](objc.ID(_clsNSColor), _nSColorSelControlAlternatingRowBackgroundColors)
-	return _ret
+func NSColorControlAlternatingRowBackgroundColors() *foundation.NSArray[*NSColor] {
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSColor), _nSColorSelControlAlternatingRowBackgroundColors)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*NSColor](_ret)
 }
 
 // Deprecated: Use -type and NSColorType instead

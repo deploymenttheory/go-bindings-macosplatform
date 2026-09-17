@@ -13,6 +13,7 @@ import (
 // An object that sends messages to the broadcasting app.
 //
 // Apple documentation: https://developer.apple.com/documentation/replaykit/rpbroadcasthandler
+// Deprecated: No longer supported
 type RPBroadcastHandler struct {
 	foundation.NSObject
 }

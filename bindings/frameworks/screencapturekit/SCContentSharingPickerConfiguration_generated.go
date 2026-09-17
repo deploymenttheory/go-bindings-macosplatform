@@ -15,8 +15,6 @@ import (
 )
 
 // ContentSharingPickerConfiguration is an idiomatic wrapper over the Objective-C class SCContentSharingPickerConfiguration.
-//
-// An instance for configuring the system content-sharing picker.
 type ContentSharingPickerConfiguration struct {
 	objref.Handle
 }

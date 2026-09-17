@@ -34,22 +34,6 @@
       "doc": "A class that displays an overlay you can use to recommend another app or an App Clip’s corresponding full app.",
       "url": "https://developer.apple.com/documentation/storekit/skoverlay"
     },
-    "SKOverlayAppClipConfiguration": {
-      "doc": "An object that represents the attributes of an overlay you use to recommend an App Clip’s corresponding full app.",
-      "url": "https://developer.apple.com/documentation/storekit/skoverlayappclipconfiguration"
-    },
-    "SKOverlayAppConfiguration": {
-      "doc": "An object that represents the attributes of an overlay you use to recommend another app on the App Store.",
-      "url": "https://developer.apple.com/documentation/storekit/skoverlayappconfiguration"
-    },
-    "SKOverlayConfiguration": {
-      "doc": "The abstract superclass for all classes that represent an overlay’s attributes.",
-      "url": "https://developer.apple.com/documentation/storekit/skoverlayconfiguration"
-    },
-    "SKOverlayTransitionContext": {
-      "doc": "A context object you can use to animate UI changes while the platform presents or dismisses an overlay.",
-      "url": "https://developer.apple.com/documentation/storekit/skoverlaytransitioncontext"
-    },
     "SKPayment": {
       "doc": "A request to the App Store to process payment for additional functionality that your app offers.",
       "url": "https://developer.apple.com/documentation/storekit/skpayment"
@@ -146,10 +130,6 @@
     }
   },
   "enums": {
-    "SKANError": {
-      "doc": "An error that an ad network attribution operation returns.",
-      "url": "https://developer.apple.com/documentation/storekit/skanerror"
-    },
     "SKCloudServiceAuthorizationStatus": {
       "doc": "Constants that indicate the type of authorization the customer has for accessing the Music library.",
       "url": "https://developer.apple.com/documentation/storekit/skcloudserviceauthorizationstatus",
@@ -228,14 +208,6 @@
         }
       }
     },
-    "SKErrorCode": {
-      "doc": "Error codes for StoreKit errors.",
-      "url": "https://developer.apple.com/documentation/storekit/skerrorcode"
-    },
-    "SKOverlayPosition": {
-      "doc": "Constants that identify the position of an overlay on the screen.",
-      "url": "https://developer.apple.com/documentation/storekit/skoverlayposition"
-    },
     "SKPaymentTransactionState": {
       "doc": "Values representing the state of a transaction.",
       "url": "https://developer.apple.com/documentation/storekit/skpaymenttransactionstate",
@@ -261,18 +233,6 @@
           "url": "https://developer.apple.com/documentation/storekit/skpaymenttransactionstate/restored"
         }
       }
-    },
-    "SKProductDiscountPaymentMode": {
-      "doc": "Values representing the payment modes for a product discount.",
-      "url": "https://developer.apple.com/documentation/storekit/skproductdiscountpaymentmode"
-    },
-    "SKProductDiscountType": {
-      "doc": "Values representing the types of discount offers an app can present.",
-      "url": "https://developer.apple.com/documentation/storekit/skproductdiscounttype"
-    },
-    "SKProductPeriodUnit": {
-      "doc": "Values representing the duration of an interval, from a day up to a year.",
-      "url": "https://developer.apple.com/documentation/storekit/skproductperiodunit"
     },
     "SKProductStorePromotionVisibility": {
       "doc": "The visibility settings that determine if an in-app purchase is visible on a device.",

@@ -465,7 +465,7 @@ func MTRBaseClusterColorControlFromID(id objc.ID) *MTRBaseClusterColorControl {
 	return o
 }
 
-// Command MoveToHue Move to specified hue.
+// Command MoveToHue This command will move the device to the requested hue using a transition.
 func (o *MTRBaseClusterColorControl) MoveToHueWithParamsCompletion(params *MTRColorControlClusterMoveToHueParams, completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -477,7 +477,7 @@ func (o *MTRBaseClusterColorControl) MoveToHueWithParamsCompletion(params *MTRCo
 	o.Ptr().Send(_mTRBaseClusterColorControlSelMoveToHueWithParamsCompletion, params.Ptr(), __block_completion)
 }
 
-// Command MoveHue Move hue up or down at specified rate.
+// Command MoveHue This command will change the hue of the device with a requested rate.
 func (o *MTRBaseClusterColorControl) MoveHueWithParamsCompletion(params *MTRColorControlClusterMoveHueParams, completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -489,7 +489,7 @@ func (o *MTRBaseClusterColorControl) MoveHueWithParamsCompletion(params *MTRColo
 	o.Ptr().Send(_mTRBaseClusterColorControlSelMoveHueWithParamsCompletion, params.Ptr(), __block_completion)
 }
 
-// Command StepHue Step hue up or down by specified size at specified rate.
+// Command StepHue This command will change the hue of the device using a step and transition.
 func (o *MTRBaseClusterColorControl) StepHueWithParamsCompletion(params *MTRColorControlClusterStepHueParams, completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -501,7 +501,7 @@ func (o *MTRBaseClusterColorControl) StepHueWithParamsCompletion(params *MTRColo
 	o.Ptr().Send(_mTRBaseClusterColorControlSelStepHueWithParamsCompletion, params.Ptr(), __block_completion)
 }
 
-// Command MoveToSaturation Move to specified saturation.
+// Command MoveToSaturation This command will move the device to the requested saturation using a transition.
 func (o *MTRBaseClusterColorControl) MoveToSaturationWithParamsCompletion(params *MTRColorControlClusterMoveToSaturationParams, completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -513,7 +513,7 @@ func (o *MTRBaseClusterColorControl) MoveToSaturationWithParamsCompletion(params
 	o.Ptr().Send(_mTRBaseClusterColorControlSelMoveToSaturationWithParamsCompletion, params.Ptr(), __block_completion)
 }
 
-// Command MoveSaturation Move saturation up or down at specified rate.
+// Command MoveSaturation This command will change the saturation of the device with a requested rate.
 func (o *MTRBaseClusterColorControl) MoveSaturationWithParamsCompletion(params *MTRColorControlClusterMoveSaturationParams, completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -525,7 +525,7 @@ func (o *MTRBaseClusterColorControl) MoveSaturationWithParamsCompletion(params *
 	o.Ptr().Send(_mTRBaseClusterColorControlSelMoveSaturationWithParamsCompletion, params.Ptr(), __block_completion)
 }
 
-// Command StepSaturation Step saturation up or down by specified size at specified rate.
+// Command StepSaturation This command will change the saturation of the device using a step and transition.
 func (o *MTRBaseClusterColorControl) StepSaturationWithParamsCompletion(params *MTRColorControlClusterStepSaturationParams, completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -537,7 +537,7 @@ func (o *MTRBaseClusterColorControl) StepSaturationWithParamsCompletion(params *
 	o.Ptr().Send(_mTRBaseClusterColorControlSelStepSaturationWithParamsCompletion, params.Ptr(), __block_completion)
 }
 
-// Command MoveToHueAndSaturation Move to hue and saturation.
+// Command MoveToHueAndSaturation This command will move the device to the requested hue and saturation using a transition.
 func (o *MTRBaseClusterColorControl) MoveToHueAndSaturationWithParamsCompletion(params *MTRColorControlClusterMoveToHueAndSaturationParams, completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -549,7 +549,7 @@ func (o *MTRBaseClusterColorControl) MoveToHueAndSaturationWithParamsCompletion(
 	o.Ptr().Send(_mTRBaseClusterColorControlSelMoveToHueAndSaturationWithParamsCompletion, params.Ptr(), __block_completion)
 }
 
-// Command MoveToColor Move to specified color.
+// Command MoveToColor This command will move the device to the requested color using a transition.
 func (o *MTRBaseClusterColorControl) MoveToColorWithParamsCompletion(params *MTRColorControlClusterMoveToColorParams, completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -561,7 +561,7 @@ func (o *MTRBaseClusterColorControl) MoveToColorWithParamsCompletion(params *MTR
 	o.Ptr().Send(_mTRBaseClusterColorControlSelMoveToColorWithParamsCompletion, params.Ptr(), __block_completion)
 }
 
-// Command MoveColor Moves the color.
+// Command MoveColor This command will change the color of the device with a requested rate.
 func (o *MTRBaseClusterColorControl) MoveColorWithParamsCompletion(params *MTRColorControlClusterMoveColorParams, completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -573,7 +573,7 @@ func (o *MTRBaseClusterColorControl) MoveColorWithParamsCompletion(params *MTRCo
 	o.Ptr().Send(_mTRBaseClusterColorControlSelMoveColorWithParamsCompletion, params.Ptr(), __block_completion)
 }
 
-// Command StepColor Steps the lighting to a specific color.
+// Command StepColor This command will change the color of the device using a step and transition.
 func (o *MTRBaseClusterColorControl) StepColorWithParamsCompletion(params *MTRColorControlClusterStepColorParams, completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -585,7 +585,7 @@ func (o *MTRBaseClusterColorControl) StepColorWithParamsCompletion(params *MTRCo
 	o.Ptr().Send(_mTRBaseClusterColorControlSelStepColorWithParamsCompletion, params.Ptr(), __block_completion)
 }
 
-// Command MoveToColorTemperature Move to a specific color temperature.
+// Command MoveToColorTemperature This command will move the device to the requested color temperate using a transition.
 func (o *MTRBaseClusterColorControl) MoveToColorTemperatureWithParamsCompletion(params *MTRColorControlClusterMoveToColorTemperatureParams, completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -597,7 +597,7 @@ func (o *MTRBaseClusterColorControl) MoveToColorTemperatureWithParamsCompletion(
 	o.Ptr().Send(_mTRBaseClusterColorControlSelMoveToColorTemperatureWithParamsCompletion, params.Ptr(), __block_completion)
 }
 
-// Command EnhancedMoveToHue Command description for EnhancedMoveToHue
+// Command EnhancedMoveToHue This command allows the light to be moved in a smooth continuous transition from their current hue to a target hue.
 func (o *MTRBaseClusterColorControl) EnhancedMoveToHueWithParamsCompletion(params *MTRColorControlClusterEnhancedMoveToHueParams, completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -609,7 +609,7 @@ func (o *MTRBaseClusterColorControl) EnhancedMoveToHueWithParamsCompletion(param
 	o.Ptr().Send(_mTRBaseClusterColorControlSelEnhancedMoveToHueWithParamsCompletion, params.Ptr(), __block_completion)
 }
 
-// Command EnhancedMoveHue Command description for EnhancedMoveHue
+// Command EnhancedMoveHue This command allows the light to start a continuous transition starting from their current hue.
 func (o *MTRBaseClusterColorControl) EnhancedMoveHueWithParamsCompletion(params *MTRColorControlClusterEnhancedMoveHueParams, completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -621,7 +621,7 @@ func (o *MTRBaseClusterColorControl) EnhancedMoveHueWithParamsCompletion(params 
 	o.Ptr().Send(_mTRBaseClusterColorControlSelEnhancedMoveHueWithParamsCompletion, params.Ptr(), __block_completion)
 }
 
-// Command EnhancedStepHue Command description for EnhancedStepHue
+// Command EnhancedStepHue This command allows the device to be moved in a stepped transition from their current hue.
 func (o *MTRBaseClusterColorControl) EnhancedStepHueWithParamsCompletion(params *MTRColorControlClusterEnhancedStepHueParams, completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -633,7 +633,7 @@ func (o *MTRBaseClusterColorControl) EnhancedStepHueWithParamsCompletion(params 
 	o.Ptr().Send(_mTRBaseClusterColorControlSelEnhancedStepHueWithParamsCompletion, params.Ptr(), __block_completion)
 }
 
-// Command EnhancedMoveToHueAndSaturation Command description for EnhancedMoveToHueAndSaturation
+// Command EnhancedMoveToHueAndSaturation This command allows the light to be moved in a smooth continuous transition from their current hue to a target hue and from their current saturation to a target saturation.
 func (o *MTRBaseClusterColorControl) EnhancedMoveToHueAndSaturationWithParamsCompletion(params *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams, completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -645,7 +645,7 @@ func (o *MTRBaseClusterColorControl) EnhancedMoveToHueAndSaturationWithParamsCom
 	o.Ptr().Send(_mTRBaseClusterColorControlSelEnhancedMoveToHueAndSaturationWithParamsCompletion, params.Ptr(), __block_completion)
 }
 
-// Command ColorLoopSet Command description for ColorLoopSet
+// Command ColorLoopSet This command allows a color loop to be activated such that the color light cycles through its range of hues.
 func (o *MTRBaseClusterColorControl) ColorLoopSetWithParamsCompletion(params *MTRColorControlClusterColorLoopSetParams, completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -657,7 +657,7 @@ func (o *MTRBaseClusterColorControl) ColorLoopSetWithParamsCompletion(params *MT
 	o.Ptr().Send(_mTRBaseClusterColorControlSelColorLoopSetWithParamsCompletion, params.Ptr(), __block_completion)
 }
 
-// Command StopMoveStep Command description for StopMoveStep
+// Command StopMoveStep This command is provided to allow MoveTo and Step commands to be stopped.
 func (o *MTRBaseClusterColorControl) StopMoveStepWithParamsCompletion(params *MTRColorControlClusterStopMoveStepParams, completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -669,7 +669,7 @@ func (o *MTRBaseClusterColorControl) StopMoveStepWithParamsCompletion(params *MT
 	o.Ptr().Send(_mTRBaseClusterColorControlSelStopMoveStepWithParamsCompletion, params.Ptr(), __block_completion)
 }
 
-// Command MoveColorTemperature Command description for MoveColorTemperature
+// Command MoveColorTemperature This command allows the color temperature of the light to be moved at a specified rate.
 func (o *MTRBaseClusterColorControl) MoveColorTemperatureWithParamsCompletion(params *MTRColorControlClusterMoveColorTemperatureParams, completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -681,7 +681,7 @@ func (o *MTRBaseClusterColorControl) MoveColorTemperatureWithParamsCompletion(pa
 	o.Ptr().Send(_mTRBaseClusterColorControlSelMoveColorTemperatureWithParamsCompletion, params.Ptr(), __block_completion)
 }
 
-// Command StepColorTemperature Command description for StepColorTemperature
+// Command StepColorTemperature This command allows the color temperature of the light to be stepped with a specified step size.
 func (o *MTRBaseClusterColorControl) StepColorTemperatureWithParamsCompletion(params *MTRColorControlClusterStepColorTemperatureParams, completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {

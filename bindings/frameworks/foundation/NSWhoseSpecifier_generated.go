@@ -157,35 +157,35 @@ func (ws *WhoseSpecifier) WithScriptingProperties(scriptingProperties map[string
 	return ws
 }
 
-// Test returns the test.
+// Test returns the test used to qualify the objects.
 func (ws *WhoseSpecifier) Test() *ScriptWhoseTest {
 	defer runtime.KeepAlive(ws)
 	_r := objc.Send[objc.ID](objref.IDOf(ws), objc.RegisterName("test"))
 	return ScriptWhoseTestFromID(_r)
 }
 
-// StartSubelementIdentifier returns the start subelement identifier.
+// StartSubelementIdentifier returns the identifier for the start subelement.
 func (ws *WhoseSpecifier) StartSubelementIdentifier() WhoseSubelementIdentifier {
 	defer runtime.KeepAlive(ws)
 	_r := objc.Send[WhoseSubelementIdentifier](objref.IDOf(ws), objc.RegisterName("startSubelementIdentifier"))
 	return _r
 }
 
-// StartSubelementIndex returns the start subelement index.
+// StartSubelementIndex returns the index of the start subelement. Only used if `startSubelementIdentifier` is `NSIndexSubelement`.
 func (ws *WhoseSpecifier) StartSubelementIndex() int {
 	defer runtime.KeepAlive(ws)
 	_r := objc.Send[int](objref.IDOf(ws), objc.RegisterName("startSubelementIndex"))
 	return _r
 }
 
-// EndSubelementIdentifier returns the end subelement identifier.
+// EndSubelementIdentifier returns the identifier for the end subelement.
 func (ws *WhoseSpecifier) EndSubelementIdentifier() WhoseSubelementIdentifier {
 	defer runtime.KeepAlive(ws)
 	_r := objc.Send[WhoseSubelementIdentifier](objref.IDOf(ws), objc.RegisterName("endSubelementIdentifier"))
 	return _r
 }
 
-// EndSubelementIndex returns the end subelement index.
+// EndSubelementIndex returns the index of the end subelement. Only used if `endSubelementIdentifier` is `NSIndexSubelement`.
 func (ws *WhoseSpecifier) EndSubelementIndex() int {
 	defer runtime.KeepAlive(ws)
 	_r := objc.Send[int](objref.IDOf(ws), objc.RegisterName("endSubelementIndex"))

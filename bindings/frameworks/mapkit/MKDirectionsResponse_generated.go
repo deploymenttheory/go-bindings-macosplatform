@@ -15,8 +15,6 @@ import (
 )
 
 // DirectionsResponse is an idiomatic wrapper over the Objective-C class MKDirectionsResponse.
-//
-// The route information that Apple servers return in response to your request for directions.
 type DirectionsResponse struct {
 	objref.Handle
 }

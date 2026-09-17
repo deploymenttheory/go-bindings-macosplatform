@@ -87,6 +87,14 @@ func (tig *ToolbarItemGroup) WithSelectionMode(selectionMode ToolbarItemGroupSel
 	return tig
 }
 
+// WithRole sets the semantic role of the item. Defaults to NSToolbarItemGroupRoleAutomatic.
+func (tig *ToolbarItemGroup) WithRole(role ToolbarItemGroupRole) *ToolbarItemGroup {
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tig), objc.RegisterName("setRole:"), role)
+	})
+	return tig
+}
+
 // WithSelectedIndex sets the index value for the most recently selected subitem of a grouped toolbar item.
 func (tig *ToolbarItemGroup) WithSelectedIndex(selectedIndex int) *ToolbarItemGroup {
 	purego.Main(func() {
@@ -328,6 +336,20 @@ func (tig *ToolbarItemGroup) SelectionMode() ToolbarItemGroupSelectionMode {
 	purego.Main(func() {
 		_mainthread0 = func() ToolbarItemGroupSelectionMode {
 			_r := objc.Send[ToolbarItemGroupSelectionMode](objref.IDOf(tig), objc.RegisterName("selectionMode"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
+}
+
+// Role returns the semantic role of the item. Defaults to `NSToolbarItemGroupRoleAutomatic`.
+func (tig *ToolbarItemGroup) Role() ToolbarItemGroupRole {
+	defer runtime.KeepAlive(tig)
+	var _mainthread0 ToolbarItemGroupRole
+	purego.Main(func() {
+		_mainthread0 = func() ToolbarItemGroupRole {
+			_r := objc.Send[ToolbarItemGroupRole](objref.IDOf(tig), objc.RegisterName("role"))
 			return _r
 		}()
 	})

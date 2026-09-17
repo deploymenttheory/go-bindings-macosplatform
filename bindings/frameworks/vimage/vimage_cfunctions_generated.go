@@ -5005,10 +5005,10 @@ func VImagePerspectiveWarpPlanar8(src unsafe.Pointer, dest unsafe.Pointer, tempB
 	return _fnVImagePerspectiveWarpPlanar8(src, dest, tempBuffer, unsafe.Pointer(transform), interpolation, backColor, flags)
 }
 
-var _fnVImagePiecewiseGammaPlanar16Q12 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int16, uint32) int
+var _fnVImagePiecewiseGammaPlanar16Q12 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, float32, unsafe.Pointer, int16, uint32) int
 
 // VImagePiecewiseGammaPlanar16Q12 calls the vImage framework function vImagePiecewiseGamma_Planar16Q12.
-func VImagePiecewiseGammaPlanar16Q12(src unsafe.Pointer, dest unsafe.Pointer, exponentialCoeffs unsafe.Pointer, gamma unsafe.Pointer, linearCoeffs unsafe.Pointer, boundary int16, flags uint32) int {
+func VImagePiecewiseGammaPlanar16Q12(src unsafe.Pointer, dest unsafe.Pointer, exponentialCoeffs unsafe.Pointer, gamma float32, linearCoeffs unsafe.Pointer, boundary int16, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImagePiecewiseGammaPlanar16Q12 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImagePiecewiseGammaPlanar16Q12, _lib, "vImagePiecewiseGamma_Planar16Q12")
@@ -5016,10 +5016,10 @@ func VImagePiecewiseGammaPlanar16Q12(src unsafe.Pointer, dest unsafe.Pointer, ex
 	return _fnVImagePiecewiseGammaPlanar16Q12(src, dest, exponentialCoeffs, gamma, linearCoeffs, boundary, flags)
 }
 
-var _fnVImagePiecewiseGammaPlanar16Q12toPlanar8 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int16, uint32) int
+var _fnVImagePiecewiseGammaPlanar16Q12toPlanar8 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, float32, unsafe.Pointer, int16, uint32) int
 
 // VImagePiecewiseGammaPlanar16Q12toPlanar8 calls the vImage framework function vImagePiecewiseGamma_Planar16Q12toPlanar8.
-func VImagePiecewiseGammaPlanar16Q12toPlanar8(src unsafe.Pointer, dest unsafe.Pointer, exponentialCoeffs unsafe.Pointer, gamma unsafe.Pointer, linearCoeffs unsafe.Pointer, boundary int16, flags uint32) int {
+func VImagePiecewiseGammaPlanar16Q12toPlanar8(src unsafe.Pointer, dest unsafe.Pointer, exponentialCoeffs unsafe.Pointer, gamma float32, linearCoeffs unsafe.Pointer, boundary int16, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImagePiecewiseGammaPlanar16Q12toPlanar8 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImagePiecewiseGammaPlanar16Q12toPlanar8, _lib, "vImagePiecewiseGamma_Planar16Q12toPlanar8")
@@ -5027,10 +5027,10 @@ func VImagePiecewiseGammaPlanar16Q12toPlanar8(src unsafe.Pointer, dest unsafe.Po
 	return _fnVImagePiecewiseGammaPlanar16Q12toPlanar8(src, dest, exponentialCoeffs, gamma, linearCoeffs, boundary, flags)
 }
 
-var _fnVImagePiecewiseGammaPlanar8 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint8, uint32) int
+var _fnVImagePiecewiseGammaPlanar8 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, float32, unsafe.Pointer, uint8, uint32) int
 
 // VImagePiecewiseGammaPlanar8 calls the vImage framework function vImagePiecewiseGamma_Planar8.
-func VImagePiecewiseGammaPlanar8(src unsafe.Pointer, dest unsafe.Pointer, exponentialCoeffs unsafe.Pointer, gamma unsafe.Pointer, linearCoeffs unsafe.Pointer, boundary uint8, flags uint32) int {
+func VImagePiecewiseGammaPlanar8(src unsafe.Pointer, dest unsafe.Pointer, exponentialCoeffs unsafe.Pointer, gamma float32, linearCoeffs unsafe.Pointer, boundary uint8, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImagePiecewiseGammaPlanar8 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImagePiecewiseGammaPlanar8, _lib, "vImagePiecewiseGamma_Planar8")
@@ -5038,10 +5038,10 @@ func VImagePiecewiseGammaPlanar8(src unsafe.Pointer, dest unsafe.Pointer, expone
 	return _fnVImagePiecewiseGammaPlanar8(src, dest, exponentialCoeffs, gamma, linearCoeffs, boundary, flags)
 }
 
-var _fnVImagePiecewiseGammaPlanar8toPlanar16Q12 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint8, uint32) int
+var _fnVImagePiecewiseGammaPlanar8toPlanar16Q12 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, float32, unsafe.Pointer, uint8, uint32) int
 
 // VImagePiecewiseGammaPlanar8toPlanar16Q12 calls the vImage framework function vImagePiecewiseGamma_Planar8toPlanar16Q12.
-func VImagePiecewiseGammaPlanar8toPlanar16Q12(src unsafe.Pointer, dest unsafe.Pointer, exponentialCoeffs unsafe.Pointer, gamma unsafe.Pointer, linearCoeffs unsafe.Pointer, boundary uint8, flags uint32) int {
+func VImagePiecewiseGammaPlanar8toPlanar16Q12(src unsafe.Pointer, dest unsafe.Pointer, exponentialCoeffs unsafe.Pointer, gamma float32, linearCoeffs unsafe.Pointer, boundary uint8, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImagePiecewiseGammaPlanar8toPlanar16Q12 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImagePiecewiseGammaPlanar8toPlanar16Q12, _lib, "vImagePiecewiseGamma_Planar8toPlanar16Q12")
@@ -5049,10 +5049,10 @@ func VImagePiecewiseGammaPlanar8toPlanar16Q12(src unsafe.Pointer, dest unsafe.Po
 	return _fnVImagePiecewiseGammaPlanar8toPlanar16Q12(src, dest, exponentialCoeffs, gamma, linearCoeffs, boundary, flags)
 }
 
-var _fnVImagePiecewiseGammaPlanar8toPlanarF func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint8, uint32) int
+var _fnVImagePiecewiseGammaPlanar8toPlanarF func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, float32, unsafe.Pointer, uint8, uint32) int
 
 // VImagePiecewiseGammaPlanar8toPlanarF calls the vImage framework function vImagePiecewiseGamma_Planar8toPlanarF.
-func VImagePiecewiseGammaPlanar8toPlanarF(src unsafe.Pointer, dest unsafe.Pointer, exponentialCoeffs unsafe.Pointer, gamma unsafe.Pointer, linearCoeffs unsafe.Pointer, boundary uint8, flags uint32) int {
+func VImagePiecewiseGammaPlanar8toPlanarF(src unsafe.Pointer, dest unsafe.Pointer, exponentialCoeffs unsafe.Pointer, gamma float32, linearCoeffs unsafe.Pointer, boundary uint8, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImagePiecewiseGammaPlanar8toPlanarF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImagePiecewiseGammaPlanar8toPlanarF, _lib, "vImagePiecewiseGamma_Planar8toPlanarF")
@@ -5060,10 +5060,10 @@ func VImagePiecewiseGammaPlanar8toPlanarF(src unsafe.Pointer, dest unsafe.Pointe
 	return _fnVImagePiecewiseGammaPlanar8toPlanarF(src, dest, exponentialCoeffs, gamma, linearCoeffs, boundary, flags)
 }
 
-var _fnVImagePiecewiseGammaPlanarF func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
+var _fnVImagePiecewiseGammaPlanarF func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, float32, unsafe.Pointer, float32, uint32) int
 
 // VImagePiecewiseGammaPlanarF calls the vImage framework function vImagePiecewiseGamma_PlanarF.
-func VImagePiecewiseGammaPlanarF(src unsafe.Pointer, dest unsafe.Pointer, exponentialCoeffs unsafe.Pointer, gamma unsafe.Pointer, linearCoeffs unsafe.Pointer, boundary unsafe.Pointer, flags uint32) int {
+func VImagePiecewiseGammaPlanarF(src unsafe.Pointer, dest unsafe.Pointer, exponentialCoeffs unsafe.Pointer, gamma float32, linearCoeffs unsafe.Pointer, boundary float32, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImagePiecewiseGammaPlanarF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImagePiecewiseGammaPlanarF, _lib, "vImagePiecewiseGamma_PlanarF")
@@ -5071,10 +5071,10 @@ func VImagePiecewiseGammaPlanarF(src unsafe.Pointer, dest unsafe.Pointer, expone
 	return _fnVImagePiecewiseGammaPlanarF(src, dest, exponentialCoeffs, gamma, linearCoeffs, boundary, flags)
 }
 
-var _fnVImagePiecewiseGammaPlanarFtoPlanar8 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
+var _fnVImagePiecewiseGammaPlanarFtoPlanar8 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, float32, unsafe.Pointer, float32, uint32) int
 
 // VImagePiecewiseGammaPlanarFtoPlanar8 calls the vImage framework function vImagePiecewiseGamma_PlanarFtoPlanar8.
-func VImagePiecewiseGammaPlanarFtoPlanar8(src unsafe.Pointer, dest unsafe.Pointer, exponentialCoeffs unsafe.Pointer, gamma unsafe.Pointer, linearCoeffs unsafe.Pointer, boundary unsafe.Pointer, flags uint32) int {
+func VImagePiecewiseGammaPlanarFtoPlanar8(src unsafe.Pointer, dest unsafe.Pointer, exponentialCoeffs unsafe.Pointer, gamma float32, linearCoeffs unsafe.Pointer, boundary float32, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImagePiecewiseGammaPlanarFtoPlanar8 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImagePiecewiseGammaPlanarFtoPlanar8, _lib, "vImagePiecewiseGamma_PlanarFtoPlanar8")
@@ -5918,10 +5918,10 @@ func VImageSepConvolvePlanarF(src unsafe.Pointer, dest unsafe.Pointer, tempBuffe
 	return _fnVImageSepConvolvePlanarF(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, kernelX, kernelXWidth, kernelY, kernelYWidth, bias, backgroundColor, flags)
 }
 
-var _fnVImageSymmetricPiecewiseGammaPlanar16Q12 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int16, uint32) int
+var _fnVImageSymmetricPiecewiseGammaPlanar16Q12 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, float32, unsafe.Pointer, int16, uint32) int
 
 // VImageSymmetricPiecewiseGammaPlanar16Q12 calls the vImage framework function vImageSymmetricPiecewiseGamma_Planar16Q12.
-func VImageSymmetricPiecewiseGammaPlanar16Q12(src unsafe.Pointer, dest unsafe.Pointer, exponentialCoeffs unsafe.Pointer, gamma unsafe.Pointer, linearCoeffs unsafe.Pointer, boundary int16, flags uint32) int {
+func VImageSymmetricPiecewiseGammaPlanar16Q12(src unsafe.Pointer, dest unsafe.Pointer, exponentialCoeffs unsafe.Pointer, gamma float32, linearCoeffs unsafe.Pointer, boundary int16, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageSymmetricPiecewiseGammaPlanar16Q12 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageSymmetricPiecewiseGammaPlanar16Q12, _lib, "vImageSymmetricPiecewiseGamma_Planar16Q12")
@@ -5929,10 +5929,10 @@ func VImageSymmetricPiecewiseGammaPlanar16Q12(src unsafe.Pointer, dest unsafe.Po
 	return _fnVImageSymmetricPiecewiseGammaPlanar16Q12(src, dest, exponentialCoeffs, gamma, linearCoeffs, boundary, flags)
 }
 
-var _fnVImageSymmetricPiecewiseGammaPlanarF func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
+var _fnVImageSymmetricPiecewiseGammaPlanarF func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, float32, unsafe.Pointer, float32, uint32) int
 
 // VImageSymmetricPiecewiseGammaPlanarF calls the vImage framework function vImageSymmetricPiecewiseGamma_PlanarF.
-func VImageSymmetricPiecewiseGammaPlanarF(src unsafe.Pointer, dest unsafe.Pointer, exponentialCoeffs unsafe.Pointer, gamma unsafe.Pointer, linearCoeffs unsafe.Pointer, boundary unsafe.Pointer, flags uint32) int {
+func VImageSymmetricPiecewiseGammaPlanarF(src unsafe.Pointer, dest unsafe.Pointer, exponentialCoeffs unsafe.Pointer, gamma float32, linearCoeffs unsafe.Pointer, boundary float32, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageSymmetricPiecewiseGammaPlanarF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageSymmetricPiecewiseGammaPlanarF, _lib, "vImageSymmetricPiecewiseGamma_PlanarF")

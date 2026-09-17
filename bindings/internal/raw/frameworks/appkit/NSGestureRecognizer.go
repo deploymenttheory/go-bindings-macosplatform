@@ -47,6 +47,8 @@ var (
 	_nSGestureRecognizerSelSetDelaysMagnificationEvents              = objc.RegisterName("setDelaysMagnificationEvents:")
 	_nSGestureRecognizerSelDelaysRotationEvents                      = objc.RegisterName("delaysRotationEvents")
 	_nSGestureRecognizerSelSetDelaysRotationEvents                   = objc.RegisterName("setDelaysRotationEvents:")
+	_nSGestureRecognizerSelIsCancellableByScrollGesture              = objc.RegisterName("isCancellableByScrollGesture")
+	_nSGestureRecognizerSelSetCancellableByScrollGesture             = objc.RegisterName("setCancellableByScrollGesture:")
 	_nSGestureRecognizerSelName                                      = objc.RegisterName("name")
 	_nSGestureRecognizerSelSetName                                   = objc.RegisterName("setName:")
 	_nSGestureRecognizerSelModifierFlags                             = objc.RegisterName("modifierFlags")
@@ -344,6 +346,25 @@ func (o *NSGestureRecognizer) DelaysRotationEvents() bool {
 func (o *NSGestureRecognizer) SetDelaysRotationEvents(delaysRotationEvents bool) {
 	purego.Main(func() {
 		o.Ptr().Send(_nSGestureRecognizerSelSetDelaysRotationEvents, delaysRotationEvents)
+	})
+}
+
+// Causes the receiver to be cancelled when its enclosing scroll view's gesture recognizer begins. Defaults to `false`.
+func (o *NSGestureRecognizer) IsCancellableByScrollGesture() bool {
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSGestureRecognizerSelIsCancellableByScrollGesture)
+			return _ret
+		}()
+	})
+	return _mainthread0
+}
+
+// Causes the receiver to be cancelled when its enclosing scroll view's gesture recognizer begins. Defaults to `false`.
+func (o *NSGestureRecognizer) SetCancellableByScrollGesture(cancellableByScrollGesture bool) {
+	purego.Main(func() {
+		o.Ptr().Send(_nSGestureRecognizerSelSetCancellableByScrollGesture, cancellableByScrollGesture)
 	})
 }
 

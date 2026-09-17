@@ -154,11 +154,13 @@ func (o *MTLRenderPassAttachmentDescriptor) SetStoreAction(storeAction MTLStoreA
 }
 
 // @property storeActionOptions @abstract Optional configuration for the store action performed with this attachment at the end of a render pass.  Default is MTLStoreActionOptionNone.
+// Deprecated: Store action options have no effect on Apple Silicon
 func (o *MTLRenderPassAttachmentDescriptor) StoreActionOptions() MTLStoreActionOptions {
 	_ret := objc.Send[MTLStoreActionOptions](o.Ptr(), _mTLRenderPassAttachmentDescriptorSelStoreActionOptions)
 	return _ret
 }
 
+// Deprecated: Store action options have no effect on Apple Silicon
 func (o *MTLRenderPassAttachmentDescriptor) SetStoreActionOptions(storeActionOptions MTLStoreActionOptions) {
 	o.Ptr().Send(_mTLRenderPassAttachmentDescriptorSelSetStoreActionOptions, storeActionOptions)
 }

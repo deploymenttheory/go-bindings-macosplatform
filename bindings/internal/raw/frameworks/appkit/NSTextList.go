@@ -77,6 +77,7 @@ func (o *NSTextList) MarkerForItemNumber(itemNumber int) *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
+// The marker format string used by the receiver. ## See Also - “NSTextList/init(markerFormat:options:)“
 func (o *NSTextList) MarkerFormat() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextListSelMarkerFormat)
 	if _ret != 0 {
@@ -85,11 +86,13 @@ func (o *NSTextList) MarkerFormat() *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
+// The list options mask value of the receiver.
 func (o *NSTextList) ListOptions() NSTextListOptions {
 	_ret := objc.Send[NSTextListOptions](o.Ptr(), _nSTextListSelListOptions)
 	return _ret
 }
 
+// The starting item number for the text list. The default value is `1`. This value will be used only for ordered lists, and ignored in other cases.
 func (o *NSTextList) StartingItemNumber() int {
 	_ret := objc.Send[int](o.Ptr(), _nSTextListSelStartingItemNumber)
 	return _ret
@@ -99,11 +102,13 @@ func (o *NSTextList) SetStartingItemNumber(startingItemNumber int) {
 	o.Ptr().Send(_nSTextListSelSetStartingItemNumber, startingItemNumber)
 }
 
+// A Boolean value that indicates whether the list is ordered.
 func (o *NSTextList) IsOrdered() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTextListSelIsOrdered)
 	return _ret
 }
 
+// A Boolean value that indicates whether TextKit includes text list markers in the contents. The default value is `false`.
 func NSTextListIncludesTextListMarkers() bool {
 	_ret := objc.Send[bool](objc.ID(_clsNSTextList), _nSTextListSelIncludesTextListMarkers)
 	return _ret

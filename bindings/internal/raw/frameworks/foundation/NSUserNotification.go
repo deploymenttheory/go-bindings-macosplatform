@@ -78,6 +78,7 @@ func (o *NSUserNotification) Init() *NSUserNotification {
 	return NSUserNotificationFromID(_ret)
 }
 
+// Specifies the title of the notification. This value should be localized because it is presented to the user. The string is truncated to a length appropriate for display and the property is modified to reflect the truncation.
 func (o *NSUserNotification) Title() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserNotificationSelTitle)
 	if _ret != 0 {
@@ -90,6 +91,7 @@ func (o *NSUserNotification) SetTitle(title *NSString) {
 	o.Ptr().Send(_nSUserNotificationSelSetTitle, title.Ptr())
 }
 
+// Specifies the subtitle of the notification. This value should be localized as it is presented to the user. The string is truncated to a length appropriate for display and the property is modified to reflect the truncation.
 func (o *NSUserNotification) Subtitle() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserNotificationSelSubtitle)
 	if _ret != 0 {
@@ -102,6 +104,7 @@ func (o *NSUserNotification) SetSubtitle(subtitle *NSString) {
 	o.Ptr().Send(_nSUserNotificationSelSetSubtitle, subtitle.Ptr())
 }
 
+// The body text of the notification. This value should be localized as it is presented to the user. The string is truncated to a length appropriate for display and the property is modified to reflect the truncation.
 func (o *NSUserNotification) InformativeText() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserNotificationSelInformativeText)
 	if _ret != 0 {
@@ -114,6 +117,7 @@ func (o *NSUserNotification) SetInformativeText(informativeText *NSString) {
 	o.Ptr().Send(_nSUserNotificationSelSetInformativeText, informativeText.Ptr())
 }
 
+// Specifies the title of the action button displayed in the notification. This value should be localized as it is presented to the user. The string is truncated to a length appropriate for display and the property is modified to reflect the truncation.
 func (o *NSUserNotification) ActionButtonTitle() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserNotificationSelActionButtonTitle)
 	if _ret != 0 {
@@ -126,6 +130,7 @@ func (o *NSUserNotification) SetActionButtonTitle(actionButtonTitle *NSString) {
 	o.Ptr().Send(_nSUserNotificationSelSetActionButtonTitle, actionButtonTitle.Ptr())
 }
 
+// Application-specific user info that can be attached to the notification. All items must be property list types or an exception is thrown. The `userInfo` content must be of reasonable serialized size (less than 1KB) or an exception is thrown.
 func (o *NSUserNotification) UserInfo() *NSDictionary[*NSString, objc.ID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserNotificationSelUserInfo)
 	if _ret != 0 {
@@ -138,6 +143,7 @@ func (o *NSUserNotification) SetUserInfo(userInfo *NSDictionary[*NSString, objc.
 	o.Ptr().Send(_nSUserNotificationSelSetUserInfo, userInfo.Ptr())
 }
 
+// Specifies when the notification should be delivered. The delivery date is specified in an absolute time. After a notification is delivered, it may be presented to the user.
 func (o *NSUserNotification) DeliveryDate() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserNotificationSelDeliveryDate)
 	if _ret != 0 {
@@ -150,6 +156,7 @@ func (o *NSUserNotification) SetDeliveryDate(deliveryDate *NSDate) {
 	o.Ptr().Send(_nSUserNotificationSelSetDeliveryDate, deliveryDate.Ptr())
 }
 
+// Specify the time zone to interpret the delivery date in. If this value is `nil` and the user switches time zones, the notification center will adjust the time of presentation to account for the time zone change. If a notification should be delivered at a time in a specific time zone (regardless of whether the user switches time zones), set this value to the specific time zone, for example the current time zone.
 func (o *NSUserNotification) DeliveryTimeZone() *NSTimeZone {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserNotificationSelDeliveryTimeZone)
 	if _ret != 0 {
@@ -162,6 +169,7 @@ func (o *NSUserNotification) SetDeliveryTimeZone(deliveryTimeZone *NSTimeZone) {
 	o.Ptr().Send(_nSUserNotificationSelSetDeliveryTimeZone, deliveryTimeZone.Ptr())
 }
 
+// Specifies the date components that control how often a user notification is repeated. This value may be `nil` if the notification should not repeat. The date component values are relative to the date the notification was delivered. If the calendar value of the `deliveryRepeatInterval` is `nil`, the current calendar is used to calculate the repeat interval. For example, if a notification should repeat every hour, set the `hour` property of the `deliveryRepeatInterval` to `1`. This value is ignored unless the user notification is scheduled with the `NSUserNotificationCenter` object.
 func (o *NSUserNotification) DeliveryRepeatInterval() *NSDateComponents {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserNotificationSelDeliveryRepeatInterval)
 	if _ret != 0 {
@@ -174,6 +182,7 @@ func (o *NSUserNotification) SetDeliveryRepeatInterval(deliveryRepeatInterval *N
 	o.Ptr().Send(_nSUserNotificationSelSetDeliveryRepeatInterval, deliveryRepeatInterval.Ptr())
 }
 
+// The date this notification was actually delivered. The notification center will set this value if a notification is put in the scheduled list and the delivery time arrives. If the notification is delivered directly using the `deliverNotification:` method of the `NSUserNotificationCenter` class, this value is set to the `deliveryDate` value. If the `deliveryDate` value is `nil`, this value is set to the current date. This value is used to sort the list of notifications in the user interface.
 func (o *NSUserNotification) ActualDeliveryDate() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserNotificationSelActualDeliveryDate)
 	if _ret != 0 {
@@ -182,16 +191,19 @@ func (o *NSUserNotification) ActualDeliveryDate() *NSDate {
 	return NSDateFromID(_ret)
 }
 
+// Specifies whether the user notification has been presented. In some cases, for example when your application is frontmost, the notification center may decide not to actually present a delivered notification. In that case, the value of this property is `NO`. It is set to `YES` if the notification was presented according to user preferences.
 func (o *NSUserNotification) IsPresented() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSUserNotificationSelIsPresented)
 	return _ret
 }
 
+// Specifies whether the notification was generated by a push notification. If this property is `YES` then the user notification was generated by a push notification (that is, remotely); if `NO` it was generated locally.
 func (o *NSUserNotification) IsRemote() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSUserNotificationSelIsRemote)
 	return _ret
 }
 
+// Specifies the name of the sound to play when the notification is delivered. Passing the `NSUserNotificationDefaultSoundName` constant causes the default notification center sound to be played. A value of `nil` means no sound is played.
 func (o *NSUserNotification) SoundName() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserNotificationSelSoundName)
 	if _ret != 0 {
@@ -204,6 +216,7 @@ func (o *NSUserNotification) SetSoundName(soundName *NSString) {
 	o.Ptr().Send(_nSUserNotificationSelSetSoundName, soundName.Ptr())
 }
 
+// A Boolean value that specifies whether the notification displays an action button. Set to `NO` if the notification has no action button. This is the case for notifications that are purely for information and have no user action. The default value is `YES`.
 func (o *NSUserNotification) HasActionButton() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSUserNotificationSelHasActionButton)
 	return _ret
@@ -213,11 +226,13 @@ func (o *NSUserNotification) SetHasActionButton(hasActionButton bool) {
 	o.Ptr().Send(_nSUserNotificationSelSetHasActionButton, hasActionButton)
 }
 
+// Specifies what caused a user notification to occur. This property specifies why the user notification was sent to the `NSUserNotificationCenterDelegate` method `userNotificationCenter:didActivateNotification:`. The supported values are described in `NSUserNotificationActivationType`.
 func (o *NSUserNotification) ActivationType() NSUserNotificationActivationType {
 	_ret := objc.Send[NSUserNotificationActivationType](o.Ptr(), _nSUserNotificationSelActivationType)
 	return _ret
 }
 
+// Specifies a custom title for the close button in an alert-style notification. This value should be localized as it is presented to the user. The string is truncated to a length appropriate for display and the property is modified to reflect the truncation. An empty string will cause the default localized text to be used. A `nil` value is invalid.
 func (o *NSUserNotification) OtherButtonTitle() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserNotificationSelOtherButtonTitle)
 	if _ret != 0 {
@@ -230,6 +245,7 @@ func (o *NSUserNotification) SetOtherButtonTitle(otherButtonTitle *NSString) {
 	o.Ptr().Send(_nSUserNotificationSelSetOtherButtonTitle, otherButtonTitle.Ptr())
 }
 
+// A string that uniquely identifies a notification. The identifier is unique to a notification. A notification delivered with the same identifier as an existing notification replaces the existing notification rather than causing the display of a new notification.
 func (o *NSUserNotification) Identifier() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserNotificationSelIdentifier)
 	if _ret != 0 {
@@ -242,6 +258,7 @@ func (o *NSUserNotification) SetIdentifier(identifier *NSString) {
 	o.Ptr().Send(_nSUserNotificationSelSetIdentifier, identifier.Ptr())
 }
 
+// Image shown in the content of the notification.
 func (o *NSUserNotification) ContentImage() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserNotificationSelContentImage)
 	return _ret
@@ -251,6 +268,7 @@ func (o *NSUserNotification) SetContentImage(contentImage objc.ID) {
 	o.Ptr().Send(_nSUserNotificationSelSetContentImage, contentImage)
 }
 
+// A Boolean value that specifies whether the notification displays a reply button. Set to `YES` if the notification has a reply button. The default value is `NO`. If this property and `hasActionButton` are both `YES`, the reply button is shown.
 func (o *NSUserNotification) HasReplyButton() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSUserNotificationSelHasReplyButton)
 	return _ret
@@ -260,6 +278,7 @@ func (o *NSUserNotification) SetHasReplyButton(hasReplyButton bool) {
 	o.Ptr().Send(_nSUserNotificationSelSetHasReplyButton, hasReplyButton)
 }
 
+// Optional placeholder string for inline reply field.
 func (o *NSUserNotification) ResponsePlaceholder() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserNotificationSelResponsePlaceholder)
 	if _ret != 0 {
@@ -272,6 +291,7 @@ func (o *NSUserNotification) SetResponsePlaceholder(responsePlaceholder *NSStrin
 	o.Ptr().Send(_nSUserNotificationSelSetResponsePlaceholder, responsePlaceholder.Ptr())
 }
 
+// The response with which the user responded to a notification. When the user responds to a notification, the `NSUserNotificationCenterDelegate` method `userNotificationCenter:didActivateNotification:` is called with the notification, the `activationType` property set to `NSUserNotificationActivationTypeReplied`, and this property is set with the user's response.
 func (o *NSUserNotification) Response() *NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserNotificationSelResponse)
 	if _ret != 0 {
@@ -280,6 +300,7 @@ func (o *NSUserNotification) Response() *NSAttributedString {
 	return NSAttributedStringFromID(_ret)
 }
 
+// The actions that can be taken on a notification in addition to the default action. This array contains `NSUserNotificationAction` objects that describe the different actions for a notification in addition to the default action described by `actionButtonTitle`.
 func (o *NSUserNotification) AdditionalActions() *NSArray[*NSUserNotificationAction] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserNotificationSelAdditionalActions)
 	if _ret != 0 {
@@ -292,6 +313,7 @@ func (o *NSUserNotification) SetAdditionalActions(additionalActions *NSArray[*NS
 	o.Ptr().Send(_nSUserNotificationSelSetAdditionalActions, additionalActions.Ptr())
 }
 
+// An additional action selected by the user. This property specifies an additional action selected by the user when the user notification is sent to the `NSUserNotificationCenterDelegate` method `userNotificationCenter:didActivateNotification:`.
 func (o *NSUserNotification) AdditionalActivationAction() *NSUserNotificationAction {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserNotificationSelAdditionalActivationAction)
 	if _ret != 0 {

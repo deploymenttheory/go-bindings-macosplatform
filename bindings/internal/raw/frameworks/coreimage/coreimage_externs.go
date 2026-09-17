@@ -12,58 +12,128 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/foundation"
 )
 
-func CIDetectorAccuracy() uintptr {
+func CIDetectorAccuracy() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "CIDetectorAccuracy")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CIDetectorAccuracyHigh() uintptr {
+func CIDetectorAccuracyHigh() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "CIDetectorAccuracyHigh")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CIDetectorAccuracyLow() uintptr {
+func CIDetectorAccuracyLow() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "CIDetectorAccuracyLow")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A dictionary key that configures a Core Image rectangle feature detection operation to search for a rectangle of a desired aspect ratio (width divided by height). This option is used with “/CIDetector/featuresInImage:options:“ The value for this key needs to be is a positive float number. Use this option with a “CIDetectorTypeRectangle“ detector to fine-tune the accuracy of the detector. For example, to more accurately find a business card (3.5 x 2 inches) in an image, specify an aspect ratio of 1.75. If this key is not specified, the a default value of 1.6 is used.
-func CIDetectorAspectRatio() uintptr {
+func CIDetectorAspectRatio() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "CIDetectorAspectRatio")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A dictionary key that configures a Core Image face feature detection operation to perform additional processing to recognize closed eyes in detected faces. This option is used with “/CIDetector/featuresInImage:options:“ If the value of the key is true, then facial expressions such as blinking and smiles are extracted. This is needed for the “/CIFaceFeature/leftEyeClosed-property“ and “/CIFaceFeature/rightEyeClosed-property“ to function.
-func CIDetectorEyeBlink() uintptr {
+func CIDetectorEyeBlink() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "CIDetectorEyeBlink")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A dictionary key that configures a Core Image rectangle feature detection operation to account for the focal length of the camera used for the image. This option is used with “/CIDetector/featuresInImage:options:“ The value of this key is an NSNumber object whose value is a floating-point number. Use this option with the CIDetectorTypeRectangle detector type to control the effect of the CIDetectorAspectRatio option on feature detection. This option’s value can be 0.0, -1.0, or any positive value: * The special value of -1.0 (the default) disables the aspect ratio test for the returned rectangle. * The special value of 0.0 enables a less precise test of aspect ratio that approximates an orthographic (non-perspective) projection. Use this value if you want to specify the aspect ratio of the rectangle via the CIDetectorAspectRatio option, but have no means of determining the value for the focal length in pixels. See below for a method to compute an approximate value for the focal length in pixels. * Any other value specifies the camera focal length, in pixels, allowing the aspect ratio specification to account for perspective distortion of rectangles in the input image. If you know the diagonal field of view of the camera (the scene angle subtended by the diagonal corners of an image), you can use the following formula to compute an approximate focal length in pixels: `focal_length_pixels = (image_diagonal_pixels/2)/tan(FOV/2)` In this formula, `image_diagonal_pixels` is the length (in pixels) of the image diagonal of the maximum resolution of the camera sensor. For example, this value is: * `4080` pixels for a `3264 x 2448` (8 megapixel) sensor * `5000` pixels for a `4096 x 3024` (12 megapixel) sensor. To measure diagonal field of view, put the camera on a tripod so that it is perpendicular to a surface and the center of the image is oriented on a mark on the surface. Measure the distance from the mark to one of the corner points of the image (Y). Measure the distance from the camera to the surface (Z). The field of view is then `2*arctan(Y/Z)`. You must specify this value in terms of the maximum sensor resolution. If the supplied CIImage has been scaled relative relative to the maximum sensor resolution, the supplied focal length must also be similarly scaled.
-func CIDetectorFocalLength() uintptr {
+func CIDetectorFocalLength() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "CIDetectorFocalLength")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A dictionary key that configures a Core Image feature detection operation to account for the orientation the image. This option is used with “/CIDetector/featuresInImage:options:“ The value of this key is an number object whose value is an integer between 1 and 8. The TIFF and EXIF specifications define the orientation values that describe how the image should be displayed. The default value is 1. For further details, see `CGImagePropertyOrientation`. The “CIDetectorTypeFace“ and “CIDetectorTypeText“ can use this option to correctly find faces or text. Regardless of the orientation values the “/CIFeature/bounds-property“ which is always measured in the cartesean coordinates system of the image that you pass to the detector.
-func CIDetectorImageOrientation() uintptr {
+func CIDetectorImageOrientation() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "CIDetectorImageOrientation")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CIDetectorMaxFeatureCount() uintptr {
+func CIDetectorMaxFeatureCount() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "CIDetectorMaxFeatureCount")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CIDetectorMinFeatureSize() uintptr {
+func CIDetectorMinFeatureSize() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "CIDetectorMinFeatureSize")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CIDetectorNumberOfAngles() uintptr {
+func CIDetectorNumberOfAngles() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "CIDetectorNumberOfAngles")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A dictionary key that configures a Core Image text feature detection operation to return feature information for components of detected features. This option is used with “/CIDetector/featuresInImage:options:“ If the value for this option configures the “CIDetectorTypeText“ detector as follows: * False: detect only in regions likely to contain text. * True: detect in regions likely to contain individual characters. If this key is not specified, the a default is False.
@@ -73,34 +143,76 @@ func CIDetectorReturnSubFeatures() uintptr {
 }
 
 // A dictionary key that configures a Core Image face feature detection operation to perform additional processing to recognize smiles in detected faces. This option is used with “/CIDetector/featuresInImage:options:“ If the value of the key is true, then facial expressions such as blinking and smiles eyes are extracted. This is needed for the “/CIFaceFeature/hasSmile-property“ to function.
-func CIDetectorSmile() uintptr {
+func CIDetectorSmile() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "CIDetectorSmile")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CIDetectorTracking() uintptr {
+func CIDetectorTracking() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "CIDetectorTracking")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CIDetectorTypeFace() uintptr {
+func CIDetectorTypeFace() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "CIDetectorTypeFace")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CIDetectorTypeQRCode() uintptr {
+func CIDetectorTypeQRCode() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "CIDetectorTypeQRCode")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CIDetectorTypeRectangle() uintptr {
+func CIDetectorTypeRectangle() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "CIDetectorTypeRectangle")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CIDetectorTypeText() uintptr {
+func CIDetectorTypeText() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "CIDetectorTypeText")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A Core Image feature type for person’s face. To detect faces in an image or video, pass this to “/CIDetector/detectorOfType:context:options:“ Use the “CIFaceFeature“ class to find more information about the detected face.
@@ -276,24 +388,52 @@ func KCIActiveKeys() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
-func KCIApplyOptionColorSpace() uintptr {
+func KCIApplyOptionColorSpace() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIApplyOptionColorSpace")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCIApplyOptionDefinition() uintptr {
+func KCIApplyOptionDefinition() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIApplyOptionDefinition")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCIApplyOptionExtent() uintptr {
+func KCIApplyOptionExtent() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIApplyOptionExtent")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCIApplyOptionUserInfo() uintptr {
+func KCIApplyOptionUserInfo() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIApplyOptionUserInfo")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Class name of the filter.
@@ -323,9 +463,16 @@ func KCIAttributeDefault() *foundation.NSString {
 }
 
 // Description of the filter intended for UI display (eg. localized)
-func KCIAttributeDescription() uintptr {
+func KCIAttributeDescription() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIAttributeDescription")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The localized name of the attribute to be used for display to the user.
@@ -342,14 +489,28 @@ func KCIAttributeDisplayName() *foundation.NSString {
 }
 
 // The version of OS X and iOS a filter was first available in.
-func KCIAttributeFilterAvailable_Mac() uintptr {
+func KCIAttributeFilterAvailable_Mac() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIAttributeFilterAvailable_Mac")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCIAttributeFilterAvailable_iOS() uintptr {
+func KCIAttributeFilterAvailable_iOS() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIAttributeFilterAvailable_iOS")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Array of filter category names (see below)
@@ -444,9 +605,16 @@ func KCIAttributeName() *foundation.NSString {
 }
 
 // URL for the reference documentation of the filter. See localizedReferenceDocumentationForFilterName.
-func KCIAttributeReferenceDocumentation() uintptr {
+func KCIAttributeReferenceDocumentation() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIAttributeReferenceDocumentation")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Maximum value for the slider.
@@ -512,15 +680,29 @@ func KCIAttributeTypeBoolean() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
-func KCIAttributeTypeColor() uintptr {
+func KCIAttributeTypeColor() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIAttributeTypeColor")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Indicates that the key uses non negative integer values.
-func KCIAttributeTypeCount() uintptr {
+func KCIAttributeTypeCount() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIAttributeTypeCount")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KCIAttributeTypeDistance() *foundation.NSString {
@@ -535,20 +717,41 @@ func KCIAttributeTypeDistance() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
-func KCIAttributeTypeGradient() uintptr {
+func KCIAttributeTypeGradient() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIAttributeTypeGradient")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCIAttributeTypeImage() uintptr {
+func KCIAttributeTypeImage() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIAttributeTypeImage")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Indicates that the key uses integer values.
-func KCIAttributeTypeInteger() uintptr {
+func KCIAttributeTypeInteger() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIAttributeTypeInteger")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KCIAttributeTypeOffset() *foundation.NSString {
@@ -563,9 +766,16 @@ func KCIAttributeTypeOffset() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
-func KCIAttributeTypeOpaqueColor() uintptr {
+func KCIAttributeTypeOpaqueColor() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIAttributeTypeOpaqueColor")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KCIAttributeTypePosition() *foundation.NSString {
@@ -628,9 +838,16 @@ func KCIAttributeTypeTime() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
-func KCIAttributeTypeTransform() uintptr {
+func KCIAttributeTypeTransform() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIAttributeTypeTransform")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KCICategoryBlur() *foundation.NSString {
@@ -705,9 +922,16 @@ func KCICategoryDistortionEffect() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
-func KCICategoryFilterGenerator() uintptr {
+func KCICategoryFilterGenerator() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCICategoryFilterGenerator")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KCICategoryGenerator() *foundation.NSString {
@@ -794,9 +1018,16 @@ func KCICategoryNonSquarePixels() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
-func KCICategoryReduction() uintptr {
+func KCICategoryReduction() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCICategoryReduction")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KCICategorySharpen() *foundation.NSString {
@@ -872,39 +1103,81 @@ func KCICategoryVideo() *foundation.NSString {
 }
 
 // A Boolean value to control the power level of Core Image context renders. This option only affects certain macOS devices with more than one available GPU device. If this value is True, then rendering with the context will use a use allow power GPU device if available and the high power device is not already in use. Otherwise, the context will use the highest power/performance GPU device.
-func KCIContextAllowLowPower() uintptr {
+func KCIContextAllowLowPower() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIContextAllowLowPower")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A Core Video Metal texture cache object to improve the performance of Core Image context renders that use Core Video pixel buffers. Creating a Core Image context with this optional `CVMetalTextureCache` can improve the performance of creating a Metal texture from a `CVPixelBuffer`. It is recommended to specify this option if the context renders to or from pixel buffers that come from a `CVPixelBufferPool`. It is the client's responsibility to flush the cache when appropriate.
-func KCIContextCVMetalTextureCache() uintptr {
+func KCIContextCVMetalTextureCache() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIContextCVMetalTextureCache")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A Boolean value to control how a Core Image context caches the contents of any intermediate image buffers it uses during rendering. If a context caches intermediate buffers, then subsequent renders of a similar image using the same context may be able to render faster. If a context does not cache intermediate buffers, then it may use less memory. If the value for this option is: * True: The context will cache intermediate results for future renders using the same context. * False: The context will not cache intermediate results. * Not specified: the default behavior True. > Note: > * This option does affect how “/CIImage/imageByInsertingIntermediate“ behaves. > * This option does not affect how “/CIImage/imageByInsertingIntermediate:“ behaves.
-func KCIContextCacheIntermediates() uintptr {
+func KCIContextCacheIntermediates() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIContextCacheIntermediates")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A Boolean value to control the quality of image downsampling operations performed by the Core Image context. The higher quality behavior performs downsampling operations in multiple passes in order to reduce aliasing artifacts. The lower quality behavior performs downsampling operations a single pass in order to improve performance. If the value for this option is: * True: The higher quality behavior will be used. * False: The lower quality behavior will be used. * Not specified: the default behavior is True on macOS and False on other platforms. > Note: > * This option does affect how “/CIImage/imageByApplyingTransform:“ operations are performed by the context. > * This option does not affect how “/CIImage/imageByApplyingTransform:highQualityDownsample:“ behaves.
-func KCIContextHighQualityDownsample() uintptr {
+func KCIContextHighQualityDownsample() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIContextHighQualityDownsample")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A number value to control the maximum memory in megabytes that the context allocates for render tasks. Larger values could increase memory  footprint while smaller values could reduce performance.
-func KCIContextMemoryLimit() uintptr {
+func KCIContextMemoryLimit() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIContextMemoryLimit")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A Boolean value to specify a client-provided name for a context. This name will be used in QuickLook graphs and the output of CI_PRINT_TREE.
-func KCIContextName() uintptr {
+func KCIContextName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIContextName")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A Core Image context option key to specify the default destination color space for rendering. This option only affects how Core Image renders using the following methods: * “/CIContext/createCGImage:fromRect:“ * “/CIContext/drawImage:atPoint:fromRect:“ * “/CIContext/drawImage:inRect:fromRect:“ With all other render methods, the destination color space is either specified as a parameter or can be determined from the object being rendered to. The value of this option can be either: * A `CGColorSpace` instance with an RGB or monochrome color model that supports output. * An `NSNull` instance to indicate that the context should not match from the working space to the destination. If this option is not specified, then the default output space is sRGB.
@@ -921,15 +1194,29 @@ func KCIContextOutputColorSpace() *foundation.NSString {
 }
 
 // A Boolean value to control how a Core Image context render produces alpha-premultiplied pixels. This option only affects how a context is rendered when using methods where the destination's alpha mode cannot be determined such as: *  “/CIContext/render:toBitmap:rowBytes:bounds:format:colorSpace:“ *  “/CIContext/render:toCVPixelBuffer:“ *  “/CIContext/render:toIOSurface:bounds:colorSpace:“ *  “/CIContext/render:toMTLTexture:commandBuffer:bounds:colorSpace:“ *  “/CIContext/createCGImage:fromRect:“ If the value for this option is: * True: The output will produce alpha-premultiplied pixels. * False: The output will produce un-premultiplied pixels. * Not specified: the default behavior True. This option does not affect how a context is rendered to a “CIRenderDestination“ because that API allows you to set or override the alpha behavior using “/CIRenderDestination/alphaMode“.
-func KCIContextOutputPremultiplied() uintptr {
+func KCIContextOutputPremultiplied() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIContextOutputPremultiplied")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A Boolean value to control the priority Core Image context renders. If this value is True, then rendering with the context from a background thread takes lower priority than other GPU usage from the main thread. This allows your app to perform Core Image rendering without disturbing the frame rate of UI animations.
-func KCIContextPriorityRequestLow() uintptr {
+func KCIContextPriorityRequestLow() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIContextPriorityRequestLow")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A Boolean value to control if a Core Image context will use a software renderer. > Note: This option has no effect if the platform does not support OpenCL.
@@ -958,385 +1245,547 @@ func KCIContextWorkingColorSpace() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
-// A Core Image context option key to specify the pixel format to for intermediate results when rendering. The value for this key is an `NSNumber` instance containing a “CIFormat“ value. The supported values for the working pixel format are: “CIFormat“        | Notes ------------------- | -------------- “kCIFormatRGBA8“  | Uses less memory but has less precision an range “kCIFormatRGBAh“  | Uses 8 bytes per pixel, supports HDR “kCIFormatRGBAf“  | Only on macOS If this option is not specified, then the default is “kCIFormatRGBAh“. (The default is “kCIFormatRGBA8“ if your if app is linked against iOS 12 SDK or earlier.)
-func KCIContextWorkingFormat() uintptr {
+// A Core Image context option key to specify the pixel format to for intermediate results when rendering. The value for this key is an `NSNumber` instance containing a “CIFormat“ value. The supported values for the working pixel format are: “CIFormat“        | Notes ------------------- | -------------- “kCIFormatRGBA8“  | Uses 4 bytes per pixel. Only supporrts SDR and has less precision. “kCIFormatRGBAh“  | Uses 8 bytes per pixel. Supports HDR. “kCIFormatRGBAf“  | Uses 16 bytes per pixel. Only available on macOS If this option is not specified, then the default is “kCIFormatRGBAh“. (The default is “kCIFormatRGBA8“ if your if app is linked against iOS 12 SDK or earlier.)
+func KCIContextWorkingFormat() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIContextWorkingFormat")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Use extended dynamic range, but brightness is modulated to optimize for co-existence with other composited content. For best results, images should contain `contentAverageLightLevel` metadata.
-func KCIDynamicRangeConstrainedHigh() uintptr {
+func KCIDynamicRangeConstrainedHigh() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIDynamicRangeConstrainedHigh")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Use High dynamic range. The provides the best HDR quality and needs to be reserved for situations where the user is focused on the media, such as larger views in an image editing/viewing app, or annotating/drawing with HDR colors
-func KCIDynamicRangeHigh() uintptr {
+func KCIDynamicRangeHigh() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIDynamicRangeHigh")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Use Standard dynamic range. Images with `contentHeadroom` metadata will be tone mapped to a maximum pixel value of 1.0.
-func KCIDynamicRangeStandard() uintptr {
+func KCIDynamicRangeStandard() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIDynamicRangeStandard")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The key of the target object that is exported
-func KCIFilterGeneratorExportedKey() uintptr {
+func KCIFilterGeneratorExportedKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIFilterGeneratorExportedKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Name of the key under which it is exported.
-func KCIFilterGeneratorExportedKeyName() uintptr {
+func KCIFilterGeneratorExportedKeyName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIFilterGeneratorExportedKeyName")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Target object for the exported key
-func KCIFilterGeneratorExportedKeyTargetObject() uintptr {
+func KCIFilterGeneratorExportedKeyTargetObject() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIFilterGeneratorExportedKeyTargetObject")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCIFormatA16() int {
+func KCIFormatA16() int32 {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIFormatA16")
 	if ptr == 0 {
 		return 0
 	}
-	return *(*int)(unsafe.Pointer(ptr))
+	return *(*int32)(unsafe.Pointer(ptr))
 }
 
-func KCIFormatA8() int {
+func KCIFormatA8() int32 {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIFormatA8")
 	if ptr == 0 {
 		return 0
 	}
-	return *(*int)(unsafe.Pointer(ptr))
+	return *(*int32)(unsafe.Pointer(ptr))
 }
 
-func KCIFormatABGR8() int {
+func KCIFormatABGR8() int32 {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIFormatABGR8")
 	if ptr == 0 {
 		return 0
 	}
-	return *(*int)(unsafe.Pointer(ptr))
+	return *(*int32)(unsafe.Pointer(ptr))
 }
 
-func KCIFormatARGB8() int {
+func KCIFormatARGB8() int32 {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIFormatARGB8")
 	if ptr == 0 {
 		return 0
 	}
-	return *(*int)(unsafe.Pointer(ptr))
+	return *(*int32)(unsafe.Pointer(ptr))
 }
 
-func KCIFormatAf() int {
+func KCIFormatAf() int32 {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIFormatAf")
 	if ptr == 0 {
 		return 0
 	}
-	return *(*int)(unsafe.Pointer(ptr))
+	return *(*int32)(unsafe.Pointer(ptr))
 }
 
-func KCIFormatAh() int {
+func KCIFormatAh() int32 {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIFormatAh")
 	if ptr == 0 {
 		return 0
 	}
-	return *(*int)(unsafe.Pointer(ptr))
+	return *(*int32)(unsafe.Pointer(ptr))
 }
 
-func KCIFormatBGRA8() int {
+func KCIFormatBGRA8() int32 {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIFormatBGRA8")
 	if ptr == 0 {
 		return 0
 	}
-	return *(*int)(unsafe.Pointer(ptr))
+	return *(*int32)(unsafe.Pointer(ptr))
 }
 
-func KCIFormatL16() int {
+func KCIFormatL16() int32 {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIFormatL16")
 	if ptr == 0 {
 		return 0
 	}
-	return *(*int)(unsafe.Pointer(ptr))
+	return *(*int32)(unsafe.Pointer(ptr))
 }
 
-func KCIFormatL8() int {
+func KCIFormatL8() int32 {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIFormatL8")
 	if ptr == 0 {
 		return 0
 	}
-	return *(*int)(unsafe.Pointer(ptr))
+	return *(*int32)(unsafe.Pointer(ptr))
 }
 
-func KCIFormatLA16() int {
+func KCIFormatLA16() int32 {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIFormatLA16")
 	if ptr == 0 {
 		return 0
 	}
-	return *(*int)(unsafe.Pointer(ptr))
+	return *(*int32)(unsafe.Pointer(ptr))
 }
 
-func KCIFormatLA8() int {
+func KCIFormatLA8() int32 {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIFormatLA8")
 	if ptr == 0 {
 		return 0
 	}
-	return *(*int)(unsafe.Pointer(ptr))
+	return *(*int32)(unsafe.Pointer(ptr))
 }
 
-func KCIFormatLAf() int {
+func KCIFormatLAf() int32 {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIFormatLAf")
 	if ptr == 0 {
 		return 0
 	}
-	return *(*int)(unsafe.Pointer(ptr))
+	return *(*int32)(unsafe.Pointer(ptr))
 }
 
-func KCIFormatLAh() int {
+func KCIFormatLAh() int32 {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIFormatLAh")
 	if ptr == 0 {
 		return 0
 	}
-	return *(*int)(unsafe.Pointer(ptr))
+	return *(*int32)(unsafe.Pointer(ptr))
 }
 
-func KCIFormatLf() int {
+func KCIFormatLf() int32 {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIFormatLf")
 	if ptr == 0 {
 		return 0
 	}
-	return *(*int)(unsafe.Pointer(ptr))
+	return *(*int32)(unsafe.Pointer(ptr))
 }
 
-func KCIFormatLh() int {
+func KCIFormatLh() int32 {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIFormatLh")
 	if ptr == 0 {
 		return 0
 	}
-	return *(*int)(unsafe.Pointer(ptr))
+	return *(*int32)(unsafe.Pointer(ptr))
 }
 
-func KCIFormatR16() int {
+func KCIFormatR16() int32 {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIFormatR16")
 	if ptr == 0 {
 		return 0
 	}
-	return *(*int)(unsafe.Pointer(ptr))
+	return *(*int32)(unsafe.Pointer(ptr))
 }
 
-func KCIFormatR8() int {
+func KCIFormatR8() int32 {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIFormatR8")
 	if ptr == 0 {
 		return 0
 	}
-	return *(*int)(unsafe.Pointer(ptr))
+	return *(*int32)(unsafe.Pointer(ptr))
 }
 
-func KCIFormatRG16() int {
+func KCIFormatRG16() int32 {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIFormatRG16")
 	if ptr == 0 {
 		return 0
 	}
-	return *(*int)(unsafe.Pointer(ptr))
+	return *(*int32)(unsafe.Pointer(ptr))
 }
 
-func KCIFormatRG8() int {
+func KCIFormatRG8() int32 {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIFormatRG8")
 	if ptr == 0 {
 		return 0
 	}
-	return *(*int)(unsafe.Pointer(ptr))
+	return *(*int32)(unsafe.Pointer(ptr))
 }
 
-func KCIFormatRGB10() int {
+func KCIFormatRGB10() int32 {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIFormatRGB10")
 	if ptr == 0 {
 		return 0
 	}
-	return *(*int)(unsafe.Pointer(ptr))
+	return *(*int32)(unsafe.Pointer(ptr))
 }
 
-func KCIFormatRGBA16() int {
+func KCIFormatRGBA16() int32 {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIFormatRGBA16")
 	if ptr == 0 {
 		return 0
 	}
-	return *(*int)(unsafe.Pointer(ptr))
+	return *(*int32)(unsafe.Pointer(ptr))
 }
 
-func KCIFormatRGBA8() int {
+func KCIFormatRGBA8() int32 {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIFormatRGBA8")
 	if ptr == 0 {
 		return 0
 	}
-	return *(*int)(unsafe.Pointer(ptr))
+	return *(*int32)(unsafe.Pointer(ptr))
 }
 
-func KCIFormatRGBAf() int {
+func KCIFormatRGBAf() int32 {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIFormatRGBAf")
 	if ptr == 0 {
 		return 0
 	}
-	return *(*int)(unsafe.Pointer(ptr))
+	return *(*int32)(unsafe.Pointer(ptr))
 }
 
-func KCIFormatRGBAh() int {
+func KCIFormatRGBAh() int32 {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIFormatRGBAh")
 	if ptr == 0 {
 		return 0
 	}
-	return *(*int)(unsafe.Pointer(ptr))
+	return *(*int32)(unsafe.Pointer(ptr))
 }
 
-func KCIFormatRGBX16() int {
+func KCIFormatRGBX16() int32 {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIFormatRGBX16")
 	if ptr == 0 {
 		return 0
 	}
-	return *(*int)(unsafe.Pointer(ptr))
+	return *(*int32)(unsafe.Pointer(ptr))
 }
 
-func KCIFormatRGBX8() int {
+func KCIFormatRGBX8() int32 {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIFormatRGBX8")
 	if ptr == 0 {
 		return 0
 	}
-	return *(*int)(unsafe.Pointer(ptr))
+	return *(*int32)(unsafe.Pointer(ptr))
 }
 
-func KCIFormatRGBXf() int {
+func KCIFormatRGBXf() int32 {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIFormatRGBXf")
 	if ptr == 0 {
 		return 0
 	}
-	return *(*int)(unsafe.Pointer(ptr))
+	return *(*int32)(unsafe.Pointer(ptr))
 }
 
-func KCIFormatRGBXh() int {
+func KCIFormatRGBXh() int32 {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIFormatRGBXh")
 	if ptr == 0 {
 		return 0
 	}
-	return *(*int)(unsafe.Pointer(ptr))
+	return *(*int32)(unsafe.Pointer(ptr))
 }
 
-func KCIFormatRGf() int {
+func KCIFormatRGf() int32 {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIFormatRGf")
 	if ptr == 0 {
 		return 0
 	}
-	return *(*int)(unsafe.Pointer(ptr))
+	return *(*int32)(unsafe.Pointer(ptr))
 }
 
-func KCIFormatRGh() int {
+func KCIFormatRGh() int32 {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIFormatRGh")
 	if ptr == 0 {
 		return 0
 	}
-	return *(*int)(unsafe.Pointer(ptr))
+	return *(*int32)(unsafe.Pointer(ptr))
 }
 
-func KCIFormatRf() int {
+func KCIFormatRf() int32 {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIFormatRf")
 	if ptr == 0 {
 		return 0
 	}
-	return *(*int)(unsafe.Pointer(ptr))
+	return *(*int32)(unsafe.Pointer(ptr))
 }
 
-func KCIFormatRh() int {
+func KCIFormatRh() int32 {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIFormatRh")
 	if ptr == 0 {
 		return 0
 	}
-	return *(*int)(unsafe.Pointer(ptr))
+	return *(*int32)(unsafe.Pointer(ptr))
 }
 
 // A Boolean value to control whether an image created with a CVPixelBuffer or an IOSurface should be cropped and offset according clean aperture attachments. For a `CVPixelBuffer` this will use `kCVImageBufferPreferredCleanApertureKey` or `kCVImageBufferCleanApertureKey`. If the value for this option is: * True: then image will be cropped and offset to the clean aperture. * False: then the full image is returned. * “CIVector“ : then use it as a `CGRect` to crop and offset. * Not specified : then it will behave as if False was specified.
-func KCIImageApplyCleanAperture() uintptr {
+func KCIImageApplyCleanAperture() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIImageApplyCleanAperture")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCIImageApplyOrientationProperty() uintptr {
+func KCIImageApplyOrientationProperty() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIImageApplyOrientationProperty")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCIImageAutoAdjustCrop() uintptr {
+func KCIImageAutoAdjustCrop() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIImageAutoAdjustCrop")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCIImageAutoAdjustEnhance() uintptr {
+func KCIImageAutoAdjustEnhance() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIImageAutoAdjustEnhance")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCIImageAutoAdjustFeatures() uintptr {
+func KCIImageAutoAdjustFeatures() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIImageAutoAdjustFeatures")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCIImageAutoAdjustLevel() uintptr {
+func KCIImageAutoAdjustLevel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIImageAutoAdjustLevel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCIImageAutoAdjustRedEye() uintptr {
+func KCIImageAutoAdjustRedEye() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIImageAutoAdjustRedEye")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCIImageAuxiliaryDepth() uintptr {
+func KCIImageAuxiliaryDepth() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIImageAuxiliaryDepth")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCIImageAuxiliaryDisparity() uintptr {
+func KCIImageAuxiliaryDisparity() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIImageAuxiliaryDisparity")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCIImageAuxiliaryHDRGainMap() uintptr {
+func KCIImageAuxiliaryHDRGainMap() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIImageAuxiliaryHDRGainMap")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCIImageAuxiliaryPortraitEffectsMatte() uintptr {
+func KCIImageAuxiliaryPortraitEffectsMatte() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIImageAuxiliaryPortraitEffectsMatte")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCIImageAuxiliarySemanticSegmentationGlassesMatte() uintptr {
+func KCIImageAuxiliarySemanticSegmentationGlassesMatte() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIImageAuxiliarySemanticSegmentationGlassesMatte")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCIImageAuxiliarySemanticSegmentationHairMatte() uintptr {
+func KCIImageAuxiliarySemanticSegmentationHairMatte() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIImageAuxiliarySemanticSegmentationHairMatte")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCIImageAuxiliarySemanticSegmentationSkinMatte() uintptr {
+func KCIImageAuxiliarySemanticSegmentationSkinMatte() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIImageAuxiliarySemanticSegmentationSkinMatte")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCIImageAuxiliarySemanticSegmentationSkyMatte() uintptr {
+func KCIImageAuxiliarySemanticSegmentationSkyMatte() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIImageAuxiliarySemanticSegmentationSkyMatte")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCIImageAuxiliarySemanticSegmentationTeethMatte() uintptr {
+func KCIImageAuxiliarySemanticSegmentationTeethMatte() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIImageAuxiliarySemanticSegmentationTeethMatte")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
+// A Boolean value specifying when the image should be decoded. If the value for this option is: * True: The image will be decoded into a non-volatile cache at initialization time if possible. * False: The image will be decoded into a volatile cache at render time. * Not specified: The default behavior is True or False depening on the image size and available memeory. This option is only supported by these APIs: * “/CIImage/imageWithContentsOfURL:options:“ * “/CIImage/initWithContentsOfURL:options:“ * “/CIImage/imageWithData:options:“ * “/CIImage/initWithData:options:“ * “/CIImage/imageWithCGImageSource:index:options:“ * “/CIImage/initWithCGImageSource:index:options:“
 func KCIImageCacheImmediately() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIImageCacheImmediately")
 	if ptr == 0 {
@@ -1362,126 +1811,287 @@ func KCIImageColorSpace() *foundation.NSString {
 }
 
 // A value for overriding the automatic behavior of the Content Average Light Level property when creating an image. The value for this key should be an `NSNumber` instance.
-func KCIImageContentAverageLightLevel() uintptr {
+func KCIImageContentAverageLightLevel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIImageContentAverageLightLevel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A value for overriding the automatic behavior of the Content Headroom property when creating an image. The value for this key should be an `NSNumber` instance.
-func KCIImageContentHeadroom() uintptr {
+func KCIImageContentHeadroom() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIImageContentHeadroom")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCIImageExpandToHDR() uintptr {
+func KCIImageExpandToHDR() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIImageExpandToHDR")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCIImageNearestSampling() uintptr {
+// A Boolean value specifying how the image should be sampled. If the value for this option is: * True: The image will be sampled using nearest neighbor sampling. * False: The image will be sampled using bilinear interpolation. * Not specified: The default behavior is False.
+func KCIImageNearestSampling() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIImageNearestSampling")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCIImageProperties() uintptr {
+func KCIImageProperties() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIImageProperties")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Specifies the tile size that the Provide Image Data method will be called for. This key and its value may be passed to: * “/CIImage/imageWithImageProvider:size::format:colorSpace:options:“ * “/CIImage/initWithImageProvider:size::format:colorSpace:options:“ If the value of this key is: Value                      | Behavior of sub-rect passed to “provideImageData:bytesPerRow:origin::size::userData:“ -------------------------- | ---------------------------- Not specified              |  the entire image `NSNumber`                 |  square tiles of size x size `NSArray` with 2 numbers   |  rectangular tiles of width x height. “CIVector“ with 2 values |  rectangular tiles of width x height. `NSNull`                   |  can be called for any possible origin and size.
-func KCIImageProviderTileSize() uintptr {
+func KCIImageProviderTileSize() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIImageProviderTileSize")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A key for any data needed by the image provider object. The associated value is an object that contains the needed data. This key and its value may be passed to: * “/CIImage/imageWithImageProvider:size::format:colorSpace:options:“ * “/CIImage/initWithImageProvider:size::format:colorSpace:options:“ The value object is retained until the image is deallocated.
-func KCIImageProviderUserInfo() uintptr {
+func KCIImageProviderUserInfo() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIImageProviderUserInfo")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // An optional key and value to save additional depth channel information to a JPEG or HEIF representations. The value for this key needs to be an `AVDepthData` instance.
-func KCIImageRepresentationAVDepthData() uintptr {
+func KCIImageRepresentationAVDepthData() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIImageRepresentationAVDepthData")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // An optional key and value to save a portrait matte channel information to a JPEG or HEIF. The value for this key needs to be a an `AVPortraitEffectsMatte` instance.
-func KCIImageRepresentationAVPortraitEffectsMatte() uintptr {
+func KCIImageRepresentationAVPortraitEffectsMatte() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIImageRepresentationAVPortraitEffectsMatte")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // An optional key and value to save one or more segmentation matte channels to a JPEG or HEIF. The value for this key needs to be an array of AVSemanticSegmentationMatte instances.
-func KCIImageRepresentationAVSemanticSegmentationMattes() uintptr {
+func KCIImageRepresentationAVSemanticSegmentationMattes() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIImageRepresentationAVSemanticSegmentationMattes")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // An optional key and value to save additional depth channel information to a JPEG or HEIF. The value for this key needs to be a monochrome depth “CIImage“ instance.
-func KCIImageRepresentationDepthImage() uintptr {
+func KCIImageRepresentationDepthImage() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIImageRepresentationDepthImage")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // An optional key and value to save additional depth channel information to a JPEG or HEIF. The value for this key needs to be a monochrome disparity “CIImage“ instance.
-func KCIImageRepresentationDisparityImage() uintptr {
+func KCIImageRepresentationDisparityImage() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIImageRepresentationDisparityImage")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // An optional key and value to request the gain map channel to be color instead of monochrome. This key affects how the gain map image is calculated from the SDR receiver and the “kCIImageRepresentationHDRImage“ image value. The value for this is a Boolean where: * True: the gain map is created as a color ratio between the HDR and SDR images. * False: the gain map is created as a brightness ratio between the HDR and SDR images. * Not specified: the default behavior False.
-func KCIImageRepresentationHDRGainMapAsRGB() uintptr {
+func KCIImageRepresentationHDRGainMapAsRGB() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIImageRepresentationHDRGainMapAsRGB")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // An optional key and value to save a gain map channel to a JPEG or HEIF. The value for this key needs to be a monochrome “CIImage“ instance. If the “kCIImageRepresentationHDRGainMapAsRGB“ option it true, then it needs to be an RGB “CIImage“ instance. The “/CIImage/properties“ should contain metadata information equivalent to what is returned when initializing an image using “kCIImageAuxiliaryHDRGainMap“.
-func KCIImageRepresentationHDRGainMapImage() uintptr {
+func KCIImageRepresentationHDRGainMapImage() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIImageRepresentationHDRGainMapImage")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // An optional key and value to save a HDR image using the gain map channel to a JPEG or HEIF. The value for this key needs to be a HDR CIImage instance. When provided, Core Image will calculate a gain map auxiliary image from the ratio of the HDR image to the primary SDR image. If the the HDR “CIImage“ instance has a “/CIImage/contentHeadroom“ property, then that will be used when calculating the HDRGainMap image and metadata.
-func KCIImageRepresentationHDRImage() uintptr {
+func KCIImageRepresentationHDRImage() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIImageRepresentationHDRImage")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // An optional key and value to save a portrait matte channel to a JPEG or HEIF. The value for this key needs to be a portrait matte “CIImage“ instance where black pixels represent the background region and white pixels represent the primary people in the image. The image will be converted to monochrome before it is saved to the JPEG or HEIF.
-func KCIImageRepresentationPortraitEffectsMatteImage() uintptr {
+func KCIImageRepresentationPortraitEffectsMatteImage() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIImageRepresentationPortraitEffectsMatteImage")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // An optional key and value to save a skin segmentation channel to a JPEG or HEIF. The value for this key needs to be a “CIImage“ instance where white pixels represent the areas where a person's glasses are found in the image. The image will be converted to monochrome before it is saved to the JPEG or HEIF.
-func KCIImageRepresentationSemanticSegmentationGlassesMatteImage() uintptr {
+func KCIImageRepresentationSemanticSegmentationGlassesMatteImage() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIImageRepresentationSemanticSegmentationGlassesMatteImage")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // An optional key and value to save a skin segmentation channel to a JPEG or HEIF. The value for this key needs to be a “CIImage“ instance where white pixels represent the areas of person's head and facial hair are found in the image. The image will be converted to monochrome before it is saved to the JPEG or HEIF.
-func KCIImageRepresentationSemanticSegmentationHairMatteImage() uintptr {
+func KCIImageRepresentationSemanticSegmentationHairMatteImage() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIImageRepresentationSemanticSegmentationHairMatteImage")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // An optional key and value to save a skin segmentation channel to a JPEG or HEIF. The value for this key needs to be a “CIImage“ instance where white pixels represent the areas of person's skin are found in the image. The image will be converted to monochrome before it is saved to the JPEG or HEIF.
-func KCIImageRepresentationSemanticSegmentationSkinMatteImage() uintptr {
+func KCIImageRepresentationSemanticSegmentationSkinMatteImage() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIImageRepresentationSemanticSegmentationSkinMatteImage")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // An optional key and value to save a skin segmentation channel to a JPEG or HEIF. The value for this key needs to be a “CIImage“ instance where white pixels represent the areas where a person's skin are found in the image. The image will be converted to monochrome before it is saved to the JPEG or HEIF.
-func KCIImageRepresentationSemanticSegmentationSkyMatteImage() uintptr {
+func KCIImageRepresentationSemanticSegmentationSkyMatteImage() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIImageRepresentationSemanticSegmentationSkyMatteImage")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // An optional key and value to save a skin segmentation channel to a JPEG or HEIF. The value for this key needs to be a “CIImage“ instance where white pixels represent the areas where a person's teeth are found in the image. The image will be converted to monochrome before it is saved to the JPEG or HEIF.
-func KCIImageRepresentationSemanticSegmentationTeethMatteImage() uintptr {
+func KCIImageRepresentationSemanticSegmentationTeethMatteImage() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIImageRepresentationSemanticSegmentationTeethMatteImage")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
+// The factor by which to scale down a returned images. The value of this key should be an `NSNumber` containing the integer value 2, 4, or 8. It can be used to improve performance and reduce memory usage when working with large images. When you specify this key, the retured image will be scaled down the image data by the specified numerical factor. If the image format doesn’t support the specified scale factor, a larger or full-size normal image is returned. This option is only supported by JPEG, HEIF, TIFF, PNG and RAW images formats. This option is only supported by these APIs: * “/CIImage/imageWithContentsOfURL:options:“ * “/CIImage/initWithContentsOfURL:options:“ * “/CIImage/imageWithData:options:“ * “/CIImage/initWithData:options:“ * “/CIImage/imageWithCGImageSource:index:options:“ * “/CIImage/initWithCGImageSource:index:options:“ > Note: the `kCGImageSourceSubsampleFactor` key can also be used for this purpose.
+func KCIImageSubsampleFactor() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_coreimageLib, "kCIImageSubsampleFactor")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KCIImageTextureFormat() uintptr {
@@ -1494,9 +2104,42 @@ func KCIImageTextureTarget() uintptr {
 	return ptr
 }
 
-func KCIImageToneMapHDRtoSDR() uintptr {
+func KCIImageToneMapHDRtoSDR() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIImageToneMapHDRtoSDR")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
+// The uniform type identifier string to use in cases where a file's format cannot be conclusively determined based solely on its contents. The value of this key should be an `NSString` containing a hint. It is most commonly needed for some RAW file formats which can also be interpreted as TIFF files. This option is only supported by these APIs: * “/CIImage/imageWithContentsOfURL:options:“ * “/CIImage/initWithContentsOfURL:options:“ * “/CIImage/imageWithData:options:“ * “/CIImage/initWithData:options:“ > Note: the key `kCGImageSourceTypeIdentifierHint` key can also be used for this purpose.
+func KCIImageTypeIdentifierHint() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_coreimageLib, "kCIImageTypeIdentifierHint")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
+}
+
+// A Boolean value specifying that using hardware is preferred when decoding. If the value for this option is: * True: The image will be decoded using dedicated hardware if possible. * False: The image will be decoded using the CPU is possible. * Not specified: The default behavior is True. This option is only supported by JPEG and HEIF images formats. This option is only supported by these APIs: * “/CIImage/imageWithContentsOfURL:options:“ * “/CIImage/initWithContentsOfURL:options:“ * “/CIImage/imageWithData:options:“ * “/CIImage/initWithData:options:“ * “/CIImage/imageWithCGImageSource:index:options:“ * “/CIImage/initWithCGImageSource:index:options:“ > Note: the `kCGImageSourceUseHardwareAcceleration` key can also be used for this purpose.
+func KCIImageUseHardwareAcceleration() *foundation.NSString {
+	ptr, _ := purego.Dlsym(_coreimageLib, "kCIImageUseHardwareAcceleration")
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Use new CIRAWFilter class instead.
@@ -1513,33 +2156,68 @@ func KCIInputAllowDraftModeKey() *foundation.NSString {
 }
 
 // A key to get or set the scalar amount value of a Core Image filter. The value for this key needs to be an `NSNumber` instance.
-func KCIInputAmountKey() uintptr {
+func KCIInputAmountKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIInputAmountKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A key to get or set the geometric angle value of a Core Image filter.  Typically the angle is in radians. The value for this key needs to be an `NSNumber` instance.
-func KCIInputAngleKey() uintptr {
+func KCIInputAngleKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIInputAngleKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A key to get or set the geometric aspect ratio value of a Core Image filter. The value for this key needs to be an `NSNumber` instance containing the `horizontal/vertical` scale ratio .
-func KCIInputAspectRatioKey() uintptr {
+func KCIInputAspectRatioKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIInputAspectRatioKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A key to get or set the background image of a Core Image filter. The value for this key needs to be a “CIImage“ instance.
-func KCIInputBackgroundImageKey() uintptr {
+func KCIInputBackgroundImageKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIInputBackgroundImageKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A key to get or set the backside image for a transition Core Image filter. The value for this key needs to be a “CIImage“ instance.
-func KCIInputBacksideImageKey() uintptr {
+func KCIInputBacksideImageKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIInputBacksideImageKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Use new CIRAWFilter class instead.
@@ -1556,15 +2234,29 @@ func KCIInputBaselineExposureKey() *foundation.NSString {
 }
 
 // A key to get or set the scalar bias value of a Core Image filter. The value for this key needs to be an `NSNumber` instance.
-func KCIInputBiasKey() uintptr {
+func KCIInputBiasKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIInputBiasKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A key to get or set the vector bias value of a Core Image filter. The value for this key needs to be a “CIVector“ instance.
-func KCIInputBiasVectorKey() uintptr {
+func KCIInputBiasVectorKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIInputBiasVectorKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Use new CIRAWFilter class instead.
@@ -1594,33 +2286,68 @@ func KCIInputBoostShadowAmountKey() *foundation.NSString {
 }
 
 // A key to get or set the scalar brightness value of a Core Image filter. The value for this key needs to be an `NSNumber` instance.
-func KCIInputBrightnessKey() uintptr {
+func KCIInputBrightnessKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIInputBrightnessKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A key to get or set the center value of a Core Image filter. The value for this key needs to be a “CIVector“ instance containing the `x,y` coordinate.
-func KCIInputCenterKey() uintptr {
+func KCIInputCenterKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIInputCenterKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A key to get or set a color value of a Core Image filter. The value for this key needs to be a “CIColor“ instance.
-func KCIInputColor0Key() uintptr {
+func KCIInputColor0Key() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIInputColor0Key")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A key to get or set a color value of a Core Image filter. The value for this key needs to be a “CIColor“ instance.
-func KCIInputColor1Key() uintptr {
+func KCIInputColor1Key() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIInputColor1Key")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A key to get or set the color value of a Core Image filter. The value for this key needs to be a “CIColor“ instance.
-func KCIInputColorKey() uintptr {
+func KCIInputColorKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIInputColorKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Use new CIRAWFilter class instead.
@@ -1637,21 +2364,42 @@ func KCIInputColorNoiseReductionAmountKey() *foundation.NSString {
 }
 
 // A key to get or set a color space value of a Core Image filter. The value for this key needs to be a `CGColorSpace` instance.
-func KCIInputColorSpaceKey() uintptr {
+func KCIInputColorSpaceKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIInputColorSpaceKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A key to get or set the scalar contrast value of a Core Image filter. The value for this key needs to be an `NSNumber` instance.
-func KCIInputContrastKey() uintptr {
+func KCIInputContrastKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIInputContrastKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A key to get or set the scalar count value of a Core Image filter. The value for this key needs to be an integer  `NSNumber` instance.
-func KCIInputCountKey() uintptr {
+func KCIInputCountKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIInputCountKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Use new CIRAWFilter class instead.
@@ -1668,9 +2416,16 @@ func KCIInputDecoderVersionKey() *foundation.NSString {
 }
 
 // A key to get or set the depth map image of a Core Image filter. The value for this key needs to be a “CIImage“ instance.
-func KCIInputDepthImageKey() uintptr {
+func KCIInputDepthImageKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIInputDepthImageKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Use new CIRAWFilter class instead.
@@ -1687,15 +2442,29 @@ func KCIInputDisableGamutMapKey() *foundation.NSString {
 }
 
 // A key to get or set the disparity map image of a Core Image filter. The value for this key needs to be a “CIImage“ instance.
-func KCIInputDisparityImageKey() uintptr {
+func KCIInputDisparityImageKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIInputDisparityImageKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A key to get or set the scalar EV value of a Core Image filter that specifies how many F-stops brighter or darker to make the image. The value for this key needs to be an `NSNumber` instance.
-func KCIInputEVKey() uintptr {
+func KCIInputEVKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIInputEVKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Use new CIRAWFilter class instead.
@@ -1751,21 +2520,42 @@ func KCIInputEnableVendorLensCorrectionKey() *foundation.NSString {
 }
 
 // A key to get or set the vector extent value of a Core Image filterthat defines the extent of the effect. The value for this key needs to be a “CIVector“ instance.
-func KCIInputExtentKey() uintptr {
+func KCIInputExtentKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIInputExtentKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A key to get or set the boolean behavior of a Core Image filter that specifies if the filter should extrapolate a table beyond the defined range. The value for this key needs to be an `NSNumber` instance.
-func KCIInputExtrapolateKey() uintptr {
+func KCIInputExtrapolateKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIInputExtrapolateKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A key to get or set the gradient map image of a Core Image filter that maps luminance to a color with alpha. The value for this key needs to be a 1 pixel tall “CIImage“ instance.
-func KCIInputGradientImageKey() uintptr {
+func KCIInputGradientImageKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIInputGradientImageKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Use new CIRAWFilter class instead.
@@ -1782,9 +2572,16 @@ func KCIInputIgnoreImageOrientationKey() *foundation.NSString {
 }
 
 // A key to get or set the input image of a Core Image filter. The value for this key needs to be a “CIImage“ instance. For filters that also use a background image, this key refers to the foreground image.
-func KCIInputImageKey() uintptr {
+func KCIInputImageKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIInputImageKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Use new CIRAWFilter class instead.
@@ -1801,9 +2598,16 @@ func KCIInputImageOrientationKey() *foundation.NSString {
 }
 
 // A key to get or set the scalar intensity value of a Core Image filter. The value for this key needs to be an `NSNumber` instance.
-func KCIInputIntensityKey() uintptr {
+func KCIInputIntensityKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIInputIntensityKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Use new CIRAWFilter class instead.
@@ -1846,15 +2650,29 @@ func KCIInputLuminanceNoiseReductionAmountKey() *foundation.NSString {
 }
 
 // A key to get or set the mask image of a Core Image filter. The value for this key needs to be a “CIImage“ instance.
-func KCIInputMaskImageKey() uintptr {
+func KCIInputMaskImageKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIInputMaskImageKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A key to get or set the matte image of a Core Image filter. The value for this key needs to be a “CIImage“ instance.
-func KCIInputMatteImageKey() uintptr {
+func KCIInputMatteImageKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIInputMatteImageKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Use new CIRAWFilter class instead.
@@ -1988,57 +2806,120 @@ func KCIInputNoiseReductionSharpnessAmountKey() *foundation.NSString {
 }
 
 // A key to get or set the palette image for a  Core Image filter. The value for this key needs to be a  1 pixel tall “CIImage“ instance.
-func KCIInputPaletteImageKey() uintptr {
+func KCIInputPaletteImageKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIInputPaletteImageKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A key to get or set the boolean behavior of a Core Image filter that specifies if the filter should operate in linear or perceptual colors. The value for this key needs to be an `NSNumber` instance.
-func KCIInputPerceptualKey() uintptr {
+func KCIInputPerceptualKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIInputPerceptualKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A key to get or set the coordinate value of a Core Image filter. The value for this key needs to be a “CIVector“ instance containing the `x,y` coordinate.
-func KCIInputPoint0Key() uintptr {
+func KCIInputPoint0Key() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIInputPoint0Key")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A key to get or set a coordinate value of a Core Image filter. The value for this key needs to be a “CIVector“ instance containing the `x,y` coordinate.
-func KCIInputPoint1Key() uintptr {
+func KCIInputPoint1Key() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIInputPoint1Key")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A key to get or set the geometric radius value of a Core Image filter. The value for this key needs to be an `NSNumber` instance.
-func KCIInputRadius0Key() uintptr {
+func KCIInputRadius0Key() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIInputRadius0Key")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A key to get or set the geometric radius value of a Core Image filter. The value for this key needs to be an `NSNumber` instance.
-func KCIInputRadius1Key() uintptr {
+func KCIInputRadius1Key() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIInputRadius1Key")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A key to get or set the geometric radius value of a Core Image filter. The value for this key needs to be an `NSNumber` instance.
-func KCIInputRadiusKey() uintptr {
+func KCIInputRadiusKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIInputRadiusKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A key to get or set the scalar optical refraction value of a Core Image filter. The value for this key needs to be an `NSNumber` instance.
-func KCIInputRefractionKey() uintptr {
+func KCIInputRefractionKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIInputRefractionKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A key to get or set the scalar saturation value of a Core Image filter. The value for this key needs to be an `NSNumber` instance.
-func KCIInputSaturationKey() uintptr {
+func KCIInputSaturationKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIInputSaturationKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Use new CIRAWFilter class instead.
@@ -2055,69 +2936,146 @@ func KCIInputScaleFactorKey() *foundation.NSString {
 }
 
 // A key to get or set the geometric scale value of a Core Image filter. The value for this key needs to be an `NSNumber` instance.
-func KCIInputScaleKey() uintptr {
+func KCIInputScaleKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIInputScaleKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A key to get or set the environment map image of a Core Image filter that maps normal directions to a color with alpha. The value for this key needs to be a “CIImage“ instance.
-func KCIInputShadingImageKey() uintptr {
+func KCIInputShadingImageKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIInputShadingImageKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A key to get or set the scalar sharpness value of a Core Image filter. The value for this key needs to be an `NSNumber` instance.
-func KCIInputSharpnessKey() uintptr {
+func KCIInputSharpnessKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIInputSharpnessKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A key to get or set the target image for a transition Core Image filter. The value for this key needs to be a “CIImage“ instance.
-func KCIInputTargetImageKey() uintptr {
+func KCIInputTargetImageKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIInputTargetImageKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A key to get or set the scalar threshold value of a Core Image filter. The value for this key needs to be an `NSNumber` instance.
-func KCIInputThresholdKey() uintptr {
+func KCIInputThresholdKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIInputThresholdKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A key to get or set the scalar time value of a Core Image filter. The value for this key needs to be an `NSNumber` instance.
-func KCIInputTimeKey() uintptr {
+func KCIInputTimeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIInputTimeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A key to get or set the geometric 2x3 matrix transform value of a Core Image filter. The value for this key needs to be an `NSAffineTransformStruct` or an `NSValue` instance.
-func KCIInputTransformKey() uintptr {
+func KCIInputTransformKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIInputTransformKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A key to get or set a coordinate value of a Core Image filter. The value for this key needs to be a “CIVector“ instance containing the `x,y` coordinate.
-func KCIInputVersionKey() uintptr {
+func KCIInputVersionKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIInputVersionKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A key to get or set the vector weights value of a convolution Core Image filter. The value for this key needs to be a “CIVector“ instance.
-func KCIInputWeightsKey() uintptr {
+func KCIInputWeightsKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIInputWeightsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A key to get or set the geometric width value of a Core Image filter. The value for this key needs to be an `NSNumber` instance.
-func KCIInputWidthKey() uintptr {
+func KCIInputWidthKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIInputWidthKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A key to get  the output image of a Core Image filter. The value for this key will be a “CIImage“ instance.
-func KCIOutputImageKey() uintptr {
+func KCIOutputImageKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIOutputImageKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Use new CIRAWFilter class instead.
@@ -2146,44 +3104,100 @@ func KCIPropertiesKey() *foundation.NSString {
 	return foundation.NSStringFromID(id)
 }
 
-func KCISamplerAffineMatrix() uintptr {
+func KCISamplerAffineMatrix() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCISamplerAffineMatrix")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCISamplerColorSpace() uintptr {
+func KCISamplerColorSpace() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCISamplerColorSpace")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCISamplerFilterLinear() uintptr {
+func KCISamplerFilterLinear() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCISamplerFilterLinear")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCISamplerFilterMode() uintptr {
+func KCISamplerFilterMode() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCISamplerFilterMode")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCISamplerFilterNearest() uintptr {
+func KCISamplerFilterNearest() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCISamplerFilterNearest")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCISamplerWrapBlack() uintptr {
+func KCISamplerWrapBlack() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCISamplerWrapBlack")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCISamplerWrapClamp() uintptr {
+func KCISamplerWrapClamp() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCISamplerWrapClamp")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KCISamplerWrapMode() uintptr {
+func KCISamplerWrapMode() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCISamplerWrapMode")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Use new CIRAWFilter class instead.
@@ -2200,31 +3214,66 @@ func KCISupportedDecoderVersionsKey() *foundation.NSString {
 }
 
 // Key to request the desired set of controls in a filter UIView. The defined values for this key are: CIUISetBasic, CIUISetIntermediate, CIUISetAdvanced and CIUISetDevelopment.
-func KCIUIParameterSet() uintptr {
+func KCIUIParameterSet() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIUIParameterSet")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Constant for requesting controls that are appropriate in an advanced user scenario.
-func KCIUISetAdvanced() uintptr {
+func KCIUISetAdvanced() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIUISetAdvanced")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Constant for requesting controls that are appropriate in a basic user scenario, meaning the bare minimum of settings to control the filter.
-func KCIUISetBasic() uintptr {
+func KCIUISetBasic() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIUISetBasic")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Constant for requesting controls that should only be visible for development purposes.
-func KCIUISetDevelopment() uintptr {
+func KCIUISetDevelopment() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIUISetDevelopment")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Constant for requesting controls that are appropriate in an intermediate user scenario.
-func KCIUISetIntermediate() uintptr {
+func KCIUISetIntermediate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coreimageLib, "kCIUISetIntermediate")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }

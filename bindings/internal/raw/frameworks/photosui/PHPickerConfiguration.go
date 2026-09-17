@@ -37,6 +37,10 @@ var (
 	_pHPickerConfigurationSelSetEdgesWithoutContentMargins       = objc.RegisterName("setEdgesWithoutContentMargins:")
 	_pHPickerConfigurationSelDisabledCapabilities                = objc.RegisterName("disabledCapabilities")
 	_pHPickerConfigurationSelSetDisabledCapabilities             = objc.RegisterName("setDisabledCapabilities:")
+	_pHPickerConfigurationSelMetadataOptions                     = objc.RegisterName("metadataOptions")
+	_pHPickerConfigurationSelSetMetadataOptions                  = objc.RegisterName("setMetadataOptions:")
+	_pHPickerConfigurationSelSearchText                          = objc.RegisterName("searchText")
+	_pHPickerConfigurationSelSetSearchText                       = objc.RegisterName("setSearchText:")
 )
 
 func PHPickerConfigurationFromID(id objc.ID) *PHPickerConfiguration {
@@ -159,4 +163,29 @@ func (o *PHPickerConfiguration) DisabledCapabilities() PHPickerCapabilities {
 // Capabilities of the picker that should be disabled. Default is \c PHPickerCapabilitiesNone.
 func (o *PHPickerConfiguration) SetDisabledCapabilities(disabledCapabilities PHPickerCapabilities) {
 	o.Ptr().Send(_pHPickerConfigurationSelSetDisabledCapabilities, disabledCapabilities)
+}
+
+// Metadata options for the picker. Default is \c PHPickerMetadataOptionsNone.
+func (o *PHPickerConfiguration) MetadataOptions() PHPickerMetadataOptions {
+	_ret := objc.Send[PHPickerMetadataOptions](o.Ptr(), _pHPickerConfigurationSelMetadataOptions)
+	return _ret
+}
+
+// Metadata options for the picker. Default is \c PHPickerMetadataOptionsNone.
+func (o *PHPickerConfiguration) SetMetadataOptions(metadataOptions PHPickerMetadataOptions) {
+	o.Ptr().Send(_pHPickerConfigurationSelSetMetadataOptions, metadataOptions)
+}
+
+// The search text for the picker. Default is \c nil.
+func (o *PHPickerConfiguration) SearchText() *PHPickerSearchText {
+	_ret := objc.Send[objc.ID](o.Ptr(), _pHPickerConfigurationSelSearchText)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return PHPickerSearchTextFromID(_ret)
+}
+
+// The search text for the picker. Default is \c nil.
+func (o *PHPickerConfiguration) SetSearchText(searchText *PHPickerSearchText) {
+	o.Ptr().Send(_pHPickerConfigurationSelSetSearchText, searchText.Ptr())
 }

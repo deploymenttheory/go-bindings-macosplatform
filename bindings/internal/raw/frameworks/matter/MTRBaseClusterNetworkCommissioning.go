@@ -137,7 +137,7 @@ func MTRBaseClusterNetworkCommissioningFromID(id objc.ID) *MTRBaseClusterNetwork
 	return o
 }
 
-// Command ScanNetworks Detemine the set of networks the device sees as available.
+// Command ScanNetworks This command is used to scan for available networks on the network interface associated with the cluster instance.
 func (o *MTRBaseClusterNetworkCommissioning) ScanNetworksWithParamsCompletion(params *MTRNetworkCommissioningClusterScanNetworksParams, completion func(*MTRNetworkCommissioningClusterScanNetworksResponseParams, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -166,7 +166,7 @@ func (o *MTRBaseClusterNetworkCommissioning) ScanNetworksWithCompletion(completi
 	o.Ptr().Send(_mTRBaseClusterNetworkCommissioningSelScanNetworksWithCompletion, __block_completion)
 }
 
-// Command AddOrUpdateWiFiNetwork Add or update the credentials for a given Wi-Fi network.
+// Command AddOrUpdateWiFiNetwork This command is used to add or update a Wi-Fi network configuration.
 func (o *MTRBaseClusterNetworkCommissioning) AddOrUpdateWiFiNetworkWithParamsCompletion(params *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams, completion func(*MTRNetworkCommissioningClusterNetworkConfigResponseParams, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -181,7 +181,7 @@ func (o *MTRBaseClusterNetworkCommissioning) AddOrUpdateWiFiNetworkWithParamsCom
 	o.Ptr().Send(_mTRBaseClusterNetworkCommissioningSelAddOrUpdateWiFiNetworkWithParamsCompletion, params.Ptr(), __block_completion)
 }
 
-// Command AddOrUpdateThreadNetwork Add or update the credentials for a given Thread network.
+// Command AddOrUpdateThreadNetwork This command is used to add or update a Thread network configuration.
 func (o *MTRBaseClusterNetworkCommissioning) AddOrUpdateThreadNetworkWithParamsCompletion(params *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams, completion func(*MTRNetworkCommissioningClusterNetworkConfigResponseParams, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -196,7 +196,7 @@ func (o *MTRBaseClusterNetworkCommissioning) AddOrUpdateThreadNetworkWithParamsC
 	o.Ptr().Send(_mTRBaseClusterNetworkCommissioningSelAddOrUpdateThreadNetworkWithParamsCompletion, params.Ptr(), __block_completion)
 }
 
-// Command RemoveNetwork Remove the definition of a given network (including its credentials).
+// Command RemoveNetwork This command is used to remove a network configuration on the network interface associated with the cluster instance.
 func (o *MTRBaseClusterNetworkCommissioning) RemoveNetworkWithParamsCompletion(params *MTRNetworkCommissioningClusterRemoveNetworkParams, completion func(*MTRNetworkCommissioningClusterNetworkConfigResponseParams, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -211,7 +211,7 @@ func (o *MTRBaseClusterNetworkCommissioning) RemoveNetworkWithParamsCompletion(p
 	o.Ptr().Send(_mTRBaseClusterNetworkCommissioningSelRemoveNetworkWithParamsCompletion, params.Ptr(), __block_completion)
 }
 
-// Command ConnectNetwork Connect to the specified network, using previously-defined credentials.
+// Command ConnectNetwork This command is used to connect to a network on the network interface associated with the cluster instance.
 func (o *MTRBaseClusterNetworkCommissioning) ConnectNetworkWithParamsCompletion(params *MTRNetworkCommissioningClusterConnectNetworkParams, completion func(*MTRNetworkCommissioningClusterConnectNetworkResponseParams, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -226,7 +226,7 @@ func (o *MTRBaseClusterNetworkCommissioning) ConnectNetworkWithParamsCompletion(
 	o.Ptr().Send(_mTRBaseClusterNetworkCommissioningSelConnectNetworkWithParamsCompletion, params.Ptr(), __block_completion)
 }
 
-// Command ReorderNetwork Modify the order in which networks will be presented in the Networks attribute.
+// Command ReorderNetwork This command is used to re-order the network configuration list.
 func (o *MTRBaseClusterNetworkCommissioning) ReorderNetworkWithParamsCompletion(params *MTRNetworkCommissioningClusterReorderNetworkParams, completion func(*MTRNetworkCommissioningClusterNetworkConfigResponseParams, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {

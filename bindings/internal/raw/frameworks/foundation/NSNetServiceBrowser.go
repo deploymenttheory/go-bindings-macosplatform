@@ -9,8 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A network service browser that finds published services on a network using multicast DNS.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsnetservicebrowser
 // Deprecated: Use nw_browser_t in Network framework instead
 type NSNetServiceBrowser struct {
@@ -42,6 +40,7 @@ func NSNetServiceBrowserFromID(id objc.ID) *NSNetServiceBrowser {
 	return o
 }
 
+// Initializes an allocated `NSNetServiceBrowser` object.
 func (o *NSNetServiceBrowser) Init() *NSNetServiceBrowser {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNetServiceBrowserSelInit)
 	if _ret != 0 {
@@ -50,30 +49,37 @@ func (o *NSNetServiceBrowser) Init() *NSNetServiceBrowser {
 	return NSNetServiceBrowserFromID(_ret)
 }
 
+// Adds the receiver to the specified run loop. - Parameters: - aRunLoop: Run loop in which to schedule the receiver. - mode: Run loop mode in which to perform this operation. You can use this method in conjunction with `-removeFromRunLoop:forMode:` to transfer the receiver to a run loop other than the default one. You should not attempt to run the receiver on multiple run loops.
 func (o *NSNetServiceBrowser) ScheduleInRunLoopForMode(aRunLoop *NSRunLoop, mode *NSString) {
 	o.Ptr().Send(_nSNetServiceBrowserSelScheduleInRunLoopForMode, aRunLoop.Ptr(), mode.Ptr())
 }
 
+// Removes the receiver from the specified run loop. - Parameters: - aRunLoop: Run loop from which to remove the receiver. - mode: Run loop mode in which to perform this operation. You can use this method in conjunction with `-scheduleInRunLoop:forMode:` to transfer the receiver to a run loop other than the default one. Although it is possible to remove an `NSNetService` object completely from any run loop and then attempt actions on it, you must not do it.
 func (o *NSNetServiceBrowser) RemoveFromRunLoopForMode(aRunLoop *NSRunLoop, mode *NSString) {
 	o.Ptr().Send(_nSNetServiceBrowserSelRemoveFromRunLoopForMode, aRunLoop.Ptr(), mode.Ptr())
 }
 
+// Initiates a search for domains visible to the host. This method returns immediately. The delegate receives a `-netServiceBrowser:didFindDomain:moreComing:` message for each domain discovered.
 func (o *NSNetServiceBrowser) SearchForBrowsableDomains() {
 	o.Ptr().Send(_nSNetServiceBrowserSelSearchForBrowsableDomains)
 }
 
+// Initiates a search for domains in which the host may register services. This method returns immediately, sending a `-netServiceBrowserWillSearch:` message to the delegate if the network was ready to initiate the search. The delegate receives a subsequent `-netServiceBrowser:didFindDomain:moreComing:` message for each domain discovered. Most network service browser clients do not have to use this method -- it is sufficient to publish a service with the empty string, which registers it in any available registration domains automatically.
 func (o *NSNetServiceBrowser) SearchForRegistrationDomains() {
 	o.Ptr().Send(_nSNetServiceBrowserSelSearchForRegistrationDomains)
 }
 
+// Starts a search for services of a particular type within a specific domain. - Parameters: - type: Type of the service to search for. Must contain both the service type and transport layer information (e.g. `_http._tcp.`). - domainString: Domain name in which to perform the search. Pass the empty string (`@""`) to search default registration domains. This method returns immediately, sending a `-netServiceBrowserWillSearch:` message to the delegate if the network was ready to initiate the search. The delegate receives subsequent `-netServiceBrowser:didFindService:moreComing:` messages for each service discovered.
 func (o *NSNetServiceBrowser) SearchForServicesOfTypeInDomain(type_ *NSString, domainString *NSString) {
 	o.Ptr().Send(_nSNetServiceBrowserSelSearchForServicesOfTypeInDomain, type_.Ptr(), domainString.Ptr())
 }
 
+// Halts a currently running search or resolution. This method sends a `-netServiceBrowserDidStopSearch:` message to the delegate and causes the browser to discard any pending search results.
 func (o *NSNetServiceBrowser) Stop() {
 	o.Ptr().Send(_nSNetServiceBrowserSelStop)
 }
 
+// The delegate object for this instance.
 func (o *NSNetServiceBrowser) Delegate() NSNetServiceBrowserDelegate {
 	_ret := objc.Send[NSNetServiceBrowserDelegate](o.Ptr(), _nSNetServiceBrowserSelDelegate)
 	return _ret
@@ -83,6 +89,7 @@ func (o *NSNetServiceBrowser) SetDelegate(delegate NSNetServiceBrowserDelegate) 
 	o.Ptr().Send(_nSNetServiceBrowserSelSetDelegate, delegate)
 }
 
+// Whether to browse over peer-to-peer Bluetooth and Wi-Fi, if available. This property must be set before initiating a search to have an effect. Initially set to `NO`.
 func (o *NSNetServiceBrowser) IncludesPeerToPeer() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSNetServiceBrowserSelIncludesPeerToPeer)
 	return _ret

@@ -1396,7 +1396,7 @@ var _fnSecCertificateCopyPublicKey func(objc.ID, unsafe.Pointer) int32
 func SecCertificateCopyPublicKey(certificate SecCertificateRef, key unsafe.Pointer) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCertificateCopyPublicKey == nil {
-		ebipurego.RegisterLibFunc(&_fnSecCertificateCopyPublicKey, _lib, "SecCertificateCopyPublicKey")
+		ebipurego.RegisterLibFunc(&_fnSecCertificateCopyPublicKey, _lib, "SecCertificateCopyPublicKey$LEGACYMAC")
 	}
 	_rc := _fnSecCertificateCopyPublicKey(objref.IDOf(certificate.Object), key)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {

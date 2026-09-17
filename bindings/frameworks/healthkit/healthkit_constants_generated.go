@@ -485,6 +485,11 @@ func HKQuantityTypeIdentifierHeartRateRecoveryOneMinute() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierHeartRateRecoveryOneMinute")))
 }
 
+// HKQuantityTypeIdentifierHeartRateVariabilityRMSSD returns the string constant HKQuantityTypeIdentifierHeartRateVariabilityRMSSD, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierHeartRateVariabilityRMSSD() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierHeartRateVariabilityRMSSD")))
+}
+
 // HKQuantityTypeIdentifierHeartRateVariabilitySDNN returns the string constant HKQuantityTypeIdentifierHeartRateVariabilitySDNN, for use as a dictionary key or argument.
 func HKQuantityTypeIdentifierHeartRateVariabilitySDNN() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierHeartRateVariabilitySDNN")))
@@ -915,6 +920,11 @@ func HKCategoryTypeIdentifierToothbrushingEvent() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierToothbrushingEvent")))
 }
 
+// HKCategoryTypeIdentifierBleedingAfterMenopause returns the string constant HKCategoryTypeIdentifierBleedingAfterMenopause, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierBleedingAfterMenopause() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierBleedingAfterMenopause")))
+}
+
 // HKCategoryTypeIdentifierBleedingAfterPregnancy returns the string constant HKCategoryTypeIdentifierBleedingAfterPregnancy, for use as a dictionary key or argument.
 func HKCategoryTypeIdentifierBleedingAfterPregnancy() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierBleedingAfterPregnancy")))
@@ -953,6 +963,11 @@ func HKCategoryTypeIdentifierIrregularMenstrualCycles() obj.Object {
 // HKCategoryTypeIdentifierLactation returns the string constant HKCategoryTypeIdentifierLactation, for use as a dictionary key or argument.
 func HKCategoryTypeIdentifierLactation() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierLactation")))
+}
+
+// HKCategoryTypeIdentifierMenopausalState returns the string constant HKCategoryTypeIdentifierMenopausalState, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierMenopausalState() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierMenopausalState")))
 }
 
 // HKCategoryTypeIdentifierMenstrualFlow returns the string constant HKCategoryTypeIdentifierMenstrualFlow, for use as a dictionary key or argument.

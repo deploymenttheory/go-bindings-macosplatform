@@ -157,10 +157,6 @@ var (
 	_dsGetRecordReferenceInfo func(uint, **TRecordEntry) TDirStatus
 	// @function dsGetRecordTypeFromEntry @param outRecType Used to return the record name to the client. Client is responsible for freeing the resulting string.
 	_dsGetRecordTypeFromEntry func(*TRecordEntry, string) TDirStatus
-	// @function dsIsDirServiceLocalRunning
-	_dsIsDirServiceLocalRunning func() TDirStatus
-	// @function dsIsDirServiceRunning
-	_dsIsDirServiceRunning func() TDirStatus
 	// @function dsOpenDirNode @discussion Establish a session for a particular directory node. @param inDirReference Directory reference established with dsOpenDirService. @param inDirNodeName Directory node name to open. Should be split into path components, for example as a result of dsBuildListFromPath @param outDirNodeReference Valid call with eDSNoErr, results in a directory node session reference. This reference represents the client's session context for the contents of the given directory node.
 	_dsOpenDirNode func(uint, *TDataList, *uint) TDirStatus
 	// @function dsOpenDirService @discussion Opens Directory Services API reference. Must be called before any other Directory Services API calls because this reference is needed for any other call. @param outDirReference reference to use in subsequent Directory Services API calls
@@ -638,18 +634,6 @@ func DsGetRecordReferenceInfo(inRecordReference uint, outRecordInfo **TRecordEnt
 // C function: dsGetRecordTypeFromEntry
 func DsGetRecordTypeFromEntry(inRecEntryPtr *TRecordEntry, outRecType string) TDirStatus {
 	return _dsGetRecordTypeFromEntry(inRecEntryPtr, outRecType)
-}
-
-// @function dsIsDirServiceLocalRunning
-// C function: dsIsDirServiceLocalRunning
-func DsIsDirServiceLocalRunning() TDirStatus {
-	return _dsIsDirServiceLocalRunning()
-}
-
-// @function dsIsDirServiceRunning
-// C function: dsIsDirServiceRunning
-func DsIsDirServiceRunning() TDirStatus {
-	return _dsIsDirServiceRunning()
 }
 
 // @function dsOpenDirNode @discussion Establish a session for a particular directory node. @param inDirReference Directory reference established with dsOpenDirService. @param inDirNodeName Directory node name to open. Should be split into path components, for example as a result of dsBuildListFromPath @param outDirNodeReference Valid call with eDSNoErr, results in a directory node session reference. This reference represents the client's session context for the contents of the given directory node.

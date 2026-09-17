@@ -20,8 +20,6 @@ import (
 // URLSessionUploadTask is an idiomatic wrapper over the Objective-C class NSURLSessionUploadTask.
 //
 // It embeds [URLSessionDataTask], promoting that type's methods.
-//
-// A URL session task that uploads data to the network in a request body.
 type URLSessionUploadTask struct {
 	URLSessionDataTask
 }
@@ -58,7 +56,7 @@ func NewURLSessionUploadTask() *URLSessionUploadTask {
 	return uRLSessionUploadTaskAdopt(_id)
 }
 
-// WithDelegate sets the delegate.
+// WithDelegate sets a delegate specific to the task. This task-specific delegate receives messages from the task before the session's delegate receives them. Methods not implemented on this delegate will still be forwarded to the session delegate. Cannot be modified after task resumes. Not supported on background session. Delegate is strongly referenced until the task completes, after which it is reset to `nil`.
 func (usut *URLSessionUploadTask) WithDelegate(delegate URLSessionTaskDelegate) *URLSessionUploadTask {
 	_shim := newURLSessionTaskDelegateShim(delegate)
 	_sel := objc.RegisterName("setDelegate:")
@@ -68,39 +66,39 @@ func (usut *URLSessionUploadTask) WithDelegate(delegate URLSessionTaskDelegate) 
 	return usut
 }
 
-// WithEarliestBeginDate sets the earliest begin date.
+// WithEarliestBeginDate sets the earliest date at which the network load should begin. For tasks created from background `NSURLSession` instances, this property indicates that the network load should not begin any earlier than this date. Setting this property does not guarantee that the load will begin at the specified date, but only that it will not begin sooner. If not specified, no start delay is used. This property has no effect for tasks created from nonbackground sessions.
 func (usut *URLSessionUploadTask) WithEarliestBeginDate(earliestBeginDate DateProvider) *URLSessionUploadTask {
 	defer runtime.KeepAlive(earliestBeginDate)
 	objc.Send[objc.ID](objref.IDOf(usut), objc.RegisterName("setEarliestBeginDate:"), objref.IDOf(earliestBeginDate))
 	return usut
 }
 
-// WithCountOfBytesClientExpectsToSend sets the count of bytes client expects to send.
+// WithCountOfBytesClientExpectsToSend sets a best-guess upper bound on the number of bytes the client expects to send. The value set for this property should account for the size of HTTP headers and body data or body stream. If no value is specified, the system uses `NSURLSessionTransferSizeUnknown` instead. This property is used by the system to optimize the scheduling of URL session tasks. Developers are strongly encouraged to provide an approximate upper bound, or an exact byte count, if possible, rather than accept the default.
 func (usut *URLSessionUploadTask) WithCountOfBytesClientExpectsToSend(countOfBytesClientExpectsToSend int64) *URLSessionUploadTask {
 	objc.Send[objc.ID](objref.IDOf(usut), objc.RegisterName("setCountOfBytesClientExpectsToSend:"), countOfBytesClientExpectsToSend)
 	return usut
 }
 
-// WithCountOfBytesClientExpectsToReceive sets the count of bytes client expects to receive.
+// WithCountOfBytesClientExpectsToReceive sets a best-guess upper bound on the number of bytes the client expects to receive. The value set for this property should account for the size of both HTTP response headers and the response body. If no value is specified, the system uses `NSURLSessionTransferSizeUnknown` instead. This property is used by the system to optimize the scheduling of URL session tasks. Developers are strongly encouraged to provide an approximate upper bound, or an exact byte count, if possible, rather than accept the default.
 func (usut *URLSessionUploadTask) WithCountOfBytesClientExpectsToReceive(countOfBytesClientExpectsToReceive int64) *URLSessionUploadTask {
 	objc.Send[objc.ID](objref.IDOf(usut), objc.RegisterName("setCountOfBytesClientExpectsToReceive:"), countOfBytesClientExpectsToReceive)
 	return usut
 }
 
-// WithTaskDescription sets the task description.
+// WithTaskDescription sets an app-provided string value for the current task. The system doesn't interpret this value; use it for whatever purpose you see fit. For example, you could store a description of the task for debugging purposes, or a key to track the task in your own data structures.
 func (usut *URLSessionUploadTask) WithTaskDescription(taskDescription StringProvider) *URLSessionUploadTask {
 	defer runtime.KeepAlive(taskDescription)
 	objc.Send[objc.ID](objref.IDOf(usut), objc.RegisterName("setTaskDescription:"), objref.IDOf(taskDescription))
 	return usut
 }
 
-// WithPriority sets the priority.
+// WithPriority sets the relative priority at which you'd like a host to handle the task, specified as a floating point value between `0.0` (lowest priority) and `1.0` (highest priority). To provide hints to a host on how to prioritize URL session tasks from your app, specify a priority for each task. Specifying a priority provides only a hint and does not guarantee performance. If you don't specify a priority, a URL session task has a priority of `NSURLSessionTaskPriorityDefault`, with a value of `0.5`. There are three named priorities you can employ: `NSURLSessionTaskPriorityDefault`, `NSURLSessionTaskPriorityLow`, and `NSURLSessionTaskPriorityHigh`. You can specify or change a task's priority at any time, but not all networking protocols respond to changes after a task has started. There is no API to let you determine the effective priority for a task from a host's perspective.
 func (usut *URLSessionUploadTask) WithPriority(priority float32) *URLSessionUploadTask {
 	objc.Send[objc.ID](objref.IDOf(usut), objc.RegisterName("setPriority:"), priority)
 	return usut
 }
 
-// WithPrefersIncrementalDelivery sets the prefers incremental delivery.
+// WithPrefersIncrementalDelivery sets a Boolean value that determines whether to deliver a partial response body in increments. Set this property to `true` to tell the task that the app would benefit from receiving a partial response body in increments. If the app can't process the response until it has all the data, set this property to `false`. Task performance may improve when this value is `false`, in which case the task only delivers data when complete. This property defaults to `true`, except in the following cases which default to `false`: - The task delivers results to a completion handler rather than to a delegate. - The task is a download task.
 func (usut *URLSessionUploadTask) WithPrefersIncrementalDelivery(prefersIncrementalDelivery bool) *URLSessionUploadTask {
 	objc.Send[objc.ID](objref.IDOf(usut), objc.RegisterName("setPrefersIncrementalDelivery:"), prefersIncrementalDelivery)
 	return usut

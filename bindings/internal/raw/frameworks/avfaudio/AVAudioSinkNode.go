@@ -18,8 +18,9 @@ type AVAudioSinkNode struct {
 }
 
 var (
-	_clsAVAudioSinkNode                      = _objcClass("AVAudioSinkNode")
-	_aVAudioSinkNodeSelInitWithReceiverBlock = objc.RegisterName("initWithReceiverBlock:")
+	_clsAVAudioSinkNode                                  = _objcClass("AVAudioSinkNode")
+	_aVAudioSinkNodeSelInitWithReceiverBlock             = objc.RegisterName("initWithReceiverBlock:")
+	_aVAudioSinkNodeSelInitWithRealtimeSafeReceiverBlock = objc.RegisterName("initWithRealtimeSafeReceiverBlock:")
 )
 
 func AVAudioSinkNodeFromID(id objc.ID) *AVAudioSinkNode {
@@ -42,6 +43,22 @@ func (o *AVAudioSinkNode) InitWithReceiverBlock(block func(*coreaudiotypes.Audio
 		defer __block_block.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioSinkNodeSelInitWithReceiverBlock, __block_block)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return AVAudioSinkNodeFromID(_ret)
+}
+
+// @method initWithRealtimeSafeReceiverBlock: @abstract Identical to initWithReceiverBlock:, but requires a realtime-safe block and is the preferred initializer.
+func (o *AVAudioSinkNode) InitWithRealtimeSafeReceiverBlock(block func(*coreaudiotypes.AudioTimeStamp, uint32, *coreaudiotypes.AudioBufferList) int) *AVAudioSinkNode {
+	var __block_block objc.Block
+	if block != nil {
+		__block_block = objc.NewBlock(func(_ objc.Block, blockParam0 *coreaudiotypes.AudioTimeStamp, blockParam1 uint32, blockParam2 *coreaudiotypes.AudioBufferList) int {
+			return block(blockParam0, blockParam1, blockParam2)
+		})
+		defer __block_block.Release()
+	}
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioSinkNodeSelInitWithRealtimeSafeReceiverBlock, __block_block)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

@@ -161,6 +161,7 @@ func (o *NSUbiquitousKeyValueStore) Synchronize() bool {
 	return _ret
 }
 
+// The shared iCloud key-value store object. Use this object to access the shared iCloud key-value store tied to your app and the current person.
 func NSUbiquitousKeyValueStoreDefaultStore() *NSUbiquitousKeyValueStore {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUbiquitousKeyValueStore), _nSUbiquitousKeyValueStoreSelDefaultStore)
 	if _ret != 0 {
@@ -169,6 +170,7 @@ func NSUbiquitousKeyValueStoreDefaultStore() *NSUbiquitousKeyValueStore {
 	return NSUbiquitousKeyValueStoreFromID(_ret)
 }
 
+// A dictionary with all of the key-value pairs in the iCloud key-value store.
 func (o *NSUbiquitousKeyValueStore) DictionaryRepresentation() *NSDictionary[*NSString, objc.ID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUbiquitousKeyValueStoreSelDictionaryRepresentation)
 	if _ret != 0 {

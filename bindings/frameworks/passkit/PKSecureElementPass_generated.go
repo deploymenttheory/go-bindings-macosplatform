@@ -94,6 +94,13 @@ func (sep *SecureElementPass) PassActivationState() SecureElementPassActivationS
 	return _r
 }
 
+// IsProvisioningAvailable reports whether provisioning is available for this pass. This property is true when the pass is in a pre-provisioned state and the issuer app can guide the user to complete provisioning. Check this property when passActivationState returns PKSecureElementPassActivationStateDeactivated to determine if provisioning is available.
+func (sep *SecureElementPass) IsProvisioningAvailable() bool {
+	defer runtime.KeepAlive(sep)
+	_r := objc.Send[bool](objref.IDOf(sep), objc.RegisterName("isProvisioningAvailable"))
+	return _r
+}
+
 // DevicePassIdentifier returns the device pass identifier.
 func (sep *SecureElementPass) DevicePassIdentifier() string {
 	defer runtime.KeepAlive(sep)

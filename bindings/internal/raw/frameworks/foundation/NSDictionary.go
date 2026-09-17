@@ -134,6 +134,7 @@ func (o *NSDictionary[KeyType, ObjectType]) InitWithCoder(coder *NSCoder) *NSDic
 	return NSDictionaryFromID[KeyType, ObjectType](_ret)
 }
 
+// The number of entries in the dictionary.
 func (o *NSDictionary[KeyType, ObjectType]) Count() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSDictionarySelCount)
 	return _ret
@@ -280,6 +281,7 @@ func (o *NSDictionary[KeyType, ObjectType]) KeysOfEntriesWithOptionsPassingTest(
 	return NSSetFromID[KeyType](_ret)
 }
 
+// A new array containing the dictionary's keys, or an empty array if the dictionary has no entries. The order of the elements in the array is not defined.
 func (o *NSDictionary[KeyType, ObjectType]) AllKeys() *NSArray[KeyType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDictionarySelAllKeys)
 	if _ret != 0 {
@@ -288,6 +290,7 @@ func (o *NSDictionary[KeyType, ObjectType]) AllKeys() *NSArray[KeyType] {
 	return NSArrayFromID[KeyType](_ret)
 }
 
+// A new array containing the dictionary's values, or an empty array if the dictionary has no entries. The order of the values in the array isn't defined.
 func (o *NSDictionary[KeyType, ObjectType]) AllValues() *NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDictionarySelAllValues)
 	if _ret != 0 {
@@ -296,6 +299,7 @@ func (o *NSDictionary[KeyType, ObjectType]) AllValues() *NSArray[ObjectType] {
 	return NSArrayFromID[ObjectType](_ret)
 }
 
+// A string that represents the contents of the dictionary, formatted in `.strings` file format. The order in which the entries are listed is undefined. This method fails unless the dictionary can be represented by a strings resource file. For details, see [String Resources](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/LoadingResources/Strings/Strings.html#//apple_ref/doc/uid/10000051i-CH6) in [Resource Programming Guide](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/LoadingResources/Introduction/Introduction.html#//apple_ref/doc/uid/10000051i).
 func (o *NSDictionary[KeyType, ObjectType]) DescriptionInStringsFileFormat() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDictionarySelDescriptionInStringsFileFormat)
 	if _ret != 0 {

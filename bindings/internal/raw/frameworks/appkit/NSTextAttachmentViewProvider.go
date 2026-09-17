@@ -62,6 +62,7 @@ func (o *NSTextAttachmentViewProvider) AttachmentBoundsForAttributesLocationText
 	return _ret
 }
 
+// The text attachment for this view. Specify the value of this property at initialization time using the “NSTextAttachmentViewProvider/init(textAttachment:parentView:textLayoutManager:location:)“ initializer.
 func (o *NSTextAttachmentViewProvider) TextAttachment() *NSTextAttachment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextAttachmentViewProviderSelTextAttachment)
 	if _ret != 0 {
@@ -70,6 +71,7 @@ func (o *NSTextAttachmentViewProvider) TextAttachment() *NSTextAttachment {
 	return NSTextAttachmentFromID(_ret)
 }
 
+// The text layout manager for this view. Specify the value of this property at initialization time using the “NSTextAttachmentViewProvider/init(textAttachment:parentView:textLayoutManager:location:)“ initializer.
 func (o *NSTextAttachmentViewProvider) TextLayoutManager() *NSTextLayoutManager {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextAttachmentViewProviderSelTextLayoutManager)
 	if _ret != 0 {
@@ -78,11 +80,13 @@ func (o *NSTextAttachmentViewProvider) TextLayoutManager() *NSTextLayoutManager 
 	return NSTextLayoutManagerFromID(_ret)
 }
 
+// The location that indicates the start of the text attachment. Specify the value of this property at initialization time using the “NSTextAttachmentViewProvider/init(textAttachment:parentView:textLayoutManager:location:)“ initializer.
 func (o *NSTextAttachmentViewProvider) Location() NSTextLocation {
 	_ret := objc.Send[NSTextLocation](o.Ptr(), _nSTextAttachmentViewProviderSelLocation)
 	return _ret
 }
 
+// The text attachment's view. The getter first invokes “loadView“ if the view hasn't been set yet. > Important: Subclasses must call the superclass implementation if they override the setter or getter.
 func (o *NSTextAttachmentViewProvider) View() *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextAttachmentViewProviderSelView)
 	if _ret != 0 {
@@ -95,6 +99,7 @@ func (o *NSTextAttachmentViewProvider) SetView(view *NSView) {
 	o.Ptr().Send(_nSTextAttachmentViewProviderSelSetView, view.Ptr())
 }
 
+// A Boolean value that determines the text attachment's bounds policy. If `true`, the framework calls the `textAttachment` property's “NSTextAttachmentViewProvider/attachmentBounds(for:location:textContainer:proposedLineFragment:position:)“ method and examines the text attachment view provider to determine the bounds instead of using the `bounds` property of this instance. Defaults to `false`.
 func (o *NSTextAttachmentViewProvider) TracksTextAttachmentViewBounds() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTextAttachmentViewProviderSelTracksTextAttachmentViewBounds)
 	return _ret

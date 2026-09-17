@@ -159,7 +159,7 @@ type AURenderCallbackStruct struct {
 	InputProcRefCon unsafe.Pointer
 }
 
-// A union of the various specific render event types. Determine which variant to use via head.eventType. AURenderEventParameter and AURenderEventParameterRamp use the parameter variant. AURenderEventMIDI and AURenderEventMIDISysEx use the MIDI variant.
+// A union of the various specific render event types.
 type AURenderEvent struct {
 	Head           AURenderEventHeader
 	Parameter      AUParameterEvent
@@ -349,11 +349,11 @@ type AudioPanningInfo struct {
 
 // Defines an audio queue buffer.
 type AudioQueueBuffer struct {
-	MAudioDataBytesCapacity    uint
+	MAudioDataBytesCapacity    uint32
 	MAudioData                 unsafe.Pointer
 	MAudioDataByteSize         uint32
 	MUserData                  unsafe.Pointer
-	MPacketDescriptionCapacity uint
+	MPacketDescriptionCapacity uint32
 	MPacketDescriptions        unsafe.Pointer
 	MPacketDescriptionCount    uint32
 }
@@ -714,7 +714,7 @@ type MIDINoteMessage struct {
 	Duration        float32
 }
 
-// A list of MIDI events the system sends to or receives from an endpoint.
+// Forward declaration of MIDIPacketList found in <CoreMIDI/MIDIServices.h>
 type MIDIPacketList struct{}
 
 // Describes a MIDI system-exclusive (SysEx) message.

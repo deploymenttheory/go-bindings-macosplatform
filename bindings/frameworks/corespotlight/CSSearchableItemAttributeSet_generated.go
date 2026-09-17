@@ -7,7 +7,6 @@ package corespotlight
 import (
 	"runtime"
 	"time"
-	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -141,8 +140,8 @@ func (sias *SearchableItemAttributeSet) WithRelatedUniqueIdentifier(relatedUniqu
 }
 
 // WithWeakRelatedUniqueIdentifier sets the unique identifier for the item to which the activity is related, but not linked.
-func (sias *SearchableItemAttributeSet) WithWeakRelatedUniqueIdentifier(weakRelatedUniqueIdentifier unsafe.Pointer) *SearchableItemAttributeSet {
-	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setWeakRelatedUniqueIdentifier:"), weakRelatedUniqueIdentifier)
+func (sias *SearchableItemAttributeSet) WithWeakRelatedUniqueIdentifier(weakRelatedUniqueIdentifier string) *SearchableItemAttributeSet {
+	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setWeakRelatedUniqueIdentifier:"), purego.NSString(weakRelatedUniqueIdentifier))
 	return sias
 }
 
@@ -179,32 +178,36 @@ func (sias *SearchableItemAttributeSet) WithTitle(title string) *SearchableItemA
 }
 
 // WithUserCreated sets a value that indicates the user created the item.
-func (sias *SearchableItemAttributeSet) WithUserCreated(userCreated unsafe.Pointer) *SearchableItemAttributeSet {
-	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setUserCreated:"), userCreated)
+func (sias *SearchableItemAttributeSet) WithUserCreated(userCreated obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(userCreated)
+	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setUserCreated:"), objref.IDOf(userCreated))
 	return sias
 }
 
 // WithUserOwned sets a value that indicates the user purchased or owns the item.
-func (sias *SearchableItemAttributeSet) WithUserOwned(userOwned unsafe.Pointer) *SearchableItemAttributeSet {
-	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setUserOwned:"), userOwned)
+func (sias *SearchableItemAttributeSet) WithUserOwned(userOwned obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(userOwned)
+	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setUserOwned:"), objref.IDOf(userOwned))
 	return sias
 }
 
 // WithUserCurated sets a value that indicates the user selected the item.
-func (sias *SearchableItemAttributeSet) WithUserCurated(userCurated unsafe.Pointer) *SearchableItemAttributeSet {
-	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setUserCurated:"), userCurated)
+func (sias *SearchableItemAttributeSet) WithUserCurated(userCurated obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(userCurated)
+	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setUserCurated:"), objref.IDOf(userCurated))
 	return sias
 }
 
 // WithRankingHint sets a number that indicates the relative importance of the item among other items from the app.
-func (sias *SearchableItemAttributeSet) WithRankingHint(rankingHint unsafe.Pointer) *SearchableItemAttributeSet {
-	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setRankingHint:"), rankingHint)
+func (sias *SearchableItemAttributeSet) WithRankingHint(rankingHint obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(rankingHint)
+	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setRankingHint:"), objref.IDOf(rankingHint))
 	return sias
 }
 
 // WithDomainIdentifier sets an identifier that represents the domain or owner of the item.
-func (sias *SearchableItemAttributeSet) WithDomainIdentifier(domainIdentifier unsafe.Pointer) *SearchableItemAttributeSet {
-	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setDomainIdentifier:"), domainIdentifier)
+func (sias *SearchableItemAttributeSet) WithDomainIdentifier(domainIdentifier string) *SearchableItemAttributeSet {
+	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setDomainIdentifier:"), purego.NSString(domainIdentifier))
 	return sias
 }
 
@@ -254,20 +257,23 @@ func (sias *SearchableItemAttributeSet) WithContainerOrder(containerOrder obj.Ob
 }
 
 // WithProviderDataTypeIdentifiers sets an array of type identifiers that correspond to data types your delegate object can provide.
-func (sias *SearchableItemAttributeSet) WithProviderDataTypeIdentifiers(providerDataTypeIdentifiers unsafe.Pointer) *SearchableItemAttributeSet {
-	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setProviderDataTypeIdentifiers:"), providerDataTypeIdentifiers)
+func (sias *SearchableItemAttributeSet) WithProviderDataTypeIdentifiers(items ...obj.Object) *SearchableItemAttributeSet {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setProviderDataTypeIdentifiers:"), _arr)
 	return sias
 }
 
 // WithProviderFileTypeIdentifiers sets an array of type identifiers that correspond to file types your delegate object can provide.
-func (sias *SearchableItemAttributeSet) WithProviderFileTypeIdentifiers(providerFileTypeIdentifiers unsafe.Pointer) *SearchableItemAttributeSet {
-	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setProviderFileTypeIdentifiers:"), providerFileTypeIdentifiers)
+func (sias *SearchableItemAttributeSet) WithProviderFileTypeIdentifiers(items ...obj.Object) *SearchableItemAttributeSet {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setProviderFileTypeIdentifiers:"), _arr)
 	return sias
 }
 
 // WithProviderInPlaceFileTypeIdentifiers sets an array of type identifiers that correspond to in-place file types your delegate object can provide.
-func (sias *SearchableItemAttributeSet) WithProviderInPlaceFileTypeIdentifiers(providerInPlaceFileTypeIdentifiers unsafe.Pointer) *SearchableItemAttributeSet {
-	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setProviderInPlaceFileTypeIdentifiers:"), providerInPlaceFileTypeIdentifiers)
+func (sias *SearchableItemAttributeSet) WithProviderInPlaceFileTypeIdentifiers(items ...obj.Object) *SearchableItemAttributeSet {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setProviderInPlaceFileTypeIdentifiers:"), _arr)
 	return sias
 }
 
@@ -1360,10 +1366,13 @@ func (sias *SearchableItemAttributeSet) RelatedUniqueIdentifier() string {
 }
 
 // WeakRelatedUniqueIdentifier returns the weak related unique identifier.
-func (sias *SearchableItemAttributeSet) WeakRelatedUniqueIdentifier() unsafe.Pointer {
+func (sias *SearchableItemAttributeSet) WeakRelatedUniqueIdentifier() string {
 	defer runtime.KeepAlive(sias)
-	_r := objc.Send[unsafe.Pointer](objref.IDOf(sias), objc.RegisterName("weakRelatedUniqueIdentifier"))
-	return _r
+	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("weakRelatedUniqueIdentifier"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
 }
 
 // MetadataModificationDate returns the metadata modification date.
@@ -1412,38 +1421,41 @@ func (sias *SearchableItemAttributeSet) Title() string {
 }
 
 // IsUserCreated returns the is user created.
-func (sias *SearchableItemAttributeSet) IsUserCreated() unsafe.Pointer {
+func (sias *SearchableItemAttributeSet) IsUserCreated() *foundation.Number {
 	defer runtime.KeepAlive(sias)
-	_r := objc.Send[unsafe.Pointer](objref.IDOf(sias), objc.RegisterName("isUserCreated"))
-	return _r
+	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("isUserCreated"))
+	return foundation.NumberFromID(_r)
 }
 
 // IsUserOwned returns the is user owned.
-func (sias *SearchableItemAttributeSet) IsUserOwned() unsafe.Pointer {
+func (sias *SearchableItemAttributeSet) IsUserOwned() *foundation.Number {
 	defer runtime.KeepAlive(sias)
-	_r := objc.Send[unsafe.Pointer](objref.IDOf(sias), objc.RegisterName("isUserOwned"))
-	return _r
+	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("isUserOwned"))
+	return foundation.NumberFromID(_r)
 }
 
 // IsUserCurated returns the is user curated.
-func (sias *SearchableItemAttributeSet) IsUserCurated() unsafe.Pointer {
+func (sias *SearchableItemAttributeSet) IsUserCurated() *foundation.Number {
 	defer runtime.KeepAlive(sias)
-	_r := objc.Send[unsafe.Pointer](objref.IDOf(sias), objc.RegisterName("isUserCurated"))
-	return _r
+	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("isUserCurated"))
+	return foundation.NumberFromID(_r)
 }
 
 // RankingHint returns the ranking hint.
-func (sias *SearchableItemAttributeSet) RankingHint() unsafe.Pointer {
+func (sias *SearchableItemAttributeSet) RankingHint() *foundation.Number {
 	defer runtime.KeepAlive(sias)
-	_r := objc.Send[unsafe.Pointer](objref.IDOf(sias), objc.RegisterName("rankingHint"))
-	return _r
+	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("rankingHint"))
+	return foundation.NumberFromID(_r)
 }
 
 // DomainIdentifier returns the domain identifier.
-func (sias *SearchableItemAttributeSet) DomainIdentifier() unsafe.Pointer {
+func (sias *SearchableItemAttributeSet) DomainIdentifier() string {
 	defer runtime.KeepAlive(sias)
-	_r := objc.Send[unsafe.Pointer](objref.IDOf(sias), objc.RegisterName("domainIdentifier"))
-	return _r
+	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("domainIdentifier"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
 }
 
 // TextContentSummary returns the text content summary.
@@ -1518,27 +1530,33 @@ func (sias *SearchableItemAttributeSet) ContainerOrder() *foundation.Number {
 }
 
 // ProviderDataTypeIdentifiers returns the provider data type identifiers.
-func (sias *SearchableItemAttributeSet) ProviderDataTypeIdentifiers() unsafe.Pointer {
+//
+// ProviderDataTypeIdentifiers returns the collection as a Go slice.
+func (sias *SearchableItemAttributeSet) ProviderDataTypeIdentifiers() []string {
 	defer runtime.KeepAlive(sias)
-	_r := objc.Send[unsafe.Pointer](objref.IDOf(sias), objc.RegisterName("providerDataTypeIdentifiers"))
-	return _r
+	_arr := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("providerDataTypeIdentifiers"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // ProviderFileTypeIdentifiers returns the provider file type identifiers.
-func (sias *SearchableItemAttributeSet) ProviderFileTypeIdentifiers() unsafe.Pointer {
+//
+// ProviderFileTypeIdentifiers returns the collection as a Go slice.
+func (sias *SearchableItemAttributeSet) ProviderFileTypeIdentifiers() []string {
 	defer runtime.KeepAlive(sias)
-	_r := objc.Send[unsafe.Pointer](objref.IDOf(sias), objc.RegisterName("providerFileTypeIdentifiers"))
-	return _r
+	_arr := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("providerFileTypeIdentifiers"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // ProviderInPlaceFileTypeIdentifiers returns the provider in place file type identifiers.
-func (sias *SearchableItemAttributeSet) ProviderInPlaceFileTypeIdentifiers() unsafe.Pointer {
+//
+// ProviderInPlaceFileTypeIdentifiers returns the collection as a Go slice.
+func (sias *SearchableItemAttributeSet) ProviderInPlaceFileTypeIdentifiers() []string {
 	defer runtime.KeepAlive(sias)
-	_r := objc.Send[unsafe.Pointer](objref.IDOf(sias), objc.RegisterName("providerInPlaceFileTypeIdentifiers"))
-	return _r
+	_arr := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("providerInPlaceFileTypeIdentifiers"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Subject returns subject of the this item.
+// Subject returns the subject.
 func (sias *SearchableItemAttributeSet) Subject() string {
 	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("subject"))

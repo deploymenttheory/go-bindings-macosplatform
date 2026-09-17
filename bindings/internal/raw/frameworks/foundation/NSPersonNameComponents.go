@@ -44,6 +44,7 @@ func NSPersonNameComponentsFromID(id objc.ID) *NSPersonNameComponents {
 	return o
 }
 
+// Pre-nominal letters denoting title, salutation, or honorific, e.g. Dr., Mr.
 func (o *NSPersonNameComponents) NamePrefix() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersonNameComponentsSelNamePrefix)
 	if _ret != 0 {
@@ -56,6 +57,7 @@ func (o *NSPersonNameComponents) SetNamePrefix(namePrefix *NSString) {
 	o.Ptr().Send(_nSPersonNameComponentsSelSetNamePrefix, namePrefix.Ptr())
 }
 
+// Name bestowed upon an individual by one's parents, e.g. Johnathan.
 func (o *NSPersonNameComponents) GivenName() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersonNameComponentsSelGivenName)
 	if _ret != 0 {
@@ -68,6 +70,7 @@ func (o *NSPersonNameComponents) SetGivenName(givenName *NSString) {
 	o.Ptr().Send(_nSPersonNameComponentsSelSetGivenName, givenName.Ptr())
 }
 
+// Secondary given name chosen to differentiate those with the same first name, e.g. Maple.
 func (o *NSPersonNameComponents) MiddleName() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersonNameComponentsSelMiddleName)
 	if _ret != 0 {
@@ -80,6 +83,7 @@ func (o *NSPersonNameComponents) SetMiddleName(middleName *NSString) {
 	o.Ptr().Send(_nSPersonNameComponentsSelSetMiddleName, middleName.Ptr())
 }
 
+// Name passed from one generation to another to indicate lineage, e.g. Appleseed.
 func (o *NSPersonNameComponents) FamilyName() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersonNameComponentsSelFamilyName)
 	if _ret != 0 {
@@ -92,6 +96,7 @@ func (o *NSPersonNameComponents) SetFamilyName(familyName *NSString) {
 	o.Ptr().Send(_nSPersonNameComponentsSelSetFamilyName, familyName.Ptr())
 }
 
+// Post-nominal letters denoting degree, accreditation, or other honor, e.g. Esq., Jr., Ph.D.
 func (o *NSPersonNameComponents) NameSuffix() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersonNameComponentsSelNameSuffix)
 	if _ret != 0 {
@@ -104,6 +109,7 @@ func (o *NSPersonNameComponents) SetNameSuffix(nameSuffix *NSString) {
 	o.Ptr().Send(_nSPersonNameComponentsSelSetNameSuffix, nameSuffix.Ptr())
 }
 
+// Name substituted for the purposes of familiarity, e.g. "Johnny".
 func (o *NSPersonNameComponents) Nickname() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersonNameComponentsSelNickname)
 	if _ret != 0 {
@@ -116,6 +122,7 @@ func (o *NSPersonNameComponents) SetNickname(nickname *NSString) {
 	o.Ptr().Send(_nSPersonNameComponentsSelSetNickname, nickname.Ptr())
 }
 
+// The phonetic representation of the name components. Each element of the phonetic representation should correspond to an element of the original `NSPersonNameComponents` instance. The phonetic representation of the phonetic representation object itself will be ignored. `nil` by default; must be instantiated.
 func (o *NSPersonNameComponents) PhoneticRepresentation() *NSPersonNameComponents {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersonNameComponentsSelPhoneticRepresentation)
 	if _ret != 0 {

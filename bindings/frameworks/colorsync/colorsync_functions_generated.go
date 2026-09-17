@@ -96,9 +96,9 @@ func ColorSyncProfileEstimateGamma(prof ColorSyncProfileRef) (obj.Object, error)
 }
 
 // ColorSyncProfileEstimateGammaWithDisplayID reports an error if the ColorSync framework function ColorSyncProfileEstimateGammaWithDisplayID fails.
-var _fnColorSyncProfileEstimateGammaWithDisplayID func(int, unsafe.Pointer) objc.ID
+var _fnColorSyncProfileEstimateGammaWithDisplayID func(int32, unsafe.Pointer) objc.ID
 
-func ColorSyncProfileEstimateGammaWithDisplayID(displayID int) (obj.Object, error) {
+func ColorSyncProfileEstimateGammaWithDisplayID(displayID int32) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncProfileEstimateGammaWithDisplayID == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncProfileEstimateGammaWithDisplayID, _lib, "ColorSyncProfileEstimateGammaWithDisplayID")

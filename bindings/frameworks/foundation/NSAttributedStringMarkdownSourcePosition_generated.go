@@ -100,28 +100,28 @@ func (asmsp *AttributedStringMarkdownSourcePosition) RangeInString(str string) N
 	return _r
 }
 
-// StartLine returns the start line.
+// StartLine returns the line where the text begins in the Markdown source. Uses 1-based counting.
 func (asmsp *AttributedStringMarkdownSourcePosition) StartLine() int {
 	defer runtime.KeepAlive(asmsp)
 	_r := objc.Send[int](objref.IDOf(asmsp), objc.RegisterName("startLine"))
 	return _r
 }
 
-// StartColumn returns the start column.
+// StartColumn returns the column where the text begins in the Markdown source. Uses 1-based counting. Columns represent UTF-8 indices; for multi-byte characters, the column indicates the first byte.
 func (asmsp *AttributedStringMarkdownSourcePosition) StartColumn() int {
 	defer runtime.KeepAlive(asmsp)
 	_r := objc.Send[int](objref.IDOf(asmsp), objc.RegisterName("startColumn"))
 	return _r
 }
 
-// EndLine returns the end line.
+// EndLine returns the line where the text ends in the Markdown source. Uses 1-based counting.
 func (asmsp *AttributedStringMarkdownSourcePosition) EndLine() int {
 	defer runtime.KeepAlive(asmsp)
 	_r := objc.Send[int](objref.IDOf(asmsp), objc.RegisterName("endLine"))
 	return _r
 }
 
-// EndColumn returns the end column.
+// EndColumn returns the column where the text ends in the Markdown source. Uses 1-based counting. Columns represent UTF-8 indices; for multi-byte characters, the column indicates the first byte.
 func (asmsp *AttributedStringMarkdownSourcePosition) EndColumn() int {
 	defer runtime.KeepAlive(asmsp)
 	_r := objc.Send[int](objref.IDOf(asmsp), objc.RegisterName("endColumn"))

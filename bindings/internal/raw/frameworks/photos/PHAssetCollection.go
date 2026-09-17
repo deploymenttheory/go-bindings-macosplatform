@@ -12,7 +12,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A representation of a Photos asset grouping, such as a moment, user-created album, or smart album.
+// A representation of a Photos asset grouping, such as Moments, a user-created album, or a Smart Album.
 //
 // Apple documentation: https://developer.apple.com/documentation/photos/phassetcollection
 type PHAssetCollection struct {

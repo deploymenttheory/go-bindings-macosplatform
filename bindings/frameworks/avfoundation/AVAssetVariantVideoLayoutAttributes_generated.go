@@ -15,8 +15,6 @@ import (
 )
 
 // AssetVariantVideoLayoutAttributes is an idiomatic wrapper over the Objective-C class AVAssetVariantVideoLayoutAttributes.
-//
-// Attributes that describe the layout of video content.
 type AssetVariantVideoLayoutAttributes struct {
 	objref.Handle
 }

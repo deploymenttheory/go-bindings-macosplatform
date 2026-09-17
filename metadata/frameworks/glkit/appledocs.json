@@ -153,9 +153,6 @@
         }
       }
     },
-    "GLKTextureLoaderError": {
-      "url": "https://developer.apple.com/documentation/glkit/glktextureloadererror"
-    },
     "GLKTextureTarget": {
       "doc": "The kind of texture pointed to by the property.",
       "url": "https://developer.apple.com/documentation/glkit/glktexturetarget",

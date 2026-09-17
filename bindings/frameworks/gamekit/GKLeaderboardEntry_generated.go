@@ -16,8 +16,6 @@ import (
 )
 
 // LeaderboardEntry is an idiomatic wrapper over the Objective-C class GKLeaderboardEntry.
-//
-// Information about a single score by a player on a leaderboard.
 type LeaderboardEntry struct {
 	objref.Handle
 }

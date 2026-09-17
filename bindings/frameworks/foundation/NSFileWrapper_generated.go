@@ -17,8 +17,6 @@ import (
 )
 
 // FileWrapper is an idiomatic wrapper over the Objective-C class NSFileWrapper.
-//
-// A representation of a node (a file, directory, or symbolic link) in the file system.
 type FileWrapper struct {
 	objref.Handle
 }
@@ -75,7 +73,7 @@ func (fw *FileWrapper) String() string {
 	return rt.Description(objref.IDOf(fw))
 }
 
-// NewFileWrapperWithURLOptions creates a new FileWrapper.
+// NewFileWrapperWithURLOptions initializes a file wrapper instance whose kind is determined by the type of file-system node located by the URL. If `url` is a directory, this method recursively creates file wrappers for each node within that directory. Use the `fileWrappers` property to get the file wrappers of the nodes contained by the directory. - Parameters: - url: URL of the file-system node the file wrapper is to represent. - options: Option flags for reading the node located at `url`. See `NSFileWrapperReadingOptions` for possible values. - outError: If an error occurs, upon return contains an `NSError` object that describes the problem. Pass `NULL` if you do not want error information. - Returns: File wrapper for the file-system node at `url`. May be a directory, file, or symbolic link, depending on what is located at the URL. Returns `nil` if reading is not successful.
 func NewFileWrapperWithURLOptions(url string, options FileWrapperReadingOptions) (result *FileWrapper, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSFileWrapper")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
@@ -86,28 +84,28 @@ func NewFileWrapperWithURLOptions(url string, options FileWrapperReadingOptions)
 	return fileWrapperAdopt(_id), nil
 }
 
-// NewFileWrapperDirectoryWithFileWrappers creates a new FileWrapper.
+// NewFileWrapperDirectoryWithFileWrappers initializes the receiver as a directory file wrapper, with a given file-wrapper list. After initialization, the file wrapper is not associated with a file-system node until you save it using -writeToURL:options:originalContentsURL:error:. The receiver is initialized with open permissions: anyone can read, write, or modify the directory on disk. If any file wrapper in the directory doesn't have a preferred filename, its preferred name is automatically set to its corresponding key in the `childrenByPreferredName` dictionary. - Parameter childrenByPreferredName: Key-value dictionary of file wrappers with which to initialize the receiver. The dictionary must contain entries whose values are the file wrappers that are to become children and whose keys are filenames. - Returns: Initialized file wrapper for `fileWrappers`.
 func NewFileWrapperDirectoryWithFileWrappers(childrenByPreferredName map[string]*FileWrapper) *FileWrapper {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSFileWrapper")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initDirectoryWithFileWrappers:"), rt.MapToDict(childrenByPreferredName, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *FileWrapper) objc.ID { return objref.IDOf(_v) }))
 	return fileWrapperAdopt(_id)
 }
 
-// NewFileWrapperRegularFileWithContents creates a new FileWrapper.
+// NewFileWrapperRegularFileWithContents initializes the receiver as a regular-file file wrapper. After initialization, the file wrapper is not associated with a file-system node until you save it using -writeToURL:options:originalContentsURL:error:. The file wrapper is initialized with open permissions: anyone can write to or read the file wrapper. - Parameter contents: Contents of the file. - Returns: Initialized regular-file file wrapper containing `contents`.
 func NewFileWrapperRegularFileWithContents(contents []byte) *FileWrapper {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSFileWrapper")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initRegularFileWithContents:"), rt.BytesToNSData(contents))
 	return fileWrapperAdopt(_id)
 }
 
-// NewFileWrapperSymbolicLinkWithDestinationURL creates a new FileWrapper.
+// NewFileWrapperSymbolicLinkWithDestinationURL initializes the receiver as a symbolic-link file wrapper that links to a specified file. The file wrapper is not associated with a file-system node until you save it using -writeToURL:options:originalContentsURL:error:. The file wrapper is initialized with open permissions: anyone can modify or read the file reference. - Parameter url: URL of the file the file wrapper is to reference. - Returns: Initialized symbolic-link file wrapper referencing `url`.
 func NewFileWrapperSymbolicLinkWithDestinationURL(url string) *FileWrapper {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSFileWrapper")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initSymbolicLinkWithDestinationURL:"), rt.FileURL(url))
 	return fileWrapperAdopt(_id)
 }
 
-// NewFileWrapperWithSerializedRepresentation creates a new FileWrapper.
+// NewFileWrapperWithSerializedRepresentation initializes the receiver as a regular-file file wrapper from given serialized data. The file wrapper is not associated with a file-system node until you save it using -writeToURL:options:originalContentsURL:error:. - Parameter serializeRepresentation: Serialized representation of a file wrapper in the format used for the `NSFileContentsPboardType` pasteboard type. - Returns: Regular-file file wrapper initialized from `serializedRepresentation`.
 func NewFileWrapperWithSerializedRepresentation(serializeRepresentation []byte) *FileWrapper {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSFileWrapper")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSerializedRepresentation:"), rt.BytesToNSData(serializeRepresentation))
@@ -122,35 +120,35 @@ func NewFileWrapperWithCoder(inCoder *Coder) *FileWrapper {
 	return fileWrapperAdopt(_id)
 }
 
-// NewFileWrapperWithPath creates a new FileWrapper.
+// NewFileWrapperWithPath initializes a file wrapper instance whose kind is determined by the type of file-system node located by the path. If `node` is a directory, this method recursively creates file wrappers for each node within that directory.
 func NewFileWrapperWithPath(path string) *FileWrapper {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSFileWrapper")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPath:"), purego.NSString(path))
 	return fileWrapperAdopt(_id)
 }
 
-// NewFileWrapperSymbolicLinkWithDestination creates a new FileWrapper.
+// NewFileWrapperSymbolicLinkWithDestination initializes the receiver as a symbolic-link file wrapper. The receiver is not associated to a file-system node until you save it using -writeToFile:atomically:updateFilenames:. It's also initialized with open permissions; anyone can read or write the disk representations it saves.
 func NewFileWrapperSymbolicLinkWithDestination(path string) *FileWrapper {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSFileWrapper")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initSymbolicLinkWithDestination:"), purego.NSString(path))
 	return fileWrapperAdopt(_id)
 }
 
-// WithPreferredFilename sets the preferred filename.
+// WithPreferredFilename sets the preferred filename for the file wrapper object. This name is normally used as the dictionary key when a child file wrapper is added to a directory file wrapper. However, if another file wrapper with the same preferred name already exists in the directory file wrapper when this object is added, the filename assigned as the dictionary key may differ from the preferred filename. When you change the preferred filename, the default implementation of this property causes the existing parent directory file wrappers to remove and re-add the child to accommodate the change. Preferred filenames of children are not preserved when you write a file wrapper to disk and then later instantiate another file wrapper by reading the file from disk. If you need to preserve the user-visible names of attachments, you have to store the names yourself. Some instances of NSFileWrapper may be created without a preferredFilename (e.g. -initDirectoryWithFileWrappers: or -initRegularFileWithContents:), meaning preferredFilename may be nil. However, setting nil is never allowed and will result in an exception.
 func (fw *FileWrapper) WithPreferredFilename(preferredFilename StringProvider) *FileWrapper {
 	defer runtime.KeepAlive(preferredFilename)
 	objc.Send[objc.ID](objref.IDOf(fw), objc.RegisterName("setPreferredFilename:"), objref.IDOf(preferredFilename))
 	return fw
 }
 
-// WithFilename sets the filename.
+// WithFilename sets the filename of the file wrapper object. This property contains the file wrapper's filename, or `nil` when the file wrapper has no corresponding file-system node. The filename is used for record-keeping purposes only and is set automatically when the file wrapper is created from the file system using -initWithURL:options:error: and when it's saved to the file system using -writeToURL:options:originalContentsURL:error: (although this method allows you to request that the filename not be updated). The filename is usually the same as the preferred filename, but might instead be a name derived from the preferred filename. You can use this method to get the name of a child that's just been read. Don't use this method to get the name of a child that's about to be written, because the name might be about to change; send -keyForFileWrapper: to the parent instead.
 func (fw *FileWrapper) WithFilename(filename StringProvider) *FileWrapper {
 	defer runtime.KeepAlive(filename)
 	objc.Send[objc.ID](objref.IDOf(fw), objc.RegisterName("setFilename:"), objref.IDOf(filename))
 	return fw
 }
 
-// WithFileAttributes sets the file attributes.
+// WithFileAttributes sets a dictionary of file attributes. The file attributes' dictionary is the same format as that returned by -[NSFileManager attributesOfItemAtPath:error:].
 func (fw *FileWrapper) WithFileAttributes(fileAttributes map[string]obj.Object) *FileWrapper {
 	objc.Send[objc.ID](objref.IDOf(fw), objc.RegisterName("setFileAttributes:"), rt.MapToDict(fileAttributes, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return fw
@@ -168,14 +166,14 @@ func (fw *FileWrapper) WithScriptingProperties(scriptingProperties map[string]ob
 	return fw
 }
 
-// MatchesContentsOfURL wraps the corresponding Objective-C method.
+// MatchesContentsOfURL indicates whether the contents of a file wrapper matches a directory, regular file, or symbolic link on disk. The contents of files are not compared; matching of regular files is based on file modification dates. For a directory, children are compared against the files in the directory, recursively. Because children of directory file wrappers are not read immediately by the -initWithURL:options:error: method unless the NSFileWrapperReadingImmediate reading option is used, even a newly-created directory file wrapper might not have the same contents as the directory on disk. You can use this method to determine whether the file wrapper's contents in memory need to be updated. If the file wrapper needs updating, use the -readFromURL:options:error: method with the NSFileWrapperReadingImmediate reading option. - Parameter url: URL of the file-system node with which to compare the file wrapper. - Returns: `YES` when the contents of the file wrapper match the contents of `url`, `NO` otherwise.
 func (fw *FileWrapper) MatchesContentsOfURL(url string) bool {
 	defer runtime.KeepAlive(fw)
 	_r := objc.Send[bool](objref.IDOf(fw), objc.RegisterName("matchesContentsOfURL:"), rt.FileURL(url))
 	return _r
 }
 
-// ReadFromURL reads from URL.
+// ReadFromURL recursively rereads the entire contents of a file wrapper from the specified location on disk. When reading a directory, children are added and removed as necessary to match the file system. - Parameters: - url: URL of the file-system node corresponding to the file wrapper. - options: Option flags for reading the node located at `url`. See `NSFileWrapperReadingOptions` for possible values. - outError: If an error occurs, upon return contains an `NSError` object that describes the problem. Pass `NULL` if you do not want error information. - Returns: `YES` if successful. If not successful, returns `NO` after setting `outError` to an `NSError` object that describes the reason why the file wrapper could not be reread.
 func (fw *FileWrapper) ReadFromURL(url string, options FileWrapperReadingOptions) error {
 	defer runtime.KeepAlive(fw)
 	var _nsErr uintptr
@@ -186,7 +184,7 @@ func (fw *FileWrapper) ReadFromURL(url string, options FileWrapperReadingOptions
 	return nil
 }
 
-// WriteToURLOptionsOriginalContentsURL writes to URL options original contents URL.
+// WriteToURLOptionsOriginalContentsURL recursively writes the entire contents of a file wrapper to a given file-system URL. - Parameters: - url: URL of the file-system node to which the file wrapper's contents are written. - options: Option flags for writing to the node located at `url`. See `NSFileWrapperWritingOptions` for possible values. - originalContentsURL: The location of a previous revision of the contents being written. The default implementation of this method attempts to avoid unnecessary I/O by writing hard links to regular files instead of actually writing out their contents when the contents have not changed. The child file wrappers must return accurate values when sent -filename for this to work. Use the NSFileWrapperWritingWithNameUpdating writing option to increase the likelihood of that. Specify `nil` for this parameter if there is no earlier version of the contents or if you want to ensure that all the contents are written to files. - outError: If an error occurs, upon return contains an `NSError` object that describes the problem. Pass `NULL` if you do not want error information. - Returns: `YES` when the write operation is successful. If not successful, returns `NO` after setting `outError` to an `NSError` object that describes the reason why the file wrapper's contents could not be written.
 func (fw *FileWrapper) WriteToURLOptionsOriginalContentsURL(url string, options FileWrapperWritingOptions, originalContentsURL string) error {
 	defer runtime.KeepAlive(fw)
 	var _nsErr uintptr
@@ -197,7 +195,7 @@ func (fw *FileWrapper) WriteToURLOptionsOriginalContentsURL(url string, options 
 	return nil
 }
 
-// AddFileWrapper adds file wrapper.
+// AddFileWrapper adds a child file wrapper to the receiver, which must be a directory file wrapper. Use this method to add an existing file wrapper as a child of a directory file wrapper. If the file wrapper does not have a preferred filename, set the `preferredFilename` property to give it one before calling -addFileWrapper:. To create a new file wrapper and add it to a directory, use the -addRegularFileWithContents:preferredFilename: method. This method raises `NSInternalInconsistencyException` if the receiver is not a directory file wrapper. This method raises `NSInvalidArgumentException` if the child file wrapper doesn't have a preferred name. - Parameter child: File wrapper to add to the directory. - Returns: Dictionary key used to store `fileWrapper` in the directory's list of file wrappers. The dictionary key is a unique filename, which is the same as the passed-in file wrapper's preferred filename unless that name is already in use as a key in the directory's dictionary of children.
 func (fw *FileWrapper) AddFileWrapper(child *FileWrapper) string {
 	defer runtime.KeepAlive(fw)
 	defer runtime.KeepAlive(child)
@@ -208,7 +206,7 @@ func (fw *FileWrapper) AddFileWrapper(child *FileWrapper) string {
 	return purego.GoString(_r)
 }
 
-// AddRegularFileWithContentsPreferredFilename adds regular file with contents preferred filename.
+// AddRegularFileWithContentsPreferredFilename creates a regular-file file wrapper with the given contents and adds it to the receiver, which must be a directory file wrapper. This is a convenience method. The default implementation allocates a new file wrapper, initializes it with -initRegularFileWithContents:, sets its preferred filename, adds it to the directory with -addFileWrapper:, and returns what -addFileWrapper: returned. This method raises `NSInternalInconsistencyException` if the receiver is not a directory file wrapper. This method raises `NSInvalidArgumentException` if you pass `nil` or an empty value for `filename`. - Parameters: - data: Contents for the new regular-file file wrapper. - fileName: Preferred filename for the new regular-file file wrapper. - Returns: Dictionary key used to store the new file wrapper in the directory's list of file wrappers. The dictionary key is a unique filename, which is the same as the passed-in file wrapper's preferred filename unless that name is already in use as a key in the directory's dictionary of children.
 func (fw *FileWrapper) AddRegularFileWithContentsPreferredFilename(data []byte, fileName string) string {
 	defer runtime.KeepAlive(fw)
 	_r := objc.Send[objc.ID](objref.IDOf(fw), objc.RegisterName("addRegularFileWithContents:preferredFilename:"), rt.BytesToNSData(data), purego.NSString(fileName))
@@ -218,14 +216,14 @@ func (fw *FileWrapper) AddRegularFileWithContentsPreferredFilename(data []byte, 
 	return purego.GoString(_r)
 }
 
-// RemoveFileWrapper removes file wrapper.
+// RemoveFileWrapper removes a child file wrapper from the receiver, which must be a directory file wrapper. This method raises `NSInternalInconsistencyException` if the receiver is not a directory file wrapper. - Parameter child: File wrapper to remove from the directory.
 func (fw *FileWrapper) RemoveFileWrapper(child *FileWrapper) {
 	defer runtime.KeepAlive(fw)
 	defer runtime.KeepAlive(child)
 	objc.Send[objc.ID](objref.IDOf(fw), objc.RegisterName("removeFileWrapper:"), objref.IDOf(child))
 }
 
-// KeyForFileWrapper wraps the corresponding Objective-C method.
+// KeyForFileWrapper returns the dictionary key used by a directory to identify a given file wrapper. The dictionary key is a unique filename, which may not be the same as the passed-in file wrapper's preferred filename if more than one file wrapper in the directory's dictionary of children has the same preferred filename. Returns `nil` if the file wrapper specified in `child` is not a child of the directory. This method raises `NSInternalInconsistencyException` if the receiver is not a directory file wrapper. - Parameter child: The child file wrapper for which you want the key. - Returns: Dictionary key used to store the file wrapper in the directory's list of file wrappers.
 func (fw *FileWrapper) KeyForFileWrapper(child *FileWrapper) string {
 	defer runtime.KeepAlive(fw)
 	defer runtime.KeepAlive(child)
@@ -236,28 +234,28 @@ func (fw *FileWrapper) KeyForFileWrapper(child *FileWrapper) string {
 	return purego.GoString(_r)
 }
 
-// IsDirectory reports whether the object is directory.
+// IsDirectory reports whether this property contains a boolean value indicating whether the file wrapper is a directory file wrapper. Invocations of -readFromURL:options:error: may change the value of this property, if the type of the file on disk has changed.
 func (fw *FileWrapper) IsDirectory() bool {
 	defer runtime.KeepAlive(fw)
 	_r := objc.Send[bool](objref.IDOf(fw), objc.RegisterName("isDirectory"))
 	return _r
 }
 
-// IsRegularFile reports whether the object is regular file.
+// IsRegularFile reports whether this property contains a boolean value that indicates whether the file wrapper object is a regular-file. Invocations of -readFromURL:options:error: may change the value of this property if the type of the file on disk has changed.
 func (fw *FileWrapper) IsRegularFile() bool {
 	defer runtime.KeepAlive(fw)
 	_r := objc.Send[bool](objref.IDOf(fw), objc.RegisterName("isRegularFile"))
 	return _r
 }
 
-// IsSymbolicLink reports whether the object is symbolic link.
+// IsSymbolicLink reports whether a boolean that indicates whether the file wrapper object is a symbolic-link file wrapper. Invocations of -readFromURL:options:error: may change the value contained by this property, if the type of the file on disk has changed.
 func (fw *FileWrapper) IsSymbolicLink() bool {
 	defer runtime.KeepAlive(fw)
 	_r := objc.Send[bool](objref.IDOf(fw), objc.RegisterName("isSymbolicLink"))
 	return _r
 }
 
-// PreferredFilename returns the preferred filename.
+// PreferredFilename returns the preferred filename for the file wrapper object. This name is normally used as the dictionary key when a child file wrapper is added to a directory file wrapper. However, if another file wrapper with the same preferred name already exists in the directory file wrapper when this object is added, the filename assigned as the dictionary key may differ from the preferred filename. When you change the preferred filename, the default implementation of this property causes the existing parent directory file wrappers to remove and re-add the child to accommodate the change. Preferred filenames of children are not preserved when you write a file wrapper to disk and then later instantiate another file wrapper by reading the file from disk. If you need to preserve the user-visible names of attachments, you have to store the names yourself. Some instances of NSFileWrapper may be created without a preferredFilename (e.g. -initDirectoryWithFileWrappers: or -initRegularFileWithContents:), meaning preferredFilename may be nil. However, setting nil is never allowed and will result in an exception.
 func (fw *FileWrapper) PreferredFilename() string {
 	defer runtime.KeepAlive(fw)
 	_r := objc.Send[objc.ID](objref.IDOf(fw), objc.RegisterName("preferredFilename"))
@@ -267,7 +265,7 @@ func (fw *FileWrapper) PreferredFilename() string {
 	return purego.GoString(_r)
 }
 
-// Filename returns the filename.
+// Filename returns the filename of the file wrapper object. This property contains the file wrapper's filename, or `nil` when the file wrapper has no corresponding file-system node. The filename is used for record-keeping purposes only and is set automatically when the file wrapper is created from the file system using -initWithURL:options:error: and when it's saved to the file system using -writeToURL:options:originalContentsURL:error: (although this method allows you to request that the filename not be updated). The filename is usually the same as the preferred filename, but might instead be a name derived from the preferred filename. You can use this method to get the name of a child that's just been read. Don't use this method to get the name of a child that's about to be written, because the name might be about to change; send -keyForFileWrapper: to the parent instead.
 func (fw *FileWrapper) Filename() string {
 	defer runtime.KeepAlive(fw)
 	_r := objc.Send[objc.ID](objref.IDOf(fw), objc.RegisterName("filename"))
@@ -277,63 +275,63 @@ func (fw *FileWrapper) Filename() string {
 	return purego.GoString(_r)
 }
 
-// FileAttributes returns the file attributes.
+// FileAttributes returns a dictionary of file attributes. The file attributes' dictionary is the same format as that returned by -[NSFileManager attributesOfItemAtPath:error:].
 func (fw *FileWrapper) FileAttributes() map[string]obj.Object {
 	defer runtime.KeepAlive(fw)
 	_r := objc.Send[objc.ID](objref.IDOf(fw), objc.RegisterName("fileAttributes"))
 	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SerializedRepresentation returns the serialized representation.
+// SerializedRepresentation returns the contents of the file wrapper as an opaque data object. This property contains a data object in the format used by the NSFileContentsPboardType pasteboard type. This data object is also suitable for passing to -initWithSerializedRepresentation:. This property may be `nil` if the user modifies the contents of the file system node after you call -readFromURL:options:error: or -initWithURL:options:error:, but before NSFileWrapper has read the contents of the file. You can use the NSFileWrapperReadingImmediate reading option to reduce the likelihood of this problem.
 func (fw *FileWrapper) SerializedRepresentation() []byte {
 	defer runtime.KeepAlive(fw)
 	_r := objc.Send[objc.ID](objref.IDOf(fw), objc.RegisterName("serializedRepresentation"))
 	return rt.NSDataToBytes(_r)
 }
 
-// FileWrappers returns the file wrappers.
+// FileWrappers returns the file wrappers contained by a directory file wrapper. The dictionary contains entries whose values are the file wrappers and whose keys are the unique filenames that have been assigned to each one. This property may contain `nil` if the user modifies the directory after you call -readFromURL:options:error: or -initWithURL:options:error: but before NSFileWrapper has read the contents of the directory. Use the NSFileWrapperReadingImmediate reading option to reduce the likelihood of that problem. This property raises `NSInternalInconsistencyException` if the file wrapper object is not a directory file wrapper.
 func (fw *FileWrapper) FileWrappers() map[string]*FileWrapper {
 	defer runtime.KeepAlive(fw)
 	_r := objc.Send[objc.ID](objref.IDOf(fw), objc.RegisterName("fileWrappers"))
 	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) *FileWrapper { return FileWrapperFromID(_id) })
 }
 
-// RegularFileContents returns the regular file contents.
+// RegularFileContents returns the contents of the file-system node associated with a regular-file file wrapper. This property may contain `nil` if the user modifies the file after you call -readFromURL:options:error: or -initWithURL:options:error: but before NSFileWrapper has read the contents of the file. Use the NSFileWrapperReadingImmediate reading option to reduce the likelihood of that problem. This property raises `NSInternalInconsistencyException` if the file wrapper object is not a regular-file file wrapper.
 func (fw *FileWrapper) RegularFileContents() []byte {
 	defer runtime.KeepAlive(fw)
 	_r := objc.Send[objc.ID](objref.IDOf(fw), objc.RegisterName("regularFileContents"))
 	return rt.NSDataToBytes(_r)
 }
 
-// SymbolicLinkDestinationURL returns the symbolic link destination URL.
+// SymbolicLinkDestinationURL returns the URL referenced by the file wrapper object, which must be a symbolic-link file wrapper. This property may contain `nil` if the user modifies the symbolic link after you call -readFromURL:options:error: or -initWithURL:options:error: but before NSFileWrapper has read the contents of the link. Use the NSFileWrapperReadingImmediate reading option to reduce the likelihood of that problem. This property raises `NSInternalInconsistencyException` if the file wrapper object is not a symbolic-link file wrapper.
 func (fw *FileWrapper) SymbolicLinkDestinationURL() string {
 	defer runtime.KeepAlive(fw)
 	_r := objc.Send[objc.ID](objref.IDOf(fw), objc.RegisterName("symbolicLinkDestinationURL"))
 	return rt.URLString(_r)
 }
 
-// NeedsToBeUpdatedFromPath wraps the corresponding Objective-C method.
+// NeedsToBeUpdatedFromPath indicates whether the file wrapper needs to be updated to match a given file-system node.
 func (fw *FileWrapper) NeedsToBeUpdatedFromPath(path string) bool {
 	defer runtime.KeepAlive(fw)
 	_r := objc.Send[bool](objref.IDOf(fw), objc.RegisterName("needsToBeUpdatedFromPath:"), purego.NSString(path))
 	return _r
 }
 
-// UpdateFromPath updates from path.
+// UpdateFromPath updates the file wrapper to match a given file-system node. For a directory file wrapper, the contained file wrappers are also sent -updateFromPath: messages. If nodes in the corresponding directory on the file system have been added or removed, corresponding file wrappers are released or created as needed.
 func (fw *FileWrapper) UpdateFromPath(path string) bool {
 	defer runtime.KeepAlive(fw)
 	_r := objc.Send[bool](objref.IDOf(fw), objc.RegisterName("updateFromPath:"), purego.NSString(path))
 	return _r
 }
 
-// WriteToFileAtomicallyUpdateFilenames writes to file atomically update filenames.
+// WriteToFileAtomicallyUpdateFilenames writes a file wrapper's contents to a given file-system node.
 func (fw *FileWrapper) WriteToFileAtomicallyUpdateFilenames(path string, atomicFlag bool, updateFilenamesFlag bool) bool {
 	defer runtime.KeepAlive(fw)
 	_r := objc.Send[bool](objref.IDOf(fw), objc.RegisterName("writeToFile:atomically:updateFilenames:"), purego.NSString(path), atomicFlag, updateFilenamesFlag)
 	return _r
 }
 
-// AddFileWithPath adds file with path.
+// AddFileWithPath creates a file wrapper from a given file-system node and adds it to the receiver, which must be a directory file wrapper.
 func (fw *FileWrapper) AddFileWithPath(path string) string {
 	defer runtime.KeepAlive(fw)
 	_r := objc.Send[objc.ID](objref.IDOf(fw), objc.RegisterName("addFileWithPath:"), purego.NSString(path))
@@ -343,7 +341,7 @@ func (fw *FileWrapper) AddFileWithPath(path string) string {
 	return purego.GoString(_r)
 }
 
-// AddSymbolicLinkWithDestinationPreferredFilename adds symbolic link with destination preferred filename.
+// AddSymbolicLinkWithDestinationPreferredFilename creates a symbolic-link file wrapper pointing to a given file-system node and adds it to the receiver, which must be a directory file wrapper.
 func (fw *FileWrapper) AddSymbolicLinkWithDestinationPreferredFilename(path string, filename string) string {
 	defer runtime.KeepAlive(fw)
 	_r := objc.Send[objc.ID](objref.IDOf(fw), objc.RegisterName("addSymbolicLinkWithDestination:preferredFilename:"), purego.NSString(path), purego.NSString(filename))
@@ -353,7 +351,7 @@ func (fw *FileWrapper) AddSymbolicLinkWithDestinationPreferredFilename(path stri
 	return purego.GoString(_r)
 }
 
-// SymbolicLinkDestination returns the symbolic link destination.
+// SymbolicLinkDestination provides the pathname referenced by the file wrapper object, which must be a symbolic-link file wrapper. This method raises `NSInternalInconsistencyException` if the receiver is not a symbolic-link file wrapper.
 func (fw *FileWrapper) SymbolicLinkDestination() string {
 	defer runtime.KeepAlive(fw)
 	_r := objc.Send[objc.ID](objref.IDOf(fw), objc.RegisterName("symbolicLinkDestination"))

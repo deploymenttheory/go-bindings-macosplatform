@@ -9,8 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A unit of measure for quantities of information.
-//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsunitinformationstorage
 type NSUnitInformationStorage struct {
 	NSDimension
@@ -81,6 +79,7 @@ func NSUnitInformationStorageBits() *NSUnitInformationStorage {
 	return NSUnitInformationStorageFromID(_ret)
 }
 
+// The nibbles unit of information storage.
 func NSUnitInformationStorageNibbles() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelNibbles)
 	if _ret != 0 {
@@ -89,6 +88,7 @@ func NSUnitInformationStorageNibbles() *NSUnitInformationStorage {
 	return NSUnitInformationStorageFromID(_ret)
 }
 
+// The yottabytes unit of information storage.
 func NSUnitInformationStorageYottabytes() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelYottabytes)
 	if _ret != 0 {
@@ -97,6 +97,7 @@ func NSUnitInformationStorageYottabytes() *NSUnitInformationStorage {
 	return NSUnitInformationStorageFromID(_ret)
 }
 
+// The zettabytes unit of information storage.
 func NSUnitInformationStorageZettabytes() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelZettabytes)
 	if _ret != 0 {
@@ -105,6 +106,7 @@ func NSUnitInformationStorageZettabytes() *NSUnitInformationStorage {
 	return NSUnitInformationStorageFromID(_ret)
 }
 
+// The exabytes unit of information storage.
 func NSUnitInformationStorageExabytes() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelExabytes)
 	if _ret != 0 {
@@ -113,6 +115,7 @@ func NSUnitInformationStorageExabytes() *NSUnitInformationStorage {
 	return NSUnitInformationStorageFromID(_ret)
 }
 
+// The petabytes unit of information storage.
 func NSUnitInformationStoragePetabytes() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelPetabytes)
 	if _ret != 0 {
@@ -121,6 +124,7 @@ func NSUnitInformationStoragePetabytes() *NSUnitInformationStorage {
 	return NSUnitInformationStorageFromID(_ret)
 }
 
+// The terabytes unit of information storage.
 func NSUnitInformationStorageTerabytes() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelTerabytes)
 	if _ret != 0 {
@@ -129,6 +133,7 @@ func NSUnitInformationStorageTerabytes() *NSUnitInformationStorage {
 	return NSUnitInformationStorageFromID(_ret)
 }
 
+// The gigabytes unit of information storage.
 func NSUnitInformationStorageGigabytes() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelGigabytes)
 	if _ret != 0 {
@@ -137,6 +142,7 @@ func NSUnitInformationStorageGigabytes() *NSUnitInformationStorage {
 	return NSUnitInformationStorageFromID(_ret)
 }
 
+// The megabytes unit of information storage.
 func NSUnitInformationStorageMegabytes() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelMegabytes)
 	if _ret != 0 {
@@ -145,6 +151,7 @@ func NSUnitInformationStorageMegabytes() *NSUnitInformationStorage {
 	return NSUnitInformationStorageFromID(_ret)
 }
 
+// The kilobytes unit of information storage.
 func NSUnitInformationStorageKilobytes() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelKilobytes)
 	if _ret != 0 {
@@ -153,6 +160,7 @@ func NSUnitInformationStorageKilobytes() *NSUnitInformationStorage {
 	return NSUnitInformationStorageFromID(_ret)
 }
 
+// The yottabits unit of information storage.
 func NSUnitInformationStorageYottabits() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelYottabits)
 	if _ret != 0 {
@@ -161,6 +169,7 @@ func NSUnitInformationStorageYottabits() *NSUnitInformationStorage {
 	return NSUnitInformationStorageFromID(_ret)
 }
 
+// The zettabits unit of information storage.
 func NSUnitInformationStorageZettabits() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelZettabits)
 	if _ret != 0 {
@@ -169,6 +178,7 @@ func NSUnitInformationStorageZettabits() *NSUnitInformationStorage {
 	return NSUnitInformationStorageFromID(_ret)
 }
 
+// The exabits unit of information storage.
 func NSUnitInformationStorageExabits() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelExabits)
 	if _ret != 0 {
@@ -177,6 +187,7 @@ func NSUnitInformationStorageExabits() *NSUnitInformationStorage {
 	return NSUnitInformationStorageFromID(_ret)
 }
 
+// The petabits unit of information storage.
 func NSUnitInformationStoragePetabits() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelPetabits)
 	if _ret != 0 {
@@ -185,6 +196,7 @@ func NSUnitInformationStoragePetabits() *NSUnitInformationStorage {
 	return NSUnitInformationStorageFromID(_ret)
 }
 
+// The terabits unit of information storage.
 func NSUnitInformationStorageTerabits() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelTerabits)
 	if _ret != 0 {
@@ -193,6 +205,7 @@ func NSUnitInformationStorageTerabits() *NSUnitInformationStorage {
 	return NSUnitInformationStorageFromID(_ret)
 }
 
+// The gigabits unit of information storage.
 func NSUnitInformationStorageGigabits() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelGigabits)
 	if _ret != 0 {
@@ -201,6 +214,7 @@ func NSUnitInformationStorageGigabits() *NSUnitInformationStorage {
 	return NSUnitInformationStorageFromID(_ret)
 }
 
+// The megabits unit of information storage.
 func NSUnitInformationStorageMegabits() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelMegabits)
 	if _ret != 0 {
@@ -209,6 +223,7 @@ func NSUnitInformationStorageMegabits() *NSUnitInformationStorage {
 	return NSUnitInformationStorageFromID(_ret)
 }
 
+// The kilobits unit of information storage.
 func NSUnitInformationStorageKilobits() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelKilobits)
 	if _ret != 0 {
@@ -217,6 +232,7 @@ func NSUnitInformationStorageKilobits() *NSUnitInformationStorage {
 	return NSUnitInformationStorageFromID(_ret)
 }
 
+// The yobibytes unit of information storage.
 func NSUnitInformationStorageYobibytes() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelYobibytes)
 	if _ret != 0 {
@@ -225,6 +241,7 @@ func NSUnitInformationStorageYobibytes() *NSUnitInformationStorage {
 	return NSUnitInformationStorageFromID(_ret)
 }
 
+// The zebibytes unit of information storage.
 func NSUnitInformationStorageZebibytes() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelZebibytes)
 	if _ret != 0 {
@@ -233,6 +250,7 @@ func NSUnitInformationStorageZebibytes() *NSUnitInformationStorage {
 	return NSUnitInformationStorageFromID(_ret)
 }
 
+// The exbibytes unit of information storage.
 func NSUnitInformationStorageExbibytes() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelExbibytes)
 	if _ret != 0 {
@@ -241,6 +259,7 @@ func NSUnitInformationStorageExbibytes() *NSUnitInformationStorage {
 	return NSUnitInformationStorageFromID(_ret)
 }
 
+// The pebibytes unit of information storage.
 func NSUnitInformationStoragePebibytes() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelPebibytes)
 	if _ret != 0 {
@@ -249,6 +268,7 @@ func NSUnitInformationStoragePebibytes() *NSUnitInformationStorage {
 	return NSUnitInformationStorageFromID(_ret)
 }
 
+// The tebibytes unit of information storage.
 func NSUnitInformationStorageTebibytes() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelTebibytes)
 	if _ret != 0 {
@@ -257,6 +277,7 @@ func NSUnitInformationStorageTebibytes() *NSUnitInformationStorage {
 	return NSUnitInformationStorageFromID(_ret)
 }
 
+// The gibibytes unit of information storage.
 func NSUnitInformationStorageGibibytes() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelGibibytes)
 	if _ret != 0 {
@@ -265,6 +286,7 @@ func NSUnitInformationStorageGibibytes() *NSUnitInformationStorage {
 	return NSUnitInformationStorageFromID(_ret)
 }
 
+// The mebibytes unit of information storage.
 func NSUnitInformationStorageMebibytes() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelMebibytes)
 	if _ret != 0 {
@@ -273,6 +295,7 @@ func NSUnitInformationStorageMebibytes() *NSUnitInformationStorage {
 	return NSUnitInformationStorageFromID(_ret)
 }
 
+// The kibibytes unit of information storage.
 func NSUnitInformationStorageKibibytes() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelKibibytes)
 	if _ret != 0 {
@@ -281,6 +304,7 @@ func NSUnitInformationStorageKibibytes() *NSUnitInformationStorage {
 	return NSUnitInformationStorageFromID(_ret)
 }
 
+// The yobibits unit of information storage.
 func NSUnitInformationStorageYobibits() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelYobibits)
 	if _ret != 0 {
@@ -289,6 +313,7 @@ func NSUnitInformationStorageYobibits() *NSUnitInformationStorage {
 	return NSUnitInformationStorageFromID(_ret)
 }
 
+// The zebibits unit of information storage.
 func NSUnitInformationStorageZebibits() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelZebibits)
 	if _ret != 0 {
@@ -297,6 +322,7 @@ func NSUnitInformationStorageZebibits() *NSUnitInformationStorage {
 	return NSUnitInformationStorageFromID(_ret)
 }
 
+// The exbibits unit of information storage.
 func NSUnitInformationStorageExbibits() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelExbibits)
 	if _ret != 0 {
@@ -305,6 +331,7 @@ func NSUnitInformationStorageExbibits() *NSUnitInformationStorage {
 	return NSUnitInformationStorageFromID(_ret)
 }
 
+// The pebibits unit of information storage.
 func NSUnitInformationStoragePebibits() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelPebibits)
 	if _ret != 0 {
@@ -313,6 +340,7 @@ func NSUnitInformationStoragePebibits() *NSUnitInformationStorage {
 	return NSUnitInformationStorageFromID(_ret)
 }
 
+// The tebibits unit of information storage.
 func NSUnitInformationStorageTebibits() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelTebibits)
 	if _ret != 0 {
@@ -321,6 +349,7 @@ func NSUnitInformationStorageTebibits() *NSUnitInformationStorage {
 	return NSUnitInformationStorageFromID(_ret)
 }
 
+// The gibibits unit of information storage.
 func NSUnitInformationStorageGibibits() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelGibibits)
 	if _ret != 0 {
@@ -329,6 +358,7 @@ func NSUnitInformationStorageGibibits() *NSUnitInformationStorage {
 	return NSUnitInformationStorageFromID(_ret)
 }
 
+// The mebibits unit of information storage.
 func NSUnitInformationStorageMebibits() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelMebibits)
 	if _ret != 0 {
@@ -337,6 +367,7 @@ func NSUnitInformationStorageMebibits() *NSUnitInformationStorage {
 	return NSUnitInformationStorageFromID(_ret)
 }
 
+// The kibibits unit of information storage.
 func NSUnitInformationStorageKibibits() *NSUnitInformationStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitInformationStorage), _nSUnitInformationStorageSelKibibits)
 	if _ret != 0 {

@@ -22,6 +22,7 @@ var (
 	_nSMutableParagraphStyleSelAddTabStop                              = objc.RegisterName("addTabStop:")
 	_nSMutableParagraphStyleSelRemoveTabStop                           = objc.RegisterName("removeTabStop:")
 	_nSMutableParagraphStyleSelSetParagraphStyle                       = objc.RegisterName("setParagraphStyle:")
+	_nSMutableParagraphStyleSelSetAlignment                            = objc.RegisterName("setAlignment:")
 	_nSMutableParagraphStyleSelSetLineSpacing                          = objc.RegisterName("setLineSpacing:")
 	_nSMutableParagraphStyleSelSetParagraphSpacing                     = objc.RegisterName("setParagraphSpacing:")
 	_nSMutableParagraphStyleSelSetFirstLineHeadIndent                  = objc.RegisterName("setFirstLineHeadIndent:")
@@ -40,9 +41,8 @@ var (
 	_nSMutableParagraphStyleSelSetAllowsDefaultTighteningForTruncation = objc.RegisterName("setAllowsDefaultTighteningForTruncation:")
 	_nSMutableParagraphStyleSelSetLineBreakStrategy                    = objc.RegisterName("setLineBreakStrategy:")
 	_nSMutableParagraphStyleSelSetTextLists                            = objc.RegisterName("setTextLists:")
-	_nSMutableParagraphStyleSelSetAlignment                            = objc.RegisterName("setAlignment:")
-	_nSMutableParagraphStyleSelSetTighteningFactorForTruncation        = objc.RegisterName("setTighteningFactorForTruncation:")
 	_nSMutableParagraphStyleSelSetTextBlocks                           = objc.RegisterName("setTextBlocks:")
+	_nSMutableParagraphStyleSelSetTighteningFactorForTruncation        = objc.RegisterName("setTighteningFactorForTruncation:")
 	_nSMutableParagraphStyleSelSetHeaderLevel                          = objc.RegisterName("setHeaderLevel:")
 )
 
@@ -69,6 +69,10 @@ func (o *NSMutableParagraphStyle) RemoveTabStop(anObject *NSTextTab) {
 // Replaces the subattributes of the paragraph with those in the specified paragraph style object.
 func (o *NSMutableParagraphStyle) SetParagraphStyle(obj *NSParagraphStyle) {
 	o.Ptr().Send(_nSMutableParagraphStyleSelSetParagraphStyle, obj.Ptr())
+}
+
+func (o *NSMutableParagraphStyle) SetAlignment(alignment NSTextAlignment) {
+	o.Ptr().Send(_nSMutableParagraphStyleSelSetAlignment, alignment)
 }
 
 func (o *NSMutableParagraphStyle) SetLineSpacing(lineSpacing float64) {
@@ -143,16 +147,12 @@ func (o *NSMutableParagraphStyle) SetTextLists(textLists *foundation.NSArray[*NS
 	o.Ptr().Send(_nSMutableParagraphStyleSelSetTextLists, textLists.Ptr())
 }
 
-func (o *NSMutableParagraphStyle) SetAlignment(alignment NSTextAlignment) {
-	o.Ptr().Send(_nSMutableParagraphStyleSelSetAlignment, alignment)
+func (o *NSMutableParagraphStyle) SetTextBlocks(textBlocks *foundation.NSArray[*NSTextBlock]) {
+	o.Ptr().Send(_nSMutableParagraphStyleSelSetTextBlocks, textBlocks.Ptr())
 }
 
 func (o *NSMutableParagraphStyle) SetTighteningFactorForTruncation(tighteningFactorForTruncation float32) {
 	o.Ptr().Send(_nSMutableParagraphStyleSelSetTighteningFactorForTruncation, tighteningFactorForTruncation)
-}
-
-func (o *NSMutableParagraphStyle) SetTextBlocks(textBlocks *foundation.NSArray[*NSTextBlock]) {
-	o.Ptr().Send(_nSMutableParagraphStyleSelSetTextBlocks, textBlocks.Ptr())
 }
 
 func (o *NSMutableParagraphStyle) SetHeaderLevel(headerLevel int) {

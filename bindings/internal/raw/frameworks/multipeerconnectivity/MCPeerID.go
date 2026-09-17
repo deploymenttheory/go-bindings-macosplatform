@@ -13,6 +13,7 @@ import (
 // An MCPeerID object represents a peer in a multipeer session.
 //
 // Apple documentation: https://developer.apple.com/documentation/multipeerconnectivity/mcpeerid
+// Deprecated: Use Network Framework instead
 type MCPeerID struct {
 	foundation.NSObject
 }
@@ -34,6 +35,7 @@ func MCPeerIDFromID(id objc.ID) *MCPeerID {
 }
 
 // Initializes a peer.
+// Deprecated: Use Network Framework instead
 func (o *MCPeerID) InitWithDisplayName(myDisplayName *foundation.NSString) *MCPeerID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mCPeerIDSelInitWithDisplayName, myDisplayName.Ptr())
 	if _ret != 0 {

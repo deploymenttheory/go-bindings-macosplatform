@@ -130,14 +130,14 @@ func (fv *FileVersion) RemoveAndReturnError() error {
 	return nil
 }
 
-// URL returns the URL.
+// URL returns the URL identifying the location of the file associated with the file version object. The URL identifies the location of the file associated with this version. If this version of the file has been deleted, the value in this property is nil. Do not display any part of this URL to the user. The location of file versions is managed by the system and should not be exposed to the user. If you want to present the name of a file version, use the localizedName property.
 func (fv *FileVersion) URL() string {
 	defer runtime.KeepAlive(fv)
 	_r := objc.Send[objc.ID](objref.IDOf(fv), objc.RegisterName("URL"))
 	return rt.URLString(_r)
 }
 
-// LocalizedName returns the localized name.
+// LocalizedName returns the string containing the user-presentable name of the file version. When displaying different versions of a file to the user, you should present this string to the user instead of the version's URL.
 func (fv *FileVersion) LocalizedName() string {
 	defer runtime.KeepAlive(fv)
 	_r := objc.Send[objc.ID](objref.IDOf(fv), objc.RegisterName("localizedName"))
@@ -147,7 +147,7 @@ func (fv *FileVersion) LocalizedName() string {
 	return purego.GoString(_r)
 }
 
-// LocalizedNameOfSavingComputer returns the localized name of saving computer.
+// LocalizedNameOfSavingComputer returns the user-presentable name of the computer on which the revision was saved. If the current revision has been deleted from disk, or if no computer name was recorded, the value in this property is nil. The computer name is guaranteed to be recorded only when the current version is in conflict with another version. The version object does not track changes to the computer name itself. Thus, if the computer name changed, the value in this string might be an old value.
 func (fv *FileVersion) LocalizedNameOfSavingComputer() string {
 	defer runtime.KeepAlive(fv)
 	_r := objc.Send[objc.ID](objref.IDOf(fv), objc.RegisterName("localizedNameOfSavingComputer"))
@@ -157,49 +157,49 @@ func (fv *FileVersion) LocalizedNameOfSavingComputer() string {
 	return purego.GoString(_r)
 }
 
-// OriginatorNameComponents returns the originator name components.
+// OriginatorNameComponents returns the name components of the user who created this version of the file. Is nil if the file is not shared or if the current user is the originator.
 func (fv *FileVersion) OriginatorNameComponents() *PersonNameComponents {
 	defer runtime.KeepAlive(fv)
 	_r := objc.Send[objc.ID](objref.IDOf(fv), objc.RegisterName("originatorNameComponents"))
 	return PersonNameComponentsFromID(_r)
 }
 
-// ModificationDate returns the modification date.
+// ModificationDate returns the modification date of the version, or possibly nil if the receiver's storage has been deleted.
 func (fv *FileVersion) ModificationDate() time.Time {
 	defer runtime.KeepAlive(fv)
 	_r := objc.Send[objc.ID](objref.IDOf(fv), objc.RegisterName("modificationDate"))
 	return rt.NSDateToTime(_r)
 }
 
-// IsConflict reports whether the object is conflict.
+// IsConflict reports whether the contents of the version are in conflict with the contents of another version. When two or more versions of a file are written at the same time, perhaps because the file is saved in the cloud and one or more of the writers were offline when they were writing, the system attempts to resolve the conflict automatically. It does this by picking one of the file versions to be the current file and setting this property to true for the other file versions that are in conflict.
 func (fv *FileVersion) IsConflict() bool {
 	defer runtime.KeepAlive(fv)
 	_r := objc.Send[bool](objref.IDOf(fv), objc.RegisterName("isConflict"))
 	return _r
 }
 
-// IsResolved reports whether the object is resolved.
+// IsResolved reports whether the conflict has been resolved. When the system detects a conflict involving versions of a file, it sets this property to false to indicate an unresolved conflict. After you resolve the conflict, set this property to true to tell the system it is resolved; you must then remove any versions of the file that are no longer useful. Never set the value of this property to false. If you do, the system raises an exception. Resolving a conflict causes the file version object to be removed from any reports about conflicting versions, such as those returned by the +unresolvedConflictVersionsOfItemAtURL: method.
 func (fv *FileVersion) IsResolved() bool {
 	defer runtime.KeepAlive(fv)
 	_r := objc.Send[bool](objref.IDOf(fv), objc.RegisterName("isResolved"))
 	return _r
 }
 
-// IsDiscardable reports whether the object is discardable.
+// IsDiscardable reports whether a Boolean value that specifies whether the system can delete the associated file at some future time. Marking a file version as discardable gives the system the flexibility to reclaim the space, occupied by the associated file, at some future time. Do not, however, depend on the file being discarded. After setting this property to true, do not set this property to false again. Doing so causes the system to raise an exception. In addition, if you set this property to true for the version of the file returned by the +currentVersionOfItemAtURL: method, the system raises an exception. Versions can be discardable only on Mac OS X.
 func (fv *FileVersion) IsDiscardable() bool {
 	defer runtime.KeepAlive(fv)
 	_r := objc.Send[bool](objref.IDOf(fv), objc.RegisterName("isDiscardable"))
 	return _r
 }
 
-// HasLocalContents reports whether the object has local contents.
+// HasLocalContents reports whether the version has local contents. Versions that are returned by +getNonlocalVersionsOfItemAtURL:completionHandler: do not initially have local contents. You can only access their contents, either directly via the URL or by invoking -replaceItemAtURL:options:error:, from within a coordinated read on the NSFileVersion's URL.
 func (fv *FileVersion) HasLocalContents() bool {
 	defer runtime.KeepAlive(fv)
 	_r := objc.Send[bool](objref.IDOf(fv), objc.RegisterName("hasLocalContents"))
 	return _r
 }
 
-// HasThumbnail reports whether the object has thumbnail.
+// HasThumbnail reports whether the version has a thumbnail image available. Thumbnails for versions from +getNonlocalVersionsOfItemAtURL:completionHandler: may not immediately be available. As soon as it becomes available, this property will change from false to true. You can use KVO to be notified of this change. If a thumbnail is available, you can access it using NSURLThumbnailKey or NSURLThumbnailDictionaryKey.
 func (fv *FileVersion) HasThumbnail() bool {
 	defer runtime.KeepAlive(fv)
 	_r := objc.Send[bool](objref.IDOf(fv), objc.RegisterName("hasThumbnail"))

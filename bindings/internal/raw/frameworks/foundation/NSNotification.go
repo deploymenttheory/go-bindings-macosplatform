@@ -55,6 +55,7 @@ func (o *NSNotification) InitWithCoder(coder *NSCoder) *NSNotification {
 	return NSNotificationFromID(_ret)
 }
 
+// The name of the notification. Typically you use this property to find out what kind of notification you are dealing with when you receive a notification. Notification names can be any string. To avoid name collisions, you might want to use a prefix that's specific to your application.
 func (o *NSNotification) Name() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNotificationSelName)
 	if _ret != 0 {
@@ -63,11 +64,13 @@ func (o *NSNotification) Name() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// The object associated with the notification. This is often the object that posted this notification. It may be `nil`. Typically you use this method to find out what object a notification applies to when you receive a notification.
 func (o *NSNotification) Object() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNotificationSelObject)
 	return _ret
 }
 
+// The user information dictionary associated with the notification. This may be `nil`. The user information dictionary stores any additional objects that objects receiving the notification might use.
 func (o *NSNotification) UserInfo() *NSDictionary[objc.ID, objc.ID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNotificationSelUserInfo)
 	if _ret != 0 {

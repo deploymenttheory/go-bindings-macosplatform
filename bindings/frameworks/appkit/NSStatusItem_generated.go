@@ -10,6 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/rt"
@@ -113,6 +114,23 @@ func (si *StatusItem) WithAutosaveName(autosaveName obj.Object) *StatusItem {
 	return si
 }
 
+// WithExpandedInterfaceDelegate sets the delegate that manages the lifecycle of the status item’s expanded interface.
+func (si *StatusItem) WithExpandedInterfaceDelegate(expandedInterfaceDelegate StatusItemExpandedInterfaceDelegate) *StatusItem {
+	_shim := newStatusItemExpandedInterfaceDelegateShim(expandedInterfaceDelegate)
+	_sel := objc.RegisterName("setExpandedInterfaceDelegate:")
+	shim.Associate(objref.IDOf(si), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(si), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return si
+}
+
+// WithView sets the custom view the status item displays at its position in the status bar.
+func (si *StatusItem) WithView(view ViewProvider) *StatusItem {
+	defer runtime.KeepAlive(view)
+	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("setView:"), objref.IDOf(view))
+	return si
+}
+
 // WithTarget sets the object that receives the status item’s action message when someone clicks the status item.
 func (si *StatusItem) WithTarget(target obj.Object) *StatusItem {
 	defer runtime.KeepAlive(target)
@@ -165,13 +183,6 @@ func (si *StatusItem) WithToolTip(toolTip string) *StatusItem {
 	return si
 }
 
-// WithView sets the custom view the status item displays at its position in the status bar.
-func (si *StatusItem) WithView(view ViewProvider) *StatusItem {
-	defer runtime.KeepAlive(view)
-	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("setView:"), objref.IDOf(view))
-	return si
-}
-
 // StatusBar returns the status bar.
 func (si *StatusItem) StatusBar() *StatusBar {
 	defer runtime.KeepAlive(si)
@@ -221,6 +232,27 @@ func (si *StatusItem) AutosaveName() *foundation.String {
 	return foundation.StringFromID(_r)
 }
 
+// ExpandedInterfaceSession returns the expanded interface session.
+func (si *StatusItem) ExpandedInterfaceSession() *StatusItemExpandedInterfaceSession {
+	defer runtime.KeepAlive(si)
+	_r := objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("expandedInterfaceSession"))
+	return StatusItemExpandedInterfaceSessionFromID(_r)
+}
+
+// View returns the view.
+func (si *StatusItem) View() *View {
+	defer runtime.KeepAlive(si)
+	_r := objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("view"))
+	return ViewFromID(_r)
+}
+
+// Target returns the target.
+func (si *StatusItem) Target() obj.Object {
+	defer runtime.KeepAlive(si)
+	_r := objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("target"))
+	return obj.Wrap(_r)
+}
+
 // SendActionOn sets the conditions on which the status item sends action messages to its target.
 func (si *StatusItem) SendActionOn(mask EventMask) int {
 	defer runtime.KeepAlive(si)
@@ -239,13 +271,6 @@ func (si *StatusItem) PopUpStatusItemMenu(menu *Menu) {
 	defer runtime.KeepAlive(si)
 	defer runtime.KeepAlive(menu)
 	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("popUpStatusItemMenu:"), objref.IDOf(menu))
-}
-
-// Target returns the target.
-func (si *StatusItem) Target() obj.Object {
-	defer runtime.KeepAlive(si)
-	_r := objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("target"))
-	return obj.Wrap(_r)
 }
 
 // Title returns the title.
@@ -301,11 +326,4 @@ func (si *StatusItem) ToolTip() string {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// View returns the view.
-func (si *StatusItem) View() *View {
-	defer runtime.KeepAlive(si)
-	_r := objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("view"))
-	return ViewFromID(_r)
 }

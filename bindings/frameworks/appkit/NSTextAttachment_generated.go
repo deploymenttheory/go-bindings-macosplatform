@@ -134,14 +134,14 @@ func (ta *TextAttachment) WithAllowsTextAttachmentView(allowsTextAttachmentView 
 	return ta
 }
 
-// Contents returns the contents.
+// Contents returns the contents for the text attachment. Modifying this property has a side effect of invalidating “image“ and “fileWrapper“ properties.
 func (ta *TextAttachment) Contents() []byte {
 	defer runtime.KeepAlive(ta)
 	_r := objc.Send[objc.ID](objref.IDOf(ta), objc.RegisterName("contents"))
 	return rt.NSDataToBytes(_r)
 }
 
-// FileType returns the file type.
+// FileType returns the file type of the contents for the text attachment. A UTI describing the format for “contents“. Modifying this property has a side effect of invalidating “image“ and “fileWrapper“ properties.
 func (ta *TextAttachment) FileType() string {
 	defer runtime.KeepAlive(ta)
 	_r := objc.Send[objc.ID](objref.IDOf(ta), objc.RegisterName("fileType"))
@@ -151,42 +151,42 @@ func (ta *TextAttachment) FileType() string {
 	return purego.GoString(_r)
 }
 
-// Image returns the image.
+// Image returns an instance of the relevant image class that represents the contents of the text attachment object. For details about using the <doc://com.apple.documentation/documentation/uikit/uiimage> class to create text attachments that automatically adjust to surrounding font and color attributes, see the <doc://com.apple.documentation/documentation/uikit/NSTextAttachment/init(image:)> initializer. Modifying this property has the side effect of invalidating the “NSTextAttachment/contents“, “NSTextAttachment/fileType“, and “NSTextAttachment/fileWrapper“ properties.
 func (ta *TextAttachment) Image() *Image {
 	defer runtime.KeepAlive(ta)
 	_r := objc.Send[objc.ID](objref.IDOf(ta), objc.RegisterName("image"))
 	return ImageFromID(_r)
 }
 
-// Bounds returns the bounds.
+// Bounds returns the layout bounds of the text attachment's graphical representation in the text coordinate system. The bounds rectangle origin is at the current glyph location on the text baseline. The default value is <doc://com.apple.documentation/documentation/coregraphics/cgrectzero>.
 func (ta *TextAttachment) Bounds() corefoundation.CGRect {
 	defer runtime.KeepAlive(ta)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(ta), objc.RegisterName("bounds"))
 	return _r
 }
 
-// FileWrapper returns the file wrapper.
+// FileWrapper returns the text attachment's file wrapper. The file wrapper holds the contents of the attached file. Modifying this property has a side effect of invalidating the “NSTextAttachment/image“, “NSTextAttachment/contents“, and “NSTextAttachment/fileType“ properties.
 func (ta *TextAttachment) FileWrapper() *foundation.FileWrapper {
 	defer runtime.KeepAlive(ta)
 	_r := objc.Send[objc.ID](objref.IDOf(ta), objc.RegisterName("fileWrapper"))
 	return foundation.FileWrapperFromID(_r)
 }
 
-// LineLayoutPadding returns the line layout padding.
+// LineLayoutPadding returns the layout padding before and after the text attachment bounds. The layout and rendering bounds X origin is inset by the padding value. This affects the relationship between the text attachment bounds and `NSLayoutManager` glyph metrics methods “NSLayoutManager/location(forGlyphAt:)“ and “NSLayoutManager/attachmentSize(forGlyphAt:)“. The default value is `0.0`.
 func (ta *TextAttachment) LineLayoutPadding() float64 {
 	defer runtime.KeepAlive(ta)
 	_r := objc.Send[float64](objref.IDOf(ta), objc.RegisterName("lineLayoutPadding"))
 	return _r
 }
 
-// AllowsTextAttachmentView wraps the corresponding Objective-C method.
+// AllowsTextAttachmentView reports whether the text attachment tries to use a text attachment view provider. When `true`, the text attachment tries to use a view provider returned by “NSTextAttachmentLayout/viewProvider(for:location:textContainer:)“. Default is `true`.
 func (ta *TextAttachment) AllowsTextAttachmentView() bool {
 	defer runtime.KeepAlive(ta)
 	_r := objc.Send[bool](objref.IDOf(ta), objc.RegisterName("allowsTextAttachmentView"))
 	return _r
 }
 
-// UsesTextAttachmentView wraps the corresponding Objective-C method.
+// UsesTextAttachmentView reports whether the text attachment is configured to use text attachment view providers. The default implementation of this property checks “NSTextAttachment/allowsTextAttachmentView“, “textAttachmentViewProviderClassForFileType:“, and “contents“.
 func (ta *TextAttachment) UsesTextAttachmentView() bool {
 	defer runtime.KeepAlive(ta)
 	_r := objc.Send[bool](objref.IDOf(ta), objc.RegisterName("usesTextAttachmentView"))

@@ -3,6 +3,30 @@
   "framework": "ARKit",
   "source": "developer.apple.com DocC render API",
   "protocols": {
+    "OS_ar_accessories": {
+      "doc": "A collection of accessories.",
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_accessories"
+    },
+    "OS_ar_accessory": {
+      "doc": "An accessory that can be tracked in the physical environment, such as a game controller or stylus.",
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_accessory"
+    },
+    "OS_ar_accessory_anchor": {
+      "doc": "An anchor that represents an accessory.",
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_accessory_anchor"
+    },
+    "OS_ar_accessory_anchors": {
+      "doc": "A collection of accessory anchors.",
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_accessory_anchors"
+    },
+    "OS_ar_accessory_tracking_configuration": {
+      "doc": "Configuration for accessory tracking.",
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_accessory_tracking_configuration"
+    },
+    "OS_ar_accessory_tracking_provider": {
+      "doc": "A data provider for accessory tracking.",
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_accessory_tracking_provider"
+    },
     "OS_ar_anchor": {
       "doc": "The identity, location, and orientation of an object in world space.",
       "url": "https://developer.apple.com/documentation/arkit/os_ar_anchor"
@@ -46,11 +70,31 @@
       "doc": "A collection of camera frame samples.",
       "url": "https://developer.apple.com/documentation/arkit/os_ar_camera_frame_samples"
     },
+    "OS_ar_camera_region_anchor": {
+      "doc": "An anchor representing a camera region with enhanced image processing.",
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_camera_region_anchor"
+    },
+    "OS_ar_camera_region_anchors": {
+      "doc": "A collection of camera region anchors.",
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_camera_region_anchors"
+    },
+    "OS_ar_camera_region_configuration": {
+      "doc": "Configuration for camera region processing.",
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_camera_region_configuration"
+    },
+    "OS_ar_camera_region_provider": {
+      "doc": "A data provider for camera region processing.",
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_camera_region_provider"
+    },
     "OS_ar_camera_video_format": {
       "url": "https://developer.apple.com/documentation/arkit/os_ar_camera_video_format"
     },
     "OS_ar_camera_video_formats": {
       "url": "https://developer.apple.com/documentation/arkit/os_ar_camera_video_formats"
+    },
+    "OS_ar_coordinate_space_data": {
+      "doc": "Data for sharing coordinate space information between participants.",
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_coordinate_space_data"
     },
     "OS_ar_data": {
       "url": "https://developer.apple.com/documentation/arkit/os_ar_data"
@@ -191,6 +235,10 @@
     "OS_ar_reference_object": {
       "url": "https://developer.apple.com/documentation/arkit/os_ar_reference_object"
     },
+    "OS_ar_reference_object_configuration": {
+      "doc": "Defines a configuration for an individual reference object.",
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_reference_object_configuration"
+    },
     "OS_ar_reference_objects": {
       "url": "https://developer.apple.com/documentation/arkit/os_ar_reference_objects"
     },
@@ -216,6 +264,14 @@
     "OS_ar_session": {
       "doc": "The main entry point for receiving data from ARKit.",
       "url": "https://developer.apple.com/documentation/arkit/os_ar_session"
+    },
+    "OS_ar_shared_coordinate_space_configuration": {
+      "doc": "Configuration for the shared coordinate space provider.",
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_shared_coordinate_space_configuration"
+    },
+    "OS_ar_shared_coordinate_space_provider": {
+      "doc": "A data provider for shared coordinate spaces across participants.",
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_shared_coordinate_space_provider"
     },
     "OS_ar_skeleton_joint": {
       "url": "https://developer.apple.com/documentation/arkit/os_ar_skeleton_joint"
@@ -257,6 +313,70 @@
     }
   },
   "enums": {
+    "ar_accessory_anchor_tracking_state_t": {
+      "doc": "Tracking status for accessory anchors.",
+      "url": "https://developer.apple.com/documentation/arkit/ar_accessory_anchor_tracking_state_t",
+      "members": {
+        "ar_accessory_anchor_tracking_state_orientation_tracked": {
+          "doc": "Tracking status for accessory anchors.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_accessory_anchor_tracking_state_t/ar_accessory_anchor_tracking_state_orientation_tracked"
+        },
+        "ar_accessory_anchor_tracking_state_position_orientation_tracked": {
+          "doc": "Tracking status for accessory anchors.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_accessory_anchor_tracking_state_t/ar_accessory_anchor_tracking_state_position_orientation_tracked"
+        },
+        "ar_accessory_anchor_tracking_state_position_orientation_tracked_low_accuracy": {
+          "doc": "Tracking status for accessory anchors.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_accessory_anchor_tracking_state_t/ar_accessory_anchor_tracking_state_position_orientation_tracked_low_accuracy"
+        },
+        "ar_accessory_anchor_tracking_state_untracked": {
+          "doc": "Tracking status for accessory anchors.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_accessory_anchor_tracking_state_t/ar_accessory_anchor_tracking_state_untracked"
+        }
+      }
+    },
+    "ar_accessory_chirality_t": {
+      "doc": "The chirality of an accessory.",
+      "url": "https://developer.apple.com/documentation/arkit/ar_accessory_chirality_t",
+      "members": {
+        "ar_accessory_chirality_left": {
+          "doc": "Left-handed accessory, or non-handed accessory held in left hand.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_accessory_chirality_t/ar_accessory_chirality_left"
+        },
+        "ar_accessory_chirality_right": {
+          "doc": "Right-handed accessory, or non-handed accessory held in right hand.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_accessory_chirality_t/ar_accessory_chirality_right"
+        },
+        "ar_accessory_chirality_unspecified": {
+          "doc": "Unspecified (non-handed accessory, not associated with a hand).",
+          "url": "https://developer.apple.com/documentation/arkit/ar_accessory_chirality_t/ar_accessory_chirality_unspecified"
+        }
+      }
+    },
+    "ar_accessory_source_type_t": {
+      "doc": "The type of input that was used to initialize an ar_accessory_t.",
+      "url": "https://developer.apple.com/documentation/arkit/ar_accessory_source_type_t",
+      "members": {
+        "ar_accessory_source_type_device": {
+          "doc": "Accessory was initialized from a GCDevice.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_accessory_source_type_t/ar_accessory_source_type_device"
+        }
+      }
+    },
+    "ar_accessory_tracking_error_code_t": {
+      "doc": "Error codes specific to accessory tracking.",
+      "url": "https://developer.apple.com/documentation/arkit/ar_accessory_tracking_error_code_t",
+      "members": {
+        "ar_accessory_tracking_error_code_accessory_loading_failed": {
+          "doc": "Error code indicating that an accessory failed to load.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_accessory_tracking_error_code_t/ar_accessory_tracking_error_code_accessory_loading_failed"
+        },
+        "ar_accessory_tracking_error_code_update_accessories_failed": {
+          "doc": "Error code indicating that updating accessories failed.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_accessory_tracking_error_code_t/ar_accessory_tracking_error_code_update_accessories_failed"
+        }
+      }
+    },
     "ar_authorization_status_t": {
       "doc": "The authorization states for a type of ARKit data.",
       "url": "https://developer.apple.com/documentation/arkit/ar_authorization_status_t",
@@ -326,6 +446,38 @@
         "ar_camera_rectification_type_stereo_corrected": {
           "doc": "Stereo corrected camera rectification.",
           "url": "https://developer.apple.com/documentation/arkit/ar_camera_rectification_type_t/ar_camera_rectification_type_stereo_corrected"
+        }
+      }
+    },
+    "ar_camera_region_camera_enhancement_t": {
+      "doc": "Enum describing camera enhancement types.",
+      "url": "https://developer.apple.com/documentation/arkit/ar_camera_region_camera_enhancement_t",
+      "members": {
+        "ar_camera_region_contrast_and_vibrancy": {
+          "doc": "Contrast \u0026 Vibrancy enhancement.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_camera_region_camera_enhancement_t/ar_camera_region_contrast_and_vibrancy"
+        },
+        "ar_camera_region_stabilization": {
+          "doc": "Solely camera stabilization. Implicitly included in other enhancements.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_camera_region_camera_enhancement_t/ar_camera_region_stabilization"
+        }
+      }
+    },
+    "ar_camera_region_error_code_t": {
+      "doc": "Error codes specific to the camera region provider.",
+      "url": "https://developer.apple.com/documentation/arkit/ar_camera_region_error_code_t",
+      "members": {
+        "ar_camera_region_error_code_add_anchor_failed": {
+          "doc": "Error code indicating that a camera region anchor failed to be added.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_camera_region_error_code_t/ar_camera_region_error_code_add_anchor_failed"
+        },
+        "ar_camera_region_error_code_anchor_max_limit_reached": {
+          "doc": "Error code indicating that the maximum amount of camera region anchors for its respective camera enhancement have been added.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_camera_region_error_code_t/ar_camera_region_error_code_anchor_max_limit_reached"
+        },
+        "ar_camera_region_error_code_remove_anchor_failed": {
+          "doc": "Error code indicating that a camera region anchor failed to be removed.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_camera_region_error_code_t/ar_camera_region_error_code_remove_anchor_failed"
         }
       }
     },
@@ -643,6 +795,34 @@
         "ar_surface_classification_window": {
           "doc": "A value describing the classification of a surface.",
           "url": "https://developer.apple.com/documentation/arkit/ar_surface_classification_t/ar_surface_classification_window"
+        }
+      }
+    },
+    "ar_transform_correction_t": {
+      "doc": "A correction type to apply for transforms returned from ARKit APIs.",
+      "url": "https://developer.apple.com/documentation/arkit/ar_transform_correction_t",
+      "members": {
+        "ar_transform_correction_none": {
+          "doc": "Transforms are unaltered and represent actual locations.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_transform_correction_t/ar_transform_correction_none"
+        },
+        "ar_transform_correction_rendered": {
+          "doc": "Transforms are corrected to render over physical objects in passthrough displays.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_transform_correction_t/ar_transform_correction_rendered"
+        }
+      }
+    },
+    "ar_world_anchor_sharing_availability_t": {
+      "doc": "Enumeration indicating the availability of world anchor sharing.",
+      "url": "https://developer.apple.com/documentation/arkit/ar_world_anchor_sharing_availability_t",
+      "members": {
+        "ar_world_anchor_sharing_availability_available": {
+          "doc": "Enumeration indicating the availability of world anchor sharing.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_world_anchor_sharing_availability_t/ar_world_anchor_sharing_availability_available"
+        },
+        "ar_world_anchor_sharing_availability_unavailable": {
+          "doc": "Enumeration indicating the availability of world anchor sharing.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_world_anchor_sharing_availability_t/ar_world_anchor_sharing_availability_unavailable"
         }
       }
     },

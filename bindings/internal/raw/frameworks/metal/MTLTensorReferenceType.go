@@ -6,6 +6,7 @@ package metal
 import (
 	"github.com/ebitengine/purego/objc"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
@@ -17,11 +18,12 @@ type MTLTensorReferenceType struct {
 }
 
 var (
-	_clsMTLTensorReferenceType               = _objcClass("MTLTensorReferenceType")
-	_mTLTensorReferenceTypeSelTensorDataType = objc.RegisterName("tensorDataType")
-	_mTLTensorReferenceTypeSelIndexType      = objc.RegisterName("indexType")
-	_mTLTensorReferenceTypeSelDimensions     = objc.RegisterName("dimensions")
-	_mTLTensorReferenceTypeSelAccess         = objc.RegisterName("access")
+	_clsMTLTensorReferenceType                = _objcClass("MTLTensorReferenceType")
+	_mTLTensorReferenceTypeSelTensorDataType  = objc.RegisterName("tensorDataType")
+	_mTLTensorReferenceTypeSelIndexType       = objc.RegisterName("indexType")
+	_mTLTensorReferenceTypeSelDimensions      = objc.RegisterName("dimensions")
+	_mTLTensorReferenceTypeSelAuxiliaryPlanes = objc.RegisterName("auxiliaryPlanes")
+	_mTLTensorReferenceTypeSelAccess          = objc.RegisterName("access")
 )
 
 func MTLTensorReferenceTypeFromID(id objc.ID) *MTLTensorReferenceType {
@@ -46,13 +48,22 @@ func (o *MTLTensorReferenceType) IndexType() MTLDataType {
 	return _ret
 }
 
-// The array of sizes, in elements, one for each dimension of this tensor. Because shader-bound tensors have dynamic extents, the “MTLTensorExtents/rank“ of `dimensions` corresponds to the rank the shader function specifies, and “MTLTensorExtents/extentsAtDimensionIndex:“ always returns a value of -1.
+// The array of sizes, in elements, one for each dimension of this tensor. For shader-bound tensors with dynamic extents, the “MTLTensorExtents/rank“ of `dimensions` corresponds to the rank the shader function specifies, and “MTLTensorExtents/extentAtDimensionIndex:“ always returns a value of -1.
 func (o *MTLTensorReferenceType) Dimensions() *MTLTensorExtents {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLTensorReferenceTypeSelDimensions)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return MTLTensorExtentsFromID(_ret)
+}
+
+// The auxiliary planes that this tensor reference requires. Returns an array of “MTLTensorAuxiliaryPlaneType“ objects describing each auxiliary plane the shader expects. Empty if the tensor has no auxiliary planes.
+func (o *MTLTensorReferenceType) AuxiliaryPlanes() *foundation.NSArray[*MTLTensorAuxiliaryPlaneType] {
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTLTensorReferenceTypeSelAuxiliaryPlanes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*MTLTensorAuxiliaryPlaneType](_ret)
 }
 
 // A value that represents the read/write permissions of the tensor.

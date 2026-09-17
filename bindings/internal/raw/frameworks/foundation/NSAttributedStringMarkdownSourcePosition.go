@@ -51,21 +51,25 @@ func (o *NSAttributedStringMarkdownSourcePosition) RangeInString(string_ *NSStri
 	return _ret
 }
 
+// The line where the text begins in the Markdown source. Uses 1-based counting.
 func (o *NSAttributedStringMarkdownSourcePosition) StartLine() int {
 	_ret := objc.Send[int](o.Ptr(), _nSAttributedStringMarkdownSourcePositionSelStartLine)
 	return _ret
 }
 
+// The column where the text begins in the Markdown source. Uses 1-based counting. Columns represent UTF-8 indices; for multi-byte characters, the column indicates the first byte.
 func (o *NSAttributedStringMarkdownSourcePosition) StartColumn() int {
 	_ret := objc.Send[int](o.Ptr(), _nSAttributedStringMarkdownSourcePositionSelStartColumn)
 	return _ret
 }
 
+// The line where the text ends in the Markdown source. Uses 1-based counting.
 func (o *NSAttributedStringMarkdownSourcePosition) EndLine() int {
 	_ret := objc.Send[int](o.Ptr(), _nSAttributedStringMarkdownSourcePositionSelEndLine)
 	return _ret
 }
 
+// The column where the text ends in the Markdown source. Uses 1-based counting. Columns represent UTF-8 indices; for multi-byte characters, the column indicates the first byte.
 func (o *NSAttributedStringMarkdownSourcePosition) EndColumn() int {
 	_ret := objc.Send[int](o.Ptr(), _nSAttributedStringMarkdownSourcePositionSelEndColumn)
 	return _ret

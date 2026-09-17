@@ -3,10 +3,6 @@
   "framework": "CoreLocation",
   "source": "developer.apple.com DocC render API",
   "classes": {
-    "CLBackgroundActivitySession": {
-      "doc": "An object that manages a visual indicator that keeps your app in use in the background, allowing it to receive updates or events.",
-      "url": "https://developer.apple.com/documentation/corelocation/clbackgroundactivitysession"
-    },
     "CLBackgroundActivitySessionDiagnostic": {
       "url": "https://developer.apple.com/documentation/corelocation/clbackgroundactivitysessiondiagnostic"
     },
@@ -34,10 +30,6 @@
       "doc": "A circular geographic region that a center point and radius deine.",
       "url": "https://developer.apple.com/documentation/corelocation/clcircularregion"
     },
-    "CLCondition": {
-      "doc": "The abstract base class for all other monitor conditions.",
-      "url": "https://developer.apple.com/documentation/corelocation/clcondition"
-    },
     "CLGeocoder": {
       "doc": "An interface for converting between geographic coordinates and place names.",
       "url": "https://developer.apple.com/documentation/corelocation/clgeocoder"
@@ -53,10 +45,6 @@
     "CLLocationUpdater": {
       "doc": "An object that provides device location updates.",
       "url": "https://developer.apple.com/documentation/corelocation/cllocationupdater"
-    },
-    "CLMonitor": {
-      "doc": "An object that monitors the conditions you add to it.",
-      "url": "https://developer.apple.com/documentation/corelocation/clmonitor"
     },
     "CLMonitorConfiguration": {
       "doc": "An object for configuring a location monitor instance.",
@@ -91,6 +79,9 @@
     }
   },
   "protocols": {
+    "CLBodyIdentifiable": {
+      "url": "https://developer.apple.com/documentation/corelocation/clbodyidentifiable"
+    },
     "CLLocationManagerDelegate": {
       "doc": "The methods you use to receive events from an associated location-manager object.",
       "url": "https://developer.apple.com/documentation/corelocation/cllocationmanagerdelegate"
@@ -131,6 +122,10 @@
           "doc": "The value that indicates positioning during dedicated fitness sessions, such as walking workouts, running workouts, cycling workouts, and so on.",
           "url": "https://developer.apple.com/documentation/corelocation/clactivitytype/fitness"
         },
+        "CLActivityTypeMaritime": {
+          "doc": "The value that indicates positioning for activities in vessels on water, including while anchored.",
+          "url": "https://developer.apple.com/documentation/corelocation/clactivitytype/maritime"
+        },
         "CLActivityTypeOther": {
           "doc": "The value that indicates the app is using location manager for an unspecified activity.",
           "url": "https://developer.apple.com/documentation/corelocation/clactivitytype/other"
@@ -138,6 +133,10 @@
         "CLActivityTypeOtherNavigation": {
           "doc": "The value that indicates positioning for activities that don’t or may not adhere to roads such as cycling, scooters, trains, boats and off-road vehicles.",
           "url": "https://developer.apple.com/documentation/corelocation/clactivitytype/othernavigation"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates an activity type instance with the provided value.",
+          "url": "https://developer.apple.com/documentation/corelocation/clactivitytype/init(rawvalue:)"
         }
       }
     },
@@ -205,10 +204,6 @@
         }
       }
     },
-    "CLError": {
-      "doc": "A Core Location error.",
-      "url": "https://developer.apple.com/documentation/corelocation/clerror"
-    },
     "CLLiveUpdateConfiguration": {
       "doc": "Specifies the types of locations that a location updater generates.",
       "url": "https://developer.apple.com/documentation/corelocation/clliveupdateconfiguration",
@@ -234,10 +229,6 @@
           "url": "https://developer.apple.com/documentation/corelocation/clliveupdateconfiguration/clliveupdateconfigurationothernavigation"
         }
       }
-    },
-    "CLLocationPushServiceError": {
-      "doc": "Error codes the location manager returns if starting to monitor for location push notifications fails.",
-      "url": "https://developer.apple.com/documentation/corelocation/cllocationpushserviceerror"
     },
     "CLMonitoringState": {
       "doc": "Values that represent the current state of a monitoring condition.",

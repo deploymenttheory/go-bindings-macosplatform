@@ -15,8 +15,6 @@ import (
 )
 
 // AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput is an idiomatic wrapper over the Objective-C class ASAuthorizationPublicKeyCredentialLargeBlobRegistrationOutput.
-//
-// The result of the large binary object support check, resulting from a passkey registration response.
 type AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput struct {
 	objref.Handle
 }
