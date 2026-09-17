@@ -41,7 +41,8 @@ to record **why** each override exists (link the issue or the header line).
   "remap_types": [
     {"class": "FooThing", "selector": "doIt:", "param": "value", "objc_type": "FooOptions"},
     {"class": "FooThing", "selector": "copyState", "param": "return", "objc_type": "FooState *"},
-    {"function": "FooCreate", "param": "flags", "objc_type": "FooOptions"}
+    {"function": "FooCreate", "param": "flags", "objc_type": "FooOptions"},
+    {"struct": "FooRecord", "field": "payload", "objc_type": "uint64_t [7]"}
   ],
 
   "force_bitmask_enums": ["FooOptions"],
@@ -63,12 +64,19 @@ to record **why** each override exists (link the issue or the header line).
 | `exclude_classes` | Drop the class entirely (no Go type, no bridge). References elsewhere degrade per the normal unresolved-type rules. |
 | `exclude_methods` | Drop one selector from one class. `class_method` defaults to `false` (instance method). |
 | `exclude_functions` | Drop a C function (all overloads of that name). |
-| `remap_types` | Replace the ObjC type of one parameter (`"param": "<name>"`) or the return value (`"param": "return"`). The new type string goes through the normal type mapper. |
+| `remap_types` | Replace the ObjC type of one parameter (`"param": "<name>"`), return value (`"param": "return"`), or struct field (`"struct": "<name>", "field": "<name>"`). The new type string goes through the normal type mapper. |
 | `force_bitmask_enums` | Set `IsBitmask` so the enum emits flag-style helpers. |
 | `availability_fixes` | Overwrite introduced/deprecated versions or the unavailable flag on a class, enum, or function. Only the fields you specify are changed. |
 | `link_lib` | Override the `-l<lib>` linker flag for C libraries. |
 
 ## Workflow
+
+For a struct-field remap, `"field": ""` selects an anonymous field only when
+exactly one exists. Missing or ambiguous fields produce a stale-entry warning
+without changing the record. Any cached Go type is cleared. Array replacements
+for inline unions must match both the measured C size and alignment; add ABI
+checks for the record and following field offsets, as in the SDK 27
+EndpointSecurity overrides.
 
 1. Edit or create `metadata/frameworks/<name>/overrides.json`.
 2. Regenerate: `go run ./cmd/generate/ bindings`.
@@ -80,6 +88,7 @@ fixed the header, making the override unnecessary.
 
 ## Implementation
 
-- Schema and applier for the CGo pipeline: `internal/overrides/`
-- Mirrored applier for the purego pipeline (its own meta model): `internal/purecg/overrides/`
+- Shared schema and applier: `internal/overrides/`
+- Framework pipeline adapter: `internal/codegen/frameworks/overrides/` (delegates
+  to the shared applier because its metadata types alias the canonical model).
 - Load points: pass 1 of both `pipeline.LoadAll` implementations.

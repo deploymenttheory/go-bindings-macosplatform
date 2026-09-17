@@ -13,7 +13,7 @@ var (
 	_pg_sandbox_free_error func(string)
 )
 
-// [sandbox.h:48]
+// [sandbox.h:49]
 // Introduced: macOS 10.5
 //
 // Deprecated: Deprecated in macOS 10.8. No longer supported
@@ -22,7 +22,7 @@ func Sandbox_init(profile string, flags uint64, errorbuf unsafe.Pointer) int32 {
 	return _pg_sandbox_init(profile, flags, errorbuf)
 }
 
-// [sandbox.h:98]
+// [sandbox.h:68]
 // Introduced: macOS 10.5
 //
 // Deprecated: Deprecated in macOS 10.8. No longer supported

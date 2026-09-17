@@ -131,8 +131,8 @@ func Host_request_notification(host uint32, notify_type int32, notify_port uint3
 
 // [mach_host.h:271]
 // ID: objc-sym machhost.host_lockgroup_info
-func Host_lockgroup_info(host uint32, lockgroup_info unsafe.Pointer, lockgroup_infoCnt *uint32) int32 {
-	return _pg_host_lockgroup_info(host, lockgroup_info, lockgroup_infoCnt)
+func Host_lockgroup_info(host_priv_t uint32, lockgroup_info unsafe.Pointer, lockgroup_infoCnt *uint32) int32 {
+	return _pg_host_lockgroup_info(host_priv_t, lockgroup_info, lockgroup_infoCnt)
 }
 
 // [mach_host.h:284]

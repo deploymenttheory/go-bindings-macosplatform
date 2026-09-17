@@ -1,6 +1,47 @@
 package idiolib
 
-import "testing"
+import (
+	"bytes"
+	"strings"
+	"testing"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/libraries/typemap"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/macosplatformmetadata"
+)
+
+func TestSDK27XPCCallbackWrappers(t *testing.T) {
+	m := typemap.New()
+	m.TypedefIndex = map[string]string{
+		"xpc_connection_t": "void *",
+		"xpc_handler_t":    "void (^)(void *)",
+	}
+	framework := &macosplatformmetadata.FrameworkMeta{
+		Framework: "xpc",
+		Typedefs:  m.TypedefIndex,
+		Functions: []macosplatformmetadata.Function{{
+			Name: "xpc_connection_set_event_handler",
+			Params: []macosplatformmetadata.Param{
+				{Name: "connection", ObjCType: "xpc_connection_t _Nonnull"},
+				{
+					Name:     "handler",
+					ObjCType: `xpc_handler_t _Nonnull __attribute__((swift_attr("@Sendable")))`,
+				},
+			},
+		}},
+	}
+	var out bytes.Buffer
+	if err := EmitCFunctions(&out, "xpc", "fixture/raw", framework, m, nil); err != nil {
+		t.Fatal(err)
+	}
+	for _, want := range []string{
+		"func (h Connection) SetEventHandler(handler func(unsafe.Pointer))",
+		"raw.Xpc_connection_set_event_handler(h.ptr, handler)",
+	} {
+		if !strings.Contains(out.String(), want) {
+			t.Fatalf("missing callback wrapper %q:\n%s", want, out.String())
+		}
+	}
+}
 
 func TestSnakeToPascal(t *testing.T) {
 	cases := map[string]string{
@@ -36,26 +77,35 @@ func TestHandleGoName(t *testing.T) {
 }
 
 func TestMethodGoName(t *testing.T) {
-	if got := methodGoName("xpc_connection_send_message", "xpc_connection_t", "xpc"); got != "SendMessage" {
+	if got := methodGoName(
+		"xpc_connection_send_message",
+		"xpc_connection_t",
+		"xpc",
+	); got != "SendMessage" {
 		t.Errorf("methodGoName = %q, want SendMessage", got)
 	}
 	// Falls back to library-prefix strip when the symbol lacks the handle prefix.
-	if got := methodGoName("xpc_connection_create", "xpc_object_t", "xpc"); got != "ConnectionCreate" {
+	if got := methodGoName(
+		"xpc_connection_create",
+		"xpc_object_t",
+		"xpc",
+	); got != "ConnectionCreate" {
 		t.Errorf("methodGoName fallback = %q, want ConnectionCreate", got)
 	}
 }
 
 func TestQualifyRawTokens(t *testing.T) {
 	cases := map[string]string{
-		"int32":          "int32",
-		"uint64":         "uint64",
-		"unsafe.Pointer": "unsafe.Pointer",
-		"Es_message_t":   "raw.Es_message_t",
-		"*Es_message_t":  "*raw.Es_message_t",
-		"[]RusageInfo":   "[]raw.RusageInfo",
-		"bsd.Timespec":   "bsd.Timespec",
-		"*bsd.Timespec":  "*bsd.Timespec",
-		"string":         "string",
+		"int32":             "int32",
+		"uint64":            "uint64",
+		"unsafe.Pointer":    "unsafe.Pointer",
+		"Es_message_t":      "raw.Es_message_t",
+		"*Es_message_t":     "*raw.Es_message_t",
+		"[]RusageInfo":      "[]raw.RusageInfo",
+		"bsd.Timespec":      "bsd.Timespec",
+		"*bsd.Timespec":     "*bsd.Timespec",
+		"string":            "string",
+		"func(*Event) bool": "func(*raw.Event) bool",
 	}
 	for in, want := range cases {
 		if got := qualifyRawTokens(in); got != want {

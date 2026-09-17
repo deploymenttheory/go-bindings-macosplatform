@@ -12,6 +12,7 @@ import (
 var _ unsafe.Pointer      // suppress unused import
 var _ objptr.Object = nil // suppress unused import
 
+// Introduced: macOS 10.7
 // OS_dispatch_data corresponds to the Objective-C @protocol OS_dispatch_data.
 type OS_dispatch_data interface {
 	objptr.Object

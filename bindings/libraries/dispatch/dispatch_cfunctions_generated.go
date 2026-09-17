@@ -35,6 +35,10 @@ func (h Data) CreateSubrange(offset uint64, length uint64) Data {
 	return WrapData(raw.Dispatch_data_create_subrange(h.ptr, offset, length))
 }
 
+func (h Data) Apply(applier func(unsafe.Pointer, uint64, unsafe.Pointer, uint64) bool) bool {
+	return raw.Dispatch_data_apply(h.ptr, applier)
+}
+
 func (h Data) CopyRegion(location uint64, offset_ptr *uint64) Data {
 	return WrapData(raw.Dispatch_data_copy_region(h.ptr, location, offset_ptr))
 }
@@ -48,12 +52,20 @@ func WrapGroup(p unsafe.Pointer) Group { return Group{ptr: p} }
 // Ptr returns the underlying dispatch_group_t handle.
 func (h Group) Ptr() unsafe.Pointer { return h.ptr }
 
+func (h Group) Async(queue Queue, block func()) {
+	raw.Dispatch_group_async(h.ptr, queue.ptr, block)
+}
+
 func (h Group) AsyncF(queue Queue, context_ unsafe.Pointer, work unsafe.Pointer) {
 	raw.Dispatch_group_async_f(h.ptr, queue.ptr, context_, work)
 }
 
 func (h Group) Wait(timeout uint64) int64 {
 	return raw.Dispatch_group_wait(h.ptr, timeout)
+}
+
+func (h Group) Notify(queue Queue, block func()) {
+	raw.Dispatch_group_notify(h.ptr, queue.ptr, block)
 }
 
 func (h Group) NotifyF(queue Queue, context_ unsafe.Pointer, work unsafe.Pointer) {
@@ -77,8 +89,20 @@ func WrapIo(p unsafe.Pointer) Io { return Io{ptr: p} }
 // Ptr returns the underlying dispatch_io_t handle.
 func (h Io) Ptr() unsafe.Pointer { return h.ptr }
 
+func (h Io) Read(offset int64, length uint64, queue Queue, io_handler func(bool, unsafe.Pointer, int32)) {
+	raw.Dispatch_io_read(h.ptr, offset, length, queue.ptr, io_handler)
+}
+
+func (h Io) Write(offset int64, data Data, queue Queue, io_handler func(bool, unsafe.Pointer, int32)) {
+	raw.Dispatch_io_write(h.ptr, offset, data.ptr, queue.ptr, io_handler)
+}
+
 func (h Io) Close(flags uint64) {
 	raw.Dispatch_io_close(h.ptr, flags)
+}
+
+func (h Io) Barrier(barrier func()) {
+	raw.Dispatch_io_barrier(h.ptr, barrier)
 }
 
 func (h Io) GetDescriptor() int32 {
@@ -164,12 +188,24 @@ func WrapQueue(p unsafe.Pointer) Queue { return Queue{ptr: p} }
 // Ptr returns the underlying dispatch_queue_t handle.
 func (h Queue) Ptr() unsafe.Pointer { return h.ptr }
 
+func (h Queue) Async(block func()) {
+	raw.Dispatch_async(h.ptr, block)
+}
+
 func (h Queue) AsyncF(context_ unsafe.Pointer, work unsafe.Pointer) {
 	raw.Dispatch_async_f(h.ptr, context_, work)
 }
 
+func (h Queue) Sync(block func()) {
+	raw.Dispatch_sync(h.ptr, block)
+}
+
 func (h Queue) SyncF(context_ unsafe.Pointer, work unsafe.Pointer) {
 	raw.Dispatch_sync_f(h.ptr, context_, work)
+}
+
+func (h Queue) AsyncAndWait(block func()) {
+	raw.Dispatch_async_and_wait(h.ptr, block)
 }
 
 func (h Queue) AsyncAndWaitF(context_ unsafe.Pointer, work unsafe.Pointer) {
@@ -184,12 +220,24 @@ func (h Queue) GetQosClass(relative_priority_ptr *int32) raw.QosClassT {
 	return raw.Dispatch_queue_get_qos_class(h.ptr, relative_priority_ptr)
 }
 
+func (h Queue) BarrierAsync(block func()) {
+	raw.Dispatch_barrier_async(h.ptr, block)
+}
+
 func (h Queue) BarrierAsyncF(context_ unsafe.Pointer, work unsafe.Pointer) {
 	raw.Dispatch_barrier_async_f(h.ptr, context_, work)
 }
 
+func (h Queue) BarrierSync(block func()) {
+	raw.Dispatch_barrier_sync(h.ptr, block)
+}
+
 func (h Queue) BarrierSyncF(context_ unsafe.Pointer, work unsafe.Pointer) {
 	raw.Dispatch_barrier_sync_f(h.ptr, context_, work)
+}
+
+func (h Queue) BarrierAsyncAndWait(block func()) {
+	raw.Dispatch_barrier_async_and_wait(h.ptr, block)
 }
 
 func (h Queue) BarrierAsyncAndWaitF(context_ unsafe.Pointer, work unsafe.Pointer) {
@@ -281,8 +329,16 @@ func WrapSource(p unsafe.Pointer) Source { return Source{ptr: p} }
 // Ptr returns the underlying dispatch_source_t handle.
 func (h Source) Ptr() unsafe.Pointer { return h.ptr }
 
+func (h Source) SetEventHandler(handler func()) {
+	raw.Dispatch_source_set_event_handler(h.ptr, handler)
+}
+
 func (h Source) SetEventHandlerF(handler unsafe.Pointer) {
 	raw.Dispatch_source_set_event_handler_f(h.ptr, handler)
+}
+
+func (h Source) SetCancelHandler(handler func()) {
+	raw.Dispatch_source_set_cancel_handler(h.ptr, handler)
 }
 
 func (h Source) SetCancelHandlerF(handler unsafe.Pointer) {
@@ -317,6 +373,10 @@ func (h Source) SetTimer(start uint64, interval uint64, leeway uint64) {
 	raw.Dispatch_source_set_timer(h.ptr, start, interval, leeway)
 }
 
+func (h Source) SetRegistrationHandler(handler func()) {
+	raw.Dispatch_source_set_registration_handler(h.ptr, handler)
+}
+
 func (h Source) SetRegistrationHandlerF(handler unsafe.Pointer) {
 	raw.Dispatch_source_set_registration_handler_f(h.ptr, handler)
 }
@@ -344,6 +404,10 @@ func Time(when uint64, delta int64) uint64 {
 
 func Walltime(when *bsd.Timespec, delta int64) uint64 {
 	return raw.Dispatch_walltime(when, delta)
+}
+
+func Apply(iterations uint64, queue Queue, block func(uint64)) {
+	raw.Dispatch_apply(iterations, queue.ptr, block)
 }
 
 func ApplyF(iterations uint64, queue Queue, context_ unsafe.Pointer, work unsafe.Pointer) {
@@ -374,6 +438,10 @@ func Main() {
 	raw.Dispatch_main()
 }
 
+func After(when uint64, queue Queue, block func()) {
+	raw.Dispatch_after(when, queue.ptr, block)
+}
+
 func AfterF(when uint64, queue Queue, context_ unsafe.Pointer, work unsafe.Pointer) {
 	raw.Dispatch_after_f(when, queue.ptr, context_, work)
 }
@@ -384,6 +452,34 @@ func GetSpecific(key unsafe.Pointer) unsafe.Pointer {
 
 func AllowSendSignals(preserve_signum int32) int32 {
 	return raw.Dispatch_allow_send_signals(preserve_signum)
+}
+
+func BlockCreate(flags raw.DispatchBlockFlagsT, block func()) unsafe.Pointer {
+	return raw.Dispatch_block_create(flags, block)
+}
+
+func BlockCreateWithQosClass(flags raw.DispatchBlockFlagsT, qos_class raw.QosClassT, relative_priority int32, block func()) unsafe.Pointer {
+	return raw.Dispatch_block_create_with_qos_class(flags, qos_class, relative_priority, block)
+}
+
+func BlockPerform(flags raw.DispatchBlockFlagsT, block func()) {
+	raw.Dispatch_block_perform(flags, block)
+}
+
+func BlockWait(block func(), timeout uint64) int64 {
+	return raw.Dispatch_block_wait(block, timeout)
+}
+
+func BlockNotify(block func(), queue Queue, notification_block func()) {
+	raw.Dispatch_block_notify(block, queue.ptr, notification_block)
+}
+
+func BlockCancel(block func()) {
+	raw.Dispatch_block_cancel(block)
+}
+
+func BlockTestcancel(block func()) int64 {
+	return raw.Dispatch_block_testcancel(block)
 }
 
 func SourceCreate(type_ *raw.DispatchSourceTypeT, handle uint64, mask uint64, queue Queue) Source {
@@ -398,8 +494,36 @@ func SemaphoreCreate(value int64) Semaphore {
 	return WrapSemaphore(raw.Dispatch_semaphore_create(value))
 }
 
+func Once(predicate *int64, block func()) {
+	raw.Dispatch_once(predicate, block)
+}
+
 func OnceF(predicate *int64, context_ unsafe.Pointer, function unsafe.Pointer) {
 	raw.Dispatch_once_f(predicate, context_, function)
+}
+
+func DataCreate(buffer unsafe.Pointer, size uint64, queue Queue, destructor func()) Data {
+	return WrapData(raw.Dispatch_data_create(buffer, size, queue.ptr, destructor))
+}
+
+func Read(fd int32, length uint64, queue Queue, handler func(unsafe.Pointer, int32)) {
+	raw.Dispatch_read(fd, length, queue.ptr, handler)
+}
+
+func Write(fd int32, data Data, queue Queue, handler func(unsafe.Pointer, int32)) {
+	raw.Dispatch_write(fd, data.ptr, queue.ptr, handler)
+}
+
+func IoCreate(type_ uint64, fd int32, queue Queue, cleanup_handler func(int32)) Io {
+	return WrapIo(raw.Dispatch_io_create(type_, fd, queue.ptr, cleanup_handler))
+}
+
+func IoCreateWithPath(type_ uint64, path string, oflag int32, mode uint16, queue Queue, cleanup_handler func(int32)) Io {
+	return WrapIo(raw.Dispatch_io_create_with_path(type_, path, oflag, mode, queue.ptr, cleanup_handler))
+}
+
+func IoCreateWithIo(type_ uint64, io Io, queue Queue, cleanup_handler func(int32)) Io {
+	return WrapIo(raw.Dispatch_io_create_with_io(type_, io.ptr, queue.ptr, cleanup_handler))
 }
 
 func WorkloopCreate(label string) Workloop {

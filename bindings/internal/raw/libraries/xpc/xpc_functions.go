@@ -30,13 +30,13 @@ var (
 	_pg_xpc_connection_create_mach_service                            func(string, unsafe.Pointer, uint64) unsafe.Pointer
 	_pg_xpc_connection_create_from_endpoint                           func(unsafe.Pointer) unsafe.Pointer
 	_pg_xpc_connection_set_target_queue                               func(unsafe.Pointer, unsafe.Pointer)
-	_pg_xpc_connection_set_event_handler                              func(unsafe.Pointer, unsafe.Pointer)
+	_pg_xpc_connection_set_event_handler                              func(unsafe.Pointer, objc.Block)
 	_pg_xpc_connection_activate                                       func(unsafe.Pointer)
 	_pg_xpc_connection_suspend                                        func(unsafe.Pointer)
 	_pg_xpc_connection_resume                                         func(unsafe.Pointer)
 	_pg_xpc_connection_send_message                                   func(unsafe.Pointer, unsafe.Pointer)
 	_pg_xpc_connection_send_barrier                                   func(unsafe.Pointer, objc.Block)
-	_pg_xpc_connection_send_message_with_reply                        func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_pg_xpc_connection_send_message_with_reply                        func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, objc.Block)
 	_pg_xpc_connection_send_message_with_reply_sync                   func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	_pg_xpc_connection_cancel                                         func(unsafe.Pointer)
 	_pg_xpc_connection_get_name                                       func(unsafe.Pointer) string
@@ -175,7 +175,7 @@ var (
 	_pg_xpc_main                                                      func(unsafe.Pointer)
 	_pg_xpc_transaction_begin                                         func()
 	_pg_xpc_transaction_end                                           func()
-	_pg_xpc_set_event_stream_handler                                  func(string, unsafe.Pointer, unsafe.Pointer)
+	_pg_xpc_set_event_stream_handler                                  func(string, unsafe.Pointer, objc.Block)
 )
 
 // [xpc.h:78]
@@ -313,8 +313,13 @@ func Xpc_connection_set_target_queue(connection unsafe.Pointer, targetq unsafe.P
 
 // [connection.h:340]
 // ID: objc-sym xpc.xpc_connection_set_event_handler
-func Xpc_connection_set_event_handler(connection unsafe.Pointer, handler unsafe.Pointer) {
-	_pg_xpc_connection_set_event_handler(connection, handler)
+func Xpc_connection_set_event_handler(connection unsafe.Pointer, handler func(unsafe.Pointer)) {
+	var _blk_handler objc.Block
+	if handler != nil {
+		_blk_handler = objc.NewBlock(func(_ objc.Block, _a0 unsafe.Pointer) { handler(_a0) })
+		defer _blk_handler.Release()
+	}
+	_pg_xpc_connection_set_event_handler(connection, _blk_handler)
 }
 
 // [connection.h:366]
@@ -354,8 +359,13 @@ func Xpc_connection_send_barrier(connection unsafe.Pointer, barrier func()) {
 
 // [connection.h:543]
 // ID: objc-sym xpc.xpc_connection_send_message_with_reply
-func Xpc_connection_send_message_with_reply(connection unsafe.Pointer, message unsafe.Pointer, replyq unsafe.Pointer, handler unsafe.Pointer) {
-	_pg_xpc_connection_send_message_with_reply(connection, message, replyq, handler)
+func Xpc_connection_send_message_with_reply(connection unsafe.Pointer, message unsafe.Pointer, replyq unsafe.Pointer, handler func(unsafe.Pointer)) {
+	var _blk_handler objc.Block
+	if handler != nil {
+		_blk_handler = objc.NewBlock(func(_ objc.Block, _a0 unsafe.Pointer) { handler(_a0) })
+		defer _blk_handler.Release()
+	}
+	_pg_xpc_connection_send_message_with_reply(connection, message, replyq, _blk_handler)
 }
 
 // [connection.h:582]
@@ -1260,6 +1270,11 @@ func Xpc_transaction_end() {
 // [xpc.h:2789]
 // Introduced: macOS 10.7
 // ID: objc-sym xpc.xpc_set_event_stream_handler
-func Xpc_set_event_stream_handler(stream string, targetq unsafe.Pointer, handler unsafe.Pointer) {
-	_pg_xpc_set_event_stream_handler(stream, targetq, handler)
+func Xpc_set_event_stream_handler(stream string, targetq unsafe.Pointer, handler func(unsafe.Pointer)) {
+	var _blk_handler objc.Block
+	if handler != nil {
+		_blk_handler = objc.NewBlock(func(_ objc.Block, _a0 unsafe.Pointer) { handler(_a0) })
+		defer _blk_handler.Release()
+	}
+	_pg_xpc_set_event_stream_handler(stream, targetq, _blk_handler)
 }

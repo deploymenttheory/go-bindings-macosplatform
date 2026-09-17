@@ -196,14 +196,14 @@ func Dispatch_resume(object unsafe.Pointer) {
 	_pg_dispatch_resume(object)
 }
 
-// [object.h:497]
+// [object.h:501]
 // Introduced: macOS 10.14
 // ID: objc-sym dispatch.dispatch_set_qos_class_floor
 func Dispatch_set_qos_class_floor(object unsafe.Pointer, qos_class QosClassT, relative_priority int32) {
 	_pg_dispatch_set_qos_class_floor(object, qos_class, relative_priority)
 }
 
-// [queue.h:239]
+// [queue.h:248]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_async
 func Dispatch_async(queue unsafe.Pointer, block func()) {
@@ -215,14 +215,14 @@ func Dispatch_async(queue unsafe.Pointer, block func()) {
 	_pg_dispatch_async(queue, _blk_block)
 }
 
-// [queue.h:270]
+// [queue.h:279]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_async_f
 func Dispatch_async_f(queue unsafe.Pointer, context_ unsafe.Pointer, work unsafe.Pointer) {
 	_pg_dispatch_async_f(queue, context_, work)
 }
 
-// [queue.h:314]
+// [queue.h:323]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_sync
 func Dispatch_sync(queue unsafe.Pointer, block func()) {
@@ -234,14 +234,14 @@ func Dispatch_sync(queue unsafe.Pointer, block func()) {
 	_pg_dispatch_sync(queue, _blk_block)
 }
 
-// [queue.h:343]
+// [queue.h:352]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_sync_f
 func Dispatch_sync_f(queue unsafe.Pointer, context_ unsafe.Pointer, work unsafe.Pointer) {
 	_pg_dispatch_sync_f(queue, context_, work)
 }
 
-// [queue.h:411]
+// [queue.h:420]
 // Introduced: macOS 10.14
 // ID: objc-sym dispatch.dispatch_async_and_wait
 func Dispatch_async_and_wait(queue unsafe.Pointer, block func()) {
@@ -253,14 +253,14 @@ func Dispatch_async_and_wait(queue unsafe.Pointer, block func()) {
 	_pg_dispatch_async_and_wait(queue, _blk_block)
 }
 
-// [queue.h:441]
+// [queue.h:450]
 // Introduced: macOS 10.14
 // ID: objc-sym dispatch.dispatch_async_and_wait_f
 func Dispatch_async_and_wait_f(queue unsafe.Pointer, context_ unsafe.Pointer, work unsafe.Pointer) {
 	_pg_dispatch_async_and_wait_f(queue, context_, work)
 }
 
-// [queue.h:514]
+// [queue.h:523]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_apply
 func Dispatch_apply(iterations uint64, queue unsafe.Pointer, block func(uint64)) {
@@ -272,14 +272,14 @@ func Dispatch_apply(iterations uint64, queue unsafe.Pointer, block func(uint64))
 	_pg_dispatch_apply(iterations, queue, _blk_block)
 }
 
-// [queue.h:550]
+// [queue.h:559]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_apply_f
 func Dispatch_apply_f(iterations uint64, queue unsafe.Pointer, context_ unsafe.Pointer, work unsafe.Pointer) {
 	_pg_dispatch_apply_f(iterations, queue, context_, work)
 }
 
-// [queue.h:586]
+// [queue.h:595]
 // Introduced: macOS 10.6
 //
 // Deprecated: Deprecated in macOS 10.9. unsupported interface
@@ -288,77 +288,77 @@ func Dispatch_get_current_queue() unsafe.Pointer {
 	return _pg_dispatch_get_current_queue()
 }
 
-// [queue.h:701]
+// [queue.h:710]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_get_global_queue
 func Dispatch_get_global_queue(identifier int64, flags uint64) unsafe.Pointer {
 	return _pg_dispatch_get_global_queue(identifier, flags)
 }
 
-// [queue.h:798]
+// [queue.h:807]
 // Introduced: macOS 10.12
 // ID: objc-sym dispatch.dispatch_queue_attr_make_initially_inactive
 func Dispatch_queue_attr_make_initially_inactive(attr unsafe.Pointer) unsafe.Pointer {
 	return _pg_dispatch_queue_attr_make_initially_inactive(attr)
 }
 
-// [queue.h:905]
+// [queue.h:914]
 // Introduced: macOS 10.12
 // ID: objc-sym dispatch.dispatch_queue_attr_make_with_autorelease_frequency
 func Dispatch_queue_attr_make_with_autorelease_frequency(attr unsafe.Pointer, frequency DispatchAutoreleaseFrequencyT) unsafe.Pointer {
 	return _pg_dispatch_queue_attr_make_with_autorelease_frequency(attr, frequency)
 }
 
-// [queue.h:970]
+// [queue.h:980]
 // Introduced: macOS 10.10
 // ID: objc-sym dispatch.dispatch_queue_attr_make_with_qos_class
 func Dispatch_queue_attr_make_with_qos_class(attr unsafe.Pointer, qos_class QosClassT, relative_priority int32) unsafe.Pointer {
 	return _pg_dispatch_queue_attr_make_with_qos_class(attr, qos_class, relative_priority)
 }
 
-// [queue.h:1037]
+// [queue.h:1050]
 // Introduced: macOS 10.12
 // ID: objc-sym dispatch.dispatch_queue_create_with_target
 func Dispatch_queue_create_with_target(label string, attr unsafe.Pointer, target unsafe.Pointer) unsafe.Pointer {
 	return _pg_dispatch_queue_create_with_target(label, attr, target)
 }
 
-// [queue.h:1091]
+// [queue.h:1108]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_queue_create
 func Dispatch_queue_create(label string, attr unsafe.Pointer) unsafe.Pointer {
 	return _pg_dispatch_queue_create(label, attr)
 }
 
-// [queue.h:1121]
+// [queue.h:1138]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_queue_get_label
 func Dispatch_queue_get_label(queue unsafe.Pointer) string {
 	return _pg_dispatch_queue_get_label(queue)
 }
 
-// [queue.h:1161]
+// [queue.h:1178]
 // Introduced: macOS 10.10
 // ID: objc-sym dispatch.dispatch_queue_get_qos_class
 func Dispatch_queue_get_qos_class(queue unsafe.Pointer, relative_priority_ptr *int32) QosClassT {
 	return _pg_dispatch_queue_get_qos_class(queue, relative_priority_ptr)
 }
 
-// [queue.h:1229]
+// [queue.h:1246]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_set_target_queue
 func Dispatch_set_target_queue(object unsafe.Pointer, queue unsafe.Pointer) {
 	_pg_dispatch_set_target_queue(object, queue)
 }
 
-// [queue.h:1249]
+// [queue.h:1266]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_main
 func Dispatch_main() {
 	_pg_dispatch_main()
 }
 
-// [queue.h:1278]
+// [queue.h:1295]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_after
 func Dispatch_after(when uint64, queue unsafe.Pointer, block func()) {
@@ -370,14 +370,14 @@ func Dispatch_after(when uint64, queue unsafe.Pointer, block func()) {
 	_pg_dispatch_after(when, queue, _blk_block)
 }
 
-// [queue.h:1311]
+// [queue.h:1328]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_after_f
 func Dispatch_after_f(when uint64, queue unsafe.Pointer, context_ unsafe.Pointer, work unsafe.Pointer) {
 	_pg_dispatch_after_f(when, queue, context_, work)
 }
 
-// [queue.h:1358]
+// [queue.h:1375]
 // Introduced: macOS 10.7
 // ID: objc-sym dispatch.dispatch_barrier_async
 func Dispatch_barrier_async(queue unsafe.Pointer, block func()) {
@@ -389,14 +389,14 @@ func Dispatch_barrier_async(queue unsafe.Pointer, block func()) {
 	_pg_dispatch_barrier_async(queue, _blk_block)
 }
 
-// [queue.h:1394]
+// [queue.h:1411]
 // Introduced: macOS 10.7
 // ID: objc-sym dispatch.dispatch_barrier_async_f
 func Dispatch_barrier_async_f(queue unsafe.Pointer, context_ unsafe.Pointer, work unsafe.Pointer) {
 	_pg_dispatch_barrier_async_f(queue, context_, work)
 }
 
-// [queue.h:1423]
+// [queue.h:1440]
 // Introduced: macOS 10.7
 // ID: objc-sym dispatch.dispatch_barrier_sync
 func Dispatch_barrier_sync(queue unsafe.Pointer, block func()) {
@@ -408,14 +408,14 @@ func Dispatch_barrier_sync(queue unsafe.Pointer, block func()) {
 	_pg_dispatch_barrier_sync(queue, _blk_block)
 }
 
-// [queue.h:1456]
+// [queue.h:1473]
 // Introduced: macOS 10.7
 // ID: objc-sym dispatch.dispatch_barrier_sync_f
 func Dispatch_barrier_sync_f(queue unsafe.Pointer, context_ unsafe.Pointer, work unsafe.Pointer) {
 	_pg_dispatch_barrier_sync_f(queue, context_, work)
 }
 
-// [queue.h:1485]
+// [queue.h:1502]
 // Introduced: macOS 10.14
 // ID: objc-sym dispatch.dispatch_barrier_async_and_wait
 func Dispatch_barrier_async_and_wait(queue unsafe.Pointer, block func()) {
@@ -427,63 +427,63 @@ func Dispatch_barrier_async_and_wait(queue unsafe.Pointer, block func()) {
 	_pg_dispatch_barrier_async_and_wait(queue, _blk_block)
 }
 
-// [queue.h:1519]
+// [queue.h:1536]
 // Introduced: macOS 10.14
 // ID: objc-sym dispatch.dispatch_barrier_async_and_wait_f
 func Dispatch_barrier_async_and_wait_f(queue unsafe.Pointer, context_ unsafe.Pointer, work unsafe.Pointer) {
 	_pg_dispatch_barrier_async_and_wait_f(queue, context_, work)
 }
 
-// [queue.h:1562]
+// [queue.h:1579]
 // Introduced: macOS 10.7
 // ID: objc-sym dispatch.dispatch_queue_set_specific
 func Dispatch_queue_set_specific(queue unsafe.Pointer, key unsafe.Pointer, context_ unsafe.Pointer, destructor unsafe.Pointer) {
 	_pg_dispatch_queue_set_specific(queue, key, context_, destructor)
 }
 
-// [queue.h:1593]
+// [queue.h:1610]
 // Introduced: macOS 10.7
 // ID: objc-sym dispatch.dispatch_queue_get_specific
 func Dispatch_queue_get_specific(queue unsafe.Pointer, key unsafe.Pointer) unsafe.Pointer {
 	return _pg_dispatch_queue_get_specific(queue, key)
 }
 
-// [queue.h:1620]
+// [queue.h:1637]
 // Introduced: macOS 10.7
 // ID: objc-sym dispatch.dispatch_get_specific
 func Dispatch_get_specific(key unsafe.Pointer) unsafe.Pointer {
 	return _pg_dispatch_get_specific(key)
 }
 
-// [queue.h:1675]
+// [queue.h:1692]
 // Introduced: macOS 10.12
 // ID: objc-sym dispatch.dispatch_assert_queue
 func Dispatch_assert_queue(queue unsafe.Pointer) {
 	_pg_dispatch_assert_queue(queue)
 }
 
-// [queue.h:1702]
+// [queue.h:1719]
 // Introduced: macOS 10.12
 // ID: objc-sym dispatch.dispatch_assert_queue_barrier
 func Dispatch_assert_queue_barrier(queue unsafe.Pointer) {
 	_pg_dispatch_assert_queue_barrier(queue)
 }
 
-// [queue.h:1726]
+// [queue.h:1743]
 // Introduced: macOS 10.12
 // ID: objc-sym dispatch.dispatch_assert_queue_not
 func Dispatch_assert_queue_not(queue unsafe.Pointer) {
 	_pg_dispatch_assert_queue_not(queue)
 }
 
-// [queue.h:1800]
+// [queue.h:1817]
 // Introduced: macOS 14.4
 // ID: objc-sym dispatch.dispatch_allow_send_signals
 func Dispatch_allow_send_signals(preserve_signum int32) int32 {
 	return _pg_dispatch_allow_send_signals(preserve_signum)
 }
 
-// [block.h:181]
+// [block.h:246]
 // Introduced: macOS 10.10
 // ID: objc-sym dispatch.dispatch_block_create
 func Dispatch_block_create(flags DispatchBlockFlagsT, block func()) unsafe.Pointer {
@@ -495,7 +495,7 @@ func Dispatch_block_create(flags DispatchBlockFlagsT, block func()) unsafe.Point
 	return _pg_dispatch_block_create(flags, _blk_block)
 }
 
-// [block.h:254]
+// [block.h:319]
 // Introduced: macOS 10.10
 // ID: objc-sym dispatch.dispatch_block_create_with_qos_class
 func Dispatch_block_create_with_qos_class(flags DispatchBlockFlagsT, qos_class QosClassT, relative_priority int32, block func()) unsafe.Pointer {
@@ -507,7 +507,7 @@ func Dispatch_block_create_with_qos_class(flags DispatchBlockFlagsT, qos_class Q
 	return _pg_dispatch_block_create_with_qos_class(flags, qos_class, relative_priority, _blk_block)
 }
 
-// [block.h:287]
+// [block.h:352]
 // Introduced: macOS 10.10
 // ID: objc-sym dispatch.dispatch_block_perform
 func Dispatch_block_perform(flags DispatchBlockFlagsT, block func()) {
@@ -519,7 +519,7 @@ func Dispatch_block_perform(flags DispatchBlockFlagsT, block func()) {
 	_pg_dispatch_block_perform(flags, _blk_block)
 }
 
-// [block.h:339]
+// [block.h:404]
 // Introduced: macOS 10.10
 // ID: objc-sym dispatch.dispatch_block_wait
 func Dispatch_block_wait(block func(), timeout uint64) int64 {
@@ -531,7 +531,7 @@ func Dispatch_block_wait(block func(), timeout uint64) int64 {
 	return _pg_dispatch_block_wait(_blk_block, timeout)
 }
 
-// [block.h:381]
+// [block.h:446]
 // Introduced: macOS 10.10
 // ID: objc-sym dispatch.dispatch_block_notify
 func Dispatch_block_notify(block func(), queue unsafe.Pointer, notification_block func()) {
@@ -548,7 +548,7 @@ func Dispatch_block_notify(block func(), queue unsafe.Pointer, notification_bloc
 	_pg_dispatch_block_notify(_blk_block, queue, _blk_notification_block)
 }
 
-// [block.h:414]
+// [block.h:479]
 // Introduced: macOS 10.10
 // ID: objc-sym dispatch.dispatch_block_cancel
 func Dispatch_block_cancel(block func()) {
@@ -560,7 +560,7 @@ func Dispatch_block_cancel(block func()) {
 	_pg_dispatch_block_cancel(_blk_block)
 }
 
-// [block.h:435]
+// [block.h:500]
 // Introduced: macOS 10.10
 // ID: objc-sym dispatch.dispatch_block_testcancel
 func Dispatch_block_testcancel(block func()) int64 {
@@ -572,7 +572,7 @@ func Dispatch_block_testcancel(block func()) int64 {
 	return _pg_dispatch_block_testcancel(_blk_block)
 }
 
-// [source.h:400]
+// [source.h:399]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_source_create
 func Dispatch_source_create(type_ *DispatchSourceTypeT, handle uint64, mask uint64, queue unsafe.Pointer) unsafe.Pointer {
@@ -584,7 +584,7 @@ func Dispatch_source_create(type_ *DispatchSourceTypeT, handle uint64, mask uint
 	return _pg_dispatch_source_create(_ptr_type_, handle, mask, queue)
 }
 
-// [source.h:423]
+// [source.h:422]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_source_set_event_handler
 func Dispatch_source_set_event_handler(source unsafe.Pointer, handler func()) {
@@ -596,14 +596,14 @@ func Dispatch_source_set_event_handler(source unsafe.Pointer, handler func()) {
 	_pg_dispatch_source_set_event_handler(source, _blk_handler)
 }
 
-// [source.h:446]
+// [source.h:445]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_source_set_event_handler_f
 func Dispatch_source_set_event_handler_f(source unsafe.Pointer, handler unsafe.Pointer) {
 	_pg_dispatch_source_set_event_handler_f(source, handler)
 }
 
-// [source.h:482]
+// [source.h:481]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_source_set_cancel_handler
 func Dispatch_source_set_cancel_handler(source unsafe.Pointer, handler func()) {
@@ -615,63 +615,63 @@ func Dispatch_source_set_cancel_handler(source unsafe.Pointer, handler func()) {
 	_pg_dispatch_source_set_cancel_handler(source, _blk_handler)
 }
 
-// [source.h:508]
+// [source.h:507]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_source_set_cancel_handler_f
 func Dispatch_source_set_cancel_handler_f(source unsafe.Pointer, handler unsafe.Pointer) {
 	_pg_dispatch_source_set_cancel_handler_f(source, handler)
 }
 
-// [source.h:537]
+// [source.h:536]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_source_cancel
 func Dispatch_source_cancel(source unsafe.Pointer) {
 	_pg_dispatch_source_cancel(source)
 }
 
-// [source.h:557]
+// [source.h:556]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_source_testcancel
 func Dispatch_source_testcancel(source unsafe.Pointer) int64 {
 	return _pg_dispatch_source_testcancel(source)
 }
 
-// [source.h:590]
+// [source.h:589]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_source_get_handle
 func Dispatch_source_get_handle(source unsafe.Pointer) uint64 {
 	return _pg_dispatch_source_get_handle(source)
 }
 
-// [source.h:623]
+// [source.h:622]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_source_get_mask
 func Dispatch_source_get_mask(source unsafe.Pointer) uint64 {
 	return _pg_dispatch_source_get_mask(source)
 }
 
-// [source.h:663]
+// [source.h:662]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_source_get_data
 func Dispatch_source_get_data(source unsafe.Pointer) uint64 {
 	return _pg_dispatch_source_get_data(source)
 }
 
-// [source.h:685]
+// [source.h:684]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_source_merge_data
 func Dispatch_source_merge_data(source unsafe.Pointer, value uint64) {
 	_pg_dispatch_source_merge_data(source, value)
 }
 
-// [source.h:739]
+// [source.h:738]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_source_set_timer
 func Dispatch_source_set_timer(source unsafe.Pointer, start uint64, interval uint64, leeway uint64) {
 	_pg_dispatch_source_set_timer(source, start, interval, leeway)
 }
 
-// [source.h:770]
+// [source.h:769]
 // Introduced: macOS 10.7
 // ID: objc-sym dispatch.dispatch_source_set_registration_handler
 func Dispatch_source_set_registration_handler(source unsafe.Pointer, handler func()) {
@@ -683,7 +683,7 @@ func Dispatch_source_set_registration_handler(source unsafe.Pointer, handler fun
 	_pg_dispatch_source_set_registration_handler(source, _blk_handler)
 }
 
-// [source.h:796]
+// [source.h:795]
 // Introduced: macOS 10.7
 // ID: objc-sym dispatch.dispatch_source_set_registration_handler_f
 func Dispatch_source_set_registration_handler_f(source unsafe.Pointer, handler unsafe.Pointer) {

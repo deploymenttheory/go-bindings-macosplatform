@@ -1,363 +1,67 @@
 {
-  "framework": "ioreport",
-  "sdk_version": "26.5",
+  "framework": "Sandbox",
+  "sdk_version": "27.0",
   "arch": "arm64",
   "schema_version": 1,
-  "clang_version": "Apple clang version 21.0.0 (clang-2100.1.1.101)",
-  "xcode_version": "Xcode 26.6 Build version 17F113",
+  "clang_version": "Apple clang version 21.0.0 (clang-2100.3.34.2)",
+  "xcode_version": "Xcode 27.0 Build version 27A266a",
   "classes": {},
   "protocols": {},
   "enums": {},
-  "structs": {
-    "IOReportSubscription": {
-      "availability": {},
-      "sdk_file": "IOReport.h",
-      "sdk_line": 36
-    }
-  },
+  "structs": {},
   "functions": [
     {
-      "name": "IOReportCopyAllChannels",
+      "name": "sandbox_init",
       "args": [
         {
-          "name": "options",
+          "name": "profile",
+          "objc_type": "const char *"
+        },
+        {
+          "name": "flags",
           "objc_type": "uint64_t"
         },
         {
-          "name": "unused",
-          "objc_type": "uint64_t"
+          "name": "errorbuf",
+          "objc_type": "char **"
         }
       ],
       "return": {
-        "objc_type": "IOReportChannelsRef"
+        "objc_type": "int"
       },
-      "availability": {},
-      "sdk_file": "IOReport.h",
-      "sdk_line": 47
+      "availability": {
+        "macos_introduced": "10.5",
+        "macos_deprecated": "10.8",
+        "deprecation_message": "No longer supported"
+      },
+      "sdk_file": "sandbox.h",
+      "sdk_line": 49,
+      "warn_unused": true
     },
     {
-      "name": "IOReportCopyChannelsInGroup",
+      "name": "sandbox_free_error",
       "args": [
         {
-          "name": "group",
-          "objc_type": "IOReportStringRef"
-        },
-        {
-          "name": "subgroup",
-          "objc_type": "IOReportStringRef"
-        },
-        {
-          "name": "options",
-          "objc_type": "uint64_t"
-        },
-        {
-          "name": "unused1",
-          "objc_type": "uint64_t"
-        },
-        {
-          "name": "unused2",
-          "objc_type": "uint64_t"
-        }
-      ],
-      "return": {
-        "objc_type": "IOReportChannelsRef"
-      },
-      "availability": {},
-      "sdk_file": "IOReport.h",
-      "sdk_line": 51
-    },
-    {
-      "name": "IOReportMergeChannels",
-      "args": [
-        {
-          "name": "target",
-          "objc_type": "IOReportChannelsRef"
-        },
-        {
-          "name": "toAdd",
-          "objc_type": "IOReportChannelsRef"
-        },
-        {
-          "name": "unused",
-          "objc_type": "IOReportOptionsRef"
+          "name": "errorbuf",
+          "objc_type": "char *"
         }
       ],
       "return": {
         "objc_type": ""
       },
-      "availability": {},
-      "sdk_file": "IOReport.h",
-      "sdk_line": 54
-    },
-    {
-      "name": "IOReportCreateSubscription",
-      "args": [
-        {
-          "name": "allocator",
-          "objc_type": "void *"
-        },
-        {
-          "name": "desiredChannels",
-          "objc_type": "IOReportChannelsRef"
-        },
-        {
-          "name": "subscribedChannels",
-          "objc_type": "IOReportChannelsRef *"
-        },
-        {
-          "name": "channelID",
-          "objc_type": "uint64_t"
-        },
-        {
-          "name": "unused",
-          "objc_type": "IOReportOptionsRef"
-        }
-      ],
-      "return": {
-        "objc_type": "IOReportSubscriptionRef"
+      "availability": {
+        "macos_introduced": "10.5",
+        "macos_deprecated": "10.8",
+        "deprecation_message": "No longer supported"
       },
-      "availability": {},
-      "sdk_file": "IOReport.h",
-      "sdk_line": 61
-    },
-    {
-      "name": "IOReportCreateSamples",
-      "args": [
-        {
-          "name": "subscription",
-          "objc_type": "IOReportSubscriptionRef"
-        },
-        {
-          "name": "subscribedChannels",
-          "objc_type": "IOReportChannelsRef"
-        },
-        {
-          "name": "unused",
-          "objc_type": "IOReportOptionsRef"
-        }
-      ],
-      "return": {
-        "objc_type": "IOReportSampleRef"
-      },
-      "availability": {},
-      "sdk_file": "IOReport.h",
-      "sdk_line": 64
-    },
-    {
-      "name": "IOReportCreateSamplesDelta",
-      "args": [
-        {
-          "name": "previousSample",
-          "objc_type": "IOReportSampleRef"
-        },
-        {
-          "name": "currentSample",
-          "objc_type": "IOReportSampleRef"
-        },
-        {
-          "name": "unused",
-          "objc_type": "IOReportOptionsRef"
-        }
-      ],
-      "return": {
-        "objc_type": "IOReportSampleRef"
-      },
-      "availability": {},
-      "sdk_file": "IOReport.h",
-      "sdk_line": 67
-    },
-    {
-      "name": "IOReportChannelGetGroup",
-      "args": [
-        {
-          "name": "channel",
-          "objc_type": "IOReportChannelRef"
-        }
-      ],
-      "return": {
-        "objc_type": "IOReportStringRef"
-      },
-      "availability": {},
-      "sdk_file": "IOReport.h",
-      "sdk_line": 71
-    },
-    {
-      "name": "IOReportChannelGetSubGroup",
-      "args": [
-        {
-          "name": "channel",
-          "objc_type": "IOReportChannelRef"
-        }
-      ],
-      "return": {
-        "objc_type": "IOReportStringRef"
-      },
-      "availability": {},
-      "sdk_file": "IOReport.h",
-      "sdk_line": 72
-    },
-    {
-      "name": "IOReportChannelGetChannelName",
-      "args": [
-        {
-          "name": "channel",
-          "objc_type": "IOReportChannelRef"
-        }
-      ],
-      "return": {
-        "objc_type": "IOReportStringRef"
-      },
-      "availability": {},
-      "sdk_file": "IOReport.h",
-      "sdk_line": 73
-    },
-    {
-      "name": "IOReportChannelGetUnitLabel",
-      "args": [
-        {
-          "name": "channel",
-          "objc_type": "IOReportChannelRef"
-        }
-      ],
-      "return": {
-        "objc_type": "IOReportStringRef"
-      },
-      "availability": {},
-      "sdk_file": "IOReport.h",
-      "sdk_line": 74
-    },
-    {
-      "name": "IOReportChannelGetChannelID",
-      "args": [
-        {
-          "name": "channel",
-          "objc_type": "IOReportChannelRef"
-        }
-      ],
-      "return": {
-        "objc_type": "uint64_t"
-      },
-      "availability": {},
-      "sdk_file": "IOReport.h",
-      "sdk_line": 75
-    },
-    {
-      "name": "IOReportChannelGetFormat",
-      "args": [
-        {
-          "name": "channel",
-          "objc_type": "IOReportChannelRef"
-        }
-      ],
-      "return": {
-        "objc_type": "int32_t"
-      },
-      "availability": {},
-      "sdk_file": "IOReport.h",
-      "sdk_line": 76
-    },
-    {
-      "name": "IOReportSimpleGetIntegerValue",
-      "args": [
-        {
-          "name": "channel",
-          "objc_type": "IOReportChannelRef"
-        },
-        {
-          "name": "index",
-          "objc_type": "int32_t"
-        }
-      ],
-      "return": {
-        "objc_type": "int64_t"
-      },
-      "availability": {},
-      "sdk_file": "IOReport.h",
-      "sdk_line": 80
-    },
-    {
-      "name": "IOReportStateGetCount",
-      "args": [
-        {
-          "name": "channel",
-          "objc_type": "IOReportChannelRef"
-        }
-      ],
-      "return": {
-        "objc_type": "int32_t"
-      },
-      "availability": {},
-      "sdk_file": "IOReport.h",
-      "sdk_line": 84
-    },
-    {
-      "name": "IOReportStateGetNameForIndex",
-      "args": [
-        {
-          "name": "channel",
-          "objc_type": "IOReportChannelRef"
-        },
-        {
-          "name": "index",
-          "objc_type": "int32_t"
-        }
-      ],
-      "return": {
-        "objc_type": "IOReportStringRef"
-      },
-      "availability": {},
-      "sdk_file": "IOReport.h",
-      "sdk_line": 85
-    },
-    {
-      "name": "IOReportStateGetResidency",
-      "args": [
-        {
-          "name": "channel",
-          "objc_type": "IOReportChannelRef"
-        },
-        {
-          "name": "index",
-          "objc_type": "int32_t"
-        }
-      ],
-      "return": {
-        "objc_type": "int64_t"
-      },
-      "availability": {},
-      "sdk_file": "IOReport.h",
-      "sdk_line": 86
-    },
-    {
-      "name": "IOReportArrayGetValueAtIndex",
-      "args": [
-        {
-          "name": "channel",
-          "objc_type": "IOReportChannelRef"
-        },
-        {
-          "name": "index",
-          "objc_type": "int32_t"
-        }
-      ],
-      "return": {
-        "objc_type": "int64_t"
-      },
-      "availability": {},
-      "sdk_file": "IOReport.h",
-      "sdk_line": 90
+      "sdk_file": "sandbox.h",
+      "sdk_line": 68
     }
   ],
   "externs": null,
   "block_types": {},
   "typedefs": {
     "Class": "Class",
-    "IOReportChannelRef": "const void *",
-    "IOReportChannelsRef": "void *",
-    "IOReportOptionsRef": "const void *",
-    "IOReportSampleRef": "const void *",
-    "IOReportStringRef": "const void *",
-    "IOReportSubscriptionRef": "struct IOReportSubscription *",
     "SEL": "SEL *",
     "__Bfloat16x4_t": "__attribute__((neon_vector_type(4))) __bf16",
     "__Bfloat16x8_t": "__attribute__((neon_vector_type(8))) __bf16",
@@ -517,6 +221,8 @@
     "int_least8_t": "int8_t",
     "intmax_t": "long",
     "intptr_t": "__darwin_intptr_t",
+    "os_block_t": "void (^)(void)",
+    "os_function_t": "void (*)(void * _Nullable)",
     "uint16_t": "unsigned short",
     "uint32_t": "unsigned int",
     "uint64_t": "unsigned long long",
@@ -532,6 +238,6 @@
     "uintmax_t": "unsigned long",
     "uintptr_t": "unsigned long"
   },
-  "link_lib": "IOReport",
-  "shim_header": "metadata/shims/IOReport.h"
+  "link_lib": "sandbox",
+  "header": "sandbox.h"
 }

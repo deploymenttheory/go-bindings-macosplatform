@@ -16,7 +16,7 @@ This project provides two things:
 
 > **One consumable API.** These fluent packages are the *only* API you import. A lower-level "raw" binding (a near-1:1 purego mirror of the ObjC/C surface) is still generated as the implementation substrate, but it lives under `bindings/internal/raw/` — Go's internal-package rule makes it unreachable from outside this module. You never import it, and the compiler guarantees it.
 
-> **Platform:** macOS 27 or later (`darwin`). Framework bindings are generated from the macOS 27.0 SDK in Xcode 27.0; C-library bindings retain their SDK 26.5 metadata pending a separate refresh. All generated code carries a `//go:build darwin` constraint.
+> **Platform:** macOS 27 or later (`darwin`). Framework and C-library bindings are generated from the macOS 27.0 SDK in Xcode 27.0. All generated code carries a `//go:build darwin` constraint.
 
 ---
 
@@ -29,6 +29,7 @@ This project provides two things:
 | [Idiomatic Migration](docs/idiomatic-migration.md) | What changed when the idiomatic layer became the sole `bindings/` API, and how to update imports |
 | [Extraction Workflow](docs/extraction_workflow.md) | How Clang AST scanning produces `.gometa.json` files and how those drive Go code generation |
 | [macOS 27 Upgrade](docs/macos27-upgrade.md) | SDK provenance, API changes, generator fixes, and validation results |
+| [macOS 27 Library Refresh](docs/macos27-libraries-upgrade.md) | C-library API changes, ABI corrections, and validation results |
 | [Naming Standard](docs/naming.md) | The naming contract for generator code and generated identifiers |
 | [Metadata Overrides](docs/metadata_overrides.md) | Declarative per-framework metadata corrections applied at load time |
 

@@ -1,10 +1,10 @@
 {
   "framework": "machvm",
-  "sdk_version": "26.5",
+  "sdk_version": "27.0",
   "arch": "arm64",
   "schema_version": 1,
-  "clang_version": "Apple clang version 21.0.0 (clang-2100.1.1.101)",
-  "xcode_version": "Xcode 26.6 Build version 17F113",
+  "clang_version": "Apple clang version 21.0.0 (clang-2100.3.34.2)",
+  "xcode_version": "Xcode 27.0 Build version 27A266a",
   "classes": {},
   "protocols": {},
   "enums": {
@@ -405,6 +405,24 @@
       "is_bitmask": true,
       "is_extensible": true
     },
+    "task_shared_region_stubs_t": {
+      "go_type": "uint8",
+      "members": [
+        {
+          "name": "TASK_SHARED_REGION_STUBS_DEV",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "TASK_SHARED_REGION_STUBS_PROD",
+          "value": "2",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "task_info.h",
+      "sdk_line": 188
+    },
     "virtual_memory_guard_exception_code_t": {
       "go_type": "uint32",
       "members": [
@@ -449,8 +467,36 @@
           "availability": {}
         },
         {
-          "name": "kGUARD_EXC_LARGE_ALLOCATION_TELEMETRY",
+          "name": "kGUARD_EXC_COW_DEFEATURED_COPY_DENIED",
           "value": "13",
+          "availability": {},
+          "doc": "Guard exception sent to a thread when a CoW defeatured map attempts to copy memory which is not permitted by system policy."
+        },
+        {
+          "name": "kGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED",
+          "value": "14",
+          "availability": {},
+          "doc": "Guard exception sent to a thread when it attempts to extract a given type of memory in a way which is not permitted for CoW defeatured maps."
+        },
+        {
+          "name": "kGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED",
+          "value": "15",
+          "availability": {},
+          "doc": "Guard exception sent to a thread when it attempts to copy-map a memory entry which was created for sharing by a CoW defeatured map."
+        },
+        {
+          "name": "kGUARD_EXC_COW_DEFEATURED_FIRST",
+          "value": "13",
+          "availability": {}
+        },
+        {
+          "name": "kGUARD_EXC_COW_DEFEATURED_LAST",
+          "value": "15",
+          "availability": {}
+        },
+        {
+          "name": "kGUARD_EXC_LARGE_ALLOCATION_TELEMETRY",
+          "value": "16",
           "availability": {}
         },
         {
@@ -1286,7 +1332,7 @@
         },
         {
           "name": "info",
-          "objc_type": "int[19]"
+          "objc_type": "int[21]"
         }
       ],
       "availability": {},
@@ -1325,7 +1371,7 @@
         },
         {
           "name": "info",
-          "objc_type": "int[19]"
+          "objc_type": "int[21]"
         }
       ],
       "availability": {},
@@ -3793,6 +3839,8 @@
     "host_basic_info_t": "struct host_basic_info *",
     "host_can_has_debugger_info_data_t": "struct host_can_has_debugger_info",
     "host_can_has_debugger_info_t": "struct host_can_has_debugger_info *",
+    "host_cpu_counters_info_data_t": "struct host_cpu_counters_info",
+    "host_cpu_counters_info_t": "struct host_cpu_counters_info *",
     "host_cpu_load_info_data_t": "struct host_cpu_load_info",
     "host_cpu_load_info_t": "struct host_cpu_load_info *",
     "host_flavor_t": "integer_t",
@@ -4082,6 +4130,8 @@
     "processor_array_t": "processor_t *",
     "processor_basic_info_data_t": "struct processor_basic_info",
     "processor_basic_info_t": "struct processor_basic_info *",
+    "processor_cpu_counters_info_data_t": "struct processor_cpu_counters_info",
+    "processor_cpu_counters_info_t": "struct processor_cpu_counters_info *",
     "processor_cpu_load_info_data_t": "struct processor_cpu_load_info",
     "processor_cpu_load_info_t": "struct processor_cpu_load_info *",
     "processor_cpu_stat64_data_t": "struct processor_cpu_stat64",
@@ -4180,6 +4230,9 @@
     "task_read_t": "mach_port_t",
     "task_role_t": "enum task_role",
     "task_security_config_info_t": "struct task_security_config_info *",
+    "task_shared_region_info_data_t": "struct task_shared_region_info",
+    "task_shared_region_info_t": "struct task_shared_region_info *",
+    "task_shared_region_stubs_t": "enum task_shared_region_stubs_t",
     "task_special_port_t": "int",
     "task_suspension_token_t": "mach_port_t",
     "task_t": "mach_port_t",
@@ -4190,6 +4243,8 @@
     "task_trace_memory_info_t": "struct task_trace_memory_info *",
     "task_vm_info_data_t": "struct task_vm_info",
     "task_vm_info_t": "struct task_vm_info *",
+    "task_vm_shared_cache_info_data_t": "struct task_vm_shared_cache_info",
+    "task_vm_shared_cache_info_t": "struct task_vm_shared_cache_info *",
     "task_wait_state_info_data_t": "struct task_wait_state_info",
     "task_wait_state_info_t": "struct task_wait_state_info *",
     "task_zone_info_array_t": "task_zone_info_t *",
@@ -4299,6 +4354,8 @@
     "vm_page_info_basic_data_t": "struct vm_page_info_basic",
     "vm_page_info_basic_t": "struct vm_page_info_basic *",
     "vm_page_info_data_t": "int[]",
+    "vm_page_info_extended_data_t": "struct vm_page_info_extended",
+    "vm_page_info_extended_t": "struct vm_page_info_extended *",
     "vm_page_info_flavor_t": "int",
     "vm_page_info_t": "int *",
     "vm_prot_t": "int",

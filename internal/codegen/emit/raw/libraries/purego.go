@@ -25,7 +25,8 @@ import (
 // PuregoRegistration is one RegisterLibFunc call the runtime file makes after
 // a successful Dlopen.
 type PuregoRegistration struct {
-	Symbol  string // C symbol name
+	Name    string // C declaration name used by SymbolAvailable
+	Symbol  string // exported dylib symbol, including any assembly alias
 	VarName string // package-level func var
 	Type    string // Go func type of the var
 }
@@ -70,7 +71,8 @@ func EmitPuregoFunctions(
 		fmt.Fprintf(&vars, "\t%s %s\n", model.varName, model.varType)
 		bodies.WriteString(model.body)
 		regs = append(regs, PuregoRegistration{
-			Symbol:  fn.Name,
+			Name:    fn.Name,
+			Symbol:  fn.LinkSymbol(),
 			VarName: model.varName,
 			Type:    model.varType,
 		})
@@ -97,6 +99,17 @@ type puregoFunctionModel struct {
 	varName string
 	varType string
 	body    string
+}
+
+// CanEmitPuregoFunction lets the public emitter use the same ABI admission
+// rules as the raw emitter before forwarding a callback-bearing function.
+func CanEmitPuregoFunction(
+	fn macosplatformmetadata.Function,
+	ctx typemap.Context,
+	m *typemap.Mapper,
+) bool {
+	_, ok := buildPuregoFunction(fn, "fixture", ctx, m, make(typemap.ImportSet))
+	return ok
 }
 
 // buildPuregoFunction builds one wrapper. The wrapper signature matches the
@@ -449,7 +462,10 @@ func EmitPuregoExterns(
 	fmt.Fprintf(&body, ")\n\n")
 
 	fmt.Fprintf(&body, "// _initExterns populates the extern vars once the dylib is loaded. An\n")
-	fmt.Fprintf(&body, "// extern whose symbol does not resolve keeps its zero value, matching the\n")
+	fmt.Fprintf(
+		&body,
+		"// extern whose symbol does not resolve keeps its zero value, matching the\n",
+	)
 	fmt.Fprintf(&body, "// CGo emission's unsupported-shape behaviour.\n")
 	fmt.Fprintf(&body, "func _initExterns(lib uintptr) {\n")
 	for _, item := range model.Items {
@@ -457,7 +473,11 @@ func EmitPuregoExterns(
 		if expr == "" {
 			continue
 		}
-		fmt.Fprintf(&body, "\tif _addr, _ := purego.Dlsym(lib, %q); _addr != 0 {\n", item.SymbolName)
+		fmt.Fprintf(
+			&body,
+			"\tif _addr, _ := purego.Dlsym(lib, %q); _addr != 0 {\n",
+			item.SymbolName,
+		)
 		fmt.Fprintf(&body, "\t\t%s = %s\n", item.GoName, expr)
 		fmt.Fprintf(&body, "\t}\n")
 	}
@@ -532,8 +552,14 @@ func EmitPuregoRuntime(
 	fmt.Fprintf(&buf, "\tregister()\n")
 	fmt.Fprintf(&buf, "}\n\n")
 
-	fmt.Fprintf(&buf, "// SymbolAvailable reports whether the named C symbol was bound when the\n")
-	fmt.Fprintf(&buf, "// library loaded. Calling a generated wrapper whose symbol is unavailable\n")
+	fmt.Fprintf(
+		&buf,
+		"// SymbolAvailable reports whether the named C function was bound when the\n",
+	)
+	fmt.Fprintf(
+		&buf,
+		"// library loaded. Calling a generated wrapper whose symbol is unavailable\n",
+	)
 	fmt.Fprintf(&buf, "// dereferences a nil function variable and panics.\n")
 	fmt.Fprintf(&buf, "func SymbolAvailable(symbol string) bool {\n")
 	fmt.Fprintf(&buf, "\t_loadOnce.Do(_loadLibrary)\n")
@@ -561,7 +587,7 @@ func EmitPuregoRuntime(
 		fmt.Fprintf(
 			&buf,
 			"\t_register(%q, func() { purego.RegisterLibFunc(&%s, _%sLib, %q) })\n",
-			reg.Symbol, reg.VarName, pkgName, reg.Symbol,
+			reg.Name, reg.VarName, pkgName, reg.Symbol,
 		)
 	}
 	if hasExterns {

@@ -70,6 +70,7 @@ const (
 	AA_COMPRESSION_ALGORITHM_LZMA     AACompressionAlgorithms = 774
 	AA_COMPRESSION_ALGORITHM_LZFSE    AACompressionAlgorithms = 2049
 	AA_COMPRESSION_ALGORITHM_LZBITMAP AACompressionAlgorithms = 1794
+	AA_COMPRESSION_ALGORITHM_LZRAVEN  AACompressionAlgorithms = 3333
 )
 
 func (i AACompressionAlgorithms) String() string {
@@ -86,6 +87,8 @@ func (i AACompressionAlgorithms) String() string {
 		return "AA_COMPRESSION_ALGORITHM_LZFSE"
 	case AA_COMPRESSION_ALGORITHM_LZBITMAP:
 		return "AA_COMPRESSION_ALGORITHM_LZBITMAP"
+	case AA_COMPRESSION_ALGORITHM_LZRAVEN:
+		return "AA_COMPRESSION_ALGORITHM_LZRAVEN"
 	default:
 		return fmt.Sprintf("AACompressionAlgorithms(%d)", int64(i))
 	}
@@ -106,6 +109,8 @@ func ParseAACompressionAlgorithms(v string) (any, error) {
 		result = AA_COMPRESSION_ALGORITHM_LZFSE
 	case "AA_COMPRESSION_ALGORITHM_LZBITMAP":
 		result = AA_COMPRESSION_ALGORITHM_LZBITMAP
+	case "AA_COMPRESSION_ALGORITHM_LZRAVEN":
+		result = AA_COMPRESSION_ALGORITHM_LZRAVEN
 	default:
 		return nil, nil
 	}
@@ -242,7 +247,7 @@ func (i AAEntryMessages) isMultiValue() bool {
 	return false
 }
 
-// [AADefs.h:48]
+// [AADefs.h:49]
 type AAEntryTypes uint32
 
 const (
@@ -331,7 +336,7 @@ func (i AAEntryTypes) isMultiValue() bool {
 	return false
 }
 
-// [AADefs.h:67]
+// [AADefs.h:68]
 type AAFieldTypes uint32
 
 const (
@@ -972,7 +977,7 @@ func (i ClockidT) isMultiValue() bool {
 	return false
 }
 
-// [fcntl.h:582]
+// [fcntl.h:601]
 type FilesecPropertyT int32
 
 const (

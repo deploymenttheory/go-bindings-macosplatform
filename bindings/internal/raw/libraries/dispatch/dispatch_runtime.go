@@ -30,7 +30,7 @@ func _register(symbol string, register func()) {
 	register()
 }
 
-// SymbolAvailable reports whether the named C symbol was bound when the
+// SymbolAvailable reports whether the named C function was bound when the
 // library loaded. Calling a generated wrapper whose symbol is unavailable
 // dereferences a nil function variable and panics.
 func SymbolAvailable(symbol string) bool {
@@ -91,7 +91,7 @@ func _loadLibrary() {
 		purego.RegisterLibFunc(&_pg_dispatch_queue_attr_make_with_qos_class, _dispatchLib, "dispatch_queue_attr_make_with_qos_class")
 	})
 	_register("dispatch_queue_create_with_target", func() {
-		purego.RegisterLibFunc(&_pg_dispatch_queue_create_with_target, _dispatchLib, "dispatch_queue_create_with_target")
+		purego.RegisterLibFunc(&_pg_dispatch_queue_create_with_target, _dispatchLib, "dispatch_queue_create_with_target$V2")
 	})
 	_register("dispatch_queue_create", func() { purego.RegisterLibFunc(&_pg_dispatch_queue_create, _dispatchLib, "dispatch_queue_create") })
 	_register("dispatch_queue_get_label", func() {
@@ -125,12 +125,12 @@ func _loadLibrary() {
 		purego.RegisterLibFunc(&_pg_dispatch_queue_get_specific, _dispatchLib, "dispatch_queue_get_specific")
 	})
 	_register("dispatch_get_specific", func() { purego.RegisterLibFunc(&_pg_dispatch_get_specific, _dispatchLib, "dispatch_get_specific") })
-	_register("dispatch_assert_queue", func() { purego.RegisterLibFunc(&_pg_dispatch_assert_queue, _dispatchLib, "dispatch_assert_queue") })
+	_register("dispatch_assert_queue", func() { purego.RegisterLibFunc(&_pg_dispatch_assert_queue, _dispatchLib, "dispatch_assert_queue$V2") })
 	_register("dispatch_assert_queue_barrier", func() {
 		purego.RegisterLibFunc(&_pg_dispatch_assert_queue_barrier, _dispatchLib, "dispatch_assert_queue_barrier")
 	})
 	_register("dispatch_assert_queue_not", func() {
-		purego.RegisterLibFunc(&_pg_dispatch_assert_queue_not, _dispatchLib, "dispatch_assert_queue_not")
+		purego.RegisterLibFunc(&_pg_dispatch_assert_queue_not, _dispatchLib, "dispatch_assert_queue_not$V2")
 	})
 	_register("dispatch_allow_send_signals", func() {
 		purego.RegisterLibFunc(&_pg_dispatch_allow_send_signals, _dispatchLib, "dispatch_allow_send_signals")

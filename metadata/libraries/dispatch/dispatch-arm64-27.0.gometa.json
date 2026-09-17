@@ -1,17 +1,19 @@
 {
   "framework": "dispatch",
-  "sdk_version": "26.5",
+  "sdk_version": "27.0",
   "arch": "arm64",
   "schema_version": 1,
-  "clang_version": "Apple clang version 21.0.0 (clang-2100.1.1.101)",
-  "xcode_version": "Xcode 26.6 Build version 17F113",
+  "clang_version": "Apple clang version 21.0.0 (clang-2100.3.34.2)",
+  "xcode_version": "Xcode 27.0 Build version 27A266a",
   "classes": {},
   "protocols": {
     "OS_dispatch_data": {
       "protocols": [
         "OS_dispatch_object"
       ],
-      "availability": {}
+      "availability": {
+        "macos_introduced": "10.7"
+      }
     },
     "OS_dispatch_group": {
       "protocols": [
@@ -292,7 +294,7 @@
       ],
       "availability": {},
       "sdk_file": "fcntl.h",
-      "sdk_line": 582
+      "sdk_line": 601
     },
     "idtype_t": {
       "go_type": "int32",
@@ -432,19 +434,19 @@
         "macos_introduced": "10.7"
       },
       "sdk_file": "queue.h",
-      "sdk_line": 750
+      "sdk_line": 759
     },
     "dispatch_queue_s": {
       "availability": {
         "macos_introduced": "10.6"
       },
       "sdk_file": "queue.h",
-      "sdk_line": 590
+      "sdk_line": 599
     },
     "dispatch_source_type_s": {
       "availability": {},
       "sdk_file": "source.h",
-      "sdk_line": 74
+      "sdk_line": 73
     },
     "timespec": {
       "availability": {},
@@ -683,7 +685,7 @@
         "macos_introduced": "10.14"
       },
       "sdk_file": "object.h",
-      "sdk_line": 497
+      "sdk_line": 501
     },
     {
       "name": "dispatch_wait",
@@ -704,7 +706,7 @@
         "unavailable": true
       },
       "sdk_file": "object.h",
-      "sdk_line": 527
+      "sdk_line": 531
     },
     {
       "name": "dispatch_notify",
@@ -729,7 +731,7 @@
         "unavailable": true
       },
       "sdk_file": "object.h",
-      "sdk_line": 564
+      "sdk_line": 568
     },
     {
       "name": "dispatch_cancel",
@@ -746,7 +748,7 @@
         "unavailable": true
       },
       "sdk_file": "object.h",
-      "sdk_line": 593
+      "sdk_line": 597
     },
     {
       "name": "dispatch_testcancel",
@@ -763,7 +765,7 @@
         "unavailable": true
       },
       "sdk_file": "object.h",
-      "sdk_line": 625,
+      "sdk_line": 629,
       "warn_unused": true
     },
     {
@@ -788,7 +790,7 @@
         "deprecation_message": "unsupported interface"
       },
       "sdk_file": "object.h",
-      "sdk_line": 661
+      "sdk_line": 665
     },
     {
       "name": "dispatch_debugv",
@@ -815,7 +817,7 @@
         "deprecation_message": "unsupported interface"
       },
       "sdk_file": "object.h",
-      "sdk_line": 668
+      "sdk_line": 672
     },
     {
       "name": "dispatch_async",
@@ -836,7 +838,7 @@
         "macos_introduced": "10.6"
       },
       "sdk_file": "queue.h",
-      "sdk_line": 239
+      "sdk_line": 248
     },
     {
       "name": "dispatch_async_f",
@@ -862,7 +864,7 @@
         "macos_introduced": "10.6"
       },
       "sdk_file": "queue.h",
-      "sdk_line": 270
+      "sdk_line": 279
     },
     {
       "name": "dispatch_sync",
@@ -884,7 +886,7 @@
         "macos_introduced": "10.6"
       },
       "sdk_file": "queue.h",
-      "sdk_line": 314
+      "sdk_line": 323
     },
     {
       "name": "dispatch_sync_f",
@@ -910,7 +912,7 @@
         "macos_introduced": "10.6"
       },
       "sdk_file": "queue.h",
-      "sdk_line": 343
+      "sdk_line": 352
     },
     {
       "name": "dispatch_async_and_wait",
@@ -932,7 +934,7 @@
         "macos_introduced": "10.14"
       },
       "sdk_file": "queue.h",
-      "sdk_line": 411
+      "sdk_line": 420
     },
     {
       "name": "dispatch_async_and_wait_f",
@@ -958,7 +960,7 @@
         "macos_introduced": "10.14"
       },
       "sdk_file": "queue.h",
-      "sdk_line": 441
+      "sdk_line": 450
     },
     {
       "name": "dispatch_apply",
@@ -986,7 +988,7 @@
         "macos_introduced": "10.6"
       },
       "sdk_file": "queue.h",
-      "sdk_line": 514
+      "sdk_line": 523
     },
     {
       "name": "dispatch_apply_f",
@@ -1018,7 +1020,7 @@
         "macos_introduced": "10.6"
       },
       "sdk_file": "queue.h",
-      "sdk_line": 550
+      "sdk_line": 559
     },
     {
       "name": "dispatch_get_current_queue",
@@ -1031,7 +1033,7 @@
         "deprecation_message": "unsupported interface"
       },
       "sdk_file": "queue.h",
-      "sdk_line": 586,
+      "sdk_line": 595,
       "warn_unused": true
     },
     {
@@ -1041,7 +1043,7 @@
       },
       "availability": {},
       "sdk_file": "queue.h",
-      "sdk_line": 619
+      "sdk_line": 628
     },
     {
       "name": "dispatch_get_global_queue",
@@ -1062,7 +1064,7 @@
         "macos_introduced": "10.6"
       },
       "sdk_file": "queue.h",
-      "sdk_line": 701,
+      "sdk_line": 710,
       "warn_unused": true
     },
     {
@@ -1081,7 +1083,7 @@
         "macos_introduced": "10.12"
       },
       "sdk_file": "queue.h",
-      "sdk_line": 798,
+      "sdk_line": 807,
       "warn_unused": true
     },
     {
@@ -1104,7 +1106,7 @@
         "macos_introduced": "10.12"
       },
       "sdk_file": "queue.h",
-      "sdk_line": 905,
+      "sdk_line": 914,
       "warn_unused": true
     },
     {
@@ -1131,11 +1133,12 @@
         "macos_introduced": "10.10"
       },
       "sdk_file": "queue.h",
-      "sdk_line": 970,
+      "sdk_line": 980,
       "warn_unused": true
     },
     {
       "name": "dispatch_queue_create_with_target",
+      "link_name": "dispatch_queue_create_with_target$V2",
       "args": [
         {
           "name": "label",
@@ -1161,7 +1164,7 @@
         "macos_introduced": "10.12"
       },
       "sdk_file": "queue.h",
-      "sdk_line": 1037,
+      "sdk_line": 1050,
       "warn_unused": true
     },
     {
@@ -1186,7 +1189,7 @@
         "macos_introduced": "10.6"
       },
       "sdk_file": "queue.h",
-      "sdk_line": 1091,
+      "sdk_line": 1108,
       "warn_unused": true
     },
     {
@@ -1205,7 +1208,7 @@
         "macos_introduced": "10.6"
       },
       "sdk_file": "queue.h",
-      "sdk_line": 1121,
+      "sdk_line": 1138,
       "warn_unused": true
     },
     {
@@ -1228,7 +1231,7 @@
         "macos_introduced": "10.10"
       },
       "sdk_file": "queue.h",
-      "sdk_line": 1161,
+      "sdk_line": 1178,
       "warn_unused": true
     },
     {
@@ -1251,7 +1254,7 @@
         "macos_introduced": "10.6"
       },
       "sdk_file": "queue.h",
-      "sdk_line": 1229
+      "sdk_line": 1246
     },
     {
       "name": "dispatch_main",
@@ -1262,7 +1265,7 @@
         "macos_introduced": "10.6"
       },
       "sdk_file": "queue.h",
-      "sdk_line": 1249
+      "sdk_line": 1266
     },
     {
       "name": "dispatch_after",
@@ -1287,7 +1290,7 @@
         "macos_introduced": "10.6"
       },
       "sdk_file": "queue.h",
-      "sdk_line": 1278
+      "sdk_line": 1295
     },
     {
       "name": "dispatch_after_f",
@@ -1317,7 +1320,7 @@
         "macos_introduced": "10.6"
       },
       "sdk_file": "queue.h",
-      "sdk_line": 1311
+      "sdk_line": 1328
     },
     {
       "name": "dispatch_barrier_async",
@@ -1338,7 +1341,7 @@
         "macos_introduced": "10.7"
       },
       "sdk_file": "queue.h",
-      "sdk_line": 1358
+      "sdk_line": 1375
     },
     {
       "name": "dispatch_barrier_async_f",
@@ -1364,7 +1367,7 @@
         "macos_introduced": "10.7"
       },
       "sdk_file": "queue.h",
-      "sdk_line": 1394
+      "sdk_line": 1411
     },
     {
       "name": "dispatch_barrier_sync",
@@ -1386,7 +1389,7 @@
         "macos_introduced": "10.7"
       },
       "sdk_file": "queue.h",
-      "sdk_line": 1423
+      "sdk_line": 1440
     },
     {
       "name": "dispatch_barrier_sync_f",
@@ -1412,7 +1415,7 @@
         "macos_introduced": "10.7"
       },
       "sdk_file": "queue.h",
-      "sdk_line": 1456
+      "sdk_line": 1473
     },
     {
       "name": "dispatch_barrier_async_and_wait",
@@ -1434,7 +1437,7 @@
         "macos_introduced": "10.14"
       },
       "sdk_file": "queue.h",
-      "sdk_line": 1485
+      "sdk_line": 1502
     },
     {
       "name": "dispatch_barrier_async_and_wait_f",
@@ -1460,7 +1463,7 @@
         "macos_introduced": "10.14"
       },
       "sdk_file": "queue.h",
-      "sdk_line": 1519
+      "sdk_line": 1536
     },
     {
       "name": "dispatch_queue_set_specific",
@@ -1491,7 +1494,7 @@
         "macos_introduced": "10.7"
       },
       "sdk_file": "queue.h",
-      "sdk_line": 1562
+      "sdk_line": 1579
     },
     {
       "name": "dispatch_queue_get_specific",
@@ -1512,7 +1515,7 @@
         "macos_introduced": "10.7"
       },
       "sdk_file": "queue.h",
-      "sdk_line": 1593,
+      "sdk_line": 1610,
       "warn_unused": true
     },
     {
@@ -1530,11 +1533,12 @@
         "macos_introduced": "10.7"
       },
       "sdk_file": "queue.h",
-      "sdk_line": 1620,
+      "sdk_line": 1637,
       "warn_unused": true
     },
     {
       "name": "dispatch_assert_queue",
+      "link_name": "dispatch_assert_queue$V2",
       "args": [
         {
           "name": "queue",
@@ -1548,7 +1552,7 @@
         "macos_introduced": "10.12"
       },
       "sdk_file": "queue.h",
-      "sdk_line": 1675
+      "sdk_line": 1692
     },
     {
       "name": "dispatch_assert_queue_barrier",
@@ -1565,10 +1569,11 @@
         "macos_introduced": "10.12"
       },
       "sdk_file": "queue.h",
-      "sdk_line": 1702
+      "sdk_line": 1719
     },
     {
       "name": "dispatch_assert_queue_not",
+      "link_name": "dispatch_assert_queue_not$V2",
       "args": [
         {
           "name": "queue",
@@ -1582,7 +1587,7 @@
         "macos_introduced": "10.12"
       },
       "sdk_file": "queue.h",
-      "sdk_line": 1726
+      "sdk_line": 1743
     },
     {
       "name": "dispatch_allow_send_signals",
@@ -1599,7 +1604,7 @@
         "macos_introduced": "14.4"
       },
       "sdk_file": "queue.h",
-      "sdk_line": 1800
+      "sdk_line": 1817
     },
     {
       "name": "dispatch_block_create",
@@ -1621,7 +1626,7 @@
         "macos_introduced": "10.10"
       },
       "sdk_file": "block.h",
-      "sdk_line": 181,
+      "sdk_line": 246,
       "warn_unused": true
     },
     {
@@ -1652,7 +1657,7 @@
         "macos_introduced": "10.10"
       },
       "sdk_file": "block.h",
-      "sdk_line": 254,
+      "sdk_line": 319,
       "warn_unused": true
     },
     {
@@ -1675,7 +1680,7 @@
         "macos_introduced": "10.10"
       },
       "sdk_file": "block.h",
-      "sdk_line": 287
+      "sdk_line": 352
     },
     {
       "name": "dispatch_block_wait",
@@ -1696,7 +1701,7 @@
         "macos_introduced": "10.10"
       },
       "sdk_file": "block.h",
-      "sdk_line": 339
+      "sdk_line": 404
     },
     {
       "name": "dispatch_block_notify",
@@ -1721,7 +1726,7 @@
         "macos_introduced": "10.10"
       },
       "sdk_file": "block.h",
-      "sdk_line": 381
+      "sdk_line": 446
     },
     {
       "name": "dispatch_block_cancel",
@@ -1738,7 +1743,7 @@
         "macos_introduced": "10.10"
       },
       "sdk_file": "block.h",
-      "sdk_line": 414
+      "sdk_line": 479
     },
     {
       "name": "dispatch_block_testcancel",
@@ -1755,7 +1760,7 @@
         "macos_introduced": "10.10"
       },
       "sdk_file": "block.h",
-      "sdk_line": 435,
+      "sdk_line": 500,
       "warn_unused": true
     },
     {
@@ -1787,7 +1792,7 @@
         "macos_introduced": "10.6"
       },
       "sdk_file": "source.h",
-      "sdk_line": 400,
+      "sdk_line": 399,
       "warn_unused": true
     },
     {
@@ -1810,7 +1815,7 @@
         "macos_introduced": "10.6"
       },
       "sdk_file": "source.h",
-      "sdk_line": 423
+      "sdk_line": 422
     },
     {
       "name": "dispatch_source_set_event_handler_f",
@@ -1832,7 +1837,7 @@
         "macos_introduced": "10.6"
       },
       "sdk_file": "source.h",
-      "sdk_line": 446
+      "sdk_line": 445
     },
     {
       "name": "dispatch_source_set_cancel_handler",
@@ -1854,7 +1859,7 @@
         "macos_introduced": "10.6"
       },
       "sdk_file": "source.h",
-      "sdk_line": 482
+      "sdk_line": 481
     },
     {
       "name": "dispatch_source_set_cancel_handler_f",
@@ -1876,7 +1881,7 @@
         "macos_introduced": "10.6"
       },
       "sdk_file": "source.h",
-      "sdk_line": 508
+      "sdk_line": 507
     },
     {
       "name": "dispatch_source_cancel",
@@ -1893,7 +1898,7 @@
         "macos_introduced": "10.6"
       },
       "sdk_file": "source.h",
-      "sdk_line": 537
+      "sdk_line": 536
     },
     {
       "name": "dispatch_source_testcancel",
@@ -1910,7 +1915,7 @@
         "macos_introduced": "10.6"
       },
       "sdk_file": "source.h",
-      "sdk_line": 557,
+      "sdk_line": 556,
       "warn_unused": true
     },
     {
@@ -1928,7 +1933,7 @@
         "macos_introduced": "10.6"
       },
       "sdk_file": "source.h",
-      "sdk_line": 590,
+      "sdk_line": 589,
       "warn_unused": true
     },
     {
@@ -1946,7 +1951,7 @@
         "macos_introduced": "10.6"
       },
       "sdk_file": "source.h",
-      "sdk_line": 623,
+      "sdk_line": 622,
       "warn_unused": true
     },
     {
@@ -1964,7 +1969,7 @@
         "macos_introduced": "10.6"
       },
       "sdk_file": "source.h",
-      "sdk_line": 663,
+      "sdk_line": 662,
       "warn_unused": true
     },
     {
@@ -1986,7 +1991,7 @@
         "macos_introduced": "10.6"
       },
       "sdk_file": "source.h",
-      "sdk_line": 685
+      "sdk_line": 684
     },
     {
       "name": "dispatch_source_set_timer",
@@ -2015,7 +2020,7 @@
         "macos_introduced": "10.6"
       },
       "sdk_file": "source.h",
-      "sdk_line": 739
+      "sdk_line": 738
     },
     {
       "name": "dispatch_source_set_registration_handler",
@@ -2037,7 +2042,7 @@
         "macos_introduced": "10.7"
       },
       "sdk_file": "source.h",
-      "sdk_line": 770
+      "sdk_line": 769
     },
     {
       "name": "dispatch_source_set_registration_handler_f",
@@ -2059,7 +2064,7 @@
         "macos_introduced": "10.7"
       },
       "sdk_file": "source.h",
-      "sdk_line": 796
+      "sdk_line": 795
     },
     {
       "name": "dispatch_group_create",
@@ -3065,7 +3070,7 @@
         "macos_introduced": "10.6"
       },
       "sdk_file": "source.h",
-      "sdk_line": 76
+      "sdk_line": 86
     },
     {
       "name": "_dispatch_source_type_data_or",
@@ -3074,7 +3079,7 @@
         "macos_introduced": "10.6"
       },
       "sdk_file": "source.h",
-      "sdk_line": 79
+      "sdk_line": 89
     },
     {
       "name": "_dispatch_source_type_data_replace",
@@ -3083,7 +3088,7 @@
         "macos_introduced": "10.13"
       },
       "sdk_file": "source.h",
-      "sdk_line": 84
+      "sdk_line": 94
     },
     {
       "name": "_dispatch_source_type_mach_send",
@@ -3092,7 +3097,7 @@
         "macos_introduced": "10.6"
       },
       "sdk_file": "source.h",
-      "sdk_line": 87
+      "sdk_line": 97
     },
     {
       "name": "_dispatch_source_type_mach_recv",
@@ -3101,7 +3106,7 @@
         "macos_introduced": "10.6"
       },
       "sdk_file": "source.h",
-      "sdk_line": 90
+      "sdk_line": 100
     },
     {
       "name": "_dispatch_source_type_memorypressure",
@@ -3110,7 +3115,7 @@
         "macos_introduced": "10.9"
       },
       "sdk_file": "source.h",
-      "sdk_line": 93
+      "sdk_line": 103
     },
     {
       "name": "_dispatch_source_type_proc",
@@ -3119,7 +3124,7 @@
         "macos_introduced": "10.6"
       },
       "sdk_file": "source.h",
-      "sdk_line": 96
+      "sdk_line": 106
     },
     {
       "name": "_dispatch_source_type_read",
@@ -3128,7 +3133,7 @@
         "macos_introduced": "10.6"
       },
       "sdk_file": "source.h",
-      "sdk_line": 99
+      "sdk_line": 109
     },
     {
       "name": "_dispatch_source_type_signal",
@@ -3137,7 +3142,7 @@
         "macos_introduced": "10.6"
       },
       "sdk_file": "source.h",
-      "sdk_line": 102
+      "sdk_line": 112
     },
     {
       "name": "_dispatch_source_type_timer",
@@ -3146,7 +3151,7 @@
         "macos_introduced": "10.6"
       },
       "sdk_file": "source.h",
-      "sdk_line": 105
+      "sdk_line": 115
     },
     {
       "name": "_dispatch_source_type_vnode",
@@ -3155,7 +3160,7 @@
         "macos_introduced": "10.6"
       },
       "sdk_file": "source.h",
-      "sdk_line": 108
+      "sdk_line": 118
     },
     {
       "name": "_dispatch_source_type_write",
@@ -3164,7 +3169,7 @@
         "macos_introduced": "10.6"
       },
       "sdk_file": "source.h",
-      "sdk_line": 111
+      "sdk_line": 121
     },
     {
       "name": "_dispatch_data_empty",
@@ -3181,7 +3186,7 @@
         "macos_introduced": "10.7"
       },
       "sdk_file": "data.h",
-      "sdk_line": 51
+      "sdk_line": 65
     },
     {
       "name": "_dispatch_data_destructor_munmap",
@@ -3190,7 +3195,7 @@
         "macos_introduced": "10.9"
       },
       "sdk_file": "data.h",
-      "sdk_line": 54
+      "sdk_line": 68
     }
   ],
   "block_types": {},

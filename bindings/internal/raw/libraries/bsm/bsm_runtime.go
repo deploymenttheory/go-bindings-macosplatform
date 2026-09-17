@@ -30,7 +30,7 @@ func _register(symbol string, register func()) {
 	register()
 }
 
-// SymbolAvailable reports whether the named C symbol was bound when the
+// SymbolAvailable reports whether the named C function was bound when the
 // library loaded. Calling a generated wrapper whose symbol is unavailable
 // dereferences a nil function variable and panics.
 func SymbolAvailable(symbol string) bool {

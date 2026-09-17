@@ -21,68 +21,68 @@ var (
 	_pg__os_log_sensitive_deprecated func()
 )
 
-// [log.h:125]
+// [log.h:145]
 // Introduced: macOS 10.12
 // ID: objc-sym oslog.os_log_create
 func Os_log_create(subsystem string, category string) unsafe.Pointer {
 	return _pg_os_log_create(subsystem, category)
 }
 
-// [log.h:425]
+// [log.h:446]
 // Introduced: macOS 10.12
 // ID: objc-sym oslog.os_log_type_enabled
 func Os_log_type_enabled(oslog unsafe.Pointer, type_ OsLogTypeT) bool {
 	return _pg_os_log_type_enabled(oslog, type_)
 }
 
-// [log.h:436]
+// [log.h:458]
 // Introduced: macOS 10.12
 // ID: objc-sym oslog._os_log_impl
 func _os_log_impl(dso unsafe.Pointer, log unsafe.Pointer, type_ OsLogTypeT, format string, buf *uint8, size uint32) {
 	_pg__os_log_impl(dso, log, type_, format, buf, size)
 }
 
-// [log.h:448]
+// [log.h:470]
 // Introduced: macOS 10.15
 // ID: objc-sym oslog._os_log_debug_impl
 func _os_log_debug_impl(dso unsafe.Pointer, log unsafe.Pointer, type_ OsLogTypeT, format string, buf *uint8, size uint32) {
 	_pg__os_log_debug_impl(dso, log, type_, format, buf, size)
 }
 
-// [log.h:460]
+// [log.h:482]
 // Introduced: macOS 10.13
 // ID: objc-sym oslog._os_log_error_impl
 func _os_log_error_impl(dso unsafe.Pointer, log unsafe.Pointer, type_ OsLogTypeT, format string, buf *uint8, size uint32) {
 	_pg__os_log_error_impl(dso, log, type_, format, buf, size)
 }
 
-// [log.h:472]
+// [log.h:494]
 // Introduced: macOS 10.13
 // ID: objc-sym oslog._os_log_fault_impl
 func _os_log_fault_impl(dso unsafe.Pointer, log unsafe.Pointer, type_ OsLogTypeT, format string, buf *uint8, size uint32) {
 	_pg__os_log_fault_impl(dso, log, type_, format, buf, size)
 }
 
-// [log.h:488]
+// [log.h:510]
 // Introduced: macOS 10.11
 // ID: objc-sym oslog._os_log_create
 func _os_log_create(dso unsafe.Pointer, subsystem string, category string) unsafe.Pointer {
 	return _pg__os_log_create(dso, subsystem, category)
 }
 
-// [log.h:494]
+// [log.h:516]
 // ID: objc-sym oslog.os_log_is_enabled
 func Os_log_is_enabled(log unsafe.Pointer) bool {
 	return _pg_os_log_is_enabled(log)
 }
 
-// [log.h:500]
+// [log.h:522]
 // ID: objc-sym oslog.os_log_is_debug_enabled
 func Os_log_is_debug_enabled(log unsafe.Pointer) bool {
 	return _pg_os_log_is_debug_enabled(log)
 }
 
-// [log.h:506]
+// [log.h:528]
 // ID: objc-sym oslog._os_log_sensitive_deprecated
 func _os_log_sensitive_deprecated() {
 	_pg__os_log_sensitive_deprecated()

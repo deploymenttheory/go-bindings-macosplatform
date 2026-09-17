@@ -24,14 +24,6 @@
     "OS_dispatch_queue_concurrent": {
       "url": "https://developer.apple.com/documentation/dispatch/os_dispatch_queue_concurrent"
     },
-    "OS_dispatch_queue_global": {
-      "doc": "A system-provided dispatch queue that schedules tasks for concurrent execution.",
-      "url": "https://developer.apple.com/documentation/dispatch/os_dispatch_queue_global"
-    },
-    "OS_dispatch_queue_main": {
-      "doc": "A system-provided dispatch queue that schedules tasks for serial execution on the app’s main thread.",
-      "url": "https://developer.apple.com/documentation/dispatch/os_dispatch_queue_main"
-    },
     "OS_dispatch_queue_serial": {
       "url": "https://developer.apple.com/documentation/dispatch/os_dispatch_queue_serial"
     },
@@ -40,10 +32,6 @@
     },
     "OS_dispatch_semaphore": {
       "url": "https://developer.apple.com/documentation/dispatch/os_dispatch_semaphore"
-    },
-    "OS_dispatch_source": {
-      "doc": "Defines a common set of properties and methods that are shared with all dispatch source types.",
-      "url": "https://developer.apple.com/documentation/dispatch/os_dispatch_source"
     },
     "OS_dispatch_workloop": {
       "doc": "A dispatch queue that prioritizes the execution of tasks based on their quality-of-service level.",

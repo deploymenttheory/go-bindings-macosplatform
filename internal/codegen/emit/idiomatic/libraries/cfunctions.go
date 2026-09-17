@@ -9,7 +9,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/libraries/render"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/libraries/view"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/libraries"
+	rawlib "github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/libraries"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/libraries/naming"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/libraries/typemap"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/macosplatformmetadata"
@@ -35,6 +35,7 @@ var goBuiltins = map[string]bool{
 	"uint": true, "uint8": true, "uint16": true, "uint32": true, "uint64": true,
 	"uintptr": true, "byte": true, "rune": true,
 	"float32": true, "float64": true, "complex64": true, "complex128": true,
+	"func": true, // callback type keyword
 }
 
 // EmitCFunctions writes the idiomatic wrapper layer for a C library's plain
@@ -49,14 +50,20 @@ var goBuiltins = map[string]bool{
 //     dropped and the remainder PascalCased, so es_message_size → MessageSize.
 //   - Error conversion: OSStatus / kern_return_t returns become a Go error.
 //
-// Functions with block / function-pointer arguments, or whose raw Go symbol is
-// unexported (leading-underscore C symbols), are skipped — the raw binding
-// remains available for those.
-func EmitCFunctions(w io.Writer, pkgName, rawImportPath string, framework *macosplatformmetadata.FrameworkMeta, m *typemap.Mapper, knownClasses map[string]bool) error {
+// Purego-backed block arguments forward the same Go callback type as the raw
+// binding. Unsupported callbacks, function pointers, and unexported raw symbols
+// are skipped.
+func EmitCFunctions(
+	w io.Writer,
+	pkgName, rawImportPath string,
+	framework *macosplatformmetadata.FrameworkMeta,
+	m *typemap.Mapper,
+	knownClasses map[string]bool,
+) error {
 	ctx := m.BaseContext(framework.Framework, knownClasses)
 	prefix := detectSymbolPrefix(framework)
 
-	// Eligible functions: exported raw symbol, no block/function-pointer args.
+	// Callback wrappers must satisfy the raw backend's ABI admission rules.
 	type efn struct {
 		fn        macosplatformmetadata.Function
 		rawGoName string
@@ -64,7 +71,10 @@ func EmitCFunctions(w io.Writer, pkgName, rawImportPath string, framework *macos
 	var eligible []efn
 	for _, fn := range rawlib.EmittableFunctions(framework) {
 		rawGoName := rawlib.FunctionGoName(framework, fn)
-		if !isExportedName(rawGoName) || fnHasBlockArg(fn, m) {
+		if !isExportedName(rawGoName) {
+			continue
+		}
+		if fnHasBlockArg(fn, m) && !rawlib.CanEmitPuregoFunction(fn, ctx, m) {
 			continue
 		}
 		eligible = append(eligible, efn{fn: fn, rawGoName: rawGoName})
@@ -98,17 +108,39 @@ func EmitCFunctions(w io.Writer, pkgName, rawImportPath string, framework *macos
 		params := e.fn.Params
 		var recvGo, recvBase string
 		if len(params) > 0 {
-			if base, ok := handleBaseName(params[0].ObjCType, ctx, m, framework); ok && handleUsed[base] {
+			if base, ok := handleBaseName(
+				params[0].ObjCType,
+				ctx,
+				m,
+				framework,
+			); ok &&
+				handleUsed[base] {
 				recvBase, recvGo = base, handleGoName(base, prefix)
 				params = params[1:]
 			}
 		}
 
-		sig, callArgs, ok := buildIdiomaticParams(params, ctx, m, framework, handleUsed, prefix, usedImports)
+		sig, callArgs, ok := buildIdiomaticParams(
+			params,
+			ctx,
+			m,
+			framework,
+			handleUsed,
+			prefix,
+			usedImports,
+		)
 		if !ok {
 			continue
 		}
-		retKind, retType := classifyReturn(e.fn.Return.ObjCType, ctx, m, framework, handleUsed, prefix, usedImports)
+		retKind, retType := classifyReturn(
+			e.fn.Return.ObjCType,
+			ctx,
+			m,
+			framework,
+			handleUsed,
+			prefix,
+			usedImports,
+		)
 
 		if recvGo != "" {
 			buf := methodsByGo[recvGo]
@@ -124,7 +156,16 @@ func EmitCFunctions(w io.Writer, pkgName, rawImportPath string, framework *macos
 			}
 		} else {
 			name := dedup(freeFuncGoName(e.fn.Name, prefix), freeSeen)
-			if err := writeWrapperFunc(&freeFns, "", name, e.rawGoName, callArgs, sig, retKind, retType); err != nil {
+			if err := writeWrapperFunc(
+				&freeFns,
+				"",
+				name,
+				e.rawGoName,
+				callArgs,
+				sig,
+				retKind,
+				retType,
+			); err != nil {
 				return err
 			}
 		}
@@ -165,7 +206,14 @@ func EmitCFunctions(w io.Writer, pkgName, rawImportPath string, framework *macos
 	if bytes.Contains(body.Bytes(), []byte("fmt.")) {
 		extraImports["fmt"] = "fmt"
 	}
-	if err := writeOpinionatedHeader(w, pkgName, rawImportPath, extraImports, usedImports, false); err != nil {
+	if err := writeOpinionatedHeader(
+		w,
+		pkgName,
+		rawImportPath,
+		extraImports,
+		usedImports,
+		false,
+	); err != nil {
 		return err
 	}
 	_, err := w.Write(body.Bytes())
@@ -174,7 +222,13 @@ func EmitCFunctions(w io.Writer, pkgName, rawImportPath string, framework *macos
 
 // writeWrapperFunc renders one idiomatic function or method forwarding to the raw
 // binding. recvPrefix is "" for a free function or "(h T) " for a method.
-func writeWrapperFunc(w io.Writer, recvPrefix, goName, rawGoName string, callArgs, sig []string, retKind int, retType string) error {
+func writeWrapperFunc(
+	w io.Writer,
+	recvPrefix, goName, rawGoName string,
+	callArgs, sig []string,
+	retKind int,
+	retType string,
+) error {
 	return render.Execute(w, "wrapper_func", view.WrapperFuncModel{
 		RecvPrefix: recvPrefix,
 		GoName:     goName,
@@ -189,8 +243,16 @@ func writeWrapperFunc(w io.Writer, recvPrefix, goName, rawGoName string, callArg
 // and the matching raw-call argument expressions. Handle parameters become
 // wrapper types (passed as name.ptr); everything else keeps its raw Go type,
 // qualified with the raw package alias. ok=false if any parameter is a
-// block/function pointer or unresolvable.
-func buildIdiomaticParams(params []macosplatformmetadata.Param, ctx typemap.Context, m *typemap.Mapper, framework *macosplatformmetadata.FrameworkMeta, handleUsed map[string]bool, prefix string, usedImports map[string]string) (sig, callArgs []string, ok bool) {
+// unsupported function pointer or unresolvable.
+func buildIdiomaticParams(
+	params []macosplatformmetadata.Param,
+	ctx typemap.Context,
+	m *typemap.Mapper,
+	framework *macosplatformmetadata.FrameworkMeta,
+	handleUsed map[string]bool,
+	prefix string,
+	usedImports map[string]string,
+) (sig, callArgs []string, ok bool) {
 	seen := map[string]int{}
 	for i, p := range params {
 		name := naming.ParamName(p.Name)
@@ -201,14 +263,29 @@ func buildIdiomaticParams(params []macosplatformmetadata.Param, ctx typemap.Cont
 		if seen[name] > 1 {
 			name = fmt.Sprintf("%s%d", name, seen[name])
 		}
-		if base, isHandle := handleBaseName(p.ObjCType, ctx, m, framework); isHandle && handleUsed[base] {
+		if base, isHandle := handleBaseName(
+			p.ObjCType,
+			ctx,
+			m,
+			framework,
+		); isHandle &&
+			handleUsed[base] {
 			sig = append(sig, name+" "+handleGoName(base, prefix))
 			callArgs = append(callArgs, name+".ptr")
 			continue
 		}
 		throwaway := make(typemap.ImportSet)
 		goType := m.GoType(p.ObjCType, ctx, throwaway)
-		if goType == "" || strings.Contains(goType, "func(") {
+		blockType := ""
+		if p.IsBlock {
+			blockType = p.ObjCType
+		} else if target, found := m.TypedefIndex[typemap.Normalise(p.ObjCType)]; found && typemap.IsBlock(target) {
+			blockType = target
+		}
+		if blockType != "" {
+			goType = m.GoBlockUserFuncType(blockType, ctx, throwaway)
+		}
+		if goType == "" || (blockType == "" && strings.Contains(goType, "func(")) {
 			return nil, nil, false
 		}
 		goType = qualifyRawTokens(goType)
@@ -221,7 +298,15 @@ func buildIdiomaticParams(params []macosplatformmetadata.Param, ctx typemap.Cont
 
 // classifyReturn determines the idiomatic return shape for a function's ObjC
 // return type.
-func classifyReturn(objcRet string, ctx typemap.Context, m *typemap.Mapper, framework *macosplatformmetadata.FrameworkMeta, handleUsed map[string]bool, prefix string, usedImports map[string]string) (kind int, goType string) {
+func classifyReturn(
+	objcRet string,
+	ctx typemap.Context,
+	m *typemap.Mapper,
+	framework *macosplatformmetadata.FrameworkMeta,
+	handleUsed map[string]bool,
+	prefix string,
+	usedImports map[string]string,
+) (kind int, goType string) {
 	base := cleanTypeToken(objcRet)
 	if objcRet == "" || (base == "void" && !strings.Contains(objcRet, "*")) {
 		return retVoid, ""
@@ -246,7 +331,12 @@ func classifyReturn(objcRet string, ctx typemap.Context, m *typemap.Mapper, fram
 // whose name ends in _t, which the mapper resolves to unsafe.Pointer, and which
 // is not a named enum, struct, or function-pointer/block typedef. Returns the
 // bare typedef name (e.g. "xpc_object_t").
-func handleBaseName(objcType string, ctx typemap.Context, m *typemap.Mapper, framework *macosplatformmetadata.FrameworkMeta) (string, bool) {
+func handleBaseName(
+	objcType string,
+	ctx typemap.Context,
+	m *typemap.Mapper,
+	framework *macosplatformmetadata.FrameworkMeta,
+) (string, bool) {
 	base := cleanTypeToken(objcType)
 	if !strings.HasSuffix(base, "_t") {
 		return "", false
@@ -373,7 +463,8 @@ func fnHasBlockArg(fn macosplatformmetadata.Function, m *typemap.Mapper) bool {
 		if p.IsBlock {
 			return true
 		}
-		if target, ok := m.TypedefIndex[typemap.Normalise(p.ObjCType)]; ok && typemap.IsBlock(target) {
+		if target, ok := m.TypedefIndex[typemap.Normalise(p.ObjCType)]; ok &&
+			typemap.IsBlock(target) {
 			return true
 		}
 	}

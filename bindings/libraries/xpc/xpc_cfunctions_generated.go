@@ -55,7 +55,7 @@ func (h Connection) SetTargetQueue(targetq DispatchQueue) {
 	raw.Xpc_connection_set_target_queue(h.ptr, targetq.ptr)
 }
 
-func (h Connection) SetEventHandler(handler unsafe.Pointer) {
+func (h Connection) SetEventHandler(handler func(unsafe.Pointer)) {
 	raw.Xpc_connection_set_event_handler(h.ptr, handler)
 }
 
@@ -75,7 +75,11 @@ func (h Connection) SendMessage(message Object) {
 	raw.Xpc_connection_send_message(h.ptr, message.ptr)
 }
 
-func (h Connection) SendMessageWithReply(message Object, replyq DispatchQueue, handler unsafe.Pointer) {
+func (h Connection) SendBarrier(barrier func()) {
+	raw.Xpc_connection_send_barrier(h.ptr, barrier)
+}
+
+func (h Connection) SendMessageWithReply(message Object, replyq DispatchQueue, handler func(unsafe.Pointer)) {
 	raw.Xpc_connection_send_message_with_reply(h.ptr, message.ptr, replyq.ptr, handler)
 }
 
@@ -328,6 +332,10 @@ func (h Object) ArrayGetValue(index uint64) Object {
 	return WrapObject(raw.Xpc_array_get_value(h.ptr, index))
 }
 
+func (h Object) ArrayApply(applier func(uint64, unsafe.Pointer) bool) bool {
+	return raw.Xpc_array_apply(h.ptr, applier)
+}
+
 func (h Object) ArraySetBool(index uint64, value bool) {
 	raw.Xpc_array_set_bool(h.ptr, index, value)
 }
@@ -430,6 +438,10 @@ func (h Object) DictionaryGetValue(key string) Object {
 
 func (h Object) DictionaryGetCount() uint64 {
 	return raw.Xpc_dictionary_get_count(h.ptr)
+}
+
+func (h Object) DictionaryApply(applier func(unsafe.Pointer, unsafe.Pointer) bool) bool {
+	return raw.Xpc_dictionary_apply(h.ptr, applier)
 }
 
 func (h Object) DictionaryGetRemoteConnection() Connection {
@@ -575,6 +587,14 @@ func (h Session) CopyDescription() string {
 	return raw.Xpc_session_copy_description(h.ptr)
 }
 
+func (h Session) SetIncomingMessageHandler(handler func(unsafe.Pointer)) {
+	raw.Xpc_session_set_incoming_message_handler(h.ptr, handler)
+}
+
+func (h Session) SetCancelHandler(cancel_handler func(unsafe.Pointer)) {
+	raw.Xpc_session_set_cancel_handler(h.ptr, cancel_handler)
+}
+
 func (h Session) SetTargetQueue(target_queue DispatchQueue) {
 	raw.Xpc_session_set_target_queue(h.ptr, target_queue.ptr)
 }
@@ -595,6 +615,10 @@ func (h Session) SendMessageWithReplySync(message Object, error_out RichError) O
 	return WrapObject(raw.Xpc_session_send_message_with_reply_sync(h.ptr, message.ptr, error_out.ptr))
 }
 
+func (h Session) SendMessageWithReplyAsync(message Object, reply_handler func(unsafe.Pointer, unsafe.Pointer)) {
+	raw.Xpc_session_send_message_with_reply_async(h.ptr, message.ptr, reply_handler)
+}
+
 func (h Session) SetPeerCodeSigningRequirement(requirement string) int32 {
 	return raw.Xpc_session_set_peer_code_signing_requirement(h.ptr, requirement)
 }
@@ -605,6 +629,10 @@ func (h Session) SetPeerRequirement(requirement PeerRequirement) {
 
 func (h Session) ListenerRejectPeer(reason string) {
 	raw.Xpc_listener_reject_peer(h.ptr, reason)
+}
+
+func ActivityRegister(identifier string, criteria Object, handler func(unsafe.Pointer)) {
+	raw.Xpc_activity_register(identifier, criteria.ptr, handler)
 }
 
 func ActivityUnregister(identifier string) {
@@ -641,6 +669,10 @@ func SessionCreateXpcService(name string, target_queue DispatchQueue, flags raw.
 
 func SessionCreateMachService(mach_service string, target_queue DispatchQueue, flags raw.XpcSessionCreateFlagsT, error_out RichError) Session {
 	return WrapSession(raw.Xpc_session_create_mach_service(mach_service, target_queue.ptr, flags, error_out.ptr))
+}
+
+func ListenerCreate(service string, target_queue DispatchQueue, flags raw.XpcListenerCreateFlagsT, incoming_session_handler func(unsafe.Pointer), error_out RichError) Listener {
+	return WrapListener(raw.Xpc_listener_create(service, target_queue.ptr, flags, incoming_session_handler, error_out.ptr))
 }
 
 func TypeGetName(type_ *raw.XpcTypeT) string {
@@ -719,6 +751,6 @@ func TransactionEnd() {
 	raw.Xpc_transaction_end()
 }
 
-func SetEventStreamHandler(stream string, targetq DispatchQueue, handler unsafe.Pointer) {
+func SetEventStreamHandler(stream string, targetq DispatchQueue, handler func(unsafe.Pointer)) {
 	raw.Xpc_set_event_stream_handler(stream, targetq.ptr, handler)
 }
