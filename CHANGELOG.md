@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.20.0](https://github.com/deploymenttheory/go-bindings-macosplatform/compare/v0.19.0...v0.20.0) (2026-09-17)
+
+
+### Features
+
+* macos27 libraries ([55eb4e6](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/55eb4e6bac712409daeaa6bde0d45cae137d125d))
+* macos27 libraries ([37381b7](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/37381b7f13aeb4197354c716c78b8cf1f64df3df))
+* regenerate macOS 27 framework bindings ([52a268a](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/52a268a0a632d3c5130ed5fd7080ecbb83f3ea88))
+* regenerate macOS 27 framework bindings ([04b05be](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/04b05bee74cfe5e8d70aed82743ab4e12f4b1137))
+
 ## [0.19.0](https://github.com/deploymenttheory/go-bindings-macosplatform/compare/v0.18.1...v0.19.0) (2026-08-11)
 
 
