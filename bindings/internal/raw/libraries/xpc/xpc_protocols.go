@@ -12,6 +12,7 @@ import (
 var _ unsafe.Pointer      // suppress unused import
 var _ objptr.Object = nil // suppress unused import
 
+// Introduced: macOS 14.0
 // OS_xpc_listener corresponds to the Objective-C @protocol OS_xpc_listener.
 type OS_xpc_listener interface {
 	objptr.Object

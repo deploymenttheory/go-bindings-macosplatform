@@ -1,5 +1,9 @@
 # macOS 27 SDK upgrade
 
+This report records the framework phase merged in PR #129. The subsequent
+[C-library refresh](macos27-libraries-upgrade.md) completes the SDK 27 migration;
+the counts and deferred-library notes below describe the framework PR's scope.
+
 This upgrade raises the minimum supported runtime to macOS 27 and regenerates
 both framework binding layers from the arm64 macOS 27.0 SDK. It adds eight
 framework entries,

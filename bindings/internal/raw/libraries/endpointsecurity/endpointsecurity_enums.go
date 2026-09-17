@@ -497,6 +497,131 @@ func (i CryptexAuthTypeT) isMultiValue() bool {
 	return false
 }
 
+// [queue.h:300]
+type DispatchAutoreleaseFrequencyT uint64
+
+const (
+	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT   DispatchAutoreleaseFrequencyT = 0
+	DISPATCH_AUTORELEASE_FREQUENCY_WORK_ITEM DispatchAutoreleaseFrequencyT = 1
+	DISPATCH_AUTORELEASE_FREQUENCY_NEVER     DispatchAutoreleaseFrequencyT = 2
+)
+
+func (i DispatchAutoreleaseFrequencyT) String() string {
+	switch i {
+	case DISPATCH_AUTORELEASE_FREQUENCY_INHERIT:
+		return "DISPATCH_AUTORELEASE_FREQUENCY_INHERIT"
+	case DISPATCH_AUTORELEASE_FREQUENCY_WORK_ITEM:
+		return "DISPATCH_AUTORELEASE_FREQUENCY_WORK_ITEM"
+	case DISPATCH_AUTORELEASE_FREQUENCY_NEVER:
+		return "DISPATCH_AUTORELEASE_FREQUENCY_NEVER"
+	default:
+		return fmt.Sprintf("DispatchAutoreleaseFrequencyT(%d)", int64(i))
+	}
+}
+
+func ParseDispatchAutoreleaseFrequencyT(v string) (any, error) {
+	result := DISPATCH_AUTORELEASE_FREQUENCY_INHERIT
+	switch v {
+	case "DISPATCH_AUTORELEASE_FREQUENCY_INHERIT":
+		result = DISPATCH_AUTORELEASE_FREQUENCY_INHERIT
+	case "DISPATCH_AUTORELEASE_FREQUENCY_WORK_ITEM":
+		result = DISPATCH_AUTORELEASE_FREQUENCY_WORK_ITEM
+	case "DISPATCH_AUTORELEASE_FREQUENCY_NEVER":
+		result = DISPATCH_AUTORELEASE_FREQUENCY_NEVER
+	default:
+		return nil, nil
+	}
+	return &result, nil
+}
+
+func SerializeDispatchAutoreleaseFrequencyT(values []DispatchAutoreleaseFrequencyT) []string {
+	result := make([]string, len(values))
+	for i, v := range values {
+		result[i] = v.String()
+	}
+	return result
+}
+
+func (i DispatchAutoreleaseFrequencyT) isMultiValue() bool {
+	return false
+}
+
+// [block.h:302]
+// Bitmask — values may be combined with |.
+type DispatchBlockFlagsT uint64
+
+const (
+	DISPATCH_BLOCK_BARRIER DispatchBlockFlagsT = 1
+	// Introduced: macOS 10.10
+	DISPATCH_BLOCK_DETACHED DispatchBlockFlagsT = 2
+	// Introduced: macOS 10.10
+	DISPATCH_BLOCK_ASSIGN_CURRENT DispatchBlockFlagsT = 4
+	// Introduced: macOS 10.10
+	DISPATCH_BLOCK_NO_QOS_CLASS DispatchBlockFlagsT = 8
+	// Introduced: macOS 10.10
+	DISPATCH_BLOCK_INHERIT_QOS_CLASS DispatchBlockFlagsT = 16
+	// Introduced: macOS 10.10
+	DISPATCH_BLOCK_ENFORCE_QOS_CLASS DispatchBlockFlagsT = 32
+)
+
+func (i DispatchBlockFlagsT) String() string {
+	var values []string
+	if i&DISPATCH_BLOCK_BARRIER == DISPATCH_BLOCK_BARRIER {
+		values = append(values, "DISPATCH_BLOCK_BARRIER")
+	}
+	if i&DISPATCH_BLOCK_DETACHED == DISPATCH_BLOCK_DETACHED {
+		values = append(values, "DISPATCH_BLOCK_DETACHED")
+	}
+	if i&DISPATCH_BLOCK_ASSIGN_CURRENT == DISPATCH_BLOCK_ASSIGN_CURRENT {
+		values = append(values, "DISPATCH_BLOCK_ASSIGN_CURRENT")
+	}
+	if i&DISPATCH_BLOCK_NO_QOS_CLASS == DISPATCH_BLOCK_NO_QOS_CLASS {
+		values = append(values, "DISPATCH_BLOCK_NO_QOS_CLASS")
+	}
+	if i&DISPATCH_BLOCK_INHERIT_QOS_CLASS == DISPATCH_BLOCK_INHERIT_QOS_CLASS {
+		values = append(values, "DISPATCH_BLOCK_INHERIT_QOS_CLASS")
+	}
+	if i&DISPATCH_BLOCK_ENFORCE_QOS_CLASS == DISPATCH_BLOCK_ENFORCE_QOS_CLASS {
+		values = append(values, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS")
+	}
+	return strings.Join(values, ",")
+}
+
+func ParseDispatchBlockFlagsT(v string) (any, error) {
+	var result DispatchBlockFlagsT
+	for _, str := range strings.Split(v, ",") {
+		switch str {
+		case "DISPATCH_BLOCK_BARRIER":
+			result |= DISPATCH_BLOCK_BARRIER
+		case "DISPATCH_BLOCK_DETACHED":
+			result |= DISPATCH_BLOCK_DETACHED
+		case "DISPATCH_BLOCK_ASSIGN_CURRENT":
+			result |= DISPATCH_BLOCK_ASSIGN_CURRENT
+		case "DISPATCH_BLOCK_NO_QOS_CLASS":
+			result |= DISPATCH_BLOCK_NO_QOS_CLASS
+		case "DISPATCH_BLOCK_INHERIT_QOS_CLASS":
+			result |= DISPATCH_BLOCK_INHERIT_QOS_CLASS
+		case "DISPATCH_BLOCK_ENFORCE_QOS_CLASS":
+			result |= DISPATCH_BLOCK_ENFORCE_QOS_CLASS
+		default:
+			return nil, nil
+		}
+	}
+	return &result, nil
+}
+
+func SerializeDispatchBlockFlagsT(values []DispatchBlockFlagsT) []string {
+	result := make([]string, len(values))
+	for i, v := range values {
+		result[i] = v.String()
+	}
+	return result
+}
+
+func (i DispatchBlockFlagsT) isMultiValue() bool {
+	return true
+}
+
 // The type of the message’s action.
 // [ESTypes.h:15]
 type EsActionTypeT int32
@@ -542,7 +667,7 @@ func (i EsActionTypeT) isMultiValue() bool {
 	return false
 }
 
-// [ESTypes.h:491]
+// [ESTypes.h:513]
 type EsAddressTypeT int32
 
 const (
@@ -601,7 +726,7 @@ func (i EsAddressTypeT) isMultiValue() bool {
 }
 
 // Values used when responding to an authorization event.
-// [ESTypes.h:299]
+// [ESTypes.h:321]
 type EsAuthResultT int32
 
 const (
@@ -648,7 +773,7 @@ func (i EsAuthResultT) isMultiValue() bool {
 }
 
 // @brief This enum describes the types of authentications that ES_EVENT_TYPE_NOTIFY_AUTHENTICATION can describe.
-// [ESTypes.h:64]
+// [ESTypes.h:75]
 type EsAuthenticationTypeT int32
 
 const (
@@ -707,7 +832,7 @@ func (i EsAuthenticationTypeT) isMultiValue() bool {
 	return false
 }
 
-// [ESTypes.h:521]
+// [ESTypes.h:543]
 type EsAuthorizationRuleClassT int32
 
 const (
@@ -784,7 +909,7 @@ func (i EsAuthorizationRuleClassT) isMultiValue() bool {
 }
 
 // es_auto_unlock_type_t See es_event_authentication_auto_unlock_t
-// [ESTypes.h:680]
+// [ESTypes.h:734]
 type EsAutoUnlockTypeT int32
 
 const (
@@ -830,8 +955,53 @@ func (i EsAutoUnlockTypeT) isMultiValue() bool {
 	return false
 }
 
+// @brief Discriminator for the `target` union of `es_event_bootstrap_look_up_t`. Selects between a running owner of the looked-up service port (PROCESS) and a lazy-launched or not-yet-running owner (JOB).
+// [ESTypes.h:66]
+type EsBootstrapTargetTypeT int32
+
+const (
+	ES_BOOTSTRAP_TARGET_TYPE_PROCESS EsBootstrapTargetTypeT = 0
+	ES_BOOTSTRAP_TARGET_TYPE_JOB     EsBootstrapTargetTypeT = 1
+)
+
+func (i EsBootstrapTargetTypeT) String() string {
+	switch i {
+	case ES_BOOTSTRAP_TARGET_TYPE_PROCESS:
+		return "ES_BOOTSTRAP_TARGET_TYPE_PROCESS"
+	case ES_BOOTSTRAP_TARGET_TYPE_JOB:
+		return "ES_BOOTSTRAP_TARGET_TYPE_JOB"
+	default:
+		return fmt.Sprintf("EsBootstrapTargetTypeT(%d)", int64(i))
+	}
+}
+
+func ParseEsBootstrapTargetTypeT(v string) (any, error) {
+	result := ES_BOOTSTRAP_TARGET_TYPE_PROCESS
+	switch v {
+	case "ES_BOOTSTRAP_TARGET_TYPE_PROCESS":
+		result = ES_BOOTSTRAP_TARGET_TYPE_PROCESS
+	case "ES_BOOTSTRAP_TARGET_TYPE_JOB":
+		result = ES_BOOTSTRAP_TARGET_TYPE_JOB
+	default:
+		return nil, nil
+	}
+	return &result, nil
+}
+
+func SerializeEsBootstrapTargetTypeT(values []EsBootstrapTargetTypeT) []string {
+	result := make([]string, len(values))
+	for i, v := range values {
+		result[i] = v.String()
+	}
+	return result
+}
+
+func (i EsBootstrapTargetTypeT) isMultiValue() bool {
+	return false
+}
+
 // es_btm_item_type_t See es_btm_launch_item_t
-// [ESTypes.h:692]
+// [ESTypes.h:746]
 type EsBtmItemTypeT int32
 
 const (
@@ -891,7 +1061,7 @@ func (i EsBtmItemTypeT) isMultiValue() bool {
 }
 
 // Values that indicate the result of clearing a cache.
-// [ESTypes.h:364]
+// [ESTypes.h:386]
 type EsClearCacheResultT int32
 
 const (
@@ -943,7 +1113,7 @@ func (i EsClearCacheResultT) isMultiValue() bool {
 }
 
 // es_cs_validation_category
-// [ESTypes.h:661]
+// [ESTypes.h:715]
 type EsCsValidationCategoryT int32
 
 const (
@@ -1032,8 +1202,61 @@ func (i EsCsValidationCategoryT) isMultiValue() bool {
 	return false
 }
 
+// Deadline miss mode for ES clients
+// [ESTypes.h:851]
+type EsDeadlineMissModeT int32
+
+const (
+	// Kill the client when it fails to respond to an auth event (default behavior)
+	ES_DEADLINE_MISS_MODE_KILL EsDeadlineMissModeT = 0
+	// Deny the operation when client fails to respond, but don't kill the client
+	ES_DEADLINE_MISS_MODE_FAIL_CLOSED EsDeadlineMissModeT = 1
+	// Allow the operation when client fails to respond, but don't kill the client
+	ES_DEADLINE_MISS_MODE_FAIL_OPEN EsDeadlineMissModeT = 2
+)
+
+func (i EsDeadlineMissModeT) String() string {
+	switch i {
+	case ES_DEADLINE_MISS_MODE_KILL:
+		return "ES_DEADLINE_MISS_MODE_KILL"
+	case ES_DEADLINE_MISS_MODE_FAIL_CLOSED:
+		return "ES_DEADLINE_MISS_MODE_FAIL_CLOSED"
+	case ES_DEADLINE_MISS_MODE_FAIL_OPEN:
+		return "ES_DEADLINE_MISS_MODE_FAIL_OPEN"
+	default:
+		return fmt.Sprintf("EsDeadlineMissModeT(%d)", int64(i))
+	}
+}
+
+func ParseEsDeadlineMissModeT(v string) (any, error) {
+	result := ES_DEADLINE_MISS_MODE_KILL
+	switch v {
+	case "ES_DEADLINE_MISS_MODE_KILL":
+		result = ES_DEADLINE_MISS_MODE_KILL
+	case "ES_DEADLINE_MISS_MODE_FAIL_CLOSED":
+		result = ES_DEADLINE_MISS_MODE_FAIL_CLOSED
+	case "ES_DEADLINE_MISS_MODE_FAIL_OPEN":
+		result = ES_DEADLINE_MISS_MODE_FAIL_OPEN
+	default:
+		return nil, nil
+	}
+	return &result, nil
+}
+
+func SerializeEsDeadlineMissModeT(values []EsDeadlineMissModeT) []string {
+	result := make([]string, len(values))
+	for i, v := range values {
+		result[i] = v.String()
+	}
+	return result
+}
+
+func (i EsDeadlineMissModeT) isMultiValue() bool {
+	return false
+}
+
 // A type that indicates how a file event presents its destination to the client.
-// [ESTypes.h:705]
+// [ESTypes.h:759]
 type EsDestinationTypeT int32
 
 const (
@@ -1078,7 +1301,7 @@ func (i EsDestinationTypeT) isMultiValue() bool {
 }
 
 // A type used to identify a message’s event type and subscribe to events of that type.
-// [ESTypes.h:99]
+// [ESTypes.h:110]
 type EsEventTypeT int32
 
 const (
@@ -1239,7 +1462,12 @@ const (
 	ES_EVENT_TYPE_RESERVED_6                       EsEventTypeT = 154
 	ES_EVENT_TYPE_RESERVED_7                       EsEventTypeT = 155
 	ES_EVENT_TYPE_RESERVED_8                       EsEventTypeT = 156
-	ES_EVENT_TYPE_LAST                             EsEventTypeT = 157
+	ES_EVENT_TYPE_AUTH_XPC_CONNECT                 EsEventTypeT = 157
+	ES_EVENT_TYPE_AUTH_BOOTSTRAP_CHECK_IN          EsEventTypeT = 158
+	ES_EVENT_TYPE_NOTIFY_BOOTSTRAP_CHECK_IN        EsEventTypeT = 159
+	ES_EVENT_TYPE_AUTH_BOOTSTRAP_LOOK_UP           EsEventTypeT = 160
+	ES_EVENT_TYPE_NOTIFY_BOOTSTRAP_LOOK_UP         EsEventTypeT = 161
+	ES_EVENT_TYPE_LAST                             EsEventTypeT = 162
 )
 
 func (i EsEventTypeT) String() string {
@@ -1558,6 +1786,16 @@ func (i EsEventTypeT) String() string {
 		return "ES_EVENT_TYPE_RESERVED_7"
 	case ES_EVENT_TYPE_RESERVED_8:
 		return "ES_EVENT_TYPE_RESERVED_8"
+	case ES_EVENT_TYPE_AUTH_XPC_CONNECT:
+		return "ES_EVENT_TYPE_AUTH_XPC_CONNECT"
+	case ES_EVENT_TYPE_AUTH_BOOTSTRAP_CHECK_IN:
+		return "ES_EVENT_TYPE_AUTH_BOOTSTRAP_CHECK_IN"
+	case ES_EVENT_TYPE_NOTIFY_BOOTSTRAP_CHECK_IN:
+		return "ES_EVENT_TYPE_NOTIFY_BOOTSTRAP_CHECK_IN"
+	case ES_EVENT_TYPE_AUTH_BOOTSTRAP_LOOK_UP:
+		return "ES_EVENT_TYPE_AUTH_BOOTSTRAP_LOOK_UP"
+	case ES_EVENT_TYPE_NOTIFY_BOOTSTRAP_LOOK_UP:
+		return "ES_EVENT_TYPE_NOTIFY_BOOTSTRAP_LOOK_UP"
 	case ES_EVENT_TYPE_LAST:
 		return "ES_EVENT_TYPE_LAST"
 	default:
@@ -1882,6 +2120,16 @@ func ParseEsEventTypeT(v string) (any, error) {
 		result = ES_EVENT_TYPE_RESERVED_7
 	case "ES_EVENT_TYPE_RESERVED_8":
 		result = ES_EVENT_TYPE_RESERVED_8
+	case "ES_EVENT_TYPE_AUTH_XPC_CONNECT":
+		result = ES_EVENT_TYPE_AUTH_XPC_CONNECT
+	case "ES_EVENT_TYPE_AUTH_BOOTSTRAP_CHECK_IN":
+		result = ES_EVENT_TYPE_AUTH_BOOTSTRAP_CHECK_IN
+	case "ES_EVENT_TYPE_NOTIFY_BOOTSTRAP_CHECK_IN":
+		result = ES_EVENT_TYPE_NOTIFY_BOOTSTRAP_CHECK_IN
+	case "ES_EVENT_TYPE_AUTH_BOOTSTRAP_LOOK_UP":
+		result = ES_EVENT_TYPE_AUTH_BOOTSTRAP_LOOK_UP
+	case "ES_EVENT_TYPE_NOTIFY_BOOTSTRAP_LOOK_UP":
+		result = ES_EVENT_TYPE_NOTIFY_BOOTSTRAP_LOOK_UP
 	case "ES_EVENT_TYPE_LAST":
 		result = ES_EVENT_TYPE_LAST
 	default:
@@ -1902,7 +2150,7 @@ func (i EsEventTypeT) isMultiValue() bool {
 	return false
 }
 
-// [ESTypes.h:568]
+// [ESTypes.h:590]
 type EsGatekeeperUserOverrideFileTypeT int32
 
 const (
@@ -1949,7 +2197,7 @@ func (i EsGatekeeperUserOverrideFileTypeT) isMultiValue() bool {
 }
 
 // es_get_task_type_t See es_event_get_task_t
-// [ESTypes.h:715]
+// [ESTypes.h:769]
 type EsGetTaskTypeT int32
 
 const (
@@ -1999,7 +2247,7 @@ func (i EsGetTaskTypeT) isMultiValue() bool {
 }
 
 // es_mount_disposition_t See es_event_mount_t
-// [ESTypes.h:753]
+// [ESTypes.h:807]
 type EsMountDispositionT int32
 
 const (
@@ -2063,7 +2311,7 @@ func (i EsMountDispositionT) isMultiValue() bool {
 	return false
 }
 
-// [ESTypes.h:502]
+// [ESTypes.h:524]
 type EsMuteInversionTypeT int32
 
 const (
@@ -2117,7 +2365,7 @@ func (i EsMuteInversionTypeT) isMultiValue() bool {
 	return false
 }
 
-// [ESTypes.h:509]
+// [ESTypes.h:531]
 // Introduced: macOS 13.0
 type EsMuteInvertedReturnT int32
 
@@ -2172,7 +2420,7 @@ func (i EsMuteInvertedReturnT) isMultiValue() bool {
 }
 
 // The type of a path argument, such as a prefix or a path literal.
-// [ESTypes.h:415]
+// [ESTypes.h:437]
 type EsMutePathTypeT int32
 
 const (
@@ -2233,7 +2481,7 @@ func (i EsMutePathTypeT) isMultiValue() bool {
 }
 
 // The result of an attempt to create a new client.
-// [ESTypes.h:345]
+// [ESTypes.h:367]
 type EsNewClientResultT int32
 
 const (
@@ -2308,7 +2556,7 @@ func (i EsNewClientResultT) isMultiValue() bool {
 	return false
 }
 
-// [ESTypes.h:554]
+// [ESTypes.h:576]
 type EsOdAccountTypeT int32
 
 const (
@@ -2352,7 +2600,7 @@ func (i EsOdAccountTypeT) isMultiValue() bool {
 	return false
 }
 
-// [ESTypes.h:542]
+// [ESTypes.h:564]
 type EsOdMemberTypeT int32
 
 const (
@@ -2404,7 +2652,7 @@ func (i EsOdMemberTypeT) isMultiValue() bool {
 	return false
 }
 
-// [ESTypes.h:562]
+// [ESTypes.h:584]
 type EsOdRecordTypeT int32
 
 const (
@@ -2449,7 +2697,7 @@ func (i EsOdRecordTypeT) isMultiValue() bool {
 }
 
 // es_openssh_login_result_type_t See es_event_openssh_login_t
-// [ESTypes.h:735]
+// [ESTypes.h:789]
 type EsOpensshLoginResultTypeT int32
 
 const (
@@ -2619,7 +2867,7 @@ func (i EsProcCheckTypeT) isMultiValue() bool {
 }
 
 // The type of a process suspension or resumption event.
-// [ESTypes.h:765]
+// [ESTypes.h:819]
 type EsProcSuspendResumeTypeT int32
 
 const (
@@ -2669,7 +2917,7 @@ func (i EsProcSuspendResumeTypeT) isMultiValue() bool {
 }
 
 // es_profile_source_t See es_profile_t
-// [ESTypes.h:776]
+// [ESTypes.h:830]
 type EsProfileSourceT int32
 
 const (
@@ -2714,7 +2962,7 @@ func (i EsProfileSourceT) isMultiValue() bool {
 }
 
 // Values that indicate the result of responding to a message.
-// [ESTypes.h:327]
+// [ESTypes.h:349]
 type EsRespondResultT int32
 
 const (
@@ -2784,7 +3032,7 @@ func (i EsRespondResultT) isMultiValue() bool {
 }
 
 // A type that indicates the type of a message’s result.
-// [ESTypes.h:309]
+// [ESTypes.h:331]
 type EsResultTypeT int32
 
 const (
@@ -2831,7 +3079,7 @@ func (i EsResultTypeT) isMultiValue() bool {
 }
 
 // Values that indicate the result of an Endpoint Security action that can only succeed or fail.
-// [ESTypes.h:319]
+// [ESTypes.h:341]
 type EsReturnT int32
 
 const (
@@ -2921,7 +3169,7 @@ func (i EsSetOrClearT) isMultiValue() bool {
 }
 
 // @brief This enum describes the type of plugin types in sudo
-// [ESTypes.h:78]
+// [ESTypes.h:89]
 type EsSudoPluginTypeT int32
 
 const (
@@ -2986,7 +3234,7 @@ func (i EsSudoPluginTypeT) isMultiValue() bool {
 }
 
 // ess_tcc_authorization_reason_t
-// [ESTypes.h:627]
+// [ESTypes.h:681]
 type EsTccAuthorizationReasonT int32
 
 const (
@@ -3091,7 +3339,7 @@ func (i EsTccAuthorizationReasonT) isMultiValue() bool {
 }
 
 // ess_tcc_authorization_right_t
-// [ESTypes.h:612]
+// [ESTypes.h:666]
 type EsTccAuthorizationRightT int32
 
 const (
@@ -3161,7 +3409,7 @@ func (i EsTccAuthorizationRightT) isMultiValue() bool {
 }
 
 // @typedef ess_tcc_event_type_t Represent the type of TCC modification event. - ES_TCC_EVENT_TYPE_UNKNOWN: Unknown prior state. - ES_TCC_EVENT_TYPE_CREATE: A new TCC authorization record was created. - ES_TCC_EVENT_TYPE_MODIFY: An existing TCC authorization record was modified. - ES_TCC_EVENT_TYPE_DELETE: An existing TCC authorization record was deleted.
-// [ESTypes.h:600]
+// [ESTypes.h:654]
 type EsTccEventTypeT int32
 
 const (
@@ -3216,7 +3464,7 @@ func (i EsTccEventTypeT) isMultiValue() bool {
 }
 
 // es_tcc_identity_type_t
-// [ESTypes.h:649]
+// [ESTypes.h:703]
 type EsTccIdentityTypeT int32
 
 const (
@@ -3271,7 +3519,7 @@ func (i EsTccIdentityTypeT) isMultiValue() bool {
 }
 
 // es_touchid_mode_t See es_event_authentication_touchid_t
-// [ESTypes.h:786]
+// [ESTypes.h:840]
 type EsTouchidModeT int32
 
 const (
@@ -3390,6 +3638,80 @@ func (i EsXpcDomainTypeT) isMultiValue() bool {
 	return false
 }
 
+// [fcntl.h:601]
+type FilesecPropertyT int32
+
+const (
+	FILESEC_OWNER         FilesecPropertyT = 1
+	FILESEC_GROUP         FilesecPropertyT = 2
+	FILESEC_UUID          FilesecPropertyT = 3
+	FILESEC_MODE          FilesecPropertyT = 4
+	FILESEC_ACL           FilesecPropertyT = 5
+	FILESEC_GRPUUID       FilesecPropertyT = 6
+	FILESEC_ACL_RAW       FilesecPropertyT = 100
+	FILESEC_ACL_ALLOCSIZE FilesecPropertyT = 101
+)
+
+func (i FilesecPropertyT) String() string {
+	switch i {
+	case FILESEC_OWNER:
+		return "FILESEC_OWNER"
+	case FILESEC_GROUP:
+		return "FILESEC_GROUP"
+	case FILESEC_UUID:
+		return "FILESEC_UUID"
+	case FILESEC_MODE:
+		return "FILESEC_MODE"
+	case FILESEC_ACL:
+		return "FILESEC_ACL"
+	case FILESEC_GRPUUID:
+		return "FILESEC_GRPUUID"
+	case FILESEC_ACL_RAW:
+		return "FILESEC_ACL_RAW"
+	case FILESEC_ACL_ALLOCSIZE:
+		return "FILESEC_ACL_ALLOCSIZE"
+	default:
+		return fmt.Sprintf("FilesecPropertyT(%d)", int64(i))
+	}
+}
+
+func ParseFilesecPropertyT(v string) (any, error) {
+	result := FILESEC_OWNER
+	switch v {
+	case "FILESEC_OWNER":
+		result = FILESEC_OWNER
+	case "FILESEC_GROUP":
+		result = FILESEC_GROUP
+	case "FILESEC_UUID":
+		result = FILESEC_UUID
+	case "FILESEC_MODE":
+		result = FILESEC_MODE
+	case "FILESEC_ACL":
+		result = FILESEC_ACL
+	case "FILESEC_GRPUUID":
+		result = FILESEC_GRPUUID
+	case "FILESEC_ACL_RAW":
+		result = FILESEC_ACL_RAW
+	case "FILESEC_ACL_ALLOCSIZE":
+		result = FILESEC_ACL_ALLOCSIZE
+	default:
+		return nil, nil
+	}
+	return &result, nil
+}
+
+func SerializeFilesecPropertyT(values []FilesecPropertyT) []string {
+	result := make([]string, len(values))
+	for i, v := range values {
+		result[i] = v.String()
+	}
+	return result
+}
+
+func (i FilesecPropertyT) isMultiValue() bool {
+	return false
+}
+
 // [mount.h:188]
 type GraftdmgTypeT uint32
 
@@ -3464,6 +3786,587 @@ func SerializeGraftdmgTypeT(values []GraftdmgTypeT) []string {
 }
 
 func (i GraftdmgTypeT) isMultiValue() bool {
+	return false
+}
+
+// [wait.h:79]
+type IdtypeT int32
+
+const (
+	P_ALL  IdtypeT = 0
+	P_PID  IdtypeT = 1
+	P_PGID IdtypeT = 2
+)
+
+func (i IdtypeT) String() string {
+	switch i {
+	case P_ALL:
+		return "P_ALL"
+	case P_PID:
+		return "P_PID"
+	case P_PGID:
+		return "P_PGID"
+	default:
+		return fmt.Sprintf("IdtypeT(%d)", int64(i))
+	}
+}
+
+func ParseIdtypeT(v string) (any, error) {
+	result := P_ALL
+	switch v {
+	case "P_ALL":
+		result = P_ALL
+	case "P_PID":
+		result = P_PID
+	case "P_PGID":
+		result = P_PGID
+	default:
+		return nil, nil
+	}
+	return &result, nil
+}
+
+func SerializeIdtypeT(values []IdtypeT) []string {
+	result := make([]string, len(values))
+	for i, v := range values {
+		result[i] = v.String()
+	}
+	return result
+}
+
+func (i IdtypeT) isMultiValue() bool {
+	return false
+}
+
+// [ipc_info.h:1098]
+type IpcInfoObjectTypeT uint32
+
+const (
+	IPC_OTYPE_NONE                 IpcInfoObjectTypeT = 0
+	IPC_OTYPE_THREAD_CONTROL       IpcInfoObjectTypeT = 1
+	IPC_OTYPE_TASK_CONTROL         IpcInfoObjectTypeT = 2
+	IPC_OTYPE_HOST                 IpcInfoObjectTypeT = 3
+	IPC_OTYPE_HOST_PRIV            IpcInfoObjectTypeT = 4
+	IPC_OTYPE_PROCESSOR            IpcInfoObjectTypeT = 5
+	IPC_OTYPE_PROCESSOR_SET        IpcInfoObjectTypeT = 6
+	IPC_OTYPE_PROCESSOR_SET_NAME   IpcInfoObjectTypeT = 7
+	IPC_OTYPE_TIMER                IpcInfoObjectTypeT = 8
+	IPC_OTYPE_PORT_SUBST_ONCE      IpcInfoObjectTypeT = 9
+	IPC_OTYPE_MIG                  IpcInfoObjectTypeT = 10
+	IPC_OTYPE_MEMORY_OBJECT        IpcInfoObjectTypeT = 11
+	IPC_OTYPE_XMM_PAGER            IpcInfoObjectTypeT = 12
+	IPC_OTYPE_XMM_KERNEL           IpcInfoObjectTypeT = 13
+	IPC_OTYPE_XMM_REPLY            IpcInfoObjectTypeT = 14
+	IPC_OTYPE_UND_REPLY            IpcInfoObjectTypeT = 15
+	IPC_OTYPE_HOST_NOTIFY          IpcInfoObjectTypeT = 16
+	IPC_OTYPE_HOST_SECURITY        IpcInfoObjectTypeT = 17
+	IPC_OTYPE_LEDGER               IpcInfoObjectTypeT = 18
+	IPC_OTYPE_MAIN_DEVICE          IpcInfoObjectTypeT = 19
+	IPC_OTYPE_TASK_NAME            IpcInfoObjectTypeT = 20
+	IPC_OTYPE_SUBSYSTEM            IpcInfoObjectTypeT = 21
+	IPC_OTYPE_IO_DONE_QUEUE        IpcInfoObjectTypeT = 22
+	IPC_OTYPE_SEMAPHORE            IpcInfoObjectTypeT = 23
+	IPC_OTYPE_LOCK_SET             IpcInfoObjectTypeT = 24
+	IPC_OTYPE_CLOCK                IpcInfoObjectTypeT = 25
+	IPC_OTYPE_CLOCK_CTRL           IpcInfoObjectTypeT = 26
+	IPC_OTYPE_IOKIT_IDENT          IpcInfoObjectTypeT = 27
+	IPC_OTYPE_NAMED_ENTRY          IpcInfoObjectTypeT = 28
+	IPC_OTYPE_IOKIT_CONNECT        IpcInfoObjectTypeT = 29
+	IPC_OTYPE_IOKIT_OBJECT         IpcInfoObjectTypeT = 30
+	IPC_OTYPE_UPL                  IpcInfoObjectTypeT = 31
+	IPC_OTYPE_MEM_OBJ_CONTROL      IpcInfoObjectTypeT = 32
+	IPC_OTYPE_AU_SESSIONPORT       IpcInfoObjectTypeT = 33
+	IPC_OTYPE_FILEPORT             IpcInfoObjectTypeT = 34
+	IPC_OTYPE_LABELH               IpcInfoObjectTypeT = 35
+	IPC_OTYPE_TASK_RESUME          IpcInfoObjectTypeT = 36
+	IPC_OTYPE_VOUCHER              IpcInfoObjectTypeT = 37
+	IPC_OTYPE_VOUCHER_ATTR_CONTROL IpcInfoObjectTypeT = 38
+	IPC_OTYPE_WORK_INTERVAL        IpcInfoObjectTypeT = 39
+	IPC_OTYPE_UX_HANDLER           IpcInfoObjectTypeT = 40
+	IPC_OTYPE_UEXT_OBJECT          IpcInfoObjectTypeT = 41
+	IPC_OTYPE_ARCADE_REG           IpcInfoObjectTypeT = 42
+	IPC_OTYPE_EVENTLINK            IpcInfoObjectTypeT = 43
+	IPC_OTYPE_TASK_INSPECT         IpcInfoObjectTypeT = 44
+	IPC_OTYPE_TASK_READ            IpcInfoObjectTypeT = 45
+	IPC_OTYPE_THREAD_INSPECT       IpcInfoObjectTypeT = 46
+	IPC_OTYPE_THREAD_READ          IpcInfoObjectTypeT = 47
+	IPC_OTYPE_SUID_CRED            IpcInfoObjectTypeT = 48
+	IPC_OTYPE_HYPERVISOR           IpcInfoObjectTypeT = 49
+	IPC_OTYPE_TASK_ID_TOKEN        IpcInfoObjectTypeT = 50
+	IPC_OTYPE_TASK_FATAL           IpcInfoObjectTypeT = 51
+	IPC_OTYPE_KCDATA               IpcInfoObjectTypeT = 52
+	IPC_OTYPE_EXCLAVES_RESOURCE    IpcInfoObjectTypeT = 53
+	IPC_OTYPE_THREAD_RESUME        IpcInfoObjectTypeT = 54
+	IPC_OTYPE_UNKNOWN              IpcInfoObjectTypeT = 4294967295
+)
+
+func (i IpcInfoObjectTypeT) String() string {
+	switch i {
+	case IPC_OTYPE_NONE:
+		return "IPC_OTYPE_NONE"
+	case IPC_OTYPE_THREAD_CONTROL:
+		return "IPC_OTYPE_THREAD_CONTROL"
+	case IPC_OTYPE_TASK_CONTROL:
+		return "IPC_OTYPE_TASK_CONTROL"
+	case IPC_OTYPE_HOST:
+		return "IPC_OTYPE_HOST"
+	case IPC_OTYPE_HOST_PRIV:
+		return "IPC_OTYPE_HOST_PRIV"
+	case IPC_OTYPE_PROCESSOR:
+		return "IPC_OTYPE_PROCESSOR"
+	case IPC_OTYPE_PROCESSOR_SET:
+		return "IPC_OTYPE_PROCESSOR_SET"
+	case IPC_OTYPE_PROCESSOR_SET_NAME:
+		return "IPC_OTYPE_PROCESSOR_SET_NAME"
+	case IPC_OTYPE_TIMER:
+		return "IPC_OTYPE_TIMER"
+	case IPC_OTYPE_PORT_SUBST_ONCE:
+		return "IPC_OTYPE_PORT_SUBST_ONCE"
+	case IPC_OTYPE_MIG:
+		return "IPC_OTYPE_MIG"
+	case IPC_OTYPE_MEMORY_OBJECT:
+		return "IPC_OTYPE_MEMORY_OBJECT"
+	case IPC_OTYPE_XMM_PAGER:
+		return "IPC_OTYPE_XMM_PAGER"
+	case IPC_OTYPE_XMM_KERNEL:
+		return "IPC_OTYPE_XMM_KERNEL"
+	case IPC_OTYPE_XMM_REPLY:
+		return "IPC_OTYPE_XMM_REPLY"
+	case IPC_OTYPE_UND_REPLY:
+		return "IPC_OTYPE_UND_REPLY"
+	case IPC_OTYPE_HOST_NOTIFY:
+		return "IPC_OTYPE_HOST_NOTIFY"
+	case IPC_OTYPE_HOST_SECURITY:
+		return "IPC_OTYPE_HOST_SECURITY"
+	case IPC_OTYPE_LEDGER:
+		return "IPC_OTYPE_LEDGER"
+	case IPC_OTYPE_MAIN_DEVICE:
+		return "IPC_OTYPE_MAIN_DEVICE"
+	case IPC_OTYPE_TASK_NAME:
+		return "IPC_OTYPE_TASK_NAME"
+	case IPC_OTYPE_SUBSYSTEM:
+		return "IPC_OTYPE_SUBSYSTEM"
+	case IPC_OTYPE_IO_DONE_QUEUE:
+		return "IPC_OTYPE_IO_DONE_QUEUE"
+	case IPC_OTYPE_SEMAPHORE:
+		return "IPC_OTYPE_SEMAPHORE"
+	case IPC_OTYPE_LOCK_SET:
+		return "IPC_OTYPE_LOCK_SET"
+	case IPC_OTYPE_CLOCK:
+		return "IPC_OTYPE_CLOCK"
+	case IPC_OTYPE_CLOCK_CTRL:
+		return "IPC_OTYPE_CLOCK_CTRL"
+	case IPC_OTYPE_IOKIT_IDENT:
+		return "IPC_OTYPE_IOKIT_IDENT"
+	case IPC_OTYPE_NAMED_ENTRY:
+		return "IPC_OTYPE_NAMED_ENTRY"
+	case IPC_OTYPE_IOKIT_CONNECT:
+		return "IPC_OTYPE_IOKIT_CONNECT"
+	case IPC_OTYPE_IOKIT_OBJECT:
+		return "IPC_OTYPE_IOKIT_OBJECT"
+	case IPC_OTYPE_UPL:
+		return "IPC_OTYPE_UPL"
+	case IPC_OTYPE_MEM_OBJ_CONTROL:
+		return "IPC_OTYPE_MEM_OBJ_CONTROL"
+	case IPC_OTYPE_AU_SESSIONPORT:
+		return "IPC_OTYPE_AU_SESSIONPORT"
+	case IPC_OTYPE_FILEPORT:
+		return "IPC_OTYPE_FILEPORT"
+	case IPC_OTYPE_LABELH:
+		return "IPC_OTYPE_LABELH"
+	case IPC_OTYPE_TASK_RESUME:
+		return "IPC_OTYPE_TASK_RESUME"
+	case IPC_OTYPE_VOUCHER:
+		return "IPC_OTYPE_VOUCHER"
+	case IPC_OTYPE_VOUCHER_ATTR_CONTROL:
+		return "IPC_OTYPE_VOUCHER_ATTR_CONTROL"
+	case IPC_OTYPE_WORK_INTERVAL:
+		return "IPC_OTYPE_WORK_INTERVAL"
+	case IPC_OTYPE_UX_HANDLER:
+		return "IPC_OTYPE_UX_HANDLER"
+	case IPC_OTYPE_UEXT_OBJECT:
+		return "IPC_OTYPE_UEXT_OBJECT"
+	case IPC_OTYPE_ARCADE_REG:
+		return "IPC_OTYPE_ARCADE_REG"
+	case IPC_OTYPE_EVENTLINK:
+		return "IPC_OTYPE_EVENTLINK"
+	case IPC_OTYPE_TASK_INSPECT:
+		return "IPC_OTYPE_TASK_INSPECT"
+	case IPC_OTYPE_TASK_READ:
+		return "IPC_OTYPE_TASK_READ"
+	case IPC_OTYPE_THREAD_INSPECT:
+		return "IPC_OTYPE_THREAD_INSPECT"
+	case IPC_OTYPE_THREAD_READ:
+		return "IPC_OTYPE_THREAD_READ"
+	case IPC_OTYPE_SUID_CRED:
+		return "IPC_OTYPE_SUID_CRED"
+	case IPC_OTYPE_HYPERVISOR:
+		return "IPC_OTYPE_HYPERVISOR"
+	case IPC_OTYPE_TASK_ID_TOKEN:
+		return "IPC_OTYPE_TASK_ID_TOKEN"
+	case IPC_OTYPE_TASK_FATAL:
+		return "IPC_OTYPE_TASK_FATAL"
+	case IPC_OTYPE_KCDATA:
+		return "IPC_OTYPE_KCDATA"
+	case IPC_OTYPE_EXCLAVES_RESOURCE:
+		return "IPC_OTYPE_EXCLAVES_RESOURCE"
+	case IPC_OTYPE_THREAD_RESUME:
+		return "IPC_OTYPE_THREAD_RESUME"
+	case IPC_OTYPE_UNKNOWN:
+		return "IPC_OTYPE_UNKNOWN"
+	default:
+		return fmt.Sprintf("IpcInfoObjectTypeT(%d)", int64(i))
+	}
+}
+
+func ParseIpcInfoObjectTypeT(v string) (any, error) {
+	result := IPC_OTYPE_NONE
+	switch v {
+	case "IPC_OTYPE_NONE":
+		result = IPC_OTYPE_NONE
+	case "IPC_OTYPE_THREAD_CONTROL":
+		result = IPC_OTYPE_THREAD_CONTROL
+	case "IPC_OTYPE_TASK_CONTROL":
+		result = IPC_OTYPE_TASK_CONTROL
+	case "IPC_OTYPE_HOST":
+		result = IPC_OTYPE_HOST
+	case "IPC_OTYPE_HOST_PRIV":
+		result = IPC_OTYPE_HOST_PRIV
+	case "IPC_OTYPE_PROCESSOR":
+		result = IPC_OTYPE_PROCESSOR
+	case "IPC_OTYPE_PROCESSOR_SET":
+		result = IPC_OTYPE_PROCESSOR_SET
+	case "IPC_OTYPE_PROCESSOR_SET_NAME":
+		result = IPC_OTYPE_PROCESSOR_SET_NAME
+	case "IPC_OTYPE_TIMER":
+		result = IPC_OTYPE_TIMER
+	case "IPC_OTYPE_PORT_SUBST_ONCE":
+		result = IPC_OTYPE_PORT_SUBST_ONCE
+	case "IPC_OTYPE_MIG":
+		result = IPC_OTYPE_MIG
+	case "IPC_OTYPE_MEMORY_OBJECT":
+		result = IPC_OTYPE_MEMORY_OBJECT
+	case "IPC_OTYPE_XMM_PAGER":
+		result = IPC_OTYPE_XMM_PAGER
+	case "IPC_OTYPE_XMM_KERNEL":
+		result = IPC_OTYPE_XMM_KERNEL
+	case "IPC_OTYPE_XMM_REPLY":
+		result = IPC_OTYPE_XMM_REPLY
+	case "IPC_OTYPE_UND_REPLY":
+		result = IPC_OTYPE_UND_REPLY
+	case "IPC_OTYPE_HOST_NOTIFY":
+		result = IPC_OTYPE_HOST_NOTIFY
+	case "IPC_OTYPE_HOST_SECURITY":
+		result = IPC_OTYPE_HOST_SECURITY
+	case "IPC_OTYPE_LEDGER":
+		result = IPC_OTYPE_LEDGER
+	case "IPC_OTYPE_MAIN_DEVICE":
+		result = IPC_OTYPE_MAIN_DEVICE
+	case "IPC_OTYPE_TASK_NAME":
+		result = IPC_OTYPE_TASK_NAME
+	case "IPC_OTYPE_SUBSYSTEM":
+		result = IPC_OTYPE_SUBSYSTEM
+	case "IPC_OTYPE_IO_DONE_QUEUE":
+		result = IPC_OTYPE_IO_DONE_QUEUE
+	case "IPC_OTYPE_SEMAPHORE":
+		result = IPC_OTYPE_SEMAPHORE
+	case "IPC_OTYPE_LOCK_SET":
+		result = IPC_OTYPE_LOCK_SET
+	case "IPC_OTYPE_CLOCK":
+		result = IPC_OTYPE_CLOCK
+	case "IPC_OTYPE_CLOCK_CTRL":
+		result = IPC_OTYPE_CLOCK_CTRL
+	case "IPC_OTYPE_IOKIT_IDENT":
+		result = IPC_OTYPE_IOKIT_IDENT
+	case "IPC_OTYPE_NAMED_ENTRY":
+		result = IPC_OTYPE_NAMED_ENTRY
+	case "IPC_OTYPE_IOKIT_CONNECT":
+		result = IPC_OTYPE_IOKIT_CONNECT
+	case "IPC_OTYPE_IOKIT_OBJECT":
+		result = IPC_OTYPE_IOKIT_OBJECT
+	case "IPC_OTYPE_UPL":
+		result = IPC_OTYPE_UPL
+	case "IPC_OTYPE_MEM_OBJ_CONTROL":
+		result = IPC_OTYPE_MEM_OBJ_CONTROL
+	case "IPC_OTYPE_AU_SESSIONPORT":
+		result = IPC_OTYPE_AU_SESSIONPORT
+	case "IPC_OTYPE_FILEPORT":
+		result = IPC_OTYPE_FILEPORT
+	case "IPC_OTYPE_LABELH":
+		result = IPC_OTYPE_LABELH
+	case "IPC_OTYPE_TASK_RESUME":
+		result = IPC_OTYPE_TASK_RESUME
+	case "IPC_OTYPE_VOUCHER":
+		result = IPC_OTYPE_VOUCHER
+	case "IPC_OTYPE_VOUCHER_ATTR_CONTROL":
+		result = IPC_OTYPE_VOUCHER_ATTR_CONTROL
+	case "IPC_OTYPE_WORK_INTERVAL":
+		result = IPC_OTYPE_WORK_INTERVAL
+	case "IPC_OTYPE_UX_HANDLER":
+		result = IPC_OTYPE_UX_HANDLER
+	case "IPC_OTYPE_UEXT_OBJECT":
+		result = IPC_OTYPE_UEXT_OBJECT
+	case "IPC_OTYPE_ARCADE_REG":
+		result = IPC_OTYPE_ARCADE_REG
+	case "IPC_OTYPE_EVENTLINK":
+		result = IPC_OTYPE_EVENTLINK
+	case "IPC_OTYPE_TASK_INSPECT":
+		result = IPC_OTYPE_TASK_INSPECT
+	case "IPC_OTYPE_TASK_READ":
+		result = IPC_OTYPE_TASK_READ
+	case "IPC_OTYPE_THREAD_INSPECT":
+		result = IPC_OTYPE_THREAD_INSPECT
+	case "IPC_OTYPE_THREAD_READ":
+		result = IPC_OTYPE_THREAD_READ
+	case "IPC_OTYPE_SUID_CRED":
+		result = IPC_OTYPE_SUID_CRED
+	case "IPC_OTYPE_HYPERVISOR":
+		result = IPC_OTYPE_HYPERVISOR
+	case "IPC_OTYPE_TASK_ID_TOKEN":
+		result = IPC_OTYPE_TASK_ID_TOKEN
+	case "IPC_OTYPE_TASK_FATAL":
+		result = IPC_OTYPE_TASK_FATAL
+	case "IPC_OTYPE_KCDATA":
+		result = IPC_OTYPE_KCDATA
+	case "IPC_OTYPE_EXCLAVES_RESOURCE":
+		result = IPC_OTYPE_EXCLAVES_RESOURCE
+	case "IPC_OTYPE_THREAD_RESUME":
+		result = IPC_OTYPE_THREAD_RESUME
+	case "IPC_OTYPE_UNKNOWN":
+		result = IPC_OTYPE_UNKNOWN
+	default:
+		return nil, nil
+	}
+	return &result, nil
+}
+
+func SerializeIpcInfoObjectTypeT(values []IpcInfoObjectTypeT) []string {
+	result := make([]string, len(values))
+	for i, v := range values {
+		result[i] = v.String()
+	}
+	return result
+}
+
+func (i IpcInfoObjectTypeT) isMultiValue() bool {
+	return false
+}
+
+// [launch.h:204]
+type LaunchDataTypeT int32
+
+const (
+	LAUNCH_DATA_DICTIONARY LaunchDataTypeT = 1
+	LAUNCH_DATA_ARRAY      LaunchDataTypeT = 2
+	LAUNCH_DATA_FD         LaunchDataTypeT = 3
+	LAUNCH_DATA_INTEGER    LaunchDataTypeT = 4
+	LAUNCH_DATA_REAL       LaunchDataTypeT = 5
+	LAUNCH_DATA_BOOL       LaunchDataTypeT = 6
+	LAUNCH_DATA_STRING     LaunchDataTypeT = 7
+	LAUNCH_DATA_OPAQUE     LaunchDataTypeT = 8
+	LAUNCH_DATA_ERRNO      LaunchDataTypeT = 9
+	LAUNCH_DATA_MACHPORT   LaunchDataTypeT = 10
+)
+
+func (i LaunchDataTypeT) String() string {
+	switch i {
+	case LAUNCH_DATA_DICTIONARY:
+		return "LAUNCH_DATA_DICTIONARY"
+	case LAUNCH_DATA_ARRAY:
+		return "LAUNCH_DATA_ARRAY"
+	case LAUNCH_DATA_FD:
+		return "LAUNCH_DATA_FD"
+	case LAUNCH_DATA_INTEGER:
+		return "LAUNCH_DATA_INTEGER"
+	case LAUNCH_DATA_REAL:
+		return "LAUNCH_DATA_REAL"
+	case LAUNCH_DATA_BOOL:
+		return "LAUNCH_DATA_BOOL"
+	case LAUNCH_DATA_STRING:
+		return "LAUNCH_DATA_STRING"
+	case LAUNCH_DATA_OPAQUE:
+		return "LAUNCH_DATA_OPAQUE"
+	case LAUNCH_DATA_ERRNO:
+		return "LAUNCH_DATA_ERRNO"
+	case LAUNCH_DATA_MACHPORT:
+		return "LAUNCH_DATA_MACHPORT"
+	default:
+		return fmt.Sprintf("LaunchDataTypeT(%d)", int64(i))
+	}
+}
+
+func ParseLaunchDataTypeT(v string) (any, error) {
+	result := LAUNCH_DATA_DICTIONARY
+	switch v {
+	case "LAUNCH_DATA_DICTIONARY":
+		result = LAUNCH_DATA_DICTIONARY
+	case "LAUNCH_DATA_ARRAY":
+		result = LAUNCH_DATA_ARRAY
+	case "LAUNCH_DATA_FD":
+		result = LAUNCH_DATA_FD
+	case "LAUNCH_DATA_INTEGER":
+		result = LAUNCH_DATA_INTEGER
+	case "LAUNCH_DATA_REAL":
+		result = LAUNCH_DATA_REAL
+	case "LAUNCH_DATA_BOOL":
+		result = LAUNCH_DATA_BOOL
+	case "LAUNCH_DATA_STRING":
+		result = LAUNCH_DATA_STRING
+	case "LAUNCH_DATA_OPAQUE":
+		result = LAUNCH_DATA_OPAQUE
+	case "LAUNCH_DATA_ERRNO":
+		result = LAUNCH_DATA_ERRNO
+	case "LAUNCH_DATA_MACHPORT":
+		result = LAUNCH_DATA_MACHPORT
+	default:
+		return nil, nil
+	}
+	return &result, nil
+}
+
+func SerializeLaunchDataTypeT(values []LaunchDataTypeT) []string {
+	result := make([]string, len(values))
+	for i, v := range values {
+		result[i] = v.String()
+	}
+	return result
+}
+
+func (i LaunchDataTypeT) isMultiValue() bool {
+	return false
+}
+
+// [vm_types.h:1102]
+// Bitmask — values may be combined with |.
+type MachVmRangeFlagsT uint64
+
+const (
+	MACH_VM_RANGE_NONE MachVmRangeFlagsT = 0
+)
+
+func (i MachVmRangeFlagsT) String() string {
+	var values []string
+	if i == 0 {
+		values = append(values, "MACH_VM_RANGE_NONE")
+	}
+	return strings.Join(values, ",")
+}
+
+func ParseMachVmRangeFlagsT(v string) (any, error) {
+	var result MachVmRangeFlagsT
+	for _, str := range strings.Split(v, ",") {
+		switch str {
+		case "MACH_VM_RANGE_NONE":
+			result |= MACH_VM_RANGE_NONE
+		default:
+			return nil, nil
+		}
+	}
+	return &result, nil
+}
+
+func SerializeMachVmRangeFlagsT(values []MachVmRangeFlagsT) []string {
+	result := make([]string, len(values))
+	for i, v := range values {
+		result[i] = v.String()
+	}
+	return result
+}
+
+func (i MachVmRangeFlagsT) isMultiValue() bool {
+	return true
+}
+
+// [vm_types.h:1098]
+type MachVmRangeFlavorT uint32
+
+const (
+	MACH_VM_RANGE_FLAVOR_INVALID MachVmRangeFlavorT = 0
+	MACH_VM_RANGE_FLAVOR_V1      MachVmRangeFlavorT = 1
+)
+
+func (i MachVmRangeFlavorT) String() string {
+	switch i {
+	case MACH_VM_RANGE_FLAVOR_INVALID:
+		return "MACH_VM_RANGE_FLAVOR_INVALID"
+	case MACH_VM_RANGE_FLAVOR_V1:
+		return "MACH_VM_RANGE_FLAVOR_V1"
+	default:
+		return fmt.Sprintf("MachVmRangeFlavorT(%d)", int64(i))
+	}
+}
+
+func ParseMachVmRangeFlavorT(v string) (any, error) {
+	result := MACH_VM_RANGE_FLAVOR_INVALID
+	switch v {
+	case "MACH_VM_RANGE_FLAVOR_INVALID":
+		result = MACH_VM_RANGE_FLAVOR_INVALID
+	case "MACH_VM_RANGE_FLAVOR_V1":
+		result = MACH_VM_RANGE_FLAVOR_V1
+	default:
+		return nil, nil
+	}
+	return &result, nil
+}
+
+func SerializeMachVmRangeFlavorT(values []MachVmRangeFlavorT) []string {
+	result := make([]string, len(values))
+	for i, v := range values {
+		result[i] = v.String()
+	}
+	return result
+}
+
+func (i MachVmRangeFlavorT) isMultiValue() bool {
+	return false
+}
+
+// [vm_types.h:1098]
+type MachVmRangeTagT uint16
+
+const (
+	MACH_VM_RANGE_DEFAULT MachVmRangeTagT = 0
+	MACH_VM_RANGE_DATA    MachVmRangeTagT = 1
+	MACH_VM_RANGE_FIXED   MachVmRangeTagT = 2
+)
+
+func (i MachVmRangeTagT) String() string {
+	switch i {
+	case MACH_VM_RANGE_DEFAULT:
+		return "MACH_VM_RANGE_DEFAULT"
+	case MACH_VM_RANGE_DATA:
+		return "MACH_VM_RANGE_DATA"
+	case MACH_VM_RANGE_FIXED:
+		return "MACH_VM_RANGE_FIXED"
+	default:
+		return fmt.Sprintf("MachVmRangeTagT(%d)", int64(i))
+	}
+}
+
+func ParseMachVmRangeTagT(v string) (any, error) {
+	result := MACH_VM_RANGE_DEFAULT
+	switch v {
+	case "MACH_VM_RANGE_DEFAULT":
+		result = MACH_VM_RANGE_DEFAULT
+	case "MACH_VM_RANGE_DATA":
+		result = MACH_VM_RANGE_DATA
+	case "MACH_VM_RANGE_FIXED":
+		result = MACH_VM_RANGE_FIXED
+	default:
+		return nil, nil
+	}
+	return &result, nil
+}
+
+func SerializeMachVmRangeTagT(values []MachVmRangeTagT) []string {
+	result := make([]string, len(values))
+	for i, v := range values {
+		result[i] = v.String()
+	}
+	return result
+}
+
+func (i MachVmRangeTagT) isMultiValue() bool {
 	return false
 }
 
@@ -3547,5 +4450,412 @@ func SerializeMpoFlagsT(values []MpoFlagsT) []string {
 }
 
 func (i MpoFlagsT) isMultiValue() bool {
+	return true
+}
+
+// [clock.h:188]
+type OsClockidT uint32
+
+const (
+	OS_CLOCK_MACH_ABSOLUTE_TIME OsClockidT = 32
+)
+
+func (i OsClockidT) String() string {
+	switch i {
+	case OS_CLOCK_MACH_ABSOLUTE_TIME:
+		return "OS_CLOCK_MACH_ABSOLUTE_TIME"
+	default:
+		return fmt.Sprintf("OsClockidT(%d)", int64(i))
+	}
+}
+
+func ParseOsClockidT(v string) (any, error) {
+	result := OS_CLOCK_MACH_ABSOLUTE_TIME
+	switch v {
+	case "OS_CLOCK_MACH_ABSOLUTE_TIME":
+		result = OS_CLOCK_MACH_ABSOLUTE_TIME
+	default:
+		return nil, nil
+	}
+	return &result, nil
+}
+
+func SerializeOsClockidT(values []OsClockidT) []string {
+	result := make([]string, len(values))
+	for i, v := range values {
+		result[i] = v.String()
+	}
+	return result
+}
+
+func (i OsClockidT) isMultiValue() bool {
+	return false
+}
+
+// [qos.h:121]
+type QosClassT uint32
+
+const (
+	QOS_CLASS_USER_INTERACTIVE QosClassT = 33
+	QOS_CLASS_USER_INITIATED   QosClassT = 25
+	QOS_CLASS_DEFAULT          QosClassT = 21
+	QOS_CLASS_UTILITY          QosClassT = 17
+	QOS_CLASS_BACKGROUND       QosClassT = 9
+	QOS_CLASS_UNSPECIFIED      QosClassT = 0
+)
+
+func (i QosClassT) String() string {
+	switch i {
+	case QOS_CLASS_USER_INTERACTIVE:
+		return "QOS_CLASS_USER_INTERACTIVE"
+	case QOS_CLASS_USER_INITIATED:
+		return "QOS_CLASS_USER_INITIATED"
+	case QOS_CLASS_DEFAULT:
+		return "QOS_CLASS_DEFAULT"
+	case QOS_CLASS_UTILITY:
+		return "QOS_CLASS_UTILITY"
+	case QOS_CLASS_BACKGROUND:
+		return "QOS_CLASS_BACKGROUND"
+	case QOS_CLASS_UNSPECIFIED:
+		return "QOS_CLASS_UNSPECIFIED"
+	default:
+		return fmt.Sprintf("QosClassT(%d)", int64(i))
+	}
+}
+
+func ParseQosClassT(v string) (any, error) {
+	result := QOS_CLASS_USER_INTERACTIVE
+	switch v {
+	case "QOS_CLASS_USER_INTERACTIVE":
+		result = QOS_CLASS_USER_INTERACTIVE
+	case "QOS_CLASS_USER_INITIATED":
+		result = QOS_CLASS_USER_INITIATED
+	case "QOS_CLASS_DEFAULT":
+		result = QOS_CLASS_DEFAULT
+	case "QOS_CLASS_UTILITY":
+		result = QOS_CLASS_UTILITY
+	case "QOS_CLASS_BACKGROUND":
+		result = QOS_CLASS_BACKGROUND
+	case "QOS_CLASS_UNSPECIFIED":
+		result = QOS_CLASS_UNSPECIFIED
+	default:
+		return nil, nil
+	}
+	return &result, nil
+}
+
+func SerializeQosClassT(values []QosClassT) []string {
+	result := make([]string, len(values))
+	for i, v := range values {
+		result[i] = v.String()
+	}
+	return result
+}
+
+func (i QosClassT) isMultiValue() bool {
+	return false
+}
+
+// [task_info.h:188]
+type TaskSharedRegionStubsT uint8
+
+const (
+	TASK_SHARED_REGION_STUBS_DEV  TaskSharedRegionStubsT = 1
+	TASK_SHARED_REGION_STUBS_PROD TaskSharedRegionStubsT = 2
+)
+
+func (i TaskSharedRegionStubsT) String() string {
+	switch i {
+	case TASK_SHARED_REGION_STUBS_DEV:
+		return "TASK_SHARED_REGION_STUBS_DEV"
+	case TASK_SHARED_REGION_STUBS_PROD:
+		return "TASK_SHARED_REGION_STUBS_PROD"
+	default:
+		return fmt.Sprintf("TaskSharedRegionStubsT(%d)", int64(i))
+	}
+}
+
+func ParseTaskSharedRegionStubsT(v string) (any, error) {
+	result := TASK_SHARED_REGION_STUBS_DEV
+	switch v {
+	case "TASK_SHARED_REGION_STUBS_DEV":
+		result = TASK_SHARED_REGION_STUBS_DEV
+	case "TASK_SHARED_REGION_STUBS_PROD":
+		result = TASK_SHARED_REGION_STUBS_PROD
+	default:
+		return nil, nil
+	}
+	return &result, nil
+}
+
+func SerializeTaskSharedRegionStubsT(values []TaskSharedRegionStubsT) []string {
+	result := make([]string, len(values))
+	for i, v := range values {
+		result[i] = v.String()
+	}
+	return result
+}
+
+func (i TaskSharedRegionStubsT) isMultiValue() bool {
+	return false
+}
+
+// [vm_statistics.h:1098]
+type VirtualMemoryGuardExceptionCodeT uint32
+
+const (
+	KGUARD_EXC_DEALLOC_GAP                  VirtualMemoryGuardExceptionCodeT = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE       VirtualMemoryGuardExceptionCodeT = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE        VirtualMemoryGuardExceptionCodeT = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE   VirtualMemoryGuardExceptionCodeT = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE   VirtualMemoryGuardExceptionCodeT = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE        VirtualMemoryGuardExceptionCodeT = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE        VirtualMemoryGuardExceptionCodeT = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION VirtualMemoryGuardExceptionCodeT = 12
+	// Guard exception sent to a thread when a CoW defeatured map attempts to copy memory which is not permitted by system policy.
+	KGUARD_EXC_COW_DEFEATURED_COPY_DENIED VirtualMemoryGuardExceptionCodeT = 13
+	// Guard exception sent to a thread when it attempts to extract a given type of memory in a way which is not permitted for CoW defeatured maps.
+	KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED VirtualMemoryGuardExceptionCodeT = 14
+	// Guard exception sent to a thread when it attempts to copy-map a memory entry which was created for sharing by a CoW defeatured map.
+	KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED VirtualMemoryGuardExceptionCodeT = 15
+	KGUARD_EXC_COW_DEFEATURED_FIRST                    VirtualMemoryGuardExceptionCodeT = 13
+	KGUARD_EXC_COW_DEFEATURED_LAST                     VirtualMemoryGuardExceptionCodeT = 15
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY              VirtualMemoryGuardExceptionCodeT = 16
+	KGUARD_EXC_SEC_ACCESS_FAULT                        VirtualMemoryGuardExceptionCodeT = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT                  VirtualMemoryGuardExceptionCodeT = 99
+	KGUARD_EXC_SEC_COPY_DENIED                         VirtualMemoryGuardExceptionCodeT = 100
+	KGUARD_EXC_SEC_SHARING_DENIED                      VirtualMemoryGuardExceptionCodeT = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                          VirtualMemoryGuardExceptionCodeT = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT                    VirtualMemoryGuardExceptionCodeT = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT                    VirtualMemoryGuardExceptionCodeT = 202
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT           VirtualMemoryGuardExceptionCodeT = 203
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT           VirtualMemoryGuardExceptionCodeT = 204
+)
+
+func (i VirtualMemoryGuardExceptionCodeT) String() string {
+	switch i {
+	case KGUARD_EXC_DEALLOC_GAP:
+		return "kGUARD_EXC_DEALLOC_GAP"
+	case KGUARD_EXC_RECLAIM_COPYIO_FAILURE:
+		return "kGUARD_EXC_RECLAIM_COPYIO_FAILURE"
+	case KGUARD_EXC_RECLAIM_INDEX_FAILURE:
+		return "kGUARD_EXC_RECLAIM_INDEX_FAILURE"
+	case KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE:
+		return "kGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE"
+	case KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE:
+		return "kGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE"
+	case KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE:
+		return "kGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE"
+	case KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE:
+		return "kGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE"
+	case KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION:
+		return "kGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION"
+	case KGUARD_EXC_COW_DEFEATURED_COPY_DENIED:
+		return "kGUARD_EXC_COW_DEFEATURED_COPY_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED:
+		return "kGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED:
+		return "kGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED"
+	case KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY:
+		return "kGUARD_EXC_LARGE_ALLOCATION_TELEMETRY"
+	case KGUARD_EXC_SEC_ACCESS_FAULT:
+		return "kGUARD_EXC_SEC_ACCESS_FAULT"
+	case KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT:
+		return "kGUARD_EXC_SEC_ASYNC_ACCESS_FAULT"
+	case KGUARD_EXC_SEC_COPY_DENIED:
+		return "kGUARD_EXC_SEC_COPY_DENIED"
+	case KGUARD_EXC_SEC_SHARING_DENIED:
+		return "kGUARD_EXC_SEC_SHARING_DENIED"
+	case KGUARD_EXC_MTE_SYNC_FAULT:
+		return "kGUARD_EXC_MTE_SYNC_FAULT"
+	case KGUARD_EXC_MTE_ASYNC_USER_FAULT:
+		return "kGUARD_EXC_MTE_ASYNC_USER_FAULT"
+	case KGUARD_EXC_MTE_ASYNC_KERN_FAULT:
+		return "kGUARD_EXC_MTE_ASYNC_KERN_FAULT"
+	case KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT:
+		return "kGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT"
+	case KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT:
+		return "kGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT"
+	default:
+		return fmt.Sprintf("VirtualMemoryGuardExceptionCodeT(%d)", int64(i))
+	}
+}
+
+func ParseVirtualMemoryGuardExceptionCodeT(v string) (any, error) {
+	result := KGUARD_EXC_DEALLOC_GAP
+	switch v {
+	case "kGUARD_EXC_DEALLOC_GAP":
+		result = KGUARD_EXC_DEALLOC_GAP
+	case "kGUARD_EXC_RECLAIM_COPYIO_FAILURE":
+		result = KGUARD_EXC_RECLAIM_COPYIO_FAILURE
+	case "kGUARD_EXC_RECLAIM_INDEX_FAILURE":
+		result = KGUARD_EXC_RECLAIM_INDEX_FAILURE
+	case "kGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE":
+		result = KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE
+	case "kGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE":
+		result = KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE
+	case "kGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE":
+		result = KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE
+	case "kGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE":
+		result = KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE
+	case "kGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION":
+		result = KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION
+	case "kGUARD_EXC_COW_DEFEATURED_COPY_DENIED":
+		result = KGUARD_EXC_COW_DEFEATURED_COPY_DENIED
+	case "kGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED":
+		result = KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED
+	case "kGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED":
+		result = KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED
+	case "kGUARD_EXC_COW_DEFEATURED_FIRST":
+		result = KGUARD_EXC_COW_DEFEATURED_FIRST
+	case "kGUARD_EXC_COW_DEFEATURED_LAST":
+		result = KGUARD_EXC_COW_DEFEATURED_LAST
+	case "kGUARD_EXC_LARGE_ALLOCATION_TELEMETRY":
+		result = KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY
+	case "kGUARD_EXC_SEC_ACCESS_FAULT":
+		result = KGUARD_EXC_SEC_ACCESS_FAULT
+	case "kGUARD_EXC_SEC_ASYNC_ACCESS_FAULT":
+		result = KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT
+	case "kGUARD_EXC_SEC_COPY_DENIED":
+		result = KGUARD_EXC_SEC_COPY_DENIED
+	case "kGUARD_EXC_SEC_SHARING_DENIED":
+		result = KGUARD_EXC_SEC_SHARING_DENIED
+	case "kGUARD_EXC_MTE_SYNC_FAULT":
+		result = KGUARD_EXC_MTE_SYNC_FAULT
+	case "kGUARD_EXC_MTE_ASYNC_USER_FAULT":
+		result = KGUARD_EXC_MTE_ASYNC_USER_FAULT
+	case "kGUARD_EXC_MTE_ASYNC_KERN_FAULT":
+		result = KGUARD_EXC_MTE_ASYNC_KERN_FAULT
+	case "kGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT":
+		result = KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT
+	case "kGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT":
+		result = KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT
+	default:
+		return nil, nil
+	}
+	return &result, nil
+}
+
+func SerializeVirtualMemoryGuardExceptionCodeT(values []VirtualMemoryGuardExceptionCodeT) []string {
+	result := make([]string, len(values))
+	for i, v := range values {
+		result[i] = v.String()
+	}
+	return result
+}
+
+func (i VirtualMemoryGuardExceptionCodeT) isMultiValue() bool {
+	return false
+}
+
+// [listener.h:194]
+// Bitmask — values may be combined with |.
+type XpcListenerCreateFlagsT uint64
+
+const (
+	XPC_LISTENER_CREATE_NONE             XpcListenerCreateFlagsT = 0
+	XPC_LISTENER_CREATE_INACTIVE         XpcListenerCreateFlagsT = 1
+	XPC_LISTENER_CREATE_FORCE_MACH       XpcListenerCreateFlagsT = 2
+	XPC_LISTENER_CREATE_FORCE_XPCSERVICE XpcListenerCreateFlagsT = 4
+)
+
+func (i XpcListenerCreateFlagsT) String() string {
+	var values []string
+	if i == 0 {
+		values = append(values, "XPC_LISTENER_CREATE_NONE")
+	}
+	if i&XPC_LISTENER_CREATE_INACTIVE == XPC_LISTENER_CREATE_INACTIVE {
+		values = append(values, "XPC_LISTENER_CREATE_INACTIVE")
+	}
+	if i&XPC_LISTENER_CREATE_FORCE_MACH == XPC_LISTENER_CREATE_FORCE_MACH {
+		values = append(values, "XPC_LISTENER_CREATE_FORCE_MACH")
+	}
+	if i&XPC_LISTENER_CREATE_FORCE_XPCSERVICE == XPC_LISTENER_CREATE_FORCE_XPCSERVICE {
+		values = append(values, "XPC_LISTENER_CREATE_FORCE_XPCSERVICE")
+	}
+	return strings.Join(values, ",")
+}
+
+func ParseXpcListenerCreateFlagsT(v string) (any, error) {
+	var result XpcListenerCreateFlagsT
+	for _, str := range strings.Split(v, ",") {
+		switch str {
+		case "XPC_LISTENER_CREATE_NONE":
+			result |= XPC_LISTENER_CREATE_NONE
+		case "XPC_LISTENER_CREATE_INACTIVE":
+			result |= XPC_LISTENER_CREATE_INACTIVE
+		case "XPC_LISTENER_CREATE_FORCE_MACH":
+			result |= XPC_LISTENER_CREATE_FORCE_MACH
+		case "XPC_LISTENER_CREATE_FORCE_XPCSERVICE":
+			result |= XPC_LISTENER_CREATE_FORCE_XPCSERVICE
+		default:
+			return nil, nil
+		}
+	}
+	return &result, nil
+}
+
+func SerializeXpcListenerCreateFlagsT(values []XpcListenerCreateFlagsT) []string {
+	result := make([]string, len(values))
+	for i, v := range values {
+		result[i] = v.String()
+	}
+	return result
+}
+
+func (i XpcListenerCreateFlagsT) isMultiValue() bool {
+	return true
+}
+
+// [session.h:194]
+// Bitmask — values may be combined with |.
+type XpcSessionCreateFlagsT uint64
+
+const (
+	XPC_SESSION_CREATE_NONE            XpcSessionCreateFlagsT = 0
+	XPC_SESSION_CREATE_INACTIVE        XpcSessionCreateFlagsT = 1
+	XPC_SESSION_CREATE_MACH_PRIVILEGED XpcSessionCreateFlagsT = 2
+)
+
+func (i XpcSessionCreateFlagsT) String() string {
+	var values []string
+	if i == 0 {
+		values = append(values, "XPC_SESSION_CREATE_NONE")
+	}
+	if i&XPC_SESSION_CREATE_INACTIVE == XPC_SESSION_CREATE_INACTIVE {
+		values = append(values, "XPC_SESSION_CREATE_INACTIVE")
+	}
+	if i&XPC_SESSION_CREATE_MACH_PRIVILEGED == XPC_SESSION_CREATE_MACH_PRIVILEGED {
+		values = append(values, "XPC_SESSION_CREATE_MACH_PRIVILEGED")
+	}
+	return strings.Join(values, ",")
+}
+
+func ParseXpcSessionCreateFlagsT(v string) (any, error) {
+	var result XpcSessionCreateFlagsT
+	for _, str := range strings.Split(v, ",") {
+		switch str {
+		case "XPC_SESSION_CREATE_NONE":
+			result |= XPC_SESSION_CREATE_NONE
+		case "XPC_SESSION_CREATE_INACTIVE":
+			result |= XPC_SESSION_CREATE_INACTIVE
+		case "XPC_SESSION_CREATE_MACH_PRIVILEGED":
+			result |= XPC_SESSION_CREATE_MACH_PRIVILEGED
+		default:
+			return nil, nil
+		}
+	}
+	return &result, nil
+}
+
+func SerializeXpcSessionCreateFlagsT(values []XpcSessionCreateFlagsT) []string {
+	result := make([]string, len(values))
+	for i, v := range values {
+		result[i] = v.String()
+	}
+	return result
+}
+
+func (i XpcSessionCreateFlagsT) isMultiValue() bool {
 	return true
 }

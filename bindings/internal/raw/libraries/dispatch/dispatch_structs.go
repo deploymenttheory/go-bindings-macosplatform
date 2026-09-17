@@ -11,12 +11,12 @@ import "unsafe"
 type DispatchDataS struct {
 }
 
-// [queue.h:750]
+// [queue.h:759]
 // Introduced: macOS 10.7
 type DispatchQueueAttrS struct {
 }
 
-// [queue.h:590]
+// [queue.h:599]
 // Introduced: macOS 10.6
 type DispatchQueueS struct {
 }

@@ -1,31 +1,13 @@
 {
-  "framework": "xpc",
-  "sdk_version": "26.5",
+  "framework": "oslog",
+  "sdk_version": "27.0",
   "arch": "arm64",
   "schema_version": 1,
-  "clang_version": "Apple clang version 21.0.0 (clang-2100.1.1.101)",
-  "xcode_version": "Xcode 26.6 Build version 17F113",
+  "clang_version": "Apple clang version 21.0.0 (clang-2100.3.34.2)",
+  "xcode_version": "Xcode 27.0 Build version 27A266a",
   "classes": {},
   "protocols": {
-    "OS_xpc_listener": {
-      "protocols": [
-        "NSObject"
-      ],
-      "availability": {}
-    },
-    "OS_xpc_object": {
-      "protocols": [
-        "NSObject"
-      ],
-      "availability": {}
-    },
-    "OS_xpc_peer_requirement": {
-      "protocols": [
-        "NSObject"
-      ],
-      "availability": {}
-    },
-    "OS_xpc_session": {
+    "OS_os_log": {
       "protocols": [
         "NSObject"
       ],
@@ -33,91 +15,85 @@
     }
   },
   "enums": {
-    "_anon_XPC_ACTIVITY_STATE_CHECK_IN": {
+    "_anon_OS_LOG_TYPE_DEFAULT": {
       "go_type": "int64",
       "members": [
         {
-          "name": "XPC_ACTIVITY_STATE_CHECK_IN",
+          "name": "OS_LOG_TYPE_DEFAULT",
           "value": "0",
           "availability": {}
         },
         {
-          "name": "XPC_ACTIVITY_STATE_WAIT",
+          "name": "OS_LOG_TYPE_INFO",
           "value": "1",
           "availability": {}
         },
         {
-          "name": "XPC_ACTIVITY_STATE_RUN",
+          "name": "OS_LOG_TYPE_DEBUG",
           "value": "2",
           "availability": {}
         },
         {
-          "name": "XPC_ACTIVITY_STATE_DEFER",
-          "value": "3",
+          "name": "OS_LOG_TYPE_ERROR",
+          "value": "16",
           "availability": {}
         },
         {
-          "name": "XPC_ACTIVITY_STATE_CONTINUE",
+          "name": "OS_LOG_TYPE_FAULT",
+          "value": "17",
+          "availability": {}
+        }
+      ],
+      "is_anon": true,
+      "availability": {}
+    },
+    "clockid_t": {
+      "go_type": "int32",
+      "members": [
+        {
+          "name": "_CLOCK_REALTIME",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "_CLOCK_MONOTONIC",
+          "value": "6",
+          "availability": {}
+        },
+        {
+          "name": "_CLOCK_MONOTONIC_RAW",
           "value": "4",
           "availability": {}
         },
         {
-          "name": "XPC_ACTIVITY_STATE_DONE",
+          "name": "_CLOCK_MONOTONIC_RAW_APPROX",
           "value": "5",
           "availability": {}
-        }
-      ],
-      "is_anon": true,
-      "availability": {}
-    },
-    "_anon_XPC_LISTENER_CREATE_NONE": {
-      "go_type": "int64",
-      "members": [
+        },
         {
-          "name": "XPC_LISTENER_CREATE_NONE",
-          "value": "0",
+          "name": "_CLOCK_UPTIME_RAW",
+          "value": "8",
           "availability": {}
         },
         {
-          "name": "XPC_LISTENER_CREATE_INACTIVE",
-          "value": "1",
+          "name": "_CLOCK_UPTIME_RAW_APPROX",
+          "value": "9",
           "availability": {}
         },
         {
-          "name": "XPC_LISTENER_CREATE_FORCE_MACH",
-          "value": "2",
+          "name": "_CLOCK_PROCESS_CPUTIME_ID",
+          "value": "12",
           "availability": {}
         },
         {
-          "name": "XPC_LISTENER_CREATE_FORCE_XPCSERVICE",
-          "value": "4",
+          "name": "_CLOCK_THREAD_CPUTIME_ID",
+          "value": "16",
           "availability": {}
         }
       ],
-      "is_anon": true,
-      "availability": {}
-    },
-    "_anon_XPC_SESSION_CREATE_NONE": {
-      "go_type": "int64",
-      "members": [
-        {
-          "name": "XPC_SESSION_CREATE_NONE",
-          "value": "0",
-          "availability": {}
-        },
-        {
-          "name": "XPC_SESSION_CREATE_INACTIVE",
-          "value": "1",
-          "availability": {}
-        },
-        {
-          "name": "XPC_SESSION_CREATE_MACH_PRIVILEGED",
-          "value": "2",
-          "availability": {}
-        }
-      ],
-      "is_anon": true,
-      "availability": {}
+      "availability": {},
+      "sdk_file": "_time.h",
+      "sdk_line": 156
     },
     "dispatch_autorelease_frequency_t": {
       "go_type": "uint64",
@@ -239,7 +215,7 @@
       ],
       "availability": {},
       "sdk_file": "fcntl.h",
-      "sdk_line": 582
+      "sdk_line": 601
     },
     "idtype_t": {
       "go_type": "int32",
@@ -732,6 +708,39 @@
       "sdk_file": "clock.h",
       "sdk_line": 188
     },
+    "os_log_type_t": {
+      "go_type": "uint8",
+      "members": [
+        {
+          "name": "OS_LOG_TYPE_DEFAULT",
+          "value": "0",
+          "availability": {}
+        },
+        {
+          "name": "OS_LOG_TYPE_INFO",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "OS_LOG_TYPE_DEBUG",
+          "value": "2",
+          "availability": {}
+        },
+        {
+          "name": "OS_LOG_TYPE_ERROR",
+          "value": "16",
+          "availability": {}
+        },
+        {
+          "name": "OS_LOG_TYPE_FAULT",
+          "value": "17",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "log.h",
+      "sdk_line": 188
+    },
     "qos_class_t": {
       "go_type": "uint32",
       "members": [
@@ -769,6 +778,24 @@
       "availability": {},
       "sdk_file": "qos.h",
       "sdk_line": 121
+    },
+    "task_shared_region_stubs_t": {
+      "go_type": "uint8",
+      "members": [
+        {
+          "name": "TASK_SHARED_REGION_STUBS_DEV",
+          "value": "1",
+          "availability": {}
+        },
+        {
+          "name": "TASK_SHARED_REGION_STUBS_PROD",
+          "value": "2",
+          "availability": {}
+        }
+      ],
+      "availability": {},
+      "sdk_file": "task_info.h",
+      "sdk_line": 188
     },
     "virtual_memory_guard_exception_code_t": {
       "go_type": "uint32",
@@ -814,8 +841,36 @@
           "availability": {}
         },
         {
-          "name": "kGUARD_EXC_LARGE_ALLOCATION_TELEMETRY",
+          "name": "kGUARD_EXC_COW_DEFEATURED_COPY_DENIED",
           "value": "13",
+          "availability": {},
+          "doc": "Guard exception sent to a thread when a CoW defeatured map attempts to copy memory which is not permitted by system policy."
+        },
+        {
+          "name": "kGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED",
+          "value": "14",
+          "availability": {},
+          "doc": "Guard exception sent to a thread when it attempts to extract a given type of memory in a way which is not permitted for CoW defeatured maps."
+        },
+        {
+          "name": "kGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED",
+          "value": "15",
+          "availability": {},
+          "doc": "Guard exception sent to a thread when it attempts to copy-map a memory entry which was created for sharing by a CoW defeatured map."
+        },
+        {
+          "name": "kGUARD_EXC_COW_DEFEATURED_FIRST",
+          "value": "13",
+          "availability": {}
+        },
+        {
+          "name": "kGUARD_EXC_COW_DEFEATURED_LAST",
+          "value": "15",
+          "availability": {}
+        },
+        {
+          "name": "kGUARD_EXC_LARGE_ALLOCATION_TELEMETRY",
+          "value": "16",
           "availability": {}
         },
         {
@@ -926,3770 +981,322 @@
     }
   },
   "structs": {
-    "_xpc_bool_s": {
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 172
-    },
-    "_xpc_dictionary_s": {
-      "availability": {},
-      "sdk_file": "connection.h",
-      "sdk_line": 38
-    },
-    "_xpc_type_s": {
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 46,
-      "doc": "@typedef xpc_type_t A type that describes XPC object types."
+    "os_log_s": {
+      "availability": {
+        "macos_introduced": "10.13"
+      },
+      "sdk_file": "log.h",
+      "sdk_line": 62
     }
   },
   "functions": [
     {
-      "name": "_xpc_object_validate",
+      "name": "os_log_create",
       "args": [
         {
-          "name": "object",
-          "objc_type": "xpc_object_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": ""
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 78
-    },
-    {
-      "name": "xpc_endpoint_create",
-      "args": [
-        {
-          "name": "connection",
-          "objc_type": "xpc_connection_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_endpoint_t  _Nonnull",
-        "already_retained": true
-      },
-      "availability": {},
-      "sdk_file": "endpoint.h",
-      "sdk_line": 22,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_debugger_api_misuse_info",
-      "return": {
-        "objc_type": "const char *"
-      },
-      "availability": {},
-      "sdk_file": "debug.h",
-      "sdk_line": 23
-    },
-    {
-      "name": "xpc_activity_register",
-      "args": [
-        {
-          "name": "identifier",
-          "objc_type": "const char * _Nonnull"
+          "name": "subsystem",
+          "objc_type": "const char *"
         },
         {
-          "name": "criteria",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "handler",
-          "objc_type": "xpc_activity_handler_t _Nonnull"
+          "name": "category",
+          "objc_type": "const char *"
         }
       ],
       "return": {
-        "objc_type": ""
-      },
-      "availability": {
-        "macos_introduced": "10.9"
-      },
-      "sdk_file": "activity.h",
-      "sdk_line": 308
-    },
-    {
-      "name": "xpc_activity_copy_criteria",
-      "args": [
-        {
-          "name": "activity",
-          "objc_type": "xpc_activity_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nullable",
+        "objc_type": "OS_OBJECT_RETURNS_RETAINED os_log_t",
         "already_retained": true
       },
       "availability": {
-        "macos_introduced": "10.9"
+        "macos_introduced": "10.12"
       },
-      "sdk_file": "activity.h",
-      "sdk_line": 323,
+      "sdk_file": "log.h",
+      "sdk_line": 145,
       "warn_unused": true
     },
     {
-      "name": "xpc_activity_set_criteria",
+      "name": "os_log_type_enabled",
       "args": [
         {
-          "name": "activity",
-          "objc_type": "xpc_activity_t _Nonnull"
+          "name": "oslog",
+          "objc_type": "os_log_t"
         },
-        {
-          "name": "criteria",
-          "objc_type": "xpc_object_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": ""
-      },
-      "availability": {
-        "macos_introduced": "10.9"
-      },
-      "sdk_file": "activity.h",
-      "sdk_line": 335
-    },
-    {
-      "name": "xpc_activity_get_state",
-      "args": [
-        {
-          "name": "activity",
-          "objc_type": "xpc_activity_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "xpc_activity_state_t"
-      },
-      "availability": {
-        "macos_introduced": "10.9"
-      },
-      "sdk_file": "activity.h",
-      "sdk_line": 417,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_activity_set_state",
-      "args": [
-        {
-          "name": "activity",
-          "objc_type": "xpc_activity_t _Nonnull"
-        },
-        {
-          "name": "state",
-          "objc_type": "xpc_activity_state_t"
-        }
-      ],
-      "return": {
-        "objc_type": "bool"
-      },
-      "availability": {
-        "macos_introduced": "10.9"
-      },
-      "sdk_file": "activity.h",
-      "sdk_line": 433,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_activity_should_defer",
-      "args": [
-        {
-          "name": "activity",
-          "objc_type": "xpc_activity_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "bool"
-      },
-      "availability": {
-        "macos_introduced": "10.9"
-      },
-      "sdk_file": "activity.h",
-      "sdk_line": 457,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_activity_unregister",
-      "args": [
-        {
-          "name": "identifier",
-          "objc_type": "const char * _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": ""
-      },
-      "availability": {
-        "macos_introduced": "10.9"
-      },
-      "sdk_file": "activity.h",
-      "sdk_line": 481
-    },
-    {
-      "name": "xpc_peer_requirement_create_entitlement_exists",
-      "args": [
-        {
-          "name": "entitlement",
-          "objc_type": "const char * _Nonnull"
-        },
-        {
-          "name": "error_out",
-          "objc_type": "xpc_rich_error_t  _Nullable * _Nullable",
-          "nullable": true
-        }
-      ],
-      "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_peer_requirement_t  _Nullable",
-        "already_retained": true
-      },
-      "availability": {
-        "macos_introduced": "26.0"
-      },
-      "sdk_file": "peer_requirement.h",
-      "sdk_line": 60
-    },
-    {
-      "name": "xpc_peer_requirement_create_entitlement_matches_value",
-      "args": [
-        {
-          "name": "entitlement",
-          "objc_type": "const char * _Nonnull"
-        },
-        {
-          "name": "value",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "error_out",
-          "objc_type": "xpc_rich_error_t  _Nullable * _Nullable",
-          "nullable": true
-        }
-      ],
-      "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_peer_requirement_t  _Nullable",
-        "already_retained": true
-      },
-      "availability": {
-        "macos_introduced": "26.0"
-      },
-      "sdk_file": "peer_requirement.h",
-      "sdk_line": 93
-    },
-    {
-      "name": "xpc_peer_requirement_create_team_identity",
-      "args": [
-        {
-          "name": "signing_identifier",
-          "objc_type": "const char * _Nullable",
-          "nullable": true
-        },
-        {
-          "name": "error_out",
-          "objc_type": "xpc_rich_error_t  _Nullable * _Nullable",
-          "nullable": true
-        }
-      ],
-      "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_peer_requirement_t  _Nullable",
-        "already_retained": true
-      },
-      "availability": {
-        "macos_introduced": "26.0"
-      },
-      "sdk_file": "peer_requirement.h",
-      "sdk_line": 128
-    },
-    {
-      "name": "xpc_peer_requirement_create_platform_identity",
-      "args": [
-        {
-          "name": "signing_identifier",
-          "objc_type": "const char * _Nullable",
-          "nullable": true
-        },
-        {
-          "name": "error_out",
-          "objc_type": "xpc_rich_error_t  _Nullable * _Nullable",
-          "nullable": true
-        }
-      ],
-      "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_peer_requirement_t  _Nullable",
-        "already_retained": true
-      },
-      "availability": {
-        "macos_introduced": "26.0"
-      },
-      "sdk_file": "peer_requirement.h",
-      "sdk_line": 160
-    },
-    {
-      "name": "xpc_peer_requirement_create_lwcr",
-      "args": [
-        {
-          "name": "lwcr",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "error_out",
-          "objc_type": "xpc_rich_error_t  _Nullable * _Nullable",
-          "nullable": true
-        }
-      ],
-      "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_peer_requirement_t  _Nullable",
-        "already_retained": true
-      },
-      "availability": {
-        "macos_introduced": "26.0"
-      },
-      "sdk_file": "peer_requirement.h",
-      "sdk_line": 208
-    },
-    {
-      "name": "xpc_peer_requirement_match_received_message",
-      "args": [
-        {
-          "name": "peer_requirement",
-          "objc_type": "xpc_peer_requirement_t _Nonnull"
-        },
-        {
-          "name": "message",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "error_out",
-          "objc_type": "xpc_rich_error_t  _Nullable * _Nullable",
-          "nullable": true
-        }
-      ],
-      "return": {
-        "objc_type": "bool"
-      },
-      "availability": {
-        "macos_introduced": "26.0"
-      },
-      "sdk_file": "peer_requirement.h",
-      "sdk_line": 235
-    },
-    {
-      "name": "xpc_connection_create",
-      "args": [
-        {
-          "name": "name",
-          "objc_type": "const char * _Nullable",
-          "nullable": true
-        },
-        {
-          "name": "targetq",
-          "objc_type": "dispatch_queue_t _Nullable",
-          "nullable": true
-        }
-      ],
-      "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_connection_t  _Nonnull",
-        "already_retained": true
-      },
-      "availability": {},
-      "sdk_file": "connection.h",
-      "sdk_line": 165,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_connection_create_mach_service",
-      "args": [
-        {
-          "name": "name",
-          "objc_type": "const char * _Nonnull"
-        },
-        {
-          "name": "targetq",
-          "objc_type": "dispatch_queue_t _Nullable",
-          "nullable": true
-        },
-        {
-          "name": "flags",
-          "objc_type": "uint64_t"
-        }
-      ],
-      "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_connection_t  _Nonnull",
-        "already_retained": true
-      },
-      "availability": {
-        "macos_introduced": "10.7"
-      },
-      "sdk_file": "connection.h",
-      "sdk_line": 205,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_connection_create_from_endpoint",
-      "args": [
-        {
-          "name": "endpoint",
-          "objc_type": "xpc_endpoint_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_connection_t  _Nonnull",
-        "already_retained": true
-      },
-      "availability": {},
-      "sdk_file": "connection.h",
-      "sdk_line": 228,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_connection_set_target_queue",
-      "args": [
-        {
-          "name": "connection",
-          "objc_type": "xpc_connection_t _Nonnull"
-        },
-        {
-          "name": "targetq",
-          "objc_type": "dispatch_queue_t _Nullable",
-          "nullable": true
-        }
-      ],
-      "return": {
-        "objc_type": ""
-      },
-      "availability": {},
-      "sdk_file": "connection.h",
-      "sdk_line": 267
-    },
-    {
-      "name": "xpc_connection_set_event_handler",
-      "args": [
-        {
-          "name": "connection",
-          "objc_type": "xpc_connection_t _Nonnull"
-        },
-        {
-          "name": "handler",
-          "objc_type": "XPC_SWIFT_SENDABLE xpc_handler_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": ""
-      },
-      "availability": {},
-      "sdk_file": "connection.h",
-      "sdk_line": 340
-    },
-    {
-      "name": "xpc_connection_activate",
-      "args": [
-        {
-          "name": "connection",
-          "objc_type": "xpc_connection_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": ""
-      },
-      "availability": {},
-      "sdk_file": "connection.h",
-      "sdk_line": 366
-    },
-    {
-      "name": "xpc_connection_suspend",
-      "args": [
-        {
-          "name": "connection",
-          "objc_type": "xpc_connection_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": ""
-      },
-      "availability": {},
-      "sdk_file": "connection.h",
-      "sdk_line": 393
-    },
-    {
-      "name": "xpc_connection_resume",
-      "args": [
-        {
-          "name": "connection",
-          "objc_type": "xpc_connection_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": ""
-      },
-      "availability": {},
-      "sdk_file": "connection.h",
-      "sdk_line": 418
-    },
-    {
-      "name": "xpc_connection_send_message",
-      "args": [
-        {
-          "name": "connection",
-          "objc_type": "xpc_connection_t _Nonnull"
-        },
-        {
-          "name": "message",
-          "objc_type": "xpc_object_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": ""
-      },
-      "availability": {},
-      "sdk_file": "connection.h",
-      "sdk_line": 454
-    },
-    {
-      "name": "xpc_connection_send_barrier",
-      "args": [
-        {
-          "name": "connection",
-          "objc_type": "xpc_connection_t _Nonnull"
-        },
-        {
-          "name": "barrier",
-          "objc_type": "dispatch_block_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": ""
-      },
-      "availability": {},
-      "sdk_file": "connection.h",
-      "sdk_line": 505
-    },
-    {
-      "name": "xpc_connection_send_message_with_reply",
-      "args": [
-        {
-          "name": "connection",
-          "objc_type": "xpc_connection_t _Nonnull"
-        },
-        {
-          "name": "message",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "replyq",
-          "objc_type": "dispatch_queue_t _Nullable",
-          "nullable": true
-        },
-        {
-          "name": "handler",
-          "objc_type": "XPC_SWIFT_SENDABLE xpc_handler_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": ""
-      },
-      "availability": {},
-      "sdk_file": "connection.h",
-      "sdk_line": 543
-    },
-    {
-      "name": "xpc_connection_send_message_with_reply_sync",
-      "args": [
-        {
-          "name": "connection",
-          "objc_type": "xpc_connection_t _Nonnull"
-        },
-        {
-          "name": "message",
-          "objc_type": "xpc_object_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull",
-        "already_retained": true
-      },
-      "availability": {},
-      "sdk_file": "connection.h",
-      "sdk_line": 582,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_connection_cancel",
-      "args": [
-        {
-          "name": "connection",
-          "objc_type": "xpc_connection_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": ""
-      },
-      "availability": {},
-      "sdk_file": "connection.h",
-      "sdk_line": 612
-    },
-    {
-      "name": "xpc_connection_get_name",
-      "args": [
-        {
-          "name": "connection",
-          "objc_type": "xpc_connection_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "const char * _Nullable"
-      },
-      "availability": {},
-      "sdk_file": "connection.h",
-      "sdk_line": 628,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_connection_get_euid",
-      "args": [
-        {
-          "name": "connection",
-          "objc_type": "xpc_connection_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "uid_t"
-      },
-      "availability": {},
-      "sdk_file": "connection.h",
-      "sdk_line": 643,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_connection_get_egid",
-      "args": [
-        {
-          "name": "connection",
-          "objc_type": "xpc_connection_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "gid_t"
-      },
-      "availability": {},
-      "sdk_file": "connection.h",
-      "sdk_line": 658,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_connection_get_pid",
-      "args": [
-        {
-          "name": "connection",
-          "objc_type": "xpc_connection_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "pid_t"
-      },
-      "availability": {
-        "macos_introduced": "10.7"
-      },
-      "sdk_file": "connection.h",
-      "sdk_line": 685,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_connection_get_asid",
-      "args": [
-        {
-          "name": "connection",
-          "objc_type": "xpc_connection_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "au_asid_t"
-      },
-      "availability": {
-        "macos_introduced": "10.7"
-      },
-      "sdk_file": "connection.h",
-      "sdk_line": 701,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_connection_set_context",
-      "args": [
-        {
-          "name": "connection",
-          "objc_type": "xpc_connection_t _Nonnull"
-        },
-        {
-          "name": "context",
-          "objc_type": "void * _Nullable",
-          "nullable": true
-        }
-      ],
-      "return": {
-        "objc_type": ""
-      },
-      "availability": {},
-      "sdk_file": "connection.h",
-      "sdk_line": 726
-    },
-    {
-      "name": "xpc_connection_get_context",
-      "args": [
-        {
-          "name": "connection",
-          "objc_type": "xpc_connection_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "void * _Nullable"
-      },
-      "availability": {},
-      "sdk_file": "connection.h",
-      "sdk_line": 743,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_connection_set_finalizer_f",
-      "args": [
-        {
-          "name": "connection",
-          "objc_type": "xpc_connection_t _Nonnull"
-        },
-        {
-          "name": "finalizer",
-          "objc_type": "xpc_finalizer_t _Nullable",
-          "nullable": true
-        }
-      ],
-      "return": {
-        "objc_type": ""
-      },
-      "availability": {},
-      "sdk_file": "connection.h",
-      "sdk_line": 768
-    },
-    {
-      "name": "xpc_connection_set_peer_code_signing_requirement",
-      "args": [
-        {
-          "name": "connection",
-          "objc_type": "xpc_connection_t _Nonnull"
-        },
-        {
-          "name": "requirement",
-          "objc_type": "const char * _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "int"
-      },
-      "availability": {
-        "macos_introduced": "12.0"
-      },
-      "sdk_file": "connection.h",
-      "sdk_line": 803,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_connection_set_peer_entitlement_exists_requirement",
-      "args": [
-        {
-          "name": "connection",
-          "objc_type": "xpc_connection_t _Nonnull"
-        },
-        {
-          "name": "entitlement",
-          "objc_type": "const char * _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "int"
-      },
-      "availability": {
-        "macos_introduced": "14.4"
-      },
-      "sdk_file": "connection.h",
-      "sdk_line": 835,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_connection_set_peer_entitlement_matches_value_requirement",
-      "args": [
-        {
-          "name": "connection",
-          "objc_type": "xpc_connection_t _Nonnull"
-        },
-        {
-          "name": "entitlement",
-          "objc_type": "const char * _Nonnull"
-        },
-        {
-          "name": "value",
-          "objc_type": "xpc_object_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "int"
-      },
-      "availability": {
-        "macos_introduced": "14.4"
-      },
-      "sdk_file": "connection.h",
-      "sdk_line": 873,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_connection_set_peer_team_identity_requirement",
-      "args": [
-        {
-          "name": "connection",
-          "objc_type": "xpc_connection_t _Nonnull"
-        },
-        {
-          "name": "signing_identifier",
-          "objc_type": "const char * _Nullable",
-          "nullable": true
-        }
-      ],
-      "return": {
-        "objc_type": "int"
-      },
-      "availability": {
-        "macos_introduced": "14.4"
-      },
-      "sdk_file": "connection.h",
-      "sdk_line": 910,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_connection_set_peer_platform_identity_requirement",
-      "args": [
-        {
-          "name": "connection",
-          "objc_type": "xpc_connection_t _Nonnull"
-        },
-        {
-          "name": "signing_identifier",
-          "objc_type": "const char * _Nullable",
-          "nullable": true
-        }
-      ],
-      "return": {
-        "objc_type": "int"
-      },
-      "availability": {
-        "macos_introduced": "14.4"
-      },
-      "sdk_file": "connection.h",
-      "sdk_line": 945,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_connection_set_peer_lightweight_code_requirement",
-      "args": [
-        {
-          "name": "connection",
-          "objc_type": "xpc_connection_t _Nonnull"
-        },
-        {
-          "name": "lwcr",
-          "objc_type": "xpc_object_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "int"
-      },
-      "availability": {
-        "macos_introduced": "14.4"
-      },
-      "sdk_file": "connection.h",
-      "sdk_line": 993,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_connection_set_peer_requirement",
-      "args": [
-        {
-          "name": "connection",
-          "objc_type": "xpc_connection_t _Nonnull"
-        },
-        {
-          "name": "peer_requirement",
-          "objc_type": "xpc_peer_requirement_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": ""
-      },
-      "availability": {
-        "macos_introduced": "26.0"
-      },
-      "sdk_file": "connection.h",
-      "sdk_line": 1019
-    },
-    {
-      "name": "xpc_connection_copy_invalidation_reason",
-      "args": [
-        {
-          "name": "connection",
-          "objc_type": "xpc_connection_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "char * _Nullable"
-      },
-      "availability": {
-        "macos_introduced": "12.0"
-      },
-      "sdk_file": "connection.h",
-      "sdk_line": 1035,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_rich_error_copy_description",
-      "args": [
-        {
-          "name": "error",
-          "objc_type": "xpc_rich_error_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "char * _Nullable"
-      },
-      "availability": {},
-      "sdk_file": "rich_error.h",
-      "sdk_line": 33,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_rich_error_can_retry",
-      "args": [
-        {
-          "name": "error",
-          "objc_type": "xpc_rich_error_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "bool"
-      },
-      "availability": {},
-      "sdk_file": "rich_error.h",
-      "sdk_line": 47,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_session_copy_description",
-      "args": [
-        {
-          "name": "session",
-          "objc_type": "xpc_session_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "char * _Nullable"
-      },
-      "availability": {
-        "macos_introduced": "13.0"
-      },
-      "sdk_file": "session.h",
-      "sdk_line": 80,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_session_create_xpc_service",
-      "args": [
-        {
-          "name": "name",
-          "objc_type": "const char * _Nonnull"
-        },
-        {
-          "name": "target_queue",
-          "objc_type": "dispatch_queue_t _Nullable",
-          "nullable": true
-        },
-        {
-          "name": "flags",
-          "objc_type": "xpc_session_create_flags_t"
-        },
-        {
-          "name": "error_out",
-          "objc_type": "xpc_rich_error_t  _Nullable * _Nullable",
-          "nullable": true
-        }
-      ],
-      "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_session_t  _Nullable",
-        "already_retained": true
-      },
-      "availability": {
-        "macos_introduced": "13.0"
-      },
-      "sdk_file": "session.h",
-      "sdk_line": 118,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_session_create_mach_service",
-      "args": [
-        {
-          "name": "mach_service",
-          "objc_type": "const char * _Nonnull"
-        },
-        {
-          "name": "target_queue",
-          "objc_type": "dispatch_queue_t _Nullable",
-          "nullable": true
-        },
-        {
-          "name": "flags",
-          "objc_type": "xpc_session_create_flags_t"
-        },
-        {
-          "name": "error_out",
-          "objc_type": "xpc_rich_error_t  _Nullable * _Nullable",
-          "nullable": true
-        }
-      ],
-      "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_session_t  _Nullable",
-        "already_retained": true
-      },
-      "availability": {
-        "macos_introduced": "13.0"
-      },
-      "sdk_file": "session.h",
-      "sdk_line": 161,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_session_set_incoming_message_handler",
-      "args": [
-        {
-          "name": "session",
-          "objc_type": "xpc_session_t _Nonnull"
-        },
-        {
-          "name": "handler",
-          "objc_type": "xpc_session_incoming_message_handler_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": ""
-      },
-      "availability": {
-        "macos_introduced": "13.0"
-      },
-      "sdk_file": "session.h",
-      "sdk_line": 185
-    },
-    {
-      "name": "xpc_session_set_cancel_handler",
-      "args": [
-        {
-          "name": "session",
-          "objc_type": "xpc_session_t _Nonnull"
-        },
-        {
-          "name": "cancel_handler",
-          "objc_type": "xpc_session_cancel_handler_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": ""
-      },
-      "availability": {
-        "macos_introduced": "13.0"
-      },
-      "sdk_file": "session.h",
-      "sdk_line": 206
-    },
-    {
-      "name": "xpc_session_set_target_queue",
-      "args": [
-        {
-          "name": "session",
-          "objc_type": "xpc_session_t _Nonnull"
-        },
-        {
-          "name": "target_queue",
-          "objc_type": "dispatch_queue_t _Nullable",
-          "nullable": true
-        }
-      ],
-      "return": {
-        "objc_type": ""
-      },
-      "availability": {
-        "macos_introduced": "14.0"
-      },
-      "sdk_file": "session.h",
-      "sdk_line": 230
-    },
-    {
-      "name": "xpc_session_activate",
-      "args": [
-        {
-          "name": "session",
-          "objc_type": "xpc_session_t _Nonnull"
-        },
-        {
-          "name": "error_out",
-          "objc_type": "xpc_rich_error_t  _Nullable * _Nullable",
-          "nullable": true
-        }
-      ],
-      "return": {
-        "objc_type": "bool"
-      },
-      "availability": {
-        "macos_introduced": "13.0"
-      },
-      "sdk_file": "session.h",
-      "sdk_line": 258
-    },
-    {
-      "name": "xpc_session_cancel",
-      "args": [
-        {
-          "name": "session",
-          "objc_type": "xpc_session_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": ""
-      },
-      "availability": {
-        "macos_introduced": "13.0"
-      },
-      "sdk_file": "session.h",
-      "sdk_line": 279
-    },
-    {
-      "name": "xpc_session_send_message",
-      "args": [
-        {
-          "name": "session",
-          "objc_type": "xpc_session_t _Nonnull"
-        },
-        {
-          "name": "message",
-          "objc_type": "xpc_object_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_rich_error_t  _Nullable",
-        "already_retained": true
-      },
-      "availability": {
-        "macos_introduced": "13.0"
-      },
-      "sdk_file": "session.h",
-      "sdk_line": 311,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_session_send_message_with_reply_sync",
-      "args": [
-        {
-          "name": "session",
-          "objc_type": "xpc_session_t _Nonnull"
-        },
-        {
-          "name": "message",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "error_out",
-          "objc_type": "xpc_rich_error_t  _Nullable * _Nullable",
-          "nullable": true
-        }
-      ],
-      "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nullable",
-        "already_retained": true
-      },
-      "availability": {
-        "macos_introduced": "13.0"
-      },
-      "sdk_file": "session.h",
-      "sdk_line": 352,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_session_send_message_with_reply_async",
-      "args": [
-        {
-          "name": "session",
-          "objc_type": "xpc_session_t _Nonnull"
-        },
-        {
-          "name": "message",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "reply_handler",
-          "objc_type": "xpc_session_reply_handler_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": ""
-      },
-      "availability": {
-        "macos_introduced": "13.0"
-      },
-      "sdk_file": "session.h",
-      "sdk_line": 384
-    },
-    {
-      "name": "xpc_session_set_peer_code_signing_requirement",
-      "args": [
-        {
-          "name": "session",
-          "objc_type": "xpc_session_t _Nonnull"
-        },
-        {
-          "name": "requirement",
-          "objc_type": "const char * _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "int"
-      },
-      "availability": {
-        "macos_introduced": "14.4"
-      },
-      "sdk_file": "session.h",
-      "sdk_line": 422,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_session_set_peer_requirement",
-      "args": [
-        {
-          "name": "session",
-          "objc_type": "xpc_session_t _Nonnull"
-        },
-        {
-          "name": "requirement",
-          "objc_type": "xpc_peer_requirement_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": ""
-      },
-      "availability": {
-        "macos_introduced": "26.0"
-      },
-      "sdk_file": "session.h",
-      "sdk_line": 450
-    },
-    {
-      "name": "xpc_listener_copy_description",
-      "args": [
-        {
-          "name": "listener",
-          "objc_type": "xpc_listener_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "char * _Nullable"
-      },
-      "availability": {
-        "macos_introduced": "14.0"
-      },
-      "sdk_file": "listener.h",
-      "sdk_line": 74,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_listener_create",
-      "args": [
-        {
-          "name": "service",
-          "objc_type": "const char * _Nonnull"
-        },
-        {
-          "name": "target_queue",
-          "objc_type": "dispatch_queue_t _Nullable",
-          "nullable": true
-        },
-        {
-          "name": "flags",
-          "objc_type": "xpc_listener_create_flags_t"
-        },
-        {
-          "name": "incoming_session_handler",
-          "objc_type": "xpc_listener_incoming_session_handler_t _Nonnull"
-        },
-        {
-          "name": "error_out",
-          "objc_type": "xpc_rich_error_t  _Nullable * _Nullable",
-          "nullable": true
-        }
-      ],
-      "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_listener_t  _Nullable",
-        "already_retained": true
-      },
-      "availability": {
-        "macos_introduced": "14.0"
-      },
-      "sdk_file": "listener.h",
-      "sdk_line": 128,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_listener_activate",
-      "args": [
-        {
-          "name": "listener",
-          "objc_type": "xpc_listener_t _Nonnull"
-        },
-        {
-          "name": "error_out",
-          "objc_type": "xpc_rich_error_t  _Nullable * _Nullable",
-          "nullable": true
-        }
-      ],
-      "return": {
-        "objc_type": "bool"
-      },
-      "availability": {
-        "macos_introduced": "14.0"
-      },
-      "sdk_file": "listener.h",
-      "sdk_line": 158
-    },
-    {
-      "name": "xpc_listener_cancel",
-      "args": [
-        {
-          "name": "listener",
-          "objc_type": "xpc_listener_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": ""
-      },
-      "availability": {
-        "macos_introduced": "14.0"
-      },
-      "sdk_file": "listener.h",
-      "sdk_line": 180
-    },
-    {
-      "name": "xpc_listener_reject_peer",
-      "args": [
-        {
-          "name": "peer",
-          "objc_type": "xpc_session_t _Nonnull"
-        },
-        {
-          "name": "reason",
-          "objc_type": "const char * _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": ""
-      },
-      "availability": {
-        "macos_introduced": "14.0"
-      },
-      "sdk_file": "listener.h",
-      "sdk_line": 203
-    },
-    {
-      "name": "xpc_listener_set_peer_code_signing_requirement",
-      "args": [
-        {
-          "name": "listener",
-          "objc_type": "xpc_listener_t _Nonnull"
-        },
-        {
-          "name": "requirement",
-          "objc_type": "const char * _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "int"
-      },
-      "availability": {
-        "macos_introduced": "14.4"
-      },
-      "sdk_file": "listener.h",
-      "sdk_line": 236,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_listener_set_peer_requirement",
-      "args": [
-        {
-          "name": "listener",
-          "objc_type": "xpc_listener_t _Nonnull"
-        },
-        {
-          "name": "requirement",
-          "objc_type": "xpc_peer_requirement_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": ""
-      },
-      "availability": {
-        "macos_introduced": "26.0"
-      },
-      "sdk_file": "listener.h",
-      "sdk_line": 262
-    },
-    {
-      "name": "xpc_retain",
-      "args": [
-        {
-          "name": "object",
-          "objc_type": "xpc_object_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "xpc_object_t  _Nonnull"
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 381
-    },
-    {
-      "name": "xpc_release",
-      "args": [
-        {
-          "name": "object",
-          "objc_type": "xpc_object_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": ""
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 406
-    },
-    {
-      "name": "xpc_get_type",
-      "args": [
-        {
-          "name": "object",
-          "objc_type": "xpc_object_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "xpc_type_t  _Nonnull"
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 429,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_type_get_name",
-      "args": [
         {
           "name": "type",
-          "objc_type": "xpc_type_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "const char * _Nonnull"
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 447
-    },
-    {
-      "name": "xpc_copy",
-      "args": [
-        {
-          "name": "object",
-          "objc_type": "xpc_object_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nullable",
-        "already_retained": true
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 472,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_equal",
-      "args": [
-        {
-          "name": "object1",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "object2",
-          "objc_type": "xpc_object_t _Nonnull"
+          "objc_type": "os_log_type_t"
         }
       ],
       "return": {
         "objc_type": "bool"
       },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 500,
+      "availability": {
+        "macos_introduced": "10.12"
+      },
+      "sdk_file": "log.h",
+      "sdk_line": 446,
       "warn_unused": true
     },
     {
-      "name": "xpc_hash",
+      "name": "_os_log_impl",
       "args": [
         {
-          "name": "object",
-          "objc_type": "xpc_object_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "size_t"
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 523,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_copy_description",
-      "args": [
-        {
-          "name": "object",
-          "objc_type": "xpc_object_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "char * _Nonnull"
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 541,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_null_create",
-      "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull",
-        "already_retained": true
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 557,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_bool_create",
-      "args": [
-        {
-          "name": "value",
-          "objc_type": "bool"
-        }
-      ],
-      "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull",
-        "already_retained": true
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 575,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_bool_get_value",
-      "args": [
-        {
-          "name": "xbool",
-          "objc_type": "xpc_object_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "bool"
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 593
-    },
-    {
-      "name": "xpc_int64_create",
-      "args": [
-        {
-          "name": "value",
-          "objc_type": "int64_t"
-        }
-      ],
-      "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull",
-        "already_retained": true
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 611,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_int64_get_value",
-      "args": [
-        {
-          "name": "xint",
-          "objc_type": "xpc_object_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "int64_t"
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 629,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_uint64_create",
-      "args": [
-        {
-          "name": "value",
-          "objc_type": "uint64_t"
-        }
-      ],
-      "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull",
-        "already_retained": true
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 647,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_uint64_get_value",
-      "args": [
-        {
-          "name": "xuint",
-          "objc_type": "xpc_object_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "uint64_t"
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 665,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_double_create",
-      "args": [
-        {
-          "name": "value",
-          "objc_type": "double"
-        }
-      ],
-      "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull",
-        "already_retained": true
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 683,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_double_get_value",
-      "args": [
-        {
-          "name": "xdouble",
-          "objc_type": "xpc_object_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "double"
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 701,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_date_create",
-      "args": [
-        {
-          "name": "interval",
-          "objc_type": "int64_t"
-        }
-      ],
-      "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull",
-        "already_retained": true
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 722,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_date_create_from_current",
-      "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull",
-        "already_retained": true
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 736,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_date_get_value",
-      "args": [
-        {
-          "name": "xdate",
-          "objc_type": "xpc_object_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "int64_t"
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 755,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_data_create",
-      "args": [
-        {
-          "name": "bytes",
-          "objc_type": "const void * _Nullable",
-          "nullable": true
+          "name": "dso",
+          "objc_type": "void *"
         },
         {
-          "name": "length",
-          "objc_type": "size_t"
-        }
-      ],
-      "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull",
-        "already_retained": true
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 782,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_data_create_with_dispatch_data",
-      "args": [
-        {
-          "name": "ddata",
-          "objc_type": "dispatch_data_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull",
-        "already_retained": true
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 806,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_data_get_length",
-      "args": [
-        {
-          "name": "xdata",
-          "objc_type": "xpc_object_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "size_t"
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 824,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_data_get_bytes_ptr",
-      "args": [
-        {
-          "name": "xdata",
-          "objc_type": "xpc_object_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "const void * _Nullable"
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 842,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_data_get_bytes",
-      "args": [
-        {
-          "name": "xdata",
-          "objc_type": "xpc_object_t _Nonnull"
+          "name": "log",
+          "objc_type": "os_log_t"
         },
         {
-          "name": "buffer",
-          "objc_type": "void * _Nonnull"
+          "name": "type",
+          "objc_type": "os_log_type_t"
         },
         {
-          "name": "off",
-          "objc_type": "size_t"
+          "name": "format",
+          "objc_type": "const char *"
         },
         {
-          "name": "length",
-          "objc_type": "size_t"
+          "name": "buf",
+          "objc_type": "uint8_t *"
+        },
+        {
+          "name": "size",
+          "objc_type": "uint32_t"
         }
       ],
       "return": {
-        "objc_type": "size_t"
+        "objc_type": ""
       },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 871,
-      "warn_unused": true
+      "availability": {
+        "macos_introduced": "10.12"
+      },
+      "sdk_file": "log.h",
+      "sdk_line": 458
     },
     {
-      "name": "xpc_string_create",
+      "name": "_os_log_debug_impl",
       "args": [
         {
-          "name": "string",
-          "objc_type": "const char * _Nonnull"
+          "name": "dso",
+          "objc_type": "void *"
+        },
+        {
+          "name": "log",
+          "objc_type": "os_log_t"
+        },
+        {
+          "name": "type",
+          "objc_type": "os_log_type_t"
+        },
+        {
+          "name": "format",
+          "objc_type": "const char *"
+        },
+        {
+          "name": "buf",
+          "objc_type": "uint8_t *"
+        },
+        {
+          "name": "size",
+          "objc_type": "uint32_t"
         }
       ],
       "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull",
-        "already_retained": true
+        "objc_type": ""
       },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 890,
-      "warn_unused": true
+      "availability": {
+        "macos_introduced": "10.15"
+      },
+      "sdk_file": "log.h",
+      "sdk_line": 470
     },
     {
-      "name": "xpc_string_create_with_format",
+      "name": "_os_log_error_impl",
       "args": [
         {
-          "name": "fmt",
-          "objc_type": "const char * _Nonnull"
+          "name": "dso",
+          "objc_type": "void *"
+        },
+        {
+          "name": "log",
+          "objc_type": "os_log_t"
+        },
+        {
+          "name": "type",
+          "objc_type": "os_log_type_t"
+        },
+        {
+          "name": "format",
+          "objc_type": "const char *"
+        },
+        {
+          "name": "buf",
+          "objc_type": "uint8_t *"
+        },
+        {
+          "name": "size",
+          "objc_type": "uint32_t"
         }
       ],
       "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull",
-        "already_retained": true
+        "objc_type": ""
+      },
+      "availability": {
+        "macos_introduced": "10.13"
+      },
+      "sdk_file": "log.h",
+      "sdk_line": 482
+    },
+    {
+      "name": "_os_log_fault_impl",
+      "args": [
+        {
+          "name": "dso",
+          "objc_type": "void *"
+        },
+        {
+          "name": "log",
+          "objc_type": "os_log_t"
+        },
+        {
+          "name": "type",
+          "objc_type": "os_log_type_t"
+        },
+        {
+          "name": "format",
+          "objc_type": "const char *"
+        },
+        {
+          "name": "buf",
+          "objc_type": "uint8_t *"
+        },
+        {
+          "name": "size",
+          "objc_type": "uint32_t"
+        }
+      ],
+      "return": {
+        "objc_type": ""
+      },
+      "availability": {
+        "macos_introduced": "10.13"
+      },
+      "sdk_file": "log.h",
+      "sdk_line": 494
+    },
+    {
+      "name": "_os_log_internal",
+      "args": [
+        {
+          "name": "dso",
+          "objc_type": "void *"
+        },
+        {
+          "name": "log",
+          "objc_type": "os_log_t"
+        },
+        {
+          "name": "type",
+          "objc_type": "os_log_type_t"
+        },
+        {
+          "name": "message",
+          "objc_type": "const char *"
+        }
+      ],
+      "return": {
+        "objc_type": ""
       },
       "variadic": true,
       "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 913,
-      "warn_unused": true
+      "sdk_file": "log.h",
+      "sdk_line": 505
     },
     {
-      "name": "xpc_string_create_with_format_and_arguments",
+      "name": "_os_log_create",
       "args": [
         {
-          "name": "fmt",
-          "objc_type": "const char * _Nonnull"
+          "name": "dso",
+          "objc_type": "void *"
         },
         {
-          "name": "ap",
-          "objc_type": "va_list"
-        }
-      ],
-      "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull",
-        "already_retained": true
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 937,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_string_get_length",
-      "args": [
-        {
-          "name": "xstring",
-          "objc_type": "xpc_object_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "size_t"
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 955,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_string_get_string_ptr",
-      "args": [
-        {
-          "name": "xstring",
-          "objc_type": "xpc_object_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "const char * _Nullable"
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 973,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_uuid_create",
-      "args": [
-        {
-          "name": "uuid",
-          "objc_type": "const unsigned char * _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull",
-        "already_retained": true
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 992,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_uuid_get_bytes",
-      "args": [
-        {
-          "name": "xuuid",
-          "objc_type": "xpc_object_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "const uint8_t * _Nullable"
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 1011
-    },
-    {
-      "name": "xpc_fd_create",
-      "args": [
-        {
-          "name": "fd",
-          "objc_type": "int"
-        }
-      ],
-      "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nullable",
-        "already_retained": true
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 1045,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_fd_dup",
-      "args": [
-        {
-          "name": "xfd",
-          "objc_type": "xpc_object_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "int"
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 1072,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_shmem_create",
-      "args": [
-        {
-          "name": "region",
-          "objc_type": "void * _Nonnull"
+          "name": "subsystem",
+          "objc_type": "const char *"
         },
         {
-          "name": "length",
-          "objc_type": "size_t"
+          "name": "category",
+          "objc_type": "const char *"
         }
       ],
       "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull",
-        "already_retained": true
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 1112,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_shmem_map",
-      "args": [
-        {
-          "name": "xshmem",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "region",
-          "objc_type": "void * _Nullable * _Nonnull",
-          "nullable": true
-        }
-      ],
-      "return": {
-        "objc_type": "size_t"
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 1143,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_array_create",
-      "args": [
-        {
-          "name": "objects",
-          "objc_type": "xpc_object_t  _Nonnull const * _Nullable",
-          "nullable": true
-        },
-        {
-          "name": "count",
-          "objc_type": "size_t"
-        }
-      ],
-      "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull",
-        "already_retained": true
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 1191,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_array_create_empty",
-      "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull",
+        "objc_type": "OS_OBJECT_RETURNS_RETAINED os_log_t",
         "already_retained": true
       },
       "availability": {
-        "macos_introduced": "11.0"
+        "macos_introduced": "10.11"
       },
-      "sdk_file": "xpc.h",
-      "sdk_line": 1210,
+      "sdk_file": "log.h",
+      "sdk_line": 510,
       "warn_unused": true
     },
     {
-      "name": "xpc_array_set_value",
+      "name": "os_log_is_enabled",
       "args": [
         {
-          "name": "xarray",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "index",
-          "objc_type": "size_t"
-        },
-        {
-          "name": "value",
-          "objc_type": "xpc_object_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": ""
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 1234
-    },
-    {
-      "name": "xpc_array_append_value",
-      "args": [
-        {
-          "name": "xarray",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "value",
-          "objc_type": "xpc_object_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": ""
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 1251
-    },
-    {
-      "name": "xpc_array_get_count",
-      "args": [
-        {
-          "name": "xarray",
-          "objc_type": "xpc_object_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "size_t"
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 1269,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_array_get_value",
-      "args": [
-        {
-          "name": "xarray",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "index",
-          "objc_type": "size_t"
-        }
-      ],
-      "return": {
-        "objc_type": "xpc_object_t  _Nonnull"
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 1295
-    },
-    {
-      "name": "xpc_array_apply",
-      "args": [
-        {
-          "name": "xarray",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "applier",
-          "objc_type": "xpc_array_applier_t _Nonnull",
-          "no_escape": true
+          "name": "log",
+          "objc_type": "os_log_t"
         }
       ],
       "return": {
         "objc_type": "bool"
       },
       "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 1321
+      "sdk_file": "log.h",
+      "sdk_line": 516,
+      "warn_unused": true
     },
     {
-      "name": "xpc_array_set_bool",
+      "name": "os_log_is_debug_enabled",
       "args": [
         {
-          "name": "xarray",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "index",
-          "objc_type": "size_t"
-        },
-        {
-          "name": "value",
-          "objc_type": "bool"
-        }
-      ],
-      "return": {
-        "objc_type": ""
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 1356
-    },
-    {
-      "name": "xpc_array_set_int64",
-      "args": [
-        {
-          "name": "xarray",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "index",
-          "objc_type": "size_t"
-        },
-        {
-          "name": "value",
-          "objc_type": "int64_t"
-        }
-      ],
-      "return": {
-        "objc_type": ""
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 1381
-    },
-    {
-      "name": "xpc_array_set_uint64",
-      "args": [
-        {
-          "name": "xarray",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "index",
-          "objc_type": "size_t"
-        },
-        {
-          "name": "value",
-          "objc_type": "uint64_t"
-        }
-      ],
-      "return": {
-        "objc_type": ""
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 1406
-    },
-    {
-      "name": "xpc_array_set_double",
-      "args": [
-        {
-          "name": "xarray",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "index",
-          "objc_type": "size_t"
-        },
-        {
-          "name": "value",
-          "objc_type": "double"
-        }
-      ],
-      "return": {
-        "objc_type": ""
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 1431
-    },
-    {
-      "name": "xpc_array_set_date",
-      "args": [
-        {
-          "name": "xarray",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "index",
-          "objc_type": "size_t"
-        },
-        {
-          "name": "value",
-          "objc_type": "int64_t"
-        }
-      ],
-      "return": {
-        "objc_type": ""
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 1458
-    },
-    {
-      "name": "xpc_array_set_data",
-      "args": [
-        {
-          "name": "xarray",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "index",
-          "objc_type": "size_t"
-        },
-        {
-          "name": "bytes",
-          "objc_type": "const void * _Nullable",
-          "nullable": true
-        },
-        {
-          "name": "length",
-          "objc_type": "size_t"
-        }
-      ],
-      "return": {
-        "objc_type": ""
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 1486
-    },
-    {
-      "name": "xpc_array_set_string",
-      "args": [
-        {
-          "name": "xarray",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "index",
-          "objc_type": "size_t"
-        },
-        {
-          "name": "string",
-          "objc_type": "const char * _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": ""
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 1512
-    },
-    {
-      "name": "xpc_array_set_uuid",
-      "args": [
-        {
-          "name": "xarray",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "index",
-          "objc_type": "size_t"
-        },
-        {
-          "name": "uuid",
-          "objc_type": "const unsigned char * _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": ""
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 1537
-    },
-    {
-      "name": "xpc_array_set_fd",
-      "args": [
-        {
-          "name": "xarray",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "index",
-          "objc_type": "size_t"
-        },
-        {
-          "name": "fd",
-          "objc_type": "int"
-        }
-      ],
-      "return": {
-        "objc_type": ""
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 1563
-    },
-    {
-      "name": "xpc_array_set_connection",
-      "args": [
-        {
-          "name": "xarray",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "index",
-          "objc_type": "size_t"
-        },
-        {
-          "name": "connection",
-          "objc_type": "xpc_connection_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": ""
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 1588
-    },
-    {
-      "name": "xpc_array_get_bool",
-      "args": [
-        {
-          "name": "xarray",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "index",
-          "objc_type": "size_t"
+          "name": "log",
+          "objc_type": "os_log_t"
         }
       ],
       "return": {
         "objc_type": "bool"
       },
       "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 1613,
+      "sdk_file": "log.h",
+      "sdk_line": 522,
       "warn_unused": true
     },
     {
-      "name": "xpc_array_get_int64",
-      "args": [
-        {
-          "name": "xarray",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "index",
-          "objc_type": "size_t"
-        }
-      ],
-      "return": {
-        "objc_type": "int64_t"
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 1636,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_array_get_uint64",
-      "args": [
-        {
-          "name": "xarray",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "index",
-          "objc_type": "size_t"
-        }
-      ],
-      "return": {
-        "objc_type": "uint64_t"
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 1659,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_array_get_double",
-      "args": [
-        {
-          "name": "xarray",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "index",
-          "objc_type": "size_t"
-        }
-      ],
-      "return": {
-        "objc_type": "double"
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 1682,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_array_get_date",
-      "args": [
-        {
-          "name": "xarray",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "index",
-          "objc_type": "size_t"
-        }
-      ],
-      "return": {
-        "objc_type": "int64_t"
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 1707,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_array_get_data",
-      "args": [
-        {
-          "name": "xarray",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "index",
-          "objc_type": "size_t"
-        },
-        {
-          "name": "length",
-          "objc_type": "size_t * _Nullable",
-          "nullable": true
-        }
-      ],
-      "return": {
-        "objc_type": "const void * _Nullable"
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 1734,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_array_get_string",
-      "args": [
-        {
-          "name": "xarray",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "index",
-          "objc_type": "size_t"
-        }
-      ],
-      "return": {
-        "objc_type": "const char * _Nullable"
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 1758,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_array_get_uuid",
-      "args": [
-        {
-          "name": "xarray",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "index",
-          "objc_type": "size_t"
-        }
-      ],
-      "return": {
-        "objc_type": "const uint8_t * _Nullable"
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 1782,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_array_dup_fd",
-      "args": [
-        {
-          "name": "xarray",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "index",
-          "objc_type": "size_t"
-        }
-      ],
-      "return": {
-        "objc_type": "int"
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 1806,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_array_create_connection",
-      "args": [
-        {
-          "name": "xarray",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "index",
-          "objc_type": "size_t"
-        }
-      ],
-      "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_connection_t  _Nullable",
-        "already_retained": true
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 1834,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_array_get_dictionary",
-      "args": [
-        {
-          "name": "xarray",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "index",
-          "objc_type": "size_t"
-        }
-      ],
-      "return": {
-        "objc_type": "xpc_object_t  _Nullable"
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 1861,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_array_get_array",
-      "args": [
-        {
-          "name": "xarray",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "index",
-          "objc_type": "size_t"
-        }
-      ],
-      "return": {
-        "objc_type": "xpc_object_t  _Nullable"
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 1888,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_dictionary_create",
-      "args": [
-        {
-          "name": "keys",
-          "objc_type": "const char *const  _Nonnull * _Nullable",
-          "nullable": true
-        },
-        {
-          "name": "values",
-          "objc_type": "xpc_object_t  _Nullable const * _Nullable",
-          "nullable": true
-        },
-        {
-          "name": "count",
-          "objc_type": "size_t"
-        }
-      ],
-      "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull",
-        "already_retained": true
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 1942,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_dictionary_create_empty",
-      "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull",
-        "already_retained": true
-      },
-      "availability": {
-        "macos_introduced": "11.0"
-      },
-      "sdk_file": "xpc.h",
-      "sdk_line": 1962,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_dictionary_create_reply",
-      "args": [
-        {
-          "name": "original",
-          "objc_type": "xpc_object_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nullable",
-        "already_retained": true
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 1987,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_dictionary_set_value",
-      "args": [
-        {
-          "name": "xdict",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "key",
-          "objc_type": "const char * _Nonnull"
-        },
-        {
-          "name": "value",
-          "objc_type": "xpc_object_t _Nullable",
-          "nullable": true
-        }
-      ],
+      "name": "_os_log_sensitive_deprecated",
       "return": {
         "objc_type": ""
       },
       "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 2010
-    },
-    {
-      "name": "xpc_dictionary_get_value",
-      "args": [
-        {
-          "name": "xdict",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "key",
-          "objc_type": "const char * _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "xpc_object_t  _Nullable"
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 2037,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_dictionary_get_count",
-      "args": [
-        {
-          "name": "xdict",
-          "objc_type": "xpc_object_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "size_t"
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 2057,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_dictionary_apply",
-      "args": [
-        {
-          "name": "xdict",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "applier",
-          "objc_type": "xpc_dictionary_applier_t _Nonnull",
-          "no_escape": true
-        }
-      ],
-      "return": {
-        "objc_type": "bool"
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 2084
-    },
-    {
-      "name": "xpc_dictionary_get_remote_connection",
-      "args": [
-        {
-          "name": "xdict",
-          "objc_type": "xpc_object_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "xpc_connection_t  _Nullable"
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 2106,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_dictionary_set_bool",
-      "args": [
-        {
-          "name": "xdict",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "key",
-          "objc_type": "const char * _Nonnull"
-        },
-        {
-          "name": "value",
-          "objc_type": "bool"
-        }
-      ],
-      "return": {
-        "objc_type": ""
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 2129
-    },
-    {
-      "name": "xpc_dictionary_set_int64",
-      "args": [
-        {
-          "name": "xdict",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "key",
-          "objc_type": "const char * _Nonnull"
-        },
-        {
-          "name": "value",
-          "objc_type": "int64_t"
-        }
-      ],
-      "return": {
-        "objc_type": ""
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 2151
-    },
-    {
-      "name": "xpc_dictionary_set_uint64",
-      "args": [
-        {
-          "name": "xdict",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "key",
-          "objc_type": "const char * _Nonnull"
-        },
-        {
-          "name": "value",
-          "objc_type": "uint64_t"
-        }
-      ],
-      "return": {
-        "objc_type": ""
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 2173
-    },
-    {
-      "name": "xpc_dictionary_set_double",
-      "args": [
-        {
-          "name": "xdict",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "key",
-          "objc_type": "const char * _Nonnull"
-        },
-        {
-          "name": "value",
-          "objc_type": "double"
-        }
-      ],
-      "return": {
-        "objc_type": ""
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 2195
-    },
-    {
-      "name": "xpc_dictionary_set_date",
-      "args": [
-        {
-          "name": "xdict",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "key",
-          "objc_type": "const char * _Nonnull"
-        },
-        {
-          "name": "value",
-          "objc_type": "int64_t"
-        }
-      ],
-      "return": {
-        "objc_type": ""
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 2219
-    },
-    {
-      "name": "xpc_dictionary_set_data",
-      "args": [
-        {
-          "name": "xdict",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "key",
-          "objc_type": "const char * _Nonnull"
-        },
-        {
-          "name": "bytes",
-          "objc_type": "const void * _Nullable",
-          "nullable": true
-        },
-        {
-          "name": "length",
-          "objc_type": "size_t"
-        }
-      ],
-      "return": {
-        "objc_type": ""
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 2244
-    },
-    {
-      "name": "xpc_dictionary_set_string",
-      "args": [
-        {
-          "name": "xdict",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "key",
-          "objc_type": "const char * _Nonnull"
-        },
-        {
-          "name": "string",
-          "objc_type": "const char * _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": ""
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 2267
-    },
-    {
-      "name": "xpc_dictionary_set_uuid",
-      "args": [
-        {
-          "name": "xdict",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "key",
-          "objc_type": "const char * _Nonnull"
-        },
-        {
-          "name": "uuid",
-          "objc_type": "const unsigned char * _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": ""
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 2290
-    },
-    {
-      "name": "xpc_dictionary_set_fd",
-      "args": [
-        {
-          "name": "xdict",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "key",
-          "objc_type": "const char * _Nonnull"
-        },
-        {
-          "name": "fd",
-          "objc_type": "int"
-        }
-      ],
-      "return": {
-        "objc_type": ""
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 2313
-    },
-    {
-      "name": "xpc_dictionary_set_connection",
-      "args": [
-        {
-          "name": "xdict",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "key",
-          "objc_type": "const char * _Nonnull"
-        },
-        {
-          "name": "connection",
-          "objc_type": "xpc_connection_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": ""
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 2336
-    },
-    {
-      "name": "xpc_dictionary_set_mach_send",
-      "args": [
-        {
-          "name": "xdict",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "key",
-          "objc_type": "const char * _Nonnull"
-        },
-        {
-          "name": "p",
-          "objc_type": "mach_port_t"
-        }
-      ],
-      "return": {
-        "objc_type": ""
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 2362
-    },
-    {
-      "name": "xpc_dictionary_get_bool",
-      "args": [
-        {
-          "name": "xdict",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "key",
-          "objc_type": "const char * _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "bool"
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 2386,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_dictionary_get_int64",
-      "args": [
-        {
-          "name": "xdict",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "key",
-          "objc_type": "const char * _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "int64_t"
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 2408,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_dictionary_get_uint64",
-      "args": [
-        {
-          "name": "xdict",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "key",
-          "objc_type": "const char * _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "uint64_t"
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 2430,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_dictionary_get_double",
-      "args": [
-        {
-          "name": "xdict",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "key",
-          "objc_type": "const char * _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "double"
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 2452,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_dictionary_get_date",
-      "args": [
-        {
-          "name": "xdict",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "key",
-          "objc_type": "const char * _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "int64_t"
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 2475,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_dictionary_get_data",
-      "args": [
-        {
-          "name": "xdict",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "key",
-          "objc_type": "const char * _Nonnull"
-        },
-        {
-          "name": "length",
-          "objc_type": "size_t * _Nullable",
-          "nullable": true
-        }
-      ],
-      "return": {
-        "objc_type": "const void * _Nullable"
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 2501,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_dictionary_get_string",
-      "args": [
-        {
-          "name": "xdict",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "key",
-          "objc_type": "const char * _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "const char * _Nullable"
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 2524,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_dictionary_get_uuid",
-      "args": [
-        {
-          "name": "xdict",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "key",
-          "objc_type": "const char * _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "const uint8_t * _Nullable"
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 2546,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_dictionary_dup_fd",
-      "args": [
-        {
-          "name": "xdict",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "key",
-          "objc_type": "const char * _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "int"
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 2569,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_dictionary_create_connection",
-      "args": [
-        {
-          "name": "xdict",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "key",
-          "objc_type": "const char * _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_connection_t  _Nullable",
-        "already_retained": true
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 2595,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_dictionary_get_dictionary",
-      "args": [
-        {
-          "name": "xdict",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "key",
-          "objc_type": "const char * _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "xpc_object_t  _Nullable"
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 2621,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_dictionary_get_array",
-      "args": [
-        {
-          "name": "xdict",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "key",
-          "objc_type": "const char * _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "xpc_object_t  _Nullable"
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 2647,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_dictionary_copy_mach_send",
-      "args": [
-        {
-          "name": "xdict",
-          "objc_type": "xpc_object_t _Nonnull"
-        },
-        {
-          "name": "key",
-          "objc_type": "const char * _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": "mach_port_t"
-      },
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 2674,
-      "warn_unused": true
-    },
-    {
-      "name": "xpc_main",
-      "args": [
-        {
-          "name": "handler",
-          "objc_type": "xpc_connection_handler_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": ""
-      },
-      "availability": {
-        "macos_introduced": "10.7"
-      },
-      "sdk_file": "xpc.h",
-      "sdk_line": 2698
-    },
-    {
-      "name": "xpc_transaction_begin",
-      "return": {
-        "objc_type": ""
-      },
-      "availability": {
-        "macos_introduced": "10.7"
-      },
-      "sdk_file": "xpc.h",
-      "sdk_line": 2736
-    },
-    {
-      "name": "xpc_transaction_end",
-      "return": {
-        "objc_type": ""
-      },
-      "availability": {
-        "macos_introduced": "10.7"
-      },
-      "sdk_file": "xpc.h",
-      "sdk_line": 2754
-    },
-    {
-      "name": "xpc_set_event_stream_handler",
-      "args": [
-        {
-          "name": "stream",
-          "objc_type": "const char * _Nonnull"
-        },
-        {
-          "name": "targetq",
-          "objc_type": "dispatch_queue_t _Nullable",
-          "nullable": true
-        },
-        {
-          "name": "handler",
-          "objc_type": "XPC_SWIFT_SENDABLE xpc_handler_t _Nonnull"
-        }
-      ],
-      "return": {
-        "objc_type": ""
-      },
-      "availability": {
-        "macos_introduced": "10.7"
-      },
-      "sdk_file": "xpc.h",
-      "sdk_line": 2789
+      "sdk_file": "log.h",
+      "sdk_line": 528
     }
   ],
   "externs": [
     {
-      "name": "_xpc_type_connection",
-      "objc_type": "const struct _xpc_type_s",
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 113
-    },
-    {
-      "name": "_xpc_type_endpoint",
-      "objc_type": "const struct _xpc_type_s",
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 140
-    },
-    {
-      "name": "_xpc_type_null",
-      "objc_type": "const struct _xpc_type_s",
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 153
-    },
-    {
-      "name": "_xpc_type_bool",
-      "objc_type": "const struct _xpc_type_s",
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 162
-    },
-    {
-      "name": "_xpc_bool_true",
-      "objc_type": "const struct _xpc_bool_s",
-      "availability": {},
-      "sdk_file": "xpc.h"
-    },
-    {
-      "name": "_xpc_bool_false",
-      "objc_type": "const struct _xpc_bool_s",
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 182
-    },
-    {
-      "name": "_xpc_type_int64",
-      "objc_type": "const struct _xpc_type_s",
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 191
-    },
-    {
-      "name": "_xpc_type_uint64",
-      "objc_type": "const struct _xpc_type_s",
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 200
-    },
-    {
-      "name": "_xpc_type_double",
-      "objc_type": "const struct _xpc_type_s",
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 209
-    },
-    {
-      "name": "_xpc_type_date",
-      "objc_type": "const struct _xpc_type_s",
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 220
-    },
-    {
-      "name": "_xpc_type_data",
-      "objc_type": "const struct _xpc_type_s",
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 229
-    },
-    {
-      "name": "_xpc_type_string",
-      "objc_type": "const struct _xpc_type_s",
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 238
-    },
-    {
-      "name": "_xpc_type_uuid",
-      "objc_type": "const struct _xpc_type_s",
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 247
-    },
-    {
-      "name": "_xpc_type_fd",
-      "objc_type": "const struct _xpc_type_s",
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 256
-    },
-    {
-      "name": "_xpc_type_shmem",
-      "objc_type": "const struct _xpc_type_s",
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 265
-    },
-    {
-      "name": "_xpc_type_array",
-      "objc_type": "const struct _xpc_type_s",
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 277
-    },
-    {
-      "name": "_xpc_type_dictionary",
-      "objc_type": "const struct _xpc_type_s",
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 288
-    },
-    {
-      "name": "_xpc_type_error",
-      "objc_type": "const struct _xpc_type_s",
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 306
-    },
-    {
-      "name": "_xpc_error_key_description",
-      "objc_type": "const char *const _Nonnull",
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 316
-    },
-    {
-      "name": "_xpc_event_key_name",
-      "objc_type": "const char *const _Nonnull",
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 326
-    },
-    {
-      "name": "_xpc_type_rich_error",
-      "objc_type": "const struct _xpc_type_s",
-      "availability": {},
-      "sdk_file": "xpc.h",
-      "sdk_line": 337
-    },
-    {
-      "name": "XPC_ACTIVITY_INTERVAL",
-      "objc_type": "const char *const _Nonnull",
+      "name": "_os_log_disabled",
+      "objc_type": "struct os_log_s",
       "availability": {
-        "macos_introduced": "10.9"
+        "macos_introduced": "10.13"
       },
-      "sdk_file": "activity.h",
-      "sdk_line": 39
+      "sdk_file": "log.h"
     },
     {
-      "name": "XPC_ACTIVITY_REPEATING",
-      "objc_type": "const char *const _Nonnull",
+      "name": "_os_log_default",
+      "objc_type": "struct os_log_s",
       "availability": {
-        "macos_introduced": "10.9"
+        "macos_introduced": "10.11"
       },
-      "sdk_file": "activity.h",
-      "sdk_line": 48
-    },
-    {
-      "name": "XPC_ACTIVITY_DELAY",
-      "objc_type": "const char *const _Nonnull",
-      "availability": {
-        "macos_introduced": "10.9"
-      },
-      "sdk_file": "activity.h",
-      "sdk_line": 58
-    },
-    {
-      "name": "XPC_ACTIVITY_GRACE_PERIOD",
-      "objc_type": "const char *const _Nonnull",
-      "availability": {
-        "macos_introduced": "10.9"
-      },
-      "sdk_file": "activity.h",
-      "sdk_line": 68
-    },
-    {
-      "name": "XPC_ACTIVITY_INTERVAL_1_MIN",
-      "objc_type": "const int64_t",
-      "availability": {
-        "macos_introduced": "10.9"
-      },
-      "sdk_file": "activity.h",
-      "sdk_line": 74
-    },
-    {
-      "name": "XPC_ACTIVITY_INTERVAL_5_MIN",
-      "objc_type": "const int64_t",
-      "availability": {
-        "macos_introduced": "10.9"
-      },
-      "sdk_file": "activity.h",
-      "sdk_line": 79
-    },
-    {
-      "name": "XPC_ACTIVITY_INTERVAL_15_MIN",
-      "objc_type": "const int64_t",
-      "availability": {
-        "macos_introduced": "10.9"
-      },
-      "sdk_file": "activity.h",
-      "sdk_line": 84
-    },
-    {
-      "name": "XPC_ACTIVITY_INTERVAL_30_MIN",
-      "objc_type": "const int64_t",
-      "availability": {
-        "macos_introduced": "10.9"
-      },
-      "sdk_file": "activity.h",
-      "sdk_line": 89
-    },
-    {
-      "name": "XPC_ACTIVITY_INTERVAL_1_HOUR",
-      "objc_type": "const int64_t",
-      "availability": {
-        "macos_introduced": "10.9"
-      },
-      "sdk_file": "activity.h",
-      "sdk_line": 94
-    },
-    {
-      "name": "XPC_ACTIVITY_INTERVAL_4_HOURS",
-      "objc_type": "const int64_t",
-      "availability": {
-        "macos_introduced": "10.9"
-      },
-      "sdk_file": "activity.h",
-      "sdk_line": 99
-    },
-    {
-      "name": "XPC_ACTIVITY_INTERVAL_8_HOURS",
-      "objc_type": "const int64_t",
-      "availability": {
-        "macos_introduced": "10.9"
-      },
-      "sdk_file": "activity.h",
-      "sdk_line": 104
-    },
-    {
-      "name": "XPC_ACTIVITY_INTERVAL_1_DAY",
-      "objc_type": "const int64_t",
-      "availability": {
-        "macos_introduced": "10.9"
-      },
-      "sdk_file": "activity.h",
-      "sdk_line": 109
-    },
-    {
-      "name": "XPC_ACTIVITY_INTERVAL_7_DAYS",
-      "objc_type": "const int64_t",
-      "availability": {
-        "macos_introduced": "10.9"
-      },
-      "sdk_file": "activity.h",
-      "sdk_line": 114
-    },
-    {
-      "name": "XPC_ACTIVITY_PRIORITY",
-      "objc_type": "const char *const _Nonnull",
-      "availability": {
-        "macos_introduced": "10.9"
-      },
-      "sdk_file": "activity.h",
-      "sdk_line": 123
-    },
-    {
-      "name": "XPC_ACTIVITY_PRIORITY_MAINTENANCE",
-      "objc_type": "const char *const _Nonnull",
-      "availability": {
-        "macos_introduced": "10.9"
-      },
-      "sdk_file": "activity.h",
-      "sdk_line": 141
-    },
-    {
-      "name": "XPC_ACTIVITY_PRIORITY_UTILITY",
-      "objc_type": "const char *const _Nonnull",
-      "availability": {
-        "macos_introduced": "10.9"
-      },
-      "sdk_file": "activity.h",
-      "sdk_line": 159
-    },
-    {
-      "name": "XPC_ACTIVITY_ALLOW_BATTERY",
-      "objc_type": "const char *const _Nonnull",
-      "availability": {
-        "macos_introduced": "10.9"
-      },
-      "sdk_file": "activity.h",
-      "sdk_line": 170
-    },
-    {
-      "name": "XPC_ACTIVITY_REQUIRE_SCREEN_SLEEP",
-      "objc_type": "const char *const _Nonnull",
-      "availability": {
-        "macos_introduced": "10.9"
-      },
-      "sdk_file": "activity.h",
-      "sdk_line": 183
-    },
-    {
-      "name": "XPC_ACTIVITY_PREVENT_DEVICE_SLEEP",
-      "objc_type": "const char *const _Nonnull",
-      "availability": {
-        "macos_introduced": "12.0"
-      },
-      "sdk_file": "activity.h",
-      "sdk_line": 198
-    },
-    {
-      "name": "XPC_ACTIVITY_REQUIRE_BATTERY_LEVEL",
-      "objc_type": "const char *const _Nonnull",
-      "availability": {},
-      "sdk_file": "activity.h",
-      "sdk_line": 209
-    },
-    {
-      "name": "XPC_ACTIVITY_REQUIRE_HDD_SPINNING",
-      "objc_type": "const char *const _Nonnull",
-      "availability": {},
-      "sdk_file": "activity.h",
-      "sdk_line": 220
-    },
-    {
-      "name": "_xpc_type_activity",
-      "objc_type": "const struct _xpc_type_s",
-      "availability": {
-        "macos_introduced": "10.9"
-      },
-      "sdk_file": "activity.h",
-      "sdk_line": 230
-    },
-    {
-      "name": "XPC_ACTIVITY_CHECK_IN",
-      "objc_type": "const xpc_object_t _Nonnull",
-      "availability": {
-        "macos_introduced": "10.9"
-      },
-      "sdk_file": "activity.h",
-      "sdk_line": 267
-    },
-    {
-      "name": "_xpc_error_connection_interrupted",
-      "objc_type": "const struct _xpc_dictionary_s",
-      "availability": {},
-      "sdk_file": "connection.h"
-    },
-    {
-      "name": "_xpc_error_connection_invalid",
-      "objc_type": "const struct _xpc_dictionary_s",
-      "availability": {},
-      "sdk_file": "connection.h",
-      "sdk_line": 57
-    },
-    {
-      "name": "_xpc_error_termination_imminent",
-      "objc_type": "const struct _xpc_dictionary_s",
-      "availability": {},
-      "sdk_file": "connection.h",
-      "sdk_line": 80
-    },
-    {
-      "name": "_xpc_error_peer_code_signing_requirement",
-      "objc_type": "const struct _xpc_dictionary_s",
-      "availability": {
-        "macos_introduced": "12.0"
-      },
-      "sdk_file": "connection.h",
-      "sdk_line": 94
-    },
-    {
-      "name": "_xpc_type_session",
-      "objc_type": "const struct _xpc_type_s",
-      "availability": {},
-      "sdk_file": "session.h",
-      "sdk_line": 455
+      "sdk_file": "log.h",
+      "sdk_line": 76
     }
   ],
   "block_types": {},
@@ -4701,6 +1308,8 @@
     "NDR_record_t": "struct NDR_record_t",
     "NSInteger": "long",
     "NSUInteger": "unsigned long",
+    "NXSwappedDouble": "unsigned long long",
+    "NXSwappedFloat": "unsigned long",
     "SEL": "struct objc_selector *",
     "UNDServerRef": "mach_port_t",
     "__Bfloat16x4_t": "__attribute__((neon_vector_type(4))) __bf16",
@@ -5395,6 +2004,7 @@
     "clock_serv_port_t": "clock_serv_t",
     "clock_serv_t": "mach_port_t",
     "clock_t": "__darwin_clock_t",
+    "clockid_t": "enum clockid_t",
     "coalition_t": "mach_port_t",
     "cpu_subtype_t": "integer_t",
     "cpu_threadtype_t": "integer_t",
@@ -5488,6 +2098,8 @@
     "host_basic_info_t": "struct host_basic_info *",
     "host_can_has_debugger_info_data_t": "struct host_can_has_debugger_info",
     "host_can_has_debugger_info_t": "struct host_can_has_debugger_info *",
+    "host_cpu_counters_info_data_t": "struct host_cpu_counters_info",
+    "host_cpu_counters_info_t": "struct host_cpu_counters_info *",
     "host_cpu_load_info_data_t": "struct host_cpu_load_info",
     "host_cpu_load_info_t": "struct host_cpu_load_info *",
     "host_flavor_t": "integer_t",
@@ -5767,6 +2379,10 @@
     "os_block_t": "void (^)(void)",
     "os_clockid_t": "enum os_clockid_t",
     "os_function_t": "void (*)(void * _Nullable)",
+    "os_log_t": "NSObject\u003cOS_os_log\u003e *",
+    "os_log_type_t": "enum os_log_type_t",
+    "os_trace_payload_object_t": "xpc_object_t",
+    "os_trace_payload_t": "void (^)(os_trace_payload_object_t)",
     "os_workgroup_attr_s": "struct os_workgroup_attr_opaque_s",
     "os_workgroup_attr_t": "struct os_workgroup_attr_opaque_s *",
     "os_workgroup_index": "uint32_t",
@@ -5812,6 +2428,8 @@
     "processor_array_t": "processor_t *",
     "processor_basic_info_data_t": "struct processor_basic_info",
     "processor_basic_info_t": "struct processor_basic_info *",
+    "processor_cpu_counters_info_data_t": "struct processor_cpu_counters_info",
+    "processor_cpu_counters_info_t": "struct processor_cpu_counters_info *",
     "processor_cpu_load_info_data_t": "struct processor_cpu_load_info",
     "processor_cpu_load_info_t": "struct processor_cpu_load_info *",
     "processor_cpu_stat64_data_t": "struct processor_cpu_stat64",
@@ -5879,7 +2497,7 @@
     "sig_t": "void (*)(int)",
     "siginfo_t": "struct __siginfo",
     "sigset_t": "__darwin_sigset_t",
-    "size_t": "__darwin_size_t",
+    "size_t": "unsigned long",
     "sleep_type_t": "int",
     "ssize_t": "__darwin_ssize_t",
     "stack_t": "struct __darwin_sigaltstack",
@@ -5942,6 +2560,9 @@
     "task_read_t": "mach_port_t",
     "task_role_t": "enum task_role",
     "task_security_config_info_t": "struct task_security_config_info *",
+    "task_shared_region_info_data_t": "struct task_shared_region_info",
+    "task_shared_region_info_t": "struct task_shared_region_info *",
+    "task_shared_region_stubs_t": "enum task_shared_region_stubs_t",
     "task_special_port_t": "int",
     "task_suspension_token_t": "mach_port_t",
     "task_t": "mach_port_t",
@@ -5952,6 +2573,8 @@
     "task_trace_memory_info_t": "struct task_trace_memory_info *",
     "task_vm_info_data_t": "struct task_vm_info",
     "task_vm_info_t": "struct task_vm_info *",
+    "task_vm_shared_cache_info_data_t": "struct task_vm_shared_cache_info",
+    "task_vm_shared_cache_info_t": "struct task_vm_shared_cache_info *",
     "task_wait_state_info_data_t": "struct task_wait_state_info",
     "task_wait_state_info_t": "struct task_wait_state_info *",
     "task_zone_info_array_t": "task_zone_info_t *",
@@ -6075,6 +2698,8 @@
     "vm_page_info_basic_data_t": "struct vm_page_info_basic",
     "vm_page_info_basic_t": "struct vm_page_info_basic *",
     "vm_page_info_data_t": "int[]",
+    "vm_page_info_extended_data_t": "struct vm_page_info_extended",
+    "vm_page_info_extended_t": "struct vm_page_info_extended *",
     "vm_page_info_flavor_t": "int",
     "vm_page_info_t": "int *",
     "vm_prot_t": "int",
@@ -6110,7 +2735,7 @@
     "vm_sync_t": "unsigned int",
     "vm_task_entry_t": "mach_port_t",
     "voucher_mach_msg_state_t": "struct voucher_mach_msg_state_s *",
-    "wchar_t": "__darwin_wchar_t",
+    "wchar_t": "int",
     "xpc_activity_handler_t": "void (^)(xpc_activity_t _Nonnull)",
     "xpc_activity_state_t": "long",
     "xpc_activity_t": "xpc_object_t",
@@ -6141,5 +2766,5 @@
     "zone_name_t": "struct zone_name"
   },
   "link_lib": "System",
-  "header": "xpc/xpc.h"
+  "header": "os/log.h"
 }

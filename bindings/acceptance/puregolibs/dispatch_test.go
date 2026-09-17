@@ -7,7 +7,39 @@ import (
 	"testing"
 
 	dispatch "github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/libraries/dispatch"
+	publicdispatch "github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 )
+
+// SDK 27 redirects these declarations to $V2 exports. Exercise the public
+// wrappers as well as the raw block bridge against a real target queue.
+func TestDispatch_VersionedQueueFunctions(t *testing.T) {
+	for _, name := range []string{
+		"dispatch_queue_create_with_target", "dispatch_assert_queue", "dispatch_assert_queue_not",
+	} {
+		if !dispatch.SymbolAvailable(name) {
+			t.Fatalf("%s was not bound", name)
+		}
+	}
+	target := publicdispatch.WrapQueue(dispatch.Dispatch_get_global_queue(0, 0))
+	queue := publicdispatch.QueueCreateWithTarget(
+		"com.weave.puregolibs.sdk27",
+		publicdispatch.QueueAttr{},
+		target,
+	)
+	if queue.Ptr() == nil {
+		t.Fatal("QueueCreateWithTarget returned nil")
+	}
+	defer publicdispatch.WrapObject(queue.Ptr()).Release()
+	queue.AssertQueueNot()
+	ran := false
+	dispatch.Dispatch_sync(queue.Ptr(), func() {
+		queue.AssertQueue()
+		ran = true
+	})
+	if !ran {
+		t.Fatal("dispatch_sync returned without running the block on the new queue")
+	}
+}
 
 // TestDispatch_MainQueueResolves proves the hand-written Dispatch_get_main_queue
 // reimplementation (dispatch_get_main_queue is a header-inline with no exported

@@ -1,10 +1,10 @@
 {
   "framework": "libproc",
-  "sdk_version": "26.5",
+  "sdk_version": "27.0",
   "arch": "arm64",
   "schema_version": 1,
-  "clang_version": "Apple clang version 21.0.0 (clang-2100.1.1.101)",
-  "xcode_version": "Xcode 26.6 Build version 17F113",
+  "clang_version": "Apple clang version 21.0.0 (clang-2100.3.34.2)",
+  "xcode_version": "Xcode 27.0 Build version 27A266a",
   "classes": {},
   "protocols": {},
   "enums": {

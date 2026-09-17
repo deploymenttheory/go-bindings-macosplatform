@@ -12,7 +12,6 @@ import (
 var _ unsafe.Pointer      // suppress unused import
 var _ objptr.Object = nil // suppress unused import
 
-// Introduced: macOS 10.13
 // OS_os_log corresponds to the Objective-C @protocol OS_os_log.
 type OS_os_log interface {
 	objptr.Object

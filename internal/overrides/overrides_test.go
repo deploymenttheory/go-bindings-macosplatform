@@ -17,20 +17,38 @@ func sampleFramework() *macosplatformmetadata.FrameworkMeta {
 		Classes: map[string]macosplatformmetadata.Class{
 			"FooThing": {
 				Methods: []macosplatformmetadata.Method{
-					{Selector: "doIt:", Params: []macosplatformmetadata.Param{{Name: "value", ObjCType: "NSInteger"}},
-						Return: macosplatformmetadata.ReturnType{ObjCType: "void"}},
-					{Selector: "broken", Return: macosplatformmetadata.ReturnType{ObjCType: "FooRef"}},
-					{Selector: "make", IsClassMethod: true, Return: macosplatformmetadata.ReturnType{ObjCType: "instancetype"}},
+					{
+						Selector: "doIt:",
+						Params: []macosplatformmetadata.Param{
+							{Name: "value", ObjCType: "NSInteger"},
+						},
+						Return: macosplatformmetadata.ReturnType{ObjCType: "void"},
+					},
+					{
+						Selector: "broken",
+						Return:   macosplatformmetadata.ReturnType{ObjCType: "FooRef"},
+					},
+					{
+						Selector:      "make",
+						IsClassMethod: true,
+						Return:        macosplatformmetadata.ReturnType{ObjCType: "instancetype"},
+					},
 				},
 			},
 			"FooGone": {},
 		},
 		Enums: map[string]macosplatformmetadata.Enum{
-			"FooOptions": {GoType: "uint64", Members: []macosplatformmetadata.EnumMember{{Name: "FooA", Value: "1"}}},
+			"FooOptions": {
+				GoType:  "uint64",
+				Members: []macosplatformmetadata.EnumMember{{Name: "FooA", Value: "1"}},
+			},
 		},
 		Functions: []macosplatformmetadata.Function{
-			{Name: "FooCreate", Params: []macosplatformmetadata.Param{{Name: "flags", ObjCType: "int"}},
-				Return: macosplatformmetadata.ReturnType{ObjCType: "void *"}},
+			{
+				Name:   "FooCreate",
+				Params: []macosplatformmetadata.Param{{Name: "flags", ObjCType: "int"}},
+				Return: macosplatformmetadata.ReturnType{ObjCType: "void *"},
+			},
 			{Name: "FooDoomed", Return: macosplatformmetadata.ReturnType{ObjCType: "void"}},
 		},
 	}
@@ -103,6 +121,58 @@ func TestRemapTypes(t *testing.T) {
 	}
 }
 
+func TestRemapStructFields(t *testing.T) {
+	for _, name := range []string{"target", ""} {
+		t.Run("field="+name, func(t *testing.T) {
+			framework := sampleFramework()
+			framework.Structs = map[string]macosplatformmetadata.Struct{
+				"Record": {Fields: []macosplatformmetadata.StructField{
+					{Name: name, ObjCType: "union (anonymous)", GoType: "unsafe.Pointer"},
+					{Name: "after", ObjCType: "int"},
+				}},
+			}
+			warnings := Apply(
+				&File{
+					RemapTypes: []TypeRemap{
+						{Struct: "Record", Field: name, ObjCType: "uint64_t [7]"},
+					},
+				},
+				framework,
+			)
+			if len(warnings) != 0 {
+				t.Fatal(warnings)
+			}
+			fields := framework.Structs["Record"].Fields
+			if fields[0].ObjCType != "uint64_t [7]" || fields[0].GoType != "" ||
+				fields[1].ObjCType != "int" {
+				t.Fatalf("incorrect field remap: %+v", fields)
+			}
+		})
+	}
+}
+
+func TestRemapStructFieldsRejectsStaleOrAmbiguousTargets(t *testing.T) {
+	framework := sampleFramework()
+	framework.Structs = map[string]macosplatformmetadata.Struct{
+		"Record": {Fields: []macosplatformmetadata.StructField{
+			{ObjCType: "union first"}, {ObjCType: "union second"},
+		}},
+	}
+	for _, remap := range []TypeRemap{
+		{Struct: "Missing", Field: "target", ObjCType: "int"},
+		{Struct: "Record", Field: "missing", ObjCType: "int"},
+		{Struct: "Record", ObjCType: "int"},
+	} {
+		if warnings := Apply(&File{RemapTypes: []TypeRemap{remap}}, framework); len(warnings) != 1 {
+			t.Fatalf("expected stale/ambiguous warning for %+v: %v", remap, warnings)
+		}
+	}
+	fields := framework.Structs["Record"].Fields
+	if fields[0].ObjCType != "union first" || fields[1].ObjCType != "union second" {
+		t.Fatalf("ambiguous remap changed a field: %+v", fields)
+	}
+}
+
 func TestForceBitmaskAndAvailability(t *testing.T) {
 	framework := sampleFramework()
 	unavailable := true
@@ -120,7 +190,8 @@ func TestForceBitmaskAndAvailability(t *testing.T) {
 	if !framework.Enums["FooOptions"].IsBitmask {
 		t.Error("FooOptions should be forced to bitmask")
 	}
-	if got := framework.Classes["FooThing"].Availability; got.MacOSIntroduced != "11.0" || got.MacOSDeprecated != "15.0" {
+	if got := framework.Classes["FooThing"].Availability; got.MacOSIntroduced != "11.0" ||
+		got.MacOSDeprecated != "15.0" {
 		t.Errorf("class availability fix not applied: %+v", got)
 	}
 	if !framework.Enums["FooOptions"].Availability.IsUnavailable {
@@ -142,9 +213,11 @@ func TestLinkLibOverride(t *testing.T) {
 func TestStaleEntriesWarn(t *testing.T) {
 	framework := sampleFramework()
 	warnings := Apply(&File{
-		ExcludeClasses:    []string{"NoSuchClass"},
-		ExcludeFunctions:  []string{"NoSuchFunc"},
-		RemapTypes:        []TypeRemap{{Class: "FooThing", Selector: "doIt:", Param: "nope", ObjCType: "int"}},
+		ExcludeClasses:   []string{"NoSuchClass"},
+		ExcludeFunctions: []string{"NoSuchFunc"},
+		RemapTypes: []TypeRemap{
+			{Class: "FooThing", Selector: "doIt:", Param: "nope", ObjCType: "int"},
+		},
 		ForceBitmaskEnums: []string{"NoSuchEnum"},
 		AvailabilityFixes: []AvailabilityFix{{Class: "NoSuchClass", MacOSIntroduced: "11.0"}},
 	}, framework)
@@ -177,7 +250,10 @@ func TestApplyAdjacent(t *testing.T) {
 
 func TestApplyAdjacentMissingFileIsNoop(t *testing.T) {
 	framework := sampleFramework()
-	warnings, err := ApplyAdjacent(filepath.Join(t.TempDir(), "Foo-arm64-26.5.gometa.json"), framework)
+	warnings, err := ApplyAdjacent(
+		filepath.Join(t.TempDir(), "Foo-arm64-26.5.gometa.json"),
+		framework,
+	)
 	if err != nil || warnings != nil {
 		t.Errorf("missing overrides file must be a no-op, got warnings=%v err=%v", warnings, err)
 	}

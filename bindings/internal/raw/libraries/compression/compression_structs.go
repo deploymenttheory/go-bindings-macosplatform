@@ -7,7 +7,7 @@ package compression
 import "unsafe"
 
 // A structure representing a compression stream.
-// [compression.h:310]
+// [compression.h:316]
 type CompressionStream struct {
 	Dst_ptr  *uint8
 	Dst_size uint64

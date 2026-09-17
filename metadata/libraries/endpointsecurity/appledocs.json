@@ -23,6 +23,9 @@
     "es_auto_unlock_type_t": {
       "url": "https://developer.apple.com/documentation/endpointsecurity/es_auto_unlock_type_t"
     },
+    "es_bootstrap_target_type_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_bootstrap_target_type_t"
+    },
     "es_btm_item_type_t": {
       "url": "https://developer.apple.com/documentation/endpointsecurity/es_btm_item_type_t"
     },
@@ -33,6 +36,10 @@
     "es_cs_validation_category_t": {
       "doc": "es_cs_validation_category",
       "url": "https://developer.apple.com/documentation/endpointsecurity/es_cs_validation_category_t"
+    },
+    "es_deadline_miss_mode_t": {
+      "doc": "Deadline miss mode for ES clients",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_deadline_miss_mode_t"
     },
     "es_destination_type_t": {
       "doc": "A type that indicates how a file event presents its destination to the client.",
@@ -160,6 +167,12 @@
     },
     "es_event_authorization_petition_t": {
       "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_authorization_petition_t"
+    },
+    "es_event_bootstrap_check_in_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_bootstrap_check_in_t"
+    },
+    "es_event_bootstrap_look_up_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_bootstrap_look_up_t"
     },
     "es_event_btm_launch_item_add_t": {
       "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_btm_launch_item_add_t"
@@ -538,6 +551,9 @@
     "es_file_t": {
       "doc": "A type that represents a file related to an Endpoint Security event.",
       "url": "https://developer.apple.com/documentation/endpointsecurity/es_file_t"
+    },
+    "es_lightweight_code_requirement_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_lightweight_code_requirement_t"
     },
     "es_message_t": {
       "doc": "A message from the Endpoint Security subsystem that describes a security event.",

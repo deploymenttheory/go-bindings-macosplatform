@@ -39,14 +39,17 @@ type MethodRef struct {
 	IsClassMethod bool   `json:"class_method,omitempty"`
 }
 
-// TypeRemap corrects the ObjC type of a single parameter or return value.
-// Address a method via Class+Selector or a C function via Function.
+// TypeRemap corrects the ObjC type of a parameter, return value, or struct field.
+// Address a method via Class+Selector, a C function via Function, or a field via
+// Struct+Field. An empty Field matches only a single anonymous field.
 // Param is the parameter name to remap, or "return" for the return type.
 type TypeRemap struct {
 	Class         string `json:"class,omitempty"`
 	Selector      string `json:"selector,omitempty"`
 	IsClassMethod bool   `json:"class_method,omitempty"`
 	Function      string `json:"function,omitempty"`
+	Struct        string `json:"struct,omitempty"`
+	Field         string `json:"field,omitempty"`
 	Param         string `json:"param"`
 	ObjCType      string `json:"objc_type"`
 }
@@ -100,7 +103,10 @@ func LoadAdjacent(metaPath string) (file *File, found bool, err error) {
 // ApplyAdjacent looks for an override file next to metaPath and applies it to
 // framework. A missing file is not an error. Returned warnings list override
 // entries that matched nothing — stale after an SDK re-scan.
-func ApplyAdjacent(metaPath string, framework *macosplatformmetadata.FrameworkMeta) ([]string, error) {
+func ApplyAdjacent(
+	metaPath string,
+	framework *macosplatformmetadata.FrameworkMeta,
+) ([]string, error) {
 	file, found, err := LoadAdjacent(metaPath)
 	if err != nil || !found {
 		return nil, err
@@ -212,14 +218,20 @@ func Apply(file *File, framework *macosplatformmetadata.FrameworkMeta) []string 
 }
 
 func describeRemap(remap TypeRemap) string {
+	if remap.Struct != "" {
+		return fmt.Sprintf("struct %s field %q", remap.Struct, remap.Field)
+	}
 	if remap.Function != "" {
 		return fmt.Sprintf("function %s param %q", remap.Function, remap.Param)
 	}
 	return fmt.Sprintf("%s.%s param %q", remap.Class, remap.Selector, remap.Param)
 }
 
-// applyRemap rewrites one param/return ObjC type. Reports whether anything matched.
+// applyRemap rewrites one field/param/return ObjC type. Reports whether anything matched.
 func applyRemap(remap TypeRemap, framework *macosplatformmetadata.FrameworkMeta) bool {
+	if remap.Struct != "" {
+		return remapStructField(remap, framework)
+	}
 	if remap.Function != "" {
 		matched := false
 		for i := range framework.Functions {
@@ -253,7 +265,35 @@ func applyRemap(remap TypeRemap, framework *macosplatformmetadata.FrameworkMeta)
 	return matched
 }
 
-func remapParams(remap TypeRemap, params []macosplatformmetadata.Param, retType *macosplatformmetadata.ReturnType) bool {
+func remapStructField(remap TypeRemap, framework *macosplatformmetadata.FrameworkMeta) bool {
+	record, ok := framework.Structs[remap.Struct]
+	if !ok {
+		return false
+	}
+	index := -1
+	for i, field := range record.Fields {
+		if field.Name != remap.Field {
+			continue
+		}
+		if index >= 0 {
+			return false // Anonymous fields must be unambiguous; do not partially apply.
+		}
+		index = i
+	}
+	if index < 0 {
+		return false
+	}
+	record.Fields[index].ObjCType = remap.ObjCType
+	record.Fields[index].GoType = "" // Recompute any cached mapping for the corrected type.
+	framework.Structs[remap.Struct] = record
+	return true
+}
+
+func remapParams(
+	remap TypeRemap,
+	params []macosplatformmetadata.Param,
+	retType *macosplatformmetadata.ReturnType,
+) bool {
 	if remap.Param == "return" {
 		retType.ObjCType = remap.ObjCType
 		return true
@@ -267,7 +307,10 @@ func remapParams(remap TypeRemap, params []macosplatformmetadata.Param, retType 
 	return false
 }
 
-func applyAvailabilityFix(fix AvailabilityFix, framework *macosplatformmetadata.FrameworkMeta) bool {
+func applyAvailabilityFix(
+	fix AvailabilityFix,
+	framework *macosplatformmetadata.FrameworkMeta,
+) bool {
 	patch := func(avail *macosplatformmetadata.Availability) {
 		if fix.MacOSIntroduced != "" {
 			avail.MacOSIntroduced = fix.MacOSIntroduced

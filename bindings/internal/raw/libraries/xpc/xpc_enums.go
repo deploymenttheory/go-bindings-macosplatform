@@ -143,7 +143,7 @@ func (i DispatchBlockFlagsT) isMultiValue() bool {
 	return true
 }
 
-// [fcntl.h:582]
+// [fcntl.h:601]
 type FilesecPropertyT int32
 
 const (
@@ -985,28 +985,80 @@ func (i QosClassT) isMultiValue() bool {
 	return false
 }
 
+// [task_info.h:188]
+type TaskSharedRegionStubsT uint8
+
+const (
+	TASK_SHARED_REGION_STUBS_DEV  TaskSharedRegionStubsT = 1
+	TASK_SHARED_REGION_STUBS_PROD TaskSharedRegionStubsT = 2
+)
+
+func (i TaskSharedRegionStubsT) String() string {
+	switch i {
+	case TASK_SHARED_REGION_STUBS_DEV:
+		return "TASK_SHARED_REGION_STUBS_DEV"
+	case TASK_SHARED_REGION_STUBS_PROD:
+		return "TASK_SHARED_REGION_STUBS_PROD"
+	default:
+		return fmt.Sprintf("TaskSharedRegionStubsT(%d)", int64(i))
+	}
+}
+
+func ParseTaskSharedRegionStubsT(v string) (any, error) {
+	result := TASK_SHARED_REGION_STUBS_DEV
+	switch v {
+	case "TASK_SHARED_REGION_STUBS_DEV":
+		result = TASK_SHARED_REGION_STUBS_DEV
+	case "TASK_SHARED_REGION_STUBS_PROD":
+		result = TASK_SHARED_REGION_STUBS_PROD
+	default:
+		return nil, nil
+	}
+	return &result, nil
+}
+
+func SerializeTaskSharedRegionStubsT(values []TaskSharedRegionStubsT) []string {
+	result := make([]string, len(values))
+	for i, v := range values {
+		result[i] = v.String()
+	}
+	return result
+}
+
+func (i TaskSharedRegionStubsT) isMultiValue() bool {
+	return false
+}
+
 // [vm_statistics.h:1098]
 type VirtualMemoryGuardExceptionCodeT uint32
 
 const (
-	KGUARD_EXC_DEALLOC_GAP                   VirtualMemoryGuardExceptionCodeT = 1
-	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        VirtualMemoryGuardExceptionCodeT = 2
-	KGUARD_EXC_RECLAIM_INDEX_FAILURE         VirtualMemoryGuardExceptionCodeT = 4
-	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    VirtualMemoryGuardExceptionCodeT = 8
-	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    VirtualMemoryGuardExceptionCodeT = 9
-	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         VirtualMemoryGuardExceptionCodeT = 10
-	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         VirtualMemoryGuardExceptionCodeT = 11
-	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  VirtualMemoryGuardExceptionCodeT = 12
-	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    VirtualMemoryGuardExceptionCodeT = 13
-	KGUARD_EXC_SEC_ACCESS_FAULT              VirtualMemoryGuardExceptionCodeT = 98
-	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        VirtualMemoryGuardExceptionCodeT = 99
-	KGUARD_EXC_SEC_COPY_DENIED               VirtualMemoryGuardExceptionCodeT = 100
-	KGUARD_EXC_SEC_SHARING_DENIED            VirtualMemoryGuardExceptionCodeT = 101
-	KGUARD_EXC_MTE_SYNC_FAULT                VirtualMemoryGuardExceptionCodeT = 200
-	KGUARD_EXC_MTE_ASYNC_USER_FAULT          VirtualMemoryGuardExceptionCodeT = 201
-	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          VirtualMemoryGuardExceptionCodeT = 202
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT VirtualMemoryGuardExceptionCodeT = 203
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT VirtualMemoryGuardExceptionCodeT = 204
+	KGUARD_EXC_DEALLOC_GAP                  VirtualMemoryGuardExceptionCodeT = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE       VirtualMemoryGuardExceptionCodeT = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE        VirtualMemoryGuardExceptionCodeT = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE   VirtualMemoryGuardExceptionCodeT = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE   VirtualMemoryGuardExceptionCodeT = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE        VirtualMemoryGuardExceptionCodeT = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE        VirtualMemoryGuardExceptionCodeT = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION VirtualMemoryGuardExceptionCodeT = 12
+	// Guard exception sent to a thread when a CoW defeatured map attempts to copy memory which is not permitted by system policy.
+	KGUARD_EXC_COW_DEFEATURED_COPY_DENIED VirtualMemoryGuardExceptionCodeT = 13
+	// Guard exception sent to a thread when it attempts to extract a given type of memory in a way which is not permitted for CoW defeatured maps.
+	KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED VirtualMemoryGuardExceptionCodeT = 14
+	// Guard exception sent to a thread when it attempts to copy-map a memory entry which was created for sharing by a CoW defeatured map.
+	KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED VirtualMemoryGuardExceptionCodeT = 15
+	KGUARD_EXC_COW_DEFEATURED_FIRST                    VirtualMemoryGuardExceptionCodeT = 13
+	KGUARD_EXC_COW_DEFEATURED_LAST                     VirtualMemoryGuardExceptionCodeT = 15
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY              VirtualMemoryGuardExceptionCodeT = 16
+	KGUARD_EXC_SEC_ACCESS_FAULT                        VirtualMemoryGuardExceptionCodeT = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT                  VirtualMemoryGuardExceptionCodeT = 99
+	KGUARD_EXC_SEC_COPY_DENIED                         VirtualMemoryGuardExceptionCodeT = 100
+	KGUARD_EXC_SEC_SHARING_DENIED                      VirtualMemoryGuardExceptionCodeT = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                          VirtualMemoryGuardExceptionCodeT = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT                    VirtualMemoryGuardExceptionCodeT = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT                    VirtualMemoryGuardExceptionCodeT = 202
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT           VirtualMemoryGuardExceptionCodeT = 203
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT           VirtualMemoryGuardExceptionCodeT = 204
 )
 
 func (i VirtualMemoryGuardExceptionCodeT) String() string {
@@ -1027,6 +1079,12 @@ func (i VirtualMemoryGuardExceptionCodeT) String() string {
 		return "kGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE"
 	case KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION:
 		return "kGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION"
+	case KGUARD_EXC_COW_DEFEATURED_COPY_DENIED:
+		return "kGUARD_EXC_COW_DEFEATURED_COPY_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED:
+		return "kGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED"
+	case KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED:
+		return "kGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED"
 	case KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY:
 		return "kGUARD_EXC_LARGE_ALLOCATION_TELEMETRY"
 	case KGUARD_EXC_SEC_ACCESS_FAULT:
@@ -1071,6 +1129,16 @@ func ParseVirtualMemoryGuardExceptionCodeT(v string) (any, error) {
 		result = KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE
 	case "kGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION":
 		result = KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION
+	case "kGUARD_EXC_COW_DEFEATURED_COPY_DENIED":
+		result = KGUARD_EXC_COW_DEFEATURED_COPY_DENIED
+	case "kGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED":
+		result = KGUARD_EXC_COW_DEFEATURED_EXTRACT_DENIED
+	case "kGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED":
+		result = KGUARD_EXC_COW_DEFEATURED_SHARE_MAP_AS_COPY_DENIED
+	case "kGUARD_EXC_COW_DEFEATURED_FIRST":
+		result = KGUARD_EXC_COW_DEFEATURED_FIRST
+	case "kGUARD_EXC_COW_DEFEATURED_LAST":
+		result = KGUARD_EXC_COW_DEFEATURED_LAST
 	case "kGUARD_EXC_LARGE_ALLOCATION_TELEMETRY":
 		result = KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY
 	case "kGUARD_EXC_SEC_ACCESS_FAULT":

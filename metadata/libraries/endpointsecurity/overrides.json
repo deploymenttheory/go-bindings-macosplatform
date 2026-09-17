@@ -1,0 +1,15 @@
+{
+ "comment": "SDK 27 arm64 unions must occupy inline storage, not an unsafe.Pointer. Native Clang probes give es_process_t.reserved size 16/alignment 1 at offset 212, and es_event_bootstrap_look_up_t.target size 56/alignment 8 at offset 64. Equivalent C arrays preserve those layouts; the former has exactly one anonymous field. Acceptance layout tests guard these SDK-specific corrections.",
+ "remap_types": [
+  {
+   "struct": "es_process_t",
+   "field": "",
+   "objc_type": "unsigned char [16]"
+  },
+  {
+   "struct": "es_event_bootstrap_look_up_t",
+   "field": "target",
+   "objc_type": "uint64_t [7]"
+  }
+ ]
+}

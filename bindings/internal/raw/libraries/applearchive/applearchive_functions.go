@@ -217,7 +217,7 @@ func AAFileStreamOpenWithPath(path string, open_flags int32, open_mode uint16) *
 }
 
 // @abstract Open a new temporary file descriptor and create a file stream @discussion All calls are directly mapped to the read, write, etc. system calls. AAByteStreamClose will remove the file. @return a new stream instance on success, and NULL on failure
-// [AAByteStream.h:268]
+// [AAByteStream.h:276]
 // ID: objc-sym AppleArchive.AATempFileStreamOpen
 func AATempFileStreamOpen() *AAByteStream {
 	_ptr := _pg_AATempFileStreamOpen()
@@ -225,14 +225,14 @@ func AATempFileStreamOpen() *AAByteStream {
 }
 
 // @abstract Create a shared buffer and associated pair of stream streams @discussion This shared buffer allows data buffering between two threads. The writer thread writes to the buffer through \p ostream and blocks when full, and the reader thread reads from the buffer through \p istream and blocks when empty. If \p ostream receives a write call with nbyte=0, it is considered EOF, and after all data is read, further reads on \p istream will return 0. @param ostream is initialized with a new sequential write stream, writing data to the buffer @param istream is initialized with a new sequential read stream, reading data from the buffer @param buffer_capacity is the size to allocate for the buffer (bytes) @return 0 and set both streams to new instances on success, return a negative error code and set both streams to NULL on failure
-// [AAByteStream.h:287]
+// [AAByteStream.h:295]
 // ID: objc-sym AppleArchive.AASharedBufferPipeOpen
 func AASharedBufferPipeOpen(ostream unsafe.Pointer, istream unsafe.Pointer, buffer_capacity uint64) int32 {
 	return _pg_AASharedBufferPipeOpen(ostream, istream, buffer_capacity)
 }
 
 // @abstract Process all data of a stream @discussion Read all bytes from \p istream, and write them to \p ostream. @param istream input byte stream @param ostream output byte stream @return number of bytes processed on success, and a negative error code on failure
-// [AAByteStream.h:305]
+// [AAByteStream.h:313]
 // ID: objc-sym AppleArchive.AAByteStreamProcess
 func AAByteStreamProcess(istream *AAByteStream, ostream *AAByteStream) int64 {
 	var _ptr_istream unsafe.Pointer

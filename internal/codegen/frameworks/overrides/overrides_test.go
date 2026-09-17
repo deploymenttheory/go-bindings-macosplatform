@@ -13,20 +13,45 @@ func sampleFramework() *meta.FrameworkMeta {
 		Classes: map[string]meta.Class{
 			"FooThing": {
 				Methods: []meta.Method{
-					{Selector: "doIt:", Params: []meta.Param{{Name: "value", ObjCType: "NSInteger"}},
-						Return: meta.ReturnType{ObjCType: "void"}},
+					{
+						Selector: "doIt:",
+						Params:   []meta.Param{{Name: "value", ObjCType: "NSInteger"}},
+						Return:   meta.ReturnType{ObjCType: "void"},
+					},
 					{Selector: "broken", Return: meta.ReturnType{ObjCType: "FooRef"}},
 				},
 			},
 			"FooGone": {},
 		},
 		Enums: map[string]meta.Enum{
-			"FooOptions": {GoType: "uint64", Members: []meta.EnumMember{{Name: "FooA", Value: "1"}}},
+			"FooOptions": {
+				GoType:  "uint64",
+				Members: []meta.EnumMember{{Name: "FooA", Value: "1"}},
+			},
 		},
 		Functions: []meta.Function{
-			{Name: "FooCreate", Params: []meta.Param{{Name: "flags", ObjCType: "int"}},
-				Return: meta.ReturnType{ObjCType: "void *"}},
+			{
+				Name: "FooCreate", Params: []meta.Param{{Name: "flags", ObjCType: "int"}},
+				Return: meta.ReturnType{ObjCType: "void *"},
+			},
 		},
+	}
+}
+
+func TestStructFieldRemapUsesSharedSemantics(t *testing.T) {
+	framework := sampleFramework()
+	framework.Structs = map[string]meta.Struct{
+		"Record": {Fields: []meta.StructField{{Name: "target", ObjCType: "union (anonymous)"}}},
+	}
+	warnings := Apply(&rootoverrides.File{RemapTypes: []rootoverrides.TypeRemap{
+		{Struct: "Record", Field: "target", ObjCType: "uint64_t [7]"},
+	}}, framework)
+	if len(warnings) != 0 || framework.Structs["Record"].Fields[0].ObjCType != "uint64_t [7]" {
+		t.Fatalf(
+			"struct remap diverged from shared semantics: warnings=%v record=%+v",
+			warnings,
+			framework.Structs["Record"],
+		)
 	}
 }
 

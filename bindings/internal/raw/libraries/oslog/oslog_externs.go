@@ -10,7 +10,7 @@ import (
 )
 
 var (
-	// [log.h:56]
+	// [log.h:76]
 	// Introduced: macOS 10.11
 	_os_log_default unsafe.Pointer
 	// [log.h]

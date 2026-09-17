@@ -15,7 +15,7 @@ type AuditTokenT struct {
 }
 
 // @brief Describes, for a single right, the class of that right and if it was granted @field right_name            The name of the right being considered @field rule_class            The class of the right being considered The rule class determines how the operating system determines if it should be granted or not @field granted               Indicates if the right was granted or not
-// [ESMessage.h:1986]
+// [ESMessage.h:1987]
 type EsAuthorizationResultT struct {
 	Right_name EsStringTokenT
 	Rule_class EsAuthorizationRuleClassT
@@ -23,7 +23,7 @@ type EsAuthorizationResultT struct {
 }
 
 // @brief Structure describing a BTM launch item @field item_type             Type of launch item. @field legacy                True iff item is a legacy plist. @field managed               True iff item is managed by MDM. @field uid                   User ID for the item (may be user nobody (-2)). @field item_url              URL for item. If file URL describing a relative path, it is relative to app_url. @field app_url               Optional.  URL for app the item is attributed to.
-// [ESMessage.h:169]
+// [ESMessage.h:170]
 type EsBtmLaunchItemT struct {
 	Item_type EsBtmItemTypeT
 	Legacy    bool
@@ -38,7 +38,7 @@ type EsClientS struct {
 }
 
 // A type for an event that indicates the checking of a file’s access permission.
-// [ESMessage.h:1015]
+// [ESMessage.h:1016]
 type EsEventAccessT struct {
 	Mode     int32
 	Target   *EsFileT
@@ -46,14 +46,14 @@ type EsEventAccessT struct {
 }
 
 // @brief Auto Unlock authentication data for type ES_AUTHENTICATION_TYPE_AUTO_UNLOCK. @field username          Username for which the authentication was attempted. @field type              Purpose of the authentication. @note This kind of authentication is performed when authenticating to the local Mac using an Apple Watch for the purpose of unlocking the machine or confirming an authorization prompt.  Auto Unlock is part of Continuity. @note This event type does not support caching (notify-only).
-// [ESMessage.h:1484]
+// [ESMessage.h:1485]
 type EsEventAuthenticationAutoUnlockT struct {
 	Username EsStringTokenT
 	Type     EsAutoUnlockTypeT
 }
 
 // @brief OpenDirectory authentication data for type ES_AUTHENTICATION_TYPE_OD. @field instigator            Process that instigated the authentication (XPC caller that asked for authentication). @field record_type           OD record type against which OD is authenticating. Typically "Users", but other record types can auth too. @field record_name           OD record name against which OD is authenticating. For record type "Users", this is the username. @field node_name             OD node against which OD is authenticating. Typically one of "/Local/Default", "/LDAPv3/<server>" or "/Active Directory/<domain>". @field db_path               Optional.  If node_name is "/Local/Default", this is the path of the database against which OD is authenticating. @field instigator_token      Audit token of the process that instigated this event.
-// [ESMessage.h:1420]
+// [ESMessage.h:1421]
 type EsEventAuthenticationOdT struct {
 	Instigator       *EsProcessT
 	Record_type      EsStringTokenT
@@ -64,7 +64,7 @@ type EsEventAuthenticationOdT struct {
 }
 
 // @brief Notification that an authentication was performed. @field success           True iff authentication was successful. @field type              The type of authentication. @field data              Type-specific data describing the authentication. @note This event type does not support caching (notify-only).
-// [ESMessage.h:1498]
+// [ESMessage.h:1499]
 type EsEventAuthenticationT struct {
 	Success bool
 	Type    EsAuthenticationTypeT
@@ -72,7 +72,7 @@ type EsEventAuthenticationT struct {
 }
 
 // @brief Token authentication data for type ES_AUTHENTICATION_TYPE_TOKEN. @field instigator            Process that instigated the authentication (XPC caller that asked for authentication). @field pubkey_hash           Hash of the public key which CryptoTokenKit is authenticating. @field token_id              Token identifier of the event which CryptoTokenKit is authenticating. @field kerberos_principal    Optional.  This will be available if token is used for GSS PKINIT authentication for obtaining a kerberos TGT.  NULL in all other cases. @field instigator_token      Audit token of the process that instigated this event.
-// [ESMessage.h:1464]
+// [ESMessage.h:1465]
 type EsEventAuthenticationTokenT struct {
 	Instigator         *EsProcessT
 	Pubkey_hash        EsStringTokenT
@@ -82,7 +82,7 @@ type EsEventAuthenticationTokenT struct {
 }
 
 // @brief TouchID authentication data for type ES_AUTHENTICATION_TYPE_TOUCHID. @field instigator            Process that instigated the authentication (XPC caller that asked for authentication). @field touchid_mode          TouchID authentication type @field has_uid               Describes whether or not the uid of the user authenticated is available @field uid                   Union that is valid when `has_uid` is set to `true` @field uid.uid               uid of user that was authenticated. This will be set when `success` is true and `touchid_mode` is of verification type i.e. ES_TOUCHID_MODE_VERIFICATION @field instigator_token      Audit token of the process that instigated this event.
-// [ESMessage.h:1442]
+// [ESMessage.h:1443]
 type EsEventAuthenticationTouchidT struct {
 	Instigator       *EsProcessT
 	Touchid_mode     EsTouchidModeT
@@ -92,7 +92,7 @@ type EsEventAuthenticationTouchidT struct {
 }
 
 // @brief Notification that a process had it's right petition judged @field instigator            Process that submitted the petition (XPC caller) @field petitioner            Process that created the petition @field return_code           The overall result of the petition. 0 indicates success. Possible return codes are defined Security framework "Authorization/Authorizatioh.h" @field result_count          The number of elements in `results` @field results               Array of results. One for each right that was peititioned @field instigator_token      Audit token of the process that submitted the petition. @field petitioner_token      Audit token of the process that created the petition. @note This event type does not support caching (notify-only).
-// [ESMessage.h:2006]
+// [ESMessage.h:2007]
 type EsEventAuthorizationJudgementT struct {
 	Instigator       *EsProcessT
 	Petitioner       *EsProcessT
@@ -104,7 +104,7 @@ type EsEventAuthorizationJudgementT struct {
 }
 
 // @brief Notification that a process peititioned for certain authorization rights @field instigator            Process that submitted the petition (XPC caller) @field petitioner            Process that created the petition @field flags                 Flags associated with the petition. Defined Security framework "Authorization/Authorizatioh.h" @field right_count           The number of elements in `rights` @field rights                Array of string tokens, each token is the name of a right being requested @field instigator_token      Audit token of the process that submitted the petition. @field petitioner_token      Audit token of the process that created the petition. @note This event type does not support caching (notify-only).
-// [ESMessage.h:1967]
+// [ESMessage.h:1968]
 type EsEventAuthorizationPetitionT struct {
 	Instigator       *EsProcessT
 	Petitioner       *EsProcessT
@@ -115,8 +115,26 @@ type EsEventAuthorizationPetitionT struct {
 	Petitioner_token AuditTokenT
 }
 
+// @brief A process called `bootstrap_check_in()` to register a named service port with launchd. Subsequent `bootstrap_look_up()` calls from other processes will resolve the registered name into a send right to this port. Submitted by launchd on behalf of the instigator. Because launchd is the submitter, the enclosing message's `es_message_t.process` describes launchd, not the process that called `bootstrap_check_in()`. The actual caller is reported as `instigator` / `instigator_token` below. @field instigator       (Optional) The process that called `bootstrap_check_in()`. Best-effort; may be null if the instigator exited before the event was constructed. @field instigator_token Audit token of the instigator, captured by launchd at RPC time. Always present. @field service_name     The name registered by the instigator. @note This event type does not support caching.
+// [ESMessage.h:2467]
+type EsEventBootstrapCheckInT struct {
+	Instigator       *EsProcessT
+	Instigator_token AuditTokenT
+	Service_name     EsStringTokenT
+}
+
+// @brief A process called `bootstrap_look_up()` to resolve a named service port registered with launchd. launchd returns a send right to that port; subsequent `mach_msg()` calls to it are delivered to the owner of the corresponding receive right. Submitted by launchd on behalf of the instigator. Because launchd is the submitter, the enclosing message's `es_message_t.process` describes launchd, not the process that called `bootstrap_look_up()`. The actual caller is reported as `instigator` / `instigator_token` below. @field instigator       (Optional) The process that called `bootstrap_look_up()`. Best-effort; may be null if the instigator exited before the event was constructed. @field instigator_token Audit token of the instigator, captured by launchd at RPC time. Always present. @field service_name     The name the instigator asked launchd to resolve. @field target_type      Discriminator for the `target` union. Selects between a running owner (PROCESS) and a lazy-launched owner (JOB). @field target           Identity of the entity that would receive messages sent to the returned port if the lookup is allowed. On the PROCESS arm, `target` (es_process_t) carries the live owner's full process info including code-signing identity (target->signing_id, target->team_id) sourced from the kernel. No identity from launchd's cached Lightweight Code Requirement (LWCR) is reported on this arm — read it from the es_process_t. On the JOB arm there is no live process, so the only available identity is the LWCR launchd had configured (if any). `lwcr` is a nullable pointer: NULL when no LWCR was cached for this service. @note This event type does not support caching.
+// [ESMessage.h:2517]
+type EsEventBootstrapLookUpT struct {
+	Instigator       *EsProcessT
+	Instigator_token AuditTokenT
+	Service_name     EsStringTokenT
+	Target_type      EsBootstrapTargetTypeT
+	Target           [7]uint64
+}
+
 // @brief Notification for launch item being made known to background task management.  This includes launch agents and daemons as well as login items added by the user, via MDM or by an app. @field instigator            Optional.  Process that instigated the BTM operation (XPC caller that asked for the item to be added). @field app                   Optional.  App process that registered the item. @field item                  BTM launch item. @field executable_path       Optional.  If available and applicable, the POSIX executable path from the launchd plist. If the path is relative, it is relative to item->app_url. @field instigator_token      Audit token of the process that instigated this event. @field app_token             Audit token of the app process that registered the item. @note May be emitted for items where an add was already seen previously, with or without the item having changed. @note This event type does not support caching (notify-only).
-// [ESMessage.h:1802]
+// [ESMessage.h:1803]
 type EsEventBtmLaunchItemAddT struct {
 	Instigator       *EsProcessT
 	App              *EsProcessT
@@ -127,7 +145,7 @@ type EsEventBtmLaunchItemAddT struct {
 }
 
 // @brief Notification for launch item being removed from background task management.  This includes launch agents and daemons as well as login items added by the user, via MDM or by an app. @field instigator            Optional.  Process that instigated the BTM operation (XPC caller that asked for the item to be removed). @field app                   Optional.  App process that registered the item. @field item                  BTM launch item. @field instigator_token      Audit token of the process that instigated this event. @field app_token             Audit token of the app process that removed the item. @note This event type does not support caching (notify-only).
-// [ESMessage.h:1825]
+// [ESMessage.h:1826]
 type EsEventBtmLaunchItemRemoveT struct {
 	Instigator       *EsProcessT
 	App              *EsProcessT
@@ -137,21 +155,21 @@ type EsEventBtmLaunchItemRemoveT struct {
 }
 
 // A type for an event that indicates a change to a process’s working directory.
-// [ESMessage.h:764]
+// [ESMessage.h:765]
 type EsEventChdirT struct {
 	Target   *EsFileT
 	Reserved [64]uint8
 }
 
 // A type for an event that indicates a change to a process’s root directory.
-// [ESMessage.h:788]
+// [ESMessage.h:789]
 type EsEventChrootT struct {
 	Target   *EsFileT
 	Reserved [64]uint8
 }
 
 // A type for an event that indicates the cloning of a file.
-// [ESMessage.h:1046]
+// [ESMessage.h:1047]
 type EsEventCloneT struct {
 	Source      *EsFileT
 	Target_dir  *EsFileT
@@ -160,7 +178,7 @@ type EsEventCloneT struct {
 }
 
 // A type for an event that indicates the closing of a file.
-// [ESMessage.h:644]
+// [ESMessage.h:645]
 type EsEventCloseT struct {
 	Modified bool
 	Target   *EsFileT
@@ -168,7 +186,7 @@ type EsEventCloseT struct {
 }
 
 // A type for an event that indicates the copying of a file by use of a system call.
-// [ESMessage.h:1070]
+// [ESMessage.h:1071]
 type EsEventCopyfileT struct {
 	Source      *EsFileT
 	Target_file *EsFileT
@@ -180,7 +198,7 @@ type EsEventCopyfileT struct {
 }
 
 // A type for an event that indicates the creation of a file.
-// [ESMessage.h:688]
+// [ESMessage.h:689]
 type EsEventCreateT struct {
 	Destination_type EsDestinationTypeT
 	Destination      unsafe.Pointer
@@ -189,13 +207,13 @@ type EsEventCreateT struct {
 }
 
 // A type for an event that indicates the invalidation of a process’ code signing status.
-// [ESMessage.h:1290]
+// [ESMessage.h:1291]
 type EsEventCsInvalidatedT struct {
 	Reserved [64]uint8
 }
 
 // A type for an event that indicates the deletion of an extended attribute from a file.
-// [ESMessage.h:567]
+// [ESMessage.h:568]
 type EsEventDeleteextattrT struct {
 	Target   *EsFileT
 	Extattr  EsStringTokenT
@@ -203,14 +221,14 @@ type EsEventDeleteextattrT struct {
 }
 
 // A type for an event that indicates the duplication of a file descriptor.
-// [ESMessage.h:1142]
+// [ESMessage.h:1143]
 type EsEventDupT struct {
 	Target   *EsFileT
 	Reserved [64]uint8
 }
 
 // A type for an event that indicates the exchange of data between two files.
-// [ESMessage.h:727]
+// [ESMessage.h:728]
 type EsEventExchangedataT struct {
 	File1    *EsFileT
 	File2    *EsFileT
@@ -218,7 +236,7 @@ type EsEventExchangedataT struct {
 }
 
 // A type for an event that indicates the execution of a process.
-// [ESMessage.h:248]
+// [ESMessage.h:249]
 type EsEventExecT struct {
 	Target         *EsProcessT
 	Dyld_exec_path EsStringTokenT
@@ -226,14 +244,14 @@ type EsEventExecT struct {
 }
 
 // A type for an event that indicates a process exiting.
-// [ESMessage.h:714]
+// [ESMessage.h:715]
 type EsEventExitT struct {
 	Stat     int32
 	Reserved [64]uint8
 }
 
 // A type for an event that indicates the manipulation of a file descriptor.
-// [ESMessage.h:1088]
+// [ESMessage.h:1089]
 type EsEventFcntlT struct {
 	Target   *EsFileT
 	Cmd      int32
@@ -241,7 +259,7 @@ type EsEventFcntlT struct {
 }
 
 // A type for an event that indicates the materialization of a file provider.
-// [ESMessage.h:970]
+// [ESMessage.h:971]
 type EsEventFileProviderMaterializeT struct {
 	Instigator       *EsProcessT
 	Source           *EsFileT
@@ -251,7 +269,7 @@ type EsEventFileProviderMaterializeT struct {
 }
 
 // A type for an event that indicates an update to a file provider.
-// [ESMessage.h:954]
+// [ESMessage.h:955]
 type EsEventFileProviderUpdateT struct {
 	Source      *EsFileT
 	Target_path EsStringTokenT
@@ -259,21 +277,21 @@ type EsEventFileProviderUpdateT struct {
 }
 
 // A type for an event that indicates the forking of a process.
-// [ESMessage.h:443]
+// [ESMessage.h:444]
 type EsEventForkT struct {
 	Child    *EsProcessT
 	Reserved [64]uint8
 }
 
 // A type for an event that indicates the retrieval of a file-system path.
-// [ESMessage.h:1116]
+// [ESMessage.h:1117]
 type EsEventFsgetpathT struct {
 	Target   *EsFileT
 	Reserved [64]uint8
 }
 
 // @brief Notification for a gatekeeper_user_override events. @field file_type                The type of the file field. If Endpoint security can't lookup the file at event submission it will emit a path instead of an es_file_t @field file                     Describes the target file that is being overridden by the user @field sha256                   SHA256 of the file. Provided if the filesize is less than 100MB. @field signing_info             Signing Information, available if the file has been signed. @note This event type does not support caching (notify-only). @note Hashes are calculated in usermode by Gatekeeper. There is no guarantee that any other program including the kernel will observe the same file at the reported path. Furthermore there is no guarantee that the CDHash is valid or that it matches the containing binary.
-// [ESMessage.h:2457]
+// [ESMessage.h:2549]
 type EsEventGatekeeperUserOverrideT struct {
 	File_type    EsGatekeeperUserOverrideFileTypeT
 	File         unsafe.Pointer
@@ -282,7 +300,7 @@ type EsEventGatekeeperUserOverrideT struct {
 }
 
 // A type for an event that indicates the retrieval of a task’s inspect port.
-// [ESMessage.h:894]
+// [ESMessage.h:895]
 type EsEventGetTaskInspectT struct {
 	Target   *EsProcessT
 	Type     EsGetTaskTypeT
@@ -290,7 +308,7 @@ type EsEventGetTaskInspectT struct {
 }
 
 // A type for an event that indicates the retrieval of a task’s name port.
-// [ESMessage.h:912]
+// [ESMessage.h:913]
 type EsEventGetTaskNameT struct {
 	Target   *EsProcessT
 	Type     EsGetTaskTypeT
@@ -298,7 +316,7 @@ type EsEventGetTaskNameT struct {
 }
 
 // A type for an event that indicates the retrieval of a task’s read port.
-// [ESMessage.h:876]
+// [ESMessage.h:877]
 type EsEventGetTaskReadT struct {
 	Target   *EsProcessT
 	Type     EsGetTaskTypeT
@@ -306,7 +324,7 @@ type EsEventGetTaskReadT struct {
 }
 
 // A type for an event that indicates the retrieval of a task’s control port.
-// [ESMessage.h:857]
+// [ESMessage.h:858]
 type EsEventGetTaskT struct {
 	Target   *EsProcessT
 	Type     EsGetTaskTypeT
@@ -314,7 +332,7 @@ type EsEventGetTaskT struct {
 }
 
 // A type for an event that indicates the retrieval of attributes from a file.
-// [ESMessage.h:926]
+// [ESMessage.h:927]
 type EsEventGetattrlistT struct {
 	Attrlist unsafe.Pointer
 	Target   *EsFileT
@@ -322,7 +340,7 @@ type EsEventGetattrlistT struct {
 }
 
 // A type for an event that indicates the retrieval of an extended attribute from a file.
-// [ESMessage.h:553]
+// [ESMessage.h:554]
 type EsEventGetextattrT struct {
 	Target   *EsFileT
 	Extattr  EsStringTokenT
@@ -336,7 +354,7 @@ type EsEventIdT struct {
 }
 
 // A type for an event that indicates the opening of an IOKit device.
-// [ESMessage.h:825]
+// [ESMessage.h:826]
 type EsEventIokitOpenT struct {
 	User_client_type   uint32
 	User_client_class  EsStringTokenT
@@ -346,21 +364,21 @@ type EsEventIokitOpenT struct {
 }
 
 // A type for an event that indicates the loading of a kernel extension.
-// [ESMessage.h:324]
+// [ESMessage.h:325]
 type EsEventKextloadT struct {
 	Identifier EsStringTokenT
 	Reserved   [64]uint8
 }
 
 // A type for an event that indicates the unloading of a Kernel Extension (KEXT).
-// [ESMessage.h:336]
+// [ESMessage.h:337]
 type EsEventKextunloadT struct {
 	Identifier EsStringTokenT
 	Reserved   [64]uint8
 }
 
 // A type for an event that indicates the creation of a hard link.
-// [ESMessage.h:387]
+// [ESMessage.h:388]
 type EsEventLinkT struct {
 	Source          *EsFileT
 	Target_dir      *EsFileT
@@ -369,14 +387,14 @@ type EsEventLinkT struct {
 }
 
 // A type for an event that indicates the retrieval of multiple extended attributes from a file.
-// [ESMessage.h:800]
+// [ESMessage.h:801]
 type EsEventListextattrT struct {
 	Target   *EsFileT
 	Reserved [64]uint8
 }
 
 // @brief Notification for authenticated login event from /usr/bin/login. @field success               True iff login was successful. @field failure_message       Optional. Failure message generated. @field username              Username used for login. @field has_uid               Describes whether or not the uid of the user logged in is available or not. @field uid                   Union that is valid when `has_uid` is set to `true` @field uid.uid               uid of user that was logged in. @note This event type does not support caching (notify-only).
-// [ESMessage.h:1759]
+// [ESMessage.h:1760]
 type EsEventLoginLoginT struct {
 	Success         bool
 	Failure_message EsStringTokenT
@@ -386,14 +404,14 @@ type EsEventLoginLoginT struct {
 }
 
 // @brief Notification for authenticated logout event from /usr/bin/login. @field username              Username used for login. @field uid                   uid of user that was logged in. @note This event type does not support caching (notify-only).
-// [ESMessage.h:1777]
+// [ESMessage.h:1778]
 type EsEventLoginLogoutT struct {
 	Username EsStringTokenT
 	Uid      uint32
 }
 
 // A type for an event that indicates the lookup of a file’s path.
-// [ESMessage.h:1001]
+// [ESMessage.h:1002]
 type EsEventLookupT struct {
 	Source_dir      *EsFileT
 	Relative_target EsStringTokenT
@@ -401,35 +419,35 @@ type EsEventLookupT struct {
 }
 
 // @brief Notification that LoginWindow locked the screen of a session. @field username              Short username of the user. @field graphical_session_id  Graphical session id of the session. @note This event type does not support caching (notify-only).
-// [ESMessage.h:1615]
+// [ESMessage.h:1616]
 type EsEventLwSessionLockT struct {
 	Username             EsStringTokenT
 	Graphical_session_id uint32
 }
 
 // @brief Notification that LoginWindow has logged in a user. @field username              Short username of the user. @field graphical_session_id  Graphical session id of the session. @note This event type does not support caching (notify-only).
-// [ESMessage.h:1589]
+// [ESMessage.h:1590]
 type EsEventLwSessionLoginT struct {
 	Username             EsStringTokenT
 	Graphical_session_id uint32
 }
 
 // @brief Notification that LoginWindow has logged out a user. @field username              Short username of the user. @field graphical_session_id  Graphical session id of the session. @note This event type does not support caching (notify-only).
-// [ESMessage.h:1602]
+// [ESMessage.h:1603]
 type EsEventLwSessionLogoutT struct {
 	Username             EsStringTokenT
 	Graphical_session_id uint32
 }
 
 // @brief Notification that LoginWindow unlocked the screen of a session. @field username              Short username of the user. @field graphical_session_id  Graphical session id of the session. @note This event type does not support caching (notify-only).
-// [ESMessage.h:1628]
+// [ESMessage.h:1629]
 type EsEventLwSessionUnlockT struct {
 	Username             EsStringTokenT
 	Graphical_session_id uint32
 }
 
 // A type for an event that indicates the mapping of memory to a file.
-// [ESMessage.h:369]
+// [ESMessage.h:370]
 type EsEventMmapT struct {
 	Protection     int32
 	Max_protection int32
@@ -440,7 +458,7 @@ type EsEventMmapT struct {
 }
 
 // A type for an event that indicates the mounting of a file system.
-// [ESMessage.h:402]
+// [ESMessage.h:403]
 type EsEventMountT struct {
 	Statfs      unsafe.Pointer
 	Disposition EsMountDispositionT
@@ -448,7 +466,7 @@ type EsEventMountT struct {
 }
 
 // A type for an event that indicates a change to protection of memory-mapped pages.
-// [ESMessage.h:457]
+// [ESMessage.h:458]
 type EsEventMprotectT struct {
 	Protection int32
 	Address    uint64
@@ -457,7 +475,7 @@ type EsEventMprotectT struct {
 }
 
 // @brief Notification that an attribute is being set. @field instigator              Process that instigated operation (XPC caller). @field error_code              0 indicates the operation succeeded. Values indicating specific failure reasons are defined in odconstants.h. @field record_type             The type of the record for which the attribute is being set. @field record_name             The name of the record for which the attribute is being set. @field attribute_name          The name of the attribute that was set. @field attribute_value_count   The size of attribute_value_array. @field attribute_values        Array of attribute values that were set. @field node_name               OD node being mutated. Typically one of "/Local/Default", "/LDAPv3/<server>" or "/Active Directory/<domain>". @field db_path                 Optional.  If node_name is "/Local/Default", this is the path of the database against which OD is authenticating. @field instigator_token        Audit token of the process that instigated this event. @note This event type does not support caching (notify-only). @note Attributes conceptually have the type `Map String (Set String)`. Each OD record has a Map of attribute name to Set of attribute value. An attribute set operation indicates the entire set of attribute values was replaced. @note The new set of attribute values may be empty.
-// [ESMessage.h:2312]
+// [ESMessage.h:2313]
 type EsEventOdAttributeSetT struct {
 	Instigator            *EsProcessT
 	Error_code            int32
@@ -472,7 +490,7 @@ type EsEventOdAttributeSetT struct {
 }
 
 // @brief Notification that an attribute value was added to a record. @field instigator            Process that instigated operation (XPC caller). @field error_code            0 indicates the operation succeeded. Values indicating specific failure reasons are defined in odconstants.h. @field record_type           The type of the record to which the attribute value was added. @field record_name           The name of the record to which the attribute value was added. @field attribute_name        The name of the attribute to which the value was added. @field attribute_value       The value that was added. @field node_name             OD node being mutated. Typically one of "/Local/Default", "/LDAPv3/<server>" or "/Active Directory/<domain>". @field db_path               Optional.  If node_name is "/Local/Default", this is the path of the database against which OD is authenticating. @field instigator_token      Audit token of the process that instigated this event. @note This event type does not support caching (notify-only). @note Attributes conceptually have the type `Map String (Set String)`. Each OD record has a Map of attribute name to Set of attribute value. When an attribute value is added, it is inserted into the set of values for that name.
-// [ESMessage.h:2239]
+// [ESMessage.h:2240]
 type EsEventOdAttributeValueAddT struct {
 	Instigator       *EsProcessT
 	Error_code       int32
@@ -486,7 +504,7 @@ type EsEventOdAttributeValueAddT struct {
 }
 
 // @brief Notification that an attribute value was removed from a record. @field instigator            Process that instigated operation (XPC caller). @field error_code            0 indicates the operation succeeded. Values indicating specific failure reasons are defined in odconstants.h. @field record_type           The type of the record from which the attribute value was removed. @field record_name           The name of the record from which the attribute value was removed. @field attribute_name        The name of the attribute from which the value was removed. @field attribute_value       The value that was removed. @field node_name             OD node being mutated. Typically one of "/Local/Default", "/LDAPv3/<server>" or "/Active Directory/<domain>". @field db_path               Optional.  If node_name is "/Local/Default", this is the path of the database against which OD is authenticating. @field instigator_token      Audit token of the process that instigated this event. @note This event type does not support caching (notify-only). @note Attributes conceptually have the type `Map String (Set String)`. Each OD record has a Map of attribute name to Set of attribute value. When an attribute value is removed, it is subtraced from the set of values for that name. @note Removing a value that was never added is a no-op.
-// [ESMessage.h:2275]
+// [ESMessage.h:2276]
 type EsEventOdAttributeValueRemoveT struct {
 	Instigator       *EsProcessT
 	Error_code       int32
@@ -500,7 +518,7 @@ type EsEventOdAttributeValueRemoveT struct {
 }
 
 // @brief Notification that a group was created. @field instigator              Process that instigated operation (XPC caller). @field error_code              0 indicates the operation succeeded. Values indicating specific failure reasons are defined in odconstants.h. @field group_name              The name of the group that was created. @field node_name               OD node being mutated. Typically one of "/Local/Default", "/LDAPv3/<server>" or "/Active Directory/<domain>". @field db_path                 Optional.  If node_name is "/Local/Default", this is the path of the database against which OD is authenticating. @field instigator_token        Audit token of the process that instigated this event. @note This event type does not support caching (notify-only).
-// [ESMessage.h:2368]
+// [ESMessage.h:2369]
 type EsEventOdCreateGroupT struct {
 	Instigator       *EsProcessT
 	Error_code       int32
@@ -511,7 +529,7 @@ type EsEventOdCreateGroupT struct {
 }
 
 // @brief Notification that a user account was created. @field instigator              Process that instigated operation (XPC caller). @field error_code              0 indicates the operation succeeded. Values indicating specific failure reasons are defined in odconstants.h. @field user_name               The name of the user account that was created. @field node_name               OD node being mutated. Typically one of "/Local/Default", "/LDAPv3/<server>" or "/Active Directory/<domain>". @field db_path                 Optional.  If node_name is "/Local/Default", this is the path of the database against which OD is authenticating. @field instigator_token        Audit token of the process that instigated this event. @note This event type does not support caching (notify-only).
-// [ESMessage.h:2342]
+// [ESMessage.h:2343]
 type EsEventOdCreateUserT struct {
 	Instigator       *EsProcessT
 	Error_code       int32
@@ -522,7 +540,7 @@ type EsEventOdCreateUserT struct {
 }
 
 // @brief Notification that a group was deleted. @field instigator              Process that instigated operation (XPC caller). @field error_code              0 indicates the operation succeeded. Values indicating specific failure reasons are defined in odconstants.h. @field group_name              The name of the group that was deleted. @field node_name               OD node being mutated. Typically one of "/Local/Default", "/LDAPv3/<server>" or "/Active Directory/<domain>". @field db_path                 Optional.  If node_name is "/Local/Default", this is the path of the database against which OD is authenticating. @field instigator_token        Audit token of the process that instigated this event. @note This event type does not support caching (notify-only).
-// [ESMessage.h:2421]
+// [ESMessage.h:2422]
 type EsEventOdDeleteGroupT struct {
 	Instigator       *EsProcessT
 	Error_code       int32
@@ -533,7 +551,7 @@ type EsEventOdDeleteGroupT struct {
 }
 
 // @brief Notification that a user account was deleted. @field instigator              Process that instigated operation (XPC caller). @field error_code              0 indicates the operation succeeded. Values indicating specific failure reasons are defined in odconstants.h. @field user_name               The name of the user account that was deleted. @field node_name               OD node being mutated. Typically one of "/Local/Default", "/LDAPv3/<server>" or "/Active Directory/<domain>". @field db_path                 Optional.  If node_name is "/Local/Default", this is the path of the database against which OD is authenticating. @field instigator_token        Audit token of the process that instigated this event. @note This event type does not support caching (notify-only).
-// [ESMessage.h:2394]
+// [ESMessage.h:2395]
 type EsEventOdDeleteUserT struct {
 	Instigator       *EsProcessT
 	Error_code       int32
@@ -544,7 +562,7 @@ type EsEventOdDeleteUserT struct {
 }
 
 // @brief Notification that a user account was disabled. @field instigator            Process that instigated operation (XPC caller). @field error_code            0 indicates the operation succeeded. Values indicating specific failure reasons are defined in odconstants.h. @field user_name             The name of the user account that was disabled. @field node_name             OD node being mutated. Typically one of "/Local/Default", "/LDAPv3/<server>" or "/Active Directory/<domain>". @field db_path               Optional.  If node_name is "/Local/Default", this is the path of the database against which OD is authenticating. @field instigator_token      Audit token of the process that instigated this event. @note This event type does not support caching (notify-only).
-// [ESMessage.h:2180]
+// [ESMessage.h:2181]
 type EsEventOdDisableUserT struct {
 	Instigator       *EsProcessT
 	Error_code       int32
@@ -555,7 +573,7 @@ type EsEventOdDisableUserT struct {
 }
 
 // @brief Notification that a user account was enabled. @field instigator            Process that instigated operation (XPC caller). @field error_code            0 indicates the operation succeeded. Values indicating specific failure reasons are defined in odconstants.h. @field user_name             The name of the user account that was enabled. @field node_name             OD node being mutated. Typically one of "/Local/Default", "/LDAPv3/<server>" or "/Active Directory/<domain>". @field db_path               Optional.  If node_name is "/Local/Default", this is the path of the database against which OD is authenticating. @field instigator_token      Audit token of the process that instigated this event. @note This event type does not support caching (notify-only).
-// [ESMessage.h:2206]
+// [ESMessage.h:2207]
 type EsEventOdEnableUserT struct {
 	Instigator       *EsProcessT
 	Error_code       int32
@@ -566,7 +584,7 @@ type EsEventOdEnableUserT struct {
 }
 
 // @brief Notification that a member was added to a group. @field instigator            Process that instigated operation (XPC caller). @field group_name            The group to which the member was added. @field member                The identity of the member added. @field node_name             OD node being mutated. Typically one of "/Local/Default", "/LDAPv3/<server>" or "/Active Directory/<domain>". @field db_path               Optional.  If node_name is "/Local/Default", this is the path of the database against which OD is authenticating. @field instigator_token      Audit token of the process that instigated this event. @note This event type does not support caching (notify-only). @note This event does not indicate that a member was actually added. For example when adding a user to a group they are already a member of.
-// [ESMessage.h:2049]
+// [ESMessage.h:2050]
 type EsEventOdGroupAddT struct {
 	Instigator       *EsProcessT
 	Error_code       int32
@@ -578,7 +596,7 @@ type EsEventOdGroupAddT struct {
 }
 
 // @brief Notification that a member was removed from a group. @field instigator            Process that instigated operation (XPC caller). @field group_name            The group from which the member was removed. @field member                The identity of the member removed. @field node_name             OD node being mutated. Typically one of "/Local/Default", "/LDAPv3/<server>" or "/Active Directory/<domain>". @field db_path               Optional.  If node_name is "/Local/Default", this is the path of the database against which OD is authenticating. @field instigator_token      Audit token of the process that instigated this event. @note This event type does not support caching (notify-only). @note This event does not indicate that a member was actually removed. For example when removing a user from a group they are not a member of.
-// [ESMessage.h:2077]
+// [ESMessage.h:2078]
 type EsEventOdGroupRemoveT struct {
 	Instigator       *EsProcessT
 	Error_code       int32
@@ -590,7 +608,7 @@ type EsEventOdGroupRemoveT struct {
 }
 
 // @brief Notification that a group had it's members initialised or replaced. @field instigator            Process that instigated operation (XPC caller). @field error_code            0 indicates the operation succeeded. Values indicating specific failure reasons are defined in odconstants.h. @field group_name            The group for which members were set. @field members               Array of new members. @field node_name             OD node being mutated. Typically one of "/Local/Default", "/LDAPv3/<server>" or "/Active Directory/<domain>". @field db_path               Optional.  If node_name is "/Local/Default", this is the path of the database against which OD is authenticating. @field instigator_token      Audit token of the process that instigated this event. @note This event type does not support caching (notify-only). @note This event does not indicate that a member was actually removed. For example when removing a user from a group they are not a member of.
-// [ESMessage.h:2125]
+// [ESMessage.h:2126]
 type EsEventOdGroupSetT struct {
 	Instigator       *EsProcessT
 	Error_code       int32
@@ -602,7 +620,7 @@ type EsEventOdGroupSetT struct {
 }
 
 // @brief Notification that an account had its password modified. @field instigator            Process that instigated operation (XPC caller). @field error_code            0 indicates the operation succeeded. Values indicating specific failure reasons are defined in odconstants.h. @field account_type          The type of the account for which the password was modified. @field account_name          The name of the account for which the password was modified. @field node_name             OD node being mutated. Typically one of "/Local/Default", "/LDAPv3/<server>" or "/Active Directory/<domain>". @field db_path               Optional.  If node_name is "/Local/Default", this is the path of the database against which OD is authenticating. @field instigator_token      Audit token of the process that instigated this event. @note This event type does not support caching (notify-only).
-// [ESMessage.h:2153]
+// [ESMessage.h:2154]
 type EsEventOdModifyPasswordT struct {
 	Instigator       *EsProcessT
 	Error_code       int32
@@ -614,7 +632,7 @@ type EsEventOdModifyPasswordT struct {
 }
 
 // A type for an event that indicates the opening of a file.
-// [ESMessage.h:308]
+// [ESMessage.h:309]
 type EsEventOpenT struct {
 	Fflag    int32
 	File     *EsFileT
@@ -622,7 +640,7 @@ type EsEventOpenT struct {
 }
 
 // @brief Notification for OpenSSH login event. @field success               True iff login was successful. @field result_type           Result type for the login attempt. @field source_address_type   Type of source address. @field source_address        Source address of connection. @field username              Username used for login. @field has_uid               Describes whether or not the uid of the user logged in is available @field uid                   Union that is valid when `has_uid` is set to `true` @field uid.uid               uid of user that was logged in. @note This is a connection-level event.  An SSH connection that is used for multiple interactive sessions and/or non-interactive commands will emit only a single successful login event. @note This event type does not support caching (notify-only).
-// [ESMessage.h:1714]
+// [ESMessage.h:1715]
 type EsEventOpensshLoginT struct {
 	Success             bool
 	Result_type         EsOpensshLoginResultTypeT
@@ -634,7 +652,7 @@ type EsEventOpensshLoginT struct {
 }
 
 // @brief Notification for OpenSSH logout event. @field source_address_type   Type of address used in the connection. @field source_address        Source address of the connection. @field username              Username which got logged out. @field uid                   uid of user that was logged out. @note This is a connection-level event.  An SSH connection that is used for multiple interactive sessions and/or non-interactive commands will emit only a single logout event. @note This event type does not support caching (notify-only).
-// [ESMessage.h:1740]
+// [ESMessage.h:1741]
 type EsEventOpensshLogoutT struct {
 	Source_address_type EsAddressTypeT
 	Source_address      EsStringTokenT
@@ -643,7 +661,7 @@ type EsEventOpensshLogoutT struct {
 }
 
 // A type that indicates the call used and the data returned when a process checks on the access of the target process.
-// [ESMessage.h:1241]
+// [ESMessage.h:1242]
 type EsEventProcCheckT struct {
 	Target   *EsProcessT
 	Type     EsProcCheckTypeT
@@ -652,7 +670,7 @@ type EsEventProcCheckT struct {
 }
 
 // A type for an event that indicates a call to suspend, resume, or shut down sockets for a process.
-// [ESMessage.h:1272]
+// [ESMessage.h:1273]
 type EsEventProcSuspendResumeT struct {
 	Target   *EsProcessT
 	Type     EsProcSuspendResumeTypeT
@@ -660,7 +678,7 @@ type EsEventProcSuspendResumeT struct {
 }
 
 // @brief Notification for Profiles installed on the system. @field instigator            Process that instigated the Profile install or update. @field is_update             Indicates if the profile is an update to an already installed profile. @field profile               Profile install item. @field instigator_token      Audit token of the process that instigated this event. @note This event type does not support caching (notify-only).
-// [ESMessage.h:1933]
+// [ESMessage.h:1934]
 type EsEventProfileAddT struct {
 	Instigator       *EsProcessT
 	Is_update        bool
@@ -669,7 +687,7 @@ type EsEventProfileAddT struct {
 }
 
 // @brief Notification for Profiles removed on the system. @field instigator            Process that instigated the Profile removal. @field profile               Profile being removed. @field instigator_token      Audit token of the process that instigated this event. @note This event type does not support caching (notify-only).
-// [ESMessage.h:1948]
+// [ESMessage.h:1949]
 type EsEventProfileRemoveT struct {
 	Instigator       *EsProcessT
 	Profile          *EsProfileT
@@ -677,35 +695,35 @@ type EsEventProfileRemoveT struct {
 }
 
 // A type for an event that indicates the closing of a pseudoterminal device.
-// [ESMessage.h:1227]
+// [ESMessage.h:1228]
 type EsEventPtyCloseT struct {
 	Dev      int32
 	Reserved [64]uint8
 }
 
 // A type for an event that indicates the granting of a pseudoterminal device to a user.
-// [ESMessage.h:1215]
+// [ESMessage.h:1216]
 type EsEventPtyGrantT struct {
 	Dev      int32
 	Reserved [64]uint8
 }
 
 // A type for an event that indicates the reading of a file-system directory.
-// [ESMessage.h:1101]
+// [ESMessage.h:1102]
 type EsEventReaddirT struct {
 	Target   *EsFileT
 	Reserved [64]uint8
 }
 
 // A type for an event that indicates the reading of a symbolic link.
-// [ESMessage.h:986]
+// [ESMessage.h:987]
 type EsEventReadlinkT struct {
 	Source   *EsFileT
 	Reserved [64]uint8
 }
 
 // A type for an event that indicates an attempt by one process to create a thread in another process.
-// [ESMessage.h:1321]
+// [ESMessage.h:1322]
 type EsEventRemoteThreadCreateT struct {
 	Target       *EsProcessT
 	Thread_state *EsThreadStateT
@@ -713,7 +731,7 @@ type EsEventRemoteThreadCreateT struct {
 }
 
 // A type for an event that indicates the unmounting of a file system.
-// [ESMessage.h:429]
+// [ESMessage.h:430]
 type EsEventRemountT struct {
 	Statfs        unsafe.Pointer
 	Remount_flags uint64
@@ -722,7 +740,7 @@ type EsEventRemountT struct {
 }
 
 // A type for an event that indicates the renaming of a file.
-// [ESMessage.h:518]
+// [ESMessage.h:519]
 type EsEventRenameT struct {
 	Source           *EsFileT
 	Destination_type EsDestinationTypeT
@@ -731,7 +749,7 @@ type EsEventRenameT struct {
 }
 
 // @brief Notification that Screen Sharing has attached to a graphical session. @field success               True iff Screen Sharing successfully attached. @field source_address_type   Type of source address. @field source_address        Optional.  Source address of connection, or NULL. Depending on the transport used, the source address may or may not be available. @field viewer_appleid        Optional.  For screen sharing initiated using an Apple ID (e.g., from Messages or FaceTime), this is the viewer's (client's) Apple ID.  It is not necessarily the Apple ID that invited the screen sharing.  NULL if unavailable. @field authentication_type   Type of authentication. @field authentication_username  Optional.  Username used for authentication to Screen Sharing.  NULL if authentication type doesn't use an username (e.g. simple VNC password). @field session_username      Optional.  Username of the loginwindow session if available,  NULL otherwise. @field existing_session      True iff there was an existing user session. @field graphical_session_id  Graphical session id of the screen shared. @note This event type does not support caching (notify-only). @discussion This event is not emitted when a screensharing session has the same source and destination address. For example if device A is acting as a NAT gateway for device B, then a screensharing session from B -> A would not emit an event.
-// [ESMessage.h:1660]
+// [ESMessage.h:1661]
 type EsEventScreensharingAttachT struct {
 	Success                 bool
 	Source_address_type     EsAddressTypeT
@@ -745,7 +763,7 @@ type EsEventScreensharingAttachT struct {
 }
 
 // @brief Notification that Screen Sharing has detached from a graphical session. @field source_address_type   Type of source address. @field source_address        Optional.  Source address of connection, or NULL. Depending on the transport used, the source address may or may not be available. @field viewer_appleid        Optional.  For screen sharing initiated using an Apple ID (e.g., from Messages or FaceTime), this is the viewer's (client's) Apple ID.  It is not necessarily the Apple ID that invited the screen sharing.  NULL if unavailable. @field graphical_session_id  Graphical session id of the screen shared. @note This event type does not support caching (notify-only). @discussion This event is not emitted when a screensharing session has the same source and destination address.
-// [ESMessage.h:1689]
+// [ESMessage.h:1690]
 type EsEventScreensharingDetachT struct {
 	Source_address_type  EsAddressTypeT
 	Source_address       EsStringTokenT
@@ -754,7 +772,7 @@ type EsEventScreensharingDetachT struct {
 }
 
 // A type for an event that indicates searching a volume or mounted file system.
-// [ESMessage.h:1256]
+// [ESMessage.h:1257]
 type EsEventSearchfsT struct {
 	Attrlist unsafe.Pointer
 	Target   *EsFileT
@@ -762,7 +780,7 @@ type EsEventSearchfsT struct {
 }
 
 // A type for an event that indicates the setting of a file’s access control list.
-// [ESMessage.h:1199]
+// [ESMessage.h:1200]
 type EsEventSetaclT struct {
 	Target       *EsFileT
 	Set_or_clear EsSetOrClearT
@@ -771,7 +789,7 @@ type EsEventSetaclT struct {
 }
 
 // A type for an event that indicates the setting of a file attribute.
-// [ESMessage.h:940]
+// [ESMessage.h:941]
 type EsEventSetattrlistT struct {
 	Attrlist unsafe.Pointer
 	Target   *EsFileT
@@ -779,21 +797,21 @@ type EsEventSetattrlistT struct {
 }
 
 // A type for an event that indicates the setting of a process’s effective group ID.
-// [ESMessage.h:1370]
+// [ESMessage.h:1371]
 type EsEventSetegidT struct {
 	Egid     uint32
 	Reserved [64]uint8
 }
 
 // A type for an event that indicates the setting of a process’s effective user ID.
-// [ESMessage.h:1358]
+// [ESMessage.h:1359]
 type EsEventSeteuidT struct {
 	Euid     uint32
 	Reserved [64]uint8
 }
 
 // A type for an event that indicates the setting of a file’s extended attribute.
-// [ESMessage.h:539]
+// [ESMessage.h:540]
 type EsEventSetextattrT struct {
 	Target   *EsFileT
 	Extattr  EsStringTokenT
@@ -801,7 +819,7 @@ type EsEventSetextattrT struct {
 }
 
 // A type for an event that indicates the setting of a file’s flags.
-// [ESMessage.h:601]
+// [ESMessage.h:602]
 type EsEventSetflagsT struct {
 	Flags    uint32
 	Target   *EsFileT
@@ -809,14 +827,14 @@ type EsEventSetflagsT struct {
 }
 
 // A type for an event that indicates the setting of a process’s group ID.
-// [ESMessage.h:1346]
+// [ESMessage.h:1347]
 type EsEventSetgidT struct {
 	Gid      uint32
 	Reserved [64]uint8
 }
 
 // A type for an event that indicates the setting of a file’s mode.
-// [ESMessage.h:584]
+// [ESMessage.h:585]
 type EsEventSetmodeT struct {
 	Mode     uint16
 	Target   *EsFileT
@@ -824,7 +842,7 @@ type EsEventSetmodeT struct {
 }
 
 // A type for an event that indicates the setting of a file’s owner.
-// [ESMessage.h:619]
+// [ESMessage.h:620]
 type EsEventSetownerT struct {
 	Uid      uint32
 	Gid      uint32
@@ -833,7 +851,7 @@ type EsEventSetownerT struct {
 }
 
 // A type for an event that indicates the setting of a process’s real and effective group IDs.
-// [ESMessage.h:1397]
+// [ESMessage.h:1398]
 type EsEventSetregidT struct {
 	Rgid     uint32
 	Egid     uint32
@@ -841,7 +859,7 @@ type EsEventSetregidT struct {
 }
 
 // A type for an event that indicates the setting of a process’s real and effective user IDs.
-// [ESMessage.h:1383]
+// [ESMessage.h:1384]
 type EsEventSetreuidT struct {
 	Ruid     uint32
 	Euid     uint32
@@ -849,20 +867,20 @@ type EsEventSetreuidT struct {
 }
 
 // A type for an event that indicates the modification of the system time.
-// [ESMessage.h:1131]
+// [ESMessage.h:1132]
 type EsEventSettimeT struct {
 	Reserved [64]uint8
 }
 
 // A type for an event that indicates the setting of a process’s user ID.
-// [ESMessage.h:1334]
+// [ESMessage.h:1335]
 type EsEventSetuidT struct {
 	Uid      uint32
 	Reserved [64]uint8
 }
 
 // A type for an event that indicates the sending of a signal to a process.
-// [ESMessage.h:491]
+// [ESMessage.h:492]
 type EsEventSignalT struct {
 	Sig        int32
 	Target     *EsProcessT
@@ -871,14 +889,14 @@ type EsEventSignalT struct {
 }
 
 // A type for an event that indicates the retrieval of a file’s status.
-// [ESMessage.h:776]
+// [ESMessage.h:777]
 type EsEventStatT struct {
 	Target   *EsFileT
 	Reserved [64]uint8
 }
 
 // @brief Notification for a su policy decisions events. @field success           True iff su was successful. @field failure_message   Optional. If success is false, a failure message is contained in this field @field from_uid          The uid of the user who initiated the su @field from_username     The username of the user who initiated the su @field has_to_uid        True iff su was successful, Describes whether or not the to_uid is interpretable @field to_uid            Optional. If success, the user ID that is going to be substituted @field to_username       Optional. If success, the user name that is going to be substituted @field shell             Optional. If success, the shell is going to execute @field argc              The length of argv @field argv              If success, the arguments are passed into to the shell @field env_count         The length of env @field env               If success, list of environment variables that is going to be substituted @note This event type does not support caching (notify-only). Should always emit on success but will only emit on security relevant failures. For example, Endpoint Security clients will not get an event for su being passed invalid command line arguments.
-// [ESMessage.h:1855]
+// [ESMessage.h:1856]
 type EsEventSuT struct {
 	Success         bool
 	Failure_message EsStringTokenT
@@ -895,7 +913,7 @@ type EsEventSuT struct {
 }
 
 // @brief Notification for a sudo event. @field success          True iff sudo was successful @field reject_info      Optional. When success is false, describes why sudo was rejected @field has_from_uid     Describes whether or not the from_uid is interpretable @field from_uid         Optional. The uid of the user who initiated the sudo @field from_username    Optional. The username of the user who initiated the sudo @field has_to_uid       Describes whether or not the to_uid is interpretable @field to_uid           Optional. If success, the user ID that is going to be substituted @field to_username      Optional. If success, the user name that is going to be substituted @field command          Optional. The command to be run @note This event type does not support caching (notify-only).
-// [ESMessage.h:1902]
+// [ESMessage.h:1903]
 type EsEventSudoT struct {
 	Success       bool
 	Reject_info   *EsSudoRejectInfoT
@@ -909,7 +927,7 @@ type EsEventSudoT struct {
 }
 
 // @brief TCC Modification Event. Occurs when a TCC permission is granted or revoked. @field service             The TCC service for which permissions are being modified. @field identity            The identity of the application that is the subject of the permission. @field identity_type       The identity type of the application string (Bundle ID, path, etc). @field update_type         The type of TCC modification event (Grant/Revoke etc) @field instigator_token    Audit token of the instigator of the modification. @field instigator          (Optional) The process information for the instigator. @field responsible_token   (Optional) Audit token of the responsible process for the modification. @field responsible         (Optional) The process information for the responsible process. @field right               The resulting TCC permission of the operation/modification. @field reason              The reason the TCC permissions were updated. @note This event type does not support caching.
-// [ESMessage.h:280]
+// [ESMessage.h:281]
 type EsEventTccModifyT struct {
 	Service           EsStringTokenT
 	Identity          EsStringTokenT
@@ -924,21 +942,21 @@ type EsEventTccModifyT struct {
 }
 
 // A type for an event that indicates an attempt by one process to attach to another process.
-// [ESMessage.h:1305]
+// [ESMessage.h:1306]
 type EsEventTraceT struct {
 	Target   *EsProcessT
 	Reserved [64]uint8
 }
 
 // A type for an event that indicates the truncation of a file.
-// [ESMessage.h:752]
+// [ESMessage.h:753]
 type EsEventTruncateT struct {
 	Target   *EsFileT
 	Reserved [64]uint8
 }
 
 // A type for an event that indicates the binding of a socket to a path.
-// [ESMessage.h:1156]
+// [ESMessage.h:1157]
 type EsEventUipcBindT struct {
 	Dir      *EsFileT
 	Filename EsStringTokenT
@@ -947,7 +965,7 @@ type EsEventUipcBindT struct {
 }
 
 // A type for an event that indicates the connection of a socket.
-// [ESMessage.h:1173]
+// [ESMessage.h:1174]
 type EsEventUipcConnectT struct {
 	File     *EsFileT
 	Domain   int32
@@ -957,7 +975,7 @@ type EsEventUipcConnectT struct {
 }
 
 // A type for an event that indicates the deletion of a file.
-// [ESMessage.h:352]
+// [ESMessage.h:353]
 type EsEventUnlinkT struct {
 	Target     *EsFileT
 	Parent_dir *EsFileT
@@ -965,14 +983,14 @@ type EsEventUnlinkT struct {
 }
 
 // A type for an event that indicates the unmounting of a file system.
-// [ESMessage.h:415]
+// [ESMessage.h:416]
 type EsEventUnmountT struct {
 	Statfs   unsafe.Pointer
 	Reserved [64]uint8
 }
 
 // A type for an event that indicates a change to a file’s access time or modification time.
-// [ESMessage.h:1030]
+// [ESMessage.h:1031]
 type EsEventUtimesT struct {
 	Target   *EsFileT
 	Atime    bsd.Timespec
@@ -981,14 +999,14 @@ type EsEventUtimesT struct {
 }
 
 // A type for an event that indicates the writing of data to a file.
-// [ESMessage.h:740]
+// [ESMessage.h:741]
 type EsEventWriteT struct {
 	Target   *EsFileT
 	Reserved [64]uint8
 }
 
 // @brief Notification that XProtect detected malware. @field signature_version     Version of the signatures used for detection. Currently corresponds to XProtect version. @field malware_identifier    String identifying the malware that was detected. @field incident_identifier   String identifying the incident, intended for linking multiple malware detected and remediated events. @field detected_path         Path where malware was detected.  This path is not necessarily a malicious binary, it can also be a legitimate file containing a malicious portion. @field detected_executable   Path to malicious binary. This can differ from detected_path when the detected path is an app bundle. @note For any given malware incident, XProtect may emit zero or more xp_malware_detected events, and zero or more xp_malware_remediated events. @note This event type does not support caching (notify-only).
-// [ESMessage.h:1528]
+// [ESMessage.h:1529]
 type EsEventXpMalwareDetectedT struct {
 	Signature_version   EsStringTokenT
 	Malware_identifier  EsStringTokenT
@@ -998,7 +1016,7 @@ type EsEventXpMalwareDetectedT struct {
 }
 
 // @brief Notification that XProtect remediated malware. @field signature_version     Version of the signatures used for remediation. Currently corresponds to XProtect version. @field malware_identifier    String identifying the malware that was detected. @field incident_identifier   String identifying the incident, intended for linking multiple malware detected and remediated events. @field action_type           String indicating the type of action that was taken, e.g. "path_delete". @field success               True iff remediation was successful. @field result_description    String describing specific reasons for failure or success. @field remediated_path       Optional.  Path that was subject to remediation, if any. This path is not necessarily a malicious binary, it can also be a legitimate file containing a malicious portion. Specifically, the file at this path may still exist after successful remediation. @field remediated_process_audit_token  Audit token of process that was subject to remediation, if any. @note For any given malware incident, XProtect may emit zero or more xp_malware_detected events, and zero or more xp_malware_remediated events. @note This event type does not support caching (notify-only).
-// [ESMessage.h:1561]
+// [ESMessage.h:1562]
 type EsEventXpMalwareRemediatedT struct {
 	Signature_version              EsStringTokenT
 	Malware_identifier             EsStringTokenT
@@ -1010,15 +1028,15 @@ type EsEventXpMalwareRemediatedT struct {
 	Remediated_process_audit_token *AuditTokenT
 }
 
-// @brief Notification for an XPC connection being established to a named service. @field service_name          Service name of the named service. @field service_domain_type   The type of XPC domain in which the service resides in. @note This event type does not support caching (notify-only).
-// [ESMessage.h:2438]
+// @brief Notification for an XPC connection being established to a named service. @field service_name          Service name of the named service. @field service_domain_type   The type of XPC domain in which the service resides in. @note This event type does not support caching.
+// [ESMessage.h:2439]
 type EsEventXpcConnectT struct {
 	Service_name        EsStringTokenT
 	Service_domain_type EsXpcDomainTypeT
 }
 
 // A structure that describes an open file descriptor.
-// [ESMessage.h:147]
+// [ESMessage.h:148]
 type EsFdT struct {
 	Fd     int32
 	Fdtype uint32
@@ -1033,8 +1051,15 @@ type EsFileT struct {
 	Stat           unsafe.Pointer
 }
 
+// @brief Identity facts cached from a service's Lightweight Code Requirement (LWCR) — the code-signing constraint launchd was told to enforce when the service binary spawns. Used as a nullable pointer on the JOB arm of `es_event_bootstrap_look_up_t.target`: NULL means launchd had no LWCR cached for this service, distinct from "LWCR was present but carried no team_id / signing_id" (which would be a non-NULL pointer with the corresponding string token's `data` field set to NULL). The PROCESS arm omits this struct entirely — the receiving process's actual code-signing identity is available via `target.process.target->signing_id` / `->team_id` (kernel-sourced from cs_ops on the audit token). Both string token fields preserve the three-state distinction common to optional ES strings: `data == NULL` (the LWCR did not carry this fact), `data != NULL && length == 0` (carried an empty value), and `data != NULL && length > 0` (carried a value). @field team_id     Team Identifier from the LWCR. The token's `data` is NULL when the LWCR did not carry this fact. @field signing_id  Signing Identifier from the LWCR. The token's `data` is NULL when the LWCR did not carry this fact.
+// [ESTypes.h:639]
+type EsLightweightCodeRequirementT struct {
+	Team_id    EsStringTokenT
+	Signing_id EsStringTokenT
+}
+
 // A message from the Endpoint Security subsystem that describes a security event.
-// [ESMessage.h:2672]
+// [ESMessage.h:2766]
 type EsMessageT struct {
 	Version        uint32
 	Time           bsd.Timespec
@@ -1052,7 +1077,7 @@ type EsMessageT struct {
 }
 
 // A structure that describes a path’s muted events.
-// [ESTypes.h:446]
+// [ESTypes.h:468]
 type EsMutedPathT struct {
 	Type        EsMutePathTypeT
 	Event_count uint64
@@ -1061,14 +1086,14 @@ type EsMutedPathT struct {
 }
 
 // A structure for a set of muted paths.
-// [ESTypes.h:459]
+// [ESTypes.h:481]
 type EsMutedPathsT struct {
 	Count uint64
 	Paths *EsMutedPathT
 }
 
 // A structure that describes a process’s muted events.
-// [ESTypes.h:471]
+// [ESTypes.h:493]
 type EsMutedProcessT struct {
 	Audit_token AuditTokenT
 	Event_count uint64
@@ -1076,14 +1101,14 @@ type EsMutedProcessT struct {
 }
 
 // A structure for a set of muted processes.
-// [ESTypes.h:483]
+// [ESTypes.h:505]
 type EsMutedProcessesT struct {
 	Count     uint64
 	Processes *EsMutedProcessT
 }
 
 // @brief An array of group member identities. @field member_type    Indicates the type of the members, and how they are identified. Note that member_type indicates which field of member_array is initialised. @field member_count   The number of elements in member_array. @field member_array   A union of pointers. The initialised member points to the first element of an array of member values.
-// [ESMessage.h:2096]
+// [ESMessage.h:2097]
 type EsOdMemberIdArrayT struct {
 	Member_type  EsOdMemberTypeT
 	Member_count uint64
@@ -1091,7 +1116,7 @@ type EsOdMemberIdArrayT struct {
 }
 
 // @brief The identity of a group member @field member_type    Indicates the type of the member, and how it is identified. Note that member_type indicates which field of member_value is initialised. @field member_value   The member identity.
-// [ESMessage.h:2023]
+// [ESMessage.h:2024]
 type EsOdMemberIdT struct {
 	Member_type  EsOdMemberTypeT
 	Member_value unsafe.Pointer
@@ -1117,10 +1142,12 @@ type EsProcessT struct {
 	Responsible_audit_token AuditTokenT
 	Parent_audit_token      AuditTokenT
 	Cs_validation_category  EsCsValidationCategoryT
+	Field17                 [16]uint8
+	Cdhash_full             EsTokenT
 }
 
 // @brief Structure describing a Profile event @field identifier		Profile identifier. @field uuid         		Profile UUID. @field install_source	Source of Profile installation (MDM/Manual Install) @field organization		Profile organization name. @field display_name		Profile display name. @field scope				Profile scope.
-// [ESMessage.h:188]
+// [ESMessage.h:189]
 type EsProfileT struct {
 	Identifier     EsStringTokenT
 	Uuid           EsStringTokenT
@@ -1131,13 +1158,13 @@ type EsProfileT struct {
 }
 
 // The result of the Endpoint Security subsystem authorization process.
-// [ESMessage.h:2589]
+// [ESMessage.h:2683]
 type EsResultT struct {
 	Result_type EsResultTypeT
 	Result      unsafe.Pointer
 }
 
-// [ESTypes.h:584]
+// [ESTypes.h:606]
 type EsSignedFileInfoT struct {
 	Cdhash     [20]uint8
 	Signing_id EsStringTokenT
@@ -1145,14 +1172,14 @@ type EsSignedFileInfoT struct {
 }
 
 // A pointer to a null-terminated string, and the length in bytes of that string.
-// [ESTypes.h:404]
+// [ESTypes.h:426]
 type EsStringTokenT struct {
 	Length uint64
 	Data   *byte
 }
 
 // @brief Provides context about failures in es_event_sudo_t. @field plugin_name      The sudo plugin that initiated the reject @field plugin_type      The sudo plugin type that initiated the reject @field failure_message  A reason represented by a string for the failure
-// [ESMessage.h:1880]
+// [ESMessage.h:1881]
 type EsSudoRejectInfoT struct {
 	Plugin_name     EsStringTokenT
 	Plugin_type     EsSudoPluginTypeT
@@ -1160,20 +1187,20 @@ type EsSudoRejectInfoT struct {
 }
 
 // A description of a thread’s machine-specfiic state.
-// [ESMessage.h:132]
+// [ESMessage.h:133]
 type EsThreadStateT struct {
 	Flavor int32
 	State  EsTokenT
 }
 
 // A structure that represents a thread in a process.
-// [ESMessage.h:117]
+// [ESMessage.h:118]
 type EsThreadT struct {
 	Thread_id uint64
 }
 
 // An arbitrary buffer of data with its size.
-// [ESTypes.h:395]
+// [ESTypes.h:417]
 type EsTokenT struct {
 	Size uint64
 	Data *uint8

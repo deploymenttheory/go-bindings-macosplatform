@@ -114,9 +114,54 @@ func (h Client) ClearCache() raw.EsClearCacheResultT {
 	return raw.Es_clear_cache(h.ptr)
 }
 
+func (h Client) SyncClient(block func()) raw.EsReturnT {
+	return raw.Es_sync_client(h.ptr, block)
+}
+
+func (h Client) NewClient(handler func(unsafe.Pointer, unsafe.Pointer)) raw.EsNewClientResultT {
+	return raw.Es_new_client(h.ptr, handler)
+}
+
+func (h Client) NewDescendantsClient(handler func(unsafe.Pointer, unsafe.Pointer)) raw.EsNewClientResultT {
+	return raw.Es_new_descendants_client(h.ptr, handler)
+}
+
+func (h Client) SetDeadlineMissMode(mode raw.EsDeadlineMissModeT) raw.EsReturnT {
+	return raw.Es_set_deadline_miss_mode(h.ptr, mode)
+}
+
+func (h Client) GetDeadlineMissMode(mode *raw.EsDeadlineMissModeT) raw.EsReturnT {
+	return raw.Es_get_deadline_miss_mode(h.ptr, mode)
+}
+
+func (h Client) SetDeadlineMaxMilliseconds(events *raw.EsEventTypeT, event_count uint32, milliseconds uint32) raw.EsReturnT {
+	return raw.Es_set_deadline_max_milliseconds(h.ptr, events, event_count, milliseconds)
+}
+
+func (h Client) GetDeadlineMaxMilliseconds(event raw.EsEventTypeT, milliseconds *uint32) raw.EsReturnT {
+	return raw.Es_get_deadline_max_milliseconds(h.ptr, event, milliseconds)
+}
+
+func (h Client) SetDeadlineMinMilliseconds(events *raw.EsEventTypeT, event_count uint32, milliseconds uint32) raw.EsReturnT {
+	return raw.Es_set_deadline_min_milliseconds(h.ptr, events, event_count, milliseconds)
+}
+
+func (h Client) GetDeadlineMinMilliseconds(event raw.EsEventTypeT, milliseconds *uint32) raw.EsReturnT {
+	return raw.Es_get_deadline_min_milliseconds(h.ptr, event, milliseconds)
+}
+
 func (h Client) DeleteClient() raw.EsReturnT {
 	return raw.Es_delete_client(h.ptr)
 }
+
+// XpcObject wraps the C handle xpc_object_t.
+type XpcObject struct{ ptr unsafe.Pointer }
+
+// WrapXpcObject adopts an existing xpc_object_t handle.
+func WrapXpcObject(p unsafe.Pointer) XpcObject { return XpcObject{ptr: p} }
+
+// Ptr returns the underlying xpc_object_t handle.
+func (h XpcObject) Ptr() unsafe.Pointer { return h.ptr }
 
 func MessageSize(msg *raw.EsMessageT) uint64 {
 	return raw.Es_message_size(msg)
@@ -160,6 +205,10 @@ func ExecEnv(event *raw.EsEventExecT, index uint32) raw.EsStringTokenT {
 
 func ExecFd(event *raw.EsEventExecT, index uint32) unsafe.Pointer {
 	return raw.Es_exec_fd(event, index)
+}
+
+func ExecEntitlements(exec *raw.EsEventExecT) XpcObject {
+	return WrapXpcObject(raw.Es_exec_entitlements(exec))
 }
 
 func ReleaseMutedProcesses(muted_processes *raw.EsMutedProcessesT) {

@@ -190,8 +190,8 @@ func RequestNotification(host uint32, notify_type int32, notify_port uint32) err
 	return nil
 }
 
-func LockgroupInfo(host uint32, lockgroup_info LockgroupInfoArray, lockgroup_infoCnt *uint32) error {
-	if _rc := raw.Host_lockgroup_info(host, lockgroup_info.ptr, lockgroup_infoCnt); _rc != 0 {
+func LockgroupInfo(host_priv_t uint32, lockgroup_info LockgroupInfoArray, lockgroup_infoCnt *uint32) error {
+	if _rc := raw.Host_lockgroup_info(host_priv_t, lockgroup_info.ptr, lockgroup_infoCnt); _rc != 0 {
 		return fmt.Errorf("LockgroupInfo"+": status %d", _rc)
 	}
 	return nil

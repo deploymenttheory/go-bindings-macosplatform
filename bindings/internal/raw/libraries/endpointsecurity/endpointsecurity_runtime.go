@@ -30,7 +30,7 @@ func _register(symbol string, register func()) {
 	register()
 }
 
-// SymbolAvailable reports whether the named C symbol was bound when the
+// SymbolAvailable reports whether the named C function was bound when the
 // library loaded. Calling a generated wrapper whose symbol is unavailable
 // dereferences a nil function variable and panics.
 func SymbolAvailable(symbol string) bool {
@@ -58,6 +58,9 @@ func _loadLibrary() {
 	_register("es_exec_arg", func() { purego.RegisterLibFunc(&_pg_es_exec_arg, _endpointsecurityLib, "es_exec_arg") })
 	_register("es_exec_env", func() { purego.RegisterLibFunc(&_pg_es_exec_env, _endpointsecurityLib, "es_exec_env") })
 	_register("es_exec_fd", func() { purego.RegisterLibFunc(&_pg_es_exec_fd, _endpointsecurityLib, "es_exec_fd") })
+	_register("es_exec_entitlements", func() {
+		purego.RegisterLibFunc(&_pg_es_exec_entitlements, _endpointsecurityLib, "es_exec_entitlements")
+	})
 	_register("es_subscribe", func() { purego.RegisterLibFunc(&_pg_es_subscribe, _endpointsecurityLib, "es_subscribe") })
 	_register("es_unsubscribe", func() { purego.RegisterLibFunc(&_pg_es_unsubscribe, _endpointsecurityLib, "es_unsubscribe") })
 	_register("es_unsubscribe_all", func() { purego.RegisterLibFunc(&_pg_es_unsubscribe_all, _endpointsecurityLib, "es_unsubscribe_all") })
@@ -106,7 +109,29 @@ func _loadLibrary() {
 	_register("es_invert_muting", func() { purego.RegisterLibFunc(&_pg_es_invert_muting, _endpointsecurityLib, "es_invert_muting") })
 	_register("es_muting_inverted", func() { purego.RegisterLibFunc(&_pg_es_muting_inverted, _endpointsecurityLib, "es_muting_inverted") })
 	_register("es_clear_cache", func() { purego.RegisterLibFunc(&_pg_es_clear_cache, _endpointsecurityLib, "es_clear_cache") })
+	_register("es_sync_client", func() { purego.RegisterLibFunc(&_pg_es_sync_client, _endpointsecurityLib, "es_sync_client") })
 	_register("es_new_client", func() { purego.RegisterLibFunc(&_pg_es_new_client, _endpointsecurityLib, "es_new_client") })
+	_register("es_new_descendants_client", func() {
+		purego.RegisterLibFunc(&_pg_es_new_descendants_client, _endpointsecurityLib, "es_new_descendants_client")
+	})
+	_register("es_set_deadline_miss_mode", func() {
+		purego.RegisterLibFunc(&_pg_es_set_deadline_miss_mode, _endpointsecurityLib, "es_set_deadline_miss_mode")
+	})
+	_register("es_get_deadline_miss_mode", func() {
+		purego.RegisterLibFunc(&_pg_es_get_deadline_miss_mode, _endpointsecurityLib, "es_get_deadline_miss_mode")
+	})
+	_register("es_set_deadline_max_milliseconds", func() {
+		purego.RegisterLibFunc(&_pg_es_set_deadline_max_milliseconds, _endpointsecurityLib, "es_set_deadline_max_milliseconds")
+	})
+	_register("es_get_deadline_max_milliseconds", func() {
+		purego.RegisterLibFunc(&_pg_es_get_deadline_max_milliseconds, _endpointsecurityLib, "es_get_deadline_max_milliseconds")
+	})
+	_register("es_set_deadline_min_milliseconds", func() {
+		purego.RegisterLibFunc(&_pg_es_set_deadline_min_milliseconds, _endpointsecurityLib, "es_set_deadline_min_milliseconds")
+	})
+	_register("es_get_deadline_min_milliseconds", func() {
+		purego.RegisterLibFunc(&_pg_es_get_deadline_min_milliseconds, _endpointsecurityLib, "es_get_deadline_min_milliseconds")
+	})
 	_register("es_delete_client", func() { purego.RegisterLibFunc(&_pg_es_delete_client, _endpointsecurityLib, "es_delete_client") })
 }
 

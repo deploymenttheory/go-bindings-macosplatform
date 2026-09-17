@@ -6,7 +6,7 @@ package xar
 
 import "unsafe"
 
-// [xar.h:59]
+// [xar.h:60]
 type XarHeader struct {
 	Magic                   uint32
 	Size                    uint16
@@ -16,7 +16,7 @@ type XarHeader struct {
 	Cksum_alg               uint32
 }
 
-// [xar.h:88]
+// [xar.h:89]
 type XarStream struct {
 	Next_out  *byte
 	Avail_out uint32

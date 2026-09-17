@@ -149,7 +149,7 @@ func (i DispatchBlockFlagsT) isMultiValue() bool {
 	return true
 }
 
-// [fcntl.h:582]
+// [fcntl.h:601]
 type FilesecPropertyT int32
 
 const (

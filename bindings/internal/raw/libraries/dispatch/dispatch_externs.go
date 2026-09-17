@@ -10,10 +10,10 @@ import (
 )
 
 var (
-	// [data.h:51]
+	// [data.h:65]
 	// Introduced: macOS 10.7
 	_dispatch_data_destructor_free func()
-	// [data.h:54]
+	// [data.h:68]
 	// Introduced: macOS 10.9
 	_dispatch_data_destructor_munmap func()
 	// [data.h]
@@ -25,40 +25,40 @@ var (
 	// [queue.h]
 	// Introduced: macOS 10.7
 	_dispatch_queue_attr_concurrent unsafe.Pointer
-	// [source.h:76]
+	// [source.h:86]
 	// Introduced: macOS 10.6
 	_dispatch_source_type_data_add unsafe.Pointer
-	// [source.h:79]
+	// [source.h:89]
 	// Introduced: macOS 10.6
 	_dispatch_source_type_data_or unsafe.Pointer
-	// [source.h:84]
+	// [source.h:94]
 	// Introduced: macOS 10.13
 	_dispatch_source_type_data_replace unsafe.Pointer
-	// [source.h:90]
+	// [source.h:100]
 	// Introduced: macOS 10.6
 	_dispatch_source_type_mach_recv unsafe.Pointer
-	// [source.h:87]
+	// [source.h:97]
 	// Introduced: macOS 10.6
 	_dispatch_source_type_mach_send unsafe.Pointer
-	// [source.h:93]
+	// [source.h:103]
 	// Introduced: macOS 10.9
 	_dispatch_source_type_memorypressure unsafe.Pointer
-	// [source.h:96]
+	// [source.h:106]
 	// Introduced: macOS 10.6
 	_dispatch_source_type_proc unsafe.Pointer
-	// [source.h:99]
+	// [source.h:109]
 	// Introduced: macOS 10.6
 	_dispatch_source_type_read unsafe.Pointer
-	// [source.h:102]
+	// [source.h:112]
 	// Introduced: macOS 10.6
 	_dispatch_source_type_signal unsafe.Pointer
-	// [source.h:105]
+	// [source.h:115]
 	// Introduced: macOS 10.6
 	_dispatch_source_type_timer unsafe.Pointer
-	// [source.h:108]
+	// [source.h:118]
 	// Introduced: macOS 10.6
 	_dispatch_source_type_vnode unsafe.Pointer
-	// [source.h:111]
+	// [source.h:121]
 	// Introduced: macOS 10.6
 	_dispatch_source_type_write unsafe.Pointer
 )

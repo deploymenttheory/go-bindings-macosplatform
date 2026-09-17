@@ -7,7 +7,7 @@ package compression
 import "fmt"
 
 // A structure for values that represent compression algorithms.
-// [compression.h:115]
+// [compression.h:119]
 type CompressionAlgorithm int32
 
 const (
@@ -18,6 +18,8 @@ const (
 	COMPRESSION_BROTLI   CompressionAlgorithm = 2818
 	COMPRESSION_LZFSE    CompressionAlgorithm = 2049
 	COMPRESSION_LZBITMAP CompressionAlgorithm = 1794
+	COMPRESSION_LZRAVEN  CompressionAlgorithm = 3333
+	COMPRESSION_LZMESH   CompressionAlgorithm = 3589
 )
 
 func (i CompressionAlgorithm) String() string {
@@ -36,6 +38,10 @@ func (i CompressionAlgorithm) String() string {
 		return "COMPRESSION_LZFSE"
 	case COMPRESSION_LZBITMAP:
 		return "COMPRESSION_LZBITMAP"
+	case COMPRESSION_LZRAVEN:
+		return "COMPRESSION_LZRAVEN"
+	case COMPRESSION_LZMESH:
+		return "COMPRESSION_LZMESH"
 	default:
 		return fmt.Sprintf("CompressionAlgorithm(%d)", int64(i))
 	}
@@ -58,6 +64,10 @@ func ParseCompressionAlgorithm(v string) (any, error) {
 		result = COMPRESSION_LZFSE
 	case "COMPRESSION_LZBITMAP":
 		result = COMPRESSION_LZBITMAP
+	case "COMPRESSION_LZRAVEN":
+		result = COMPRESSION_LZRAVEN
+	case "COMPRESSION_LZMESH":
+		result = COMPRESSION_LZMESH
 	default:
 		return nil, nil
 	}
@@ -77,7 +87,7 @@ func (i CompressionAlgorithm) isMultiValue() bool {
 }
 
 // A set of values used to represent the status of stream compression.
-// [compression.h:349]
+// [compression.h:355]
 type CompressionStatus int32
 
 const (
@@ -127,7 +137,7 @@ func (i CompressionStatus) isMultiValue() bool {
 }
 
 // A set of values used to represent stream compression flags.
-// [compression.h:342]
+// [compression.h:348]
 type CompressionStreamFlags int32
 
 const (
@@ -167,7 +177,7 @@ func (i CompressionStreamFlags) isMultiValue() bool {
 }
 
 // A set of values used to represent a stream compression operation.
-// [compression.h:331]
+// [compression.h:337]
 type CompressionStreamOperation int32
 
 const (

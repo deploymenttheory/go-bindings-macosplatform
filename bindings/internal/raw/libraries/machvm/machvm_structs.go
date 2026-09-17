@@ -249,7 +249,7 @@ type ReplyVmRegionRecurse64T struct {
 	Size          uint64
 	Nesting_depth uint32
 	InfoCnt       uint32
-	Info          [19]int32
+	Info          [21]int32
 }
 
 // [vm_map.h:1332]
@@ -261,7 +261,7 @@ type ReplyVmRegionRecurseT struct {
 	Size          uint64
 	Nesting_depth uint32
 	InfoCnt       uint32
-	Info          [19]int32
+	Info          [21]int32
 }
 
 // [vm_map.h:1058]

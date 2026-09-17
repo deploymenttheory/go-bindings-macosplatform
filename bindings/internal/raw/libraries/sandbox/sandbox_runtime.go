@@ -30,7 +30,7 @@ func _register(symbol string, register func()) {
 	register()
 }
 
-// SymbolAvailable reports whether the named C symbol was bound when the
+// SymbolAvailable reports whether the named C function was bound when the
 // library loaded. Calling a generated wrapper whose symbol is unavailable
 // dereferences a nil function variable and panics.
 func SymbolAvailable(symbol string) bool {
@@ -49,7 +49,6 @@ func _loadLibrary() {
 	}
 	_register("sandbox_init", func() { purego.RegisterLibFunc(&_pg_sandbox_init, _sandboxLib, "sandbox_init") })
 	_register("sandbox_free_error", func() { purego.RegisterLibFunc(&_pg_sandbox_free_error, _sandboxLib, "sandbox_free_error") })
-	_initExterns(_sandboxLib)
 }
 
 func init() {

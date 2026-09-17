@@ -1,10 +1,59 @@
 package rawlib
 
 import (
+	"bytes"
+	"strings"
 	"testing"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/libraries/typemap"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/macosplatformmetadata"
 )
+
+func TestPuregoFunctionLinkAlias(t *testing.T) {
+	for _, alias := range []string{"", "fixture_perform$V2"} {
+		t.Run("alias="+alias, func(t *testing.T) {
+			framework := &macosplatformmetadata.FrameworkMeta{
+				Framework: "Fixture",
+				Functions: []macosplatformmetadata.Function{
+					{Name: "fixture_perform", LinkName: alias},
+				},
+			}
+			var functions, runtime bytes.Buffer
+			regs, err := EmitPuregoFunctions(&functions, "fixture", framework, typemap.New(), nil)
+			if err != nil {
+				t.Fatal(err)
+			}
+			if len(regs) != 1 {
+				t.Fatalf("registrations = %d, want 1", len(regs))
+			}
+			if err := EmitPuregoRuntime(
+				&runtime,
+				"fixture",
+				"Fixture",
+				"/fixture.dylib",
+				regs,
+				false,
+			); err != nil {
+				t.Fatal(err)
+			}
+			if !strings.Contains(functions.String(), "func Fixture_perform(") {
+				t.Fatalf("assembly alias changed the Go API: %s", functions.String())
+			}
+			symbol := alias
+			if symbol == "" {
+				symbol = "fixture_perform"
+			}
+			want := `_register("fixture_perform", func() { purego.RegisterLibFunc(&_pg_fixture_perform, _fixtureLib, "` + symbol + `") })`
+			if !strings.Contains(runtime.String(), want) {
+				t.Fatalf(
+					"registration must retain the availability key and resolve %q: %s",
+					symbol,
+					runtime.String(),
+				)
+			}
+		})
+	}
+}
 
 // TestPuregoArg covers the wrapper-argument classification for the purego
 // backend: the func-var parameter type purego registers and the call
@@ -53,7 +102,12 @@ func TestSplitGoFuncType(t *testing.T) {
 	}{
 		{"func()", nil, "", true},
 		{"func(unsafe.Pointer)", []string{"unsafe.Pointer"}, "", true},
-		{"func(unsafe.Pointer, unsafe.Pointer)", []string{"unsafe.Pointer", "unsafe.Pointer"}, "", true},
+		{
+			"func(unsafe.Pointer, unsafe.Pointer)",
+			[]string{"unsafe.Pointer", "unsafe.Pointer"},
+			"",
+			true,
+		},
 		{"func(uint64, unsafe.Pointer) bool", []string{"uint64", "unsafe.Pointer"}, "bool", true},
 		{"func(a map[string]int, b int)", []string{"a map[string]int", "b int"}, "", true},
 		{"func(f func(int, int) bool) error", []string{"f func(int, int) bool"}, "error", true},
@@ -86,9 +140,21 @@ func TestExternPuregoInitExpr(t *testing.T) {
 	cases := []struct {
 		goType, cgoExpr, want string
 	}{
-		{"uint32", "*(*uint32)(C.machinit_extern_mach_task_self_())", "*(*uint32)(unsafe.Pointer(_addr))"},
-		{"unsafe.Pointer", "*(*unsafe.Pointer)(C.xpc_extern_foo())", "*(*unsafe.Pointer)(unsafe.Pointer(_addr))"},
-		{"unsafe.Pointer", "C.dispatch_extern_bar()", "unsafe.Pointer(_addr)"}, // struct-value global: address itself
+		{
+			"uint32",
+			"*(*uint32)(C.machinit_extern_mach_task_self_())",
+			"*(*uint32)(unsafe.Pointer(_addr))",
+		},
+		{
+			"unsafe.Pointer",
+			"*(*unsafe.Pointer)(C.xpc_extern_foo())",
+			"*(*unsafe.Pointer)(unsafe.Pointer(_addr))",
+		},
+		{
+			"unsafe.Pointer",
+			"C.dispatch_extern_bar()",
+			"unsafe.Pointer(_addr)",
+		}, // struct-value global: address itself
 		{"string", "", ""}, // unsupported shape stays zero-valued
 	}
 	for _, c := range cases {
