@@ -5,6 +5,8 @@
 package latentsemanticmapping
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -16,6 +18,8 @@ var _fnLSMMapAddText func(objc.ID, objc.ID, uint32) int32
 
 // LSMMapAddText reports an error if the LatentSemanticMapping framework function LSMMapAddText fails.
 func LSMMapAddText(mapref LSMMapRef, textref LSMTextRef, category uint32) error {
+	defer runtime.KeepAlive(mapref)
+	defer runtime.KeepAlive(textref)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSMMapAddText == nil {
 		ebipurego.RegisterLibFunc(&_fnLSMMapAddText, _lib, "LSMMapAddText")
@@ -31,6 +35,8 @@ var _fnLSMMapAddTextWithWeight func(objc.ID, objc.ID, uint32, float32) int32
 
 // LSMMapAddTextWithWeight reports an error if the LatentSemanticMapping framework function LSMMapAddTextWithWeight fails.
 func LSMMapAddTextWithWeight(mapref LSMMapRef, textref LSMTextRef, category uint32, weight float32) error {
+	defer runtime.KeepAlive(mapref)
+	defer runtime.KeepAlive(textref)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSMMapAddTextWithWeight == nil {
 		ebipurego.RegisterLibFunc(&_fnLSMMapAddTextWithWeight, _lib, "LSMMapAddTextWithWeight")
@@ -46,6 +52,8 @@ var _fnLSMMapApplyClusters func(objc.ID, objc.ID) int32
 
 // LSMMapApplyClusters reports an error if the LatentSemanticMapping framework function LSMMapApplyClusters fails.
 func LSMMapApplyClusters(mapref LSMMapRef, clusters obj.Object) error {
+	defer runtime.KeepAlive(mapref)
+	defer runtime.KeepAlive(clusters)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSMMapApplyClusters == nil {
 		ebipurego.RegisterLibFunc(&_fnLSMMapApplyClusters, _lib, "LSMMapApplyClusters")
@@ -61,6 +69,7 @@ var _fnLSMMapCompile func(objc.ID) int32
 
 // LSMMapCompile reports an error if the LatentSemanticMapping framework function LSMMapCompile fails.
 func LSMMapCompile(mapref LSMMapRef) error {
+	defer runtime.KeepAlive(mapref)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSMMapCompile == nil {
 		ebipurego.RegisterLibFunc(&_fnLSMMapCompile, _lib, "LSMMapCompile")
@@ -76,6 +85,8 @@ var _fnLSMMapSetStopWords func(objc.ID, objc.ID) int32
 
 // LSMMapSetStopWords reports an error if the LatentSemanticMapping framework function LSMMapSetStopWords fails.
 func LSMMapSetStopWords(mapref LSMMapRef, textref LSMTextRef) error {
+	defer runtime.KeepAlive(mapref)
+	defer runtime.KeepAlive(textref)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSMMapSetStopWords == nil {
 		ebipurego.RegisterLibFunc(&_fnLSMMapSetStopWords, _lib, "LSMMapSetStopWords")
@@ -91,6 +102,7 @@ var _fnLSMMapStartTraining func(objc.ID) int32
 
 // LSMMapStartTraining reports an error if the LatentSemanticMapping framework function LSMMapStartTraining fails.
 func LSMMapStartTraining(mapref LSMMapRef) error {
+	defer runtime.KeepAlive(mapref)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSMMapStartTraining == nil {
 		ebipurego.RegisterLibFunc(&_fnLSMMapStartTraining, _lib, "LSMMapStartTraining")
@@ -106,6 +118,9 @@ var _fnLSMMapWriteToStream func(objc.ID, objc.ID, objc.ID, int) int32
 
 // LSMMapWriteToStream reports an error if the LatentSemanticMapping framework function LSMMapWriteToStream fails.
 func LSMMapWriteToStream(mapref LSMMapRef, textref LSMTextRef, stream obj.Object, options int) error {
+	defer runtime.KeepAlive(mapref)
+	defer runtime.KeepAlive(textref)
+	defer runtime.KeepAlive(stream)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSMMapWriteToStream == nil {
 		ebipurego.RegisterLibFunc(&_fnLSMMapWriteToStream, _lib, "LSMMapWriteToStream")
@@ -121,6 +136,8 @@ var _fnLSMMapWriteToURL func(objc.ID, objc.ID, int) int32
 
 // LSMMapWriteToURL reports an error if the LatentSemanticMapping framework function LSMMapWriteToURL fails.
 func LSMMapWriteToURL(mapref LSMMapRef, file obj.Object, flags int) error {
+	defer runtime.KeepAlive(mapref)
+	defer runtime.KeepAlive(file)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSMMapWriteToURL == nil {
 		ebipurego.RegisterLibFunc(&_fnLSMMapWriteToURL, _lib, "LSMMapWriteToURL")
@@ -136,6 +153,8 @@ var _fnLSMTextAddToken func(objc.ID, objc.ID) int32
 
 // LSMTextAddToken reports an error if the LatentSemanticMapping framework function LSMTextAddToken fails.
 func LSMTextAddToken(textref LSMTextRef, token obj.Object) error {
+	defer runtime.KeepAlive(textref)
+	defer runtime.KeepAlive(token)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSMTextAddToken == nil {
 		ebipurego.RegisterLibFunc(&_fnLSMTextAddToken, _lib, "LSMTextAddToken")
@@ -151,6 +170,8 @@ var _fnLSMTextAddWord func(objc.ID, objc.ID) int32
 
 // LSMTextAddWord reports an error if the LatentSemanticMapping framework function LSMTextAddWord fails.
 func LSMTextAddWord(textref LSMTextRef, word obj.Object) error {
+	defer runtime.KeepAlive(textref)
+	defer runtime.KeepAlive(word)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSMTextAddWord == nil {
 		ebipurego.RegisterLibFunc(&_fnLSMTextAddWord, _lib, "LSMTextAddWord")
@@ -166,6 +187,9 @@ var _fnLSMTextAddWords func(objc.ID, objc.ID, objc.ID, int) int32
 
 // LSMTextAddWords reports an error if the LatentSemanticMapping framework function LSMTextAddWords fails.
 func LSMTextAddWords(textref LSMTextRef, words obj.Object, locale obj.Object, flags int) error {
+	defer runtime.KeepAlive(textref)
+	defer runtime.KeepAlive(words)
+	defer runtime.KeepAlive(locale)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSMTextAddWords == nil {
 		ebipurego.RegisterLibFunc(&_fnLSMTextAddWords, _lib, "LSMTextAddWords")

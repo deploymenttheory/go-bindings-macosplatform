@@ -5,6 +5,7 @@
 package cfnetwork
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
@@ -19,6 +20,8 @@ import (
 var _fnCFNetworkCopyProxiesForAutoConfigurationScript func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
 func CFNetworkCopyProxiesForAutoConfigurationScript(proxyAutoConfigurationScript corefoundation.CFStringRef, targetURL corefoundation.CFURLRef) (obj.Object, error) {
+	defer runtime.KeepAlive(proxyAutoConfigurationScript)
+	defer runtime.KeepAlive(targetURL)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFNetworkCopyProxiesForAutoConfigurationScript == nil {
 		ebipurego.RegisterLibFunc(&_fnCFNetworkCopyProxiesForAutoConfigurationScript, _lib, "CFNetworkCopyProxiesForAutoConfigurationScript")

@@ -5,6 +5,7 @@
 package launchservices
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
@@ -19,6 +20,7 @@ import (
 var _fnLSCopyApplicationURLsForBundleIdentifier func(objc.ID, unsafe.Pointer) objc.ID
 
 func LSCopyApplicationURLsForBundleIdentifier(inBundleIdentifier corefoundation.CFStringRef) (obj.Object, error) {
+	defer runtime.KeepAlive(inBundleIdentifier)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSCopyApplicationURLsForBundleIdentifier == nil {
 		ebipurego.RegisterLibFunc(&_fnLSCopyApplicationURLsForBundleIdentifier, _lib, "LSCopyApplicationURLsForBundleIdentifier")
@@ -35,6 +37,7 @@ func LSCopyApplicationURLsForBundleIdentifier(inBundleIdentifier corefoundation.
 var _fnLSCopyDefaultApplicationURLForContentType func(objc.ID, LSRolesMask, unsafe.Pointer) objc.ID
 
 func LSCopyDefaultApplicationURLForContentType(inContentType corefoundation.CFStringRef, inRoleMask LSRolesMask) (obj.Object, error) {
+	defer runtime.KeepAlive(inContentType)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSCopyDefaultApplicationURLForContentType == nil {
 		ebipurego.RegisterLibFunc(&_fnLSCopyDefaultApplicationURLForContentType, _lib, "LSCopyDefaultApplicationURLForContentType")
@@ -51,6 +54,7 @@ func LSCopyDefaultApplicationURLForContentType(inContentType corefoundation.CFSt
 var _fnLSCopyDefaultApplicationURLForURL func(objc.ID, LSRolesMask, unsafe.Pointer) objc.ID
 
 func LSCopyDefaultApplicationURLForURL(inURL corefoundation.CFURLRef, inRoleMask LSRolesMask) (obj.Object, error) {
+	defer runtime.KeepAlive(inURL)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSCopyDefaultApplicationURLForURL == nil {
 		ebipurego.RegisterLibFunc(&_fnLSCopyDefaultApplicationURLForURL, _lib, "LSCopyDefaultApplicationURLForURL")

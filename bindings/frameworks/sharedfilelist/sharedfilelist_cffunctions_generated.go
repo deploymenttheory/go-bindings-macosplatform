@@ -5,6 +5,7 @@
 package sharedfilelist
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
@@ -19,6 +20,9 @@ var _fnLSSharedFileListItemMove func(objc.ID, objc.ID, objc.ID) int32
 
 // LSSharedFileListItemMove reports an error if the SharedFileList framework function LSSharedFileListItemMove fails.
 func LSSharedFileListItemMove(inList LSSharedFileListRef, inItem LSSharedFileListItemRef, inMoveAfterItem LSSharedFileListItemRef) error {
+	defer runtime.KeepAlive(inList)
+	defer runtime.KeepAlive(inItem)
+	defer runtime.KeepAlive(inMoveAfterItem)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSSharedFileListItemMove == nil {
 		ebipurego.RegisterLibFunc(&_fnLSSharedFileListItemMove, _lib, "LSSharedFileListItemMove")
@@ -34,6 +38,8 @@ var _fnLSSharedFileListItemRemove func(objc.ID, objc.ID) int32
 
 // LSSharedFileListItemRemove reports an error if the SharedFileList framework function LSSharedFileListItemRemove fails.
 func LSSharedFileListItemRemove(inList LSSharedFileListRef, inItem LSSharedFileListItemRef) error {
+	defer runtime.KeepAlive(inList)
+	defer runtime.KeepAlive(inItem)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSSharedFileListItemRemove == nil {
 		ebipurego.RegisterLibFunc(&_fnLSSharedFileListItemRemove, _lib, "LSSharedFileListItemRemove")
@@ -49,6 +55,7 @@ var _fnLSSharedFileListItemResolve func(objc.ID, int, unsafe.Pointer, unsafe.Poi
 
 // LSSharedFileListItemResolve reports an error if the SharedFileList framework function LSSharedFileListItemResolve fails.
 func LSSharedFileListItemResolve(inItem LSSharedFileListItemRef, inFlags int, outRef *carboncore.FSRef) (obj.Object, error) {
+	defer runtime.KeepAlive(inItem)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSSharedFileListItemResolve == nil {
 		ebipurego.RegisterLibFunc(&_fnLSSharedFileListItemResolve, _lib, "LSSharedFileListItemResolve")
@@ -65,6 +72,9 @@ var _fnLSSharedFileListItemSetProperty func(objc.ID, objc.ID, objc.ID) int32
 
 // LSSharedFileListItemSetProperty reports an error if the SharedFileList framework function LSSharedFileListItemSetProperty fails.
 func LSSharedFileListItemSetProperty(inItem LSSharedFileListItemRef, inPropertyName obj.Object, inPropertyData obj.Object) error {
+	defer runtime.KeepAlive(inItem)
+	defer runtime.KeepAlive(inPropertyName)
+	defer runtime.KeepAlive(inPropertyData)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSSharedFileListItemSetProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnLSSharedFileListItemSetProperty, _lib, "LSSharedFileListItemSetProperty")
@@ -80,6 +90,7 @@ var _fnLSSharedFileListRemoveAllItems func(objc.ID) int32
 
 // LSSharedFileListRemoveAllItems reports an error if the SharedFileList framework function LSSharedFileListRemoveAllItems fails.
 func LSSharedFileListRemoveAllItems(inList LSSharedFileListRef) error {
+	defer runtime.KeepAlive(inList)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSSharedFileListRemoveAllItems == nil {
 		ebipurego.RegisterLibFunc(&_fnLSSharedFileListRemoveAllItems, _lib, "LSSharedFileListRemoveAllItems")
@@ -95,6 +106,8 @@ var _fnLSSharedFileListSetAuthorization func(objc.ID, objc.ID) int32
 
 // LSSharedFileListSetAuthorization reports an error if the SharedFileList framework function LSSharedFileListSetAuthorization fails.
 func LSSharedFileListSetAuthorization(inList LSSharedFileListRef, inAuthorization obj.Object) error {
+	defer runtime.KeepAlive(inList)
+	defer runtime.KeepAlive(inAuthorization)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSSharedFileListSetAuthorization == nil {
 		ebipurego.RegisterLibFunc(&_fnLSSharedFileListSetAuthorization, _lib, "LSSharedFileListSetAuthorization")
@@ -110,6 +123,9 @@ var _fnLSSharedFileListSetProperty func(objc.ID, objc.ID, objc.ID) int32
 
 // LSSharedFileListSetProperty reports an error if the SharedFileList framework function LSSharedFileListSetProperty fails.
 func LSSharedFileListSetProperty(inList LSSharedFileListRef, inPropertyName obj.Object, inPropertyData obj.Object) error {
+	defer runtime.KeepAlive(inList)
+	defer runtime.KeepAlive(inPropertyName)
+	defer runtime.KeepAlive(inPropertyData)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSSharedFileListSetProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnLSSharedFileListSetProperty, _lib, "LSSharedFileListSetProperty")

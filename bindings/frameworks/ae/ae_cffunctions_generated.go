@@ -5,6 +5,7 @@
 package ae
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -32,6 +33,7 @@ var _fnAEStreamCloseDesc func(objc.ID) int32
 
 // AEStreamCloseDesc reports an error if the AE framework function AEStreamCloseDesc fails.
 func AEStreamCloseDesc(ref AEStreamRef) error {
+	defer runtime.KeepAlive(ref)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAEStreamCloseDesc == nil {
 		ebipurego.RegisterLibFunc(&_fnAEStreamCloseDesc, _lib, "AEStreamCloseDesc")
@@ -47,6 +49,7 @@ var _fnAEStreamCloseList func(objc.ID) int32
 
 // AEStreamCloseList reports an error if the AE framework function AEStreamCloseList fails.
 func AEStreamCloseList(ref AEStreamRef) error {
+	defer runtime.KeepAlive(ref)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAEStreamCloseList == nil {
 		ebipurego.RegisterLibFunc(&_fnAEStreamCloseList, _lib, "AEStreamCloseList")
@@ -62,6 +65,7 @@ var _fnAEStreamCloseRecord func(objc.ID) int32
 
 // AEStreamCloseRecord reports an error if the AE framework function AEStreamCloseRecord fails.
 func AEStreamCloseRecord(ref AEStreamRef) error {
+	defer runtime.KeepAlive(ref)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAEStreamCloseRecord == nil {
 		ebipurego.RegisterLibFunc(&_fnAEStreamCloseRecord, _lib, "AEStreamCloseRecord")
@@ -77,6 +81,7 @@ var _fnAEStreamOpenDesc func(objc.ID, int) int32
 
 // AEStreamOpenDesc reports an error if the AE framework function AEStreamOpenDesc fails.
 func AEStreamOpenDesc(ref AEStreamRef, newType int) error {
+	defer runtime.KeepAlive(ref)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAEStreamOpenDesc == nil {
 		ebipurego.RegisterLibFunc(&_fnAEStreamOpenDesc, _lib, "AEStreamOpenDesc")
@@ -92,6 +97,7 @@ var _fnAEStreamOpenKeyDesc func(objc.ID, int, int) int32
 
 // AEStreamOpenKeyDesc reports an error if the AE framework function AEStreamOpenKeyDesc fails.
 func AEStreamOpenKeyDesc(ref AEStreamRef, key int, newType int) error {
+	defer runtime.KeepAlive(ref)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAEStreamOpenKeyDesc == nil {
 		ebipurego.RegisterLibFunc(&_fnAEStreamOpenKeyDesc, _lib, "AEStreamOpenKeyDesc")
@@ -107,6 +113,7 @@ var _fnAEStreamOpenList func(objc.ID) int32
 
 // AEStreamOpenList reports an error if the AE framework function AEStreamOpenList fails.
 func AEStreamOpenList(ref AEStreamRef) error {
+	defer runtime.KeepAlive(ref)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAEStreamOpenList == nil {
 		ebipurego.RegisterLibFunc(&_fnAEStreamOpenList, _lib, "AEStreamOpenList")
@@ -122,6 +129,7 @@ var _fnAEStreamOpenRecord func(objc.ID, int) int32
 
 // AEStreamOpenRecord reports an error if the AE framework function AEStreamOpenRecord fails.
 func AEStreamOpenRecord(ref AEStreamRef, newType int) error {
+	defer runtime.KeepAlive(ref)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAEStreamOpenRecord == nil {
 		ebipurego.RegisterLibFunc(&_fnAEStreamOpenRecord, _lib, "AEStreamOpenRecord")
@@ -137,6 +145,7 @@ var _fnAEStreamOptionalParam func(objc.ID, int) int32
 
 // AEStreamOptionalParam reports an error if the AE framework function AEStreamOptionalParam fails.
 func AEStreamOptionalParam(ref AEStreamRef, key int) error {
+	defer runtime.KeepAlive(ref)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAEStreamOptionalParam == nil {
 		ebipurego.RegisterLibFunc(&_fnAEStreamOptionalParam, _lib, "AEStreamOptionalParam")
@@ -152,6 +161,7 @@ var _fnAEStreamSetRecordType func(objc.ID, int) int32
 
 // AEStreamSetRecordType reports an error if the AE framework function AEStreamSetRecordType fails.
 func AEStreamSetRecordType(ref AEStreamRef, newType int) error {
+	defer runtime.KeepAlive(ref)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAEStreamSetRecordType == nil {
 		ebipurego.RegisterLibFunc(&_fnAEStreamSetRecordType, _lib, "AEStreamSetRecordType")
@@ -167,6 +177,7 @@ var _fnAEStreamWriteData func(objc.ID, unsafe.Pointer, int) int32
 
 // AEStreamWriteData reports an error if the AE framework function AEStreamWriteData fails.
 func AEStreamWriteData(ref AEStreamRef, data unsafe.Pointer, length int) error {
+	defer runtime.KeepAlive(ref)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAEStreamWriteData == nil {
 		ebipurego.RegisterLibFunc(&_fnAEStreamWriteData, _lib, "AEStreamWriteData")
@@ -182,6 +193,7 @@ var _fnAEStreamWriteDesc func(objc.ID, int, unsafe.Pointer, int) int32
 
 // AEStreamWriteDesc reports an error if the AE framework function AEStreamWriteDesc fails.
 func AEStreamWriteDesc(ref AEStreamRef, newType int, data unsafe.Pointer, length int) error {
+	defer runtime.KeepAlive(ref)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAEStreamWriteDesc == nil {
 		ebipurego.RegisterLibFunc(&_fnAEStreamWriteDesc, _lib, "AEStreamWriteDesc")
@@ -197,6 +209,7 @@ var _fnAEStreamWriteKey func(objc.ID, int) int32
 
 // AEStreamWriteKey reports an error if the AE framework function AEStreamWriteKey fails.
 func AEStreamWriteKey(ref AEStreamRef, key int) error {
+	defer runtime.KeepAlive(ref)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAEStreamWriteKey == nil {
 		ebipurego.RegisterLibFunc(&_fnAEStreamWriteKey, _lib, "AEStreamWriteKey")
@@ -212,6 +225,7 @@ var _fnAEStreamWriteKeyDesc func(objc.ID, int, int, unsafe.Pointer, int) int32
 
 // AEStreamWriteKeyDesc reports an error if the AE framework function AEStreamWriteKeyDesc fails.
 func AEStreamWriteKeyDesc(ref AEStreamRef, key int, newType int, data unsafe.Pointer, length int) error {
+	defer runtime.KeepAlive(ref)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAEStreamWriteKeyDesc == nil {
 		ebipurego.RegisterLibFunc(&_fnAEStreamWriteKeyDesc, _lib, "AEStreamWriteKeyDesc")

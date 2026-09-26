@@ -5,6 +5,7 @@
 package scenekit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
@@ -18,6 +19,7 @@ var _fnSCNExportJavaScriptModule func(objc.ID)
 
 // SCNExportJavaScriptModule calls the SceneKit framework function SCNExportJavaScriptModule.
 func SCNExportJavaScriptModule(context_ obj.Object) {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNExportJavaScriptModule == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNExportJavaScriptModule, _lib, "SCNExportJavaScriptModule")

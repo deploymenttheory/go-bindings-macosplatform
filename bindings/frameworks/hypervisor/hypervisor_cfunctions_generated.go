@@ -5,6 +5,7 @@
 package hypervisor
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -30,6 +31,7 @@ var _fnHvGicConfigSetDistributorBase func(objc.ID, uint64) int32
 
 // HvGicConfigSetDistributorBase reports an error if the Hypervisor framework function hv_gic_config_set_distributor_base fails.
 func HvGicConfigSetDistributorBase(config obj.Object, distributorBaseAddress uint64) error {
+	defer runtime.KeepAlive(config)
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvGicConfigSetDistributorBase == nil {
 		ebipurego.RegisterLibFunc(&_fnHvGicConfigSetDistributorBase, _lib, "hv_gic_config_set_distributor_base")
@@ -45,6 +47,7 @@ var _fnHvGicConfigSetMsiInterruptRange func(objc.ID, uint32, uint32) int32
 
 // HvGicConfigSetMsiInterruptRange reports an error if the Hypervisor framework function hv_gic_config_set_msi_interrupt_range fails.
 func HvGicConfigSetMsiInterruptRange(config obj.Object, msiIntidBase uint32, msiIntidCount uint32) error {
+	defer runtime.KeepAlive(config)
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvGicConfigSetMsiInterruptRange == nil {
 		ebipurego.RegisterLibFunc(&_fnHvGicConfigSetMsiInterruptRange, _lib, "hv_gic_config_set_msi_interrupt_range")
@@ -60,6 +63,7 @@ var _fnHvGicConfigSetMsiRegionBase func(objc.ID, uint64) int32
 
 // HvGicConfigSetMsiRegionBase reports an error if the Hypervisor framework function hv_gic_config_set_msi_region_base fails.
 func HvGicConfigSetMsiRegionBase(config obj.Object, msiRegionBaseAddress uint64) error {
+	defer runtime.KeepAlive(config)
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvGicConfigSetMsiRegionBase == nil {
 		ebipurego.RegisterLibFunc(&_fnHvGicConfigSetMsiRegionBase, _lib, "hv_gic_config_set_msi_region_base")
@@ -75,6 +79,7 @@ var _fnHvGicConfigSetRedistributorBase func(objc.ID, uint64) int32
 
 // HvGicConfigSetRedistributorBase reports an error if the Hypervisor framework function hv_gic_config_set_redistributor_base fails.
 func HvGicConfigSetRedistributorBase(config obj.Object, redistributorBaseAddress uint64) error {
+	defer runtime.KeepAlive(config)
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvGicConfigSetRedistributorBase == nil {
 		ebipurego.RegisterLibFunc(&_fnHvGicConfigSetRedistributorBase, _lib, "hv_gic_config_set_redistributor_base")
@@ -90,6 +95,7 @@ var _fnHvGicCreate func(objc.ID) int32
 
 // HvGicCreate reports an error if the Hypervisor framework function hv_gic_create fails.
 func HvGicCreate(gicConfig obj.Object) error {
+	defer runtime.KeepAlive(gicConfig)
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvGicCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnHvGicCreate, _lib, "hv_gic_create")
@@ -523,6 +529,7 @@ var _fnHvGicStateGetData func(objc.ID, unsafe.Pointer) int32
 
 // HvGicStateGetData reports an error if the Hypervisor framework function hv_gic_state_get_data fails.
 func HvGicStateGetData(state obj.Object, gicStateData unsafe.Pointer) error {
+	defer runtime.KeepAlive(state)
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvGicStateGetData == nil {
 		ebipurego.RegisterLibFunc(&_fnHvGicStateGetData, _lib, "hv_gic_state_get_data")
@@ -538,6 +545,7 @@ var _fnHvGicStateGetSize func(objc.ID, unsafe.Pointer) int32
 
 // HvGicStateGetSize reports an error if the Hypervisor framework function hv_gic_state_get_size fails.
 func HvGicStateGetSize(state obj.Object) (gicStateSize int, err error) {
+	defer runtime.KeepAlive(state)
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvGicStateGetSize == nil {
 		ebipurego.RegisterLibFunc(&_fnHvGicStateGetSize, _lib, "hv_gic_state_get_size")
@@ -582,6 +590,7 @@ var _fnHvVcpuConfigGetCcsidrEl1SysRegValues func(objc.ID, CacheType, unsafe.Poin
 
 // HvVcpuConfigGetCcsidrEl1SysRegValues reports an error if the Hypervisor framework function hv_vcpu_config_get_ccsidr_el1_sys_reg_values fails.
 func HvVcpuConfigGetCcsidrEl1SysRegValues(config obj.Object, cacheType CacheType) (values uint64, err error) {
+	defer runtime.KeepAlive(config)
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVcpuConfigGetCcsidrEl1SysRegValues == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVcpuConfigGetCcsidrEl1SysRegValues, _lib, "hv_vcpu_config_get_ccsidr_el1_sys_reg_values")
@@ -598,6 +607,7 @@ var _fnHvVcpuConfigGetFeatureReg func(objc.ID, FeatureReg, unsafe.Pointer) int32
 
 // HvVcpuConfigGetFeatureReg reports an error if the Hypervisor framework function hv_vcpu_config_get_feature_reg fails.
 func HvVcpuConfigGetFeatureReg(config obj.Object, featureReg FeatureReg) (value uint64, err error) {
+	defer runtime.KeepAlive(config)
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVcpuConfigGetFeatureReg == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVcpuConfigGetFeatureReg, _lib, "hv_vcpu_config_get_feature_reg")
@@ -614,6 +624,7 @@ var _fnHvVcpuCreate func(unsafe.Pointer, unsafe.Pointer, objc.ID) int32
 
 // HvVcpuCreate reports an error if the Hypervisor framework function hv_vcpu_create fails.
 func HvVcpuCreate(config obj.Object) (vcpu uint64, exit *HvVcpuExitT, err error) {
+	defer runtime.KeepAlive(config)
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVcpuCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVcpuCreate, _lib, "hv_vcpu_create")
@@ -1211,6 +1222,7 @@ var _fnHvVmConfigGetEl2Enabled func(objc.ID, unsafe.Pointer) int32
 
 // HvVmConfigGetEl2Enabled reports an error if the Hypervisor framework function hv_vm_config_get_el2_enabled fails.
 func HvVmConfigGetEl2Enabled(config obj.Object) (el2Enabled bool, err error) {
+	defer runtime.KeepAlive(config)
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVmConfigGetEl2Enabled == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVmConfigGetEl2Enabled, _lib, "hv_vm_config_get_el2_enabled")
@@ -1243,6 +1255,7 @@ var _fnHvVmConfigGetIpaGranule func(objc.ID, unsafe.Pointer) int32
 
 // HvVmConfigGetIpaGranule reports an error if the Hypervisor framework function hv_vm_config_get_ipa_granule fails.
 func HvVmConfigGetIpaGranule(config obj.Object) (granule IPAGranule, err error) {
+	defer runtime.KeepAlive(config)
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVmConfigGetIpaGranule == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVmConfigGetIpaGranule, _lib, "hv_vm_config_get_ipa_granule")
@@ -1259,6 +1272,7 @@ var _fnHvVmConfigGetIpaSize func(objc.ID, unsafe.Pointer) int32
 
 // HvVmConfigGetIpaSize reports an error if the Hypervisor framework function hv_vm_config_get_ipa_size fails.
 func HvVmConfigGetIpaSize(config obj.Object) (ipaBitLength uint32, err error) {
+	defer runtime.KeepAlive(config)
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVmConfigGetIpaSize == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVmConfigGetIpaSize, _lib, "hv_vm_config_get_ipa_size")
@@ -1291,6 +1305,7 @@ var _fnHvVmConfigSetEl2Enabled func(objc.ID, bool) int32
 
 // HvVmConfigSetEl2Enabled reports an error if the Hypervisor framework function hv_vm_config_set_el2_enabled fails.
 func HvVmConfigSetEl2Enabled(config obj.Object, el2Enabled bool) error {
+	defer runtime.KeepAlive(config)
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVmConfigSetEl2Enabled == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVmConfigSetEl2Enabled, _lib, "hv_vm_config_set_el2_enabled")
@@ -1306,6 +1321,7 @@ var _fnHvVmConfigSetIpaGranule func(objc.ID, IPAGranule) int32
 
 // HvVmConfigSetIpaGranule reports an error if the Hypervisor framework function hv_vm_config_set_ipa_granule fails.
 func HvVmConfigSetIpaGranule(config obj.Object, granule IPAGranule) error {
+	defer runtime.KeepAlive(config)
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVmConfigSetIpaGranule == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVmConfigSetIpaGranule, _lib, "hv_vm_config_set_ipa_granule")
@@ -1321,6 +1337,7 @@ var _fnHvVmConfigSetIpaSize func(objc.ID, uint32) int32
 
 // HvVmConfigSetIpaSize reports an error if the Hypervisor framework function hv_vm_config_set_ipa_size fails.
 func HvVmConfigSetIpaSize(config obj.Object, ipaBitLength uint32) error {
+	defer runtime.KeepAlive(config)
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVmConfigSetIpaSize == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVmConfigSetIpaSize, _lib, "hv_vm_config_set_ipa_size")
@@ -1336,6 +1353,7 @@ var _fnHvVmCreate func(objc.ID) int32
 
 // HvVmCreate reports an error if the Hypervisor framework function hv_vm_create fails.
 func HvVmCreate(config obj.Object) error {
+	defer runtime.KeepAlive(config)
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVmCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVmCreate, _lib, "hv_vm_create")

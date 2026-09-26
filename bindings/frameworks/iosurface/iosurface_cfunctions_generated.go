@@ -5,6 +5,7 @@
 package iosurface
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
@@ -20,6 +21,7 @@ var _fnIOSurfaceAlignProperty func(objc.ID, int) int
 
 // IOSurfaceAlignProperty calls the IOSurface framework function IOSurfaceAlignProperty.
 func IOSurfaceAlignProperty(property corefoundation.CFStringRef, value int) int {
+	defer runtime.KeepAlive(property)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOSurfaceAlignProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceAlignProperty, _lib, "IOSurfaceAlignProperty")
@@ -31,6 +33,7 @@ var _fnIOSurfaceAllowsPixelSizeCasting func(objc.ID) uint8
 
 // IOSurfaceAllowsPixelSizeCasting calls the IOSurface framework function IOSurfaceAllowsPixelSizeCasting.
 func IOSurfaceAllowsPixelSizeCasting(buffer coregraphics.IOSurfaceRef) uint8 {
+	defer runtime.KeepAlive(buffer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOSurfaceAllowsPixelSizeCasting == nil {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceAllowsPixelSizeCasting, _lib, "IOSurfaceAllowsPixelSizeCasting")
@@ -42,6 +45,7 @@ var _fnIOSurfaceCopyAllValues func(objc.ID) objc.ID
 
 // IOSurfaceCopyAllValues calls the IOSurface framework function IOSurfaceCopyAllValues.
 func IOSurfaceCopyAllValues(buffer coregraphics.IOSurfaceRef) corefoundation.CFDictionaryRef {
+	defer runtime.KeepAlive(buffer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOSurfaceCopyAllValues == nil {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceCopyAllValues, _lib, "IOSurfaceCopyAllValues")
@@ -54,6 +58,8 @@ var _fnIOSurfaceCopyValue func(objc.ID, objc.ID) objc.ID
 
 // IOSurfaceCopyValue calls the IOSurface framework function IOSurfaceCopyValue.
 func IOSurfaceCopyValue(buffer coregraphics.IOSurfaceRef, key corefoundation.CFStringRef) obj.Object {
+	defer runtime.KeepAlive(buffer)
+	defer runtime.KeepAlive(key)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOSurfaceCopyValue == nil {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceCopyValue, _lib, "IOSurfaceCopyValue")
@@ -66,6 +72,7 @@ var _fnIOSurfaceCreate func(objc.ID) objc.ID
 
 // IOSurfaceCreate calls the IOSurface framework function IOSurfaceCreate.
 func IOSurfaceCreate(properties corefoundation.CFDictionaryRef) coregraphics.IOSurfaceRef {
+	defer runtime.KeepAlive(properties)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOSurfaceCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceCreate, _lib, "IOSurfaceCreate")
@@ -78,6 +85,7 @@ var _fnIOSurfaceCreateMachPort func(objc.ID) uint32
 
 // IOSurfaceCreateMachPort calls the IOSurface framework function IOSurfaceCreateMachPort.
 func IOSurfaceCreateMachPort(buffer coregraphics.IOSurfaceRef) int {
+	defer runtime.KeepAlive(buffer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOSurfaceCreateMachPort == nil {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceCreateMachPort, _lib, "IOSurfaceCreateMachPort")
@@ -89,6 +97,7 @@ var _fnIOSurfaceCreateXPCObject func(objc.ID) unsafe.Pointer
 
 // IOSurfaceCreateXPCObject calls the IOSurface framework function IOSurfaceCreateXPCObject.
 func IOSurfaceCreateXPCObject(aSurface coregraphics.IOSurfaceRef) unsafe.Pointer {
+	defer runtime.KeepAlive(aSurface)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOSurfaceCreateXPCObject == nil {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceCreateXPCObject, _lib, "IOSurfaceCreateXPCObject")
@@ -100,6 +109,7 @@ var _fnIOSurfaceDecrementUseCount func(objc.ID)
 
 // IOSurfaceDecrementUseCount calls the IOSurface framework function IOSurfaceDecrementUseCount.
 func IOSurfaceDecrementUseCount(buffer coregraphics.IOSurfaceRef) {
+	defer runtime.KeepAlive(buffer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOSurfaceDecrementUseCount == nil {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceDecrementUseCount, _lib, "IOSurfaceDecrementUseCount")
@@ -111,6 +121,7 @@ var _fnIOSurfaceGetAllocSize func(objc.ID) int
 
 // IOSurfaceGetAllocSize calls the IOSurface framework function IOSurfaceGetAllocSize.
 func IOSurfaceGetAllocSize(buffer coregraphics.IOSurfaceRef) int {
+	defer runtime.KeepAlive(buffer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOSurfaceGetAllocSize == nil {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceGetAllocSize, _lib, "IOSurfaceGetAllocSize")
@@ -122,6 +133,7 @@ var _fnIOSurfaceGetBaseAddress func(objc.ID) unsafe.Pointer
 
 // IOSurfaceGetBaseAddress calls the IOSurface framework function IOSurfaceGetBaseAddress.
 func IOSurfaceGetBaseAddress(buffer coregraphics.IOSurfaceRef) unsafe.Pointer {
+	defer runtime.KeepAlive(buffer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOSurfaceGetBaseAddress == nil {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceGetBaseAddress, _lib, "IOSurfaceGetBaseAddress")
@@ -133,6 +145,7 @@ var _fnIOSurfaceGetBaseAddressOfPlane func(objc.ID, int) unsafe.Pointer
 
 // IOSurfaceGetBaseAddressOfPlane calls the IOSurface framework function IOSurfaceGetBaseAddressOfPlane.
 func IOSurfaceGetBaseAddressOfPlane(buffer coregraphics.IOSurfaceRef, planeIndex int) unsafe.Pointer {
+	defer runtime.KeepAlive(buffer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOSurfaceGetBaseAddressOfPlane == nil {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceGetBaseAddressOfPlane, _lib, "IOSurfaceGetBaseAddressOfPlane")
@@ -144,6 +157,7 @@ var _fnIOSurfaceGetBitDepthOfComponentOfPlane func(objc.ID, int, int) int
 
 // IOSurfaceGetBitDepthOfComponentOfPlane calls the IOSurface framework function IOSurfaceGetBitDepthOfComponentOfPlane.
 func IOSurfaceGetBitDepthOfComponentOfPlane(buffer coregraphics.IOSurfaceRef, planeIndex int, componentIndex int) int {
+	defer runtime.KeepAlive(buffer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOSurfaceGetBitDepthOfComponentOfPlane == nil {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceGetBitDepthOfComponentOfPlane, _lib, "IOSurfaceGetBitDepthOfComponentOfPlane")
@@ -155,6 +169,7 @@ var _fnIOSurfaceGetBitOffsetOfComponentOfPlane func(objc.ID, int, int) int
 
 // IOSurfaceGetBitOffsetOfComponentOfPlane calls the IOSurface framework function IOSurfaceGetBitOffsetOfComponentOfPlane.
 func IOSurfaceGetBitOffsetOfComponentOfPlane(buffer coregraphics.IOSurfaceRef, planeIndex int, componentIndex int) int {
+	defer runtime.KeepAlive(buffer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOSurfaceGetBitOffsetOfComponentOfPlane == nil {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceGetBitOffsetOfComponentOfPlane, _lib, "IOSurfaceGetBitOffsetOfComponentOfPlane")
@@ -166,6 +181,7 @@ var _fnIOSurfaceGetBytesPerElement func(objc.ID) int
 
 // IOSurfaceGetBytesPerElement calls the IOSurface framework function IOSurfaceGetBytesPerElement.
 func IOSurfaceGetBytesPerElement(buffer coregraphics.IOSurfaceRef) int {
+	defer runtime.KeepAlive(buffer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOSurfaceGetBytesPerElement == nil {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceGetBytesPerElement, _lib, "IOSurfaceGetBytesPerElement")
@@ -177,6 +193,7 @@ var _fnIOSurfaceGetBytesPerElementOfPlane func(objc.ID, int) int
 
 // IOSurfaceGetBytesPerElementOfPlane calls the IOSurface framework function IOSurfaceGetBytesPerElementOfPlane.
 func IOSurfaceGetBytesPerElementOfPlane(buffer coregraphics.IOSurfaceRef, planeIndex int) int {
+	defer runtime.KeepAlive(buffer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOSurfaceGetBytesPerElementOfPlane == nil {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceGetBytesPerElementOfPlane, _lib, "IOSurfaceGetBytesPerElementOfPlane")
@@ -188,6 +205,7 @@ var _fnIOSurfaceGetBytesPerRow func(objc.ID) int
 
 // IOSurfaceGetBytesPerRow calls the IOSurface framework function IOSurfaceGetBytesPerRow.
 func IOSurfaceGetBytesPerRow(buffer coregraphics.IOSurfaceRef) int {
+	defer runtime.KeepAlive(buffer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOSurfaceGetBytesPerRow == nil {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceGetBytesPerRow, _lib, "IOSurfaceGetBytesPerRow")
@@ -199,6 +217,7 @@ var _fnIOSurfaceGetBytesPerRowOfPlane func(objc.ID, int) int
 
 // IOSurfaceGetBytesPerRowOfPlane calls the IOSurface framework function IOSurfaceGetBytesPerRowOfPlane.
 func IOSurfaceGetBytesPerRowOfPlane(buffer coregraphics.IOSurfaceRef, planeIndex int) int {
+	defer runtime.KeepAlive(buffer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOSurfaceGetBytesPerRowOfPlane == nil {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceGetBytesPerRowOfPlane, _lib, "IOSurfaceGetBytesPerRowOfPlane")
@@ -210,6 +229,7 @@ var _fnIOSurfaceGetElementHeight func(objc.ID) int
 
 // IOSurfaceGetElementHeight calls the IOSurface framework function IOSurfaceGetElementHeight.
 func IOSurfaceGetElementHeight(buffer coregraphics.IOSurfaceRef) int {
+	defer runtime.KeepAlive(buffer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOSurfaceGetElementHeight == nil {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceGetElementHeight, _lib, "IOSurfaceGetElementHeight")
@@ -221,6 +241,7 @@ var _fnIOSurfaceGetElementHeightOfPlane func(objc.ID, int) int
 
 // IOSurfaceGetElementHeightOfPlane calls the IOSurface framework function IOSurfaceGetElementHeightOfPlane.
 func IOSurfaceGetElementHeightOfPlane(buffer coregraphics.IOSurfaceRef, planeIndex int) int {
+	defer runtime.KeepAlive(buffer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOSurfaceGetElementHeightOfPlane == nil {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceGetElementHeightOfPlane, _lib, "IOSurfaceGetElementHeightOfPlane")
@@ -232,6 +253,7 @@ var _fnIOSurfaceGetElementWidth func(objc.ID) int
 
 // IOSurfaceGetElementWidth calls the IOSurface framework function IOSurfaceGetElementWidth.
 func IOSurfaceGetElementWidth(buffer coregraphics.IOSurfaceRef) int {
+	defer runtime.KeepAlive(buffer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOSurfaceGetElementWidth == nil {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceGetElementWidth, _lib, "IOSurfaceGetElementWidth")
@@ -243,6 +265,7 @@ var _fnIOSurfaceGetElementWidthOfPlane func(objc.ID, int) int
 
 // IOSurfaceGetElementWidthOfPlane calls the IOSurface framework function IOSurfaceGetElementWidthOfPlane.
 func IOSurfaceGetElementWidthOfPlane(buffer coregraphics.IOSurfaceRef, planeIndex int) int {
+	defer runtime.KeepAlive(buffer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOSurfaceGetElementWidthOfPlane == nil {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceGetElementWidthOfPlane, _lib, "IOSurfaceGetElementWidthOfPlane")
@@ -254,6 +277,7 @@ var _fnIOSurfaceGetHeight func(objc.ID) int
 
 // IOSurfaceGetHeight calls the IOSurface framework function IOSurfaceGetHeight.
 func IOSurfaceGetHeight(buffer coregraphics.IOSurfaceRef) int {
+	defer runtime.KeepAlive(buffer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOSurfaceGetHeight == nil {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceGetHeight, _lib, "IOSurfaceGetHeight")
@@ -265,6 +289,7 @@ var _fnIOSurfaceGetHeightOfPlane func(objc.ID, int) int
 
 // IOSurfaceGetHeightOfPlane calls the IOSurface framework function IOSurfaceGetHeightOfPlane.
 func IOSurfaceGetHeightOfPlane(buffer coregraphics.IOSurfaceRef, planeIndex int) int {
+	defer runtime.KeepAlive(buffer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOSurfaceGetHeightOfPlane == nil {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceGetHeightOfPlane, _lib, "IOSurfaceGetHeightOfPlane")
@@ -276,6 +301,7 @@ var _fnIOSurfaceGetID func(objc.ID) uint32
 
 // IOSurfaceGetID calls the IOSurface framework function IOSurfaceGetID.
 func IOSurfaceGetID(buffer coregraphics.IOSurfaceRef) uint32 {
+	defer runtime.KeepAlive(buffer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOSurfaceGetID == nil {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceGetID, _lib, "IOSurfaceGetID")
@@ -287,6 +313,7 @@ var _fnIOSurfaceGetNameOfComponentOfPlane func(objc.ID, int, int) IOSurfaceCompo
 
 // IOSurfaceGetNameOfComponentOfPlane calls the IOSurface framework function IOSurfaceGetNameOfComponentOfPlane.
 func IOSurfaceGetNameOfComponentOfPlane(buffer coregraphics.IOSurfaceRef, planeIndex int, componentIndex int) IOSurfaceComponentName {
+	defer runtime.KeepAlive(buffer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOSurfaceGetNameOfComponentOfPlane == nil {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceGetNameOfComponentOfPlane, _lib, "IOSurfaceGetNameOfComponentOfPlane")
@@ -298,6 +325,7 @@ var _fnIOSurfaceGetNumberOfComponentsOfPlane func(objc.ID, int) int
 
 // IOSurfaceGetNumberOfComponentsOfPlane calls the IOSurface framework function IOSurfaceGetNumberOfComponentsOfPlane.
 func IOSurfaceGetNumberOfComponentsOfPlane(buffer coregraphics.IOSurfaceRef, planeIndex int) int {
+	defer runtime.KeepAlive(buffer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOSurfaceGetNumberOfComponentsOfPlane == nil {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceGetNumberOfComponentsOfPlane, _lib, "IOSurfaceGetNumberOfComponentsOfPlane")
@@ -309,6 +337,7 @@ var _fnIOSurfaceGetPixelFormat func(objc.ID) uint32
 
 // IOSurfaceGetPixelFormat calls the IOSurface framework function IOSurfaceGetPixelFormat.
 func IOSurfaceGetPixelFormat(buffer coregraphics.IOSurfaceRef) int {
+	defer runtime.KeepAlive(buffer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOSurfaceGetPixelFormat == nil {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceGetPixelFormat, _lib, "IOSurfaceGetPixelFormat")
@@ -320,6 +349,7 @@ var _fnIOSurfaceGetPlaneCount func(objc.ID) int
 
 // IOSurfaceGetPlaneCount calls the IOSurface framework function IOSurfaceGetPlaneCount.
 func IOSurfaceGetPlaneCount(buffer coregraphics.IOSurfaceRef) int {
+	defer runtime.KeepAlive(buffer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOSurfaceGetPlaneCount == nil {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceGetPlaneCount, _lib, "IOSurfaceGetPlaneCount")
@@ -331,6 +361,7 @@ var _fnIOSurfaceGetPropertyAlignment func(objc.ID) int
 
 // IOSurfaceGetPropertyAlignment calls the IOSurface framework function IOSurfaceGetPropertyAlignment.
 func IOSurfaceGetPropertyAlignment(property corefoundation.CFStringRef) int {
+	defer runtime.KeepAlive(property)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOSurfaceGetPropertyAlignment == nil {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceGetPropertyAlignment, _lib, "IOSurfaceGetPropertyAlignment")
@@ -342,6 +373,7 @@ var _fnIOSurfaceGetPropertyMaximum func(objc.ID) int
 
 // IOSurfaceGetPropertyMaximum calls the IOSurface framework function IOSurfaceGetPropertyMaximum.
 func IOSurfaceGetPropertyMaximum(property corefoundation.CFStringRef) int {
+	defer runtime.KeepAlive(property)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOSurfaceGetPropertyMaximum == nil {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceGetPropertyMaximum, _lib, "IOSurfaceGetPropertyMaximum")
@@ -353,6 +385,7 @@ var _fnIOSurfaceGetRangeOfComponentOfPlane func(objc.ID, int, int) IOSurfaceComp
 
 // IOSurfaceGetRangeOfComponentOfPlane calls the IOSurface framework function IOSurfaceGetRangeOfComponentOfPlane.
 func IOSurfaceGetRangeOfComponentOfPlane(buffer coregraphics.IOSurfaceRef, planeIndex int, componentIndex int) IOSurfaceComponentRange {
+	defer runtime.KeepAlive(buffer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOSurfaceGetRangeOfComponentOfPlane == nil {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceGetRangeOfComponentOfPlane, _lib, "IOSurfaceGetRangeOfComponentOfPlane")
@@ -364,6 +397,7 @@ var _fnIOSurfaceGetSeed func(objc.ID) uint32
 
 // IOSurfaceGetSeed calls the IOSurface framework function IOSurfaceGetSeed.
 func IOSurfaceGetSeed(buffer coregraphics.IOSurfaceRef) uint32 {
+	defer runtime.KeepAlive(buffer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOSurfaceGetSeed == nil {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceGetSeed, _lib, "IOSurfaceGetSeed")
@@ -375,6 +409,7 @@ var _fnIOSurfaceGetSubsampling func(objc.ID) IOSurfaceSubsampling
 
 // IOSurfaceGetSubsampling calls the IOSurface framework function IOSurfaceGetSubsampling.
 func IOSurfaceGetSubsampling(buffer coregraphics.IOSurfaceRef) IOSurfaceSubsampling {
+	defer runtime.KeepAlive(buffer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOSurfaceGetSubsampling == nil {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceGetSubsampling, _lib, "IOSurfaceGetSubsampling")
@@ -397,6 +432,7 @@ var _fnIOSurfaceGetTypeOfComponentOfPlane func(objc.ID, int, int) IOSurfaceCompo
 
 // IOSurfaceGetTypeOfComponentOfPlane calls the IOSurface framework function IOSurfaceGetTypeOfComponentOfPlane.
 func IOSurfaceGetTypeOfComponentOfPlane(buffer coregraphics.IOSurfaceRef, planeIndex int, componentIndex int) IOSurfaceComponentType {
+	defer runtime.KeepAlive(buffer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOSurfaceGetTypeOfComponentOfPlane == nil {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceGetTypeOfComponentOfPlane, _lib, "IOSurfaceGetTypeOfComponentOfPlane")
@@ -408,6 +444,7 @@ var _fnIOSurfaceGetUseCount func(objc.ID) int32
 
 // IOSurfaceGetUseCount calls the IOSurface framework function IOSurfaceGetUseCount.
 func IOSurfaceGetUseCount(buffer coregraphics.IOSurfaceRef) int32 {
+	defer runtime.KeepAlive(buffer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOSurfaceGetUseCount == nil {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceGetUseCount, _lib, "IOSurfaceGetUseCount")
@@ -419,6 +456,7 @@ var _fnIOSurfaceGetWidth func(objc.ID) int
 
 // IOSurfaceGetWidth calls the IOSurface framework function IOSurfaceGetWidth.
 func IOSurfaceGetWidth(buffer coregraphics.IOSurfaceRef) int {
+	defer runtime.KeepAlive(buffer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOSurfaceGetWidth == nil {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceGetWidth, _lib, "IOSurfaceGetWidth")
@@ -430,6 +468,7 @@ var _fnIOSurfaceGetWidthOfPlane func(objc.ID, int) int
 
 // IOSurfaceGetWidthOfPlane calls the IOSurface framework function IOSurfaceGetWidthOfPlane.
 func IOSurfaceGetWidthOfPlane(buffer coregraphics.IOSurfaceRef, planeIndex int) int {
+	defer runtime.KeepAlive(buffer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOSurfaceGetWidthOfPlane == nil {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceGetWidthOfPlane, _lib, "IOSurfaceGetWidthOfPlane")
@@ -441,6 +480,7 @@ var _fnIOSurfaceIncrementUseCount func(objc.ID)
 
 // IOSurfaceIncrementUseCount calls the IOSurface framework function IOSurfaceIncrementUseCount.
 func IOSurfaceIncrementUseCount(buffer coregraphics.IOSurfaceRef) {
+	defer runtime.KeepAlive(buffer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOSurfaceIncrementUseCount == nil {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceIncrementUseCount, _lib, "IOSurfaceIncrementUseCount")
@@ -452,6 +492,7 @@ var _fnIOSurfaceIsInUse func(objc.ID) uint8
 
 // IOSurfaceIsInUse calls the IOSurface framework function IOSurfaceIsInUse.
 func IOSurfaceIsInUse(buffer coregraphics.IOSurfaceRef) uint8 {
+	defer runtime.KeepAlive(buffer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOSurfaceIsInUse == nil {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceIsInUse, _lib, "IOSurfaceIsInUse")
@@ -463,6 +504,7 @@ var _fnIOSurfaceLock func(objc.ID, IOSurfaceLockOptions, unsafe.Pointer) int32
 
 // IOSurfaceLock calls the IOSurface framework function IOSurfaceLock.
 func IOSurfaceLock(buffer coregraphics.IOSurfaceRef, options IOSurfaceLockOptions) (result int, seed uint32) {
+	defer runtime.KeepAlive(buffer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOSurfaceLock == nil {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceLock, _lib, "IOSurfaceLock")
@@ -512,6 +554,7 @@ var _fnIOSurfaceRemoveAllValues func(objc.ID)
 
 // IOSurfaceRemoveAllValues calls the IOSurface framework function IOSurfaceRemoveAllValues.
 func IOSurfaceRemoveAllValues(buffer coregraphics.IOSurfaceRef) {
+	defer runtime.KeepAlive(buffer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOSurfaceRemoveAllValues == nil {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceRemoveAllValues, _lib, "IOSurfaceRemoveAllValues")
@@ -523,6 +566,8 @@ var _fnIOSurfaceRemoveValue func(objc.ID, objc.ID)
 
 // IOSurfaceRemoveValue calls the IOSurface framework function IOSurfaceRemoveValue.
 func IOSurfaceRemoveValue(buffer coregraphics.IOSurfaceRef, key corefoundation.CFStringRef) {
+	defer runtime.KeepAlive(buffer)
+	defer runtime.KeepAlive(key)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOSurfaceRemoveValue == nil {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceRemoveValue, _lib, "IOSurfaceRemoveValue")
@@ -534,6 +579,7 @@ var _fnIOSurfaceSetOwnershipIdentity func(objc.ID, int, int, uint32) int32
 
 // IOSurfaceSetOwnershipIdentity calls the IOSurface framework function IOSurfaceSetOwnershipIdentity.
 func IOSurfaceSetOwnershipIdentity(buffer coregraphics.IOSurfaceRef, taskIdToken int, newLedgerTag int, newLedgerOptions uint32) int {
+	defer runtime.KeepAlive(buffer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOSurfaceSetOwnershipIdentity == nil {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceSetOwnershipIdentity, _lib, "IOSurfaceSetOwnershipIdentity")
@@ -545,6 +591,7 @@ var _fnIOSurfaceSetPurgeable func(objc.ID, uint32, unsafe.Pointer) int32
 
 // IOSurfaceSetPurgeable calls the IOSurface framework function IOSurfaceSetPurgeable.
 func IOSurfaceSetPurgeable(buffer coregraphics.IOSurfaceRef, newState uint32) (result int, oldState uint32) {
+	defer runtime.KeepAlive(buffer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOSurfaceSetPurgeable == nil {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceSetPurgeable, _lib, "IOSurfaceSetPurgeable")
@@ -558,6 +605,9 @@ var _fnIOSurfaceSetValue func(objc.ID, objc.ID, objc.ID)
 
 // IOSurfaceSetValue calls the IOSurface framework function IOSurfaceSetValue.
 func IOSurfaceSetValue(buffer coregraphics.IOSurfaceRef, key corefoundation.CFStringRef, value obj.Object) {
+	defer runtime.KeepAlive(buffer)
+	defer runtime.KeepAlive(key)
+	defer runtime.KeepAlive(value)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOSurfaceSetValue == nil {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceSetValue, _lib, "IOSurfaceSetValue")
@@ -569,6 +619,8 @@ var _fnIOSurfaceSetValues func(objc.ID, objc.ID)
 
 // IOSurfaceSetValues calls the IOSurface framework function IOSurfaceSetValues.
 func IOSurfaceSetValues(buffer coregraphics.IOSurfaceRef, keysAndValues corefoundation.CFDictionaryRef) {
+	defer runtime.KeepAlive(buffer)
+	defer runtime.KeepAlive(keysAndValues)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOSurfaceSetValues == nil {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceSetValues, _lib, "IOSurfaceSetValues")
@@ -580,6 +632,7 @@ var _fnIOSurfaceUnlock func(objc.ID, IOSurfaceLockOptions, unsafe.Pointer) int32
 
 // IOSurfaceUnlock calls the IOSurface framework function IOSurfaceUnlock.
 func IOSurfaceUnlock(buffer coregraphics.IOSurfaceRef, options IOSurfaceLockOptions) (result int, seed uint32) {
+	defer runtime.KeepAlive(buffer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOSurfaceUnlock == nil {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceUnlock, _lib, "IOSurfaceUnlock")

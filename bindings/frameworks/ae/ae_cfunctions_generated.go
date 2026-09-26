@@ -5,6 +5,7 @@
 package ae
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
@@ -132,6 +133,8 @@ var _fnAECreateRemoteProcessResolver func(objc.ID, objc.ID) objc.ID
 
 // AECreateRemoteProcessResolver calls the AE framework function AECreateRemoteProcessResolver.
 func AECreateRemoteProcessResolver(allocator corefoundation.CFAllocatorRef, url corefoundation.CFURLRef) AERemoteProcessResolverRef {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(url)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAECreateRemoteProcessResolver == nil {
 		ebipurego.RegisterLibFunc(&_fnAECreateRemoteProcessResolver, _lib, "AECreateRemoteProcessResolver")
@@ -199,6 +202,7 @@ var _fnAEDisposeRemoteProcessResolver func(objc.ID)
 
 // AEDisposeRemoteProcessResolver calls the AE framework function AEDisposeRemoteProcessResolver.
 func AEDisposeRemoteProcessResolver(ref AERemoteProcessResolverRef) {
+	defer runtime.KeepAlive(ref)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAEDisposeRemoteProcessResolver == nil {
 		ebipurego.RegisterLibFunc(&_fnAEDisposeRemoteProcessResolver, _lib, "AEDisposeRemoteProcessResolver")
@@ -594,6 +598,7 @@ var _fnAERemoteProcessResolverGetProcesses func(objc.ID, unsafe.Pointer) objc.ID
 
 // AERemoteProcessResolverGetProcesses calls the AE framework function AERemoteProcessResolverGetProcesses.
 func AERemoteProcessResolverGetProcesses(ref AERemoteProcessResolverRef, outError *corefoundation.CFStreamError) corefoundation.CFArrayRef {
+	defer runtime.KeepAlive(ref)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAERemoteProcessResolverGetProcesses == nil {
 		ebipurego.RegisterLibFunc(&_fnAERemoteProcessResolverGetProcesses, _lib, "AERemoteProcessResolverGetProcesses")
@@ -606,6 +611,9 @@ var _fnAERemoteProcessResolverScheduleWithRunLoop func(objc.ID, objc.ID, objc.ID
 
 // AERemoteProcessResolverScheduleWithRunLoop calls the AE framework function AERemoteProcessResolverScheduleWithRunLoop.
 func AERemoteProcessResolverScheduleWithRunLoop(ref AERemoteProcessResolverRef, runLoop corefoundation.CFRunLoopRef, runLoopMode corefoundation.CFStringRef, callback unsafe.Pointer, ctx unsafe.Pointer) {
+	defer runtime.KeepAlive(ref)
+	defer runtime.KeepAlive(runLoop)
+	defer runtime.KeepAlive(runLoopMode)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAERemoteProcessResolverScheduleWithRunLoop == nil {
 		ebipurego.RegisterLibFunc(&_fnAERemoteProcessResolverScheduleWithRunLoop, _lib, "AERemoteProcessResolverScheduleWithRunLoop")
@@ -758,6 +766,7 @@ var _fnAEStreamClose func(objc.ID, unsafe.Pointer) int32
 
 // AEStreamClose calls the AE framework function AEStreamClose.
 func AEStreamClose(ref AEStreamRef, desc unsafe.Pointer) int {
+	defer runtime.KeepAlive(ref)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAEStreamClose == nil {
 		ebipurego.RegisterLibFunc(&_fnAEStreamClose, _lib, "AEStreamClose")
@@ -805,6 +814,7 @@ var _fnAEStreamWriteAEDesc func(objc.ID, unsafe.Pointer) int32
 
 // AEStreamWriteAEDesc calls the AE framework function AEStreamWriteAEDesc.
 func AEStreamWriteAEDesc(ref AEStreamRef, desc unsafe.Pointer) int {
+	defer runtime.KeepAlive(ref)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAEStreamWriteAEDesc == nil {
 		ebipurego.RegisterLibFunc(&_fnAEStreamWriteAEDesc, _lib, "AEStreamWriteAEDesc")

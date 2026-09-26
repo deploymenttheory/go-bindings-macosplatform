@@ -5,6 +5,7 @@
 package openscripting
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
@@ -62,6 +63,7 @@ var _fnASSetSourceAttributes func(unsafe.Pointer, objc.ID) int32
 
 // ASSetSourceAttributes calls the OpenScripting framework function ASSetSourceAttributes.
 func ASSetSourceAttributes(scriptingComponent *carboncore.ComponentInstanceRecord, sourceAttributes corefoundation.CFArrayRef) int {
+	defer runtime.KeepAlive(sourceAttributes)
 	_loadOnce.Do(_loadLibrary)
 	if _fnASSetSourceAttributes == nil {
 		ebipurego.RegisterLibFunc(&_fnASSetSourceAttributes, _lib, "ASSetSourceAttributes")
@@ -215,6 +217,7 @@ var _fnOSACopyScriptingDefinitionFromURL func(objc.ID, int, unsafe.Pointer) int3
 
 // OSACopyScriptingDefinitionFromURL calls the OpenScripting framework function OSACopyScriptingDefinitionFromURL.
 func OSACopyScriptingDefinitionFromURL(url corefoundation.CFURLRef, modeFlags int, sdef unsafe.Pointer) int {
+	defer runtime.KeepAlive(url)
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSACopyScriptingDefinitionFromURL == nil {
 		ebipurego.RegisterLibFunc(&_fnOSACopyScriptingDefinitionFromURL, _lib, "OSACopyScriptingDefinitionFromURL")
@@ -449,6 +452,7 @@ var _fnOSAGetScriptDataFromURL func(objc.ID, unsafe.Pointer, int, unsafe.Pointer
 
 // OSAGetScriptDataFromURL calls the OpenScripting framework function OSAGetScriptDataFromURL.
 func OSAGetScriptDataFromURL(scriptURL corefoundation.CFURLRef, modeFlags int, resultingScriptData unsafe.Pointer) (result int, storable uint8) {
+	defer runtime.KeepAlive(scriptURL)
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSAGetScriptDataFromURL == nil {
 		ebipurego.RegisterLibFunc(&_fnOSAGetScriptDataFromURL, _lib, "OSAGetScriptDataFromURL")
@@ -598,6 +602,7 @@ var _fnOSALoadScriptData func(unsafe.Pointer, unsafe.Pointer, objc.ID, int, unsa
 
 // OSALoadScriptData calls the OpenScripting framework function OSALoadScriptData.
 func OSALoadScriptData(scriptingComponent *carboncore.ComponentInstanceRecord, scriptData unsafe.Pointer, fromURL corefoundation.CFURLRef, modeFlags int) (result int, resultingScriptID int) {
+	defer runtime.KeepAlive(fromURL)
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSALoadScriptData == nil {
 		ebipurego.RegisterLibFunc(&_fnOSALoadScriptData, _lib, "OSALoadScriptData")

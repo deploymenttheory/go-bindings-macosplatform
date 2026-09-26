@@ -5,6 +5,7 @@
 package coremediaio
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
@@ -124,6 +125,7 @@ var _fnCMIOStreamClockConvertHostTimeToDeviceTime func(uint64, objc.ID) coremedi
 
 // CMIOStreamClockConvertHostTimeToDeviceTime calls the CoreMediaIO framework function CMIOStreamClockConvertHostTimeToDeviceTime.
 func CMIOStreamClockConvertHostTimeToDeviceTime(hostTime uint64, clock obj.Object) coremedia.CMTime {
+	defer runtime.KeepAlive(clock)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMIOStreamClockConvertHostTimeToDeviceTime == nil {
 		ebipurego.RegisterLibFunc(&_fnCMIOStreamClockConvertHostTimeToDeviceTime, _lib, "CMIOStreamClockConvertHostTimeToDeviceTime")

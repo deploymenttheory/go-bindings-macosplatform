@@ -5,6 +5,7 @@
 package compositorservices
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -18,6 +19,7 @@ import (
 var _fnCpLayerRendererPropertiesCreateUsingConfiguration func(objc.ID, unsafe.Pointer) objc.ID
 
 func CpLayerRendererPropertiesCreateUsingConfiguration(configuration *_cp_layer_renderer_configuration) (obj.Object, error) {
+	defer runtime.KeepAlive(configuration)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpLayerRendererPropertiesCreateUsingConfiguration == nil {
 		ebipurego.RegisterLibFunc(&_fnCpLayerRendererPropertiesCreateUsingConfiguration, _lib, "cp_layer_renderer_properties_create_using_configuration")

@@ -5,6 +5,7 @@
 package hiservices
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
@@ -67,6 +68,9 @@ var _fnHIShapeDifference func(objc.ID, objc.ID, objc.ID) int32
 
 // HIShapeDifference reports an error if the HIServices framework function HIShapeDifference fails.
 func HIShapeDifference(inShape1 HIShapeRef, inShape2 HIShapeRef, outResult HIMutableShapeRef) error {
+	defer runtime.KeepAlive(inShape1)
+	defer runtime.KeepAlive(inShape2)
+	defer runtime.KeepAlive(outResult)
 	_loadOnce.Do(_loadLibrary)
 	if _fnHIShapeDifference == nil {
 		ebipurego.RegisterLibFunc(&_fnHIShapeDifference, _lib, "HIShapeDifference")
@@ -82,6 +86,7 @@ var _fnHIShapeEnumerate func(objc.ID, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // HIShapeEnumerate reports an error if the HIServices framework function HIShapeEnumerate fails.
 func HIShapeEnumerate(inShape HIShapeRef, inOptions int, inProc unsafe.Pointer, inRefcon unsafe.Pointer) error {
+	defer runtime.KeepAlive(inShape)
 	_loadOnce.Do(_loadLibrary)
 	if _fnHIShapeEnumerate == nil {
 		ebipurego.RegisterLibFunc(&_fnHIShapeEnumerate, _lib, "HIShapeEnumerate")
@@ -97,6 +102,8 @@ var _fnHIShapeGetAsQDRgn func(objc.ID, objc.ID) int32
 
 // HIShapeGetAsQDRgn reports an error if the HIServices framework function HIShapeGetAsQDRgn fails.
 func HIShapeGetAsQDRgn(inShape HIShapeRef, outRgn obj.Object) error {
+	defer runtime.KeepAlive(inShape)
+	defer runtime.KeepAlive(outRgn)
 	_loadOnce.Do(_loadLibrary)
 	if _fnHIShapeGetAsQDRgn == nil {
 		ebipurego.RegisterLibFunc(&_fnHIShapeGetAsQDRgn, _lib, "HIShapeGetAsQDRgn")
@@ -112,6 +119,7 @@ var _fnHIShapeInset func(objc.ID, float64, float64) int32
 
 // HIShapeInset reports an error if the HIServices framework function HIShapeInset fails.
 func HIShapeInset(inShape HIMutableShapeRef, inDX float64, inDY float64) error {
+	defer runtime.KeepAlive(inShape)
 	_loadOnce.Do(_loadLibrary)
 	if _fnHIShapeInset == nil {
 		ebipurego.RegisterLibFunc(&_fnHIShapeInset, _lib, "HIShapeInset")
@@ -127,6 +135,9 @@ var _fnHIShapeIntersect func(objc.ID, objc.ID, objc.ID) int32
 
 // HIShapeIntersect reports an error if the HIServices framework function HIShapeIntersect fails.
 func HIShapeIntersect(inShape1 HIShapeRef, inShape2 HIShapeRef, outResult HIMutableShapeRef) error {
+	defer runtime.KeepAlive(inShape1)
+	defer runtime.KeepAlive(inShape2)
+	defer runtime.KeepAlive(outResult)
 	_loadOnce.Do(_loadLibrary)
 	if _fnHIShapeIntersect == nil {
 		ebipurego.RegisterLibFunc(&_fnHIShapeIntersect, _lib, "HIShapeIntersect")
@@ -142,6 +153,7 @@ var _fnHIShapeOffset func(objc.ID, float64, float64) int32
 
 // HIShapeOffset reports an error if the HIServices framework function HIShapeOffset fails.
 func HIShapeOffset(inShape HIMutableShapeRef, inDX float64, inDY float64) error {
+	defer runtime.KeepAlive(inShape)
 	_loadOnce.Do(_loadLibrary)
 	if _fnHIShapeOffset == nil {
 		ebipurego.RegisterLibFunc(&_fnHIShapeOffset, _lib, "HIShapeOffset")
@@ -157,6 +169,8 @@ var _fnHIShapeReplacePathInCGContext func(objc.ID, objc.ID) int32
 
 // HIShapeReplacePathInCGContext reports an error if the HIServices framework function HIShapeReplacePathInCGContext fails.
 func HIShapeReplacePathInCGContext(inShape HIShapeRef, inContext coregraphics.CGContextRef) error {
+	defer runtime.KeepAlive(inShape)
+	defer runtime.KeepAlive(inContext)
 	_loadOnce.Do(_loadLibrary)
 	if _fnHIShapeReplacePathInCGContext == nil {
 		ebipurego.RegisterLibFunc(&_fnHIShapeReplacePathInCGContext, _lib, "HIShapeReplacePathInCGContext")
@@ -172,6 +186,7 @@ var _fnHIShapeSetEmpty func(objc.ID) int32
 
 // HIShapeSetEmpty reports an error if the HIServices framework function HIShapeSetEmpty fails.
 func HIShapeSetEmpty(inShape HIMutableShapeRef) error {
+	defer runtime.KeepAlive(inShape)
 	_loadOnce.Do(_loadLibrary)
 	if _fnHIShapeSetEmpty == nil {
 		ebipurego.RegisterLibFunc(&_fnHIShapeSetEmpty, _lib, "HIShapeSetEmpty")
@@ -187,6 +202,8 @@ var _fnHIShapeSetWithShape func(objc.ID, objc.ID) int32
 
 // HIShapeSetWithShape reports an error if the HIServices framework function HIShapeSetWithShape fails.
 func HIShapeSetWithShape(inDestShape HIMutableShapeRef, inSrcShape HIShapeRef) error {
+	defer runtime.KeepAlive(inDestShape)
+	defer runtime.KeepAlive(inSrcShape)
 	_loadOnce.Do(_loadLibrary)
 	if _fnHIShapeSetWithShape == nil {
 		ebipurego.RegisterLibFunc(&_fnHIShapeSetWithShape, _lib, "HIShapeSetWithShape")
@@ -202,6 +219,9 @@ var _fnHIShapeUnion func(objc.ID, objc.ID, objc.ID) int32
 
 // HIShapeUnion reports an error if the HIServices framework function HIShapeUnion fails.
 func HIShapeUnion(inShape1 HIShapeRef, inShape2 HIShapeRef, outResult HIMutableShapeRef) error {
+	defer runtime.KeepAlive(inShape1)
+	defer runtime.KeepAlive(inShape2)
+	defer runtime.KeepAlive(outResult)
 	_loadOnce.Do(_loadLibrary)
 	if _fnHIShapeUnion == nil {
 		ebipurego.RegisterLibFunc(&_fnHIShapeUnion, _lib, "HIShapeUnion")
@@ -217,6 +237,7 @@ var _fnHIShapeUnionWithRect func(objc.ID, unsafe.Pointer) int32
 
 // HIShapeUnionWithRect reports an error if the HIServices framework function HIShapeUnionWithRect fails.
 func HIShapeUnionWithRect(inShape HIMutableShapeRef, inRect *corefoundation.CGRect) error {
+	defer runtime.KeepAlive(inShape)
 	_loadOnce.Do(_loadLibrary)
 	if _fnHIShapeUnionWithRect == nil {
 		ebipurego.RegisterLibFunc(&_fnHIShapeUnionWithRect, _lib, "HIShapeUnionWithRect")
@@ -232,6 +253,9 @@ var _fnHIShapeXor func(objc.ID, objc.ID, objc.ID) int32
 
 // HIShapeXor reports an error if the HIServices framework function HIShapeXor fails.
 func HIShapeXor(inShape1 HIShapeRef, inShape2 HIShapeRef, outResult HIMutableShapeRef) error {
+	defer runtime.KeepAlive(inShape1)
+	defer runtime.KeepAlive(inShape2)
+	defer runtime.KeepAlive(outResult)
 	_loadOnce.Do(_loadLibrary)
 	if _fnHIShapeXor == nil {
 		ebipurego.RegisterLibFunc(&_fnHIShapeXor, _lib, "HIShapeXor")
@@ -247,6 +271,7 @@ var _fnICBegin func(objc.ID, uint8) int32
 
 // ICBegin reports an error if the HIServices framework function ICBegin fails.
 func ICBegin(inst ICInstance, perm uint8) error {
+	defer runtime.KeepAlive(inst)
 	_loadOnce.Do(_loadLibrary)
 	if _fnICBegin == nil {
 		ebipurego.RegisterLibFunc(&_fnICBegin, _lib, "ICBegin")
@@ -262,6 +287,7 @@ var _fnICDeleteProfile func(objc.ID, int) int32
 
 // ICDeleteProfile reports an error if the HIServices framework function ICDeleteProfile fails.
 func ICDeleteProfile(inst ICInstance, thisID int) error {
+	defer runtime.KeepAlive(inst)
 	_loadOnce.Do(_loadLibrary)
 	if _fnICDeleteProfile == nil {
 		ebipurego.RegisterLibFunc(&_fnICDeleteProfile, _lib, "ICDeleteProfile")
@@ -277,6 +303,7 @@ var _fnICEnd func(objc.ID) int32
 
 // ICEnd reports an error if the HIServices framework function ICEnd fails.
 func ICEnd(inst ICInstance) error {
+	defer runtime.KeepAlive(inst)
 	_loadOnce.Do(_loadLibrary)
 	if _fnICEnd == nil {
 		ebipurego.RegisterLibFunc(&_fnICEnd, _lib, "ICEnd")
@@ -292,6 +319,7 @@ var _fnICSetCurrentProfile func(objc.ID, int) int32
 
 // ICSetCurrentProfile reports an error if the HIServices framework function ICSetCurrentProfile fails.
 func ICSetCurrentProfile(inst ICInstance, newID int) error {
+	defer runtime.KeepAlive(inst)
 	_loadOnce.Do(_loadLibrary)
 	if _fnICSetCurrentProfile == nil {
 		ebipurego.RegisterLibFunc(&_fnICSetCurrentProfile, _lib, "ICSetCurrentProfile")
@@ -322,6 +350,7 @@ var _fnICStop func(objc.ID) int32
 
 // ICStop reports an error if the HIServices framework function ICStop fails.
 func ICStop(inst ICInstance) error {
+	defer runtime.KeepAlive(inst)
 	_loadOnce.Do(_loadLibrary)
 	if _fnICStop == nil {
 		ebipurego.RegisterLibFunc(&_fnICStop, _lib, "ICStop")
@@ -337,6 +366,7 @@ var _fnPasteboardClear func(objc.ID) int32
 
 // PasteboardClear reports an error if the HIServices framework function PasteboardClear fails.
 func PasteboardClear(inPasteboard PasteboardRef) error {
+	defer runtime.KeepAlive(inPasteboard)
 	_loadOnce.Do(_loadLibrary)
 	if _fnPasteboardClear == nil {
 		ebipurego.RegisterLibFunc(&_fnPasteboardClear, _lib, "PasteboardClear")
@@ -352,6 +382,8 @@ var _fnPasteboardCopyItemFlavorData func(objc.ID, unsafe.Pointer, objc.ID, unsaf
 
 // PasteboardCopyItemFlavorData reports an error if the HIServices framework function PasteboardCopyItemFlavorData fails.
 func PasteboardCopyItemFlavorData(inPasteboard PasteboardRef, inItem unsafe.Pointer, inFlavorType obj.Object) (obj.Object, error) {
+	defer runtime.KeepAlive(inPasteboard)
+	defer runtime.KeepAlive(inFlavorType)
 	_loadOnce.Do(_loadLibrary)
 	if _fnPasteboardCopyItemFlavorData == nil {
 		ebipurego.RegisterLibFunc(&_fnPasteboardCopyItemFlavorData, _lib, "PasteboardCopyItemFlavorData")
@@ -368,6 +400,7 @@ var _fnPasteboardCopyItemFlavors func(objc.ID, unsafe.Pointer, unsafe.Pointer) i
 
 // PasteboardCopyItemFlavors reports an error if the HIServices framework function PasteboardCopyItemFlavors fails.
 func PasteboardCopyItemFlavors(inPasteboard PasteboardRef, inItem unsafe.Pointer) (obj.Object, error) {
+	defer runtime.KeepAlive(inPasteboard)
 	_loadOnce.Do(_loadLibrary)
 	if _fnPasteboardCopyItemFlavors == nil {
 		ebipurego.RegisterLibFunc(&_fnPasteboardCopyItemFlavors, _lib, "PasteboardCopyItemFlavors")
@@ -384,6 +417,7 @@ var _fnPasteboardCopyName func(objc.ID, unsafe.Pointer) int32
 
 // PasteboardCopyName reports an error if the HIServices framework function PasteboardCopyName fails.
 func PasteboardCopyName(inPasteboard PasteboardRef) (obj.Object, error) {
+	defer runtime.KeepAlive(inPasteboard)
 	_loadOnce.Do(_loadLibrary)
 	if _fnPasteboardCopyName == nil {
 		ebipurego.RegisterLibFunc(&_fnPasteboardCopyName, _lib, "PasteboardCopyName")
@@ -400,6 +434,7 @@ var _fnPasteboardCopyPasteLocation func(objc.ID, unsafe.Pointer) int32
 
 // PasteboardCopyPasteLocation reports an error if the HIServices framework function PasteboardCopyPasteLocation fails.
 func PasteboardCopyPasteLocation(inPasteboard PasteboardRef) (obj.Object, error) {
+	defer runtime.KeepAlive(inPasteboard)
 	_loadOnce.Do(_loadLibrary)
 	if _fnPasteboardCopyPasteLocation == nil {
 		ebipurego.RegisterLibFunc(&_fnPasteboardCopyPasteLocation, _lib, "PasteboardCopyPasteLocation")
@@ -416,6 +451,7 @@ var _fnPasteboardCreate func(objc.ID, unsafe.Pointer) int32
 
 // PasteboardCreate reports an error if the HIServices framework function PasteboardCreate fails.
 func PasteboardCreate(inName obj.Object, outPasteboard unsafe.Pointer) error {
+	defer runtime.KeepAlive(inName)
 	_loadOnce.Do(_loadLibrary)
 	if _fnPasteboardCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnPasteboardCreate, _lib, "PasteboardCreate")
@@ -431,6 +467,7 @@ var _fnPasteboardGetItemIdentifier func(objc.ID, int, unsafe.Pointer) int32
 
 // PasteboardGetItemIdentifier reports an error if the HIServices framework function PasteboardGetItemIdentifier fails.
 func PasteboardGetItemIdentifier(inPasteboard PasteboardRef, inIndex int, outItem unsafe.Pointer) error {
+	defer runtime.KeepAlive(inPasteboard)
 	_loadOnce.Do(_loadLibrary)
 	if _fnPasteboardGetItemIdentifier == nil {
 		ebipurego.RegisterLibFunc(&_fnPasteboardGetItemIdentifier, _lib, "PasteboardGetItemIdentifier")
@@ -446,6 +483,9 @@ var _fnPasteboardPutItemFlavor func(objc.ID, unsafe.Pointer, objc.ID, objc.ID, P
 
 // PasteboardPutItemFlavor reports an error if the HIServices framework function PasteboardPutItemFlavor fails.
 func PasteboardPutItemFlavor(inPasteboard PasteboardRef, inItem unsafe.Pointer, inFlavorType obj.Object, inData obj.Object, inFlags PasteboardFlavorFlags) error {
+	defer runtime.KeepAlive(inPasteboard)
+	defer runtime.KeepAlive(inFlavorType)
+	defer runtime.KeepAlive(inData)
 	_loadOnce.Do(_loadLibrary)
 	if _fnPasteboardPutItemFlavor == nil {
 		ebipurego.RegisterLibFunc(&_fnPasteboardPutItemFlavor, _lib, "PasteboardPutItemFlavor")
@@ -461,6 +501,7 @@ var _fnPasteboardResolvePromises func(objc.ID) int32
 
 // PasteboardResolvePromises reports an error if the HIServices framework function PasteboardResolvePromises fails.
 func PasteboardResolvePromises(inPasteboard PasteboardRef) error {
+	defer runtime.KeepAlive(inPasteboard)
 	_loadOnce.Do(_loadLibrary)
 	if _fnPasteboardResolvePromises == nil {
 		ebipurego.RegisterLibFunc(&_fnPasteboardResolvePromises, _lib, "PasteboardResolvePromises")
@@ -476,6 +517,8 @@ var _fnPasteboardSetPasteLocation func(objc.ID, objc.ID) int32
 
 // PasteboardSetPasteLocation reports an error if the HIServices framework function PasteboardSetPasteLocation fails.
 func PasteboardSetPasteLocation(inPasteboard PasteboardRef, inPasteLocation obj.Object) error {
+	defer runtime.KeepAlive(inPasteboard)
+	defer runtime.KeepAlive(inPasteLocation)
 	_loadOnce.Do(_loadLibrary)
 	if _fnPasteboardSetPasteLocation == nil {
 		ebipurego.RegisterLibFunc(&_fnPasteboardSetPasteLocation, _lib, "PasteboardSetPasteLocation")
@@ -491,6 +534,7 @@ var _fnPasteboardSetPromiseKeeper func(objc.ID, unsafe.Pointer, unsafe.Pointer) 
 
 // PasteboardSetPromiseKeeper reports an error if the HIServices framework function PasteboardSetPromiseKeeper fails.
 func PasteboardSetPromiseKeeper(inPasteboard PasteboardRef, inPromiseKeeper unsafe.Pointer, inContext unsafe.Pointer) error {
+	defer runtime.KeepAlive(inPasteboard)
 	_loadOnce.Do(_loadLibrary)
 	if _fnPasteboardSetPromiseKeeper == nil {
 		ebipurego.RegisterLibFunc(&_fnPasteboardSetPromiseKeeper, _lib, "PasteboardSetPromiseKeeper")
@@ -506,6 +550,8 @@ var _fnPlotIconRefInContext func(objc.ID, unsafe.Pointer, int16, int16, unsafe.P
 
 // PlotIconRefInContext reports an error if the HIServices framework function PlotIconRefInContext fails.
 func PlotIconRefInContext(inContext coregraphics.CGContextRef, inRect *corefoundation.CGRect, inAlign int16, inTransform int16, inLabelColor *RGBColor, inFlags int, inIconRef obj.Object) error {
+	defer runtime.KeepAlive(inContext)
+	defer runtime.KeepAlive(inIconRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnPlotIconRefInContext == nil {
 		ebipurego.RegisterLibFunc(&_fnPlotIconRefInContext, _lib, "PlotIconRefInContext")
@@ -551,6 +597,7 @@ var _fnTranslationCopyDestinationType func(objc.ID, unsafe.Pointer) int32
 
 // TranslationCopyDestinationType reports an error if the HIServices framework function TranslationCopyDestinationType fails.
 func TranslationCopyDestinationType(inTranslation TranslationRef) (obj.Object, error) {
+	defer runtime.KeepAlive(inTranslation)
 	_loadOnce.Do(_loadLibrary)
 	if _fnTranslationCopyDestinationType == nil {
 		ebipurego.RegisterLibFunc(&_fnTranslationCopyDestinationType, _lib, "TranslationCopyDestinationType")
@@ -567,6 +614,7 @@ var _fnTranslationCopySourceType func(objc.ID, unsafe.Pointer) int32
 
 // TranslationCopySourceType reports an error if the HIServices framework function TranslationCopySourceType fails.
 func TranslationCopySourceType(inTranslation TranslationRef) (obj.Object, error) {
+	defer runtime.KeepAlive(inTranslation)
 	_loadOnce.Do(_loadLibrary)
 	if _fnTranslationCopySourceType == nil {
 		ebipurego.RegisterLibFunc(&_fnTranslationCopySourceType, _lib, "TranslationCopySourceType")
@@ -583,6 +631,8 @@ var _fnTranslationCreate func(objc.ID, objc.ID, int, unsafe.Pointer) int32
 
 // TranslationCreate reports an error if the HIServices framework function TranslationCreate fails.
 func TranslationCreate(inSourceType obj.Object, inDestinationType obj.Object, inTranslationFlags int, outTranslation unsafe.Pointer) error {
+	defer runtime.KeepAlive(inSourceType)
+	defer runtime.KeepAlive(inDestinationType)
 	_loadOnce.Do(_loadLibrary)
 	if _fnTranslationCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnTranslationCreate, _lib, "TranslationCreate")
@@ -598,6 +648,7 @@ var _fnTranslationCreateWithSourceArray func(objc.ID, int, unsafe.Pointer, unsaf
 
 // TranslationCreateWithSourceArray reports an error if the HIServices framework function TranslationCreateWithSourceArray fails.
 func TranslationCreateWithSourceArray(inSourceTypes obj.Object, inTranslationFlags int) (obj.Object, obj.Object, error) {
+	defer runtime.KeepAlive(inSourceTypes)
 	_loadOnce.Do(_loadLibrary)
 	if _fnTranslationCreateWithSourceArray == nil {
 		ebipurego.RegisterLibFunc(&_fnTranslationCreateWithSourceArray, _lib, "TranslationCreateWithSourceArray")
@@ -615,6 +666,8 @@ var _fnTranslationPerformForData func(objc.ID, objc.ID, unsafe.Pointer) int32
 
 // TranslationPerformForData reports an error if the HIServices framework function TranslationPerformForData fails.
 func TranslationPerformForData(inTranslation TranslationRef, inSourceData obj.Object) (obj.Object, error) {
+	defer runtime.KeepAlive(inTranslation)
+	defer runtime.KeepAlive(inSourceData)
 	_loadOnce.Do(_loadLibrary)
 	if _fnTranslationPerformForData == nil {
 		ebipurego.RegisterLibFunc(&_fnTranslationPerformForData, _lib, "TranslationPerformForData")
@@ -631,6 +684,8 @@ var _fnTranslationPerformForFile func(objc.ID, unsafe.Pointer, unsafe.Pointer, o
 
 // TranslationPerformForFile reports an error if the HIServices framework function TranslationPerformForFile fails.
 func TranslationPerformForFile(inTranslation TranslationRef, inSourceFile *carboncore.FSRef, inDestinationDirectory *carboncore.FSRef, inDestinationName obj.Object, outTranslatedFile *carboncore.FSRef) error {
+	defer runtime.KeepAlive(inTranslation)
+	defer runtime.KeepAlive(inDestinationName)
 	_loadOnce.Do(_loadLibrary)
 	if _fnTranslationPerformForFile == nil {
 		ebipurego.RegisterLibFunc(&_fnTranslationPerformForFile, _lib, "TranslationPerformForFile")
@@ -646,6 +701,9 @@ var _fnTranslationPerformForURL func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) 
 
 // TranslationPerformForURL reports an error if the HIServices framework function TranslationPerformForURL fails.
 func TranslationPerformForURL(inTranslation TranslationRef, inSourceURL obj.Object, inDestinationURL obj.Object) (obj.Object, error) {
+	defer runtime.KeepAlive(inTranslation)
+	defer runtime.KeepAlive(inSourceURL)
+	defer runtime.KeepAlive(inDestinationURL)
 	_loadOnce.Do(_loadLibrary)
 	if _fnTranslationPerformForURL == nil {
 		ebipurego.RegisterLibFunc(&_fnTranslationPerformForURL, _lib, "TranslationPerformForURL")

@@ -5,6 +5,7 @@
 package coremediaio
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
@@ -94,6 +95,8 @@ var _fnCMIOStreamClockCreate func(objc.ID, objc.ID, unsafe.Pointer, coremedia.CM
 
 // CMIOStreamClockCreate reports an error if the CoreMediaIO framework function CMIOStreamClockCreate fails.
 func CMIOStreamClockCreate(allocator obj.Object, clockName obj.Object, sourceIdentifier unsafe.Pointer, getTimeCallMinimumInterval coremedia.CMTime, numberOfEventsForRateSmoothing int, numberOfAveragesForRateSmoothing int) (obj.Object, error) {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(clockName)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMIOStreamClockCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnCMIOStreamClockCreate, _lib, "CMIOStreamClockCreate")
@@ -110,6 +113,7 @@ var _fnCMIOStreamClockInvalidate func(objc.ID) int32
 
 // CMIOStreamClockInvalidate reports an error if the CoreMediaIO framework function CMIOStreamClockInvalidate fails.
 func CMIOStreamClockInvalidate(clock obj.Object) error {
+	defer runtime.KeepAlive(clock)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMIOStreamClockInvalidate == nil {
 		ebipurego.RegisterLibFunc(&_fnCMIOStreamClockInvalidate, _lib, "CMIOStreamClockInvalidate")
@@ -125,6 +129,7 @@ var _fnCMIOStreamClockPostTimingEvent func(coremedia.CMTime, uint64, uint8, objc
 
 // CMIOStreamClockPostTimingEvent reports an error if the CoreMediaIO framework function CMIOStreamClockPostTimingEvent fails.
 func CMIOStreamClockPostTimingEvent(eventTime coremedia.CMTime, hostTime uint64, resynchronize uint8, clock obj.Object) error {
+	defer runtime.KeepAlive(clock)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMIOStreamClockPostTimingEvent == nil {
 		ebipurego.RegisterLibFunc(&_fnCMIOStreamClockPostTimingEvent, _lib, "CMIOStreamClockPostTimingEvent")

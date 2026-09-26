@@ -5,6 +5,7 @@
 package cfnetwork
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
@@ -18,6 +19,7 @@ var _fnCFFTPCreateParsedResourceListing func(objc.ID, unsafe.Pointer, int, unsaf
 
 // CFFTPCreateParsedResourceListing calls the CFNetwork framework function CFFTPCreateParsedResourceListing.
 func CFFTPCreateParsedResourceListing(alloc corefoundation.CFAllocatorRef, buffer unsafe.Pointer, bufferLength int, parsed unsafe.Pointer) int {
+	defer runtime.KeepAlive(alloc)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFFTPCreateParsedResourceListing == nil {
 		ebipurego.RegisterLibFunc(&_fnCFFTPCreateParsedResourceListing, _lib, "CFFTPCreateParsedResourceListing")
@@ -29,6 +31,8 @@ var _fnCFHTTPAuthenticationAppliesToRequest func(objc.ID, objc.ID) uint8
 
 // CFHTTPAuthenticationAppliesToRequest calls the CFNetwork framework function CFHTTPAuthenticationAppliesToRequest.
 func CFHTTPAuthenticationAppliesToRequest(auth corefoundation.CFHTTPAuthenticationRef, request corefoundation.CFHTTPMessageRef) uint8 {
+	defer runtime.KeepAlive(auth)
+	defer runtime.KeepAlive(request)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFHTTPAuthenticationAppliesToRequest == nil {
 		ebipurego.RegisterLibFunc(&_fnCFHTTPAuthenticationAppliesToRequest, _lib, "CFHTTPAuthenticationAppliesToRequest")
@@ -40,6 +44,7 @@ var _fnCFHTTPAuthenticationCopyDomains func(objc.ID) objc.ID
 
 // CFHTTPAuthenticationCopyDomains calls the CFNetwork framework function CFHTTPAuthenticationCopyDomains.
 func CFHTTPAuthenticationCopyDomains(auth corefoundation.CFHTTPAuthenticationRef) corefoundation.CFArrayRef {
+	defer runtime.KeepAlive(auth)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFHTTPAuthenticationCopyDomains == nil {
 		ebipurego.RegisterLibFunc(&_fnCFHTTPAuthenticationCopyDomains, _lib, "CFHTTPAuthenticationCopyDomains")
@@ -52,6 +57,7 @@ var _fnCFHTTPAuthenticationCopyMethod func(objc.ID) objc.ID
 
 // CFHTTPAuthenticationCopyMethod calls the CFNetwork framework function CFHTTPAuthenticationCopyMethod.
 func CFHTTPAuthenticationCopyMethod(auth corefoundation.CFHTTPAuthenticationRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(auth)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFHTTPAuthenticationCopyMethod == nil {
 		ebipurego.RegisterLibFunc(&_fnCFHTTPAuthenticationCopyMethod, _lib, "CFHTTPAuthenticationCopyMethod")
@@ -64,6 +70,7 @@ var _fnCFHTTPAuthenticationCopyRealm func(objc.ID) objc.ID
 
 // CFHTTPAuthenticationCopyRealm calls the CFNetwork framework function CFHTTPAuthenticationCopyRealm.
 func CFHTTPAuthenticationCopyRealm(auth corefoundation.CFHTTPAuthenticationRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(auth)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFHTTPAuthenticationCopyRealm == nil {
 		ebipurego.RegisterLibFunc(&_fnCFHTTPAuthenticationCopyRealm, _lib, "CFHTTPAuthenticationCopyRealm")
@@ -76,6 +83,8 @@ var _fnCFHTTPAuthenticationCreateFromResponse func(objc.ID, objc.ID) objc.ID
 
 // CFHTTPAuthenticationCreateFromResponse calls the CFNetwork framework function CFHTTPAuthenticationCreateFromResponse.
 func CFHTTPAuthenticationCreateFromResponse(alloc corefoundation.CFAllocatorRef, response corefoundation.CFHTTPMessageRef) corefoundation.CFHTTPAuthenticationRef {
+	defer runtime.KeepAlive(alloc)
+	defer runtime.KeepAlive(response)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFHTTPAuthenticationCreateFromResponse == nil {
 		ebipurego.RegisterLibFunc(&_fnCFHTTPAuthenticationCreateFromResponse, _lib, "CFHTTPAuthenticationCreateFromResponse")
@@ -99,6 +108,7 @@ var _fnCFHTTPAuthenticationIsValid func(objc.ID, unsafe.Pointer) uint8
 
 // CFHTTPAuthenticationIsValid calls the CFNetwork framework function CFHTTPAuthenticationIsValid.
 func CFHTTPAuthenticationIsValid(auth corefoundation.CFHTTPAuthenticationRef, err *corefoundation.CFStreamError) uint8 {
+	defer runtime.KeepAlive(auth)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFHTTPAuthenticationIsValid == nil {
 		ebipurego.RegisterLibFunc(&_fnCFHTTPAuthenticationIsValid, _lib, "CFHTTPAuthenticationIsValid")
@@ -110,6 +120,7 @@ var _fnCFHTTPAuthenticationRequiresAccountDomain func(objc.ID) uint8
 
 // CFHTTPAuthenticationRequiresAccountDomain calls the CFNetwork framework function CFHTTPAuthenticationRequiresAccountDomain.
 func CFHTTPAuthenticationRequiresAccountDomain(auth corefoundation.CFHTTPAuthenticationRef) uint8 {
+	defer runtime.KeepAlive(auth)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFHTTPAuthenticationRequiresAccountDomain == nil {
 		ebipurego.RegisterLibFunc(&_fnCFHTTPAuthenticationRequiresAccountDomain, _lib, "CFHTTPAuthenticationRequiresAccountDomain")
@@ -121,6 +132,7 @@ var _fnCFHTTPAuthenticationRequiresOrderedRequests func(objc.ID) uint8
 
 // CFHTTPAuthenticationRequiresOrderedRequests calls the CFNetwork framework function CFHTTPAuthenticationRequiresOrderedRequests.
 func CFHTTPAuthenticationRequiresOrderedRequests(auth corefoundation.CFHTTPAuthenticationRef) uint8 {
+	defer runtime.KeepAlive(auth)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFHTTPAuthenticationRequiresOrderedRequests == nil {
 		ebipurego.RegisterLibFunc(&_fnCFHTTPAuthenticationRequiresOrderedRequests, _lib, "CFHTTPAuthenticationRequiresOrderedRequests")
@@ -132,6 +144,7 @@ var _fnCFHTTPAuthenticationRequiresUserNameAndPassword func(objc.ID) uint8
 
 // CFHTTPAuthenticationRequiresUserNameAndPassword calls the CFNetwork framework function CFHTTPAuthenticationRequiresUserNameAndPassword.
 func CFHTTPAuthenticationRequiresUserNameAndPassword(auth corefoundation.CFHTTPAuthenticationRef) uint8 {
+	defer runtime.KeepAlive(auth)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFHTTPAuthenticationRequiresUserNameAndPassword == nil {
 		ebipurego.RegisterLibFunc(&_fnCFHTTPAuthenticationRequiresUserNameAndPassword, _lib, "CFHTTPAuthenticationRequiresUserNameAndPassword")
@@ -143,6 +156,11 @@ var _fnCFHTTPMessageAddAuthentication func(objc.ID, objc.ID, objc.ID, objc.ID, o
 
 // CFHTTPMessageAddAuthentication calls the CFNetwork framework function CFHTTPMessageAddAuthentication.
 func CFHTTPMessageAddAuthentication(request corefoundation.CFHTTPMessageRef, authenticationFailureResponse corefoundation.CFHTTPMessageRef, username corefoundation.CFStringRef, password corefoundation.CFStringRef, authenticationScheme corefoundation.CFStringRef, forProxy uint8) uint8 {
+	defer runtime.KeepAlive(request)
+	defer runtime.KeepAlive(authenticationFailureResponse)
+	defer runtime.KeepAlive(username)
+	defer runtime.KeepAlive(password)
+	defer runtime.KeepAlive(authenticationScheme)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFHTTPMessageAddAuthentication == nil {
 		ebipurego.RegisterLibFunc(&_fnCFHTTPMessageAddAuthentication, _lib, "CFHTTPMessageAddAuthentication")
@@ -154,6 +172,7 @@ var _fnCFHTTPMessageAppendBytes func(objc.ID, unsafe.Pointer, int) uint8
 
 // CFHTTPMessageAppendBytes calls the CFNetwork framework function CFHTTPMessageAppendBytes.
 func CFHTTPMessageAppendBytes(message corefoundation.CFHTTPMessageRef, newBytes unsafe.Pointer, numBytes int) uint8 {
+	defer runtime.KeepAlive(message)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFHTTPMessageAppendBytes == nil {
 		ebipurego.RegisterLibFunc(&_fnCFHTTPMessageAppendBytes, _lib, "CFHTTPMessageAppendBytes")
@@ -165,6 +184,9 @@ var _fnCFHTTPMessageApplyCredentialDictionary func(objc.ID, objc.ID, objc.ID, un
 
 // CFHTTPMessageApplyCredentialDictionary calls the CFNetwork framework function CFHTTPMessageApplyCredentialDictionary.
 func CFHTTPMessageApplyCredentialDictionary(request corefoundation.CFHTTPMessageRef, auth corefoundation.CFHTTPAuthenticationRef, dict corefoundation.CFDictionaryRef, err *corefoundation.CFStreamError) uint8 {
+	defer runtime.KeepAlive(request)
+	defer runtime.KeepAlive(auth)
+	defer runtime.KeepAlive(dict)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFHTTPMessageApplyCredentialDictionary == nil {
 		ebipurego.RegisterLibFunc(&_fnCFHTTPMessageApplyCredentialDictionary, _lib, "CFHTTPMessageApplyCredentialDictionary")
@@ -176,6 +198,10 @@ var _fnCFHTTPMessageApplyCredentials func(objc.ID, objc.ID, objc.ID, objc.ID, un
 
 // CFHTTPMessageApplyCredentials calls the CFNetwork framework function CFHTTPMessageApplyCredentials.
 func CFHTTPMessageApplyCredentials(request corefoundation.CFHTTPMessageRef, auth corefoundation.CFHTTPAuthenticationRef, username corefoundation.CFStringRef, password corefoundation.CFStringRef, err *corefoundation.CFStreamError) uint8 {
+	defer runtime.KeepAlive(request)
+	defer runtime.KeepAlive(auth)
+	defer runtime.KeepAlive(username)
+	defer runtime.KeepAlive(password)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFHTTPMessageApplyCredentials == nil {
 		ebipurego.RegisterLibFunc(&_fnCFHTTPMessageApplyCredentials, _lib, "CFHTTPMessageApplyCredentials")
@@ -187,6 +213,7 @@ var _fnCFHTTPMessageCopyAllHeaderFields func(objc.ID) objc.ID
 
 // CFHTTPMessageCopyAllHeaderFields calls the CFNetwork framework function CFHTTPMessageCopyAllHeaderFields.
 func CFHTTPMessageCopyAllHeaderFields(message corefoundation.CFHTTPMessageRef) corefoundation.CFDictionaryRef {
+	defer runtime.KeepAlive(message)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFHTTPMessageCopyAllHeaderFields == nil {
 		ebipurego.RegisterLibFunc(&_fnCFHTTPMessageCopyAllHeaderFields, _lib, "CFHTTPMessageCopyAllHeaderFields")
@@ -199,6 +226,7 @@ var _fnCFHTTPMessageCopyBody func(objc.ID) objc.ID
 
 // CFHTTPMessageCopyBody calls the CFNetwork framework function CFHTTPMessageCopyBody.
 func CFHTTPMessageCopyBody(message corefoundation.CFHTTPMessageRef) corefoundation.CFDataRef {
+	defer runtime.KeepAlive(message)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFHTTPMessageCopyBody == nil {
 		ebipurego.RegisterLibFunc(&_fnCFHTTPMessageCopyBody, _lib, "CFHTTPMessageCopyBody")
@@ -211,6 +239,8 @@ var _fnCFHTTPMessageCopyHeaderFieldValue func(objc.ID, objc.ID) objc.ID
 
 // CFHTTPMessageCopyHeaderFieldValue calls the CFNetwork framework function CFHTTPMessageCopyHeaderFieldValue.
 func CFHTTPMessageCopyHeaderFieldValue(message corefoundation.CFHTTPMessageRef, headerField corefoundation.CFStringRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(message)
+	defer runtime.KeepAlive(headerField)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFHTTPMessageCopyHeaderFieldValue == nil {
 		ebipurego.RegisterLibFunc(&_fnCFHTTPMessageCopyHeaderFieldValue, _lib, "CFHTTPMessageCopyHeaderFieldValue")
@@ -223,6 +253,7 @@ var _fnCFHTTPMessageCopyRequestMethod func(objc.ID) objc.ID
 
 // CFHTTPMessageCopyRequestMethod calls the CFNetwork framework function CFHTTPMessageCopyRequestMethod.
 func CFHTTPMessageCopyRequestMethod(request corefoundation.CFHTTPMessageRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(request)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFHTTPMessageCopyRequestMethod == nil {
 		ebipurego.RegisterLibFunc(&_fnCFHTTPMessageCopyRequestMethod, _lib, "CFHTTPMessageCopyRequestMethod")
@@ -235,6 +266,7 @@ var _fnCFHTTPMessageCopyRequestURL func(objc.ID) objc.ID
 
 // CFHTTPMessageCopyRequestURL calls the CFNetwork framework function CFHTTPMessageCopyRequestURL.
 func CFHTTPMessageCopyRequestURL(request corefoundation.CFHTTPMessageRef) corefoundation.CFURLRef {
+	defer runtime.KeepAlive(request)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFHTTPMessageCopyRequestURL == nil {
 		ebipurego.RegisterLibFunc(&_fnCFHTTPMessageCopyRequestURL, _lib, "CFHTTPMessageCopyRequestURL")
@@ -247,6 +279,7 @@ var _fnCFHTTPMessageCopyResponseStatusLine func(objc.ID) objc.ID
 
 // CFHTTPMessageCopyResponseStatusLine calls the CFNetwork framework function CFHTTPMessageCopyResponseStatusLine.
 func CFHTTPMessageCopyResponseStatusLine(response corefoundation.CFHTTPMessageRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(response)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFHTTPMessageCopyResponseStatusLine == nil {
 		ebipurego.RegisterLibFunc(&_fnCFHTTPMessageCopyResponseStatusLine, _lib, "CFHTTPMessageCopyResponseStatusLine")
@@ -259,6 +292,7 @@ var _fnCFHTTPMessageCopySerializedMessage func(objc.ID) objc.ID
 
 // CFHTTPMessageCopySerializedMessage calls the CFNetwork framework function CFHTTPMessageCopySerializedMessage.
 func CFHTTPMessageCopySerializedMessage(message corefoundation.CFHTTPMessageRef) corefoundation.CFDataRef {
+	defer runtime.KeepAlive(message)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFHTTPMessageCopySerializedMessage == nil {
 		ebipurego.RegisterLibFunc(&_fnCFHTTPMessageCopySerializedMessage, _lib, "CFHTTPMessageCopySerializedMessage")
@@ -271,6 +305,7 @@ var _fnCFHTTPMessageCopyVersion func(objc.ID) objc.ID
 
 // CFHTTPMessageCopyVersion calls the CFNetwork framework function CFHTTPMessageCopyVersion.
 func CFHTTPMessageCopyVersion(message corefoundation.CFHTTPMessageRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(message)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFHTTPMessageCopyVersion == nil {
 		ebipurego.RegisterLibFunc(&_fnCFHTTPMessageCopyVersion, _lib, "CFHTTPMessageCopyVersion")
@@ -283,6 +318,8 @@ var _fnCFHTTPMessageCreateCopy func(objc.ID, objc.ID) objc.ID
 
 // CFHTTPMessageCreateCopy calls the CFNetwork framework function CFHTTPMessageCreateCopy.
 func CFHTTPMessageCreateCopy(alloc corefoundation.CFAllocatorRef, message corefoundation.CFHTTPMessageRef) corefoundation.CFHTTPMessageRef {
+	defer runtime.KeepAlive(alloc)
+	defer runtime.KeepAlive(message)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFHTTPMessageCreateCopy == nil {
 		ebipurego.RegisterLibFunc(&_fnCFHTTPMessageCreateCopy, _lib, "CFHTTPMessageCreateCopy")
@@ -295,6 +332,7 @@ var _fnCFHTTPMessageCreateEmpty func(objc.ID, uint8) objc.ID
 
 // CFHTTPMessageCreateEmpty calls the CFNetwork framework function CFHTTPMessageCreateEmpty.
 func CFHTTPMessageCreateEmpty(alloc corefoundation.CFAllocatorRef, isRequest uint8) corefoundation.CFHTTPMessageRef {
+	defer runtime.KeepAlive(alloc)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFHTTPMessageCreateEmpty == nil {
 		ebipurego.RegisterLibFunc(&_fnCFHTTPMessageCreateEmpty, _lib, "CFHTTPMessageCreateEmpty")
@@ -307,6 +345,10 @@ var _fnCFHTTPMessageCreateRequest func(objc.ID, objc.ID, objc.ID, objc.ID) objc.
 
 // CFHTTPMessageCreateRequest calls the CFNetwork framework function CFHTTPMessageCreateRequest.
 func CFHTTPMessageCreateRequest(alloc corefoundation.CFAllocatorRef, requestMethod corefoundation.CFStringRef, url corefoundation.CFURLRef, httpVersion corefoundation.CFStringRef) corefoundation.CFHTTPMessageRef {
+	defer runtime.KeepAlive(alloc)
+	defer runtime.KeepAlive(requestMethod)
+	defer runtime.KeepAlive(url)
+	defer runtime.KeepAlive(httpVersion)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFHTTPMessageCreateRequest == nil {
 		ebipurego.RegisterLibFunc(&_fnCFHTTPMessageCreateRequest, _lib, "CFHTTPMessageCreateRequest")
@@ -319,6 +361,9 @@ var _fnCFHTTPMessageCreateResponse func(objc.ID, int, objc.ID, objc.ID) objc.ID
 
 // CFHTTPMessageCreateResponse calls the CFNetwork framework function CFHTTPMessageCreateResponse.
 func CFHTTPMessageCreateResponse(alloc corefoundation.CFAllocatorRef, statusCode int, statusDescription corefoundation.CFStringRef, httpVersion corefoundation.CFStringRef) corefoundation.CFHTTPMessageRef {
+	defer runtime.KeepAlive(alloc)
+	defer runtime.KeepAlive(statusDescription)
+	defer runtime.KeepAlive(httpVersion)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFHTTPMessageCreateResponse == nil {
 		ebipurego.RegisterLibFunc(&_fnCFHTTPMessageCreateResponse, _lib, "CFHTTPMessageCreateResponse")
@@ -331,6 +376,7 @@ var _fnCFHTTPMessageGetResponseStatusCode func(objc.ID) int
 
 // CFHTTPMessageGetResponseStatusCode calls the CFNetwork framework function CFHTTPMessageGetResponseStatusCode.
 func CFHTTPMessageGetResponseStatusCode(response corefoundation.CFHTTPMessageRef) int {
+	defer runtime.KeepAlive(response)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFHTTPMessageGetResponseStatusCode == nil {
 		ebipurego.RegisterLibFunc(&_fnCFHTTPMessageGetResponseStatusCode, _lib, "CFHTTPMessageGetResponseStatusCode")
@@ -353,6 +399,7 @@ var _fnCFHTTPMessageIsHeaderComplete func(objc.ID) uint8
 
 // CFHTTPMessageIsHeaderComplete calls the CFNetwork framework function CFHTTPMessageIsHeaderComplete.
 func CFHTTPMessageIsHeaderComplete(message corefoundation.CFHTTPMessageRef) uint8 {
+	defer runtime.KeepAlive(message)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFHTTPMessageIsHeaderComplete == nil {
 		ebipurego.RegisterLibFunc(&_fnCFHTTPMessageIsHeaderComplete, _lib, "CFHTTPMessageIsHeaderComplete")
@@ -364,6 +411,7 @@ var _fnCFHTTPMessageIsRequest func(objc.ID) uint8
 
 // CFHTTPMessageIsRequest calls the CFNetwork framework function CFHTTPMessageIsRequest.
 func CFHTTPMessageIsRequest(message corefoundation.CFHTTPMessageRef) uint8 {
+	defer runtime.KeepAlive(message)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFHTTPMessageIsRequest == nil {
 		ebipurego.RegisterLibFunc(&_fnCFHTTPMessageIsRequest, _lib, "CFHTTPMessageIsRequest")
@@ -375,6 +423,8 @@ var _fnCFHTTPMessageSetBody func(objc.ID, objc.ID)
 
 // CFHTTPMessageSetBody calls the CFNetwork framework function CFHTTPMessageSetBody.
 func CFHTTPMessageSetBody(message corefoundation.CFHTTPMessageRef, bodyData corefoundation.CFDataRef) {
+	defer runtime.KeepAlive(message)
+	defer runtime.KeepAlive(bodyData)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFHTTPMessageSetBody == nil {
 		ebipurego.RegisterLibFunc(&_fnCFHTTPMessageSetBody, _lib, "CFHTTPMessageSetBody")
@@ -386,6 +436,9 @@ var _fnCFHTTPMessageSetHeaderFieldValue func(objc.ID, objc.ID, objc.ID)
 
 // CFHTTPMessageSetHeaderFieldValue calls the CFNetwork framework function CFHTTPMessageSetHeaderFieldValue.
 func CFHTTPMessageSetHeaderFieldValue(message corefoundation.CFHTTPMessageRef, headerField corefoundation.CFStringRef, value corefoundation.CFStringRef) {
+	defer runtime.KeepAlive(message)
+	defer runtime.KeepAlive(headerField)
+	defer runtime.KeepAlive(value)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFHTTPMessageSetHeaderFieldValue == nil {
 		ebipurego.RegisterLibFunc(&_fnCFHTTPMessageSetHeaderFieldValue, _lib, "CFHTTPMessageSetHeaderFieldValue")
@@ -397,6 +450,7 @@ var _fnCFHostCancelInfoResolution func(objc.ID, CFHostInfoType)
 
 // CFHostCancelInfoResolution calls the CFNetwork framework function CFHostCancelInfoResolution.
 func CFHostCancelInfoResolution(theHost corefoundation.CFHostRef, info CFHostInfoType) {
+	defer runtime.KeepAlive(theHost)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFHostCancelInfoResolution == nil {
 		ebipurego.RegisterLibFunc(&_fnCFHostCancelInfoResolution, _lib, "CFHostCancelInfoResolution")
@@ -408,6 +462,8 @@ var _fnCFHostCreateCopy func(objc.ID, objc.ID) objc.ID
 
 // CFHostCreateCopy calls the CFNetwork framework function CFHostCreateCopy.
 func CFHostCreateCopy(alloc corefoundation.CFAllocatorRef, host corefoundation.CFHostRef) corefoundation.CFHostRef {
+	defer runtime.KeepAlive(alloc)
+	defer runtime.KeepAlive(host)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFHostCreateCopy == nil {
 		ebipurego.RegisterLibFunc(&_fnCFHostCreateCopy, _lib, "CFHostCreateCopy")
@@ -420,6 +476,8 @@ var _fnCFHostCreateWithAddress func(objc.ID, objc.ID) objc.ID
 
 // CFHostCreateWithAddress calls the CFNetwork framework function CFHostCreateWithAddress.
 func CFHostCreateWithAddress(allocator corefoundation.CFAllocatorRef, addr corefoundation.CFDataRef) corefoundation.CFHostRef {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(addr)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFHostCreateWithAddress == nil {
 		ebipurego.RegisterLibFunc(&_fnCFHostCreateWithAddress, _lib, "CFHostCreateWithAddress")
@@ -432,6 +490,8 @@ var _fnCFHostCreateWithName func(objc.ID, objc.ID) objc.ID
 
 // CFHostCreateWithName calls the CFNetwork framework function CFHostCreateWithName.
 func CFHostCreateWithName(allocator corefoundation.CFAllocatorRef, hostname corefoundation.CFStringRef) corefoundation.CFHostRef {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(hostname)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFHostCreateWithName == nil {
 		ebipurego.RegisterLibFunc(&_fnCFHostCreateWithName, _lib, "CFHostCreateWithName")
@@ -444,6 +504,7 @@ var _fnCFHostGetAddressing func(objc.ID, unsafe.Pointer) objc.ID
 
 // CFHostGetAddressing calls the CFNetwork framework function CFHostGetAddressing.
 func CFHostGetAddressing(theHost corefoundation.CFHostRef) (result corefoundation.CFArrayRef, hasBeenResolved uint8) {
+	defer runtime.KeepAlive(theHost)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFHostGetAddressing == nil {
 		ebipurego.RegisterLibFunc(&_fnCFHostGetAddressing, _lib, "CFHostGetAddressing")
@@ -457,6 +518,7 @@ var _fnCFHostGetNames func(objc.ID, unsafe.Pointer) objc.ID
 
 // CFHostGetNames calls the CFNetwork framework function CFHostGetNames.
 func CFHostGetNames(theHost corefoundation.CFHostRef) (result corefoundation.CFArrayRef, hasBeenResolved uint8) {
+	defer runtime.KeepAlive(theHost)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFHostGetNames == nil {
 		ebipurego.RegisterLibFunc(&_fnCFHostGetNames, _lib, "CFHostGetNames")
@@ -470,6 +532,7 @@ var _fnCFHostGetReachability func(objc.ID, unsafe.Pointer) objc.ID
 
 // CFHostGetReachability calls the CFNetwork framework function CFHostGetReachability.
 func CFHostGetReachability(theHost corefoundation.CFHostRef) (result corefoundation.CFDataRef, hasBeenResolved uint8) {
+	defer runtime.KeepAlive(theHost)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFHostGetReachability == nil {
 		ebipurego.RegisterLibFunc(&_fnCFHostGetReachability, _lib, "CFHostGetReachability")
@@ -494,6 +557,9 @@ var _fnCFHostScheduleWithRunLoop func(objc.ID, objc.ID, objc.ID)
 
 // CFHostScheduleWithRunLoop calls the CFNetwork framework function CFHostScheduleWithRunLoop.
 func CFHostScheduleWithRunLoop(theHost corefoundation.CFHostRef, runLoop corefoundation.CFRunLoopRef, runLoopMode corefoundation.CFStringRef) {
+	defer runtime.KeepAlive(theHost)
+	defer runtime.KeepAlive(runLoop)
+	defer runtime.KeepAlive(runLoopMode)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFHostScheduleWithRunLoop == nil {
 		ebipurego.RegisterLibFunc(&_fnCFHostScheduleWithRunLoop, _lib, "CFHostScheduleWithRunLoop")
@@ -505,6 +571,7 @@ var _fnCFHostSetClient func(objc.ID, unsafe.Pointer, unsafe.Pointer) uint8
 
 // CFHostSetClient calls the CFNetwork framework function CFHostSetClient.
 func CFHostSetClient(theHost corefoundation.CFHostRef, clientCB unsafe.Pointer, clientContext unsafe.Pointer) uint8 {
+	defer runtime.KeepAlive(theHost)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFHostSetClient == nil {
 		ebipurego.RegisterLibFunc(&_fnCFHostSetClient, _lib, "CFHostSetClient")
@@ -516,6 +583,7 @@ var _fnCFHostStartInfoResolution func(objc.ID, CFHostInfoType, unsafe.Pointer) u
 
 // CFHostStartInfoResolution calls the CFNetwork framework function CFHostStartInfoResolution.
 func CFHostStartInfoResolution(theHost corefoundation.CFHostRef, info CFHostInfoType, err *corefoundation.CFStreamError) uint8 {
+	defer runtime.KeepAlive(theHost)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFHostStartInfoResolution == nil {
 		ebipurego.RegisterLibFunc(&_fnCFHostStartInfoResolution, _lib, "CFHostStartInfoResolution")
@@ -527,6 +595,9 @@ var _fnCFHostUnscheduleFromRunLoop func(objc.ID, objc.ID, objc.ID)
 
 // CFHostUnscheduleFromRunLoop calls the CFNetwork framework function CFHostUnscheduleFromRunLoop.
 func CFHostUnscheduleFromRunLoop(theHost corefoundation.CFHostRef, runLoop corefoundation.CFRunLoopRef, runLoopMode corefoundation.CFStringRef) {
+	defer runtime.KeepAlive(theHost)
+	defer runtime.KeepAlive(runLoop)
+	defer runtime.KeepAlive(runLoopMode)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFHostUnscheduleFromRunLoop == nil {
 		ebipurego.RegisterLibFunc(&_fnCFHostUnscheduleFromRunLoop, _lib, "CFHostUnscheduleFromRunLoop")
@@ -538,6 +609,7 @@ var _fnCFNetDiagnosticCopyNetworkStatusPassively func(objc.ID, unsafe.Pointer) i
 
 // CFNetDiagnosticCopyNetworkStatusPassively calls the CFNetwork framework function CFNetDiagnosticCopyNetworkStatusPassively.
 func CFNetDiagnosticCopyNetworkStatusPassively(details corefoundation.CFNetDiagnosticRef, description unsafe.Pointer) int {
+	defer runtime.KeepAlive(details)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFNetDiagnosticCopyNetworkStatusPassively == nil {
 		ebipurego.RegisterLibFunc(&_fnCFNetDiagnosticCopyNetworkStatusPassively, _lib, "CFNetDiagnosticCopyNetworkStatusPassively")
@@ -549,6 +621,9 @@ var _fnCFNetDiagnosticCreateWithStreams func(objc.ID, objc.ID, objc.ID) objc.ID
 
 // CFNetDiagnosticCreateWithStreams calls the CFNetwork framework function CFNetDiagnosticCreateWithStreams.
 func CFNetDiagnosticCreateWithStreams(alloc corefoundation.CFAllocatorRef, readStream corefoundation.CFReadStreamRef, writeStream corefoundation.CFWriteStreamRef) corefoundation.CFNetDiagnosticRef {
+	defer runtime.KeepAlive(alloc)
+	defer runtime.KeepAlive(readStream)
+	defer runtime.KeepAlive(writeStream)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFNetDiagnosticCreateWithStreams == nil {
 		ebipurego.RegisterLibFunc(&_fnCFNetDiagnosticCreateWithStreams, _lib, "CFNetDiagnosticCreateWithStreams")
@@ -561,6 +636,8 @@ var _fnCFNetDiagnosticCreateWithURL func(objc.ID, objc.ID) objc.ID
 
 // CFNetDiagnosticCreateWithURL calls the CFNetwork framework function CFNetDiagnosticCreateWithURL.
 func CFNetDiagnosticCreateWithURL(alloc corefoundation.CFAllocatorRef, url corefoundation.CFURLRef) corefoundation.CFNetDiagnosticRef {
+	defer runtime.KeepAlive(alloc)
+	defer runtime.KeepAlive(url)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFNetDiagnosticCreateWithURL == nil {
 		ebipurego.RegisterLibFunc(&_fnCFNetDiagnosticCreateWithURL, _lib, "CFNetDiagnosticCreateWithURL")
@@ -573,6 +650,7 @@ var _fnCFNetDiagnosticDiagnoseProblemInteractively func(objc.ID) int
 
 // CFNetDiagnosticDiagnoseProblemInteractively calls the CFNetwork framework function CFNetDiagnosticDiagnoseProblemInteractively.
 func CFNetDiagnosticDiagnoseProblemInteractively(details corefoundation.CFNetDiagnosticRef) int {
+	defer runtime.KeepAlive(details)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFNetDiagnosticDiagnoseProblemInteractively == nil {
 		ebipurego.RegisterLibFunc(&_fnCFNetDiagnosticDiagnoseProblemInteractively, _lib, "CFNetDiagnosticDiagnoseProblemInteractively")
@@ -584,6 +662,8 @@ var _fnCFNetDiagnosticSetName func(objc.ID, objc.ID)
 
 // CFNetDiagnosticSetName calls the CFNetwork framework function CFNetDiagnosticSetName.
 func CFNetDiagnosticSetName(details corefoundation.CFNetDiagnosticRef, name corefoundation.CFStringRef) {
+	defer runtime.KeepAlive(details)
+	defer runtime.KeepAlive(name)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFNetDiagnosticSetName == nil {
 		ebipurego.RegisterLibFunc(&_fnCFNetDiagnosticSetName, _lib, "CFNetDiagnosticSetName")
@@ -595,6 +675,7 @@ var _fnCFNetServiceBrowserCreate func(objc.ID, unsafe.Pointer, unsafe.Pointer) o
 
 // CFNetServiceBrowserCreate calls the CFNetwork framework function CFNetServiceBrowserCreate.
 func CFNetServiceBrowserCreate(alloc corefoundation.CFAllocatorRef, clientCB unsafe.Pointer, clientContext unsafe.Pointer) corefoundation.CFNetServiceBrowserRef {
+	defer runtime.KeepAlive(alloc)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFNetServiceBrowserCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceBrowserCreate, _lib, "CFNetServiceBrowserCreate")
@@ -618,6 +699,7 @@ var _fnCFNetServiceBrowserInvalidate func(objc.ID)
 
 // CFNetServiceBrowserInvalidate calls the CFNetwork framework function CFNetServiceBrowserInvalidate.
 func CFNetServiceBrowserInvalidate(browser corefoundation.CFNetServiceBrowserRef) {
+	defer runtime.KeepAlive(browser)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFNetServiceBrowserInvalidate == nil {
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceBrowserInvalidate, _lib, "CFNetServiceBrowserInvalidate")
@@ -629,6 +711,9 @@ var _fnCFNetServiceBrowserScheduleWithRunLoop func(objc.ID, objc.ID, objc.ID)
 
 // CFNetServiceBrowserScheduleWithRunLoop calls the CFNetwork framework function CFNetServiceBrowserScheduleWithRunLoop.
 func CFNetServiceBrowserScheduleWithRunLoop(browser corefoundation.CFNetServiceBrowserRef, runLoop corefoundation.CFRunLoopRef, runLoopMode corefoundation.CFStringRef) {
+	defer runtime.KeepAlive(browser)
+	defer runtime.KeepAlive(runLoop)
+	defer runtime.KeepAlive(runLoopMode)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFNetServiceBrowserScheduleWithRunLoop == nil {
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceBrowserScheduleWithRunLoop, _lib, "CFNetServiceBrowserScheduleWithRunLoop")
@@ -640,6 +725,7 @@ var _fnCFNetServiceBrowserSearchForDomains func(objc.ID, uint8, unsafe.Pointer) 
 
 // CFNetServiceBrowserSearchForDomains calls the CFNetwork framework function CFNetServiceBrowserSearchForDomains.
 func CFNetServiceBrowserSearchForDomains(browser corefoundation.CFNetServiceBrowserRef, registrationDomains uint8, err *corefoundation.CFStreamError) uint8 {
+	defer runtime.KeepAlive(browser)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFNetServiceBrowserSearchForDomains == nil {
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceBrowserSearchForDomains, _lib, "CFNetServiceBrowserSearchForDomains")
@@ -651,6 +737,9 @@ var _fnCFNetServiceBrowserSearchForServices func(objc.ID, objc.ID, objc.ID, unsa
 
 // CFNetServiceBrowserSearchForServices calls the CFNetwork framework function CFNetServiceBrowserSearchForServices.
 func CFNetServiceBrowserSearchForServices(browser corefoundation.CFNetServiceBrowserRef, domain corefoundation.CFStringRef, serviceType corefoundation.CFStringRef, err *corefoundation.CFStreamError) uint8 {
+	defer runtime.KeepAlive(browser)
+	defer runtime.KeepAlive(domain)
+	defer runtime.KeepAlive(serviceType)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFNetServiceBrowserSearchForServices == nil {
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceBrowserSearchForServices, _lib, "CFNetServiceBrowserSearchForServices")
@@ -662,6 +751,7 @@ var _fnCFNetServiceBrowserStopSearch func(objc.ID, unsafe.Pointer)
 
 // CFNetServiceBrowserStopSearch calls the CFNetwork framework function CFNetServiceBrowserStopSearch.
 func CFNetServiceBrowserStopSearch(browser corefoundation.CFNetServiceBrowserRef, err *corefoundation.CFStreamError) {
+	defer runtime.KeepAlive(browser)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFNetServiceBrowserStopSearch == nil {
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceBrowserStopSearch, _lib, "CFNetServiceBrowserStopSearch")
@@ -673,6 +763,9 @@ var _fnCFNetServiceBrowserUnscheduleFromRunLoop func(objc.ID, objc.ID, objc.ID)
 
 // CFNetServiceBrowserUnscheduleFromRunLoop calls the CFNetwork framework function CFNetServiceBrowserUnscheduleFromRunLoop.
 func CFNetServiceBrowserUnscheduleFromRunLoop(browser corefoundation.CFNetServiceBrowserRef, runLoop corefoundation.CFRunLoopRef, runLoopMode corefoundation.CFStringRef) {
+	defer runtime.KeepAlive(browser)
+	defer runtime.KeepAlive(runLoop)
+	defer runtime.KeepAlive(runLoopMode)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFNetServiceBrowserUnscheduleFromRunLoop == nil {
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceBrowserUnscheduleFromRunLoop, _lib, "CFNetServiceBrowserUnscheduleFromRunLoop")
@@ -684,6 +777,7 @@ var _fnCFNetServiceCancel func(objc.ID)
 
 // CFNetServiceCancel calls the CFNetwork framework function CFNetServiceCancel.
 func CFNetServiceCancel(theService corefoundation.CFNetServiceRef) {
+	defer runtime.KeepAlive(theService)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFNetServiceCancel == nil {
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceCancel, _lib, "CFNetServiceCancel")
@@ -695,6 +789,10 @@ var _fnCFNetServiceCreate func(objc.ID, objc.ID, objc.ID, objc.ID, int) objc.ID
 
 // CFNetServiceCreate calls the CFNetwork framework function CFNetServiceCreate.
 func CFNetServiceCreate(alloc corefoundation.CFAllocatorRef, domain corefoundation.CFStringRef, serviceType corefoundation.CFStringRef, name corefoundation.CFStringRef, port int) corefoundation.CFNetServiceRef {
+	defer runtime.KeepAlive(alloc)
+	defer runtime.KeepAlive(domain)
+	defer runtime.KeepAlive(serviceType)
+	defer runtime.KeepAlive(name)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFNetServiceCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceCreate, _lib, "CFNetServiceCreate")
@@ -707,6 +805,8 @@ var _fnCFNetServiceCreateCopy func(objc.ID, objc.ID) objc.ID
 
 // CFNetServiceCreateCopy calls the CFNetwork framework function CFNetServiceCreateCopy.
 func CFNetServiceCreateCopy(alloc corefoundation.CFAllocatorRef, service corefoundation.CFNetServiceRef) corefoundation.CFNetServiceRef {
+	defer runtime.KeepAlive(alloc)
+	defer runtime.KeepAlive(service)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFNetServiceCreateCopy == nil {
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceCreateCopy, _lib, "CFNetServiceCreateCopy")
@@ -719,6 +819,8 @@ var _fnCFNetServiceCreateDictionaryWithTXTData func(objc.ID, objc.ID) objc.ID
 
 // CFNetServiceCreateDictionaryWithTXTData calls the CFNetwork framework function CFNetServiceCreateDictionaryWithTXTData.
 func CFNetServiceCreateDictionaryWithTXTData(alloc corefoundation.CFAllocatorRef, txtRecord corefoundation.CFDataRef) corefoundation.CFDictionaryRef {
+	defer runtime.KeepAlive(alloc)
+	defer runtime.KeepAlive(txtRecord)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFNetServiceCreateDictionaryWithTXTData == nil {
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceCreateDictionaryWithTXTData, _lib, "CFNetServiceCreateDictionaryWithTXTData")
@@ -731,6 +833,8 @@ var _fnCFNetServiceCreateTXTDataWithDictionary func(objc.ID, objc.ID) objc.ID
 
 // CFNetServiceCreateTXTDataWithDictionary calls the CFNetwork framework function CFNetServiceCreateTXTDataWithDictionary.
 func CFNetServiceCreateTXTDataWithDictionary(alloc corefoundation.CFAllocatorRef, keyValuePairs corefoundation.CFDictionaryRef) corefoundation.CFDataRef {
+	defer runtime.KeepAlive(alloc)
+	defer runtime.KeepAlive(keyValuePairs)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFNetServiceCreateTXTDataWithDictionary == nil {
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceCreateTXTDataWithDictionary, _lib, "CFNetServiceCreateTXTDataWithDictionary")
@@ -743,6 +847,7 @@ var _fnCFNetServiceGetAddressing func(objc.ID) objc.ID
 
 // CFNetServiceGetAddressing calls the CFNetwork framework function CFNetServiceGetAddressing.
 func CFNetServiceGetAddressing(theService corefoundation.CFNetServiceRef) corefoundation.CFArrayRef {
+	defer runtime.KeepAlive(theService)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFNetServiceGetAddressing == nil {
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceGetAddressing, _lib, "CFNetServiceGetAddressing")
@@ -755,6 +860,7 @@ var _fnCFNetServiceGetDomain func(objc.ID) objc.ID
 
 // CFNetServiceGetDomain calls the CFNetwork framework function CFNetServiceGetDomain.
 func CFNetServiceGetDomain(theService corefoundation.CFNetServiceRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(theService)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFNetServiceGetDomain == nil {
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceGetDomain, _lib, "CFNetServiceGetDomain")
@@ -767,6 +873,7 @@ var _fnCFNetServiceGetName func(objc.ID) objc.ID
 
 // CFNetServiceGetName calls the CFNetwork framework function CFNetServiceGetName.
 func CFNetServiceGetName(theService corefoundation.CFNetServiceRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(theService)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFNetServiceGetName == nil {
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceGetName, _lib, "CFNetServiceGetName")
@@ -779,6 +886,7 @@ var _fnCFNetServiceGetPortNumber func(objc.ID) int32
 
 // CFNetServiceGetPortNumber calls the CFNetwork framework function CFNetServiceGetPortNumber.
 func CFNetServiceGetPortNumber(theService corefoundation.CFNetServiceRef) int {
+	defer runtime.KeepAlive(theService)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFNetServiceGetPortNumber == nil {
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceGetPortNumber, _lib, "CFNetServiceGetPortNumber")
@@ -790,6 +898,7 @@ var _fnCFNetServiceGetTXTData func(objc.ID) objc.ID
 
 // CFNetServiceGetTXTData calls the CFNetwork framework function CFNetServiceGetTXTData.
 func CFNetServiceGetTXTData(theService corefoundation.CFNetServiceRef) corefoundation.CFDataRef {
+	defer runtime.KeepAlive(theService)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFNetServiceGetTXTData == nil {
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceGetTXTData, _lib, "CFNetServiceGetTXTData")
@@ -802,6 +911,7 @@ var _fnCFNetServiceGetTargetHost func(objc.ID) objc.ID
 
 // CFNetServiceGetTargetHost calls the CFNetwork framework function CFNetServiceGetTargetHost.
 func CFNetServiceGetTargetHost(theService corefoundation.CFNetServiceRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(theService)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFNetServiceGetTargetHost == nil {
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceGetTargetHost, _lib, "CFNetServiceGetTargetHost")
@@ -814,6 +924,7 @@ var _fnCFNetServiceGetType func(objc.ID) objc.ID
 
 // CFNetServiceGetType calls the CFNetwork framework function CFNetServiceGetType.
 func CFNetServiceGetType(theService corefoundation.CFNetServiceRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(theService)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFNetServiceGetType == nil {
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceGetType, _lib, "CFNetServiceGetType")
@@ -837,6 +948,8 @@ var _fnCFNetServiceMonitorCreate func(objc.ID, objc.ID, unsafe.Pointer, unsafe.P
 
 // CFNetServiceMonitorCreate calls the CFNetwork framework function CFNetServiceMonitorCreate.
 func CFNetServiceMonitorCreate(alloc corefoundation.CFAllocatorRef, theService corefoundation.CFNetServiceRef, clientCB unsafe.Pointer, clientContext unsafe.Pointer) corefoundation.CFNetServiceMonitorRef {
+	defer runtime.KeepAlive(alloc)
+	defer runtime.KeepAlive(theService)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFNetServiceMonitorCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceMonitorCreate, _lib, "CFNetServiceMonitorCreate")
@@ -860,6 +973,7 @@ var _fnCFNetServiceMonitorInvalidate func(objc.ID)
 
 // CFNetServiceMonitorInvalidate calls the CFNetwork framework function CFNetServiceMonitorInvalidate.
 func CFNetServiceMonitorInvalidate(monitor corefoundation.CFNetServiceMonitorRef) {
+	defer runtime.KeepAlive(monitor)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFNetServiceMonitorInvalidate == nil {
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceMonitorInvalidate, _lib, "CFNetServiceMonitorInvalidate")
@@ -871,6 +985,9 @@ var _fnCFNetServiceMonitorScheduleWithRunLoop func(objc.ID, objc.ID, objc.ID)
 
 // CFNetServiceMonitorScheduleWithRunLoop calls the CFNetwork framework function CFNetServiceMonitorScheduleWithRunLoop.
 func CFNetServiceMonitorScheduleWithRunLoop(monitor corefoundation.CFNetServiceMonitorRef, runLoop corefoundation.CFRunLoopRef, runLoopMode corefoundation.CFStringRef) {
+	defer runtime.KeepAlive(monitor)
+	defer runtime.KeepAlive(runLoop)
+	defer runtime.KeepAlive(runLoopMode)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFNetServiceMonitorScheduleWithRunLoop == nil {
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceMonitorScheduleWithRunLoop, _lib, "CFNetServiceMonitorScheduleWithRunLoop")
@@ -882,6 +999,7 @@ var _fnCFNetServiceMonitorStart func(objc.ID, CFNetServiceMonitorType, unsafe.Po
 
 // CFNetServiceMonitorStart calls the CFNetwork framework function CFNetServiceMonitorStart.
 func CFNetServiceMonitorStart(monitor corefoundation.CFNetServiceMonitorRef, recordType CFNetServiceMonitorType, err *corefoundation.CFStreamError) uint8 {
+	defer runtime.KeepAlive(monitor)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFNetServiceMonitorStart == nil {
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceMonitorStart, _lib, "CFNetServiceMonitorStart")
@@ -893,6 +1011,7 @@ var _fnCFNetServiceMonitorStop func(objc.ID, unsafe.Pointer)
 
 // CFNetServiceMonitorStop calls the CFNetwork framework function CFNetServiceMonitorStop.
 func CFNetServiceMonitorStop(monitor corefoundation.CFNetServiceMonitorRef, err *corefoundation.CFStreamError) {
+	defer runtime.KeepAlive(monitor)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFNetServiceMonitorStop == nil {
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceMonitorStop, _lib, "CFNetServiceMonitorStop")
@@ -904,6 +1023,9 @@ var _fnCFNetServiceMonitorUnscheduleFromRunLoop func(objc.ID, objc.ID, objc.ID)
 
 // CFNetServiceMonitorUnscheduleFromRunLoop calls the CFNetwork framework function CFNetServiceMonitorUnscheduleFromRunLoop.
 func CFNetServiceMonitorUnscheduleFromRunLoop(monitor corefoundation.CFNetServiceMonitorRef, runLoop corefoundation.CFRunLoopRef, runLoopMode corefoundation.CFStringRef) {
+	defer runtime.KeepAlive(monitor)
+	defer runtime.KeepAlive(runLoop)
+	defer runtime.KeepAlive(runLoopMode)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFNetServiceMonitorUnscheduleFromRunLoop == nil {
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceMonitorUnscheduleFromRunLoop, _lib, "CFNetServiceMonitorUnscheduleFromRunLoop")
@@ -915,6 +1037,7 @@ var _fnCFNetServiceRegister func(objc.ID, unsafe.Pointer) uint8
 
 // CFNetServiceRegister calls the CFNetwork framework function CFNetServiceRegister.
 func CFNetServiceRegister(theService corefoundation.CFNetServiceRef, err *corefoundation.CFStreamError) uint8 {
+	defer runtime.KeepAlive(theService)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFNetServiceRegister == nil {
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceRegister, _lib, "CFNetServiceRegister")
@@ -926,6 +1049,7 @@ var _fnCFNetServiceRegisterWithOptions func(objc.ID, int, unsafe.Pointer) uint8
 
 // CFNetServiceRegisterWithOptions calls the CFNetwork framework function CFNetServiceRegisterWithOptions.
 func CFNetServiceRegisterWithOptions(theService corefoundation.CFNetServiceRef, options int, err *corefoundation.CFStreamError) uint8 {
+	defer runtime.KeepAlive(theService)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFNetServiceRegisterWithOptions == nil {
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceRegisterWithOptions, _lib, "CFNetServiceRegisterWithOptions")
@@ -937,6 +1061,7 @@ var _fnCFNetServiceResolve func(objc.ID, unsafe.Pointer) uint8
 
 // CFNetServiceResolve calls the CFNetwork framework function CFNetServiceResolve.
 func CFNetServiceResolve(theService corefoundation.CFNetServiceRef, err *corefoundation.CFStreamError) uint8 {
+	defer runtime.KeepAlive(theService)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFNetServiceResolve == nil {
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceResolve, _lib, "CFNetServiceResolve")
@@ -948,6 +1073,7 @@ var _fnCFNetServiceResolveWithTimeout func(objc.ID, float64, unsafe.Pointer) uin
 
 // CFNetServiceResolveWithTimeout calls the CFNetwork framework function CFNetServiceResolveWithTimeout.
 func CFNetServiceResolveWithTimeout(theService corefoundation.CFNetServiceRef, timeout float64, err *corefoundation.CFStreamError) uint8 {
+	defer runtime.KeepAlive(theService)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFNetServiceResolveWithTimeout == nil {
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceResolveWithTimeout, _lib, "CFNetServiceResolveWithTimeout")
@@ -959,6 +1085,9 @@ var _fnCFNetServiceScheduleWithRunLoop func(objc.ID, objc.ID, objc.ID)
 
 // CFNetServiceScheduleWithRunLoop calls the CFNetwork framework function CFNetServiceScheduleWithRunLoop.
 func CFNetServiceScheduleWithRunLoop(theService corefoundation.CFNetServiceRef, runLoop corefoundation.CFRunLoopRef, runLoopMode corefoundation.CFStringRef) {
+	defer runtime.KeepAlive(theService)
+	defer runtime.KeepAlive(runLoop)
+	defer runtime.KeepAlive(runLoopMode)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFNetServiceScheduleWithRunLoop == nil {
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceScheduleWithRunLoop, _lib, "CFNetServiceScheduleWithRunLoop")
@@ -970,6 +1099,7 @@ var _fnCFNetServiceSetClient func(objc.ID, unsafe.Pointer, unsafe.Pointer) uint8
 
 // CFNetServiceSetClient calls the CFNetwork framework function CFNetServiceSetClient.
 func CFNetServiceSetClient(theService corefoundation.CFNetServiceRef, clientCB unsafe.Pointer, clientContext unsafe.Pointer) uint8 {
+	defer runtime.KeepAlive(theService)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFNetServiceSetClient == nil {
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceSetClient, _lib, "CFNetServiceSetClient")
@@ -981,6 +1111,8 @@ var _fnCFNetServiceSetTXTData func(objc.ID, objc.ID) uint8
 
 // CFNetServiceSetTXTData calls the CFNetwork framework function CFNetServiceSetTXTData.
 func CFNetServiceSetTXTData(theService corefoundation.CFNetServiceRef, txtRecord corefoundation.CFDataRef) uint8 {
+	defer runtime.KeepAlive(theService)
+	defer runtime.KeepAlive(txtRecord)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFNetServiceSetTXTData == nil {
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceSetTXTData, _lib, "CFNetServiceSetTXTData")
@@ -992,6 +1124,9 @@ var _fnCFNetServiceUnscheduleFromRunLoop func(objc.ID, objc.ID, objc.ID)
 
 // CFNetServiceUnscheduleFromRunLoop calls the CFNetwork framework function CFNetServiceUnscheduleFromRunLoop.
 func CFNetServiceUnscheduleFromRunLoop(theService corefoundation.CFNetServiceRef, runLoop corefoundation.CFRunLoopRef, runLoopMode corefoundation.CFStringRef) {
+	defer runtime.KeepAlive(theService)
+	defer runtime.KeepAlive(runLoop)
+	defer runtime.KeepAlive(runLoopMode)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFNetServiceUnscheduleFromRunLoop == nil {
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceUnscheduleFromRunLoop, _lib, "CFNetServiceUnscheduleFromRunLoop")
@@ -1003,6 +1138,8 @@ var _fnCFNetworkCopyProxiesForURL func(objc.ID, objc.ID) objc.ID
 
 // CFNetworkCopyProxiesForURL calls the CFNetwork framework function CFNetworkCopyProxiesForURL.
 func CFNetworkCopyProxiesForURL(url corefoundation.CFURLRef, proxySettings corefoundation.CFDictionaryRef) corefoundation.CFArrayRef {
+	defer runtime.KeepAlive(url)
+	defer runtime.KeepAlive(proxySettings)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFNetworkCopyProxiesForURL == nil {
 		ebipurego.RegisterLibFunc(&_fnCFNetworkCopyProxiesForURL, _lib, "CFNetworkCopyProxiesForURL")
@@ -1027,6 +1164,8 @@ var _fnCFNetworkExecuteProxyAutoConfigurationScript func(objc.ID, objc.ID, unsaf
 
 // CFNetworkExecuteProxyAutoConfigurationScript calls the CFNetwork framework function CFNetworkExecuteProxyAutoConfigurationScript.
 func CFNetworkExecuteProxyAutoConfigurationScript(proxyAutoConfigurationScript corefoundation.CFStringRef, targetURL corefoundation.CFURLRef, cb unsafe.Pointer, clientContext unsafe.Pointer) corefoundation.CFRunLoopSourceRef {
+	defer runtime.KeepAlive(proxyAutoConfigurationScript)
+	defer runtime.KeepAlive(targetURL)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFNetworkExecuteProxyAutoConfigurationScript == nil {
 		ebipurego.RegisterLibFunc(&_fnCFNetworkExecuteProxyAutoConfigurationScript, _lib, "CFNetworkExecuteProxyAutoConfigurationScript")
@@ -1039,6 +1178,8 @@ var _fnCFNetworkExecuteProxyAutoConfigurationURL func(objc.ID, objc.ID, unsafe.P
 
 // CFNetworkExecuteProxyAutoConfigurationURL calls the CFNetwork framework function CFNetworkExecuteProxyAutoConfigurationURL.
 func CFNetworkExecuteProxyAutoConfigurationURL(proxyAutoConfigURL corefoundation.CFURLRef, targetURL corefoundation.CFURLRef, cb unsafe.Pointer, clientContext unsafe.Pointer) corefoundation.CFRunLoopSourceRef {
+	defer runtime.KeepAlive(proxyAutoConfigURL)
+	defer runtime.KeepAlive(targetURL)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFNetworkExecuteProxyAutoConfigurationURL == nil {
 		ebipurego.RegisterLibFunc(&_fnCFNetworkExecuteProxyAutoConfigurationURL, _lib, "CFNetworkExecuteProxyAutoConfigurationURL")
@@ -1051,6 +1192,8 @@ var _fnCFReadStreamCreateForHTTPRequest func(objc.ID, objc.ID) objc.ID
 
 // CFReadStreamCreateForHTTPRequest calls the CFNetwork framework function CFReadStreamCreateForHTTPRequest.
 func CFReadStreamCreateForHTTPRequest(alloc corefoundation.CFAllocatorRef, request corefoundation.CFHTTPMessageRef) corefoundation.CFReadStreamRef {
+	defer runtime.KeepAlive(alloc)
+	defer runtime.KeepAlive(request)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFReadStreamCreateForHTTPRequest == nil {
 		ebipurego.RegisterLibFunc(&_fnCFReadStreamCreateForHTTPRequest, _lib, "CFReadStreamCreateForHTTPRequest")
@@ -1063,6 +1206,9 @@ var _fnCFReadStreamCreateForStreamedHTTPRequest func(objc.ID, objc.ID, objc.ID) 
 
 // CFReadStreamCreateForStreamedHTTPRequest calls the CFNetwork framework function CFReadStreamCreateForStreamedHTTPRequest.
 func CFReadStreamCreateForStreamedHTTPRequest(alloc corefoundation.CFAllocatorRef, requestHeaders corefoundation.CFHTTPMessageRef, requestBody corefoundation.CFReadStreamRef) corefoundation.CFReadStreamRef {
+	defer runtime.KeepAlive(alloc)
+	defer runtime.KeepAlive(requestHeaders)
+	defer runtime.KeepAlive(requestBody)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFReadStreamCreateForStreamedHTTPRequest == nil {
 		ebipurego.RegisterLibFunc(&_fnCFReadStreamCreateForStreamedHTTPRequest, _lib, "CFReadStreamCreateForStreamedHTTPRequest")
@@ -1075,6 +1221,8 @@ var _fnCFReadStreamCreateWithFTPURL func(objc.ID, objc.ID) objc.ID
 
 // CFReadStreamCreateWithFTPURL calls the CFNetwork framework function CFReadStreamCreateWithFTPURL.
 func CFReadStreamCreateWithFTPURL(alloc corefoundation.CFAllocatorRef, ftpURL corefoundation.CFURLRef) corefoundation.CFReadStreamRef {
+	defer runtime.KeepAlive(alloc)
+	defer runtime.KeepAlive(ftpURL)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFReadStreamCreateWithFTPURL == nil {
 		ebipurego.RegisterLibFunc(&_fnCFReadStreamCreateWithFTPURL, _lib, "CFReadStreamCreateWithFTPURL")
@@ -1109,6 +1257,8 @@ var _fnCFStreamCreatePairWithSocketToCFHost func(objc.ID, objc.ID, int, unsafe.P
 
 // CFStreamCreatePairWithSocketToCFHost calls the CFNetwork framework function CFStreamCreatePairWithSocketToCFHost.
 func CFStreamCreatePairWithSocketToCFHost(alloc corefoundation.CFAllocatorRef, host corefoundation.CFHostRef, port int, readStream unsafe.Pointer, writeStream unsafe.Pointer) {
+	defer runtime.KeepAlive(alloc)
+	defer runtime.KeepAlive(host)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFStreamCreatePairWithSocketToCFHost == nil {
 		ebipurego.RegisterLibFunc(&_fnCFStreamCreatePairWithSocketToCFHost, _lib, "CFStreamCreatePairWithSocketToCFHost")
@@ -1120,6 +1270,8 @@ var _fnCFStreamCreatePairWithSocketToNetService func(objc.ID, objc.ID, unsafe.Po
 
 // CFStreamCreatePairWithSocketToNetService calls the CFNetwork framework function CFStreamCreatePairWithSocketToNetService.
 func CFStreamCreatePairWithSocketToNetService(alloc corefoundation.CFAllocatorRef, service corefoundation.CFNetServiceRef, readStream unsafe.Pointer, writeStream unsafe.Pointer) {
+	defer runtime.KeepAlive(alloc)
+	defer runtime.KeepAlive(service)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFStreamCreatePairWithSocketToNetService == nil {
 		ebipurego.RegisterLibFunc(&_fnCFStreamCreatePairWithSocketToNetService, _lib, "CFStreamCreatePairWithSocketToNetService")
@@ -1131,6 +1283,8 @@ var _fnCFWriteStreamCreateWithFTPURL func(objc.ID, objc.ID) objc.ID
 
 // CFWriteStreamCreateWithFTPURL calls the CFNetwork framework function CFWriteStreamCreateWithFTPURL.
 func CFWriteStreamCreateWithFTPURL(alloc corefoundation.CFAllocatorRef, ftpURL corefoundation.CFURLRef) corefoundation.CFWriteStreamRef {
+	defer runtime.KeepAlive(alloc)
+	defer runtime.KeepAlive(ftpURL)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFWriteStreamCreateWithFTPURL == nil {
 		ebipurego.RegisterLibFunc(&_fnCFWriteStreamCreateWithFTPURL, _lib, "CFWriteStreamCreateWithFTPURL")

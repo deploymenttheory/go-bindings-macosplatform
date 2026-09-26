@@ -9,7 +9,8 @@
 {{define "cfunc"}}{{if .CommentFirst}}{{.CommentLine}}{{end}}var {{.VarName}} func({{join .ABIParams ", "}}) {{.ABIRet}}
 
 {{if not .CommentFirst}}{{.CommentLine}}{{end}}func {{.GoName}}({{join .SigParams ", "}}){{.RetSig}} {
-_loadOnce.Do(_loadLibrary)
+{{range .KeepAlive}}defer runtime.KeepAlive({{.}})
+{{end}}_loadOnce.Do(_loadLibrary)
 if {{.VarName}} == nil {
 ebipurego.RegisterLibFunc(&{{.VarName}}, _lib, {{.CName | printf "%q"}})
 }

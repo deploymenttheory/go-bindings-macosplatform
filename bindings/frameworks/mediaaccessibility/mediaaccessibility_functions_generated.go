@@ -5,6 +5,7 @@
 package mediaaccessibility
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
@@ -19,6 +20,7 @@ import (
 var _fnMAImageCaptioningCopyCaption func(objc.ID, unsafe.Pointer) objc.ID
 
 func MAImageCaptioningCopyCaption(url corefoundation.CFURLRef) (obj.Object, error) {
+	defer runtime.KeepAlive(url)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMAImageCaptioningCopyCaption == nil {
 		ebipurego.RegisterLibFunc(&_fnMAImageCaptioningCopyCaption, _lib, "MAImageCaptioningCopyCaption")
@@ -35,6 +37,8 @@ func MAImageCaptioningCopyCaption(url corefoundation.CFURLRef) (obj.Object, erro
 var _fnMAImageCaptioningSetCaption func(objc.ID, objc.ID, unsafe.Pointer) bool
 
 func MAImageCaptioningSetCaption(url corefoundation.CFURLRef, str corefoundation.CFStringRef) error {
+	defer runtime.KeepAlive(url)
+	defer runtime.KeepAlive(str)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMAImageCaptioningSetCaption == nil {
 		ebipurego.RegisterLibFunc(&_fnMAImageCaptioningSetCaption, _lib, "MAImageCaptioningSetCaption")

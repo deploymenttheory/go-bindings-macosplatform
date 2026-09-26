@@ -5,6 +5,7 @@
 package sharedfilelist
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
@@ -19,6 +20,9 @@ var _fnLSSharedFileListAddObserver func(objc.ID, objc.ID, objc.ID, unsafe.Pointe
 
 // LSSharedFileListAddObserver calls the SharedFileList framework function LSSharedFileListAddObserver.
 func LSSharedFileListAddObserver(inList LSSharedFileListRef, inRunloop corefoundation.CFRunLoopRef, inRunloopMode corefoundation.CFStringRef, callback unsafe.Pointer, context_ unsafe.Pointer) {
+	defer runtime.KeepAlive(inList)
+	defer runtime.KeepAlive(inRunloop)
+	defer runtime.KeepAlive(inRunloopMode)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSSharedFileListAddObserver == nil {
 		ebipurego.RegisterLibFunc(&_fnLSSharedFileListAddObserver, _lib, "LSSharedFileListAddObserver")
@@ -30,6 +34,8 @@ var _fnLSSharedFileListCopyProperty func(objc.ID, objc.ID) objc.ID
 
 // LSSharedFileListCopyProperty calls the SharedFileList framework function LSSharedFileListCopyProperty.
 func LSSharedFileListCopyProperty(inList LSSharedFileListRef, inPropertyName corefoundation.CFStringRef) obj.Object {
+	defer runtime.KeepAlive(inList)
+	defer runtime.KeepAlive(inPropertyName)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSSharedFileListCopyProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnLSSharedFileListCopyProperty, _lib, "LSSharedFileListCopyProperty")
@@ -42,6 +48,7 @@ var _fnLSSharedFileListCopySnapshot func(objc.ID, unsafe.Pointer) objc.ID
 
 // LSSharedFileListCopySnapshot calls the SharedFileList framework function LSSharedFileListCopySnapshot.
 func LSSharedFileListCopySnapshot(inList LSSharedFileListRef) (result corefoundation.CFArrayRef, outSnapshotSeed int) {
+	defer runtime.KeepAlive(inList)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSSharedFileListCopySnapshot == nil {
 		ebipurego.RegisterLibFunc(&_fnLSSharedFileListCopySnapshot, _lib, "LSSharedFileListCopySnapshot")
@@ -55,6 +62,9 @@ var _fnLSSharedFileListCreate func(objc.ID, objc.ID, objc.ID) objc.ID
 
 // LSSharedFileListCreate calls the SharedFileList framework function LSSharedFileListCreate.
 func LSSharedFileListCreate(inAllocator corefoundation.CFAllocatorRef, inListType corefoundation.CFStringRef, listOptions obj.Object) LSSharedFileListRef {
+	defer runtime.KeepAlive(inAllocator)
+	defer runtime.KeepAlive(inListType)
+	defer runtime.KeepAlive(listOptions)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSSharedFileListCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnLSSharedFileListCreate, _lib, "LSSharedFileListCreate")
@@ -67,6 +77,7 @@ var _fnLSSharedFileListGetSeedValue func(objc.ID) uint32
 
 // LSSharedFileListGetSeedValue calls the SharedFileList framework function LSSharedFileListGetSeedValue.
 func LSSharedFileListGetSeedValue(inList LSSharedFileListRef) int {
+	defer runtime.KeepAlive(inList)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSSharedFileListGetSeedValue == nil {
 		ebipurego.RegisterLibFunc(&_fnLSSharedFileListGetSeedValue, _lib, "LSSharedFileListGetSeedValue")
@@ -89,6 +100,12 @@ var _fnLSSharedFileListInsertItemFSRef func(objc.ID, objc.ID, objc.ID, objc.ID, 
 
 // LSSharedFileListInsertItemFSRef calls the SharedFileList framework function LSSharedFileListInsertItemFSRef.
 func LSSharedFileListInsertItemFSRef(inList LSSharedFileListRef, insertAfterThisItem LSSharedFileListItemRef, inDisplayName corefoundation.CFStringRef, inIconRef obj.Object, inFSRef *carboncore.FSRef, inPropertiesToSet corefoundation.CFDictionaryRef, inPropertiesToClear corefoundation.CFArrayRef) LSSharedFileListItemRef {
+	defer runtime.KeepAlive(inList)
+	defer runtime.KeepAlive(insertAfterThisItem)
+	defer runtime.KeepAlive(inDisplayName)
+	defer runtime.KeepAlive(inIconRef)
+	defer runtime.KeepAlive(inPropertiesToSet)
+	defer runtime.KeepAlive(inPropertiesToClear)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSSharedFileListInsertItemFSRef == nil {
 		ebipurego.RegisterLibFunc(&_fnLSSharedFileListInsertItemFSRef, _lib, "LSSharedFileListInsertItemFSRef")
@@ -101,6 +118,13 @@ var _fnLSSharedFileListInsertItemURL func(objc.ID, objc.ID, objc.ID, objc.ID, ob
 
 // LSSharedFileListInsertItemURL calls the SharedFileList framework function LSSharedFileListInsertItemURL.
 func LSSharedFileListInsertItemURL(inList LSSharedFileListRef, insertAfterThisItem LSSharedFileListItemRef, inDisplayName corefoundation.CFStringRef, inIconRef obj.Object, inURL corefoundation.CFURLRef, inPropertiesToSet corefoundation.CFDictionaryRef, inPropertiesToClear corefoundation.CFArrayRef) LSSharedFileListItemRef {
+	defer runtime.KeepAlive(inList)
+	defer runtime.KeepAlive(insertAfterThisItem)
+	defer runtime.KeepAlive(inDisplayName)
+	defer runtime.KeepAlive(inIconRef)
+	defer runtime.KeepAlive(inURL)
+	defer runtime.KeepAlive(inPropertiesToSet)
+	defer runtime.KeepAlive(inPropertiesToClear)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSSharedFileListInsertItemURL == nil {
 		ebipurego.RegisterLibFunc(&_fnLSSharedFileListInsertItemURL, _lib, "LSSharedFileListInsertItemURL")
@@ -113,6 +137,7 @@ var _fnLSSharedFileListItemCopyDisplayName func(objc.ID) objc.ID
 
 // LSSharedFileListItemCopyDisplayName calls the SharedFileList framework function LSSharedFileListItemCopyDisplayName.
 func LSSharedFileListItemCopyDisplayName(inItem LSSharedFileListItemRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(inItem)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSSharedFileListItemCopyDisplayName == nil {
 		ebipurego.RegisterLibFunc(&_fnLSSharedFileListItemCopyDisplayName, _lib, "LSSharedFileListItemCopyDisplayName")
@@ -125,6 +150,7 @@ var _fnLSSharedFileListItemCopyIconRef func(objc.ID) objc.ID
 
 // LSSharedFileListItemCopyIconRef calls the SharedFileList framework function LSSharedFileListItemCopyIconRef.
 func LSSharedFileListItemCopyIconRef(inItem LSSharedFileListItemRef) obj.Object {
+	defer runtime.KeepAlive(inItem)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSSharedFileListItemCopyIconRef == nil {
 		ebipurego.RegisterLibFunc(&_fnLSSharedFileListItemCopyIconRef, _lib, "LSSharedFileListItemCopyIconRef")
@@ -137,6 +163,8 @@ var _fnLSSharedFileListItemCopyProperty func(objc.ID, objc.ID) objc.ID
 
 // LSSharedFileListItemCopyProperty calls the SharedFileList framework function LSSharedFileListItemCopyProperty.
 func LSSharedFileListItemCopyProperty(inItem LSSharedFileListItemRef, inPropertyName corefoundation.CFStringRef) obj.Object {
+	defer runtime.KeepAlive(inItem)
+	defer runtime.KeepAlive(inPropertyName)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSSharedFileListItemCopyProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnLSSharedFileListItemCopyProperty, _lib, "LSSharedFileListItemCopyProperty")
@@ -149,6 +177,7 @@ var _fnLSSharedFileListItemGetID func(objc.ID) uint32
 
 // LSSharedFileListItemGetID calls the SharedFileList framework function LSSharedFileListItemGetID.
 func LSSharedFileListItemGetID(inItem LSSharedFileListItemRef) int {
+	defer runtime.KeepAlive(inItem)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSSharedFileListItemGetID == nil {
 		ebipurego.RegisterLibFunc(&_fnLSSharedFileListItemGetID, _lib, "LSSharedFileListItemGetID")
@@ -171,6 +200,9 @@ var _fnLSSharedFileListRemoveObserver func(objc.ID, objc.ID, objc.ID, unsafe.Poi
 
 // LSSharedFileListRemoveObserver calls the SharedFileList framework function LSSharedFileListRemoveObserver.
 func LSSharedFileListRemoveObserver(inList LSSharedFileListRef, inRunloop corefoundation.CFRunLoopRef, inRunloopMode corefoundation.CFStringRef, callback unsafe.Pointer, context_ unsafe.Pointer) {
+	defer runtime.KeepAlive(inList)
+	defer runtime.KeepAlive(inRunloop)
+	defer runtime.KeepAlive(inRunloopMode)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSSharedFileListRemoveObserver == nil {
 		ebipurego.RegisterLibFunc(&_fnLSSharedFileListRemoveObserver, _lib, "LSSharedFileListRemoveObserver")

@@ -5,6 +5,7 @@
 package quicklook
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
@@ -20,6 +21,7 @@ var _fnQLPreviewRequestCopyContentUTI func(objc.ID) objc.ID
 
 // QLPreviewRequestCopyContentUTI calls the QuickLook framework function QLPreviewRequestCopyContentUTI.
 func QLPreviewRequestCopyContentUTI(preview QLPreviewRequestRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(preview)
 	_loadOnce.Do(_loadLibrary)
 	if _fnQLPreviewRequestCopyContentUTI == nil {
 		ebipurego.RegisterLibFunc(&_fnQLPreviewRequestCopyContentUTI, _lib, "QLPreviewRequestCopyContentUTI")
@@ -32,6 +34,7 @@ var _fnQLPreviewRequestCopyOptions func(objc.ID) objc.ID
 
 // QLPreviewRequestCopyOptions calls the QuickLook framework function QLPreviewRequestCopyOptions.
 func QLPreviewRequestCopyOptions(preview QLPreviewRequestRef) corefoundation.CFDictionaryRef {
+	defer runtime.KeepAlive(preview)
 	_loadOnce.Do(_loadLibrary)
 	if _fnQLPreviewRequestCopyOptions == nil {
 		ebipurego.RegisterLibFunc(&_fnQLPreviewRequestCopyOptions, _lib, "QLPreviewRequestCopyOptions")
@@ -44,6 +47,7 @@ var _fnQLPreviewRequestCopyURL func(objc.ID) objc.ID
 
 // QLPreviewRequestCopyURL calls the QuickLook framework function QLPreviewRequestCopyURL.
 func QLPreviewRequestCopyURL(preview QLPreviewRequestRef) corefoundation.CFURLRef {
+	defer runtime.KeepAlive(preview)
 	_loadOnce.Do(_loadLibrary)
 	if _fnQLPreviewRequestCopyURL == nil {
 		ebipurego.RegisterLibFunc(&_fnQLPreviewRequestCopyURL, _lib, "QLPreviewRequestCopyURL")
@@ -56,6 +60,8 @@ var _fnQLPreviewRequestCreateContext func(objc.ID, corefoundation.CGSize, uint8,
 
 // QLPreviewRequestCreateContext calls the QuickLook framework function QLPreviewRequestCreateContext.
 func QLPreviewRequestCreateContext(preview QLPreviewRequestRef, size corefoundation.CGSize, isBitmap uint8, properties corefoundation.CFDictionaryRef) coregraphics.CGContextRef {
+	defer runtime.KeepAlive(preview)
+	defer runtime.KeepAlive(properties)
 	_loadOnce.Do(_loadLibrary)
 	if _fnQLPreviewRequestCreateContext == nil {
 		ebipurego.RegisterLibFunc(&_fnQLPreviewRequestCreateContext, _lib, "QLPreviewRequestCreateContext")
@@ -68,6 +74,9 @@ var _fnQLPreviewRequestCreatePDFContext func(objc.ID, unsafe.Pointer, objc.ID, o
 
 // QLPreviewRequestCreatePDFContext calls the QuickLook framework function QLPreviewRequestCreatePDFContext.
 func QLPreviewRequestCreatePDFContext(preview QLPreviewRequestRef, mediaBox *corefoundation.CGRect, auxiliaryInfo corefoundation.CFDictionaryRef, properties corefoundation.CFDictionaryRef) coregraphics.CGContextRef {
+	defer runtime.KeepAlive(preview)
+	defer runtime.KeepAlive(auxiliaryInfo)
+	defer runtime.KeepAlive(properties)
 	_loadOnce.Do(_loadLibrary)
 	if _fnQLPreviewRequestCreatePDFContext == nil {
 		ebipurego.RegisterLibFunc(&_fnQLPreviewRequestCreatePDFContext, _lib, "QLPreviewRequestCreatePDFContext")
@@ -80,6 +89,8 @@ var _fnQLPreviewRequestFlushContext func(objc.ID, objc.ID)
 
 // QLPreviewRequestFlushContext calls the QuickLook framework function QLPreviewRequestFlushContext.
 func QLPreviewRequestFlushContext(preview QLPreviewRequestRef, context_ coregraphics.CGContextRef) {
+	defer runtime.KeepAlive(preview)
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnQLPreviewRequestFlushContext == nil {
 		ebipurego.RegisterLibFunc(&_fnQLPreviewRequestFlushContext, _lib, "QLPreviewRequestFlushContext")
@@ -91,6 +102,7 @@ var _fnQLPreviewRequestGetDocumentObject func(objc.ID) unsafe.Pointer
 
 // QLPreviewRequestGetDocumentObject calls the QuickLook framework function QLPreviewRequestGetDocumentObject.
 func QLPreviewRequestGetDocumentObject(preview QLPreviewRequestRef) unsafe.Pointer {
+	defer runtime.KeepAlive(preview)
 	_loadOnce.Do(_loadLibrary)
 	if _fnQLPreviewRequestGetDocumentObject == nil {
 		ebipurego.RegisterLibFunc(&_fnQLPreviewRequestGetDocumentObject, _lib, "QLPreviewRequestGetDocumentObject")
@@ -102,6 +114,7 @@ var _fnQLPreviewRequestGetGeneratorBundle func(objc.ID) objc.ID
 
 // QLPreviewRequestGetGeneratorBundle calls the QuickLook framework function QLPreviewRequestGetGeneratorBundle.
 func QLPreviewRequestGetGeneratorBundle(preview QLPreviewRequestRef) corefoundation.CFBundleRef {
+	defer runtime.KeepAlive(preview)
 	_loadOnce.Do(_loadLibrary)
 	if _fnQLPreviewRequestGetGeneratorBundle == nil {
 		ebipurego.RegisterLibFunc(&_fnQLPreviewRequestGetGeneratorBundle, _lib, "QLPreviewRequestGetGeneratorBundle")
@@ -125,6 +138,7 @@ var _fnQLPreviewRequestIsCancelled func(objc.ID) uint8
 
 // QLPreviewRequestIsCancelled calls the QuickLook framework function QLPreviewRequestIsCancelled.
 func QLPreviewRequestIsCancelled(preview QLPreviewRequestRef) uint8 {
+	defer runtime.KeepAlive(preview)
 	_loadOnce.Do(_loadLibrary)
 	if _fnQLPreviewRequestIsCancelled == nil {
 		ebipurego.RegisterLibFunc(&_fnQLPreviewRequestIsCancelled, _lib, "QLPreviewRequestIsCancelled")
@@ -136,6 +150,10 @@ var _fnQLPreviewRequestSetDataRepresentation func(objc.ID, objc.ID, objc.ID, obj
 
 // QLPreviewRequestSetDataRepresentation calls the QuickLook framework function QLPreviewRequestSetDataRepresentation.
 func QLPreviewRequestSetDataRepresentation(preview QLPreviewRequestRef, data corefoundation.CFDataRef, contentTypeUTI corefoundation.CFStringRef, properties corefoundation.CFDictionaryRef) {
+	defer runtime.KeepAlive(preview)
+	defer runtime.KeepAlive(data)
+	defer runtime.KeepAlive(contentTypeUTI)
+	defer runtime.KeepAlive(properties)
 	_loadOnce.Do(_loadLibrary)
 	if _fnQLPreviewRequestSetDataRepresentation == nil {
 		ebipurego.RegisterLibFunc(&_fnQLPreviewRequestSetDataRepresentation, _lib, "QLPreviewRequestSetDataRepresentation")
@@ -147,6 +165,7 @@ var _fnQLPreviewRequestSetDocumentObject func(objc.ID, unsafe.Pointer, unsafe.Po
 
 // QLPreviewRequestSetDocumentObject calls the QuickLook framework function QLPreviewRequestSetDocumentObject.
 func QLPreviewRequestSetDocumentObject(preview QLPreviewRequestRef, object unsafe.Pointer, callbacks unsafe.Pointer) {
+	defer runtime.KeepAlive(preview)
 	_loadOnce.Do(_loadLibrary)
 	if _fnQLPreviewRequestSetDocumentObject == nil {
 		ebipurego.RegisterLibFunc(&_fnQLPreviewRequestSetDocumentObject, _lib, "QLPreviewRequestSetDocumentObject")
@@ -158,6 +177,10 @@ var _fnQLPreviewRequestSetURLRepresentation func(objc.ID, objc.ID, objc.ID, objc
 
 // QLPreviewRequestSetURLRepresentation calls the QuickLook framework function QLPreviewRequestSetURLRepresentation.
 func QLPreviewRequestSetURLRepresentation(preview QLPreviewRequestRef, url corefoundation.CFURLRef, contentTypeUTI corefoundation.CFStringRef, properties corefoundation.CFDictionaryRef) {
+	defer runtime.KeepAlive(preview)
+	defer runtime.KeepAlive(url)
+	defer runtime.KeepAlive(contentTypeUTI)
+	defer runtime.KeepAlive(properties)
 	_loadOnce.Do(_loadLibrary)
 	if _fnQLPreviewRequestSetURLRepresentation == nil {
 		ebipurego.RegisterLibFunc(&_fnQLPreviewRequestSetURLRepresentation, _lib, "QLPreviewRequestSetURLRepresentation")
@@ -169,6 +192,7 @@ var _fnQLThumbnailCancel func(objc.ID)
 
 // QLThumbnailCancel calls the QuickLook framework function QLThumbnailCancel.
 func QLThumbnailCancel(thumbnail QLThumbnailRef) {
+	defer runtime.KeepAlive(thumbnail)
 	_loadOnce.Do(_loadLibrary)
 	if _fnQLThumbnailCancel == nil {
 		ebipurego.RegisterLibFunc(&_fnQLThumbnailCancel, _lib, "QLThumbnailCancel")
@@ -180,6 +204,7 @@ var _fnQLThumbnailCopyDocumentURL func(objc.ID) objc.ID
 
 // QLThumbnailCopyDocumentURL calls the QuickLook framework function QLThumbnailCopyDocumentURL.
 func QLThumbnailCopyDocumentURL(thumbnail QLThumbnailRef) corefoundation.CFURLRef {
+	defer runtime.KeepAlive(thumbnail)
 	_loadOnce.Do(_loadLibrary)
 	if _fnQLThumbnailCopyDocumentURL == nil {
 		ebipurego.RegisterLibFunc(&_fnQLThumbnailCopyDocumentURL, _lib, "QLThumbnailCopyDocumentURL")
@@ -192,6 +217,7 @@ var _fnQLThumbnailCopyImage func(objc.ID) objc.ID
 
 // QLThumbnailCopyImage calls the QuickLook framework function QLThumbnailCopyImage.
 func QLThumbnailCopyImage(thumbnail QLThumbnailRef) coregraphics.CGImageRef {
+	defer runtime.KeepAlive(thumbnail)
 	_loadOnce.Do(_loadLibrary)
 	if _fnQLThumbnailCopyImage == nil {
 		ebipurego.RegisterLibFunc(&_fnQLThumbnailCopyImage, _lib, "QLThumbnailCopyImage")
@@ -204,6 +230,7 @@ var _fnQLThumbnailCopyOptions func(objc.ID) objc.ID
 
 // QLThumbnailCopyOptions calls the QuickLook framework function QLThumbnailCopyOptions.
 func QLThumbnailCopyOptions(thumbnail QLThumbnailRef) corefoundation.CFDictionaryRef {
+	defer runtime.KeepAlive(thumbnail)
 	_loadOnce.Do(_loadLibrary)
 	if _fnQLThumbnailCopyOptions == nil {
 		ebipurego.RegisterLibFunc(&_fnQLThumbnailCopyOptions, _lib, "QLThumbnailCopyOptions")
@@ -216,6 +243,9 @@ var _fnQLThumbnailCreate func(objc.ID, objc.ID, corefoundation.CGSize, objc.ID) 
 
 // QLThumbnailCreate calls the QuickLook framework function QLThumbnailCreate.
 func QLThumbnailCreate(allocator corefoundation.CFAllocatorRef, url corefoundation.CFURLRef, maxThumbnailSize corefoundation.CGSize, options corefoundation.CFDictionaryRef) QLThumbnailRef {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(url)
+	defer runtime.KeepAlive(options)
 	_loadOnce.Do(_loadLibrary)
 	if _fnQLThumbnailCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnQLThumbnailCreate, _lib, "QLThumbnailCreate")
@@ -228,6 +258,7 @@ var _fnQLThumbnailDispatchAsync func(objc.ID, objc.ID, objc.Block)
 
 // QLThumbnailDispatchAsync calls the QuickLook framework function QLThumbnailDispatchAsync.
 func QLThumbnailDispatchAsync(thumbnail QLThumbnailRef, queue dispatch.Queue, completion func()) {
+	defer runtime.KeepAlive(thumbnail)
 	_loadOnce.Do(_loadLibrary)
 	if _fnQLThumbnailDispatchAsync == nil {
 		ebipurego.RegisterLibFunc(&_fnQLThumbnailDispatchAsync, _lib, "QLThumbnailDispatchAsync")
@@ -239,6 +270,7 @@ var _fnQLThumbnailGetContentRect func(objc.ID) corefoundation.CGRect
 
 // QLThumbnailGetContentRect calls the QuickLook framework function QLThumbnailGetContentRect.
 func QLThumbnailGetContentRect(thumbnail QLThumbnailRef) corefoundation.CGRect {
+	defer runtime.KeepAlive(thumbnail)
 	_loadOnce.Do(_loadLibrary)
 	if _fnQLThumbnailGetContentRect == nil {
 		ebipurego.RegisterLibFunc(&_fnQLThumbnailGetContentRect, _lib, "QLThumbnailGetContentRect")
@@ -250,6 +282,7 @@ var _fnQLThumbnailGetMaximumSize func(objc.ID) corefoundation.CGSize
 
 // QLThumbnailGetMaximumSize calls the QuickLook framework function QLThumbnailGetMaximumSize.
 func QLThumbnailGetMaximumSize(thumbnail QLThumbnailRef) corefoundation.CGSize {
+	defer runtime.KeepAlive(thumbnail)
 	_loadOnce.Do(_loadLibrary)
 	if _fnQLThumbnailGetMaximumSize == nil {
 		ebipurego.RegisterLibFunc(&_fnQLThumbnailGetMaximumSize, _lib, "QLThumbnailGetMaximumSize")
@@ -272,6 +305,9 @@ var _fnQLThumbnailImageCreate func(objc.ID, objc.ID, corefoundation.CGSize, objc
 
 // QLThumbnailImageCreate calls the QuickLook framework function QLThumbnailImageCreate.
 func QLThumbnailImageCreate(allocator corefoundation.CFAllocatorRef, url corefoundation.CFURLRef, maxThumbnailSize corefoundation.CGSize, options corefoundation.CFDictionaryRef) coregraphics.CGImageRef {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(url)
+	defer runtime.KeepAlive(options)
 	_loadOnce.Do(_loadLibrary)
 	if _fnQLThumbnailImageCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnQLThumbnailImageCreate, _lib, "QLThumbnailImageCreate")
@@ -284,6 +320,7 @@ var _fnQLThumbnailIsCancelled func(objc.ID) uint8
 
 // QLThumbnailIsCancelled calls the QuickLook framework function QLThumbnailIsCancelled.
 func QLThumbnailIsCancelled(thumbnail QLThumbnailRef) uint8 {
+	defer runtime.KeepAlive(thumbnail)
 	_loadOnce.Do(_loadLibrary)
 	if _fnQLThumbnailIsCancelled == nil {
 		ebipurego.RegisterLibFunc(&_fnQLThumbnailIsCancelled, _lib, "QLThumbnailIsCancelled")
@@ -295,6 +332,7 @@ var _fnQLThumbnailRequestCopyContentUTI func(objc.ID) objc.ID
 
 // QLThumbnailRequestCopyContentUTI calls the QuickLook framework function QLThumbnailRequestCopyContentUTI.
 func QLThumbnailRequestCopyContentUTI(thumbnail QLThumbnailRequestRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(thumbnail)
 	_loadOnce.Do(_loadLibrary)
 	if _fnQLThumbnailRequestCopyContentUTI == nil {
 		ebipurego.RegisterLibFunc(&_fnQLThumbnailRequestCopyContentUTI, _lib, "QLThumbnailRequestCopyContentUTI")
@@ -307,6 +345,7 @@ var _fnQLThumbnailRequestCopyOptions func(objc.ID) objc.ID
 
 // QLThumbnailRequestCopyOptions calls the QuickLook framework function QLThumbnailRequestCopyOptions.
 func QLThumbnailRequestCopyOptions(thumbnail QLThumbnailRequestRef) corefoundation.CFDictionaryRef {
+	defer runtime.KeepAlive(thumbnail)
 	_loadOnce.Do(_loadLibrary)
 	if _fnQLThumbnailRequestCopyOptions == nil {
 		ebipurego.RegisterLibFunc(&_fnQLThumbnailRequestCopyOptions, _lib, "QLThumbnailRequestCopyOptions")
@@ -319,6 +358,7 @@ var _fnQLThumbnailRequestCopyURL func(objc.ID) objc.ID
 
 // QLThumbnailRequestCopyURL calls the QuickLook framework function QLThumbnailRequestCopyURL.
 func QLThumbnailRequestCopyURL(thumbnail QLThumbnailRequestRef) corefoundation.CFURLRef {
+	defer runtime.KeepAlive(thumbnail)
 	_loadOnce.Do(_loadLibrary)
 	if _fnQLThumbnailRequestCopyURL == nil {
 		ebipurego.RegisterLibFunc(&_fnQLThumbnailRequestCopyURL, _lib, "QLThumbnailRequestCopyURL")
@@ -331,6 +371,8 @@ var _fnQLThumbnailRequestCreateContext func(objc.ID, corefoundation.CGSize, uint
 
 // QLThumbnailRequestCreateContext calls the QuickLook framework function QLThumbnailRequestCreateContext.
 func QLThumbnailRequestCreateContext(thumbnail QLThumbnailRequestRef, size corefoundation.CGSize, isBitmap uint8, properties corefoundation.CFDictionaryRef) coregraphics.CGContextRef {
+	defer runtime.KeepAlive(thumbnail)
+	defer runtime.KeepAlive(properties)
 	_loadOnce.Do(_loadLibrary)
 	if _fnQLThumbnailRequestCreateContext == nil {
 		ebipurego.RegisterLibFunc(&_fnQLThumbnailRequestCreateContext, _lib, "QLThumbnailRequestCreateContext")
@@ -343,6 +385,8 @@ var _fnQLThumbnailRequestFlushContext func(objc.ID, objc.ID)
 
 // QLThumbnailRequestFlushContext calls the QuickLook framework function QLThumbnailRequestFlushContext.
 func QLThumbnailRequestFlushContext(thumbnail QLThumbnailRequestRef, context_ coregraphics.CGContextRef) {
+	defer runtime.KeepAlive(thumbnail)
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnQLThumbnailRequestFlushContext == nil {
 		ebipurego.RegisterLibFunc(&_fnQLThumbnailRequestFlushContext, _lib, "QLThumbnailRequestFlushContext")
@@ -354,6 +398,7 @@ var _fnQLThumbnailRequestGetDocumentObject func(objc.ID) unsafe.Pointer
 
 // QLThumbnailRequestGetDocumentObject calls the QuickLook framework function QLThumbnailRequestGetDocumentObject.
 func QLThumbnailRequestGetDocumentObject(thumbnail QLThumbnailRequestRef) unsafe.Pointer {
+	defer runtime.KeepAlive(thumbnail)
 	_loadOnce.Do(_loadLibrary)
 	if _fnQLThumbnailRequestGetDocumentObject == nil {
 		ebipurego.RegisterLibFunc(&_fnQLThumbnailRequestGetDocumentObject, _lib, "QLThumbnailRequestGetDocumentObject")
@@ -365,6 +410,7 @@ var _fnQLThumbnailRequestGetGeneratorBundle func(objc.ID) objc.ID
 
 // QLThumbnailRequestGetGeneratorBundle calls the QuickLook framework function QLThumbnailRequestGetGeneratorBundle.
 func QLThumbnailRequestGetGeneratorBundle(thumbnail QLThumbnailRequestRef) corefoundation.CFBundleRef {
+	defer runtime.KeepAlive(thumbnail)
 	_loadOnce.Do(_loadLibrary)
 	if _fnQLThumbnailRequestGetGeneratorBundle == nil {
 		ebipurego.RegisterLibFunc(&_fnQLThumbnailRequestGetGeneratorBundle, _lib, "QLThumbnailRequestGetGeneratorBundle")
@@ -377,6 +423,7 @@ var _fnQLThumbnailRequestGetMaximumSize func(objc.ID) corefoundation.CGSize
 
 // QLThumbnailRequestGetMaximumSize calls the QuickLook framework function QLThumbnailRequestGetMaximumSize.
 func QLThumbnailRequestGetMaximumSize(thumbnail QLThumbnailRequestRef) corefoundation.CGSize {
+	defer runtime.KeepAlive(thumbnail)
 	_loadOnce.Do(_loadLibrary)
 	if _fnQLThumbnailRequestGetMaximumSize == nil {
 		ebipurego.RegisterLibFunc(&_fnQLThumbnailRequestGetMaximumSize, _lib, "QLThumbnailRequestGetMaximumSize")
@@ -399,6 +446,7 @@ var _fnQLThumbnailRequestIsCancelled func(objc.ID) uint8
 
 // QLThumbnailRequestIsCancelled calls the QuickLook framework function QLThumbnailRequestIsCancelled.
 func QLThumbnailRequestIsCancelled(thumbnail QLThumbnailRequestRef) uint8 {
+	defer runtime.KeepAlive(thumbnail)
 	_loadOnce.Do(_loadLibrary)
 	if _fnQLThumbnailRequestIsCancelled == nil {
 		ebipurego.RegisterLibFunc(&_fnQLThumbnailRequestIsCancelled, _lib, "QLThumbnailRequestIsCancelled")
@@ -410,6 +458,7 @@ var _fnQLThumbnailRequestSetDocumentObject func(objc.ID, unsafe.Pointer, unsafe.
 
 // QLThumbnailRequestSetDocumentObject calls the QuickLook framework function QLThumbnailRequestSetDocumentObject.
 func QLThumbnailRequestSetDocumentObject(thumbnail QLThumbnailRequestRef, object unsafe.Pointer, callbacks unsafe.Pointer) {
+	defer runtime.KeepAlive(thumbnail)
 	_loadOnce.Do(_loadLibrary)
 	if _fnQLThumbnailRequestSetDocumentObject == nil {
 		ebipurego.RegisterLibFunc(&_fnQLThumbnailRequestSetDocumentObject, _lib, "QLThumbnailRequestSetDocumentObject")
@@ -421,6 +470,9 @@ var _fnQLThumbnailRequestSetImage func(objc.ID, objc.ID, objc.ID)
 
 // QLThumbnailRequestSetImage calls the QuickLook framework function QLThumbnailRequestSetImage.
 func QLThumbnailRequestSetImage(thumbnail QLThumbnailRequestRef, image coregraphics.CGImageRef, properties corefoundation.CFDictionaryRef) {
+	defer runtime.KeepAlive(thumbnail)
+	defer runtime.KeepAlive(image)
+	defer runtime.KeepAlive(properties)
 	_loadOnce.Do(_loadLibrary)
 	if _fnQLThumbnailRequestSetImage == nil {
 		ebipurego.RegisterLibFunc(&_fnQLThumbnailRequestSetImage, _lib, "QLThumbnailRequestSetImage")
@@ -432,6 +484,9 @@ var _fnQLThumbnailRequestSetImageAtURL func(objc.ID, objc.ID, objc.ID)
 
 // QLThumbnailRequestSetImageAtURL calls the QuickLook framework function QLThumbnailRequestSetImageAtURL.
 func QLThumbnailRequestSetImageAtURL(thumbnail QLThumbnailRequestRef, url corefoundation.CFURLRef, properties corefoundation.CFDictionaryRef) {
+	defer runtime.KeepAlive(thumbnail)
+	defer runtime.KeepAlive(url)
+	defer runtime.KeepAlive(properties)
 	_loadOnce.Do(_loadLibrary)
 	if _fnQLThumbnailRequestSetImageAtURL == nil {
 		ebipurego.RegisterLibFunc(&_fnQLThumbnailRequestSetImageAtURL, _lib, "QLThumbnailRequestSetImageAtURL")
@@ -443,6 +498,9 @@ var _fnQLThumbnailRequestSetImageWithData func(objc.ID, objc.ID, objc.ID)
 
 // QLThumbnailRequestSetImageWithData calls the QuickLook framework function QLThumbnailRequestSetImageWithData.
 func QLThumbnailRequestSetImageWithData(thumbnail QLThumbnailRequestRef, data corefoundation.CFDataRef, properties corefoundation.CFDictionaryRef) {
+	defer runtime.KeepAlive(thumbnail)
+	defer runtime.KeepAlive(data)
+	defer runtime.KeepAlive(properties)
 	_loadOnce.Do(_loadLibrary)
 	if _fnQLThumbnailRequestSetImageWithData == nil {
 		ebipurego.RegisterLibFunc(&_fnQLThumbnailRequestSetImageWithData, _lib, "QLThumbnailRequestSetImageWithData")
@@ -454,6 +512,11 @@ var _fnQLThumbnailRequestSetThumbnailWithDataRepresentation func(objc.ID, objc.I
 
 // QLThumbnailRequestSetThumbnailWithDataRepresentation calls the QuickLook framework function QLThumbnailRequestSetThumbnailWithDataRepresentation.
 func QLThumbnailRequestSetThumbnailWithDataRepresentation(thumbnail QLThumbnailRequestRef, data corefoundation.CFDataRef, contentTypeUTI corefoundation.CFStringRef, previewProperties corefoundation.CFDictionaryRef, properties corefoundation.CFDictionaryRef) {
+	defer runtime.KeepAlive(thumbnail)
+	defer runtime.KeepAlive(data)
+	defer runtime.KeepAlive(contentTypeUTI)
+	defer runtime.KeepAlive(previewProperties)
+	defer runtime.KeepAlive(properties)
 	_loadOnce.Do(_loadLibrary)
 	if _fnQLThumbnailRequestSetThumbnailWithDataRepresentation == nil {
 		ebipurego.RegisterLibFunc(&_fnQLThumbnailRequestSetThumbnailWithDataRepresentation, _lib, "QLThumbnailRequestSetThumbnailWithDataRepresentation")
@@ -465,6 +528,11 @@ var _fnQLThumbnailRequestSetThumbnailWithURLRepresentation func(objc.ID, objc.ID
 
 // QLThumbnailRequestSetThumbnailWithURLRepresentation calls the QuickLook framework function QLThumbnailRequestSetThumbnailWithURLRepresentation.
 func QLThumbnailRequestSetThumbnailWithURLRepresentation(thumbnail QLThumbnailRequestRef, url corefoundation.CFURLRef, contentTypeUTI corefoundation.CFStringRef, previewProperties corefoundation.CFDictionaryRef, properties corefoundation.CFDictionaryRef) {
+	defer runtime.KeepAlive(thumbnail)
+	defer runtime.KeepAlive(url)
+	defer runtime.KeepAlive(contentTypeUTI)
+	defer runtime.KeepAlive(previewProperties)
+	defer runtime.KeepAlive(properties)
 	_loadOnce.Do(_loadLibrary)
 	if _fnQLThumbnailRequestSetThumbnailWithURLRepresentation == nil {
 		ebipurego.RegisterLibFunc(&_fnQLThumbnailRequestSetThumbnailWithURLRepresentation, _lib, "QLThumbnailRequestSetThumbnailWithURLRepresentation")

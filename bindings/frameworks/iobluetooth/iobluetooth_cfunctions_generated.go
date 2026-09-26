@@ -5,6 +5,7 @@
 package iobluetooth
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
@@ -19,6 +20,8 @@ var _fnIOBluetoothAddSCOAudioDevice func(objc.ID, objc.ID) int32
 
 // IOBluetoothAddSCOAudioDevice calls the IOBluetooth framework function IOBluetoothAddSCOAudioDevice.
 func IOBluetoothAddSCOAudioDevice(device IOBluetoothDeviceRef, configDict corefoundation.CFDictionaryRef) int {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(configDict)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOBluetoothAddSCOAudioDevice == nil {
 		ebipurego.RegisterLibFunc(&_fnIOBluetoothAddSCOAudioDevice, _lib, "IOBluetoothAddSCOAudioDevice")
@@ -56,6 +59,7 @@ var _fnIOBluetoothIgnoreHIDDevice func(objc.ID)
 
 // IOBluetoothIgnoreHIDDevice calls the IOBluetooth framework function IOBluetoothIgnoreHIDDevice.
 func IOBluetoothIgnoreHIDDevice(device IOBluetoothDeviceRef) {
+	defer runtime.KeepAlive(device)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOBluetoothIgnoreHIDDevice == nil {
 		ebipurego.RegisterLibFunc(&_fnIOBluetoothIgnoreHIDDevice, _lib, "IOBluetoothIgnoreHIDDevice")
@@ -78,6 +82,7 @@ var _fnIOBluetoothL2CAPChannelRegisterForChannelCloseNotification func(objc.ID, 
 
 // IOBluetoothL2CAPChannelRegisterForChannelCloseNotification calls the IOBluetooth framework function IOBluetoothL2CAPChannelRegisterForChannelCloseNotification.
 func IOBluetoothL2CAPChannelRegisterForChannelCloseNotification(channel IOBluetoothL2CAPChannelRef, callback unsafe.Pointer, inRefCon unsafe.Pointer) IOBluetoothUserNotificationRef {
+	defer runtime.KeepAlive(channel)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOBluetoothL2CAPChannelRegisterForChannelCloseNotification == nil {
 		ebipurego.RegisterLibFunc(&_fnIOBluetoothL2CAPChannelRegisterForChannelCloseNotification, _lib, "IOBluetoothL2CAPChannelRegisterForChannelCloseNotification")
@@ -177,6 +182,7 @@ var _fnIOBluetoothOBEXSessionCreateWithIOBluetoothDeviceRefAndChannelNumber func
 
 // IOBluetoothOBEXSessionCreateWithIOBluetoothDeviceRefAndChannelNumber calls the IOBluetooth framework function IOBluetoothOBEXSessionCreateWithIOBluetoothDeviceRefAndChannelNumber.
 func IOBluetoothOBEXSessionCreateWithIOBluetoothDeviceRefAndChannelNumber(inDeviceRef IOBluetoothDeviceRef, inChannelID uint8, outSessionRef unsafe.Pointer) int32 {
+	defer runtime.KeepAlive(inDeviceRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOBluetoothOBEXSessionCreateWithIOBluetoothDeviceRefAndChannelNumber == nil {
 		ebipurego.RegisterLibFunc(&_fnIOBluetoothOBEXSessionCreateWithIOBluetoothDeviceRefAndChannelNumber, _lib, "IOBluetoothOBEXSessionCreateWithIOBluetoothDeviceRefAndChannelNumber")
@@ -188,6 +194,7 @@ var _fnIOBluetoothOBEXSessionCreateWithIOBluetoothSDPServiceRecordRef func(objc.
 
 // IOBluetoothOBEXSessionCreateWithIOBluetoothSDPServiceRecordRef calls the IOBluetooth framework function IOBluetoothOBEXSessionCreateWithIOBluetoothSDPServiceRecordRef.
 func IOBluetoothOBEXSessionCreateWithIOBluetoothSDPServiceRecordRef(inSDPServiceRef IOBluetoothSDPServiceRecordRef, outSessionRef unsafe.Pointer) int32 {
+	defer runtime.KeepAlive(inSDPServiceRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOBluetoothOBEXSessionCreateWithIOBluetoothSDPServiceRecordRef == nil {
 		ebipurego.RegisterLibFunc(&_fnIOBluetoothOBEXSessionCreateWithIOBluetoothSDPServiceRecordRef, _lib, "IOBluetoothOBEXSessionCreateWithIOBluetoothSDPServiceRecordRef")
@@ -199,6 +206,7 @@ var _fnIOBluetoothOBEXSessionCreateWithIncomingIOBluetoothRFCOMMChannel func(obj
 
 // IOBluetoothOBEXSessionCreateWithIncomingIOBluetoothRFCOMMChannel calls the IOBluetooth framework function IOBluetoothOBEXSessionCreateWithIncomingIOBluetoothRFCOMMChannel.
 func IOBluetoothOBEXSessionCreateWithIncomingIOBluetoothRFCOMMChannel(inRFCOMMChannelRef IOBluetoothRFCOMMChannelRef, inCallback unsafe.Pointer, inUserRefCon unsafe.Pointer, outSessionRef unsafe.Pointer) int32 {
+	defer runtime.KeepAlive(inRFCOMMChannelRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOBluetoothOBEXSessionCreateWithIncomingIOBluetoothRFCOMMChannel == nil {
 		ebipurego.RegisterLibFunc(&_fnIOBluetoothOBEXSessionCreateWithIncomingIOBluetoothRFCOMMChannel, _lib, "IOBluetoothOBEXSessionCreateWithIncomingIOBluetoothRFCOMMChannel")
@@ -210,6 +218,7 @@ var _fnIOBluetoothOBEXSessionOpenTransportConnection func(objc.ID, unsafe.Pointe
 
 // IOBluetoothOBEXSessionOpenTransportConnection calls the IOBluetooth framework function IOBluetoothOBEXSessionOpenTransportConnection.
 func IOBluetoothOBEXSessionOpenTransportConnection(inSessionRef OBEXSessionRef, inCallback unsafe.Pointer, inUserRefCon unsafe.Pointer) int32 {
+	defer runtime.KeepAlive(inSessionRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOBluetoothOBEXSessionOpenTransportConnection == nil {
 		ebipurego.RegisterLibFunc(&_fnIOBluetoothOBEXSessionOpenTransportConnection, _lib, "IOBluetoothOBEXSessionOpenTransportConnection")
@@ -232,6 +241,7 @@ var _fnIOBluetoothRemoveIgnoredHIDDevice func(objc.ID)
 
 // IOBluetoothRemoveIgnoredHIDDevice calls the IOBluetooth framework function IOBluetoothRemoveIgnoredHIDDevice.
 func IOBluetoothRemoveIgnoredHIDDevice(device IOBluetoothDeviceRef) {
+	defer runtime.KeepAlive(device)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOBluetoothRemoveIgnoredHIDDevice == nil {
 		ebipurego.RegisterLibFunc(&_fnIOBluetoothRemoveIgnoredHIDDevice, _lib, "IOBluetoothRemoveIgnoredHIDDevice")
@@ -243,6 +253,7 @@ var _fnIOBluetoothRemoveSCOAudioDevice func(objc.ID) int32
 
 // IOBluetoothRemoveSCOAudioDevice calls the IOBluetooth framework function IOBluetoothRemoveSCOAudioDevice.
 func IOBluetoothRemoveSCOAudioDevice(device IOBluetoothDeviceRef) int {
+	defer runtime.KeepAlive(device)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOBluetoothRemoveSCOAudioDevice == nil {
 		ebipurego.RegisterLibFunc(&_fnIOBluetoothRemoveSCOAudioDevice, _lib, "IOBluetoothRemoveSCOAudioDevice")
@@ -265,6 +276,7 @@ var _fnIOBluetoothUserNotificationUnregister func(objc.ID)
 
 // IOBluetoothUserNotificationUnregister calls the IOBluetooth framework function IOBluetoothUserNotificationUnregister.
 func IOBluetoothUserNotificationUnregister(notificationRef IOBluetoothUserNotificationRef) {
+	defer runtime.KeepAlive(notificationRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOBluetoothUserNotificationUnregister == nil {
 		ebipurego.RegisterLibFunc(&_fnIOBluetoothUserNotificationUnregister, _lib, "IOBluetoothUserNotificationUnregister")
@@ -276,6 +288,7 @@ var _fnOBEXAddApplicationParameterHeader func(unsafe.Pointer, uint32, objc.ID) i
 
 // OBEXAddApplicationParameterHeader calls the IOBluetooth framework function OBEXAddApplicationParameterHeader.
 func OBEXAddApplicationParameterHeader(inHeaderData unsafe.Pointer, inHeaderDataLength uint32, dictRef corefoundation.CFMutableDictionaryRef) int32 {
+	defer runtime.KeepAlive(dictRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnOBEXAddApplicationParameterHeader == nil {
 		ebipurego.RegisterLibFunc(&_fnOBEXAddApplicationParameterHeader, _lib, "OBEXAddApplicationParameterHeader")
@@ -287,6 +300,7 @@ var _fnOBEXAddAuthorizationChallengeHeader func(unsafe.Pointer, uint32, objc.ID)
 
 // OBEXAddAuthorizationChallengeHeader calls the IOBluetooth framework function OBEXAddAuthorizationChallengeHeader.
 func OBEXAddAuthorizationChallengeHeader(inHeaderData unsafe.Pointer, inHeaderDataLength uint32, dictRef corefoundation.CFMutableDictionaryRef) int32 {
+	defer runtime.KeepAlive(dictRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnOBEXAddAuthorizationChallengeHeader == nil {
 		ebipurego.RegisterLibFunc(&_fnOBEXAddAuthorizationChallengeHeader, _lib, "OBEXAddAuthorizationChallengeHeader")
@@ -298,6 +312,7 @@ var _fnOBEXAddAuthorizationResponseHeader func(unsafe.Pointer, uint32, objc.ID) 
 
 // OBEXAddAuthorizationResponseHeader calls the IOBluetooth framework function OBEXAddAuthorizationResponseHeader.
 func OBEXAddAuthorizationResponseHeader(inHeaderData unsafe.Pointer, inHeaderDataLength uint32, dictRef corefoundation.CFMutableDictionaryRef) int32 {
+	defer runtime.KeepAlive(dictRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnOBEXAddAuthorizationResponseHeader == nil {
 		ebipurego.RegisterLibFunc(&_fnOBEXAddAuthorizationResponseHeader, _lib, "OBEXAddAuthorizationResponseHeader")
@@ -309,6 +324,7 @@ var _fnOBEXAddBodyHeader func(unsafe.Pointer, uint32, uint8, objc.ID) int32
 
 // OBEXAddBodyHeader calls the IOBluetooth framework function OBEXAddBodyHeader.
 func OBEXAddBodyHeader(inHeaderData unsafe.Pointer, inHeaderDataLength uint32, isEndOfBody uint8, dictRef corefoundation.CFMutableDictionaryRef) int32 {
+	defer runtime.KeepAlive(dictRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnOBEXAddBodyHeader == nil {
 		ebipurego.RegisterLibFunc(&_fnOBEXAddBodyHeader, _lib, "OBEXAddBodyHeader")
@@ -320,6 +336,7 @@ var _fnOBEXAddByteSequenceHeader func(unsafe.Pointer, uint32, objc.ID) int32
 
 // OBEXAddByteSequenceHeader calls the IOBluetooth framework function OBEXAddByteSequenceHeader.
 func OBEXAddByteSequenceHeader(inHeaderData unsafe.Pointer, inHeaderDataLength uint32, dictRef corefoundation.CFMutableDictionaryRef) int32 {
+	defer runtime.KeepAlive(dictRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnOBEXAddByteSequenceHeader == nil {
 		ebipurego.RegisterLibFunc(&_fnOBEXAddByteSequenceHeader, _lib, "OBEXAddByteSequenceHeader")
@@ -331,6 +348,7 @@ var _fnOBEXAddConnectionIDHeader func(unsafe.Pointer, uint32, objc.ID) int32
 
 // OBEXAddConnectionIDHeader calls the IOBluetooth framework function OBEXAddConnectionIDHeader.
 func OBEXAddConnectionIDHeader(inHeaderData unsafe.Pointer, inHeaderDataLength uint32, dictRef corefoundation.CFMutableDictionaryRef) int32 {
+	defer runtime.KeepAlive(dictRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnOBEXAddConnectionIDHeader == nil {
 		ebipurego.RegisterLibFunc(&_fnOBEXAddConnectionIDHeader, _lib, "OBEXAddConnectionIDHeader")
@@ -342,6 +360,7 @@ var _fnOBEXAddCountHeader func(uint32, objc.ID) int32
 
 // OBEXAddCountHeader calls the IOBluetooth framework function OBEXAddCountHeader.
 func OBEXAddCountHeader(count uint32, dictRef corefoundation.CFMutableDictionaryRef) int32 {
+	defer runtime.KeepAlive(dictRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnOBEXAddCountHeader == nil {
 		ebipurego.RegisterLibFunc(&_fnOBEXAddCountHeader, _lib, "OBEXAddCountHeader")
@@ -353,6 +372,8 @@ var _fnOBEXAddDescriptionHeader func(objc.ID, objc.ID) int32
 
 // OBEXAddDescriptionHeader calls the IOBluetooth framework function OBEXAddDescriptionHeader.
 func OBEXAddDescriptionHeader(description corefoundation.CFStringRef, dictRef corefoundation.CFMutableDictionaryRef) int32 {
+	defer runtime.KeepAlive(description)
+	defer runtime.KeepAlive(dictRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnOBEXAddDescriptionHeader == nil {
 		ebipurego.RegisterLibFunc(&_fnOBEXAddDescriptionHeader, _lib, "OBEXAddDescriptionHeader")
@@ -364,6 +385,7 @@ var _fnOBEXAddHTTPHeader func(unsafe.Pointer, uint32, objc.ID) int32
 
 // OBEXAddHTTPHeader calls the IOBluetooth framework function OBEXAddHTTPHeader.
 func OBEXAddHTTPHeader(inHeaderData unsafe.Pointer, inHeaderDataLength uint32, dictRef corefoundation.CFMutableDictionaryRef) int32 {
+	defer runtime.KeepAlive(dictRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnOBEXAddHTTPHeader == nil {
 		ebipurego.RegisterLibFunc(&_fnOBEXAddHTTPHeader, _lib, "OBEXAddHTTPHeader")
@@ -375,6 +397,7 @@ var _fnOBEXAddLengthHeader func(uint32, objc.ID) int32
 
 // OBEXAddLengthHeader calls the IOBluetooth framework function OBEXAddLengthHeader.
 func OBEXAddLengthHeader(length uint32, dictRef corefoundation.CFMutableDictionaryRef) int32 {
+	defer runtime.KeepAlive(dictRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnOBEXAddLengthHeader == nil {
 		ebipurego.RegisterLibFunc(&_fnOBEXAddLengthHeader, _lib, "OBEXAddLengthHeader")
@@ -386,6 +409,8 @@ var _fnOBEXAddNameHeader func(objc.ID, objc.ID) int32
 
 // OBEXAddNameHeader calls the IOBluetooth framework function OBEXAddNameHeader.
 func OBEXAddNameHeader(name corefoundation.CFStringRef, dictRef corefoundation.CFMutableDictionaryRef) int32 {
+	defer runtime.KeepAlive(name)
+	defer runtime.KeepAlive(dictRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnOBEXAddNameHeader == nil {
 		ebipurego.RegisterLibFunc(&_fnOBEXAddNameHeader, _lib, "OBEXAddNameHeader")
@@ -397,6 +422,7 @@ var _fnOBEXAddObjectClassHeader func(unsafe.Pointer, uint32, objc.ID) int32
 
 // OBEXAddObjectClassHeader calls the IOBluetooth framework function OBEXAddObjectClassHeader.
 func OBEXAddObjectClassHeader(inHeaderData unsafe.Pointer, inHeaderDataLength uint32, dictRef corefoundation.CFMutableDictionaryRef) int32 {
+	defer runtime.KeepAlive(dictRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnOBEXAddObjectClassHeader == nil {
 		ebipurego.RegisterLibFunc(&_fnOBEXAddObjectClassHeader, _lib, "OBEXAddObjectClassHeader")
@@ -408,6 +434,7 @@ var _fnOBEXAddTargetHeader func(unsafe.Pointer, uint32, objc.ID) int32
 
 // OBEXAddTargetHeader calls the IOBluetooth framework function OBEXAddTargetHeader.
 func OBEXAddTargetHeader(inHeaderData unsafe.Pointer, inHeaderDataLength uint32, dictRef corefoundation.CFMutableDictionaryRef) int32 {
+	defer runtime.KeepAlive(dictRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnOBEXAddTargetHeader == nil {
 		ebipurego.RegisterLibFunc(&_fnOBEXAddTargetHeader, _lib, "OBEXAddTargetHeader")
@@ -419,6 +446,7 @@ var _fnOBEXAddTime4ByteHeader func(uint32, objc.ID) int32
 
 // OBEXAddTime4ByteHeader calls the IOBluetooth framework function OBEXAddTime4ByteHeader.
 func OBEXAddTime4ByteHeader(time4Byte uint32, dictRef corefoundation.CFMutableDictionaryRef) int32 {
+	defer runtime.KeepAlive(dictRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnOBEXAddTime4ByteHeader == nil {
 		ebipurego.RegisterLibFunc(&_fnOBEXAddTime4ByteHeader, _lib, "OBEXAddTime4ByteHeader")
@@ -430,6 +458,7 @@ var _fnOBEXAddTimeISOHeader func(unsafe.Pointer, uint32, objc.ID) int32
 
 // OBEXAddTimeISOHeader calls the IOBluetooth framework function OBEXAddTimeISOHeader.
 func OBEXAddTimeISOHeader(inHeaderData unsafe.Pointer, inHeaderDataLength uint32, dictRef corefoundation.CFMutableDictionaryRef) int32 {
+	defer runtime.KeepAlive(dictRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnOBEXAddTimeISOHeader == nil {
 		ebipurego.RegisterLibFunc(&_fnOBEXAddTimeISOHeader, _lib, "OBEXAddTimeISOHeader")
@@ -441,6 +470,8 @@ var _fnOBEXAddTypeHeader func(objc.ID, objc.ID) int32
 
 // OBEXAddTypeHeader calls the IOBluetooth framework function OBEXAddTypeHeader.
 func OBEXAddTypeHeader(type_ corefoundation.CFStringRef, dictRef corefoundation.CFMutableDictionaryRef) int32 {
+	defer runtime.KeepAlive(type_)
+	defer runtime.KeepAlive(dictRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnOBEXAddTypeHeader == nil {
 		ebipurego.RegisterLibFunc(&_fnOBEXAddTypeHeader, _lib, "OBEXAddTypeHeader")
@@ -452,6 +483,7 @@ var _fnOBEXAddUserDefinedHeader func(unsafe.Pointer, uint32, objc.ID) int32
 
 // OBEXAddUserDefinedHeader calls the IOBluetooth framework function OBEXAddUserDefinedHeader.
 func OBEXAddUserDefinedHeader(inHeaderData unsafe.Pointer, inHeaderDataLength uint32, dictRef corefoundation.CFMutableDictionaryRef) int32 {
+	defer runtime.KeepAlive(dictRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnOBEXAddUserDefinedHeader == nil {
 		ebipurego.RegisterLibFunc(&_fnOBEXAddUserDefinedHeader, _lib, "OBEXAddUserDefinedHeader")
@@ -463,6 +495,7 @@ var _fnOBEXAddWhoHeader func(unsafe.Pointer, uint32, objc.ID) int32
 
 // OBEXAddWhoHeader calls the IOBluetooth framework function OBEXAddWhoHeader.
 func OBEXAddWhoHeader(inHeaderData unsafe.Pointer, inHeaderDataLength uint32, dictRef corefoundation.CFMutableDictionaryRef) int32 {
+	defer runtime.KeepAlive(dictRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnOBEXAddWhoHeader == nil {
 		ebipurego.RegisterLibFunc(&_fnOBEXAddWhoHeader, _lib, "OBEXAddWhoHeader")
@@ -510,6 +543,7 @@ var _fnOBEXHeadersToBytes func(objc.ID) objc.ID
 
 // OBEXHeadersToBytes calls the IOBluetooth framework function OBEXHeadersToBytes.
 func OBEXHeadersToBytes(dictionaryOfHeaders corefoundation.CFDictionaryRef) corefoundation.CFMutableDataRef {
+	defer runtime.KeepAlive(dictionaryOfHeaders)
 	_loadOnce.Do(_loadLibrary)
 	if _fnOBEXHeadersToBytes == nil {
 		ebipurego.RegisterLibFunc(&_fnOBEXHeadersToBytes, _lib, "OBEXHeadersToBytes")
@@ -522,6 +556,7 @@ var _fnOBEXSessionAbort func(objc.ID, unsafe.Pointer, int, unsafe.Pointer, unsaf
 
 // OBEXSessionAbort calls the IOBluetooth framework function OBEXSessionAbort.
 func OBEXSessionAbort(inSessionRef OBEXSessionRef, inOptionalHeaders unsafe.Pointer, inOptionalHeadersLength int, inCallback unsafe.Pointer, inUserRefCon unsafe.Pointer) int32 {
+	defer runtime.KeepAlive(inSessionRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnOBEXSessionAbort == nil {
 		ebipurego.RegisterLibFunc(&_fnOBEXSessionAbort, _lib, "OBEXSessionAbort")
@@ -533,6 +568,7 @@ var _fnOBEXSessionAbortResponse func(objc.ID, uint8, unsafe.Pointer, int, unsafe
 
 // OBEXSessionAbortResponse calls the IOBluetooth framework function OBEXSessionAbortResponse.
 func OBEXSessionAbortResponse(inSessionRef OBEXSessionRef, inResponseOpCode uint8, inOptionalHeaders unsafe.Pointer, inOptionalHeadersLength int, inCallback unsafe.Pointer, inUserRefCon unsafe.Pointer) int32 {
+	defer runtime.KeepAlive(inSessionRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnOBEXSessionAbortResponse == nil {
 		ebipurego.RegisterLibFunc(&_fnOBEXSessionAbortResponse, _lib, "OBEXSessionAbortResponse")
@@ -544,6 +580,7 @@ var _fnOBEXSessionConnect func(objc.ID, uint8, uint16, unsafe.Pointer, int, unsa
 
 // OBEXSessionConnect calls the IOBluetooth framework function OBEXSessionConnect.
 func OBEXSessionConnect(inSessionRef OBEXSessionRef, inFlags uint8, inMaxPacketLength uint16, inOptionalHeaders unsafe.Pointer, inOptionalHeadersLength int, inCallback unsafe.Pointer, inUserRefCon unsafe.Pointer) int32 {
+	defer runtime.KeepAlive(inSessionRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnOBEXSessionConnect == nil {
 		ebipurego.RegisterLibFunc(&_fnOBEXSessionConnect, _lib, "OBEXSessionConnect")
@@ -555,6 +592,7 @@ var _fnOBEXSessionConnectResponse func(objc.ID, uint8, uint8, uint16, unsafe.Poi
 
 // OBEXSessionConnectResponse calls the IOBluetooth framework function OBEXSessionConnectResponse.
 func OBEXSessionConnectResponse(inSessionRef OBEXSessionRef, inResponseOpCode uint8, inFlags uint8, inMaxPacketLength uint16, inOptionalHeaders unsafe.Pointer, inOptionalHeadersLength int, inCallback unsafe.Pointer, inUserRefCon unsafe.Pointer) int32 {
+	defer runtime.KeepAlive(inSessionRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnOBEXSessionConnectResponse == nil {
 		ebipurego.RegisterLibFunc(&_fnOBEXSessionConnectResponse, _lib, "OBEXSessionConnectResponse")
@@ -566,6 +604,7 @@ var _fnOBEXSessionDelete func(objc.ID) int32
 
 // OBEXSessionDelete calls the IOBluetooth framework function OBEXSessionDelete.
 func OBEXSessionDelete(inSessionRef OBEXSessionRef) int32 {
+	defer runtime.KeepAlive(inSessionRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnOBEXSessionDelete == nil {
 		ebipurego.RegisterLibFunc(&_fnOBEXSessionDelete, _lib, "OBEXSessionDelete")
@@ -577,6 +616,7 @@ var _fnOBEXSessionDisconnect func(objc.ID, unsafe.Pointer, int, unsafe.Pointer, 
 
 // OBEXSessionDisconnect calls the IOBluetooth framework function OBEXSessionDisconnect.
 func OBEXSessionDisconnect(inSessionRef OBEXSessionRef, inOptionalHeaders unsafe.Pointer, inOptionalHeadersLength int, inCallback unsafe.Pointer, inUserRefCon unsafe.Pointer) int32 {
+	defer runtime.KeepAlive(inSessionRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnOBEXSessionDisconnect == nil {
 		ebipurego.RegisterLibFunc(&_fnOBEXSessionDisconnect, _lib, "OBEXSessionDisconnect")
@@ -588,6 +628,7 @@ var _fnOBEXSessionDisconnectResponse func(objc.ID, uint8, unsafe.Pointer, int, u
 
 // OBEXSessionDisconnectResponse calls the IOBluetooth framework function OBEXSessionDisconnectResponse.
 func OBEXSessionDisconnectResponse(inSessionRef OBEXSessionRef, inResponseOpCode uint8, inOptionalHeaders unsafe.Pointer, inOptionalHeadersLength int, inCallback unsafe.Pointer, inUserRefCon unsafe.Pointer) int32 {
+	defer runtime.KeepAlive(inSessionRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnOBEXSessionDisconnectResponse == nil {
 		ebipurego.RegisterLibFunc(&_fnOBEXSessionDisconnectResponse, _lib, "OBEXSessionDisconnectResponse")
@@ -599,6 +640,7 @@ var _fnOBEXSessionGet func(objc.ID, uint8, unsafe.Pointer, int, unsafe.Pointer, 
 
 // OBEXSessionGet calls the IOBluetooth framework function OBEXSessionGet.
 func OBEXSessionGet(inSessionRef OBEXSessionRef, inIsFinalChunk uint8, inHeadersData unsafe.Pointer, inHeadersDataLength int, inCallback unsafe.Pointer, inUserRefCon unsafe.Pointer) int32 {
+	defer runtime.KeepAlive(inSessionRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnOBEXSessionGet == nil {
 		ebipurego.RegisterLibFunc(&_fnOBEXSessionGet, _lib, "OBEXSessionGet")
@@ -610,6 +652,7 @@ var _fnOBEXSessionGetAvailableCommandPayloadLength func(objc.ID, uint8, unsafe.P
 
 // OBEXSessionGetAvailableCommandPayloadLength calls the IOBluetooth framework function OBEXSessionGetAvailableCommandPayloadLength.
 func OBEXSessionGetAvailableCommandPayloadLength(inSessionRef OBEXSessionRef, inOpCode uint8) (result int32, outLength uint16) {
+	defer runtime.KeepAlive(inSessionRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnOBEXSessionGetAvailableCommandPayloadLength == nil {
 		ebipurego.RegisterLibFunc(&_fnOBEXSessionGetAvailableCommandPayloadLength, _lib, "OBEXSessionGetAvailableCommandPayloadLength")
@@ -623,6 +666,7 @@ var _fnOBEXSessionGetAvailableCommandResponsePayloadLength func(objc.ID, uint8, 
 
 // OBEXSessionGetAvailableCommandResponsePayloadLength calls the IOBluetooth framework function OBEXSessionGetAvailableCommandResponsePayloadLength.
 func OBEXSessionGetAvailableCommandResponsePayloadLength(inSessionRef OBEXSessionRef, inOpCode uint8) (result int32, outLength uint16) {
+	defer runtime.KeepAlive(inSessionRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnOBEXSessionGetAvailableCommandResponsePayloadLength == nil {
 		ebipurego.RegisterLibFunc(&_fnOBEXSessionGetAvailableCommandResponsePayloadLength, _lib, "OBEXSessionGetAvailableCommandResponsePayloadLength")
@@ -636,6 +680,7 @@ var _fnOBEXSessionGetMaxPacketLength func(objc.ID, unsafe.Pointer) int32
 
 // OBEXSessionGetMaxPacketLength calls the IOBluetooth framework function OBEXSessionGetMaxPacketLength.
 func OBEXSessionGetMaxPacketLength(inSessionRef OBEXSessionRef) (result int32, outLength uint16) {
+	defer runtime.KeepAlive(inSessionRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnOBEXSessionGetMaxPacketLength == nil {
 		ebipurego.RegisterLibFunc(&_fnOBEXSessionGetMaxPacketLength, _lib, "OBEXSessionGetMaxPacketLength")
@@ -649,6 +694,7 @@ var _fnOBEXSessionGetResponse func(objc.ID, uint8, unsafe.Pointer, int, unsafe.P
 
 // OBEXSessionGetResponse calls the IOBluetooth framework function OBEXSessionGetResponse.
 func OBEXSessionGetResponse(inSessionRef OBEXSessionRef, inResponseOpCode uint8, inOptionalHeaders unsafe.Pointer, inOptionalHeadersLength int, inCallback unsafe.Pointer, inUserRefCon unsafe.Pointer) int32 {
+	defer runtime.KeepAlive(inSessionRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnOBEXSessionGetResponse == nil {
 		ebipurego.RegisterLibFunc(&_fnOBEXSessionGetResponse, _lib, "OBEXSessionGetResponse")
@@ -660,6 +706,7 @@ var _fnOBEXSessionHasOpenOBEXConnection func(objc.ID, unsafe.Pointer) int32
 
 // OBEXSessionHasOpenOBEXConnection calls the IOBluetooth framework function OBEXSessionHasOpenOBEXConnection.
 func OBEXSessionHasOpenOBEXConnection(inSessionRef OBEXSessionRef) (result int32, outIsConnected uint8) {
+	defer runtime.KeepAlive(inSessionRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnOBEXSessionHasOpenOBEXConnection == nil {
 		ebipurego.RegisterLibFunc(&_fnOBEXSessionHasOpenOBEXConnection, _lib, "OBEXSessionHasOpenOBEXConnection")
@@ -673,6 +720,7 @@ var _fnOBEXSessionPut func(objc.ID, uint8, unsafe.Pointer, int, unsafe.Pointer, 
 
 // OBEXSessionPut calls the IOBluetooth framework function OBEXSessionPut.
 func OBEXSessionPut(inSessionRef OBEXSessionRef, inIsFinalChunk uint8, inHeadersData unsafe.Pointer, inHeadersDataLength int, inBodyData unsafe.Pointer, inBodyDataLength int, inCallback unsafe.Pointer, inUserRefCon unsafe.Pointer) int32 {
+	defer runtime.KeepAlive(inSessionRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnOBEXSessionPut == nil {
 		ebipurego.RegisterLibFunc(&_fnOBEXSessionPut, _lib, "OBEXSessionPut")
@@ -684,6 +732,7 @@ var _fnOBEXSessionPutResponse func(objc.ID, uint8, unsafe.Pointer, int, unsafe.P
 
 // OBEXSessionPutResponse calls the IOBluetooth framework function OBEXSessionPutResponse.
 func OBEXSessionPutResponse(inSessionRef OBEXSessionRef, inResponseOpCode uint8, inOptionalHeaders unsafe.Pointer, inOptionalHeadersLength int, inCallback unsafe.Pointer, inUserRefCon unsafe.Pointer) int32 {
+	defer runtime.KeepAlive(inSessionRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnOBEXSessionPutResponse == nil {
 		ebipurego.RegisterLibFunc(&_fnOBEXSessionPutResponse, _lib, "OBEXSessionPutResponse")
@@ -695,6 +744,7 @@ var _fnOBEXSessionSetPath func(objc.ID, uint8, uint8, unsafe.Pointer, int, unsaf
 
 // OBEXSessionSetPath calls the IOBluetooth framework function OBEXSessionSetPath.
 func OBEXSessionSetPath(inSessionRef OBEXSessionRef, inFlags uint8, inConstants uint8, inOptionalHeaders unsafe.Pointer, inOptionalHeadersLength int, inCallback unsafe.Pointer, inUserRefCon unsafe.Pointer) int32 {
+	defer runtime.KeepAlive(inSessionRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnOBEXSessionSetPath == nil {
 		ebipurego.RegisterLibFunc(&_fnOBEXSessionSetPath, _lib, "OBEXSessionSetPath")
@@ -706,6 +756,7 @@ var _fnOBEXSessionSetPathResponse func(objc.ID, uint8, unsafe.Pointer, int, unsa
 
 // OBEXSessionSetPathResponse calls the IOBluetooth framework function OBEXSessionSetPathResponse.
 func OBEXSessionSetPathResponse(inSessionRef OBEXSessionRef, inResponseOpCode uint8, inOptionalHeaders unsafe.Pointer, inOptionalHeadersLength int, inCallback unsafe.Pointer, inUserRefCon unsafe.Pointer) int32 {
+	defer runtime.KeepAlive(inSessionRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnOBEXSessionSetPathResponse == nil {
 		ebipurego.RegisterLibFunc(&_fnOBEXSessionSetPathResponse, _lib, "OBEXSessionSetPathResponse")
@@ -717,6 +768,7 @@ var _fnOBEXSessionSetServerCallback func(objc.ID, unsafe.Pointer, unsafe.Pointer
 
 // OBEXSessionSetServerCallback calls the IOBluetooth framework function OBEXSessionSetServerCallback.
 func OBEXSessionSetServerCallback(inSessionRef OBEXSessionRef, inCallback unsafe.Pointer, inUserRefCon unsafe.Pointer) int32 {
+	defer runtime.KeepAlive(inSessionRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnOBEXSessionSetServerCallback == nil {
 		ebipurego.RegisterLibFunc(&_fnOBEXSessionSetServerCallback, _lib, "OBEXSessionSetServerCallback")

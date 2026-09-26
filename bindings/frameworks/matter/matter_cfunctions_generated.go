@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -117,6 +119,10 @@ var _fnMTRSetMessageReliabilityParameters func(objc.ID, objc.ID, objc.ID, objc.I
 
 // MTRSetMessageReliabilityParameters calls the Matter framework function MTRSetMessageReliabilityParameters.
 func MTRSetMessageReliabilityParameters(idleRetransmitMs obj.Object, activeRetransmitMs obj.Object, activeThresholdMs obj.Object, additionalRetransmitDelayMs obj.Object) {
+	defer runtime.KeepAlive(idleRetransmitMs)
+	defer runtime.KeepAlive(activeRetransmitMs)
+	defer runtime.KeepAlive(activeThresholdMs)
+	defer runtime.KeepAlive(additionalRetransmitDelayMs)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMTRSetMessageReliabilityParameters == nil {
 		ebipurego.RegisterLibFunc(&_fnMTRSetMessageReliabilityParameters, _lib, "MTRSetMessageReliabilityParameters")

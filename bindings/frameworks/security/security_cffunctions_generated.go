@@ -5,6 +5,7 @@
 package security
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -50,6 +51,7 @@ var _fnAuthorizationExecuteWithPrivileges func(objc.ID, string, AuthorizationFla
 
 // AuthorizationExecuteWithPrivileges reports an error if the Security framework function AuthorizationExecuteWithPrivileges fails.
 func AuthorizationExecuteWithPrivileges(authorization AuthorizationRef, pathToTool string, options AuthorizationFlags, arguments string, communicationsPipe unsafe.Pointer) error {
+	defer runtime.KeepAlive(authorization)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAuthorizationExecuteWithPrivileges == nil {
 		ebipurego.RegisterLibFunc(&_fnAuthorizationExecuteWithPrivileges, _lib, "AuthorizationExecuteWithPrivileges")
@@ -65,6 +67,7 @@ var _fnAuthorizationFree func(objc.ID, AuthorizationFlags) int32
 
 // AuthorizationFree reports an error if the Security framework function AuthorizationFree fails.
 func AuthorizationFree(authorization AuthorizationRef, flags AuthorizationFlags) error {
+	defer runtime.KeepAlive(authorization)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAuthorizationFree == nil {
 		ebipurego.RegisterLibFunc(&_fnAuthorizationFree, _lib, "AuthorizationFree")
@@ -80,6 +83,7 @@ var _fnAuthorizationMakeExternalForm func(objc.ID, unsafe.Pointer) int32
 
 // AuthorizationMakeExternalForm reports an error if the Security framework function AuthorizationMakeExternalForm fails.
 func AuthorizationMakeExternalForm(authorization AuthorizationRef, extForm *AuthorizationExternalForm) error {
+	defer runtime.KeepAlive(authorization)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAuthorizationMakeExternalForm == nil {
 		ebipurego.RegisterLibFunc(&_fnAuthorizationMakeExternalForm, _lib, "AuthorizationMakeExternalForm")
@@ -111,6 +115,7 @@ var _fnAuthorizationRightRemove func(objc.ID, string) int32
 
 // AuthorizationRightRemove reports an error if the Security framework function AuthorizationRightRemove fails.
 func AuthorizationRightRemove(authRef AuthorizationRef, rightName string) error {
+	defer runtime.KeepAlive(authRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAuthorizationRightRemove == nil {
 		ebipurego.RegisterLibFunc(&_fnAuthorizationRightRemove, _lib, "AuthorizationRightRemove")
@@ -126,6 +131,11 @@ var _fnAuthorizationRightSet func(objc.ID, string, objc.ID, objc.ID, objc.ID, ob
 
 // AuthorizationRightSet reports an error if the Security framework function AuthorizationRightSet fails.
 func AuthorizationRightSet(authRef AuthorizationRef, rightName string, rightDefinition obj.Object, descriptionKey obj.Object, bundle obj.Object, localeTableName obj.Object) error {
+	defer runtime.KeepAlive(authRef)
+	defer runtime.KeepAlive(rightDefinition)
+	defer runtime.KeepAlive(descriptionKey)
+	defer runtime.KeepAlive(bundle)
+	defer runtime.KeepAlive(localeTableName)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAuthorizationRightSet == nil {
 		ebipurego.RegisterLibFunc(&_fnAuthorizationRightSet, _lib, "AuthorizationRightSet")
@@ -141,6 +151,7 @@ var _fnCMSDecoderCopyAllCerts func(objc.ID, unsafe.Pointer) int32
 
 // CMSDecoderCopyAllCerts reports an error if the Security framework function CMSDecoderCopyAllCerts fails.
 func CMSDecoderCopyAllCerts(cmsDecoder CMSDecoderRef) (obj.Object, error) {
+	defer runtime.KeepAlive(cmsDecoder)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSDecoderCopyAllCerts == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSDecoderCopyAllCerts, _lib, "CMSDecoderCopyAllCerts")
@@ -157,6 +168,7 @@ var _fnCMSDecoderCopyContent func(objc.ID, unsafe.Pointer) int32
 
 // CMSDecoderCopyContent reports an error if the Security framework function CMSDecoderCopyContent fails.
 func CMSDecoderCopyContent(cmsDecoder CMSDecoderRef) (obj.Object, error) {
+	defer runtime.KeepAlive(cmsDecoder)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSDecoderCopyContent == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSDecoderCopyContent, _lib, "CMSDecoderCopyContent")
@@ -173,6 +185,7 @@ var _fnCMSDecoderCopyDetachedContent func(objc.ID, unsafe.Pointer) int32
 
 // CMSDecoderCopyDetachedContent reports an error if the Security framework function CMSDecoderCopyDetachedContent fails.
 func CMSDecoderCopyDetachedContent(cmsDecoder CMSDecoderRef) (obj.Object, error) {
+	defer runtime.KeepAlive(cmsDecoder)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSDecoderCopyDetachedContent == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSDecoderCopyDetachedContent, _lib, "CMSDecoderCopyDetachedContent")
@@ -189,6 +202,7 @@ var _fnCMSDecoderCopyEncapsulatedContentType func(objc.ID, unsafe.Pointer) int32
 
 // CMSDecoderCopyEncapsulatedContentType reports an error if the Security framework function CMSDecoderCopyEncapsulatedContentType fails.
 func CMSDecoderCopyEncapsulatedContentType(cmsDecoder CMSDecoderRef) (obj.Object, error) {
+	defer runtime.KeepAlive(cmsDecoder)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSDecoderCopyEncapsulatedContentType == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSDecoderCopyEncapsulatedContentType, _lib, "CMSDecoderCopyEncapsulatedContentType")
@@ -205,6 +219,7 @@ var _fnCMSDecoderCopySignerCert func(objc.ID, int, unsafe.Pointer) int32
 
 // CMSDecoderCopySignerCert reports an error if the Security framework function CMSDecoderCopySignerCert fails.
 func CMSDecoderCopySignerCert(cmsDecoder CMSDecoderRef, signerIndex int, signerCertOut unsafe.Pointer) error {
+	defer runtime.KeepAlive(cmsDecoder)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSDecoderCopySignerCert == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSDecoderCopySignerCert, _lib, "CMSDecoderCopySignerCert")
@@ -220,6 +235,7 @@ var _fnCMSDecoderCopySignerEmailAddress func(objc.ID, int, unsafe.Pointer) int32
 
 // CMSDecoderCopySignerEmailAddress reports an error if the Security framework function CMSDecoderCopySignerEmailAddress fails.
 func CMSDecoderCopySignerEmailAddress(cmsDecoder CMSDecoderRef, signerIndex int) (obj.Object, error) {
+	defer runtime.KeepAlive(cmsDecoder)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSDecoderCopySignerEmailAddress == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSDecoderCopySignerEmailAddress, _lib, "CMSDecoderCopySignerEmailAddress")
@@ -236,6 +252,7 @@ var _fnCMSDecoderCopySignerTimestampCertificates func(objc.ID, int, unsafe.Point
 
 // CMSDecoderCopySignerTimestampCertificates reports an error if the Security framework function CMSDecoderCopySignerTimestampCertificates fails.
 func CMSDecoderCopySignerTimestampCertificates(cmsDecoder CMSDecoderRef, signerIndex int) (obj.Object, error) {
+	defer runtime.KeepAlive(cmsDecoder)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSDecoderCopySignerTimestampCertificates == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSDecoderCopySignerTimestampCertificates, _lib, "CMSDecoderCopySignerTimestampCertificates")
@@ -267,6 +284,7 @@ var _fnCMSDecoderFinalizeMessage func(objc.ID) int32
 
 // CMSDecoderFinalizeMessage reports an error if the Security framework function CMSDecoderFinalizeMessage fails.
 func CMSDecoderFinalizeMessage(cmsDecoder CMSDecoderRef) error {
+	defer runtime.KeepAlive(cmsDecoder)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSDecoderFinalizeMessage == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSDecoderFinalizeMessage, _lib, "CMSDecoderFinalizeMessage")
@@ -282,6 +300,8 @@ var _fnCMSDecoderSetDetachedContent func(objc.ID, objc.ID) int32
 
 // CMSDecoderSetDetachedContent reports an error if the Security framework function CMSDecoderSetDetachedContent fails.
 func CMSDecoderSetDetachedContent(cmsDecoder CMSDecoderRef, detachedContent obj.Object) error {
+	defer runtime.KeepAlive(cmsDecoder)
+	defer runtime.KeepAlive(detachedContent)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSDecoderSetDetachedContent == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSDecoderSetDetachedContent, _lib, "CMSDecoderSetDetachedContent")
@@ -297,6 +317,8 @@ var _fnCMSDecoderSetSearchKeychain func(objc.ID, objc.ID) int32
 
 // CMSDecoderSetSearchKeychain reports an error if the Security framework function CMSDecoderSetSearchKeychain fails.
 func CMSDecoderSetSearchKeychain(cmsDecoder CMSDecoderRef, keychainOrArray obj.Object) error {
+	defer runtime.KeepAlive(cmsDecoder)
+	defer runtime.KeepAlive(keychainOrArray)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSDecoderSetSearchKeychain == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSDecoderSetSearchKeychain, _lib, "CMSDecoderSetSearchKeychain")
@@ -312,6 +334,7 @@ var _fnCMSDecoderUpdateMessage func(objc.ID, unsafe.Pointer, int) int32
 
 // CMSDecoderUpdateMessage reports an error if the Security framework function CMSDecoderUpdateMessage fails.
 func CMSDecoderUpdateMessage(cmsDecoder CMSDecoderRef, msgBytes unsafe.Pointer, msgBytesLen int) error {
+	defer runtime.KeepAlive(cmsDecoder)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSDecoderUpdateMessage == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSDecoderUpdateMessage, _lib, "CMSDecoderUpdateMessage")
@@ -327,6 +350,9 @@ var _fnCMSEncodeContent func(objc.ID, objc.ID, objc.ID, uint8, CMSSignedAttribut
 
 // CMSEncodeContent reports an error if the Security framework function CMSEncodeContent fails.
 func CMSEncodeContent(signers obj.Object, recipients obj.Object, eContentTypeOID obj.Object, detachedContent uint8, signedAttributes CMSSignedAttributes, content unsafe.Pointer, contentLen int) (obj.Object, error) {
+	defer runtime.KeepAlive(signers)
+	defer runtime.KeepAlive(recipients)
+	defer runtime.KeepAlive(eContentTypeOID)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSEncodeContent == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSEncodeContent, _lib, "CMSEncodeContent")
@@ -343,6 +369,8 @@ var _fnCMSEncoderAddRecipients func(objc.ID, objc.ID) int32
 
 // CMSEncoderAddRecipients reports an error if the Security framework function CMSEncoderAddRecipients fails.
 func CMSEncoderAddRecipients(cmsEncoder CMSEncoderRef, recipientOrArray obj.Object) error {
+	defer runtime.KeepAlive(cmsEncoder)
+	defer runtime.KeepAlive(recipientOrArray)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSEncoderAddRecipients == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSEncoderAddRecipients, _lib, "CMSEncoderAddRecipients")
@@ -358,6 +386,7 @@ var _fnCMSEncoderAddSignedAttributes func(objc.ID, CMSSignedAttributes) int32
 
 // CMSEncoderAddSignedAttributes reports an error if the Security framework function CMSEncoderAddSignedAttributes fails.
 func CMSEncoderAddSignedAttributes(cmsEncoder CMSEncoderRef, signedAttributes CMSSignedAttributes) error {
+	defer runtime.KeepAlive(cmsEncoder)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSEncoderAddSignedAttributes == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSEncoderAddSignedAttributes, _lib, "CMSEncoderAddSignedAttributes")
@@ -373,6 +402,8 @@ var _fnCMSEncoderAddSigners func(objc.ID, objc.ID) int32
 
 // CMSEncoderAddSigners reports an error if the Security framework function CMSEncoderAddSigners fails.
 func CMSEncoderAddSigners(cmsEncoder CMSEncoderRef, signerOrArray obj.Object) error {
+	defer runtime.KeepAlive(cmsEncoder)
+	defer runtime.KeepAlive(signerOrArray)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSEncoderAddSigners == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSEncoderAddSigners, _lib, "CMSEncoderAddSigners")
@@ -388,6 +419,8 @@ var _fnCMSEncoderAddSupportingCerts func(objc.ID, objc.ID) int32
 
 // CMSEncoderAddSupportingCerts reports an error if the Security framework function CMSEncoderAddSupportingCerts fails.
 func CMSEncoderAddSupportingCerts(cmsEncoder CMSEncoderRef, certOrArray obj.Object) error {
+	defer runtime.KeepAlive(cmsEncoder)
+	defer runtime.KeepAlive(certOrArray)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSEncoderAddSupportingCerts == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSEncoderAddSupportingCerts, _lib, "CMSEncoderAddSupportingCerts")
@@ -403,6 +436,7 @@ var _fnCMSEncoderCopyEncapsulatedContentType func(objc.ID, unsafe.Pointer) int32
 
 // CMSEncoderCopyEncapsulatedContentType reports an error if the Security framework function CMSEncoderCopyEncapsulatedContentType fails.
 func CMSEncoderCopyEncapsulatedContentType(cmsEncoder CMSEncoderRef) (obj.Object, error) {
+	defer runtime.KeepAlive(cmsEncoder)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSEncoderCopyEncapsulatedContentType == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSEncoderCopyEncapsulatedContentType, _lib, "CMSEncoderCopyEncapsulatedContentType")
@@ -419,6 +453,7 @@ var _fnCMSEncoderCopyEncodedContent func(objc.ID, unsafe.Pointer) int32
 
 // CMSEncoderCopyEncodedContent reports an error if the Security framework function CMSEncoderCopyEncodedContent fails.
 func CMSEncoderCopyEncodedContent(cmsEncoder CMSEncoderRef) (obj.Object, error) {
+	defer runtime.KeepAlive(cmsEncoder)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSEncoderCopyEncodedContent == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSEncoderCopyEncodedContent, _lib, "CMSEncoderCopyEncodedContent")
@@ -435,6 +470,7 @@ var _fnCMSEncoderCopyRecipients func(objc.ID, unsafe.Pointer) int32
 
 // CMSEncoderCopyRecipients reports an error if the Security framework function CMSEncoderCopyRecipients fails.
 func CMSEncoderCopyRecipients(cmsEncoder CMSEncoderRef) (obj.Object, error) {
+	defer runtime.KeepAlive(cmsEncoder)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSEncoderCopyRecipients == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSEncoderCopyRecipients, _lib, "CMSEncoderCopyRecipients")
@@ -451,6 +487,7 @@ var _fnCMSEncoderCopySigners func(objc.ID, unsafe.Pointer) int32
 
 // CMSEncoderCopySigners reports an error if the Security framework function CMSEncoderCopySigners fails.
 func CMSEncoderCopySigners(cmsEncoder CMSEncoderRef) (obj.Object, error) {
+	defer runtime.KeepAlive(cmsEncoder)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSEncoderCopySigners == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSEncoderCopySigners, _lib, "CMSEncoderCopySigners")
@@ -467,6 +504,7 @@ var _fnCMSEncoderCopySupportingCerts func(objc.ID, unsafe.Pointer) int32
 
 // CMSEncoderCopySupportingCerts reports an error if the Security framework function CMSEncoderCopySupportingCerts fails.
 func CMSEncoderCopySupportingCerts(cmsEncoder CMSEncoderRef) (obj.Object, error) {
+	defer runtime.KeepAlive(cmsEncoder)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSEncoderCopySupportingCerts == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSEncoderCopySupportingCerts, _lib, "CMSEncoderCopySupportingCerts")
@@ -498,6 +536,7 @@ var _fnCMSEncoderSetCertificateChainMode func(objc.ID, CMSCertificateChainMode) 
 
 // CMSEncoderSetCertificateChainMode reports an error if the Security framework function CMSEncoderSetCertificateChainMode fails.
 func CMSEncoderSetCertificateChainMode(cmsEncoder CMSEncoderRef, chainMode CMSCertificateChainMode) error {
+	defer runtime.KeepAlive(cmsEncoder)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSEncoderSetCertificateChainMode == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSEncoderSetCertificateChainMode, _lib, "CMSEncoderSetCertificateChainMode")
@@ -513,6 +552,8 @@ var _fnCMSEncoderSetEncapsulatedContentTypeOID func(objc.ID, objc.ID) int32
 
 // CMSEncoderSetEncapsulatedContentTypeOID reports an error if the Security framework function CMSEncoderSetEncapsulatedContentTypeOID fails.
 func CMSEncoderSetEncapsulatedContentTypeOID(cmsEncoder CMSEncoderRef, eContentTypeOID obj.Object) error {
+	defer runtime.KeepAlive(cmsEncoder)
+	defer runtime.KeepAlive(eContentTypeOID)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSEncoderSetEncapsulatedContentTypeOID == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSEncoderSetEncapsulatedContentTypeOID, _lib, "CMSEncoderSetEncapsulatedContentTypeOID")
@@ -528,6 +569,7 @@ var _fnCMSEncoderSetHasDetachedContent func(objc.ID, uint8) int32
 
 // CMSEncoderSetHasDetachedContent reports an error if the Security framework function CMSEncoderSetHasDetachedContent fails.
 func CMSEncoderSetHasDetachedContent(cmsEncoder CMSEncoderRef, detachedContent uint8) error {
+	defer runtime.KeepAlive(cmsEncoder)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSEncoderSetHasDetachedContent == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSEncoderSetHasDetachedContent, _lib, "CMSEncoderSetHasDetachedContent")
@@ -543,6 +585,8 @@ var _fnCMSEncoderSetSignerAlgorithm func(objc.ID, objc.ID) int32
 
 // CMSEncoderSetSignerAlgorithm reports an error if the Security framework function CMSEncoderSetSignerAlgorithm fails.
 func CMSEncoderSetSignerAlgorithm(cmsEncoder CMSEncoderRef, digestAlgorithm obj.Object) error {
+	defer runtime.KeepAlive(cmsEncoder)
+	defer runtime.KeepAlive(digestAlgorithm)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSEncoderSetSignerAlgorithm == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSEncoderSetSignerAlgorithm, _lib, "CMSEncoderSetSignerAlgorithm")
@@ -558,6 +602,7 @@ var _fnCMSEncoderUpdateContent func(objc.ID, unsafe.Pointer, int) int32
 
 // CMSEncoderUpdateContent reports an error if the Security framework function CMSEncoderUpdateContent fails.
 func CMSEncoderUpdateContent(cmsEncoder CMSEncoderRef, content unsafe.Pointer, contentLen int) error {
+	defer runtime.KeepAlive(cmsEncoder)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSEncoderUpdateContent == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSEncoderUpdateContent, _lib, "CMSEncoderUpdateContent")
@@ -573,6 +618,7 @@ var _fnSSLAddDistinguishedName func(objc.ID, unsafe.Pointer, int) int32
 
 // SSLAddDistinguishedName reports an error if the Security framework function SSLAddDistinguishedName fails.
 func SSLAddDistinguishedName(context_ SSLContextRef, derDN unsafe.Pointer, derDNLen int) error {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLAddDistinguishedName == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLAddDistinguishedName, _lib, "SSLAddDistinguishedName")
@@ -588,6 +634,7 @@ var _fnSSLClose func(objc.ID) int32
 
 // SSLClose reports an error if the Security framework function SSLClose fails.
 func SSLClose(context_ SSLContextRef) error {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLClose == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLClose, _lib, "SSLClose")
@@ -603,6 +650,7 @@ var _fnSSLCopyALPNProtocols func(objc.ID, unsafe.Pointer) int32
 
 // SSLCopyALPNProtocols reports an error if the Security framework function SSLCopyALPNProtocols fails.
 func SSLCopyALPNProtocols(context_ SSLContextRef) (obj.Object, error) {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLCopyALPNProtocols == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLCopyALPNProtocols, _lib, "SSLCopyALPNProtocols")
@@ -619,6 +667,7 @@ var _fnSSLCopyCertificateAuthorities func(objc.ID, unsafe.Pointer) int32
 
 // SSLCopyCertificateAuthorities reports an error if the Security framework function SSLCopyCertificateAuthorities fails.
 func SSLCopyCertificateAuthorities(context_ SSLContextRef) (obj.Object, error) {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLCopyCertificateAuthorities == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLCopyCertificateAuthorities, _lib, "SSLCopyCertificateAuthorities")
@@ -635,6 +684,7 @@ var _fnSSLCopyDistinguishedNames func(objc.ID, unsafe.Pointer) int32
 
 // SSLCopyDistinguishedNames reports an error if the Security framework function SSLCopyDistinguishedNames fails.
 func SSLCopyDistinguishedNames(context_ SSLContextRef) (obj.Object, error) {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLCopyDistinguishedNames == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLCopyDistinguishedNames, _lib, "SSLCopyDistinguishedNames")
@@ -651,6 +701,7 @@ var _fnSSLCopyPeerCertificates func(objc.ID, unsafe.Pointer) int32
 
 // SSLCopyPeerCertificates reports an error if the Security framework function SSLCopyPeerCertificates fails.
 func SSLCopyPeerCertificates(context_ SSLContextRef) (obj.Object, error) {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLCopyPeerCertificates == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLCopyPeerCertificates, _lib, "SSLCopyPeerCertificates")
@@ -667,6 +718,7 @@ var _fnSSLCopyPeerTrust func(objc.ID, unsafe.Pointer) int32
 
 // SSLCopyPeerTrust reports an error if the Security framework function SSLCopyPeerTrust fails.
 func SSLCopyPeerTrust(context_ SSLContextRef, trust unsafe.Pointer) error {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLCopyPeerTrust == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLCopyPeerTrust, _lib, "SSLCopyPeerTrust")
@@ -682,6 +734,7 @@ var _fnSSLCopyTrustedRoots func(objc.ID, unsafe.Pointer) int32
 
 // SSLCopyTrustedRoots reports an error if the Security framework function SSLCopyTrustedRoots fails.
 func SSLCopyTrustedRoots(context_ SSLContextRef) (obj.Object, error) {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLCopyTrustedRoots == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLCopyTrustedRoots, _lib, "SSLCopyTrustedRoots")
@@ -698,6 +751,7 @@ var _fnSSLDisposeContext func(objc.ID) int32
 
 // SSLDisposeContext reports an error if the Security framework function SSLDisposeContext fails.
 func SSLDisposeContext(context_ SSLContextRef) error {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLDisposeContext == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLDisposeContext, _lib, "SSLDisposeContext")
@@ -713,6 +767,7 @@ var _fnSSLGetConnection func(objc.ID, unsafe.Pointer) int32
 
 // SSLGetConnection reports an error if the Security framework function SSLGetConnection fails.
 func SSLGetConnection(context_ SSLContextRef, connection unsafe.Pointer) error {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLGetConnection == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLGetConnection, _lib, "SSLGetConnection")
@@ -728,6 +783,7 @@ var _fnSSLHandshake func(objc.ID) int32
 
 // SSLHandshake reports an error if the Security framework function SSLHandshake fails.
 func SSLHandshake(context_ SSLContextRef) error {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLHandshake == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLHandshake, _lib, "SSLHandshake")
@@ -758,6 +814,7 @@ var _fnSSLReHandshake func(objc.ID) int32
 
 // SSLReHandshake reports an error if the Security framework function SSLReHandshake fails.
 func SSLReHandshake(context_ SSLContextRef) error {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLReHandshake == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLReHandshake, _lib, "SSLReHandshake")
@@ -773,6 +830,8 @@ var _fnSSLSetALPNProtocols func(objc.ID, objc.ID) int32
 
 // SSLSetALPNProtocols reports an error if the Security framework function SSLSetALPNProtocols fails.
 func SSLSetALPNProtocols(context_ SSLContextRef, protocols obj.Object) error {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(protocols)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetALPNProtocols == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetALPNProtocols, _lib, "SSLSetALPNProtocols")
@@ -788,6 +847,7 @@ var _fnSSLSetAllowsAnyRoot func(objc.ID, uint8) int32
 
 // SSLSetAllowsAnyRoot reports an error if the Security framework function SSLSetAllowsAnyRoot fails.
 func SSLSetAllowsAnyRoot(context_ SSLContextRef, anyRoot uint8) error {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetAllowsAnyRoot == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetAllowsAnyRoot, _lib, "SSLSetAllowsAnyRoot")
@@ -803,6 +863,7 @@ var _fnSSLSetAllowsExpiredCerts func(objc.ID, uint8) int32
 
 // SSLSetAllowsExpiredCerts reports an error if the Security framework function SSLSetAllowsExpiredCerts fails.
 func SSLSetAllowsExpiredCerts(context_ SSLContextRef, allowsExpired uint8) error {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetAllowsExpiredCerts == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetAllowsExpiredCerts, _lib, "SSLSetAllowsExpiredCerts")
@@ -818,6 +879,7 @@ var _fnSSLSetAllowsExpiredRoots func(objc.ID, uint8) int32
 
 // SSLSetAllowsExpiredRoots reports an error if the Security framework function SSLSetAllowsExpiredRoots fails.
 func SSLSetAllowsExpiredRoots(context_ SSLContextRef, allowsExpired uint8) error {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetAllowsExpiredRoots == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetAllowsExpiredRoots, _lib, "SSLSetAllowsExpiredRoots")
@@ -833,6 +895,8 @@ var _fnSSLSetCertificate func(objc.ID, objc.ID) int32
 
 // SSLSetCertificate reports an error if the Security framework function SSLSetCertificate fails.
 func SSLSetCertificate(context_ SSLContextRef, certRefs obj.Object) error {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(certRefs)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetCertificate == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetCertificate, _lib, "SSLSetCertificate")
@@ -848,6 +912,8 @@ var _fnSSLSetCertificateAuthorities func(objc.ID, objc.ID, uint8) int32
 
 // SSLSetCertificateAuthorities reports an error if the Security framework function SSLSetCertificateAuthorities fails.
 func SSLSetCertificateAuthorities(context_ SSLContextRef, certificateOrArray obj.Object, replaceExisting uint8) error {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(certificateOrArray)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetCertificateAuthorities == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetCertificateAuthorities, _lib, "SSLSetCertificateAuthorities")
@@ -863,6 +929,7 @@ var _fnSSLSetClientSideAuthenticate func(objc.ID, SSLAuthenticate) int32
 
 // SSLSetClientSideAuthenticate reports an error if the Security framework function SSLSetClientSideAuthenticate fails.
 func SSLSetClientSideAuthenticate(context_ SSLContextRef, auth SSLAuthenticate) error {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetClientSideAuthenticate == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetClientSideAuthenticate, _lib, "SSLSetClientSideAuthenticate")
@@ -878,6 +945,7 @@ var _fnSSLSetConnection func(objc.ID, unsafe.Pointer) int32
 
 // SSLSetConnection reports an error if the Security framework function SSLSetConnection fails.
 func SSLSetConnection(context_ SSLContextRef, connection unsafe.Pointer) error {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetConnection == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetConnection, _lib, "SSLSetConnection")
@@ -893,6 +961,7 @@ var _fnSSLSetDatagramHelloCookie func(objc.ID, unsafe.Pointer, int) int32
 
 // SSLSetDatagramHelloCookie reports an error if the Security framework function SSLSetDatagramHelloCookie fails.
 func SSLSetDatagramHelloCookie(dtlsContext SSLContextRef, cookie unsafe.Pointer, cookieLen int) error {
+	defer runtime.KeepAlive(dtlsContext)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetDatagramHelloCookie == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetDatagramHelloCookie, _lib, "SSLSetDatagramHelloCookie")
@@ -908,6 +977,7 @@ var _fnSSLSetDiffieHellmanParams func(objc.ID, unsafe.Pointer, int) int32
 
 // SSLSetDiffieHellmanParams reports an error if the Security framework function SSLSetDiffieHellmanParams fails.
 func SSLSetDiffieHellmanParams(context_ SSLContextRef, dhParams unsafe.Pointer, dhParamsLen int) error {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetDiffieHellmanParams == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetDiffieHellmanParams, _lib, "SSLSetDiffieHellmanParams")
@@ -923,6 +993,7 @@ var _fnSSLSetEnableCertVerify func(objc.ID, uint8) int32
 
 // SSLSetEnableCertVerify reports an error if the Security framework function SSLSetEnableCertVerify fails.
 func SSLSetEnableCertVerify(context_ SSLContextRef, enableVerify uint8) error {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetEnableCertVerify == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetEnableCertVerify, _lib, "SSLSetEnableCertVerify")
@@ -938,6 +1009,8 @@ var _fnSSLSetEncryptionCertificate func(objc.ID, objc.ID) int32
 
 // SSLSetEncryptionCertificate reports an error if the Security framework function SSLSetEncryptionCertificate fails.
 func SSLSetEncryptionCertificate(context_ SSLContextRef, certRefs obj.Object) error {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(certRefs)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetEncryptionCertificate == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetEncryptionCertificate, _lib, "SSLSetEncryptionCertificate")
@@ -953,6 +1026,7 @@ var _fnSSLSetError func(objc.ID, int) int32
 
 // SSLSetError reports an error if the Security framework function SSLSetError fails.
 func SSLSetError(context_ SSLContextRef, status int) error {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetError == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetError, _lib, "SSLSetError")
@@ -968,6 +1042,7 @@ var _fnSSLSetIOFuncs func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // SSLSetIOFuncs reports an error if the Security framework function SSLSetIOFuncs fails.
 func SSLSetIOFuncs(context_ SSLContextRef, readFunc unsafe.Pointer, writeFunc unsafe.Pointer) error {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetIOFuncs == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetIOFuncs, _lib, "SSLSetIOFuncs")
@@ -983,6 +1058,7 @@ var _fnSSLSetMaxDatagramRecordSize func(objc.ID, int) int32
 
 // SSLSetMaxDatagramRecordSize reports an error if the Security framework function SSLSetMaxDatagramRecordSize fails.
 func SSLSetMaxDatagramRecordSize(dtlsContext SSLContextRef, maxSize int) error {
+	defer runtime.KeepAlive(dtlsContext)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetMaxDatagramRecordSize == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetMaxDatagramRecordSize, _lib, "SSLSetMaxDatagramRecordSize")
@@ -998,6 +1074,8 @@ var _fnSSLSetOCSPResponse func(objc.ID, objc.ID) int32
 
 // SSLSetOCSPResponse reports an error if the Security framework function SSLSetOCSPResponse fails.
 func SSLSetOCSPResponse(context_ SSLContextRef, response obj.Object) error {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(response)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetOCSPResponse == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetOCSPResponse, _lib, "SSLSetOCSPResponse")
@@ -1013,6 +1091,7 @@ var _fnSSLSetPeerDomainName func(objc.ID, string, int) int32
 
 // SSLSetPeerDomainName reports an error if the Security framework function SSLSetPeerDomainName fails.
 func SSLSetPeerDomainName(context_ SSLContextRef, peerName string, peerNameLen int) error {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetPeerDomainName == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetPeerDomainName, _lib, "SSLSetPeerDomainName")
@@ -1028,6 +1107,7 @@ var _fnSSLSetPeerID func(objc.ID, unsafe.Pointer, int) int32
 
 // SSLSetPeerID reports an error if the Security framework function SSLSetPeerID fails.
 func SSLSetPeerID(context_ SSLContextRef, peerID unsafe.Pointer, peerIDLen int) error {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetPeerID == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetPeerID, _lib, "SSLSetPeerID")
@@ -1043,6 +1123,7 @@ var _fnSSLSetProtocolVersion func(objc.ID, SSLProtocol) int32
 
 // SSLSetProtocolVersion reports an error if the Security framework function SSLSetProtocolVersion fails.
 func SSLSetProtocolVersion(context_ SSLContextRef, version SSLProtocol) error {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetProtocolVersion == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetProtocolVersion, _lib, "SSLSetProtocolVersion")
@@ -1058,6 +1139,7 @@ var _fnSSLSetProtocolVersionEnabled func(objc.ID, SSLProtocol, uint8) int32
 
 // SSLSetProtocolVersionEnabled reports an error if the Security framework function SSLSetProtocolVersionEnabled fails.
 func SSLSetProtocolVersionEnabled(context_ SSLContextRef, protocol SSLProtocol, enable uint8) error {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetProtocolVersionEnabled == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetProtocolVersionEnabled, _lib, "SSLSetProtocolVersionEnabled")
@@ -1073,6 +1155,7 @@ var _fnSSLSetProtocolVersionMax func(objc.ID, SSLProtocol) int32
 
 // SSLSetProtocolVersionMax reports an error if the Security framework function SSLSetProtocolVersionMax fails.
 func SSLSetProtocolVersionMax(context_ SSLContextRef, maxVersion SSLProtocol) error {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetProtocolVersionMax == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetProtocolVersionMax, _lib, "SSLSetProtocolVersionMax")
@@ -1088,6 +1171,7 @@ var _fnSSLSetProtocolVersionMin func(objc.ID, SSLProtocol) int32
 
 // SSLSetProtocolVersionMin reports an error if the Security framework function SSLSetProtocolVersionMin fails.
 func SSLSetProtocolVersionMin(context_ SSLContextRef, minVersion SSLProtocol) error {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetProtocolVersionMin == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetProtocolVersionMin, _lib, "SSLSetProtocolVersionMin")
@@ -1103,6 +1187,7 @@ var _fnSSLSetRsaBlinding func(objc.ID, uint8) int32
 
 // SSLSetRsaBlinding reports an error if the Security framework function SSLSetRsaBlinding fails.
 func SSLSetRsaBlinding(context_ SSLContextRef, blinding uint8) error {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetRsaBlinding == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetRsaBlinding, _lib, "SSLSetRsaBlinding")
@@ -1118,6 +1203,8 @@ var _fnSSLSetSessionConfig func(objc.ID, objc.ID) int32
 
 // SSLSetSessionConfig reports an error if the Security framework function SSLSetSessionConfig fails.
 func SSLSetSessionConfig(context_ SSLContextRef, config obj.Object) error {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(config)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetSessionConfig == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetSessionConfig, _lib, "SSLSetSessionConfig")
@@ -1133,6 +1220,7 @@ var _fnSSLSetSessionOption func(objc.ID, SSLSessionOption, uint8) int32
 
 // SSLSetSessionOption reports an error if the Security framework function SSLSetSessionOption fails.
 func SSLSetSessionOption(context_ SSLContextRef, option SSLSessionOption, value uint8) error {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetSessionOption == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetSessionOption, _lib, "SSLSetSessionOption")
@@ -1148,6 +1236,7 @@ var _fnSSLSetSessionTicketsEnabled func(objc.ID, uint8) int32
 
 // SSLSetSessionTicketsEnabled reports an error if the Security framework function SSLSetSessionTicketsEnabled fails.
 func SSLSetSessionTicketsEnabled(context_ SSLContextRef, enabled uint8) error {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetSessionTicketsEnabled == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetSessionTicketsEnabled, _lib, "SSLSetSessionTicketsEnabled")
@@ -1163,6 +1252,8 @@ var _fnSSLSetTrustedRoots func(objc.ID, objc.ID, uint8) int32
 
 // SSLSetTrustedRoots reports an error if the Security framework function SSLSetTrustedRoots fails.
 func SSLSetTrustedRoots(context_ SSLContextRef, trustedRoots obj.Object, replaceExisting uint8) error {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(trustedRoots)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetTrustedRoots == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetTrustedRoots, _lib, "SSLSetTrustedRoots")
@@ -1178,6 +1269,7 @@ var _fnSecACLCopySimpleContents func(objc.ID, unsafe.Pointer, unsafe.Pointer, un
 
 // SecACLCopySimpleContents reports an error if the Security framework function SecACLCopySimpleContents fails.
 func SecACLCopySimpleContents(acl SecACLRef, promptSelector *CssmAclKeychainPromptSelector) (obj.Object, obj.Object, error) {
+	defer runtime.KeepAlive(acl)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecACLCopySimpleContents == nil {
 		ebipurego.RegisterLibFunc(&_fnSecACLCopySimpleContents, _lib, "SecACLCopySimpleContents")
@@ -1195,6 +1287,9 @@ var _fnSecACLCreateFromSimpleContents func(objc.ID, objc.ID, objc.ID, unsafe.Poi
 
 // SecACLCreateFromSimpleContents reports an error if the Security framework function SecACLCreateFromSimpleContents fails.
 func SecACLCreateFromSimpleContents(access SecAccessRef, applicationList obj.Object, description obj.Object, promptSelector *CssmAclKeychainPromptSelector, newAcl unsafe.Pointer) error {
+	defer runtime.KeepAlive(access)
+	defer runtime.KeepAlive(applicationList)
+	defer runtime.KeepAlive(description)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecACLCreateFromSimpleContents == nil {
 		ebipurego.RegisterLibFunc(&_fnSecACLCreateFromSimpleContents, _lib, "SecACLCreateFromSimpleContents")
@@ -1210,6 +1305,9 @@ var _fnSecACLCreateWithSimpleContents func(objc.ID, objc.ID, objc.ID, SecKeychai
 
 // SecACLCreateWithSimpleContents reports an error if the Security framework function SecACLCreateWithSimpleContents fails.
 func SecACLCreateWithSimpleContents(access SecAccessRef, applicationList obj.Object, description obj.Object, promptSelector SecKeychainPromptSelector, newAcl unsafe.Pointer) error {
+	defer runtime.KeepAlive(access)
+	defer runtime.KeepAlive(applicationList)
+	defer runtime.KeepAlive(description)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecACLCreateWithSimpleContents == nil {
 		ebipurego.RegisterLibFunc(&_fnSecACLCreateWithSimpleContents, _lib, "SecACLCreateWithSimpleContents")
@@ -1225,6 +1323,7 @@ var _fnSecACLRemove func(objc.ID) int32
 
 // SecACLRemove reports an error if the Security framework function SecACLRemove fails.
 func SecACLRemove(aclRef SecACLRef) error {
+	defer runtime.KeepAlive(aclRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecACLRemove == nil {
 		ebipurego.RegisterLibFunc(&_fnSecACLRemove, _lib, "SecACLRemove")
@@ -1240,6 +1339,9 @@ var _fnSecACLSetContents func(objc.ID, objc.ID, objc.ID, SecKeychainPromptSelect
 
 // SecACLSetContents reports an error if the Security framework function SecACLSetContents fails.
 func SecACLSetContents(acl SecACLRef, applicationList obj.Object, description obj.Object, promptSelector SecKeychainPromptSelector) error {
+	defer runtime.KeepAlive(acl)
+	defer runtime.KeepAlive(applicationList)
+	defer runtime.KeepAlive(description)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecACLSetContents == nil {
 		ebipurego.RegisterLibFunc(&_fnSecACLSetContents, _lib, "SecACLSetContents")
@@ -1255,6 +1357,9 @@ var _fnSecACLSetSimpleContents func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) i
 
 // SecACLSetSimpleContents reports an error if the Security framework function SecACLSetSimpleContents fails.
 func SecACLSetSimpleContents(acl SecACLRef, applicationList obj.Object, description obj.Object, promptSelector *CssmAclKeychainPromptSelector) error {
+	defer runtime.KeepAlive(acl)
+	defer runtime.KeepAlive(applicationList)
+	defer runtime.KeepAlive(description)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecACLSetSimpleContents == nil {
 		ebipurego.RegisterLibFunc(&_fnSecACLSetSimpleContents, _lib, "SecACLSetSimpleContents")
@@ -1270,6 +1375,8 @@ var _fnSecACLUpdateAuthorizations func(objc.ID, objc.ID) int32
 
 // SecACLUpdateAuthorizations reports an error if the Security framework function SecACLUpdateAuthorizations fails.
 func SecACLUpdateAuthorizations(acl SecACLRef, authorizations obj.Object) error {
+	defer runtime.KeepAlive(acl)
+	defer runtime.KeepAlive(authorizations)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecACLUpdateAuthorizations == nil {
 		ebipurego.RegisterLibFunc(&_fnSecACLUpdateAuthorizations, _lib, "SecACLUpdateAuthorizations")
@@ -1285,6 +1392,7 @@ var _fnSecAccessCopyACLList func(objc.ID, unsafe.Pointer) int32
 
 // SecAccessCopyACLList reports an error if the Security framework function SecAccessCopyACLList fails.
 func SecAccessCopyACLList(accessRef SecAccessRef) (obj.Object, error) {
+	defer runtime.KeepAlive(accessRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecAccessCopyACLList == nil {
 		ebipurego.RegisterLibFunc(&_fnSecAccessCopyACLList, _lib, "SecAccessCopyACLList")
@@ -1301,6 +1409,7 @@ var _fnSecAccessCopySelectedACLList func(objc.ID, int32, unsafe.Pointer) int32
 
 // SecAccessCopySelectedACLList reports an error if the Security framework function SecAccessCopySelectedACLList fails.
 func SecAccessCopySelectedACLList(accessRef SecAccessRef, action int32) (obj.Object, error) {
+	defer runtime.KeepAlive(accessRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecAccessCopySelectedACLList == nil {
 		ebipurego.RegisterLibFunc(&_fnSecAccessCopySelectedACLList, _lib, "SecAccessCopySelectedACLList")
@@ -1317,6 +1426,8 @@ var _fnSecAccessCreate func(objc.ID, objc.ID, unsafe.Pointer) int32
 
 // SecAccessCreate reports an error if the Security framework function SecAccessCreate fails.
 func SecAccessCreate(descriptor obj.Object, trustedlist obj.Object, accessRef unsafe.Pointer) error {
+	defer runtime.KeepAlive(descriptor)
+	defer runtime.KeepAlive(trustedlist)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecAccessCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnSecAccessCreate, _lib, "SecAccessCreate")
@@ -1332,6 +1443,8 @@ var _fnSecCertificateAddToKeychain func(objc.ID, objc.ID) int32
 
 // SecCertificateAddToKeychain reports an error if the Security framework function SecCertificateAddToKeychain fails.
 func SecCertificateAddToKeychain(certificate SecCertificateRef, keychain SecKeychainRef) error {
+	defer runtime.KeepAlive(certificate)
+	defer runtime.KeepAlive(keychain)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCertificateAddToKeychain == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCertificateAddToKeychain, _lib, "SecCertificateAddToKeychain")
@@ -1347,6 +1460,7 @@ var _fnSecCertificateCopyCommonName func(objc.ID, unsafe.Pointer) int32
 
 // SecCertificateCopyCommonName reports an error if the Security framework function SecCertificateCopyCommonName fails.
 func SecCertificateCopyCommonName(certificate SecCertificateRef) (obj.Object, error) {
+	defer runtime.KeepAlive(certificate)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCertificateCopyCommonName == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCertificateCopyCommonName, _lib, "SecCertificateCopyCommonName")
@@ -1363,6 +1477,7 @@ var _fnSecCertificateCopyEmailAddresses func(objc.ID, unsafe.Pointer) int32
 
 // SecCertificateCopyEmailAddresses reports an error if the Security framework function SecCertificateCopyEmailAddresses fails.
 func SecCertificateCopyEmailAddresses(certificate SecCertificateRef) (obj.Object, error) {
+	defer runtime.KeepAlive(certificate)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCertificateCopyEmailAddresses == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCertificateCopyEmailAddresses, _lib, "SecCertificateCopyEmailAddresses")
@@ -1379,6 +1494,7 @@ var _fnSecCertificateCopyPreference func(objc.ID, uint32, unsafe.Pointer) int32
 
 // SecCertificateCopyPreference reports an error if the Security framework function SecCertificateCopyPreference fails.
 func SecCertificateCopyPreference(name obj.Object, keyUsage uint32, certificate unsafe.Pointer) error {
+	defer runtime.KeepAlive(name)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCertificateCopyPreference == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCertificateCopyPreference, _lib, "SecCertificateCopyPreference")
@@ -1394,6 +1510,7 @@ var _fnSecCertificateCopyPublicKey func(objc.ID, unsafe.Pointer) int32
 
 // SecCertificateCopyPublicKey reports an error if the Security framework function SecCertificateCopyPublicKey fails.
 func SecCertificateCopyPublicKey(certificate SecCertificateRef, key unsafe.Pointer) error {
+	defer runtime.KeepAlive(certificate)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCertificateCopyPublicKey == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCertificateCopyPublicKey, _lib, "SecCertificateCopyPublicKey$LEGACYMAC")
@@ -1409,6 +1526,9 @@ var _fnSecCertificateSetPreference func(objc.ID, objc.ID, uint32, objc.ID) int32
 
 // SecCertificateSetPreference reports an error if the Security framework function SecCertificateSetPreference fails.
 func SecCertificateSetPreference(certificate SecCertificateRef, name obj.Object, keyUsage uint32, date obj.Object) error {
+	defer runtime.KeepAlive(certificate)
+	defer runtime.KeepAlive(name)
+	defer runtime.KeepAlive(date)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCertificateSetPreference == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCertificateSetPreference, _lib, "SecCertificateSetPreference")
@@ -1424,6 +1544,9 @@ var _fnSecCertificateSetPreferred func(objc.ID, objc.ID, objc.ID) int32
 
 // SecCertificateSetPreferred reports an error if the Security framework function SecCertificateSetPreferred fails.
 func SecCertificateSetPreferred(certificate SecCertificateRef, name obj.Object, keyUsage obj.Object) error {
+	defer runtime.KeepAlive(certificate)
+	defer runtime.KeepAlive(name)
+	defer runtime.KeepAlive(keyUsage)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCertificateSetPreferred == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCertificateSetPreferred, _lib, "SecCertificateSetPreferred")
@@ -1439,6 +1562,8 @@ var _fnSecCodeCheckValidity func(objc.ID, SecCSFlags, objc.ID) int32
 
 // SecCodeCheckValidity reports an error if the Security framework function SecCodeCheckValidity fails.
 func SecCodeCheckValidity(code SecCodeRef, flags SecCSFlags, requirement SecRequirementRef) error {
+	defer runtime.KeepAlive(code)
+	defer runtime.KeepAlive(requirement)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCodeCheckValidity == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCodeCheckValidity, _lib, "SecCodeCheckValidity")
@@ -1454,6 +1579,7 @@ var _fnSecCodeCopyDesignatedRequirement func(objc.ID, SecCSFlags, unsafe.Pointer
 
 // SecCodeCopyDesignatedRequirement reports an error if the Security framework function SecCodeCopyDesignatedRequirement fails.
 func SecCodeCopyDesignatedRequirement(code SecStaticCodeRef, flags SecCSFlags, requirement unsafe.Pointer) error {
+	defer runtime.KeepAlive(code)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCodeCopyDesignatedRequirement == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCodeCopyDesignatedRequirement, _lib, "SecCodeCopyDesignatedRequirement")
@@ -1469,6 +1595,8 @@ var _fnSecCodeCopyGuestWithAttributes func(objc.ID, objc.ID, SecCSFlags, unsafe.
 
 // SecCodeCopyGuestWithAttributes reports an error if the Security framework function SecCodeCopyGuestWithAttributes fails.
 func SecCodeCopyGuestWithAttributes(host SecCodeRef, attributes obj.Object, flags SecCSFlags, guest unsafe.Pointer) error {
+	defer runtime.KeepAlive(host)
+	defer runtime.KeepAlive(attributes)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCodeCopyGuestWithAttributes == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCodeCopyGuestWithAttributes, _lib, "SecCodeCopyGuestWithAttributes")
@@ -1484,6 +1612,7 @@ var _fnSecCodeCopyHost func(objc.ID, SecCSFlags, unsafe.Pointer) int32
 
 // SecCodeCopyHost reports an error if the Security framework function SecCodeCopyHost fails.
 func SecCodeCopyHost(guest SecCodeRef, flags SecCSFlags, host unsafe.Pointer) error {
+	defer runtime.KeepAlive(guest)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCodeCopyHost == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCodeCopyHost, _lib, "SecCodeCopyHost")
@@ -1499,6 +1628,7 @@ var _fnSecCodeCopyPath func(objc.ID, SecCSFlags, unsafe.Pointer) int32
 
 // SecCodeCopyPath reports an error if the Security framework function SecCodeCopyPath fails.
 func SecCodeCopyPath(staticCode SecStaticCodeRef, flags SecCSFlags) (obj.Object, error) {
+	defer runtime.KeepAlive(staticCode)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCodeCopyPath == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCodeCopyPath, _lib, "SecCodeCopyPath")
@@ -1530,6 +1660,7 @@ var _fnSecCodeCopySigningInformation func(objc.ID, SecCSFlags, unsafe.Pointer) i
 
 // SecCodeCopySigningInformation reports an error if the Security framework function SecCodeCopySigningInformation fails.
 func SecCodeCopySigningInformation(code SecStaticCodeRef, flags SecCSFlags) (obj.Object, error) {
+	defer runtime.KeepAlive(code)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCodeCopySigningInformation == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCodeCopySigningInformation, _lib, "SecCodeCopySigningInformation")
@@ -1546,6 +1677,7 @@ var _fnSecCodeCopyStaticCode func(objc.ID, SecCSFlags, unsafe.Pointer) int32
 
 // SecCodeCopyStaticCode reports an error if the Security framework function SecCodeCopyStaticCode fails.
 func SecCodeCopyStaticCode(code SecCodeRef, flags SecCSFlags, staticCode unsafe.Pointer) error {
+	defer runtime.KeepAlive(code)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCodeCopyStaticCode == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCodeCopyStaticCode, _lib, "SecCodeCopyStaticCode")
@@ -1576,6 +1708,7 @@ var _fnSecCodeMapMemory func(objc.ID, SecCSFlags) int32
 
 // SecCodeMapMemory reports an error if the Security framework function SecCodeMapMemory fails.
 func SecCodeMapMemory(code SecStaticCodeRef, flags SecCSFlags) error {
+	defer runtime.KeepAlive(code)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCodeMapMemory == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCodeMapMemory, _lib, "SecCodeMapMemory")
@@ -1591,6 +1724,9 @@ var _fnSecCodeValidateFileResource func(objc.ID, objc.ID, objc.ID, SecCSFlags) i
 
 // SecCodeValidateFileResource reports an error if the Security framework function SecCodeValidateFileResource fails.
 func SecCodeValidateFileResource(code SecStaticCodeRef, relativePath obj.Object, fileData obj.Object, flags SecCSFlags) error {
+	defer runtime.KeepAlive(code)
+	defer runtime.KeepAlive(relativePath)
+	defer runtime.KeepAlive(fileData)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCodeValidateFileResource == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCodeValidateFileResource, _lib, "SecCodeValidateFileResource")
@@ -1636,6 +1772,7 @@ var _fnSecHostSetGuestStatus func(int, uint32, objc.ID, SecCSFlags) int32
 
 // SecHostSetGuestStatus reports an error if the Security framework function SecHostSetGuestStatus fails.
 func SecHostSetGuestStatus(guestRef int, status uint32, attributes obj.Object, flags SecCSFlags) error {
+	defer runtime.KeepAlive(attributes)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecHostSetGuestStatus == nil {
 		ebipurego.RegisterLibFunc(&_fnSecHostSetGuestStatus, _lib, "SecHostSetGuestStatus")
@@ -1666,6 +1803,7 @@ var _fnSecIdentityCopyCertificate func(objc.ID, unsafe.Pointer) int32
 
 // SecIdentityCopyCertificate reports an error if the Security framework function SecIdentityCopyCertificate fails.
 func SecIdentityCopyCertificate(identityRef SecIdentityRef, certificateRef unsafe.Pointer) error {
+	defer runtime.KeepAlive(identityRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecIdentityCopyCertificate == nil {
 		ebipurego.RegisterLibFunc(&_fnSecIdentityCopyCertificate, _lib, "SecIdentityCopyCertificate")
@@ -1681,6 +1819,8 @@ var _fnSecIdentityCopyPreference func(objc.ID, uint32, objc.ID, unsafe.Pointer) 
 
 // SecIdentityCopyPreference reports an error if the Security framework function SecIdentityCopyPreference fails.
 func SecIdentityCopyPreference(name obj.Object, keyUsage uint32, validIssuers obj.Object, identity unsafe.Pointer) error {
+	defer runtime.KeepAlive(name)
+	defer runtime.KeepAlive(validIssuers)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecIdentityCopyPreference == nil {
 		ebipurego.RegisterLibFunc(&_fnSecIdentityCopyPreference, _lib, "SecIdentityCopyPreference")
@@ -1696,6 +1836,7 @@ var _fnSecIdentityCopyPrivateKey func(objc.ID, unsafe.Pointer) int32
 
 // SecIdentityCopyPrivateKey reports an error if the Security framework function SecIdentityCopyPrivateKey fails.
 func SecIdentityCopyPrivateKey(identityRef SecIdentityRef, privateKeyRef unsafe.Pointer) error {
+	defer runtime.KeepAlive(identityRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecIdentityCopyPrivateKey == nil {
 		ebipurego.RegisterLibFunc(&_fnSecIdentityCopyPrivateKey, _lib, "SecIdentityCopyPrivateKey")
@@ -1711,6 +1852,7 @@ var _fnSecIdentityCopySystemIdentity func(objc.ID, unsafe.Pointer, unsafe.Pointe
 
 // SecIdentityCopySystemIdentity reports an error if the Security framework function SecIdentityCopySystemIdentity fails.
 func SecIdentityCopySystemIdentity(domain obj.Object, idRef unsafe.Pointer) (obj.Object, error) {
+	defer runtime.KeepAlive(domain)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecIdentityCopySystemIdentity == nil {
 		ebipurego.RegisterLibFunc(&_fnSecIdentityCopySystemIdentity, _lib, "SecIdentityCopySystemIdentity")
@@ -1727,6 +1869,8 @@ var _fnSecIdentityCreateWithCertificate func(objc.ID, objc.ID, unsafe.Pointer) i
 
 // SecIdentityCreateWithCertificate reports an error if the Security framework function SecIdentityCreateWithCertificate fails.
 func SecIdentityCreateWithCertificate(keychainOrArray obj.Object, certificateRef SecCertificateRef, identityRef unsafe.Pointer) error {
+	defer runtime.KeepAlive(keychainOrArray)
+	defer runtime.KeepAlive(certificateRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecIdentityCreateWithCertificate == nil {
 		ebipurego.RegisterLibFunc(&_fnSecIdentityCreateWithCertificate, _lib, "SecIdentityCreateWithCertificate")
@@ -1742,6 +1886,7 @@ var _fnSecIdentitySearchCopyNext func(objc.ID, unsafe.Pointer) int32
 
 // SecIdentitySearchCopyNext reports an error if the Security framework function SecIdentitySearchCopyNext fails.
 func SecIdentitySearchCopyNext(searchRef SecIdentitySearchRef, identity unsafe.Pointer) error {
+	defer runtime.KeepAlive(searchRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecIdentitySearchCopyNext == nil {
 		ebipurego.RegisterLibFunc(&_fnSecIdentitySearchCopyNext, _lib, "SecIdentitySearchCopyNext")
@@ -1757,6 +1902,7 @@ var _fnSecIdentitySearchCreate func(objc.ID, uint32, unsafe.Pointer) int32
 
 // SecIdentitySearchCreate reports an error if the Security framework function SecIdentitySearchCreate fails.
 func SecIdentitySearchCreate(keychainOrArray obj.Object, keyUsage uint32, searchRef unsafe.Pointer) error {
+	defer runtime.KeepAlive(keychainOrArray)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecIdentitySearchCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnSecIdentitySearchCreate, _lib, "SecIdentitySearchCreate")
@@ -1772,6 +1918,8 @@ var _fnSecIdentitySetPreference func(objc.ID, objc.ID, uint32) int32
 
 // SecIdentitySetPreference reports an error if the Security framework function SecIdentitySetPreference fails.
 func SecIdentitySetPreference(identity SecIdentityRef, name obj.Object, keyUsage uint32) error {
+	defer runtime.KeepAlive(identity)
+	defer runtime.KeepAlive(name)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecIdentitySetPreference == nil {
 		ebipurego.RegisterLibFunc(&_fnSecIdentitySetPreference, _lib, "SecIdentitySetPreference")
@@ -1787,6 +1935,9 @@ var _fnSecIdentitySetPreferred func(objc.ID, objc.ID, objc.ID) int32
 
 // SecIdentitySetPreferred reports an error if the Security framework function SecIdentitySetPreferred fails.
 func SecIdentitySetPreferred(identity SecIdentityRef, name obj.Object, keyUsage obj.Object) error {
+	defer runtime.KeepAlive(identity)
+	defer runtime.KeepAlive(name)
+	defer runtime.KeepAlive(keyUsage)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecIdentitySetPreferred == nil {
 		ebipurego.RegisterLibFunc(&_fnSecIdentitySetPreferred, _lib, "SecIdentitySetPreferred")
@@ -1802,6 +1953,8 @@ var _fnSecIdentitySetSystemIdentity func(objc.ID, objc.ID) int32
 
 // SecIdentitySetSystemIdentity reports an error if the Security framework function SecIdentitySetSystemIdentity fails.
 func SecIdentitySetSystemIdentity(domain obj.Object, idRef SecIdentityRef) error {
+	defer runtime.KeepAlive(domain)
+	defer runtime.KeepAlive(idRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecIdentitySetSystemIdentity == nil {
 		ebipurego.RegisterLibFunc(&_fnSecIdentitySetSystemIdentity, _lib, "SecIdentitySetSystemIdentity")
@@ -1817,6 +1970,7 @@ var _fnSecItemAdd func(objc.ID, unsafe.Pointer) int32
 
 // SecItemAdd reports an error if the Security framework function SecItemAdd fails.
 func SecItemAdd(attributes obj.Object) (obj.Object, error) {
+	defer runtime.KeepAlive(attributes)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecItemAdd == nil {
 		ebipurego.RegisterLibFunc(&_fnSecItemAdd, _lib, "SecItemAdd")
@@ -1833,6 +1987,7 @@ var _fnSecItemCopyMatching func(objc.ID, unsafe.Pointer) int32
 
 // SecItemCopyMatching reports an error if the Security framework function SecItemCopyMatching fails.
 func SecItemCopyMatching(query obj.Object) (obj.Object, error) {
+	defer runtime.KeepAlive(query)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecItemCopyMatching == nil {
 		ebipurego.RegisterLibFunc(&_fnSecItemCopyMatching, _lib, "SecItemCopyMatching")
@@ -1849,6 +2004,7 @@ var _fnSecItemDelete func(objc.ID) int32
 
 // SecItemDelete reports an error if the Security framework function SecItemDelete fails.
 func SecItemDelete(query obj.Object) error {
+	defer runtime.KeepAlive(query)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecItemDelete == nil {
 		ebipurego.RegisterLibFunc(&_fnSecItemDelete, _lib, "SecItemDelete")
@@ -1864,6 +2020,8 @@ var _fnSecItemUpdate func(objc.ID, objc.ID) int32
 
 // SecItemUpdate reports an error if the Security framework function SecItemUpdate fails.
 func SecItemUpdate(query obj.Object, attributesToUpdate obj.Object) error {
+	defer runtime.KeepAlive(query)
+	defer runtime.KeepAlive(attributesToUpdate)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecItemUpdate == nil {
 		ebipurego.RegisterLibFunc(&_fnSecItemUpdate, _lib, "SecItemUpdate")
@@ -1879,6 +2037,8 @@ var _fnSecKeyCreatePair func(objc.ID, uint32, uint32, uint64, uint32, uint32, ui
 
 // SecKeyCreatePair reports an error if the Security framework function SecKeyCreatePair fails.
 func SecKeyCreatePair(keychainRef SecKeychainRef, algorithm uint32, keySizeInBits uint32, contextHandle uint64, publicKeyUsage uint32, publicKeyAttr uint32, privateKeyUsage uint32, privateKeyAttr uint32, initialAccess SecAccessRef, publicKey unsafe.Pointer, privateKey unsafe.Pointer) error {
+	defer runtime.KeepAlive(keychainRef)
+	defer runtime.KeepAlive(initialAccess)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeyCreatePair == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeyCreatePair, _lib, "SecKeyCreatePair")
@@ -1894,6 +2054,8 @@ var _fnSecKeyGenerate func(objc.ID, uint32, uint32, uint64, uint32, uint32, objc
 
 // SecKeyGenerate reports an error if the Security framework function SecKeyGenerate fails.
 func SecKeyGenerate(keychainRef SecKeychainRef, algorithm uint32, keySizeInBits uint32, contextHandle uint64, keyUsage uint32, keyAttr uint32, initialAccess SecAccessRef, keyRef unsafe.Pointer) error {
+	defer runtime.KeepAlive(keychainRef)
+	defer runtime.KeepAlive(initialAccess)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeyGenerate == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeyGenerate, _lib, "SecKeyGenerate")
@@ -1909,6 +2071,7 @@ var _fnSecKeyGeneratePair func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // SecKeyGeneratePair reports an error if the Security framework function SecKeyGeneratePair fails.
 func SecKeyGeneratePair(parameters obj.Object, publicKey unsafe.Pointer, privateKey unsafe.Pointer) error {
+	defer runtime.KeepAlive(parameters)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeyGeneratePair == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeyGeneratePair, _lib, "SecKeyGeneratePair")
@@ -1939,6 +2102,7 @@ var _fnSecKeychainAddGenericPassword func(objc.ID, int, string, int, string, int
 
 // SecKeychainAddGenericPassword reports an error if the Security framework function SecKeychainAddGenericPassword fails.
 func SecKeychainAddGenericPassword(keychain SecKeychainRef, serviceNameLength int, serviceName string, accountNameLength int, accountName string, passwordLength int, passwordData unsafe.Pointer, itemRef unsafe.Pointer) error {
+	defer runtime.KeepAlive(keychain)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainAddGenericPassword == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainAddGenericPassword, _lib, "SecKeychainAddGenericPassword")
@@ -1954,6 +2118,7 @@ var _fnSecKeychainAddInternetPassword func(objc.ID, int, string, int, string, in
 
 // SecKeychainAddInternetPassword reports an error if the Security framework function SecKeychainAddInternetPassword fails.
 func SecKeychainAddInternetPassword(keychain SecKeychainRef, serverNameLength int, serverName string, securityDomainLength int, securityDomain string, accountNameLength int, accountName string, pathLength int, path string, port uint16, protocol SecProtocolType, authenticationType SecAuthenticationType, passwordLength int, passwordData unsafe.Pointer, itemRef unsafe.Pointer) error {
+	defer runtime.KeepAlive(keychain)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainAddInternetPassword == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainAddInternetPassword, _lib, "SecKeychainAddInternetPassword")
@@ -1969,6 +2134,7 @@ var _fnSecKeychainCopyAccess func(objc.ID, unsafe.Pointer) int32
 
 // SecKeychainCopyAccess reports an error if the Security framework function SecKeychainCopyAccess fails.
 func SecKeychainCopyAccess(keychain SecKeychainRef, access unsafe.Pointer) error {
+	defer runtime.KeepAlive(keychain)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainCopyAccess == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainCopyAccess, _lib, "SecKeychainCopyAccess")
@@ -2046,6 +2212,7 @@ var _fnSecKeychainCopySettings func(objc.ID, unsafe.Pointer) int32
 
 // SecKeychainCopySettings reports an error if the Security framework function SecKeychainCopySettings fails.
 func SecKeychainCopySettings(keychain SecKeychainRef, outSettings *SecKeychainSettings) error {
+	defer runtime.KeepAlive(keychain)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainCopySettings == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainCopySettings, _lib, "SecKeychainCopySettings")
@@ -2061,6 +2228,7 @@ var _fnSecKeychainCreate func(string, int, unsafe.Pointer, uint8, objc.ID, unsaf
 
 // SecKeychainCreate reports an error if the Security framework function SecKeychainCreate fails.
 func SecKeychainCreate(pathName string, passwordLength int, password unsafe.Pointer, promptUser uint8, initialAccess SecAccessRef, keychain unsafe.Pointer) error {
+	defer runtime.KeepAlive(initialAccess)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainCreate, _lib, "SecKeychainCreate")
@@ -2076,6 +2244,7 @@ var _fnSecKeychainDelete func(objc.ID) int32
 
 // SecKeychainDelete reports an error if the Security framework function SecKeychainDelete fails.
 func SecKeychainDelete(keychainOrArray SecKeychainRef) error {
+	defer runtime.KeepAlive(keychainOrArray)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainDelete == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainDelete, _lib, "SecKeychainDelete")
@@ -2091,6 +2260,7 @@ var _fnSecKeychainGetDLDBHandle func(objc.ID, unsafe.Pointer) int32
 
 // SecKeychainGetDLDBHandle reports an error if the Security framework function SecKeychainGetDLDBHandle fails.
 func SecKeychainGetDLDBHandle(keychain SecKeychainRef, dldbHandle *CssmDlDbHandle) error {
+	defer runtime.KeepAlive(keychain)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainGetDLDBHandle == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainGetDLDBHandle, _lib, "SecKeychainGetDLDBHandle")
@@ -2106,6 +2276,7 @@ var _fnSecKeychainItemCopyAccess func(objc.ID, unsafe.Pointer) int32
 
 // SecKeychainItemCopyAccess reports an error if the Security framework function SecKeychainItemCopyAccess fails.
 func SecKeychainItemCopyAccess(itemRef SecKeychainItemRef, access unsafe.Pointer) error {
+	defer runtime.KeepAlive(itemRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainItemCopyAccess == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainItemCopyAccess, _lib, "SecKeychainItemCopyAccess")
@@ -2121,6 +2292,7 @@ var _fnSecKeychainItemCopyFromPersistentReference func(objc.ID, unsafe.Pointer) 
 
 // SecKeychainItemCopyFromPersistentReference reports an error if the Security framework function SecKeychainItemCopyFromPersistentReference fails.
 func SecKeychainItemCopyFromPersistentReference(persistentItemRef obj.Object, itemRef unsafe.Pointer) error {
+	defer runtime.KeepAlive(persistentItemRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainItemCopyFromPersistentReference == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainItemCopyFromPersistentReference, _lib, "SecKeychainItemCopyFromPersistentReference")
@@ -2136,6 +2308,7 @@ var _fnSecKeychainItemCopyKeychain func(objc.ID, unsafe.Pointer) int32
 
 // SecKeychainItemCopyKeychain reports an error if the Security framework function SecKeychainItemCopyKeychain fails.
 func SecKeychainItemCopyKeychain(itemRef SecKeychainItemRef, keychainRef unsafe.Pointer) error {
+	defer runtime.KeepAlive(itemRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainItemCopyKeychain == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainItemCopyKeychain, _lib, "SecKeychainItemCopyKeychain")
@@ -2151,6 +2324,9 @@ var _fnSecKeychainItemCreateCopy func(objc.ID, objc.ID, objc.ID, unsafe.Pointer)
 
 // SecKeychainItemCreateCopy reports an error if the Security framework function SecKeychainItemCreateCopy fails.
 func SecKeychainItemCreateCopy(itemRef SecKeychainItemRef, destKeychainRef SecKeychainRef, initialAccess SecAccessRef, itemCopy unsafe.Pointer) error {
+	defer runtime.KeepAlive(itemRef)
+	defer runtime.KeepAlive(destKeychainRef)
+	defer runtime.KeepAlive(initialAccess)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainItemCreateCopy == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainItemCreateCopy, _lib, "SecKeychainItemCreateCopy")
@@ -2166,6 +2342,7 @@ var _fnSecKeychainItemCreatePersistentReference func(objc.ID, unsafe.Pointer) in
 
 // SecKeychainItemCreatePersistentReference reports an error if the Security framework function SecKeychainItemCreatePersistentReference fails.
 func SecKeychainItemCreatePersistentReference(itemRef SecKeychainItemRef) (obj.Object, error) {
+	defer runtime.KeepAlive(itemRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainItemCreatePersistentReference == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainItemCreatePersistentReference, _lib, "SecKeychainItemCreatePersistentReference")
@@ -2182,6 +2359,7 @@ var _fnSecKeychainItemDelete func(objc.ID) int32
 
 // SecKeychainItemDelete reports an error if the Security framework function SecKeychainItemDelete fails.
 func SecKeychainItemDelete(itemRef SecKeychainItemRef) error {
+	defer runtime.KeepAlive(itemRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainItemDelete == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainItemDelete, _lib, "SecKeychainItemDelete")
@@ -2197,6 +2375,7 @@ var _fnSecKeychainItemGetDLDBHandle func(objc.ID, unsafe.Pointer) int32
 
 // SecKeychainItemGetDLDBHandle reports an error if the Security framework function SecKeychainItemGetDLDBHandle fails.
 func SecKeychainItemGetDLDBHandle(keyItemRef SecKeychainItemRef, dldbHandle *CssmDlDbHandle) error {
+	defer runtime.KeepAlive(keyItemRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainItemGetDLDBHandle == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainItemGetDLDBHandle, _lib, "SecKeychainItemGetDLDBHandle")
@@ -2212,6 +2391,8 @@ var _fnSecKeychainItemSetAccess func(objc.ID, objc.ID) int32
 
 // SecKeychainItemSetAccess reports an error if the Security framework function SecKeychainItemSetAccess fails.
 func SecKeychainItemSetAccess(itemRef SecKeychainItemRef, access SecAccessRef) error {
+	defer runtime.KeepAlive(itemRef)
+	defer runtime.KeepAlive(access)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainItemSetAccess == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainItemSetAccess, _lib, "SecKeychainItemSetAccess")
@@ -2227,6 +2408,7 @@ var _fnSecKeychainLock func(objc.ID) int32
 
 // SecKeychainLock reports an error if the Security framework function SecKeychainLock fails.
 func SecKeychainLock(keychain SecKeychainRef) error {
+	defer runtime.KeepAlive(keychain)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainLock == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainLock, _lib, "SecKeychainLock")
@@ -2287,6 +2469,7 @@ var _fnSecKeychainSearchCopyNext func(objc.ID, unsafe.Pointer) int32
 
 // SecKeychainSearchCopyNext reports an error if the Security framework function SecKeychainSearchCopyNext fails.
 func SecKeychainSearchCopyNext(searchRef SecKeychainSearchRef, itemRef unsafe.Pointer) error {
+	defer runtime.KeepAlive(searchRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainSearchCopyNext == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainSearchCopyNext, _lib, "SecKeychainSearchCopyNext")
@@ -2302,6 +2485,8 @@ var _fnSecKeychainSetAccess func(objc.ID, objc.ID) int32
 
 // SecKeychainSetAccess reports an error if the Security framework function SecKeychainSetAccess fails.
 func SecKeychainSetAccess(keychain SecKeychainRef, access SecAccessRef) error {
+	defer runtime.KeepAlive(keychain)
+	defer runtime.KeepAlive(access)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainSetAccess == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainSetAccess, _lib, "SecKeychainSetAccess")
@@ -2317,6 +2502,7 @@ var _fnSecKeychainSetDefault func(objc.ID) int32
 
 // SecKeychainSetDefault reports an error if the Security framework function SecKeychainSetDefault fails.
 func SecKeychainSetDefault(keychain SecKeychainRef) error {
+	defer runtime.KeepAlive(keychain)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainSetDefault == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainSetDefault, _lib, "SecKeychainSetDefault")
@@ -2332,6 +2518,7 @@ var _fnSecKeychainSetDomainDefault func(SecPreferencesDomain, objc.ID) int32
 
 // SecKeychainSetDomainDefault reports an error if the Security framework function SecKeychainSetDomainDefault fails.
 func SecKeychainSetDomainDefault(domain SecPreferencesDomain, keychain SecKeychainRef) error {
+	defer runtime.KeepAlive(keychain)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainSetDomainDefault == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainSetDomainDefault, _lib, "SecKeychainSetDomainDefault")
@@ -2347,6 +2534,7 @@ var _fnSecKeychainSetDomainSearchList func(SecPreferencesDomain, objc.ID) int32
 
 // SecKeychainSetDomainSearchList reports an error if the Security framework function SecKeychainSetDomainSearchList fails.
 func SecKeychainSetDomainSearchList(domain SecPreferencesDomain, searchList obj.Object) error {
+	defer runtime.KeepAlive(searchList)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainSetDomainSearchList == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainSetDomainSearchList, _lib, "SecKeychainSetDomainSearchList")
@@ -2377,6 +2565,7 @@ var _fnSecKeychainSetSearchList func(objc.ID) int32
 
 // SecKeychainSetSearchList reports an error if the Security framework function SecKeychainSetSearchList fails.
 func SecKeychainSetSearchList(searchList obj.Object) error {
+	defer runtime.KeepAlive(searchList)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainSetSearchList == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainSetSearchList, _lib, "SecKeychainSetSearchList")
@@ -2392,6 +2581,7 @@ var _fnSecKeychainSetSettings func(objc.ID, unsafe.Pointer) int32
 
 // SecKeychainSetSettings reports an error if the Security framework function SecKeychainSetSettings fails.
 func SecKeychainSetSettings(keychain SecKeychainRef, newSettings *SecKeychainSettings) error {
+	defer runtime.KeepAlive(keychain)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainSetSettings == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainSetSettings, _lib, "SecKeychainSetSettings")
@@ -2422,6 +2612,7 @@ var _fnSecKeychainUnlock func(objc.ID, int, unsafe.Pointer, uint8) int32
 
 // SecKeychainUnlock reports an error if the Security framework function SecKeychainUnlock fails.
 func SecKeychainUnlock(keychain SecKeychainRef, passwordLength int, password unsafe.Pointer, usePassword uint8) error {
+	defer runtime.KeepAlive(keychain)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainUnlock == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainUnlock, _lib, "SecKeychainUnlock")
@@ -2437,6 +2628,8 @@ var _fnSecPKCS12Import func(objc.ID, objc.ID, unsafe.Pointer) int32
 
 // SecPKCS12Import reports an error if the Security framework function SecPKCS12Import fails.
 func SecPKCS12Import(pkcs12Data obj.Object, options obj.Object) (obj.Object, error) {
+	defer runtime.KeepAlive(pkcs12Data)
+	defer runtime.KeepAlive(options)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecPKCS12Import == nil {
 		ebipurego.RegisterLibFunc(&_fnSecPKCS12Import, _lib, "SecPKCS12Import")
@@ -2453,6 +2646,7 @@ var _fnSecPolicySearchCopyNext func(objc.ID, unsafe.Pointer) int32
 
 // SecPolicySearchCopyNext reports an error if the Security framework function SecPolicySearchCopyNext fails.
 func SecPolicySearchCopyNext(searchRef SecPolicySearchRef, policyRef unsafe.Pointer) error {
+	defer runtime.KeepAlive(searchRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecPolicySearchCopyNext == nil {
 		ebipurego.RegisterLibFunc(&_fnSecPolicySearchCopyNext, _lib, "SecPolicySearchCopyNext")
@@ -2468,6 +2662,8 @@ var _fnSecPolicySetProperties func(objc.ID, objc.ID) int32
 
 // SecPolicySetProperties reports an error if the Security framework function SecPolicySetProperties fails.
 func SecPolicySetProperties(policyRef SecPolicyRef, properties obj.Object) error {
+	defer runtime.KeepAlive(policyRef)
+	defer runtime.KeepAlive(properties)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecPolicySetProperties == nil {
 		ebipurego.RegisterLibFunc(&_fnSecPolicySetProperties, _lib, "SecPolicySetProperties")
@@ -2483,6 +2679,7 @@ var _fnSecRequirementCopyData func(objc.ID, SecCSFlags, unsafe.Pointer) int32
 
 // SecRequirementCopyData reports an error if the Security framework function SecRequirementCopyData fails.
 func SecRequirementCopyData(requirement SecRequirementRef, flags SecCSFlags) (obj.Object, error) {
+	defer runtime.KeepAlive(requirement)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecRequirementCopyData == nil {
 		ebipurego.RegisterLibFunc(&_fnSecRequirementCopyData, _lib, "SecRequirementCopyData")
@@ -2499,6 +2696,7 @@ var _fnSecRequirementCopyString func(objc.ID, SecCSFlags, unsafe.Pointer) int32
 
 // SecRequirementCopyString reports an error if the Security framework function SecRequirementCopyString fails.
 func SecRequirementCopyString(requirement SecRequirementRef, flags SecCSFlags) (obj.Object, error) {
+	defer runtime.KeepAlive(requirement)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecRequirementCopyString == nil {
 		ebipurego.RegisterLibFunc(&_fnSecRequirementCopyString, _lib, "SecRequirementCopyString")
@@ -2515,6 +2713,7 @@ var _fnSecRequirementCreateWithData func(objc.ID, SecCSFlags, unsafe.Pointer) in
 
 // SecRequirementCreateWithData reports an error if the Security framework function SecRequirementCreateWithData fails.
 func SecRequirementCreateWithData(data obj.Object, flags SecCSFlags, requirement unsafe.Pointer) error {
+	defer runtime.KeepAlive(data)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecRequirementCreateWithData == nil {
 		ebipurego.RegisterLibFunc(&_fnSecRequirementCreateWithData, _lib, "SecRequirementCreateWithData")
@@ -2530,6 +2729,7 @@ var _fnSecRequirementCreateWithString func(objc.ID, SecCSFlags, unsafe.Pointer) 
 
 // SecRequirementCreateWithString reports an error if the Security framework function SecRequirementCreateWithString fails.
 func SecRequirementCreateWithString(text obj.Object, flags SecCSFlags, requirement unsafe.Pointer) error {
+	defer runtime.KeepAlive(text)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecRequirementCreateWithString == nil {
 		ebipurego.RegisterLibFunc(&_fnSecRequirementCreateWithString, _lib, "SecRequirementCreateWithString")
@@ -2545,6 +2745,7 @@ var _fnSecRequirementCreateWithStringAndErrors func(objc.ID, SecCSFlags, unsafe.
 
 // SecRequirementCreateWithStringAndErrors reports an error if the Security framework function SecRequirementCreateWithStringAndErrors fails.
 func SecRequirementCreateWithStringAndErrors(text obj.Object, flags SecCSFlags, requirement unsafe.Pointer) (obj.Object, error) {
+	defer runtime.KeepAlive(text)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecRequirementCreateWithStringAndErrors == nil {
 		ebipurego.RegisterLibFunc(&_fnSecRequirementCreateWithStringAndErrors, _lib, "SecRequirementCreateWithStringAndErrors")
@@ -2561,6 +2762,8 @@ var _fnSecStaticCodeCheckValidity func(objc.ID, SecCSFlags, objc.ID) int32
 
 // SecStaticCodeCheckValidity reports an error if the Security framework function SecStaticCodeCheckValidity fails.
 func SecStaticCodeCheckValidity(staticCode SecStaticCodeRef, flags SecCSFlags, requirement SecRequirementRef) error {
+	defer runtime.KeepAlive(staticCode)
+	defer runtime.KeepAlive(requirement)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecStaticCodeCheckValidity == nil {
 		ebipurego.RegisterLibFunc(&_fnSecStaticCodeCheckValidity, _lib, "SecStaticCodeCheckValidity")
@@ -2576,6 +2779,7 @@ var _fnSecStaticCodeCreateWithPath func(objc.ID, SecCSFlags, unsafe.Pointer) int
 
 // SecStaticCodeCreateWithPath reports an error if the Security framework function SecStaticCodeCreateWithPath fails.
 func SecStaticCodeCreateWithPath(path obj.Object, flags SecCSFlags, staticCode unsafe.Pointer) error {
+	defer runtime.KeepAlive(path)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecStaticCodeCreateWithPath == nil {
 		ebipurego.RegisterLibFunc(&_fnSecStaticCodeCreateWithPath, _lib, "SecStaticCodeCreateWithPath")
@@ -2591,6 +2795,8 @@ var _fnSecStaticCodeCreateWithPathAndAttributes func(objc.ID, SecCSFlags, objc.I
 
 // SecStaticCodeCreateWithPathAndAttributes reports an error if the Security framework function SecStaticCodeCreateWithPathAndAttributes fails.
 func SecStaticCodeCreateWithPathAndAttributes(path obj.Object, flags SecCSFlags, attributes obj.Object, staticCode unsafe.Pointer) error {
+	defer runtime.KeepAlive(path)
+	defer runtime.KeepAlive(attributes)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecStaticCodeCreateWithPathAndAttributes == nil {
 		ebipurego.RegisterLibFunc(&_fnSecStaticCodeCreateWithPathAndAttributes, _lib, "SecStaticCodeCreateWithPathAndAttributes")
@@ -2622,6 +2828,7 @@ var _fnSecTrustCopyCustomAnchorCertificates func(objc.ID, unsafe.Pointer) int32
 
 // SecTrustCopyCustomAnchorCertificates reports an error if the Security framework function SecTrustCopyCustomAnchorCertificates fails.
 func SecTrustCopyCustomAnchorCertificates(trust SecTrustRef) (obj.Object, error) {
+	defer runtime.KeepAlive(trust)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustCopyCustomAnchorCertificates == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustCopyCustomAnchorCertificates, _lib, "SecTrustCopyCustomAnchorCertificates")
@@ -2638,6 +2845,7 @@ var _fnSecTrustCopyPolicies func(objc.ID, unsafe.Pointer) int32
 
 // SecTrustCopyPolicies reports an error if the Security framework function SecTrustCopyPolicies fails.
 func SecTrustCopyPolicies(trust SecTrustRef) (obj.Object, error) {
+	defer runtime.KeepAlive(trust)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustCopyPolicies == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustCopyPolicies, _lib, "SecTrustCopyPolicies")
@@ -2654,6 +2862,8 @@ var _fnSecTrustCreateWithCertificates func(objc.ID, objc.ID, unsafe.Pointer) int
 
 // SecTrustCreateWithCertificates reports an error if the Security framework function SecTrustCreateWithCertificates fails.
 func SecTrustCreateWithCertificates(certificates obj.Object, policies obj.Object, trust unsafe.Pointer) error {
+	defer runtime.KeepAlive(certificates)
+	defer runtime.KeepAlive(policies)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustCreateWithCertificates == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustCreateWithCertificates, _lib, "SecTrustCreateWithCertificates")
@@ -2669,6 +2879,7 @@ var _fnSecTrustEvaluateAsync func(objc.ID, objc.ID, objc.Block) int32
 
 // SecTrustEvaluateAsync reports an error if the Security framework function SecTrustEvaluateAsync fails.
 func SecTrustEvaluateAsync(trust SecTrustRef, queue dispatch.Queue, result func(unsafe.Pointer, SecTrustResultType)) error {
+	defer runtime.KeepAlive(trust)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustEvaluateAsync == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustEvaluateAsync, _lib, "SecTrustEvaluateAsync")
@@ -2684,6 +2895,7 @@ var _fnSecTrustEvaluateAsyncWithError func(objc.ID, objc.ID, objc.Block) int32
 
 // SecTrustEvaluateAsyncWithError reports an error if the Security framework function SecTrustEvaluateAsyncWithError fails.
 func SecTrustEvaluateAsyncWithError(trust SecTrustRef, queue dispatch.Queue, result func(unsafe.Pointer, bool, unsafe.Pointer)) error {
+	defer runtime.KeepAlive(trust)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustEvaluateAsyncWithError == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustEvaluateAsyncWithError, _lib, "SecTrustEvaluateAsyncWithError")
@@ -2699,6 +2911,8 @@ var _fnSecTrustSetAnchorCertificates func(objc.ID, objc.ID) int32
 
 // SecTrustSetAnchorCertificates reports an error if the Security framework function SecTrustSetAnchorCertificates fails.
 func SecTrustSetAnchorCertificates(trust SecTrustRef, anchorCertificates obj.Object) error {
+	defer runtime.KeepAlive(trust)
+	defer runtime.KeepAlive(anchorCertificates)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustSetAnchorCertificates == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustSetAnchorCertificates, _lib, "SecTrustSetAnchorCertificates")
@@ -2714,6 +2928,7 @@ var _fnSecTrustSetAnchorCertificatesOnly func(objc.ID, uint8) int32
 
 // SecTrustSetAnchorCertificatesOnly reports an error if the Security framework function SecTrustSetAnchorCertificatesOnly fails.
 func SecTrustSetAnchorCertificatesOnly(trust SecTrustRef, anchorCertificatesOnly uint8) error {
+	defer runtime.KeepAlive(trust)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustSetAnchorCertificatesOnly == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustSetAnchorCertificatesOnly, _lib, "SecTrustSetAnchorCertificatesOnly")
@@ -2729,6 +2944,8 @@ var _fnSecTrustSetKeychains func(objc.ID, objc.ID) int32
 
 // SecTrustSetKeychains reports an error if the Security framework function SecTrustSetKeychains fails.
 func SecTrustSetKeychains(trust SecTrustRef, keychainOrArray obj.Object) error {
+	defer runtime.KeepAlive(trust)
+	defer runtime.KeepAlive(keychainOrArray)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustSetKeychains == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustSetKeychains, _lib, "SecTrustSetKeychains")
@@ -2744,6 +2961,7 @@ var _fnSecTrustSetNetworkFetchAllowed func(objc.ID, uint8) int32
 
 // SecTrustSetNetworkFetchAllowed reports an error if the Security framework function SecTrustSetNetworkFetchAllowed fails.
 func SecTrustSetNetworkFetchAllowed(trust SecTrustRef, allowFetch uint8) error {
+	defer runtime.KeepAlive(trust)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustSetNetworkFetchAllowed == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustSetNetworkFetchAllowed, _lib, "SecTrustSetNetworkFetchAllowed")
@@ -2759,6 +2977,8 @@ var _fnSecTrustSetOCSPResponse func(objc.ID, objc.ID) int32
 
 // SecTrustSetOCSPResponse reports an error if the Security framework function SecTrustSetOCSPResponse fails.
 func SecTrustSetOCSPResponse(trust SecTrustRef, responseData obj.Object) error {
+	defer runtime.KeepAlive(trust)
+	defer runtime.KeepAlive(responseData)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustSetOCSPResponse == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustSetOCSPResponse, _lib, "SecTrustSetOCSPResponse")
@@ -2774,6 +2994,7 @@ var _fnSecTrustSetOptions func(objc.ID, SecTrustOptionFlags) int32
 
 // SecTrustSetOptions reports an error if the Security framework function SecTrustSetOptions fails.
 func SecTrustSetOptions(trustRef SecTrustRef, options SecTrustOptionFlags) error {
+	defer runtime.KeepAlive(trustRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustSetOptions == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustSetOptions, _lib, "SecTrustSetOptions")
@@ -2789,6 +3010,8 @@ var _fnSecTrustSetParameters func(objc.ID, uint32, objc.ID) int32
 
 // SecTrustSetParameters reports an error if the Security framework function SecTrustSetParameters fails.
 func SecTrustSetParameters(trustRef SecTrustRef, action uint32, actionData obj.Object) error {
+	defer runtime.KeepAlive(trustRef)
+	defer runtime.KeepAlive(actionData)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustSetParameters == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustSetParameters, _lib, "SecTrustSetParameters")
@@ -2804,6 +3027,8 @@ var _fnSecTrustSetPolicies func(objc.ID, objc.ID) int32
 
 // SecTrustSetPolicies reports an error if the Security framework function SecTrustSetPolicies fails.
 func SecTrustSetPolicies(trust SecTrustRef, policies obj.Object) error {
+	defer runtime.KeepAlive(trust)
+	defer runtime.KeepAlive(policies)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustSetPolicies == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustSetPolicies, _lib, "SecTrustSetPolicies")
@@ -2819,6 +3044,8 @@ var _fnSecTrustSetSignedCertificateTimestamps func(objc.ID, objc.ID) int32
 
 // SecTrustSetSignedCertificateTimestamps reports an error if the Security framework function SecTrustSetSignedCertificateTimestamps fails.
 func SecTrustSetSignedCertificateTimestamps(trust SecTrustRef, sctArray obj.Object) error {
+	defer runtime.KeepAlive(trust)
+	defer runtime.KeepAlive(sctArray)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustSetSignedCertificateTimestamps == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustSetSignedCertificateTimestamps, _lib, "SecTrustSetSignedCertificateTimestamps")
@@ -2834,6 +3061,8 @@ var _fnSecTrustSetVerifyDate func(objc.ID, objc.ID) int32
 
 // SecTrustSetVerifyDate reports an error if the Security framework function SecTrustSetVerifyDate fails.
 func SecTrustSetVerifyDate(trust SecTrustRef, verifyDate obj.Object) error {
+	defer runtime.KeepAlive(trust)
+	defer runtime.KeepAlive(verifyDate)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustSetVerifyDate == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustSetVerifyDate, _lib, "SecTrustSetVerifyDate")
@@ -2865,6 +3094,7 @@ var _fnSecTrustSettingsCopyModificationDate func(objc.ID, SecTrustSettingsDomain
 
 // SecTrustSettingsCopyModificationDate reports an error if the Security framework function SecTrustSettingsCopyModificationDate fails.
 func SecTrustSettingsCopyModificationDate(certRef SecCertificateRef, domain SecTrustSettingsDomain) (obj.Object, error) {
+	defer runtime.KeepAlive(certRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustSettingsCopyModificationDate == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustSettingsCopyModificationDate, _lib, "SecTrustSettingsCopyModificationDate")
@@ -2881,6 +3111,7 @@ var _fnSecTrustSettingsCopyTrustSettings func(objc.ID, SecTrustSettingsDomain, u
 
 // SecTrustSettingsCopyTrustSettings reports an error if the Security framework function SecTrustSettingsCopyTrustSettings fails.
 func SecTrustSettingsCopyTrustSettings(certRef SecCertificateRef, domain SecTrustSettingsDomain) (obj.Object, error) {
+	defer runtime.KeepAlive(certRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustSettingsCopyTrustSettings == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustSettingsCopyTrustSettings, _lib, "SecTrustSettingsCopyTrustSettings")
@@ -2913,6 +3144,7 @@ var _fnSecTrustSettingsImportExternalRepresentation func(SecTrustSettingsDomain,
 
 // SecTrustSettingsImportExternalRepresentation reports an error if the Security framework function SecTrustSettingsImportExternalRepresentation fails.
 func SecTrustSettingsImportExternalRepresentation(domain SecTrustSettingsDomain, trustSettings obj.Object) error {
+	defer runtime.KeepAlive(trustSettings)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustSettingsImportExternalRepresentation == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustSettingsImportExternalRepresentation, _lib, "SecTrustSettingsImportExternalRepresentation")
@@ -2928,6 +3160,7 @@ var _fnSecTrustSettingsRemoveTrustSettings func(objc.ID, SecTrustSettingsDomain)
 
 // SecTrustSettingsRemoveTrustSettings reports an error if the Security framework function SecTrustSettingsRemoveTrustSettings fails.
 func SecTrustSettingsRemoveTrustSettings(certRef SecCertificateRef, domain SecTrustSettingsDomain) error {
+	defer runtime.KeepAlive(certRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustSettingsRemoveTrustSettings == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustSettingsRemoveTrustSettings, _lib, "SecTrustSettingsRemoveTrustSettings")
@@ -2943,6 +3176,8 @@ var _fnSecTrustSettingsSetTrustSettings func(objc.ID, SecTrustSettingsDomain, ob
 
 // SecTrustSettingsSetTrustSettings reports an error if the Security framework function SecTrustSettingsSetTrustSettings fails.
 func SecTrustSettingsSetTrustSettings(certRef SecCertificateRef, domain SecTrustSettingsDomain, trustSettingsDictOrArray obj.Object) error {
+	defer runtime.KeepAlive(certRef)
+	defer runtime.KeepAlive(trustSettingsDictOrArray)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustSettingsSetTrustSettings == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustSettingsSetTrustSettings, _lib, "SecTrustSettingsSetTrustSettings")
@@ -2958,6 +3193,7 @@ var _fnSecTrustedApplicationCopyData func(objc.ID, unsafe.Pointer) int32
 
 // SecTrustedApplicationCopyData reports an error if the Security framework function SecTrustedApplicationCopyData fails.
 func SecTrustedApplicationCopyData(appRef SecTrustedApplicationRef) (obj.Object, error) {
+	defer runtime.KeepAlive(appRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustedApplicationCopyData == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustedApplicationCopyData, _lib, "SecTrustedApplicationCopyData")
@@ -2989,6 +3225,8 @@ var _fnSecTrustedApplicationSetData func(objc.ID, objc.ID) int32
 
 // SecTrustedApplicationSetData reports an error if the Security framework function SecTrustedApplicationSetData fails.
 func SecTrustedApplicationSetData(appRef SecTrustedApplicationRef, data obj.Object) error {
+	defer runtime.KeepAlive(appRef)
+	defer runtime.KeepAlive(data)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustedApplicationSetData == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustedApplicationSetData, _lib, "SecTrustedApplicationSetData")

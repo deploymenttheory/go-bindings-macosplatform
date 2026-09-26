@@ -5,6 +5,7 @@
 package imageio
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
@@ -19,6 +20,9 @@ import (
 var _fnCGImageDestinationCopyImageSource func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) bool
 
 func CGImageDestinationCopyImageSource(idst coregraphics.CGImageDestinationRef, isrc coregraphics.CGImageSourceRef, options corefoundation.CFDictionaryRef) error {
+	defer runtime.KeepAlive(idst)
+	defer runtime.KeepAlive(isrc)
+	defer runtime.KeepAlive(options)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageDestinationCopyImageSource == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageDestinationCopyImageSource, _lib, "CGImageDestinationCopyImageSource")
@@ -35,6 +39,9 @@ func CGImageDestinationCopyImageSource(idst coregraphics.CGImageDestinationRef, 
 var _fnCGImageMetadataRegisterNamespaceForPrefix func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) bool
 
 func CGImageMetadataRegisterNamespaceForPrefix(metadata coregraphics.CGMutableImageMetadataRef, xmlns corefoundation.CFStringRef, prefix corefoundation.CFStringRef) error {
+	defer runtime.KeepAlive(metadata)
+	defer runtime.KeepAlive(xmlns)
+	defer runtime.KeepAlive(prefix)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageMetadataRegisterNamespaceForPrefix == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataRegisterNamespaceForPrefix, _lib, "CGImageMetadataRegisterNamespaceForPrefix")

@@ -5,6 +5,7 @@
 package mpscore
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -83,6 +84,7 @@ var _fnMPSGetImageType func(objc.ID) objc.ID
 
 // MPSGetImageType calls the MPSCore framework function MPSGetImageType.
 func MPSGetImageType(image *Image) obj.Object {
+	defer runtime.KeepAlive(image)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMPSGetImageType == nil {
 		ebipurego.RegisterLibFunc(&_fnMPSGetImageType, _lib, "MPSGetImageType")

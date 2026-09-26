@@ -5,6 +5,7 @@
 package sharedfilelist
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -18,6 +19,7 @@ import (
 var _fnLSSharedFileListItemCopyResolvedURL func(objc.ID, int, unsafe.Pointer) objc.ID
 
 func LSSharedFileListItemCopyResolvedURL(inItem LSSharedFileListItemRef, inFlags int) (obj.Object, error) {
+	defer runtime.KeepAlive(inItem)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSSharedFileListItemCopyResolvedURL == nil {
 		ebipurego.RegisterLibFunc(&_fnLSSharedFileListItemCopyResolvedURL, _lib, "LSSharedFileListItemCopyResolvedURL")

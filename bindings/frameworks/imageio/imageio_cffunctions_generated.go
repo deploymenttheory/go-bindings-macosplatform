@@ -5,6 +5,8 @@
 package imageio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -16,6 +18,7 @@ var _fnCGImageSourceSetAllowableTypes func(objc.ID) int32
 
 // CGImageSourceSetAllowableTypes reports an error if the ImageIO framework function CGImageSourceSetAllowableTypes fails.
 func CGImageSourceSetAllowableTypes(allowableTypes obj.Object) error {
+	defer runtime.KeepAlive(allowableTypes)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageSourceSetAllowableTypes == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageSourceSetAllowableTypes, _lib, "CGImageSourceSetAllowableTypes")

@@ -5,6 +5,7 @@
 package corefoundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -18,6 +19,7 @@ import (
 var _fnCFBundleLoadExecutableAndReturnError func(objc.ID, unsafe.Pointer) uint8
 
 func CFBundleLoadExecutableAndReturnError(bundle CFBundleRef) error {
+	defer runtime.KeepAlive(bundle)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFBundleLoadExecutableAndReturnError == nil {
 		ebipurego.RegisterLibFunc(&_fnCFBundleLoadExecutableAndReturnError, _lib, "CFBundleLoadExecutableAndReturnError")
@@ -34,6 +36,7 @@ func CFBundleLoadExecutableAndReturnError(bundle CFBundleRef) error {
 var _fnCFBundlePreflightExecutable func(objc.ID, unsafe.Pointer) uint8
 
 func CFBundlePreflightExecutable(bundle CFBundleRef) error {
+	defer runtime.KeepAlive(bundle)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFBundlePreflightExecutable == nil {
 		ebipurego.RegisterLibFunc(&_fnCFBundlePreflightExecutable, _lib, "CFBundlePreflightExecutable")
@@ -50,6 +53,8 @@ func CFBundlePreflightExecutable(bundle CFBundleRef) error {
 var _fnCFPropertyListCreateData func(objc.ID, objc.ID, CFPropertyListFormat, int, unsafe.Pointer) objc.ID
 
 func CFPropertyListCreateData(allocator CFAllocatorRef, propertyList CFPropertyListRef, format CFPropertyListFormat, options int) (obj.Object, error) {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(propertyList)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFPropertyListCreateData == nil {
 		ebipurego.RegisterLibFunc(&_fnCFPropertyListCreateData, _lib, "CFPropertyListCreateData")
@@ -66,6 +71,8 @@ func CFPropertyListCreateData(allocator CFAllocatorRef, propertyList CFPropertyL
 var _fnCFPropertyListWrite func(objc.ID, objc.ID, CFPropertyListFormat, int, unsafe.Pointer) objc.ID
 
 func CFPropertyListWrite(propertyList CFPropertyListRef, stream CFWriteStreamRef, format CFPropertyListFormat, options int) (obj.Object, error) {
+	defer runtime.KeepAlive(propertyList)
+	defer runtime.KeepAlive(stream)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFPropertyListWrite == nil {
 		ebipurego.RegisterLibFunc(&_fnCFPropertyListWrite, _lib, "CFPropertyListWrite")
@@ -82,6 +89,10 @@ func CFPropertyListWrite(propertyList CFPropertyListRef, stream CFWriteStreamRef
 var _fnCFStringCreateStringWithValidatedFormat func(objc.ID, objc.ID, objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
 func CFStringCreateStringWithValidatedFormat(alloc CFAllocatorRef, formatOptions CFDictionaryRef, validFormatSpecifiers CFStringRef, format CFStringRef) (obj.Object, error) {
+	defer runtime.KeepAlive(alloc)
+	defer runtime.KeepAlive(formatOptions)
+	defer runtime.KeepAlive(validFormatSpecifiers)
+	defer runtime.KeepAlive(format)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFStringCreateStringWithValidatedFormat == nil {
 		ebipurego.RegisterLibFunc(&_fnCFStringCreateStringWithValidatedFormat, _lib, "CFStringCreateStringWithValidatedFormat")
@@ -98,6 +109,10 @@ func CFStringCreateStringWithValidatedFormat(alloc CFAllocatorRef, formatOptions
 var _fnCFStringCreateStringWithValidatedFormatAndArguments func(objc.ID, objc.ID, objc.ID, objc.ID, string, unsafe.Pointer) objc.ID
 
 func CFStringCreateStringWithValidatedFormatAndArguments(alloc CFAllocatorRef, formatOptions CFDictionaryRef, validFormatSpecifiers CFStringRef, format CFStringRef, arguments string) (obj.Object, error) {
+	defer runtime.KeepAlive(alloc)
+	defer runtime.KeepAlive(formatOptions)
+	defer runtime.KeepAlive(validFormatSpecifiers)
+	defer runtime.KeepAlive(format)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFStringCreateStringWithValidatedFormatAndArguments == nil {
 		ebipurego.RegisterLibFunc(&_fnCFStringCreateStringWithValidatedFormatAndArguments, _lib, "CFStringCreateStringWithValidatedFormatAndArguments")
@@ -114,6 +129,8 @@ func CFStringCreateStringWithValidatedFormatAndArguments(alloc CFAllocatorRef, f
 var _fnCFURLCopyResourcePropertiesForKeys func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
 func CFURLCopyResourcePropertiesForKeys(url CFURLRef, keys CFArrayRef) (obj.Object, error) {
+	defer runtime.KeepAlive(url)
+	defer runtime.KeepAlive(keys)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFURLCopyResourcePropertiesForKeys == nil {
 		ebipurego.RegisterLibFunc(&_fnCFURLCopyResourcePropertiesForKeys, _lib, "CFURLCopyResourcePropertiesForKeys")
@@ -130,6 +147,8 @@ func CFURLCopyResourcePropertiesForKeys(url CFURLRef, keys CFArrayRef) (obj.Obje
 var _fnCFURLCopyResourcePropertyForKey func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer) uint8
 
 func CFURLCopyResourcePropertyForKey(url CFURLRef, key CFStringRef, propertyValueTypeRefPtr unsafe.Pointer) error {
+	defer runtime.KeepAlive(url)
+	defer runtime.KeepAlive(key)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFURLCopyResourcePropertyForKey == nil {
 		ebipurego.RegisterLibFunc(&_fnCFURLCopyResourcePropertyForKey, _lib, "CFURLCopyResourcePropertyForKey")
@@ -146,6 +165,10 @@ func CFURLCopyResourcePropertyForKey(url CFURLRef, key CFStringRef, propertyValu
 var _fnCFURLCreateBookmarkData func(objc.ID, objc.ID, CFURLBookmarkCreationOptions, objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
 func CFURLCreateBookmarkData(allocator CFAllocatorRef, url CFURLRef, options CFURLBookmarkCreationOptions, resourcePropertiesToInclude CFArrayRef, relativeToURL CFURLRef) (obj.Object, error) {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(url)
+	defer runtime.KeepAlive(resourcePropertiesToInclude)
+	defer runtime.KeepAlive(relativeToURL)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFURLCreateBookmarkData == nil {
 		ebipurego.RegisterLibFunc(&_fnCFURLCreateBookmarkData, _lib, "CFURLCreateBookmarkData")
@@ -162,6 +185,8 @@ func CFURLCreateBookmarkData(allocator CFAllocatorRef, url CFURLRef, options CFU
 var _fnCFURLCreateBookmarkDataFromFile func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
 func CFURLCreateBookmarkDataFromFile(allocator CFAllocatorRef, fileURL CFURLRef) (obj.Object, error) {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(fileURL)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFURLCreateBookmarkDataFromFile == nil {
 		ebipurego.RegisterLibFunc(&_fnCFURLCreateBookmarkDataFromFile, _lib, "CFURLCreateBookmarkDataFromFile")
@@ -178,6 +203,8 @@ func CFURLCreateBookmarkDataFromFile(allocator CFAllocatorRef, fileURL CFURLRef)
 var _fnCFURLCreateFilePathURL func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
 func CFURLCreateFilePathURL(allocator CFAllocatorRef, url CFURLRef) (obj.Object, error) {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(url)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFURLCreateFilePathURL == nil {
 		ebipurego.RegisterLibFunc(&_fnCFURLCreateFilePathURL, _lib, "CFURLCreateFilePathURL")
@@ -194,6 +221,8 @@ func CFURLCreateFilePathURL(allocator CFAllocatorRef, url CFURLRef) (obj.Object,
 var _fnCFURLCreateFileReferenceURL func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
 func CFURLCreateFileReferenceURL(allocator CFAllocatorRef, url CFURLRef) (obj.Object, error) {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(url)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFURLCreateFileReferenceURL == nil {
 		ebipurego.RegisterLibFunc(&_fnCFURLCreateFileReferenceURL, _lib, "CFURLCreateFileReferenceURL")
@@ -210,6 +239,7 @@ func CFURLCreateFileReferenceURL(allocator CFAllocatorRef, url CFURLRef) (obj.Ob
 var _fnCFURLEnumeratorGetNextURL func(objc.ID, unsafe.Pointer, unsafe.Pointer) objc.ID
 
 func CFURLEnumeratorGetNextURL(enumerator CFURLEnumeratorRef, url unsafe.Pointer) (obj.Object, error) {
+	defer runtime.KeepAlive(enumerator)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFURLEnumeratorGetNextURL == nil {
 		ebipurego.RegisterLibFunc(&_fnCFURLEnumeratorGetNextURL, _lib, "CFURLEnumeratorGetNextURL")
@@ -226,6 +256,7 @@ func CFURLEnumeratorGetNextURL(enumerator CFURLEnumeratorRef, url unsafe.Pointer
 var _fnCFURLResourceIsReachable func(objc.ID, unsafe.Pointer) uint8
 
 func CFURLResourceIsReachable(url CFURLRef) error {
+	defer runtime.KeepAlive(url)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFURLResourceIsReachable == nil {
 		ebipurego.RegisterLibFunc(&_fnCFURLResourceIsReachable, _lib, "CFURLResourceIsReachable")
@@ -242,6 +273,8 @@ func CFURLResourceIsReachable(url CFURLRef) error {
 var _fnCFURLSetResourcePropertiesForKeys func(objc.ID, objc.ID, unsafe.Pointer) uint8
 
 func CFURLSetResourcePropertiesForKeys(url CFURLRef, keyedPropertyValues CFDictionaryRef) error {
+	defer runtime.KeepAlive(url)
+	defer runtime.KeepAlive(keyedPropertyValues)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFURLSetResourcePropertiesForKeys == nil {
 		ebipurego.RegisterLibFunc(&_fnCFURLSetResourcePropertiesForKeys, _lib, "CFURLSetResourcePropertiesForKeys")
@@ -258,6 +291,9 @@ func CFURLSetResourcePropertiesForKeys(url CFURLRef, keyedPropertyValues CFDicti
 var _fnCFURLSetResourcePropertyForKey func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) uint8
 
 func CFURLSetResourcePropertyForKey(url CFURLRef, key CFStringRef, propertyValue obj.Object) error {
+	defer runtime.KeepAlive(url)
+	defer runtime.KeepAlive(key)
+	defer runtime.KeepAlive(propertyValue)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFURLSetResourcePropertyForKey == nil {
 		ebipurego.RegisterLibFunc(&_fnCFURLSetResourcePropertyForKey, _lib, "CFURLSetResourcePropertyForKey")
@@ -274,6 +310,8 @@ func CFURLSetResourcePropertyForKey(url CFURLRef, key CFStringRef, propertyValue
 var _fnCFURLWriteBookmarkDataToFile func(objc.ID, objc.ID, int, unsafe.Pointer) uint8
 
 func CFURLWriteBookmarkDataToFile(bookmarkRef CFDataRef, fileURL CFURLRef, options int) error {
+	defer runtime.KeepAlive(bookmarkRef)
+	defer runtime.KeepAlive(fileURL)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFURLWriteBookmarkDataToFile == nil {
 		ebipurego.RegisterLibFunc(&_fnCFURLWriteBookmarkDataToFile, _lib, "CFURLWriteBookmarkDataToFile")

@@ -5,6 +5,7 @@
 package carboncore
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
@@ -19,6 +20,7 @@ var _fnCSBackupSetItemExcluded func(objc.ID, uint8, uint8) int32
 
 // CSBackupSetItemExcluded reports an error if the CarbonCore framework function CSBackupSetItemExcluded fails.
 func CSBackupSetItemExcluded(item obj.Object, exclude uint8, excludeByPath uint8) error {
+	defer runtime.KeepAlive(item)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSBackupSetItemExcluded == nil {
 		ebipurego.RegisterLibFunc(&_fnCSBackupSetItemExcluded, _lib, "CSBackupSetItemExcluded")
@@ -34,6 +36,7 @@ var _fnChangeTextToUnicodeInfo func(objc.ID, unsafe.Pointer) int32
 
 // ChangeTextToUnicodeInfo reports an error if the CarbonCore framework function ChangeTextToUnicodeInfo fails.
 func ChangeTextToUnicodeInfo(ioTextToUnicodeInfo TextToUnicodeInfo, iUnicodeMapping *UnicodeMapping) error {
+	defer runtime.KeepAlive(ioTextToUnicodeInfo)
 	_loadOnce.Do(_loadLibrary)
 	if _fnChangeTextToUnicodeInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnChangeTextToUnicodeInfo, _lib, "ChangeTextToUnicodeInfo")
@@ -49,6 +52,7 @@ var _fnChangeUnicodeToTextInfo func(objc.ID, unsafe.Pointer) int32
 
 // ChangeUnicodeToTextInfo reports an error if the CarbonCore framework function ChangeUnicodeToTextInfo fails.
 func ChangeUnicodeToTextInfo(ioUnicodeToTextInfo UnicodeToTextInfo, iUnicodeMapping *UnicodeMapping) error {
+	defer runtime.KeepAlive(ioUnicodeToTextInfo)
 	_loadOnce.Do(_loadLibrary)
 	if _fnChangeUnicodeToTextInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnChangeUnicodeToTextInfo, _lib, "ChangeUnicodeToTextInfo")
@@ -244,6 +248,7 @@ var _fnFNGetDirectoryForSubscription func(objc.ID, unsafe.Pointer) int32
 
 // FNGetDirectoryForSubscription reports an error if the CarbonCore framework function FNGetDirectoryForSubscription fails.
 func FNGetDirectoryForSubscription(subscription FNSubscriptionRef, ref *FSRef) error {
+	defer runtime.KeepAlive(subscription)
 	_loadOnce.Do(_loadLibrary)
 	if _fnFNGetDirectoryForSubscription == nil {
 		ebipurego.RegisterLibFunc(&_fnFNGetDirectoryForSubscription, _lib, "FNGetDirectoryForSubscription")
@@ -304,6 +309,7 @@ var _fnFNUnsubscribe func(objc.ID) int32
 
 // FNUnsubscribe reports an error if the CarbonCore framework function FNUnsubscribe fails.
 func FNUnsubscribe(subscription FNSubscriptionRef) error {
+	defer runtime.KeepAlive(subscription)
 	_loadOnce.Do(_loadLibrary)
 	if _fnFNUnsubscribe == nil {
 		ebipurego.RegisterLibFunc(&_fnFNUnsubscribe, _lib, "FNUnsubscribe")
@@ -319,6 +325,7 @@ var _fnFSCancelVolumeOperation func(objc.ID) int32
 
 // FSCancelVolumeOperation reports an error if the CarbonCore framework function FSCancelVolumeOperation fails.
 func FSCancelVolumeOperation(volumeOp FSVolumeOperation) error {
+	defer runtime.KeepAlive(volumeOp)
 	_loadOnce.Do(_loadLibrary)
 	if _fnFSCancelVolumeOperation == nil {
 		ebipurego.RegisterLibFunc(&_fnFSCancelVolumeOperation, _lib, "FSCancelVolumeOperation")
@@ -365,6 +372,7 @@ var _fnFSCopyObjectSync func(unsafe.Pointer, unsafe.Pointer, objc.ID, unsafe.Poi
 
 // FSCopyObjectSync reports an error if the CarbonCore framework function FSCopyObjectSync fails.
 func FSCopyObjectSync(source *FSRef, destDir *FSRef, destName obj.Object, target *FSRef, options int) error {
+	defer runtime.KeepAlive(destName)
 	_loadOnce.Do(_loadLibrary)
 	if _fnFSCopyObjectSync == nil {
 		ebipurego.RegisterLibFunc(&_fnFSCopyObjectSync, _lib, "FSCopyObjectSync")
@@ -411,6 +419,7 @@ var _fnFSDisposeVolumeOperation func(objc.ID) int32
 
 // FSDisposeVolumeOperation reports an error if the CarbonCore framework function FSDisposeVolumeOperation fails.
 func FSDisposeVolumeOperation(volumeOp FSVolumeOperation) error {
+	defer runtime.KeepAlive(volumeOp)
 	_loadOnce.Do(_loadLibrary)
 	if _fnFSDisposeVolumeOperation == nil {
 		ebipurego.RegisterLibFunc(&_fnFSDisposeVolumeOperation, _lib, "FSDisposeVolumeOperation")
@@ -426,6 +435,9 @@ var _fnFSEjectVolumeAsync func(int16, int, objc.ID, unsafe.Pointer, unsafe.Point
 
 // FSEjectVolumeAsync reports an error if the CarbonCore framework function FSEjectVolumeAsync fails.
 func FSEjectVolumeAsync(vRefNum int16, flags int, volumeOp FSVolumeOperation, clientData unsafe.Pointer, callback unsafe.Pointer, runloop obj.Object, runloopMode obj.Object) error {
+	defer runtime.KeepAlive(volumeOp)
+	defer runtime.KeepAlive(runloop)
+	defer runtime.KeepAlive(runloopMode)
 	_loadOnce.Do(_loadLibrary)
 	if _fnFSEjectVolumeAsync == nil {
 		ebipurego.RegisterLibFunc(&_fnFSEjectVolumeAsync, _lib, "FSEjectVolumeAsync")
@@ -441,6 +453,7 @@ var _fnFSFileOperationCancel func(objc.ID) int32
 
 // FSFileOperationCancel reports an error if the CarbonCore framework function FSFileOperationCancel fails.
 func FSFileOperationCancel(fileOp FSFileOperationRef) error {
+	defer runtime.KeepAlive(fileOp)
 	_loadOnce.Do(_loadLibrary)
 	if _fnFSFileOperationCancel == nil {
 		ebipurego.RegisterLibFunc(&_fnFSFileOperationCancel, _lib, "FSFileOperationCancel")
@@ -456,6 +469,9 @@ var _fnFSFileOperationScheduleWithRunLoop func(objc.ID, objc.ID, objc.ID) int32
 
 // FSFileOperationScheduleWithRunLoop reports an error if the CarbonCore framework function FSFileOperationScheduleWithRunLoop fails.
 func FSFileOperationScheduleWithRunLoop(fileOp FSFileOperationRef, runLoop obj.Object, runLoopMode obj.Object) error {
+	defer runtime.KeepAlive(fileOp)
+	defer runtime.KeepAlive(runLoop)
+	defer runtime.KeepAlive(runLoopMode)
 	_loadOnce.Do(_loadLibrary)
 	if _fnFSFileOperationScheduleWithRunLoop == nil {
 		ebipurego.RegisterLibFunc(&_fnFSFileOperationScheduleWithRunLoop, _lib, "FSFileOperationScheduleWithRunLoop")
@@ -471,6 +487,9 @@ var _fnFSFileOperationUnscheduleFromRunLoop func(objc.ID, objc.ID, objc.ID) int3
 
 // FSFileOperationUnscheduleFromRunLoop reports an error if the CarbonCore framework function FSFileOperationUnscheduleFromRunLoop fails.
 func FSFileOperationUnscheduleFromRunLoop(fileOp FSFileOperationRef, runLoop obj.Object, runLoopMode obj.Object) error {
+	defer runtime.KeepAlive(fileOp)
+	defer runtime.KeepAlive(runLoop)
+	defer runtime.KeepAlive(runLoopMode)
 	_loadOnce.Do(_loadLibrary)
 	if _fnFSFileOperationUnscheduleFromRunLoop == nil {
 		ebipurego.RegisterLibFunc(&_fnFSFileOperationUnscheduleFromRunLoop, _lib, "FSFileOperationUnscheduleFromRunLoop")
@@ -486,6 +505,7 @@ var _fnFSFileSecurityCopyAccessControlList func(objc.ID, unsafe.Pointer) int32
 
 // FSFileSecurityCopyAccessControlList reports an error if the CarbonCore framework function FSFileSecurityCopyAccessControlList fails.
 func FSFileSecurityCopyAccessControlList(fileSec FSFileSecurityRef, accessControlList unsafe.Pointer) error {
+	defer runtime.KeepAlive(fileSec)
 	_loadOnce.Do(_loadLibrary)
 	if _fnFSFileSecurityCopyAccessControlList == nil {
 		ebipurego.RegisterLibFunc(&_fnFSFileSecurityCopyAccessControlList, _lib, "FSFileSecurityCopyAccessControlList")
@@ -501,6 +521,7 @@ var _fnFSFileSecurityGetGroupUUID func(objc.ID, unsafe.Pointer) int32
 
 // FSFileSecurityGetGroupUUID reports an error if the CarbonCore framework function FSFileSecurityGetGroupUUID fails.
 func FSFileSecurityGetGroupUUID(fileSec FSFileSecurityRef, group *corefoundation.CFUUIDBytes) error {
+	defer runtime.KeepAlive(fileSec)
 	_loadOnce.Do(_loadLibrary)
 	if _fnFSFileSecurityGetGroupUUID == nil {
 		ebipurego.RegisterLibFunc(&_fnFSFileSecurityGetGroupUUID, _lib, "FSFileSecurityGetGroupUUID")
@@ -516,6 +537,7 @@ var _fnFSFileSecurityGetOwnerUUID func(objc.ID, unsafe.Pointer) int32
 
 // FSFileSecurityGetOwnerUUID reports an error if the CarbonCore framework function FSFileSecurityGetOwnerUUID fails.
 func FSFileSecurityGetOwnerUUID(fileSec FSFileSecurityRef, owner *corefoundation.CFUUIDBytes) error {
+	defer runtime.KeepAlive(fileSec)
 	_loadOnce.Do(_loadLibrary)
 	if _fnFSFileSecurityGetOwnerUUID == nil {
 		ebipurego.RegisterLibFunc(&_fnFSFileSecurityGetOwnerUUID, _lib, "FSFileSecurityGetOwnerUUID")
@@ -531,6 +553,7 @@ var _fnFSFileSecuritySetAccessControlList func(objc.ID, unsafe.Pointer) int32
 
 // FSFileSecuritySetAccessControlList reports an error if the CarbonCore framework function FSFileSecuritySetAccessControlList fails.
 func FSFileSecuritySetAccessControlList(fileSec FSFileSecurityRef, accessControlList unsafe.Pointer) error {
+	defer runtime.KeepAlive(fileSec)
 	_loadOnce.Do(_loadLibrary)
 	if _fnFSFileSecuritySetAccessControlList == nil {
 		ebipurego.RegisterLibFunc(&_fnFSFileSecuritySetAccessControlList, _lib, "FSFileSecuritySetAccessControlList")
@@ -546,6 +569,7 @@ var _fnFSFileSecuritySetGroup func(objc.ID, int) int32
 
 // FSFileSecuritySetGroup reports an error if the CarbonCore framework function FSFileSecuritySetGroup fails.
 func FSFileSecuritySetGroup(fileSec FSFileSecurityRef, group int) error {
+	defer runtime.KeepAlive(fileSec)
 	_loadOnce.Do(_loadLibrary)
 	if _fnFSFileSecuritySetGroup == nil {
 		ebipurego.RegisterLibFunc(&_fnFSFileSecuritySetGroup, _lib, "FSFileSecuritySetGroup")
@@ -561,6 +585,7 @@ var _fnFSFileSecuritySetGroupUUID func(objc.ID, unsafe.Pointer) int32
 
 // FSFileSecuritySetGroupUUID reports an error if the CarbonCore framework function FSFileSecuritySetGroupUUID fails.
 func FSFileSecuritySetGroupUUID(fileSec FSFileSecurityRef, group *corefoundation.CFUUIDBytes) error {
+	defer runtime.KeepAlive(fileSec)
 	_loadOnce.Do(_loadLibrary)
 	if _fnFSFileSecuritySetGroupUUID == nil {
 		ebipurego.RegisterLibFunc(&_fnFSFileSecuritySetGroupUUID, _lib, "FSFileSecuritySetGroupUUID")
@@ -576,6 +601,7 @@ var _fnFSFileSecuritySetMode func(objc.ID, uint16) int32
 
 // FSFileSecuritySetMode reports an error if the CarbonCore framework function FSFileSecuritySetMode fails.
 func FSFileSecuritySetMode(fileSec FSFileSecurityRef, mode uint16) error {
+	defer runtime.KeepAlive(fileSec)
 	_loadOnce.Do(_loadLibrary)
 	if _fnFSFileSecuritySetMode == nil {
 		ebipurego.RegisterLibFunc(&_fnFSFileSecuritySetMode, _lib, "FSFileSecuritySetMode")
@@ -591,6 +617,7 @@ var _fnFSFileSecuritySetOwner func(objc.ID, int) int32
 
 // FSFileSecuritySetOwner reports an error if the CarbonCore framework function FSFileSecuritySetOwner fails.
 func FSFileSecuritySetOwner(fileSec FSFileSecurityRef, owner int) error {
+	defer runtime.KeepAlive(fileSec)
 	_loadOnce.Do(_loadLibrary)
 	if _fnFSFileSecuritySetOwner == nil {
 		ebipurego.RegisterLibFunc(&_fnFSFileSecuritySetOwner, _lib, "FSFileSecuritySetOwner")
@@ -606,6 +633,7 @@ var _fnFSFileSecuritySetOwnerUUID func(objc.ID, unsafe.Pointer) int32
 
 // FSFileSecuritySetOwnerUUID reports an error if the CarbonCore framework function FSFileSecuritySetOwnerUUID fails.
 func FSFileSecuritySetOwnerUUID(fileSec FSFileSecurityRef, owner *corefoundation.CFUUIDBytes) error {
+	defer runtime.KeepAlive(fileSec)
 	_loadOnce.Do(_loadLibrary)
 	if _fnFSFileSecuritySetOwnerUUID == nil {
 		ebipurego.RegisterLibFunc(&_fnFSFileSecuritySetOwnerUUID, _lib, "FSFileSecuritySetOwnerUUID")
@@ -636,6 +664,7 @@ var _fnFSGetHFSUniStrFromString func(objc.ID, unsafe.Pointer) int32
 
 // FSGetHFSUniStrFromString reports an error if the CarbonCore framework function FSGetHFSUniStrFromString fails.
 func FSGetHFSUniStrFromString(theString obj.Object, uniStr unsafe.Pointer) error {
+	defer runtime.KeepAlive(theString)
 	_loadOnce.Do(_loadLibrary)
 	if _fnFSGetHFSUniStrFromString == nil {
 		ebipurego.RegisterLibFunc(&_fnFSGetHFSUniStrFromString, _lib, "FSGetHFSUniStrFromString")
@@ -666,6 +695,11 @@ var _fnFSMountLocalVolumeAsync func(objc.ID, objc.ID, objc.ID, unsafe.Pointer, i
 
 // FSMountLocalVolumeAsync reports an error if the CarbonCore framework function FSMountLocalVolumeAsync fails.
 func FSMountLocalVolumeAsync(diskID obj.Object, mountDir obj.Object, volumeOp FSVolumeOperation, clientData unsafe.Pointer, flags int, callback unsafe.Pointer, runloop obj.Object, runloopMode obj.Object) error {
+	defer runtime.KeepAlive(diskID)
+	defer runtime.KeepAlive(mountDir)
+	defer runtime.KeepAlive(volumeOp)
+	defer runtime.KeepAlive(runloop)
+	defer runtime.KeepAlive(runloopMode)
 	_loadOnce.Do(_loadLibrary)
 	if _fnFSMountLocalVolumeAsync == nil {
 		ebipurego.RegisterLibFunc(&_fnFSMountLocalVolumeAsync, _lib, "FSMountLocalVolumeAsync")
@@ -681,6 +715,13 @@ var _fnFSMountServerVolumeAsync func(objc.ID, objc.ID, objc.ID, objc.ID, objc.ID
 
 // FSMountServerVolumeAsync reports an error if the CarbonCore framework function FSMountServerVolumeAsync fails.
 func FSMountServerVolumeAsync(url obj.Object, mountDir obj.Object, user obj.Object, password obj.Object, volumeOp FSVolumeOperation, clientData unsafe.Pointer, flags int, callback unsafe.Pointer, runloop obj.Object, runloopMode obj.Object) error {
+	defer runtime.KeepAlive(url)
+	defer runtime.KeepAlive(mountDir)
+	defer runtime.KeepAlive(user)
+	defer runtime.KeepAlive(password)
+	defer runtime.KeepAlive(volumeOp)
+	defer runtime.KeepAlive(runloop)
+	defer runtime.KeepAlive(runloopMode)
 	_loadOnce.Do(_loadLibrary)
 	if _fnFSMountServerVolumeAsync == nil {
 		ebipurego.RegisterLibFunc(&_fnFSMountServerVolumeAsync, _lib, "FSMountServerVolumeAsync")
@@ -696,6 +737,7 @@ var _fnFSMoveObjectSync func(unsafe.Pointer, unsafe.Pointer, objc.ID, unsafe.Poi
 
 // FSMoveObjectSync reports an error if the CarbonCore framework function FSMoveObjectSync fails.
 func FSMoveObjectSync(source *FSRef, destDir *FSRef, destName obj.Object, target *FSRef, options int) error {
+	defer runtime.KeepAlive(destName)
 	_loadOnce.Do(_loadLibrary)
 	if _fnFSMoveObjectSync == nil {
 		ebipurego.RegisterLibFunc(&_fnFSMoveObjectSync, _lib, "FSMoveObjectSync")
@@ -726,6 +768,7 @@ var _fnFSPathCopyObjectSync func(string, string, objc.ID, string, int) int32
 
 // FSPathCopyObjectSync reports an error if the CarbonCore framework function FSPathCopyObjectSync fails.
 func FSPathCopyObjectSync(sourcePath string, destDirPath string, destName obj.Object, targetPath string, options int) error {
+	defer runtime.KeepAlive(destName)
 	_loadOnce.Do(_loadLibrary)
 	if _fnFSPathCopyObjectSync == nil {
 		ebipurego.RegisterLibFunc(&_fnFSPathCopyObjectSync, _lib, "FSPathCopyObjectSync")
@@ -756,6 +799,7 @@ var _fnFSPathMoveObjectSync func(string, string, objc.ID, string, int) int32
 
 // FSPathMoveObjectSync reports an error if the CarbonCore framework function FSPathMoveObjectSync fails.
 func FSPathMoveObjectSync(sourcePath string, destDirPath string, destName obj.Object, targetPath string, options int) error {
+	defer runtime.KeepAlive(destName)
 	_loadOnce.Do(_loadLibrary)
 	if _fnFSPathMoveObjectSync == nil {
 		ebipurego.RegisterLibFunc(&_fnFSPathMoveObjectSync, _lib, "FSPathMoveObjectSync")
@@ -786,6 +830,8 @@ var _fnFSPathReplaceObject func(string, string, objc.ID, objc.ID, string, int) i
 
 // FSPathReplaceObject reports an error if the CarbonCore framework function FSPathReplaceObject fails.
 func FSPathReplaceObject(originalObjectPath string, replacementObjectPath string, newName obj.Object, temporaryName obj.Object, temporaryDirectoryPath string, flags int) error {
+	defer runtime.KeepAlive(newName)
+	defer runtime.KeepAlive(temporaryName)
 	_loadOnce.Do(_loadLibrary)
 	if _fnFSPathReplaceObject == nil {
 		ebipurego.RegisterLibFunc(&_fnFSPathReplaceObject, _lib, "FSPathReplaceObject")
@@ -801,6 +847,8 @@ var _fnFSReplaceObject func(unsafe.Pointer, unsafe.Pointer, objc.ID, objc.ID, un
 
 // FSReplaceObject reports an error if the CarbonCore framework function FSReplaceObject fails.
 func FSReplaceObject(originalObject *FSRef, replacementObject *FSRef, newName obj.Object, temporaryName obj.Object, temporaryDirectory *FSRef, flags int, resultObject *FSRef) error {
+	defer runtime.KeepAlive(newName)
+	defer runtime.KeepAlive(temporaryName)
 	_loadOnce.Do(_loadLibrary)
 	if _fnFSReplaceObject == nil {
 		ebipurego.RegisterLibFunc(&_fnFSReplaceObject, _lib, "FSReplaceObject")
@@ -831,6 +879,9 @@ var _fnFSUnmountVolumeAsync func(int16, int, objc.ID, unsafe.Pointer, unsafe.Poi
 
 // FSUnmountVolumeAsync reports an error if the CarbonCore framework function FSUnmountVolumeAsync fails.
 func FSUnmountVolumeAsync(vRefNum int16, flags int, volumeOp FSVolumeOperation, clientData unsafe.Pointer, callback unsafe.Pointer, runloop obj.Object, runloopMode obj.Object) error {
+	defer runtime.KeepAlive(volumeOp)
+	defer runtime.KeepAlive(runloop)
+	defer runtime.KeepAlive(runloopMode)
 	_loadOnce.Do(_loadLibrary)
 	if _fnFSUnmountVolumeAsync == nil {
 		ebipurego.RegisterLibFunc(&_fnFSUnmountVolumeAsync, _lib, "FSUnmountVolumeAsync")
@@ -891,6 +942,7 @@ var _fnLocaleRefGetPartString func(objc.ID, int, int, string) int32
 
 // LocaleRefGetPartString reports an error if the CarbonCore framework function LocaleRefGetPartString fails.
 func LocaleRefGetPartString(locale LocaleRef, partMask int, maxStringLen int, partString string) error {
+	defer runtime.KeepAlive(locale)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLocaleRefGetPartString == nil {
 		ebipurego.RegisterLibFunc(&_fnLocaleRefGetPartString, _lib, "LocaleRefGetPartString")
@@ -906,6 +958,7 @@ var _fnMPArmTimer func(objc.ID, unsafe.Pointer, int) int32
 
 // MPArmTimer reports an error if the CarbonCore framework function MPArmTimer fails.
 func MPArmTimer(timerID MPTimerID, expirationTime unsafe.Pointer, options int) error {
+	defer runtime.KeepAlive(timerID)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMPArmTimer == nil {
 		ebipurego.RegisterLibFunc(&_fnMPArmTimer, _lib, "MPArmTimer")
@@ -921,6 +974,7 @@ var _fnMPCancelTimer func(objc.ID, unsafe.Pointer) int32
 
 // MPCancelTimer reports an error if the CarbonCore framework function MPCancelTimer fails.
 func MPCancelTimer(timerID MPTimerID, timeRemaining unsafe.Pointer) error {
+	defer runtime.KeepAlive(timerID)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMPCancelTimer == nil {
 		ebipurego.RegisterLibFunc(&_fnMPCancelTimer, _lib, "MPCancelTimer")
@@ -936,6 +990,7 @@ var _fnMPCauseNotification func(objc.ID) int32
 
 // MPCauseNotification reports an error if the CarbonCore framework function MPCauseNotification fails.
 func MPCauseNotification(notificationID MPNotificationID) error {
+	defer runtime.KeepAlive(notificationID)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMPCauseNotification == nil {
 		ebipurego.RegisterLibFunc(&_fnMPCauseNotification, _lib, "MPCauseNotification")
@@ -1026,6 +1081,7 @@ var _fnMPCreateTask func(unsafe.Pointer, unsafe.Pointer, int, objc.ID, unsafe.Po
 
 // MPCreateTask reports an error if the CarbonCore framework function MPCreateTask fails.
 func MPCreateTask(entryPoint unsafe.Pointer, parameter unsafe.Pointer, stackSize int, notifyQueue MPQueueID, terminationParameter1 unsafe.Pointer, terminationParameter2 unsafe.Pointer, options int, task unsafe.Pointer) error {
+	defer runtime.KeepAlive(notifyQueue)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMPCreateTask == nil {
 		ebipurego.RegisterLibFunc(&_fnMPCreateTask, _lib, "MPCreateTask")
@@ -1086,6 +1142,7 @@ var _fnMPDeleteCriticalRegion func(objc.ID) int32
 
 // MPDeleteCriticalRegion reports an error if the CarbonCore framework function MPDeleteCriticalRegion fails.
 func MPDeleteCriticalRegion(criticalRegion MPCriticalRegionID) error {
+	defer runtime.KeepAlive(criticalRegion)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMPDeleteCriticalRegion == nil {
 		ebipurego.RegisterLibFunc(&_fnMPDeleteCriticalRegion, _lib, "MPDeleteCriticalRegion")
@@ -1101,6 +1158,7 @@ var _fnMPDeleteEvent func(objc.ID) int32
 
 // MPDeleteEvent reports an error if the CarbonCore framework function MPDeleteEvent fails.
 func MPDeleteEvent(event MPEventID) error {
+	defer runtime.KeepAlive(event)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMPDeleteEvent == nil {
 		ebipurego.RegisterLibFunc(&_fnMPDeleteEvent, _lib, "MPDeleteEvent")
@@ -1116,6 +1174,7 @@ var _fnMPDeleteNotification func(objc.ID) int32
 
 // MPDeleteNotification reports an error if the CarbonCore framework function MPDeleteNotification fails.
 func MPDeleteNotification(notificationID MPNotificationID) error {
+	defer runtime.KeepAlive(notificationID)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMPDeleteNotification == nil {
 		ebipurego.RegisterLibFunc(&_fnMPDeleteNotification, _lib, "MPDeleteNotification")
@@ -1131,6 +1190,7 @@ var _fnMPDeleteQueue func(objc.ID) int32
 
 // MPDeleteQueue reports an error if the CarbonCore framework function MPDeleteQueue fails.
 func MPDeleteQueue(queue MPQueueID) error {
+	defer runtime.KeepAlive(queue)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMPDeleteQueue == nil {
 		ebipurego.RegisterLibFunc(&_fnMPDeleteQueue, _lib, "MPDeleteQueue")
@@ -1146,6 +1206,7 @@ var _fnMPDeleteSemaphore func(objc.ID) int32
 
 // MPDeleteSemaphore reports an error if the CarbonCore framework function MPDeleteSemaphore fails.
 func MPDeleteSemaphore(semaphore MPSemaphoreID) error {
+	defer runtime.KeepAlive(semaphore)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMPDeleteSemaphore == nil {
 		ebipurego.RegisterLibFunc(&_fnMPDeleteSemaphore, _lib, "MPDeleteSemaphore")
@@ -1161,6 +1222,7 @@ var _fnMPDeleteTimer func(objc.ID) int32
 
 // MPDeleteTimer reports an error if the CarbonCore framework function MPDeleteTimer fails.
 func MPDeleteTimer(timerID MPTimerID) error {
+	defer runtime.KeepAlive(timerID)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMPDeleteTimer == nil {
 		ebipurego.RegisterLibFunc(&_fnMPDeleteTimer, _lib, "MPDeleteTimer")
@@ -1176,6 +1238,7 @@ var _fnMPDisposeTaskException func(objc.ID, int) int32
 
 // MPDisposeTaskException reports an error if the CarbonCore framework function MPDisposeTaskException fails.
 func MPDisposeTaskException(task MPTaskID, action int) error {
+	defer runtime.KeepAlive(task)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMPDisposeTaskException == nil {
 		ebipurego.RegisterLibFunc(&_fnMPDisposeTaskException, _lib, "MPDisposeTaskException")
@@ -1191,6 +1254,7 @@ var _fnMPEnterCriticalRegion func(objc.ID, int) int32
 
 // MPEnterCriticalRegion reports an error if the CarbonCore framework function MPEnterCriticalRegion fails.
 func MPEnterCriticalRegion(criticalRegion MPCriticalRegionID, timeout int) error {
+	defer runtime.KeepAlive(criticalRegion)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMPEnterCriticalRegion == nil {
 		ebipurego.RegisterLibFunc(&_fnMPEnterCriticalRegion, _lib, "MPEnterCriticalRegion")
@@ -1206,6 +1270,7 @@ var _fnMPExitCriticalRegion func(objc.ID) int32
 
 // MPExitCriticalRegion reports an error if the CarbonCore framework function MPExitCriticalRegion fails.
 func MPExitCriticalRegion(criticalRegion MPCriticalRegionID) error {
+	defer runtime.KeepAlive(criticalRegion)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMPExitCriticalRegion == nil {
 		ebipurego.RegisterLibFunc(&_fnMPExitCriticalRegion, _lib, "MPExitCriticalRegion")
@@ -1221,6 +1286,7 @@ var _fnMPExtractTaskState func(objc.ID, int, unsafe.Pointer) int32
 
 // MPExtractTaskState reports an error if the CarbonCore framework function MPExtractTaskState fails.
 func MPExtractTaskState(task MPTaskID, kind int, info unsafe.Pointer) error {
+	defer runtime.KeepAlive(task)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMPExtractTaskState == nil {
 		ebipurego.RegisterLibFunc(&_fnMPExtractTaskState, _lib, "MPExtractTaskState")
@@ -1236,6 +1302,7 @@ var _fnMPGetNextCpuID func(objc.ID, unsafe.Pointer) int32
 
 // MPGetNextCpuID reports an error if the CarbonCore framework function MPGetNextCpuID fails.
 func MPGetNextCpuID(owningCoherenceID MPCoherenceID, cpuID unsafe.Pointer) error {
+	defer runtime.KeepAlive(owningCoherenceID)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMPGetNextCpuID == nil {
 		ebipurego.RegisterLibFunc(&_fnMPGetNextCpuID, _lib, "MPGetNextCpuID")
@@ -1251,6 +1318,7 @@ var _fnMPGetNextTaskID func(objc.ID, unsafe.Pointer) int32
 
 // MPGetNextTaskID reports an error if the CarbonCore framework function MPGetNextTaskID fails.
 func MPGetNextTaskID(owningProcessID MPProcessID, taskID unsafe.Pointer) error {
+	defer runtime.KeepAlive(owningProcessID)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMPGetNextTaskID == nil {
 		ebipurego.RegisterLibFunc(&_fnMPGetNextTaskID, _lib, "MPGetNextTaskID")
@@ -1266,6 +1334,8 @@ var _fnMPModifyNotification func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointe
 
 // MPModifyNotification reports an error if the CarbonCore framework function MPModifyNotification fails.
 func MPModifyNotification(notificationID MPNotificationID, anID MPOpaqueID, notifyParam1 unsafe.Pointer, notifyParam2 unsafe.Pointer, notifyParam3 unsafe.Pointer) error {
+	defer runtime.KeepAlive(notificationID)
+	defer runtime.KeepAlive(anID)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMPModifyNotification == nil {
 		ebipurego.RegisterLibFunc(&_fnMPModifyNotification, _lib, "MPModifyNotification")
@@ -1281,6 +1351,7 @@ var _fnMPModifyNotificationParameters func(objc.ID, int, unsafe.Pointer, unsafe.
 
 // MPModifyNotificationParameters reports an error if the CarbonCore framework function MPModifyNotificationParameters fails.
 func MPModifyNotificationParameters(notificationID MPNotificationID, kind int, notifyParam1 unsafe.Pointer, notifyParam2 unsafe.Pointer, notifyParam3 unsafe.Pointer) error {
+	defer runtime.KeepAlive(notificationID)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMPModifyNotificationParameters == nil {
 		ebipurego.RegisterLibFunc(&_fnMPModifyNotificationParameters, _lib, "MPModifyNotificationParameters")
@@ -1296,6 +1367,7 @@ var _fnMPNotifyQueue func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointe
 
 // MPNotifyQueue reports an error if the CarbonCore framework function MPNotifyQueue fails.
 func MPNotifyQueue(queue MPQueueID, param1 unsafe.Pointer, param2 unsafe.Pointer, param3 unsafe.Pointer) error {
+	defer runtime.KeepAlive(queue)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMPNotifyQueue == nil {
 		ebipurego.RegisterLibFunc(&_fnMPNotifyQueue, _lib, "MPNotifyQueue")
@@ -1311,6 +1383,7 @@ var _fnMPRegisterDebugger func(objc.ID, int) int32
 
 // MPRegisterDebugger reports an error if the CarbonCore framework function MPRegisterDebugger fails.
 func MPRegisterDebugger(queue MPQueueID, level int) error {
+	defer runtime.KeepAlive(queue)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMPRegisterDebugger == nil {
 		ebipurego.RegisterLibFunc(&_fnMPRegisterDebugger, _lib, "MPRegisterDebugger")
@@ -1326,6 +1399,7 @@ var _fnMPSetEvent func(objc.ID, int) int32
 
 // MPSetEvent reports an error if the CarbonCore framework function MPSetEvent fails.
 func MPSetEvent(event MPEventID, flags int) error {
+	defer runtime.KeepAlive(event)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMPSetEvent == nil {
 		ebipurego.RegisterLibFunc(&_fnMPSetEvent, _lib, "MPSetEvent")
@@ -1341,6 +1415,8 @@ var _fnMPSetExceptionHandler func(objc.ID, objc.ID) int32
 
 // MPSetExceptionHandler reports an error if the CarbonCore framework function MPSetExceptionHandler fails.
 func MPSetExceptionHandler(task MPTaskID, exceptionQ MPQueueID) error {
+	defer runtime.KeepAlive(task)
+	defer runtime.KeepAlive(exceptionQ)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMPSetExceptionHandler == nil {
 		ebipurego.RegisterLibFunc(&_fnMPSetExceptionHandler, _lib, "MPSetExceptionHandler")
@@ -1356,6 +1432,7 @@ var _fnMPSetQueueReserve func(objc.ID, int) int32
 
 // MPSetQueueReserve reports an error if the CarbonCore framework function MPSetQueueReserve fails.
 func MPSetQueueReserve(queue MPQueueID, count int) error {
+	defer runtime.KeepAlive(queue)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMPSetQueueReserve == nil {
 		ebipurego.RegisterLibFunc(&_fnMPSetQueueReserve, _lib, "MPSetQueueReserve")
@@ -1371,6 +1448,7 @@ var _fnMPSetTaskState func(objc.ID, int, unsafe.Pointer) int32
 
 // MPSetTaskState reports an error if the CarbonCore framework function MPSetTaskState fails.
 func MPSetTaskState(task MPTaskID, kind int, info unsafe.Pointer) error {
+	defer runtime.KeepAlive(task)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMPSetTaskState == nil {
 		ebipurego.RegisterLibFunc(&_fnMPSetTaskState, _lib, "MPSetTaskState")
@@ -1401,6 +1479,7 @@ var _fnMPSetTaskType func(objc.ID, int) int32
 
 // MPSetTaskType reports an error if the CarbonCore framework function MPSetTaskType fails.
 func MPSetTaskType(task MPTaskID, taskType int) error {
+	defer runtime.KeepAlive(task)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMPSetTaskType == nil {
 		ebipurego.RegisterLibFunc(&_fnMPSetTaskType, _lib, "MPSetTaskType")
@@ -1416,6 +1495,7 @@ var _fnMPSetTaskWeight func(objc.ID, int) int32
 
 // MPSetTaskWeight reports an error if the CarbonCore framework function MPSetTaskWeight fails.
 func MPSetTaskWeight(task MPTaskID, weight int) error {
+	defer runtime.KeepAlive(task)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMPSetTaskWeight == nil {
 		ebipurego.RegisterLibFunc(&_fnMPSetTaskWeight, _lib, "MPSetTaskWeight")
@@ -1431,6 +1511,8 @@ var _fnMPSetTimerNotify func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer, u
 
 // MPSetTimerNotify reports an error if the CarbonCore framework function MPSetTimerNotify fails.
 func MPSetTimerNotify(timerID MPTimerID, anID MPOpaqueID, notifyParam1 unsafe.Pointer, notifyParam2 unsafe.Pointer, notifyParam3 unsafe.Pointer) error {
+	defer runtime.KeepAlive(timerID)
+	defer runtime.KeepAlive(anID)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMPSetTimerNotify == nil {
 		ebipurego.RegisterLibFunc(&_fnMPSetTimerNotify, _lib, "MPSetTimerNotify")
@@ -1446,6 +1528,7 @@ var _fnMPSignalSemaphore func(objc.ID) int32
 
 // MPSignalSemaphore reports an error if the CarbonCore framework function MPSignalSemaphore fails.
 func MPSignalSemaphore(semaphore MPSemaphoreID) error {
+	defer runtime.KeepAlive(semaphore)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMPSignalSemaphore == nil {
 		ebipurego.RegisterLibFunc(&_fnMPSignalSemaphore, _lib, "MPSignalSemaphore")
@@ -1461,6 +1544,7 @@ var _fnMPTerminateTask func(objc.ID, int) int32
 
 // MPTerminateTask reports an error if the CarbonCore framework function MPTerminateTask fails.
 func MPTerminateTask(task MPTaskID, terminationStatus int) error {
+	defer runtime.KeepAlive(task)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMPTerminateTask == nil {
 		ebipurego.RegisterLibFunc(&_fnMPTerminateTask, _lib, "MPTerminateTask")
@@ -1476,6 +1560,7 @@ var _fnMPThrowException func(objc.ID, int) int32
 
 // MPThrowException reports an error if the CarbonCore framework function MPThrowException fails.
 func MPThrowException(task MPTaskID, kind int) error {
+	defer runtime.KeepAlive(task)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMPThrowException == nil {
 		ebipurego.RegisterLibFunc(&_fnMPThrowException, _lib, "MPThrowException")
@@ -1491,6 +1576,7 @@ var _fnMPUnregisterDebugger func(objc.ID) int32
 
 // MPUnregisterDebugger reports an error if the CarbonCore framework function MPUnregisterDebugger fails.
 func MPUnregisterDebugger(queue MPQueueID) error {
+	defer runtime.KeepAlive(queue)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMPUnregisterDebugger == nil {
 		ebipurego.RegisterLibFunc(&_fnMPUnregisterDebugger, _lib, "MPUnregisterDebugger")
@@ -1506,6 +1592,7 @@ var _fnMPWaitOnQueue func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointe
 
 // MPWaitOnQueue reports an error if the CarbonCore framework function MPWaitOnQueue fails.
 func MPWaitOnQueue(queue MPQueueID, param1 unsafe.Pointer, param2 unsafe.Pointer, param3 unsafe.Pointer, timeout int) error {
+	defer runtime.KeepAlive(queue)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMPWaitOnQueue == nil {
 		ebipurego.RegisterLibFunc(&_fnMPWaitOnQueue, _lib, "MPWaitOnQueue")
@@ -1521,6 +1608,7 @@ var _fnMPWaitOnSemaphore func(objc.ID, int) int32
 
 // MPWaitOnSemaphore reports an error if the CarbonCore framework function MPWaitOnSemaphore fails.
 func MPWaitOnSemaphore(semaphore MPSemaphoreID, timeout int) error {
+	defer runtime.KeepAlive(semaphore)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMPWaitOnSemaphore == nil {
 		ebipurego.RegisterLibFunc(&_fnMPWaitOnSemaphore, _lib, "MPWaitOnSemaphore")
@@ -1536,6 +1624,7 @@ var _fnReleaseCollection func(objc.ID) int32
 
 // ReleaseCollection reports an error if the CarbonCore framework function ReleaseCollection fails.
 func ReleaseCollection(c Collection) error {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnReleaseCollection == nil {
 		ebipurego.RegisterLibFunc(&_fnReleaseCollection, _lib, "ReleaseCollection")
@@ -1551,6 +1640,7 @@ var _fnResetTextToUnicodeInfo func(objc.ID) int32
 
 // ResetTextToUnicodeInfo reports an error if the CarbonCore framework function ResetTextToUnicodeInfo fails.
 func ResetTextToUnicodeInfo(ioTextToUnicodeInfo TextToUnicodeInfo) error {
+	defer runtime.KeepAlive(ioTextToUnicodeInfo)
 	_loadOnce.Do(_loadLibrary)
 	if _fnResetTextToUnicodeInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnResetTextToUnicodeInfo, _lib, "ResetTextToUnicodeInfo")
@@ -1566,6 +1656,7 @@ var _fnResetUnicodeToTextInfo func(objc.ID) int32
 
 // ResetUnicodeToTextInfo reports an error if the CarbonCore framework function ResetUnicodeToTextInfo fails.
 func ResetUnicodeToTextInfo(ioUnicodeToTextInfo UnicodeToTextInfo) error {
+	defer runtime.KeepAlive(ioUnicodeToTextInfo)
 	_loadOnce.Do(_loadLibrary)
 	if _fnResetUnicodeToTextInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnResetUnicodeToTextInfo, _lib, "ResetUnicodeToTextInfo")
@@ -1581,6 +1672,7 @@ var _fnResetUnicodeToTextRunInfo func(objc.ID) int32
 
 // ResetUnicodeToTextRunInfo reports an error if the CarbonCore framework function ResetUnicodeToTextRunInfo fails.
 func ResetUnicodeToTextRunInfo(ioUnicodeToTextRunInfo UnicodeToTextRunInfo) error {
+	defer runtime.KeepAlive(ioUnicodeToTextRunInfo)
 	_loadOnce.Do(_loadLibrary)
 	if _fnResetUnicodeToTextRunInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnResetUnicodeToTextRunInfo, _lib, "ResetUnicodeToTextRunInfo")
@@ -1596,6 +1688,7 @@ var _fnRetainCollection func(objc.ID) int32
 
 // RetainCollection reports an error if the CarbonCore framework function RetainCollection fails.
 func RetainCollection(c Collection) error {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnRetainCollection == nil {
 		ebipurego.RegisterLibFunc(&_fnRetainCollection, _lib, "RetainCollection")
@@ -1626,6 +1719,7 @@ var _fnSetFallbackUnicodeToText func(objc.ID, unsafe.Pointer, int, unsafe.Pointe
 
 // SetFallbackUnicodeToText reports an error if the CarbonCore framework function SetFallbackUnicodeToText fails.
 func SetFallbackUnicodeToText(iUnicodeToTextInfo UnicodeToTextInfo, iFallback unsafe.Pointer, iControlFlags int, iInfoPtr unsafe.Pointer) error {
+	defer runtime.KeepAlive(iUnicodeToTextInfo)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSetFallbackUnicodeToText == nil {
 		ebipurego.RegisterLibFunc(&_fnSetFallbackUnicodeToText, _lib, "SetFallbackUnicodeToText")
@@ -1641,6 +1735,7 @@ var _fnSetFallbackUnicodeToTextRun func(objc.ID, unsafe.Pointer, int, unsafe.Poi
 
 // SetFallbackUnicodeToTextRun reports an error if the CarbonCore framework function SetFallbackUnicodeToTextRun fails.
 func SetFallbackUnicodeToTextRun(iUnicodeToTextRunInfo UnicodeToTextRunInfo, iFallback unsafe.Pointer, iControlFlags int, iInfoPtr unsafe.Pointer) error {
+	defer runtime.KeepAlive(iUnicodeToTextRunInfo)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSetFallbackUnicodeToTextRun == nil {
 		ebipurego.RegisterLibFunc(&_fnSetFallbackUnicodeToTextRun, _lib, "SetFallbackUnicodeToTextRun")
@@ -1656,6 +1751,7 @@ var _fnTECClearConverterContextInfo func(objc.ID) int32
 
 // TECClearConverterContextInfo reports an error if the CarbonCore framework function TECClearConverterContextInfo fails.
 func TECClearConverterContextInfo(encodingConverter TECObjectRef) error {
+	defer runtime.KeepAlive(encodingConverter)
 	_loadOnce.Do(_loadLibrary)
 	if _fnTECClearConverterContextInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnTECClearConverterContextInfo, _lib, "TECClearConverterContextInfo")
@@ -1671,6 +1767,7 @@ var _fnTECClearSnifferContextInfo func(objc.ID) int32
 
 // TECClearSnifferContextInfo reports an error if the CarbonCore framework function TECClearSnifferContextInfo fails.
 func TECClearSnifferContextInfo(encodingSniffer TECSnifferObjectRef) error {
+	defer runtime.KeepAlive(encodingSniffer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnTECClearSnifferContextInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnTECClearSnifferContextInfo, _lib, "TECClearSnifferContextInfo")
@@ -1701,6 +1798,7 @@ var _fnTECDisposeConverter func(objc.ID) int32
 
 // TECDisposeConverter reports an error if the CarbonCore framework function TECDisposeConverter fails.
 func TECDisposeConverter(newEncodingConverter TECObjectRef) error {
+	defer runtime.KeepAlive(newEncodingConverter)
 	_loadOnce.Do(_loadLibrary)
 	if _fnTECDisposeConverter == nil {
 		ebipurego.RegisterLibFunc(&_fnTECDisposeConverter, _lib, "TECDisposeConverter")
@@ -1716,6 +1814,7 @@ var _fnTECDisposeSniffer func(objc.ID) int32
 
 // TECDisposeSniffer reports an error if the CarbonCore framework function TECDisposeSniffer fails.
 func TECDisposeSniffer(encodingSniffer TECSnifferObjectRef) error {
+	defer runtime.KeepAlive(encodingSniffer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnTECDisposeSniffer == nil {
 		ebipurego.RegisterLibFunc(&_fnTECDisposeSniffer, _lib, "TECDisposeSniffer")
@@ -1731,6 +1830,7 @@ var _fnTECSetBasicOptions func(objc.ID, int) int32
 
 // TECSetBasicOptions reports an error if the CarbonCore framework function TECSetBasicOptions fails.
 func TECSetBasicOptions(encodingConverter TECObjectRef, controlFlags int) error {
+	defer runtime.KeepAlive(encodingConverter)
 	_loadOnce.Do(_loadLibrary)
 	if _fnTECSetBasicOptions == nil {
 		ebipurego.RegisterLibFunc(&_fnTECSetBasicOptions, _lib, "TECSetBasicOptions")
@@ -1746,6 +1846,7 @@ var _fnUCCreateCollator func(objc.ID, int, int, unsafe.Pointer) int32
 
 // UCCreateCollator reports an error if the CarbonCore framework function UCCreateCollator fails.
 func UCCreateCollator(locale LocaleRef, opVariant int, options int, collatorRef unsafe.Pointer) error {
+	defer runtime.KeepAlive(locale)
 	_loadOnce.Do(_loadLibrary)
 	if _fnUCCreateCollator == nil {
 		ebipurego.RegisterLibFunc(&_fnUCCreateCollator, _lib, "UCCreateCollator")
@@ -1761,6 +1862,7 @@ var _fnUCCreateTextBreakLocator func(objc.ID, int, int, unsafe.Pointer) int32
 
 // UCCreateTextBreakLocator reports an error if the CarbonCore framework function UCCreateTextBreakLocator fails.
 func UCCreateTextBreakLocator(locale LocaleRef, opVariant int, breakTypes int, breakRef unsafe.Pointer) error {
+	defer runtime.KeepAlive(locale)
 	_loadOnce.Do(_loadLibrary)
 	if _fnUCCreateTextBreakLocator == nil {
 		ebipurego.RegisterLibFunc(&_fnUCCreateTextBreakLocator, _lib, "UCCreateTextBreakLocator")
@@ -1806,6 +1908,7 @@ var _fnUCTypeSelectCreateSelector func(objc.ID, int, int, unsafe.Pointer) int32
 
 // UCTypeSelectCreateSelector reports an error if the CarbonCore framework function UCTypeSelectCreateSelector fails.
 func UCTypeSelectCreateSelector(locale LocaleRef, opVariant int, options int, newSelector unsafe.Pointer) error {
+	defer runtime.KeepAlive(locale)
 	_loadOnce.Do(_loadLibrary)
 	if _fnUCTypeSelectCreateSelector == nil {
 		ebipurego.RegisterLibFunc(&_fnUCTypeSelectCreateSelector, _lib, "UCTypeSelectCreateSelector")
@@ -1821,6 +1924,7 @@ var _fnUCTypeSelectFlushSelectorData func(objc.ID) int32
 
 // UCTypeSelectFlushSelectorData reports an error if the CarbonCore framework function UCTypeSelectFlushSelectorData fails.
 func UCTypeSelectFlushSelectorData(ref UCTypeSelectRef) error {
+	defer runtime.KeepAlive(ref)
 	_loadOnce.Do(_loadLibrary)
 	if _fnUCTypeSelectFlushSelectorData == nil {
 		ebipurego.RegisterLibFunc(&_fnUCTypeSelectFlushSelectorData, _lib, "UCTypeSelectFlushSelectorData")

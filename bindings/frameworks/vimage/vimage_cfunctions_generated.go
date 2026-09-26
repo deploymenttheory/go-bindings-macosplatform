@@ -5,6 +5,7 @@
 package vimage
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
@@ -481,6 +482,7 @@ var _fnVImageBufferCopyToCVPixelBuffer func(unsafe.Pointer, unsafe.Pointer, unsa
 
 // VImageBufferCopyToCVPixelBuffer calls the vImage framework function vImageBuffer_CopyToCVPixelBuffer.
 func VImageBufferCopyToCVPixelBuffer(buffer unsafe.Pointer, bufferFormat unsafe.Pointer, cvPixelBuffer unsafe.Pointer, cvImageFormat VImageCVImageFormatRef, backgroundColor unsafe.Pointer, flags uint32) int {
+	defer runtime.KeepAlive(cvImageFormat)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageBufferCopyToCVPixelBuffer == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageBufferCopyToCVPixelBuffer, _lib, "vImageBuffer_CopyToCVPixelBuffer")
@@ -514,6 +516,7 @@ var _fnVImageBufferInitForCopyFromCVPixelBuffer func(unsafe.Pointer, objc.ID, un
 
 // VImageBufferInitForCopyFromCVPixelBuffer calls the vImage framework function vImageBuffer_InitForCopyFromCVPixelBuffer.
 func VImageBufferInitForCopyFromCVPixelBuffer(buffers unsafe.Pointer, converter VImageConverterRef, pixelBuffer unsafe.Pointer, flags uint32) int {
+	defer runtime.KeepAlive(converter)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageBufferInitForCopyFromCVPixelBuffer == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageBufferInitForCopyFromCVPixelBuffer, _lib, "vImageBuffer_InitForCopyFromCVPixelBuffer")
@@ -525,6 +528,7 @@ var _fnVImageBufferInitForCopyToCVPixelBuffer func(unsafe.Pointer, objc.ID, unsa
 
 // VImageBufferInitForCopyToCVPixelBuffer calls the vImage framework function vImageBuffer_InitForCopyToCVPixelBuffer.
 func VImageBufferInitForCopyToCVPixelBuffer(buffers unsafe.Pointer, converter VImageConverterRef, pixelBuffer unsafe.Pointer, flags uint32) int {
+	defer runtime.KeepAlive(converter)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageBufferInitForCopyToCVPixelBuffer == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageBufferInitForCopyToCVPixelBuffer, _lib, "vImageBuffer_InitForCopyToCVPixelBuffer")
@@ -536,6 +540,7 @@ var _fnVImageBufferInitWithCGImage func(unsafe.Pointer, unsafe.Pointer, unsafe.P
 
 // VImageBufferInitWithCGImage calls the vImage framework function vImageBuffer_InitWithCGImage.
 func VImageBufferInitWithCGImage(buf unsafe.Pointer, format unsafe.Pointer, backgroundColor unsafe.Pointer, image coregraphics.CGImageRef, flags uint32) int {
+	defer runtime.KeepAlive(image)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageBufferInitWithCGImage == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageBufferInitWithCGImage, _lib, "vImageBuffer_InitWithCGImage")
@@ -547,6 +552,7 @@ var _fnVImageBufferInitWithCVPixelBuffer func(unsafe.Pointer, unsafe.Pointer, un
 
 // VImageBufferInitWithCVPixelBuffer calls the vImage framework function vImageBuffer_InitWithCVPixelBuffer.
 func VImageBufferInitWithCVPixelBuffer(buffer unsafe.Pointer, desiredFormat unsafe.Pointer, cvPixelBuffer unsafe.Pointer, cvImageFormat VImageCVImageFormatRef, backgroundColor unsafe.Pointer, flags uint32) int {
+	defer runtime.KeepAlive(cvImageFormat)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageBufferInitWithCVPixelBuffer == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageBufferInitWithCVPixelBuffer, _lib, "vImageBuffer_InitWithCVPixelBuffer")
@@ -591,6 +597,7 @@ var _fnVImageCVImageFormatCopy func(objc.ID) objc.ID
 
 // VImageCVImageFormatCopy calls the vImage framework function vImageCVImageFormat_Copy.
 func VImageCVImageFormatCopy(format VImageConstCVImageFormatRef) VImageCVImageFormatRef {
+	defer runtime.KeepAlive(format)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageCVImageFormatCopy == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageCVImageFormatCopy, _lib, "vImageCVImageFormat_Copy")
@@ -603,6 +610,7 @@ var _fnVImageCVImageFormatCopyChannelDescription func(objc.ID, unsafe.Pointer, u
 
 // VImageCVImageFormatCopyChannelDescription calls the vImage framework function vImageCVImageFormat_CopyChannelDescription.
 func VImageCVImageFormatCopyChannelDescription(format VImageCVImageFormatRef, desc *VImageChannelDescription, type_ uint32) int {
+	defer runtime.KeepAlive(format)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageCVImageFormatCopyChannelDescription == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageCVImageFormatCopyChannelDescription, _lib, "vImageCVImageFormat_CopyChannelDescription")
@@ -614,6 +622,7 @@ var _fnVImageCVImageFormatCopyConversionMatrix func(objc.ID, unsafe.Pointer, uin
 
 // VImageCVImageFormatCopyConversionMatrix calls the vImage framework function vImageCVImageFormat_CopyConversionMatrix.
 func VImageCVImageFormatCopyConversionMatrix(format VImageCVImageFormatRef, matrix unsafe.Pointer, inType uint32) int {
+	defer runtime.KeepAlive(format)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageCVImageFormatCopyConversionMatrix == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageCVImageFormatCopyConversionMatrix, _lib, "vImageCVImageFormat_CopyConversionMatrix")
@@ -625,6 +634,8 @@ var _fnVImageCVImageFormatCreate func(uint32, unsafe.Pointer, objc.ID, objc.ID, 
 
 // VImageCVImageFormatCreate calls the vImage framework function vImageCVImageFormat_Create.
 func VImageCVImageFormatCreate(imageFormatType uint32, matrix *VImageARGBToYpCbCrMatrix, cvImageBufferChromaLocation corefoundation.CFStringRef, baseColorspace coregraphics.CGColorSpaceRef, alphaIsOneHint int) VImageCVImageFormatRef {
+	defer runtime.KeepAlive(cvImageBufferChromaLocation)
+	defer runtime.KeepAlive(baseColorspace)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageCVImageFormatCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageCVImageFormatCreate, _lib, "vImageCVImageFormat_Create")
@@ -649,6 +660,7 @@ var _fnVImageCVImageFormatGetAlphaHint func(objc.ID) int32
 
 // VImageCVImageFormatGetAlphaHint calls the vImage framework function vImageCVImageFormat_GetAlphaHint.
 func VImageCVImageFormatGetAlphaHint(format VImageConstCVImageFormatRef) int {
+	defer runtime.KeepAlive(format)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageCVImageFormatGetAlphaHint == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageCVImageFormatGetAlphaHint, _lib, "vImageCVImageFormat_GetAlphaHint")
@@ -660,6 +672,7 @@ var _fnVImageCVImageFormatGetChannelCount func(objc.ID) uint32
 
 // VImageCVImageFormatGetChannelCount calls the vImage framework function vImageCVImageFormat_GetChannelCount.
 func VImageCVImageFormatGetChannelCount(format VImageConstCVImageFormatRef) uint32 {
+	defer runtime.KeepAlive(format)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageCVImageFormatGetChannelCount == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageCVImageFormatGetChannelCount, _lib, "vImageCVImageFormat_GetChannelCount")
@@ -671,6 +684,7 @@ var _fnVImageCVImageFormatGetChannelDescription func(objc.ID, uint32) *VImageCha
 
 // VImageCVImageFormatGetChannelDescription calls the vImage framework function vImageCVImageFormat_GetChannelDescription.
 func VImageCVImageFormatGetChannelDescription(format VImageConstCVImageFormatRef, type_ uint32) *VImageChannelDescription {
+	defer runtime.KeepAlive(format)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageCVImageFormatGetChannelDescription == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageCVImageFormatGetChannelDescription, _lib, "vImageCVImageFormat_GetChannelDescription")
@@ -682,6 +696,7 @@ var _fnVImageCVImageFormatGetChannelNames func(objc.ID) unsafe.Pointer
 
 // VImageCVImageFormatGetChannelNames calls the vImage framework function vImageCVImageFormat_GetChannelNames.
 func VImageCVImageFormatGetChannelNames(format VImageConstCVImageFormatRef) unsafe.Pointer {
+	defer runtime.KeepAlive(format)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageCVImageFormatGetChannelNames == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageCVImageFormatGetChannelNames, _lib, "vImageCVImageFormat_GetChannelNames")
@@ -693,6 +708,7 @@ var _fnVImageCVImageFormatGetChromaSiting func(objc.ID) objc.ID
 
 // VImageCVImageFormatGetChromaSiting calls the vImage framework function vImageCVImageFormat_GetChromaSiting.
 func VImageCVImageFormatGetChromaSiting(format VImageConstCVImageFormatRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(format)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageCVImageFormatGetChromaSiting == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageCVImageFormatGetChromaSiting, _lib, "vImageCVImageFormat_GetChromaSiting")
@@ -705,6 +721,7 @@ var _fnVImageCVImageFormatGetColorSpace func(objc.ID) objc.ID
 
 // VImageCVImageFormatGetColorSpace calls the vImage framework function vImageCVImageFormat_GetColorSpace.
 func VImageCVImageFormatGetColorSpace(format VImageConstCVImageFormatRef) coregraphics.CGColorSpaceRef {
+	defer runtime.KeepAlive(format)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageCVImageFormatGetColorSpace == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageCVImageFormatGetColorSpace, _lib, "vImageCVImageFormat_GetColorSpace")
@@ -717,6 +734,7 @@ var _fnVImageCVImageFormatGetConversionMatrix func(objc.ID, unsafe.Pointer) unsa
 
 // VImageCVImageFormatGetConversionMatrix calls the vImage framework function vImageCVImageFormat_GetConversionMatrix.
 func VImageCVImageFormatGetConversionMatrix(format VImageConstCVImageFormatRef) (result unsafe.Pointer, outType uint32) {
+	defer runtime.KeepAlive(format)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageCVImageFormatGetConversionMatrix == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageCVImageFormatGetConversionMatrix, _lib, "vImageCVImageFormat_GetConversionMatrix")
@@ -730,6 +748,7 @@ var _fnVImageCVImageFormatGetFormatCode func(objc.ID) uint32
 
 // VImageCVImageFormatGetFormatCode calls the vImage framework function vImageCVImageFormat_GetFormatCode.
 func VImageCVImageFormatGetFormatCode(format VImageConstCVImageFormatRef) uint32 {
+	defer runtime.KeepAlive(format)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageCVImageFormatGetFormatCode == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageCVImageFormatGetFormatCode, _lib, "vImageCVImageFormat_GetFormatCode")
@@ -741,6 +760,7 @@ var _fnVImageCVImageFormatGetUserData func(objc.ID) unsafe.Pointer
 
 // VImageCVImageFormatGetUserData calls the vImage framework function vImageCVImageFormat_GetUserData.
 func VImageCVImageFormatGetUserData(format VImageConstCVImageFormatRef) unsafe.Pointer {
+	defer runtime.KeepAlive(format)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageCVImageFormatGetUserData == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageCVImageFormatGetUserData, _lib, "vImageCVImageFormat_GetUserData")
@@ -752,6 +772,7 @@ var _fnVImageCVImageFormatRelease func(objc.ID)
 
 // VImageCVImageFormatRelease calls the vImage framework function vImageCVImageFormat_Release.
 func VImageCVImageFormatRelease(fmt_ VImageCVImageFormatRef) {
+	defer runtime.KeepAlive(fmt_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageCVImageFormatRelease == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageCVImageFormatRelease, _lib, "vImageCVImageFormat_Release")
@@ -763,6 +784,7 @@ var _fnVImageCVImageFormatRetain func(objc.ID)
 
 // VImageCVImageFormatRetain calls the vImage framework function vImageCVImageFormat_Retain.
 func VImageCVImageFormatRetain(fmt_ VImageCVImageFormatRef) {
+	defer runtime.KeepAlive(fmt_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageCVImageFormatRetain == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageCVImageFormatRetain, _lib, "vImageCVImageFormat_Retain")
@@ -774,6 +796,7 @@ var _fnVImageCVImageFormatSetAlphaHint func(objc.ID, int) int
 
 // VImageCVImageFormatSetAlphaHint calls the vImage framework function vImageCVImageFormat_SetAlphaHint.
 func VImageCVImageFormatSetAlphaHint(format VImageCVImageFormatRef, alphaIsOne int) int {
+	defer runtime.KeepAlive(format)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageCVImageFormatSetAlphaHint == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageCVImageFormatSetAlphaHint, _lib, "vImageCVImageFormat_SetAlphaHint")
@@ -785,6 +808,8 @@ var _fnVImageCVImageFormatSetChromaSiting func(objc.ID, objc.ID) int
 
 // VImageCVImageFormatSetChromaSiting calls the vImage framework function vImageCVImageFormat_SetChromaSiting.
 func VImageCVImageFormatSetChromaSiting(format VImageCVImageFormatRef, siting corefoundation.CFStringRef) int {
+	defer runtime.KeepAlive(format)
+	defer runtime.KeepAlive(siting)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageCVImageFormatSetChromaSiting == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageCVImageFormatSetChromaSiting, _lib, "vImageCVImageFormat_SetChromaSiting")
@@ -796,6 +821,8 @@ var _fnVImageCVImageFormatSetColorSpace func(objc.ID, objc.ID) int
 
 // VImageCVImageFormatSetColorSpace calls the vImage framework function vImageCVImageFormat_SetColorSpace.
 func VImageCVImageFormatSetColorSpace(format VImageCVImageFormatRef, colorspace coregraphics.CGColorSpaceRef) int {
+	defer runtime.KeepAlive(format)
+	defer runtime.KeepAlive(colorspace)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageCVImageFormatSetColorSpace == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageCVImageFormatSetColorSpace, _lib, "vImageCVImageFormat_SetColorSpace")
@@ -807,6 +834,7 @@ var _fnVImageCVImageFormatSetUserData func(objc.ID, unsafe.Pointer, unsafe.Point
 
 // VImageCVImageFormatSetUserData calls the vImage framework function vImageCVImageFormat_SetUserData.
 func VImageCVImageFormatSetUserData(format VImageCVImageFormatRef, userData unsafe.Pointer, userDataReleaseCallback unsafe.Pointer) int {
+	defer runtime.KeepAlive(format)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageCVImageFormatSetUserData == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageCVImageFormatSetUserData, _lib, "vImageCVImageFormat_SetUserData")
@@ -1865,6 +1893,7 @@ var _fnVImageConvertAnyToAny func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsaf
 
 // VImageConvertAnyToAny calls the vImage framework function vImageConvert_AnyToAny.
 func VImageConvertAnyToAny(converter VImageConverterRef, srcs unsafe.Pointer, dests unsafe.Pointer, tempBuffer unsafe.Pointer, flags uint32) int {
+	defer runtime.KeepAlive(converter)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertAnyToAny == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertAnyToAny, _lib, "vImageConvert_AnyToAny")
@@ -2995,6 +3024,7 @@ var _fnVImageConverterCreateForCGToCVImageFormat func(unsafe.Pointer, objc.ID, u
 
 // VImageConverterCreateForCGToCVImageFormat calls the vImage framework function vImageConverter_CreateForCGToCVImageFormat.
 func VImageConverterCreateForCGToCVImageFormat(srcFormat unsafe.Pointer, destFormat VImageCVImageFormatRef, backgroundColor unsafe.Pointer, flags uint32) (result VImageConverterRef, err int) {
+	defer runtime.KeepAlive(destFormat)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConverterCreateForCGToCVImageFormat == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConverterCreateForCGToCVImageFormat, _lib, "vImageConverter_CreateForCGToCVImageFormat")
@@ -3008,6 +3038,7 @@ var _fnVImageConverterCreateForCVToCGImageFormat func(objc.ID, unsafe.Pointer, u
 
 // VImageConverterCreateForCVToCGImageFormat calls the vImage framework function vImageConverter_CreateForCVToCGImageFormat.
 func VImageConverterCreateForCVToCGImageFormat(srcFormat VImageCVImageFormatRef, destFormat unsafe.Pointer, backgroundColor unsafe.Pointer, flags uint32) (result VImageConverterRef, err int) {
+	defer runtime.KeepAlive(srcFormat)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConverterCreateForCVToCGImageFormat == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConverterCreateForCVToCGImageFormat, _lib, "vImageConverter_CreateForCVToCGImageFormat")
@@ -3021,6 +3052,7 @@ var _fnVImageConverterCreateWithCGColorConversionInfo func(objc.ID, unsafe.Point
 
 // VImageConverterCreateWithCGColorConversionInfo calls the vImage framework function vImageConverter_CreateWithCGColorConversionInfo.
 func VImageConverterCreateWithCGColorConversionInfo(colorConversionInfoRef coregraphics.CGColorConversionInfoRef, sFormat unsafe.Pointer, dFormat unsafe.Pointer, bg unsafe.Pointer, flags uint32) (result VImageConverterRef, err int) {
+	defer runtime.KeepAlive(colorConversionInfoRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConverterCreateWithCGColorConversionInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConverterCreateWithCGColorConversionInfo, _lib, "vImageConverter_CreateWithCGColorConversionInfo")
@@ -3047,6 +3079,7 @@ var _fnVImageConverterCreateWithColorSyncCodeFragment func(objc.ID, unsafe.Point
 
 // VImageConverterCreateWithColorSyncCodeFragment calls the vImage framework function vImageConverter_CreateWithColorSyncCodeFragment.
 func VImageConverterCreateWithColorSyncCodeFragment(codeFragment obj.Object, srcFormat unsafe.Pointer, destFormat unsafe.Pointer, backgroundColor unsafe.Pointer, flags uint32) (result VImageConverterRef, err int) {
+	defer runtime.KeepAlive(codeFragment)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConverterCreateWithColorSyncCodeFragment == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConverterCreateWithColorSyncCodeFragment, _lib, "vImageConverter_CreateWithColorSyncCodeFragment")
@@ -3060,6 +3093,7 @@ var _fnVImageConverterGetDestinationBufferOrder func(objc.ID) unsafe.Pointer
 
 // VImageConverterGetDestinationBufferOrder calls the vImage framework function vImageConverter_GetDestinationBufferOrder.
 func VImageConverterGetDestinationBufferOrder(converter VImageConverterRef) unsafe.Pointer {
+	defer runtime.KeepAlive(converter)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConverterGetDestinationBufferOrder == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConverterGetDestinationBufferOrder, _lib, "vImageConverter_GetDestinationBufferOrder")
@@ -3071,6 +3105,7 @@ var _fnVImageConverterGetNumberOfDestinationBuffers func(objc.ID) int
 
 // VImageConverterGetNumberOfDestinationBuffers calls the vImage framework function vImageConverter_GetNumberOfDestinationBuffers.
 func VImageConverterGetNumberOfDestinationBuffers(converter VImageConverterRef) int {
+	defer runtime.KeepAlive(converter)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConverterGetNumberOfDestinationBuffers == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConverterGetNumberOfDestinationBuffers, _lib, "vImageConverter_GetNumberOfDestinationBuffers")
@@ -3082,6 +3117,7 @@ var _fnVImageConverterGetNumberOfSourceBuffers func(objc.ID) int
 
 // VImageConverterGetNumberOfSourceBuffers calls the vImage framework function vImageConverter_GetNumberOfSourceBuffers.
 func VImageConverterGetNumberOfSourceBuffers(converter VImageConverterRef) int {
+	defer runtime.KeepAlive(converter)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConverterGetNumberOfSourceBuffers == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConverterGetNumberOfSourceBuffers, _lib, "vImageConverter_GetNumberOfSourceBuffers")
@@ -3093,6 +3129,7 @@ var _fnVImageConverterGetSourceBufferOrder func(objc.ID) unsafe.Pointer
 
 // VImageConverterGetSourceBufferOrder calls the vImage framework function vImageConverter_GetSourceBufferOrder.
 func VImageConverterGetSourceBufferOrder(converter VImageConverterRef) unsafe.Pointer {
+	defer runtime.KeepAlive(converter)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConverterGetSourceBufferOrder == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConverterGetSourceBufferOrder, _lib, "vImageConverter_GetSourceBufferOrder")
@@ -3104,6 +3141,7 @@ var _fnVImageConverterMustOperateOutOfPlace func(objc.ID, unsafe.Pointer, unsafe
 
 // VImageConverterMustOperateOutOfPlace calls the vImage framework function vImageConverter_MustOperateOutOfPlace.
 func VImageConverterMustOperateOutOfPlace(converter VImageConverterRef, srcs unsafe.Pointer, dests unsafe.Pointer, flags uint32) int {
+	defer runtime.KeepAlive(converter)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConverterMustOperateOutOfPlace == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConverterMustOperateOutOfPlace, _lib, "vImageConverter_MustOperateOutOfPlace")
@@ -3115,6 +3153,7 @@ var _fnVImageConverterRelease func(objc.ID)
 
 // VImageConverterRelease calls the vImage framework function vImageConverter_Release.
 func VImageConverterRelease(converter VImageConverterRef) {
+	defer runtime.KeepAlive(converter)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConverterRelease == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConverterRelease, _lib, "vImageConverter_Release")
@@ -3126,6 +3165,7 @@ var _fnVImageConverterRetain func(objc.ID)
 
 // VImageConverterRetain calls the vImage framework function vImageConverter_Retain.
 func VImageConverterRetain(converter VImageConverterRef) {
+	defer runtime.KeepAlive(converter)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConverterRetain == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConverterRetain, _lib, "vImageConverter_Retain")
@@ -4627,6 +4667,7 @@ var _fnVImageMultiDimensionalInterpolatedLookupTablePlanar16Q12 func(unsafe.Poin
 
 // VImageMultiDimensionalInterpolatedLookupTablePlanar16Q12 calls the vImage framework function vImageMultiDimensionalInterpolatedLookupTable_Planar16Q12.
 func VImageMultiDimensionalInterpolatedLookupTablePlanar16Q12(srcs unsafe.Pointer, dests unsafe.Pointer, tempBuffer unsafe.Pointer, table VImageMultidimensionalTable, method unsafe.Pointer, flags uint32) int {
+	defer runtime.KeepAlive(table)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageMultiDimensionalInterpolatedLookupTablePlanar16Q12 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageMultiDimensionalInterpolatedLookupTablePlanar16Q12, _lib, "vImageMultiDimensionalInterpolatedLookupTable_Planar16Q12")
@@ -4638,6 +4679,7 @@ var _fnVImageMultiDimensionalInterpolatedLookupTablePlanarF func(unsafe.Pointer,
 
 // VImageMultiDimensionalInterpolatedLookupTablePlanarF calls the vImage framework function vImageMultiDimensionalInterpolatedLookupTable_PlanarF.
 func VImageMultiDimensionalInterpolatedLookupTablePlanarF(srcs unsafe.Pointer, dests unsafe.Pointer, tempBuffer unsafe.Pointer, table VImageMultidimensionalTable, method unsafe.Pointer, flags uint32) int {
+	defer runtime.KeepAlive(table)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageMultiDimensionalInterpolatedLookupTablePlanarF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageMultiDimensionalInterpolatedLookupTablePlanarF, _lib, "vImageMultiDimensionalInterpolatedLookupTable_PlanarF")
@@ -4662,6 +4704,7 @@ var _fnVImageMultidimensionalTableRelease func(objc.ID) int
 
 // VImageMultidimensionalTableRelease calls the vImage framework function vImageMultidimensionalTable_Release.
 func VImageMultidimensionalTableRelease(table VImageMultidimensionalTable) int {
+	defer runtime.KeepAlive(table)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageMultidimensionalTableRelease == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageMultidimensionalTableRelease, _lib, "vImageMultidimensionalTable_Release")
@@ -4673,6 +4716,7 @@ var _fnVImageMultidimensionalTableRetain func(objc.ID) int
 
 // VImageMultidimensionalTableRetain calls the vImage framework function vImageMultidimensionalTable_Retain.
 func VImageMultidimensionalTableRetain(table VImageMultidimensionalTable) int {
+	defer runtime.KeepAlive(table)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageMultidimensionalTableRetain == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageMultidimensionalTableRetain, _lib, "vImageMultidimensionalTable_Retain")

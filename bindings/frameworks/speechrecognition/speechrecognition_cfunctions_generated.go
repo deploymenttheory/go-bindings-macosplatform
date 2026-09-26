@@ -5,6 +5,7 @@
 package speechrecognition
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -115,6 +116,7 @@ var _fnSRCountItems func(objc.ID, unsafe.Pointer) int16
 
 // SRCountItems calls the SpeechRecognition framework function SRCountItems.
 func SRCountItems(container SRSpeechObject) (result int16, count int64) {
+	defer runtime.KeepAlive(container)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSRCountItems == nil {
 		ebipurego.RegisterLibFunc(&_fnSRCountItems, _lib, "SRCountItems")
@@ -161,6 +163,7 @@ var _fnSRGetIndexedItem func(objc.ID, unsafe.Pointer, int) int16
 
 // SRGetIndexedItem calls the SpeechRecognition framework function SRGetIndexedItem.
 func SRGetIndexedItem(container SRSpeechObject, item unsafe.Pointer, index int) int16 {
+	defer runtime.KeepAlive(container)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSRGetIndexedItem == nil {
 		ebipurego.RegisterLibFunc(&_fnSRGetIndexedItem, _lib, "SRGetIndexedItem")
@@ -183,6 +186,7 @@ var _fnSRGetProperty func(objc.ID, int, unsafe.Pointer, unsafe.Pointer) int16
 
 // SRGetProperty calls the SpeechRecognition framework function SRGetProperty.
 func SRGetProperty(srObject SRSpeechObject, selector int, property unsafe.Pointer) (result int16, propertyLen int) {
+	defer runtime.KeepAlive(srObject)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSRGetProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnSRGetProperty, _lib, "SRGetProperty")
@@ -196,6 +200,7 @@ var _fnSRGetReference func(objc.ID, unsafe.Pointer) int16
 
 // SRGetReference calls the SpeechRecognition framework function SRGetReference.
 func SRGetReference(srObject SRSpeechObject, newObjectRef unsafe.Pointer) int16 {
+	defer runtime.KeepAlive(srObject)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSRGetReference == nil {
 		ebipurego.RegisterLibFunc(&_fnSRGetReference, _lib, "SRGetReference")
@@ -354,6 +359,7 @@ var _fnSRReleaseObject func(objc.ID) int16
 
 // SRReleaseObject calls the SpeechRecognition framework function SRReleaseObject.
 func SRReleaseObject(srObject SRSpeechObject) int16 {
+	defer runtime.KeepAlive(srObject)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSRReleaseObject == nil {
 		ebipurego.RegisterLibFunc(&_fnSRReleaseObject, _lib, "SRReleaseObject")
@@ -365,6 +371,7 @@ var _fnSRRemoveIndexedItem func(objc.ID, int) int16
 
 // SRRemoveIndexedItem calls the SpeechRecognition framework function SRRemoveIndexedItem.
 func SRRemoveIndexedItem(container SRSpeechObject, index int) int16 {
+	defer runtime.KeepAlive(container)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSRRemoveIndexedItem == nil {
 		ebipurego.RegisterLibFunc(&_fnSRRemoveIndexedItem, _lib, "SRRemoveIndexedItem")
@@ -387,6 +394,8 @@ var _fnSRSetIndexedItem func(objc.ID, objc.ID, int) int16
 
 // SRSetIndexedItem calls the SpeechRecognition framework function SRSetIndexedItem.
 func SRSetIndexedItem(container SRSpeechObject, item SRSpeechObject, index int) int16 {
+	defer runtime.KeepAlive(container)
+	defer runtime.KeepAlive(item)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSRSetIndexedItem == nil {
 		ebipurego.RegisterLibFunc(&_fnSRSetIndexedItem, _lib, "SRSetIndexedItem")
@@ -409,6 +418,7 @@ var _fnSRSetProperty func(objc.ID, int, unsafe.Pointer, int) int16
 
 // SRSetProperty calls the SpeechRecognition framework function SRSetProperty.
 func SRSetProperty(srObject SRSpeechObject, selector int, property unsafe.Pointer, propertyLen int) int16 {
+	defer runtime.KeepAlive(srObject)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSRSetProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnSRSetProperty, _lib, "SRSetProperty")

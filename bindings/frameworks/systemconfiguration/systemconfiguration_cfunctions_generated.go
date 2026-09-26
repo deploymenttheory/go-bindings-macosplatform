@@ -5,6 +5,7 @@
 package systemconfiguration
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
@@ -19,6 +20,7 @@ var _fnSCBondInterfaceCopyAll func(objc.ID) objc.ID
 
 // SCBondInterfaceCopyAll calls the SystemConfiguration framework function SCBondInterfaceCopyAll.
 func SCBondInterfaceCopyAll(prefs SCPreferencesRef) corefoundation.CFArrayRef {
+	defer runtime.KeepAlive(prefs)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCBondInterfaceCopyAll == nil {
 		ebipurego.RegisterLibFunc(&_fnSCBondInterfaceCopyAll, _lib, "SCBondInterfaceCopyAll")
@@ -31,6 +33,7 @@ var _fnSCBondInterfaceCopyAvailableMemberInterfaces func(objc.ID) objc.ID
 
 // SCBondInterfaceCopyAvailableMemberInterfaces calls the SystemConfiguration framework function SCBondInterfaceCopyAvailableMemberInterfaces.
 func SCBondInterfaceCopyAvailableMemberInterfaces(prefs SCPreferencesRef) corefoundation.CFArrayRef {
+	defer runtime.KeepAlive(prefs)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCBondInterfaceCopyAvailableMemberInterfaces == nil {
 		ebipurego.RegisterLibFunc(&_fnSCBondInterfaceCopyAvailableMemberInterfaces, _lib, "SCBondInterfaceCopyAvailableMemberInterfaces")
@@ -55,6 +58,7 @@ var _fnSCBondInterfaceCreate func(objc.ID) unsafe.Pointer
 
 // SCBondInterfaceCreate calls the SystemConfiguration framework function SCBondInterfaceCreate.
 func SCBondInterfaceCreate(prefs SCPreferencesRef) unsafe.Pointer {
+	defer runtime.KeepAlive(prefs)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCBondInterfaceCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnSCBondInterfaceCreate, _lib, "SCBondInterfaceCreate")
@@ -101,6 +105,7 @@ var _fnSCBondInterfaceSetLocalizedDisplayName func(unsafe.Pointer, objc.ID) uint
 
 // SCBondInterfaceSetLocalizedDisplayName calls the SystemConfiguration framework function SCBondInterfaceSetLocalizedDisplayName.
 func SCBondInterfaceSetLocalizedDisplayName(bond unsafe.Pointer, newName corefoundation.CFStringRef) uint8 {
+	defer runtime.KeepAlive(newName)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCBondInterfaceSetLocalizedDisplayName == nil {
 		ebipurego.RegisterLibFunc(&_fnSCBondInterfaceSetLocalizedDisplayName, _lib, "SCBondInterfaceSetLocalizedDisplayName")
@@ -112,6 +117,7 @@ var _fnSCBondInterfaceSetMemberInterfaces func(unsafe.Pointer, objc.ID) uint8
 
 // SCBondInterfaceSetMemberInterfaces calls the SystemConfiguration framework function SCBondInterfaceSetMemberInterfaces.
 func SCBondInterfaceSetMemberInterfaces(bond unsafe.Pointer, members corefoundation.CFArrayRef) uint8 {
+	defer runtime.KeepAlive(members)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCBondInterfaceSetMemberInterfaces == nil {
 		ebipurego.RegisterLibFunc(&_fnSCBondInterfaceSetMemberInterfaces, _lib, "SCBondInterfaceSetMemberInterfaces")
@@ -123,6 +129,7 @@ var _fnSCBondInterfaceSetOptions func(unsafe.Pointer, objc.ID) uint8
 
 // SCBondInterfaceSetOptions calls the SystemConfiguration framework function SCBondInterfaceSetOptions.
 func SCBondInterfaceSetOptions(bond unsafe.Pointer, newOptions corefoundation.CFDictionaryRef) uint8 {
+	defer runtime.KeepAlive(newOptions)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCBondInterfaceSetOptions == nil {
 		ebipurego.RegisterLibFunc(&_fnSCBondInterfaceSetOptions, _lib, "SCBondInterfaceSetOptions")
@@ -134,6 +141,8 @@ var _fnSCBondStatusGetInterfaceStatus func(objc.ID, objc.ID) objc.ID
 
 // SCBondStatusGetInterfaceStatus calls the SystemConfiguration framework function SCBondStatusGetInterfaceStatus.
 func SCBondStatusGetInterfaceStatus(bondStatus SCBondStatusRef, interface_ SCNetworkInterfaceRef) corefoundation.CFDictionaryRef {
+	defer runtime.KeepAlive(bondStatus)
+	defer runtime.KeepAlive(interface_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCBondStatusGetInterfaceStatus == nil {
 		ebipurego.RegisterLibFunc(&_fnSCBondStatusGetInterfaceStatus, _lib, "SCBondStatusGetInterfaceStatus")
@@ -146,6 +155,7 @@ var _fnSCBondStatusGetMemberInterfaces func(objc.ID) objc.ID
 
 // SCBondStatusGetMemberInterfaces calls the SystemConfiguration framework function SCBondStatusGetMemberInterfaces.
 func SCBondStatusGetMemberInterfaces(bondStatus SCBondStatusRef) corefoundation.CFArrayRef {
+	defer runtime.KeepAlive(bondStatus)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCBondStatusGetMemberInterfaces == nil {
 		ebipurego.RegisterLibFunc(&_fnSCBondStatusGetMemberInterfaces, _lib, "SCBondStatusGetMemberInterfaces")
@@ -181,6 +191,9 @@ var _fnSCDynamicStoreAddTemporaryValue func(objc.ID, objc.ID, objc.ID) uint8
 
 // SCDynamicStoreAddTemporaryValue calls the SystemConfiguration framework function SCDynamicStoreAddTemporaryValue.
 func SCDynamicStoreAddTemporaryValue(store SCDynamicStoreRef, key corefoundation.CFStringRef, value corefoundation.CFPropertyListRef) uint8 {
+	defer runtime.KeepAlive(store)
+	defer runtime.KeepAlive(key)
+	defer runtime.KeepAlive(value)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCDynamicStoreAddTemporaryValue == nil {
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreAddTemporaryValue, _lib, "SCDynamicStoreAddTemporaryValue")
@@ -192,6 +205,9 @@ var _fnSCDynamicStoreAddValue func(objc.ID, objc.ID, objc.ID) uint8
 
 // SCDynamicStoreAddValue calls the SystemConfiguration framework function SCDynamicStoreAddValue.
 func SCDynamicStoreAddValue(store SCDynamicStoreRef, key corefoundation.CFStringRef, value corefoundation.CFPropertyListRef) uint8 {
+	defer runtime.KeepAlive(store)
+	defer runtime.KeepAlive(key)
+	defer runtime.KeepAlive(value)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCDynamicStoreAddValue == nil {
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreAddValue, _lib, "SCDynamicStoreAddValue")
@@ -203,6 +219,7 @@ var _fnSCDynamicStoreCopyComputerName func(objc.ID, unsafe.Pointer) objc.ID
 
 // SCDynamicStoreCopyComputerName calls the SystemConfiguration framework function SCDynamicStoreCopyComputerName.
 func SCDynamicStoreCopyComputerName(store SCDynamicStoreRef) (result corefoundation.CFStringRef, nameEncoding int) {
+	defer runtime.KeepAlive(store)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCDynamicStoreCopyComputerName == nil {
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreCopyComputerName, _lib, "SCDynamicStoreCopyComputerName")
@@ -216,6 +233,7 @@ var _fnSCDynamicStoreCopyConsoleUser func(objc.ID, unsafe.Pointer, unsafe.Pointe
 
 // SCDynamicStoreCopyConsoleUser calls the SystemConfiguration framework function SCDynamicStoreCopyConsoleUser.
 func SCDynamicStoreCopyConsoleUser(store SCDynamicStoreRef) (result corefoundation.CFStringRef, uid int, gid int) {
+	defer runtime.KeepAlive(store)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCDynamicStoreCopyConsoleUser == nil {
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreCopyConsoleUser, _lib, "SCDynamicStoreCopyConsoleUser")
@@ -230,6 +248,8 @@ var _fnSCDynamicStoreCopyKeyList func(objc.ID, objc.ID) objc.ID
 
 // SCDynamicStoreCopyKeyList calls the SystemConfiguration framework function SCDynamicStoreCopyKeyList.
 func SCDynamicStoreCopyKeyList(store SCDynamicStoreRef, pattern corefoundation.CFStringRef) corefoundation.CFArrayRef {
+	defer runtime.KeepAlive(store)
+	defer runtime.KeepAlive(pattern)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCDynamicStoreCopyKeyList == nil {
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreCopyKeyList, _lib, "SCDynamicStoreCopyKeyList")
@@ -242,6 +262,7 @@ var _fnSCDynamicStoreCopyLocalHostName func(objc.ID) objc.ID
 
 // SCDynamicStoreCopyLocalHostName calls the SystemConfiguration framework function SCDynamicStoreCopyLocalHostName.
 func SCDynamicStoreCopyLocalHostName(store SCDynamicStoreRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(store)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCDynamicStoreCopyLocalHostName == nil {
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreCopyLocalHostName, _lib, "SCDynamicStoreCopyLocalHostName")
@@ -254,6 +275,7 @@ var _fnSCDynamicStoreCopyLocation func(objc.ID) objc.ID
 
 // SCDynamicStoreCopyLocation calls the SystemConfiguration framework function SCDynamicStoreCopyLocation.
 func SCDynamicStoreCopyLocation(store SCDynamicStoreRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(store)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCDynamicStoreCopyLocation == nil {
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreCopyLocation, _lib, "SCDynamicStoreCopyLocation")
@@ -266,6 +288,9 @@ var _fnSCDynamicStoreCopyMultiple func(objc.ID, objc.ID, objc.ID) objc.ID
 
 // SCDynamicStoreCopyMultiple calls the SystemConfiguration framework function SCDynamicStoreCopyMultiple.
 func SCDynamicStoreCopyMultiple(store SCDynamicStoreRef, keys corefoundation.CFArrayRef, patterns corefoundation.CFArrayRef) corefoundation.CFDictionaryRef {
+	defer runtime.KeepAlive(store)
+	defer runtime.KeepAlive(keys)
+	defer runtime.KeepAlive(patterns)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCDynamicStoreCopyMultiple == nil {
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreCopyMultiple, _lib, "SCDynamicStoreCopyMultiple")
@@ -278,6 +303,7 @@ var _fnSCDynamicStoreCopyNotifiedKeys func(objc.ID) objc.ID
 
 // SCDynamicStoreCopyNotifiedKeys calls the SystemConfiguration framework function SCDynamicStoreCopyNotifiedKeys.
 func SCDynamicStoreCopyNotifiedKeys(store SCDynamicStoreRef) corefoundation.CFArrayRef {
+	defer runtime.KeepAlive(store)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCDynamicStoreCopyNotifiedKeys == nil {
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreCopyNotifiedKeys, _lib, "SCDynamicStoreCopyNotifiedKeys")
@@ -290,6 +316,7 @@ var _fnSCDynamicStoreCopyProxies func(objc.ID) objc.ID
 
 // SCDynamicStoreCopyProxies calls the SystemConfiguration framework function SCDynamicStoreCopyProxies.
 func SCDynamicStoreCopyProxies(store SCDynamicStoreRef) corefoundation.CFDictionaryRef {
+	defer runtime.KeepAlive(store)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCDynamicStoreCopyProxies == nil {
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreCopyProxies, _lib, "SCDynamicStoreCopyProxies")
@@ -302,6 +329,8 @@ var _fnSCDynamicStoreCopyValue func(objc.ID, objc.ID) objc.ID
 
 // SCDynamicStoreCopyValue calls the SystemConfiguration framework function SCDynamicStoreCopyValue.
 func SCDynamicStoreCopyValue(store SCDynamicStoreRef, key corefoundation.CFStringRef) corefoundation.CFPropertyListRef {
+	defer runtime.KeepAlive(store)
+	defer runtime.KeepAlive(key)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCDynamicStoreCopyValue == nil {
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreCopyValue, _lib, "SCDynamicStoreCopyValue")
@@ -314,6 +343,8 @@ var _fnSCDynamicStoreCreate func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointe
 
 // SCDynamicStoreCreate calls the SystemConfiguration framework function SCDynamicStoreCreate.
 func SCDynamicStoreCreate(allocator corefoundation.CFAllocatorRef, name corefoundation.CFStringRef, callout unsafe.Pointer, context_ unsafe.Pointer) SCDynamicStoreRef {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(name)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCDynamicStoreCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreCreate, _lib, "SCDynamicStoreCreate")
@@ -326,6 +357,8 @@ var _fnSCDynamicStoreCreateRunLoopSource func(objc.ID, objc.ID, int) objc.ID
 
 // SCDynamicStoreCreateRunLoopSource calls the SystemConfiguration framework function SCDynamicStoreCreateRunLoopSource.
 func SCDynamicStoreCreateRunLoopSource(allocator corefoundation.CFAllocatorRef, store SCDynamicStoreRef, order int) corefoundation.CFRunLoopSourceRef {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(store)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCDynamicStoreCreateRunLoopSource == nil {
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreCreateRunLoopSource, _lib, "SCDynamicStoreCreateRunLoopSource")
@@ -338,6 +371,9 @@ var _fnSCDynamicStoreCreateWithOptions func(objc.ID, objc.ID, objc.ID, unsafe.Po
 
 // SCDynamicStoreCreateWithOptions calls the SystemConfiguration framework function SCDynamicStoreCreateWithOptions.
 func SCDynamicStoreCreateWithOptions(allocator corefoundation.CFAllocatorRef, name corefoundation.CFStringRef, storeOptions corefoundation.CFDictionaryRef, callout unsafe.Pointer, context_ unsafe.Pointer) SCDynamicStoreRef {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(name)
+	defer runtime.KeepAlive(storeOptions)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCDynamicStoreCreateWithOptions == nil {
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreCreateWithOptions, _lib, "SCDynamicStoreCreateWithOptions")
@@ -361,6 +397,7 @@ var _fnSCDynamicStoreKeyCreateComputerName func(objc.ID) objc.ID
 
 // SCDynamicStoreKeyCreateComputerName calls the SystemConfiguration framework function SCDynamicStoreKeyCreateComputerName.
 func SCDynamicStoreKeyCreateComputerName(allocator corefoundation.CFAllocatorRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(allocator)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCDynamicStoreKeyCreateComputerName == nil {
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreKeyCreateComputerName, _lib, "SCDynamicStoreKeyCreateComputerName")
@@ -373,6 +410,7 @@ var _fnSCDynamicStoreKeyCreateConsoleUser func(objc.ID) objc.ID
 
 // SCDynamicStoreKeyCreateConsoleUser calls the SystemConfiguration framework function SCDynamicStoreKeyCreateConsoleUser.
 func SCDynamicStoreKeyCreateConsoleUser(allocator corefoundation.CFAllocatorRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(allocator)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCDynamicStoreKeyCreateConsoleUser == nil {
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreKeyCreateConsoleUser, _lib, "SCDynamicStoreKeyCreateConsoleUser")
@@ -385,6 +423,7 @@ var _fnSCDynamicStoreKeyCreateHostNames func(objc.ID) objc.ID
 
 // SCDynamicStoreKeyCreateHostNames calls the SystemConfiguration framework function SCDynamicStoreKeyCreateHostNames.
 func SCDynamicStoreKeyCreateHostNames(allocator corefoundation.CFAllocatorRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(allocator)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCDynamicStoreKeyCreateHostNames == nil {
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreKeyCreateHostNames, _lib, "SCDynamicStoreKeyCreateHostNames")
@@ -397,6 +436,7 @@ var _fnSCDynamicStoreKeyCreateLocation func(objc.ID) objc.ID
 
 // SCDynamicStoreKeyCreateLocation calls the SystemConfiguration framework function SCDynamicStoreKeyCreateLocation.
 func SCDynamicStoreKeyCreateLocation(allocator corefoundation.CFAllocatorRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(allocator)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCDynamicStoreKeyCreateLocation == nil {
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreKeyCreateLocation, _lib, "SCDynamicStoreKeyCreateLocation")
@@ -409,6 +449,9 @@ var _fnSCDynamicStoreKeyCreateNetworkGlobalEntity func(objc.ID, objc.ID, objc.ID
 
 // SCDynamicStoreKeyCreateNetworkGlobalEntity calls the SystemConfiguration framework function SCDynamicStoreKeyCreateNetworkGlobalEntity.
 func SCDynamicStoreKeyCreateNetworkGlobalEntity(allocator corefoundation.CFAllocatorRef, domain corefoundation.CFStringRef, entity corefoundation.CFStringRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(domain)
+	defer runtime.KeepAlive(entity)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCDynamicStoreKeyCreateNetworkGlobalEntity == nil {
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreKeyCreateNetworkGlobalEntity, _lib, "SCDynamicStoreKeyCreateNetworkGlobalEntity")
@@ -421,6 +464,8 @@ var _fnSCDynamicStoreKeyCreateNetworkInterface func(objc.ID, objc.ID) objc.ID
 
 // SCDynamicStoreKeyCreateNetworkInterface calls the SystemConfiguration framework function SCDynamicStoreKeyCreateNetworkInterface.
 func SCDynamicStoreKeyCreateNetworkInterface(allocator corefoundation.CFAllocatorRef, domain corefoundation.CFStringRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(domain)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCDynamicStoreKeyCreateNetworkInterface == nil {
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreKeyCreateNetworkInterface, _lib, "SCDynamicStoreKeyCreateNetworkInterface")
@@ -433,6 +478,10 @@ var _fnSCDynamicStoreKeyCreateNetworkInterfaceEntity func(objc.ID, objc.ID, objc
 
 // SCDynamicStoreKeyCreateNetworkInterfaceEntity calls the SystemConfiguration framework function SCDynamicStoreKeyCreateNetworkInterfaceEntity.
 func SCDynamicStoreKeyCreateNetworkInterfaceEntity(allocator corefoundation.CFAllocatorRef, domain corefoundation.CFStringRef, ifname corefoundation.CFStringRef, entity corefoundation.CFStringRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(domain)
+	defer runtime.KeepAlive(ifname)
+	defer runtime.KeepAlive(entity)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCDynamicStoreKeyCreateNetworkInterfaceEntity == nil {
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreKeyCreateNetworkInterfaceEntity, _lib, "SCDynamicStoreKeyCreateNetworkInterfaceEntity")
@@ -445,6 +494,10 @@ var _fnSCDynamicStoreKeyCreateNetworkServiceEntity func(objc.ID, objc.ID, objc.I
 
 // SCDynamicStoreKeyCreateNetworkServiceEntity calls the SystemConfiguration framework function SCDynamicStoreKeyCreateNetworkServiceEntity.
 func SCDynamicStoreKeyCreateNetworkServiceEntity(allocator corefoundation.CFAllocatorRef, domain corefoundation.CFStringRef, serviceID corefoundation.CFStringRef, entity corefoundation.CFStringRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(domain)
+	defer runtime.KeepAlive(serviceID)
+	defer runtime.KeepAlive(entity)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCDynamicStoreKeyCreateNetworkServiceEntity == nil {
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreKeyCreateNetworkServiceEntity, _lib, "SCDynamicStoreKeyCreateNetworkServiceEntity")
@@ -457,6 +510,7 @@ var _fnSCDynamicStoreKeyCreateProxies func(objc.ID) objc.ID
 
 // SCDynamicStoreKeyCreateProxies calls the SystemConfiguration framework function SCDynamicStoreKeyCreateProxies.
 func SCDynamicStoreKeyCreateProxies(allocator corefoundation.CFAllocatorRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(allocator)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCDynamicStoreKeyCreateProxies == nil {
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreKeyCreateProxies, _lib, "SCDynamicStoreKeyCreateProxies")
@@ -469,6 +523,8 @@ var _fnSCDynamicStoreNotifyValue func(objc.ID, objc.ID) uint8
 
 // SCDynamicStoreNotifyValue calls the SystemConfiguration framework function SCDynamicStoreNotifyValue.
 func SCDynamicStoreNotifyValue(store SCDynamicStoreRef, key corefoundation.CFStringRef) uint8 {
+	defer runtime.KeepAlive(store)
+	defer runtime.KeepAlive(key)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCDynamicStoreNotifyValue == nil {
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreNotifyValue, _lib, "SCDynamicStoreNotifyValue")
@@ -480,6 +536,8 @@ var _fnSCDynamicStoreRemoveValue func(objc.ID, objc.ID) uint8
 
 // SCDynamicStoreRemoveValue calls the SystemConfiguration framework function SCDynamicStoreRemoveValue.
 func SCDynamicStoreRemoveValue(store SCDynamicStoreRef, key corefoundation.CFStringRef) uint8 {
+	defer runtime.KeepAlive(store)
+	defer runtime.KeepAlive(key)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCDynamicStoreRemoveValue == nil {
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreRemoveValue, _lib, "SCDynamicStoreRemoveValue")
@@ -491,6 +549,7 @@ var _fnSCDynamicStoreSetDispatchQueue func(objc.ID, objc.ID) uint8
 
 // SCDynamicStoreSetDispatchQueue calls the SystemConfiguration framework function SCDynamicStoreSetDispatchQueue.
 func SCDynamicStoreSetDispatchQueue(store SCDynamicStoreRef, queue dispatch.Queue) uint8 {
+	defer runtime.KeepAlive(store)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCDynamicStoreSetDispatchQueue == nil {
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreSetDispatchQueue, _lib, "SCDynamicStoreSetDispatchQueue")
@@ -502,6 +561,10 @@ var _fnSCDynamicStoreSetMultiple func(objc.ID, objc.ID, objc.ID, objc.ID) uint8
 
 // SCDynamicStoreSetMultiple calls the SystemConfiguration framework function SCDynamicStoreSetMultiple.
 func SCDynamicStoreSetMultiple(store SCDynamicStoreRef, keysToSet corefoundation.CFDictionaryRef, keysToRemove corefoundation.CFArrayRef, keysToNotify corefoundation.CFArrayRef) uint8 {
+	defer runtime.KeepAlive(store)
+	defer runtime.KeepAlive(keysToSet)
+	defer runtime.KeepAlive(keysToRemove)
+	defer runtime.KeepAlive(keysToNotify)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCDynamicStoreSetMultiple == nil {
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreSetMultiple, _lib, "SCDynamicStoreSetMultiple")
@@ -513,6 +576,9 @@ var _fnSCDynamicStoreSetNotificationKeys func(objc.ID, objc.ID, objc.ID) uint8
 
 // SCDynamicStoreSetNotificationKeys calls the SystemConfiguration framework function SCDynamicStoreSetNotificationKeys.
 func SCDynamicStoreSetNotificationKeys(store SCDynamicStoreRef, keys corefoundation.CFArrayRef, patterns corefoundation.CFArrayRef) uint8 {
+	defer runtime.KeepAlive(store)
+	defer runtime.KeepAlive(keys)
+	defer runtime.KeepAlive(patterns)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCDynamicStoreSetNotificationKeys == nil {
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreSetNotificationKeys, _lib, "SCDynamicStoreSetNotificationKeys")
@@ -524,6 +590,9 @@ var _fnSCDynamicStoreSetValue func(objc.ID, objc.ID, objc.ID) uint8
 
 // SCDynamicStoreSetValue calls the SystemConfiguration framework function SCDynamicStoreSetValue.
 func SCDynamicStoreSetValue(store SCDynamicStoreRef, key corefoundation.CFStringRef, value corefoundation.CFPropertyListRef) uint8 {
+	defer runtime.KeepAlive(store)
+	defer runtime.KeepAlive(key)
+	defer runtime.KeepAlive(value)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCDynamicStoreSetValue == nil {
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreSetValue, _lib, "SCDynamicStoreSetValue")
@@ -583,6 +652,7 @@ var _fnSCNetworkConnectionCopyExtendedStatus func(objc.ID) objc.ID
 
 // SCNetworkConnectionCopyExtendedStatus calls the SystemConfiguration framework function SCNetworkConnectionCopyExtendedStatus.
 func SCNetworkConnectionCopyExtendedStatus(connection SCNetworkConnectionRef) corefoundation.CFDictionaryRef {
+	defer runtime.KeepAlive(connection)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkConnectionCopyExtendedStatus == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkConnectionCopyExtendedStatus, _lib, "SCNetworkConnectionCopyExtendedStatus")
@@ -595,6 +665,7 @@ var _fnSCNetworkConnectionCopyServiceID func(objc.ID) objc.ID
 
 // SCNetworkConnectionCopyServiceID calls the SystemConfiguration framework function SCNetworkConnectionCopyServiceID.
 func SCNetworkConnectionCopyServiceID(connection SCNetworkConnectionRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(connection)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkConnectionCopyServiceID == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkConnectionCopyServiceID, _lib, "SCNetworkConnectionCopyServiceID")
@@ -607,6 +678,7 @@ var _fnSCNetworkConnectionCopyStatistics func(objc.ID) objc.ID
 
 // SCNetworkConnectionCopyStatistics calls the SystemConfiguration framework function SCNetworkConnectionCopyStatistics.
 func SCNetworkConnectionCopyStatistics(connection SCNetworkConnectionRef) corefoundation.CFDictionaryRef {
+	defer runtime.KeepAlive(connection)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkConnectionCopyStatistics == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkConnectionCopyStatistics, _lib, "SCNetworkConnectionCopyStatistics")
@@ -619,6 +691,7 @@ var _fnSCNetworkConnectionCopyUserOptions func(objc.ID) objc.ID
 
 // SCNetworkConnectionCopyUserOptions calls the SystemConfiguration framework function SCNetworkConnectionCopyUserOptions.
 func SCNetworkConnectionCopyUserOptions(connection SCNetworkConnectionRef) corefoundation.CFDictionaryRef {
+	defer runtime.KeepAlive(connection)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkConnectionCopyUserOptions == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkConnectionCopyUserOptions, _lib, "SCNetworkConnectionCopyUserOptions")
@@ -631,6 +704,7 @@ var _fnSCNetworkConnectionCopyUserPreferences func(objc.ID, unsafe.Pointer, unsa
 
 // SCNetworkConnectionCopyUserPreferences calls the SystemConfiguration framework function SCNetworkConnectionCopyUserPreferences.
 func SCNetworkConnectionCopyUserPreferences(selectionOptions corefoundation.CFDictionaryRef, serviceID unsafe.Pointer, userOptions unsafe.Pointer) uint8 {
+	defer runtime.KeepAlive(selectionOptions)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkConnectionCopyUserPreferences == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkConnectionCopyUserPreferences, _lib, "SCNetworkConnectionCopyUserPreferences")
@@ -642,6 +716,8 @@ var _fnSCNetworkConnectionCreateWithServiceID func(objc.ID, objc.ID, unsafe.Poin
 
 // SCNetworkConnectionCreateWithServiceID calls the SystemConfiguration framework function SCNetworkConnectionCreateWithServiceID.
 func SCNetworkConnectionCreateWithServiceID(allocator corefoundation.CFAllocatorRef, serviceID corefoundation.CFStringRef, callout unsafe.Pointer, context_ unsafe.Pointer) SCNetworkConnectionRef {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(serviceID)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkConnectionCreateWithServiceID == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkConnectionCreateWithServiceID, _lib, "SCNetworkConnectionCreateWithServiceID")
@@ -654,6 +730,7 @@ var _fnSCNetworkConnectionGetStatus func(objc.ID) SCNetworkConnectionStatus
 
 // SCNetworkConnectionGetStatus calls the SystemConfiguration framework function SCNetworkConnectionGetStatus.
 func SCNetworkConnectionGetStatus(connection SCNetworkConnectionRef) SCNetworkConnectionStatus {
+	defer runtime.KeepAlive(connection)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkConnectionGetStatus == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkConnectionGetStatus, _lib, "SCNetworkConnectionGetStatus")
@@ -676,6 +753,9 @@ var _fnSCNetworkConnectionScheduleWithRunLoop func(objc.ID, objc.ID, objc.ID) ui
 
 // SCNetworkConnectionScheduleWithRunLoop calls the SystemConfiguration framework function SCNetworkConnectionScheduleWithRunLoop.
 func SCNetworkConnectionScheduleWithRunLoop(connection SCNetworkConnectionRef, runLoop corefoundation.CFRunLoopRef, runLoopMode corefoundation.CFStringRef) uint8 {
+	defer runtime.KeepAlive(connection)
+	defer runtime.KeepAlive(runLoop)
+	defer runtime.KeepAlive(runLoopMode)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkConnectionScheduleWithRunLoop == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkConnectionScheduleWithRunLoop, _lib, "SCNetworkConnectionScheduleWithRunLoop")
@@ -687,6 +767,7 @@ var _fnSCNetworkConnectionSetDispatchQueue func(objc.ID, objc.ID) uint8
 
 // SCNetworkConnectionSetDispatchQueue calls the SystemConfiguration framework function SCNetworkConnectionSetDispatchQueue.
 func SCNetworkConnectionSetDispatchQueue(connection SCNetworkConnectionRef, queue dispatch.Queue) uint8 {
+	defer runtime.KeepAlive(connection)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkConnectionSetDispatchQueue == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkConnectionSetDispatchQueue, _lib, "SCNetworkConnectionSetDispatchQueue")
@@ -698,6 +779,8 @@ var _fnSCNetworkConnectionStart func(objc.ID, objc.ID, uint8) uint8
 
 // SCNetworkConnectionStart calls the SystemConfiguration framework function SCNetworkConnectionStart.
 func SCNetworkConnectionStart(connection SCNetworkConnectionRef, userOptions corefoundation.CFDictionaryRef, linger uint8) uint8 {
+	defer runtime.KeepAlive(connection)
+	defer runtime.KeepAlive(userOptions)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkConnectionStart == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkConnectionStart, _lib, "SCNetworkConnectionStart")
@@ -709,6 +792,7 @@ var _fnSCNetworkConnectionStop func(objc.ID, uint8) uint8
 
 // SCNetworkConnectionStop calls the SystemConfiguration framework function SCNetworkConnectionStop.
 func SCNetworkConnectionStop(connection SCNetworkConnectionRef, forceDisconnect uint8) uint8 {
+	defer runtime.KeepAlive(connection)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkConnectionStop == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkConnectionStop, _lib, "SCNetworkConnectionStop")
@@ -720,6 +804,9 @@ var _fnSCNetworkConnectionUnscheduleFromRunLoop func(objc.ID, objc.ID, objc.ID) 
 
 // SCNetworkConnectionUnscheduleFromRunLoop calls the SystemConfiguration framework function SCNetworkConnectionUnscheduleFromRunLoop.
 func SCNetworkConnectionUnscheduleFromRunLoop(connection SCNetworkConnectionRef, runLoop corefoundation.CFRunLoopRef, runLoopMode corefoundation.CFStringRef) uint8 {
+	defer runtime.KeepAlive(connection)
+	defer runtime.KeepAlive(runLoop)
+	defer runtime.KeepAlive(runLoopMode)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkConnectionUnscheduleFromRunLoop == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkConnectionUnscheduleFromRunLoop, _lib, "SCNetworkConnectionUnscheduleFromRunLoop")
@@ -743,6 +830,7 @@ var _fnSCNetworkInterfaceCopyMTU func(objc.ID, unsafe.Pointer, unsafe.Pointer, u
 
 // SCNetworkInterfaceCopyMTU calls the SystemConfiguration framework function SCNetworkInterfaceCopyMTU.
 func SCNetworkInterfaceCopyMTU(interface_ SCNetworkInterfaceRef) (result uint8, mtuCur int32, mtuMin int32, mtuMax int32) {
+	defer runtime.KeepAlive(interface_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkInterfaceCopyMTU == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkInterfaceCopyMTU, _lib, "SCNetworkInterfaceCopyMTU")
@@ -758,6 +846,7 @@ var _fnSCNetworkInterfaceCopyMediaOptions func(objc.ID, unsafe.Pointer, unsafe.P
 
 // SCNetworkInterfaceCopyMediaOptions calls the SystemConfiguration framework function SCNetworkInterfaceCopyMediaOptions.
 func SCNetworkInterfaceCopyMediaOptions(interface_ SCNetworkInterfaceRef, current unsafe.Pointer, active unsafe.Pointer, available unsafe.Pointer, filter uint8) uint8 {
+	defer runtime.KeepAlive(interface_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkInterfaceCopyMediaOptions == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkInterfaceCopyMediaOptions, _lib, "SCNetworkInterfaceCopyMediaOptions")
@@ -769,6 +858,8 @@ var _fnSCNetworkInterfaceCopyMediaSubTypeOptions func(objc.ID, objc.ID) objc.ID
 
 // SCNetworkInterfaceCopyMediaSubTypeOptions calls the SystemConfiguration framework function SCNetworkInterfaceCopyMediaSubTypeOptions.
 func SCNetworkInterfaceCopyMediaSubTypeOptions(available corefoundation.CFArrayRef, subType corefoundation.CFStringRef) corefoundation.CFArrayRef {
+	defer runtime.KeepAlive(available)
+	defer runtime.KeepAlive(subType)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkInterfaceCopyMediaSubTypeOptions == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkInterfaceCopyMediaSubTypeOptions, _lib, "SCNetworkInterfaceCopyMediaSubTypeOptions")
@@ -781,6 +872,7 @@ var _fnSCNetworkInterfaceCopyMediaSubTypes func(objc.ID) objc.ID
 
 // SCNetworkInterfaceCopyMediaSubTypes calls the SystemConfiguration framework function SCNetworkInterfaceCopyMediaSubTypes.
 func SCNetworkInterfaceCopyMediaSubTypes(available corefoundation.CFArrayRef) corefoundation.CFArrayRef {
+	defer runtime.KeepAlive(available)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkInterfaceCopyMediaSubTypes == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkInterfaceCopyMediaSubTypes, _lib, "SCNetworkInterfaceCopyMediaSubTypes")
@@ -793,6 +885,8 @@ var _fnSCNetworkInterfaceCreateWithInterface func(objc.ID, objc.ID) objc.ID
 
 // SCNetworkInterfaceCreateWithInterface calls the SystemConfiguration framework function SCNetworkInterfaceCreateWithInterface.
 func SCNetworkInterfaceCreateWithInterface(interface_ SCNetworkInterfaceRef, interfaceType corefoundation.CFStringRef) SCNetworkInterfaceRef {
+	defer runtime.KeepAlive(interface_)
+	defer runtime.KeepAlive(interfaceType)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkInterfaceCreateWithInterface == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkInterfaceCreateWithInterface, _lib, "SCNetworkInterfaceCreateWithInterface")
@@ -805,6 +899,7 @@ var _fnSCNetworkInterfaceForceConfigurationRefresh func(objc.ID) uint8
 
 // SCNetworkInterfaceForceConfigurationRefresh calls the SystemConfiguration framework function SCNetworkInterfaceForceConfigurationRefresh.
 func SCNetworkInterfaceForceConfigurationRefresh(interface_ SCNetworkInterfaceRef) uint8 {
+	defer runtime.KeepAlive(interface_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkInterfaceForceConfigurationRefresh == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkInterfaceForceConfigurationRefresh, _lib, "SCNetworkInterfaceForceConfigurationRefresh")
@@ -816,6 +911,7 @@ var _fnSCNetworkInterfaceGetBSDName func(objc.ID) objc.ID
 
 // SCNetworkInterfaceGetBSDName calls the SystemConfiguration framework function SCNetworkInterfaceGetBSDName.
 func SCNetworkInterfaceGetBSDName(interface_ SCNetworkInterfaceRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(interface_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkInterfaceGetBSDName == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkInterfaceGetBSDName, _lib, "SCNetworkInterfaceGetBSDName")
@@ -828,6 +924,7 @@ var _fnSCNetworkInterfaceGetConfiguration func(objc.ID) objc.ID
 
 // SCNetworkInterfaceGetConfiguration calls the SystemConfiguration framework function SCNetworkInterfaceGetConfiguration.
 func SCNetworkInterfaceGetConfiguration(interface_ SCNetworkInterfaceRef) corefoundation.CFDictionaryRef {
+	defer runtime.KeepAlive(interface_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkInterfaceGetConfiguration == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkInterfaceGetConfiguration, _lib, "SCNetworkInterfaceGetConfiguration")
@@ -840,6 +937,8 @@ var _fnSCNetworkInterfaceGetExtendedConfiguration func(objc.ID, objc.ID) objc.ID
 
 // SCNetworkInterfaceGetExtendedConfiguration calls the SystemConfiguration framework function SCNetworkInterfaceGetExtendedConfiguration.
 func SCNetworkInterfaceGetExtendedConfiguration(interface_ SCNetworkInterfaceRef, extendedType corefoundation.CFStringRef) corefoundation.CFDictionaryRef {
+	defer runtime.KeepAlive(interface_)
+	defer runtime.KeepAlive(extendedType)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkInterfaceGetExtendedConfiguration == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkInterfaceGetExtendedConfiguration, _lib, "SCNetworkInterfaceGetExtendedConfiguration")
@@ -852,6 +951,7 @@ var _fnSCNetworkInterfaceGetHardwareAddressString func(objc.ID) objc.ID
 
 // SCNetworkInterfaceGetHardwareAddressString calls the SystemConfiguration framework function SCNetworkInterfaceGetHardwareAddressString.
 func SCNetworkInterfaceGetHardwareAddressString(interface_ SCNetworkInterfaceRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(interface_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkInterfaceGetHardwareAddressString == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkInterfaceGetHardwareAddressString, _lib, "SCNetworkInterfaceGetHardwareAddressString")
@@ -864,6 +964,7 @@ var _fnSCNetworkInterfaceGetInterface func(objc.ID) objc.ID
 
 // SCNetworkInterfaceGetInterface calls the SystemConfiguration framework function SCNetworkInterfaceGetInterface.
 func SCNetworkInterfaceGetInterface(interface_ SCNetworkInterfaceRef) SCNetworkInterfaceRef {
+	defer runtime.KeepAlive(interface_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkInterfaceGetInterface == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkInterfaceGetInterface, _lib, "SCNetworkInterfaceGetInterface")
@@ -876,6 +977,7 @@ var _fnSCNetworkInterfaceGetInterfaceType func(objc.ID) objc.ID
 
 // SCNetworkInterfaceGetInterfaceType calls the SystemConfiguration framework function SCNetworkInterfaceGetInterfaceType.
 func SCNetworkInterfaceGetInterfaceType(interface_ SCNetworkInterfaceRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(interface_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkInterfaceGetInterfaceType == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkInterfaceGetInterfaceType, _lib, "SCNetworkInterfaceGetInterfaceType")
@@ -888,6 +990,7 @@ var _fnSCNetworkInterfaceGetLocalizedDisplayName func(objc.ID) objc.ID
 
 // SCNetworkInterfaceGetLocalizedDisplayName calls the SystemConfiguration framework function SCNetworkInterfaceGetLocalizedDisplayName.
 func SCNetworkInterfaceGetLocalizedDisplayName(interface_ SCNetworkInterfaceRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(interface_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkInterfaceGetLocalizedDisplayName == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkInterfaceGetLocalizedDisplayName, _lib, "SCNetworkInterfaceGetLocalizedDisplayName")
@@ -900,6 +1003,7 @@ var _fnSCNetworkInterfaceGetSupportedInterfaceTypes func(objc.ID) objc.ID
 
 // SCNetworkInterfaceGetSupportedInterfaceTypes calls the SystemConfiguration framework function SCNetworkInterfaceGetSupportedInterfaceTypes.
 func SCNetworkInterfaceGetSupportedInterfaceTypes(interface_ SCNetworkInterfaceRef) corefoundation.CFArrayRef {
+	defer runtime.KeepAlive(interface_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkInterfaceGetSupportedInterfaceTypes == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkInterfaceGetSupportedInterfaceTypes, _lib, "SCNetworkInterfaceGetSupportedInterfaceTypes")
@@ -912,6 +1016,7 @@ var _fnSCNetworkInterfaceGetSupportedProtocolTypes func(objc.ID) objc.ID
 
 // SCNetworkInterfaceGetSupportedProtocolTypes calls the SystemConfiguration framework function SCNetworkInterfaceGetSupportedProtocolTypes.
 func SCNetworkInterfaceGetSupportedProtocolTypes(interface_ SCNetworkInterfaceRef) corefoundation.CFArrayRef {
+	defer runtime.KeepAlive(interface_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkInterfaceGetSupportedProtocolTypes == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkInterfaceGetSupportedProtocolTypes, _lib, "SCNetworkInterfaceGetSupportedProtocolTypes")
@@ -935,6 +1040,7 @@ var _fnSCNetworkInterfaceRefreshConfiguration func(objc.ID) uint8
 
 // SCNetworkInterfaceRefreshConfiguration calls the SystemConfiguration framework function SCNetworkInterfaceRefreshConfiguration.
 func SCNetworkInterfaceRefreshConfiguration(ifName corefoundation.CFStringRef) uint8 {
+	defer runtime.KeepAlive(ifName)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkInterfaceRefreshConfiguration == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkInterfaceRefreshConfiguration, _lib, "SCNetworkInterfaceRefreshConfiguration")
@@ -946,6 +1052,8 @@ var _fnSCNetworkInterfaceSetConfiguration func(objc.ID, objc.ID) uint8
 
 // SCNetworkInterfaceSetConfiguration calls the SystemConfiguration framework function SCNetworkInterfaceSetConfiguration.
 func SCNetworkInterfaceSetConfiguration(interface_ SCNetworkInterfaceRef, config corefoundation.CFDictionaryRef) uint8 {
+	defer runtime.KeepAlive(interface_)
+	defer runtime.KeepAlive(config)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkInterfaceSetConfiguration == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkInterfaceSetConfiguration, _lib, "SCNetworkInterfaceSetConfiguration")
@@ -957,6 +1065,9 @@ var _fnSCNetworkInterfaceSetExtendedConfiguration func(objc.ID, objc.ID, objc.ID
 
 // SCNetworkInterfaceSetExtendedConfiguration calls the SystemConfiguration framework function SCNetworkInterfaceSetExtendedConfiguration.
 func SCNetworkInterfaceSetExtendedConfiguration(interface_ SCNetworkInterfaceRef, extendedType corefoundation.CFStringRef, config corefoundation.CFDictionaryRef) uint8 {
+	defer runtime.KeepAlive(interface_)
+	defer runtime.KeepAlive(extendedType)
+	defer runtime.KeepAlive(config)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkInterfaceSetExtendedConfiguration == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkInterfaceSetExtendedConfiguration, _lib, "SCNetworkInterfaceSetExtendedConfiguration")
@@ -968,6 +1079,7 @@ var _fnSCNetworkInterfaceSetMTU func(objc.ID, int) uint8
 
 // SCNetworkInterfaceSetMTU calls the SystemConfiguration framework function SCNetworkInterfaceSetMTU.
 func SCNetworkInterfaceSetMTU(interface_ SCNetworkInterfaceRef, mtu int) uint8 {
+	defer runtime.KeepAlive(interface_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkInterfaceSetMTU == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkInterfaceSetMTU, _lib, "SCNetworkInterfaceSetMTU")
@@ -979,6 +1091,9 @@ var _fnSCNetworkInterfaceSetMediaOptions func(objc.ID, objc.ID, objc.ID) uint8
 
 // SCNetworkInterfaceSetMediaOptions calls the SystemConfiguration framework function SCNetworkInterfaceSetMediaOptions.
 func SCNetworkInterfaceSetMediaOptions(interface_ SCNetworkInterfaceRef, subtype corefoundation.CFStringRef, options corefoundation.CFArrayRef) uint8 {
+	defer runtime.KeepAlive(interface_)
+	defer runtime.KeepAlive(subtype)
+	defer runtime.KeepAlive(options)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkInterfaceSetMediaOptions == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkInterfaceSetMediaOptions, _lib, "SCNetworkInterfaceSetMediaOptions")
@@ -990,6 +1105,7 @@ var _fnSCNetworkProtocolGetConfiguration func(objc.ID) objc.ID
 
 // SCNetworkProtocolGetConfiguration calls the SystemConfiguration framework function SCNetworkProtocolGetConfiguration.
 func SCNetworkProtocolGetConfiguration(protocol SCNetworkProtocolRef) corefoundation.CFDictionaryRef {
+	defer runtime.KeepAlive(protocol)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkProtocolGetConfiguration == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkProtocolGetConfiguration, _lib, "SCNetworkProtocolGetConfiguration")
@@ -1002,6 +1118,7 @@ var _fnSCNetworkProtocolGetEnabled func(objc.ID) uint8
 
 // SCNetworkProtocolGetEnabled calls the SystemConfiguration framework function SCNetworkProtocolGetEnabled.
 func SCNetworkProtocolGetEnabled(protocol SCNetworkProtocolRef) uint8 {
+	defer runtime.KeepAlive(protocol)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkProtocolGetEnabled == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkProtocolGetEnabled, _lib, "SCNetworkProtocolGetEnabled")
@@ -1013,6 +1130,7 @@ var _fnSCNetworkProtocolGetProtocolType func(objc.ID) objc.ID
 
 // SCNetworkProtocolGetProtocolType calls the SystemConfiguration framework function SCNetworkProtocolGetProtocolType.
 func SCNetworkProtocolGetProtocolType(protocol SCNetworkProtocolRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(protocol)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkProtocolGetProtocolType == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkProtocolGetProtocolType, _lib, "SCNetworkProtocolGetProtocolType")
@@ -1036,6 +1154,8 @@ var _fnSCNetworkProtocolSetConfiguration func(objc.ID, objc.ID) uint8
 
 // SCNetworkProtocolSetConfiguration calls the SystemConfiguration framework function SCNetworkProtocolSetConfiguration.
 func SCNetworkProtocolSetConfiguration(protocol SCNetworkProtocolRef, config corefoundation.CFDictionaryRef) uint8 {
+	defer runtime.KeepAlive(protocol)
+	defer runtime.KeepAlive(config)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkProtocolSetConfiguration == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkProtocolSetConfiguration, _lib, "SCNetworkProtocolSetConfiguration")
@@ -1047,6 +1167,7 @@ var _fnSCNetworkProtocolSetEnabled func(objc.ID, uint8) uint8
 
 // SCNetworkProtocolSetEnabled calls the SystemConfiguration framework function SCNetworkProtocolSetEnabled.
 func SCNetworkProtocolSetEnabled(protocol SCNetworkProtocolRef, enabled uint8) uint8 {
+	defer runtime.KeepAlive(protocol)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkProtocolSetEnabled == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkProtocolSetEnabled, _lib, "SCNetworkProtocolSetEnabled")
@@ -1058,6 +1179,7 @@ var _fnSCNetworkReachabilityCreateWithAddress func(objc.ID, unsafe.Pointer) objc
 
 // SCNetworkReachabilityCreateWithAddress calls the SystemConfiguration framework function SCNetworkReachabilityCreateWithAddress.
 func SCNetworkReachabilityCreateWithAddress(allocator corefoundation.CFAllocatorRef, address unsafe.Pointer) SCNetworkReachabilityRef {
+	defer runtime.KeepAlive(allocator)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkReachabilityCreateWithAddress == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkReachabilityCreateWithAddress, _lib, "SCNetworkReachabilityCreateWithAddress")
@@ -1070,6 +1192,7 @@ var _fnSCNetworkReachabilityCreateWithAddressPair func(objc.ID, unsafe.Pointer, 
 
 // SCNetworkReachabilityCreateWithAddressPair calls the SystemConfiguration framework function SCNetworkReachabilityCreateWithAddressPair.
 func SCNetworkReachabilityCreateWithAddressPair(allocator corefoundation.CFAllocatorRef, localAddress unsafe.Pointer, remoteAddress unsafe.Pointer) SCNetworkReachabilityRef {
+	defer runtime.KeepAlive(allocator)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkReachabilityCreateWithAddressPair == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkReachabilityCreateWithAddressPair, _lib, "SCNetworkReachabilityCreateWithAddressPair")
@@ -1082,6 +1205,7 @@ var _fnSCNetworkReachabilityCreateWithName func(objc.ID, string) objc.ID
 
 // SCNetworkReachabilityCreateWithName calls the SystemConfiguration framework function SCNetworkReachabilityCreateWithName.
 func SCNetworkReachabilityCreateWithName(allocator corefoundation.CFAllocatorRef, nodename string) SCNetworkReachabilityRef {
+	defer runtime.KeepAlive(allocator)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkReachabilityCreateWithName == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkReachabilityCreateWithName, _lib, "SCNetworkReachabilityCreateWithName")
@@ -1094,6 +1218,7 @@ var _fnSCNetworkReachabilityGetFlags func(objc.ID, unsafe.Pointer) uint8
 
 // SCNetworkReachabilityGetFlags calls the SystemConfiguration framework function SCNetworkReachabilityGetFlags.
 func SCNetworkReachabilityGetFlags(target SCNetworkReachabilityRef) (result uint8, flags SCNetworkReachabilityFlags) {
+	defer runtime.KeepAlive(target)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkReachabilityGetFlags == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkReachabilityGetFlags, _lib, "SCNetworkReachabilityGetFlags")
@@ -1118,6 +1243,9 @@ var _fnSCNetworkReachabilityScheduleWithRunLoop func(objc.ID, objc.ID, objc.ID) 
 
 // SCNetworkReachabilityScheduleWithRunLoop calls the SystemConfiguration framework function SCNetworkReachabilityScheduleWithRunLoop.
 func SCNetworkReachabilityScheduleWithRunLoop(target SCNetworkReachabilityRef, runLoop corefoundation.CFRunLoopRef, runLoopMode corefoundation.CFStringRef) uint8 {
+	defer runtime.KeepAlive(target)
+	defer runtime.KeepAlive(runLoop)
+	defer runtime.KeepAlive(runLoopMode)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkReachabilityScheduleWithRunLoop == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkReachabilityScheduleWithRunLoop, _lib, "SCNetworkReachabilityScheduleWithRunLoop")
@@ -1129,6 +1257,7 @@ var _fnSCNetworkReachabilitySetCallback func(objc.ID, unsafe.Pointer, unsafe.Poi
 
 // SCNetworkReachabilitySetCallback calls the SystemConfiguration framework function SCNetworkReachabilitySetCallback.
 func SCNetworkReachabilitySetCallback(target SCNetworkReachabilityRef, callout unsafe.Pointer, context_ unsafe.Pointer) uint8 {
+	defer runtime.KeepAlive(target)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkReachabilitySetCallback == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkReachabilitySetCallback, _lib, "SCNetworkReachabilitySetCallback")
@@ -1140,6 +1269,7 @@ var _fnSCNetworkReachabilitySetDispatchQueue func(objc.ID, objc.ID) uint8
 
 // SCNetworkReachabilitySetDispatchQueue calls the SystemConfiguration framework function SCNetworkReachabilitySetDispatchQueue.
 func SCNetworkReachabilitySetDispatchQueue(target SCNetworkReachabilityRef, queue dispatch.Queue) uint8 {
+	defer runtime.KeepAlive(target)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkReachabilitySetDispatchQueue == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkReachabilitySetDispatchQueue, _lib, "SCNetworkReachabilitySetDispatchQueue")
@@ -1151,6 +1281,9 @@ var _fnSCNetworkReachabilityUnscheduleFromRunLoop func(objc.ID, objc.ID, objc.ID
 
 // SCNetworkReachabilityUnscheduleFromRunLoop calls the SystemConfiguration framework function SCNetworkReachabilityUnscheduleFromRunLoop.
 func SCNetworkReachabilityUnscheduleFromRunLoop(target SCNetworkReachabilityRef, runLoop corefoundation.CFRunLoopRef, runLoopMode corefoundation.CFStringRef) uint8 {
+	defer runtime.KeepAlive(target)
+	defer runtime.KeepAlive(runLoop)
+	defer runtime.KeepAlive(runLoopMode)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkReachabilityUnscheduleFromRunLoop == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkReachabilityUnscheduleFromRunLoop, _lib, "SCNetworkReachabilityUnscheduleFromRunLoop")
@@ -1162,6 +1295,8 @@ var _fnSCNetworkServiceAddProtocolType func(objc.ID, objc.ID) uint8
 
 // SCNetworkServiceAddProtocolType calls the SystemConfiguration framework function SCNetworkServiceAddProtocolType.
 func SCNetworkServiceAddProtocolType(service SCNetworkServiceRef, protocolType corefoundation.CFStringRef) uint8 {
+	defer runtime.KeepAlive(service)
+	defer runtime.KeepAlive(protocolType)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkServiceAddProtocolType == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkServiceAddProtocolType, _lib, "SCNetworkServiceAddProtocolType")
@@ -1173,6 +1308,8 @@ var _fnSCNetworkServiceCopy func(objc.ID, objc.ID) objc.ID
 
 // SCNetworkServiceCopy calls the SystemConfiguration framework function SCNetworkServiceCopy.
 func SCNetworkServiceCopy(prefs SCPreferencesRef, serviceID corefoundation.CFStringRef) SCNetworkServiceRef {
+	defer runtime.KeepAlive(prefs)
+	defer runtime.KeepAlive(serviceID)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkServiceCopy == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkServiceCopy, _lib, "SCNetworkServiceCopy")
@@ -1185,6 +1322,7 @@ var _fnSCNetworkServiceCopyAll func(objc.ID) objc.ID
 
 // SCNetworkServiceCopyAll calls the SystemConfiguration framework function SCNetworkServiceCopyAll.
 func SCNetworkServiceCopyAll(prefs SCPreferencesRef) corefoundation.CFArrayRef {
+	defer runtime.KeepAlive(prefs)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkServiceCopyAll == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkServiceCopyAll, _lib, "SCNetworkServiceCopyAll")
@@ -1197,6 +1335,8 @@ var _fnSCNetworkServiceCopyProtocol func(objc.ID, objc.ID) objc.ID
 
 // SCNetworkServiceCopyProtocol calls the SystemConfiguration framework function SCNetworkServiceCopyProtocol.
 func SCNetworkServiceCopyProtocol(service SCNetworkServiceRef, protocolType corefoundation.CFStringRef) SCNetworkProtocolRef {
+	defer runtime.KeepAlive(service)
+	defer runtime.KeepAlive(protocolType)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkServiceCopyProtocol == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkServiceCopyProtocol, _lib, "SCNetworkServiceCopyProtocol")
@@ -1209,6 +1349,7 @@ var _fnSCNetworkServiceCopyProtocols func(objc.ID) objc.ID
 
 // SCNetworkServiceCopyProtocols calls the SystemConfiguration framework function SCNetworkServiceCopyProtocols.
 func SCNetworkServiceCopyProtocols(service SCNetworkServiceRef) corefoundation.CFArrayRef {
+	defer runtime.KeepAlive(service)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkServiceCopyProtocols == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkServiceCopyProtocols, _lib, "SCNetworkServiceCopyProtocols")
@@ -1221,6 +1362,8 @@ var _fnSCNetworkServiceCreate func(objc.ID, objc.ID) objc.ID
 
 // SCNetworkServiceCreate calls the SystemConfiguration framework function SCNetworkServiceCreate.
 func SCNetworkServiceCreate(prefs SCPreferencesRef, interface_ SCNetworkInterfaceRef) SCNetworkServiceRef {
+	defer runtime.KeepAlive(prefs)
+	defer runtime.KeepAlive(interface_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkServiceCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkServiceCreate, _lib, "SCNetworkServiceCreate")
@@ -1233,6 +1376,7 @@ var _fnSCNetworkServiceEstablishDefaultConfiguration func(objc.ID) uint8
 
 // SCNetworkServiceEstablishDefaultConfiguration calls the SystemConfiguration framework function SCNetworkServiceEstablishDefaultConfiguration.
 func SCNetworkServiceEstablishDefaultConfiguration(service SCNetworkServiceRef) uint8 {
+	defer runtime.KeepAlive(service)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkServiceEstablishDefaultConfiguration == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkServiceEstablishDefaultConfiguration, _lib, "SCNetworkServiceEstablishDefaultConfiguration")
@@ -1244,6 +1388,7 @@ var _fnSCNetworkServiceGetEnabled func(objc.ID) uint8
 
 // SCNetworkServiceGetEnabled calls the SystemConfiguration framework function SCNetworkServiceGetEnabled.
 func SCNetworkServiceGetEnabled(service SCNetworkServiceRef) uint8 {
+	defer runtime.KeepAlive(service)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkServiceGetEnabled == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkServiceGetEnabled, _lib, "SCNetworkServiceGetEnabled")
@@ -1255,6 +1400,7 @@ var _fnSCNetworkServiceGetInterface func(objc.ID) objc.ID
 
 // SCNetworkServiceGetInterface calls the SystemConfiguration framework function SCNetworkServiceGetInterface.
 func SCNetworkServiceGetInterface(service SCNetworkServiceRef) SCNetworkInterfaceRef {
+	defer runtime.KeepAlive(service)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkServiceGetInterface == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkServiceGetInterface, _lib, "SCNetworkServiceGetInterface")
@@ -1267,6 +1413,7 @@ var _fnSCNetworkServiceGetName func(objc.ID) objc.ID
 
 // SCNetworkServiceGetName calls the SystemConfiguration framework function SCNetworkServiceGetName.
 func SCNetworkServiceGetName(service SCNetworkServiceRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(service)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkServiceGetName == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkServiceGetName, _lib, "SCNetworkServiceGetName")
@@ -1279,6 +1426,7 @@ var _fnSCNetworkServiceGetServiceID func(objc.ID) objc.ID
 
 // SCNetworkServiceGetServiceID calls the SystemConfiguration framework function SCNetworkServiceGetServiceID.
 func SCNetworkServiceGetServiceID(service SCNetworkServiceRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(service)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkServiceGetServiceID == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkServiceGetServiceID, _lib, "SCNetworkServiceGetServiceID")
@@ -1302,6 +1450,7 @@ var _fnSCNetworkServiceRemove func(objc.ID) uint8
 
 // SCNetworkServiceRemove calls the SystemConfiguration framework function SCNetworkServiceRemove.
 func SCNetworkServiceRemove(service SCNetworkServiceRef) uint8 {
+	defer runtime.KeepAlive(service)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkServiceRemove == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkServiceRemove, _lib, "SCNetworkServiceRemove")
@@ -1313,6 +1462,8 @@ var _fnSCNetworkServiceRemoveProtocolType func(objc.ID, objc.ID) uint8
 
 // SCNetworkServiceRemoveProtocolType calls the SystemConfiguration framework function SCNetworkServiceRemoveProtocolType.
 func SCNetworkServiceRemoveProtocolType(service SCNetworkServiceRef, protocolType corefoundation.CFStringRef) uint8 {
+	defer runtime.KeepAlive(service)
+	defer runtime.KeepAlive(protocolType)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkServiceRemoveProtocolType == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkServiceRemoveProtocolType, _lib, "SCNetworkServiceRemoveProtocolType")
@@ -1324,6 +1475,7 @@ var _fnSCNetworkServiceSetEnabled func(objc.ID, uint8) uint8
 
 // SCNetworkServiceSetEnabled calls the SystemConfiguration framework function SCNetworkServiceSetEnabled.
 func SCNetworkServiceSetEnabled(service SCNetworkServiceRef, enabled uint8) uint8 {
+	defer runtime.KeepAlive(service)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkServiceSetEnabled == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkServiceSetEnabled, _lib, "SCNetworkServiceSetEnabled")
@@ -1335,6 +1487,8 @@ var _fnSCNetworkServiceSetName func(objc.ID, objc.ID) uint8
 
 // SCNetworkServiceSetName calls the SystemConfiguration framework function SCNetworkServiceSetName.
 func SCNetworkServiceSetName(service SCNetworkServiceRef, name corefoundation.CFStringRef) uint8 {
+	defer runtime.KeepAlive(service)
+	defer runtime.KeepAlive(name)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkServiceSetName == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkServiceSetName, _lib, "SCNetworkServiceSetName")
@@ -1346,6 +1500,8 @@ var _fnSCNetworkSetAddService func(objc.ID, objc.ID) uint8
 
 // SCNetworkSetAddService calls the SystemConfiguration framework function SCNetworkSetAddService.
 func SCNetworkSetAddService(set SCNetworkSetRef, service SCNetworkServiceRef) uint8 {
+	defer runtime.KeepAlive(set)
+	defer runtime.KeepAlive(service)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkSetAddService == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkSetAddService, _lib, "SCNetworkSetAddService")
@@ -1357,6 +1513,8 @@ var _fnSCNetworkSetContainsInterface func(objc.ID, objc.ID) uint8
 
 // SCNetworkSetContainsInterface calls the SystemConfiguration framework function SCNetworkSetContainsInterface.
 func SCNetworkSetContainsInterface(set SCNetworkSetRef, interface_ SCNetworkInterfaceRef) uint8 {
+	defer runtime.KeepAlive(set)
+	defer runtime.KeepAlive(interface_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkSetContainsInterface == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkSetContainsInterface, _lib, "SCNetworkSetContainsInterface")
@@ -1368,6 +1526,8 @@ var _fnSCNetworkSetCopy func(objc.ID, objc.ID) objc.ID
 
 // SCNetworkSetCopy calls the SystemConfiguration framework function SCNetworkSetCopy.
 func SCNetworkSetCopy(prefs SCPreferencesRef, setID corefoundation.CFStringRef) SCNetworkSetRef {
+	defer runtime.KeepAlive(prefs)
+	defer runtime.KeepAlive(setID)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkSetCopy == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkSetCopy, _lib, "SCNetworkSetCopy")
@@ -1380,6 +1540,7 @@ var _fnSCNetworkSetCopyAll func(objc.ID) objc.ID
 
 // SCNetworkSetCopyAll calls the SystemConfiguration framework function SCNetworkSetCopyAll.
 func SCNetworkSetCopyAll(prefs SCPreferencesRef) corefoundation.CFArrayRef {
+	defer runtime.KeepAlive(prefs)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkSetCopyAll == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkSetCopyAll, _lib, "SCNetworkSetCopyAll")
@@ -1392,6 +1553,7 @@ var _fnSCNetworkSetCopyCurrent func(objc.ID) objc.ID
 
 // SCNetworkSetCopyCurrent calls the SystemConfiguration framework function SCNetworkSetCopyCurrent.
 func SCNetworkSetCopyCurrent(prefs SCPreferencesRef) SCNetworkSetRef {
+	defer runtime.KeepAlive(prefs)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkSetCopyCurrent == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkSetCopyCurrent, _lib, "SCNetworkSetCopyCurrent")
@@ -1404,6 +1566,7 @@ var _fnSCNetworkSetCopyServices func(objc.ID) objc.ID
 
 // SCNetworkSetCopyServices calls the SystemConfiguration framework function SCNetworkSetCopyServices.
 func SCNetworkSetCopyServices(set SCNetworkSetRef) corefoundation.CFArrayRef {
+	defer runtime.KeepAlive(set)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkSetCopyServices == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkSetCopyServices, _lib, "SCNetworkSetCopyServices")
@@ -1416,6 +1579,7 @@ var _fnSCNetworkSetCreate func(objc.ID) objc.ID
 
 // SCNetworkSetCreate calls the SystemConfiguration framework function SCNetworkSetCreate.
 func SCNetworkSetCreate(prefs SCPreferencesRef) SCNetworkSetRef {
+	defer runtime.KeepAlive(prefs)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkSetCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkSetCreate, _lib, "SCNetworkSetCreate")
@@ -1428,6 +1592,7 @@ var _fnSCNetworkSetGetName func(objc.ID) objc.ID
 
 // SCNetworkSetGetName calls the SystemConfiguration framework function SCNetworkSetGetName.
 func SCNetworkSetGetName(set SCNetworkSetRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(set)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkSetGetName == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkSetGetName, _lib, "SCNetworkSetGetName")
@@ -1440,6 +1605,7 @@ var _fnSCNetworkSetGetServiceOrder func(objc.ID) objc.ID
 
 // SCNetworkSetGetServiceOrder calls the SystemConfiguration framework function SCNetworkSetGetServiceOrder.
 func SCNetworkSetGetServiceOrder(set SCNetworkSetRef) corefoundation.CFArrayRef {
+	defer runtime.KeepAlive(set)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkSetGetServiceOrder == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkSetGetServiceOrder, _lib, "SCNetworkSetGetServiceOrder")
@@ -1452,6 +1618,7 @@ var _fnSCNetworkSetGetSetID func(objc.ID) objc.ID
 
 // SCNetworkSetGetSetID calls the SystemConfiguration framework function SCNetworkSetGetSetID.
 func SCNetworkSetGetSetID(set SCNetworkSetRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(set)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkSetGetSetID == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkSetGetSetID, _lib, "SCNetworkSetGetSetID")
@@ -1475,6 +1642,7 @@ var _fnSCNetworkSetRemove func(objc.ID) uint8
 
 // SCNetworkSetRemove calls the SystemConfiguration framework function SCNetworkSetRemove.
 func SCNetworkSetRemove(set SCNetworkSetRef) uint8 {
+	defer runtime.KeepAlive(set)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkSetRemove == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkSetRemove, _lib, "SCNetworkSetRemove")
@@ -1486,6 +1654,8 @@ var _fnSCNetworkSetRemoveService func(objc.ID, objc.ID) uint8
 
 // SCNetworkSetRemoveService calls the SystemConfiguration framework function SCNetworkSetRemoveService.
 func SCNetworkSetRemoveService(set SCNetworkSetRef, service SCNetworkServiceRef) uint8 {
+	defer runtime.KeepAlive(set)
+	defer runtime.KeepAlive(service)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkSetRemoveService == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkSetRemoveService, _lib, "SCNetworkSetRemoveService")
@@ -1497,6 +1667,7 @@ var _fnSCNetworkSetSetCurrent func(objc.ID) uint8
 
 // SCNetworkSetSetCurrent calls the SystemConfiguration framework function SCNetworkSetSetCurrent.
 func SCNetworkSetSetCurrent(set SCNetworkSetRef) uint8 {
+	defer runtime.KeepAlive(set)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkSetSetCurrent == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkSetSetCurrent, _lib, "SCNetworkSetSetCurrent")
@@ -1508,6 +1679,8 @@ var _fnSCNetworkSetSetName func(objc.ID, objc.ID) uint8
 
 // SCNetworkSetSetName calls the SystemConfiguration framework function SCNetworkSetSetName.
 func SCNetworkSetSetName(set SCNetworkSetRef, name corefoundation.CFStringRef) uint8 {
+	defer runtime.KeepAlive(set)
+	defer runtime.KeepAlive(name)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkSetSetName == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkSetSetName, _lib, "SCNetworkSetSetName")
@@ -1519,6 +1692,8 @@ var _fnSCNetworkSetSetServiceOrder func(objc.ID, objc.ID) uint8
 
 // SCNetworkSetSetServiceOrder calls the SystemConfiguration framework function SCNetworkSetSetServiceOrder.
 func SCNetworkSetSetServiceOrder(set SCNetworkSetRef, newOrder corefoundation.CFArrayRef) uint8 {
+	defer runtime.KeepAlive(set)
+	defer runtime.KeepAlive(newOrder)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkSetSetServiceOrder == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkSetSetServiceOrder, _lib, "SCNetworkSetSetServiceOrder")
@@ -1530,6 +1705,9 @@ var _fnSCPreferencesAddValue func(objc.ID, objc.ID, objc.ID) uint8
 
 // SCPreferencesAddValue calls the SystemConfiguration framework function SCPreferencesAddValue.
 func SCPreferencesAddValue(prefs SCPreferencesRef, key corefoundation.CFStringRef, value corefoundation.CFPropertyListRef) uint8 {
+	defer runtime.KeepAlive(prefs)
+	defer runtime.KeepAlive(key)
+	defer runtime.KeepAlive(value)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCPreferencesAddValue == nil {
 		ebipurego.RegisterLibFunc(&_fnSCPreferencesAddValue, _lib, "SCPreferencesAddValue")
@@ -1541,6 +1719,7 @@ var _fnSCPreferencesApplyChanges func(objc.ID) uint8
 
 // SCPreferencesApplyChanges calls the SystemConfiguration framework function SCPreferencesApplyChanges.
 func SCPreferencesApplyChanges(prefs SCPreferencesRef) uint8 {
+	defer runtime.KeepAlive(prefs)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCPreferencesApplyChanges == nil {
 		ebipurego.RegisterLibFunc(&_fnSCPreferencesApplyChanges, _lib, "SCPreferencesApplyChanges")
@@ -1552,6 +1731,7 @@ var _fnSCPreferencesCommitChanges func(objc.ID) uint8
 
 // SCPreferencesCommitChanges calls the SystemConfiguration framework function SCPreferencesCommitChanges.
 func SCPreferencesCommitChanges(prefs SCPreferencesRef) uint8 {
+	defer runtime.KeepAlive(prefs)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCPreferencesCommitChanges == nil {
 		ebipurego.RegisterLibFunc(&_fnSCPreferencesCommitChanges, _lib, "SCPreferencesCommitChanges")
@@ -1563,6 +1743,7 @@ var _fnSCPreferencesCopyKeyList func(objc.ID) objc.ID
 
 // SCPreferencesCopyKeyList calls the SystemConfiguration framework function SCPreferencesCopyKeyList.
 func SCPreferencesCopyKeyList(prefs SCPreferencesRef) corefoundation.CFArrayRef {
+	defer runtime.KeepAlive(prefs)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCPreferencesCopyKeyList == nil {
 		ebipurego.RegisterLibFunc(&_fnSCPreferencesCopyKeyList, _lib, "SCPreferencesCopyKeyList")
@@ -1575,6 +1756,9 @@ var _fnSCPreferencesCreate func(objc.ID, objc.ID, objc.ID) objc.ID
 
 // SCPreferencesCreate calls the SystemConfiguration framework function SCPreferencesCreate.
 func SCPreferencesCreate(allocator corefoundation.CFAllocatorRef, name corefoundation.CFStringRef, prefsID corefoundation.CFStringRef) SCPreferencesRef {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(name)
+	defer runtime.KeepAlive(prefsID)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCPreferencesCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnSCPreferencesCreate, _lib, "SCPreferencesCreate")
@@ -1587,6 +1771,10 @@ var _fnSCPreferencesCreateWithAuthorization func(objc.ID, objc.ID, objc.ID, objc
 
 // SCPreferencesCreateWithAuthorization calls the SystemConfiguration framework function SCPreferencesCreateWithAuthorization.
 func SCPreferencesCreateWithAuthorization(allocator corefoundation.CFAllocatorRef, name corefoundation.CFStringRef, prefsID corefoundation.CFStringRef, authorization obj.Object) SCPreferencesRef {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(name)
+	defer runtime.KeepAlive(prefsID)
+	defer runtime.KeepAlive(authorization)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCPreferencesCreateWithAuthorization == nil {
 		ebipurego.RegisterLibFunc(&_fnSCPreferencesCreateWithAuthorization, _lib, "SCPreferencesCreateWithAuthorization")
@@ -1599,6 +1787,7 @@ var _fnSCPreferencesGetSignature func(objc.ID) objc.ID
 
 // SCPreferencesGetSignature calls the SystemConfiguration framework function SCPreferencesGetSignature.
 func SCPreferencesGetSignature(prefs SCPreferencesRef) corefoundation.CFDataRef {
+	defer runtime.KeepAlive(prefs)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCPreferencesGetSignature == nil {
 		ebipurego.RegisterLibFunc(&_fnSCPreferencesGetSignature, _lib, "SCPreferencesGetSignature")
@@ -1622,6 +1811,8 @@ var _fnSCPreferencesGetValue func(objc.ID, objc.ID) objc.ID
 
 // SCPreferencesGetValue calls the SystemConfiguration framework function SCPreferencesGetValue.
 func SCPreferencesGetValue(prefs SCPreferencesRef, key corefoundation.CFStringRef) corefoundation.CFPropertyListRef {
+	defer runtime.KeepAlive(prefs)
+	defer runtime.KeepAlive(key)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCPreferencesGetValue == nil {
 		ebipurego.RegisterLibFunc(&_fnSCPreferencesGetValue, _lib, "SCPreferencesGetValue")
@@ -1634,6 +1825,7 @@ var _fnSCPreferencesLock func(objc.ID, uint8) uint8
 
 // SCPreferencesLock calls the SystemConfiguration framework function SCPreferencesLock.
 func SCPreferencesLock(prefs SCPreferencesRef, wait uint8) uint8 {
+	defer runtime.KeepAlive(prefs)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCPreferencesLock == nil {
 		ebipurego.RegisterLibFunc(&_fnSCPreferencesLock, _lib, "SCPreferencesLock")
@@ -1645,6 +1837,8 @@ var _fnSCPreferencesPathCreateUniqueChild func(objc.ID, objc.ID) objc.ID
 
 // SCPreferencesPathCreateUniqueChild calls the SystemConfiguration framework function SCPreferencesPathCreateUniqueChild.
 func SCPreferencesPathCreateUniqueChild(prefs SCPreferencesRef, prefix corefoundation.CFStringRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(prefs)
+	defer runtime.KeepAlive(prefix)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCPreferencesPathCreateUniqueChild == nil {
 		ebipurego.RegisterLibFunc(&_fnSCPreferencesPathCreateUniqueChild, _lib, "SCPreferencesPathCreateUniqueChild")
@@ -1657,6 +1851,8 @@ var _fnSCPreferencesPathGetLink func(objc.ID, objc.ID) objc.ID
 
 // SCPreferencesPathGetLink calls the SystemConfiguration framework function SCPreferencesPathGetLink.
 func SCPreferencesPathGetLink(prefs SCPreferencesRef, path corefoundation.CFStringRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(prefs)
+	defer runtime.KeepAlive(path)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCPreferencesPathGetLink == nil {
 		ebipurego.RegisterLibFunc(&_fnSCPreferencesPathGetLink, _lib, "SCPreferencesPathGetLink")
@@ -1669,6 +1865,8 @@ var _fnSCPreferencesPathGetValue func(objc.ID, objc.ID) objc.ID
 
 // SCPreferencesPathGetValue calls the SystemConfiguration framework function SCPreferencesPathGetValue.
 func SCPreferencesPathGetValue(prefs SCPreferencesRef, path corefoundation.CFStringRef) corefoundation.CFDictionaryRef {
+	defer runtime.KeepAlive(prefs)
+	defer runtime.KeepAlive(path)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCPreferencesPathGetValue == nil {
 		ebipurego.RegisterLibFunc(&_fnSCPreferencesPathGetValue, _lib, "SCPreferencesPathGetValue")
@@ -1681,6 +1879,8 @@ var _fnSCPreferencesPathRemoveValue func(objc.ID, objc.ID) uint8
 
 // SCPreferencesPathRemoveValue calls the SystemConfiguration framework function SCPreferencesPathRemoveValue.
 func SCPreferencesPathRemoveValue(prefs SCPreferencesRef, path corefoundation.CFStringRef) uint8 {
+	defer runtime.KeepAlive(prefs)
+	defer runtime.KeepAlive(path)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCPreferencesPathRemoveValue == nil {
 		ebipurego.RegisterLibFunc(&_fnSCPreferencesPathRemoveValue, _lib, "SCPreferencesPathRemoveValue")
@@ -1692,6 +1892,9 @@ var _fnSCPreferencesPathSetLink func(objc.ID, objc.ID, objc.ID) uint8
 
 // SCPreferencesPathSetLink calls the SystemConfiguration framework function SCPreferencesPathSetLink.
 func SCPreferencesPathSetLink(prefs SCPreferencesRef, path corefoundation.CFStringRef, link corefoundation.CFStringRef) uint8 {
+	defer runtime.KeepAlive(prefs)
+	defer runtime.KeepAlive(path)
+	defer runtime.KeepAlive(link)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCPreferencesPathSetLink == nil {
 		ebipurego.RegisterLibFunc(&_fnSCPreferencesPathSetLink, _lib, "SCPreferencesPathSetLink")
@@ -1703,6 +1906,9 @@ var _fnSCPreferencesPathSetValue func(objc.ID, objc.ID, objc.ID) uint8
 
 // SCPreferencesPathSetValue calls the SystemConfiguration framework function SCPreferencesPathSetValue.
 func SCPreferencesPathSetValue(prefs SCPreferencesRef, path corefoundation.CFStringRef, value corefoundation.CFDictionaryRef) uint8 {
+	defer runtime.KeepAlive(prefs)
+	defer runtime.KeepAlive(path)
+	defer runtime.KeepAlive(value)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCPreferencesPathSetValue == nil {
 		ebipurego.RegisterLibFunc(&_fnSCPreferencesPathSetValue, _lib, "SCPreferencesPathSetValue")
@@ -1714,6 +1920,8 @@ var _fnSCPreferencesRemoveValue func(objc.ID, objc.ID) uint8
 
 // SCPreferencesRemoveValue calls the SystemConfiguration framework function SCPreferencesRemoveValue.
 func SCPreferencesRemoveValue(prefs SCPreferencesRef, key corefoundation.CFStringRef) uint8 {
+	defer runtime.KeepAlive(prefs)
+	defer runtime.KeepAlive(key)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCPreferencesRemoveValue == nil {
 		ebipurego.RegisterLibFunc(&_fnSCPreferencesRemoveValue, _lib, "SCPreferencesRemoveValue")
@@ -1725,6 +1933,9 @@ var _fnSCPreferencesScheduleWithRunLoop func(objc.ID, objc.ID, objc.ID) uint8
 
 // SCPreferencesScheduleWithRunLoop calls the SystemConfiguration framework function SCPreferencesScheduleWithRunLoop.
 func SCPreferencesScheduleWithRunLoop(prefs SCPreferencesRef, runLoop corefoundation.CFRunLoopRef, runLoopMode corefoundation.CFStringRef) uint8 {
+	defer runtime.KeepAlive(prefs)
+	defer runtime.KeepAlive(runLoop)
+	defer runtime.KeepAlive(runLoopMode)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCPreferencesScheduleWithRunLoop == nil {
 		ebipurego.RegisterLibFunc(&_fnSCPreferencesScheduleWithRunLoop, _lib, "SCPreferencesScheduleWithRunLoop")
@@ -1736,6 +1947,7 @@ var _fnSCPreferencesSetCallback func(objc.ID, unsafe.Pointer, unsafe.Pointer) ui
 
 // SCPreferencesSetCallback calls the SystemConfiguration framework function SCPreferencesSetCallback.
 func SCPreferencesSetCallback(prefs SCPreferencesRef, callout unsafe.Pointer, context_ unsafe.Pointer) uint8 {
+	defer runtime.KeepAlive(prefs)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCPreferencesSetCallback == nil {
 		ebipurego.RegisterLibFunc(&_fnSCPreferencesSetCallback, _lib, "SCPreferencesSetCallback")
@@ -1747,6 +1959,8 @@ var _fnSCPreferencesSetComputerName func(objc.ID, objc.ID, int) uint8
 
 // SCPreferencesSetComputerName calls the SystemConfiguration framework function SCPreferencesSetComputerName.
 func SCPreferencesSetComputerName(prefs SCPreferencesRef, name corefoundation.CFStringRef, nameEncoding int) uint8 {
+	defer runtime.KeepAlive(prefs)
+	defer runtime.KeepAlive(name)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCPreferencesSetComputerName == nil {
 		ebipurego.RegisterLibFunc(&_fnSCPreferencesSetComputerName, _lib, "SCPreferencesSetComputerName")
@@ -1758,6 +1972,7 @@ var _fnSCPreferencesSetDispatchQueue func(objc.ID, objc.ID) uint8
 
 // SCPreferencesSetDispatchQueue calls the SystemConfiguration framework function SCPreferencesSetDispatchQueue.
 func SCPreferencesSetDispatchQueue(prefs SCPreferencesRef, queue dispatch.Queue) uint8 {
+	defer runtime.KeepAlive(prefs)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCPreferencesSetDispatchQueue == nil {
 		ebipurego.RegisterLibFunc(&_fnSCPreferencesSetDispatchQueue, _lib, "SCPreferencesSetDispatchQueue")
@@ -1769,6 +1984,8 @@ var _fnSCPreferencesSetLocalHostName func(objc.ID, objc.ID) uint8
 
 // SCPreferencesSetLocalHostName calls the SystemConfiguration framework function SCPreferencesSetLocalHostName.
 func SCPreferencesSetLocalHostName(prefs SCPreferencesRef, name corefoundation.CFStringRef) uint8 {
+	defer runtime.KeepAlive(prefs)
+	defer runtime.KeepAlive(name)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCPreferencesSetLocalHostName == nil {
 		ebipurego.RegisterLibFunc(&_fnSCPreferencesSetLocalHostName, _lib, "SCPreferencesSetLocalHostName")
@@ -1780,6 +1997,9 @@ var _fnSCPreferencesSetValue func(objc.ID, objc.ID, objc.ID) uint8
 
 // SCPreferencesSetValue calls the SystemConfiguration framework function SCPreferencesSetValue.
 func SCPreferencesSetValue(prefs SCPreferencesRef, key corefoundation.CFStringRef, value corefoundation.CFPropertyListRef) uint8 {
+	defer runtime.KeepAlive(prefs)
+	defer runtime.KeepAlive(key)
+	defer runtime.KeepAlive(value)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCPreferencesSetValue == nil {
 		ebipurego.RegisterLibFunc(&_fnSCPreferencesSetValue, _lib, "SCPreferencesSetValue")
@@ -1791,6 +2011,7 @@ var _fnSCPreferencesSynchronize func(objc.ID)
 
 // SCPreferencesSynchronize calls the SystemConfiguration framework function SCPreferencesSynchronize.
 func SCPreferencesSynchronize(prefs SCPreferencesRef) {
+	defer runtime.KeepAlive(prefs)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCPreferencesSynchronize == nil {
 		ebipurego.RegisterLibFunc(&_fnSCPreferencesSynchronize, _lib, "SCPreferencesSynchronize")
@@ -1802,6 +2023,7 @@ var _fnSCPreferencesUnlock func(objc.ID) uint8
 
 // SCPreferencesUnlock calls the SystemConfiguration framework function SCPreferencesUnlock.
 func SCPreferencesUnlock(prefs SCPreferencesRef) uint8 {
+	defer runtime.KeepAlive(prefs)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCPreferencesUnlock == nil {
 		ebipurego.RegisterLibFunc(&_fnSCPreferencesUnlock, _lib, "SCPreferencesUnlock")
@@ -1813,6 +2035,9 @@ var _fnSCPreferencesUnscheduleFromRunLoop func(objc.ID, objc.ID, objc.ID) uint8
 
 // SCPreferencesUnscheduleFromRunLoop calls the SystemConfiguration framework function SCPreferencesUnscheduleFromRunLoop.
 func SCPreferencesUnscheduleFromRunLoop(prefs SCPreferencesRef, runLoop corefoundation.CFRunLoopRef, runLoopMode corefoundation.CFStringRef) uint8 {
+	defer runtime.KeepAlive(prefs)
+	defer runtime.KeepAlive(runLoop)
+	defer runtime.KeepAlive(runLoopMode)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCPreferencesUnscheduleFromRunLoop == nil {
 		ebipurego.RegisterLibFunc(&_fnSCPreferencesUnscheduleFromRunLoop, _lib, "SCPreferencesUnscheduleFromRunLoop")
@@ -1824,6 +2049,7 @@ var _fnSCVLANInterfaceCopyAll func(objc.ID) objc.ID
 
 // SCVLANInterfaceCopyAll calls the SystemConfiguration framework function SCVLANInterfaceCopyAll.
 func SCVLANInterfaceCopyAll(prefs SCPreferencesRef) corefoundation.CFArrayRef {
+	defer runtime.KeepAlive(prefs)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCVLANInterfaceCopyAll == nil {
 		ebipurego.RegisterLibFunc(&_fnSCVLANInterfaceCopyAll, _lib, "SCVLANInterfaceCopyAll")
@@ -1848,6 +2074,9 @@ var _fnSCVLANInterfaceCreate func(objc.ID, objc.ID, objc.ID) unsafe.Pointer
 
 // SCVLANInterfaceCreate calls the SystemConfiguration framework function SCVLANInterfaceCreate.
 func SCVLANInterfaceCreate(prefs SCPreferencesRef, physical SCNetworkInterfaceRef, tag corefoundation.CFNumberRef) unsafe.Pointer {
+	defer runtime.KeepAlive(prefs)
+	defer runtime.KeepAlive(physical)
+	defer runtime.KeepAlive(tag)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCVLANInterfaceCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnSCVLANInterfaceCreate, _lib, "SCVLANInterfaceCreate")
@@ -1906,6 +2135,7 @@ var _fnSCVLANInterfaceSetLocalizedDisplayName func(unsafe.Pointer, objc.ID) uint
 
 // SCVLANInterfaceSetLocalizedDisplayName calls the SystemConfiguration framework function SCVLANInterfaceSetLocalizedDisplayName.
 func SCVLANInterfaceSetLocalizedDisplayName(vlan unsafe.Pointer, newName corefoundation.CFStringRef) uint8 {
+	defer runtime.KeepAlive(newName)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCVLANInterfaceSetLocalizedDisplayName == nil {
 		ebipurego.RegisterLibFunc(&_fnSCVLANInterfaceSetLocalizedDisplayName, _lib, "SCVLANInterfaceSetLocalizedDisplayName")
@@ -1917,6 +2147,7 @@ var _fnSCVLANInterfaceSetOptions func(unsafe.Pointer, objc.ID) uint8
 
 // SCVLANInterfaceSetOptions calls the SystemConfiguration framework function SCVLANInterfaceSetOptions.
 func SCVLANInterfaceSetOptions(vlan unsafe.Pointer, newOptions corefoundation.CFDictionaryRef) uint8 {
+	defer runtime.KeepAlive(newOptions)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCVLANInterfaceSetOptions == nil {
 		ebipurego.RegisterLibFunc(&_fnSCVLANInterfaceSetOptions, _lib, "SCVLANInterfaceSetOptions")
@@ -1928,6 +2159,8 @@ var _fnSCVLANInterfaceSetPhysicalInterfaceAndTag func(unsafe.Pointer, objc.ID, o
 
 // SCVLANInterfaceSetPhysicalInterfaceAndTag calls the SystemConfiguration framework function SCVLANInterfaceSetPhysicalInterfaceAndTag.
 func SCVLANInterfaceSetPhysicalInterfaceAndTag(vlan unsafe.Pointer, physical SCNetworkInterfaceRef, tag corefoundation.CFNumberRef) uint8 {
+	defer runtime.KeepAlive(physical)
+	defer runtime.KeepAlive(tag)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCVLANInterfaceSetPhysicalInterfaceAndTag == nil {
 		ebipurego.RegisterLibFunc(&_fnSCVLANInterfaceSetPhysicalInterfaceAndTag, _lib, "SCVLANInterfaceSetPhysicalInterfaceAndTag")

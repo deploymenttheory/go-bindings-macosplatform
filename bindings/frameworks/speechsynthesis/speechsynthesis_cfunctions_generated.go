@@ -5,6 +5,7 @@
 package speechsynthesis
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
@@ -31,6 +32,7 @@ var _fnCopyPhonemesFromText func(unsafe.Pointer, objc.ID, unsafe.Pointer) int16
 
 // CopyPhonemesFromText calls the SpeechSynthesis framework function CopyPhonemesFromText.
 func CopyPhonemesFromText(text corefoundation.CFStringRef, phonemes unsafe.Pointer) (result int16, chan_ SpeechChannelRecord) {
+	defer runtime.KeepAlive(text)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCopyPhonemesFromText == nil {
 		ebipurego.RegisterLibFunc(&_fnCopyPhonemesFromText, _lib, "CopyPhonemesFromText")
@@ -44,6 +46,7 @@ var _fnCopySpeechProperty func(unsafe.Pointer, objc.ID, unsafe.Pointer) int16
 
 // CopySpeechProperty calls the SpeechSynthesis framework function CopySpeechProperty.
 func CopySpeechProperty(property corefoundation.CFStringRef, object unsafe.Pointer) (result int16, chan_ SpeechChannelRecord) {
+	defer runtime.KeepAlive(property)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCopySpeechProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnCopySpeechProperty, _lib, "CopySpeechProperty")
@@ -437,6 +440,8 @@ var _fnSetSpeechProperty func(unsafe.Pointer, objc.ID, objc.ID) int16
 
 // SetSpeechProperty calls the SpeechSynthesis framework function SetSpeechProperty.
 func SetSpeechProperty(property corefoundation.CFStringRef, object obj.Object) (result int16, chan_ SpeechChannelRecord) {
+	defer runtime.KeepAlive(property)
+	defer runtime.KeepAlive(object)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSetSpeechProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnSetSpeechProperty, _lib, "SetSpeechProperty")
@@ -476,6 +481,8 @@ var _fnSpeakCFString func(unsafe.Pointer, objc.ID, objc.ID) int16
 
 // SpeakCFString calls the SpeechSynthesis framework function SpeakCFString.
 func SpeakCFString(aString corefoundation.CFStringRef, options corefoundation.CFDictionaryRef) (result int16, chan_ SpeechChannelRecord) {
+	defer runtime.KeepAlive(aString)
+	defer runtime.KeepAlive(options)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSpeakCFString == nil {
 		ebipurego.RegisterLibFunc(&_fnSpeakCFString, _lib, "SpeakCFString")
@@ -548,6 +555,7 @@ var _fnSpeechSynthesisRegisterModuleURL func(objc.ID) int16
 
 // SpeechSynthesisRegisterModuleURL calls the SpeechSynthesis framework function SpeechSynthesisRegisterModuleURL.
 func SpeechSynthesisRegisterModuleURL(url corefoundation.CFURLRef) int16 {
+	defer runtime.KeepAlive(url)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSpeechSynthesisRegisterModuleURL == nil {
 		ebipurego.RegisterLibFunc(&_fnSpeechSynthesisRegisterModuleURL, _lib, "SpeechSynthesisRegisterModuleURL")
@@ -559,6 +567,7 @@ var _fnSpeechSynthesisUnregisterModuleURL func(objc.ID) int16
 
 // SpeechSynthesisUnregisterModuleURL calls the SpeechSynthesis framework function SpeechSynthesisUnregisterModuleURL.
 func SpeechSynthesisUnregisterModuleURL(url corefoundation.CFURLRef) int16 {
+	defer runtime.KeepAlive(url)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSpeechSynthesisUnregisterModuleURL == nil {
 		ebipurego.RegisterLibFunc(&_fnSpeechSynthesisUnregisterModuleURL, _lib, "SpeechSynthesisUnregisterModuleURL")
@@ -625,6 +634,7 @@ var _fnUseSpeechDictionary func(unsafe.Pointer, objc.ID) int16
 
 // UseSpeechDictionary calls the SpeechSynthesis framework function UseSpeechDictionary.
 func UseSpeechDictionary(speechDictionary corefoundation.CFDictionaryRef) (result int16, chan_ SpeechChannelRecord) {
+	defer runtime.KeepAlive(speechDictionary)
 	_loadOnce.Do(_loadLibrary)
 	if _fnUseSpeechDictionary == nil {
 		ebipurego.RegisterLibFunc(&_fnUseSpeechDictionary, _lib, "UseSpeechDictionary")

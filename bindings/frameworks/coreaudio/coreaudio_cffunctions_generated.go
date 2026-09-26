@@ -5,6 +5,7 @@
 package coreaudio
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreaudiotypes"
@@ -229,6 +230,7 @@ var _fnAudioHardwareAddRunLoopSource func(objc.ID) int32
 
 // AudioHardwareAddRunLoopSource reports an error if the CoreAudio framework function AudioHardwareAddRunLoopSource fails.
 func AudioHardwareAddRunLoopSource(inRunLoopSource obj.Object) error {
+	defer runtime.KeepAlive(inRunLoopSource)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAudioHardwareAddRunLoopSource == nil {
 		ebipurego.RegisterLibFunc(&_fnAudioHardwareAddRunLoopSource, _lib, "AudioHardwareAddRunLoopSource")
@@ -274,6 +276,7 @@ var _fnAudioHardwareRemoveRunLoopSource func(objc.ID) int32
 
 // AudioHardwareRemoveRunLoopSource reports an error if the CoreAudio framework function AudioHardwareRemoveRunLoopSource fails.
 func AudioHardwareRemoveRunLoopSource(inRunLoopSource obj.Object) error {
+	defer runtime.KeepAlive(inRunLoopSource)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAudioHardwareRemoveRunLoopSource == nil {
 		ebipurego.RegisterLibFunc(&_fnAudioHardwareRemoveRunLoopSource, _lib, "AudioHardwareRemoveRunLoopSource")

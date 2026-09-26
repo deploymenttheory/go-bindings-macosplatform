@@ -5,6 +5,7 @@
 package javaruntimesupport
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
@@ -19,6 +20,7 @@ var _fnJRSAccessibilityUnregisterUniqueIdForUIElement func(objc.ID)
 
 // JRSAccessibilityUnregisterUniqueIdForUIElement calls the JavaRuntimeSupport framework function JRSAccessibilityUnregisterUniqueIdForUIElement.
 func JRSAccessibilityUnregisterUniqueIdForUIElement(element obj.Object) {
+	defer runtime.KeepAlive(element)
 	_loadOnce.Do(_loadLibrary)
 	if _fnJRSAccessibilityUnregisterUniqueIdForUIElement == nil {
 		ebipurego.RegisterLibFunc(&_fnJRSAccessibilityUnregisterUniqueIdForUIElement, _lib, "JRSAccessibilityUnregisterUniqueIdForUIElement")
@@ -52,6 +54,7 @@ var _fnJRSFontCreateFallbackFontForCharacters func(objc.ID, unsafe.Pointer, int)
 
 // JRSFontCreateFallbackFontForCharacters calls the JavaRuntimeSupport framework function JRSFontCreateFallbackFontForCharacters.
 func JRSFontCreateFallbackFontForCharacters(font obj.Object, unichars unsafe.Pointer, length int) obj.Object {
+	defer runtime.KeepAlive(font)
 	_loadOnce.Do(_loadLibrary)
 	if _fnJRSFontCreateFallbackFontForCharacters == nil {
 		ebipurego.RegisterLibFunc(&_fnJRSFontCreateFallbackFontForCharacters, _lib, "JRSFontCreateFallbackFontForCharacters")
@@ -64,6 +67,7 @@ var _fnJRSFontGetAdvancesForGlyphsAndStyle func(objc.ID, unsafe.Pointer, uint32,
 
 // JRSFontGetAdvancesForGlyphsAndStyle calls the JavaRuntimeSupport framework function JRSFontGetAdvancesForGlyphsAndStyle.
 func JRSFontGetAdvancesForGlyphsAndStyle(font obj.Object, tx *corefoundation.CGAffineTransform, style uint32, glyphs unsafe.Pointer, count int, advances *corefoundation.CGSize) float64 {
+	defer runtime.KeepAlive(font)
 	_loadOnce.Do(_loadLibrary)
 	if _fnJRSFontGetAdvancesForGlyphsAndStyle == nil {
 		ebipurego.RegisterLibFunc(&_fnJRSFontGetAdvancesForGlyphsAndStyle, _lib, "JRSFontGetAdvancesForGlyphsAndStyle")
@@ -75,6 +79,7 @@ var _fnJRSFontGetBoundingBoxesForGlyphsAndStyle func(objc.ID, unsafe.Pointer, ui
 
 // JRSFontGetBoundingBoxesForGlyphsAndStyle calls the JavaRuntimeSupport framework function JRSFontGetBoundingBoxesForGlyphsAndStyle.
 func JRSFontGetBoundingBoxesForGlyphsAndStyle(font obj.Object, tx *corefoundation.CGAffineTransform, style uint32, glyphs unsafe.Pointer, count int, bboxes *corefoundation.CGRect) corefoundation.CGRect {
+	defer runtime.KeepAlive(font)
 	_loadOnce.Do(_loadLibrary)
 	if _fnJRSFontGetBoundingBoxesForGlyphsAndStyle == nil {
 		ebipurego.RegisterLibFunc(&_fnJRSFontGetBoundingBoxesForGlyphsAndStyle, _lib, "JRSFontGetBoundingBoxesForGlyphsAndStyle")
@@ -86,6 +91,7 @@ var _fnJRSFontGetRenderingStyleForContext func(objc.ID) uint32
 
 // JRSFontGetRenderingStyleForContext calls the JavaRuntimeSupport framework function JRSFontGetRenderingStyleForContext.
 func JRSFontGetRenderingStyleForContext(context_ coregraphics.CGContextRef) uint32 {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnJRSFontGetRenderingStyleForContext == nil {
 		ebipurego.RegisterLibFunc(&_fnJRSFontGetRenderingStyleForContext, _lib, "JRSFontGetRenderingStyleForContext")
@@ -108,6 +114,7 @@ var _fnJRSFontSetRenderingStyleOnContext func(objc.ID, uint32)
 
 // JRSFontSetRenderingStyleOnContext calls the JavaRuntimeSupport framework function JRSFontSetRenderingStyleOnContext.
 func JRSFontSetRenderingStyleOnContext(context_ coregraphics.CGContextRef, style uint32) {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnJRSFontSetRenderingStyleOnContext == nil {
 		ebipurego.RegisterLibFunc(&_fnJRSFontSetRenderingStyleOnContext, _lib, "JRSFontSetRenderingStyleOnContext")
@@ -152,6 +159,7 @@ var _fnJRSUIControlDraw func(unsafe.Pointer, unsafe.Pointer, objc.ID, corefounda
 
 // JRSUIControlDraw calls the JavaRuntimeSupport framework function JRSUIControlDraw.
 func JRSUIControlDraw(renderer unsafe.Pointer, control unsafe.Pointer, context_ coregraphics.CGContextRef, bounds corefoundation.CGRect) {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnJRSUIControlDraw == nil {
 		ebipurego.RegisterLibFunc(&_fnJRSUIControlDraw, _lib, "JRSUIControlDraw")
@@ -339,6 +347,8 @@ var _fnJRSUIControlSetValueByKey func(unsafe.Pointer, objc.ID, objc.ID)
 
 // JRSUIControlSetValueByKey calls the JavaRuntimeSupport framework function JRSUIControlSetValueByKey.
 func JRSUIControlSetValueByKey(control unsafe.Pointer, key obj.Object, value obj.Object) {
+	defer runtime.KeepAlive(key)
+	defer runtime.KeepAlive(value)
 	_loadOnce.Do(_loadLibrary)
 	if _fnJRSUIControlSetValueByKey == nil {
 		ebipurego.RegisterLibFunc(&_fnJRSUIControlSetValueByKey, _lib, "JRSUIControlSetValueByKey")

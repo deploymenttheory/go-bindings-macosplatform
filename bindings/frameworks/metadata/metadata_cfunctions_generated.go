@@ -5,6 +5,7 @@
 package metadata
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
@@ -31,6 +32,7 @@ var _fnMDCopyLabelWithUUID func(objc.ID) objc.ID
 
 // MDCopyLabelWithUUID calls the Metadata framework function MDCopyLabelWithUUID.
 func MDCopyLabelWithUUID(labelUUID corefoundation.CFUUIDRef) MDLabelRef {
+	defer runtime.KeepAlive(labelUUID)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDCopyLabelWithUUID == nil {
 		ebipurego.RegisterLibFunc(&_fnMDCopyLabelWithUUID, _lib, "MDCopyLabelWithUUID")
@@ -43,6 +45,7 @@ var _fnMDCopyLabelsMatchingExpression func(objc.ID) objc.ID
 
 // MDCopyLabelsMatchingExpression calls the Metadata framework function MDCopyLabelsMatchingExpression.
 func MDCopyLabelsMatchingExpression(simpleQueryString corefoundation.CFStringRef) corefoundation.CFArrayRef {
+	defer runtime.KeepAlive(simpleQueryString)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDCopyLabelsMatchingExpression == nil {
 		ebipurego.RegisterLibFunc(&_fnMDCopyLabelsMatchingExpression, _lib, "MDCopyLabelsMatchingExpression")
@@ -55,6 +58,7 @@ var _fnMDCopyLabelsWithKind func(objc.ID) objc.ID
 
 // MDCopyLabelsWithKind calls the Metadata framework function MDCopyLabelsWithKind.
 func MDCopyLabelsWithKind(kind corefoundation.CFStringRef) corefoundation.CFArrayRef {
+	defer runtime.KeepAlive(kind)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDCopyLabelsWithKind == nil {
 		ebipurego.RegisterLibFunc(&_fnMDCopyLabelsWithKind, _lib, "MDCopyLabelsWithKind")
@@ -67,6 +71,8 @@ var _fnMDItemCopyAttribute func(objc.ID, objc.ID) objc.ID
 
 // MDItemCopyAttribute calls the Metadata framework function MDItemCopyAttribute.
 func MDItemCopyAttribute(item MDItemRef, name corefoundation.CFStringRef) obj.Object {
+	defer runtime.KeepAlive(item)
+	defer runtime.KeepAlive(name)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDItemCopyAttribute == nil {
 		ebipurego.RegisterLibFunc(&_fnMDItemCopyAttribute, _lib, "MDItemCopyAttribute")
@@ -79,6 +85,7 @@ var _fnMDItemCopyAttributeNames func(objc.ID) objc.ID
 
 // MDItemCopyAttributeNames calls the Metadata framework function MDItemCopyAttributeNames.
 func MDItemCopyAttributeNames(item MDItemRef) corefoundation.CFArrayRef {
+	defer runtime.KeepAlive(item)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDItemCopyAttributeNames == nil {
 		ebipurego.RegisterLibFunc(&_fnMDItemCopyAttributeNames, _lib, "MDItemCopyAttributeNames")
@@ -91,6 +98,8 @@ var _fnMDItemCopyAttributes func(objc.ID, objc.ID) objc.ID
 
 // MDItemCopyAttributes calls the Metadata framework function MDItemCopyAttributes.
 func MDItemCopyAttributes(item MDItemRef, names corefoundation.CFArrayRef) corefoundation.CFDictionaryRef {
+	defer runtime.KeepAlive(item)
+	defer runtime.KeepAlive(names)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDItemCopyAttributes == nil {
 		ebipurego.RegisterLibFunc(&_fnMDItemCopyAttributes, _lib, "MDItemCopyAttributes")
@@ -103,6 +112,7 @@ var _fnMDItemCopyLabels func(objc.ID) objc.ID
 
 // MDItemCopyLabels calls the Metadata framework function MDItemCopyLabels.
 func MDItemCopyLabels(item MDItemRef) corefoundation.CFArrayRef {
+	defer runtime.KeepAlive(item)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDItemCopyLabels == nil {
 		ebipurego.RegisterLibFunc(&_fnMDItemCopyLabels, _lib, "MDItemCopyLabels")
@@ -115,6 +125,8 @@ var _fnMDItemCreate func(objc.ID, objc.ID) objc.ID
 
 // MDItemCreate calls the Metadata framework function MDItemCreate.
 func MDItemCreate(allocator corefoundation.CFAllocatorRef, path corefoundation.CFStringRef) MDItemRef {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(path)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDItemCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnMDItemCreate, _lib, "MDItemCreate")
@@ -127,6 +139,8 @@ var _fnMDItemCreateWithURL func(objc.ID, objc.ID) objc.ID
 
 // MDItemCreateWithURL calls the Metadata framework function MDItemCreateWithURL.
 func MDItemCreateWithURL(allocator corefoundation.CFAllocatorRef, url corefoundation.CFURLRef) MDItemRef {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(url)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDItemCreateWithURL == nil {
 		ebipurego.RegisterLibFunc(&_fnMDItemCreateWithURL, _lib, "MDItemCreateWithURL")
@@ -139,6 +153,7 @@ var _fnMDItemGetCacheFileDescriptors func(objc.ID, objc.Block)
 
 // MDItemGetCacheFileDescriptors calls the Metadata framework function MDItemGetCacheFileDescriptors.
 func MDItemGetCacheFileDescriptors(items corefoundation.CFArrayRef, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(items)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDItemGetCacheFileDescriptors == nil {
 		ebipurego.RegisterLibFunc(&_fnMDItemGetCacheFileDescriptors, _lib, "MDItemGetCacheFileDescriptors")
@@ -161,6 +176,8 @@ var _fnMDItemRemoveLabel func(objc.ID, objc.ID) uint8
 
 // MDItemRemoveLabel calls the Metadata framework function MDItemRemoveLabel.
 func MDItemRemoveLabel(item MDItemRef, label MDLabelRef) uint8 {
+	defer runtime.KeepAlive(item)
+	defer runtime.KeepAlive(label)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDItemRemoveLabel == nil {
 		ebipurego.RegisterLibFunc(&_fnMDItemRemoveLabel, _lib, "MDItemRemoveLabel")
@@ -172,6 +189,8 @@ var _fnMDItemSetLabel func(objc.ID, objc.ID) uint8
 
 // MDItemSetLabel calls the Metadata framework function MDItemSetLabel.
 func MDItemSetLabel(item MDItemRef, label MDLabelRef) uint8 {
+	defer runtime.KeepAlive(item)
+	defer runtime.KeepAlive(label)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDItemSetLabel == nil {
 		ebipurego.RegisterLibFunc(&_fnMDItemSetLabel, _lib, "MDItemSetLabel")
@@ -183,6 +202,8 @@ var _fnMDItemsCopyAttributes func(objc.ID, objc.ID) objc.ID
 
 // MDItemsCopyAttributes calls the Metadata framework function MDItemsCopyAttributes.
 func MDItemsCopyAttributes(items corefoundation.CFArrayRef, names corefoundation.CFArrayRef) corefoundation.CFArrayRef {
+	defer runtime.KeepAlive(items)
+	defer runtime.KeepAlive(names)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDItemsCopyAttributes == nil {
 		ebipurego.RegisterLibFunc(&_fnMDItemsCopyAttributes, _lib, "MDItemsCopyAttributes")
@@ -195,6 +216,8 @@ var _fnMDItemsCreateWithURLs func(objc.ID, objc.ID) objc.ID
 
 // MDItemsCreateWithURLs calls the Metadata framework function MDItemsCreateWithURLs.
 func MDItemsCreateWithURLs(allocator corefoundation.CFAllocatorRef, urls corefoundation.CFArrayRef) corefoundation.CFArrayRef {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(urls)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDItemsCreateWithURLs == nil {
 		ebipurego.RegisterLibFunc(&_fnMDItemsCreateWithURLs, _lib, "MDItemsCreateWithURLs")
@@ -207,6 +230,8 @@ var _fnMDLabelCopyAttribute func(objc.ID, objc.ID) objc.ID
 
 // MDLabelCopyAttribute calls the Metadata framework function MDLabelCopyAttribute.
 func MDLabelCopyAttribute(label MDLabelRef, name corefoundation.CFStringRef) obj.Object {
+	defer runtime.KeepAlive(label)
+	defer runtime.KeepAlive(name)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDLabelCopyAttribute == nil {
 		ebipurego.RegisterLibFunc(&_fnMDLabelCopyAttribute, _lib, "MDLabelCopyAttribute")
@@ -219,6 +244,7 @@ var _fnMDLabelCopyAttributeName func(objc.ID) objc.ID
 
 // MDLabelCopyAttributeName calls the Metadata framework function MDLabelCopyAttributeName.
 func MDLabelCopyAttributeName(label MDLabelRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(label)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDLabelCopyAttributeName == nil {
 		ebipurego.RegisterLibFunc(&_fnMDLabelCopyAttributeName, _lib, "MDLabelCopyAttributeName")
@@ -231,6 +257,9 @@ var _fnMDLabelCreate func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
 // MDLabelCreate calls the Metadata framework function MDLabelCreate.
 func MDLabelCreate(allocator corefoundation.CFAllocatorRef, displayName corefoundation.CFStringRef, kind corefoundation.CFStringRef, domain unsafe.Pointer) MDLabelRef {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(displayName)
+	defer runtime.KeepAlive(kind)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDLabelCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnMDLabelCreate, _lib, "MDLabelCreate")
@@ -243,6 +272,7 @@ var _fnMDLabelDelete func(objc.ID) uint8
 
 // MDLabelDelete calls the Metadata framework function MDLabelDelete.
 func MDLabelDelete(label MDLabelRef) uint8 {
+	defer runtime.KeepAlive(label)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDLabelDelete == nil {
 		ebipurego.RegisterLibFunc(&_fnMDLabelDelete, _lib, "MDLabelDelete")
@@ -265,6 +295,8 @@ var _fnMDLabelSetAttributes func(objc.ID, objc.ID) uint8
 
 // MDLabelSetAttributes calls the Metadata framework function MDLabelSetAttributes.
 func MDLabelSetAttributes(label MDLabelRef, attrs corefoundation.CFDictionaryRef) uint8 {
+	defer runtime.KeepAlive(label)
+	defer runtime.KeepAlive(attrs)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDLabelSetAttributes == nil {
 		ebipurego.RegisterLibFunc(&_fnMDLabelSetAttributes, _lib, "MDLabelSetAttributes")
@@ -276,6 +308,7 @@ var _fnMDQueryCopyQueryString func(objc.ID) objc.ID
 
 // MDQueryCopyQueryString calls the Metadata framework function MDQueryCopyQueryString.
 func MDQueryCopyQueryString(query MDQueryRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(query)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDQueryCopyQueryString == nil {
 		ebipurego.RegisterLibFunc(&_fnMDQueryCopyQueryString, _lib, "MDQueryCopyQueryString")
@@ -288,6 +321,7 @@ var _fnMDQueryCopySortingAttributes func(objc.ID) objc.ID
 
 // MDQueryCopySortingAttributes calls the Metadata framework function MDQueryCopySortingAttributes.
 func MDQueryCopySortingAttributes(query MDQueryRef) corefoundation.CFArrayRef {
+	defer runtime.KeepAlive(query)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDQueryCopySortingAttributes == nil {
 		ebipurego.RegisterLibFunc(&_fnMDQueryCopySortingAttributes, _lib, "MDQueryCopySortingAttributes")
@@ -300,6 +334,7 @@ var _fnMDQueryCopyValueListAttributes func(objc.ID) objc.ID
 
 // MDQueryCopyValueListAttributes calls the Metadata framework function MDQueryCopyValueListAttributes.
 func MDQueryCopyValueListAttributes(query MDQueryRef) corefoundation.CFArrayRef {
+	defer runtime.KeepAlive(query)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDQueryCopyValueListAttributes == nil {
 		ebipurego.RegisterLibFunc(&_fnMDQueryCopyValueListAttributes, _lib, "MDQueryCopyValueListAttributes")
@@ -312,6 +347,8 @@ var _fnMDQueryCopyValuesOfAttribute func(objc.ID, objc.ID) objc.ID
 
 // MDQueryCopyValuesOfAttribute calls the Metadata framework function MDQueryCopyValuesOfAttribute.
 func MDQueryCopyValuesOfAttribute(query MDQueryRef, name corefoundation.CFStringRef) corefoundation.CFArrayRef {
+	defer runtime.KeepAlive(query)
+	defer runtime.KeepAlive(name)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDQueryCopyValuesOfAttribute == nil {
 		ebipurego.RegisterLibFunc(&_fnMDQueryCopyValuesOfAttribute, _lib, "MDQueryCopyValuesOfAttribute")
@@ -324,6 +361,10 @@ var _fnMDQueryCreate func(objc.ID, objc.ID, objc.ID, objc.ID) objc.ID
 
 // MDQueryCreate calls the Metadata framework function MDQueryCreate.
 func MDQueryCreate(allocator corefoundation.CFAllocatorRef, queryString corefoundation.CFStringRef, valueListAttrs corefoundation.CFArrayRef, sortingAttrs corefoundation.CFArrayRef) MDQueryRef {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(queryString)
+	defer runtime.KeepAlive(valueListAttrs)
+	defer runtime.KeepAlive(sortingAttrs)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDQueryCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnMDQueryCreate, _lib, "MDQueryCreate")
@@ -336,6 +377,11 @@ var _fnMDQueryCreateForItems func(objc.ID, objc.ID, objc.ID, objc.ID, objc.ID) o
 
 // MDQueryCreateForItems calls the Metadata framework function MDQueryCreateForItems.
 func MDQueryCreateForItems(allocator corefoundation.CFAllocatorRef, queryString corefoundation.CFStringRef, valueListAttrs corefoundation.CFArrayRef, sortingAttrs corefoundation.CFArrayRef, items corefoundation.CFArrayRef) MDQueryRef {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(queryString)
+	defer runtime.KeepAlive(valueListAttrs)
+	defer runtime.KeepAlive(sortingAttrs)
+	defer runtime.KeepAlive(items)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDQueryCreateForItems == nil {
 		ebipurego.RegisterLibFunc(&_fnMDQueryCreateForItems, _lib, "MDQueryCreateForItems")
@@ -348,6 +394,11 @@ var _fnMDQueryCreateSubset func(objc.ID, objc.ID, objc.ID, objc.ID, objc.ID) obj
 
 // MDQueryCreateSubset calls the Metadata framework function MDQueryCreateSubset.
 func MDQueryCreateSubset(allocator corefoundation.CFAllocatorRef, query MDQueryRef, queryString corefoundation.CFStringRef, valueListAttrs corefoundation.CFArrayRef, sortingAttrs corefoundation.CFArrayRef) MDQueryRef {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(query)
+	defer runtime.KeepAlive(queryString)
+	defer runtime.KeepAlive(valueListAttrs)
+	defer runtime.KeepAlive(sortingAttrs)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDQueryCreateSubset == nil {
 		ebipurego.RegisterLibFunc(&_fnMDQueryCreateSubset, _lib, "MDQueryCreateSubset")
@@ -360,6 +411,7 @@ var _fnMDQueryDisableUpdates func(objc.ID)
 
 // MDQueryDisableUpdates calls the Metadata framework function MDQueryDisableUpdates.
 func MDQueryDisableUpdates(query MDQueryRef) {
+	defer runtime.KeepAlive(query)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDQueryDisableUpdates == nil {
 		ebipurego.RegisterLibFunc(&_fnMDQueryDisableUpdates, _lib, "MDQueryDisableUpdates")
@@ -371,6 +423,7 @@ var _fnMDQueryEnableUpdates func(objc.ID)
 
 // MDQueryEnableUpdates calls the Metadata framework function MDQueryEnableUpdates.
 func MDQueryEnableUpdates(query MDQueryRef) {
+	defer runtime.KeepAlive(query)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDQueryEnableUpdates == nil {
 		ebipurego.RegisterLibFunc(&_fnMDQueryEnableUpdates, _lib, "MDQueryEnableUpdates")
@@ -382,6 +435,7 @@ var _fnMDQueryExecute func(objc.ID, int) uint8
 
 // MDQueryExecute calls the Metadata framework function MDQueryExecute.
 func MDQueryExecute(query MDQueryRef, optionFlags int) uint8 {
+	defer runtime.KeepAlive(query)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDQueryExecute == nil {
 		ebipurego.RegisterLibFunc(&_fnMDQueryExecute, _lib, "MDQueryExecute")
@@ -393,6 +447,8 @@ var _fnMDQueryGetAttributeValueOfResultAtIndex func(objc.ID, objc.ID, int) unsaf
 
 // MDQueryGetAttributeValueOfResultAtIndex calls the Metadata framework function MDQueryGetAttributeValueOfResultAtIndex.
 func MDQueryGetAttributeValueOfResultAtIndex(query MDQueryRef, name corefoundation.CFStringRef, idx int) unsafe.Pointer {
+	defer runtime.KeepAlive(query)
+	defer runtime.KeepAlive(name)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDQueryGetAttributeValueOfResultAtIndex == nil {
 		ebipurego.RegisterLibFunc(&_fnMDQueryGetAttributeValueOfResultAtIndex, _lib, "MDQueryGetAttributeValueOfResultAtIndex")
@@ -404,6 +460,7 @@ var _fnMDQueryGetBatchingParameters func(objc.ID) MDQueryBatchingParams
 
 // MDQueryGetBatchingParameters calls the Metadata framework function MDQueryGetBatchingParameters.
 func MDQueryGetBatchingParameters(query MDQueryRef) MDQueryBatchingParams {
+	defer runtime.KeepAlive(query)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDQueryGetBatchingParameters == nil {
 		ebipurego.RegisterLibFunc(&_fnMDQueryGetBatchingParameters, _lib, "MDQueryGetBatchingParameters")
@@ -415,6 +472,9 @@ var _fnMDQueryGetCountOfResultsWithAttributeValue func(objc.ID, objc.ID, objc.ID
 
 // MDQueryGetCountOfResultsWithAttributeValue calls the Metadata framework function MDQueryGetCountOfResultsWithAttributeValue.
 func MDQueryGetCountOfResultsWithAttributeValue(query MDQueryRef, name corefoundation.CFStringRef, value obj.Object) int {
+	defer runtime.KeepAlive(query)
+	defer runtime.KeepAlive(name)
+	defer runtime.KeepAlive(value)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDQueryGetCountOfResultsWithAttributeValue == nil {
 		ebipurego.RegisterLibFunc(&_fnMDQueryGetCountOfResultsWithAttributeValue, _lib, "MDQueryGetCountOfResultsWithAttributeValue")
@@ -426,6 +486,7 @@ var _fnMDQueryGetIndexOfResult func(objc.ID, unsafe.Pointer) int
 
 // MDQueryGetIndexOfResult calls the Metadata framework function MDQueryGetIndexOfResult.
 func MDQueryGetIndexOfResult(query MDQueryRef, result unsafe.Pointer) int {
+	defer runtime.KeepAlive(query)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDQueryGetIndexOfResult == nil {
 		ebipurego.RegisterLibFunc(&_fnMDQueryGetIndexOfResult, _lib, "MDQueryGetIndexOfResult")
@@ -437,6 +498,7 @@ var _fnMDQueryGetResultAtIndex func(objc.ID, int) unsafe.Pointer
 
 // MDQueryGetResultAtIndex calls the Metadata framework function MDQueryGetResultAtIndex.
 func MDQueryGetResultAtIndex(query MDQueryRef, idx int) unsafe.Pointer {
+	defer runtime.KeepAlive(query)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDQueryGetResultAtIndex == nil {
 		ebipurego.RegisterLibFunc(&_fnMDQueryGetResultAtIndex, _lib, "MDQueryGetResultAtIndex")
@@ -448,6 +510,7 @@ var _fnMDQueryGetResultCount func(objc.ID) int
 
 // MDQueryGetResultCount calls the Metadata framework function MDQueryGetResultCount.
 func MDQueryGetResultCount(query MDQueryRef) int {
+	defer runtime.KeepAlive(query)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDQueryGetResultCount == nil {
 		ebipurego.RegisterLibFunc(&_fnMDQueryGetResultCount, _lib, "MDQueryGetResultCount")
@@ -459,6 +522,8 @@ var _fnMDQueryGetSortOptionFlagsForAttribute func(objc.ID, objc.ID) uint32
 
 // MDQueryGetSortOptionFlagsForAttribute calls the Metadata framework function MDQueryGetSortOptionFlagsForAttribute.
 func MDQueryGetSortOptionFlagsForAttribute(query MDQueryRef, fieldName corefoundation.CFStringRef) uint32 {
+	defer runtime.KeepAlive(query)
+	defer runtime.KeepAlive(fieldName)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDQueryGetSortOptionFlagsForAttribute == nil {
 		ebipurego.RegisterLibFunc(&_fnMDQueryGetSortOptionFlagsForAttribute, _lib, "MDQueryGetSortOptionFlagsForAttribute")
@@ -481,6 +546,7 @@ var _fnMDQueryIsGatheringComplete func(objc.ID) uint8
 
 // MDQueryIsGatheringComplete calls the Metadata framework function MDQueryIsGatheringComplete.
 func MDQueryIsGatheringComplete(query MDQueryRef) uint8 {
+	defer runtime.KeepAlive(query)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDQueryIsGatheringComplete == nil {
 		ebipurego.RegisterLibFunc(&_fnMDQueryIsGatheringComplete, _lib, "MDQueryIsGatheringComplete")
@@ -492,6 +558,7 @@ var _fnMDQuerySetBatchingParameters func(objc.ID, MDQueryBatchingParams)
 
 // MDQuerySetBatchingParameters calls the Metadata framework function MDQuerySetBatchingParameters.
 func MDQuerySetBatchingParameters(query MDQueryRef, params MDQueryBatchingParams) {
+	defer runtime.KeepAlive(query)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDQuerySetBatchingParameters == nil {
 		ebipurego.RegisterLibFunc(&_fnMDQuerySetBatchingParameters, _lib, "MDQuerySetBatchingParameters")
@@ -503,6 +570,7 @@ var _fnMDQuerySetCreateResultFunction func(objc.ID, unsafe.Pointer, unsafe.Point
 
 // MDQuerySetCreateResultFunction calls the Metadata framework function MDQuerySetCreateResultFunction.
 func MDQuerySetCreateResultFunction(query MDQueryRef, func_ unsafe.Pointer, context_ unsafe.Pointer, cb unsafe.Pointer) {
+	defer runtime.KeepAlive(query)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDQuerySetCreateResultFunction == nil {
 		ebipurego.RegisterLibFunc(&_fnMDQuerySetCreateResultFunction, _lib, "MDQuerySetCreateResultFunction")
@@ -514,6 +582,7 @@ var _fnMDQuerySetCreateValueFunction func(objc.ID, unsafe.Pointer, unsafe.Pointe
 
 // MDQuerySetCreateValueFunction calls the Metadata framework function MDQuerySetCreateValueFunction.
 func MDQuerySetCreateValueFunction(query MDQueryRef, func_ unsafe.Pointer, context_ unsafe.Pointer, cb unsafe.Pointer) {
+	defer runtime.KeepAlive(query)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDQuerySetCreateValueFunction == nil {
 		ebipurego.RegisterLibFunc(&_fnMDQuerySetCreateValueFunction, _lib, "MDQuerySetCreateValueFunction")
@@ -525,6 +594,7 @@ var _fnMDQuerySetDispatchQueue func(objc.ID, objc.ID)
 
 // MDQuerySetDispatchQueue calls the Metadata framework function MDQuerySetDispatchQueue.
 func MDQuerySetDispatchQueue(query MDQueryRef, queue dispatch.Queue) {
+	defer runtime.KeepAlive(query)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDQuerySetDispatchQueue == nil {
 		ebipurego.RegisterLibFunc(&_fnMDQuerySetDispatchQueue, _lib, "MDQuerySetDispatchQueue")
@@ -536,6 +606,7 @@ var _fnMDQuerySetMaxCount func(objc.ID, int)
 
 // MDQuerySetMaxCount calls the Metadata framework function MDQuerySetMaxCount.
 func MDQuerySetMaxCount(query MDQueryRef, size int) {
+	defer runtime.KeepAlive(query)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDQuerySetMaxCount == nil {
 		ebipurego.RegisterLibFunc(&_fnMDQuerySetMaxCount, _lib, "MDQuerySetMaxCount")
@@ -547,6 +618,8 @@ var _fnMDQuerySetSearchScope func(objc.ID, objc.ID, int)
 
 // MDQuerySetSearchScope calls the Metadata framework function MDQuerySetSearchScope.
 func MDQuerySetSearchScope(query MDQueryRef, scopeDirectories corefoundation.CFArrayRef, scopeOptions int) {
+	defer runtime.KeepAlive(query)
+	defer runtime.KeepAlive(scopeDirectories)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDQuerySetSearchScope == nil {
 		ebipurego.RegisterLibFunc(&_fnMDQuerySetSearchScope, _lib, "MDQuerySetSearchScope")
@@ -558,6 +631,7 @@ var _fnMDQuerySetSortComparator func(objc.ID, unsafe.Pointer, unsafe.Pointer)
 
 // MDQuerySetSortComparator calls the Metadata framework function MDQuerySetSortComparator.
 func MDQuerySetSortComparator(query MDQueryRef, comparator unsafe.Pointer, context_ unsafe.Pointer) {
+	defer runtime.KeepAlive(query)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDQuerySetSortComparator == nil {
 		ebipurego.RegisterLibFunc(&_fnMDQuerySetSortComparator, _lib, "MDQuerySetSortComparator")
@@ -569,6 +643,7 @@ var _fnMDQuerySetSortComparatorBlock func(objc.ID, objc.Block)
 
 // MDQuerySetSortComparatorBlock calls the Metadata framework function MDQuerySetSortComparatorBlock.
 func MDQuerySetSortComparatorBlock(query MDQueryRef, comparator func(unsafe.Pointer, unsafe.Pointer) int) {
+	defer runtime.KeepAlive(query)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDQuerySetSortComparatorBlock == nil {
 		ebipurego.RegisterLibFunc(&_fnMDQuerySetSortComparatorBlock, _lib, "MDQuerySetSortComparatorBlock")
@@ -580,6 +655,8 @@ var _fnMDQuerySetSortOptionFlagsForAttribute func(objc.ID, objc.ID, uint32) uint
 
 // MDQuerySetSortOptionFlagsForAttribute calls the Metadata framework function MDQuerySetSortOptionFlagsForAttribute.
 func MDQuerySetSortOptionFlagsForAttribute(query MDQueryRef, fieldName corefoundation.CFStringRef, flags uint32) uint8 {
+	defer runtime.KeepAlive(query)
+	defer runtime.KeepAlive(fieldName)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDQuerySetSortOptionFlagsForAttribute == nil {
 		ebipurego.RegisterLibFunc(&_fnMDQuerySetSortOptionFlagsForAttribute, _lib, "MDQuerySetSortOptionFlagsForAttribute")
@@ -591,6 +668,8 @@ var _fnMDQuerySetSortOrder func(objc.ID, objc.ID) uint8
 
 // MDQuerySetSortOrder calls the Metadata framework function MDQuerySetSortOrder.
 func MDQuerySetSortOrder(query MDQueryRef, sortingAttrs corefoundation.CFArrayRef) uint8 {
+	defer runtime.KeepAlive(query)
+	defer runtime.KeepAlive(sortingAttrs)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDQuerySetSortOrder == nil {
 		ebipurego.RegisterLibFunc(&_fnMDQuerySetSortOrder, _lib, "MDQuerySetSortOrder")
@@ -602,6 +681,7 @@ var _fnMDQueryStop func(objc.ID)
 
 // MDQueryStop calls the Metadata framework function MDQueryStop.
 func MDQueryStop(query MDQueryRef) {
+	defer runtime.KeepAlive(query)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDQueryStop == nil {
 		ebipurego.RegisterLibFunc(&_fnMDQueryStop, _lib, "MDQueryStop")
@@ -625,6 +705,7 @@ var _fnMDSchemaCopyAttributesForContentType func(objc.ID) objc.ID
 
 // MDSchemaCopyAttributesForContentType calls the Metadata framework function MDSchemaCopyAttributesForContentType.
 func MDSchemaCopyAttributesForContentType(contentTypeUTI corefoundation.CFStringRef) corefoundation.CFDictionaryRef {
+	defer runtime.KeepAlive(contentTypeUTI)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDSchemaCopyAttributesForContentType == nil {
 		ebipurego.RegisterLibFunc(&_fnMDSchemaCopyAttributesForContentType, _lib, "MDSchemaCopyAttributesForContentType")
@@ -637,6 +718,7 @@ var _fnMDSchemaCopyDisplayDescriptionForAttribute func(objc.ID) objc.ID
 
 // MDSchemaCopyDisplayDescriptionForAttribute calls the Metadata framework function MDSchemaCopyDisplayDescriptionForAttribute.
 func MDSchemaCopyDisplayDescriptionForAttribute(name corefoundation.CFStringRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(name)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDSchemaCopyDisplayDescriptionForAttribute == nil {
 		ebipurego.RegisterLibFunc(&_fnMDSchemaCopyDisplayDescriptionForAttribute, _lib, "MDSchemaCopyDisplayDescriptionForAttribute")
@@ -649,6 +731,7 @@ var _fnMDSchemaCopyDisplayNameForAttribute func(objc.ID) objc.ID
 
 // MDSchemaCopyDisplayNameForAttribute calls the Metadata framework function MDSchemaCopyDisplayNameForAttribute.
 func MDSchemaCopyDisplayNameForAttribute(name corefoundation.CFStringRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(name)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDSchemaCopyDisplayNameForAttribute == nil {
 		ebipurego.RegisterLibFunc(&_fnMDSchemaCopyDisplayNameForAttribute, _lib, "MDSchemaCopyDisplayNameForAttribute")
@@ -661,6 +744,7 @@ var _fnMDSchemaCopyMetaAttributesForAttribute func(objc.ID) objc.ID
 
 // MDSchemaCopyMetaAttributesForAttribute calls the Metadata framework function MDSchemaCopyMetaAttributesForAttribute.
 func MDSchemaCopyMetaAttributesForAttribute(name corefoundation.CFStringRef) corefoundation.CFDictionaryRef {
+	defer runtime.KeepAlive(name)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDSchemaCopyMetaAttributesForAttribute == nil {
 		ebipurego.RegisterLibFunc(&_fnMDSchemaCopyMetaAttributesForAttribute, _lib, "MDSchemaCopyMetaAttributesForAttribute")

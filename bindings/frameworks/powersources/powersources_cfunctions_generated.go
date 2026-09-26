@@ -5,6 +5,7 @@
 package powersources
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
@@ -42,6 +43,7 @@ var _fnIOPSCopyPowerSourcesList func(objc.ID) objc.ID
 
 // IOPSCopyPowerSourcesList calls the PowerSources framework function IOPSCopyPowerSourcesList.
 func IOPSCopyPowerSourcesList(blob obj.Object) corefoundation.CFArrayRef {
+	defer runtime.KeepAlive(blob)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOPSCopyPowerSourcesList == nil {
 		ebipurego.RegisterLibFunc(&_fnIOPSCopyPowerSourcesList, _lib, "IOPSCopyPowerSourcesList")
@@ -77,6 +79,8 @@ var _fnIOPSGetPowerSourceDescription func(objc.ID, objc.ID) objc.ID
 
 // IOPSGetPowerSourceDescription calls the PowerSources framework function IOPSGetPowerSourceDescription.
 func IOPSGetPowerSourceDescription(blob obj.Object, ps obj.Object) corefoundation.CFDictionaryRef {
+	defer runtime.KeepAlive(blob)
+	defer runtime.KeepAlive(ps)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOPSGetPowerSourceDescription == nil {
 		ebipurego.RegisterLibFunc(&_fnIOPSGetPowerSourceDescription, _lib, "IOPSGetPowerSourceDescription")
@@ -89,6 +93,7 @@ var _fnIOPSGetProvidingPowerSourceType func(objc.ID) objc.ID
 
 // IOPSGetProvidingPowerSourceType calls the PowerSources framework function IOPSGetProvidingPowerSourceType.
 func IOPSGetProvidingPowerSourceType(snapshot obj.Object) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(snapshot)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOPSGetProvidingPowerSourceType == nil {
 		ebipurego.RegisterLibFunc(&_fnIOPSGetProvidingPowerSourceType, _lib, "IOPSGetProvidingPowerSourceType")

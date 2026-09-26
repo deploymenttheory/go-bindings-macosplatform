@@ -5,6 +5,7 @@
 package healthkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
@@ -18,6 +19,7 @@ var _fnHKAppleSleepingBreathingDisturbancesClassificationForQuantity func(objc.I
 
 // HKAppleSleepingBreathingDisturbancesClassificationForQuantity calls the HealthKit framework function HKAppleSleepingBreathingDisturbancesClassificationForQuantity.
 func HKAppleSleepingBreathingDisturbancesClassificationForQuantity(value *Quantity) *foundation.Number {
+	defer runtime.KeepAlive(value)
 	_loadOnce.Do(_loadLibrary)
 	if _fnHKAppleSleepingBreathingDisturbancesClassificationForQuantity == nil {
 		ebipurego.RegisterLibFunc(&_fnHKAppleSleepingBreathingDisturbancesClassificationForQuantity, _lib, "HKAppleSleepingBreathingDisturbancesClassificationForQuantity")
@@ -42,6 +44,7 @@ var _fnHKAppleWalkingSteadinessClassificationForQuantity func(objc.ID, unsafe.Po
 
 // HKAppleWalkingSteadinessClassificationForQuantity calls the HealthKit framework function HKAppleWalkingSteadinessClassificationForQuantity.
 func HKAppleWalkingSteadinessClassificationForQuantity(value *Quantity, errorOut unsafe.Pointer) (ok bool, classificationOut AppleWalkingSteadinessClassification) {
+	defer runtime.KeepAlive(value)
 	_loadOnce.Do(_loadLibrary)
 	if _fnHKAppleWalkingSteadinessClassificationForQuantity == nil {
 		ebipurego.RegisterLibFunc(&_fnHKAppleWalkingSteadinessClassificationForQuantity, _lib, "HKAppleWalkingSteadinessClassificationForQuantity")

@@ -5,6 +5,7 @@
 package glkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
@@ -997,6 +998,7 @@ var _fnGLKMatrixStackCreate func(objc.ID) objc.ID
 
 // GLKMatrixStackCreate calls the GLKit framework function GLKMatrixStackCreate.
 func GLKMatrixStackCreate(alloc corefoundation.CFAllocatorRef) GLKMatrixStackRef {
+	defer runtime.KeepAlive(alloc)
 	_loadOnce.Do(_loadLibrary)
 	if _fnGLKMatrixStackCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnGLKMatrixStackCreate, _lib, "GLKMatrixStackCreate")
@@ -1009,6 +1011,7 @@ var _fnGLKMatrixStackGetMatrix2 func(objc.ID) unsafe.Pointer
 
 // GLKMatrixStackGetMatrix2 calls the GLKit framework function GLKMatrixStackGetMatrix2.
 func GLKMatrixStackGetMatrix2(stack GLKMatrixStackRef) unsafe.Pointer {
+	defer runtime.KeepAlive(stack)
 	_loadOnce.Do(_loadLibrary)
 	if _fnGLKMatrixStackGetMatrix2 == nil {
 		ebipurego.RegisterLibFunc(&_fnGLKMatrixStackGetMatrix2, _lib, "GLKMatrixStackGetMatrix2")
@@ -1020,6 +1023,7 @@ var _fnGLKMatrixStackGetMatrix3 func(objc.ID) unsafe.Pointer
 
 // GLKMatrixStackGetMatrix3 calls the GLKit framework function GLKMatrixStackGetMatrix3.
 func GLKMatrixStackGetMatrix3(stack GLKMatrixStackRef) unsafe.Pointer {
+	defer runtime.KeepAlive(stack)
 	_loadOnce.Do(_loadLibrary)
 	if _fnGLKMatrixStackGetMatrix3 == nil {
 		ebipurego.RegisterLibFunc(&_fnGLKMatrixStackGetMatrix3, _lib, "GLKMatrixStackGetMatrix3")
@@ -1031,6 +1035,7 @@ var _fnGLKMatrixStackGetMatrix3Inverse func(objc.ID) unsafe.Pointer
 
 // GLKMatrixStackGetMatrix3Inverse calls the GLKit framework function GLKMatrixStackGetMatrix3Inverse.
 func GLKMatrixStackGetMatrix3Inverse(stack GLKMatrixStackRef) unsafe.Pointer {
+	defer runtime.KeepAlive(stack)
 	_loadOnce.Do(_loadLibrary)
 	if _fnGLKMatrixStackGetMatrix3Inverse == nil {
 		ebipurego.RegisterLibFunc(&_fnGLKMatrixStackGetMatrix3Inverse, _lib, "GLKMatrixStackGetMatrix3Inverse")
@@ -1042,6 +1047,7 @@ var _fnGLKMatrixStackGetMatrix3InverseTranspose func(objc.ID) unsafe.Pointer
 
 // GLKMatrixStackGetMatrix3InverseTranspose calls the GLKit framework function GLKMatrixStackGetMatrix3InverseTranspose.
 func GLKMatrixStackGetMatrix3InverseTranspose(stack GLKMatrixStackRef) unsafe.Pointer {
+	defer runtime.KeepAlive(stack)
 	_loadOnce.Do(_loadLibrary)
 	if _fnGLKMatrixStackGetMatrix3InverseTranspose == nil {
 		ebipurego.RegisterLibFunc(&_fnGLKMatrixStackGetMatrix3InverseTranspose, _lib, "GLKMatrixStackGetMatrix3InverseTranspose")
@@ -1053,6 +1059,7 @@ var _fnGLKMatrixStackGetMatrix4 func(objc.ID) unsafe.Pointer
 
 // GLKMatrixStackGetMatrix4 calls the GLKit framework function GLKMatrixStackGetMatrix4.
 func GLKMatrixStackGetMatrix4(stack GLKMatrixStackRef) unsafe.Pointer {
+	defer runtime.KeepAlive(stack)
 	_loadOnce.Do(_loadLibrary)
 	if _fnGLKMatrixStackGetMatrix4 == nil {
 		ebipurego.RegisterLibFunc(&_fnGLKMatrixStackGetMatrix4, _lib, "GLKMatrixStackGetMatrix4")
@@ -1064,6 +1071,7 @@ var _fnGLKMatrixStackGetMatrix4Inverse func(objc.ID) unsafe.Pointer
 
 // GLKMatrixStackGetMatrix4Inverse calls the GLKit framework function GLKMatrixStackGetMatrix4Inverse.
 func GLKMatrixStackGetMatrix4Inverse(stack GLKMatrixStackRef) unsafe.Pointer {
+	defer runtime.KeepAlive(stack)
 	_loadOnce.Do(_loadLibrary)
 	if _fnGLKMatrixStackGetMatrix4Inverse == nil {
 		ebipurego.RegisterLibFunc(&_fnGLKMatrixStackGetMatrix4Inverse, _lib, "GLKMatrixStackGetMatrix4Inverse")
@@ -1075,6 +1083,7 @@ var _fnGLKMatrixStackGetMatrix4InverseTranspose func(objc.ID) unsafe.Pointer
 
 // GLKMatrixStackGetMatrix4InverseTranspose calls the GLKit framework function GLKMatrixStackGetMatrix4InverseTranspose.
 func GLKMatrixStackGetMatrix4InverseTranspose(stack GLKMatrixStackRef) unsafe.Pointer {
+	defer runtime.KeepAlive(stack)
 	_loadOnce.Do(_loadLibrary)
 	if _fnGLKMatrixStackGetMatrix4InverseTranspose == nil {
 		ebipurego.RegisterLibFunc(&_fnGLKMatrixStackGetMatrix4InverseTranspose, _lib, "GLKMatrixStackGetMatrix4InverseTranspose")
@@ -1097,6 +1106,7 @@ var _fnGLKMatrixStackLoadMatrix4 func(objc.ID, unsafe.Pointer)
 
 // GLKMatrixStackLoadMatrix4 calls the GLKit framework function GLKMatrixStackLoadMatrix4.
 func GLKMatrixStackLoadMatrix4(stack GLKMatrixStackRef, matrix unsafe.Pointer) {
+	defer runtime.KeepAlive(stack)
 	_loadOnce.Do(_loadLibrary)
 	if _fnGLKMatrixStackLoadMatrix4 == nil {
 		ebipurego.RegisterLibFunc(&_fnGLKMatrixStackLoadMatrix4, _lib, "GLKMatrixStackLoadMatrix4")
@@ -1108,6 +1118,7 @@ var _fnGLKMatrixStackMultiplyMatrix4 func(objc.ID, unsafe.Pointer)
 
 // GLKMatrixStackMultiplyMatrix4 calls the GLKit framework function GLKMatrixStackMultiplyMatrix4.
 func GLKMatrixStackMultiplyMatrix4(stack GLKMatrixStackRef, matrix unsafe.Pointer) {
+	defer runtime.KeepAlive(stack)
 	_loadOnce.Do(_loadLibrary)
 	if _fnGLKMatrixStackMultiplyMatrix4 == nil {
 		ebipurego.RegisterLibFunc(&_fnGLKMatrixStackMultiplyMatrix4, _lib, "GLKMatrixStackMultiplyMatrix4")
@@ -1119,6 +1130,8 @@ var _fnGLKMatrixStackMultiplyMatrixStack func(objc.ID, objc.ID)
 
 // GLKMatrixStackMultiplyMatrixStack calls the GLKit framework function GLKMatrixStackMultiplyMatrixStack.
 func GLKMatrixStackMultiplyMatrixStack(stackLeft GLKMatrixStackRef, stackRight GLKMatrixStackRef) {
+	defer runtime.KeepAlive(stackLeft)
+	defer runtime.KeepAlive(stackRight)
 	_loadOnce.Do(_loadLibrary)
 	if _fnGLKMatrixStackMultiplyMatrixStack == nil {
 		ebipurego.RegisterLibFunc(&_fnGLKMatrixStackMultiplyMatrixStack, _lib, "GLKMatrixStackMultiplyMatrixStack")
@@ -1130,6 +1143,7 @@ var _fnGLKMatrixStackPop func(objc.ID)
 
 // GLKMatrixStackPop calls the GLKit framework function GLKMatrixStackPop.
 func GLKMatrixStackPop(stack GLKMatrixStackRef) {
+	defer runtime.KeepAlive(stack)
 	_loadOnce.Do(_loadLibrary)
 	if _fnGLKMatrixStackPop == nil {
 		ebipurego.RegisterLibFunc(&_fnGLKMatrixStackPop, _lib, "GLKMatrixStackPop")
@@ -1141,6 +1155,7 @@ var _fnGLKMatrixStackPush func(objc.ID)
 
 // GLKMatrixStackPush calls the GLKit framework function GLKMatrixStackPush.
 func GLKMatrixStackPush(stack GLKMatrixStackRef) {
+	defer runtime.KeepAlive(stack)
 	_loadOnce.Do(_loadLibrary)
 	if _fnGLKMatrixStackPush == nil {
 		ebipurego.RegisterLibFunc(&_fnGLKMatrixStackPush, _lib, "GLKMatrixStackPush")
@@ -1152,6 +1167,7 @@ var _fnGLKMatrixStackRotate func(objc.ID, float32, float32, float32, float32)
 
 // GLKMatrixStackRotate calls the GLKit framework function GLKMatrixStackRotate.
 func GLKMatrixStackRotate(stack GLKMatrixStackRef, radians float32, x float32, y float32, z float32) {
+	defer runtime.KeepAlive(stack)
 	_loadOnce.Do(_loadLibrary)
 	if _fnGLKMatrixStackRotate == nil {
 		ebipurego.RegisterLibFunc(&_fnGLKMatrixStackRotate, _lib, "GLKMatrixStackRotate")
@@ -1163,6 +1179,7 @@ var _fnGLKMatrixStackRotateWithVector3 func(objc.ID, float32, unsafe.Pointer)
 
 // GLKMatrixStackRotateWithVector3 calls the GLKit framework function GLKMatrixStackRotateWithVector3.
 func GLKMatrixStackRotateWithVector3(stack GLKMatrixStackRef, radians float32, axisVector unsafe.Pointer) {
+	defer runtime.KeepAlive(stack)
 	_loadOnce.Do(_loadLibrary)
 	if _fnGLKMatrixStackRotateWithVector3 == nil {
 		ebipurego.RegisterLibFunc(&_fnGLKMatrixStackRotateWithVector3, _lib, "GLKMatrixStackRotateWithVector3")
@@ -1174,6 +1191,7 @@ var _fnGLKMatrixStackRotateWithVector4 func(objc.ID, float32, unsafe.Pointer)
 
 // GLKMatrixStackRotateWithVector4 calls the GLKit framework function GLKMatrixStackRotateWithVector4.
 func GLKMatrixStackRotateWithVector4(stack GLKMatrixStackRef, radians float32, axisVector unsafe.Pointer) {
+	defer runtime.KeepAlive(stack)
 	_loadOnce.Do(_loadLibrary)
 	if _fnGLKMatrixStackRotateWithVector4 == nil {
 		ebipurego.RegisterLibFunc(&_fnGLKMatrixStackRotateWithVector4, _lib, "GLKMatrixStackRotateWithVector4")
@@ -1185,6 +1203,7 @@ var _fnGLKMatrixStackRotateX func(objc.ID, float32)
 
 // GLKMatrixStackRotateX calls the GLKit framework function GLKMatrixStackRotateX.
 func GLKMatrixStackRotateX(stack GLKMatrixStackRef, radians float32) {
+	defer runtime.KeepAlive(stack)
 	_loadOnce.Do(_loadLibrary)
 	if _fnGLKMatrixStackRotateX == nil {
 		ebipurego.RegisterLibFunc(&_fnGLKMatrixStackRotateX, _lib, "GLKMatrixStackRotateX")
@@ -1196,6 +1215,7 @@ var _fnGLKMatrixStackRotateY func(objc.ID, float32)
 
 // GLKMatrixStackRotateY calls the GLKit framework function GLKMatrixStackRotateY.
 func GLKMatrixStackRotateY(stack GLKMatrixStackRef, radians float32) {
+	defer runtime.KeepAlive(stack)
 	_loadOnce.Do(_loadLibrary)
 	if _fnGLKMatrixStackRotateY == nil {
 		ebipurego.RegisterLibFunc(&_fnGLKMatrixStackRotateY, _lib, "GLKMatrixStackRotateY")
@@ -1207,6 +1227,7 @@ var _fnGLKMatrixStackRotateZ func(objc.ID, float32)
 
 // GLKMatrixStackRotateZ calls the GLKit framework function GLKMatrixStackRotateZ.
 func GLKMatrixStackRotateZ(stack GLKMatrixStackRef, radians float32) {
+	defer runtime.KeepAlive(stack)
 	_loadOnce.Do(_loadLibrary)
 	if _fnGLKMatrixStackRotateZ == nil {
 		ebipurego.RegisterLibFunc(&_fnGLKMatrixStackRotateZ, _lib, "GLKMatrixStackRotateZ")
@@ -1218,6 +1239,7 @@ var _fnGLKMatrixStackScale func(objc.ID, float32, float32, float32)
 
 // GLKMatrixStackScale calls the GLKit framework function GLKMatrixStackScale.
 func GLKMatrixStackScale(stack GLKMatrixStackRef, sx float32, sy float32, sz float32) {
+	defer runtime.KeepAlive(stack)
 	_loadOnce.Do(_loadLibrary)
 	if _fnGLKMatrixStackScale == nil {
 		ebipurego.RegisterLibFunc(&_fnGLKMatrixStackScale, _lib, "GLKMatrixStackScale")
@@ -1229,6 +1251,7 @@ var _fnGLKMatrixStackScaleWithVector3 func(objc.ID, unsafe.Pointer)
 
 // GLKMatrixStackScaleWithVector3 calls the GLKit framework function GLKMatrixStackScaleWithVector3.
 func GLKMatrixStackScaleWithVector3(stack GLKMatrixStackRef, scaleVector unsafe.Pointer) {
+	defer runtime.KeepAlive(stack)
 	_loadOnce.Do(_loadLibrary)
 	if _fnGLKMatrixStackScaleWithVector3 == nil {
 		ebipurego.RegisterLibFunc(&_fnGLKMatrixStackScaleWithVector3, _lib, "GLKMatrixStackScaleWithVector3")
@@ -1240,6 +1263,7 @@ var _fnGLKMatrixStackScaleWithVector4 func(objc.ID, unsafe.Pointer)
 
 // GLKMatrixStackScaleWithVector4 calls the GLKit framework function GLKMatrixStackScaleWithVector4.
 func GLKMatrixStackScaleWithVector4(stack GLKMatrixStackRef, scaleVector unsafe.Pointer) {
+	defer runtime.KeepAlive(stack)
 	_loadOnce.Do(_loadLibrary)
 	if _fnGLKMatrixStackScaleWithVector4 == nil {
 		ebipurego.RegisterLibFunc(&_fnGLKMatrixStackScaleWithVector4, _lib, "GLKMatrixStackScaleWithVector4")
@@ -1251,6 +1275,7 @@ var _fnGLKMatrixStackSize func(objc.ID) int32
 
 // GLKMatrixStackSize calls the GLKit framework function GLKMatrixStackSize.
 func GLKMatrixStackSize(stack GLKMatrixStackRef) int {
+	defer runtime.KeepAlive(stack)
 	_loadOnce.Do(_loadLibrary)
 	if _fnGLKMatrixStackSize == nil {
 		ebipurego.RegisterLibFunc(&_fnGLKMatrixStackSize, _lib, "GLKMatrixStackSize")
@@ -1262,6 +1287,7 @@ var _fnGLKMatrixStackTranslate func(objc.ID, float32, float32, float32)
 
 // GLKMatrixStackTranslate calls the GLKit framework function GLKMatrixStackTranslate.
 func GLKMatrixStackTranslate(stack GLKMatrixStackRef, tx float32, ty float32, tz float32) {
+	defer runtime.KeepAlive(stack)
 	_loadOnce.Do(_loadLibrary)
 	if _fnGLKMatrixStackTranslate == nil {
 		ebipurego.RegisterLibFunc(&_fnGLKMatrixStackTranslate, _lib, "GLKMatrixStackTranslate")
@@ -1273,6 +1299,7 @@ var _fnGLKMatrixStackTranslateWithVector3 func(objc.ID, unsafe.Pointer)
 
 // GLKMatrixStackTranslateWithVector3 calls the GLKit framework function GLKMatrixStackTranslateWithVector3.
 func GLKMatrixStackTranslateWithVector3(stack GLKMatrixStackRef, translationVector unsafe.Pointer) {
+	defer runtime.KeepAlive(stack)
 	_loadOnce.Do(_loadLibrary)
 	if _fnGLKMatrixStackTranslateWithVector3 == nil {
 		ebipurego.RegisterLibFunc(&_fnGLKMatrixStackTranslateWithVector3, _lib, "GLKMatrixStackTranslateWithVector3")
@@ -1284,6 +1311,7 @@ var _fnGLKMatrixStackTranslateWithVector4 func(objc.ID, unsafe.Pointer)
 
 // GLKMatrixStackTranslateWithVector4 calls the GLKit framework function GLKMatrixStackTranslateWithVector4.
 func GLKMatrixStackTranslateWithVector4(stack GLKMatrixStackRef, translationVector unsafe.Pointer) {
+	defer runtime.KeepAlive(stack)
 	_loadOnce.Do(_loadLibrary)
 	if _fnGLKMatrixStackTranslateWithVector4 == nil {
 		ebipurego.RegisterLibFunc(&_fnGLKMatrixStackTranslateWithVector4, _lib, "GLKMatrixStackTranslateWithVector4")

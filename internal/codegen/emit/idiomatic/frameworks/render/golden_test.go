@@ -296,6 +296,7 @@ func TestFuncsGolden(t *testing.T) {
 			Kind:    view.FuncOSStatus,
 			Call:    "_fnSecItemDelete(objref.IDOf(query))",
 			FailRet: "_err", OkRet: "nil",
+			KeepAlive: []string{"query"},
 		},
 		{
 			GoName: "CFBundlePreflightExecutable", CName: "CFBundlePreflightExecutable", VarName: "_fnCFBundlePreflightExecutable",
@@ -303,10 +304,11 @@ func TestFuncsGolden(t *testing.T) {
 			CommentFirst: true,
 			ABIParams:    []string{"objc.ID", "unsafe.Pointer"}, ABIRet: "bool",
 			SigParams: []string{"bundle obj.Object"}, RetSig: " error",
-			Kind:     view.FuncCFErrorBool,
-			PreLines: []string{"var _cfErr unsafe.Pointer"},
-			Call:     "_fnCFBundlePreflightExecutable(objref.IDOf(bundle), unsafe.Pointer(&_cfErr))",
-			Fail:     "!_ok",
+			Kind:      view.FuncCFErrorBool,
+			PreLines:  []string{"var _cfErr unsafe.Pointer"},
+			Call:      "_fnCFBundlePreflightExecutable(objref.IDOf(bundle), unsafe.Pointer(&_cfErr))",
+			Fail:      "!_ok",
+			KeepAlive: []string{"bundle"},
 		},
 		{
 			GoName: "VcpuCreate", CName: "hv_vcpu_create", VarName: "_fnVcpuCreate",

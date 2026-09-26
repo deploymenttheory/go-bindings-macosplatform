@@ -5,6 +5,7 @@
 package coregraphics
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -18,6 +19,9 @@ import (
 var _fnCGColorConversionInfoCreateForToneMapping func(objc.ID, float32, objc.ID, float32, CGToneMapping, objc.ID, unsafe.Pointer) objc.ID
 
 func CGColorConversionInfoCreateForToneMapping(source CGColorSpaceRef, sourceHeadroom float32, target CGColorSpaceRef, targetHeadroom float32, method CGToneMapping, options obj.Object) (obj.Object, error) {
+	defer runtime.KeepAlive(source)
+	defer runtime.KeepAlive(target)
+	defer runtime.KeepAlive(options)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorConversionInfoCreateForToneMapping == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorConversionInfoCreateForToneMapping, _lib, "CGColorConversionInfoCreateForToneMapping")

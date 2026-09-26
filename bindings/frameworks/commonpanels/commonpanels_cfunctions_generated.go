@@ -5,6 +5,7 @@
 package commonpanels
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
@@ -86,6 +87,7 @@ var _fnFCCopyFontDescriptorsInCollection func(objc.ID) objc.ID
 
 // FCCopyFontDescriptorsInCollection calls the CommonPanels framework function FCCopyFontDescriptorsInCollection.
 func FCCopyFontDescriptorsInCollection(iCollection corefoundation.CFStringRef) corefoundation.CFArrayRef {
+	defer runtime.KeepAlive(iCollection)
 	_loadOnce.Do(_loadLibrary)
 	if _fnFCCopyFontDescriptorsInCollection == nil {
 		ebipurego.RegisterLibFunc(&_fnFCCopyFontDescriptorsInCollection, _lib, "FCCopyFontDescriptorsInCollection")
@@ -98,6 +100,7 @@ var _fnFCFontDescriptorCreateWithFontAttributes func(objc.ID) objc.ID
 
 // FCFontDescriptorCreateWithFontAttributes calls the CommonPanels framework function FCFontDescriptorCreateWithFontAttributes.
 func FCFontDescriptorCreateWithFontAttributes(iAttributes corefoundation.CFDictionaryRef) FCFontDescriptorRef {
+	defer runtime.KeepAlive(iAttributes)
 	_loadOnce.Do(_loadLibrary)
 	if _fnFCFontDescriptorCreateWithFontAttributes == nil {
 		ebipurego.RegisterLibFunc(&_fnFCFontDescriptorCreateWithFontAttributes, _lib, "FCFontDescriptorCreateWithFontAttributes")
@@ -110,6 +113,7 @@ var _fnFCFontDescriptorCreateWithName func(objc.ID, float64) objc.ID
 
 // FCFontDescriptorCreateWithName calls the CommonPanels framework function FCFontDescriptorCreateWithName.
 func FCFontDescriptorCreateWithName(iFontName corefoundation.CFStringRef, iSize float64) FCFontDescriptorRef {
+	defer runtime.KeepAlive(iFontName)
 	_loadOnce.Do(_loadLibrary)
 	if _fnFCFontDescriptorCreateWithName == nil {
 		ebipurego.RegisterLibFunc(&_fnFCFontDescriptorCreateWithName, _lib, "FCFontDescriptorCreateWithName")

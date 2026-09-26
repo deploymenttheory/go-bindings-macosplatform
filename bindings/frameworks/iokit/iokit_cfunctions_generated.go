@@ -5,6 +5,7 @@
 package iokit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
@@ -249,6 +250,7 @@ var _fnIOConnectSetCFProperties func(int, objc.ID) int32
 
 // IOConnectSetCFProperties calls the IOKit framework function IOConnectSetCFProperties.
 func IOConnectSetCFProperties(connect int, properties obj.Object) int {
+	defer runtime.KeepAlive(properties)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOConnectSetCFProperties == nil {
 		ebipurego.RegisterLibFunc(&_fnIOConnectSetCFProperties, _lib, "IOConnectSetCFProperties")
@@ -260,6 +262,8 @@ var _fnIOConnectSetCFProperty func(int, objc.ID, objc.ID) int32
 
 // IOConnectSetCFProperty calls the IOKit framework function IOConnectSetCFProperty.
 func IOConnectSetCFProperty(connect int, propertyName corefoundation.CFStringRef, property obj.Object) int {
+	defer runtime.KeepAlive(propertyName)
+	defer runtime.KeepAlive(property)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOConnectSetCFProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnIOConnectSetCFProperty, _lib, "IOConnectSetCFProperty")
@@ -500,6 +504,7 @@ var _fnIONotificationPortDestroy func(objc.ID)
 
 // IONotificationPortDestroy calls the IOKit framework function IONotificationPortDestroy.
 func IONotificationPortDestroy(notify IONotificationPortRef) {
+	defer runtime.KeepAlive(notify)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIONotificationPortDestroy == nil {
 		ebipurego.RegisterLibFunc(&_fnIONotificationPortDestroy, _lib, "IONotificationPortDestroy")
@@ -511,6 +516,7 @@ var _fnIONotificationPortGetMachPort func(objc.ID) uint32
 
 // IONotificationPortGetMachPort calls the IOKit framework function IONotificationPortGetMachPort.
 func IONotificationPortGetMachPort(notify IONotificationPortRef) int {
+	defer runtime.KeepAlive(notify)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIONotificationPortGetMachPort == nil {
 		ebipurego.RegisterLibFunc(&_fnIONotificationPortGetMachPort, _lib, "IONotificationPortGetMachPort")
@@ -522,6 +528,7 @@ var _fnIONotificationPortGetRunLoopSource func(objc.ID) objc.ID
 
 // IONotificationPortGetRunLoopSource calls the IOKit framework function IONotificationPortGetRunLoopSource.
 func IONotificationPortGetRunLoopSource(notify IONotificationPortRef) corefoundation.CFRunLoopSourceRef {
+	defer runtime.KeepAlive(notify)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIONotificationPortGetRunLoopSource == nil {
 		ebipurego.RegisterLibFunc(&_fnIONotificationPortGetRunLoopSource, _lib, "IONotificationPortGetRunLoopSource")
@@ -534,6 +541,7 @@ var _fnIONotificationPortSetDispatchQueue func(objc.ID, objc.ID)
 
 // IONotificationPortSetDispatchQueue calls the IOKit framework function IONotificationPortSetDispatchQueue.
 func IONotificationPortSetDispatchQueue(notify IONotificationPortRef, queue dispatch.Queue) {
+	defer runtime.KeepAlive(notify)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIONotificationPortSetDispatchQueue == nil {
 		ebipurego.RegisterLibFunc(&_fnIONotificationPortSetDispatchQueue, _lib, "IONotificationPortSetDispatchQueue")
@@ -545,6 +553,7 @@ var _fnIONotificationPortSetImportanceReceiver func(objc.ID) int32
 
 // IONotificationPortSetImportanceReceiver calls the IOKit framework function IONotificationPortSetImportanceReceiver.
 func IONotificationPortSetImportanceReceiver(notify IONotificationPortRef) int {
+	defer runtime.KeepAlive(notify)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIONotificationPortSetImportanceReceiver == nil {
 		ebipurego.RegisterLibFunc(&_fnIONotificationPortSetImportanceReceiver, _lib, "IONotificationPortSetImportanceReceiver")
@@ -567,6 +576,7 @@ var _fnIOObjectCopyBundleIdentifierForClass func(objc.ID) objc.ID
 
 // IOObjectCopyBundleIdentifierForClass calls the IOKit framework function IOObjectCopyBundleIdentifierForClass.
 func IOObjectCopyBundleIdentifierForClass(classname corefoundation.CFStringRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(classname)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOObjectCopyBundleIdentifierForClass == nil {
 		ebipurego.RegisterLibFunc(&_fnIOObjectCopyBundleIdentifierForClass, _lib, "IOObjectCopyBundleIdentifierForClass")
@@ -591,6 +601,7 @@ var _fnIOObjectCopySuperclassForClass func(objc.ID) objc.ID
 
 // IOObjectCopySuperclassForClass calls the IOKit framework function IOObjectCopySuperclassForClass.
 func IOObjectCopySuperclassForClass(classname corefoundation.CFStringRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(classname)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOObjectCopySuperclassForClass == nil {
 		ebipurego.RegisterLibFunc(&_fnIOObjectCopySuperclassForClass, _lib, "IOObjectCopySuperclassForClass")
@@ -705,6 +716,7 @@ var _fnIORegistryEntryCopyFromPath func(int, objc.ID) uint32
 
 // IORegistryEntryCopyFromPath calls the IOKit framework function IORegistryEntryCopyFromPath.
 func IORegistryEntryCopyFromPath(mainPort int, path corefoundation.CFStringRef) int {
+	defer runtime.KeepAlive(path)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIORegistryEntryCopyFromPath == nil {
 		ebipurego.RegisterLibFunc(&_fnIORegistryEntryCopyFromPath, _lib, "IORegistryEntryCopyFromPath")
@@ -728,6 +740,7 @@ var _fnIORegistryEntryCreateCFProperties func(int, unsafe.Pointer, objc.ID, int)
 
 // IORegistryEntryCreateCFProperties calls the IOKit framework function IORegistryEntryCreateCFProperties.
 func IORegistryEntryCreateCFProperties(entry int, properties unsafe.Pointer, allocator corefoundation.CFAllocatorRef, options int) int {
+	defer runtime.KeepAlive(allocator)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIORegistryEntryCreateCFProperties == nil {
 		ebipurego.RegisterLibFunc(&_fnIORegistryEntryCreateCFProperties, _lib, "IORegistryEntryCreateCFProperties")
@@ -739,6 +752,8 @@ var _fnIORegistryEntryCreateCFProperty func(int, objc.ID, objc.ID, int) objc.ID
 
 // IORegistryEntryCreateCFProperty calls the IOKit framework function IORegistryEntryCreateCFProperty.
 func IORegistryEntryCreateCFProperty(entry int, key corefoundation.CFStringRef, allocator corefoundation.CFAllocatorRef, options int) obj.Object {
+	defer runtime.KeepAlive(key)
+	defer runtime.KeepAlive(allocator)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIORegistryEntryCreateCFProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnIORegistryEntryCreateCFProperty, _lib, "IORegistryEntryCreateCFProperty")
@@ -920,6 +935,8 @@ var _fnIORegistryEntrySearchCFProperty func(int, string, objc.ID, objc.ID, int) 
 
 // IORegistryEntrySearchCFProperty calls the IOKit framework function IORegistryEntrySearchCFProperty.
 func IORegistryEntrySearchCFProperty(entry int, plane string, key corefoundation.CFStringRef, allocator corefoundation.CFAllocatorRef, options int) obj.Object {
+	defer runtime.KeepAlive(key)
+	defer runtime.KeepAlive(allocator)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIORegistryEntrySearchCFProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnIORegistryEntrySearchCFProperty, _lib, "IORegistryEntrySearchCFProperty")
@@ -932,6 +949,7 @@ var _fnIORegistryEntrySetCFProperties func(int, objc.ID) int32
 
 // IORegistryEntrySetCFProperties calls the IOKit framework function IORegistryEntrySetCFProperties.
 func IORegistryEntrySetCFProperties(entry int, properties obj.Object) int {
+	defer runtime.KeepAlive(properties)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIORegistryEntrySetCFProperties == nil {
 		ebipurego.RegisterLibFunc(&_fnIORegistryEntrySetCFProperties, _lib, "IORegistryEntrySetCFProperties")
@@ -943,6 +961,8 @@ var _fnIORegistryEntrySetCFProperty func(int, objc.ID, objc.ID) int32
 
 // IORegistryEntrySetCFProperty calls the IOKit framework function IORegistryEntrySetCFProperty.
 func IORegistryEntrySetCFProperty(entry int, propertyName corefoundation.CFStringRef, property obj.Object) int {
+	defer runtime.KeepAlive(propertyName)
+	defer runtime.KeepAlive(property)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIORegistryEntrySetCFProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnIORegistryEntrySetCFProperty, _lib, "IORegistryEntrySetCFProperty")
@@ -987,6 +1007,7 @@ var _fnIOServiceAddInterestNotification func(objc.ID, int, string, unsafe.Pointe
 
 // IOServiceAddInterestNotification calls the IOKit framework function IOServiceAddInterestNotification.
 func IOServiceAddInterestNotification(notifyPort IONotificationPortRef, service int, interestType string, callback unsafe.Pointer, refCon unsafe.Pointer) (result int, notification int) {
+	defer runtime.KeepAlive(notifyPort)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOServiceAddInterestNotification == nil {
 		ebipurego.RegisterLibFunc(&_fnIOServiceAddInterestNotification, _lib, "IOServiceAddInterestNotification")
@@ -1000,6 +1021,8 @@ var _fnIOServiceAddMatchingNotification func(objc.ID, string, objc.ID, unsafe.Po
 
 // IOServiceAddMatchingNotification calls the IOKit framework function IOServiceAddMatchingNotification.
 func IOServiceAddMatchingNotification(notifyPort IONotificationPortRef, notificationType string, matching corefoundation.CFDictionaryRef, callback unsafe.Pointer, refCon unsafe.Pointer) (result int, notification int) {
+	defer runtime.KeepAlive(notifyPort)
+	defer runtime.KeepAlive(matching)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOServiceAddMatchingNotification == nil {
 		ebipurego.RegisterLibFunc(&_fnIOServiceAddMatchingNotification, _lib, "IOServiceAddMatchingNotification")
@@ -1013,6 +1036,7 @@ var _fnIOServiceAddNotification func(int, string, objc.ID, int, int, unsafe.Poin
 
 // IOServiceAddNotification calls the IOKit framework function IOServiceAddNotification.
 func IOServiceAddNotification(mainPort int, notificationType string, matching corefoundation.CFDictionaryRef, wakePort int, reference int) (result int, notification int) {
+	defer runtime.KeepAlive(matching)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOServiceAddNotification == nil {
 		ebipurego.RegisterLibFunc(&_fnIOServiceAddNotification, _lib, "IOServiceAddNotification")
@@ -1061,6 +1085,7 @@ var _fnIOServiceGetMatchingService func(int, objc.ID) uint32
 
 // IOServiceGetMatchingService calls the IOKit framework function IOServiceGetMatchingService.
 func IOServiceGetMatchingService(mainPort int, matching corefoundation.CFDictionaryRef) int {
+	defer runtime.KeepAlive(matching)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOServiceGetMatchingService == nil {
 		ebipurego.RegisterLibFunc(&_fnIOServiceGetMatchingService, _lib, "IOServiceGetMatchingService")
@@ -1072,6 +1097,7 @@ var _fnIOServiceGetMatchingServices func(int, objc.ID, unsafe.Pointer) int32
 
 // IOServiceGetMatchingServices calls the IOKit framework function IOServiceGetMatchingServices.
 func IOServiceGetMatchingServices(mainPort int, matching corefoundation.CFDictionaryRef) (result int, existing int) {
+	defer runtime.KeepAlive(matching)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOServiceGetMatchingServices == nil {
 		ebipurego.RegisterLibFunc(&_fnIOServiceGetMatchingServices, _lib, "IOServiceGetMatchingServices")
@@ -1085,6 +1111,7 @@ var _fnIOServiceMatchPropertyTable func(int, objc.ID, unsafe.Pointer) int32
 
 // IOServiceMatchPropertyTable calls the IOKit framework function IOServiceMatchPropertyTable.
 func IOServiceMatchPropertyTable(service int, matching corefoundation.CFDictionaryRef) (result int, matches int) {
+	defer runtime.KeepAlive(matching)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOServiceMatchPropertyTable == nil {
 		ebipurego.RegisterLibFunc(&_fnIOServiceMatchPropertyTable, _lib, "IOServiceMatchPropertyTable")

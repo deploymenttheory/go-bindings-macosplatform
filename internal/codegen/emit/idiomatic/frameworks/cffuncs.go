@@ -73,7 +73,7 @@ func emitFunctionWrappers(
 		}
 
 		// Classify every parameter except the trailing error out-parameter.
-		var sigParts, abiParts, callArgs []string
+		var sigParts, abiParts, callArgs, keepAlive []string
 		fnImports := map[string]string{}
 		ok := true
 		usedNames := make(map[string]int)
@@ -103,6 +103,10 @@ func emitFunctionWrappers(
 			sigParts = append(sigParts, pName+" "+sig)
 			abiParts = append(abiParts, cfuncABIType(sig, argExpr))
 			callArgs = append(callArgs, argExpr)
+			if passesWrapper(argExpr) {
+				keepAlive = append(keepAlive, pName)
+				fnImports["runtime"] = "runtime"
+			}
 		}
 		if !ok {
 			mapper.AppendDiagnostic(
@@ -163,6 +167,7 @@ func emitFunctionWrappers(
 				PreLines:     []string{"var _cfErr unsafe.Pointer"},
 				Call:         fmt.Sprintf("%s(%s)", varName, argsWithErr),
 				Fail:         fail,
+				KeepAlive:    keepAlive,
 			})
 		} else {
 			// A pointer-returning function: the result is a toll-free-bridged
@@ -182,6 +187,7 @@ func emitFunctionWrappers(
 				Kind:         view.FuncCFErrorPtr,
 				PreLines:     []string{"var _cfErr unsafe.Pointer"},
 				Call:         fmt.Sprintf("%s(%s)", varName, argsWithErr),
+				KeepAlive:    keepAlive,
 			})
 		}
 	}

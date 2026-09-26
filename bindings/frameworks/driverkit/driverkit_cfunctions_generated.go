@@ -5,6 +5,7 @@
 package driverkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -496,6 +497,7 @@ var _fnOSArrayAppendValue func(unsafe.Pointer, objc.ID) bool
 
 // OSArrayAppendValue calls the DriverKit framework function OSArrayAppendValue.
 func OSArrayAppendValue(value OSObjectPtr) (ok bool, object int32) {
+	defer runtime.KeepAlive(value)
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSArrayAppendValue == nil {
 		ebipurego.RegisterLibFunc(&_fnOSArrayAppendValue, _lib, "OSArrayAppendValue")
@@ -585,6 +587,7 @@ var _fnOSArrayReplaceValue func(unsafe.Pointer, int, objc.ID) bool
 
 // OSArrayReplaceValue calls the DriverKit framework function OSArrayReplaceValue.
 func OSArrayReplaceValue(index int, value OSObjectPtr) (ok bool, object int32) {
+	defer runtime.KeepAlive(value)
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSArrayReplaceValue == nil {
 		ebipurego.RegisterLibFunc(&_fnOSArrayReplaceValue, _lib, "OSArrayReplaceValue")
@@ -624,6 +627,7 @@ var _fnOSArraySetValue func(unsafe.Pointer, int, objc.ID) bool
 
 // OSArraySetValue calls the DriverKit framework function OSArraySetValue.
 func OSArraySetValue(index int, value OSObjectPtr) (ok bool, object int32) {
+	defer runtime.KeepAlive(value)
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSArraySetValue == nil {
 		ebipurego.RegisterLibFunc(&_fnOSArraySetValue, _lib, "OSArraySetValue")
@@ -637,6 +641,7 @@ var _fnOSCollectionTypeID func(objc.ID) uint64
 
 // OSCollectionTypeID calls the DriverKit framework function OSCollectionTypeID.
 func OSCollectionTypeID(object OSObjectPtr) uint64 {
+	defer runtime.KeepAlive(object)
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSCollectionTypeID == nil {
 		ebipurego.RegisterLibFunc(&_fnOSCollectionTypeID, _lib, "OSCollectionTypeID")
@@ -694,6 +699,7 @@ var _fnOSCreateSerializationFromObject func(objc.ID) unsafe.Pointer
 
 // OSCreateSerializationFromObject calls the DriverKit framework function OSCreateSerializationFromObject.
 func OSCreateSerializationFromObject(object OSObjectPtr) unsafe.Pointer {
+	defer runtime.KeepAlive(object)
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSCreateSerializationFromObject == nil {
 		ebipurego.RegisterLibFunc(&_fnOSCreateSerializationFromObject, _lib, "OSCreateSerializationFromObject")
@@ -870,6 +876,7 @@ var _fnOSDictionarySetValue func(unsafe.Pointer, string, objc.ID) bool
 
 // OSDictionarySetValue calls the DriverKit framework function OSDictionarySetValue.
 func OSDictionarySetValue(key string, value OSObjectPtr) (ok bool, object int32) {
+	defer runtime.KeepAlive(value)
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSDictionarySetValue == nil {
 		ebipurego.RegisterLibFunc(&_fnOSDictionarySetValue, _lib, "OSDictionarySetValue")
@@ -907,6 +914,7 @@ var _fnOSObjectAllocate func(unsafe.Pointer, objc.ID) int32
 
 // OSObjectAllocate calls the DriverKit framework function OSObjectAllocate.
 func OSObjectAllocate(pObject obj.Object) (result int, meta int32) {
+	defer runtime.KeepAlive(pObject)
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSObjectAllocate == nil {
 		ebipurego.RegisterLibFunc(&_fnOSObjectAllocate, _lib, "OSObjectAllocate")
@@ -920,6 +928,7 @@ var _fnOSObjectLog func(objc.ID)
 
 // OSObjectLog calls the DriverKit framework function OSObjectLog.
 func OSObjectLog(object OSObjectPtr) {
+	defer runtime.KeepAlive(object)
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSObjectLog == nil {
 		ebipurego.RegisterLibFunc(&_fnOSObjectLog, _lib, "OSObjectLog")
@@ -931,6 +940,7 @@ var _fnOSObjectRelease func(objc.ID)
 
 // OSObjectRelease calls the DriverKit framework function OSObjectRelease.
 func OSObjectRelease(container OSObjectPtr) {
+	defer runtime.KeepAlive(container)
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSObjectRelease == nil {
 		ebipurego.RegisterLibFunc(&_fnOSObjectRelease, _lib, "OSObjectRelease")
@@ -942,6 +952,7 @@ var _fnOSObjectRetain func(objc.ID)
 
 // OSObjectRetain calls the DriverKit framework function OSObjectRetain.
 func OSObjectRetain(container OSObjectPtr) {
+	defer runtime.KeepAlive(container)
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSObjectRetain == nil {
 		ebipurego.RegisterLibFunc(&_fnOSObjectRetain, _lib, "OSObjectRetain")

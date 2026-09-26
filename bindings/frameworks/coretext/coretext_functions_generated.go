@@ -5,6 +5,7 @@
 package coretext
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
@@ -19,6 +20,7 @@ import (
 var _fnCTFontManagerRegisterFontsForURL func(objc.ID, CTFontManagerScope, unsafe.Pointer) bool
 
 func CTFontManagerRegisterFontsForURL(fontURL corefoundation.CFURLRef, scope CTFontManagerScope) error {
+	defer runtime.KeepAlive(fontURL)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCTFontManagerRegisterFontsForURL == nil {
 		ebipurego.RegisterLibFunc(&_fnCTFontManagerRegisterFontsForURL, _lib, "CTFontManagerRegisterFontsForURL")
@@ -35,6 +37,7 @@ func CTFontManagerRegisterFontsForURL(fontURL corefoundation.CFURLRef, scope CTF
 var _fnCTFontManagerRegisterGraphicsFont func(objc.ID, unsafe.Pointer) bool
 
 func CTFontManagerRegisterGraphicsFont(font coregraphics.CGFontRef) error {
+	defer runtime.KeepAlive(font)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCTFontManagerRegisterGraphicsFont == nil {
 		ebipurego.RegisterLibFunc(&_fnCTFontManagerRegisterGraphicsFont, _lib, "CTFontManagerRegisterGraphicsFont")
@@ -51,6 +54,7 @@ func CTFontManagerRegisterGraphicsFont(font coregraphics.CGFontRef) error {
 var _fnCTFontManagerUnregisterFontsForURL func(objc.ID, CTFontManagerScope, unsafe.Pointer) bool
 
 func CTFontManagerUnregisterFontsForURL(fontURL corefoundation.CFURLRef, scope CTFontManagerScope) error {
+	defer runtime.KeepAlive(fontURL)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCTFontManagerUnregisterFontsForURL == nil {
 		ebipurego.RegisterLibFunc(&_fnCTFontManagerUnregisterFontsForURL, _lib, "CTFontManagerUnregisterFontsForURL")
@@ -67,6 +71,7 @@ func CTFontManagerUnregisterFontsForURL(fontURL corefoundation.CFURLRef, scope C
 var _fnCTFontManagerUnregisterGraphicsFont func(objc.ID, unsafe.Pointer) bool
 
 func CTFontManagerUnregisterGraphicsFont(font coregraphics.CGFontRef) error {
+	defer runtime.KeepAlive(font)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCTFontManagerUnregisterGraphicsFont == nil {
 		ebipurego.RegisterLibFunc(&_fnCTFontManagerUnregisterGraphicsFont, _lib, "CTFontManagerUnregisterGraphicsFont")

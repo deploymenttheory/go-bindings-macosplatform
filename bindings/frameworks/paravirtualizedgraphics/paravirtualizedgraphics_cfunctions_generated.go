@@ -5,6 +5,7 @@
 package paravirtualizedgraphics
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -29,6 +30,7 @@ var _fnPGCreateDeviceWithDescriptor func(objc.ID) unsafe.Pointer
 
 // PGCreateDeviceWithDescriptor calls the ParavirtualizedGraphics framework function PGCreateDeviceWithDescriptor.
 func PGCreateDeviceWithDescriptor(descriptor *PGDeviceDescriptor) unsafe.Pointer {
+	defer runtime.KeepAlive(descriptor)
 	_loadOnce.Do(_loadLibrary)
 	if _fnPGCreateDeviceWithDescriptor == nil {
 		ebipurego.RegisterLibFunc(&_fnPGCreateDeviceWithDescriptor, _lib, "PGCreateDeviceWithDescriptor")
