@@ -23,11 +23,11 @@ import (
 )
 
 var (
-	clsNSData              = objc.GetClass("NSData")
-	clsNSDate              = objc.GetClass("NSDate")
-	clsNSMutableDictionary = objc.GetClass("NSMutableDictionary")
-	clsNSMutableSet        = objc.GetClass("NSMutableSet")
-	clsNSURL               = objc.GetClass("NSURL")
+	clsNSData              = sync.OnceValue(func() objc.Class { return purego.FoundationClass("NSData") })
+	clsNSDate              = sync.OnceValue(func() objc.Class { return purego.FoundationClass("NSDate") })
+	clsNSMutableDictionary = sync.OnceValue(func() objc.Class { return purego.FoundationClass("NSMutableDictionary") })
+	clsNSMutableSet        = sync.OnceValue(func() objc.Class { return purego.FoundationClass("NSMutableSet") })
+	clsNSURL               = sync.OnceValue(func() objc.Class { return purego.FoundationClass("NSURL") })
 
 	selFileURLWithPath = objc.RegisterName("fileURLWithPath:")
 	selIsFileURL       = objc.RegisterName("isFileURL")
@@ -93,7 +93,7 @@ func AwaitValue[T any](ctx context.Context, start func(done func(T, error))) (T,
 // Objective-C methods take a file URL rather than a path string; the generated
 // code accepts a Go string and calls this to build the URL.
 func FileURL(path string) objc.ID {
-	return objc.Send[objc.ID](objc.ID(clsNSURL), selFileURLWithPath, purego.NSString(path))
+	return objc.Send[objc.ID](objc.ID(clsNSURL()), selFileURLWithPath, purego.NSString(path))
 }
 
 // URLString returns the Go string form of an NSURL: the filesystem path for a
@@ -131,7 +131,7 @@ func TimeToNSDate(t time.Time) objc.ID {
 		return 0
 	}
 	sec := float64(t.Unix()) + float64(t.Nanosecond())/1e9
-	return objc.Send[objc.ID](objc.ID(clsNSDate), selDateWithTimeIntervalSince1970, sec)
+	return objc.Send[objc.ID](objc.ID(clsNSDate()), selDateWithTimeIntervalSince1970, sec)
 }
 
 // ── Not-found convention ─────────────────────────────────────────────────────
@@ -155,9 +155,9 @@ func IndexResult(raw uint) (int, bool) {
 // bytes). An empty slice yields an empty NSData.
 func BytesToNSData(b []byte) objc.ID {
 	if len(b) == 0 {
-		return objc.Send[objc.ID](objc.ID(clsNSData), selData)
+		return objc.Send[objc.ID](objc.ID(clsNSData()), selData)
 	}
-	return objc.Send[objc.ID](objc.ID(clsNSData), selDataWithBytesLength,
+	return objc.Send[objc.ID](objc.ID(clsNSData()), selDataWithBytesLength,
 		unsafe.Pointer(&b[0]), uint(len(b)))
 }
 
@@ -202,7 +202,7 @@ func DictToMap[K comparable, V any](dict objc.ID, kconv func(objc.ID) K, vconv f
 
 // MapToDict builds an autoreleased NSMutableDictionary from a Go map.
 func MapToDict[K comparable, V any](m map[K]V, kconv func(K) objc.ID, vconv func(V) objc.ID) objc.ID {
-	d := objc.Send[objc.ID](objc.ID(clsNSMutableDictionary), selDictionary)
+	d := objc.Send[objc.ID](objc.ID(clsNSMutableDictionary()), selDictionary)
 	for k, v := range m {
 		d.Send(selSetObjectForKey, vconv(v), kconv(k))
 	}
@@ -220,7 +220,7 @@ func NSSetToSlice[T any](set objc.ID, conv func(objc.ID) T) []T {
 
 // SliceToNSSet builds an autoreleased NSMutableSet from a Go slice.
 func SliceToNSSet[T any](items []T, conv func(T) objc.ID) objc.ID {
-	s := objc.Send[objc.ID](objc.ID(clsNSMutableSet), selSet)
+	s := objc.Send[objc.ID](objc.ID(clsNSMutableSet()), selSet)
 	for _, it := range items {
 		s.Send(selAddObject, conv(it))
 	}
