@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.20.1](https://github.com/deploymenttheory/go-bindings-macosplatform/compare/v0.20.0...v0.20.1) (2026-09-27)
+
+
+### Bug Fixes
+
+* load Foundation for runtime class lookups and keep wrappers alive across calls ([#132](https://github.com/deploymenttheory/go-bindings-macosplatform/issues/132)) ([71544a1](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/71544a14f48a1fc30dc57a69d75d01bfc34ab7e9))
+
 ## [0.20.0](https://github.com/deploymenttheory/go-bindings-macosplatform/compare/v0.19.0...v0.20.0) (2026-09-17)
 
 
