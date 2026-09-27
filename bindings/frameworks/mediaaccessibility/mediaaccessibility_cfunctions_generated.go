@@ -5,6 +5,7 @@
 package mediaaccessibility
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
@@ -31,6 +32,7 @@ var _fnMACaptionAppearanceAddSelectedLanguage func(CaptionAppearanceDomain, objc
 
 // MACaptionAppearanceAddSelectedLanguage calls the MediaAccessibility framework function MACaptionAppearanceAddSelectedLanguage.
 func MACaptionAppearanceAddSelectedLanguage(domain CaptionAppearanceDomain, language corefoundation.CFStringRef) bool {
+	defer runtime.KeepAlive(language)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMACaptionAppearanceAddSelectedLanguage == nil {
 		ebipurego.RegisterLibFunc(&_fnMACaptionAppearanceAddSelectedLanguage, _lib, "MACaptionAppearanceAddSelectedLanguage")
@@ -117,6 +119,7 @@ var _fnMACaptionAppearanceCopyProfileName func(objc.ID) objc.ID
 
 // MACaptionAppearanceCopyProfileName calls the MediaAccessibility framework function MACaptionAppearanceCopyProfileName.
 func MACaptionAppearanceCopyProfileName(profileID corefoundation.CFStringRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(profileID)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMACaptionAppearanceCopyProfileName == nil {
 		ebipurego.RegisterLibFunc(&_fnMACaptionAppearanceCopyProfileName, _lib, "MACaptionAppearanceCopyProfileName")
@@ -154,6 +157,7 @@ var _fnMACaptionAppearanceDidDisplayCaptions func(objc.ID)
 
 // MACaptionAppearanceDidDisplayCaptions calls the MediaAccessibility framework function MACaptionAppearanceDidDisplayCaptions.
 func MACaptionAppearanceDidDisplayCaptions(strings_ corefoundation.CFArrayRef) {
+	defer runtime.KeepAlive(strings_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMACaptionAppearanceDidDisplayCaptions == nil {
 		ebipurego.RegisterLibFunc(&_fnMACaptionAppearanceDidDisplayCaptions, _lib, "MACaptionAppearanceDidDisplayCaptions")
@@ -165,6 +169,7 @@ var _fnMACaptionAppearanceExecuteBlockForProfileID func(objc.ID, objc.Block)
 
 // MACaptionAppearanceExecuteBlockForProfileID calls the MediaAccessibility framework function MACaptionAppearanceExecuteBlockForProfileID.
 func MACaptionAppearanceExecuteBlockForProfileID(profileID corefoundation.CFStringRef, aBlock func()) {
+	defer runtime.KeepAlive(profileID)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMACaptionAppearanceExecuteBlockForProfileID == nil {
 		ebipurego.RegisterLibFunc(&_fnMACaptionAppearanceExecuteBlockForProfileID, _lib, "MACaptionAppearanceExecuteBlockForProfileID")
@@ -276,6 +281,7 @@ var _fnMACaptionAppearanceSetActiveProfileID func(objc.ID)
 
 // MACaptionAppearanceSetActiveProfileID calls the MediaAccessibility framework function MACaptionAppearanceSetActiveProfileID.
 func MACaptionAppearanceSetActiveProfileID(profileID corefoundation.CFStringRef) {
+	defer runtime.KeepAlive(profileID)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMACaptionAppearanceSetActiveProfileID == nil {
 		ebipurego.RegisterLibFunc(&_fnMACaptionAppearanceSetActiveProfileID, _lib, "MACaptionAppearanceSetActiveProfileID")

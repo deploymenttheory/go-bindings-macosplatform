@@ -5,6 +5,7 @@
 package imageio
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
@@ -19,6 +20,8 @@ var _fnCGAnimateImageAtURLWithBlock func(objc.ID, objc.ID, unsafe.Pointer) int32
 
 // CGAnimateImageAtURLWithBlock calls the ImageIO framework function CGAnimateImageAtURLWithBlock.
 func CGAnimateImageAtURLWithBlock(url corefoundation.CFURLRef, options corefoundation.CFDictionaryRef, block unsafe.Pointer) int {
+	defer runtime.KeepAlive(url)
+	defer runtime.KeepAlive(options)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGAnimateImageAtURLWithBlock == nil {
 		ebipurego.RegisterLibFunc(&_fnCGAnimateImageAtURLWithBlock, _lib, "CGAnimateImageAtURLWithBlock")
@@ -30,6 +33,8 @@ var _fnCGAnimateImageDataWithBlock func(objc.ID, objc.ID, unsafe.Pointer) int32
 
 // CGAnimateImageDataWithBlock calls the ImageIO framework function CGAnimateImageDataWithBlock.
 func CGAnimateImageDataWithBlock(data corefoundation.CFDataRef, options corefoundation.CFDictionaryRef, block unsafe.Pointer) int {
+	defer runtime.KeepAlive(data)
+	defer runtime.KeepAlive(options)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGAnimateImageDataWithBlock == nil {
 		ebipurego.RegisterLibFunc(&_fnCGAnimateImageDataWithBlock, _lib, "CGAnimateImageDataWithBlock")
@@ -41,6 +46,9 @@ var _fnCGImageDestinationAddAuxiliaryDataInfo func(objc.ID, objc.ID, objc.ID)
 
 // CGImageDestinationAddAuxiliaryDataInfo calls the ImageIO framework function CGImageDestinationAddAuxiliaryDataInfo.
 func CGImageDestinationAddAuxiliaryDataInfo(idst coregraphics.CGImageDestinationRef, auxiliaryImageDataType corefoundation.CFStringRef, auxiliaryDataInfoDictionary corefoundation.CFDictionaryRef) {
+	defer runtime.KeepAlive(idst)
+	defer runtime.KeepAlive(auxiliaryImageDataType)
+	defer runtime.KeepAlive(auxiliaryDataInfoDictionary)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageDestinationAddAuxiliaryDataInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageDestinationAddAuxiliaryDataInfo, _lib, "CGImageDestinationAddAuxiliaryDataInfo")
@@ -52,6 +60,9 @@ var _fnCGImageDestinationAddImage func(objc.ID, objc.ID, objc.ID)
 
 // CGImageDestinationAddImage calls the ImageIO framework function CGImageDestinationAddImage.
 func CGImageDestinationAddImage(idst coregraphics.CGImageDestinationRef, image coregraphics.CGImageRef, properties corefoundation.CFDictionaryRef) {
+	defer runtime.KeepAlive(idst)
+	defer runtime.KeepAlive(image)
+	defer runtime.KeepAlive(properties)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageDestinationAddImage == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageDestinationAddImage, _lib, "CGImageDestinationAddImage")
@@ -63,6 +74,10 @@ var _fnCGImageDestinationAddImageAndMetadata func(objc.ID, objc.ID, objc.ID, obj
 
 // CGImageDestinationAddImageAndMetadata calls the ImageIO framework function CGImageDestinationAddImageAndMetadata.
 func CGImageDestinationAddImageAndMetadata(idst coregraphics.CGImageDestinationRef, image coregraphics.CGImageRef, metadata coregraphics.CGImageMetadataRef, options corefoundation.CFDictionaryRef) {
+	defer runtime.KeepAlive(idst)
+	defer runtime.KeepAlive(image)
+	defer runtime.KeepAlive(metadata)
+	defer runtime.KeepAlive(options)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageDestinationAddImageAndMetadata == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageDestinationAddImageAndMetadata, _lib, "CGImageDestinationAddImageAndMetadata")
@@ -74,6 +89,9 @@ var _fnCGImageDestinationAddImageFromSource func(objc.ID, objc.ID, int, objc.ID)
 
 // CGImageDestinationAddImageFromSource calls the ImageIO framework function CGImageDestinationAddImageFromSource.
 func CGImageDestinationAddImageFromSource(idst coregraphics.CGImageDestinationRef, isrc coregraphics.CGImageSourceRef, index int, properties corefoundation.CFDictionaryRef) {
+	defer runtime.KeepAlive(idst)
+	defer runtime.KeepAlive(isrc)
+	defer runtime.KeepAlive(properties)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageDestinationAddImageFromSource == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageDestinationAddImageFromSource, _lib, "CGImageDestinationAddImageFromSource")
@@ -97,6 +115,9 @@ var _fnCGImageDestinationCreateWithData func(objc.ID, objc.ID, int, objc.ID) obj
 
 // CGImageDestinationCreateWithData calls the ImageIO framework function CGImageDestinationCreateWithData.
 func CGImageDestinationCreateWithData(data corefoundation.CFMutableDataRef, type_ corefoundation.CFStringRef, count int, options corefoundation.CFDictionaryRef) coregraphics.CGImageDestinationRef {
+	defer runtime.KeepAlive(data)
+	defer runtime.KeepAlive(type_)
+	defer runtime.KeepAlive(options)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageDestinationCreateWithData == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageDestinationCreateWithData, _lib, "CGImageDestinationCreateWithData")
@@ -109,6 +130,9 @@ var _fnCGImageDestinationCreateWithDataConsumer func(objc.ID, objc.ID, int, objc
 
 // CGImageDestinationCreateWithDataConsumer calls the ImageIO framework function CGImageDestinationCreateWithDataConsumer.
 func CGImageDestinationCreateWithDataConsumer(consumer coregraphics.CGDataConsumerRef, type_ corefoundation.CFStringRef, count int, options corefoundation.CFDictionaryRef) coregraphics.CGImageDestinationRef {
+	defer runtime.KeepAlive(consumer)
+	defer runtime.KeepAlive(type_)
+	defer runtime.KeepAlive(options)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageDestinationCreateWithDataConsumer == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageDestinationCreateWithDataConsumer, _lib, "CGImageDestinationCreateWithDataConsumer")
@@ -121,6 +145,9 @@ var _fnCGImageDestinationCreateWithURL func(objc.ID, objc.ID, int, objc.ID) objc
 
 // CGImageDestinationCreateWithURL calls the ImageIO framework function CGImageDestinationCreateWithURL.
 func CGImageDestinationCreateWithURL(url corefoundation.CFURLRef, type_ corefoundation.CFStringRef, count int, options corefoundation.CFDictionaryRef) coregraphics.CGImageDestinationRef {
+	defer runtime.KeepAlive(url)
+	defer runtime.KeepAlive(type_)
+	defer runtime.KeepAlive(options)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageDestinationCreateWithURL == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageDestinationCreateWithURL, _lib, "CGImageDestinationCreateWithURL")
@@ -133,6 +160,7 @@ var _fnCGImageDestinationFinalize func(objc.ID) bool
 
 // CGImageDestinationFinalize calls the ImageIO framework function CGImageDestinationFinalize.
 func CGImageDestinationFinalize(idst coregraphics.CGImageDestinationRef) bool {
+	defer runtime.KeepAlive(idst)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageDestinationFinalize == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageDestinationFinalize, _lib, "CGImageDestinationFinalize")
@@ -155,6 +183,8 @@ var _fnCGImageDestinationSetProperties func(objc.ID, objc.ID)
 
 // CGImageDestinationSetProperties calls the ImageIO framework function CGImageDestinationSetProperties.
 func CGImageDestinationSetProperties(idst coregraphics.CGImageDestinationRef, properties corefoundation.CFDictionaryRef) {
+	defer runtime.KeepAlive(idst)
+	defer runtime.KeepAlive(properties)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageDestinationSetProperties == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageDestinationSetProperties, _lib, "CGImageDestinationSetProperties")
@@ -166,6 +196,9 @@ var _fnCGImageMetadataCopyStringValueWithPath func(objc.ID, objc.ID, objc.ID) ob
 
 // CGImageMetadataCopyStringValueWithPath calls the ImageIO framework function CGImageMetadataCopyStringValueWithPath.
 func CGImageMetadataCopyStringValueWithPath(metadata coregraphics.CGImageMetadataRef, parent coregraphics.CGImageMetadataTagRef, path corefoundation.CFStringRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(metadata)
+	defer runtime.KeepAlive(parent)
+	defer runtime.KeepAlive(path)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageMetadataCopyStringValueWithPath == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataCopyStringValueWithPath, _lib, "CGImageMetadataCopyStringValueWithPath")
@@ -178,6 +211,9 @@ var _fnCGImageMetadataCopyTagMatchingImageProperty func(objc.ID, objc.ID, objc.I
 
 // CGImageMetadataCopyTagMatchingImageProperty calls the ImageIO framework function CGImageMetadataCopyTagMatchingImageProperty.
 func CGImageMetadataCopyTagMatchingImageProperty(metadata coregraphics.CGImageMetadataRef, dictionaryName corefoundation.CFStringRef, propertyName corefoundation.CFStringRef) coregraphics.CGImageMetadataTagRef {
+	defer runtime.KeepAlive(metadata)
+	defer runtime.KeepAlive(dictionaryName)
+	defer runtime.KeepAlive(propertyName)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageMetadataCopyTagMatchingImageProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataCopyTagMatchingImageProperty, _lib, "CGImageMetadataCopyTagMatchingImageProperty")
@@ -190,6 +226,9 @@ var _fnCGImageMetadataCopyTagWithPath func(objc.ID, objc.ID, objc.ID) objc.ID
 
 // CGImageMetadataCopyTagWithPath calls the ImageIO framework function CGImageMetadataCopyTagWithPath.
 func CGImageMetadataCopyTagWithPath(metadata coregraphics.CGImageMetadataRef, parent coregraphics.CGImageMetadataTagRef, path corefoundation.CFStringRef) coregraphics.CGImageMetadataTagRef {
+	defer runtime.KeepAlive(metadata)
+	defer runtime.KeepAlive(parent)
+	defer runtime.KeepAlive(path)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageMetadataCopyTagWithPath == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataCopyTagWithPath, _lib, "CGImageMetadataCopyTagWithPath")
@@ -202,6 +241,7 @@ var _fnCGImageMetadataCopyTags func(objc.ID) objc.ID
 
 // CGImageMetadataCopyTags calls the ImageIO framework function CGImageMetadataCopyTags.
 func CGImageMetadataCopyTags(metadata coregraphics.CGImageMetadataRef) corefoundation.CFArrayRef {
+	defer runtime.KeepAlive(metadata)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageMetadataCopyTags == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataCopyTags, _lib, "CGImageMetadataCopyTags")
@@ -214,6 +254,7 @@ var _fnCGImageMetadataCreateFromXMPData func(objc.ID) objc.ID
 
 // CGImageMetadataCreateFromXMPData calls the ImageIO framework function CGImageMetadataCreateFromXMPData.
 func CGImageMetadataCreateFromXMPData(data corefoundation.CFDataRef) coregraphics.CGImageMetadataRef {
+	defer runtime.KeepAlive(data)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageMetadataCreateFromXMPData == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataCreateFromXMPData, _lib, "CGImageMetadataCreateFromXMPData")
@@ -238,6 +279,7 @@ var _fnCGImageMetadataCreateMutableCopy func(objc.ID) objc.ID
 
 // CGImageMetadataCreateMutableCopy calls the ImageIO framework function CGImageMetadataCreateMutableCopy.
 func CGImageMetadataCreateMutableCopy(metadata coregraphics.CGImageMetadataRef) coregraphics.CGMutableImageMetadataRef {
+	defer runtime.KeepAlive(metadata)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageMetadataCreateMutableCopy == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataCreateMutableCopy, _lib, "CGImageMetadataCreateMutableCopy")
@@ -250,6 +292,8 @@ var _fnCGImageMetadataCreateXMPData func(objc.ID, objc.ID) objc.ID
 
 // CGImageMetadataCreateXMPData calls the ImageIO framework function CGImageMetadataCreateXMPData.
 func CGImageMetadataCreateXMPData(metadata coregraphics.CGImageMetadataRef, options corefoundation.CFDictionaryRef) corefoundation.CFDataRef {
+	defer runtime.KeepAlive(metadata)
+	defer runtime.KeepAlive(options)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageMetadataCreateXMPData == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataCreateXMPData, _lib, "CGImageMetadataCreateXMPData")
@@ -262,6 +306,9 @@ var _fnCGImageMetadataEnumerateTagsUsingBlock func(objc.ID, objc.ID, objc.ID, ob
 
 // CGImageMetadataEnumerateTagsUsingBlock calls the ImageIO framework function CGImageMetadataEnumerateTagsUsingBlock.
 func CGImageMetadataEnumerateTagsUsingBlock(metadata coregraphics.CGImageMetadataRef, rootPath corefoundation.CFStringRef, options corefoundation.CFDictionaryRef, block func(unsafe.Pointer, unsafe.Pointer) bool) {
+	defer runtime.KeepAlive(metadata)
+	defer runtime.KeepAlive(rootPath)
+	defer runtime.KeepAlive(options)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageMetadataEnumerateTagsUsingBlock == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataEnumerateTagsUsingBlock, _lib, "CGImageMetadataEnumerateTagsUsingBlock")
@@ -284,6 +331,9 @@ var _fnCGImageMetadataRemoveTagWithPath func(objc.ID, objc.ID, objc.ID) bool
 
 // CGImageMetadataRemoveTagWithPath calls the ImageIO framework function CGImageMetadataRemoveTagWithPath.
 func CGImageMetadataRemoveTagWithPath(metadata coregraphics.CGMutableImageMetadataRef, parent coregraphics.CGImageMetadataTagRef, path corefoundation.CFStringRef) bool {
+	defer runtime.KeepAlive(metadata)
+	defer runtime.KeepAlive(parent)
+	defer runtime.KeepAlive(path)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageMetadataRemoveTagWithPath == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataRemoveTagWithPath, _lib, "CGImageMetadataRemoveTagWithPath")
@@ -295,6 +345,10 @@ var _fnCGImageMetadataSetTagWithPath func(objc.ID, objc.ID, objc.ID, objc.ID) bo
 
 // CGImageMetadataSetTagWithPath calls the ImageIO framework function CGImageMetadataSetTagWithPath.
 func CGImageMetadataSetTagWithPath(metadata coregraphics.CGMutableImageMetadataRef, parent coregraphics.CGImageMetadataTagRef, path corefoundation.CFStringRef, tag coregraphics.CGImageMetadataTagRef) bool {
+	defer runtime.KeepAlive(metadata)
+	defer runtime.KeepAlive(parent)
+	defer runtime.KeepAlive(path)
+	defer runtime.KeepAlive(tag)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageMetadataSetTagWithPath == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataSetTagWithPath, _lib, "CGImageMetadataSetTagWithPath")
@@ -306,6 +360,10 @@ var _fnCGImageMetadataSetValueMatchingImageProperty func(objc.ID, objc.ID, objc.
 
 // CGImageMetadataSetValueMatchingImageProperty calls the ImageIO framework function CGImageMetadataSetValueMatchingImageProperty.
 func CGImageMetadataSetValueMatchingImageProperty(metadata coregraphics.CGMutableImageMetadataRef, dictionaryName corefoundation.CFStringRef, propertyName corefoundation.CFStringRef, value obj.Object) bool {
+	defer runtime.KeepAlive(metadata)
+	defer runtime.KeepAlive(dictionaryName)
+	defer runtime.KeepAlive(propertyName)
+	defer runtime.KeepAlive(value)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageMetadataSetValueMatchingImageProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataSetValueMatchingImageProperty, _lib, "CGImageMetadataSetValueMatchingImageProperty")
@@ -317,6 +375,10 @@ var _fnCGImageMetadataSetValueWithPath func(objc.ID, objc.ID, objc.ID, objc.ID) 
 
 // CGImageMetadataSetValueWithPath calls the ImageIO framework function CGImageMetadataSetValueWithPath.
 func CGImageMetadataSetValueWithPath(metadata coregraphics.CGMutableImageMetadataRef, parent coregraphics.CGImageMetadataTagRef, path corefoundation.CFStringRef, value obj.Object) bool {
+	defer runtime.KeepAlive(metadata)
+	defer runtime.KeepAlive(parent)
+	defer runtime.KeepAlive(path)
+	defer runtime.KeepAlive(value)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageMetadataSetValueWithPath == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataSetValueWithPath, _lib, "CGImageMetadataSetValueWithPath")
@@ -328,6 +390,7 @@ var _fnCGImageMetadataTagCopyName func(objc.ID) objc.ID
 
 // CGImageMetadataTagCopyName calls the ImageIO framework function CGImageMetadataTagCopyName.
 func CGImageMetadataTagCopyName(tag coregraphics.CGImageMetadataTagRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(tag)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageMetadataTagCopyName == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataTagCopyName, _lib, "CGImageMetadataTagCopyName")
@@ -340,6 +403,7 @@ var _fnCGImageMetadataTagCopyNamespace func(objc.ID) objc.ID
 
 // CGImageMetadataTagCopyNamespace calls the ImageIO framework function CGImageMetadataTagCopyNamespace.
 func CGImageMetadataTagCopyNamespace(tag coregraphics.CGImageMetadataTagRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(tag)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageMetadataTagCopyNamespace == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataTagCopyNamespace, _lib, "CGImageMetadataTagCopyNamespace")
@@ -352,6 +416,7 @@ var _fnCGImageMetadataTagCopyPrefix func(objc.ID) objc.ID
 
 // CGImageMetadataTagCopyPrefix calls the ImageIO framework function CGImageMetadataTagCopyPrefix.
 func CGImageMetadataTagCopyPrefix(tag coregraphics.CGImageMetadataTagRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(tag)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageMetadataTagCopyPrefix == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataTagCopyPrefix, _lib, "CGImageMetadataTagCopyPrefix")
@@ -364,6 +429,7 @@ var _fnCGImageMetadataTagCopyQualifiers func(objc.ID) objc.ID
 
 // CGImageMetadataTagCopyQualifiers calls the ImageIO framework function CGImageMetadataTagCopyQualifiers.
 func CGImageMetadataTagCopyQualifiers(tag coregraphics.CGImageMetadataTagRef) corefoundation.CFArrayRef {
+	defer runtime.KeepAlive(tag)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageMetadataTagCopyQualifiers == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataTagCopyQualifiers, _lib, "CGImageMetadataTagCopyQualifiers")
@@ -376,6 +442,7 @@ var _fnCGImageMetadataTagCopyValue func(objc.ID) objc.ID
 
 // CGImageMetadataTagCopyValue calls the ImageIO framework function CGImageMetadataTagCopyValue.
 func CGImageMetadataTagCopyValue(tag coregraphics.CGImageMetadataTagRef) obj.Object {
+	defer runtime.KeepAlive(tag)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageMetadataTagCopyValue == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataTagCopyValue, _lib, "CGImageMetadataTagCopyValue")
@@ -388,6 +455,10 @@ var _fnCGImageMetadataTagCreate func(objc.ID, objc.ID, objc.ID, CGImageMetadataT
 
 // CGImageMetadataTagCreate calls the ImageIO framework function CGImageMetadataTagCreate.
 func CGImageMetadataTagCreate(xmlns corefoundation.CFStringRef, prefix corefoundation.CFStringRef, name corefoundation.CFStringRef, type_ CGImageMetadataType, value obj.Object) coregraphics.CGImageMetadataTagRef {
+	defer runtime.KeepAlive(xmlns)
+	defer runtime.KeepAlive(prefix)
+	defer runtime.KeepAlive(name)
+	defer runtime.KeepAlive(value)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageMetadataTagCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataTagCreate, _lib, "CGImageMetadataTagCreate")
@@ -400,6 +471,7 @@ var _fnCGImageMetadataTagGetType func(objc.ID) CGImageMetadataType
 
 // CGImageMetadataTagGetType calls the ImageIO framework function CGImageMetadataTagGetType.
 func CGImageMetadataTagGetType(tag coregraphics.CGImageMetadataTagRef) CGImageMetadataType {
+	defer runtime.KeepAlive(tag)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageMetadataTagGetType == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataTagGetType, _lib, "CGImageMetadataTagGetType")
@@ -422,6 +494,8 @@ var _fnCGImageSourceCopyAuxiliaryDataInfoAtIndex func(objc.ID, int, objc.ID) obj
 
 // CGImageSourceCopyAuxiliaryDataInfoAtIndex calls the ImageIO framework function CGImageSourceCopyAuxiliaryDataInfoAtIndex.
 func CGImageSourceCopyAuxiliaryDataInfoAtIndex(isrc coregraphics.CGImageSourceRef, index int, auxiliaryImageDataType corefoundation.CFStringRef) corefoundation.CFDictionaryRef {
+	defer runtime.KeepAlive(isrc)
+	defer runtime.KeepAlive(auxiliaryImageDataType)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageSourceCopyAuxiliaryDataInfoAtIndex == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageSourceCopyAuxiliaryDataInfoAtIndex, _lib, "CGImageSourceCopyAuxiliaryDataInfoAtIndex")
@@ -434,6 +508,8 @@ var _fnCGImageSourceCopyMetadataAtIndex func(objc.ID, int, objc.ID) objc.ID
 
 // CGImageSourceCopyMetadataAtIndex calls the ImageIO framework function CGImageSourceCopyMetadataAtIndex.
 func CGImageSourceCopyMetadataAtIndex(isrc coregraphics.CGImageSourceRef, index int, options corefoundation.CFDictionaryRef) coregraphics.CGImageMetadataRef {
+	defer runtime.KeepAlive(isrc)
+	defer runtime.KeepAlive(options)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageSourceCopyMetadataAtIndex == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageSourceCopyMetadataAtIndex, _lib, "CGImageSourceCopyMetadataAtIndex")
@@ -446,6 +522,8 @@ var _fnCGImageSourceCopyProperties func(objc.ID, objc.ID) objc.ID
 
 // CGImageSourceCopyProperties calls the ImageIO framework function CGImageSourceCopyProperties.
 func CGImageSourceCopyProperties(isrc coregraphics.CGImageSourceRef, options corefoundation.CFDictionaryRef) corefoundation.CFDictionaryRef {
+	defer runtime.KeepAlive(isrc)
+	defer runtime.KeepAlive(options)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageSourceCopyProperties == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageSourceCopyProperties, _lib, "CGImageSourceCopyProperties")
@@ -458,6 +536,8 @@ var _fnCGImageSourceCopyPropertiesAtIndex func(objc.ID, int, objc.ID) objc.ID
 
 // CGImageSourceCopyPropertiesAtIndex calls the ImageIO framework function CGImageSourceCopyPropertiesAtIndex.
 func CGImageSourceCopyPropertiesAtIndex(isrc coregraphics.CGImageSourceRef, index int, options corefoundation.CFDictionaryRef) corefoundation.CFDictionaryRef {
+	defer runtime.KeepAlive(isrc)
+	defer runtime.KeepAlive(options)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageSourceCopyPropertiesAtIndex == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageSourceCopyPropertiesAtIndex, _lib, "CGImageSourceCopyPropertiesAtIndex")
@@ -482,6 +562,8 @@ var _fnCGImageSourceCreateImageAtIndex func(objc.ID, int, objc.ID) objc.ID
 
 // CGImageSourceCreateImageAtIndex calls the ImageIO framework function CGImageSourceCreateImageAtIndex.
 func CGImageSourceCreateImageAtIndex(isrc coregraphics.CGImageSourceRef, index int, options corefoundation.CFDictionaryRef) coregraphics.CGImageRef {
+	defer runtime.KeepAlive(isrc)
+	defer runtime.KeepAlive(options)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageSourceCreateImageAtIndex == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageSourceCreateImageAtIndex, _lib, "CGImageSourceCreateImageAtIndex")
@@ -494,6 +576,7 @@ var _fnCGImageSourceCreateIncremental func(objc.ID) objc.ID
 
 // CGImageSourceCreateIncremental calls the ImageIO framework function CGImageSourceCreateIncremental.
 func CGImageSourceCreateIncremental(options corefoundation.CFDictionaryRef) coregraphics.CGImageSourceRef {
+	defer runtime.KeepAlive(options)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageSourceCreateIncremental == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageSourceCreateIncremental, _lib, "CGImageSourceCreateIncremental")
@@ -506,6 +589,8 @@ var _fnCGImageSourceCreateThumbnailAtIndex func(objc.ID, int, objc.ID) objc.ID
 
 // CGImageSourceCreateThumbnailAtIndex calls the ImageIO framework function CGImageSourceCreateThumbnailAtIndex.
 func CGImageSourceCreateThumbnailAtIndex(isrc coregraphics.CGImageSourceRef, index int, options corefoundation.CFDictionaryRef) coregraphics.CGImageRef {
+	defer runtime.KeepAlive(isrc)
+	defer runtime.KeepAlive(options)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageSourceCreateThumbnailAtIndex == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageSourceCreateThumbnailAtIndex, _lib, "CGImageSourceCreateThumbnailAtIndex")
@@ -518,6 +603,8 @@ var _fnCGImageSourceCreateWithData func(objc.ID, objc.ID) objc.ID
 
 // CGImageSourceCreateWithData calls the ImageIO framework function CGImageSourceCreateWithData.
 func CGImageSourceCreateWithData(data corefoundation.CFDataRef, options corefoundation.CFDictionaryRef) coregraphics.CGImageSourceRef {
+	defer runtime.KeepAlive(data)
+	defer runtime.KeepAlive(options)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageSourceCreateWithData == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageSourceCreateWithData, _lib, "CGImageSourceCreateWithData")
@@ -530,6 +617,8 @@ var _fnCGImageSourceCreateWithDataProvider func(objc.ID, objc.ID) objc.ID
 
 // CGImageSourceCreateWithDataProvider calls the ImageIO framework function CGImageSourceCreateWithDataProvider.
 func CGImageSourceCreateWithDataProvider(provider coregraphics.CGDataProviderRef, options corefoundation.CFDictionaryRef) coregraphics.CGImageSourceRef {
+	defer runtime.KeepAlive(provider)
+	defer runtime.KeepAlive(options)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageSourceCreateWithDataProvider == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageSourceCreateWithDataProvider, _lib, "CGImageSourceCreateWithDataProvider")
@@ -542,6 +631,8 @@ var _fnCGImageSourceCreateWithURL func(objc.ID, objc.ID) objc.ID
 
 // CGImageSourceCreateWithURL calls the ImageIO framework function CGImageSourceCreateWithURL.
 func CGImageSourceCreateWithURL(url corefoundation.CFURLRef, options corefoundation.CFDictionaryRef) coregraphics.CGImageSourceRef {
+	defer runtime.KeepAlive(url)
+	defer runtime.KeepAlive(options)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageSourceCreateWithURL == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageSourceCreateWithURL, _lib, "CGImageSourceCreateWithURL")
@@ -554,6 +645,7 @@ var _fnCGImageSourceGetCount func(objc.ID) int
 
 // CGImageSourceGetCount calls the ImageIO framework function CGImageSourceGetCount.
 func CGImageSourceGetCount(isrc coregraphics.CGImageSourceRef) int {
+	defer runtime.KeepAlive(isrc)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageSourceGetCount == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageSourceGetCount, _lib, "CGImageSourceGetCount")
@@ -565,6 +657,7 @@ var _fnCGImageSourceGetPrimaryImageIndex func(objc.ID) int
 
 // CGImageSourceGetPrimaryImageIndex calls the ImageIO framework function CGImageSourceGetPrimaryImageIndex.
 func CGImageSourceGetPrimaryImageIndex(isrc coregraphics.CGImageSourceRef) int {
+	defer runtime.KeepAlive(isrc)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageSourceGetPrimaryImageIndex == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageSourceGetPrimaryImageIndex, _lib, "CGImageSourceGetPrimaryImageIndex")
@@ -576,6 +669,7 @@ var _fnCGImageSourceGetStatus func(objc.ID) CGImageSourceStatus
 
 // CGImageSourceGetStatus calls the ImageIO framework function CGImageSourceGetStatus.
 func CGImageSourceGetStatus(isrc coregraphics.CGImageSourceRef) CGImageSourceStatus {
+	defer runtime.KeepAlive(isrc)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageSourceGetStatus == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageSourceGetStatus, _lib, "CGImageSourceGetStatus")
@@ -587,6 +681,7 @@ var _fnCGImageSourceGetStatusAtIndex func(objc.ID, int) CGImageSourceStatus
 
 // CGImageSourceGetStatusAtIndex calls the ImageIO framework function CGImageSourceGetStatusAtIndex.
 func CGImageSourceGetStatusAtIndex(isrc coregraphics.CGImageSourceRef, index int) CGImageSourceStatus {
+	defer runtime.KeepAlive(isrc)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageSourceGetStatusAtIndex == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageSourceGetStatusAtIndex, _lib, "CGImageSourceGetStatusAtIndex")
@@ -598,6 +693,7 @@ var _fnCGImageSourceGetType func(objc.ID) objc.ID
 
 // CGImageSourceGetType calls the ImageIO framework function CGImageSourceGetType.
 func CGImageSourceGetType(isrc coregraphics.CGImageSourceRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(isrc)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageSourceGetType == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageSourceGetType, _lib, "CGImageSourceGetType")
@@ -621,6 +717,7 @@ var _fnCGImageSourceRemoveCacheAtIndex func(objc.ID, int)
 
 // CGImageSourceRemoveCacheAtIndex calls the ImageIO framework function CGImageSourceRemoveCacheAtIndex.
 func CGImageSourceRemoveCacheAtIndex(isrc coregraphics.CGImageSourceRef, index int) {
+	defer runtime.KeepAlive(isrc)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageSourceRemoveCacheAtIndex == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageSourceRemoveCacheAtIndex, _lib, "CGImageSourceRemoveCacheAtIndex")
@@ -632,6 +729,8 @@ var _fnCGImageSourceUpdateData func(objc.ID, objc.ID, bool)
 
 // CGImageSourceUpdateData calls the ImageIO framework function CGImageSourceUpdateData.
 func CGImageSourceUpdateData(isrc coregraphics.CGImageSourceRef, data corefoundation.CFDataRef, final bool) {
+	defer runtime.KeepAlive(isrc)
+	defer runtime.KeepAlive(data)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageSourceUpdateData == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageSourceUpdateData, _lib, "CGImageSourceUpdateData")
@@ -643,6 +742,8 @@ var _fnCGImageSourceUpdateDataProvider func(objc.ID, objc.ID, bool)
 
 // CGImageSourceUpdateDataProvider calls the ImageIO framework function CGImageSourceUpdateDataProvider.
 func CGImageSourceUpdateDataProvider(isrc coregraphics.CGImageSourceRef, provider coregraphics.CGDataProviderRef, final bool) {
+	defer runtime.KeepAlive(isrc)
+	defer runtime.KeepAlive(provider)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageSourceUpdateDataProvider == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageSourceUpdateDataProvider, _lib, "CGImageSourceUpdateDataProvider")

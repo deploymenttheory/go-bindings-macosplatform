@@ -5,6 +5,7 @@
 package servicemanagement
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
@@ -19,6 +20,9 @@ import (
 var _fnSMJobBless func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) uint8
 
 func SMJobBless(domain corefoundation.CFStringRef, executableLabel corefoundation.CFStringRef, auth obj.Object) error {
+	defer runtime.KeepAlive(domain)
+	defer runtime.KeepAlive(executableLabel)
+	defer runtime.KeepAlive(auth)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSMJobBless == nil {
 		ebipurego.RegisterLibFunc(&_fnSMJobBless, _lib, "SMJobBless")
@@ -35,6 +39,9 @@ func SMJobBless(domain corefoundation.CFStringRef, executableLabel corefoundatio
 var _fnSMJobRemove func(objc.ID, objc.ID, objc.ID, uint8, unsafe.Pointer) uint8
 
 func SMJobRemove(domain corefoundation.CFStringRef, jobLabel corefoundation.CFStringRef, auth obj.Object, wait uint8) error {
+	defer runtime.KeepAlive(domain)
+	defer runtime.KeepAlive(jobLabel)
+	defer runtime.KeepAlive(auth)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSMJobRemove == nil {
 		ebipurego.RegisterLibFunc(&_fnSMJobRemove, _lib, "SMJobRemove")
@@ -51,6 +58,9 @@ func SMJobRemove(domain corefoundation.CFStringRef, jobLabel corefoundation.CFSt
 var _fnSMJobSubmit func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) uint8
 
 func SMJobSubmit(domain corefoundation.CFStringRef, job corefoundation.CFDictionaryRef, auth obj.Object) error {
+	defer runtime.KeepAlive(domain)
+	defer runtime.KeepAlive(job)
+	defer runtime.KeepAlive(auth)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSMJobSubmit == nil {
 		ebipurego.RegisterLibFunc(&_fnSMJobSubmit, _lib, "SMJobSubmit")

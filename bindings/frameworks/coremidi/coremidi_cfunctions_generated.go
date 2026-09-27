@@ -5,6 +5,7 @@
 package coremidi
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
@@ -480,6 +481,7 @@ var _fnMIDIClientCreate func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Poi
 
 // MIDIClientCreate calls the CoreMIDI framework function MIDIClientCreate.
 func MIDIClientCreate(name corefoundation.CFStringRef, notifyProc unsafe.Pointer, notifyRefCon unsafe.Pointer) (result int, outClient int) {
+	defer runtime.KeepAlive(name)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDIClientCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDIClientCreate, _lib, "MIDIClientCreate")
@@ -493,6 +495,7 @@ var _fnMIDIClientCreateWithBlock func(objc.ID, unsafe.Pointer, unsafe.Pointer) i
 
 // MIDIClientCreateWithBlock calls the CoreMIDI framework function MIDIClientCreateWithBlock.
 func MIDIClientCreateWithBlock(name corefoundation.CFStringRef, notifyBlock unsafe.Pointer) (result int, outClient int) {
+	defer runtime.KeepAlive(name)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDIClientCreateWithBlock == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDIClientCreateWithBlock, _lib, "MIDIClientCreateWithBlock")
@@ -517,6 +520,7 @@ var _fnMIDIDestinationCreate func(int, objc.ID, unsafe.Pointer, unsafe.Pointer, 
 
 // MIDIDestinationCreate calls the CoreMIDI framework function MIDIDestinationCreate.
 func MIDIDestinationCreate(client int, name corefoundation.CFStringRef, readProc unsafe.Pointer, refCon unsafe.Pointer) (result int, outDest int) {
+	defer runtime.KeepAlive(name)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDIDestinationCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDIDestinationCreate, _lib, "MIDIDestinationCreate")
@@ -530,6 +534,7 @@ var _fnMIDIDestinationCreateWithBlock func(int, objc.ID, unsafe.Pointer, unsafe.
 
 // MIDIDestinationCreateWithBlock calls the CoreMIDI framework function MIDIDestinationCreateWithBlock.
 func MIDIDestinationCreateWithBlock(client int, name corefoundation.CFStringRef, readBlock unsafe.Pointer) (result int, outDest int) {
+	defer runtime.KeepAlive(name)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDIDestinationCreateWithBlock == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDIDestinationCreateWithBlock, _lib, "MIDIDestinationCreateWithBlock")
@@ -543,6 +548,7 @@ var _fnMIDIDestinationCreateWithProtocol func(int, objc.ID, ProtocolID, unsafe.P
 
 // MIDIDestinationCreateWithProtocol calls the CoreMIDI framework function MIDIDestinationCreateWithProtocol.
 func MIDIDestinationCreateWithProtocol(client int, name corefoundation.CFStringRef, protocol ProtocolID, readBlock unsafe.Pointer) (result int, outDest int) {
+	defer runtime.KeepAlive(name)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDIDestinationCreateWithProtocol == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDIDestinationCreateWithProtocol, _lib, "MIDIDestinationCreateWithProtocol")
@@ -556,6 +562,7 @@ var _fnMIDIDeviceAddEntity func(int, objc.ID, uint8, int, int, unsafe.Pointer) i
 
 // MIDIDeviceAddEntity calls the CoreMIDI framework function MIDIDeviceAddEntity.
 func MIDIDeviceAddEntity(device int, name corefoundation.CFStringRef, embedded uint8, numSourceEndpoints int, numDestinationEndpoints int) (result int, newEntity int) {
+	defer runtime.KeepAlive(name)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDIDeviceAddEntity == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDIDeviceAddEntity, _lib, "MIDIDeviceAddEntity")
@@ -569,6 +576,9 @@ var _fnMIDIDeviceCreate func(unsafe.Pointer, objc.ID, objc.ID, objc.ID, unsafe.P
 
 // MIDIDeviceCreate calls the CoreMIDI framework function MIDIDeviceCreate.
 func MIDIDeviceCreate(owner unsafe.Pointer, name corefoundation.CFStringRef, manufacturer corefoundation.CFStringRef, model corefoundation.CFStringRef) (result int, outDevice int) {
+	defer runtime.KeepAlive(name)
+	defer runtime.KeepAlive(manufacturer)
+	defer runtime.KeepAlive(model)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDIDeviceCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDIDeviceCreate, _lib, "MIDIDeviceCreate")
@@ -626,6 +636,7 @@ var _fnMIDIDeviceNewEntity func(int, objc.ID, ProtocolID, uint8, int, int, unsaf
 
 // MIDIDeviceNewEntity calls the CoreMIDI framework function MIDIDeviceNewEntity.
 func MIDIDeviceNewEntity(device int, name corefoundation.CFStringRef, protocol ProtocolID, embedded uint8, numSourceEndpoints int, numDestinationEndpoints int) (result int, newEntity int) {
+	defer runtime.KeepAlive(name)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDIDeviceNewEntity == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDIDeviceNewEntity, _lib, "MIDIDeviceNewEntity")
@@ -775,6 +786,9 @@ var _fnMIDIExternalDeviceCreate func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) 
 
 // MIDIExternalDeviceCreate calls the CoreMIDI framework function MIDIExternalDeviceCreate.
 func MIDIExternalDeviceCreate(name corefoundation.CFStringRef, manufacturer corefoundation.CFStringRef, model corefoundation.CFStringRef) (result int, outDevice int) {
+	defer runtime.KeepAlive(name)
+	defer runtime.KeepAlive(manufacturer)
+	defer runtime.KeepAlive(model)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDIExternalDeviceCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDIExternalDeviceCreate, _lib, "MIDIExternalDeviceCreate")
@@ -899,6 +913,7 @@ var _fnMIDIInputPortCreate func(int, objc.ID, unsafe.Pointer, unsafe.Pointer, un
 
 // MIDIInputPortCreate calls the CoreMIDI framework function MIDIInputPortCreate.
 func MIDIInputPortCreate(client int, portName corefoundation.CFStringRef, readProc unsafe.Pointer, refCon unsafe.Pointer) (result int, outPort int) {
+	defer runtime.KeepAlive(portName)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDIInputPortCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDIInputPortCreate, _lib, "MIDIInputPortCreate")
@@ -912,6 +927,7 @@ var _fnMIDIInputPortCreateWithBlock func(int, objc.ID, unsafe.Pointer, unsafe.Po
 
 // MIDIInputPortCreateWithBlock calls the CoreMIDI framework function MIDIInputPortCreateWithBlock.
 func MIDIInputPortCreateWithBlock(client int, portName corefoundation.CFStringRef, readBlock unsafe.Pointer) (result int, outPort int) {
+	defer runtime.KeepAlive(portName)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDIInputPortCreateWithBlock == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDIInputPortCreateWithBlock, _lib, "MIDIInputPortCreateWithBlock")
@@ -925,6 +941,7 @@ var _fnMIDIInputPortCreateWithProtocol func(int, objc.ID, ProtocolID, unsafe.Poi
 
 // MIDIInputPortCreateWithProtocol calls the CoreMIDI framework function MIDIInputPortCreateWithProtocol.
 func MIDIInputPortCreateWithProtocol(client int, portName corefoundation.CFStringRef, protocol ProtocolID, receiveBlock unsafe.Pointer) (result int, outPort int) {
+	defer runtime.KeepAlive(portName)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDIInputPortCreateWithProtocol == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDIInputPortCreateWithProtocol, _lib, "MIDIInputPortCreateWithProtocol")
@@ -996,6 +1013,7 @@ var _fnMIDIObjectGetIntegerProperty func(int, objc.ID, unsafe.Pointer) int32
 
 // MIDIObjectGetIntegerProperty calls the CoreMIDI framework function MIDIObjectGetIntegerProperty.
 func MIDIObjectGetIntegerProperty(object int, propertyID corefoundation.CFStringRef) (result int, outValue int) {
+	defer runtime.KeepAlive(propertyID)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDIObjectGetIntegerProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDIObjectGetIntegerProperty, _lib, "MIDIObjectGetIntegerProperty")
@@ -1009,6 +1027,7 @@ var _fnMIDIOutputPortCreate func(int, objc.ID, unsafe.Pointer) int32
 
 // MIDIOutputPortCreate calls the CoreMIDI framework function MIDIOutputPortCreate.
 func MIDIOutputPortCreate(client int, portName corefoundation.CFStringRef) (result int, outPort int) {
+	defer runtime.KeepAlive(portName)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDIOutputPortCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDIOutputPortCreate, _lib, "MIDIOutputPortCreate")
@@ -1145,6 +1164,7 @@ var _fnMIDISetupFromData func(objc.ID, unsafe.Pointer) int32
 
 // MIDISetupFromData calls the CoreMIDI framework function MIDISetupFromData.
 func MIDISetupFromData(data corefoundation.CFDataRef) (result int, outSetup int) {
+	defer runtime.KeepAlive(data)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDISetupFromData == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDISetupFromData, _lib, "MIDISetupFromData")
@@ -1171,6 +1191,7 @@ var _fnMIDISourceCreate func(int, objc.ID, unsafe.Pointer) int32
 
 // MIDISourceCreate calls the CoreMIDI framework function MIDISourceCreate.
 func MIDISourceCreate(client int, name corefoundation.CFStringRef) (result int, outSrc int) {
+	defer runtime.KeepAlive(name)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDISourceCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDISourceCreate, _lib, "MIDISourceCreate")
@@ -1184,6 +1205,7 @@ var _fnMIDISourceCreateWithProtocol func(int, objc.ID, ProtocolID, unsafe.Pointe
 
 // MIDISourceCreateWithProtocol calls the CoreMIDI framework function MIDISourceCreateWithProtocol.
 func MIDISourceCreateWithProtocol(client int, name corefoundation.CFStringRef, protocol ProtocolID) (result int, outSrc int) {
+	defer runtime.KeepAlive(name)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDISourceCreateWithProtocol == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDISourceCreateWithProtocol, _lib, "MIDISourceCreateWithProtocol")
@@ -1197,6 +1219,8 @@ var _fnMIDIThruConnectionCreate func(objc.ID, objc.ID, unsafe.Pointer) int32
 
 // MIDIThruConnectionCreate calls the CoreMIDI framework function MIDIThruConnectionCreate.
 func MIDIThruConnectionCreate(inPersistentOwnerID corefoundation.CFStringRef, inConnectionParams corefoundation.CFDataRef) (result int, outConnection int) {
+	defer runtime.KeepAlive(inPersistentOwnerID)
+	defer runtime.KeepAlive(inConnectionParams)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDIThruConnectionCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDIThruConnectionCreate, _lib, "MIDIThruConnectionCreate")

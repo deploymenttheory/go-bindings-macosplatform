@@ -5,6 +5,7 @@
 package securityhi
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/hitoolbox"
@@ -64,6 +65,8 @@ var _fnSecChooseIdentity func(objc.ID, objc.ID, unsafe.Pointer) int32
 
 // SecChooseIdentity reports an error if the SecurityHI framework function SecChooseIdentity fails.
 func SecChooseIdentity(displayInfo obj.Object, identities obj.Object, identityRef unsafe.Pointer) error {
+	defer runtime.KeepAlive(displayInfo)
+	defer runtime.KeepAlive(identities)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecChooseIdentity == nil {
 		ebipurego.RegisterLibFunc(&_fnSecChooseIdentity, _lib, "SecChooseIdentity")
@@ -79,6 +82,9 @@ var _fnSecChooseIdentityAsSheet func(unsafe.Pointer, objc.ID, objc.ID, objc.ID) 
 
 // SecChooseIdentityAsSheet reports an error if the SecurityHI framework function SecChooseIdentityAsSheet fails.
 func SecChooseIdentityAsSheet(parentWindow unsafe.Pointer, inTarget obj.Object, displayInfo obj.Object, identities obj.Object) error {
+	defer runtime.KeepAlive(inTarget)
+	defer runtime.KeepAlive(displayInfo)
+	defer runtime.KeepAlive(identities)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecChooseIdentityAsSheet == nil {
 		ebipurego.RegisterLibFunc(&_fnSecChooseIdentityAsSheet, _lib, "SecChooseIdentityAsSheet")
@@ -94,6 +100,8 @@ var _fnSecDisplayCertificate func(objc.ID, objc.ID) int32
 
 // SecDisplayCertificate reports an error if the SecurityHI framework function SecDisplayCertificate fails.
 func SecDisplayCertificate(certificate obj.Object, keychainList obj.Object) error {
+	defer runtime.KeepAlive(certificate)
+	defer runtime.KeepAlive(keychainList)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecDisplayCertificate == nil {
 		ebipurego.RegisterLibFunc(&_fnSecDisplayCertificate, _lib, "SecDisplayCertificate")
@@ -109,6 +117,8 @@ var _fnSecEditTrust func(objc.ID, objc.ID) int32
 
 // SecEditTrust reports an error if the SecurityHI framework function SecEditTrust fails.
 func SecEditTrust(displayInfo obj.Object, trust obj.Object) error {
+	defer runtime.KeepAlive(displayInfo)
+	defer runtime.KeepAlive(trust)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecEditTrust == nil {
 		ebipurego.RegisterLibFunc(&_fnSecEditTrust, _lib, "SecEditTrust")
@@ -124,6 +134,9 @@ var _fnSecEditTrustAsSheet func(unsafe.Pointer, objc.ID, objc.ID, objc.ID) int32
 
 // SecEditTrustAsSheet reports an error if the SecurityHI framework function SecEditTrustAsSheet fails.
 func SecEditTrustAsSheet(parentWindow unsafe.Pointer, inTarget obj.Object, displayInfo obj.Object, trust obj.Object) error {
+	defer runtime.KeepAlive(inTarget)
+	defer runtime.KeepAlive(displayInfo)
+	defer runtime.KeepAlive(trust)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecEditTrustAsSheet == nil {
 		ebipurego.RegisterLibFunc(&_fnSecEditTrustAsSheet, _lib, "SecEditTrustAsSheet")

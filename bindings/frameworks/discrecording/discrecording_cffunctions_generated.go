@@ -5,6 +5,8 @@
 package discrecording
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -16,6 +18,8 @@ var _fnDRBurnWriteLayout func(objc.ID, objc.ID) int32
 
 // DRBurnWriteLayout reports an error if the DiscRecording framework function DRBurnWriteLayout fails.
 func DRBurnWriteLayout(burn DRBurnRef, layout obj.Object) error {
+	defer runtime.KeepAlive(burn)
+	defer runtime.KeepAlive(layout)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRBurnWriteLayout == nil {
 		ebipurego.RegisterLibFunc(&_fnDRBurnWriteLayout, _lib, "DRBurnWriteLayout")
@@ -31,6 +35,7 @@ var _fnDRDeviceAcquireExclusiveAccess func(objc.ID) int32
 
 // DRDeviceAcquireExclusiveAccess reports an error if the DiscRecording framework function DRDeviceAcquireExclusiveAccess fails.
 func DRDeviceAcquireExclusiveAccess(device DRDeviceRef) error {
+	defer runtime.KeepAlive(device)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRDeviceAcquireExclusiveAccess == nil {
 		ebipurego.RegisterLibFunc(&_fnDRDeviceAcquireExclusiveAccess, _lib, "DRDeviceAcquireExclusiveAccess")
@@ -46,6 +51,7 @@ var _fnDRDeviceCloseTray func(objc.ID) int32
 
 // DRDeviceCloseTray reports an error if the DiscRecording framework function DRDeviceCloseTray fails.
 func DRDeviceCloseTray(device DRDeviceRef) error {
+	defer runtime.KeepAlive(device)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRDeviceCloseTray == nil {
 		ebipurego.RegisterLibFunc(&_fnDRDeviceCloseTray, _lib, "DRDeviceCloseTray")
@@ -61,6 +67,7 @@ var _fnDRDeviceEjectMedia func(objc.ID) int32
 
 // DRDeviceEjectMedia reports an error if the DiscRecording framework function DRDeviceEjectMedia fails.
 func DRDeviceEjectMedia(device DRDeviceRef) error {
+	defer runtime.KeepAlive(device)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRDeviceEjectMedia == nil {
 		ebipurego.RegisterLibFunc(&_fnDRDeviceEjectMedia, _lib, "DRDeviceEjectMedia")
@@ -76,6 +83,7 @@ var _fnDRDeviceOpenTray func(objc.ID) int32
 
 // DRDeviceOpenTray reports an error if the DiscRecording framework function DRDeviceOpenTray fails.
 func DRDeviceOpenTray(device DRDeviceRef) error {
+	defer runtime.KeepAlive(device)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRDeviceOpenTray == nil {
 		ebipurego.RegisterLibFunc(&_fnDRDeviceOpenTray, _lib, "DRDeviceOpenTray")
@@ -91,6 +99,7 @@ var _fnDREraseStart func(objc.ID) int32
 
 // DREraseStart reports an error if the DiscRecording framework function DREraseStart fails.
 func DREraseStart(erase DREraseRef) error {
+	defer runtime.KeepAlive(erase)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDREraseStart == nil {
 		ebipurego.RegisterLibFunc(&_fnDREraseStart, _lib, "DREraseStart")

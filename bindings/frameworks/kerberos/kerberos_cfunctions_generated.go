@@ -5,6 +5,7 @@
 package kerberos
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -17,6 +18,8 @@ var _fnKLAcquireInitialTickets func(objc.ID, objc.ID, unsafe.Pointer, string) in
 
 // KLAcquireInitialTickets calls the Kerberos framework function KLAcquireInitialTickets.
 func KLAcquireInitialTickets(inPrincipal KLPrincipal, inLoginOptions KLLoginOptions, outPrincipal unsafe.Pointer, outCredCacheName string) int32 {
+	defer runtime.KeepAlive(inPrincipal)
+	defer runtime.KeepAlive(inLoginOptions)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKLAcquireInitialTickets == nil {
 		ebipurego.RegisterLibFunc(&_fnKLAcquireInitialTickets, _lib, "KLAcquireInitialTickets")
@@ -28,6 +31,8 @@ var _fnKLAcquireInitialTicketsWithPassword func(objc.ID, objc.ID, string, string
 
 // KLAcquireInitialTicketsWithPassword calls the Kerberos framework function KLAcquireInitialTicketsWithPassword.
 func KLAcquireInitialTicketsWithPassword(inPrincipal KLPrincipal, inLoginOptions KLLoginOptions, inPassword string, outCredCacheName string) int32 {
+	defer runtime.KeepAlive(inPrincipal)
+	defer runtime.KeepAlive(inLoginOptions)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKLAcquireInitialTicketsWithPassword == nil {
 		ebipurego.RegisterLibFunc(&_fnKLAcquireInitialTicketsWithPassword, _lib, "KLAcquireInitialTicketsWithPassword")
@@ -39,6 +44,9 @@ var _fnKLAcquireNewInitialTicketCredentialsWithPassword func(objc.ID, objc.ID, s
 
 // KLAcquireNewInitialTicketCredentialsWithPassword calls the Kerberos framework function KLAcquireNewInitialTicketCredentialsWithPassword.
 func KLAcquireNewInitialTicketCredentialsWithPassword(inPrincipal KLPrincipal, inLoginOptions KLLoginOptions, inPassword string, inV5Context Krb5Context, outV4Credentials unsafe.Pointer, outV5Credentials unsafe.Pointer) (result int32, outGotV4Credentials int8, outGotV5Credentials int8) {
+	defer runtime.KeepAlive(inPrincipal)
+	defer runtime.KeepAlive(inLoginOptions)
+	defer runtime.KeepAlive(inV5Context)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKLAcquireNewInitialTicketCredentialsWithPassword == nil {
 		ebipurego.RegisterLibFunc(&_fnKLAcquireNewInitialTicketCredentialsWithPassword, _lib, "KLAcquireNewInitialTicketCredentialsWithPassword")
@@ -53,6 +61,8 @@ var _fnKLAcquireNewInitialTickets func(objc.ID, objc.ID, unsafe.Pointer, string)
 
 // KLAcquireNewInitialTickets calls the Kerberos framework function KLAcquireNewInitialTickets.
 func KLAcquireNewInitialTickets(inPrincipal KLPrincipal, inLoginOptions KLLoginOptions, outPrincipal unsafe.Pointer, outCredCacheName string) int32 {
+	defer runtime.KeepAlive(inPrincipal)
+	defer runtime.KeepAlive(inLoginOptions)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKLAcquireNewInitialTickets == nil {
 		ebipurego.RegisterLibFunc(&_fnKLAcquireNewInitialTickets, _lib, "KLAcquireNewInitialTickets")
@@ -64,6 +74,8 @@ var _fnKLAcquireNewInitialTicketsWithKeytab func(objc.ID, objc.ID, string, strin
 
 // KLAcquireNewInitialTicketsWithKeytab calls the Kerberos framework function KLAcquireNewInitialTicketsWithKeytab.
 func KLAcquireNewInitialTicketsWithKeytab(inPrincipal KLPrincipal, inLoginOptions KLLoginOptions, inKeytabName string, outCredCacheName string) int32 {
+	defer runtime.KeepAlive(inPrincipal)
+	defer runtime.KeepAlive(inLoginOptions)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKLAcquireNewInitialTicketsWithKeytab == nil {
 		ebipurego.RegisterLibFunc(&_fnKLAcquireNewInitialTicketsWithKeytab, _lib, "KLAcquireNewInitialTicketsWithKeytab")
@@ -75,6 +87,8 @@ var _fnKLAcquireNewInitialTicketsWithPassword func(objc.ID, objc.ID, string, str
 
 // KLAcquireNewInitialTicketsWithPassword calls the Kerberos framework function KLAcquireNewInitialTicketsWithPassword.
 func KLAcquireNewInitialTicketsWithPassword(inPrincipal KLPrincipal, inLoginOptions KLLoginOptions, inPassword string, outCredCacheName string) int32 {
+	defer runtime.KeepAlive(inPrincipal)
+	defer runtime.KeepAlive(inLoginOptions)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKLAcquireNewInitialTicketsWithPassword == nil {
 		ebipurego.RegisterLibFunc(&_fnKLAcquireNewInitialTicketsWithPassword, _lib, "KLAcquireNewInitialTicketsWithPassword")
@@ -86,6 +100,7 @@ var _fnKLAcquireNewTickets func(objc.ID, unsafe.Pointer, string) int32
 
 // KLAcquireNewTickets calls the Kerberos framework function KLAcquireNewTickets.
 func KLAcquireNewTickets(inPrincipal KLPrincipal, outPrincipal unsafe.Pointer, outCredCacheName string) int32 {
+	defer runtime.KeepAlive(inPrincipal)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKLAcquireNewTickets == nil {
 		ebipurego.RegisterLibFunc(&_fnKLAcquireNewTickets, _lib, "KLAcquireNewTickets")
@@ -97,6 +112,8 @@ var _fnKLAcquireNewTicketsWithPassword func(objc.ID, objc.ID, string, string) in
 
 // KLAcquireNewTicketsWithPassword calls the Kerberos framework function KLAcquireNewTicketsWithPassword.
 func KLAcquireNewTicketsWithPassword(inPrincipal KLPrincipal, inLoginOptions KLLoginOptions, inPassword string, outCredCacheName string) int32 {
+	defer runtime.KeepAlive(inPrincipal)
+	defer runtime.KeepAlive(inLoginOptions)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKLAcquireNewTicketsWithPassword == nil {
 		ebipurego.RegisterLibFunc(&_fnKLAcquireNewTicketsWithPassword, _lib, "KLAcquireNewTicketsWithPassword")
@@ -108,6 +125,7 @@ var _fnKLAcquireTickets func(objc.ID, unsafe.Pointer, string) int32
 
 // KLAcquireTickets calls the Kerberos framework function KLAcquireTickets.
 func KLAcquireTickets(inPrincipal KLPrincipal, outPrincipal unsafe.Pointer, outCredCacheName string) int32 {
+	defer runtime.KeepAlive(inPrincipal)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKLAcquireTickets == nil {
 		ebipurego.RegisterLibFunc(&_fnKLAcquireTickets, _lib, "KLAcquireTickets")
@@ -119,6 +137,8 @@ var _fnKLAcquireTicketsWithPassword func(objc.ID, objc.ID, string, string) int32
 
 // KLAcquireTicketsWithPassword calls the Kerberos framework function KLAcquireTicketsWithPassword.
 func KLAcquireTicketsWithPassword(inPrincipal KLPrincipal, inLoginOptions KLLoginOptions, inPassword string, outCredCacheName string) int32 {
+	defer runtime.KeepAlive(inPrincipal)
+	defer runtime.KeepAlive(inLoginOptions)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKLAcquireTicketsWithPassword == nil {
 		ebipurego.RegisterLibFunc(&_fnKLAcquireTicketsWithPassword, _lib, "KLAcquireTicketsWithPassword")
@@ -130,6 +150,7 @@ var _fnKLCacheHasValidTickets func(objc.ID, int, unsafe.Pointer, unsafe.Pointer,
 
 // KLCacheHasValidTickets calls the Kerberos framework function KLCacheHasValidTickets.
 func KLCacheHasValidTickets(inPrincipal KLPrincipal, inKerberosVersion int, outPrincipal unsafe.Pointer, outCredCacheName string) (result int32, outFoundValidTickets int8) {
+	defer runtime.KeepAlive(inPrincipal)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKLCacheHasValidTickets == nil {
 		ebipurego.RegisterLibFunc(&_fnKLCacheHasValidTickets, _lib, "KLCacheHasValidTickets")
@@ -154,6 +175,7 @@ var _fnKLChangePassword func(objc.ID) int32
 
 // KLChangePassword calls the Kerberos framework function KLChangePassword.
 func KLChangePassword(inPrincipal KLPrincipal) int32 {
+	defer runtime.KeepAlive(inPrincipal)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKLChangePassword == nil {
 		ebipurego.RegisterLibFunc(&_fnKLChangePassword, _lib, "KLChangePassword")
@@ -165,6 +187,7 @@ var _fnKLChangePasswordWithPasswords func(objc.ID, string, string, unsafe.Pointe
 
 // KLChangePasswordWithPasswords calls the Kerberos framework function KLChangePasswordWithPasswords.
 func KLChangePasswordWithPasswords(inPrincipal KLPrincipal, inOldPassword string, inNewPassword string, outRejectionError string, outRejectionDescription string) (result int32, outRejected int8) {
+	defer runtime.KeepAlive(inPrincipal)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKLChangePasswordWithPasswords == nil {
 		ebipurego.RegisterLibFunc(&_fnKLChangePasswordWithPasswords, _lib, "KLChangePasswordWithPasswords")
@@ -178,6 +201,8 @@ var _fnKLComparePrincipal func(objc.ID, objc.ID, unsafe.Pointer) int32
 
 // KLComparePrincipal calls the Kerberos framework function KLComparePrincipal.
 func KLComparePrincipal(inFirstPrincipal KLPrincipal, inSecondPrincipal KLPrincipal) (result int32, outAreEquivalent int8) {
+	defer runtime.KeepAlive(inFirstPrincipal)
+	defer runtime.KeepAlive(inSecondPrincipal)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKLComparePrincipal == nil {
 		ebipurego.RegisterLibFunc(&_fnKLComparePrincipal, _lib, "KLComparePrincipal")
@@ -224,6 +249,7 @@ var _fnKLCreatePrincipalFromPrincipal func(objc.ID, unsafe.Pointer) int32
 
 // KLCreatePrincipalFromPrincipal calls the Kerberos framework function KLCreatePrincipalFromPrincipal.
 func KLCreatePrincipalFromPrincipal(inPrincipal KLPrincipal, outPrincipal unsafe.Pointer) int32 {
+	defer runtime.KeepAlive(inPrincipal)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKLCreatePrincipalFromPrincipal == nil {
 		ebipurego.RegisterLibFunc(&_fnKLCreatePrincipalFromPrincipal, _lib, "KLCreatePrincipalFromPrincipal")
@@ -257,6 +283,7 @@ var _fnKLDestroyTickets func(objc.ID) int32
 
 // KLDestroyTickets calls the Kerberos framework function KLDestroyTickets.
 func KLDestroyTickets(inPrincipal KLPrincipal) int32 {
+	defer runtime.KeepAlive(inPrincipal)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKLDestroyTickets == nil {
 		ebipurego.RegisterLibFunc(&_fnKLDestroyTickets, _lib, "KLDestroyTickets")
@@ -268,6 +295,7 @@ var _fnKLDisposeLoginOptions func(objc.ID) int32
 
 // KLDisposeLoginOptions calls the Kerberos framework function KLDisposeLoginOptions.
 func KLDisposeLoginOptions(ioOptions KLLoginOptions) int32 {
+	defer runtime.KeepAlive(ioOptions)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKLDisposeLoginOptions == nil {
 		ebipurego.RegisterLibFunc(&_fnKLDisposeLoginOptions, _lib, "KLDisposeLoginOptions")
@@ -279,6 +307,7 @@ var _fnKLDisposePrincipal func(objc.ID) int32
 
 // KLDisposePrincipal calls the Kerberos framework function KLDisposePrincipal.
 func KLDisposePrincipal(inPrincipal KLPrincipal) int32 {
+	defer runtime.KeepAlive(inPrincipal)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKLDisposePrincipal == nil {
 		ebipurego.RegisterLibFunc(&_fnKLDisposePrincipal, _lib, "KLDisposePrincipal")
@@ -338,6 +367,7 @@ var _fnKLGetDisplayStringFromPrincipal func(objc.ID, int, string) int32
 
 // KLGetDisplayStringFromPrincipal calls the Kerberos framework function KLGetDisplayStringFromPrincipal.
 func KLGetDisplayStringFromPrincipal(inPrincipal KLPrincipal, inKerberosVersion int, outFullPrincipal string) int32 {
+	defer runtime.KeepAlive(inPrincipal)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKLGetDisplayStringFromPrincipal == nil {
 		ebipurego.RegisterLibFunc(&_fnKLGetDisplayStringFromPrincipal, _lib, "KLGetDisplayStringFromPrincipal")
@@ -408,6 +438,7 @@ var _fnKLGetStringFromPrincipal func(objc.ID, int, string) int32
 
 // KLGetStringFromPrincipal calls the Kerberos framework function KLGetStringFromPrincipal.
 func KLGetStringFromPrincipal(inPrincipal KLPrincipal, inKerberosVersion int, outFullPrincipal string) int32 {
+	defer runtime.KeepAlive(inPrincipal)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKLGetStringFromPrincipal == nil {
 		ebipurego.RegisterLibFunc(&_fnKLGetStringFromPrincipal, _lib, "KLGetStringFromPrincipal")
@@ -419,6 +450,7 @@ var _fnKLGetTripletFromPrincipal func(objc.ID, string, string, string) int32
 
 // KLGetTripletFromPrincipal calls the Kerberos framework function KLGetTripletFromPrincipal.
 func KLGetTripletFromPrincipal(inPrincipal KLPrincipal, outName string, outInstance string, outRealm string) int32 {
+	defer runtime.KeepAlive(inPrincipal)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKLGetTripletFromPrincipal == nil {
 		ebipurego.RegisterLibFunc(&_fnKLGetTripletFromPrincipal, _lib, "KLGetTripletFromPrincipal")
@@ -465,6 +497,7 @@ var _fnKLLoginOptionsSetAddressless func(objc.ID, int8) int32
 
 // KLLoginOptionsSetAddressless calls the Kerberos framework function KLLoginOptionsSetAddressless.
 func KLLoginOptionsSetAddressless(ioOptions KLLoginOptions, inAddressless int8) int32 {
+	defer runtime.KeepAlive(ioOptions)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKLLoginOptionsSetAddressless == nil {
 		ebipurego.RegisterLibFunc(&_fnKLLoginOptionsSetAddressless, _lib, "KLLoginOptionsSetAddressless")
@@ -476,6 +509,7 @@ var _fnKLLoginOptionsSetForwardable func(objc.ID, int8) int32
 
 // KLLoginOptionsSetForwardable calls the Kerberos framework function KLLoginOptionsSetForwardable.
 func KLLoginOptionsSetForwardable(ioOptions KLLoginOptions, inForwardable int8) int32 {
+	defer runtime.KeepAlive(ioOptions)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKLLoginOptionsSetForwardable == nil {
 		ebipurego.RegisterLibFunc(&_fnKLLoginOptionsSetForwardable, _lib, "KLLoginOptionsSetForwardable")
@@ -487,6 +521,7 @@ var _fnKLLoginOptionsSetProxiable func(objc.ID, int8) int32
 
 // KLLoginOptionsSetProxiable calls the Kerberos framework function KLLoginOptionsSetProxiable.
 func KLLoginOptionsSetProxiable(ioOptions KLLoginOptions, inProxiable int8) int32 {
+	defer runtime.KeepAlive(ioOptions)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKLLoginOptionsSetProxiable == nil {
 		ebipurego.RegisterLibFunc(&_fnKLLoginOptionsSetProxiable, _lib, "KLLoginOptionsSetProxiable")
@@ -498,6 +533,7 @@ var _fnKLLoginOptionsSetRenewableLifetime func(objc.ID, int) int32
 
 // KLLoginOptionsSetRenewableLifetime calls the Kerberos framework function KLLoginOptionsSetRenewableLifetime.
 func KLLoginOptionsSetRenewableLifetime(ioOptions KLLoginOptions, inRenewableLifetime int) int32 {
+	defer runtime.KeepAlive(ioOptions)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKLLoginOptionsSetRenewableLifetime == nil {
 		ebipurego.RegisterLibFunc(&_fnKLLoginOptionsSetRenewableLifetime, _lib, "KLLoginOptionsSetRenewableLifetime")
@@ -509,6 +545,7 @@ var _fnKLLoginOptionsSetServiceName func(objc.ID, string) int32
 
 // KLLoginOptionsSetServiceName calls the Kerberos framework function KLLoginOptionsSetServiceName.
 func KLLoginOptionsSetServiceName(ioOptions KLLoginOptions, inServiceName string) int32 {
+	defer runtime.KeepAlive(ioOptions)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKLLoginOptionsSetServiceName == nil {
 		ebipurego.RegisterLibFunc(&_fnKLLoginOptionsSetServiceName, _lib, "KLLoginOptionsSetServiceName")
@@ -520,6 +557,7 @@ var _fnKLLoginOptionsSetTicketLifetime func(objc.ID, int) int32
 
 // KLLoginOptionsSetTicketLifetime calls the Kerberos framework function KLLoginOptionsSetTicketLifetime.
 func KLLoginOptionsSetTicketLifetime(ioOptions KLLoginOptions, inTicketLifetime int) int32 {
+	defer runtime.KeepAlive(ioOptions)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKLLoginOptionsSetTicketLifetime == nil {
 		ebipurego.RegisterLibFunc(&_fnKLLoginOptionsSetTicketLifetime, _lib, "KLLoginOptionsSetTicketLifetime")
@@ -531,6 +569,7 @@ var _fnKLLoginOptionsSetTicketStartTime func(objc.ID, int) int32
 
 // KLLoginOptionsSetTicketStartTime calls the Kerberos framework function KLLoginOptionsSetTicketStartTime.
 func KLLoginOptionsSetTicketStartTime(ioOptions KLLoginOptions, inStartTime int) int32 {
+	defer runtime.KeepAlive(ioOptions)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKLLoginOptionsSetTicketStartTime == nil {
 		ebipurego.RegisterLibFunc(&_fnKLLoginOptionsSetTicketStartTime, _lib, "KLLoginOptionsSetTicketStartTime")
@@ -564,6 +603,8 @@ var _fnKLRenewInitialTickets func(objc.ID, objc.ID, unsafe.Pointer, string) int3
 
 // KLRenewInitialTickets calls the Kerberos framework function KLRenewInitialTickets.
 func KLRenewInitialTickets(inPrincipal KLPrincipal, inLoginOptions KLLoginOptions, outPrincipal unsafe.Pointer, outCredCacheName string) int32 {
+	defer runtime.KeepAlive(inPrincipal)
+	defer runtime.KeepAlive(inLoginOptions)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKLRenewInitialTickets == nil {
 		ebipurego.RegisterLibFunc(&_fnKLRenewInitialTickets, _lib, "KLRenewInitialTickets")
@@ -641,6 +682,7 @@ var _fnKLSetSystemDefaultCache func(objc.ID) int32
 
 // KLSetSystemDefaultCache calls the Kerberos framework function KLSetSystemDefaultCache.
 func KLSetSystemDefaultCache(inPrincipal KLPrincipal) int32 {
+	defer runtime.KeepAlive(inPrincipal)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKLSetSystemDefaultCache == nil {
 		ebipurego.RegisterLibFunc(&_fnKLSetSystemDefaultCache, _lib, "KLSetSystemDefaultCache")
@@ -652,6 +694,8 @@ var _fnKLStoreNewInitialTicketCredentials func(objc.ID, objc.ID, unsafe.Pointer,
 
 // KLStoreNewInitialTicketCredentials calls the Kerberos framework function KLStoreNewInitialTicketCredentials.
 func KLStoreNewInitialTicketCredentials(inPrincipal KLPrincipal, inV5Context Krb5Context, inV4Credentials unsafe.Pointer, inV5Credentials unsafe.Pointer, outCredCacheName string) int32 {
+	defer runtime.KeepAlive(inPrincipal)
+	defer runtime.KeepAlive(inV5Context)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKLStoreNewInitialTicketCredentials == nil {
 		ebipurego.RegisterLibFunc(&_fnKLStoreNewInitialTicketCredentials, _lib, "KLStoreNewInitialTicketCredentials")
@@ -663,6 +707,7 @@ var _fnKLTicketExpirationTime func(objc.ID, int, unsafe.Pointer) int32
 
 // KLTicketExpirationTime calls the Kerberos framework function KLTicketExpirationTime.
 func KLTicketExpirationTime(inPrincipal KLPrincipal, inKerberosVersion int) (result int32, outExpirationTime int) {
+	defer runtime.KeepAlive(inPrincipal)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKLTicketExpirationTime == nil {
 		ebipurego.RegisterLibFunc(&_fnKLTicketExpirationTime, _lib, "KLTicketExpirationTime")
@@ -676,6 +721,7 @@ var _fnKLTicketStartTime func(objc.ID, int, unsafe.Pointer) int32
 
 // KLTicketStartTime calls the Kerberos framework function KLTicketStartTime.
 func KLTicketStartTime(inPrincipal KLPrincipal, inKerberosVersion int) (result int32, outStartTime int) {
+	defer runtime.KeepAlive(inPrincipal)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKLTicketStartTime == nil {
 		ebipurego.RegisterLibFunc(&_fnKLTicketStartTime, _lib, "KLTicketStartTime")
@@ -689,6 +735,8 @@ var _fnKLValidateInitialTickets func(objc.ID, objc.ID, string) int32
 
 // KLValidateInitialTickets calls the Kerberos framework function KLValidateInitialTickets.
 func KLValidateInitialTickets(inPrincipal KLPrincipal, inLoginOptions KLLoginOptions, outCredCacheName string) int32 {
+	defer runtime.KeepAlive(inPrincipal)
+	defer runtime.KeepAlive(inLoginOptions)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKLValidateInitialTickets == nil {
 		ebipurego.RegisterLibFunc(&_fnKLValidateInitialTickets, _lib, "KLValidateInitialTickets")
@@ -711,6 +759,7 @@ var _fnKLVerifyInitialTickets func(objc.ID, int8, string) int32
 
 // KLVerifyInitialTickets calls the Kerberos framework function KLVerifyInitialTickets.
 func KLVerifyInitialTickets(inPrincipal KLPrincipal, inFailIfNoHostKey int8, outCredCacheName string) int32 {
+	defer runtime.KeepAlive(inPrincipal)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKLVerifyInitialTickets == nil {
 		ebipurego.RegisterLibFunc(&_fnKLVerifyInitialTickets, _lib, "KLVerifyInitialTickets")
@@ -794,6 +843,7 @@ var _fnGssAcceptSecContext func(unsafe.Pointer, unsafe.Pointer, objc.ID, unsafe.
 
 // GssAcceptSecContext calls the Kerberos framework function gss_accept_sec_context.
 func GssAcceptSecContext(arg2 unsafe.Pointer, arg3 obj.Object, arg4 unsafe.Pointer, arg5 unsafe.Pointer, arg6 unsafe.Pointer, arg7 unsafe.Pointer, arg8 unsafe.Pointer, arg11 unsafe.Pointer) (result uint32, arg uint32, arg9 uint32, arg10 uint32) {
+	defer runtime.KeepAlive(arg3)
 	_loadOnce.Do(_loadLibrary)
 	if _fnGssAcceptSecContext == nil {
 		ebipurego.RegisterLibFunc(&_fnGssAcceptSecContext, _lib, "gss_accept_sec_context")
@@ -809,6 +859,7 @@ var _fnGssAcquireCred func(unsafe.Pointer, objc.ID, uint32, unsafe.Pointer, int,
 
 // GssAcquireCred calls the Kerberos framework function gss_acquire_cred.
 func GssAcquireCred(arg2 obj.Object, arg3 uint32, arg4 unsafe.Pointer, arg5 int, arg6 unsafe.Pointer, arg7 unsafe.Pointer) (result uint32, arg uint32, arg8 uint32) {
+	defer runtime.KeepAlive(arg2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnGssAcquireCred == nil {
 		ebipurego.RegisterLibFunc(&_fnGssAcquireCred, _lib, "gss_acquire_cred")
@@ -823,6 +874,8 @@ var _fnGssAddCred func(unsafe.Pointer, objc.ID, objc.ID, unsafe.Pointer, int, ui
 
 // GssAddCred calls the Kerberos framework function gss_add_cred.
 func GssAddCred(arg2 obj.Object, arg3 obj.Object, arg4 unsafe.Pointer, arg5 int, arg6 uint32, arg7 uint32, arg8 unsafe.Pointer, arg9 unsafe.Pointer) (result uint32, arg uint32, arg10 uint32, arg11 uint32) {
+	defer runtime.KeepAlive(arg2)
+	defer runtime.KeepAlive(arg3)
 	_loadOnce.Do(_loadLibrary)
 	if _fnGssAddCred == nil {
 		ebipurego.RegisterLibFunc(&_fnGssAddCred, _lib, "gss_add_cred")
@@ -851,6 +904,7 @@ var _fnGssCanonicalizeName func(unsafe.Pointer, objc.ID, unsafe.Pointer, unsafe.
 
 // GssCanonicalizeName calls the Kerberos framework function gss_canonicalize_name.
 func GssCanonicalizeName(arg2 obj.Object, arg3 unsafe.Pointer, arg4 unsafe.Pointer) (result uint32, arg uint32) {
+	defer runtime.KeepAlive(arg2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnGssCanonicalizeName == nil {
 		ebipurego.RegisterLibFunc(&_fnGssCanonicalizeName, _lib, "gss_canonicalize_name")
@@ -864,6 +918,8 @@ var _fnGssCompareName func(unsafe.Pointer, objc.ID, objc.ID, unsafe.Pointer) uin
 
 // GssCompareName calls the Kerberos framework function gss_compare_name.
 func GssCompareName(arg2 obj.Object, arg3 obj.Object) (result uint32, arg uint32, arg4 int32) {
+	defer runtime.KeepAlive(arg2)
+	defer runtime.KeepAlive(arg3)
 	_loadOnce.Do(_loadLibrary)
 	if _fnGssCompareName == nil {
 		ebipurego.RegisterLibFunc(&_fnGssCompareName, _lib, "gss_compare_name")
@@ -878,6 +934,7 @@ var _fnGssContextTime func(unsafe.Pointer, objc.ID, unsafe.Pointer) uint32
 
 // GssContextTime calls the Kerberos framework function gss_context_time.
 func GssContextTime(arg2 obj.Object) (result uint32, arg uint32, arg3 uint32) {
+	defer runtime.KeepAlive(arg2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnGssContextTime == nil {
 		ebipurego.RegisterLibFunc(&_fnGssContextTime, _lib, "gss_context_time")
@@ -918,6 +975,7 @@ var _fnGssDisplayName func(unsafe.Pointer, objc.ID, unsafe.Pointer, unsafe.Point
 
 // GssDisplayName calls the Kerberos framework function gss_display_name.
 func GssDisplayName(arg2 obj.Object, arg3 unsafe.Pointer, arg4 unsafe.Pointer) (result uint32, arg uint32) {
+	defer runtime.KeepAlive(arg2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnGssDisplayName == nil {
 		ebipurego.RegisterLibFunc(&_fnGssDisplayName, _lib, "gss_display_name")
@@ -945,6 +1003,7 @@ var _fnGssDuplicateName func(unsafe.Pointer, objc.ID, unsafe.Pointer) uint32
 
 // GssDuplicateName calls the Kerberos framework function gss_duplicate_name.
 func GssDuplicateName(arg2 obj.Object, arg3 unsafe.Pointer) (result uint32, arg uint32) {
+	defer runtime.KeepAlive(arg2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnGssDuplicateName == nil {
 		ebipurego.RegisterLibFunc(&_fnGssDuplicateName, _lib, "gss_duplicate_name")
@@ -958,6 +1017,7 @@ var _fnGssExportName func(unsafe.Pointer, objc.ID, unsafe.Pointer) uint32
 
 // GssExportName calls the Kerberos framework function gss_export_name.
 func GssExportName(arg2 obj.Object, arg3 unsafe.Pointer) (result uint32, arg uint32) {
+	defer runtime.KeepAlive(arg2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnGssExportName == nil {
 		ebipurego.RegisterLibFunc(&_fnGssExportName, _lib, "gss_export_name")
@@ -984,6 +1044,7 @@ var _fnGssGetMic func(unsafe.Pointer, objc.ID, uint32, unsafe.Pointer, unsafe.Po
 
 // GssGetMic calls the Kerberos framework function gss_get_mic.
 func GssGetMic(arg2 obj.Object, arg3 uint32, arg4 unsafe.Pointer, arg5 unsafe.Pointer) (result uint32, arg uint32) {
+	defer runtime.KeepAlive(arg2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnGssGetMic == nil {
 		ebipurego.RegisterLibFunc(&_fnGssGetMic, _lib, "gss_get_mic")
@@ -1036,6 +1097,8 @@ var _fnGssInitSecContext func(unsafe.Pointer, objc.ID, unsafe.Pointer, objc.ID, 
 
 // GssInitSecContext calls the Kerberos framework function gss_init_sec_context.
 func GssInitSecContext(arg2 obj.Object, arg3 unsafe.Pointer, arg4 obj.Object, arg5 unsafe.Pointer, arg6 uint32, arg7 uint32, arg8 unsafe.Pointer, arg9 unsafe.Pointer, arg10 unsafe.Pointer, arg11 unsafe.Pointer) (result uint32, arg uint32, arg12 uint32, arg13 uint32) {
+	defer runtime.KeepAlive(arg2)
+	defer runtime.KeepAlive(arg4)
 	_loadOnce.Do(_loadLibrary)
 	if _fnGssInitSecContext == nil {
 		ebipurego.RegisterLibFunc(&_fnGssInitSecContext, _lib, "gss_init_sec_context")
@@ -1051,6 +1114,7 @@ var _fnGssInquireContext func(unsafe.Pointer, objc.ID, unsafe.Pointer, unsafe.Po
 
 // GssInquireContext calls the Kerberos framework function gss_inquire_context.
 func GssInquireContext(arg2 obj.Object, arg3 unsafe.Pointer, arg4 unsafe.Pointer, arg6 unsafe.Pointer) (result uint32, arg uint32, arg5 uint32, arg7 uint32, arg8 int32, arg9 int32) {
+	defer runtime.KeepAlive(arg2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnGssInquireContext == nil {
 		ebipurego.RegisterLibFunc(&_fnGssInquireContext, _lib, "gss_inquire_context")
@@ -1068,6 +1132,7 @@ var _fnGssInquireCred func(unsafe.Pointer, objc.ID, unsafe.Pointer, unsafe.Point
 
 // GssInquireCred calls the Kerberos framework function gss_inquire_cred.
 func GssInquireCred(arg2 obj.Object, arg3 unsafe.Pointer, arg6 unsafe.Pointer) (result uint32, arg uint32, arg4 uint32, arg5 int) {
+	defer runtime.KeepAlive(arg2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnGssInquireCred == nil {
 		ebipurego.RegisterLibFunc(&_fnGssInquireCred, _lib, "gss_inquire_cred")
@@ -1083,6 +1148,7 @@ var _fnGssInquireCredByMech func(unsafe.Pointer, objc.ID, unsafe.Pointer, unsafe
 
 // GssInquireCredByMech calls the Kerberos framework function gss_inquire_cred_by_mech.
 func GssInquireCredByMech(arg2 obj.Object, arg3 unsafe.Pointer, arg4 unsafe.Pointer) (result uint32, arg uint32, arg5 uint32, arg6 uint32, arg7 int) {
+	defer runtime.KeepAlive(arg2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnGssInquireCredByMech == nil {
 		ebipurego.RegisterLibFunc(&_fnGssInquireCredByMech, _lib, "gss_inquire_cred_by_mech")
@@ -1099,6 +1165,7 @@ var _fnGssInquireMechsForName func(unsafe.Pointer, objc.ID, unsafe.Pointer) uint
 
 // GssInquireMechsForName calls the Kerberos framework function gss_inquire_mechs_for_name.
 func GssInquireMechsForName(arg2 obj.Object, arg3 unsafe.Pointer) (result uint32, arg uint32) {
+	defer runtime.KeepAlive(arg2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnGssInquireMechsForName == nil {
 		ebipurego.RegisterLibFunc(&_fnGssInquireMechsForName, _lib, "gss_inquire_mechs_for_name")
@@ -1138,6 +1205,8 @@ var _fnGssKrb5CopyCcache func(unsafe.Pointer, objc.ID, objc.ID) uint32
 
 // GssKrb5CopyCcache calls the Kerberos framework function gss_krb5_copy_ccache.
 func GssKrb5CopyCcache(credHandle obj.Object, outCcache Krb5Ccache) (result uint32, minorStatus uint32) {
+	defer runtime.KeepAlive(credHandle)
+	defer runtime.KeepAlive(outCcache)
 	_loadOnce.Do(_loadLibrary)
 	if _fnGssKrb5CopyCcache == nil {
 		ebipurego.RegisterLibFunc(&_fnGssKrb5CopyCcache, _lib, "gss_krb5_copy_ccache")
@@ -1177,6 +1246,7 @@ var _fnGssKrb5GetTktFlags func(unsafe.Pointer, objc.ID, unsafe.Pointer) uint32
 
 // GssKrb5GetTktFlags calls the Kerberos framework function gss_krb5_get_tkt_flags.
 func GssKrb5GetTktFlags(contextHandle obj.Object) (result uint32, minorStatus uint32, ticketFlags int) {
+	defer runtime.KeepAlive(contextHandle)
 	_loadOnce.Do(_loadLibrary)
 	if _fnGssKrb5GetTktFlags == nil {
 		ebipurego.RegisterLibFunc(&_fnGssKrb5GetTktFlags, _lib, "gss_krb5_get_tkt_flags")
@@ -1191,6 +1261,7 @@ var _fnGssKrb5SetAllowableEnctypes func(unsafe.Pointer, objc.ID, uint32, unsafe.
 
 // GssKrb5SetAllowableEnctypes calls the Kerberos framework function gss_krb5_set_allowable_enctypes.
 func GssKrb5SetAllowableEnctypes(cred obj.Object, numKtypes uint32) (result uint32, minorStatus uint32, ktypes int) {
+	defer runtime.KeepAlive(cred)
 	_loadOnce.Do(_loadLibrary)
 	if _fnGssKrb5SetAllowableEnctypes == nil {
 		ebipurego.RegisterLibFunc(&_fnGssKrb5SetAllowableEnctypes, _lib, "gss_krb5_set_allowable_enctypes")
@@ -1231,6 +1302,7 @@ var _fnGssProcessContextToken func(unsafe.Pointer, objc.ID, unsafe.Pointer) uint
 
 // GssProcessContextToken calls the Kerberos framework function gss_process_context_token.
 func GssProcessContextToken(arg2 obj.Object, arg3 unsafe.Pointer) (result uint32, arg uint32) {
+	defer runtime.KeepAlive(arg2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnGssProcessContextToken == nil {
 		ebipurego.RegisterLibFunc(&_fnGssProcessContextToken, _lib, "gss_process_context_token")
@@ -1309,6 +1381,7 @@ var _fnGssSeal func(unsafe.Pointer, objc.ID, int, int, unsafe.Pointer, unsafe.Po
 
 // GssSeal calls the Kerberos framework function gss_seal.
 func GssSeal(arg2 obj.Object, arg3 int, arg4 int, arg5 unsafe.Pointer, arg7 unsafe.Pointer) (result uint32, arg uint32, arg6 int32) {
+	defer runtime.KeepAlive(arg2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnGssSeal == nil {
 		ebipurego.RegisterLibFunc(&_fnGssSeal, _lib, "gss_seal")
@@ -1323,6 +1396,7 @@ var _fnGssSign func(unsafe.Pointer, objc.ID, int, unsafe.Pointer, unsafe.Pointer
 
 // GssSign calls the Kerberos framework function gss_sign.
 func GssSign(arg2 obj.Object, arg3 int, arg4 unsafe.Pointer, arg5 unsafe.Pointer) (result uint32, arg uint32) {
+	defer runtime.KeepAlive(arg2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnGssSign == nil {
 		ebipurego.RegisterLibFunc(&_fnGssSign, _lib, "gss_sign")
@@ -1363,6 +1437,7 @@ var _fnGssUnseal func(unsafe.Pointer, objc.ID, unsafe.Pointer, unsafe.Pointer, u
 
 // GssUnseal calls the Kerberos framework function gss_unseal.
 func GssUnseal(arg2 obj.Object, arg3 unsafe.Pointer, arg4 unsafe.Pointer) (result uint32, arg uint32, arg5 int32, arg6 int32) {
+	defer runtime.KeepAlive(arg2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnGssUnseal == nil {
 		ebipurego.RegisterLibFunc(&_fnGssUnseal, _lib, "gss_unseal")
@@ -1378,6 +1453,7 @@ var _fnGssUnwrap func(unsafe.Pointer, objc.ID, unsafe.Pointer, unsafe.Pointer, u
 
 // GssUnwrap calls the Kerberos framework function gss_unwrap.
 func GssUnwrap(arg2 obj.Object, arg3 unsafe.Pointer, arg4 unsafe.Pointer) (result uint32, arg uint32, arg5 int32, arg6 uint32) {
+	defer runtime.KeepAlive(arg2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnGssUnwrap == nil {
 		ebipurego.RegisterLibFunc(&_fnGssUnwrap, _lib, "gss_unwrap")
@@ -1393,6 +1469,7 @@ var _fnGssVerify func(unsafe.Pointer, objc.ID, unsafe.Pointer, unsafe.Pointer, u
 
 // GssVerify calls the Kerberos framework function gss_verify.
 func GssVerify(arg2 obj.Object, arg3 unsafe.Pointer, arg4 unsafe.Pointer) (result uint32, arg uint32, arg5 int32) {
+	defer runtime.KeepAlive(arg2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnGssVerify == nil {
 		ebipurego.RegisterLibFunc(&_fnGssVerify, _lib, "gss_verify")
@@ -1407,6 +1484,7 @@ var _fnGssVerifyMic func(unsafe.Pointer, objc.ID, unsafe.Pointer, unsafe.Pointer
 
 // GssVerifyMic calls the Kerberos framework function gss_verify_mic.
 func GssVerifyMic(arg2 obj.Object, arg3 unsafe.Pointer, arg4 unsafe.Pointer) (result uint32, arg uint32, arg5 uint32) {
+	defer runtime.KeepAlive(arg2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnGssVerifyMic == nil {
 		ebipurego.RegisterLibFunc(&_fnGssVerifyMic, _lib, "gss_verify_mic")
@@ -1421,6 +1499,7 @@ var _fnGssWrap func(unsafe.Pointer, objc.ID, int, uint32, unsafe.Pointer, unsafe
 
 // GssWrap calls the Kerberos framework function gss_wrap.
 func GssWrap(arg2 obj.Object, arg3 int, arg4 uint32, arg5 unsafe.Pointer, arg7 unsafe.Pointer) (result uint32, arg uint32, arg6 int32) {
+	defer runtime.KeepAlive(arg2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnGssWrap == nil {
 		ebipurego.RegisterLibFunc(&_fnGssWrap, _lib, "gss_wrap")
@@ -1435,6 +1514,7 @@ var _fnGssWrapSizeLimit func(unsafe.Pointer, objc.ID, int, uint32, uint32, unsaf
 
 // GssWrapSizeLimit calls the Kerberos framework function gss_wrap_size_limit.
 func GssWrapSizeLimit(arg2 obj.Object, arg3 int, arg4 uint32, arg5 uint32) (result uint32, arg uint32, arg6 uint32) {
+	defer runtime.KeepAlive(arg2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnGssWrapSizeLimit == nil {
 		ebipurego.RegisterLibFunc(&_fnGssWrapSizeLimit, _lib, "gss_wrap_size_limit")
@@ -1493,6 +1573,7 @@ var _fnKrb5425ConvPrincipal func(objc.ID, string, string, string, unsafe.Pointer
 
 // Krb5425ConvPrincipal calls the Kerberos framework function krb5_425_conv_principal.
 func Krb5425ConvPrincipal(arg Krb5Context, name string, instance string, realm string, princ unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5425ConvPrincipal == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5425ConvPrincipal, _lib, "krb5_425_conv_principal")
@@ -1504,6 +1585,7 @@ var _fnKrb5524ConvPrincipal func(objc.ID, unsafe.Pointer, string, string, string
 
 // Krb5524ConvPrincipal calls the Kerberos framework function krb5_524_conv_principal.
 func Krb5524ConvPrincipal(context_ Krb5Context, princ unsafe.Pointer, name string, inst string, realm string) int {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5524ConvPrincipal == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5524ConvPrincipal, _lib, "krb5_524_conv_principal")
@@ -1515,6 +1597,7 @@ var _fnKrb5524ConvertCreds func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // Krb5524ConvertCreds calls the Kerberos framework function krb5_524_convert_creds.
 func Krb5524ConvertCreds(context_ Krb5Context, v5creds unsafe.Pointer, v4creds unsafe.Pointer) int {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5524ConvertCreds == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5524ConvertCreds, _lib, "krb5_524_convert_creds")
@@ -1526,6 +1609,7 @@ var _fnKrb5AddressCompare func(objc.ID, unsafe.Pointer, unsafe.Pointer) uint32
 
 // Krb5AddressCompare calls the Kerberos framework function krb5_address_compare.
 func Krb5AddressCompare(arg Krb5Context, arg2 unsafe.Pointer, arg3 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5AddressCompare == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5AddressCompare, _lib, "krb5_address_compare")
@@ -1537,6 +1621,7 @@ var _fnKrb5AddressOrder func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // Krb5AddressOrder calls the Kerberos framework function krb5_address_order.
 func Krb5AddressOrder(arg Krb5Context, arg2 unsafe.Pointer, arg3 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5AddressOrder == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5AddressOrder, _lib, "krb5_address_order")
@@ -1548,6 +1633,7 @@ var _fnKrb5AddressSearch func(objc.ID, unsafe.Pointer, unsafe.Pointer) uint32
 
 // Krb5AddressSearch calls the Kerberos framework function krb5_address_search.
 func Krb5AddressSearch(arg Krb5Context, arg2 unsafe.Pointer, arg3 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5AddressSearch == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5AddressSearch, _lib, "krb5_address_search")
@@ -1559,6 +1645,7 @@ var _fnKrb5AnameToLocalname func(objc.ID, unsafe.Pointer, int, string) int32
 
 // Krb5AnameToLocalname calls the Kerberos framework function krb5_aname_to_localname.
 func Krb5AnameToLocalname(arg Krb5Context, arg2 unsafe.Pointer, arg3 int, arg4 string) int {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5AnameToLocalname == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5AnameToLocalname, _lib, "krb5_aname_to_localname")
@@ -1570,6 +1657,7 @@ var _fnKrb5AppdefaultBoolean func(objc.ID, string, unsafe.Pointer, string, int, 
 
 // Krb5AppdefaultBoolean calls the Kerberos framework function krb5_appdefault_boolean.
 func Krb5AppdefaultBoolean(context_ Krb5Context, appname string, realm unsafe.Pointer, option string, defaultValue int) (retValue int32) {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5AppdefaultBoolean == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5AppdefaultBoolean, _lib, "krb5_appdefault_boolean")
@@ -1583,6 +1671,7 @@ var _fnKrb5AppdefaultString func(objc.ID, string, unsafe.Pointer, string, string
 
 // Krb5AppdefaultString calls the Kerberos framework function krb5_appdefault_string.
 func Krb5AppdefaultString(context_ Krb5Context, appname string, realm unsafe.Pointer, option string, defaultValue string, retValue string) {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5AppdefaultString == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5AppdefaultString, _lib, "krb5_appdefault_string")
@@ -1594,6 +1683,8 @@ var _fnKrb5AuthConFree func(objc.ID, objc.ID) int32
 
 // Krb5AuthConFree calls the Kerberos framework function krb5_auth_con_free.
 func Krb5AuthConFree(arg Krb5Context, arg2 Krb5AuthContext) int {
+	defer runtime.KeepAlive(arg)
+	defer runtime.KeepAlive(arg2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5AuthConFree == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5AuthConFree, _lib, "krb5_auth_con_free")
@@ -1605,6 +1696,8 @@ var _fnKrb5AuthConGenaddrs func(objc.ID, objc.ID, int, int) int32
 
 // Krb5AuthConGenaddrs calls the Kerberos framework function krb5_auth_con_genaddrs.
 func Krb5AuthConGenaddrs(arg Krb5Context, arg2 Krb5AuthContext, arg3 int, arg4 int) int {
+	defer runtime.KeepAlive(arg)
+	defer runtime.KeepAlive(arg2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5AuthConGenaddrs == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5AuthConGenaddrs, _lib, "krb5_auth_con_genaddrs")
@@ -1616,6 +1709,8 @@ var _fnKrb5AuthConGetChecksumFunc func(objc.ID, objc.ID, unsafe.Pointer, unsafe.
 
 // Krb5AuthConGetChecksumFunc calls the Kerberos framework function krb5_auth_con_get_checksum_func.
 func Krb5AuthConGetChecksumFunc(arg Krb5Context, arg2 Krb5AuthContext, arg3 unsafe.Pointer, arg4 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
+	defer runtime.KeepAlive(arg2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5AuthConGetChecksumFunc == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5AuthConGetChecksumFunc, _lib, "krb5_auth_con_get_checksum_func")
@@ -1627,6 +1722,8 @@ var _fnKrb5AuthConGetaddrs func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer
 
 // Krb5AuthConGetaddrs calls the Kerberos framework function krb5_auth_con_getaddrs.
 func Krb5AuthConGetaddrs(arg Krb5Context, arg2 Krb5AuthContext, arg3 unsafe.Pointer, arg4 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
+	defer runtime.KeepAlive(arg2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5AuthConGetaddrs == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5AuthConGetaddrs, _lib, "krb5_auth_con_getaddrs")
@@ -1638,6 +1735,8 @@ var _fnKrb5AuthConGetauthenticator func(objc.ID, objc.ID, unsafe.Pointer) int32
 
 // Krb5AuthConGetauthenticator calls the Kerberos framework function krb5_auth_con_getauthenticator.
 func Krb5AuthConGetauthenticator(arg Krb5Context, arg2 Krb5AuthContext, arg3 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
+	defer runtime.KeepAlive(arg2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5AuthConGetauthenticator == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5AuthConGetauthenticator, _lib, "krb5_auth_con_getauthenticator")
@@ -1649,6 +1748,8 @@ var _fnKrb5AuthConGetflags func(objc.ID, objc.ID, unsafe.Pointer) int32
 
 // Krb5AuthConGetflags calls the Kerberos framework function krb5_auth_con_getflags.
 func Krb5AuthConGetflags(arg Krb5Context, arg2 Krb5AuthContext) (result int, arg3 int) {
+	defer runtime.KeepAlive(arg)
+	defer runtime.KeepAlive(arg2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5AuthConGetflags == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5AuthConGetflags, _lib, "krb5_auth_con_getflags")
@@ -1662,6 +1763,8 @@ var _fnKrb5AuthConGetkey func(objc.ID, objc.ID, unsafe.Pointer) int32
 
 // Krb5AuthConGetkey calls the Kerberos framework function krb5_auth_con_getkey.
 func Krb5AuthConGetkey(arg Krb5Context, arg2 Krb5AuthContext, arg3 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
+	defer runtime.KeepAlive(arg2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5AuthConGetkey == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5AuthConGetkey, _lib, "krb5_auth_con_getkey")
@@ -1673,6 +1776,8 @@ var _fnKrb5AuthConGetlocalseqnumber func(objc.ID, objc.ID, unsafe.Pointer) int32
 
 // Krb5AuthConGetlocalseqnumber calls the Kerberos framework function krb5_auth_con_getlocalseqnumber.
 func Krb5AuthConGetlocalseqnumber(arg Krb5Context, arg2 Krb5AuthContext) (result int, arg3 int) {
+	defer runtime.KeepAlive(arg)
+	defer runtime.KeepAlive(arg2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5AuthConGetlocalseqnumber == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5AuthConGetlocalseqnumber, _lib, "krb5_auth_con_getlocalseqnumber")
@@ -1686,6 +1791,8 @@ var _fnKrb5AuthConGetrcache func(objc.ID, objc.ID, unsafe.Pointer) int32
 
 // Krb5AuthConGetrcache calls the Kerberos framework function krb5_auth_con_getrcache.
 func Krb5AuthConGetrcache(arg Krb5Context, arg2 Krb5AuthContext, arg3 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
+	defer runtime.KeepAlive(arg2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5AuthConGetrcache == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5AuthConGetrcache, _lib, "krb5_auth_con_getrcache")
@@ -1697,6 +1804,8 @@ var _fnKrb5AuthConGetrecvsubkey func(objc.ID, objc.ID, unsafe.Pointer) int32
 
 // Krb5AuthConGetrecvsubkey calls the Kerberos framework function krb5_auth_con_getrecvsubkey.
 func Krb5AuthConGetrecvsubkey(arg Krb5Context, arg2 Krb5AuthContext, arg3 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
+	defer runtime.KeepAlive(arg2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5AuthConGetrecvsubkey == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5AuthConGetrecvsubkey, _lib, "krb5_auth_con_getrecvsubkey")
@@ -1708,6 +1817,8 @@ var _fnKrb5AuthConGetremoteseqnumber func(objc.ID, objc.ID, unsafe.Pointer) int3
 
 // Krb5AuthConGetremoteseqnumber calls the Kerberos framework function krb5_auth_con_getremoteseqnumber.
 func Krb5AuthConGetremoteseqnumber(arg Krb5Context, arg2 Krb5AuthContext) (result int, arg3 int) {
+	defer runtime.KeepAlive(arg)
+	defer runtime.KeepAlive(arg2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5AuthConGetremoteseqnumber == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5AuthConGetremoteseqnumber, _lib, "krb5_auth_con_getremoteseqnumber")
@@ -1721,6 +1832,8 @@ var _fnKrb5AuthConGetsendsubkey func(objc.ID, objc.ID, unsafe.Pointer) int32
 
 // Krb5AuthConGetsendsubkey calls the Kerberos framework function krb5_auth_con_getsendsubkey.
 func Krb5AuthConGetsendsubkey(arg Krb5Context, arg2 Krb5AuthContext, arg3 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
+	defer runtime.KeepAlive(arg2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5AuthConGetsendsubkey == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5AuthConGetsendsubkey, _lib, "krb5_auth_con_getsendsubkey")
@@ -1732,6 +1845,7 @@ var _fnKrb5AuthConInit func(objc.ID, unsafe.Pointer) int32
 
 // Krb5AuthConInit calls the Kerberos framework function krb5_auth_con_init.
 func Krb5AuthConInit(arg Krb5Context, arg2 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5AuthConInit == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5AuthConInit, _lib, "krb5_auth_con_init")
@@ -1743,6 +1857,8 @@ var _fnKrb5AuthConSetChecksumFunc func(objc.ID, objc.ID, unsafe.Pointer, unsafe.
 
 // Krb5AuthConSetChecksumFunc calls the Kerberos framework function krb5_auth_con_set_checksum_func.
 func Krb5AuthConSetChecksumFunc(arg Krb5Context, arg2 Krb5AuthContext, arg3 unsafe.Pointer, arg4 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
+	defer runtime.KeepAlive(arg2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5AuthConSetChecksumFunc == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5AuthConSetChecksumFunc, _lib, "krb5_auth_con_set_checksum_func")
@@ -1754,6 +1870,8 @@ var _fnKrb5AuthConSetaddrs func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer
 
 // Krb5AuthConSetaddrs calls the Kerberos framework function krb5_auth_con_setaddrs.
 func Krb5AuthConSetaddrs(arg Krb5Context, arg2 Krb5AuthContext, arg3 unsafe.Pointer, arg4 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
+	defer runtime.KeepAlive(arg2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5AuthConSetaddrs == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5AuthConSetaddrs, _lib, "krb5_auth_con_setaddrs")
@@ -1765,6 +1883,8 @@ var _fnKrb5AuthConSetflags func(objc.ID, objc.ID, int) int32
 
 // Krb5AuthConSetflags calls the Kerberos framework function krb5_auth_con_setflags.
 func Krb5AuthConSetflags(arg Krb5Context, arg2 Krb5AuthContext, arg3 int) int {
+	defer runtime.KeepAlive(arg)
+	defer runtime.KeepAlive(arg2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5AuthConSetflags == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5AuthConSetflags, _lib, "krb5_auth_con_setflags")
@@ -1776,6 +1896,8 @@ var _fnKrb5AuthConSetports func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer
 
 // Krb5AuthConSetports calls the Kerberos framework function krb5_auth_con_setports.
 func Krb5AuthConSetports(arg Krb5Context, arg2 Krb5AuthContext, arg3 unsafe.Pointer, arg4 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
+	defer runtime.KeepAlive(arg2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5AuthConSetports == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5AuthConSetports, _lib, "krb5_auth_con_setports")
@@ -1787,6 +1909,9 @@ var _fnKrb5AuthConSetrcache func(objc.ID, objc.ID, objc.ID) int32
 
 // Krb5AuthConSetrcache calls the Kerberos framework function krb5_auth_con_setrcache.
 func Krb5AuthConSetrcache(arg Krb5Context, arg2 Krb5AuthContext, arg3 Krb5Rcache) int {
+	defer runtime.KeepAlive(arg)
+	defer runtime.KeepAlive(arg2)
+	defer runtime.KeepAlive(arg3)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5AuthConSetrcache == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5AuthConSetrcache, _lib, "krb5_auth_con_setrcache")
@@ -1798,6 +1923,8 @@ var _fnKrb5AuthConSetrecvsubkey func(objc.ID, objc.ID, unsafe.Pointer) int32
 
 // Krb5AuthConSetrecvsubkey calls the Kerberos framework function krb5_auth_con_setrecvsubkey.
 func Krb5AuthConSetrecvsubkey(arg Krb5Context, arg2 Krb5AuthContext, arg3 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
+	defer runtime.KeepAlive(arg2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5AuthConSetrecvsubkey == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5AuthConSetrecvsubkey, _lib, "krb5_auth_con_setrecvsubkey")
@@ -1809,6 +1936,8 @@ var _fnKrb5AuthConSetsendsubkey func(objc.ID, objc.ID, unsafe.Pointer) int32
 
 // Krb5AuthConSetsendsubkey calls the Kerberos framework function krb5_auth_con_setsendsubkey.
 func Krb5AuthConSetsendsubkey(arg Krb5Context, arg2 Krb5AuthContext, arg3 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
+	defer runtime.KeepAlive(arg2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5AuthConSetsendsubkey == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5AuthConSetsendsubkey, _lib, "krb5_auth_con_setsendsubkey")
@@ -1820,6 +1949,8 @@ var _fnKrb5AuthConSetuseruserkey func(objc.ID, objc.ID, unsafe.Pointer) int32
 
 // Krb5AuthConSetuseruserkey calls the Kerberos framework function krb5_auth_con_setuseruserkey.
 func Krb5AuthConSetuseruserkey(arg Krb5Context, arg2 Krb5AuthContext, arg3 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
+	defer runtime.KeepAlive(arg2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5AuthConSetuseruserkey == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5AuthConSetuseruserkey, _lib, "krb5_auth_con_setuseruserkey")
@@ -1831,6 +1962,7 @@ var _fnKrb5BuildPrincipalAllocVa func(objc.ID, unsafe.Pointer, int, string, stri
 
 // Krb5BuildPrincipalAllocVa calls the Kerberos framework function krb5_build_principal_alloc_va.
 func Krb5BuildPrincipalAllocVa(arg Krb5Context, arg2 unsafe.Pointer, arg3 int, arg4 string, arg5 string) int {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5BuildPrincipalAllocVa == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5BuildPrincipalAllocVa, _lib, "krb5_build_principal_alloc_va")
@@ -1842,6 +1974,7 @@ var _fnKrb5CBlockSize func(objc.ID, int, unsafe.Pointer) int32
 
 // Krb5CBlockSize calls the Kerberos framework function krb5_c_block_size.
 func Krb5CBlockSize(context_ Krb5Context, enctype int) (result int, blocksize int) {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CBlockSize == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CBlockSize, _lib, "krb5_c_block_size")
@@ -1855,6 +1988,7 @@ var _fnKrb5CChecksumLength func(objc.ID, int, unsafe.Pointer) int32
 
 // Krb5CChecksumLength calls the Kerberos framework function krb5_c_checksum_length.
 func Krb5CChecksumLength(context_ Krb5Context, cksumtype int) (result int, length int) {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CChecksumLength == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CChecksumLength, _lib, "krb5_c_checksum_length")
@@ -1868,6 +2002,7 @@ var _fnKrb5CDecrypt func(objc.ID, unsafe.Pointer, int, unsafe.Pointer, unsafe.Po
 
 // Krb5CDecrypt calls the Kerberos framework function krb5_c_decrypt.
 func Krb5CDecrypt(context_ Krb5Context, key unsafe.Pointer, usage int, cipherState unsafe.Pointer, input unsafe.Pointer, output unsafe.Pointer) int {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CDecrypt == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CDecrypt, _lib, "krb5_c_decrypt")
@@ -1879,6 +2014,7 @@ var _fnKrb5CEncrypt func(objc.ID, unsafe.Pointer, int, unsafe.Pointer, unsafe.Po
 
 // Krb5CEncrypt calls the Kerberos framework function krb5_c_encrypt.
 func Krb5CEncrypt(context_ Krb5Context, key unsafe.Pointer, usage int, cipherState unsafe.Pointer, input unsafe.Pointer, output unsafe.Pointer) int {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CEncrypt == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CEncrypt, _lib, "krb5_c_encrypt")
@@ -1890,6 +2026,7 @@ var _fnKrb5CEncryptLength func(objc.ID, int, int, unsafe.Pointer) int32
 
 // Krb5CEncryptLength calls the Kerberos framework function krb5_c_encrypt_length.
 func Krb5CEncryptLength(context_ Krb5Context, enctype int, inputlen int) (result int, length int) {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CEncryptLength == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CEncryptLength, _lib, "krb5_c_encrypt_length")
@@ -1903,6 +2040,7 @@ var _fnKrb5CEnctypeCompare func(objc.ID, int, int, unsafe.Pointer) int32
 
 // Krb5CEnctypeCompare calls the Kerberos framework function krb5_c_enctype_compare.
 func Krb5CEnctypeCompare(context_ Krb5Context, e1 int, e2 int) (result int, similar int) {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CEnctypeCompare == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CEnctypeCompare, _lib, "krb5_c_enctype_compare")
@@ -1916,6 +2054,7 @@ var _fnKrb5CFreeState func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // Krb5CFreeState calls the Kerberos framework function krb5_c_free_state.
 func Krb5CFreeState(context_ Krb5Context, key unsafe.Pointer, state unsafe.Pointer) int {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CFreeState == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CFreeState, _lib, "krb5_c_free_state")
@@ -1927,6 +2066,7 @@ var _fnKrb5CInitState func(objc.ID, unsafe.Pointer, int, unsafe.Pointer) int32
 
 // Krb5CInitState calls the Kerberos framework function krb5_c_init_state.
 func Krb5CInitState(context_ Krb5Context, key unsafe.Pointer, usage int, newState unsafe.Pointer) int {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CInitState == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CInitState, _lib, "krb5_c_init_state")
@@ -1960,6 +2100,7 @@ var _fnKrb5CKeyedChecksumTypes func(objc.ID, int, unsafe.Pointer, unsafe.Pointer
 
 // Krb5CKeyedChecksumTypes calls the Kerberos framework function krb5_c_keyed_checksum_types.
 func Krb5CKeyedChecksumTypes(context_ Krb5Context, enctype int, cksumtypes unsafe.Pointer) (result int, count uint32) {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CKeyedChecksumTypes == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CKeyedChecksumTypes, _lib, "krb5_c_keyed_checksum_types")
@@ -1973,6 +2114,7 @@ var _fnKrb5CMakeChecksum func(objc.ID, int, unsafe.Pointer, int, unsafe.Pointer,
 
 // Krb5CMakeChecksum calls the Kerberos framework function krb5_c_make_checksum.
 func Krb5CMakeChecksum(context_ Krb5Context, cksumtype int, key unsafe.Pointer, usage int, input unsafe.Pointer, cksum unsafe.Pointer) int {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CMakeChecksum == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CMakeChecksum, _lib, "krb5_c_make_checksum")
@@ -1984,6 +2126,7 @@ var _fnKrb5CMakeRandomKey func(objc.ID, int, unsafe.Pointer) int32
 
 // Krb5CMakeRandomKey calls the Kerberos framework function krb5_c_make_random_key.
 func Krb5CMakeRandomKey(context_ Krb5Context, enctype int, k5RandomKey unsafe.Pointer) int {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CMakeRandomKey == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CMakeRandomKey, _lib, "krb5_c_make_random_key")
@@ -1995,6 +2138,7 @@ var _fnKrb5CRandomAddEntropy func(objc.ID, int, unsafe.Pointer) int32
 
 // Krb5CRandomAddEntropy calls the Kerberos framework function krb5_c_random_add_entropy.
 func Krb5CRandomAddEntropy(context_ Krb5Context, randsourceId int, data unsafe.Pointer) int {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CRandomAddEntropy == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CRandomAddEntropy, _lib, "krb5_c_random_add_entropy")
@@ -2006,6 +2150,7 @@ var _fnKrb5CRandomMakeOctets func(objc.ID, unsafe.Pointer) int32
 
 // Krb5CRandomMakeOctets calls the Kerberos framework function krb5_c_random_make_octets.
 func Krb5CRandomMakeOctets(context_ Krb5Context, data unsafe.Pointer) int {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CRandomMakeOctets == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CRandomMakeOctets, _lib, "krb5_c_random_make_octets")
@@ -2017,6 +2162,7 @@ var _fnKrb5CRandomOsEntropy func(objc.ID, int, unsafe.Pointer) int32
 
 // Krb5CRandomOsEntropy calls the Kerberos framework function krb5_c_random_os_entropy.
 func Krb5CRandomOsEntropy(context_ Krb5Context, strong int) (result int, success int32) {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CRandomOsEntropy == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CRandomOsEntropy, _lib, "krb5_c_random_os_entropy")
@@ -2030,6 +2176,7 @@ var _fnKrb5CRandomSeed func(objc.ID, unsafe.Pointer) int32
 
 // Krb5CRandomSeed calls the Kerberos framework function krb5_c_random_seed.
 func Krb5CRandomSeed(context_ Krb5Context, data unsafe.Pointer) int {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CRandomSeed == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CRandomSeed, _lib, "krb5_c_random_seed")
@@ -2041,6 +2188,7 @@ var _fnKrb5CStringToKey func(objc.ID, int, unsafe.Pointer, unsafe.Pointer, unsaf
 
 // Krb5CStringToKey calls the Kerberos framework function krb5_c_string_to_key.
 func Krb5CStringToKey(context_ Krb5Context, enctype int, str unsafe.Pointer, salt unsafe.Pointer, key unsafe.Pointer) int {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CStringToKey == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CStringToKey, _lib, "krb5_c_string_to_key")
@@ -2052,6 +2200,7 @@ var _fnKrb5CStringToKeyWithParams func(objc.ID, int, unsafe.Pointer, unsafe.Poin
 
 // Krb5CStringToKeyWithParams calls the Kerberos framework function krb5_c_string_to_key_with_params.
 func Krb5CStringToKeyWithParams(context_ Krb5Context, enctype int, str unsafe.Pointer, salt unsafe.Pointer, params unsafe.Pointer, key unsafe.Pointer) int {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CStringToKeyWithParams == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CStringToKeyWithParams, _lib, "krb5_c_string_to_key_with_params")
@@ -2085,6 +2234,7 @@ var _fnKrb5CVerifyChecksum func(objc.ID, unsafe.Pointer, int, unsafe.Pointer, un
 
 // Krb5CVerifyChecksum calls the Kerberos framework function krb5_c_verify_checksum.
 func Krb5CVerifyChecksum(context_ Krb5Context, key unsafe.Pointer, usage int, data unsafe.Pointer, cksum unsafe.Pointer) (result int, valid int) {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CVerifyChecksum == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CVerifyChecksum, _lib, "krb5_c_verify_checksum")
@@ -2098,6 +2248,7 @@ var _fnKrb5CalculateChecksum func(objc.ID, int, unsafe.Pointer, int, unsafe.Poin
 
 // Krb5CalculateChecksum calls the Kerberos framework function krb5_calculate_checksum.
 func Krb5CalculateChecksum(context_ Krb5Context, ctype int, in unsafe.Pointer, inLength int, seed unsafe.Pointer, seedLength int, outcksum unsafe.Pointer) int {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CalculateChecksum == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CalculateChecksum, _lib, "krb5_calculate_checksum")
@@ -2109,6 +2260,7 @@ var _fnKrb5CcCacheMatch func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // Krb5CcCacheMatch calls the Kerberos framework function krb5_cc_cache_match.
 func Krb5CcCacheMatch(context_ Krb5Context, client unsafe.Pointer, identifier unsafe.Pointer) int {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CcCacheMatch == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CcCacheMatch, _lib, "krb5_cc_cache_match")
@@ -2120,6 +2272,8 @@ var _fnKrb5CcClose func(objc.ID, objc.ID) int32
 
 // Krb5CcClose calls the Kerberos framework function krb5_cc_close.
 func Krb5CcClose(context_ Krb5Context, cache Krb5Ccache) int {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(cache)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CcClose == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CcClose, _lib, "krb5_cc_close")
@@ -2131,6 +2285,9 @@ var _fnKrb5CcCopyCreds func(objc.ID, objc.ID, objc.ID) int32
 
 // Krb5CcCopyCreds calls the Kerberos framework function krb5_cc_copy_creds.
 func Krb5CcCopyCreds(context_ Krb5Context, incc Krb5Ccache, outcc Krb5Ccache) int {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(incc)
+	defer runtime.KeepAlive(outcc)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CcCopyCreds == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CcCopyCreds, _lib, "krb5_cc_copy_creds")
@@ -2142,6 +2299,7 @@ var _fnKrb5CcDefault func(objc.ID, unsafe.Pointer) int32
 
 // Krb5CcDefault calls the Kerberos framework function krb5_cc_default.
 func Krb5CcDefault(arg Krb5Context, arg2 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CcDefault == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CcDefault, _lib, "krb5_cc_default")
@@ -2153,6 +2311,7 @@ var _fnKrb5CcDefaultName func(objc.ID) string
 
 // Krb5CcDefaultName calls the Kerberos framework function krb5_cc_default_name.
 func Krb5CcDefaultName(arg Krb5Context) string {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CcDefaultName == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CcDefaultName, _lib, "krb5_cc_default_name")
@@ -2164,6 +2323,8 @@ var _fnKrb5CcDestroy func(objc.ID, objc.ID) int32
 
 // Krb5CcDestroy calls the Kerberos framework function krb5_cc_destroy.
 func Krb5CcDestroy(context_ Krb5Context, cache Krb5Ccache) int {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(cache)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CcDestroy == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CcDestroy, _lib, "krb5_cc_destroy")
@@ -2175,6 +2336,8 @@ var _fnKrb5CcEndSeqGet func(objc.ID, objc.ID, unsafe.Pointer) int32
 
 // Krb5CcEndSeqGet calls the Kerberos framework function krb5_cc_end_seq_get.
 func Krb5CcEndSeqGet(context_ Krb5Context, cache Krb5Ccache, cursor unsafe.Pointer) int {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(cache)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CcEndSeqGet == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CcEndSeqGet, _lib, "krb5_cc_end_seq_get")
@@ -2186,6 +2349,7 @@ var _fnKrb5CcGenNew func(objc.ID, unsafe.Pointer) int32
 
 // Krb5CcGenNew calls the Kerberos framework function krb5_cc_gen_new.
 func Krb5CcGenNew(context_ Krb5Context, cache unsafe.Pointer) int {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CcGenNew == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CcGenNew, _lib, "krb5_cc_gen_new")
@@ -2197,6 +2361,8 @@ var _fnKrb5CcGetConfig func(objc.ID, objc.ID, unsafe.Pointer, string, unsafe.Poi
 
 // Krb5CcGetConfig calls the Kerberos framework function krb5_cc_get_config.
 func Krb5CcGetConfig(arg Krb5Context, arg2 Krb5Ccache, arg3 unsafe.Pointer, arg4 string, arg5 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
+	defer runtime.KeepAlive(arg2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CcGetConfig == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CcGetConfig, _lib, "krb5_cc_get_config")
@@ -2208,6 +2374,8 @@ var _fnKrb5CcGetName func(objc.ID, objc.ID) string
 
 // Krb5CcGetName calls the Kerberos framework function krb5_cc_get_name.
 func Krb5CcGetName(context_ Krb5Context, cache Krb5Ccache) string {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(cache)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CcGetName == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CcGetName, _lib, "krb5_cc_get_name")
@@ -2219,6 +2387,8 @@ var _fnKrb5CcGetPrincipal func(objc.ID, objc.ID, unsafe.Pointer) int32
 
 // Krb5CcGetPrincipal calls the Kerberos framework function krb5_cc_get_principal.
 func Krb5CcGetPrincipal(context_ Krb5Context, cache Krb5Ccache, principal unsafe.Pointer) int {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(cache)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CcGetPrincipal == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CcGetPrincipal, _lib, "krb5_cc_get_principal")
@@ -2230,6 +2400,8 @@ var _fnKrb5CcGetType func(objc.ID, objc.ID) string
 
 // Krb5CcGetType calls the Kerberos framework function krb5_cc_get_type.
 func Krb5CcGetType(context_ Krb5Context, cache Krb5Ccache) string {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(cache)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CcGetType == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CcGetType, _lib, "krb5_cc_get_type")
@@ -2241,6 +2413,8 @@ var _fnKrb5CcInitialize func(objc.ID, objc.ID, unsafe.Pointer) int32
 
 // Krb5CcInitialize calls the Kerberos framework function krb5_cc_initialize.
 func Krb5CcInitialize(context_ Krb5Context, cache Krb5Ccache, principal unsafe.Pointer) int {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(cache)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CcInitialize == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CcInitialize, _lib, "krb5_cc_initialize")
@@ -2252,6 +2426,8 @@ var _fnKrb5CcLastChangeTime func(objc.ID, objc.ID, unsafe.Pointer) int32
 
 // Krb5CcLastChangeTime calls the Kerberos framework function krb5_cc_last_change_time.
 func Krb5CcLastChangeTime(context_ Krb5Context, ccache Krb5Ccache) (result int, changeTime int) {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(ccache)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CcLastChangeTime == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CcLastChangeTime, _lib, "krb5_cc_last_change_time")
@@ -2265,6 +2441,8 @@ var _fnKrb5CcLock func(objc.ID, objc.ID) int32
 
 // Krb5CcLock calls the Kerberos framework function krb5_cc_lock.
 func Krb5CcLock(context_ Krb5Context, ccache Krb5Ccache) int {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(ccache)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CcLock == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CcLock, _lib, "krb5_cc_lock")
@@ -2276,6 +2454,9 @@ var _fnKrb5CcMove func(objc.ID, objc.ID, objc.ID) int32
 
 // Krb5CcMove calls the Kerberos framework function krb5_cc_move.
 func Krb5CcMove(context_ Krb5Context, src Krb5Ccache, dst Krb5Ccache) int {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(src)
+	defer runtime.KeepAlive(dst)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CcMove == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CcMove, _lib, "krb5_cc_move")
@@ -2287,6 +2468,7 @@ var _fnKrb5CcNewUnique func(objc.ID, string, string, unsafe.Pointer) int32
 
 // Krb5CcNewUnique calls the Kerberos framework function krb5_cc_new_unique.
 func Krb5CcNewUnique(context_ Krb5Context, type_ string, hint string, identifier unsafe.Pointer) int {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CcNewUnique == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CcNewUnique, _lib, "krb5_cc_new_unique")
@@ -2298,6 +2480,8 @@ var _fnKrb5CcNextCred func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer) int
 
 // Krb5CcNextCred calls the Kerberos framework function krb5_cc_next_cred.
 func Krb5CcNextCred(context_ Krb5Context, cache Krb5Ccache, cursor unsafe.Pointer, creds unsafe.Pointer) int {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(cache)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CcNextCred == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CcNextCred, _lib, "krb5_cc_next_cred")
@@ -2309,6 +2493,8 @@ var _fnKrb5CcRemoveCred func(objc.ID, objc.ID, int, unsafe.Pointer) int32
 
 // Krb5CcRemoveCred calls the Kerberos framework function krb5_cc_remove_cred.
 func Krb5CcRemoveCred(context_ Krb5Context, cache Krb5Ccache, flags int, creds unsafe.Pointer) int {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(cache)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CcRemoveCred == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CcRemoveCred, _lib, "krb5_cc_remove_cred")
@@ -2320,6 +2506,7 @@ var _fnKrb5CcResolve func(objc.ID, string, unsafe.Pointer) int32
 
 // Krb5CcResolve calls the Kerberos framework function krb5_cc_resolve.
 func Krb5CcResolve(arg Krb5Context, arg2 string, arg3 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CcResolve == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CcResolve, _lib, "krb5_cc_resolve")
@@ -2331,6 +2518,8 @@ var _fnKrb5CcRetrieveCred func(objc.ID, objc.ID, int, unsafe.Pointer, unsafe.Poi
 
 // Krb5CcRetrieveCred calls the Kerberos framework function krb5_cc_retrieve_cred.
 func Krb5CcRetrieveCred(context_ Krb5Context, cache Krb5Ccache, flags int, mcreds unsafe.Pointer, creds unsafe.Pointer) int {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(cache)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CcRetrieveCred == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CcRetrieveCred, _lib, "krb5_cc_retrieve_cred")
@@ -2342,6 +2531,8 @@ var _fnKrb5CcSetConfig func(objc.ID, objc.ID, unsafe.Pointer, string, unsafe.Poi
 
 // Krb5CcSetConfig calls the Kerberos framework function krb5_cc_set_config.
 func Krb5CcSetConfig(arg Krb5Context, arg2 Krb5Ccache, arg3 unsafe.Pointer, arg4 string, arg5 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
+	defer runtime.KeepAlive(arg2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CcSetConfig == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CcSetConfig, _lib, "krb5_cc_set_config")
@@ -2353,6 +2544,7 @@ var _fnKrb5CcSetDefaultName func(objc.ID, string) int32
 
 // Krb5CcSetDefaultName calls the Kerberos framework function krb5_cc_set_default_name.
 func Krb5CcSetDefaultName(arg Krb5Context, arg2 string) int {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CcSetDefaultName == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CcSetDefaultName, _lib, "krb5_cc_set_default_name")
@@ -2364,6 +2556,8 @@ var _fnKrb5CcSetFlags func(objc.ID, objc.ID, int) int32
 
 // Krb5CcSetFlags calls the Kerberos framework function krb5_cc_set_flags.
 func Krb5CcSetFlags(context_ Krb5Context, cache Krb5Ccache, flags int) int {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(cache)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CcSetFlags == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CcSetFlags, _lib, "krb5_cc_set_flags")
@@ -2375,6 +2569,8 @@ var _fnKrb5CcStartSeqGet func(objc.ID, objc.ID, unsafe.Pointer) int32
 
 // Krb5CcStartSeqGet calls the Kerberos framework function krb5_cc_start_seq_get.
 func Krb5CcStartSeqGet(context_ Krb5Context, cache Krb5Ccache, cursor unsafe.Pointer) int {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(cache)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CcStartSeqGet == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CcStartSeqGet, _lib, "krb5_cc_start_seq_get")
@@ -2386,6 +2582,8 @@ var _fnKrb5CcStoreCred func(objc.ID, objc.ID, unsafe.Pointer) int32
 
 // Krb5CcStoreCred calls the Kerberos framework function krb5_cc_store_cred.
 func Krb5CcStoreCred(context_ Krb5Context, cache Krb5Ccache, creds unsafe.Pointer) int {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(cache)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CcStoreCred == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CcStoreCred, _lib, "krb5_cc_store_cred")
@@ -2397,6 +2595,8 @@ var _fnKrb5CcUnlock func(objc.ID, objc.ID) int32
 
 // Krb5CcUnlock calls the Kerberos framework function krb5_cc_unlock.
 func Krb5CcUnlock(context_ Krb5Context, ccache Krb5Ccache) int {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(ccache)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CcUnlock == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CcUnlock, _lib, "krb5_cc_unlock")
@@ -2408,6 +2608,7 @@ var _fnKrb5CccolCursorFree func(objc.ID, unsafe.Pointer) int32
 
 // Krb5CccolCursorFree calls the Kerberos framework function krb5_cccol_cursor_free.
 func Krb5CccolCursorFree(context_ Krb5Context, cursor unsafe.Pointer) int {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CccolCursorFree == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CccolCursorFree, _lib, "krb5_cccol_cursor_free")
@@ -2419,6 +2620,7 @@ var _fnKrb5CccolCursorNew func(objc.ID, unsafe.Pointer) int32
 
 // Krb5CccolCursorNew calls the Kerberos framework function krb5_cccol_cursor_new.
 func Krb5CccolCursorNew(context_ Krb5Context, cursor unsafe.Pointer) int {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CccolCursorNew == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CccolCursorNew, _lib, "krb5_cccol_cursor_new")
@@ -2430,6 +2632,8 @@ var _fnKrb5CccolCursorNext func(objc.ID, objc.ID, unsafe.Pointer) int32
 
 // Krb5CccolCursorNext calls the Kerberos framework function krb5_cccol_cursor_next.
 func Krb5CccolCursorNext(context_ Krb5Context, cursor Krb5CccolCursor, ccache unsafe.Pointer) int {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(cursor)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CccolCursorNext == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CccolCursorNext, _lib, "krb5_cccol_cursor_next")
@@ -2441,6 +2645,7 @@ var _fnKrb5CccolLastChangeTime func(objc.ID, unsafe.Pointer) int32
 
 // Krb5CccolLastChangeTime calls the Kerberos framework function krb5_cccol_last_change_time.
 func Krb5CccolLastChangeTime(context_ Krb5Context) (result int, changeTime int) {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CccolLastChangeTime == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CccolLastChangeTime, _lib, "krb5_cccol_last_change_time")
@@ -2454,6 +2659,7 @@ var _fnKrb5CccolLock func(objc.ID) int32
 
 // Krb5CccolLock calls the Kerberos framework function krb5_cccol_lock.
 func Krb5CccolLock(context_ Krb5Context) int {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CccolLock == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CccolLock, _lib, "krb5_cccol_lock")
@@ -2465,6 +2671,7 @@ var _fnKrb5CccolUnlock func(objc.ID) int32
 
 // Krb5CccolUnlock calls the Kerberos framework function krb5_cccol_unlock.
 func Krb5CccolUnlock(context_ Krb5Context) int {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CccolUnlock == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CccolUnlock, _lib, "krb5_cccol_unlock")
@@ -2476,6 +2683,7 @@ var _fnKrb5ChangePassword func(objc.ID, unsafe.Pointer, string, unsafe.Pointer, 
 
 // Krb5ChangePassword calls the Kerberos framework function krb5_change_password.
 func Krb5ChangePassword(context_ Krb5Context, creds unsafe.Pointer, newpw string, resultCodeString unsafe.Pointer, resultString unsafe.Pointer) (result int, resultCode int32) {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5ChangePassword == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5ChangePassword, _lib, "krb5_change_password")
@@ -2489,6 +2697,7 @@ var _fnKrb5ChecksumSize func(objc.ID, int) int
 
 // Krb5ChecksumSize calls the Kerberos framework function krb5_checksum_size.
 func Krb5ChecksumSize(context_ Krb5Context, ctype int) int {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5ChecksumSize == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5ChecksumSize, _lib, "krb5_checksum_size")
@@ -2511,6 +2720,7 @@ var _fnKrb5ClearErrorMessage func(objc.ID)
 
 // Krb5ClearErrorMessage calls the Kerberos framework function krb5_clear_error_message.
 func Krb5ClearErrorMessage(arg Krb5Context) {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5ClearErrorMessage == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5ClearErrorMessage, _lib, "krb5_clear_error_message")
@@ -2522,6 +2732,7 @@ var _fnKrb5CopyAddresses func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // Krb5CopyAddresses calls the Kerberos framework function krb5_copy_addresses.
 func Krb5CopyAddresses(arg Krb5Context, arg2 unsafe.Pointer, arg3 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CopyAddresses == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CopyAddresses, _lib, "krb5_copy_addresses")
@@ -2533,6 +2744,7 @@ var _fnKrb5CopyAuthdata func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // Krb5CopyAuthdata calls the Kerberos framework function krb5_copy_authdata.
 func Krb5CopyAuthdata(arg Krb5Context, arg2 unsafe.Pointer, arg3 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CopyAuthdata == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CopyAuthdata, _lib, "krb5_copy_authdata")
@@ -2544,6 +2756,7 @@ var _fnKrb5CopyAuthenticator func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // Krb5CopyAuthenticator calls the Kerberos framework function krb5_copy_authenticator.
 func Krb5CopyAuthenticator(arg Krb5Context, arg2 unsafe.Pointer, arg3 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CopyAuthenticator == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CopyAuthenticator, _lib, "krb5_copy_authenticator")
@@ -2555,6 +2768,7 @@ var _fnKrb5CopyChecksum func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // Krb5CopyChecksum calls the Kerberos framework function krb5_copy_checksum.
 func Krb5CopyChecksum(arg Krb5Context, arg2 unsafe.Pointer, arg3 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CopyChecksum == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CopyChecksum, _lib, "krb5_copy_checksum")
@@ -2566,6 +2780,7 @@ var _fnKrb5CopyContext func(objc.ID, unsafe.Pointer) int32
 
 // Krb5CopyContext calls the Kerberos framework function krb5_copy_context.
 func Krb5CopyContext(arg Krb5Context, arg2 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CopyContext == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CopyContext, _lib, "krb5_copy_context")
@@ -2577,6 +2792,7 @@ var _fnKrb5CopyCreds func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // Krb5CopyCreds calls the Kerberos framework function krb5_copy_creds.
 func Krb5CopyCreds(arg Krb5Context, arg2 unsafe.Pointer, arg3 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CopyCreds == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CopyCreds, _lib, "krb5_copy_creds")
@@ -2588,6 +2804,7 @@ var _fnKrb5CopyData func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // Krb5CopyData calls the Kerberos framework function krb5_copy_data.
 func Krb5CopyData(arg Krb5Context, arg2 unsafe.Pointer, arg3 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CopyData == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CopyData, _lib, "krb5_copy_data")
@@ -2599,6 +2816,7 @@ var _fnKrb5CopyKeyblock func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // Krb5CopyKeyblock calls the Kerberos framework function krb5_copy_keyblock.
 func Krb5CopyKeyblock(arg Krb5Context, arg2 unsafe.Pointer, arg3 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CopyKeyblock == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CopyKeyblock, _lib, "krb5_copy_keyblock")
@@ -2610,6 +2828,7 @@ var _fnKrb5CopyKeyblockContents func(objc.ID, unsafe.Pointer, unsafe.Pointer) in
 
 // Krb5CopyKeyblockContents calls the Kerberos framework function krb5_copy_keyblock_contents.
 func Krb5CopyKeyblockContents(arg Krb5Context, arg2 unsafe.Pointer, arg3 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CopyKeyblockContents == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CopyKeyblockContents, _lib, "krb5_copy_keyblock_contents")
@@ -2621,6 +2840,7 @@ var _fnKrb5CopyPrincipal func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // Krb5CopyPrincipal calls the Kerberos framework function krb5_copy_principal.
 func Krb5CopyPrincipal(arg Krb5Context, arg2 unsafe.Pointer, arg3 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CopyPrincipal == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CopyPrincipal, _lib, "krb5_copy_principal")
@@ -2632,6 +2852,7 @@ var _fnKrb5CopyTicket func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // Krb5CopyTicket calls the Kerberos framework function krb5_copy_ticket.
 func Krb5CopyTicket(arg Krb5Context, arg2 unsafe.Pointer, arg3 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CopyTicket == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CopyTicket, _lib, "krb5_copy_ticket")
@@ -2654,6 +2875,7 @@ var _fnKrb5Decrypt func(objc.ID, unsafe.Pointer, unsafe.Pointer, int, unsafe.Poi
 
 // Krb5Decrypt calls the Kerberos framework function krb5_decrypt.
 func Krb5Decrypt(context_ Krb5Context, inptr unsafe.Pointer, outptr unsafe.Pointer, size int, eblock unsafe.Pointer, ivec unsafe.Pointer) int {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5Decrypt == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5Decrypt, _lib, "krb5_decrypt")
@@ -2676,6 +2898,7 @@ var _fnKrb5EblockEnctype func(objc.ID, unsafe.Pointer) int32
 
 // Krb5EblockEnctype calls the Kerberos framework function krb5_eblock_enctype.
 func Krb5EblockEnctype(context_ Krb5Context, eblock unsafe.Pointer) int {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5EblockEnctype == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5EblockEnctype, _lib, "krb5_eblock_enctype")
@@ -2687,6 +2910,7 @@ var _fnKrb5Encrypt func(objc.ID, unsafe.Pointer, unsafe.Pointer, int, unsafe.Poi
 
 // Krb5Encrypt calls the Kerberos framework function krb5_encrypt.
 func Krb5Encrypt(context_ Krb5Context, inptr unsafe.Pointer, outptr unsafe.Pointer, size int, eblock unsafe.Pointer, ivec unsafe.Pointer) int {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5Encrypt == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5Encrypt, _lib, "krb5_encrypt")
@@ -2720,6 +2944,7 @@ var _fnKrb5FinishKey func(objc.ID, unsafe.Pointer) int32
 
 // Krb5FinishKey calls the Kerberos framework function krb5_finish_key.
 func Krb5FinishKey(context_ Krb5Context, eblock unsafe.Pointer) int {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5FinishKey == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5FinishKey, _lib, "krb5_finish_key")
@@ -2731,6 +2956,7 @@ var _fnKrb5FinishRandomKey func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // Krb5FinishRandomKey calls the Kerberos framework function krb5_finish_random_key.
 func Krb5FinishRandomKey(context_ Krb5Context, eblock unsafe.Pointer, ptr unsafe.Pointer) int {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5FinishRandomKey == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5FinishRandomKey, _lib, "krb5_finish_random_key")
@@ -2742,6 +2968,7 @@ var _fnKrb5FreeAddresses func(objc.ID, unsafe.Pointer)
 
 // Krb5FreeAddresses calls the Kerberos framework function krb5_free_addresses.
 func Krb5FreeAddresses(arg Krb5Context, arg2 unsafe.Pointer) {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5FreeAddresses == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5FreeAddresses, _lib, "krb5_free_addresses")
@@ -2753,6 +2980,7 @@ var _fnKrb5FreeApRepEncPart func(objc.ID, unsafe.Pointer)
 
 // Krb5FreeApRepEncPart calls the Kerberos framework function krb5_free_ap_rep_enc_part.
 func Krb5FreeApRepEncPart(arg Krb5Context, arg2 unsafe.Pointer) {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5FreeApRepEncPart == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5FreeApRepEncPart, _lib, "krb5_free_ap_rep_enc_part")
@@ -2764,6 +2992,7 @@ var _fnKrb5FreeAuthdata func(objc.ID, unsafe.Pointer)
 
 // Krb5FreeAuthdata calls the Kerberos framework function krb5_free_authdata.
 func Krb5FreeAuthdata(arg Krb5Context, arg2 unsafe.Pointer) {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5FreeAuthdata == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5FreeAuthdata, _lib, "krb5_free_authdata")
@@ -2775,6 +3004,7 @@ var _fnKrb5FreeAuthenticator func(objc.ID, unsafe.Pointer)
 
 // Krb5FreeAuthenticator calls the Kerberos framework function krb5_free_authenticator.
 func Krb5FreeAuthenticator(arg Krb5Context, arg2 unsafe.Pointer) {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5FreeAuthenticator == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5FreeAuthenticator, _lib, "krb5_free_authenticator")
@@ -2786,6 +3016,7 @@ var _fnKrb5FreeChecksum func(objc.ID, unsafe.Pointer)
 
 // Krb5FreeChecksum calls the Kerberos framework function krb5_free_checksum.
 func Krb5FreeChecksum(arg Krb5Context, arg2 unsafe.Pointer) {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5FreeChecksum == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5FreeChecksum, _lib, "krb5_free_checksum")
@@ -2797,6 +3028,7 @@ var _fnKrb5FreeChecksumContents func(objc.ID, unsafe.Pointer)
 
 // Krb5FreeChecksumContents calls the Kerberos framework function krb5_free_checksum_contents.
 func Krb5FreeChecksumContents(arg Krb5Context, arg2 unsafe.Pointer) {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5FreeChecksumContents == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5FreeChecksumContents, _lib, "krb5_free_checksum_contents")
@@ -2808,6 +3040,7 @@ var _fnKrb5FreeCksumtypes func(objc.ID, unsafe.Pointer)
 
 // Krb5FreeCksumtypes calls the Kerberos framework function krb5_free_cksumtypes.
 func Krb5FreeCksumtypes(arg Krb5Context) (arg2 int) {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5FreeCksumtypes == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5FreeCksumtypes, _lib, "krb5_free_cksumtypes")
@@ -2821,6 +3054,7 @@ var _fnKrb5FreeContext func(objc.ID)
 
 // Krb5FreeContext calls the Kerberos framework function krb5_free_context.
 func Krb5FreeContext(arg Krb5Context) {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5FreeContext == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5FreeContext, _lib, "krb5_free_context")
@@ -2832,6 +3066,7 @@ var _fnKrb5FreeCredContents func(objc.ID, unsafe.Pointer)
 
 // Krb5FreeCredContents calls the Kerberos framework function krb5_free_cred_contents.
 func Krb5FreeCredContents(arg Krb5Context, arg2 unsafe.Pointer) {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5FreeCredContents == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5FreeCredContents, _lib, "krb5_free_cred_contents")
@@ -2843,6 +3078,7 @@ var _fnKrb5FreeCreds func(objc.ID, unsafe.Pointer)
 
 // Krb5FreeCreds calls the Kerberos framework function krb5_free_creds.
 func Krb5FreeCreds(arg Krb5Context, arg2 unsafe.Pointer) {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5FreeCreds == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5FreeCreds, _lib, "krb5_free_creds")
@@ -2854,6 +3090,7 @@ var _fnKrb5FreeData func(objc.ID, unsafe.Pointer)
 
 // Krb5FreeData calls the Kerberos framework function krb5_free_data.
 func Krb5FreeData(arg Krb5Context, arg2 unsafe.Pointer) {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5FreeData == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5FreeData, _lib, "krb5_free_data")
@@ -2865,6 +3102,7 @@ var _fnKrb5FreeDataContents func(objc.ID, unsafe.Pointer)
 
 // Krb5FreeDataContents calls the Kerberos framework function krb5_free_data_contents.
 func Krb5FreeDataContents(arg Krb5Context, arg2 unsafe.Pointer) {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5FreeDataContents == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5FreeDataContents, _lib, "krb5_free_data_contents")
@@ -2876,6 +3114,7 @@ var _fnKrb5FreeDefaultRealm func(objc.ID, string)
 
 // Krb5FreeDefaultRealm calls the Kerberos framework function krb5_free_default_realm.
 func Krb5FreeDefaultRealm(arg Krb5Context, arg2 string) {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5FreeDefaultRealm == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5FreeDefaultRealm, _lib, "krb5_free_default_realm")
@@ -2887,6 +3126,7 @@ var _fnKrb5FreeError func(objc.ID, unsafe.Pointer)
 
 // Krb5FreeError calls the Kerberos framework function krb5_free_error.
 func Krb5FreeError(arg Krb5Context, arg2 unsafe.Pointer) {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5FreeError == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5FreeError, _lib, "krb5_free_error")
@@ -2898,6 +3138,7 @@ var _fnKrb5FreeErrorMessage func(objc.ID, string)
 
 // Krb5FreeErrorMessage calls the Kerberos framework function krb5_free_error_message.
 func Krb5FreeErrorMessage(arg Krb5Context, arg2 string) {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5FreeErrorMessage == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5FreeErrorMessage, _lib, "krb5_free_error_message")
@@ -2909,6 +3150,7 @@ var _fnKrb5FreeHostRealm func(objc.ID, string) int32
 
 // Krb5FreeHostRealm calls the Kerberos framework function krb5_free_host_realm.
 func Krb5FreeHostRealm(arg Krb5Context, arg2 string) int {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5FreeHostRealm == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5FreeHostRealm, _lib, "krb5_free_host_realm")
@@ -2920,6 +3162,7 @@ var _fnKrb5FreeKeyblock func(objc.ID, unsafe.Pointer)
 
 // Krb5FreeKeyblock calls the Kerberos framework function krb5_free_keyblock.
 func Krb5FreeKeyblock(arg Krb5Context, arg2 unsafe.Pointer) {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5FreeKeyblock == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5FreeKeyblock, _lib, "krb5_free_keyblock")
@@ -2931,6 +3174,7 @@ var _fnKrb5FreeKeyblockContents func(objc.ID, unsafe.Pointer)
 
 // Krb5FreeKeyblockContents calls the Kerberos framework function krb5_free_keyblock_contents.
 func Krb5FreeKeyblockContents(arg Krb5Context, arg2 unsafe.Pointer) {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5FreeKeyblockContents == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5FreeKeyblockContents, _lib, "krb5_free_keyblock_contents")
@@ -2942,6 +3186,7 @@ var _fnKrb5FreeKeytabEntryContents func(objc.ID, unsafe.Pointer) int32
 
 // Krb5FreeKeytabEntryContents calls the Kerberos framework function krb5_free_keytab_entry_contents.
 func Krb5FreeKeytabEntryContents(arg Krb5Context, arg2 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5FreeKeytabEntryContents == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5FreeKeytabEntryContents, _lib, "krb5_free_keytab_entry_contents")
@@ -2953,6 +3198,7 @@ var _fnKrb5FreePrincipal func(objc.ID, unsafe.Pointer)
 
 // Krb5FreePrincipal calls the Kerberos framework function krb5_free_principal.
 func Krb5FreePrincipal(arg Krb5Context, arg2 unsafe.Pointer) {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5FreePrincipal == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5FreePrincipal, _lib, "krb5_free_principal")
@@ -2964,6 +3210,7 @@ var _fnKrb5FreeTgtCreds func(objc.ID, unsafe.Pointer)
 
 // Krb5FreeTgtCreds calls the Kerberos framework function krb5_free_tgt_creds.
 func Krb5FreeTgtCreds(arg Krb5Context, arg2 unsafe.Pointer) {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5FreeTgtCreds == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5FreeTgtCreds, _lib, "krb5_free_tgt_creds")
@@ -2975,6 +3222,7 @@ var _fnKrb5FreeTicket func(objc.ID, unsafe.Pointer)
 
 // Krb5FreeTicket calls the Kerberos framework function krb5_free_ticket.
 func Krb5FreeTicket(arg Krb5Context, arg2 unsafe.Pointer) {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5FreeTicket == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5FreeTicket, _lib, "krb5_free_ticket")
@@ -2986,6 +3234,7 @@ var _fnKrb5FreeUnparsedName func(objc.ID, string)
 
 // Krb5FreeUnparsedName calls the Kerberos framework function krb5_free_unparsed_name.
 func Krb5FreeUnparsedName(arg Krb5Context, arg2 string) {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5FreeUnparsedName == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5FreeUnparsedName, _lib, "krb5_free_unparsed_name")
@@ -2997,6 +3246,9 @@ var _fnKrb5FwdTgtCreds func(objc.ID, objc.ID, string, unsafe.Pointer, unsafe.Poi
 
 // Krb5FwdTgtCreds calls the Kerberos framework function krb5_fwd_tgt_creds.
 func Krb5FwdTgtCreds(arg Krb5Context, arg2 Krb5AuthContext, arg3 string, arg4 unsafe.Pointer, arg5 unsafe.Pointer, arg6 Krb5Ccache, forwardable int, arg7 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
+	defer runtime.KeepAlive(arg2)
+	defer runtime.KeepAlive(arg6)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5FwdTgtCreds == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5FwdTgtCreds, _lib, "krb5_fwd_tgt_creds")
@@ -3008,6 +3260,8 @@ var _fnKrb5GetCredentials func(objc.ID, int, objc.ID, unsafe.Pointer, unsafe.Poi
 
 // Krb5GetCredentials calls the Kerberos framework function krb5_get_credentials.
 func Krb5GetCredentials(arg Krb5Context, arg2 int, arg3 Krb5Ccache, arg4 unsafe.Pointer, arg5 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
+	defer runtime.KeepAlive(arg3)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5GetCredentials == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5GetCredentials, _lib, "krb5_get_credentials")
@@ -3019,6 +3273,8 @@ var _fnKrb5GetCredentialsRenew func(objc.ID, int, objc.ID, unsafe.Pointer, unsaf
 
 // Krb5GetCredentialsRenew calls the Kerberos framework function krb5_get_credentials_renew.
 func Krb5GetCredentialsRenew(arg Krb5Context, arg2 int, arg3 Krb5Ccache, arg4 unsafe.Pointer, arg5 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
+	defer runtime.KeepAlive(arg3)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5GetCredentialsRenew == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5GetCredentialsRenew, _lib, "krb5_get_credentials_renew")
@@ -3030,6 +3286,8 @@ var _fnKrb5GetCredentialsValidate func(objc.ID, int, objc.ID, unsafe.Pointer, un
 
 // Krb5GetCredentialsValidate calls the Kerberos framework function krb5_get_credentials_validate.
 func Krb5GetCredentialsValidate(arg Krb5Context, arg2 int, arg3 Krb5Ccache, arg4 unsafe.Pointer, arg5 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
+	defer runtime.KeepAlive(arg3)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5GetCredentialsValidate == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5GetCredentialsValidate, _lib, "krb5_get_credentials_validate")
@@ -3041,6 +3299,7 @@ var _fnKrb5GetDefaultRealm func(objc.ID, string) int32
 
 // Krb5GetDefaultRealm calls the Kerberos framework function krb5_get_default_realm.
 func Krb5GetDefaultRealm(arg Krb5Context, arg2 string) int {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5GetDefaultRealm == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5GetDefaultRealm, _lib, "krb5_get_default_realm")
@@ -3052,6 +3311,7 @@ var _fnKrb5GetErrorMessage func(objc.ID, int) string
 
 // Krb5GetErrorMessage calls the Kerberos framework function krb5_get_error_message.
 func Krb5GetErrorMessage(arg Krb5Context, arg2 int) string {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5GetErrorMessage == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5GetErrorMessage, _lib, "krb5_get_error_message")
@@ -3063,6 +3323,7 @@ var _fnKrb5GetHostRealm func(objc.ID, string, string) int32
 
 // Krb5GetHostRealm calls the Kerberos framework function krb5_get_host_realm.
 func Krb5GetHostRealm(arg Krb5Context, arg2 string, arg3 string) int {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5GetHostRealm == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5GetHostRealm, _lib, "krb5_get_host_realm")
@@ -3074,6 +3335,8 @@ var _fnKrb5GetInitCredsKeytab func(objc.ID, unsafe.Pointer, unsafe.Pointer, objc
 
 // Krb5GetInitCredsKeytab calls the Kerberos framework function krb5_get_init_creds_keytab.
 func Krb5GetInitCredsKeytab(context_ Krb5Context, creds unsafe.Pointer, client unsafe.Pointer, argKeytab Krb5Keytab, startTime int, inTktService string, k5GicOptions unsafe.Pointer) int {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(argKeytab)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5GetInitCredsKeytab == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5GetInitCredsKeytab, _lib, "krb5_get_init_creds_keytab")
@@ -3085,6 +3348,7 @@ var _fnKrb5GetInitCredsOptAlloc func(objc.ID, unsafe.Pointer) int32
 
 // Krb5GetInitCredsOptAlloc calls the Kerberos framework function krb5_get_init_creds_opt_alloc.
 func Krb5GetInitCredsOptAlloc(context_ Krb5Context, opt unsafe.Pointer) int {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5GetInitCredsOptAlloc == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5GetInitCredsOptAlloc, _lib, "krb5_get_init_creds_opt_alloc")
@@ -3096,6 +3360,7 @@ var _fnKrb5GetInitCredsOptFree func(objc.ID, unsafe.Pointer)
 
 // Krb5GetInitCredsOptFree calls the Kerberos framework function krb5_get_init_creds_opt_free.
 func Krb5GetInitCredsOptFree(context_ Krb5Context, opt unsafe.Pointer) {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5GetInitCredsOptFree == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5GetInitCredsOptFree, _lib, "krb5_get_init_creds_opt_free")
@@ -3173,6 +3438,7 @@ var _fnKrb5GetInitCredsOptSetPa func(objc.ID, unsafe.Pointer, string, string) in
 
 // Krb5GetInitCredsOptSetPa calls the Kerberos framework function krb5_get_init_creds_opt_set_pa.
 func Krb5GetInitCredsOptSetPa(context_ Krb5Context, opt unsafe.Pointer, attr string, value string) int {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5GetInitCredsOptSetPa == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5GetInitCredsOptSetPa, _lib, "krb5_get_init_creds_opt_set_pa")
@@ -3195,6 +3461,7 @@ var _fnKrb5GetInitCredsOptSetProcessLastReq func(objc.ID, unsafe.Pointer, unsafe
 
 // Krb5GetInitCredsOptSetProcessLastReq calls the Kerberos framework function krb5_get_init_creds_opt_set_process_last_req.
 func Krb5GetInitCredsOptSetProcessLastReq(arg Krb5Context, arg2 unsafe.Pointer, arg3 unsafe.Pointer, arg4 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5GetInitCredsOptSetProcessLastReq == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5GetInitCredsOptSetProcessLastReq, _lib, "krb5_get_init_creds_opt_set_process_last_req")
@@ -3250,6 +3517,7 @@ var _fnKrb5GetInitCredsPassword func(objc.ID, unsafe.Pointer, unsafe.Pointer, st
 
 // Krb5GetInitCredsPassword calls the Kerberos framework function krb5_get_init_creds_password.
 func Krb5GetInitCredsPassword(context_ Krb5Context, creds unsafe.Pointer, client unsafe.Pointer, password string, prompter unsafe.Pointer, data unsafe.Pointer, startTime int, inTktService string, k5GicOptions unsafe.Pointer) int {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5GetInitCredsPassword == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5GetInitCredsPassword, _lib, "krb5_get_init_creds_password")
@@ -3261,6 +3529,7 @@ var _fnKrb5GetPermittedEnctypes func(objc.ID, unsafe.Pointer) int32
 
 // Krb5GetPermittedEnctypes calls the Kerberos framework function krb5_get_permitted_enctypes.
 func Krb5GetPermittedEnctypes(arg Krb5Context, arg2 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5GetPermittedEnctypes == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5GetPermittedEnctypes, _lib, "krb5_get_permitted_enctypes")
@@ -3272,6 +3541,7 @@ var _fnKrb5GetProfile func(objc.ID, unsafe.Pointer) int32
 
 // Krb5GetProfile calls the Kerberos framework function krb5_get_profile.
 func Krb5GetProfile(arg Krb5Context, arg2 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5GetProfile == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5GetProfile, _lib, "krb5_get_profile")
@@ -3283,6 +3553,7 @@ var _fnKrb5GetPromptTypes func(objc.ID) unsafe.Pointer
 
 // Krb5GetPromptTypes calls the Kerberos framework function krb5_get_prompt_types.
 func Krb5GetPromptTypes(context_ Krb5Context) unsafe.Pointer {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5GetPromptTypes == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5GetPromptTypes, _lib, "krb5_get_prompt_types")
@@ -3294,6 +3565,8 @@ var _fnKrb5GetRenewedCreds func(objc.ID, unsafe.Pointer, unsafe.Pointer, objc.ID
 
 // Krb5GetRenewedCreds calls the Kerberos framework function krb5_get_renewed_creds.
 func Krb5GetRenewedCreds(context_ Krb5Context, creds unsafe.Pointer, client unsafe.Pointer, ccache Krb5Ccache, inTktService string) int {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(ccache)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5GetRenewedCreds == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5GetRenewedCreds, _lib, "krb5_get_renewed_creds")
@@ -3305,6 +3578,7 @@ var _fnKrb5GetServerRcache func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // Krb5GetServerRcache calls the Kerberos framework function krb5_get_server_rcache.
 func Krb5GetServerRcache(arg Krb5Context, arg2 unsafe.Pointer, arg3 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5GetServerRcache == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5GetServerRcache, _lib, "krb5_get_server_rcache")
@@ -3316,6 +3590,7 @@ var _fnKrb5GetTimeOffsets func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // Krb5GetTimeOffsets calls the Kerberos framework function krb5_get_time_offsets.
 func Krb5GetTimeOffsets(arg Krb5Context) (result int, arg2 int, arg3 int) {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5GetTimeOffsets == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5GetTimeOffsets, _lib, "krb5_get_time_offsets")
@@ -3330,6 +3605,8 @@ var _fnKrb5GetValidatedCreds func(objc.ID, unsafe.Pointer, unsafe.Pointer, objc.
 
 // Krb5GetValidatedCreds calls the Kerberos framework function krb5_get_validated_creds.
 func Krb5GetValidatedCreds(context_ Krb5Context, creds unsafe.Pointer, client unsafe.Pointer, ccache Krb5Ccache, inTktService string) int {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(ccache)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5GetValidatedCreds == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5GetValidatedCreds, _lib, "krb5_get_validated_creds")
@@ -3363,6 +3640,7 @@ var _fnKrb5InitKeyblock func(objc.ID, int, int, unsafe.Pointer) int32
 
 // Krb5InitKeyblock calls the Kerberos framework function krb5_init_keyblock.
 func Krb5InitKeyblock(arg Krb5Context, enctype int, length int, out unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5InitKeyblock == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5InitKeyblock, _lib, "krb5_init_keyblock")
@@ -3374,6 +3652,7 @@ var _fnKrb5InitRandomKey func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Po
 
 // Krb5InitRandomKey calls the Kerberos framework function krb5_init_random_key.
 func Krb5InitRandomKey(context_ Krb5Context, eblock unsafe.Pointer, keyblock unsafe.Pointer, ptr unsafe.Pointer) int {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5InitRandomKey == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5InitRandomKey, _lib, "krb5_init_random_key")
@@ -3396,6 +3675,7 @@ var _fnKrb5IsConfigPrincipal func(objc.ID, unsafe.Pointer) uint32
 
 // Krb5IsConfigPrincipal calls the Kerberos framework function krb5_is_config_principal.
 func Krb5IsConfigPrincipal(arg Krb5Context, arg2 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5IsConfigPrincipal == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5IsConfigPrincipal, _lib, "krb5_is_config_principal")
@@ -3429,6 +3709,8 @@ var _fnKrb5KtAddEntry func(objc.ID, objc.ID, unsafe.Pointer) int32
 
 // Krb5KtAddEntry calls the Kerberos framework function krb5_kt_add_entry.
 func Krb5KtAddEntry(arg Krb5Context, arg2 Krb5Keytab, arg3 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
+	defer runtime.KeepAlive(arg2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5KtAddEntry == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5KtAddEntry, _lib, "krb5_kt_add_entry")
@@ -3440,6 +3722,8 @@ var _fnKrb5KtClose func(objc.ID, objc.ID) int32
 
 // Krb5KtClose calls the Kerberos framework function krb5_kt_close.
 func Krb5KtClose(context_ Krb5Context, keytab Krb5Keytab) int {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(keytab)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5KtClose == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5KtClose, _lib, "krb5_kt_close")
@@ -3451,6 +3735,7 @@ var _fnKrb5KtDefault func(objc.ID, unsafe.Pointer) int32
 
 // Krb5KtDefault calls the Kerberos framework function krb5_kt_default.
 func Krb5KtDefault(arg Krb5Context, arg2 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5KtDefault == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5KtDefault, _lib, "krb5_kt_default")
@@ -3462,6 +3747,7 @@ var _fnKrb5KtDefaultName func(objc.ID, string, int) int32
 
 // Krb5KtDefaultName calls the Kerberos framework function krb5_kt_default_name.
 func Krb5KtDefaultName(arg Krb5Context, arg2 string, arg3 int) int {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5KtDefaultName == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5KtDefaultName, _lib, "krb5_kt_default_name")
@@ -3473,6 +3759,8 @@ var _fnKrb5KtEndSeqGet func(objc.ID, objc.ID, unsafe.Pointer) int32
 
 // Krb5KtEndSeqGet calls the Kerberos framework function krb5_kt_end_seq_get.
 func Krb5KtEndSeqGet(context_ Krb5Context, keytab Krb5Keytab, cursor unsafe.Pointer) int {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(keytab)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5KtEndSeqGet == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5KtEndSeqGet, _lib, "krb5_kt_end_seq_get")
@@ -3484,6 +3772,8 @@ var _fnKrb5KtGetEntry func(objc.ID, objc.ID, unsafe.Pointer, int, int, unsafe.Po
 
 // Krb5KtGetEntry calls the Kerberos framework function krb5_kt_get_entry.
 func Krb5KtGetEntry(context_ Krb5Context, keytab Krb5Keytab, principal unsafe.Pointer, vno int, enctype int, entry unsafe.Pointer) int {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(keytab)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5KtGetEntry == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5KtGetEntry, _lib, "krb5_kt_get_entry")
@@ -3495,6 +3785,8 @@ var _fnKrb5KtGetName func(objc.ID, objc.ID, string, int) int32
 
 // Krb5KtGetName calls the Kerberos framework function krb5_kt_get_name.
 func Krb5KtGetName(context_ Krb5Context, keytab Krb5Keytab, name string, namelen int) int {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(keytab)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5KtGetName == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5KtGetName, _lib, "krb5_kt_get_name")
@@ -3506,6 +3798,8 @@ var _fnKrb5KtGetType func(objc.ID, objc.ID) string
 
 // Krb5KtGetType calls the Kerberos framework function krb5_kt_get_type.
 func Krb5KtGetType(arg Krb5Context, keytab Krb5Keytab) string {
+	defer runtime.KeepAlive(arg)
+	defer runtime.KeepAlive(keytab)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5KtGetType == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5KtGetType, _lib, "krb5_kt_get_type")
@@ -3517,6 +3811,8 @@ var _fnKrb5KtNextEntry func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer) in
 
 // Krb5KtNextEntry calls the Kerberos framework function krb5_kt_next_entry.
 func Krb5KtNextEntry(context_ Krb5Context, keytab Krb5Keytab, entry unsafe.Pointer, cursor unsafe.Pointer) int {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(keytab)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5KtNextEntry == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5KtNextEntry, _lib, "krb5_kt_next_entry")
@@ -3528,6 +3824,7 @@ var _fnKrb5KtReadServiceKey func(objc.ID, unsafe.Pointer, unsafe.Pointer, int, i
 
 // Krb5KtReadServiceKey calls the Kerberos framework function krb5_kt_read_service_key.
 func Krb5KtReadServiceKey(arg Krb5Context, arg2 unsafe.Pointer, arg3 unsafe.Pointer, arg4 int, arg5 int, arg6 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5KtReadServiceKey == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5KtReadServiceKey, _lib, "krb5_kt_read_service_key")
@@ -3539,6 +3836,8 @@ var _fnKrb5KtRemoveEntry func(objc.ID, objc.ID, unsafe.Pointer) int32
 
 // Krb5KtRemoveEntry calls the Kerberos framework function krb5_kt_remove_entry.
 func Krb5KtRemoveEntry(arg Krb5Context, arg2 Krb5Keytab, arg3 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
+	defer runtime.KeepAlive(arg2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5KtRemoveEntry == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5KtRemoveEntry, _lib, "krb5_kt_remove_entry")
@@ -3550,6 +3849,7 @@ var _fnKrb5KtResolve func(objc.ID, string, unsafe.Pointer) int32
 
 // Krb5KtResolve calls the Kerberos framework function krb5_kt_resolve.
 func Krb5KtResolve(arg Krb5Context, arg2 string, arg3 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5KtResolve == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5KtResolve, _lib, "krb5_kt_resolve")
@@ -3561,6 +3861,8 @@ var _fnKrb5KtStartSeqGet func(objc.ID, objc.ID, unsafe.Pointer) int32
 
 // Krb5KtStartSeqGet calls the Kerberos framework function krb5_kt_start_seq_get.
 func Krb5KtStartSeqGet(context_ Krb5Context, keytab Krb5Keytab, cursor unsafe.Pointer) int {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(keytab)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5KtStartSeqGet == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5KtStartSeqGet, _lib, "krb5_kt_start_seq_get")
@@ -3572,6 +3874,7 @@ var _fnKrb5Kuserok func(objc.ID, unsafe.Pointer, string) uint32
 
 // Krb5Kuserok calls the Kerberos framework function krb5_kuserok.
 func Krb5Kuserok(arg Krb5Context, arg2 unsafe.Pointer, arg3 string) int {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5Kuserok == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5Kuserok, _lib, "krb5_kuserok")
@@ -3583,6 +3886,8 @@ var _fnKrb5Mk1cred func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe
 
 // Krb5Mk1cred calls the Kerberos framework function krb5_mk_1cred.
 func Krb5Mk1cred(arg Krb5Context, arg2 Krb5AuthContext, arg3 unsafe.Pointer, arg4 unsafe.Pointer) (result int, arg5 Krb5ReplayData) {
+	defer runtime.KeepAlive(arg)
+	defer runtime.KeepAlive(arg2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5Mk1cred == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5Mk1cred, _lib, "krb5_mk_1cred")
@@ -3596,6 +3901,7 @@ var _fnKrb5MkError func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // Krb5MkError calls the Kerberos framework function krb5_mk_error.
 func Krb5MkError(arg Krb5Context, arg2 unsafe.Pointer, arg3 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5MkError == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5MkError, _lib, "krb5_mk_error")
@@ -3607,6 +3913,8 @@ var _fnKrb5MkNcred func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe
 
 // Krb5MkNcred calls the Kerberos framework function krb5_mk_ncred.
 func Krb5MkNcred(arg Krb5Context, arg2 Krb5AuthContext, arg3 unsafe.Pointer, arg4 unsafe.Pointer) (result int, arg5 Krb5ReplayData) {
+	defer runtime.KeepAlive(arg)
+	defer runtime.KeepAlive(arg2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5MkNcred == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5MkNcred, _lib, "krb5_mk_ncred")
@@ -3620,6 +3928,8 @@ var _fnKrb5MkPriv func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.
 
 // Krb5MkPriv calls the Kerberos framework function krb5_mk_priv.
 func Krb5MkPriv(arg Krb5Context, arg2 Krb5AuthContext, arg3 unsafe.Pointer, arg4 unsafe.Pointer) (result int, arg5 Krb5ReplayData) {
+	defer runtime.KeepAlive(arg)
+	defer runtime.KeepAlive(arg2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5MkPriv == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5MkPriv, _lib, "krb5_mk_priv")
@@ -3633,6 +3943,8 @@ var _fnKrb5MkRep func(objc.ID, objc.ID, unsafe.Pointer) int32
 
 // Krb5MkRep calls the Kerberos framework function krb5_mk_rep.
 func Krb5MkRep(arg Krb5Context, arg2 Krb5AuthContext, arg3 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
+	defer runtime.KeepAlive(arg2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5MkRep == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5MkRep, _lib, "krb5_mk_rep")
@@ -3644,6 +3956,8 @@ var _fnKrb5MkReq func(objc.ID, unsafe.Pointer, int, string, string, unsafe.Point
 
 // Krb5MkReq calls the Kerberos framework function krb5_mk_req.
 func Krb5MkReq(arg Krb5Context, arg2 unsafe.Pointer, arg3 int, arg4 string, arg5 string, arg6 unsafe.Pointer, arg7 Krb5Ccache, arg8 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
+	defer runtime.KeepAlive(arg7)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5MkReq == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5MkReq, _lib, "krb5_mk_req")
@@ -3655,6 +3969,7 @@ var _fnKrb5MkReqExtended func(objc.ID, unsafe.Pointer, int, unsafe.Pointer, unsa
 
 // Krb5MkReqExtended calls the Kerberos framework function krb5_mk_req_extended.
 func Krb5MkReqExtended(arg Krb5Context, arg2 unsafe.Pointer, arg3 int, arg4 unsafe.Pointer, arg5 unsafe.Pointer, arg6 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5MkReqExtended == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5MkReqExtended, _lib, "krb5_mk_req_extended")
@@ -3666,6 +3981,8 @@ var _fnKrb5MkSafe func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.
 
 // Krb5MkSafe calls the Kerberos framework function krb5_mk_safe.
 func Krb5MkSafe(arg Krb5Context, arg2 Krb5AuthContext, arg3 unsafe.Pointer, arg4 unsafe.Pointer) (result int, arg5 Krb5ReplayData) {
+	defer runtime.KeepAlive(arg)
+	defer runtime.KeepAlive(arg2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5MkSafe == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5MkSafe, _lib, "krb5_mk_safe")
@@ -3679,6 +3996,7 @@ var _fnKrb5OsLocaladdr func(objc.ID, unsafe.Pointer) int32
 
 // Krb5OsLocaladdr calls the Kerberos framework function krb5_os_localaddr.
 func Krb5OsLocaladdr(arg Krb5Context, arg2 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5OsLocaladdr == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5OsLocaladdr, _lib, "krb5_os_localaddr")
@@ -3690,6 +4008,7 @@ var _fnKrb5ParseName func(objc.ID, string, unsafe.Pointer) int32
 
 // Krb5ParseName calls the Kerberos framework function krb5_parse_name.
 func Krb5ParseName(arg Krb5Context, arg2 string, arg3 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5ParseName == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5ParseName, _lib, "krb5_parse_name")
@@ -3701,6 +4020,7 @@ var _fnKrb5ParseNameFlags func(objc.ID, string, int, unsafe.Pointer) int32
 
 // Krb5ParseNameFlags calls the Kerberos framework function krb5_parse_name_flags.
 func Krb5ParseNameFlags(arg Krb5Context, arg2 string, arg3 int, arg4 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5ParseNameFlags == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5ParseNameFlags, _lib, "krb5_parse_name_flags")
@@ -3712,6 +4032,7 @@ var _fnKrb5Principal2salt func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // Krb5Principal2salt calls the Kerberos framework function krb5_principal2salt.
 func Krb5Principal2salt(arg Krb5Context, arg2 unsafe.Pointer, arg3 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5Principal2salt == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5Principal2salt, _lib, "krb5_principal2salt")
@@ -3723,6 +4044,7 @@ var _fnKrb5PrincipalCompare func(objc.ID, unsafe.Pointer, unsafe.Pointer) uint32
 
 // Krb5PrincipalCompare calls the Kerberos framework function krb5_principal_compare.
 func Krb5PrincipalCompare(arg Krb5Context, arg2 unsafe.Pointer, arg3 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5PrincipalCompare == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5PrincipalCompare, _lib, "krb5_principal_compare")
@@ -3734,6 +4056,7 @@ var _fnKrb5ProcessKey func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // Krb5ProcessKey calls the Kerberos framework function krb5_process_key.
 func Krb5ProcessKey(context_ Krb5Context, eblock unsafe.Pointer, key unsafe.Pointer) int {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5ProcessKey == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5ProcessKey, _lib, "krb5_process_key")
@@ -3745,6 +4068,7 @@ var _fnKrb5PrompterPosix func(objc.ID, unsafe.Pointer, string, string, int, unsa
 
 // Krb5PrompterPosix calls the Kerberos framework function krb5_prompter_posix.
 func Krb5PrompterPosix(context_ Krb5Context, data unsafe.Pointer, name string, banner string, numPrompts int, prompts unsafe.Pointer) int {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5PrompterPosix == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5PrompterPosix, _lib, "krb5_prompter_posix")
@@ -3756,6 +4080,7 @@ var _fnKrb5RandomKey func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointe
 
 // Krb5RandomKey calls the Kerberos framework function krb5_random_key.
 func Krb5RandomKey(context_ Krb5Context, eblock unsafe.Pointer, ptr unsafe.Pointer, keyblock unsafe.Pointer) int {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5RandomKey == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5RandomKey, _lib, "krb5_random_key")
@@ -3767,6 +4092,8 @@ var _fnKrb5RdCred func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.
 
 // Krb5RdCred calls the Kerberos framework function krb5_rd_cred.
 func Krb5RdCred(arg Krb5Context, arg2 Krb5AuthContext, arg3 unsafe.Pointer, arg4 unsafe.Pointer) (result int, arg5 Krb5ReplayData) {
+	defer runtime.KeepAlive(arg)
+	defer runtime.KeepAlive(arg2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5RdCred == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5RdCred, _lib, "krb5_rd_cred")
@@ -3780,6 +4107,7 @@ var _fnKrb5RdError func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // Krb5RdError calls the Kerberos framework function krb5_rd_error.
 func Krb5RdError(arg Krb5Context, arg2 unsafe.Pointer, arg3 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5RdError == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5RdError, _lib, "krb5_rd_error")
@@ -3791,6 +4119,8 @@ var _fnKrb5RdPriv func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.
 
 // Krb5RdPriv calls the Kerberos framework function krb5_rd_priv.
 func Krb5RdPriv(arg Krb5Context, arg2 Krb5AuthContext, arg3 unsafe.Pointer, arg4 unsafe.Pointer) (result int, arg5 Krb5ReplayData) {
+	defer runtime.KeepAlive(arg)
+	defer runtime.KeepAlive(arg2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5RdPriv == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5RdPriv, _lib, "krb5_rd_priv")
@@ -3804,6 +4134,8 @@ var _fnKrb5RdRep func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // Krb5RdRep calls the Kerberos framework function krb5_rd_rep.
 func Krb5RdRep(arg Krb5Context, arg2 Krb5AuthContext, arg3 unsafe.Pointer, arg4 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
+	defer runtime.KeepAlive(arg2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5RdRep == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5RdRep, _lib, "krb5_rd_rep")
@@ -3815,6 +4147,8 @@ var _fnKrb5RdReq func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, o
 
 // Krb5RdReq calls the Kerberos framework function krb5_rd_req.
 func Krb5RdReq(arg Krb5Context, arg2 unsafe.Pointer, arg3 unsafe.Pointer, arg4 unsafe.Pointer, arg5 Krb5Keytab, arg7 unsafe.Pointer) (result int, arg6 int) {
+	defer runtime.KeepAlive(arg)
+	defer runtime.KeepAlive(arg5)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5RdReq == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5RdReq, _lib, "krb5_rd_req")
@@ -3828,6 +4162,8 @@ var _fnKrb5RdSafe func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.
 
 // Krb5RdSafe calls the Kerberos framework function krb5_rd_safe.
 func Krb5RdSafe(arg Krb5Context, arg2 Krb5AuthContext, arg3 unsafe.Pointer, arg4 unsafe.Pointer) (result int, arg5 Krb5ReplayData) {
+	defer runtime.KeepAlive(arg)
+	defer runtime.KeepAlive(arg2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5RdSafe == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5RdSafe, _lib, "krb5_rd_safe")
@@ -3841,6 +4177,7 @@ var _fnKrb5ReadPassword func(objc.ID, string, string, string, unsafe.Pointer) in
 
 // Krb5ReadPassword calls the Kerberos framework function krb5_read_password.
 func Krb5ReadPassword(arg Krb5Context, arg2 string, arg3 string, arg4 string) (result int, arg5 uint32) {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5ReadPassword == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5ReadPassword, _lib, "krb5_read_password")
@@ -3854,6 +4191,7 @@ var _fnKrb5RealmCompare func(objc.ID, unsafe.Pointer, unsafe.Pointer) uint32
 
 // Krb5RealmCompare calls the Kerberos framework function krb5_realm_compare.
 func Krb5RealmCompare(arg Krb5Context, arg2 unsafe.Pointer, arg3 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5RealmCompare == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5RealmCompare, _lib, "krb5_realm_compare")
@@ -3865,6 +4203,8 @@ var _fnKrb5Recvauth func(objc.ID, unsafe.Pointer, unsafe.Pointer, string, unsafe
 
 // Krb5Recvauth calls the Kerberos framework function krb5_recvauth.
 func Krb5Recvauth(arg Krb5Context, arg2 unsafe.Pointer, arg3 unsafe.Pointer, arg4 string, arg5 unsafe.Pointer, arg6 int, arg7 Krb5Keytab, arg8 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
+	defer runtime.KeepAlive(arg7)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5Recvauth == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5Recvauth, _lib, "krb5_recvauth")
@@ -3876,6 +4216,8 @@ var _fnKrb5RecvauthVersion func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.
 
 // Krb5RecvauthVersion calls the Kerberos framework function krb5_recvauth_version.
 func Krb5RecvauthVersion(arg Krb5Context, arg2 unsafe.Pointer, arg3 unsafe.Pointer, arg4 unsafe.Pointer, arg5 int, arg6 Krb5Keytab, arg7 unsafe.Pointer, arg8 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
+	defer runtime.KeepAlive(arg6)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5RecvauthVersion == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5RecvauthVersion, _lib, "krb5_recvauth_version")
@@ -3898,6 +4240,8 @@ var _fnKrb5Sendauth func(objc.ID, unsafe.Pointer, unsafe.Pointer, string, unsafe
 
 // Krb5Sendauth calls the Kerberos framework function krb5_sendauth.
 func Krb5Sendauth(arg Krb5Context, arg2 unsafe.Pointer, arg3 unsafe.Pointer, arg4 string, arg5 unsafe.Pointer, arg6 unsafe.Pointer, arg7 int, arg8 unsafe.Pointer, arg9 unsafe.Pointer, arg10 Krb5Ccache, arg11 unsafe.Pointer, arg12 unsafe.Pointer, arg13 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
+	defer runtime.KeepAlive(arg10)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5Sendauth == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5Sendauth, _lib, "krb5_sendauth")
@@ -3909,6 +4253,8 @@ var _fnKrb5ServerDecryptTicketKeytab func(objc.ID, objc.ID, unsafe.Pointer) int3
 
 // Krb5ServerDecryptTicketKeytab calls the Kerberos framework function krb5_server_decrypt_ticket_keytab.
 func Krb5ServerDecryptTicketKeytab(context_ Krb5Context, kt Krb5Keytab, ticket unsafe.Pointer) int {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(kt)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5ServerDecryptTicketKeytab == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5ServerDecryptTicketKeytab, _lib, "krb5_server_decrypt_ticket_keytab")
@@ -3920,6 +4266,7 @@ var _fnKrb5SetDefaultRealm func(objc.ID, string) int32
 
 // Krb5SetDefaultRealm calls the Kerberos framework function krb5_set_default_realm.
 func Krb5SetDefaultRealm(arg Krb5Context, arg2 string) int {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5SetDefaultRealm == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5SetDefaultRealm, _lib, "krb5_set_default_realm")
@@ -3931,6 +4278,7 @@ var _fnKrb5SetDefaultTgsEnctypes func(objc.ID, unsafe.Pointer) int32
 
 // Krb5SetDefaultTgsEnctypes calls the Kerberos framework function krb5_set_default_tgs_enctypes.
 func Krb5SetDefaultTgsEnctypes(arg Krb5Context, arg2 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5SetDefaultTgsEnctypes == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5SetDefaultTgsEnctypes, _lib, "krb5_set_default_tgs_enctypes")
@@ -3942,6 +4290,7 @@ var _fnKrb5SetPassword func(objc.ID, unsafe.Pointer, string, unsafe.Pointer, uns
 
 // Krb5SetPassword calls the Kerberos framework function krb5_set_password.
 func Krb5SetPassword(context_ Krb5Context, creds unsafe.Pointer, newpw string, changePasswordFor unsafe.Pointer, resultCodeString unsafe.Pointer, resultString unsafe.Pointer) (result int, resultCode int32) {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5SetPassword == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5SetPassword, _lib, "krb5_set_password")
@@ -3955,6 +4304,8 @@ var _fnKrb5SetPasswordUsingCcache func(objc.ID, objc.ID, string, unsafe.Pointer,
 
 // Krb5SetPasswordUsingCcache calls the Kerberos framework function krb5_set_password_using_ccache.
 func Krb5SetPasswordUsingCcache(context_ Krb5Context, ccache Krb5Ccache, newpw string, changePasswordFor unsafe.Pointer, resultCodeString unsafe.Pointer, resultString unsafe.Pointer) (result int, resultCode int32) {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(ccache)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5SetPasswordUsingCcache == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5SetPasswordUsingCcache, _lib, "krb5_set_password_using_ccache")
@@ -3968,6 +4319,7 @@ var _fnKrb5SetPrincipalRealm func(objc.ID, unsafe.Pointer, string) int32
 
 // Krb5SetPrincipalRealm calls the Kerberos framework function krb5_set_principal_realm.
 func Krb5SetPrincipalRealm(arg Krb5Context, arg2 unsafe.Pointer, arg3 string) int {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5SetPrincipalRealm == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5SetPrincipalRealm, _lib, "krb5_set_principal_realm")
@@ -3979,6 +4331,7 @@ var _fnKrb5SetRealTime func(objc.ID, int, int) int32
 
 // Krb5SetRealTime calls the Kerberos framework function krb5_set_real_time.
 func Krb5SetRealTime(arg Krb5Context, arg2 int, arg3 int) int {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5SetRealTime == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5SetRealTime, _lib, "krb5_set_real_time")
@@ -3990,6 +4343,7 @@ var _fnKrb5SnameToPrincipal func(objc.ID, string, string, int, unsafe.Pointer) i
 
 // Krb5SnameToPrincipal calls the Kerberos framework function krb5_sname_to_principal.
 func Krb5SnameToPrincipal(arg Krb5Context, arg2 string, arg3 string, arg4 int, arg5 unsafe.Pointer) int {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5SnameToPrincipal == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5SnameToPrincipal, _lib, "krb5_sname_to_principal")
@@ -4040,6 +4394,7 @@ var _fnKrb5StringToKey func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Poin
 
 // Krb5StringToKey calls the Kerberos framework function krb5_string_to_key.
 func Krb5StringToKey(context_ Krb5Context, eblock unsafe.Pointer, keyblock unsafe.Pointer, data unsafe.Pointer, salt unsafe.Pointer) int {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5StringToKey == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5StringToKey, _lib, "krb5_string_to_key")
@@ -4077,6 +4432,7 @@ var _fnKrb5Timeofday func(objc.ID, unsafe.Pointer) int32
 
 // Krb5Timeofday calls the Kerberos framework function krb5_timeofday.
 func Krb5Timeofday(arg Krb5Context) (result int, arg2 int) {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5Timeofday == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5Timeofday, _lib, "krb5_timeofday")
@@ -4112,6 +4468,7 @@ var _fnKrb5UnparseName func(objc.ID, unsafe.Pointer, string) int32
 
 // Krb5UnparseName calls the Kerberos framework function krb5_unparse_name.
 func Krb5UnparseName(arg Krb5Context, arg2 unsafe.Pointer, arg3 string) int {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5UnparseName == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5UnparseName, _lib, "krb5_unparse_name")
@@ -4123,6 +4480,7 @@ var _fnKrb5UnparseNameExt func(objc.ID, unsafe.Pointer, string, unsafe.Pointer) 
 
 // Krb5UnparseNameExt calls the Kerberos framework function krb5_unparse_name_ext.
 func Krb5UnparseNameExt(arg Krb5Context, arg2 unsafe.Pointer, arg3 string) (result int, arg4 uint32) {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5UnparseNameExt == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5UnparseNameExt, _lib, "krb5_unparse_name_ext")
@@ -4136,6 +4494,7 @@ var _fnKrb5UnparseNameFlags func(objc.ID, unsafe.Pointer, int, string) int32
 
 // Krb5UnparseNameFlags calls the Kerberos framework function krb5_unparse_name_flags.
 func Krb5UnparseNameFlags(arg Krb5Context, arg2 unsafe.Pointer, arg3 int, arg4 string) int {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5UnparseNameFlags == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5UnparseNameFlags, _lib, "krb5_unparse_name_flags")
@@ -4147,6 +4506,7 @@ var _fnKrb5UnparseNameFlagsExt func(objc.ID, unsafe.Pointer, int, string, unsafe
 
 // Krb5UnparseNameFlagsExt calls the Kerberos framework function krb5_unparse_name_flags_ext.
 func Krb5UnparseNameFlagsExt(arg Krb5Context, arg2 unsafe.Pointer, arg3 int, arg4 string) (result int, arg5 uint32) {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5UnparseNameFlagsExt == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5UnparseNameFlagsExt, _lib, "krb5_unparse_name_flags_ext")
@@ -4160,6 +4520,7 @@ var _fnKrb5UsTimeofday func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // Krb5UsTimeofday calls the Kerberos framework function krb5_us_timeofday.
 func Krb5UsTimeofday(arg Krb5Context) (result int, arg2 int, arg3 int) {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5UsTimeofday == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5UsTimeofday, _lib, "krb5_us_timeofday")
@@ -4174,6 +4535,7 @@ var _fnKrb5UseEnctype func(objc.ID, unsafe.Pointer, int) int32
 
 // Krb5UseEnctype calls the Kerberos framework function krb5_use_enctype.
 func Krb5UseEnctype(context_ Krb5Context, eblock unsafe.Pointer, enctype int) int {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5UseEnctype == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5UseEnctype, _lib, "krb5_use_enctype")
@@ -4185,6 +4547,7 @@ var _fnKrb5VerifyChecksum func(objc.ID, int, unsafe.Pointer, unsafe.Pointer, int
 
 // Krb5VerifyChecksum calls the Kerberos framework function krb5_verify_checksum.
 func Krb5VerifyChecksum(context_ Krb5Context, ctype int, cksum unsafe.Pointer, in unsafe.Pointer, inLength int, seed unsafe.Pointer, seedLength int) int {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5VerifyChecksum == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5VerifyChecksum, _lib, "krb5_verify_checksum")
@@ -4196,6 +4559,8 @@ var _fnKrb5VerifyInitCreds func(objc.ID, unsafe.Pointer, unsafe.Pointer, objc.ID
 
 // Krb5VerifyInitCreds calls the Kerberos framework function krb5_verify_init_creds.
 func Krb5VerifyInitCreds(context_ Krb5Context, creds unsafe.Pointer, apReqServer unsafe.Pointer, apReqKeytab Krb5Keytab, ccache unsafe.Pointer) (result int, k5VicOptions Krb5VerifyInitCredsOpt) {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(apReqKeytab)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5VerifyInitCreds == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5VerifyInitCreds, _lib, "krb5_verify_init_creds")
@@ -4235,6 +4600,7 @@ var _fnKrb5VsetErrorMessage func(objc.ID, int, string, string)
 
 // Krb5VsetErrorMessage calls the Kerberos framework function krb5_vset_error_message.
 func Krb5VsetErrorMessage(arg Krb5Context, arg2 int, arg3 string, arg4 string) {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5VsetErrorMessage == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5VsetErrorMessage, _lib, "krb5_vset_error_message")
@@ -4246,6 +4612,7 @@ var _fnProfileAbandon func(objc.ID)
 
 // ProfileAbandon calls the Kerberos framework function profile_abandon.
 func ProfileAbandon(profile ProfileT) {
+	defer runtime.KeepAlive(profile)
 	_loadOnce.Do(_loadLibrary)
 	if _fnProfileAbandon == nil {
 		ebipurego.RegisterLibFunc(&_fnProfileAbandon, _lib, "profile_abandon")
@@ -4257,6 +4624,7 @@ var _fnProfileAddRelation func(objc.ID, string, string) int
 
 // ProfileAddRelation calls the Kerberos framework function profile_add_relation.
 func ProfileAddRelation(profile ProfileT, names string, newValue string) int {
+	defer runtime.KeepAlive(profile)
 	_loadOnce.Do(_loadLibrary)
 	if _fnProfileAddRelation == nil {
 		ebipurego.RegisterLibFunc(&_fnProfileAddRelation, _lib, "profile_add_relation")
@@ -4268,6 +4636,7 @@ var _fnProfileClearRelation func(objc.ID, string) int
 
 // ProfileClearRelation calls the Kerberos framework function profile_clear_relation.
 func ProfileClearRelation(profile ProfileT, names string) int {
+	defer runtime.KeepAlive(profile)
 	_loadOnce.Do(_loadLibrary)
 	if _fnProfileClearRelation == nil {
 		ebipurego.RegisterLibFunc(&_fnProfileClearRelation, _lib, "profile_clear_relation")
@@ -4290,6 +4659,7 @@ var _fnProfileFlush func(objc.ID) int
 
 // ProfileFlush calls the Kerberos framework function profile_flush.
 func ProfileFlush(profile ProfileT) int {
+	defer runtime.KeepAlive(profile)
 	_loadOnce.Do(_loadLibrary)
 	if _fnProfileFlush == nil {
 		ebipurego.RegisterLibFunc(&_fnProfileFlush, _lib, "profile_flush")
@@ -4301,6 +4671,7 @@ var _fnProfileFlushToBuffer func(objc.ID, string) int
 
 // ProfileFlushToBuffer calls the Kerberos framework function profile_flush_to_buffer.
 func ProfileFlushToBuffer(profile ProfileT, bufp string) int {
+	defer runtime.KeepAlive(profile)
 	_loadOnce.Do(_loadLibrary)
 	if _fnProfileFlushToBuffer == nil {
 		ebipurego.RegisterLibFunc(&_fnProfileFlushToBuffer, _lib, "profile_flush_to_buffer")
@@ -4312,6 +4683,7 @@ var _fnProfileFlushToFile func(objc.ID, string) int
 
 // ProfileFlushToFile calls the Kerberos framework function profile_flush_to_file.
 func ProfileFlushToFile(profile ProfileT, outfile string) int {
+	defer runtime.KeepAlive(profile)
 	_loadOnce.Do(_loadLibrary)
 	if _fnProfileFlushToFile == nil {
 		ebipurego.RegisterLibFunc(&_fnProfileFlushToFile, _lib, "profile_flush_to_file")
@@ -4323,6 +4695,7 @@ var _fnProfileFreeBuffer func(objc.ID, string)
 
 // ProfileFreeBuffer calls the Kerberos framework function profile_free_buffer.
 func ProfileFreeBuffer(profile ProfileT, buf string) {
+	defer runtime.KeepAlive(profile)
 	_loadOnce.Do(_loadLibrary)
 	if _fnProfileFreeBuffer == nil {
 		ebipurego.RegisterLibFunc(&_fnProfileFreeBuffer, _lib, "profile_free_buffer")
@@ -4345,6 +4718,7 @@ var _fnProfileGetBoolean func(objc.ID, string, string, string, int, unsafe.Point
 
 // ProfileGetBoolean calls the Kerberos framework function profile_get_boolean.
 func ProfileGetBoolean(profile ProfileT, name string, subname string, subsubname string, defVal int) (result int, retDefault int32) {
+	defer runtime.KeepAlive(profile)
 	_loadOnce.Do(_loadLibrary)
 	if _fnProfileGetBoolean == nil {
 		ebipurego.RegisterLibFunc(&_fnProfileGetBoolean, _lib, "profile_get_boolean")
@@ -4358,6 +4732,7 @@ var _fnProfileGetInteger func(objc.ID, string, string, string, int, unsafe.Point
 
 // ProfileGetInteger calls the Kerberos framework function profile_get_integer.
 func ProfileGetInteger(profile ProfileT, name string, subname string, subsubname string, defVal int) (result int, retDefault int32) {
+	defer runtime.KeepAlive(profile)
 	_loadOnce.Do(_loadLibrary)
 	if _fnProfileGetInteger == nil {
 		ebipurego.RegisterLibFunc(&_fnProfileGetInteger, _lib, "profile_get_integer")
@@ -4371,6 +4746,7 @@ var _fnProfileGetRelationNames func(objc.ID, string, string) int
 
 // ProfileGetRelationNames calls the Kerberos framework function profile_get_relation_names.
 func ProfileGetRelationNames(profile ProfileT, names string, retNames string) int {
+	defer runtime.KeepAlive(profile)
 	_loadOnce.Do(_loadLibrary)
 	if _fnProfileGetRelationNames == nil {
 		ebipurego.RegisterLibFunc(&_fnProfileGetRelationNames, _lib, "profile_get_relation_names")
@@ -4382,6 +4758,7 @@ var _fnProfileGetString func(objc.ID, string, string, string, string, string) in
 
 // ProfileGetString calls the Kerberos framework function profile_get_string.
 func ProfileGetString(profile ProfileT, name string, subname string, subsubname string, defVal string, retString string) int {
+	defer runtime.KeepAlive(profile)
 	_loadOnce.Do(_loadLibrary)
 	if _fnProfileGetString == nil {
 		ebipurego.RegisterLibFunc(&_fnProfileGetString, _lib, "profile_get_string")
@@ -4393,6 +4770,7 @@ var _fnProfileGetSubsectionNames func(objc.ID, string, string) int
 
 // ProfileGetSubsectionNames calls the Kerberos framework function profile_get_subsection_names.
 func ProfileGetSubsectionNames(profile ProfileT, names string, retNames string) int {
+	defer runtime.KeepAlive(profile)
 	_loadOnce.Do(_loadLibrary)
 	if _fnProfileGetSubsectionNames == nil {
 		ebipurego.RegisterLibFunc(&_fnProfileGetSubsectionNames, _lib, "profile_get_subsection_names")
@@ -4404,6 +4782,7 @@ var _fnProfileGetValues func(objc.ID, string, string) int
 
 // ProfileGetValues calls the Kerberos framework function profile_get_values.
 func ProfileGetValues(profile ProfileT, names string, retValues string) int {
+	defer runtime.KeepAlive(profile)
 	_loadOnce.Do(_loadLibrary)
 	if _fnProfileGetValues == nil {
 		ebipurego.RegisterLibFunc(&_fnProfileGetValues, _lib, "profile_get_values")
@@ -4437,6 +4816,7 @@ var _fnProfileIsModified func(objc.ID, unsafe.Pointer) int
 
 // ProfileIsModified calls the Kerberos framework function profile_is_modified.
 func ProfileIsModified(profile ProfileT) (result int, modified int32) {
+	defer runtime.KeepAlive(profile)
 	_loadOnce.Do(_loadLibrary)
 	if _fnProfileIsModified == nil {
 		ebipurego.RegisterLibFunc(&_fnProfileIsModified, _lib, "profile_is_modified")
@@ -4450,6 +4830,7 @@ var _fnProfileIsWritable func(objc.ID, unsafe.Pointer) int
 
 // ProfileIsWritable calls the Kerberos framework function profile_is_writable.
 func ProfileIsWritable(profile ProfileT) (result int, writable int32) {
+	defer runtime.KeepAlive(profile)
 	_loadOnce.Do(_loadLibrary)
 	if _fnProfileIsWritable == nil {
 		ebipurego.RegisterLibFunc(&_fnProfileIsWritable, _lib, "profile_is_writable")
@@ -4474,6 +4855,7 @@ var _fnProfileIteratorCreate func(objc.ID, string, int, unsafe.Pointer) int
 
 // ProfileIteratorCreate calls the Kerberos framework function profile_iterator_create.
 func ProfileIteratorCreate(profile ProfileT, names string, flags int, retIter unsafe.Pointer) int {
+	defer runtime.KeepAlive(profile)
 	_loadOnce.Do(_loadLibrary)
 	if _fnProfileIteratorCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnProfileIteratorCreate, _lib, "profile_iterator_create")
@@ -4496,6 +4878,7 @@ var _fnProfileRelease func(objc.ID)
 
 // ProfileRelease calls the Kerberos framework function profile_release.
 func ProfileRelease(profile ProfileT) {
+	defer runtime.KeepAlive(profile)
 	_loadOnce.Do(_loadLibrary)
 	if _fnProfileRelease == nil {
 		ebipurego.RegisterLibFunc(&_fnProfileRelease, _lib, "profile_release")
@@ -4518,6 +4901,7 @@ var _fnProfileRenameSection func(objc.ID, string, string) int
 
 // ProfileRenameSection calls the Kerberos framework function profile_rename_section.
 func ProfileRenameSection(profile ProfileT, names string, newName string) int {
+	defer runtime.KeepAlive(profile)
 	_loadOnce.Do(_loadLibrary)
 	if _fnProfileRenameSection == nil {
 		ebipurego.RegisterLibFunc(&_fnProfileRenameSection, _lib, "profile_rename_section")
@@ -4529,6 +4913,7 @@ var _fnProfileUpdateRelation func(objc.ID, string, string, string) int
 
 // ProfileUpdateRelation calls the Kerberos framework function profile_update_relation.
 func ProfileUpdateRelation(profile ProfileT, names string, oldValue string, newValue string) int {
+	defer runtime.KeepAlive(profile)
 	_loadOnce.Do(_loadLibrary)
 	if _fnProfileUpdateRelation == nil {
 		ebipurego.RegisterLibFunc(&_fnProfileUpdateRelation, _lib, "profile_update_relation")

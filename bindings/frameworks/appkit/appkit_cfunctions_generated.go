@@ -5,6 +5,7 @@
 package appkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
@@ -20,6 +21,7 @@ var _fnNSAccessibilityActionDescription func(objc.ID) objc.ID
 
 // NSAccessibilityActionDescription calls the AppKit framework function NSAccessibilityActionDescription.
 func NSAccessibilityActionDescription(action obj.Object) string {
+	defer runtime.KeepAlive(action)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSAccessibilityActionDescription == nil {
 		ebipurego.RegisterLibFunc(&_fnNSAccessibilityActionDescription, _lib, "NSAccessibilityActionDescription")
@@ -35,6 +37,7 @@ var _fnNSAccessibilityFrameInView func(objc.ID, corefoundation.CGRect) corefound
 
 // NSAccessibilityFrameInView calls the AppKit framework function NSAccessibilityFrameInView.
 func NSAccessibilityFrameInView(parentView *View, frame corefoundation.CGRect) corefoundation.CGRect {
+	defer runtime.KeepAlive(parentView)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSAccessibilityFrameInView == nil {
 		ebipurego.RegisterLibFunc(&_fnNSAccessibilityFrameInView, _lib, "NSAccessibilityFrameInView")
@@ -46,6 +49,7 @@ var _fnNSAccessibilityPointInView func(objc.ID, corefoundation.CGPoint) corefoun
 
 // NSAccessibilityPointInView calls the AppKit framework function NSAccessibilityPointInView.
 func NSAccessibilityPointInView(parentView *View, point corefoundation.CGPoint) corefoundation.CGPoint {
+	defer runtime.KeepAlive(parentView)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSAccessibilityPointInView == nil {
 		ebipurego.RegisterLibFunc(&_fnNSAccessibilityPointInView, _lib, "NSAccessibilityPointInView")
@@ -57,6 +61,8 @@ var _fnNSAccessibilityPostNotification func(objc.ID, objc.ID)
 
 // NSAccessibilityPostNotification calls the AppKit framework function NSAccessibilityPostNotification.
 func NSAccessibilityPostNotification(element obj.Object, notification obj.Object) {
+	defer runtime.KeepAlive(element)
+	defer runtime.KeepAlive(notification)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSAccessibilityPostNotification == nil {
 		ebipurego.RegisterLibFunc(&_fnNSAccessibilityPostNotification, _lib, "NSAccessibilityPostNotification")
@@ -68,6 +74,9 @@ var _fnNSAccessibilityPostNotificationWithUserInfo func(objc.ID, objc.ID, objc.I
 
 // NSAccessibilityPostNotificationWithUserInfo calls the AppKit framework function NSAccessibilityPostNotificationWithUserInfo.
 func NSAccessibilityPostNotificationWithUserInfo(element obj.Object, notification obj.Object, userInfo obj.Object) {
+	defer runtime.KeepAlive(element)
+	defer runtime.KeepAlive(notification)
+	defer runtime.KeepAlive(userInfo)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSAccessibilityPostNotificationWithUserInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnNSAccessibilityPostNotificationWithUserInfo, _lib, "NSAccessibilityPostNotificationWithUserInfo")
@@ -79,6 +88,9 @@ var _fnNSAccessibilityRaiseBadArgumentException func(objc.ID, objc.ID, objc.ID)
 
 // NSAccessibilityRaiseBadArgumentException calls the AppKit framework function NSAccessibilityRaiseBadArgumentException.
 func NSAccessibilityRaiseBadArgumentException(element obj.Object, attribute obj.Object, value obj.Object) {
+	defer runtime.KeepAlive(element)
+	defer runtime.KeepAlive(attribute)
+	defer runtime.KeepAlive(value)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSAccessibilityRaiseBadArgumentException == nil {
 		ebipurego.RegisterLibFunc(&_fnNSAccessibilityRaiseBadArgumentException, _lib, "NSAccessibilityRaiseBadArgumentException")
@@ -90,6 +102,8 @@ var _fnNSAccessibilityRoleDescription func(objc.ID, objc.ID) objc.ID
 
 // NSAccessibilityRoleDescription calls the AppKit framework function NSAccessibilityRoleDescription.
 func NSAccessibilityRoleDescription(role obj.Object, subrole obj.Object) string {
+	defer runtime.KeepAlive(role)
+	defer runtime.KeepAlive(subrole)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSAccessibilityRoleDescription == nil {
 		ebipurego.RegisterLibFunc(&_fnNSAccessibilityRoleDescription, _lib, "NSAccessibilityRoleDescription")
@@ -105,6 +119,7 @@ var _fnNSAccessibilityRoleDescriptionForUIElement func(objc.ID) objc.ID
 
 // NSAccessibilityRoleDescriptionForUIElement calls the AppKit framework function NSAccessibilityRoleDescriptionForUIElement.
 func NSAccessibilityRoleDescriptionForUIElement(element obj.Object) string {
+	defer runtime.KeepAlive(element)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSAccessibilityRoleDescriptionForUIElement == nil {
 		ebipurego.RegisterLibFunc(&_fnNSAccessibilityRoleDescriptionForUIElement, _lib, "NSAccessibilityRoleDescriptionForUIElement")
@@ -131,6 +146,7 @@ var _fnNSAccessibilityUnignoredAncestor func(objc.ID) objc.ID
 
 // NSAccessibilityUnignoredAncestor calls the AppKit framework function NSAccessibilityUnignoredAncestor.
 func NSAccessibilityUnignoredAncestor(element obj.Object) obj.Object {
+	defer runtime.KeepAlive(element)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSAccessibilityUnignoredAncestor == nil {
 		ebipurego.RegisterLibFunc(&_fnNSAccessibilityUnignoredAncestor, _lib, "NSAccessibilityUnignoredAncestor")
@@ -143,6 +159,7 @@ var _fnNSAccessibilityUnignoredChildren func(objc.ID) objc.ID
 
 // NSAccessibilityUnignoredChildren calls the AppKit framework function NSAccessibilityUnignoredChildren.
 func NSAccessibilityUnignoredChildren(originalChildren obj.Object) obj.Object {
+	defer runtime.KeepAlive(originalChildren)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSAccessibilityUnignoredChildren == nil {
 		ebipurego.RegisterLibFunc(&_fnNSAccessibilityUnignoredChildren, _lib, "NSAccessibilityUnignoredChildren")
@@ -155,6 +172,7 @@ var _fnNSAccessibilityUnignoredChildrenForOnlyChild func(objc.ID) objc.ID
 
 // NSAccessibilityUnignoredChildrenForOnlyChild calls the AppKit framework function NSAccessibilityUnignoredChildrenForOnlyChild.
 func NSAccessibilityUnignoredChildrenForOnlyChild(originalChild obj.Object) obj.Object {
+	defer runtime.KeepAlive(originalChild)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSAccessibilityUnignoredChildrenForOnlyChild == nil {
 		ebipurego.RegisterLibFunc(&_fnNSAccessibilityUnignoredChildrenForOnlyChild, _lib, "NSAccessibilityUnignoredChildrenForOnlyChild")
@@ -167,6 +185,7 @@ var _fnNSAccessibilityUnignoredDescendant func(objc.ID) objc.ID
 
 // NSAccessibilityUnignoredDescendant calls the AppKit framework function NSAccessibilityUnignoredDescendant.
 func NSAccessibilityUnignoredDescendant(element obj.Object) obj.Object {
+	defer runtime.KeepAlive(element)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSAccessibilityUnignoredDescendant == nil {
 		ebipurego.RegisterLibFunc(&_fnNSAccessibilityUnignoredDescendant, _lib, "NSAccessibilityUnignoredDescendant")
@@ -223,6 +242,8 @@ var _fnNSBeginInformationalAlertSheet func(objc.ID, objc.ID, objc.ID, objc.ID, o
 
 // NSBeginInformationalAlertSheet calls the AppKit framework function NSBeginInformationalAlertSheet.
 func NSBeginInformationalAlertSheet(title string, defaultButton string, alternateButton string, otherButton string, docWindow *Window, modalDelegate obj.Object, didEndSelector unsafe.Pointer, didDismissSelector unsafe.Pointer, contextInfo unsafe.Pointer, msgFormat string) {
+	defer runtime.KeepAlive(docWindow)
+	defer runtime.KeepAlive(modalDelegate)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSBeginInformationalAlertSheet == nil {
 		ebipurego.RegisterLibFunc(&_fnNSBeginInformationalAlertSheet, _lib, "NSBeginInformationalAlertSheet")
@@ -234,6 +255,7 @@ var _fnNSBestDepth func(objc.ID, int, int, bool, unsafe.Pointer) WindowDepth
 
 // NSBestDepth calls the AppKit framework function NSBestDepth.
 func NSBestDepth(colorSpace obj.Object, bps int, bpp int, planar bool) (result WindowDepth, exactMatch bool) {
+	defer runtime.KeepAlive(colorSpace)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSBestDepth == nil {
 		ebipurego.RegisterLibFunc(&_fnNSBestDepth, _lib, "NSBestDepth")
@@ -386,6 +408,7 @@ var _fnNSDrawBitmap func(corefoundation.CGRect, int, int, int, int, int, int, bo
 
 // NSDrawBitmap calls the AppKit framework function NSDrawBitmap.
 func NSDrawBitmap(rect corefoundation.CGRect, width int, height int, bps int, spp int, bpp int, bpr int, isPlanar bool, hasAlpha bool, colorSpaceName obj.Object, data unsafe.Pointer) {
+	defer runtime.KeepAlive(colorSpaceName)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSDrawBitmap == nil {
 		ebipurego.RegisterLibFunc(&_fnNSDrawBitmap, _lib, "NSDrawBitmap")
@@ -408,6 +431,7 @@ var _fnNSDrawColorTiledRects func(corefoundation.CGRect, corefoundation.CGRect, 
 
 // NSDrawColorTiledRects calls the AppKit framework function NSDrawColorTiledRects.
 func NSDrawColorTiledRects(boundsRect corefoundation.CGRect, clipRect corefoundation.CGRect, sides unsafe.Pointer, colors *Color, count int) corefoundation.CGRect {
+	defer runtime.KeepAlive(colors)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSDrawColorTiledRects == nil {
 		ebipurego.RegisterLibFunc(&_fnNSDrawColorTiledRects, _lib, "NSDrawColorTiledRects")
@@ -463,6 +487,15 @@ var _fnNSDrawNinePartImage func(corefoundation.CGRect, objc.ID, objc.ID, objc.ID
 
 // NSDrawNinePartImage calls the AppKit framework function NSDrawNinePartImage.
 func NSDrawNinePartImage(frame corefoundation.CGRect, topLeftCorner *Image, topEdgeFill *Image, topRightCorner *Image, leftEdgeFill *Image, centerFill *Image, rightEdgeFill *Image, bottomLeftCorner *Image, bottomEdgeFill *Image, bottomRightCorner *Image, op CompositingOperation, alphaFraction float64, flipped bool) {
+	defer runtime.KeepAlive(topLeftCorner)
+	defer runtime.KeepAlive(topEdgeFill)
+	defer runtime.KeepAlive(topRightCorner)
+	defer runtime.KeepAlive(leftEdgeFill)
+	defer runtime.KeepAlive(centerFill)
+	defer runtime.KeepAlive(rightEdgeFill)
+	defer runtime.KeepAlive(bottomLeftCorner)
+	defer runtime.KeepAlive(bottomEdgeFill)
+	defer runtime.KeepAlive(bottomRightCorner)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSDrawNinePartImage == nil {
 		ebipurego.RegisterLibFunc(&_fnNSDrawNinePartImage, _lib, "NSDrawNinePartImage")
@@ -474,6 +507,9 @@ var _fnNSDrawThreePartImage func(corefoundation.CGRect, objc.ID, objc.ID, objc.I
 
 // NSDrawThreePartImage calls the AppKit framework function NSDrawThreePartImage.
 func NSDrawThreePartImage(frame corefoundation.CGRect, startCap *Image, centerFill *Image, endCap *Image, vertical bool, op CompositingOperation, alphaFraction float64, flipped bool) {
+	defer runtime.KeepAlive(startCap)
+	defer runtime.KeepAlive(centerFill)
+	defer runtime.KeepAlive(endCap)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSDrawThreePartImage == nil {
 		ebipurego.RegisterLibFunc(&_fnNSDrawThreePartImage, _lib, "NSDrawThreePartImage")
@@ -584,6 +620,7 @@ var _fnNSGetFileType func(objc.ID) objc.ID
 
 // NSGetFileType calls the AppKit framework function NSGetFileType.
 func NSGetFileType(pboardType obj.Object) string {
+	defer runtime.KeepAlive(pboardType)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSGetFileType == nil {
 		ebipurego.RegisterLibFunc(&_fnNSGetFileType, _lib, "NSGetFileType")
@@ -648,6 +685,7 @@ var _fnNSInterfaceStyleForKey func(objc.ID, objc.ID) int
 
 // NSInterfaceStyleForKey calls the AppKit framework function NSInterfaceStyleForKey.
 func NSInterfaceStyleForKey(key string, responder *Responder) int {
+	defer runtime.KeepAlive(responder)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSInterfaceStyleForKey == nil {
 		ebipurego.RegisterLibFunc(&_fnNSInterfaceStyleForKey, _lib, "NSInterfaceStyleForKey")
@@ -659,6 +697,7 @@ var _fnNSIsControllerMarker func(objc.ID) bool
 
 // NSIsControllerMarker calls the AppKit framework function NSIsControllerMarker.
 func NSIsControllerMarker(object obj.Object) bool {
+	defer runtime.KeepAlive(object)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSIsControllerMarker == nil {
 		ebipurego.RegisterLibFunc(&_fnNSIsControllerMarker, _lib, "NSIsControllerMarker")
@@ -670,6 +709,7 @@ var _fnNSNumberOfColorComponents func(objc.ID) int
 
 // NSNumberOfColorComponents calls the AppKit framework function NSNumberOfColorComponents.
 func NSNumberOfColorComponents(colorSpaceName obj.Object) int {
+	defer runtime.KeepAlive(colorSpaceName)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSNumberOfColorComponents == nil {
 		ebipurego.RegisterLibFunc(&_fnNSNumberOfColorComponents, _lib, "NSNumberOfColorComponents")
@@ -719,6 +759,7 @@ var _fnNSPerformService func(objc.ID, objc.ID) bool
 
 // NSPerformService calls the AppKit framework function NSPerformService.
 func NSPerformService(itemName string, pboard *Pasteboard) bool {
+	defer runtime.KeepAlive(pboard)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSPerformService == nil {
 		ebipurego.RegisterLibFunc(&_fnNSPerformService, _lib, "NSPerformService")
@@ -808,6 +849,7 @@ var _fnNSRectFillListWithColors func(unsafe.Pointer, objc.ID, int)
 
 // NSRectFillListWithColors calls the AppKit framework function NSRectFillListWithColors.
 func NSRectFillListWithColors(rects *corefoundation.CGRect, colors *Color, num int) {
+	defer runtime.KeepAlive(colors)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSRectFillListWithColors == nil {
 		ebipurego.RegisterLibFunc(&_fnNSRectFillListWithColors, _lib, "NSRectFillListWithColors")
@@ -819,6 +861,7 @@ var _fnNSRectFillListWithColorsUsingOperation func(unsafe.Pointer, objc.ID, int,
 
 // NSRectFillListWithColorsUsingOperation calls the AppKit framework function NSRectFillListWithColorsUsingOperation.
 func NSRectFillListWithColorsUsingOperation(rects *corefoundation.CGRect, colors *Color, num int, op CompositingOperation) {
+	defer runtime.KeepAlive(colors)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSRectFillListWithColorsUsingOperation == nil {
 		ebipurego.RegisterLibFunc(&_fnNSRectFillListWithColorsUsingOperation, _lib, "NSRectFillListWithColorsUsingOperation")
@@ -852,6 +895,8 @@ var _fnNSRegisterServicesProvider func(objc.ID, objc.ID)
 
 // NSRegisterServicesProvider calls the AppKit framework function NSRegisterServicesProvider.
 func NSRegisterServicesProvider(provider obj.Object, name obj.Object) {
+	defer runtime.KeepAlive(provider)
+	defer runtime.KeepAlive(name)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSRegisterServicesProvider == nil {
 		ebipurego.RegisterLibFunc(&_fnNSRegisterServicesProvider, _lib, "NSRegisterServicesProvider")
@@ -863,6 +908,7 @@ var _fnNSReleaseAlertPanel func(objc.ID)
 
 // NSReleaseAlertPanel calls the AppKit framework function NSReleaseAlertPanel.
 func NSReleaseAlertPanel(panel obj.Object) {
+	defer runtime.KeepAlive(panel)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSReleaseAlertPanel == nil {
 		ebipurego.RegisterLibFunc(&_fnNSReleaseAlertPanel, _lib, "NSReleaseAlertPanel")
@@ -885,6 +931,7 @@ var _fnNSRunInformationalAlertPanelRelativeToWindow func(objc.ID, objc.ID, objc.
 
 // NSRunInformationalAlertPanelRelativeToWindow calls the AppKit framework function NSRunInformationalAlertPanelRelativeToWindow.
 func NSRunInformationalAlertPanelRelativeToWindow(title string, msgFormat string, defaultButton string, alternateButton string, otherButton string, docWindow *Window) int {
+	defer runtime.KeepAlive(docWindow)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSRunInformationalAlertPanelRelativeToWindow == nil {
 		ebipurego.RegisterLibFunc(&_fnNSRunInformationalAlertPanelRelativeToWindow, _lib, "NSRunInformationalAlertPanelRelativeToWindow")
@@ -918,6 +965,7 @@ var _fnNSShowAnimationEffect func(AnimationEffect, corefoundation.CGPoint, coref
 
 // NSShowAnimationEffect calls the AppKit framework function NSShowAnimationEffect.
 func NSShowAnimationEffect(animationEffect AnimationEffect, centerLocation corefoundation.CGPoint, size corefoundation.CGSize, animationDelegate obj.Object, didEndSelector unsafe.Pointer, contextInfo unsafe.Pointer) {
+	defer runtime.KeepAlive(animationDelegate)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSShowAnimationEffect == nil {
 		ebipurego.RegisterLibFunc(&_fnNSShowAnimationEffect, _lib, "NSShowAnimationEffect")
@@ -951,6 +999,7 @@ var _fnNSUnregisterServicesProvider func(objc.ID)
 
 // NSUnregisterServicesProvider calls the AppKit framework function NSUnregisterServicesProvider.
 func NSUnregisterServicesProvider(name obj.Object) {
+	defer runtime.KeepAlive(name)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSUnregisterServicesProvider == nil {
 		ebipurego.RegisterLibFunc(&_fnNSUnregisterServicesProvider, _lib, "NSUnregisterServicesProvider")

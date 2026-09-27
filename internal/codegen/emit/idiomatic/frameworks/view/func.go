@@ -51,6 +51,11 @@ type Func struct {
 	// error for FuncStatusCode (for example
 	// errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0)).
 	ErrExpr string
+	// KeepAlive names the parameters whose wrappers are kept alive until the
+	// function returns (defer runtime.KeepAlive): the call receives only the
+	// object pointer, so the collector could otherwise finalize the wrapper,
+	// releasing the object, while the C function is still using it.
+	KeepAlive []string
 }
 
 // FuncKind selects how a Func wrapper turns its bound call into a Go result.

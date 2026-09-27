@@ -5,6 +5,7 @@
 package colorsync
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
@@ -30,6 +31,7 @@ var _fnCGDisplayGetDisplayIDFromUUID func(objc.ID) uint32
 
 // CGDisplayGetDisplayIDFromUUID calls the ColorSync framework function CGDisplayGetDisplayIDFromUUID.
 func CGDisplayGetDisplayIDFromUUID(uuid corefoundation.CFUUIDRef) uint32 {
+	defer runtime.KeepAlive(uuid)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGDisplayGetDisplayIDFromUUID == nil {
 		ebipurego.RegisterLibFunc(&_fnCGDisplayGetDisplayIDFromUUID, _lib, "CGDisplayGetDisplayIDFromUUID")
@@ -52,6 +54,7 @@ var _fnColorSyncCMMCopyCMMIdentifier func(objc.ID) objc.ID
 
 // ColorSyncCMMCopyCMMIdentifier calls the ColorSync framework function ColorSyncCMMCopyCMMIdentifier.
 func ColorSyncCMMCopyCMMIdentifier(arg ColorSyncCMMRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncCMMCopyCMMIdentifier == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncCMMCopyCMMIdentifier, _lib, "ColorSyncCMMCopyCMMIdentifier")
@@ -64,6 +67,7 @@ var _fnColorSyncCMMCopyLocalizedName func(objc.ID) objc.ID
 
 // ColorSyncCMMCopyLocalizedName calls the ColorSync framework function ColorSyncCMMCopyLocalizedName.
 func ColorSyncCMMCopyLocalizedName(arg ColorSyncCMMRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncCMMCopyLocalizedName == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncCMMCopyLocalizedName, _lib, "ColorSyncCMMCopyLocalizedName")
@@ -76,6 +80,7 @@ var _fnColorSyncCMMCreate func(objc.ID) objc.ID
 
 // ColorSyncCMMCreate calls the ColorSync framework function ColorSyncCMMCreate.
 func ColorSyncCMMCreate(cmmBundle corefoundation.CFBundleRef) ColorSyncCMMRef {
+	defer runtime.KeepAlive(cmmBundle)
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncCMMCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncCMMCreate, _lib, "ColorSyncCMMCreate")
@@ -88,6 +93,7 @@ var _fnColorSyncCMMGetBundle func(objc.ID) objc.ID
 
 // ColorSyncCMMGetBundle calls the ColorSync framework function ColorSyncCMMGetBundle.
 func ColorSyncCMMGetBundle(arg ColorSyncCMMRef) corefoundation.CFBundleRef {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncCMMGetBundle == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncCMMGetBundle, _lib, "ColorSyncCMMGetBundle")
@@ -111,6 +117,8 @@ var _fnColorSyncCreateCodeFragment func(objc.ID, objc.ID) objc.ID
 
 // ColorSyncCreateCodeFragment calls the ColorSync framework function ColorSyncCreateCodeFragment.
 func ColorSyncCreateCodeFragment(profileSequence corefoundation.CFArrayRef, options corefoundation.CFDictionaryRef) obj.Object {
+	defer runtime.KeepAlive(profileSequence)
+	defer runtime.KeepAlive(options)
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncCreateCodeFragment == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncCreateCodeFragment, _lib, "ColorSyncCreateCodeFragment")
@@ -123,6 +131,8 @@ var _fnColorSyncDeviceCopyDeviceInfo func(objc.ID, objc.ID) objc.ID
 
 // ColorSyncDeviceCopyDeviceInfo calls the ColorSync framework function ColorSyncDeviceCopyDeviceInfo.
 func ColorSyncDeviceCopyDeviceInfo(deviceClass corefoundation.CFStringRef, devID corefoundation.CFUUIDRef) corefoundation.CFDictionaryRef {
+	defer runtime.KeepAlive(deviceClass)
+	defer runtime.KeepAlive(devID)
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncDeviceCopyDeviceInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncDeviceCopyDeviceInfo, _lib, "ColorSyncDeviceCopyDeviceInfo")
@@ -135,6 +145,9 @@ var _fnColorSyncDeviceSetCustomProfiles func(objc.ID, objc.ID, objc.ID) bool
 
 // ColorSyncDeviceSetCustomProfiles calls the ColorSync framework function ColorSyncDeviceSetCustomProfiles.
 func ColorSyncDeviceSetCustomProfiles(deviceClass corefoundation.CFStringRef, deviceID corefoundation.CFUUIDRef, profileInfo corefoundation.CFDictionaryRef) bool {
+	defer runtime.KeepAlive(deviceClass)
+	defer runtime.KeepAlive(deviceID)
+	defer runtime.KeepAlive(profileInfo)
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncDeviceSetCustomProfiles == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncDeviceSetCustomProfiles, _lib, "ColorSyncDeviceSetCustomProfiles")
@@ -181,6 +194,7 @@ var _fnColorSyncIterateInstalledProfilesWithOptions func(unsafe.Pointer, unsafe.
 
 // ColorSyncIterateInstalledProfilesWithOptions calls the ColorSync framework function ColorSyncIterateInstalledProfilesWithOptions.
 func ColorSyncIterateInstalledProfilesWithOptions(callBack unsafe.Pointer, userInfo unsafe.Pointer, options corefoundation.CFDictionaryRef, err unsafe.Pointer) (seed uint32) {
+	defer runtime.KeepAlive(options)
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncIterateInstalledProfilesWithOptions == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncIterateInstalledProfilesWithOptions, _lib, "ColorSyncIterateInstalledProfilesWithOptions")
@@ -194,6 +208,7 @@ var _fnColorSyncProfileContainsHeadroomAdaptiveGainCurve func(objc.ID) bool
 
 // ColorSyncProfileContainsHeadroomAdaptiveGainCurve calls the ColorSync framework function ColorSyncProfileContainsHeadroomAdaptiveGainCurve.
 func ColorSyncProfileContainsHeadroomAdaptiveGainCurve(profile ColorSyncProfileRef) bool {
+	defer runtime.KeepAlive(profile)
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncProfileContainsHeadroomAdaptiveGainCurve == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncProfileContainsHeadroomAdaptiveGainCurve, _lib, "ColorSyncProfileContainsHeadroomAdaptiveGainCurve")
@@ -205,6 +220,8 @@ var _fnColorSyncProfileContainsTag func(objc.ID, objc.ID) bool
 
 // ColorSyncProfileContainsTag calls the ColorSync framework function ColorSyncProfileContainsTag.
 func ColorSyncProfileContainsTag(prof ColorSyncProfileRef, signature corefoundation.CFStringRef) bool {
+	defer runtime.KeepAlive(prof)
+	defer runtime.KeepAlive(signature)
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncProfileContainsTag == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncProfileContainsTag, _lib, "ColorSyncProfileContainsTag")
@@ -216,6 +233,7 @@ var _fnColorSyncProfileCopyDescriptionString func(objc.ID) objc.ID
 
 // ColorSyncProfileCopyDescriptionString calls the ColorSync framework function ColorSyncProfileCopyDescriptionString.
 func ColorSyncProfileCopyDescriptionString(prof ColorSyncProfileRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(prof)
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncProfileCopyDescriptionString == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncProfileCopyDescriptionString, _lib, "ColorSyncProfileCopyDescriptionString")
@@ -228,6 +246,7 @@ var _fnColorSyncProfileCopyHeader func(objc.ID) objc.ID
 
 // ColorSyncProfileCopyHeader calls the ColorSync framework function ColorSyncProfileCopyHeader.
 func ColorSyncProfileCopyHeader(prof ColorSyncProfileRef) corefoundation.CFDataRef {
+	defer runtime.KeepAlive(prof)
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncProfileCopyHeader == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncProfileCopyHeader, _lib, "ColorSyncProfileCopyHeader")
@@ -240,6 +259,7 @@ var _fnColorSyncProfileCopyHeadroomAdaptiveGainCurveInfoDictionary func(objc.ID)
 
 // ColorSyncProfileCopyHeadroomAdaptiveGainCurveInfoDictionary calls the ColorSync framework function ColorSyncProfileCopyHeadroomAdaptiveGainCurveInfoDictionary.
 func ColorSyncProfileCopyHeadroomAdaptiveGainCurveInfoDictionary(profile ColorSyncProfileRef) corefoundation.CFDictionaryRef {
+	defer runtime.KeepAlive(profile)
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncProfileCopyHeadroomAdaptiveGainCurveInfoDictionary == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncProfileCopyHeadroomAdaptiveGainCurveInfoDictionary, _lib, "ColorSyncProfileCopyHeadroomAdaptiveGainCurveInfoDictionary")
@@ -252,6 +272,7 @@ var _fnColorSyncProfileCopyHeadroomAdaptiveGainCurveMetadata func(objc.ID) objc.
 
 // ColorSyncProfileCopyHeadroomAdaptiveGainCurveMetadata calls the ColorSync framework function ColorSyncProfileCopyHeadroomAdaptiveGainCurveMetadata.
 func ColorSyncProfileCopyHeadroomAdaptiveGainCurveMetadata(profile ColorSyncProfileRef) corefoundation.CFDataRef {
+	defer runtime.KeepAlive(profile)
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncProfileCopyHeadroomAdaptiveGainCurveMetadata == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncProfileCopyHeadroomAdaptiveGainCurveMetadata, _lib, "ColorSyncProfileCopyHeadroomAdaptiveGainCurveMetadata")
@@ -264,6 +285,8 @@ var _fnColorSyncProfileCopyTag func(objc.ID, objc.ID) objc.ID
 
 // ColorSyncProfileCopyTag calls the ColorSync framework function ColorSyncProfileCopyTag.
 func ColorSyncProfileCopyTag(prof ColorSyncProfileRef, signature corefoundation.CFStringRef) corefoundation.CFDataRef {
+	defer runtime.KeepAlive(prof)
+	defer runtime.KeepAlive(signature)
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncProfileCopyTag == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncProfileCopyTag, _lib, "ColorSyncProfileCopyTag")
@@ -276,6 +299,7 @@ var _fnColorSyncProfileCopyTagSignatures func(objc.ID) objc.ID
 
 // ColorSyncProfileCopyTagSignatures calls the ColorSync framework function ColorSyncProfileCopyTagSignatures.
 func ColorSyncProfileCopyTagSignatures(prof ColorSyncProfileRef) corefoundation.CFArrayRef {
+	defer runtime.KeepAlive(prof)
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncProfileCopyTagSignatures == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncProfileCopyTagSignatures, _lib, "ColorSyncProfileCopyTagSignatures")
@@ -288,6 +312,8 @@ var _fnColorSyncProfileCreateCopyWithHeadroomAdaptiveGainCurveInfoDictionary fun
 
 // ColorSyncProfileCreateCopyWithHeadroomAdaptiveGainCurveInfoDictionary calls the ColorSync framework function ColorSyncProfileCreateCopyWithHeadroomAdaptiveGainCurveInfoDictionary.
 func ColorSyncProfileCreateCopyWithHeadroomAdaptiveGainCurveInfoDictionary(profile ColorSyncProfileRef, info corefoundation.CFDictionaryRef) ColorSyncProfileRef {
+	defer runtime.KeepAlive(profile)
+	defer runtime.KeepAlive(info)
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncProfileCreateCopyWithHeadroomAdaptiveGainCurveInfoDictionary == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncProfileCreateCopyWithHeadroomAdaptiveGainCurveInfoDictionary, _lib, "ColorSyncProfileCreateCopyWithHeadroomAdaptiveGainCurveInfoDictionary")
@@ -300,6 +326,9 @@ var _fnColorSyncProfileCreateCopyWithHeadroomAdaptiveGainCurveMetadata func(objc
 
 // ColorSyncProfileCreateCopyWithHeadroomAdaptiveGainCurveMetadata calls the ColorSync framework function ColorSyncProfileCreateCopyWithHeadroomAdaptiveGainCurveMetadata.
 func ColorSyncProfileCreateCopyWithHeadroomAdaptiveGainCurveMetadata(profile ColorSyncProfileRef, data corefoundation.CFDataRef, options corefoundation.CFDictionaryRef) ColorSyncProfileRef {
+	defer runtime.KeepAlive(profile)
+	defer runtime.KeepAlive(data)
+	defer runtime.KeepAlive(options)
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncProfileCreateCopyWithHeadroomAdaptiveGainCurveMetadata == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncProfileCreateCopyWithHeadroomAdaptiveGainCurveMetadata, _lib, "ColorSyncProfileCreateCopyWithHeadroomAdaptiveGainCurveMetadata")
@@ -312,6 +341,9 @@ var _fnColorSyncProfileCreateDeviceProfile func(objc.ID, objc.ID, objc.ID) objc.
 
 // ColorSyncProfileCreateDeviceProfile calls the ColorSync framework function ColorSyncProfileCreateDeviceProfile.
 func ColorSyncProfileCreateDeviceProfile(deviceClass corefoundation.CFStringRef, deviceID corefoundation.CFUUIDRef, profileID obj.Object) ColorSyncProfileRef {
+	defer runtime.KeepAlive(deviceClass)
+	defer runtime.KeepAlive(deviceID)
+	defer runtime.KeepAlive(profileID)
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncProfileCreateDeviceProfile == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncProfileCreateDeviceProfile, _lib, "ColorSyncProfileCreateDeviceProfile")
@@ -324,6 +356,7 @@ var _fnColorSyncProfileCreateDisplayTransferTablesFromVCGT func(objc.ID, unsafe.
 
 // ColorSyncProfileCreateDisplayTransferTablesFromVCGT calls the ColorSync framework function ColorSyncProfileCreateDisplayTransferTablesFromVCGT.
 func ColorSyncProfileCreateDisplayTransferTablesFromVCGT(profile ColorSyncProfileRef) (result corefoundation.CFDataRef, nSamplesPerChannel int) {
+	defer runtime.KeepAlive(profile)
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncProfileCreateDisplayTransferTablesFromVCGT == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncProfileCreateDisplayTransferTablesFromVCGT, _lib, "ColorSyncProfileCreateDisplayTransferTablesFromVCGT")
@@ -337,6 +370,8 @@ var _fnColorSyncProfileCreateLink func(objc.ID, objc.ID) objc.ID
 
 // ColorSyncProfileCreateLink calls the ColorSync framework function ColorSyncProfileCreateLink.
 func ColorSyncProfileCreateLink(profileInfo corefoundation.CFArrayRef, options corefoundation.CFDictionaryRef) ColorSyncProfileRef {
+	defer runtime.KeepAlive(profileInfo)
+	defer runtime.KeepAlive(options)
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncProfileCreateLink == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncProfileCreateLink, _lib, "ColorSyncProfileCreateLink")
@@ -361,6 +396,7 @@ var _fnColorSyncProfileCreateMutableCopy func(objc.ID) objc.ID
 
 // ColorSyncProfileCreateMutableCopy calls the ColorSync framework function ColorSyncProfileCreateMutableCopy.
 func ColorSyncProfileCreateMutableCopy(prof ColorSyncProfileRef) ColorSyncMutableProfileRef {
+	defer runtime.KeepAlive(prof)
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncProfileCreateMutableCopy == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncProfileCreateMutableCopy, _lib, "ColorSyncProfileCreateMutableCopy")
@@ -385,6 +421,7 @@ var _fnColorSyncProfileCreateWithName func(objc.ID) objc.ID
 
 // ColorSyncProfileCreateWithName calls the ColorSync framework function ColorSyncProfileCreateWithName.
 func ColorSyncProfileCreateWithName(name corefoundation.CFStringRef) ColorSyncProfileRef {
+	defer runtime.KeepAlive(name)
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncProfileCreateWithName == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncProfileCreateWithName, _lib, "ColorSyncProfileCreateWithName")
@@ -397,6 +434,7 @@ var _fnColorSyncProfileGetDisplayTransferFormulaFromVCGT func(objc.ID, unsafe.Po
 
 // ColorSyncProfileGetDisplayTransferFormulaFromVCGT calls the ColorSync framework function ColorSyncProfileGetDisplayTransferFormulaFromVCGT.
 func ColorSyncProfileGetDisplayTransferFormulaFromVCGT(profile ColorSyncProfileRef) (ok bool, redMin float32, redMax float32, redGamma float32, greenMin float32, greenMax float32, greenGamma float32, blueMin float32, blueMax float32, blueGamma float32) {
+	defer runtime.KeepAlive(profile)
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncProfileGetDisplayTransferFormulaFromVCGT == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncProfileGetDisplayTransferFormulaFromVCGT, _lib, "ColorSyncProfileGetDisplayTransferFormulaFromVCGT")
@@ -418,6 +456,7 @@ var _fnColorSyncProfileGetMD5 func(objc.ID) ColorSyncMD5
 
 // ColorSyncProfileGetMD5 calls the ColorSync framework function ColorSyncProfileGetMD5.
 func ColorSyncProfileGetMD5(prof ColorSyncProfileRef) ColorSyncMD5 {
+	defer runtime.KeepAlive(prof)
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncProfileGetMD5 == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncProfileGetMD5, _lib, "ColorSyncProfileGetMD5")
@@ -440,6 +479,7 @@ var _fnColorSyncProfileIsHLGBased func(objc.ID) bool
 
 // ColorSyncProfileIsHLGBased calls the ColorSync framework function ColorSyncProfileIsHLGBased.
 func ColorSyncProfileIsHLGBased(arg ColorSyncProfileRef) bool {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncProfileIsHLGBased == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncProfileIsHLGBased, _lib, "ColorSyncProfileIsHLGBased")
@@ -451,6 +491,7 @@ var _fnColorSyncProfileIsMatrixBased func(objc.ID) bool
 
 // ColorSyncProfileIsMatrixBased calls the ColorSync framework function ColorSyncProfileIsMatrixBased.
 func ColorSyncProfileIsMatrixBased(arg ColorSyncProfileRef) bool {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncProfileIsMatrixBased == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncProfileIsMatrixBased, _lib, "ColorSyncProfileIsMatrixBased")
@@ -462,6 +503,7 @@ var _fnColorSyncProfileIsPQBased func(objc.ID) bool
 
 // ColorSyncProfileIsPQBased calls the ColorSync framework function ColorSyncProfileIsPQBased.
 func ColorSyncProfileIsPQBased(arg ColorSyncProfileRef) bool {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncProfileIsPQBased == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncProfileIsPQBased, _lib, "ColorSyncProfileIsPQBased")
@@ -473,6 +515,7 @@ var _fnColorSyncProfileIsWideGamut func(objc.ID) bool
 
 // ColorSyncProfileIsWideGamut calls the ColorSync framework function ColorSyncProfileIsWideGamut.
 func ColorSyncProfileIsWideGamut(arg ColorSyncProfileRef) bool {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncProfileIsWideGamut == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncProfileIsWideGamut, _lib, "ColorSyncProfileIsWideGamut")
@@ -484,6 +527,8 @@ var _fnColorSyncProfileRemoveTag func(objc.ID, objc.ID)
 
 // ColorSyncProfileRemoveTag calls the ColorSync framework function ColorSyncProfileRemoveTag.
 func ColorSyncProfileRemoveTag(prof ColorSyncMutableProfileRef, signature corefoundation.CFStringRef) {
+	defer runtime.KeepAlive(prof)
+	defer runtime.KeepAlive(signature)
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncProfileRemoveTag == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncProfileRemoveTag, _lib, "ColorSyncProfileRemoveTag")
@@ -495,6 +540,8 @@ var _fnColorSyncProfileSetHeader func(objc.ID, objc.ID)
 
 // ColorSyncProfileSetHeader calls the ColorSync framework function ColorSyncProfileSetHeader.
 func ColorSyncProfileSetHeader(prof ColorSyncMutableProfileRef, header corefoundation.CFDataRef) {
+	defer runtime.KeepAlive(prof)
+	defer runtime.KeepAlive(header)
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncProfileSetHeader == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncProfileSetHeader, _lib, "ColorSyncProfileSetHeader")
@@ -506,6 +553,9 @@ var _fnColorSyncProfileSetTag func(objc.ID, objc.ID, objc.ID)
 
 // ColorSyncProfileSetTag calls the ColorSync framework function ColorSyncProfileSetTag.
 func ColorSyncProfileSetTag(prof ColorSyncMutableProfileRef, signature corefoundation.CFStringRef, data corefoundation.CFDataRef) {
+	defer runtime.KeepAlive(prof)
+	defer runtime.KeepAlive(signature)
+	defer runtime.KeepAlive(data)
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncProfileSetTag == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncProfileSetTag, _lib, "ColorSyncProfileSetTag")
@@ -517,6 +567,9 @@ var _fnColorSyncRegisterDevice func(objc.ID, objc.ID, objc.ID) bool
 
 // ColorSyncRegisterDevice calls the ColorSync framework function ColorSyncRegisterDevice.
 func ColorSyncRegisterDevice(deviceClass corefoundation.CFStringRef, deviceID corefoundation.CFUUIDRef, deviceInfo corefoundation.CFDictionaryRef) bool {
+	defer runtime.KeepAlive(deviceClass)
+	defer runtime.KeepAlive(deviceID)
+	defer runtime.KeepAlive(deviceInfo)
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncRegisterDevice == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncRegisterDevice, _lib, "ColorSyncRegisterDevice")
@@ -528,6 +581,8 @@ var _fnColorSyncTransformConvert func(objc.ID, int, int, unsafe.Pointer, ColorSy
 
 // ColorSyncTransformConvert calls the ColorSync framework function ColorSyncTransformConvert.
 func ColorSyncTransformConvert(transform ColorSyncTransformRef, width int, height int, dst unsafe.Pointer, dstDepth ColorSyncDataDepth, dstLayout uint32, dstBytesPerRow int, src unsafe.Pointer, srcDepth ColorSyncDataDepth, srcLayout uint32, srcBytesPerRow int, options corefoundation.CFDictionaryRef) bool {
+	defer runtime.KeepAlive(transform)
+	defer runtime.KeepAlive(options)
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncTransformConvert == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncTransformConvert, _lib, "ColorSyncTransformConvert")
@@ -539,6 +594,9 @@ var _fnColorSyncTransformCopyProperty func(objc.ID, objc.ID, objc.ID) objc.ID
 
 // ColorSyncTransformCopyProperty calls the ColorSync framework function ColorSyncTransformCopyProperty.
 func ColorSyncTransformCopyProperty(transform ColorSyncTransformRef, key obj.Object, options corefoundation.CFDictionaryRef) obj.Object {
+	defer runtime.KeepAlive(transform)
+	defer runtime.KeepAlive(key)
+	defer runtime.KeepAlive(options)
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncTransformCopyProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncTransformCopyProperty, _lib, "ColorSyncTransformCopyProperty")
@@ -551,6 +609,8 @@ var _fnColorSyncTransformCreate func(objc.ID, objc.ID) objc.ID
 
 // ColorSyncTransformCreate calls the ColorSync framework function ColorSyncTransformCreate.
 func ColorSyncTransformCreate(profileSequence corefoundation.CFArrayRef, options corefoundation.CFDictionaryRef) ColorSyncTransformRef {
+	defer runtime.KeepAlive(profileSequence)
+	defer runtime.KeepAlive(options)
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncTransformCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncTransformCreate, _lib, "ColorSyncTransformCreate")
@@ -563,6 +623,7 @@ var _fnColorSyncTransformGetProfileSequence func(objc.ID) objc.ID
 
 // ColorSyncTransformGetProfileSequence calls the ColorSync framework function ColorSyncTransformGetProfileSequence.
 func ColorSyncTransformGetProfileSequence(transform ColorSyncTransformRef) corefoundation.CFArrayRef {
+	defer runtime.KeepAlive(transform)
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncTransformGetProfileSequence == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncTransformGetProfileSequence, _lib, "ColorSyncTransformGetProfileSequence")
@@ -586,6 +647,9 @@ var _fnColorSyncTransformSetProperty func(objc.ID, objc.ID, objc.ID)
 
 // ColorSyncTransformSetProperty calls the ColorSync framework function ColorSyncTransformSetProperty.
 func ColorSyncTransformSetProperty(transform ColorSyncTransformRef, key obj.Object, property obj.Object) {
+	defer runtime.KeepAlive(transform)
+	defer runtime.KeepAlive(key)
+	defer runtime.KeepAlive(property)
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncTransformSetProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncTransformSetProperty, _lib, "ColorSyncTransformSetProperty")
@@ -597,6 +661,8 @@ var _fnColorSyncUnregisterDevice func(objc.ID, objc.ID) bool
 
 // ColorSyncUnregisterDevice calls the ColorSync framework function ColorSyncUnregisterDevice.
 func ColorSyncUnregisterDevice(deviceClass corefoundation.CFStringRef, deviceID corefoundation.CFUUIDRef) bool {
+	defer runtime.KeepAlive(deviceClass)
+	defer runtime.KeepAlive(deviceID)
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncUnregisterDevice == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncUnregisterDevice, _lib, "ColorSyncUnregisterDevice")

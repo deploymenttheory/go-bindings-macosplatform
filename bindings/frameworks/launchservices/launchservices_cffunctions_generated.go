@@ -5,6 +5,7 @@
 package launchservices
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
@@ -34,6 +35,7 @@ var _fnLSCopyApplicationForMIMEType func(objc.ID, LSRolesMask, unsafe.Pointer) i
 
 // LSCopyApplicationForMIMEType reports an error if the LaunchServices framework function LSCopyApplicationForMIMEType fails.
 func LSCopyApplicationForMIMEType(inMIMEType obj.Object, inRoleMask LSRolesMask) (obj.Object, error) {
+	defer runtime.KeepAlive(inMIMEType)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSCopyApplicationForMIMEType == nil {
 		ebipurego.RegisterLibFunc(&_fnLSCopyApplicationForMIMEType, _lib, "LSCopyApplicationForMIMEType")
@@ -66,6 +68,7 @@ var _fnLSCopyDisplayNameForURL func(objc.ID, unsafe.Pointer) int32
 
 // LSCopyDisplayNameForURL reports an error if the LaunchServices framework function LSCopyDisplayNameForURL fails.
 func LSCopyDisplayNameForURL(inURL obj.Object) (obj.Object, error) {
+	defer runtime.KeepAlive(inURL)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSCopyDisplayNameForURL == nil {
 		ebipurego.RegisterLibFunc(&_fnLSCopyDisplayNameForURL, _lib, "LSCopyDisplayNameForURL")
@@ -82,6 +85,7 @@ var _fnLSCopyItemAttribute func(unsafe.Pointer, LSRolesMask, objc.ID, unsafe.Poi
 
 // LSCopyItemAttribute reports an error if the LaunchServices framework function LSCopyItemAttribute fails.
 func LSCopyItemAttribute(inItem *carboncore.FSRef, inRoles LSRolesMask, inAttributeName obj.Object) (obj.Object, error) {
+	defer runtime.KeepAlive(inAttributeName)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSCopyItemAttribute == nil {
 		ebipurego.RegisterLibFunc(&_fnLSCopyItemAttribute, _lib, "LSCopyItemAttribute")
@@ -98,6 +102,7 @@ var _fnLSCopyItemAttributes func(unsafe.Pointer, LSRolesMask, objc.ID, unsafe.Po
 
 // LSCopyItemAttributes reports an error if the LaunchServices framework function LSCopyItemAttributes fails.
 func LSCopyItemAttributes(inItem *carboncore.FSRef, inRoles LSRolesMask, inAttributeNames obj.Object) (obj.Object, error) {
+	defer runtime.KeepAlive(inAttributeNames)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSCopyItemAttributes == nil {
 		ebipurego.RegisterLibFunc(&_fnLSCopyItemAttributes, _lib, "LSCopyItemAttributes")
@@ -114,6 +119,7 @@ var _fnLSCopyKindStringForMIMEType func(objc.ID, unsafe.Pointer) int32
 
 // LSCopyKindStringForMIMEType reports an error if the LaunchServices framework function LSCopyKindStringForMIMEType fails.
 func LSCopyKindStringForMIMEType(inMIMEType obj.Object) (obj.Object, error) {
+	defer runtime.KeepAlive(inMIMEType)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSCopyKindStringForMIMEType == nil {
 		ebipurego.RegisterLibFunc(&_fnLSCopyKindStringForMIMEType, _lib, "LSCopyKindStringForMIMEType")
@@ -146,6 +152,7 @@ var _fnLSCopyKindStringForTypeInfo func(int, int, objc.ID, unsafe.Pointer) int32
 
 // LSCopyKindStringForTypeInfo reports an error if the LaunchServices framework function LSCopyKindStringForTypeInfo fails.
 func LSCopyKindStringForTypeInfo(inType int, inCreator int, inExtension obj.Object) (obj.Object, error) {
+	defer runtime.KeepAlive(inExtension)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSCopyKindStringForTypeInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnLSCopyKindStringForTypeInfo, _lib, "LSCopyKindStringForTypeInfo")
@@ -162,6 +169,7 @@ var _fnLSCopyKindStringForURL func(objc.ID, unsafe.Pointer) int32
 
 // LSCopyKindStringForURL reports an error if the LaunchServices framework function LSCopyKindStringForURL fails.
 func LSCopyKindStringForURL(inURL obj.Object) (obj.Object, error) {
+	defer runtime.KeepAlive(inURL)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSCopyKindStringForURL == nil {
 		ebipurego.RegisterLibFunc(&_fnLSCopyKindStringForURL, _lib, "LSCopyKindStringForURL")
@@ -178,6 +186,8 @@ var _fnLSFindApplicationForInfo func(int, objc.ID, objc.ID, unsafe.Pointer, unsa
 
 // LSFindApplicationForInfo reports an error if the LaunchServices framework function LSFindApplicationForInfo fails.
 func LSFindApplicationForInfo(inCreator int, inBundleID obj.Object, inName obj.Object, outAppRef *carboncore.FSRef) (obj.Object, error) {
+	defer runtime.KeepAlive(inBundleID)
+	defer runtime.KeepAlive(inName)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSFindApplicationForInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnLSFindApplicationForInfo, _lib, "LSFindApplicationForInfo")
@@ -194,6 +204,7 @@ var _fnLSGetApplicationForInfo func(int, int, objc.ID, LSRolesMask, unsafe.Point
 
 // LSGetApplicationForInfo reports an error if the LaunchServices framework function LSGetApplicationForInfo fails.
 func LSGetApplicationForInfo(inType int, inCreator int, inExtension obj.Object, inRoleMask LSRolesMask, outAppRef *carboncore.FSRef) (obj.Object, error) {
+	defer runtime.KeepAlive(inExtension)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSGetApplicationForInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnLSGetApplicationForInfo, _lib, "LSGetApplicationForInfo")
@@ -226,6 +237,7 @@ var _fnLSGetApplicationForURL func(objc.ID, LSRolesMask, unsafe.Pointer, unsafe.
 
 // LSGetApplicationForURL reports an error if the LaunchServices framework function LSGetApplicationForURL fails.
 func LSGetApplicationForURL(inURL obj.Object, inRoleMask LSRolesMask, outAppRef *carboncore.FSRef) (obj.Object, error) {
+	defer runtime.KeepAlive(inURL)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSGetApplicationForURL == nil {
 		ebipurego.RegisterLibFunc(&_fnLSGetApplicationForURL, _lib, "LSGetApplicationForURL")
@@ -242,6 +254,7 @@ var _fnLSOpenCFURLRef func(objc.ID, unsafe.Pointer) int32
 
 // LSOpenCFURLRef reports an error if the LaunchServices framework function LSOpenCFURLRef fails.
 func LSOpenCFURLRef(inURL obj.Object) (obj.Object, error) {
+	defer runtime.KeepAlive(inURL)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSOpenCFURLRef == nil {
 		ebipurego.RegisterLibFunc(&_fnLSOpenCFURLRef, _lib, "LSOpenCFURLRef")
@@ -288,6 +301,7 @@ var _fnLSRegisterURL func(objc.ID, uint8) int32
 
 // LSRegisterURL reports an error if the LaunchServices framework function LSRegisterURL fails.
 func LSRegisterURL(inURL obj.Object, inUpdate uint8) error {
+	defer runtime.KeepAlive(inURL)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSRegisterURL == nil {
 		ebipurego.RegisterLibFunc(&_fnLSRegisterURL, _lib, "LSRegisterURL")
@@ -303,6 +317,8 @@ var _fnLSSetDefaultHandlerForURLScheme func(objc.ID, objc.ID) int32
 
 // LSSetDefaultHandlerForURLScheme reports an error if the LaunchServices framework function LSSetDefaultHandlerForURLScheme fails.
 func LSSetDefaultHandlerForURLScheme(inURLScheme obj.Object, inHandlerBundleID obj.Object) error {
+	defer runtime.KeepAlive(inURLScheme)
+	defer runtime.KeepAlive(inHandlerBundleID)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSSetDefaultHandlerForURLScheme == nil {
 		ebipurego.RegisterLibFunc(&_fnLSSetDefaultHandlerForURLScheme, _lib, "LSSetDefaultHandlerForURLScheme")
@@ -318,6 +334,8 @@ var _fnLSSetDefaultRoleHandlerForContentType func(objc.ID, LSRolesMask, objc.ID)
 
 // LSSetDefaultRoleHandlerForContentType reports an error if the LaunchServices framework function LSSetDefaultRoleHandlerForContentType fails.
 func LSSetDefaultRoleHandlerForContentType(inContentType obj.Object, inRole LSRolesMask, inHandlerBundleID obj.Object) error {
+	defer runtime.KeepAlive(inContentType)
+	defer runtime.KeepAlive(inHandlerBundleID)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSSetDefaultRoleHandlerForContentType == nil {
 		ebipurego.RegisterLibFunc(&_fnLSSetDefaultRoleHandlerForContentType, _lib, "LSSetDefaultRoleHandlerForContentType")
@@ -348,6 +366,7 @@ var _fnLSSetExtensionHiddenForURL func(objc.ID, uint8) int32
 
 // LSSetExtensionHiddenForURL reports an error if the LaunchServices framework function LSSetExtensionHiddenForURL fails.
 func LSSetExtensionHiddenForURL(inURL obj.Object, inHide uint8) error {
+	defer runtime.KeepAlive(inURL)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSSetExtensionHiddenForURL == nil {
 		ebipurego.RegisterLibFunc(&_fnLSSetExtensionHiddenForURL, _lib, "LSSetExtensionHiddenForURL")
@@ -363,6 +382,7 @@ var _fnLSSetHandlerOptionsForContentType func(objc.ID, LSHandlerOptions) int32
 
 // LSSetHandlerOptionsForContentType reports an error if the LaunchServices framework function LSSetHandlerOptionsForContentType fails.
 func LSSetHandlerOptionsForContentType(inContentType obj.Object, inOptions LSHandlerOptions) error {
+	defer runtime.KeepAlive(inContentType)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSSetHandlerOptionsForContentType == nil {
 		ebipurego.RegisterLibFunc(&_fnLSSetHandlerOptionsForContentType, _lib, "LSSetHandlerOptionsForContentType")
@@ -378,6 +398,8 @@ var _fnLSSetItemAttribute func(unsafe.Pointer, LSRolesMask, objc.ID, objc.ID) in
 
 // LSSetItemAttribute reports an error if the LaunchServices framework function LSSetItemAttribute fails.
 func LSSetItemAttribute(inItem *carboncore.FSRef, inRoles LSRolesMask, inAttributeName obj.Object, inValue obj.Object) error {
+	defer runtime.KeepAlive(inAttributeName)
+	defer runtime.KeepAlive(inValue)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSSetItemAttribute == nil {
 		ebipurego.RegisterLibFunc(&_fnLSSetItemAttribute, _lib, "LSSetItemAttribute")

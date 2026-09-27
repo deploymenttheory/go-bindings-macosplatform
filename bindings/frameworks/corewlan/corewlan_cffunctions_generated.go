@@ -5,6 +5,7 @@
 package corewlan
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -19,6 +20,7 @@ var _fnCWKeychainCopyEAPIdentity func(objc.ID, unsafe.Pointer) int32
 
 // CWKeychainCopyEAPIdentity reports an error if the CoreWLAN framework function CWKeychainCopyEAPIdentity fails.
 func CWKeychainCopyEAPIdentity(ssidData obj.Object, identity unsafe.Pointer) error {
+	defer runtime.KeepAlive(ssidData)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCWKeychainCopyEAPIdentity == nil {
 		ebipurego.RegisterLibFunc(&_fnCWKeychainCopyEAPIdentity, _lib, "CWKeychainCopyEAPIdentity")
@@ -50,6 +52,7 @@ var _fnCWKeychainCopyEAPUsernameAndPassword func(objc.ID, unsafe.Pointer, unsafe
 
 // CWKeychainCopyEAPUsernameAndPassword reports an error if the CoreWLAN framework function CWKeychainCopyEAPUsernameAndPassword fails.
 func CWKeychainCopyEAPUsernameAndPassword(ssidData obj.Object) (obj.Object, obj.Object, error) {
+	defer runtime.KeepAlive(ssidData)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCWKeychainCopyEAPUsernameAndPassword == nil {
 		ebipurego.RegisterLibFunc(&_fnCWKeychainCopyEAPUsernameAndPassword, _lib, "CWKeychainCopyEAPUsernameAndPassword")
@@ -67,6 +70,7 @@ var _fnCWKeychainCopyPassword func(objc.ID, unsafe.Pointer) int32
 
 // CWKeychainCopyPassword reports an error if the CoreWLAN framework function CWKeychainCopyPassword fails.
 func CWKeychainCopyPassword(ssidData obj.Object) (obj.Object, error) {
+	defer runtime.KeepAlive(ssidData)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCWKeychainCopyPassword == nil {
 		ebipurego.RegisterLibFunc(&_fnCWKeychainCopyPassword, _lib, "CWKeychainCopyPassword")
@@ -98,6 +102,7 @@ var _fnCWKeychainDeleteEAPUsernameAndPassword func(objc.ID) int32
 
 // CWKeychainDeleteEAPUsernameAndPassword reports an error if the CoreWLAN framework function CWKeychainDeleteEAPUsernameAndPassword fails.
 func CWKeychainDeleteEAPUsernameAndPassword(ssidData obj.Object) error {
+	defer runtime.KeepAlive(ssidData)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCWKeychainDeleteEAPUsernameAndPassword == nil {
 		ebipurego.RegisterLibFunc(&_fnCWKeychainDeleteEAPUsernameAndPassword, _lib, "CWKeychainDeleteEAPUsernameAndPassword")
@@ -113,6 +118,7 @@ var _fnCWKeychainDeletePassword func(objc.ID) int32
 
 // CWKeychainDeletePassword reports an error if the CoreWLAN framework function CWKeychainDeletePassword fails.
 func CWKeychainDeletePassword(ssidData obj.Object) error {
+	defer runtime.KeepAlive(ssidData)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCWKeychainDeletePassword == nil {
 		ebipurego.RegisterLibFunc(&_fnCWKeychainDeletePassword, _lib, "CWKeychainDeletePassword")
@@ -188,6 +194,8 @@ var _fnCWKeychainSetEAPIdentity func(objc.ID, objc.ID) int32
 
 // CWKeychainSetEAPIdentity reports an error if the CoreWLAN framework function CWKeychainSetEAPIdentity fails.
 func CWKeychainSetEAPIdentity(ssidData obj.Object, identity obj.Object) error {
+	defer runtime.KeepAlive(ssidData)
+	defer runtime.KeepAlive(identity)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCWKeychainSetEAPIdentity == nil {
 		ebipurego.RegisterLibFunc(&_fnCWKeychainSetEAPIdentity, _lib, "CWKeychainSetEAPIdentity")
@@ -203,6 +211,9 @@ var _fnCWKeychainSetEAPUsernameAndPassword func(objc.ID, objc.ID, objc.ID) int32
 
 // CWKeychainSetEAPUsernameAndPassword reports an error if the CoreWLAN framework function CWKeychainSetEAPUsernameAndPassword fails.
 func CWKeychainSetEAPUsernameAndPassword(ssidData obj.Object, username obj.Object, password obj.Object) error {
+	defer runtime.KeepAlive(ssidData)
+	defer runtime.KeepAlive(username)
+	defer runtime.KeepAlive(password)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCWKeychainSetEAPUsernameAndPassword == nil {
 		ebipurego.RegisterLibFunc(&_fnCWKeychainSetEAPUsernameAndPassword, _lib, "CWKeychainSetEAPUsernameAndPassword")
@@ -218,6 +229,8 @@ var _fnCWKeychainSetPassword func(objc.ID, objc.ID) int32
 
 // CWKeychainSetPassword reports an error if the CoreWLAN framework function CWKeychainSetPassword fails.
 func CWKeychainSetPassword(ssidData obj.Object, password obj.Object) error {
+	defer runtime.KeepAlive(ssidData)
+	defer runtime.KeepAlive(password)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCWKeychainSetPassword == nil {
 		ebipurego.RegisterLibFunc(&_fnCWKeychainSetPassword, _lib, "CWKeychainSetPassword")
@@ -233,6 +246,7 @@ var _fnCWKeychainSetWiFiEAPIdentity func(KeychainDomain, objc.ID, objc.ID) int32
 
 // CWKeychainSetWiFiEAPIdentity reports an error if the CoreWLAN framework function CWKeychainSetWiFiEAPIdentity fails.
 func CWKeychainSetWiFiEAPIdentity(domain KeychainDomain, ssid []byte, identity obj.Object) error {
+	defer runtime.KeepAlive(identity)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCWKeychainSetWiFiEAPIdentity == nil {
 		ebipurego.RegisterLibFunc(&_fnCWKeychainSetWiFiEAPIdentity, _lib, "CWKeychainSetWiFiEAPIdentity")

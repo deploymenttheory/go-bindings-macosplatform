@@ -5,6 +5,7 @@
 package avfoundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
@@ -53,6 +54,7 @@ var _fnAVCaptureReactionSystemImageNameForType func(objc.ID) objc.ID
 
 // AVCaptureReactionSystemImageNameForType calls the AVFoundation framework function AVCaptureReactionSystemImageNameForType.
 func AVCaptureReactionSystemImageNameForType(reactionType obj.Object) string {
+	defer runtime.KeepAlive(reactionType)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAVCaptureReactionSystemImageNameForType == nil {
 		ebipurego.RegisterLibFunc(&_fnAVCaptureReactionSystemImageNameForType, _lib, "AVCaptureReactionSystemImageNameForType")
@@ -114,6 +116,8 @@ var _fnAVSampleBufferAttachContentKey func(objc.ID, objc.ID, unsafe.Pointer) boo
 
 // AVSampleBufferAttachContentKey calls the AVFoundation framework function AVSampleBufferAttachContentKey.
 func AVSampleBufferAttachContentKey(sbuf obj.Object, contentKey *ContentKey, outError unsafe.Pointer) bool {
+	defer runtime.KeepAlive(sbuf)
+	defer runtime.KeepAlive(contentKey)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAVSampleBufferAttachContentKey == nil {
 		ebipurego.RegisterLibFunc(&_fnAVSampleBufferAttachContentKey, _lib, "AVSampleBufferAttachContentKey")

@@ -5,6 +5,7 @@
 package opengl
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
@@ -31,6 +32,7 @@ var _fnCGLClearDrawable func(objc.ID) unsafe.Pointer
 
 // CGLClearDrawable calls the OpenGL framework function CGLClearDrawable.
 func CGLClearDrawable(ctx CGLContextObj) unsafe.Pointer {
+	defer runtime.KeepAlive(ctx)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGLClearDrawable == nil {
 		ebipurego.RegisterLibFunc(&_fnCGLClearDrawable, _lib, "CGLClearDrawable")
@@ -42,6 +44,8 @@ var _fnCGLCopyContext func(objc.ID, objc.ID, uint32) unsafe.Pointer
 
 // CGLCopyContext calls the OpenGL framework function CGLCopyContext.
 func CGLCopyContext(src CGLContextObj, dst CGLContextObj, mask uint32) unsafe.Pointer {
+	defer runtime.KeepAlive(src)
+	defer runtime.KeepAlive(dst)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGLCopyContext == nil {
 		ebipurego.RegisterLibFunc(&_fnCGLCopyContext, _lib, "CGLCopyContext")
@@ -53,6 +57,8 @@ var _fnCGLCreateContext func(objc.ID, objc.ID, unsafe.Pointer) unsafe.Pointer
 
 // CGLCreateContext calls the OpenGL framework function CGLCreateContext.
 func CGLCreateContext(pix CGLPixelFormatObj, share CGLContextObj, ctx unsafe.Pointer) unsafe.Pointer {
+	defer runtime.KeepAlive(pix)
+	defer runtime.KeepAlive(share)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGLCreateContext == nil {
 		ebipurego.RegisterLibFunc(&_fnCGLCreateContext, _lib, "CGLCreateContext")
@@ -75,6 +81,7 @@ var _fnCGLDescribePBuffer func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.P
 
 // CGLDescribePBuffer calls the OpenGL framework function CGLDescribePBuffer.
 func CGLDescribePBuffer(object CGLPBufferObj) (result unsafe.Pointer, width int32, height int32, target uint32, internalFormat uint32, mipmap int32) {
+	defer runtime.KeepAlive(object)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGLDescribePBuffer == nil {
 		ebipurego.RegisterLibFunc(&_fnCGLDescribePBuffer, _lib, "CGLDescribePBuffer")
@@ -92,6 +99,7 @@ var _fnCGLDescribePixelFormat func(objc.ID, int32, unsafe.Pointer, unsafe.Pointe
 
 // CGLDescribePixelFormat calls the OpenGL framework function CGLDescribePixelFormat.
 func CGLDescribePixelFormat(pix CGLPixelFormatObj, pixNum int32, attrib unsafe.Pointer) (result unsafe.Pointer, value int32) {
+	defer runtime.KeepAlive(pix)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGLDescribePixelFormat == nil {
 		ebipurego.RegisterLibFunc(&_fnCGLDescribePixelFormat, _lib, "CGLDescribePixelFormat")
@@ -105,6 +113,7 @@ var _fnCGLDescribeRenderer func(objc.ID, int32, unsafe.Pointer, unsafe.Pointer) 
 
 // CGLDescribeRenderer calls the OpenGL framework function CGLDescribeRenderer.
 func CGLDescribeRenderer(rend CGLRendererInfoObj, rendNum int32, prop unsafe.Pointer) (result unsafe.Pointer, value int32) {
+	defer runtime.KeepAlive(rend)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGLDescribeRenderer == nil {
 		ebipurego.RegisterLibFunc(&_fnCGLDescribeRenderer, _lib, "CGLDescribeRenderer")
@@ -118,6 +127,7 @@ var _fnCGLDestroyContext func(objc.ID) unsafe.Pointer
 
 // CGLDestroyContext calls the OpenGL framework function CGLDestroyContext.
 func CGLDestroyContext(ctx CGLContextObj) unsafe.Pointer {
+	defer runtime.KeepAlive(ctx)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGLDestroyContext == nil {
 		ebipurego.RegisterLibFunc(&_fnCGLDestroyContext, _lib, "CGLDestroyContext")
@@ -129,6 +139,7 @@ var _fnCGLDestroyPBuffer func(objc.ID) unsafe.Pointer
 
 // CGLDestroyPBuffer calls the OpenGL framework function CGLDestroyPBuffer.
 func CGLDestroyPBuffer(pbuffer CGLPBufferObj) unsafe.Pointer {
+	defer runtime.KeepAlive(pbuffer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGLDestroyPBuffer == nil {
 		ebipurego.RegisterLibFunc(&_fnCGLDestroyPBuffer, _lib, "CGLDestroyPBuffer")
@@ -140,6 +151,7 @@ var _fnCGLDestroyPixelFormat func(objc.ID) unsafe.Pointer
 
 // CGLDestroyPixelFormat calls the OpenGL framework function CGLDestroyPixelFormat.
 func CGLDestroyPixelFormat(pix CGLPixelFormatObj) unsafe.Pointer {
+	defer runtime.KeepAlive(pix)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGLDestroyPixelFormat == nil {
 		ebipurego.RegisterLibFunc(&_fnCGLDestroyPixelFormat, _lib, "CGLDestroyPixelFormat")
@@ -151,6 +163,7 @@ var _fnCGLDestroyRendererInfo func(objc.ID) unsafe.Pointer
 
 // CGLDestroyRendererInfo calls the OpenGL framework function CGLDestroyRendererInfo.
 func CGLDestroyRendererInfo(rend CGLRendererInfoObj) unsafe.Pointer {
+	defer runtime.KeepAlive(rend)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGLDestroyRendererInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnCGLDestroyRendererInfo, _lib, "CGLDestroyRendererInfo")
@@ -162,6 +175,7 @@ var _fnCGLDisable func(objc.ID, unsafe.Pointer) unsafe.Pointer
 
 // CGLDisable calls the OpenGL framework function CGLDisable.
 func CGLDisable(ctx CGLContextObj, pname unsafe.Pointer) unsafe.Pointer {
+	defer runtime.KeepAlive(ctx)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGLDisable == nil {
 		ebipurego.RegisterLibFunc(&_fnCGLDisable, _lib, "CGLDisable")
@@ -173,6 +187,7 @@ var _fnCGLEnable func(objc.ID, unsafe.Pointer) unsafe.Pointer
 
 // CGLEnable calls the OpenGL framework function CGLEnable.
 func CGLEnable(ctx CGLContextObj, pname unsafe.Pointer) unsafe.Pointer {
+	defer runtime.KeepAlive(ctx)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGLEnable == nil {
 		ebipurego.RegisterLibFunc(&_fnCGLEnable, _lib, "CGLEnable")
@@ -195,6 +210,7 @@ var _fnCGLFlushDrawable func(objc.ID) unsafe.Pointer
 
 // CGLFlushDrawable calls the OpenGL framework function CGLFlushDrawable.
 func CGLFlushDrawable(ctx CGLContextObj) unsafe.Pointer {
+	defer runtime.KeepAlive(ctx)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGLFlushDrawable == nil {
 		ebipurego.RegisterLibFunc(&_fnCGLFlushDrawable, _lib, "CGLFlushDrawable")
@@ -206,6 +222,7 @@ var _fnCGLGetContextRetainCount func(objc.ID) uint32
 
 // CGLGetContextRetainCount calls the OpenGL framework function CGLGetContextRetainCount.
 func CGLGetContextRetainCount(ctx CGLContextObj) uint32 {
+	defer runtime.KeepAlive(ctx)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGLGetContextRetainCount == nil {
 		ebipurego.RegisterLibFunc(&_fnCGLGetContextRetainCount, _lib, "CGLGetContextRetainCount")
@@ -254,6 +271,7 @@ var _fnCGLGetOffScreen func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Poin
 
 // CGLGetOffScreen calls the OpenGL framework function CGLGetOffScreen.
 func CGLGetOffScreen(ctx CGLContextObj, baseaddr unsafe.Pointer) (result unsafe.Pointer, width int32, height int32, rowbytes int32) {
+	defer runtime.KeepAlive(ctx)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGLGetOffScreen == nil {
 		ebipurego.RegisterLibFunc(&_fnCGLGetOffScreen, _lib, "CGLGetOffScreen")
@@ -282,6 +300,7 @@ var _fnCGLGetPBuffer func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointe
 
 // CGLGetPBuffer calls the OpenGL framework function CGLGetPBuffer.
 func CGLGetPBuffer(ctx CGLContextObj, pbuffer unsafe.Pointer) (result unsafe.Pointer, face uint32, level int32, screen int32) {
+	defer runtime.KeepAlive(ctx)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGLGetPBuffer == nil {
 		ebipurego.RegisterLibFunc(&_fnCGLGetPBuffer, _lib, "CGLGetPBuffer")
@@ -297,6 +316,7 @@ var _fnCGLGetPBufferRetainCount func(objc.ID) uint32
 
 // CGLGetPBufferRetainCount calls the OpenGL framework function CGLGetPBufferRetainCount.
 func CGLGetPBufferRetainCount(pbuffer CGLPBufferObj) uint32 {
+	defer runtime.KeepAlive(pbuffer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGLGetPBufferRetainCount == nil {
 		ebipurego.RegisterLibFunc(&_fnCGLGetPBufferRetainCount, _lib, "CGLGetPBufferRetainCount")
@@ -308,6 +328,7 @@ var _fnCGLGetParameter func(objc.ID, unsafe.Pointer, unsafe.Pointer) unsafe.Poin
 
 // CGLGetParameter calls the OpenGL framework function CGLGetParameter.
 func CGLGetParameter(ctx CGLContextObj, pname unsafe.Pointer) (result unsafe.Pointer, params int32) {
+	defer runtime.KeepAlive(ctx)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGLGetParameter == nil {
 		ebipurego.RegisterLibFunc(&_fnCGLGetParameter, _lib, "CGLGetParameter")
@@ -321,6 +342,7 @@ var _fnCGLGetPixelFormat func(objc.ID) objc.ID
 
 // CGLGetPixelFormat calls the OpenGL framework function CGLGetPixelFormat.
 func CGLGetPixelFormat(ctx CGLContextObj) CGLPixelFormatObj {
+	defer runtime.KeepAlive(ctx)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGLGetPixelFormat == nil {
 		ebipurego.RegisterLibFunc(&_fnCGLGetPixelFormat, _lib, "CGLGetPixelFormat")
@@ -333,6 +355,7 @@ var _fnCGLGetPixelFormatRetainCount func(objc.ID) uint32
 
 // CGLGetPixelFormatRetainCount calls the OpenGL framework function CGLGetPixelFormatRetainCount.
 func CGLGetPixelFormatRetainCount(pix CGLPixelFormatObj) uint32 {
+	defer runtime.KeepAlive(pix)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGLGetPixelFormatRetainCount == nil {
 		ebipurego.RegisterLibFunc(&_fnCGLGetPixelFormatRetainCount, _lib, "CGLGetPixelFormatRetainCount")
@@ -344,6 +367,7 @@ var _fnCGLGetShareGroup func(objc.ID) objc.ID
 
 // CGLGetShareGroup calls the OpenGL framework function CGLGetShareGroup.
 func CGLGetShareGroup(ctx CGLContextObj) CGLShareGroupObj {
+	defer runtime.KeepAlive(ctx)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGLGetShareGroup == nil {
 		ebipurego.RegisterLibFunc(&_fnCGLGetShareGroup, _lib, "CGLGetShareGroup")
@@ -370,6 +394,7 @@ var _fnCGLGetVirtualScreen func(objc.ID, unsafe.Pointer) unsafe.Pointer
 
 // CGLGetVirtualScreen calls the OpenGL framework function CGLGetVirtualScreen.
 func CGLGetVirtualScreen(ctx CGLContextObj) (result unsafe.Pointer, screen int32) {
+	defer runtime.KeepAlive(ctx)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGLGetVirtualScreen == nil {
 		ebipurego.RegisterLibFunc(&_fnCGLGetVirtualScreen, _lib, "CGLGetVirtualScreen")
@@ -383,6 +408,7 @@ var _fnCGLIsEnabled func(objc.ID, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 
 // CGLIsEnabled calls the OpenGL framework function CGLIsEnabled.
 func CGLIsEnabled(ctx CGLContextObj, pname unsafe.Pointer) (result unsafe.Pointer, enable int32) {
+	defer runtime.KeepAlive(ctx)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGLIsEnabled == nil {
 		ebipurego.RegisterLibFunc(&_fnCGLIsEnabled, _lib, "CGLIsEnabled")
@@ -396,6 +422,7 @@ var _fnCGLLockContext func(objc.ID) unsafe.Pointer
 
 // CGLLockContext calls the OpenGL framework function CGLLockContext.
 func CGLLockContext(ctx CGLContextObj) unsafe.Pointer {
+	defer runtime.KeepAlive(ctx)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGLLockContext == nil {
 		ebipurego.RegisterLibFunc(&_fnCGLLockContext, _lib, "CGLLockContext")
@@ -420,6 +447,7 @@ var _fnCGLReleaseContext func(objc.ID)
 
 // CGLReleaseContext calls the OpenGL framework function CGLReleaseContext.
 func CGLReleaseContext(ctx CGLContextObj) {
+	defer runtime.KeepAlive(ctx)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGLReleaseContext == nil {
 		ebipurego.RegisterLibFunc(&_fnCGLReleaseContext, _lib, "CGLReleaseContext")
@@ -431,6 +459,7 @@ var _fnCGLReleasePBuffer func(objc.ID)
 
 // CGLReleasePBuffer calls the OpenGL framework function CGLReleasePBuffer.
 func CGLReleasePBuffer(pbuffer CGLPBufferObj) {
+	defer runtime.KeepAlive(pbuffer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGLReleasePBuffer == nil {
 		ebipurego.RegisterLibFunc(&_fnCGLReleasePBuffer, _lib, "CGLReleasePBuffer")
@@ -442,6 +471,7 @@ var _fnCGLReleasePixelFormat func(objc.ID)
 
 // CGLReleasePixelFormat calls the OpenGL framework function CGLReleasePixelFormat.
 func CGLReleasePixelFormat(pix CGLPixelFormatObj) {
+	defer runtime.KeepAlive(pix)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGLReleasePixelFormat == nil {
 		ebipurego.RegisterLibFunc(&_fnCGLReleasePixelFormat, _lib, "CGLReleasePixelFormat")
@@ -453,6 +483,7 @@ var _fnCGLRetainContext func(objc.ID) objc.ID
 
 // CGLRetainContext calls the OpenGL framework function CGLRetainContext.
 func CGLRetainContext(ctx CGLContextObj) CGLContextObj {
+	defer runtime.KeepAlive(ctx)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGLRetainContext == nil {
 		ebipurego.RegisterLibFunc(&_fnCGLRetainContext, _lib, "CGLRetainContext")
@@ -465,6 +496,7 @@ var _fnCGLRetainPBuffer func(objc.ID) objc.ID
 
 // CGLRetainPBuffer calls the OpenGL framework function CGLRetainPBuffer.
 func CGLRetainPBuffer(pbuffer CGLPBufferObj) CGLPBufferObj {
+	defer runtime.KeepAlive(pbuffer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGLRetainPBuffer == nil {
 		ebipurego.RegisterLibFunc(&_fnCGLRetainPBuffer, _lib, "CGLRetainPBuffer")
@@ -477,6 +509,7 @@ var _fnCGLRetainPixelFormat func(objc.ID) objc.ID
 
 // CGLRetainPixelFormat calls the OpenGL framework function CGLRetainPixelFormat.
 func CGLRetainPixelFormat(pix CGLPixelFormatObj) CGLPixelFormatObj {
+	defer runtime.KeepAlive(pix)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGLRetainPixelFormat == nil {
 		ebipurego.RegisterLibFunc(&_fnCGLRetainPixelFormat, _lib, "CGLRetainPixelFormat")
@@ -489,6 +522,7 @@ var _fnCGLSetCurrentContext func(objc.ID) unsafe.Pointer
 
 // CGLSetCurrentContext calls the OpenGL framework function CGLSetCurrentContext.
 func CGLSetCurrentContext(ctx CGLContextObj) unsafe.Pointer {
+	defer runtime.KeepAlive(ctx)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGLSetCurrentContext == nil {
 		ebipurego.RegisterLibFunc(&_fnCGLSetCurrentContext, _lib, "CGLSetCurrentContext")
@@ -500,6 +534,7 @@ var _fnCGLSetFullScreen func(objc.ID) unsafe.Pointer
 
 // CGLSetFullScreen calls the OpenGL framework function CGLSetFullScreen.
 func CGLSetFullScreen(ctx CGLContextObj) unsafe.Pointer {
+	defer runtime.KeepAlive(ctx)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGLSetFullScreen == nil {
 		ebipurego.RegisterLibFunc(&_fnCGLSetFullScreen, _lib, "CGLSetFullScreen")
@@ -511,6 +546,7 @@ var _fnCGLSetFullScreenOnDisplay func(objc.ID, uint32) unsafe.Pointer
 
 // CGLSetFullScreenOnDisplay calls the OpenGL framework function CGLSetFullScreenOnDisplay.
 func CGLSetFullScreenOnDisplay(ctx CGLContextObj, displayMask uint32) unsafe.Pointer {
+	defer runtime.KeepAlive(ctx)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGLSetFullScreenOnDisplay == nil {
 		ebipurego.RegisterLibFunc(&_fnCGLSetFullScreenOnDisplay, _lib, "CGLSetFullScreenOnDisplay")
@@ -533,6 +569,7 @@ var _fnCGLSetOffScreen func(objc.ID, int32, int32, int32, unsafe.Pointer) unsafe
 
 // CGLSetOffScreen calls the OpenGL framework function CGLSetOffScreen.
 func CGLSetOffScreen(ctx CGLContextObj, width int32, height int32, rowbytes int32, baseaddr unsafe.Pointer) unsafe.Pointer {
+	defer runtime.KeepAlive(ctx)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGLSetOffScreen == nil {
 		ebipurego.RegisterLibFunc(&_fnCGLSetOffScreen, _lib, "CGLSetOffScreen")
@@ -555,6 +592,8 @@ var _fnCGLSetPBuffer func(objc.ID, objc.ID, uint32, int32, int32) unsafe.Pointer
 
 // CGLSetPBuffer calls the OpenGL framework function CGLSetPBuffer.
 func CGLSetPBuffer(ctx CGLContextObj, pbuffer CGLPBufferObj, face uint32, level int32, screen int32) unsafe.Pointer {
+	defer runtime.KeepAlive(ctx)
+	defer runtime.KeepAlive(pbuffer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGLSetPBuffer == nil {
 		ebipurego.RegisterLibFunc(&_fnCGLSetPBuffer, _lib, "CGLSetPBuffer")
@@ -566,6 +605,7 @@ var _fnCGLSetParameter func(objc.ID, unsafe.Pointer, unsafe.Pointer) unsafe.Poin
 
 // CGLSetParameter calls the OpenGL framework function CGLSetParameter.
 func CGLSetParameter(ctx CGLContextObj, pname unsafe.Pointer, params unsafe.Pointer) unsafe.Pointer {
+	defer runtime.KeepAlive(ctx)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGLSetParameter == nil {
 		ebipurego.RegisterLibFunc(&_fnCGLSetParameter, _lib, "CGLSetParameter")
@@ -577,6 +617,7 @@ var _fnCGLSetVirtualScreen func(objc.ID, int32) unsafe.Pointer
 
 // CGLSetVirtualScreen calls the OpenGL framework function CGLSetVirtualScreen.
 func CGLSetVirtualScreen(ctx CGLContextObj, screen int32) unsafe.Pointer {
+	defer runtime.KeepAlive(ctx)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGLSetVirtualScreen == nil {
 		ebipurego.RegisterLibFunc(&_fnCGLSetVirtualScreen, _lib, "CGLSetVirtualScreen")
@@ -588,6 +629,8 @@ var _fnCGLTexImageIOSurface2D func(objc.ID, uint32, uint32, int32, int32, uint32
 
 // CGLTexImageIOSurface2D calls the OpenGL framework function CGLTexImageIOSurface2D.
 func CGLTexImageIOSurface2D(ctx CGLContextObj, target uint32, internalFormat uint32, width int32, height int32, format uint32, type_ uint32, ioSurface coregraphics.IOSurfaceRef, plane uint32) unsafe.Pointer {
+	defer runtime.KeepAlive(ctx)
+	defer runtime.KeepAlive(ioSurface)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGLTexImageIOSurface2D == nil {
 		ebipurego.RegisterLibFunc(&_fnCGLTexImageIOSurface2D, _lib, "CGLTexImageIOSurface2D")
@@ -599,6 +642,8 @@ var _fnCGLTexImagePBuffer func(objc.ID, objc.ID, uint32) unsafe.Pointer
 
 // CGLTexImagePBuffer calls the OpenGL framework function CGLTexImagePBuffer.
 func CGLTexImagePBuffer(ctx CGLContextObj, pbuffer CGLPBufferObj, source uint32) unsafe.Pointer {
+	defer runtime.KeepAlive(ctx)
+	defer runtime.KeepAlive(pbuffer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGLTexImagePBuffer == nil {
 		ebipurego.RegisterLibFunc(&_fnCGLTexImagePBuffer, _lib, "CGLTexImagePBuffer")
@@ -610,6 +655,7 @@ var _fnCGLUnlockContext func(objc.ID) unsafe.Pointer
 
 // CGLUnlockContext calls the OpenGL framework function CGLUnlockContext.
 func CGLUnlockContext(ctx CGLContextObj) unsafe.Pointer {
+	defer runtime.KeepAlive(ctx)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGLUnlockContext == nil {
 		ebipurego.RegisterLibFunc(&_fnCGLUnlockContext, _lib, "CGLUnlockContext")
@@ -621,6 +667,7 @@ var _fnCGLUpdateContext func(objc.ID) unsafe.Pointer
 
 // CGLUpdateContext calls the OpenGL framework function CGLUpdateContext.
 func CGLUpdateContext(ctx CGLContextObj) unsafe.Pointer {
+	defer runtime.KeepAlive(ctx)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGLUpdateContext == nil {
 		ebipurego.RegisterLibFunc(&_fnCGLUpdateContext, _lib, "CGLUpdateContext")

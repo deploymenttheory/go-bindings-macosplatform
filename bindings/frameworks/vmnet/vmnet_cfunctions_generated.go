@@ -5,6 +5,7 @@
 package vmnet
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -31,6 +32,7 @@ var _fnInterfaceAddIpPortForwardingRule func(objc.ID, uint8, uint16, uint8, unsa
 
 // InterfaceAddIpPortForwardingRule reports an error if the vmnet framework function vmnet_interface_add_ip_port_forwarding_rule fails.
 func InterfaceAddIpPortForwardingRule(interface_ InterfaceRef, protocol uint8, externalPort uint16, addressFamily uint8, internalAddress unsafe.Pointer, internalPort uint16, handler func(VmnetReturn)) error {
+	defer runtime.KeepAlive(interface_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnInterfaceAddIpPortForwardingRule == nil {
 		ebipurego.RegisterLibFunc(&_fnInterfaceAddIpPortForwardingRule, _lib, "vmnet_interface_add_ip_port_forwarding_rule")
@@ -46,6 +48,7 @@ var _fnInterfaceAddPortForwardingRule func(objc.ID, uint8, uint16, unsafe.Pointe
 
 // InterfaceAddPortForwardingRule reports an error if the vmnet framework function vmnet_interface_add_port_forwarding_rule fails.
 func InterfaceAddPortForwardingRule(interface_ InterfaceRef, protocol uint8, externalPort uint16, internalAddress unsafe.Pointer, internalPort uint16, handler func(VmnetReturn)) error {
+	defer runtime.KeepAlive(interface_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnInterfaceAddPortForwardingRule == nil {
 		ebipurego.RegisterLibFunc(&_fnInterfaceAddPortForwardingRule, _lib, "vmnet_interface_add_port_forwarding_rule")
@@ -61,6 +64,7 @@ var _fnInterfaceGetIpPortForwardingRules func(objc.ID, uint8, objc.Block) VmnetR
 
 // InterfaceGetIpPortForwardingRules reports an error if the vmnet framework function vmnet_interface_get_ip_port_forwarding_rules fails.
 func InterfaceGetIpPortForwardingRules(interface_ InterfaceRef, addressFamily uint8, handler func(obj.Object)) error {
+	defer runtime.KeepAlive(interface_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnInterfaceGetIpPortForwardingRules == nil {
 		ebipurego.RegisterLibFunc(&_fnInterfaceGetIpPortForwardingRules, _lib, "vmnet_interface_get_ip_port_forwarding_rules")
@@ -76,6 +80,7 @@ var _fnInterfaceGetPortForwardingRules func(objc.ID, objc.Block) VmnetReturn
 
 // InterfaceGetPortForwardingRules reports an error if the vmnet framework function vmnet_interface_get_port_forwarding_rules fails.
 func InterfaceGetPortForwardingRules(interface_ InterfaceRef, handler func(obj.Object)) error {
+	defer runtime.KeepAlive(interface_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnInterfaceGetPortForwardingRules == nil {
 		ebipurego.RegisterLibFunc(&_fnInterfaceGetPortForwardingRules, _lib, "vmnet_interface_get_port_forwarding_rules")
@@ -91,6 +96,7 @@ var _fnInterfaceRemoveIpPortForwardingRule func(objc.ID, uint8, uint16, uint8, o
 
 // InterfaceRemoveIpPortForwardingRule reports an error if the vmnet framework function vmnet_interface_remove_ip_port_forwarding_rule fails.
 func InterfaceRemoveIpPortForwardingRule(interface_ InterfaceRef, protocol uint8, externalPort uint16, addressFamily uint8, handler func(VmnetReturn)) error {
+	defer runtime.KeepAlive(interface_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnInterfaceRemoveIpPortForwardingRule == nil {
 		ebipurego.RegisterLibFunc(&_fnInterfaceRemoveIpPortForwardingRule, _lib, "vmnet_interface_remove_ip_port_forwarding_rule")
@@ -106,6 +112,7 @@ var _fnInterfaceRemovePortForwardingRule func(objc.ID, uint8, uint16, objc.Block
 
 // InterfaceRemovePortForwardingRule reports an error if the vmnet framework function vmnet_interface_remove_port_forwarding_rule fails.
 func InterfaceRemovePortForwardingRule(interface_ InterfaceRef, protocol uint8, externalPort uint16, handler func(VmnetReturn)) error {
+	defer runtime.KeepAlive(interface_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnInterfaceRemovePortForwardingRule == nil {
 		ebipurego.RegisterLibFunc(&_fnInterfaceRemovePortForwardingRule, _lib, "vmnet_interface_remove_port_forwarding_rule")
@@ -121,6 +128,7 @@ var _fnInterfaceSetEventCallback func(objc.ID, InterfaceEvent, objc.ID, objc.Blo
 
 // InterfaceSetEventCallback reports an error if the vmnet framework function vmnet_interface_set_event_callback fails.
 func InterfaceSetEventCallback(interface_ InterfaceRef, eventMask InterfaceEvent, queue dispatch.Queue, callback func(InterfaceEvent, obj.Object)) error {
+	defer runtime.KeepAlive(interface_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnInterfaceSetEventCallback == nil {
 		ebipurego.RegisterLibFunc(&_fnInterfaceSetEventCallback, _lib, "vmnet_interface_set_event_callback")
@@ -136,6 +144,7 @@ var _fnInterfaceStartWithNetwork func(objc.ID, objc.ID, objc.ID, objc.Block) obj
 
 // InterfaceStartWithNetwork calls the vmnet framework function vmnet_interface_start_with_network.
 func InterfaceStartWithNetwork(network VmnetNetworkRef, interfaceDesc xpc.Object, queue dispatch.Queue, startBlock func(VmnetReturn, obj.Object)) InterfaceRef {
+	defer runtime.KeepAlive(network)
 	_loadOnce.Do(_loadLibrary)
 	if _fnInterfaceStartWithNetwork == nil {
 		ebipurego.RegisterLibFunc(&_fnInterfaceStartWithNetwork, _lib, "vmnet_interface_start_with_network")
@@ -166,6 +175,7 @@ var _fnNetworkConfigurationAddDhcpReservation func(objc.ID, unsafe.Pointer, unsa
 
 // NetworkConfigurationAddDhcpReservation reports an error if the vmnet framework function vmnet_network_configuration_add_dhcp_reservation fails.
 func NetworkConfigurationAddDhcpReservation(config VmnetNetworkConfigurationRef, client unsafe.Pointer, reservation unsafe.Pointer) error {
+	defer runtime.KeepAlive(config)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNetworkConfigurationAddDhcpReservation == nil {
 		ebipurego.RegisterLibFunc(&_fnNetworkConfigurationAddDhcpReservation, _lib, "vmnet_network_configuration_add_dhcp_reservation")
@@ -181,6 +191,7 @@ var _fnNetworkConfigurationAddPortForwardingRule func(objc.ID, uint8, uint8, uin
 
 // NetworkConfigurationAddPortForwardingRule reports an error if the vmnet framework function vmnet_network_configuration_add_port_forwarding_rule fails.
 func NetworkConfigurationAddPortForwardingRule(config VmnetNetworkConfigurationRef, protocol uint8, addressFamily uint8, internalPort uint16, externalPort uint16, internalAddress unsafe.Pointer) error {
+	defer runtime.KeepAlive(config)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNetworkConfigurationAddPortForwardingRule == nil {
 		ebipurego.RegisterLibFunc(&_fnNetworkConfigurationAddPortForwardingRule, _lib, "vmnet_network_configuration_add_port_forwarding_rule")
@@ -209,6 +220,7 @@ var _fnNetworkConfigurationDisableDhcp func(objc.ID)
 
 // NetworkConfigurationDisableDhcp calls the vmnet framework function vmnet_network_configuration_disable_dhcp.
 func NetworkConfigurationDisableDhcp(config VmnetNetworkConfigurationRef) {
+	defer runtime.KeepAlive(config)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNetworkConfigurationDisableDhcp == nil {
 		ebipurego.RegisterLibFunc(&_fnNetworkConfigurationDisableDhcp, _lib, "vmnet_network_configuration_disable_dhcp")
@@ -220,6 +232,7 @@ var _fnNetworkConfigurationDisableDnsProxy func(objc.ID)
 
 // NetworkConfigurationDisableDnsProxy calls the vmnet framework function vmnet_network_configuration_disable_dns_proxy.
 func NetworkConfigurationDisableDnsProxy(config VmnetNetworkConfigurationRef) {
+	defer runtime.KeepAlive(config)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNetworkConfigurationDisableDnsProxy == nil {
 		ebipurego.RegisterLibFunc(&_fnNetworkConfigurationDisableDnsProxy, _lib, "vmnet_network_configuration_disable_dns_proxy")
@@ -231,6 +244,7 @@ var _fnNetworkConfigurationDisableNat44 func(objc.ID)
 
 // NetworkConfigurationDisableNat44 calls the vmnet framework function vmnet_network_configuration_disable_nat44.
 func NetworkConfigurationDisableNat44(config VmnetNetworkConfigurationRef) {
+	defer runtime.KeepAlive(config)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNetworkConfigurationDisableNat44 == nil {
 		ebipurego.RegisterLibFunc(&_fnNetworkConfigurationDisableNat44, _lib, "vmnet_network_configuration_disable_nat44")
@@ -242,6 +256,7 @@ var _fnNetworkConfigurationDisableNat66 func(objc.ID)
 
 // NetworkConfigurationDisableNat66 calls the vmnet framework function vmnet_network_configuration_disable_nat66.
 func NetworkConfigurationDisableNat66(config VmnetNetworkConfigurationRef) {
+	defer runtime.KeepAlive(config)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNetworkConfigurationDisableNat66 == nil {
 		ebipurego.RegisterLibFunc(&_fnNetworkConfigurationDisableNat66, _lib, "vmnet_network_configuration_disable_nat66")
@@ -253,6 +268,7 @@ var _fnNetworkConfigurationDisableRouterAdvertisement func(objc.ID)
 
 // NetworkConfigurationDisableRouterAdvertisement calls the vmnet framework function vmnet_network_configuration_disable_router_advertisement.
 func NetworkConfigurationDisableRouterAdvertisement(config VmnetNetworkConfigurationRef) {
+	defer runtime.KeepAlive(config)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNetworkConfigurationDisableRouterAdvertisement == nil {
 		ebipurego.RegisterLibFunc(&_fnNetworkConfigurationDisableRouterAdvertisement, _lib, "vmnet_network_configuration_disable_router_advertisement")
@@ -264,6 +280,7 @@ var _fnNetworkConfigurationSetExternalInterface func(objc.ID, string) VmnetRetur
 
 // NetworkConfigurationSetExternalInterface reports an error if the vmnet framework function vmnet_network_configuration_set_external_interface fails.
 func NetworkConfigurationSetExternalInterface(config VmnetNetworkConfigurationRef, interfaceName string) error {
+	defer runtime.KeepAlive(config)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNetworkConfigurationSetExternalInterface == nil {
 		ebipurego.RegisterLibFunc(&_fnNetworkConfigurationSetExternalInterface, _lib, "vmnet_network_configuration_set_external_interface")
@@ -279,6 +296,7 @@ var _fnNetworkConfigurationSetIpv4Subnet func(objc.ID, unsafe.Pointer, unsafe.Po
 
 // NetworkConfigurationSetIpv4Subnet reports an error if the vmnet framework function vmnet_network_configuration_set_ipv4_subnet fails.
 func NetworkConfigurationSetIpv4Subnet(config VmnetNetworkConfigurationRef, subnetAddr unsafe.Pointer, subnetMask unsafe.Pointer) error {
+	defer runtime.KeepAlive(config)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNetworkConfigurationSetIpv4Subnet == nil {
 		ebipurego.RegisterLibFunc(&_fnNetworkConfigurationSetIpv4Subnet, _lib, "vmnet_network_configuration_set_ipv4_subnet")
@@ -294,6 +312,7 @@ var _fnNetworkConfigurationSetIpv6Prefix func(objc.ID, unsafe.Pointer, uint8) Vm
 
 // NetworkConfigurationSetIpv6Prefix reports an error if the vmnet framework function vmnet_network_configuration_set_ipv6_prefix fails.
 func NetworkConfigurationSetIpv6Prefix(config VmnetNetworkConfigurationRef, prefix unsafe.Pointer, length uint8) error {
+	defer runtime.KeepAlive(config)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNetworkConfigurationSetIpv6Prefix == nil {
 		ebipurego.RegisterLibFunc(&_fnNetworkConfigurationSetIpv6Prefix, _lib, "vmnet_network_configuration_set_ipv6_prefix")
@@ -309,6 +328,7 @@ var _fnNetworkConfigurationSetMtu func(objc.ID, uint32) VmnetReturn
 
 // NetworkConfigurationSetMtu reports an error if the vmnet framework function vmnet_network_configuration_set_mtu fails.
 func NetworkConfigurationSetMtu(config VmnetNetworkConfigurationRef, mtu uint32) error {
+	defer runtime.KeepAlive(config)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNetworkConfigurationSetMtu == nil {
 		ebipurego.RegisterLibFunc(&_fnNetworkConfigurationSetMtu, _lib, "vmnet_network_configuration_set_mtu")
@@ -324,6 +344,7 @@ var _fnNetworkCopySerialization func(objc.ID, unsafe.Pointer) unsafe.Pointer
 
 // NetworkCopySerialization calls the vmnet framework function vmnet_network_copy_serialization.
 func NetworkCopySerialization(network VmnetNetworkRef) (result unsafe.Pointer, status VmnetReturn) {
+	defer runtime.KeepAlive(network)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNetworkCopySerialization == nil {
 		ebipurego.RegisterLibFunc(&_fnNetworkCopySerialization, _lib, "vmnet_network_copy_serialization")
@@ -337,6 +358,7 @@ var _fnNetworkCreate func(objc.ID, unsafe.Pointer) objc.ID
 
 // NetworkCreate calls the vmnet framework function vmnet_network_create.
 func NetworkCreate(configuration VmnetNetworkConfigurationRef) (result VmnetNetworkRef, status VmnetReturn) {
+	defer runtime.KeepAlive(configuration)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNetworkCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnNetworkCreate, _lib, "vmnet_network_create")
@@ -363,6 +385,7 @@ var _fnNetworkGetIpv4Subnet func(objc.ID, unsafe.Pointer, unsafe.Pointer)
 
 // NetworkGetIpv4Subnet calls the vmnet framework function vmnet_network_get_ipv4_subnet.
 func NetworkGetIpv4Subnet(network VmnetNetworkRef, subnet unsafe.Pointer, mask unsafe.Pointer) {
+	defer runtime.KeepAlive(network)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNetworkGetIpv4Subnet == nil {
 		ebipurego.RegisterLibFunc(&_fnNetworkGetIpv4Subnet, _lib, "vmnet_network_get_ipv4_subnet")
@@ -374,6 +397,7 @@ var _fnNetworkGetIpv6Prefix func(objc.ID, unsafe.Pointer, unsafe.Pointer)
 
 // NetworkGetIpv6Prefix calls the vmnet framework function vmnet_network_get_ipv6_prefix.
 func NetworkGetIpv6Prefix(network VmnetNetworkRef, prefix unsafe.Pointer) (prefixLen uint8) {
+	defer runtime.KeepAlive(network)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNetworkGetIpv6Prefix == nil {
 		ebipurego.RegisterLibFunc(&_fnNetworkGetIpv6Prefix, _lib, "vmnet_network_get_ipv6_prefix")
@@ -405,6 +429,7 @@ var _fnRead func(objc.ID, unsafe.Pointer, unsafe.Pointer) VmnetReturn
 
 // Read reports an error if the vmnet framework function vmnet_read fails.
 func Read(interface_ InterfaceRef, packets unsafe.Pointer, pktcnt *int32) error {
+	defer runtime.KeepAlive(interface_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnRead == nil {
 		ebipurego.RegisterLibFunc(&_fnRead, _lib, "vmnet_read")
@@ -432,6 +457,7 @@ var _fnStopInterface func(objc.ID, objc.ID, objc.Block) VmnetReturn
 
 // StopInterface reports an error if the vmnet framework function vmnet_stop_interface fails.
 func StopInterface(interface_ InterfaceRef, queue dispatch.Queue, handler func(VmnetReturn)) error {
+	defer runtime.KeepAlive(interface_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnStopInterface == nil {
 		ebipurego.RegisterLibFunc(&_fnStopInterface, _lib, "vmnet_stop_interface")
@@ -447,6 +473,7 @@ var _fnWrite func(objc.ID, unsafe.Pointer, unsafe.Pointer) VmnetReturn
 
 // Write reports an error if the vmnet framework function vmnet_write fails.
 func Write(interface_ InterfaceRef, packets unsafe.Pointer, pktcnt *int32) error {
+	defer runtime.KeepAlive(interface_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnWrite == nil {
 		ebipurego.RegisterLibFunc(&_fnWrite, _lib, "vmnet_write")

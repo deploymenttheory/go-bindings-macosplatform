@@ -5,6 +5,7 @@
 package osservices
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -18,6 +19,8 @@ import (
 var _fnCSIdentityCommit func(objc.ID, objc.ID, unsafe.Pointer) uint8
 
 func CSIdentityCommit(identity CSIdentityRef, authorization obj.Object) error {
+	defer runtime.KeepAlive(identity)
+	defer runtime.KeepAlive(authorization)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSIdentityCommit == nil {
 		ebipurego.RegisterLibFunc(&_fnCSIdentityCommit, _lib, "CSIdentityCommit")
@@ -34,6 +37,7 @@ func CSIdentityCommit(identity CSIdentityRef, authorization obj.Object) error {
 var _fnCSIdentityQueryExecute func(objc.ID, int, unsafe.Pointer) uint8
 
 func CSIdentityQueryExecute(query CSIdentityQueryRef, flags int) error {
+	defer runtime.KeepAlive(query)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSIdentityQueryExecute == nil {
 		ebipurego.RegisterLibFunc(&_fnCSIdentityQueryExecute, _lib, "CSIdentityQueryExecute")

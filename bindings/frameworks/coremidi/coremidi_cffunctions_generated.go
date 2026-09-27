@@ -5,6 +5,7 @@
 package coremidi
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -33,6 +34,7 @@ var _fnMIDIBluetoothDriverDisconnect func(objc.ID) int32
 
 // MIDIBluetoothDriverDisconnect reports an error if the CoreMIDI framework function MIDIBluetoothDriverDisconnect fails.
 func MIDIBluetoothDriverDisconnect(uuid obj.Object) error {
+	defer runtime.KeepAlive(uuid)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDIBluetoothDriverDisconnect == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDIBluetoothDriverDisconnect, _lib, "MIDIBluetoothDriverDisconnect")
@@ -214,6 +216,7 @@ var _fnMIDIGetSerialPortOwner func(objc.ID, unsafe.Pointer) int32
 
 // MIDIGetSerialPortOwner reports an error if the CoreMIDI framework function MIDIGetSerialPortOwner fails.
 func MIDIGetSerialPortOwner(portName obj.Object) (obj.Object, error) {
+	defer runtime.KeepAlive(portName)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDIGetSerialPortOwner == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDIGetSerialPortOwner, _lib, "MIDIGetSerialPortOwner")
@@ -230,6 +233,7 @@ var _fnMIDIObjectGetDataProperty func(int, objc.ID, unsafe.Pointer) int32
 
 // MIDIObjectGetDataProperty reports an error if the CoreMIDI framework function MIDIObjectGetDataProperty fails.
 func MIDIObjectGetDataProperty(object int, propertyID obj.Object) (obj.Object, error) {
+	defer runtime.KeepAlive(propertyID)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDIObjectGetDataProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDIObjectGetDataProperty, _lib, "MIDIObjectGetDataProperty")
@@ -246,6 +250,7 @@ var _fnMIDIObjectGetDictionaryProperty func(int, objc.ID, unsafe.Pointer) int32
 
 // MIDIObjectGetDictionaryProperty reports an error if the CoreMIDI framework function MIDIObjectGetDictionaryProperty fails.
 func MIDIObjectGetDictionaryProperty(object int, propertyID obj.Object) (obj.Object, error) {
+	defer runtime.KeepAlive(propertyID)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDIObjectGetDictionaryProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDIObjectGetDictionaryProperty, _lib, "MIDIObjectGetDictionaryProperty")
@@ -278,6 +283,7 @@ var _fnMIDIObjectGetStringProperty func(int, objc.ID, unsafe.Pointer) int32
 
 // MIDIObjectGetStringProperty reports an error if the CoreMIDI framework function MIDIObjectGetStringProperty fails.
 func MIDIObjectGetStringProperty(object int, propertyID obj.Object) (obj.Object, error) {
+	defer runtime.KeepAlive(propertyID)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDIObjectGetStringProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDIObjectGetStringProperty, _lib, "MIDIObjectGetStringProperty")
@@ -294,6 +300,7 @@ var _fnMIDIObjectRemoveProperty func(int, objc.ID) int32
 
 // MIDIObjectRemoveProperty reports an error if the CoreMIDI framework function MIDIObjectRemoveProperty fails.
 func MIDIObjectRemoveProperty(object int, propertyID obj.Object) error {
+	defer runtime.KeepAlive(propertyID)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDIObjectRemoveProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDIObjectRemoveProperty, _lib, "MIDIObjectRemoveProperty")
@@ -309,6 +316,8 @@ var _fnMIDIObjectSetDataProperty func(int, objc.ID, objc.ID) int32
 
 // MIDIObjectSetDataProperty reports an error if the CoreMIDI framework function MIDIObjectSetDataProperty fails.
 func MIDIObjectSetDataProperty(object int, propertyID obj.Object, data obj.Object) error {
+	defer runtime.KeepAlive(propertyID)
+	defer runtime.KeepAlive(data)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDIObjectSetDataProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDIObjectSetDataProperty, _lib, "MIDIObjectSetDataProperty")
@@ -324,6 +333,8 @@ var _fnMIDIObjectSetDictionaryProperty func(int, objc.ID, objc.ID) int32
 
 // MIDIObjectSetDictionaryProperty reports an error if the CoreMIDI framework function MIDIObjectSetDictionaryProperty fails.
 func MIDIObjectSetDictionaryProperty(object int, propertyID obj.Object, dict obj.Object) error {
+	defer runtime.KeepAlive(propertyID)
+	defer runtime.KeepAlive(dict)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDIObjectSetDictionaryProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDIObjectSetDictionaryProperty, _lib, "MIDIObjectSetDictionaryProperty")
@@ -339,6 +350,7 @@ var _fnMIDIObjectSetIntegerProperty func(int, objc.ID, int) int32
 
 // MIDIObjectSetIntegerProperty reports an error if the CoreMIDI framework function MIDIObjectSetIntegerProperty fails.
 func MIDIObjectSetIntegerProperty(object int, propertyID obj.Object, value int) error {
+	defer runtime.KeepAlive(propertyID)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDIObjectSetIntegerProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDIObjectSetIntegerProperty, _lib, "MIDIObjectSetIntegerProperty")
@@ -354,6 +366,8 @@ var _fnMIDIObjectSetStringProperty func(int, objc.ID, objc.ID) int32
 
 // MIDIObjectSetStringProperty reports an error if the CoreMIDI framework function MIDIObjectSetStringProperty fails.
 func MIDIObjectSetStringProperty(object int, propertyID obj.Object, str obj.Object) error {
+	defer runtime.KeepAlive(propertyID)
+	defer runtime.KeepAlive(str)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDIObjectSetStringProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDIObjectSetStringProperty, _lib, "MIDIObjectSetStringProperty")
@@ -429,6 +443,8 @@ var _fnMIDISetSerialPortOwner func(objc.ID, objc.ID) int32
 
 // MIDISetSerialPortOwner reports an error if the CoreMIDI framework function MIDISetSerialPortOwner fails.
 func MIDISetSerialPortOwner(portName obj.Object, driverName obj.Object) error {
+	defer runtime.KeepAlive(portName)
+	defer runtime.KeepAlive(driverName)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDISetSerialPortOwner == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDISetSerialPortOwner, _lib, "MIDISetSerialPortOwner")
@@ -565,6 +581,7 @@ var _fnMIDIThruConnectionFind func(objc.ID, unsafe.Pointer) int32
 
 // MIDIThruConnectionFind reports an error if the CoreMIDI framework function MIDIThruConnectionFind fails.
 func MIDIThruConnectionFind(inPersistentOwnerID obj.Object) (obj.Object, error) {
+	defer runtime.KeepAlive(inPersistentOwnerID)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDIThruConnectionFind == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDIThruConnectionFind, _lib, "MIDIThruConnectionFind")
@@ -597,6 +614,7 @@ var _fnMIDIThruConnectionSetParams func(int, objc.ID) int32
 
 // MIDIThruConnectionSetParams reports an error if the CoreMIDI framework function MIDIThruConnectionSetParams fails.
 func MIDIThruConnectionSetParams(connection int, inConnectionParams obj.Object) error {
+	defer runtime.KeepAlive(inConnectionParams)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDIThruConnectionSetParams == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDIThruConnectionSetParams, _lib, "MIDIThruConnectionSetParams")

@@ -5,6 +5,7 @@
 package security
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
@@ -19,6 +20,8 @@ import (
 var _fnSecAccessControlCreateWithFlags func(objc.ID, objc.ID, SecAccessControlCreateFlags, unsafe.Pointer) objc.ID
 
 func SecAccessControlCreateWithFlags(allocator corefoundation.CFAllocatorRef, protection obj.Object, flags SecAccessControlCreateFlags) (obj.Object, error) {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(protection)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecAccessControlCreateWithFlags == nil {
 		ebipurego.RegisterLibFunc(&_fnSecAccessControlCreateWithFlags, _lib, "SecAccessControlCreateWithFlags")
@@ -35,6 +38,7 @@ func SecAccessControlCreateWithFlags(allocator corefoundation.CFAllocatorRef, pr
 var _fnSecAccessCreateWithOwnerAndACL func(int, int, int, objc.ID, unsafe.Pointer) objc.ID
 
 func SecAccessCreateWithOwnerAndACL(userId int, groupId int, ownerType int, acls corefoundation.CFArrayRef) (obj.Object, error) {
+	defer runtime.KeepAlive(acls)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecAccessCreateWithOwnerAndACL == nil {
 		ebipurego.RegisterLibFunc(&_fnSecAccessCreateWithOwnerAndACL, _lib, "SecAccessCreateWithOwnerAndACL")
@@ -51,6 +55,8 @@ func SecAccessCreateWithOwnerAndACL(userId int, groupId int, ownerType int, acls
 var _fnSecCertificateCopyLongDescription func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
 func SecCertificateCopyLongDescription(alloc corefoundation.CFAllocatorRef, certificate SecCertificateRef) (obj.Object, error) {
+	defer runtime.KeepAlive(alloc)
+	defer runtime.KeepAlive(certificate)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCertificateCopyLongDescription == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCertificateCopyLongDescription, _lib, "SecCertificateCopyLongDescription")
@@ -67,6 +73,7 @@ func SecCertificateCopyLongDescription(alloc corefoundation.CFAllocatorRef, cert
 var _fnSecCertificateCopyNormalizedIssuerContent func(objc.ID, unsafe.Pointer) objc.ID
 
 func SecCertificateCopyNormalizedIssuerContent(certificate SecCertificateRef) (obj.Object, error) {
+	defer runtime.KeepAlive(certificate)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCertificateCopyNormalizedIssuerContent == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCertificateCopyNormalizedIssuerContent, _lib, "SecCertificateCopyNormalizedIssuerContent")
@@ -83,6 +90,7 @@ func SecCertificateCopyNormalizedIssuerContent(certificate SecCertificateRef) (o
 var _fnSecCertificateCopyNormalizedSubjectContent func(objc.ID, unsafe.Pointer) objc.ID
 
 func SecCertificateCopyNormalizedSubjectContent(certificate SecCertificateRef) (obj.Object, error) {
+	defer runtime.KeepAlive(certificate)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCertificateCopyNormalizedSubjectContent == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCertificateCopyNormalizedSubjectContent, _lib, "SecCertificateCopyNormalizedSubjectContent")
@@ -99,6 +107,7 @@ func SecCertificateCopyNormalizedSubjectContent(certificate SecCertificateRef) (
 var _fnSecCertificateCopySerialNumber func(objc.ID, unsafe.Pointer) objc.ID
 
 func SecCertificateCopySerialNumber(certificate SecCertificateRef) (obj.Object, error) {
+	defer runtime.KeepAlive(certificate)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCertificateCopySerialNumber == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCertificateCopySerialNumber, _lib, "SecCertificateCopySerialNumber")
@@ -115,6 +124,7 @@ func SecCertificateCopySerialNumber(certificate SecCertificateRef) (obj.Object, 
 var _fnSecCertificateCopySerialNumberData func(objc.ID, unsafe.Pointer) objc.ID
 
 func SecCertificateCopySerialNumberData(certificate SecCertificateRef) (obj.Object, error) {
+	defer runtime.KeepAlive(certificate)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCertificateCopySerialNumberData == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCertificateCopySerialNumberData, _lib, "SecCertificateCopySerialNumberData")
@@ -131,6 +141,8 @@ func SecCertificateCopySerialNumberData(certificate SecCertificateRef) (obj.Obje
 var _fnSecCertificateCopyShortDescription func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
 func SecCertificateCopyShortDescription(alloc corefoundation.CFAllocatorRef, certificate SecCertificateRef) (obj.Object, error) {
+	defer runtime.KeepAlive(alloc)
+	defer runtime.KeepAlive(certificate)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCertificateCopyShortDescription == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCertificateCopyShortDescription, _lib, "SecCertificateCopyShortDescription")
@@ -147,6 +159,8 @@ func SecCertificateCopyShortDescription(alloc corefoundation.CFAllocatorRef, cer
 var _fnSecCertificateCopyValues func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
 func SecCertificateCopyValues(certificate SecCertificateRef, keys corefoundation.CFArrayRef) (obj.Object, error) {
+	defer runtime.KeepAlive(certificate)
+	defer runtime.KeepAlive(keys)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCertificateCopyValues == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCertificateCopyValues, _lib, "SecCertificateCopyValues")
@@ -163,6 +177,8 @@ func SecCertificateCopyValues(certificate SecCertificateRef, keys corefoundation
 var _fnSecCodeCheckValidityWithErrors func(objc.ID, SecCSFlags, objc.ID, unsafe.Pointer) objc.ID
 
 func SecCodeCheckValidityWithErrors(code SecCodeRef, flags SecCSFlags, requirement SecRequirementRef) (obj.Object, error) {
+	defer runtime.KeepAlive(code)
+	defer runtime.KeepAlive(requirement)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCodeCheckValidityWithErrors == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCodeCheckValidityWithErrors, _lib, "SecCodeCheckValidityWithErrors")
@@ -179,6 +195,7 @@ func SecCodeCheckValidityWithErrors(code SecCodeRef, flags SecCSFlags, requireme
 var _fnSecDecodeTransformCreate func(objc.ID, unsafe.Pointer) objc.ID
 
 func SecDecodeTransformCreate(decodeType obj.Object) (obj.Object, error) {
+	defer runtime.KeepAlive(decodeType)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecDecodeTransformCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnSecDecodeTransformCreate, _lib, "SecDecodeTransformCreate")
@@ -195,6 +212,7 @@ func SecDecodeTransformCreate(decodeType obj.Object) (obj.Object, error) {
 var _fnSecDecryptTransformCreate func(objc.ID, unsafe.Pointer) objc.ID
 
 func SecDecryptTransformCreate(keyRef SecKeyRef) (obj.Object, error) {
+	defer runtime.KeepAlive(keyRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecDecryptTransformCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnSecDecryptTransformCreate, _lib, "SecDecryptTransformCreate")
@@ -211,6 +229,7 @@ func SecDecryptTransformCreate(keyRef SecKeyRef) (obj.Object, error) {
 var _fnSecDigestTransformCreate func(objc.ID, int, unsafe.Pointer) objc.ID
 
 func SecDigestTransformCreate(digestType obj.Object, digestLength int) (obj.Object, error) {
+	defer runtime.KeepAlive(digestType)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecDigestTransformCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnSecDigestTransformCreate, _lib, "SecDigestTransformCreate")
@@ -227,6 +246,7 @@ func SecDigestTransformCreate(digestType obj.Object, digestLength int) (obj.Obje
 var _fnSecEncodeTransformCreate func(objc.ID, unsafe.Pointer) objc.ID
 
 func SecEncodeTransformCreate(encodeType obj.Object) (obj.Object, error) {
+	defer runtime.KeepAlive(encodeType)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecEncodeTransformCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnSecEncodeTransformCreate, _lib, "SecEncodeTransformCreate")
@@ -243,6 +263,7 @@ func SecEncodeTransformCreate(encodeType obj.Object) (obj.Object, error) {
 var _fnSecEncryptTransformCreate func(objc.ID, unsafe.Pointer) objc.ID
 
 func SecEncryptTransformCreate(keyRef SecKeyRef) (obj.Object, error) {
+	defer runtime.KeepAlive(keyRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecEncryptTransformCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnSecEncryptTransformCreate, _lib, "SecEncryptTransformCreate")
@@ -259,6 +280,7 @@ func SecEncryptTransformCreate(keyRef SecKeyRef) (obj.Object, error) {
 var _fnSecKeyCopyExternalRepresentation func(objc.ID, unsafe.Pointer) objc.ID
 
 func SecKeyCopyExternalRepresentation(key SecKeyRef) (obj.Object, error) {
+	defer runtime.KeepAlive(key)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeyCopyExternalRepresentation == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeyCopyExternalRepresentation, _lib, "SecKeyCopyExternalRepresentation")
@@ -275,6 +297,9 @@ func SecKeyCopyExternalRepresentation(key SecKeyRef) (obj.Object, error) {
 var _fnSecKeyCopyKeyExchangeResult func(objc.ID, unsafe.Pointer, objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
 func SecKeyCopyKeyExchangeResult(privateKey SecKeyRef, algorithm unsafe.Pointer, publicKey SecKeyRef, parameters corefoundation.CFDictionaryRef) (obj.Object, error) {
+	defer runtime.KeepAlive(privateKey)
+	defer runtime.KeepAlive(publicKey)
+	defer runtime.KeepAlive(parameters)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeyCopyKeyExchangeResult == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeyCopyKeyExchangeResult, _lib, "SecKeyCopyKeyExchangeResult")
@@ -291,6 +316,8 @@ func SecKeyCopyKeyExchangeResult(privateKey SecKeyRef, algorithm unsafe.Pointer,
 var _fnSecKeyCreateDecryptedData func(objc.ID, unsafe.Pointer, objc.ID, unsafe.Pointer) objc.ID
 
 func SecKeyCreateDecryptedData(key SecKeyRef, algorithm unsafe.Pointer, ciphertext corefoundation.CFDataRef) (obj.Object, error) {
+	defer runtime.KeepAlive(key)
+	defer runtime.KeepAlive(ciphertext)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeyCreateDecryptedData == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeyCreateDecryptedData, _lib, "SecKeyCreateDecryptedData")
@@ -307,6 +334,8 @@ func SecKeyCreateDecryptedData(key SecKeyRef, algorithm unsafe.Pointer, cipherte
 var _fnSecKeyCreateEncryptedData func(objc.ID, unsafe.Pointer, objc.ID, unsafe.Pointer) objc.ID
 
 func SecKeyCreateEncryptedData(key SecKeyRef, algorithm unsafe.Pointer, plaintext corefoundation.CFDataRef) (obj.Object, error) {
+	defer runtime.KeepAlive(key)
+	defer runtime.KeepAlive(plaintext)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeyCreateEncryptedData == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeyCreateEncryptedData, _lib, "SecKeyCreateEncryptedData")
@@ -323,6 +352,8 @@ func SecKeyCreateEncryptedData(key SecKeyRef, algorithm unsafe.Pointer, plaintex
 var _fnSecKeyCreateFromData func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
 func SecKeyCreateFromData(parameters corefoundation.CFDictionaryRef, keyData corefoundation.CFDataRef) (obj.Object, error) {
+	defer runtime.KeepAlive(parameters)
+	defer runtime.KeepAlive(keyData)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeyCreateFromData == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeyCreateFromData, _lib, "SecKeyCreateFromData")
@@ -339,6 +370,7 @@ func SecKeyCreateFromData(parameters corefoundation.CFDictionaryRef, keyData cor
 var _fnSecKeyCreateRandomKey func(objc.ID, unsafe.Pointer) objc.ID
 
 func SecKeyCreateRandomKey(parameters corefoundation.CFDictionaryRef) (obj.Object, error) {
+	defer runtime.KeepAlive(parameters)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeyCreateRandomKey == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeyCreateRandomKey, _lib, "SecKeyCreateRandomKey")
@@ -355,6 +387,8 @@ func SecKeyCreateRandomKey(parameters corefoundation.CFDictionaryRef) (obj.Objec
 var _fnSecKeyCreateSignature func(objc.ID, unsafe.Pointer, objc.ID, unsafe.Pointer) objc.ID
 
 func SecKeyCreateSignature(key SecKeyRef, algorithm unsafe.Pointer, dataToSign corefoundation.CFDataRef) (obj.Object, error) {
+	defer runtime.KeepAlive(key)
+	defer runtime.KeepAlive(dataToSign)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeyCreateSignature == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeyCreateSignature, _lib, "SecKeyCreateSignature")
@@ -371,6 +405,8 @@ func SecKeyCreateSignature(key SecKeyRef, algorithm unsafe.Pointer, dataToSign c
 var _fnSecKeyCreateWithData func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
 func SecKeyCreateWithData(keyData corefoundation.CFDataRef, attributes corefoundation.CFDictionaryRef) (obj.Object, error) {
+	defer runtime.KeepAlive(keyData)
+	defer runtime.KeepAlive(attributes)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeyCreateWithData == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeyCreateWithData, _lib, "SecKeyCreateWithData")
@@ -387,6 +423,8 @@ func SecKeyCreateWithData(keyData corefoundation.CFDataRef, attributes corefound
 var _fnSecKeyDeriveFromPassword func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
 func SecKeyDeriveFromPassword(password corefoundation.CFStringRef, parameters corefoundation.CFDictionaryRef) (obj.Object, error) {
+	defer runtime.KeepAlive(password)
+	defer runtime.KeepAlive(parameters)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeyDeriveFromPassword == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeyDeriveFromPassword, _lib, "SecKeyDeriveFromPassword")
@@ -403,6 +441,7 @@ func SecKeyDeriveFromPassword(password corefoundation.CFStringRef, parameters co
 var _fnSecKeyGenerateSymmetric func(objc.ID, unsafe.Pointer) objc.ID
 
 func SecKeyGenerateSymmetric(parameters corefoundation.CFDictionaryRef) (obj.Object, error) {
+	defer runtime.KeepAlive(parameters)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeyGenerateSymmetric == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeyGenerateSymmetric, _lib, "SecKeyGenerateSymmetric")
@@ -419,6 +458,8 @@ func SecKeyGenerateSymmetric(parameters corefoundation.CFDictionaryRef) (obj.Obj
 var _fnSecKeyUnwrapSymmetric func(unsafe.Pointer, objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
 func SecKeyUnwrapSymmetric(keyToUnwrap unsafe.Pointer, unwrappingKey SecKeyRef, parameters corefoundation.CFDictionaryRef) (obj.Object, error) {
+	defer runtime.KeepAlive(unwrappingKey)
+	defer runtime.KeepAlive(parameters)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeyUnwrapSymmetric == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeyUnwrapSymmetric, _lib, "SecKeyUnwrapSymmetric")
@@ -435,6 +476,9 @@ func SecKeyUnwrapSymmetric(keyToUnwrap unsafe.Pointer, unwrappingKey SecKeyRef, 
 var _fnSecKeyVerifySignature func(objc.ID, unsafe.Pointer, objc.ID, objc.ID, unsafe.Pointer) uint8
 
 func SecKeyVerifySignature(key SecKeyRef, algorithm unsafe.Pointer, signedData corefoundation.CFDataRef, signature corefoundation.CFDataRef) error {
+	defer runtime.KeepAlive(key)
+	defer runtime.KeepAlive(signedData)
+	defer runtime.KeepAlive(signature)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeyVerifySignature == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeyVerifySignature, _lib, "SecKeyVerifySignature")
@@ -451,6 +495,9 @@ func SecKeyVerifySignature(key SecKeyRef, algorithm unsafe.Pointer, signedData c
 var _fnSecKeyWrapSymmetric func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
 func SecKeyWrapSymmetric(keyToWrap SecKeyRef, wrappingKey SecKeyRef, parameters corefoundation.CFDictionaryRef) (obj.Object, error) {
+	defer runtime.KeepAlive(keyToWrap)
+	defer runtime.KeepAlive(wrappingKey)
+	defer runtime.KeepAlive(parameters)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeyWrapSymmetric == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeyWrapSymmetric, _lib, "SecKeyWrapSymmetric")
@@ -467,6 +514,7 @@ func SecKeyWrapSymmetric(keyToWrap SecKeyRef, wrappingKey SecKeyRef, parameters 
 var _fnSecSignTransformCreate func(objc.ID, unsafe.Pointer) objc.ID
 
 func SecSignTransformCreate(key SecKeyRef) (obj.Object, error) {
+	defer runtime.KeepAlive(key)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecSignTransformCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnSecSignTransformCreate, _lib, "SecSignTransformCreate")
@@ -483,6 +531,8 @@ func SecSignTransformCreate(key SecKeyRef) (obj.Object, error) {
 var _fnSecStaticCodeCheckValidityWithErrors func(objc.ID, SecCSFlags, objc.ID, unsafe.Pointer) objc.ID
 
 func SecStaticCodeCheckValidityWithErrors(staticCode SecStaticCodeRef, flags SecCSFlags, requirement SecRequirementRef) (obj.Object, error) {
+	defer runtime.KeepAlive(staticCode)
+	defer runtime.KeepAlive(requirement)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecStaticCodeCheckValidityWithErrors == nil {
 		ebipurego.RegisterLibFunc(&_fnSecStaticCodeCheckValidityWithErrors, _lib, "SecStaticCodeCheckValidityWithErrors")
@@ -499,6 +549,7 @@ func SecStaticCodeCheckValidityWithErrors(staticCode SecStaticCodeRef, flags Sec
 var _fnSecTaskCopySigningIdentifier func(objc.ID, unsafe.Pointer) objc.ID
 
 func SecTaskCopySigningIdentifier(task SecTaskRef) (obj.Object, error) {
+	defer runtime.KeepAlive(task)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTaskCopySigningIdentifier == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTaskCopySigningIdentifier, _lib, "SecTaskCopySigningIdentifier")
@@ -515,6 +566,8 @@ func SecTaskCopySigningIdentifier(task SecTaskRef) (obj.Object, error) {
 var _fnSecTaskCopyValueForEntitlement func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
 func SecTaskCopyValueForEntitlement(task SecTaskRef, entitlement corefoundation.CFStringRef) (obj.Object, error) {
+	defer runtime.KeepAlive(task)
+	defer runtime.KeepAlive(entitlement)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTaskCopyValueForEntitlement == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTaskCopyValueForEntitlement, _lib, "SecTaskCopyValueForEntitlement")
@@ -531,6 +584,8 @@ func SecTaskCopyValueForEntitlement(task SecTaskRef, entitlement corefoundation.
 var _fnSecTaskCopyValuesForEntitlements func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
 func SecTaskCopyValuesForEntitlements(task SecTaskRef, entitlements corefoundation.CFArrayRef) (obj.Object, error) {
+	defer runtime.KeepAlive(task)
+	defer runtime.KeepAlive(entitlements)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTaskCopyValuesForEntitlements == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTaskCopyValuesForEntitlements, _lib, "SecTaskCopyValuesForEntitlements")
@@ -547,6 +602,8 @@ func SecTaskCopyValuesForEntitlements(task SecTaskRef, entitlements corefoundati
 var _fnSecTransformConnectTransforms func(unsafe.Pointer, objc.ID, unsafe.Pointer, objc.ID, unsafe.Pointer, unsafe.Pointer) objc.ID
 
 func SecTransformConnectTransforms(sourceTransformRef unsafe.Pointer, sourceAttributeName corefoundation.CFStringRef, destinationTransformRef unsafe.Pointer, destinationAttributeName corefoundation.CFStringRef, group unsafe.Pointer) (obj.Object, error) {
+	defer runtime.KeepAlive(sourceAttributeName)
+	defer runtime.KeepAlive(destinationAttributeName)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTransformConnectTransforms == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTransformConnectTransforms, _lib, "SecTransformConnectTransforms")
@@ -563,6 +620,7 @@ func SecTransformConnectTransforms(sourceTransformRef unsafe.Pointer, sourceAttr
 var _fnSecTransformCreate func(objc.ID, unsafe.Pointer) objc.ID
 
 func SecTransformCreate(name corefoundation.CFStringRef) (obj.Object, error) {
+	defer runtime.KeepAlive(name)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTransformCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTransformCreate, _lib, "SecTransformCreate")
@@ -579,6 +637,7 @@ func SecTransformCreate(name corefoundation.CFStringRef) (obj.Object, error) {
 var _fnSecTransformCreateFromExternalRepresentation func(objc.ID, unsafe.Pointer) objc.ID
 
 func SecTransformCreateFromExternalRepresentation(dictionary corefoundation.CFDictionaryRef) (obj.Object, error) {
+	defer runtime.KeepAlive(dictionary)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTransformCreateFromExternalRepresentation == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTransformCreateFromExternalRepresentation, _lib, "SecTransformCreateFromExternalRepresentation")
@@ -611,6 +670,7 @@ func SecTransformExecute(transformRef unsafe.Pointer) (obj.Object, error) {
 var _fnSecTransformRegister func(objc.ID, unsafe.Pointer, unsafe.Pointer) uint8
 
 func SecTransformRegister(uniqueName corefoundation.CFStringRef, createTransformFunction unsafe.Pointer) error {
+	defer runtime.KeepAlive(uniqueName)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTransformRegister == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTransformRegister, _lib, "SecTransformRegister")
@@ -627,6 +687,8 @@ func SecTransformRegister(uniqueName corefoundation.CFStringRef, createTransform
 var _fnSecTransformSetAttribute func(unsafe.Pointer, objc.ID, objc.ID, unsafe.Pointer) uint8
 
 func SecTransformSetAttribute(transformRef unsafe.Pointer, key corefoundation.CFStringRef, value obj.Object) error {
+	defer runtime.KeepAlive(key)
+	defer runtime.KeepAlive(value)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTransformSetAttribute == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTransformSetAttribute, _lib, "SecTransformSetAttribute")
@@ -643,6 +705,7 @@ func SecTransformSetAttribute(transformRef unsafe.Pointer, key corefoundation.CF
 var _fnSecTrustEvaluateWithError func(objc.ID, unsafe.Pointer) bool
 
 func SecTrustEvaluateWithError(trust SecTrustRef) error {
+	defer runtime.KeepAlive(trust)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustEvaluateWithError == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustEvaluateWithError, _lib, "SecTrustEvaluateWithError")
@@ -659,6 +722,8 @@ func SecTrustEvaluateWithError(trust SecTrustRef) error {
 var _fnSecVerifyTransformCreate func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
 func SecVerifyTransformCreate(key SecKeyRef, signature corefoundation.CFDataRef) (obj.Object, error) {
+	defer runtime.KeepAlive(key)
+	defer runtime.KeepAlive(signature)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecVerifyTransformCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnSecVerifyTransformCreate, _lib, "SecVerifyTransformCreate")

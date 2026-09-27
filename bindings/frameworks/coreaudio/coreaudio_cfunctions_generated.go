@@ -5,6 +5,7 @@
 package coreaudio
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreaudiotypes"
@@ -123,6 +124,7 @@ var _fnAudioHardwareCreateAggregateDevice func(objc.ID, unsafe.Pointer) int32
 
 // AudioHardwareCreateAggregateDevice calls the CoreAudio framework function AudioHardwareCreateAggregateDevice.
 func AudioHardwareCreateAggregateDevice(inDescription corefoundation.CFDictionaryRef) (result int, outDeviceID int) {
+	defer runtime.KeepAlive(inDescription)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAudioHardwareCreateAggregateDevice == nil {
 		ebipurego.RegisterLibFunc(&_fnAudioHardwareCreateAggregateDevice, _lib, "AudioHardwareCreateAggregateDevice")

@@ -5,6 +5,7 @@
 package diskarbitration
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
@@ -19,6 +20,7 @@ var _fnDAApprovalSessionCreate func(objc.ID) objc.ID
 
 // DAApprovalSessionCreate calls the DiskArbitration framework function DAApprovalSessionCreate.
 func DAApprovalSessionCreate(allocator corefoundation.CFAllocatorRef) DAApprovalSessionRef {
+	defer runtime.KeepAlive(allocator)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDAApprovalSessionCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnDAApprovalSessionCreate, _lib, "DAApprovalSessionCreate")
@@ -42,6 +44,9 @@ var _fnDAApprovalSessionScheduleWithRunLoop func(objc.ID, objc.ID, objc.ID)
 
 // DAApprovalSessionScheduleWithRunLoop calls the DiskArbitration framework function DAApprovalSessionScheduleWithRunLoop.
 func DAApprovalSessionScheduleWithRunLoop(session DAApprovalSessionRef, runLoop corefoundation.CFRunLoopRef, runLoopMode corefoundation.CFStringRef) {
+	defer runtime.KeepAlive(session)
+	defer runtime.KeepAlive(runLoop)
+	defer runtime.KeepAlive(runLoopMode)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDAApprovalSessionScheduleWithRunLoop == nil {
 		ebipurego.RegisterLibFunc(&_fnDAApprovalSessionScheduleWithRunLoop, _lib, "DAApprovalSessionScheduleWithRunLoop")
@@ -53,6 +58,9 @@ var _fnDAApprovalSessionUnscheduleFromRunLoop func(objc.ID, objc.ID, objc.ID)
 
 // DAApprovalSessionUnscheduleFromRunLoop calls the DiskArbitration framework function DAApprovalSessionUnscheduleFromRunLoop.
 func DAApprovalSessionUnscheduleFromRunLoop(session DAApprovalSessionRef, runLoop corefoundation.CFRunLoopRef, runLoopMode corefoundation.CFStringRef) {
+	defer runtime.KeepAlive(session)
+	defer runtime.KeepAlive(runLoop)
+	defer runtime.KeepAlive(runLoopMode)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDAApprovalSessionUnscheduleFromRunLoop == nil {
 		ebipurego.RegisterLibFunc(&_fnDAApprovalSessionUnscheduleFromRunLoop, _lib, "DAApprovalSessionUnscheduleFromRunLoop")
@@ -64,6 +72,7 @@ var _fnDADiskClaim func(objc.ID, int, unsafe.Pointer, unsafe.Pointer, unsafe.Poi
 
 // DADiskClaim calls the DiskArbitration framework function DADiskClaim.
 func DADiskClaim(disk DADiskRef, options int, release unsafe.Pointer, releaseContext unsafe.Pointer, callback unsafe.Pointer, callbackContext unsafe.Pointer) {
+	defer runtime.KeepAlive(disk)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDADiskClaim == nil {
 		ebipurego.RegisterLibFunc(&_fnDADiskClaim, _lib, "DADiskClaim")
@@ -75,6 +84,7 @@ var _fnDADiskCopyDescription func(objc.ID) objc.ID
 
 // DADiskCopyDescription calls the DiskArbitration framework function DADiskCopyDescription.
 func DADiskCopyDescription(disk DADiskRef) corefoundation.CFDictionaryRef {
+	defer runtime.KeepAlive(disk)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDADiskCopyDescription == nil {
 		ebipurego.RegisterLibFunc(&_fnDADiskCopyDescription, _lib, "DADiskCopyDescription")
@@ -87,6 +97,7 @@ var _fnDADiskCopyIOMedia func(objc.ID) uint32
 
 // DADiskCopyIOMedia calls the DiskArbitration framework function DADiskCopyIOMedia.
 func DADiskCopyIOMedia(disk DADiskRef) int {
+	defer runtime.KeepAlive(disk)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDADiskCopyIOMedia == nil {
 		ebipurego.RegisterLibFunc(&_fnDADiskCopyIOMedia, _lib, "DADiskCopyIOMedia")
@@ -98,6 +109,7 @@ var _fnDADiskCopyWholeDisk func(objc.ID) objc.ID
 
 // DADiskCopyWholeDisk calls the DiskArbitration framework function DADiskCopyWholeDisk.
 func DADiskCopyWholeDisk(disk DADiskRef) DADiskRef {
+	defer runtime.KeepAlive(disk)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDADiskCopyWholeDisk == nil {
 		ebipurego.RegisterLibFunc(&_fnDADiskCopyWholeDisk, _lib, "DADiskCopyWholeDisk")
@@ -110,6 +122,8 @@ var _fnDADiskCreateFromBSDName func(objc.ID, objc.ID, string) objc.ID
 
 // DADiskCreateFromBSDName calls the DiskArbitration framework function DADiskCreateFromBSDName.
 func DADiskCreateFromBSDName(allocator corefoundation.CFAllocatorRef, session DASessionRef, name string) DADiskRef {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(session)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDADiskCreateFromBSDName == nil {
 		ebipurego.RegisterLibFunc(&_fnDADiskCreateFromBSDName, _lib, "DADiskCreateFromBSDName")
@@ -122,6 +136,8 @@ var _fnDADiskCreateFromIOMedia func(objc.ID, objc.ID, int) objc.ID
 
 // DADiskCreateFromIOMedia calls the DiskArbitration framework function DADiskCreateFromIOMedia.
 func DADiskCreateFromIOMedia(allocator corefoundation.CFAllocatorRef, session DASessionRef, media int) DADiskRef {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(session)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDADiskCreateFromIOMedia == nil {
 		ebipurego.RegisterLibFunc(&_fnDADiskCreateFromIOMedia, _lib, "DADiskCreateFromIOMedia")
@@ -134,6 +150,9 @@ var _fnDADiskCreateFromVolumePath func(objc.ID, objc.ID, objc.ID) objc.ID
 
 // DADiskCreateFromVolumePath calls the DiskArbitration framework function DADiskCreateFromVolumePath.
 func DADiskCreateFromVolumePath(allocator corefoundation.CFAllocatorRef, session DASessionRef, path corefoundation.CFURLRef) DADiskRef {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(session)
+	defer runtime.KeepAlive(path)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDADiskCreateFromVolumePath == nil {
 		ebipurego.RegisterLibFunc(&_fnDADiskCreateFromVolumePath, _lib, "DADiskCreateFromVolumePath")
@@ -146,6 +165,7 @@ var _fnDADiskEject func(objc.ID, int, unsafe.Pointer, unsafe.Pointer)
 
 // DADiskEject calls the DiskArbitration framework function DADiskEject.
 func DADiskEject(disk DADiskRef, options int, callback unsafe.Pointer, context_ unsafe.Pointer) {
+	defer runtime.KeepAlive(disk)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDADiskEject == nil {
 		ebipurego.RegisterLibFunc(&_fnDADiskEject, _lib, "DADiskEject")
@@ -157,6 +177,7 @@ var _fnDADiskGetBSDName func(objc.ID) string
 
 // DADiskGetBSDName calls the DiskArbitration framework function DADiskGetBSDName.
 func DADiskGetBSDName(disk DADiskRef) string {
+	defer runtime.KeepAlive(disk)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDADiskGetBSDName == nil {
 		ebipurego.RegisterLibFunc(&_fnDADiskGetBSDName, _lib, "DADiskGetBSDName")
@@ -168,6 +189,7 @@ var _fnDADiskGetOptions func(objc.ID) uint32
 
 // DADiskGetOptions calls the DiskArbitration framework function DADiskGetOptions.
 func DADiskGetOptions(disk DADiskRef) int {
+	defer runtime.KeepAlive(disk)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDADiskGetOptions == nil {
 		ebipurego.RegisterLibFunc(&_fnDADiskGetOptions, _lib, "DADiskGetOptions")
@@ -190,6 +212,7 @@ var _fnDADiskIsClaimed func(objc.ID) uint8
 
 // DADiskIsClaimed calls the DiskArbitration framework function DADiskIsClaimed.
 func DADiskIsClaimed(disk DADiskRef) uint8 {
+	defer runtime.KeepAlive(disk)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDADiskIsClaimed == nil {
 		ebipurego.RegisterLibFunc(&_fnDADiskIsClaimed, _lib, "DADiskIsClaimed")
@@ -201,6 +224,8 @@ var _fnDADiskMount func(objc.ID, objc.ID, int, unsafe.Pointer, unsafe.Pointer)
 
 // DADiskMount calls the DiskArbitration framework function DADiskMount.
 func DADiskMount(disk DADiskRef, path corefoundation.CFURLRef, options int, callback unsafe.Pointer, context_ unsafe.Pointer) {
+	defer runtime.KeepAlive(disk)
+	defer runtime.KeepAlive(path)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDADiskMount == nil {
 		ebipurego.RegisterLibFunc(&_fnDADiskMount, _lib, "DADiskMount")
@@ -212,6 +237,8 @@ var _fnDADiskMountWithArguments func(objc.ID, objc.ID, int, unsafe.Pointer, unsa
 
 // DADiskMountWithArguments calls the DiskArbitration framework function DADiskMountWithArguments.
 func DADiskMountWithArguments(disk DADiskRef, path corefoundation.CFURLRef, options int, callback unsafe.Pointer, context_ unsafe.Pointer, arguments unsafe.Pointer) {
+	defer runtime.KeepAlive(disk)
+	defer runtime.KeepAlive(path)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDADiskMountWithArguments == nil {
 		ebipurego.RegisterLibFunc(&_fnDADiskMountWithArguments, _lib, "DADiskMountWithArguments")
@@ -223,6 +250,8 @@ var _fnDADiskRename func(objc.ID, objc.ID, int, unsafe.Pointer, unsafe.Pointer)
 
 // DADiskRename calls the DiskArbitration framework function DADiskRename.
 func DADiskRename(disk DADiskRef, name corefoundation.CFStringRef, options int, callback unsafe.Pointer, context_ unsafe.Pointer) {
+	defer runtime.KeepAlive(disk)
+	defer runtime.KeepAlive(name)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDADiskRename == nil {
 		ebipurego.RegisterLibFunc(&_fnDADiskRename, _lib, "DADiskRename")
@@ -234,6 +263,7 @@ var _fnDADiskSetOptions func(objc.ID, int, uint8) int32
 
 // DADiskSetOptions calls the DiskArbitration framework function DADiskSetOptions.
 func DADiskSetOptions(disk DADiskRef, options int, value uint8) int {
+	defer runtime.KeepAlive(disk)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDADiskSetOptions == nil {
 		ebipurego.RegisterLibFunc(&_fnDADiskSetOptions, _lib, "DADiskSetOptions")
@@ -245,6 +275,7 @@ var _fnDADiskUnclaim func(objc.ID)
 
 // DADiskUnclaim calls the DiskArbitration framework function DADiskUnclaim.
 func DADiskUnclaim(disk DADiskRef) {
+	defer runtime.KeepAlive(disk)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDADiskUnclaim == nil {
 		ebipurego.RegisterLibFunc(&_fnDADiskUnclaim, _lib, "DADiskUnclaim")
@@ -256,6 +287,7 @@ var _fnDADiskUnmount func(objc.ID, int, unsafe.Pointer, unsafe.Pointer)
 
 // DADiskUnmount calls the DiskArbitration framework function DADiskUnmount.
 func DADiskUnmount(disk DADiskRef, options int, callback unsafe.Pointer, context_ unsafe.Pointer) {
+	defer runtime.KeepAlive(disk)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDADiskUnmount == nil {
 		ebipurego.RegisterLibFunc(&_fnDADiskUnmount, _lib, "DADiskUnmount")
@@ -267,6 +299,8 @@ var _fnDADissenterCreate func(objc.ID, int, objc.ID) objc.ID
 
 // DADissenterCreate calls the DiskArbitration framework function DADissenterCreate.
 func DADissenterCreate(allocator corefoundation.CFAllocatorRef, status int, str corefoundation.CFStringRef) DADissenterRef {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(str)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDADissenterCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnDADissenterCreate, _lib, "DADissenterCreate")
@@ -279,6 +313,7 @@ var _fnDADissenterGetStatus func(objc.ID) int32
 
 // DADissenterGetStatus calls the DiskArbitration framework function DADissenterGetStatus.
 func DADissenterGetStatus(dissenter DADissenterRef) int {
+	defer runtime.KeepAlive(dissenter)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDADissenterGetStatus == nil {
 		ebipurego.RegisterLibFunc(&_fnDADissenterGetStatus, _lib, "DADissenterGetStatus")
@@ -290,6 +325,7 @@ var _fnDADissenterGetStatusString func(objc.ID) objc.ID
 
 // DADissenterGetStatusString calls the DiskArbitration framework function DADissenterGetStatusString.
 func DADissenterGetStatusString(dissenter DADissenterRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(dissenter)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDADissenterGetStatusString == nil {
 		ebipurego.RegisterLibFunc(&_fnDADissenterGetStatusString, _lib, "DADissenterGetStatusString")
@@ -302,6 +338,8 @@ var _fnDARegisterDiskAppearedCallback func(objc.ID, objc.ID, unsafe.Pointer, uns
 
 // DARegisterDiskAppearedCallback calls the DiskArbitration framework function DARegisterDiskAppearedCallback.
 func DARegisterDiskAppearedCallback(session DASessionRef, match corefoundation.CFDictionaryRef, callback unsafe.Pointer, context_ unsafe.Pointer) {
+	defer runtime.KeepAlive(session)
+	defer runtime.KeepAlive(match)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDARegisterDiskAppearedCallback == nil {
 		ebipurego.RegisterLibFunc(&_fnDARegisterDiskAppearedCallback, _lib, "DARegisterDiskAppearedCallback")
@@ -313,6 +351,9 @@ var _fnDARegisterDiskDescriptionChangedCallback func(objc.ID, objc.ID, objc.ID, 
 
 // DARegisterDiskDescriptionChangedCallback calls the DiskArbitration framework function DARegisterDiskDescriptionChangedCallback.
 func DARegisterDiskDescriptionChangedCallback(session DASessionRef, match corefoundation.CFDictionaryRef, watch corefoundation.CFArrayRef, callback unsafe.Pointer, context_ unsafe.Pointer) {
+	defer runtime.KeepAlive(session)
+	defer runtime.KeepAlive(match)
+	defer runtime.KeepAlive(watch)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDARegisterDiskDescriptionChangedCallback == nil {
 		ebipurego.RegisterLibFunc(&_fnDARegisterDiskDescriptionChangedCallback, _lib, "DARegisterDiskDescriptionChangedCallback")
@@ -324,6 +365,8 @@ var _fnDARegisterDiskDisappearedCallback func(objc.ID, objc.ID, unsafe.Pointer, 
 
 // DARegisterDiskDisappearedCallback calls the DiskArbitration framework function DARegisterDiskDisappearedCallback.
 func DARegisterDiskDisappearedCallback(session DASessionRef, match corefoundation.CFDictionaryRef, callback unsafe.Pointer, context_ unsafe.Pointer) {
+	defer runtime.KeepAlive(session)
+	defer runtime.KeepAlive(match)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDARegisterDiskDisappearedCallback == nil {
 		ebipurego.RegisterLibFunc(&_fnDARegisterDiskDisappearedCallback, _lib, "DARegisterDiskDisappearedCallback")
@@ -335,6 +378,8 @@ var _fnDARegisterDiskEjectApprovalCallback func(objc.ID, objc.ID, unsafe.Pointer
 
 // DARegisterDiskEjectApprovalCallback calls the DiskArbitration framework function DARegisterDiskEjectApprovalCallback.
 func DARegisterDiskEjectApprovalCallback(session DASessionRef, match corefoundation.CFDictionaryRef, callback unsafe.Pointer, context_ unsafe.Pointer) {
+	defer runtime.KeepAlive(session)
+	defer runtime.KeepAlive(match)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDARegisterDiskEjectApprovalCallback == nil {
 		ebipurego.RegisterLibFunc(&_fnDARegisterDiskEjectApprovalCallback, _lib, "DARegisterDiskEjectApprovalCallback")
@@ -346,6 +391,8 @@ var _fnDARegisterDiskMountApprovalCallback func(objc.ID, objc.ID, unsafe.Pointer
 
 // DARegisterDiskMountApprovalCallback calls the DiskArbitration framework function DARegisterDiskMountApprovalCallback.
 func DARegisterDiskMountApprovalCallback(session DASessionRef, match corefoundation.CFDictionaryRef, callback unsafe.Pointer, context_ unsafe.Pointer) {
+	defer runtime.KeepAlive(session)
+	defer runtime.KeepAlive(match)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDARegisterDiskMountApprovalCallback == nil {
 		ebipurego.RegisterLibFunc(&_fnDARegisterDiskMountApprovalCallback, _lib, "DARegisterDiskMountApprovalCallback")
@@ -357,6 +404,8 @@ var _fnDARegisterDiskPeekCallback func(objc.ID, objc.ID, int, unsafe.Pointer, un
 
 // DARegisterDiskPeekCallback calls the DiskArbitration framework function DARegisterDiskPeekCallback.
 func DARegisterDiskPeekCallback(session DASessionRef, match corefoundation.CFDictionaryRef, order int, callback unsafe.Pointer, context_ unsafe.Pointer) {
+	defer runtime.KeepAlive(session)
+	defer runtime.KeepAlive(match)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDARegisterDiskPeekCallback == nil {
 		ebipurego.RegisterLibFunc(&_fnDARegisterDiskPeekCallback, _lib, "DARegisterDiskPeekCallback")
@@ -368,6 +417,8 @@ var _fnDARegisterDiskUnmountApprovalCallback func(objc.ID, objc.ID, unsafe.Point
 
 // DARegisterDiskUnmountApprovalCallback calls the DiskArbitration framework function DARegisterDiskUnmountApprovalCallback.
 func DARegisterDiskUnmountApprovalCallback(session DASessionRef, match corefoundation.CFDictionaryRef, callback unsafe.Pointer, context_ unsafe.Pointer) {
+	defer runtime.KeepAlive(session)
+	defer runtime.KeepAlive(match)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDARegisterDiskUnmountApprovalCallback == nil {
 		ebipurego.RegisterLibFunc(&_fnDARegisterDiskUnmountApprovalCallback, _lib, "DARegisterDiskUnmountApprovalCallback")
@@ -379,6 +430,7 @@ var _fnDASessionCreate func(objc.ID) objc.ID
 
 // DASessionCreate calls the DiskArbitration framework function DASessionCreate.
 func DASessionCreate(allocator corefoundation.CFAllocatorRef) DASessionRef {
+	defer runtime.KeepAlive(allocator)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDASessionCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnDASessionCreate, _lib, "DASessionCreate")
@@ -402,6 +454,9 @@ var _fnDASessionScheduleWithRunLoop func(objc.ID, objc.ID, objc.ID)
 
 // DASessionScheduleWithRunLoop calls the DiskArbitration framework function DASessionScheduleWithRunLoop.
 func DASessionScheduleWithRunLoop(session DASessionRef, runLoop corefoundation.CFRunLoopRef, runLoopMode corefoundation.CFStringRef) {
+	defer runtime.KeepAlive(session)
+	defer runtime.KeepAlive(runLoop)
+	defer runtime.KeepAlive(runLoopMode)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDASessionScheduleWithRunLoop == nil {
 		ebipurego.RegisterLibFunc(&_fnDASessionScheduleWithRunLoop, _lib, "DASessionScheduleWithRunLoop")
@@ -413,6 +468,7 @@ var _fnDASessionSetDispatchQueue func(objc.ID, objc.ID)
 
 // DASessionSetDispatchQueue calls the DiskArbitration framework function DASessionSetDispatchQueue.
 func DASessionSetDispatchQueue(session DASessionRef, queue dispatch.Queue) {
+	defer runtime.KeepAlive(session)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDASessionSetDispatchQueue == nil {
 		ebipurego.RegisterLibFunc(&_fnDASessionSetDispatchQueue, _lib, "DASessionSetDispatchQueue")
@@ -424,6 +480,9 @@ var _fnDASessionUnscheduleFromRunLoop func(objc.ID, objc.ID, objc.ID)
 
 // DASessionUnscheduleFromRunLoop calls the DiskArbitration framework function DASessionUnscheduleFromRunLoop.
 func DASessionUnscheduleFromRunLoop(session DASessionRef, runLoop corefoundation.CFRunLoopRef, runLoopMode corefoundation.CFStringRef) {
+	defer runtime.KeepAlive(session)
+	defer runtime.KeepAlive(runLoop)
+	defer runtime.KeepAlive(runLoopMode)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDASessionUnscheduleFromRunLoop == nil {
 		ebipurego.RegisterLibFunc(&_fnDASessionUnscheduleFromRunLoop, _lib, "DASessionUnscheduleFromRunLoop")
@@ -435,6 +494,7 @@ var _fnDAUnregisterApprovalCallback func(objc.ID, unsafe.Pointer, unsafe.Pointer
 
 // DAUnregisterApprovalCallback calls the DiskArbitration framework function DAUnregisterApprovalCallback.
 func DAUnregisterApprovalCallback(session DASessionRef, callback unsafe.Pointer, context_ unsafe.Pointer) {
+	defer runtime.KeepAlive(session)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDAUnregisterApprovalCallback == nil {
 		ebipurego.RegisterLibFunc(&_fnDAUnregisterApprovalCallback, _lib, "DAUnregisterApprovalCallback")
@@ -446,6 +506,7 @@ var _fnDAUnregisterCallback func(objc.ID, unsafe.Pointer, unsafe.Pointer)
 
 // DAUnregisterCallback calls the DiskArbitration framework function DAUnregisterCallback.
 func DAUnregisterCallback(session DASessionRef, callback unsafe.Pointer, context_ unsafe.Pointer) {
+	defer runtime.KeepAlive(session)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDAUnregisterCallback == nil {
 		ebipurego.RegisterLibFunc(&_fnDAUnregisterCallback, _lib, "DAUnregisterCallback")

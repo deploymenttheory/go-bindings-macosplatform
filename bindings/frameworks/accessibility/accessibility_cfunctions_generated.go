@@ -5,6 +5,7 @@
 package accessibility
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
@@ -51,6 +52,7 @@ var _fnAXNameFromColor func(objc.ID) objc.ID
 
 // AXNameFromColor calls the Accessibility framework function AXNameFromColor.
 func AXNameFromColor(color coregraphics.CGColorRef) string {
+	defer runtime.KeepAlive(color)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAXNameFromColor == nil {
 		ebipurego.RegisterLibFunc(&_fnAXNameFromColor, _lib, "AXNameFromColor")

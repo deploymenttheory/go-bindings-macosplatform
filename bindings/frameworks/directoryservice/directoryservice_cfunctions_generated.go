@@ -5,6 +5,7 @@
 package directoryservice
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
@@ -1094,6 +1095,7 @@ var _fnDsServiceInformationAllocate func(objc.ID, int, unsafe.Pointer) TDirStatu
 
 // DsServiceInformationAllocate calls the DirectoryService framework function dsServiceInformationAllocate.
 func DsServiceInformationAllocate(inServiceInfo corefoundation.CFDictionaryRef, inBufferSize int, outPackedServiceInfo unsafe.Pointer) TDirStatus {
+	defer runtime.KeepAlive(inServiceInfo)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsServiceInformationAllocate == nil {
 		ebipurego.RegisterLibFunc(&_fnDsServiceInformationAllocate, _lib, "dsServiceInformationAllocate")

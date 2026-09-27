@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
@@ -19,6 +20,7 @@ var _fnCFBridgingRelease func(objc.ID) objc.ID
 
 // CFBridgingRelease calls the Foundation framework function CFBridgingRelease.
 func CFBridgingRelease(x obj.Object) obj.Object {
+	defer runtime.KeepAlive(x)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFBridgingRelease == nil {
 		ebipurego.RegisterLibFunc(&_fnCFBridgingRelease, _lib, "CFBridgingRelease")
@@ -31,6 +33,7 @@ var _fnCFBridgingRetain func(objc.ID) objc.ID
 
 // CFBridgingRetain calls the Foundation framework function CFBridgingRetain.
 func CFBridgingRetain(x obj.Object) obj.Object {
+	defer runtime.KeepAlive(x)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFBridgingRetain == nil {
 		ebipurego.RegisterLibFunc(&_fnCFBridgingRetain, _lib, "CFBridgingRetain")
@@ -43,6 +46,7 @@ var _fnNSAllHashTableObjects func(objc.ID) objc.ID
 
 // NSAllHashTableObjects calls the Foundation framework function NSAllHashTableObjects.
 func NSAllHashTableObjects(table obj.Object) obj.Object {
+	defer runtime.KeepAlive(table)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSAllHashTableObjects == nil {
 		ebipurego.RegisterLibFunc(&_fnNSAllHashTableObjects, _lib, "NSAllHashTableObjects")
@@ -55,6 +59,7 @@ var _fnNSAllMapTableKeys func(objc.ID) objc.ID
 
 // NSAllMapTableKeys calls the Foundation framework function NSAllMapTableKeys.
 func NSAllMapTableKeys(table obj.Object) obj.Object {
+	defer runtime.KeepAlive(table)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSAllMapTableKeys == nil {
 		ebipurego.RegisterLibFunc(&_fnNSAllMapTableKeys, _lib, "NSAllMapTableKeys")
@@ -67,6 +72,7 @@ var _fnNSAllMapTableValues func(objc.ID) objc.ID
 
 // NSAllMapTableValues calls the Foundation framework function NSAllMapTableValues.
 func NSAllMapTableValues(table obj.Object) obj.Object {
+	defer runtime.KeepAlive(table)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSAllMapTableValues == nil {
 		ebipurego.RegisterLibFunc(&_fnNSAllMapTableValues, _lib, "NSAllMapTableValues")
@@ -124,6 +130,8 @@ var _fnNSCompareHashTables func(objc.ID, objc.ID) bool
 
 // NSCompareHashTables calls the Foundation framework function NSCompareHashTables.
 func NSCompareHashTables(table1 obj.Object, table2 obj.Object) bool {
+	defer runtime.KeepAlive(table1)
+	defer runtime.KeepAlive(table2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSCompareHashTables == nil {
 		ebipurego.RegisterLibFunc(&_fnNSCompareHashTables, _lib, "NSCompareHashTables")
@@ -135,6 +143,8 @@ var _fnNSCompareMapTables func(objc.ID, objc.ID) bool
 
 // NSCompareMapTables calls the Foundation framework function NSCompareMapTables.
 func NSCompareMapTables(table1 obj.Object, table2 obj.Object) bool {
+	defer runtime.KeepAlive(table1)
+	defer runtime.KeepAlive(table2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSCompareMapTables == nil {
 		ebipurego.RegisterLibFunc(&_fnNSCompareMapTables, _lib, "NSCompareMapTables")
@@ -201,6 +211,7 @@ var _fnNSCopyHashTableWithZone func(objc.ID, unsafe.Pointer) objc.ID
 
 // NSCopyHashTableWithZone calls the Foundation framework function NSCopyHashTableWithZone.
 func NSCopyHashTableWithZone(table obj.Object, zone unsafe.Pointer) obj.Object {
+	defer runtime.KeepAlive(table)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSCopyHashTableWithZone == nil {
 		ebipurego.RegisterLibFunc(&_fnNSCopyHashTableWithZone, _lib, "NSCopyHashTableWithZone")
@@ -213,6 +224,7 @@ var _fnNSCopyMapTableWithZone func(objc.ID, unsafe.Pointer) objc.ID
 
 // NSCopyMapTableWithZone calls the Foundation framework function NSCopyMapTableWithZone.
 func NSCopyMapTableWithZone(table obj.Object, zone unsafe.Pointer) obj.Object {
+	defer runtime.KeepAlive(table)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSCopyMapTableWithZone == nil {
 		ebipurego.RegisterLibFunc(&_fnNSCopyMapTableWithZone, _lib, "NSCopyMapTableWithZone")
@@ -236,6 +248,7 @@ var _fnNSCopyObject func(objc.ID, int, unsafe.Pointer) objc.ID
 
 // NSCopyObject calls the Foundation framework function NSCopyObject.
 func NSCopyObject(object obj.Object, extraBytes int, zone unsafe.Pointer) obj.Object {
+	defer runtime.KeepAlive(object)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSCopyObject == nil {
 		ebipurego.RegisterLibFunc(&_fnNSCopyObject, _lib, "NSCopyObject")
@@ -248,6 +261,7 @@ var _fnNSCountHashTable func(objc.ID) int
 
 // NSCountHashTable calls the Foundation framework function NSCountHashTable.
 func NSCountHashTable(table obj.Object) int {
+	defer runtime.KeepAlive(table)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSCountHashTable == nil {
 		ebipurego.RegisterLibFunc(&_fnNSCountHashTable, _lib, "NSCountHashTable")
@@ -259,6 +273,7 @@ var _fnNSCountMapTable func(objc.ID) int
 
 // NSCountMapTable calls the Foundation framework function NSCountMapTable.
 func NSCountMapTable(table obj.Object) int {
+	defer runtime.KeepAlive(table)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSCountMapTable == nil {
 		ebipurego.RegisterLibFunc(&_fnNSCountMapTable, _lib, "NSCountMapTable")
@@ -340,6 +355,7 @@ var _fnNSDeallocateObject func(objc.ID)
 
 // NSDeallocateObject calls the Foundation framework function NSDeallocateObject.
 func NSDeallocateObject(object obj.Object) {
+	defer runtime.KeepAlive(object)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSDeallocateObject == nil {
 		ebipurego.RegisterLibFunc(&_fnNSDeallocateObject, _lib, "NSDeallocateObject")
@@ -491,6 +507,7 @@ var _fnNSDecimalString func(unsafe.Pointer, objc.ID) objc.ID
 
 // NSDecimalString calls the Foundation framework function NSDecimalString.
 func NSDecimalString(dcm *NSDecimal, locale obj.Object) string {
+	defer runtime.KeepAlive(locale)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSDecimalString == nil {
 		ebipurego.RegisterLibFunc(&_fnNSDecimalString, _lib, "NSDecimalString")
@@ -519,6 +536,7 @@ var _fnNSDecrementExtraRefCountWasZero func(objc.ID) bool
 
 // NSDecrementExtraRefCountWasZero calls the Foundation framework function NSDecrementExtraRefCountWasZero.
 func NSDecrementExtraRefCountWasZero(object obj.Object) bool {
+	defer runtime.KeepAlive(object)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSDecrementExtraRefCountWasZero == nil {
 		ebipurego.RegisterLibFunc(&_fnNSDecrementExtraRefCountWasZero, _lib, "NSDecrementExtraRefCountWasZero")
@@ -596,6 +614,7 @@ var _fnNSEnumerateHashTable func(objc.ID) unsafe.Pointer
 
 // NSEnumerateHashTable calls the Foundation framework function NSEnumerateHashTable.
 func NSEnumerateHashTable(table obj.Object) unsafe.Pointer {
+	defer runtime.KeepAlive(table)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSEnumerateHashTable == nil {
 		ebipurego.RegisterLibFunc(&_fnNSEnumerateHashTable, _lib, "NSEnumerateHashTable")
@@ -607,6 +626,7 @@ var _fnNSEnumerateMapTable func(objc.ID) unsafe.Pointer
 
 // NSEnumerateMapTable calls the Foundation framework function NSEnumerateMapTable.
 func NSEnumerateMapTable(table obj.Object) unsafe.Pointer {
+	defer runtime.KeepAlive(table)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSEnumerateMapTable == nil {
 		ebipurego.RegisterLibFunc(&_fnNSEnumerateMapTable, _lib, "NSEnumerateMapTable")
@@ -662,6 +682,7 @@ var _fnNSExtraRefCount func(objc.ID) int
 
 // NSExtraRefCount calls the Foundation framework function NSExtraRefCount.
 func NSExtraRefCount(object obj.Object) int {
+	defer runtime.KeepAlive(object)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSExtraRefCount == nil {
 		ebipurego.RegisterLibFunc(&_fnNSExtraRefCount, _lib, "NSExtraRefCount")
@@ -688,6 +709,7 @@ var _fnNSFreeHashTable func(objc.ID)
 
 // NSFreeHashTable calls the Foundation framework function NSFreeHashTable.
 func NSFreeHashTable(table obj.Object) {
+	defer runtime.KeepAlive(table)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSFreeHashTable == nil {
 		ebipurego.RegisterLibFunc(&_fnNSFreeHashTable, _lib, "NSFreeHashTable")
@@ -699,6 +721,7 @@ var _fnNSFreeMapTable func(objc.ID)
 
 // NSFreeMapTable calls the Foundation framework function NSFreeMapTable.
 func NSFreeMapTable(table obj.Object) {
+	defer runtime.KeepAlive(table)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSFreeMapTable == nil {
 		ebipurego.RegisterLibFunc(&_fnNSFreeMapTable, _lib, "NSFreeMapTable")
@@ -776,6 +799,7 @@ var _fnNSHashGet func(objc.ID, unsafe.Pointer) unsafe.Pointer
 
 // NSHashGet calls the Foundation framework function NSHashGet.
 func NSHashGet(table obj.Object, pointer unsafe.Pointer) unsafe.Pointer {
+	defer runtime.KeepAlive(table)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSHashGet == nil {
 		ebipurego.RegisterLibFunc(&_fnNSHashGet, _lib, "NSHashGet")
@@ -787,6 +811,7 @@ var _fnNSHashInsert func(objc.ID, unsafe.Pointer)
 
 // NSHashInsert calls the Foundation framework function NSHashInsert.
 func NSHashInsert(table obj.Object, pointer unsafe.Pointer) {
+	defer runtime.KeepAlive(table)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSHashInsert == nil {
 		ebipurego.RegisterLibFunc(&_fnNSHashInsert, _lib, "NSHashInsert")
@@ -798,6 +823,7 @@ var _fnNSHashInsertIfAbsent func(objc.ID, unsafe.Pointer) unsafe.Pointer
 
 // NSHashInsertIfAbsent calls the Foundation framework function NSHashInsertIfAbsent.
 func NSHashInsertIfAbsent(table obj.Object, pointer unsafe.Pointer) unsafe.Pointer {
+	defer runtime.KeepAlive(table)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSHashInsertIfAbsent == nil {
 		ebipurego.RegisterLibFunc(&_fnNSHashInsertIfAbsent, _lib, "NSHashInsertIfAbsent")
@@ -809,6 +835,7 @@ var _fnNSHashInsertKnownAbsent func(objc.ID, unsafe.Pointer)
 
 // NSHashInsertKnownAbsent calls the Foundation framework function NSHashInsertKnownAbsent.
 func NSHashInsertKnownAbsent(table obj.Object, pointer unsafe.Pointer) {
+	defer runtime.KeepAlive(table)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSHashInsertKnownAbsent == nil {
 		ebipurego.RegisterLibFunc(&_fnNSHashInsertKnownAbsent, _lib, "NSHashInsertKnownAbsent")
@@ -820,6 +847,7 @@ var _fnNSHashRemove func(objc.ID, unsafe.Pointer)
 
 // NSHashRemove calls the Foundation framework function NSHashRemove.
 func NSHashRemove(table obj.Object, pointer unsafe.Pointer) {
+	defer runtime.KeepAlive(table)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSHashRemove == nil {
 		ebipurego.RegisterLibFunc(&_fnNSHashRemove, _lib, "NSHashRemove")
@@ -883,6 +911,7 @@ var _fnNSIncrementExtraRefCount func(objc.ID)
 
 // NSIncrementExtraRefCount calls the Foundation framework function NSIncrementExtraRefCount.
 func NSIncrementExtraRefCount(object obj.Object) {
+	defer runtime.KeepAlive(object)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSIncrementExtraRefCount == nil {
 		ebipurego.RegisterLibFunc(&_fnNSIncrementExtraRefCount, _lib, "NSIncrementExtraRefCount")
@@ -993,6 +1022,7 @@ var _fnNSLogv func(objc.ID, string)
 
 // NSLogv calls the Foundation framework function NSLogv.
 func NSLogv(arg obj.Object, arg2 string) {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSLogv == nil {
 		ebipurego.RegisterLibFunc(&_fnNSLogv, _lib, "NSLogv")
@@ -1004,6 +1034,7 @@ var _fnNSMakeCollectable func(objc.ID) objc.ID
 
 // NSMakeCollectable calls the Foundation framework function NSMakeCollectable.
 func NSMakeCollectable(cf obj.Object) obj.Object {
+	defer runtime.KeepAlive(cf)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSMakeCollectable == nil {
 		ebipurego.RegisterLibFunc(&_fnNSMakeCollectable, _lib, "NSMakeCollectable")
@@ -1060,6 +1091,7 @@ var _fnNSMapGet func(objc.ID, unsafe.Pointer) unsafe.Pointer
 
 // NSMapGet calls the Foundation framework function NSMapGet.
 func NSMapGet(table obj.Object, key unsafe.Pointer) unsafe.Pointer {
+	defer runtime.KeepAlive(table)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSMapGet == nil {
 		ebipurego.RegisterLibFunc(&_fnNSMapGet, _lib, "NSMapGet")
@@ -1071,6 +1103,7 @@ var _fnNSMapInsert func(objc.ID, unsafe.Pointer, unsafe.Pointer)
 
 // NSMapInsert calls the Foundation framework function NSMapInsert.
 func NSMapInsert(table obj.Object, key unsafe.Pointer, value unsafe.Pointer) {
+	defer runtime.KeepAlive(table)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSMapInsert == nil {
 		ebipurego.RegisterLibFunc(&_fnNSMapInsert, _lib, "NSMapInsert")
@@ -1082,6 +1115,7 @@ var _fnNSMapInsertIfAbsent func(objc.ID, unsafe.Pointer, unsafe.Pointer) unsafe.
 
 // NSMapInsertIfAbsent calls the Foundation framework function NSMapInsertIfAbsent.
 func NSMapInsertIfAbsent(table obj.Object, key unsafe.Pointer, value unsafe.Pointer) unsafe.Pointer {
+	defer runtime.KeepAlive(table)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSMapInsertIfAbsent == nil {
 		ebipurego.RegisterLibFunc(&_fnNSMapInsertIfAbsent, _lib, "NSMapInsertIfAbsent")
@@ -1093,6 +1127,7 @@ var _fnNSMapInsertKnownAbsent func(objc.ID, unsafe.Pointer, unsafe.Pointer)
 
 // NSMapInsertKnownAbsent calls the Foundation framework function NSMapInsertKnownAbsent.
 func NSMapInsertKnownAbsent(table obj.Object, key unsafe.Pointer, value unsafe.Pointer) {
+	defer runtime.KeepAlive(table)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSMapInsertKnownAbsent == nil {
 		ebipurego.RegisterLibFunc(&_fnNSMapInsertKnownAbsent, _lib, "NSMapInsertKnownAbsent")
@@ -1104,6 +1139,7 @@ var _fnNSMapMember func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // NSMapMember calls the Foundation framework function NSMapMember.
 func NSMapMember(table obj.Object, key unsafe.Pointer, originalKey unsafe.Pointer, value unsafe.Pointer) bool {
+	defer runtime.KeepAlive(table)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSMapMember == nil {
 		ebipurego.RegisterLibFunc(&_fnNSMapMember, _lib, "NSMapMember")
@@ -1115,6 +1151,7 @@ var _fnNSMapRemove func(objc.ID, unsafe.Pointer)
 
 // NSMapRemove calls the Foundation framework function NSMapRemove.
 func NSMapRemove(table obj.Object, key unsafe.Pointer) {
+	defer runtime.KeepAlive(table)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSMapRemove == nil {
 		ebipurego.RegisterLibFunc(&_fnNSMapRemove, _lib, "NSMapRemove")
@@ -1405,6 +1442,7 @@ var _fnNSResetHashTable func(objc.ID)
 
 // NSResetHashTable calls the Foundation framework function NSResetHashTable.
 func NSResetHashTable(table obj.Object) {
+	defer runtime.KeepAlive(table)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSResetHashTable == nil {
 		ebipurego.RegisterLibFunc(&_fnNSResetHashTable, _lib, "NSResetHashTable")
@@ -1416,6 +1454,7 @@ var _fnNSResetMapTable func(objc.ID)
 
 // NSResetMapTable calls the Foundation framework function NSResetMapTable.
 func NSResetMapTable(table obj.Object) {
+	defer runtime.KeepAlive(table)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSResetMapTable == nil {
 		ebipurego.RegisterLibFunc(&_fnNSResetMapTable, _lib, "NSResetMapTable")
@@ -1494,6 +1533,7 @@ var _fnNSShouldRetainWithZone func(objc.ID, unsafe.Pointer) bool
 
 // NSShouldRetainWithZone calls the Foundation framework function NSShouldRetainWithZone.
 func NSShouldRetainWithZone(anObject obj.Object, requestedZone unsafe.Pointer) bool {
+	defer runtime.KeepAlive(anObject)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSShouldRetainWithZone == nil {
 		ebipurego.RegisterLibFunc(&_fnNSShouldRetainWithZone, _lib, "NSShouldRetainWithZone")
@@ -1553,6 +1593,7 @@ var _fnNSStringFromHashTable func(objc.ID) objc.ID
 
 // NSStringFromHashTable calls the Foundation framework function NSStringFromHashTable.
 func NSStringFromHashTable(table obj.Object) string {
+	defer runtime.KeepAlive(table)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSStringFromHashTable == nil {
 		ebipurego.RegisterLibFunc(&_fnNSStringFromHashTable, _lib, "NSStringFromHashTable")
@@ -1568,6 +1609,7 @@ var _fnNSStringFromMapTable func(objc.ID) objc.ID
 
 // NSStringFromMapTable calls the Foundation framework function NSStringFromMapTable.
 func NSStringFromMapTable(table obj.Object) string {
+	defer runtime.KeepAlive(table)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSStringFromMapTable == nil {
 		ebipurego.RegisterLibFunc(&_fnNSStringFromMapTable, _lib, "NSStringFromMapTable")
@@ -2136,6 +2178,7 @@ var _fnNXReadNSObjectFromCoder func(objc.ID) objc.ID
 
 // NXReadNSObjectFromCoder calls the Foundation framework function NXReadNSObjectFromCoder.
 func NXReadNSObjectFromCoder(decoder *Coder) *Object {
+	defer runtime.KeepAlive(decoder)
 	_loadOnce.Do(_loadLibrary)
 	if _fnNXReadNSObjectFromCoder == nil {
 		ebipurego.RegisterLibFunc(&_fnNXReadNSObjectFromCoder, _lib, "NXReadNSObjectFromCoder")
@@ -2148,6 +2191,7 @@ var _fnObjectGetClassName func(objc.ID) string
 
 // ObjectGetClassName calls the Foundation framework function object_getClassName.
 func ObjectGetClassName(object obj.Object) string {
+	defer runtime.KeepAlive(object)
 	_loadOnce.Do(_loadLibrary)
 	if _fnObjectGetClassName == nil {
 		ebipurego.RegisterLibFunc(&_fnObjectGetClassName, _lib, "object_getClassName")
@@ -2159,6 +2203,7 @@ var _fnObjectGetIndexedIvars func(objc.ID) unsafe.Pointer
 
 // ObjectGetIndexedIvars calls the Foundation framework function object_getIndexedIvars.
 func ObjectGetIndexedIvars(object obj.Object) unsafe.Pointer {
+	defer runtime.KeepAlive(object)
 	_loadOnce.Do(_loadLibrary)
 	if _fnObjectGetIndexedIvars == nil {
 		ebipurego.RegisterLibFunc(&_fnObjectGetIndexedIvars, _lib, "object_getIndexedIvars")

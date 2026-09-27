@@ -7,6 +7,7 @@ package purego
 
 import (
 	"runtime"
+	"sync"
 	"unsafe"
 
 	"github.com/ebitengine/purego/objc"
@@ -19,7 +20,7 @@ var (
 	selRelease    = objc.RegisterName("release")
 	selUTF8String = objc.RegisterName("UTF8String")
 
-	clsNSString = objc.GetClass("NSString")
+	clsNSString = sync.OnceValue(func() objc.Class { return FoundationClass("NSString") })
 
 	selStringWithUTF8String = objc.RegisterName("stringWithUTF8String:")
 )
@@ -87,7 +88,7 @@ func GoString(nsstr objc.ID) string {
 // The returned ID is autoreleased; retain it if you need it to outlive the
 // current autorelease pool drain.
 func NSString(s string) objc.ID {
-	return objc.Send[objc.ID](objc.ID(clsNSString), selStringWithUTF8String, s)
+	return objc.Send[objc.ID](objc.ID(clsNSString()), selStringWithUTF8String, s)
 }
 
 // NSErrorToError converts an NSError ObjC object to a Go error.

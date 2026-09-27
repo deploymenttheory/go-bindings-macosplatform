@@ -5,6 +5,8 @@
 package servicemanagement
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -16,6 +18,7 @@ var _fnSMCopyAllJobDictionaries func(objc.ID) objc.ID
 
 // SMCopyAllJobDictionaries calls the ServiceManagement framework function SMCopyAllJobDictionaries.
 func SMCopyAllJobDictionaries(domain corefoundation.CFStringRef) corefoundation.CFArrayRef {
+	defer runtime.KeepAlive(domain)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSMCopyAllJobDictionaries == nil {
 		ebipurego.RegisterLibFunc(&_fnSMCopyAllJobDictionaries, _lib, "SMCopyAllJobDictionaries")
@@ -28,6 +31,8 @@ var _fnSMJobCopyDictionary func(objc.ID, objc.ID) objc.ID
 
 // SMJobCopyDictionary calls the ServiceManagement framework function SMJobCopyDictionary.
 func SMJobCopyDictionary(domain corefoundation.CFStringRef, jobLabel corefoundation.CFStringRef) corefoundation.CFDictionaryRef {
+	defer runtime.KeepAlive(domain)
+	defer runtime.KeepAlive(jobLabel)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSMJobCopyDictionary == nil {
 		ebipurego.RegisterLibFunc(&_fnSMJobCopyDictionary, _lib, "SMJobCopyDictionary")
@@ -40,6 +45,7 @@ var _fnSMLoginItemSetEnabled func(objc.ID, uint8) uint8
 
 // SMLoginItemSetEnabled calls the ServiceManagement framework function SMLoginItemSetEnabled.
 func SMLoginItemSetEnabled(identifier corefoundation.CFStringRef, enabled uint8) uint8 {
+	defer runtime.KeepAlive(identifier)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSMLoginItemSetEnabled == nil {
 		ebipurego.RegisterLibFunc(&_fnSMLoginItemSetEnabled, _lib, "SMLoginItemSetEnabled")

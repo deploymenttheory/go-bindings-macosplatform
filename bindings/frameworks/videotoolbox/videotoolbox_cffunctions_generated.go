@@ -5,6 +5,7 @@
 package videotoolbox
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
@@ -19,6 +20,7 @@ var _fnVTCompressionSessionCompleteFrames func(objc.ID, coremedia.CMTime) int32
 
 // VTCompressionSessionCompleteFrames reports an error if the VideoToolbox framework function VTCompressionSessionCompleteFrames fails.
 func VTCompressionSessionCompleteFrames(session VTCompressionSessionRef, completeUntilPresentationTimeStamp coremedia.CMTime) error {
+	defer runtime.KeepAlive(session)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTCompressionSessionCompleteFrames == nil {
 		ebipurego.RegisterLibFunc(&_fnVTCompressionSessionCompleteFrames, _lib, "VTCompressionSessionCompleteFrames")
@@ -34,6 +36,10 @@ var _fnVTCompressionSessionCreate func(objc.ID, int32, int32, int, objc.ID, objc
 
 // VTCompressionSessionCreate reports an error if the VideoToolbox framework function VTCompressionSessionCreate fails.
 func VTCompressionSessionCreate(allocator obj.Object, width int32, height int32, codecType int, encoderSpecification obj.Object, sourceImageBufferAttributes obj.Object, compressedDataAllocator obj.Object, outputCallback unsafe.Pointer, outputCallbackRefCon unsafe.Pointer, compressionSessionOut unsafe.Pointer) error {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(encoderSpecification)
+	defer runtime.KeepAlive(sourceImageBufferAttributes)
+	defer runtime.KeepAlive(compressedDataAllocator)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTCompressionSessionCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnVTCompressionSessionCreate, _lib, "VTCompressionSessionCreate")
@@ -49,6 +55,7 @@ var _fnVTCompressionSessionPrepareToEncodeFrames func(objc.ID) int32
 
 // VTCompressionSessionPrepareToEncodeFrames reports an error if the VideoToolbox framework function VTCompressionSessionPrepareToEncodeFrames fails.
 func VTCompressionSessionPrepareToEncodeFrames(session VTCompressionSessionRef) error {
+	defer runtime.KeepAlive(session)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTCompressionSessionPrepareToEncodeFrames == nil {
 		ebipurego.RegisterLibFunc(&_fnVTCompressionSessionPrepareToEncodeFrames, _lib, "VTCompressionSessionPrepareToEncodeFrames")
@@ -64,6 +71,7 @@ var _fnVTCopyRAWProcessorExtensionProperties func(objc.ID, unsafe.Pointer) int32
 
 // VTCopyRAWProcessorExtensionProperties reports an error if the VideoToolbox framework function VTCopyRAWProcessorExtensionProperties fails.
 func VTCopyRAWProcessorExtensionProperties(formatDesc obj.Object) (obj.Object, error) {
+	defer runtime.KeepAlive(formatDesc)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTCopyRAWProcessorExtensionProperties == nil {
 		ebipurego.RegisterLibFunc(&_fnVTCopyRAWProcessorExtensionProperties, _lib, "VTCopyRAWProcessorExtensionProperties")
@@ -80,6 +88,7 @@ var _fnVTCopySupportedPropertyDictionaryForEncoder func(int32, int32, int, objc.
 
 // VTCopySupportedPropertyDictionaryForEncoder reports an error if the VideoToolbox framework function VTCopySupportedPropertyDictionaryForEncoder fails.
 func VTCopySupportedPropertyDictionaryForEncoder(width int32, height int32, codecType int, encoderSpecification obj.Object) (obj.Object, obj.Object, error) {
+	defer runtime.KeepAlive(encoderSpecification)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTCopySupportedPropertyDictionaryForEncoder == nil {
 		ebipurego.RegisterLibFunc(&_fnVTCopySupportedPropertyDictionaryForEncoder, _lib, "VTCopySupportedPropertyDictionaryForEncoder")
@@ -97,6 +106,7 @@ var _fnVTCopyVideoDecoderExtensionProperties func(objc.ID, unsafe.Pointer) int32
 
 // VTCopyVideoDecoderExtensionProperties reports an error if the VideoToolbox framework function VTCopyVideoDecoderExtensionProperties fails.
 func VTCopyVideoDecoderExtensionProperties(formatDesc obj.Object) (obj.Object, error) {
+	defer runtime.KeepAlive(formatDesc)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTCopyVideoDecoderExtensionProperties == nil {
 		ebipurego.RegisterLibFunc(&_fnVTCopyVideoDecoderExtensionProperties, _lib, "VTCopyVideoDecoderExtensionProperties")
@@ -113,6 +123,7 @@ var _fnVTCopyVideoEncoderList func(objc.ID, unsafe.Pointer) int32
 
 // VTCopyVideoEncoderList reports an error if the VideoToolbox framework function VTCopyVideoEncoderList fails.
 func VTCopyVideoEncoderList(options obj.Object) (obj.Object, error) {
+	defer runtime.KeepAlive(options)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTCopyVideoEncoderList == nil {
 		ebipurego.RegisterLibFunc(&_fnVTCopyVideoEncoderList, _lib, "VTCopyVideoEncoderList")
@@ -129,6 +140,7 @@ var _fnVTCreateCGImageFromCVPixelBuffer func(unsafe.Pointer, objc.ID, unsafe.Poi
 
 // VTCreateCGImageFromCVPixelBuffer reports an error if the VideoToolbox framework function VTCreateCGImageFromCVPixelBuffer fails.
 func VTCreateCGImageFromCVPixelBuffer(pixelBuffer unsafe.Pointer, options obj.Object, imageOut unsafe.Pointer) error {
+	defer runtime.KeepAlive(options)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTCreateCGImageFromCVPixelBuffer == nil {
 		ebipurego.RegisterLibFunc(&_fnVTCreateCGImageFromCVPixelBuffer, _lib, "VTCreateCGImageFromCVPixelBuffer")
@@ -144,6 +156,7 @@ var _fnVTDecompressionSessionCopyBlackPixelBuffer func(objc.ID, unsafe.Pointer) 
 
 // VTDecompressionSessionCopyBlackPixelBuffer reports an error if the VideoToolbox framework function VTDecompressionSessionCopyBlackPixelBuffer fails.
 func VTDecompressionSessionCopyBlackPixelBuffer(session VTDecompressionSessionRef, pixelBufferOut unsafe.Pointer) error {
+	defer runtime.KeepAlive(session)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTDecompressionSessionCopyBlackPixelBuffer == nil {
 		ebipurego.RegisterLibFunc(&_fnVTDecompressionSessionCopyBlackPixelBuffer, _lib, "VTDecompressionSessionCopyBlackPixelBuffer")
@@ -159,6 +172,7 @@ var _fnVTDecompressionSessionFinishDelayedFrames func(objc.ID) int32
 
 // VTDecompressionSessionFinishDelayedFrames reports an error if the VideoToolbox framework function VTDecompressionSessionFinishDelayedFrames fails.
 func VTDecompressionSessionFinishDelayedFrames(session VTDecompressionSessionRef) error {
+	defer runtime.KeepAlive(session)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTDecompressionSessionFinishDelayedFrames == nil {
 		ebipurego.RegisterLibFunc(&_fnVTDecompressionSessionFinishDelayedFrames, _lib, "VTDecompressionSessionFinishDelayedFrames")
@@ -174,6 +188,7 @@ var _fnVTDecompressionSessionSetMultiImageCallback func(objc.ID, unsafe.Pointer,
 
 // VTDecompressionSessionSetMultiImageCallback reports an error if the VideoToolbox framework function VTDecompressionSessionSetMultiImageCallback fails.
 func VTDecompressionSessionSetMultiImageCallback(decompressionSession VTDecompressionSessionRef, outputMultiImageCallback unsafe.Pointer, outputMultiImageRefcon unsafe.Pointer) error {
+	defer runtime.KeepAlive(decompressionSession)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTDecompressionSessionSetMultiImageCallback == nil {
 		ebipurego.RegisterLibFunc(&_fnVTDecompressionSessionSetMultiImageCallback, _lib, "VTDecompressionSessionSetMultiImageCallback")
@@ -189,6 +204,7 @@ var _fnVTDecompressionSessionWaitForAsynchronousFrames func(objc.ID) int32
 
 // VTDecompressionSessionWaitForAsynchronousFrames reports an error if the VideoToolbox framework function VTDecompressionSessionWaitForAsynchronousFrames fails.
 func VTDecompressionSessionWaitForAsynchronousFrames(session VTDecompressionSessionRef) error {
+	defer runtime.KeepAlive(session)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTDecompressionSessionWaitForAsynchronousFrames == nil {
 		ebipurego.RegisterLibFunc(&_fnVTDecompressionSessionWaitForAsynchronousFrames, _lib, "VTDecompressionSessionWaitForAsynchronousFrames")
@@ -204,6 +220,8 @@ var _fnVTFrameSiloAddSampleBuffer func(objc.ID, objc.ID) int32
 
 // VTFrameSiloAddSampleBuffer reports an error if the VideoToolbox framework function VTFrameSiloAddSampleBuffer fails.
 func VTFrameSiloAddSampleBuffer(silo VTFrameSiloRef, sampleBuffer obj.Object) error {
+	defer runtime.KeepAlive(silo)
+	defer runtime.KeepAlive(sampleBuffer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTFrameSiloAddSampleBuffer == nil {
 		ebipurego.RegisterLibFunc(&_fnVTFrameSiloAddSampleBuffer, _lib, "VTFrameSiloAddSampleBuffer")
@@ -219,6 +237,7 @@ var _fnVTFrameSiloCallBlockForEachSampleBuffer func(objc.ID, coremedia.CMTimeRan
 
 // VTFrameSiloCallBlockForEachSampleBuffer reports an error if the VideoToolbox framework function VTFrameSiloCallBlockForEachSampleBuffer fails.
 func VTFrameSiloCallBlockForEachSampleBuffer(silo VTFrameSiloRef, timeRange coremedia.CMTimeRange, handler func(unsafe.Pointer) int) error {
+	defer runtime.KeepAlive(silo)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTFrameSiloCallBlockForEachSampleBuffer == nil {
 		ebipurego.RegisterLibFunc(&_fnVTFrameSiloCallBlockForEachSampleBuffer, _lib, "VTFrameSiloCallBlockForEachSampleBuffer")
@@ -234,6 +253,7 @@ var _fnVTFrameSiloCallFunctionForEachSampleBuffer func(objc.ID, coremedia.CMTime
 
 // VTFrameSiloCallFunctionForEachSampleBuffer reports an error if the VideoToolbox framework function VTFrameSiloCallFunctionForEachSampleBuffer fails.
 func VTFrameSiloCallFunctionForEachSampleBuffer(silo VTFrameSiloRef, timeRange coremedia.CMTimeRange, refcon unsafe.Pointer, callback unsafe.Pointer) error {
+	defer runtime.KeepAlive(silo)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTFrameSiloCallFunctionForEachSampleBuffer == nil {
 		ebipurego.RegisterLibFunc(&_fnVTFrameSiloCallFunctionForEachSampleBuffer, _lib, "VTFrameSiloCallFunctionForEachSampleBuffer")
@@ -249,6 +269,9 @@ var _fnVTFrameSiloCreate func(objc.ID, objc.ID, coremedia.CMTimeRange, objc.ID, 
 
 // VTFrameSiloCreate reports an error if the VideoToolbox framework function VTFrameSiloCreate fails.
 func VTFrameSiloCreate(allocator obj.Object, fileURL obj.Object, timeRange coremedia.CMTimeRange, options obj.Object, frameSiloOut unsafe.Pointer) error {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(fileURL)
+	defer runtime.KeepAlive(options)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTFrameSiloCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnVTFrameSiloCreate, _lib, "VTFrameSiloCreate")
@@ -264,6 +287,7 @@ var _fnVTFrameSiloSetTimeRangesForNextPass func(objc.ID, int, unsafe.Pointer) in
 
 // VTFrameSiloSetTimeRangesForNextPass reports an error if the VideoToolbox framework function VTFrameSiloSetTimeRangesForNextPass fails.
 func VTFrameSiloSetTimeRangesForNextPass(silo VTFrameSiloRef, timeRangeCount int, timeRangeArray *coremedia.CMTimeRange) error {
+	defer runtime.KeepAlive(silo)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTFrameSiloSetTimeRangesForNextPass == nil {
 		ebipurego.RegisterLibFunc(&_fnVTFrameSiloSetTimeRangesForNextPass, _lib, "VTFrameSiloSetTimeRangesForNextPass")
@@ -279,6 +303,7 @@ var _fnVTHDRPerFrameMetadataGenerationSessionAttachMetadata func(objc.ID, unsafe
 
 // VTHDRPerFrameMetadataGenerationSessionAttachMetadata reports an error if the VideoToolbox framework function VTHDRPerFrameMetadataGenerationSessionAttachMetadata fails.
 func VTHDRPerFrameMetadataGenerationSessionAttachMetadata(hdrPerFrameMetadataGenerationSession VTHDRPerFrameMetadataGenerationSessionRef, pixelBuffer unsafe.Pointer, sceneChange uint8) error {
+	defer runtime.KeepAlive(hdrPerFrameMetadataGenerationSession)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTHDRPerFrameMetadataGenerationSessionAttachMetadata == nil {
 		ebipurego.RegisterLibFunc(&_fnVTHDRPerFrameMetadataGenerationSessionAttachMetadata, _lib, "VTHDRPerFrameMetadataGenerationSessionAttachMetadata")
@@ -294,6 +319,8 @@ var _fnVTHDRPerFrameMetadataGenerationSessionCreate func(objc.ID, float32, objc.
 
 // VTHDRPerFrameMetadataGenerationSessionCreate reports an error if the VideoToolbox framework function VTHDRPerFrameMetadataGenerationSessionCreate fails.
 func VTHDRPerFrameMetadataGenerationSessionCreate(allocator obj.Object, framesPerSecond float32, options obj.Object, hdrPerFrameMetadataGenerationSessionOut unsafe.Pointer) error {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(options)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTHDRPerFrameMetadataGenerationSessionCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnVTHDRPerFrameMetadataGenerationSessionCreate, _lib, "VTHDRPerFrameMetadataGenerationSessionCreate")
@@ -309,6 +336,7 @@ var _fnVTMotionEstimationSessionCompleteFrames func(objc.ID) int32
 
 // VTMotionEstimationSessionCompleteFrames reports an error if the VideoToolbox framework function VTMotionEstimationSessionCompleteFrames fails.
 func VTMotionEstimationSessionCompleteFrames(session VTMotionEstimationSessionRef) error {
+	defer runtime.KeepAlive(session)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTMotionEstimationSessionCompleteFrames == nil {
 		ebipurego.RegisterLibFunc(&_fnVTMotionEstimationSessionCompleteFrames, _lib, "VTMotionEstimationSessionCompleteFrames")
@@ -324,6 +352,7 @@ var _fnVTMotionEstimationSessionCopySourcePixelBufferAttributes func(objc.ID, un
 
 // VTMotionEstimationSessionCopySourcePixelBufferAttributes reports an error if the VideoToolbox framework function VTMotionEstimationSessionCopySourcePixelBufferAttributes fails.
 func VTMotionEstimationSessionCopySourcePixelBufferAttributes(motionEstimationSession VTMotionEstimationSessionRef) (obj.Object, error) {
+	defer runtime.KeepAlive(motionEstimationSession)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTMotionEstimationSessionCopySourcePixelBufferAttributes == nil {
 		ebipurego.RegisterLibFunc(&_fnVTMotionEstimationSessionCopySourcePixelBufferAttributes, _lib, "VTMotionEstimationSessionCopySourcePixelBufferAttributes")
@@ -340,6 +369,8 @@ var _fnVTMotionEstimationSessionCreate func(objc.ID, objc.ID, uint32, uint32, un
 
 // VTMotionEstimationSessionCreate reports an error if the VideoToolbox framework function VTMotionEstimationSessionCreate fails.
 func VTMotionEstimationSessionCreate(allocator obj.Object, motionVectorProcessorSelectionOptions obj.Object, width uint32, height uint32, motionEstimationSessionOut unsafe.Pointer) error {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(motionVectorProcessorSelectionOptions)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTMotionEstimationSessionCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnVTMotionEstimationSessionCreate, _lib, "VTMotionEstimationSessionCreate")
@@ -355,6 +386,8 @@ var _fnVTMotionEstimationSessionEstimateMotionVectors func(objc.ID, unsafe.Point
 
 // VTMotionEstimationSessionEstimateMotionVectors reports an error if the VideoToolbox framework function VTMotionEstimationSessionEstimateMotionVectors fails.
 func VTMotionEstimationSessionEstimateMotionVectors(session VTMotionEstimationSessionRef, referenceImage unsafe.Pointer, currentImage unsafe.Pointer, motionEstimationFrameFlags MotionEstimationFrameFlags, additionalFrameOptions obj.Object, outputHandler func(int, MotionEstimationInfoFlags, unsafe.Pointer, unsafe.Pointer)) error {
+	defer runtime.KeepAlive(session)
+	defer runtime.KeepAlive(additionalFrameOptions)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTMotionEstimationSessionEstimateMotionVectors == nil {
 		ebipurego.RegisterLibFunc(&_fnVTMotionEstimationSessionEstimateMotionVectors, _lib, "VTMotionEstimationSessionEstimateMotionVectors")
@@ -372,6 +405,7 @@ var _fnVTMultiPassStorageClose func(objc.ID) int32
 
 // VTMultiPassStorageClose reports an error if the VideoToolbox framework function VTMultiPassStorageClose fails.
 func VTMultiPassStorageClose(multiPassStorage VTMultiPassStorageRef) error {
+	defer runtime.KeepAlive(multiPassStorage)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTMultiPassStorageClose == nil {
 		ebipurego.RegisterLibFunc(&_fnVTMultiPassStorageClose, _lib, "VTMultiPassStorageClose")
@@ -387,6 +421,9 @@ var _fnVTMultiPassStorageCreate func(objc.ID, objc.ID, coremedia.CMTimeRange, ob
 
 // VTMultiPassStorageCreate reports an error if the VideoToolbox framework function VTMultiPassStorageCreate fails.
 func VTMultiPassStorageCreate(allocator obj.Object, fileURL obj.Object, timeRange coremedia.CMTimeRange, options obj.Object, multiPassStorageOut unsafe.Pointer) error {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(fileURL)
+	defer runtime.KeepAlive(options)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTMultiPassStorageCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnVTMultiPassStorageCreate, _lib, "VTMultiPassStorageCreate")
@@ -402,6 +439,7 @@ var _fnVTPixelRotationSessionCreate func(objc.ID, unsafe.Pointer) int32
 
 // VTPixelRotationSessionCreate reports an error if the VideoToolbox framework function VTPixelRotationSessionCreate fails.
 func VTPixelRotationSessionCreate(allocator obj.Object, pixelRotationSessionOut unsafe.Pointer) error {
+	defer runtime.KeepAlive(allocator)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTPixelRotationSessionCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnVTPixelRotationSessionCreate, _lib, "VTPixelRotationSessionCreate")
@@ -417,6 +455,7 @@ var _fnVTPixelRotationSessionRotateImage func(objc.ID, unsafe.Pointer, unsafe.Po
 
 // VTPixelRotationSessionRotateImage reports an error if the VideoToolbox framework function VTPixelRotationSessionRotateImage fails.
 func VTPixelRotationSessionRotateImage(session VTPixelRotationSessionRef, sourceBuffer unsafe.Pointer, destinationBuffer unsafe.Pointer) error {
+	defer runtime.KeepAlive(session)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTPixelRotationSessionRotateImage == nil {
 		ebipurego.RegisterLibFunc(&_fnVTPixelRotationSessionRotateImage, _lib, "VTPixelRotationSessionRotateImage")
@@ -432,6 +471,7 @@ var _fnVTPixelTransferSessionCreate func(objc.ID, unsafe.Pointer) int32
 
 // VTPixelTransferSessionCreate reports an error if the VideoToolbox framework function VTPixelTransferSessionCreate fails.
 func VTPixelTransferSessionCreate(allocator obj.Object, pixelTransferSessionOut unsafe.Pointer) error {
+	defer runtime.KeepAlive(allocator)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTPixelTransferSessionCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnVTPixelTransferSessionCreate, _lib, "VTPixelTransferSessionCreate")
@@ -447,6 +487,7 @@ var _fnVTPixelTransferSessionTransferImage func(objc.ID, unsafe.Pointer, unsafe.
 
 // VTPixelTransferSessionTransferImage reports an error if the VideoToolbox framework function VTPixelTransferSessionTransferImage fails.
 func VTPixelTransferSessionTransferImage(session VTPixelTransferSessionRef, sourceBuffer unsafe.Pointer, destinationBuffer unsafe.Pointer) error {
+	defer runtime.KeepAlive(session)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTPixelTransferSessionTransferImage == nil {
 		ebipurego.RegisterLibFunc(&_fnVTPixelTransferSessionTransferImage, _lib, "VTPixelTransferSessionTransferImage")
@@ -462,6 +503,7 @@ var _fnVTRAWProcessingSessionCompleteFrames func(objc.ID) int32
 
 // VTRAWProcessingSessionCompleteFrames reports an error if the VideoToolbox framework function VTRAWProcessingSessionCompleteFrames fails.
 func VTRAWProcessingSessionCompleteFrames(session VTRAWProcessingSessionRef) error {
+	defer runtime.KeepAlive(session)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTRAWProcessingSessionCompleteFrames == nil {
 		ebipurego.RegisterLibFunc(&_fnVTRAWProcessingSessionCompleteFrames, _lib, "VTRAWProcessingSessionCompleteFrames")
@@ -477,6 +519,7 @@ var _fnVTRAWProcessingSessionCopyProcessingParameters func(objc.ID, unsafe.Point
 
 // VTRAWProcessingSessionCopyProcessingParameters reports an error if the VideoToolbox framework function VTRAWProcessingSessionCopyProcessingParameters fails.
 func VTRAWProcessingSessionCopyProcessingParameters(session VTRAWProcessingSessionRef) (obj.Object, error) {
+	defer runtime.KeepAlive(session)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTRAWProcessingSessionCopyProcessingParameters == nil {
 		ebipurego.RegisterLibFunc(&_fnVTRAWProcessingSessionCopyProcessingParameters, _lib, "VTRAWProcessingSessionCopyProcessingParameters")
@@ -493,6 +536,9 @@ var _fnVTRAWProcessingSessionCreate func(objc.ID, unsafe.Pointer, objc.ID, objc.
 
 // VTRAWProcessingSessionCreate reports an error if the VideoToolbox framework function VTRAWProcessingSessionCreate fails.
 func VTRAWProcessingSessionCreate(allocator obj.Object, formatDescription unsafe.Pointer, outputPixelBufferAttributes obj.Object, processingSessionOptions obj.Object, processingSessionOut unsafe.Pointer) error {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(outputPixelBufferAttributes)
+	defer runtime.KeepAlive(processingSessionOptions)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTRAWProcessingSessionCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnVTRAWProcessingSessionCreate, _lib, "VTRAWProcessingSessionCreate")
@@ -508,6 +554,8 @@ var _fnVTRAWProcessingSessionProcessFrame func(objc.ID, unsafe.Pointer, objc.ID,
 
 // VTRAWProcessingSessionProcessFrame reports an error if the VideoToolbox framework function VTRAWProcessingSessionProcessFrame fails.
 func VTRAWProcessingSessionProcessFrame(session VTRAWProcessingSessionRef, inputPixelBuffer unsafe.Pointer, frameOptions obj.Object, outputHandler func(int, unsafe.Pointer)) error {
+	defer runtime.KeepAlive(session)
+	defer runtime.KeepAlive(frameOptions)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTRAWProcessingSessionProcessFrame == nil {
 		ebipurego.RegisterLibFunc(&_fnVTRAWProcessingSessionProcessFrame, _lib, "VTRAWProcessingSessionProcessFrame")
@@ -523,6 +571,7 @@ var _fnVTRAWProcessingSessionSetParameterChangedHander func(objc.ID, objc.Block)
 
 // VTRAWProcessingSessionSetParameterChangedHander reports an error if the VideoToolbox framework function VTRAWProcessingSessionSetParameterChangedHander fails.
 func VTRAWProcessingSessionSetParameterChangedHander(session VTRAWProcessingSessionRef, parameterChangeHandler func(unsafe.Pointer)) error {
+	defer runtime.KeepAlive(session)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTRAWProcessingSessionSetParameterChangedHander == nil {
 		ebipurego.RegisterLibFunc(&_fnVTRAWProcessingSessionSetParameterChangedHander, _lib, "VTRAWProcessingSessionSetParameterChangedHander")
@@ -538,6 +587,7 @@ var _fnVTRAWProcessingSessionSetParameterChangedHandler func(objc.ID, objc.Block
 
 // VTRAWProcessingSessionSetParameterChangedHandler reports an error if the VideoToolbox framework function VTRAWProcessingSessionSetParameterChangedHandler fails.
 func VTRAWProcessingSessionSetParameterChangedHandler(session VTRAWProcessingSessionRef, parameterChangeHandler func(unsafe.Pointer)) error {
+	defer runtime.KeepAlive(session)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTRAWProcessingSessionSetParameterChangedHandler == nil {
 		ebipurego.RegisterLibFunc(&_fnVTRAWProcessingSessionSetParameterChangedHandler, _lib, "VTRAWProcessingSessionSetParameterChangedHandler")
@@ -553,6 +603,8 @@ var _fnVTRAWProcessingSessionSetProcessingParameters func(objc.ID, objc.ID) int3
 
 // VTRAWProcessingSessionSetProcessingParameters reports an error if the VideoToolbox framework function VTRAWProcessingSessionSetProcessingParameters fails.
 func VTRAWProcessingSessionSetProcessingParameters(session VTRAWProcessingSessionRef, processingParameters obj.Object) error {
+	defer runtime.KeepAlive(session)
+	defer runtime.KeepAlive(processingParameters)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTRAWProcessingSessionSetProcessingParameters == nil {
 		ebipurego.RegisterLibFunc(&_fnVTRAWProcessingSessionSetProcessingParameters, _lib, "VTRAWProcessingSessionSetProcessingParameters")
@@ -568,6 +620,8 @@ var _fnVTSessionCopyProperty func(unsafe.Pointer, objc.ID, objc.ID, unsafe.Point
 
 // VTSessionCopyProperty reports an error if the VideoToolbox framework function VTSessionCopyProperty fails.
 func VTSessionCopyProperty(session unsafe.Pointer, propertyKey obj.Object, allocator obj.Object, propertyValueOut unsafe.Pointer) error {
+	defer runtime.KeepAlive(propertyKey)
+	defer runtime.KeepAlive(allocator)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTSessionCopyProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnVTSessionCopyProperty, _lib, "VTSessionCopyProperty")
@@ -583,6 +637,7 @@ var _fnVTSessionCopySerializableProperties func(unsafe.Pointer, objc.ID, unsafe.
 
 // VTSessionCopySerializableProperties reports an error if the VideoToolbox framework function VTSessionCopySerializableProperties fails.
 func VTSessionCopySerializableProperties(session unsafe.Pointer, allocator obj.Object) (obj.Object, error) {
+	defer runtime.KeepAlive(allocator)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTSessionCopySerializableProperties == nil {
 		ebipurego.RegisterLibFunc(&_fnVTSessionCopySerializableProperties, _lib, "VTSessionCopySerializableProperties")
@@ -615,6 +670,7 @@ var _fnVTSessionSetProperties func(unsafe.Pointer, objc.ID) int32
 
 // VTSessionSetProperties reports an error if the VideoToolbox framework function VTSessionSetProperties fails.
 func VTSessionSetProperties(session unsafe.Pointer, propertyDictionary obj.Object) error {
+	defer runtime.KeepAlive(propertyDictionary)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTSessionSetProperties == nil {
 		ebipurego.RegisterLibFunc(&_fnVTSessionSetProperties, _lib, "VTSessionSetProperties")
@@ -630,6 +686,8 @@ var _fnVTSessionSetProperty func(unsafe.Pointer, objc.ID, objc.ID) int32
 
 // VTSessionSetProperty reports an error if the VideoToolbox framework function VTSessionSetProperty fails.
 func VTSessionSetProperty(session unsafe.Pointer, propertyKey obj.Object, propertyValue obj.Object) error {
+	defer runtime.KeepAlive(propertyKey)
+	defer runtime.KeepAlive(propertyValue)
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTSessionSetProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnVTSessionSetProperty, _lib, "VTSessionSetProperty")

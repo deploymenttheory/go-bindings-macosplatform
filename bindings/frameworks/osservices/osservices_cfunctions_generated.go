@@ -5,6 +5,7 @@
 package osservices
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
@@ -65,6 +66,8 @@ var _fnCSIdentityAddAlias func(objc.ID, objc.ID)
 
 // CSIdentityAddAlias calls the OSServices framework function CSIdentityAddAlias.
 func CSIdentityAddAlias(identity CSIdentityRef, alias corefoundation.CFStringRef) {
+	defer runtime.KeepAlive(identity)
+	defer runtime.KeepAlive(alias)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSIdentityAddAlias == nil {
 		ebipurego.RegisterLibFunc(&_fnCSIdentityAddAlias, _lib, "CSIdentityAddAlias")
@@ -76,6 +79,8 @@ var _fnCSIdentityAddMember func(objc.ID, objc.ID)
 
 // CSIdentityAddMember calls the OSServices framework function CSIdentityAddMember.
 func CSIdentityAddMember(group CSIdentityRef, member CSIdentityRef) {
+	defer runtime.KeepAlive(group)
+	defer runtime.KeepAlive(member)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSIdentityAddMember == nil {
 		ebipurego.RegisterLibFunc(&_fnCSIdentityAddMember, _lib, "CSIdentityAddMember")
@@ -87,6 +92,8 @@ var _fnCSIdentityAuthenticateUsingPassword func(objc.ID, objc.ID) uint8
 
 // CSIdentityAuthenticateUsingPassword calls the OSServices framework function CSIdentityAuthenticateUsingPassword.
 func CSIdentityAuthenticateUsingPassword(user CSIdentityRef, password corefoundation.CFStringRef) uint8 {
+	defer runtime.KeepAlive(user)
+	defer runtime.KeepAlive(password)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSIdentityAuthenticateUsingPassword == nil {
 		ebipurego.RegisterLibFunc(&_fnCSIdentityAuthenticateUsingPassword, _lib, "CSIdentityAuthenticateUsingPassword")
@@ -98,6 +105,7 @@ var _fnCSIdentityAuthorityCopyLocalizedName func(objc.ID) objc.ID
 
 // CSIdentityAuthorityCopyLocalizedName calls the OSServices framework function CSIdentityAuthorityCopyLocalizedName.
 func CSIdentityAuthorityCopyLocalizedName(authority CSIdentityAuthorityRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(authority)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSIdentityAuthorityCopyLocalizedName == nil {
 		ebipurego.RegisterLibFunc(&_fnCSIdentityAuthorityCopyLocalizedName, _lib, "CSIdentityAuthorityCopyLocalizedName")
@@ -121,6 +129,10 @@ var _fnCSIdentityCommitAsynchronously func(objc.ID, unsafe.Pointer, objc.ID, obj
 
 // CSIdentityCommitAsynchronously calls the OSServices framework function CSIdentityCommitAsynchronously.
 func CSIdentityCommitAsynchronously(identity CSIdentityRef, clientContext unsafe.Pointer, runLoop corefoundation.CFRunLoopRef, runLoopMode corefoundation.CFStringRef, authorization obj.Object) uint8 {
+	defer runtime.KeepAlive(identity)
+	defer runtime.KeepAlive(runLoop)
+	defer runtime.KeepAlive(runLoopMode)
+	defer runtime.KeepAlive(authorization)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSIdentityCommitAsynchronously == nil {
 		ebipurego.RegisterLibFunc(&_fnCSIdentityCommitAsynchronously, _lib, "CSIdentityCommitAsynchronously")
@@ -132,6 +144,10 @@ var _fnCSIdentityCreate func(objc.ID, int, objc.ID, objc.ID, int, objc.ID) objc.
 
 // CSIdentityCreate calls the OSServices framework function CSIdentityCreate.
 func CSIdentityCreate(allocator corefoundation.CFAllocatorRef, identityClass int, fullName corefoundation.CFStringRef, posixName corefoundation.CFStringRef, flags int, authority CSIdentityAuthorityRef) CSIdentityRef {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(fullName)
+	defer runtime.KeepAlive(posixName)
+	defer runtime.KeepAlive(authority)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSIdentityCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnCSIdentityCreate, _lib, "CSIdentityCreate")
@@ -144,6 +160,8 @@ var _fnCSIdentityCreateCopy func(objc.ID, objc.ID) objc.ID
 
 // CSIdentityCreateCopy calls the OSServices framework function CSIdentityCreateCopy.
 func CSIdentityCreateCopy(allocator corefoundation.CFAllocatorRef, identity CSIdentityRef) CSIdentityRef {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(identity)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSIdentityCreateCopy == nil {
 		ebipurego.RegisterLibFunc(&_fnCSIdentityCreateCopy, _lib, "CSIdentityCreateCopy")
@@ -156,6 +174,8 @@ var _fnCSIdentityCreateGroupMembershipQuery func(objc.ID, objc.ID) objc.ID
 
 // CSIdentityCreateGroupMembershipQuery calls the OSServices framework function CSIdentityCreateGroupMembershipQuery.
 func CSIdentityCreateGroupMembershipQuery(allocator corefoundation.CFAllocatorRef, group CSIdentityRef) CSIdentityQueryRef {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(group)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSIdentityCreateGroupMembershipQuery == nil {
 		ebipurego.RegisterLibFunc(&_fnCSIdentityCreateGroupMembershipQuery, _lib, "CSIdentityCreateGroupMembershipQuery")
@@ -168,6 +188,8 @@ var _fnCSIdentityCreatePersistentReference func(objc.ID, objc.ID) objc.ID
 
 // CSIdentityCreatePersistentReference calls the OSServices framework function CSIdentityCreatePersistentReference.
 func CSIdentityCreatePersistentReference(allocator corefoundation.CFAllocatorRef, identity CSIdentityRef) corefoundation.CFDataRef {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(identity)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSIdentityCreatePersistentReference == nil {
 		ebipurego.RegisterLibFunc(&_fnCSIdentityCreatePersistentReference, _lib, "CSIdentityCreatePersistentReference")
@@ -180,6 +202,7 @@ var _fnCSIdentityDelete func(objc.ID)
 
 // CSIdentityDelete calls the OSServices framework function CSIdentityDelete.
 func CSIdentityDelete(identity CSIdentityRef) {
+	defer runtime.KeepAlive(identity)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSIdentityDelete == nil {
 		ebipurego.RegisterLibFunc(&_fnCSIdentityDelete, _lib, "CSIdentityDelete")
@@ -191,6 +214,7 @@ var _fnCSIdentityGetAliases func(objc.ID) objc.ID
 
 // CSIdentityGetAliases calls the OSServices framework function CSIdentityGetAliases.
 func CSIdentityGetAliases(identity CSIdentityRef) corefoundation.CFArrayRef {
+	defer runtime.KeepAlive(identity)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSIdentityGetAliases == nil {
 		ebipurego.RegisterLibFunc(&_fnCSIdentityGetAliases, _lib, "CSIdentityGetAliases")
@@ -203,6 +227,7 @@ var _fnCSIdentityGetAuthority func(objc.ID) objc.ID
 
 // CSIdentityGetAuthority calls the OSServices framework function CSIdentityGetAuthority.
 func CSIdentityGetAuthority(identity CSIdentityRef) CSIdentityAuthorityRef {
+	defer runtime.KeepAlive(identity)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSIdentityGetAuthority == nil {
 		ebipurego.RegisterLibFunc(&_fnCSIdentityGetAuthority, _lib, "CSIdentityGetAuthority")
@@ -215,6 +240,7 @@ var _fnCSIdentityGetCertificate func(objc.ID) objc.ID
 
 // CSIdentityGetCertificate calls the OSServices framework function CSIdentityGetCertificate.
 func CSIdentityGetCertificate(user CSIdentityRef) obj.Object {
+	defer runtime.KeepAlive(user)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSIdentityGetCertificate == nil {
 		ebipurego.RegisterLibFunc(&_fnCSIdentityGetCertificate, _lib, "CSIdentityGetCertificate")
@@ -227,6 +253,7 @@ var _fnCSIdentityGetClass func(objc.ID) int
 
 // CSIdentityGetClass calls the OSServices framework function CSIdentityGetClass.
 func CSIdentityGetClass(identity CSIdentityRef) int {
+	defer runtime.KeepAlive(identity)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSIdentityGetClass == nil {
 		ebipurego.RegisterLibFunc(&_fnCSIdentityGetClass, _lib, "CSIdentityGetClass")
@@ -238,6 +265,7 @@ var _fnCSIdentityGetEmailAddress func(objc.ID) objc.ID
 
 // CSIdentityGetEmailAddress calls the OSServices framework function CSIdentityGetEmailAddress.
 func CSIdentityGetEmailAddress(identity CSIdentityRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(identity)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSIdentityGetEmailAddress == nil {
 		ebipurego.RegisterLibFunc(&_fnCSIdentityGetEmailAddress, _lib, "CSIdentityGetEmailAddress")
@@ -250,6 +278,7 @@ var _fnCSIdentityGetFullName func(objc.ID) objc.ID
 
 // CSIdentityGetFullName calls the OSServices framework function CSIdentityGetFullName.
 func CSIdentityGetFullName(identity CSIdentityRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(identity)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSIdentityGetFullName == nil {
 		ebipurego.RegisterLibFunc(&_fnCSIdentityGetFullName, _lib, "CSIdentityGetFullName")
@@ -262,6 +291,7 @@ var _fnCSIdentityGetImageData func(objc.ID) objc.ID
 
 // CSIdentityGetImageData calls the OSServices framework function CSIdentityGetImageData.
 func CSIdentityGetImageData(identity CSIdentityRef) corefoundation.CFDataRef {
+	defer runtime.KeepAlive(identity)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSIdentityGetImageData == nil {
 		ebipurego.RegisterLibFunc(&_fnCSIdentityGetImageData, _lib, "CSIdentityGetImageData")
@@ -274,6 +304,7 @@ var _fnCSIdentityGetImageDataType func(objc.ID) objc.ID
 
 // CSIdentityGetImageDataType calls the OSServices framework function CSIdentityGetImageDataType.
 func CSIdentityGetImageDataType(identity CSIdentityRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(identity)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSIdentityGetImageDataType == nil {
 		ebipurego.RegisterLibFunc(&_fnCSIdentityGetImageDataType, _lib, "CSIdentityGetImageDataType")
@@ -286,6 +317,7 @@ var _fnCSIdentityGetImageURL func(objc.ID) objc.ID
 
 // CSIdentityGetImageURL calls the OSServices framework function CSIdentityGetImageURL.
 func CSIdentityGetImageURL(identity CSIdentityRef) corefoundation.CFURLRef {
+	defer runtime.KeepAlive(identity)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSIdentityGetImageURL == nil {
 		ebipurego.RegisterLibFunc(&_fnCSIdentityGetImageURL, _lib, "CSIdentityGetImageURL")
@@ -298,6 +330,7 @@ var _fnCSIdentityGetPosixID func(objc.ID) uint32
 
 // CSIdentityGetPosixID calls the OSServices framework function CSIdentityGetPosixID.
 func CSIdentityGetPosixID(identity CSIdentityRef) int {
+	defer runtime.KeepAlive(identity)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSIdentityGetPosixID == nil {
 		ebipurego.RegisterLibFunc(&_fnCSIdentityGetPosixID, _lib, "CSIdentityGetPosixID")
@@ -309,6 +342,7 @@ var _fnCSIdentityGetPosixName func(objc.ID) objc.ID
 
 // CSIdentityGetPosixName calls the OSServices framework function CSIdentityGetPosixName.
 func CSIdentityGetPosixName(identity CSIdentityRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(identity)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSIdentityGetPosixName == nil {
 		ebipurego.RegisterLibFunc(&_fnCSIdentityGetPosixName, _lib, "CSIdentityGetPosixName")
@@ -332,6 +366,7 @@ var _fnCSIdentityGetUUID func(objc.ID) objc.ID
 
 // CSIdentityGetUUID calls the OSServices framework function CSIdentityGetUUID.
 func CSIdentityGetUUID(identity CSIdentityRef) corefoundation.CFUUIDRef {
+	defer runtime.KeepAlive(identity)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSIdentityGetUUID == nil {
 		ebipurego.RegisterLibFunc(&_fnCSIdentityGetUUID, _lib, "CSIdentityGetUUID")
@@ -344,6 +379,7 @@ var _fnCSIdentityIsCommitting func(objc.ID) uint8
 
 // CSIdentityIsCommitting calls the OSServices framework function CSIdentityIsCommitting.
 func CSIdentityIsCommitting(identity CSIdentityRef) uint8 {
+	defer runtime.KeepAlive(identity)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSIdentityIsCommitting == nil {
 		ebipurego.RegisterLibFunc(&_fnCSIdentityIsCommitting, _lib, "CSIdentityIsCommitting")
@@ -355,6 +391,7 @@ var _fnCSIdentityIsEnabled func(objc.ID) uint8
 
 // CSIdentityIsEnabled calls the OSServices framework function CSIdentityIsEnabled.
 func CSIdentityIsEnabled(user CSIdentityRef) uint8 {
+	defer runtime.KeepAlive(user)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSIdentityIsEnabled == nil {
 		ebipurego.RegisterLibFunc(&_fnCSIdentityIsEnabled, _lib, "CSIdentityIsEnabled")
@@ -366,6 +403,7 @@ var _fnCSIdentityIsHidden func(objc.ID) uint8
 
 // CSIdentityIsHidden calls the OSServices framework function CSIdentityIsHidden.
 func CSIdentityIsHidden(identity CSIdentityRef) uint8 {
+	defer runtime.KeepAlive(identity)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSIdentityIsHidden == nil {
 		ebipurego.RegisterLibFunc(&_fnCSIdentityIsHidden, _lib, "CSIdentityIsHidden")
@@ -377,6 +415,8 @@ var _fnCSIdentityIsMemberOfGroup func(objc.ID, objc.ID) uint8
 
 // CSIdentityIsMemberOfGroup calls the OSServices framework function CSIdentityIsMemberOfGroup.
 func CSIdentityIsMemberOfGroup(identity CSIdentityRef, group CSIdentityRef) uint8 {
+	defer runtime.KeepAlive(identity)
+	defer runtime.KeepAlive(group)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSIdentityIsMemberOfGroup == nil {
 		ebipurego.RegisterLibFunc(&_fnCSIdentityIsMemberOfGroup, _lib, "CSIdentityIsMemberOfGroup")
@@ -388,6 +428,7 @@ var _fnCSIdentityQueryCopyResults func(objc.ID) objc.ID
 
 // CSIdentityQueryCopyResults calls the OSServices framework function CSIdentityQueryCopyResults.
 func CSIdentityQueryCopyResults(query CSIdentityQueryRef) corefoundation.CFArrayRef {
+	defer runtime.KeepAlive(query)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSIdentityQueryCopyResults == nil {
 		ebipurego.RegisterLibFunc(&_fnCSIdentityQueryCopyResults, _lib, "CSIdentityQueryCopyResults")
@@ -400,6 +441,8 @@ var _fnCSIdentityQueryCreate func(objc.ID, int, objc.ID) objc.ID
 
 // CSIdentityQueryCreate calls the OSServices framework function CSIdentityQueryCreate.
 func CSIdentityQueryCreate(allocator corefoundation.CFAllocatorRef, identityClass int, authority CSIdentityAuthorityRef) CSIdentityQueryRef {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(authority)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSIdentityQueryCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnCSIdentityQueryCreate, _lib, "CSIdentityQueryCreate")
@@ -412,6 +455,7 @@ var _fnCSIdentityQueryCreateForCurrentUser func(objc.ID) objc.ID
 
 // CSIdentityQueryCreateForCurrentUser calls the OSServices framework function CSIdentityQueryCreateForCurrentUser.
 func CSIdentityQueryCreateForCurrentUser(allocator corefoundation.CFAllocatorRef) CSIdentityQueryRef {
+	defer runtime.KeepAlive(allocator)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSIdentityQueryCreateForCurrentUser == nil {
 		ebipurego.RegisterLibFunc(&_fnCSIdentityQueryCreateForCurrentUser, _lib, "CSIdentityQueryCreateForCurrentUser")
@@ -424,6 +468,9 @@ var _fnCSIdentityQueryCreateForName func(objc.ID, objc.ID, int, int, objc.ID) ob
 
 // CSIdentityQueryCreateForName calls the OSServices framework function CSIdentityQueryCreateForName.
 func CSIdentityQueryCreateForName(allocator corefoundation.CFAllocatorRef, name corefoundation.CFStringRef, comparisonMethod int, identityClass int, authority CSIdentityAuthorityRef) CSIdentityQueryRef {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(name)
+	defer runtime.KeepAlive(authority)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSIdentityQueryCreateForName == nil {
 		ebipurego.RegisterLibFunc(&_fnCSIdentityQueryCreateForName, _lib, "CSIdentityQueryCreateForName")
@@ -436,6 +483,8 @@ var _fnCSIdentityQueryCreateForPersistentReference func(objc.ID, objc.ID) objc.I
 
 // CSIdentityQueryCreateForPersistentReference calls the OSServices framework function CSIdentityQueryCreateForPersistentReference.
 func CSIdentityQueryCreateForPersistentReference(allocator corefoundation.CFAllocatorRef, referenceData corefoundation.CFDataRef) CSIdentityQueryRef {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(referenceData)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSIdentityQueryCreateForPersistentReference == nil {
 		ebipurego.RegisterLibFunc(&_fnCSIdentityQueryCreateForPersistentReference, _lib, "CSIdentityQueryCreateForPersistentReference")
@@ -448,6 +497,8 @@ var _fnCSIdentityQueryCreateForPosixID func(objc.ID, int, int, objc.ID) objc.ID
 
 // CSIdentityQueryCreateForPosixID calls the OSServices framework function CSIdentityQueryCreateForPosixID.
 func CSIdentityQueryCreateForPosixID(allocator corefoundation.CFAllocatorRef, posixID int, identityClass int, authority CSIdentityAuthorityRef) CSIdentityQueryRef {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(authority)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSIdentityQueryCreateForPosixID == nil {
 		ebipurego.RegisterLibFunc(&_fnCSIdentityQueryCreateForPosixID, _lib, "CSIdentityQueryCreateForPosixID")
@@ -460,6 +511,9 @@ var _fnCSIdentityQueryCreateForUUID func(objc.ID, objc.ID, objc.ID) objc.ID
 
 // CSIdentityQueryCreateForUUID calls the OSServices framework function CSIdentityQueryCreateForUUID.
 func CSIdentityQueryCreateForUUID(allocator corefoundation.CFAllocatorRef, uuid corefoundation.CFUUIDRef, authority CSIdentityAuthorityRef) CSIdentityQueryRef {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(uuid)
+	defer runtime.KeepAlive(authority)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSIdentityQueryCreateForUUID == nil {
 		ebipurego.RegisterLibFunc(&_fnCSIdentityQueryCreateForUUID, _lib, "CSIdentityQueryCreateForUUID")
@@ -472,6 +526,9 @@ var _fnCSIdentityQueryExecuteAsynchronously func(objc.ID, int, unsafe.Pointer, o
 
 // CSIdentityQueryExecuteAsynchronously calls the OSServices framework function CSIdentityQueryExecuteAsynchronously.
 func CSIdentityQueryExecuteAsynchronously(query CSIdentityQueryRef, flags int, clientContext unsafe.Pointer, runLoop corefoundation.CFRunLoopRef, runLoopMode corefoundation.CFStringRef) uint8 {
+	defer runtime.KeepAlive(query)
+	defer runtime.KeepAlive(runLoop)
+	defer runtime.KeepAlive(runLoopMode)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSIdentityQueryExecuteAsynchronously == nil {
 		ebipurego.RegisterLibFunc(&_fnCSIdentityQueryExecuteAsynchronously, _lib, "CSIdentityQueryExecuteAsynchronously")
@@ -494,6 +551,7 @@ var _fnCSIdentityQueryStop func(objc.ID)
 
 // CSIdentityQueryStop calls the OSServices framework function CSIdentityQueryStop.
 func CSIdentityQueryStop(query CSIdentityQueryRef) {
+	defer runtime.KeepAlive(query)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSIdentityQueryStop == nil {
 		ebipurego.RegisterLibFunc(&_fnCSIdentityQueryStop, _lib, "CSIdentityQueryStop")
@@ -505,6 +563,8 @@ var _fnCSIdentityRemoveAlias func(objc.ID, objc.ID)
 
 // CSIdentityRemoveAlias calls the OSServices framework function CSIdentityRemoveAlias.
 func CSIdentityRemoveAlias(identity CSIdentityRef, alias corefoundation.CFStringRef) {
+	defer runtime.KeepAlive(identity)
+	defer runtime.KeepAlive(alias)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSIdentityRemoveAlias == nil {
 		ebipurego.RegisterLibFunc(&_fnCSIdentityRemoveAlias, _lib, "CSIdentityRemoveAlias")
@@ -516,6 +576,7 @@ var _fnCSIdentityRemoveClient func(objc.ID)
 
 // CSIdentityRemoveClient calls the OSServices framework function CSIdentityRemoveClient.
 func CSIdentityRemoveClient(identity CSIdentityRef) {
+	defer runtime.KeepAlive(identity)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSIdentityRemoveClient == nil {
 		ebipurego.RegisterLibFunc(&_fnCSIdentityRemoveClient, _lib, "CSIdentityRemoveClient")
@@ -527,6 +588,8 @@ var _fnCSIdentityRemoveMember func(objc.ID, objc.ID)
 
 // CSIdentityRemoveMember calls the OSServices framework function CSIdentityRemoveMember.
 func CSIdentityRemoveMember(group CSIdentityRef, member CSIdentityRef) {
+	defer runtime.KeepAlive(group)
+	defer runtime.KeepAlive(member)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSIdentityRemoveMember == nil {
 		ebipurego.RegisterLibFunc(&_fnCSIdentityRemoveMember, _lib, "CSIdentityRemoveMember")
@@ -538,6 +601,8 @@ var _fnCSIdentitySetCertificate func(objc.ID, objc.ID)
 
 // CSIdentitySetCertificate calls the OSServices framework function CSIdentitySetCertificate.
 func CSIdentitySetCertificate(user CSIdentityRef, certificate obj.Object) {
+	defer runtime.KeepAlive(user)
+	defer runtime.KeepAlive(certificate)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSIdentitySetCertificate == nil {
 		ebipurego.RegisterLibFunc(&_fnCSIdentitySetCertificate, _lib, "CSIdentitySetCertificate")
@@ -549,6 +614,8 @@ var _fnCSIdentitySetEmailAddress func(objc.ID, objc.ID)
 
 // CSIdentitySetEmailAddress calls the OSServices framework function CSIdentitySetEmailAddress.
 func CSIdentitySetEmailAddress(identity CSIdentityRef, emailAddress corefoundation.CFStringRef) {
+	defer runtime.KeepAlive(identity)
+	defer runtime.KeepAlive(emailAddress)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSIdentitySetEmailAddress == nil {
 		ebipurego.RegisterLibFunc(&_fnCSIdentitySetEmailAddress, _lib, "CSIdentitySetEmailAddress")
@@ -560,6 +627,8 @@ var _fnCSIdentitySetFullName func(objc.ID, objc.ID)
 
 // CSIdentitySetFullName calls the OSServices framework function CSIdentitySetFullName.
 func CSIdentitySetFullName(identity CSIdentityRef, fullName corefoundation.CFStringRef) {
+	defer runtime.KeepAlive(identity)
+	defer runtime.KeepAlive(fullName)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSIdentitySetFullName == nil {
 		ebipurego.RegisterLibFunc(&_fnCSIdentitySetFullName, _lib, "CSIdentitySetFullName")
@@ -571,6 +640,9 @@ var _fnCSIdentitySetImageData func(objc.ID, objc.ID, objc.ID)
 
 // CSIdentitySetImageData calls the OSServices framework function CSIdentitySetImageData.
 func CSIdentitySetImageData(identity CSIdentityRef, imageData corefoundation.CFDataRef, imageDataType corefoundation.CFStringRef) {
+	defer runtime.KeepAlive(identity)
+	defer runtime.KeepAlive(imageData)
+	defer runtime.KeepAlive(imageDataType)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSIdentitySetImageData == nil {
 		ebipurego.RegisterLibFunc(&_fnCSIdentitySetImageData, _lib, "CSIdentitySetImageData")
@@ -582,6 +654,8 @@ var _fnCSIdentitySetImageURL func(objc.ID, objc.ID)
 
 // CSIdentitySetImageURL calls the OSServices framework function CSIdentitySetImageURL.
 func CSIdentitySetImageURL(identity CSIdentityRef, url corefoundation.CFURLRef) {
+	defer runtime.KeepAlive(identity)
+	defer runtime.KeepAlive(url)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSIdentitySetImageURL == nil {
 		ebipurego.RegisterLibFunc(&_fnCSIdentitySetImageURL, _lib, "CSIdentitySetImageURL")
@@ -593,6 +667,7 @@ var _fnCSIdentitySetIsEnabled func(objc.ID, uint8)
 
 // CSIdentitySetIsEnabled calls the OSServices framework function CSIdentitySetIsEnabled.
 func CSIdentitySetIsEnabled(user CSIdentityRef, isEnabled uint8) {
+	defer runtime.KeepAlive(user)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSIdentitySetIsEnabled == nil {
 		ebipurego.RegisterLibFunc(&_fnCSIdentitySetIsEnabled, _lib, "CSIdentitySetIsEnabled")
@@ -604,6 +679,8 @@ var _fnCSIdentitySetPassword func(objc.ID, objc.ID)
 
 // CSIdentitySetPassword calls the OSServices framework function CSIdentitySetPassword.
 func CSIdentitySetPassword(user CSIdentityRef, password corefoundation.CFStringRef) {
+	defer runtime.KeepAlive(user)
+	defer runtime.KeepAlive(password)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSIdentitySetPassword == nil {
 		ebipurego.RegisterLibFunc(&_fnCSIdentitySetPassword, _lib, "CSIdentitySetPassword")
@@ -965,6 +1042,7 @@ var _fnWSGetWSTypeIDFromCFType func(objc.ID) WSTypeID
 
 // WSGetWSTypeIDFromCFType calls the OSServices framework function WSGetWSTypeIDFromCFType.
 func WSGetWSTypeIDFromCFType(ref obj.Object) WSTypeID {
+	defer runtime.KeepAlive(ref)
 	_loadOnce.Do(_loadLibrary)
 	if _fnWSGetWSTypeIDFromCFType == nil {
 		ebipurego.RegisterLibFunc(&_fnWSGetWSTypeIDFromCFType, _lib, "WSGetWSTypeIDFromCFType")
@@ -976,6 +1054,9 @@ var _fnWSMethodInvocationAddDeserializationOverride func(objc.ID, objc.ID, objc.
 
 // WSMethodInvocationAddDeserializationOverride calls the OSServices framework function WSMethodInvocationAddDeserializationOverride.
 func WSMethodInvocationAddDeserializationOverride(invocation WSMethodInvocationRef, typeNamespace corefoundation.CFStringRef, typeName corefoundation.CFStringRef, deserializationProc unsafe.Pointer, context_ unsafe.Pointer) {
+	defer runtime.KeepAlive(invocation)
+	defer runtime.KeepAlive(typeNamespace)
+	defer runtime.KeepAlive(typeName)
 	_loadOnce.Do(_loadLibrary)
 	if _fnWSMethodInvocationAddDeserializationOverride == nil {
 		ebipurego.RegisterLibFunc(&_fnWSMethodInvocationAddDeserializationOverride, _lib, "WSMethodInvocationAddDeserializationOverride")
@@ -987,6 +1068,7 @@ var _fnWSMethodInvocationAddSerializationOverride func(objc.ID, int, unsafe.Poin
 
 // WSMethodInvocationAddSerializationOverride calls the OSServices framework function WSMethodInvocationAddSerializationOverride.
 func WSMethodInvocationAddSerializationOverride(invocation WSMethodInvocationRef, objType int, serializationProc unsafe.Pointer, context_ unsafe.Pointer) {
+	defer runtime.KeepAlive(invocation)
 	_loadOnce.Do(_loadLibrary)
 	if _fnWSMethodInvocationAddSerializationOverride == nil {
 		ebipurego.RegisterLibFunc(&_fnWSMethodInvocationAddSerializationOverride, _lib, "WSMethodInvocationAddSerializationOverride")
@@ -998,6 +1080,7 @@ var _fnWSMethodInvocationCopyParameters func(objc.ID, unsafe.Pointer) objc.ID
 
 // WSMethodInvocationCopyParameters calls the OSServices framework function WSMethodInvocationCopyParameters.
 func WSMethodInvocationCopyParameters(invocation WSMethodInvocationRef, parameterOrder unsafe.Pointer) corefoundation.CFDictionaryRef {
+	defer runtime.KeepAlive(invocation)
 	_loadOnce.Do(_loadLibrary)
 	if _fnWSMethodInvocationCopyParameters == nil {
 		ebipurego.RegisterLibFunc(&_fnWSMethodInvocationCopyParameters, _lib, "WSMethodInvocationCopyParameters")
@@ -1010,6 +1093,8 @@ var _fnWSMethodInvocationCopyProperty func(objc.ID, objc.ID) objc.ID
 
 // WSMethodInvocationCopyProperty calls the OSServices framework function WSMethodInvocationCopyProperty.
 func WSMethodInvocationCopyProperty(invocation WSMethodInvocationRef, propertyName corefoundation.CFStringRef) obj.Object {
+	defer runtime.KeepAlive(invocation)
+	defer runtime.KeepAlive(propertyName)
 	_loadOnce.Do(_loadLibrary)
 	if _fnWSMethodInvocationCopyProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnWSMethodInvocationCopyProperty, _lib, "WSMethodInvocationCopyProperty")
@@ -1022,6 +1107,7 @@ var _fnWSMethodInvocationCopySerialization func(objc.ID) objc.ID
 
 // WSMethodInvocationCopySerialization calls the OSServices framework function WSMethodInvocationCopySerialization.
 func WSMethodInvocationCopySerialization(invocation WSMethodInvocationRef) corefoundation.CFDataRef {
+	defer runtime.KeepAlive(invocation)
 	_loadOnce.Do(_loadLibrary)
 	if _fnWSMethodInvocationCopySerialization == nil {
 		ebipurego.RegisterLibFunc(&_fnWSMethodInvocationCopySerialization, _lib, "WSMethodInvocationCopySerialization")
@@ -1034,6 +1120,9 @@ var _fnWSMethodInvocationCreate func(objc.ID, objc.ID, objc.ID) objc.ID
 
 // WSMethodInvocationCreate calls the OSServices framework function WSMethodInvocationCreate.
 func WSMethodInvocationCreate(url corefoundation.CFURLRef, methodName corefoundation.CFStringRef, protocol corefoundation.CFStringRef) WSMethodInvocationRef {
+	defer runtime.KeepAlive(url)
+	defer runtime.KeepAlive(methodName)
+	defer runtime.KeepAlive(protocol)
 	_loadOnce.Do(_loadLibrary)
 	if _fnWSMethodInvocationCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnWSMethodInvocationCreate, _lib, "WSMethodInvocationCreate")
@@ -1046,6 +1135,7 @@ var _fnWSMethodInvocationCreateFromSerialization func(objc.ID) objc.ID
 
 // WSMethodInvocationCreateFromSerialization calls the OSServices framework function WSMethodInvocationCreateFromSerialization.
 func WSMethodInvocationCreateFromSerialization(contract corefoundation.CFDataRef) WSMethodInvocationRef {
+	defer runtime.KeepAlive(contract)
 	_loadOnce.Do(_loadLibrary)
 	if _fnWSMethodInvocationCreateFromSerialization == nil {
 		ebipurego.RegisterLibFunc(&_fnWSMethodInvocationCreateFromSerialization, _lib, "WSMethodInvocationCreateFromSerialization")
@@ -1069,6 +1159,7 @@ var _fnWSMethodInvocationInvoke func(objc.ID) objc.ID
 
 // WSMethodInvocationInvoke calls the OSServices framework function WSMethodInvocationInvoke.
 func WSMethodInvocationInvoke(invocation WSMethodInvocationRef) corefoundation.CFDictionaryRef {
+	defer runtime.KeepAlive(invocation)
 	_loadOnce.Do(_loadLibrary)
 	if _fnWSMethodInvocationInvoke == nil {
 		ebipurego.RegisterLibFunc(&_fnWSMethodInvocationInvoke, _lib, "WSMethodInvocationInvoke")
@@ -1081,6 +1172,9 @@ var _fnWSMethodInvocationScheduleWithRunLoop func(objc.ID, objc.ID, objc.ID)
 
 // WSMethodInvocationScheduleWithRunLoop calls the OSServices framework function WSMethodInvocationScheduleWithRunLoop.
 func WSMethodInvocationScheduleWithRunLoop(invocation WSMethodInvocationRef, runLoop corefoundation.CFRunLoopRef, runLoopMode corefoundation.CFStringRef) {
+	defer runtime.KeepAlive(invocation)
+	defer runtime.KeepAlive(runLoop)
+	defer runtime.KeepAlive(runLoopMode)
 	_loadOnce.Do(_loadLibrary)
 	if _fnWSMethodInvocationScheduleWithRunLoop == nil {
 		ebipurego.RegisterLibFunc(&_fnWSMethodInvocationScheduleWithRunLoop, _lib, "WSMethodInvocationScheduleWithRunLoop")
@@ -1092,6 +1186,7 @@ var _fnWSMethodInvocationSetCallBack func(objc.ID, unsafe.Pointer, unsafe.Pointe
 
 // WSMethodInvocationSetCallBack calls the OSServices framework function WSMethodInvocationSetCallBack.
 func WSMethodInvocationSetCallBack(invocation WSMethodInvocationRef, clientCB unsafe.Pointer, context_ unsafe.Pointer) {
+	defer runtime.KeepAlive(invocation)
 	_loadOnce.Do(_loadLibrary)
 	if _fnWSMethodInvocationSetCallBack == nil {
 		ebipurego.RegisterLibFunc(&_fnWSMethodInvocationSetCallBack, _lib, "WSMethodInvocationSetCallBack")
@@ -1103,6 +1198,9 @@ var _fnWSMethodInvocationSetParameters func(objc.ID, objc.ID, objc.ID)
 
 // WSMethodInvocationSetParameters calls the OSServices framework function WSMethodInvocationSetParameters.
 func WSMethodInvocationSetParameters(invocation WSMethodInvocationRef, parameters corefoundation.CFDictionaryRef, parameterOrder corefoundation.CFArrayRef) {
+	defer runtime.KeepAlive(invocation)
+	defer runtime.KeepAlive(parameters)
+	defer runtime.KeepAlive(parameterOrder)
 	_loadOnce.Do(_loadLibrary)
 	if _fnWSMethodInvocationSetParameters == nil {
 		ebipurego.RegisterLibFunc(&_fnWSMethodInvocationSetParameters, _lib, "WSMethodInvocationSetParameters")
@@ -1114,6 +1212,9 @@ var _fnWSMethodInvocationSetProperty func(objc.ID, objc.ID, objc.ID)
 
 // WSMethodInvocationSetProperty calls the OSServices framework function WSMethodInvocationSetProperty.
 func WSMethodInvocationSetProperty(invocation WSMethodInvocationRef, propertyName corefoundation.CFStringRef, propertyValue obj.Object) {
+	defer runtime.KeepAlive(invocation)
+	defer runtime.KeepAlive(propertyName)
+	defer runtime.KeepAlive(propertyValue)
 	_loadOnce.Do(_loadLibrary)
 	if _fnWSMethodInvocationSetProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnWSMethodInvocationSetProperty, _lib, "WSMethodInvocationSetProperty")
@@ -1125,6 +1226,9 @@ var _fnWSMethodInvocationUnscheduleFromRunLoop func(objc.ID, objc.ID, objc.ID)
 
 // WSMethodInvocationUnscheduleFromRunLoop calls the OSServices framework function WSMethodInvocationUnscheduleFromRunLoop.
 func WSMethodInvocationUnscheduleFromRunLoop(invocation WSMethodInvocationRef, runLoop corefoundation.CFRunLoopRef, runLoopMode corefoundation.CFStringRef) {
+	defer runtime.KeepAlive(invocation)
+	defer runtime.KeepAlive(runLoop)
+	defer runtime.KeepAlive(runLoopMode)
 	_loadOnce.Do(_loadLibrary)
 	if _fnWSMethodInvocationUnscheduleFromRunLoop == nil {
 		ebipurego.RegisterLibFunc(&_fnWSMethodInvocationUnscheduleFromRunLoop, _lib, "WSMethodInvocationUnscheduleFromRunLoop")
@@ -1136,6 +1240,7 @@ var _fnWSMethodResultIsFault func(objc.ID) uint8
 
 // WSMethodResultIsFault calls the OSServices framework function WSMethodResultIsFault.
 func WSMethodResultIsFault(methodResult corefoundation.CFDictionaryRef) uint8 {
+	defer runtime.KeepAlive(methodResult)
 	_loadOnce.Do(_loadLibrary)
 	if _fnWSMethodResultIsFault == nil {
 		ebipurego.RegisterLibFunc(&_fnWSMethodResultIsFault, _lib, "WSMethodResultIsFault")
@@ -1147,6 +1252,9 @@ var _fnWSProtocolHandlerCopyFaultDocument func(objc.ID, objc.ID, objc.ID) objc.I
 
 // WSProtocolHandlerCopyFaultDocument calls the OSServices framework function WSProtocolHandlerCopyFaultDocument.
 func WSProtocolHandlerCopyFaultDocument(ref WSProtocolHandlerRef, methodContext corefoundation.CFDictionaryRef, faultDict corefoundation.CFDictionaryRef) corefoundation.CFDataRef {
+	defer runtime.KeepAlive(ref)
+	defer runtime.KeepAlive(methodContext)
+	defer runtime.KeepAlive(faultDict)
 	_loadOnce.Do(_loadLibrary)
 	if _fnWSProtocolHandlerCopyFaultDocument == nil {
 		ebipurego.RegisterLibFunc(&_fnWSProtocolHandlerCopyFaultDocument, _lib, "WSProtocolHandlerCopyFaultDocument")
@@ -1159,6 +1267,8 @@ var _fnWSProtocolHandlerCopyProperty func(objc.ID, objc.ID) objc.ID
 
 // WSProtocolHandlerCopyProperty calls the OSServices framework function WSProtocolHandlerCopyProperty.
 func WSProtocolHandlerCopyProperty(ref WSProtocolHandlerRef, propertyName corefoundation.CFStringRef) obj.Object {
+	defer runtime.KeepAlive(ref)
+	defer runtime.KeepAlive(propertyName)
 	_loadOnce.Do(_loadLibrary)
 	if _fnWSProtocolHandlerCopyProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnWSProtocolHandlerCopyProperty, _lib, "WSProtocolHandlerCopyProperty")
@@ -1171,6 +1281,9 @@ var _fnWSProtocolHandlerCopyReplyDictionary func(objc.ID, objc.ID, objc.ID) objc
 
 // WSProtocolHandlerCopyReplyDictionary calls the OSServices framework function WSProtocolHandlerCopyReplyDictionary.
 func WSProtocolHandlerCopyReplyDictionary(ref WSProtocolHandlerRef, methodName corefoundation.CFStringRef, data corefoundation.CFDataRef) corefoundation.CFDictionaryRef {
+	defer runtime.KeepAlive(ref)
+	defer runtime.KeepAlive(methodName)
+	defer runtime.KeepAlive(data)
 	_loadOnce.Do(_loadLibrary)
 	if _fnWSProtocolHandlerCopyReplyDictionary == nil {
 		ebipurego.RegisterLibFunc(&_fnWSProtocolHandlerCopyReplyDictionary, _lib, "WSProtocolHandlerCopyReplyDictionary")
@@ -1183,6 +1296,9 @@ var _fnWSProtocolHandlerCopyReplyDocument func(objc.ID, objc.ID, objc.ID) objc.I
 
 // WSProtocolHandlerCopyReplyDocument calls the OSServices framework function WSProtocolHandlerCopyReplyDocument.
 func WSProtocolHandlerCopyReplyDocument(ref WSProtocolHandlerRef, methodContext corefoundation.CFDictionaryRef, resultValue obj.Object) corefoundation.CFDataRef {
+	defer runtime.KeepAlive(ref)
+	defer runtime.KeepAlive(methodContext)
+	defer runtime.KeepAlive(resultValue)
 	_loadOnce.Do(_loadLibrary)
 	if _fnWSProtocolHandlerCopyReplyDocument == nil {
 		ebipurego.RegisterLibFunc(&_fnWSProtocolHandlerCopyReplyDocument, _lib, "WSProtocolHandlerCopyReplyDocument")
@@ -1195,6 +1311,8 @@ var _fnWSProtocolHandlerCopyRequestDictionary func(objc.ID, objc.ID) objc.ID
 
 // WSProtocolHandlerCopyRequestDictionary calls the OSServices framework function WSProtocolHandlerCopyRequestDictionary.
 func WSProtocolHandlerCopyRequestDictionary(ref WSProtocolHandlerRef, data corefoundation.CFDataRef) corefoundation.CFDictionaryRef {
+	defer runtime.KeepAlive(ref)
+	defer runtime.KeepAlive(data)
 	_loadOnce.Do(_loadLibrary)
 	if _fnWSProtocolHandlerCopyRequestDictionary == nil {
 		ebipurego.RegisterLibFunc(&_fnWSProtocolHandlerCopyRequestDictionary, _lib, "WSProtocolHandlerCopyRequestDictionary")
@@ -1207,6 +1325,11 @@ var _fnWSProtocolHandlerCopyRequestDocument func(objc.ID, objc.ID, objc.ID, objc
 
 // WSProtocolHandlerCopyRequestDocument calls the OSServices framework function WSProtocolHandlerCopyRequestDocument.
 func WSProtocolHandlerCopyRequestDocument(ref WSProtocolHandlerRef, methodName corefoundation.CFStringRef, methodParams corefoundation.CFDictionaryRef, methodParamOrder corefoundation.CFArrayRef, methodExtras corefoundation.CFDictionaryRef) corefoundation.CFDataRef {
+	defer runtime.KeepAlive(ref)
+	defer runtime.KeepAlive(methodName)
+	defer runtime.KeepAlive(methodParams)
+	defer runtime.KeepAlive(methodParamOrder)
+	defer runtime.KeepAlive(methodExtras)
 	_loadOnce.Do(_loadLibrary)
 	if _fnWSProtocolHandlerCopyRequestDocument == nil {
 		ebipurego.RegisterLibFunc(&_fnWSProtocolHandlerCopyRequestDocument, _lib, "WSProtocolHandlerCopyRequestDocument")
@@ -1219,6 +1342,8 @@ var _fnWSProtocolHandlerCreate func(objc.ID, objc.ID) objc.ID
 
 // WSProtocolHandlerCreate calls the OSServices framework function WSProtocolHandlerCreate.
 func WSProtocolHandlerCreate(allocator corefoundation.CFAllocatorRef, protocol corefoundation.CFStringRef) WSProtocolHandlerRef {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(protocol)
 	_loadOnce.Do(_loadLibrary)
 	if _fnWSProtocolHandlerCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnWSProtocolHandlerCreate, _lib, "WSProtocolHandlerCreate")
@@ -1242,6 +1367,9 @@ var _fnWSProtocolHandlerSetDeserializationOverride func(objc.ID, objc.ID, objc.I
 
 // WSProtocolHandlerSetDeserializationOverride calls the OSServices framework function WSProtocolHandlerSetDeserializationOverride.
 func WSProtocolHandlerSetDeserializationOverride(protocol WSProtocolHandlerRef, typeNamespace corefoundation.CFStringRef, typeName corefoundation.CFStringRef, deserializationProc unsafe.Pointer, context_ unsafe.Pointer) {
+	defer runtime.KeepAlive(protocol)
+	defer runtime.KeepAlive(typeNamespace)
+	defer runtime.KeepAlive(typeName)
 	_loadOnce.Do(_loadLibrary)
 	if _fnWSProtocolHandlerSetDeserializationOverride == nil {
 		ebipurego.RegisterLibFunc(&_fnWSProtocolHandlerSetDeserializationOverride, _lib, "WSProtocolHandlerSetDeserializationOverride")
@@ -1253,6 +1381,9 @@ var _fnWSProtocolHandlerSetProperty func(objc.ID, objc.ID, objc.ID)
 
 // WSProtocolHandlerSetProperty calls the OSServices framework function WSProtocolHandlerSetProperty.
 func WSProtocolHandlerSetProperty(ref WSProtocolHandlerRef, propertyName corefoundation.CFStringRef, propertyValue obj.Object) {
+	defer runtime.KeepAlive(ref)
+	defer runtime.KeepAlive(propertyName)
+	defer runtime.KeepAlive(propertyValue)
 	_loadOnce.Do(_loadLibrary)
 	if _fnWSProtocolHandlerSetProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnWSProtocolHandlerSetProperty, _lib, "WSProtocolHandlerSetProperty")
@@ -1264,6 +1395,7 @@ var _fnWSProtocolHandlerSetSerializationOverride func(objc.ID, int, unsafe.Point
 
 // WSProtocolHandlerSetSerializationOverride calls the OSServices framework function WSProtocolHandlerSetSerializationOverride.
 func WSProtocolHandlerSetSerializationOverride(protocol WSProtocolHandlerRef, objType int, serializationProc unsafe.Pointer, context_ unsafe.Pointer) {
+	defer runtime.KeepAlive(protocol)
 	_loadOnce.Do(_loadLibrary)
 	if _fnWSProtocolHandlerSetSerializationOverride == nil {
 		ebipurego.RegisterLibFunc(&_fnWSProtocolHandlerSetSerializationOverride, _lib, "WSProtocolHandlerSetSerializationOverride")

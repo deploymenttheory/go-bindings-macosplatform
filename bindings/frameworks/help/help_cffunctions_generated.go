@@ -5,6 +5,7 @@
 package help
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
@@ -34,6 +35,9 @@ var _fnAHGotoPage func(objc.ID, objc.ID, objc.ID) int32
 
 // AHGotoPage reports an error if the Help framework function AHGotoPage fails.
 func AHGotoPage(bookname obj.Object, path obj.Object, anchor obj.Object) error {
+	defer runtime.KeepAlive(bookname)
+	defer runtime.KeepAlive(path)
+	defer runtime.KeepAlive(anchor)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAHGotoPage == nil {
 		ebipurego.RegisterLibFunc(&_fnAHGotoPage, _lib, "AHGotoPage")
@@ -49,6 +53,8 @@ var _fnAHLookupAnchor func(objc.ID, objc.ID) int32
 
 // AHLookupAnchor reports an error if the Help framework function AHLookupAnchor fails.
 func AHLookupAnchor(bookname obj.Object, anchor obj.Object) error {
+	defer runtime.KeepAlive(bookname)
+	defer runtime.KeepAlive(anchor)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAHLookupAnchor == nil {
 		ebipurego.RegisterLibFunc(&_fnAHLookupAnchor, _lib, "AHLookupAnchor")
@@ -79,6 +85,7 @@ var _fnAHRegisterHelpBookWithURL func(objc.ID) int32
 
 // AHRegisterHelpBookWithURL reports an error if the Help framework function AHRegisterHelpBookWithURL fails.
 func AHRegisterHelpBookWithURL(applicationURL obj.Object) error {
+	defer runtime.KeepAlive(applicationURL)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAHRegisterHelpBookWithURL == nil {
 		ebipurego.RegisterLibFunc(&_fnAHRegisterHelpBookWithURL, _lib, "AHRegisterHelpBookWithURL")
@@ -94,6 +101,8 @@ var _fnAHSearch func(objc.ID, objc.ID) int32
 
 // AHSearch reports an error if the Help framework function AHSearch fails.
 func AHSearch(bookname obj.Object, query obj.Object) error {
+	defer runtime.KeepAlive(bookname)
+	defer runtime.KeepAlive(query)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAHSearch == nil {
 		ebipurego.RegisterLibFunc(&_fnAHSearch, _lib, "AHSearch")

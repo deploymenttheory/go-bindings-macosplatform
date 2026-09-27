@@ -5,6 +5,8 @@
 package coregraphics
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	ebipurego "github.com/ebitengine/purego"
@@ -15,6 +17,8 @@ var _fnCGPDFContextAddStructureTreeRootChild func(objc.ID, objc.ID) int32
 
 // CGPDFContextAddStructureTreeRootChild reports an error if the CoreGraphics framework function CGPDFContextAddStructureTreeRootChild fails.
 func CGPDFContextAddStructureTreeRootChild(context_ CGContextRef, structureElement CGPDFStructureElementRef) error {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(structureElement)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFContextAddStructureTreeRootChild == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFContextAddStructureTreeRootChild, _lib, "CGPDFContextAddStructureTreeRootChild")
@@ -30,6 +34,8 @@ var _fnCGPDFStructureElementAddMarkedContentItem func(objc.ID, objc.ID) int32
 
 // CGPDFStructureElementAddMarkedContentItem reports an error if the CoreGraphics framework function CGPDFStructureElementAddMarkedContentItem fails.
 func CGPDFStructureElementAddMarkedContentItem(structureElement CGPDFStructureElementRef, markedContentItem CGPDFMarkedContentItemRef) error {
+	defer runtime.KeepAlive(structureElement)
+	defer runtime.KeepAlive(markedContentItem)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFStructureElementAddMarkedContentItem == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFStructureElementAddMarkedContentItem, _lib, "CGPDFStructureElementAddMarkedContentItem")
@@ -45,6 +51,8 @@ var _fnCGPDFStructureElementAddStructureElement func(objc.ID, objc.ID) int32
 
 // CGPDFStructureElementAddStructureElement reports an error if the CoreGraphics framework function CGPDFStructureElementAddStructureElement fails.
 func CGPDFStructureElementAddStructureElement(structureElement CGPDFStructureElementRef, childStructureElement CGPDFStructureElementRef) error {
+	defer runtime.KeepAlive(structureElement)
+	defer runtime.KeepAlive(childStructureElement)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFStructureElementAddStructureElement == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFStructureElementAddStructureElement, _lib, "CGPDFStructureElementAddStructureElement")

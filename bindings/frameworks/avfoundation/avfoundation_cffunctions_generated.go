@@ -5,6 +5,7 @@
 package avfoundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -18,6 +19,7 @@ var _fnCMTagCollectionCreateWithVideoOutputPreset func(objc.ID, CMTagCollectionV
 
 // CMTagCollectionCreateWithVideoOutputPreset reports an error if the AVFoundation framework function CMTagCollectionCreateWithVideoOutputPreset fails.
 func CMTagCollectionCreateWithVideoOutputPreset(allocator obj.Object, preset CMTagCollectionVideoOutputPreset, newCollectionOut unsafe.Pointer) error {
+	defer runtime.KeepAlive(allocator)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMTagCollectionCreateWithVideoOutputPreset == nil {
 		ebipurego.RegisterLibFunc(&_fnCMTagCollectionCreateWithVideoOutputPreset, _lib, "CMTagCollectionCreateWithVideoOutputPreset")

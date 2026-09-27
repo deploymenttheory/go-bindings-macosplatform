@@ -5,6 +5,7 @@
 package security
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
@@ -19,6 +20,7 @@ var _fnAuthorizationCopyInfo func(objc.ID, string, unsafe.Pointer) int32
 
 // AuthorizationCopyInfo calls the Security framework function AuthorizationCopyInfo.
 func AuthorizationCopyInfo(authorization AuthorizationRef, tag string, info unsafe.Pointer) int {
+	defer runtime.KeepAlive(authorization)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAuthorizationCopyInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnAuthorizationCopyInfo, _lib, "AuthorizationCopyInfo")
@@ -30,6 +32,7 @@ var _fnAuthorizationCopyRights func(objc.ID, unsafe.Pointer, unsafe.Pointer, Aut
 
 // AuthorizationCopyRights calls the Security framework function AuthorizationCopyRights.
 func AuthorizationCopyRights(authorization AuthorizationRef, rights unsafe.Pointer, environment unsafe.Pointer, flags AuthorizationFlags, authorizedRights unsafe.Pointer) int {
+	defer runtime.KeepAlive(authorization)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAuthorizationCopyRights == nil {
 		ebipurego.RegisterLibFunc(&_fnAuthorizationCopyRights, _lib, "AuthorizationCopyRights")
@@ -41,6 +44,7 @@ var _fnAuthorizationCopyRightsAsync func(objc.ID, unsafe.Pointer, unsafe.Pointer
 
 // AuthorizationCopyRightsAsync calls the Security framework function AuthorizationCopyRightsAsync.
 func AuthorizationCopyRightsAsync(authorization AuthorizationRef, rights unsafe.Pointer, environment unsafe.Pointer, flags AuthorizationFlags, callbackBlock unsafe.Pointer) {
+	defer runtime.KeepAlive(authorization)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAuthorizationCopyRightsAsync == nil {
 		ebipurego.RegisterLibFunc(&_fnAuthorizationCopyRightsAsync, _lib, "AuthorizationCopyRightsAsync")
@@ -74,6 +78,7 @@ var _fnCMSDecoderCopySignerSigningTime func(objc.ID, int, unsafe.Pointer) int32
 
 // CMSDecoderCopySignerSigningTime calls the Security framework function CMSDecoderCopySignerSigningTime.
 func CMSDecoderCopySignerSigningTime(cmsDecoder CMSDecoderRef, signerIndex int) (result int, signingTime float64) {
+	defer runtime.KeepAlive(cmsDecoder)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSDecoderCopySignerSigningTime == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSDecoderCopySignerSigningTime, _lib, "CMSDecoderCopySignerSigningTime")
@@ -87,6 +92,8 @@ var _fnCMSDecoderCopySignerStatus func(objc.ID, int, objc.ID, uint8, unsafe.Poin
 
 // CMSDecoderCopySignerStatus calls the Security framework function CMSDecoderCopySignerStatus.
 func CMSDecoderCopySignerStatus(cmsDecoder CMSDecoderRef, signerIndex int, policyOrArray obj.Object, evaluateSecTrust uint8, secTrustOut unsafe.Pointer) (result int, signerStatusOut CMSSignerStatus, certVerifyResultCodeOut int) {
+	defer runtime.KeepAlive(cmsDecoder)
+	defer runtime.KeepAlive(policyOrArray)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSDecoderCopySignerStatus == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSDecoderCopySignerStatus, _lib, "CMSDecoderCopySignerStatus")
@@ -101,6 +108,7 @@ var _fnCMSDecoderCopySignerTimestamp func(objc.ID, int, unsafe.Pointer) int32
 
 // CMSDecoderCopySignerTimestamp calls the Security framework function CMSDecoderCopySignerTimestamp.
 func CMSDecoderCopySignerTimestamp(cmsDecoder CMSDecoderRef, signerIndex int) (result int, timestamp float64) {
+	defer runtime.KeepAlive(cmsDecoder)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSDecoderCopySignerTimestamp == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSDecoderCopySignerTimestamp, _lib, "CMSDecoderCopySignerTimestamp")
@@ -114,6 +122,8 @@ var _fnCMSDecoderCopySignerTimestampWithPolicy func(objc.ID, objc.ID, int, unsaf
 
 // CMSDecoderCopySignerTimestampWithPolicy calls the Security framework function CMSDecoderCopySignerTimestampWithPolicy.
 func CMSDecoderCopySignerTimestampWithPolicy(cmsDecoder CMSDecoderRef, timeStampPolicy obj.Object, signerIndex int) (result int, timestamp float64) {
+	defer runtime.KeepAlive(cmsDecoder)
+	defer runtime.KeepAlive(timeStampPolicy)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSDecoderCopySignerTimestampWithPolicy == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSDecoderCopySignerTimestampWithPolicy, _lib, "CMSDecoderCopySignerTimestampWithPolicy")
@@ -127,6 +137,7 @@ var _fnCMSDecoderGetNumSigners func(objc.ID, unsafe.Pointer) int32
 
 // CMSDecoderGetNumSigners calls the Security framework function CMSDecoderGetNumSigners.
 func CMSDecoderGetNumSigners(cmsDecoder CMSDecoderRef) (result int, numSignersOut int) {
+	defer runtime.KeepAlive(cmsDecoder)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSDecoderGetNumSigners == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSDecoderGetNumSigners, _lib, "CMSDecoderGetNumSigners")
@@ -151,6 +162,7 @@ var _fnCMSDecoderIsContentEncrypted func(objc.ID, unsafe.Pointer) int32
 
 // CMSDecoderIsContentEncrypted calls the Security framework function CMSDecoderIsContentEncrypted.
 func CMSDecoderIsContentEncrypted(cmsDecoder CMSDecoderRef) (result int, isEncryptedOut uint8) {
+	defer runtime.KeepAlive(cmsDecoder)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSDecoderIsContentEncrypted == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSDecoderIsContentEncrypted, _lib, "CMSDecoderIsContentEncrypted")
@@ -164,6 +176,8 @@ var _fnCMSEncode func(objc.ID, objc.ID, unsafe.Pointer, uint8, CMSSignedAttribut
 
 // CMSEncode calls the Security framework function CMSEncode.
 func CMSEncode(signers obj.Object, recipients obj.Object, eContentType unsafe.Pointer, detachedContent uint8, signedAttributes CMSSignedAttributes, content unsafe.Pointer, contentLen int, encodedContentOut unsafe.Pointer) int {
+	defer runtime.KeepAlive(signers)
+	defer runtime.KeepAlive(recipients)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSEncode == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSEncode, _lib, "CMSEncode")
@@ -175,6 +189,7 @@ var _fnCMSEncoderCopySignerTimestamp func(objc.ID, int, unsafe.Pointer) int32
 
 // CMSEncoderCopySignerTimestamp calls the Security framework function CMSEncoderCopySignerTimestamp.
 func CMSEncoderCopySignerTimestamp(cmsEncoder CMSEncoderRef, signerIndex int) (result int, timestamp float64) {
+	defer runtime.KeepAlive(cmsEncoder)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSEncoderCopySignerTimestamp == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSEncoderCopySignerTimestamp, _lib, "CMSEncoderCopySignerTimestamp")
@@ -188,6 +203,8 @@ var _fnCMSEncoderCopySignerTimestampWithPolicy func(objc.ID, objc.ID, int, unsaf
 
 // CMSEncoderCopySignerTimestampWithPolicy calls the Security framework function CMSEncoderCopySignerTimestampWithPolicy.
 func CMSEncoderCopySignerTimestampWithPolicy(cmsEncoder CMSEncoderRef, timeStampPolicy obj.Object, signerIndex int) (result int, timestamp float64) {
+	defer runtime.KeepAlive(cmsEncoder)
+	defer runtime.KeepAlive(timeStampPolicy)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSEncoderCopySignerTimestampWithPolicy == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSEncoderCopySignerTimestampWithPolicy, _lib, "CMSEncoderCopySignerTimestampWithPolicy")
@@ -201,6 +218,7 @@ var _fnCMSEncoderGetCertificateChainMode func(objc.ID, unsafe.Pointer) int32
 
 // CMSEncoderGetCertificateChainMode calls the Security framework function CMSEncoderGetCertificateChainMode.
 func CMSEncoderGetCertificateChainMode(cmsEncoder CMSEncoderRef) (result int, chainModeOut CMSCertificateChainMode) {
+	defer runtime.KeepAlive(cmsEncoder)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSEncoderGetCertificateChainMode == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSEncoderGetCertificateChainMode, _lib, "CMSEncoderGetCertificateChainMode")
@@ -214,6 +232,7 @@ var _fnCMSEncoderGetHasDetachedContent func(objc.ID, unsafe.Pointer) int32
 
 // CMSEncoderGetHasDetachedContent calls the Security framework function CMSEncoderGetHasDetachedContent.
 func CMSEncoderGetHasDetachedContent(cmsEncoder CMSEncoderRef) (result int, detachedContentOut uint8) {
+	defer runtime.KeepAlive(cmsEncoder)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSEncoderGetHasDetachedContent == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSEncoderGetHasDetachedContent, _lib, "CMSEncoderGetHasDetachedContent")
@@ -238,6 +257,7 @@ var _fnCMSEncoderSetEncapsulatedContentType func(objc.ID, unsafe.Pointer) int32
 
 // CMSEncoderSetEncapsulatedContentType calls the Security framework function CMSEncoderSetEncapsulatedContentType.
 func CMSEncoderSetEncapsulatedContentType(cmsEncoder CMSEncoderRef, eContentType unsafe.Pointer) int {
+	defer runtime.KeepAlive(cmsEncoder)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSEncoderSetEncapsulatedContentType == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSEncoderSetEncapsulatedContentType, _lib, "CMSEncoderSetEncapsulatedContentType")
@@ -2401,6 +2421,7 @@ var _fnSSLCopyRequestedPeerName func(objc.ID, string, unsafe.Pointer) int32
 
 // SSLCopyRequestedPeerName calls the Security framework function SSLCopyRequestedPeerName.
 func SSLCopyRequestedPeerName(context_ SSLContextRef, peerName string) (result int, peerNameLen int) {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLCopyRequestedPeerName == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLCopyRequestedPeerName, _lib, "SSLCopyRequestedPeerName")
@@ -2414,6 +2435,7 @@ var _fnSSLCopyRequestedPeerNameLength func(objc.ID, unsafe.Pointer) int32
 
 // SSLCopyRequestedPeerNameLength calls the Security framework function SSLCopyRequestedPeerNameLength.
 func SSLCopyRequestedPeerNameLength(ctx SSLContextRef) (result int, peerNameLen int) {
+	defer runtime.KeepAlive(ctx)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLCopyRequestedPeerNameLength == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLCopyRequestedPeerNameLength, _lib, "SSLCopyRequestedPeerNameLength")
@@ -2427,6 +2449,7 @@ var _fnSSLCreateContext func(objc.ID, SSLProtocolSide, SSLConnectionType) objc.I
 
 // SSLCreateContext calls the Security framework function SSLCreateContext.
 func SSLCreateContext(alloc corefoundation.CFAllocatorRef, protocolSide SSLProtocolSide, connectionType SSLConnectionType) SSLContextRef {
+	defer runtime.KeepAlive(alloc)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLCreateContext == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLCreateContext, _lib, "SSLCreateContext")
@@ -2439,6 +2462,7 @@ var _fnSSLGetAllowsAnyRoot func(objc.ID, unsafe.Pointer) int32
 
 // SSLGetAllowsAnyRoot calls the Security framework function SSLGetAllowsAnyRoot.
 func SSLGetAllowsAnyRoot(context_ SSLContextRef) (result int, anyRoot uint8) {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLGetAllowsAnyRoot == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLGetAllowsAnyRoot, _lib, "SSLGetAllowsAnyRoot")
@@ -2452,6 +2476,7 @@ var _fnSSLGetAllowsExpiredCerts func(objc.ID, unsafe.Pointer) int32
 
 // SSLGetAllowsExpiredCerts calls the Security framework function SSLGetAllowsExpiredCerts.
 func SSLGetAllowsExpiredCerts(context_ SSLContextRef) (result int, allowsExpired uint8) {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLGetAllowsExpiredCerts == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLGetAllowsExpiredCerts, _lib, "SSLGetAllowsExpiredCerts")
@@ -2465,6 +2490,7 @@ var _fnSSLGetAllowsExpiredRoots func(objc.ID, unsafe.Pointer) int32
 
 // SSLGetAllowsExpiredRoots calls the Security framework function SSLGetAllowsExpiredRoots.
 func SSLGetAllowsExpiredRoots(context_ SSLContextRef) (result int, allowsExpired uint8) {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLGetAllowsExpiredRoots == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLGetAllowsExpiredRoots, _lib, "SSLGetAllowsExpiredRoots")
@@ -2478,6 +2504,7 @@ var _fnSSLGetBufferedReadSize func(objc.ID, unsafe.Pointer) int32
 
 // SSLGetBufferedReadSize calls the Security framework function SSLGetBufferedReadSize.
 func SSLGetBufferedReadSize(context_ SSLContextRef) (result int, bufferSize int) {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLGetBufferedReadSize == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLGetBufferedReadSize, _lib, "SSLGetBufferedReadSize")
@@ -2491,6 +2518,7 @@ var _fnSSLGetClientCertificateState func(objc.ID, unsafe.Pointer) int32
 
 // SSLGetClientCertificateState calls the Security framework function SSLGetClientCertificateState.
 func SSLGetClientCertificateState(context_ SSLContextRef) (result int, clientState SSLClientCertificateState) {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLGetClientCertificateState == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLGetClientCertificateState, _lib, "SSLGetClientCertificateState")
@@ -2504,6 +2532,7 @@ var _fnSSLGetDatagramWriteSize func(objc.ID, unsafe.Pointer) int32
 
 // SSLGetDatagramWriteSize calls the Security framework function SSLGetDatagramWriteSize.
 func SSLGetDatagramWriteSize(dtlsContext SSLContextRef) (result int, bufSize int) {
+	defer runtime.KeepAlive(dtlsContext)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLGetDatagramWriteSize == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLGetDatagramWriteSize, _lib, "SSLGetDatagramWriteSize")
@@ -2517,6 +2546,7 @@ var _fnSSLGetDiffieHellmanParams func(objc.ID, unsafe.Pointer, unsafe.Pointer) i
 
 // SSLGetDiffieHellmanParams calls the Security framework function SSLGetDiffieHellmanParams.
 func SSLGetDiffieHellmanParams(context_ SSLContextRef, dhParams unsafe.Pointer) (result int, dhParamsLen int) {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLGetDiffieHellmanParams == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLGetDiffieHellmanParams, _lib, "SSLGetDiffieHellmanParams")
@@ -2530,6 +2560,7 @@ var _fnSSLGetEnableCertVerify func(objc.ID, unsafe.Pointer) int32
 
 // SSLGetEnableCertVerify calls the Security framework function SSLGetEnableCertVerify.
 func SSLGetEnableCertVerify(context_ SSLContextRef) (result int, enableVerify uint8) {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLGetEnableCertVerify == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLGetEnableCertVerify, _lib, "SSLGetEnableCertVerify")
@@ -2543,6 +2574,7 @@ var _fnSSLGetEnabledCiphers func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // SSLGetEnabledCiphers calls the Security framework function SSLGetEnabledCiphers.
 func SSLGetEnabledCiphers(context_ SSLContextRef) (result int, ciphers uint16, numCiphers int) {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLGetEnabledCiphers == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLGetEnabledCiphers, _lib, "SSLGetEnabledCiphers")
@@ -2557,6 +2589,7 @@ var _fnSSLGetMaxDatagramRecordSize func(objc.ID, unsafe.Pointer) int32
 
 // SSLGetMaxDatagramRecordSize calls the Security framework function SSLGetMaxDatagramRecordSize.
 func SSLGetMaxDatagramRecordSize(dtlsContext SSLContextRef) (result int, maxSize int) {
+	defer runtime.KeepAlive(dtlsContext)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLGetMaxDatagramRecordSize == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLGetMaxDatagramRecordSize, _lib, "SSLGetMaxDatagramRecordSize")
@@ -2570,6 +2603,7 @@ var _fnSSLGetNegotiatedCipher func(objc.ID, unsafe.Pointer) int32
 
 // SSLGetNegotiatedCipher calls the Security framework function SSLGetNegotiatedCipher.
 func SSLGetNegotiatedCipher(context_ SSLContextRef) (result int, cipherSuite uint16) {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLGetNegotiatedCipher == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLGetNegotiatedCipher, _lib, "SSLGetNegotiatedCipher")
@@ -2583,6 +2617,7 @@ var _fnSSLGetNegotiatedProtocolVersion func(objc.ID, unsafe.Pointer) int32
 
 // SSLGetNegotiatedProtocolVersion calls the Security framework function SSLGetNegotiatedProtocolVersion.
 func SSLGetNegotiatedProtocolVersion(context_ SSLContextRef) (result int, protocol SSLProtocol) {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLGetNegotiatedProtocolVersion == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLGetNegotiatedProtocolVersion, _lib, "SSLGetNegotiatedProtocolVersion")
@@ -2596,6 +2631,7 @@ var _fnSSLGetNumberEnabledCiphers func(objc.ID, unsafe.Pointer) int32
 
 // SSLGetNumberEnabledCiphers calls the Security framework function SSLGetNumberEnabledCiphers.
 func SSLGetNumberEnabledCiphers(context_ SSLContextRef) (result int, numCiphers int) {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLGetNumberEnabledCiphers == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLGetNumberEnabledCiphers, _lib, "SSLGetNumberEnabledCiphers")
@@ -2609,6 +2645,7 @@ var _fnSSLGetNumberSupportedCiphers func(objc.ID, unsafe.Pointer) int32
 
 // SSLGetNumberSupportedCiphers calls the Security framework function SSLGetNumberSupportedCiphers.
 func SSLGetNumberSupportedCiphers(context_ SSLContextRef) (result int, numCiphers int) {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLGetNumberSupportedCiphers == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLGetNumberSupportedCiphers, _lib, "SSLGetNumberSupportedCiphers")
@@ -2622,6 +2659,7 @@ var _fnSSLGetPeerDomainName func(objc.ID, string, unsafe.Pointer) int32
 
 // SSLGetPeerDomainName calls the Security framework function SSLGetPeerDomainName.
 func SSLGetPeerDomainName(context_ SSLContextRef, peerName string) (result int, peerNameLen int) {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLGetPeerDomainName == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLGetPeerDomainName, _lib, "SSLGetPeerDomainName")
@@ -2635,6 +2673,7 @@ var _fnSSLGetPeerDomainNameLength func(objc.ID, unsafe.Pointer) int32
 
 // SSLGetPeerDomainNameLength calls the Security framework function SSLGetPeerDomainNameLength.
 func SSLGetPeerDomainNameLength(context_ SSLContextRef) (result int, peerNameLen int) {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLGetPeerDomainNameLength == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLGetPeerDomainNameLength, _lib, "SSLGetPeerDomainNameLength")
@@ -2648,6 +2687,7 @@ var _fnSSLGetPeerID func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // SSLGetPeerID calls the Security framework function SSLGetPeerID.
 func SSLGetPeerID(context_ SSLContextRef, peerID unsafe.Pointer) (result int, peerIDLen int) {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLGetPeerID == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLGetPeerID, _lib, "SSLGetPeerID")
@@ -2661,6 +2701,7 @@ var _fnSSLGetProtocolVersion func(objc.ID, unsafe.Pointer) int32
 
 // SSLGetProtocolVersion calls the Security framework function SSLGetProtocolVersion.
 func SSLGetProtocolVersion(context_ SSLContextRef) (result int, protocol SSLProtocol) {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLGetProtocolVersion == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLGetProtocolVersion, _lib, "SSLGetProtocolVersion")
@@ -2674,6 +2715,7 @@ var _fnSSLGetProtocolVersionEnabled func(objc.ID, SSLProtocol, unsafe.Pointer) i
 
 // SSLGetProtocolVersionEnabled calls the Security framework function SSLGetProtocolVersionEnabled.
 func SSLGetProtocolVersionEnabled(context_ SSLContextRef, protocol SSLProtocol) (result int, enable uint8) {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLGetProtocolVersionEnabled == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLGetProtocolVersionEnabled, _lib, "SSLGetProtocolVersionEnabled")
@@ -2687,6 +2729,7 @@ var _fnSSLGetProtocolVersionMax func(objc.ID, unsafe.Pointer) int32
 
 // SSLGetProtocolVersionMax calls the Security framework function SSLGetProtocolVersionMax.
 func SSLGetProtocolVersionMax(context_ SSLContextRef) (result int, maxVersion SSLProtocol) {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLGetProtocolVersionMax == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLGetProtocolVersionMax, _lib, "SSLGetProtocolVersionMax")
@@ -2700,6 +2743,7 @@ var _fnSSLGetProtocolVersionMin func(objc.ID, unsafe.Pointer) int32
 
 // SSLGetProtocolVersionMin calls the Security framework function SSLGetProtocolVersionMin.
 func SSLGetProtocolVersionMin(context_ SSLContextRef) (result int, minVersion SSLProtocol) {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLGetProtocolVersionMin == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLGetProtocolVersionMin, _lib, "SSLGetProtocolVersionMin")
@@ -2713,6 +2757,7 @@ var _fnSSLGetRsaBlinding func(objc.ID, unsafe.Pointer) int32
 
 // SSLGetRsaBlinding calls the Security framework function SSLGetRsaBlinding.
 func SSLGetRsaBlinding(context_ SSLContextRef) (result int, blinding uint8) {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLGetRsaBlinding == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLGetRsaBlinding, _lib, "SSLGetRsaBlinding")
@@ -2726,6 +2771,7 @@ var _fnSSLGetSessionOption func(objc.ID, SSLSessionOption, unsafe.Pointer) int32
 
 // SSLGetSessionOption calls the Security framework function SSLGetSessionOption.
 func SSLGetSessionOption(context_ SSLContextRef, option SSLSessionOption) (result int, value uint8) {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLGetSessionOption == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLGetSessionOption, _lib, "SSLGetSessionOption")
@@ -2739,6 +2785,7 @@ var _fnSSLGetSessionState func(objc.ID, unsafe.Pointer) int32
 
 // SSLGetSessionState calls the Security framework function SSLGetSessionState.
 func SSLGetSessionState(context_ SSLContextRef) (result int, state SSLSessionState) {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLGetSessionState == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLGetSessionState, _lib, "SSLGetSessionState")
@@ -2752,6 +2799,7 @@ var _fnSSLGetSupportedCiphers func(objc.ID, unsafe.Pointer, unsafe.Pointer) int3
 
 // SSLGetSupportedCiphers calls the Security framework function SSLGetSupportedCiphers.
 func SSLGetSupportedCiphers(context_ SSLContextRef) (result int, ciphers uint16, numCiphers int) {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLGetSupportedCiphers == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLGetSupportedCiphers, _lib, "SSLGetSupportedCiphers")
@@ -2766,6 +2814,7 @@ var _fnSSLRead func(objc.ID, unsafe.Pointer, int, unsafe.Pointer) int32
 
 // SSLRead calls the Security framework function SSLRead.
 func SSLRead(context_ SSLContextRef, data unsafe.Pointer, dataLength int) (result int, processed int) {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLRead == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLRead, _lib, "SSLRead")
@@ -2779,6 +2828,7 @@ var _fnSSLSetEnabledCiphers func(objc.ID, unsafe.Pointer, int) int32
 
 // SSLSetEnabledCiphers calls the Security framework function SSLSetEnabledCiphers.
 func SSLSetEnabledCiphers(context_ SSLContextRef, ciphers unsafe.Pointer, numCiphers int) int {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetEnabledCiphers == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetEnabledCiphers, _lib, "SSLSetEnabledCiphers")
@@ -2790,6 +2840,7 @@ var _fnSSLWrite func(objc.ID, unsafe.Pointer, int, unsafe.Pointer) int32
 
 // SSLWrite calls the Security framework function SSLWrite.
 func SSLWrite(context_ SSLContextRef, data unsafe.Pointer, dataLength int) (result int, processed int) {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLWrite == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLWrite, _lib, "SSLWrite")
@@ -2803,6 +2854,7 @@ var _fnSecACLCopyAuthorizations func(objc.ID) objc.ID
 
 // SecACLCopyAuthorizations calls the Security framework function SecACLCopyAuthorizations.
 func SecACLCopyAuthorizations(acl SecACLRef) corefoundation.CFArrayRef {
+	defer runtime.KeepAlive(acl)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecACLCopyAuthorizations == nil {
 		ebipurego.RegisterLibFunc(&_fnSecACLCopyAuthorizations, _lib, "SecACLCopyAuthorizations")
@@ -2815,6 +2867,7 @@ var _fnSecACLCopyContents func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.P
 
 // SecACLCopyContents calls the Security framework function SecACLCopyContents.
 func SecACLCopyContents(acl SecACLRef, applicationList unsafe.Pointer, description unsafe.Pointer) (result int, promptSelector SecKeychainPromptSelector) {
+	defer runtime.KeepAlive(acl)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecACLCopyContents == nil {
 		ebipurego.RegisterLibFunc(&_fnSecACLCopyContents, _lib, "SecACLCopyContents")
@@ -2828,6 +2881,7 @@ var _fnSecACLGetAuthorizations func(objc.ID, unsafe.Pointer, unsafe.Pointer) int
 
 // SecACLGetAuthorizations calls the Security framework function SecACLGetAuthorizations.
 func SecACLGetAuthorizations(acl SecACLRef, tags unsafe.Pointer) (result int, tagCount uint32) {
+	defer runtime.KeepAlive(acl)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecACLGetAuthorizations == nil {
 		ebipurego.RegisterLibFunc(&_fnSecACLGetAuthorizations, _lib, "SecACLGetAuthorizations")
@@ -2852,6 +2906,7 @@ var _fnSecACLSetAuthorizations func(objc.ID, unsafe.Pointer, uint32) int32
 
 // SecACLSetAuthorizations calls the Security framework function SecACLSetAuthorizations.
 func SecACLSetAuthorizations(acl SecACLRef, tags unsafe.Pointer, tagCount uint32) int {
+	defer runtime.KeepAlive(acl)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecACLSetAuthorizations == nil {
 		ebipurego.RegisterLibFunc(&_fnSecACLSetAuthorizations, _lib, "SecACLSetAuthorizations")
@@ -2874,6 +2929,8 @@ var _fnSecAccessCopyMatchingACLList func(objc.ID, objc.ID) objc.ID
 
 // SecAccessCopyMatchingACLList calls the Security framework function SecAccessCopyMatchingACLList.
 func SecAccessCopyMatchingACLList(accessRef SecAccessRef, authorizationTag obj.Object) corefoundation.CFArrayRef {
+	defer runtime.KeepAlive(accessRef)
+	defer runtime.KeepAlive(authorizationTag)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecAccessCopyMatchingACLList == nil {
 		ebipurego.RegisterLibFunc(&_fnSecAccessCopyMatchingACLList, _lib, "SecAccessCopyMatchingACLList")
@@ -2886,6 +2943,7 @@ var _fnSecAccessCopyOwnerAndACL func(objc.ID, unsafe.Pointer, unsafe.Pointer, un
 
 // SecAccessCopyOwnerAndACL calls the Security framework function SecAccessCopyOwnerAndACL.
 func SecAccessCopyOwnerAndACL(accessRef SecAccessRef, aclList unsafe.Pointer) (result int, userId int, groupId int, ownerType int) {
+	defer runtime.KeepAlive(accessRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecAccessCopyOwnerAndACL == nil {
 		ebipurego.RegisterLibFunc(&_fnSecAccessCopyOwnerAndACL, _lib, "SecAccessCopyOwnerAndACL")
@@ -2912,6 +2970,7 @@ var _fnSecAccessGetOwnerAndACL func(objc.ID, unsafe.Pointer, unsafe.Pointer, uns
 
 // SecAccessGetOwnerAndACL calls the Security framework function SecAccessGetOwnerAndACL.
 func SecAccessGetOwnerAndACL(accessRef SecAccessRef, owner unsafe.Pointer, acls unsafe.Pointer) (result int, aclCount uint32) {
+	defer runtime.KeepAlive(accessRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecAccessGetOwnerAndACL == nil {
 		ebipurego.RegisterLibFunc(&_fnSecAccessGetOwnerAndACL, _lib, "SecAccessGetOwnerAndACL")
@@ -2936,6 +2995,9 @@ var _fnSecAddSharedWebCredential func(objc.ID, objc.ID, objc.ID, objc.Block)
 
 // SecAddSharedWebCredential calls the Security framework function SecAddSharedWebCredential.
 func SecAddSharedWebCredential(fqdn corefoundation.CFStringRef, account corefoundation.CFStringRef, password corefoundation.CFStringRef, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(fqdn)
+	defer runtime.KeepAlive(account)
+	defer runtime.KeepAlive(password)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecAddSharedWebCredential == nil {
 		ebipurego.RegisterLibFunc(&_fnSecAddSharedWebCredential, _lib, "SecAddSharedWebCredential")
@@ -2947,6 +3009,7 @@ var _fnSecCertificateCopyData func(objc.ID) objc.ID
 
 // SecCertificateCopyData calls the Security framework function SecCertificateCopyData.
 func SecCertificateCopyData(certificate SecCertificateRef) corefoundation.CFDataRef {
+	defer runtime.KeepAlive(certificate)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCertificateCopyData == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCertificateCopyData, _lib, "SecCertificateCopyData")
@@ -2959,6 +3022,7 @@ var _fnSecCertificateCopyKey func(objc.ID) objc.ID
 
 // SecCertificateCopyKey calls the Security framework function SecCertificateCopyKey.
 func SecCertificateCopyKey(certificate SecCertificateRef) SecKeyRef {
+	defer runtime.KeepAlive(certificate)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCertificateCopyKey == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCertificateCopyKey, _lib, "SecCertificateCopyKey")
@@ -2971,6 +3035,7 @@ var _fnSecCertificateCopyNormalizedIssuerSequence func(objc.ID) objc.ID
 
 // SecCertificateCopyNormalizedIssuerSequence calls the Security framework function SecCertificateCopyNormalizedIssuerSequence.
 func SecCertificateCopyNormalizedIssuerSequence(certificate SecCertificateRef) corefoundation.CFDataRef {
+	defer runtime.KeepAlive(certificate)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCertificateCopyNormalizedIssuerSequence == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCertificateCopyNormalizedIssuerSequence, _lib, "SecCertificateCopyNormalizedIssuerSequence")
@@ -2983,6 +3048,7 @@ var _fnSecCertificateCopyNormalizedSubjectSequence func(objc.ID) objc.ID
 
 // SecCertificateCopyNormalizedSubjectSequence calls the Security framework function SecCertificateCopyNormalizedSubjectSequence.
 func SecCertificateCopyNormalizedSubjectSequence(certificate SecCertificateRef) corefoundation.CFDataRef {
+	defer runtime.KeepAlive(certificate)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCertificateCopyNormalizedSubjectSequence == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCertificateCopyNormalizedSubjectSequence, _lib, "SecCertificateCopyNormalizedSubjectSequence")
@@ -2995,6 +3061,7 @@ var _fnSecCertificateCopyNotValidAfterDate func(objc.ID) objc.ID
 
 // SecCertificateCopyNotValidAfterDate calls the Security framework function SecCertificateCopyNotValidAfterDate.
 func SecCertificateCopyNotValidAfterDate(certificate SecCertificateRef) corefoundation.CFDateRef {
+	defer runtime.KeepAlive(certificate)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCertificateCopyNotValidAfterDate == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCertificateCopyNotValidAfterDate, _lib, "SecCertificateCopyNotValidAfterDate")
@@ -3007,6 +3074,7 @@ var _fnSecCertificateCopyNotValidBeforeDate func(objc.ID) objc.ID
 
 // SecCertificateCopyNotValidBeforeDate calls the Security framework function SecCertificateCopyNotValidBeforeDate.
 func SecCertificateCopyNotValidBeforeDate(certificate SecCertificateRef) corefoundation.CFDateRef {
+	defer runtime.KeepAlive(certificate)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCertificateCopyNotValidBeforeDate == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCertificateCopyNotValidBeforeDate, _lib, "SecCertificateCopyNotValidBeforeDate")
@@ -3019,6 +3087,8 @@ var _fnSecCertificateCopyPreferred func(objc.ID, objc.ID) objc.ID
 
 // SecCertificateCopyPreferred calls the Security framework function SecCertificateCopyPreferred.
 func SecCertificateCopyPreferred(name corefoundation.CFStringRef, keyUsage corefoundation.CFArrayRef) SecCertificateRef {
+	defer runtime.KeepAlive(name)
+	defer runtime.KeepAlive(keyUsage)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCertificateCopyPreferred == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCertificateCopyPreferred, _lib, "SecCertificateCopyPreferred")
@@ -3031,6 +3101,7 @@ var _fnSecCertificateCopySubjectSummary func(objc.ID) objc.ID
 
 // SecCertificateCopySubjectSummary calls the Security framework function SecCertificateCopySubjectSummary.
 func SecCertificateCopySubjectSummary(certificate SecCertificateRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(certificate)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCertificateCopySubjectSummary == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCertificateCopySubjectSummary, _lib, "SecCertificateCopySubjectSummary")
@@ -3054,6 +3125,8 @@ var _fnSecCertificateCreateWithData func(objc.ID, objc.ID) objc.ID
 
 // SecCertificateCreateWithData calls the Security framework function SecCertificateCreateWithData.
 func SecCertificateCreateWithData(allocator corefoundation.CFAllocatorRef, data corefoundation.CFDataRef) SecCertificateRef {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(data)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCertificateCreateWithData == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCertificateCreateWithData, _lib, "SecCertificateCreateWithData")
@@ -3066,6 +3139,7 @@ var _fnSecCertificateGetAlgorithmID func(objc.ID, unsafe.Pointer) int32
 
 // SecCertificateGetAlgorithmID calls the Security framework function SecCertificateGetAlgorithmID.
 func SecCertificateGetAlgorithmID(certificate SecCertificateRef, algid unsafe.Pointer) int {
+	defer runtime.KeepAlive(certificate)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCertificateGetAlgorithmID == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCertificateGetAlgorithmID, _lib, "SecCertificateGetAlgorithmID")
@@ -3077,6 +3151,7 @@ var _fnSecCertificateGetCLHandle func(objc.ID, unsafe.Pointer) int32
 
 // SecCertificateGetCLHandle calls the Security framework function SecCertificateGetCLHandle.
 func SecCertificateGetCLHandle(certificate SecCertificateRef) (result int, clHandle int) {
+	defer runtime.KeepAlive(certificate)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCertificateGetCLHandle == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCertificateGetCLHandle, _lib, "SecCertificateGetCLHandle")
@@ -3090,6 +3165,7 @@ var _fnSecCertificateGetData func(objc.ID, unsafe.Pointer) int32
 
 // SecCertificateGetData calls the Security framework function SecCertificateGetData.
 func SecCertificateGetData(certificate SecCertificateRef, data unsafe.Pointer) int {
+	defer runtime.KeepAlive(certificate)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCertificateGetData == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCertificateGetData, _lib, "SecCertificateGetData")
@@ -3101,6 +3177,7 @@ var _fnSecCertificateGetIssuer func(objc.ID, unsafe.Pointer) int32
 
 // SecCertificateGetIssuer calls the Security framework function SecCertificateGetIssuer.
 func SecCertificateGetIssuer(certificate SecCertificateRef, issuer unsafe.Pointer) int {
+	defer runtime.KeepAlive(certificate)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCertificateGetIssuer == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCertificateGetIssuer, _lib, "SecCertificateGetIssuer")
@@ -3112,6 +3189,7 @@ var _fnSecCertificateGetSubject func(objc.ID, unsafe.Pointer) int32
 
 // SecCertificateGetSubject calls the Security framework function SecCertificateGetSubject.
 func SecCertificateGetSubject(certificate SecCertificateRef, subject unsafe.Pointer) int {
+	defer runtime.KeepAlive(certificate)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCertificateGetSubject == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCertificateGetSubject, _lib, "SecCertificateGetSubject")
@@ -3123,6 +3201,7 @@ var _fnSecCertificateGetType func(objc.ID, unsafe.Pointer) int32
 
 // SecCertificateGetType calls the Security framework function SecCertificateGetType.
 func SecCertificateGetType(certificate SecCertificateRef) (result int, certificateType uint32) {
+	defer runtime.KeepAlive(certificate)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCertificateGetType == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCertificateGetType, _lib, "SecCertificateGetType")
@@ -3226,6 +3305,8 @@ var _fnSecHostCreateGuest func(int, uint32, objc.ID, objc.ID, SecCSFlags, unsafe
 
 // SecHostCreateGuest calls the Security framework function SecHostCreateGuest.
 func SecHostCreateGuest(host int, status uint32, path corefoundation.CFURLRef, attributes corefoundation.CFDictionaryRef, flags SecCSFlags) (result int, newGuest int) {
+	defer runtime.KeepAlive(path)
+	defer runtime.KeepAlive(attributes)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecHostCreateGuest == nil {
 		ebipurego.RegisterLibFunc(&_fnSecHostCreateGuest, _lib, "SecHostCreateGuest")
@@ -3252,6 +3333,9 @@ var _fnSecIdentityCopyPreferred func(objc.ID, objc.ID, objc.ID) objc.ID
 
 // SecIdentityCopyPreferred calls the Security framework function SecIdentityCopyPreferred.
 func SecIdentityCopyPreferred(name corefoundation.CFStringRef, keyUsage corefoundation.CFArrayRef, validIssuers corefoundation.CFArrayRef) SecIdentityRef {
+	defer runtime.KeepAlive(name)
+	defer runtime.KeepAlive(keyUsage)
+	defer runtime.KeepAlive(validIssuers)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecIdentityCopyPreferred == nil {
 		ebipurego.RegisterLibFunc(&_fnSecIdentityCopyPreferred, _lib, "SecIdentityCopyPreferred")
@@ -3264,6 +3348,9 @@ var _fnSecIdentityCreate func(objc.ID, objc.ID, objc.ID) objc.ID
 
 // SecIdentityCreate calls the Security framework function SecIdentityCreate.
 func SecIdentityCreate(allocator corefoundation.CFAllocatorRef, certificate SecCertificateRef, privateKey SecKeyRef) SecIdentityRef {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(certificate)
+	defer runtime.KeepAlive(privateKey)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecIdentityCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnSecIdentityCreate, _lib, "SecIdentityCreate")
@@ -3298,6 +3385,7 @@ var _fnSecItemExport func(objc.ID, SecExternalFormat, SecItemImportExportFlags, 
 
 // SecItemExport calls the Security framework function SecItemExport.
 func SecItemExport(secItemOrArray obj.Object, outputFormat SecExternalFormat, flags SecItemImportExportFlags, keyParams unsafe.Pointer, exportedData unsafe.Pointer) int {
+	defer runtime.KeepAlive(secItemOrArray)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecItemExport == nil {
 		ebipurego.RegisterLibFunc(&_fnSecItemExport, _lib, "SecItemExport")
@@ -3309,6 +3397,9 @@ var _fnSecItemImport func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer, SecI
 
 // SecItemImport calls the Security framework function SecItemImport.
 func SecItemImport(importedData corefoundation.CFDataRef, fileNameOrExtension corefoundation.CFStringRef, flags SecItemImportExportFlags, keyParams unsafe.Pointer, importKeychain SecKeychainRef, outItems unsafe.Pointer) (result int, inputFormat SecExternalFormat, itemType SecExternalItemType) {
+	defer runtime.KeepAlive(importedData)
+	defer runtime.KeepAlive(fileNameOrExtension)
+	defer runtime.KeepAlive(importKeychain)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecItemImport == nil {
 		ebipurego.RegisterLibFunc(&_fnSecItemImport, _lib, "SecItemImport")
@@ -3323,6 +3414,7 @@ var _fnSecKeyCopyAttributes func(objc.ID) objc.ID
 
 // SecKeyCopyAttributes calls the Security framework function SecKeyCopyAttributes.
 func SecKeyCopyAttributes(key SecKeyRef) corefoundation.CFDictionaryRef {
+	defer runtime.KeepAlive(key)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeyCopyAttributes == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeyCopyAttributes, _lib, "SecKeyCopyAttributes")
@@ -3335,6 +3427,7 @@ var _fnSecKeyCopyPublicKey func(objc.ID) objc.ID
 
 // SecKeyCopyPublicKey calls the Security framework function SecKeyCopyPublicKey.
 func SecKeyCopyPublicKey(key SecKeyRef) SecKeyRef {
+	defer runtime.KeepAlive(key)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeyCopyPublicKey == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeyCopyPublicKey, _lib, "SecKeyCopyPublicKey")
@@ -3347,6 +3440,7 @@ var _fnSecKeyGeneratePairAsync func(objc.ID, objc.ID, objc.Block)
 
 // SecKeyGeneratePairAsync calls the Security framework function SecKeyGeneratePairAsync.
 func SecKeyGeneratePairAsync(parameters corefoundation.CFDictionaryRef, deliveryQueue dispatch.Queue, result func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)) {
+	defer runtime.KeepAlive(parameters)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeyGeneratePairAsync == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeyGeneratePairAsync, _lib, "SecKeyGeneratePairAsync")
@@ -3358,6 +3452,7 @@ var _fnSecKeyGetBlockSize func(objc.ID) int
 
 // SecKeyGetBlockSize calls the Security framework function SecKeyGetBlockSize.
 func SecKeyGetBlockSize(key SecKeyRef) int {
+	defer runtime.KeepAlive(key)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeyGetBlockSize == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeyGetBlockSize, _lib, "SecKeyGetBlockSize")
@@ -3369,6 +3464,7 @@ var _fnSecKeyGetCSPHandle func(objc.ID, unsafe.Pointer) int32
 
 // SecKeyGetCSPHandle calls the Security framework function SecKeyGetCSPHandle.
 func SecKeyGetCSPHandle(keyRef SecKeyRef) (result int, cspHandle int) {
+	defer runtime.KeepAlive(keyRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeyGetCSPHandle == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeyGetCSPHandle, _lib, "SecKeyGetCSPHandle")
@@ -3382,6 +3478,7 @@ var _fnSecKeyGetCSSMKey func(objc.ID, unsafe.Pointer) int32
 
 // SecKeyGetCSSMKey calls the Security framework function SecKeyGetCSSMKey.
 func SecKeyGetCSSMKey(key SecKeyRef, cssmKey unsafe.Pointer) int {
+	defer runtime.KeepAlive(key)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeyGetCSSMKey == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeyGetCSSMKey, _lib, "SecKeyGetCSSMKey")
@@ -3393,6 +3490,7 @@ var _fnSecKeyGetCredentials func(objc.ID, int32, SecCredentialType, unsafe.Point
 
 // SecKeyGetCredentials calls the Security framework function SecKeyGetCredentials.
 func SecKeyGetCredentials(keyRef SecKeyRef, operation int32, credentialType SecCredentialType, outCredentials unsafe.Pointer) int {
+	defer runtime.KeepAlive(keyRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeyGetCredentials == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeyGetCredentials, _lib, "SecKeyGetCredentials")
@@ -3415,6 +3513,7 @@ var _fnSecKeyIsAlgorithmSupported func(objc.ID, SecKeyOperationType, unsafe.Poin
 
 // SecKeyIsAlgorithmSupported calls the Security framework function SecKeyIsAlgorithmSupported.
 func SecKeyIsAlgorithmSupported(key SecKeyRef, operation SecKeyOperationType, algorithm unsafe.Pointer) uint8 {
+	defer runtime.KeepAlive(key)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeyIsAlgorithmSupported == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeyIsAlgorithmSupported, _lib, "SecKeyIsAlgorithmSupported")
@@ -3426,6 +3525,7 @@ var _fnSecKeychainAttributeInfoForItemID func(objc.ID, int, unsafe.Pointer) int3
 
 // SecKeychainAttributeInfoForItemID calls the Security framework function SecKeychainAttributeInfoForItemID.
 func SecKeychainAttributeInfoForItemID(keychain SecKeychainRef, itemID int, info unsafe.Pointer) int {
+	defer runtime.KeepAlive(keychain)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainAttributeInfoForItemID == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainAttributeInfoForItemID, _lib, "SecKeychainAttributeInfoForItemID")
@@ -3437,6 +3537,7 @@ var _fnSecKeychainFindGenericPassword func(objc.ID, int, string, int, string, un
 
 // SecKeychainFindGenericPassword calls the Security framework function SecKeychainFindGenericPassword.
 func SecKeychainFindGenericPassword(keychainOrArray obj.Object, serviceNameLength int, serviceName string, accountNameLength int, accountName string, passwordData unsafe.Pointer, itemRef unsafe.Pointer) (result int, passwordLength int) {
+	defer runtime.KeepAlive(keychainOrArray)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainFindGenericPassword == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainFindGenericPassword, _lib, "SecKeychainFindGenericPassword")
@@ -3450,6 +3551,7 @@ var _fnSecKeychainFindInternetPassword func(objc.ID, int, string, int, string, i
 
 // SecKeychainFindInternetPassword calls the Security framework function SecKeychainFindInternetPassword.
 func SecKeychainFindInternetPassword(keychainOrArray obj.Object, serverNameLength int, serverName string, securityDomainLength int, securityDomain string, accountNameLength int, accountName string, pathLength int, path string, port uint16, protocol SecProtocolType, authenticationType SecAuthenticationType, passwordData unsafe.Pointer, itemRef unsafe.Pointer) (result int, passwordLength int) {
+	defer runtime.KeepAlive(keychainOrArray)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainFindInternetPassword == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainFindInternetPassword, _lib, "SecKeychainFindInternetPassword")
@@ -3474,6 +3576,7 @@ var _fnSecKeychainGetCSPHandle func(objc.ID, unsafe.Pointer) int32
 
 // SecKeychainGetCSPHandle calls the Security framework function SecKeychainGetCSPHandle.
 func SecKeychainGetCSPHandle(keychain SecKeychainRef) (result int, cspHandle int) {
+	defer runtime.KeepAlive(keychain)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainGetCSPHandle == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainGetCSPHandle, _lib, "SecKeychainGetCSPHandle")
@@ -3487,6 +3590,7 @@ var _fnSecKeychainGetPath func(objc.ID, unsafe.Pointer, string) int32
 
 // SecKeychainGetPath calls the Security framework function SecKeychainGetPath.
 func SecKeychainGetPath(keychain SecKeychainRef, pathName string) (result int, ioPathLength int) {
+	defer runtime.KeepAlive(keychain)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainGetPath == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainGetPath, _lib, "SecKeychainGetPath")
@@ -3513,6 +3617,7 @@ var _fnSecKeychainGetStatus func(objc.ID, unsafe.Pointer) int32
 
 // SecKeychainGetStatus calls the Security framework function SecKeychainGetStatus.
 func SecKeychainGetStatus(keychain SecKeychainRef) (result int, keychainStatus int) {
+	defer runtime.KeepAlive(keychain)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainGetStatus == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainGetStatus, _lib, "SecKeychainGetStatus")
@@ -3563,6 +3668,7 @@ var _fnSecKeychainItemCopyAttributesAndData func(objc.ID, unsafe.Pointer, unsafe
 
 // SecKeychainItemCopyAttributesAndData calls the Security framework function SecKeychainItemCopyAttributesAndData.
 func SecKeychainItemCopyAttributesAndData(itemRef SecKeychainItemRef, info unsafe.Pointer, attrList unsafe.Pointer, outData unsafe.Pointer) (result int, itemClass SecItemClass, length int) {
+	defer runtime.KeepAlive(itemRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainItemCopyAttributesAndData == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainItemCopyAttributesAndData, _lib, "SecKeychainItemCopyAttributesAndData")
@@ -3577,6 +3683,7 @@ var _fnSecKeychainItemCopyContent func(objc.ID, unsafe.Pointer, unsafe.Pointer, 
 
 // SecKeychainItemCopyContent calls the Security framework function SecKeychainItemCopyContent.
 func SecKeychainItemCopyContent(itemRef SecKeychainItemRef, attrList unsafe.Pointer, outData unsafe.Pointer) (result int, itemClass SecItemClass, length int) {
+	defer runtime.KeepAlive(itemRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainItemCopyContent == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainItemCopyContent, _lib, "SecKeychainItemCopyContent")
@@ -3591,6 +3698,8 @@ var _fnSecKeychainItemCreateFromContent func(SecItemClass, unsafe.Pointer, int, 
 
 // SecKeychainItemCreateFromContent calls the Security framework function SecKeychainItemCreateFromContent.
 func SecKeychainItemCreateFromContent(itemClass SecItemClass, attrList unsafe.Pointer, length int, data unsafe.Pointer, keychainRef SecKeychainRef, initialAccess SecAccessRef, itemRef unsafe.Pointer) int {
+	defer runtime.KeepAlive(keychainRef)
+	defer runtime.KeepAlive(initialAccess)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainItemCreateFromContent == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainItemCreateFromContent, _lib, "SecKeychainItemCreateFromContent")
@@ -3602,6 +3711,7 @@ var _fnSecKeychainItemExport func(objc.ID, SecExternalFormat, SecItemImportExpor
 
 // SecKeychainItemExport calls the Security framework function SecKeychainItemExport.
 func SecKeychainItemExport(keychainItemOrArray obj.Object, outputFormat SecExternalFormat, flags SecItemImportExportFlags, keyParams unsafe.Pointer, exportedData unsafe.Pointer) int {
+	defer runtime.KeepAlive(keychainItemOrArray)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainItemExport == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainItemExport, _lib, "SecKeychainItemExport")
@@ -3646,6 +3756,7 @@ var _fnSecKeychainItemGetUniqueRecordID func(objc.ID, unsafe.Pointer) int32
 
 // SecKeychainItemGetUniqueRecordID calls the Security framework function SecKeychainItemGetUniqueRecordID.
 func SecKeychainItemGetUniqueRecordID(itemRef SecKeychainItemRef, uniqueRecordID unsafe.Pointer) int {
+	defer runtime.KeepAlive(itemRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainItemGetUniqueRecordID == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainItemGetUniqueRecordID, _lib, "SecKeychainItemGetUniqueRecordID")
@@ -3657,6 +3768,9 @@ var _fnSecKeychainItemImport func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Point
 
 // SecKeychainItemImport calls the Security framework function SecKeychainItemImport.
 func SecKeychainItemImport(importedData corefoundation.CFDataRef, fileNameOrExtension corefoundation.CFStringRef, flags SecItemImportExportFlags, keyParams unsafe.Pointer, importKeychain SecKeychainRef, outItems unsafe.Pointer) (result int, inputFormat SecExternalFormat, itemType SecExternalItemType) {
+	defer runtime.KeepAlive(importedData)
+	defer runtime.KeepAlive(fileNameOrExtension)
+	defer runtime.KeepAlive(importKeychain)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainItemImport == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainItemImport, _lib, "SecKeychainItemImport")
@@ -3671,6 +3785,7 @@ var _fnSecKeychainItemModifyAttributesAndData func(objc.ID, unsafe.Pointer, int,
 
 // SecKeychainItemModifyAttributesAndData calls the Security framework function SecKeychainItemModifyAttributesAndData.
 func SecKeychainItemModifyAttributesAndData(itemRef SecKeychainItemRef, attrList unsafe.Pointer, length int, data unsafe.Pointer) int {
+	defer runtime.KeepAlive(itemRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainItemModifyAttributesAndData == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainItemModifyAttributesAndData, _lib, "SecKeychainItemModifyAttributesAndData")
@@ -3682,6 +3797,7 @@ var _fnSecKeychainItemModifyContent func(objc.ID, unsafe.Pointer, int, unsafe.Po
 
 // SecKeychainItemModifyContent calls the Security framework function SecKeychainItemModifyContent.
 func SecKeychainItemModifyContent(itemRef SecKeychainItemRef, attrList unsafe.Pointer, length int, data unsafe.Pointer) int {
+	defer runtime.KeepAlive(itemRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainItemModifyContent == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainItemModifyContent, _lib, "SecKeychainItemModifyContent")
@@ -3693,6 +3809,7 @@ var _fnSecKeychainSearchCreateFromAttributes func(objc.ID, SecItemClass, unsafe.
 
 // SecKeychainSearchCreateFromAttributes calls the Security framework function SecKeychainSearchCreateFromAttributes.
 func SecKeychainSearchCreateFromAttributes(keychainOrArray obj.Object, itemClass SecItemClass, attrList unsafe.Pointer, searchRef unsafe.Pointer) int {
+	defer runtime.KeepAlive(keychainOrArray)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainSearchCreateFromAttributes == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainSearchCreateFromAttributes, _lib, "SecKeychainSearchCreateFromAttributes")
@@ -3715,6 +3832,7 @@ var _fnSecPolicyCopyProperties func(objc.ID) objc.ID
 
 // SecPolicyCopyProperties calls the Security framework function SecPolicyCopyProperties.
 func SecPolicyCopyProperties(policyRef SecPolicyRef) corefoundation.CFDictionaryRef {
+	defer runtime.KeepAlive(policyRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecPolicyCopyProperties == nil {
 		ebipurego.RegisterLibFunc(&_fnSecPolicyCopyProperties, _lib, "SecPolicyCopyProperties")
@@ -3751,6 +3869,7 @@ var _fnSecPolicyCreateSSL func(uint8, objc.ID) objc.ID
 
 // SecPolicyCreateSSL calls the Security framework function SecPolicyCreateSSL.
 func SecPolicyCreateSSL(server uint8, hostname corefoundation.CFStringRef) SecPolicyRef {
+	defer runtime.KeepAlive(hostname)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecPolicyCreateSSL == nil {
 		ebipurego.RegisterLibFunc(&_fnSecPolicyCreateSSL, _lib, "SecPolicyCreateSSL")
@@ -3763,6 +3882,7 @@ var _fnSecPolicyCreateWithOID func(objc.ID) objc.ID
 
 // SecPolicyCreateWithOID calls the Security framework function SecPolicyCreateWithOID.
 func SecPolicyCreateWithOID(policyOID obj.Object) SecPolicyRef {
+	defer runtime.KeepAlive(policyOID)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecPolicyCreateWithOID == nil {
 		ebipurego.RegisterLibFunc(&_fnSecPolicyCreateWithOID, _lib, "SecPolicyCreateWithOID")
@@ -3775,6 +3895,8 @@ var _fnSecPolicyCreateWithProperties func(objc.ID, objc.ID) objc.ID
 
 // SecPolicyCreateWithProperties calls the Security framework function SecPolicyCreateWithProperties.
 func SecPolicyCreateWithProperties(policyIdentifier obj.Object, properties corefoundation.CFDictionaryRef) SecPolicyRef {
+	defer runtime.KeepAlive(policyIdentifier)
+	defer runtime.KeepAlive(properties)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecPolicyCreateWithProperties == nil {
 		ebipurego.RegisterLibFunc(&_fnSecPolicyCreateWithProperties, _lib, "SecPolicyCreateWithProperties")
@@ -3787,6 +3909,7 @@ var _fnSecPolicyGetOID func(objc.ID, unsafe.Pointer) int32
 
 // SecPolicyGetOID calls the Security framework function SecPolicyGetOID.
 func SecPolicyGetOID(policyRef SecPolicyRef, oid unsafe.Pointer) int {
+	defer runtime.KeepAlive(policyRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecPolicyGetOID == nil {
 		ebipurego.RegisterLibFunc(&_fnSecPolicyGetOID, _lib, "SecPolicyGetOID")
@@ -3798,6 +3921,7 @@ var _fnSecPolicyGetTPHandle func(objc.ID, unsafe.Pointer) int32
 
 // SecPolicyGetTPHandle calls the Security framework function SecPolicyGetTPHandle.
 func SecPolicyGetTPHandle(policyRef SecPolicyRef) (result int, tpHandle int) {
+	defer runtime.KeepAlive(policyRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecPolicyGetTPHandle == nil {
 		ebipurego.RegisterLibFunc(&_fnSecPolicyGetTPHandle, _lib, "SecPolicyGetTPHandle")
@@ -3822,6 +3946,7 @@ var _fnSecPolicyGetValue func(objc.ID, unsafe.Pointer) int32
 
 // SecPolicyGetValue calls the Security framework function SecPolicyGetValue.
 func SecPolicyGetValue(policyRef SecPolicyRef, value unsafe.Pointer) int {
+	defer runtime.KeepAlive(policyRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecPolicyGetValue == nil {
 		ebipurego.RegisterLibFunc(&_fnSecPolicyGetValue, _lib, "SecPolicyGetValue")
@@ -3855,6 +3980,7 @@ var _fnSecPolicySetValue func(objc.ID, unsafe.Pointer) int32
 
 // SecPolicySetValue calls the Security framework function SecPolicySetValue.
 func SecPolicySetValue(policyRef SecPolicyRef, value unsafe.Pointer) int {
+	defer runtime.KeepAlive(policyRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecPolicySetValue == nil {
 		ebipurego.RegisterLibFunc(&_fnSecPolicySetValue, _lib, "SecPolicySetValue")
@@ -3866,6 +3992,7 @@ var _fnSecRandomCopyBytes func(objc.ID, int, unsafe.Pointer) int32
 
 // SecRandomCopyBytes calls the Security framework function SecRandomCopyBytes.
 func SecRandomCopyBytes(rnd SecRandomRef, count int, data unsafe.Pointer) int {
+	defer runtime.KeepAlive(rnd)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecRandomCopyBytes == nil {
 		ebipurego.RegisterLibFunc(&_fnSecRandomCopyBytes, _lib, "SecRandomCopyBytes")
@@ -3877,6 +4004,8 @@ var _fnSecRequestSharedWebCredential func(objc.ID, objc.ID, objc.Block)
 
 // SecRequestSharedWebCredential calls the Security framework function SecRequestSharedWebCredential.
 func SecRequestSharedWebCredential(fqdn corefoundation.CFStringRef, account corefoundation.CFStringRef, completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
+	defer runtime.KeepAlive(fqdn)
+	defer runtime.KeepAlive(account)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecRequestSharedWebCredential == nil {
 		ebipurego.RegisterLibFunc(&_fnSecRequestSharedWebCredential, _lib, "SecRequestSharedWebCredential")
@@ -3910,6 +4039,7 @@ var _fnSecTaskCreateFromSelf func(objc.ID) objc.ID
 
 // SecTaskCreateFromSelf calls the Security framework function SecTaskCreateFromSelf.
 func SecTaskCreateFromSelf(allocator corefoundation.CFAllocatorRef) SecTaskRef {
+	defer runtime.KeepAlive(allocator)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTaskCreateFromSelf == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTaskCreateFromSelf, _lib, "SecTaskCreateFromSelf")
@@ -3922,6 +4052,7 @@ var _fnSecTaskCreateWithAuditToken func(objc.ID, AuditTokenT) objc.ID
 
 // SecTaskCreateWithAuditToken calls the Security framework function SecTaskCreateWithAuditToken.
 func SecTaskCreateWithAuditToken(allocator corefoundation.CFAllocatorRef, token AuditTokenT) SecTaskRef {
+	defer runtime.KeepAlive(allocator)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTaskCreateWithAuditToken == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTaskCreateWithAuditToken, _lib, "SecTaskCreateWithAuditToken")
@@ -3945,6 +4076,7 @@ var _fnSecTranformCustomGetAttribute func(objc.ID, unsafe.Pointer, SecTransformM
 
 // SecTranformCustomGetAttribute calls the Security framework function SecTranformCustomGetAttribute.
 func SecTranformCustomGetAttribute(ref SecTransformImplementationRef, attribute unsafe.Pointer, type_ SecTransformMetaAttributeType) obj.Object {
+	defer runtime.KeepAlive(ref)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTranformCustomGetAttribute == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTranformCustomGetAttribute, _lib, "SecTranformCustomGetAttribute")
@@ -3980,6 +4112,7 @@ var _fnSecTransformCreateReadTransformWithReadStream func(objc.ID) unsafe.Pointe
 
 // SecTransformCreateReadTransformWithReadStream calls the Security framework function SecTransformCreateReadTransformWithReadStream.
 func SecTransformCreateReadTransformWithReadStream(inputStream corefoundation.CFReadStreamRef) unsafe.Pointer {
+	defer runtime.KeepAlive(inputStream)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTransformCreateReadTransformWithReadStream == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTransformCreateReadTransformWithReadStream, _lib, "SecTransformCreateReadTransformWithReadStream")
@@ -3991,6 +4124,7 @@ var _fnSecTransformCustomGetAttribute func(objc.ID, unsafe.Pointer, SecTransform
 
 // SecTransformCustomGetAttribute calls the Security framework function SecTransformCustomGetAttribute.
 func SecTransformCustomGetAttribute(ref SecTransformImplementationRef, attribute unsafe.Pointer, type_ SecTransformMetaAttributeType) obj.Object {
+	defer runtime.KeepAlive(ref)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTransformCustomGetAttribute == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTransformCustomGetAttribute, _lib, "SecTranformCustomGetAttribute")
@@ -4003,6 +4137,8 @@ var _fnSecTransformCustomSetAttribute func(objc.ID, unsafe.Pointer, SecTransform
 
 // SecTransformCustomSetAttribute calls the Security framework function SecTransformCustomSetAttribute.
 func SecTransformCustomSetAttribute(ref SecTransformImplementationRef, attribute unsafe.Pointer, type_ SecTransformMetaAttributeType, value obj.Object) obj.Object {
+	defer runtime.KeepAlive(ref)
+	defer runtime.KeepAlive(value)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTransformCustomSetAttribute == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTransformCustomSetAttribute, _lib, "SecTransformCustomSetAttribute")
@@ -4026,6 +4162,7 @@ var _fnSecTransformFindByName func(unsafe.Pointer, objc.ID) unsafe.Pointer
 
 // SecTransformFindByName calls the Security framework function SecTransformFindByName.
 func SecTransformFindByName(transform unsafe.Pointer, name corefoundation.CFStringRef) unsafe.Pointer {
+	defer runtime.KeepAlive(name)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTransformFindByName == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTransformFindByName, _lib, "SecTransformFindByName")
@@ -4037,6 +4174,7 @@ var _fnSecTransformGetAttribute func(unsafe.Pointer, objc.ID) objc.ID
 
 // SecTransformGetAttribute calls the Security framework function SecTransformGetAttribute.
 func SecTransformGetAttribute(transformRef unsafe.Pointer, key corefoundation.CFStringRef) obj.Object {
+	defer runtime.KeepAlive(key)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTransformGetAttribute == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTransformGetAttribute, _lib, "SecTransformGetAttribute")
@@ -4072,6 +4210,8 @@ var _fnSecTransformPushbackAttribute func(objc.ID, unsafe.Pointer, objc.ID) objc
 
 // SecTransformPushbackAttribute calls the Security framework function SecTransformPushbackAttribute.
 func SecTransformPushbackAttribute(ref SecTransformImplementationRef, attribute unsafe.Pointer, value obj.Object) obj.Object {
+	defer runtime.KeepAlive(ref)
+	defer runtime.KeepAlive(value)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTransformPushbackAttribute == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTransformPushbackAttribute, _lib, "SecTransformPushbackAttribute")
@@ -4084,6 +4224,8 @@ var _fnSecTransformSetAttributeAction func(objc.ID, objc.ID, unsafe.Pointer, obj
 
 // SecTransformSetAttributeAction calls the Security framework function SecTransformSetAttributeAction.
 func SecTransformSetAttributeAction(ref SecTransformImplementationRef, action corefoundation.CFStringRef, attribute unsafe.Pointer, newAction func(unsafe.Pointer, unsafe.Pointer) int) corefoundation.CFErrorRef {
+	defer runtime.KeepAlive(ref)
+	defer runtime.KeepAlive(action)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTransformSetAttributeAction == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTransformSetAttributeAction, _lib, "SecTransformSetAttributeAction")
@@ -4096,6 +4238,8 @@ var _fnSecTransformSetDataAction func(objc.ID, objc.ID, objc.Block) objc.ID
 
 // SecTransformSetDataAction calls the Security framework function SecTransformSetDataAction.
 func SecTransformSetDataAction(ref SecTransformImplementationRef, action corefoundation.CFStringRef, newAction func(unsafe.Pointer) int) corefoundation.CFErrorRef {
+	defer runtime.KeepAlive(ref)
+	defer runtime.KeepAlive(action)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTransformSetDataAction == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTransformSetDataAction, _lib, "SecTransformSetDataAction")
@@ -4108,6 +4252,8 @@ var _fnSecTransformSetTransformAction func(objc.ID, objc.ID, objc.Block) objc.ID
 
 // SecTransformSetTransformAction calls the Security framework function SecTransformSetTransformAction.
 func SecTransformSetTransformAction(ref SecTransformImplementationRef, action corefoundation.CFStringRef, newAction func() int) corefoundation.CFErrorRef {
+	defer runtime.KeepAlive(ref)
+	defer runtime.KeepAlive(action)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTransformSetTransformAction == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTransformSetTransformAction, _lib, "SecTransformSetTransformAction")
@@ -4120,6 +4266,7 @@ var _fnSecTrustCopyCertificateChain func(objc.ID) objc.ID
 
 // SecTrustCopyCertificateChain calls the Security framework function SecTrustCopyCertificateChain.
 func SecTrustCopyCertificateChain(trust SecTrustRef) corefoundation.CFArrayRef {
+	defer runtime.KeepAlive(trust)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustCopyCertificateChain == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustCopyCertificateChain, _lib, "SecTrustCopyCertificateChain")
@@ -4132,6 +4279,7 @@ var _fnSecTrustCopyExceptions func(objc.ID) objc.ID
 
 // SecTrustCopyExceptions calls the Security framework function SecTrustCopyExceptions.
 func SecTrustCopyExceptions(trust SecTrustRef) corefoundation.CFDataRef {
+	defer runtime.KeepAlive(trust)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustCopyExceptions == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustCopyExceptions, _lib, "SecTrustCopyExceptions")
@@ -4144,6 +4292,7 @@ var _fnSecTrustCopyKey func(objc.ID) objc.ID
 
 // SecTrustCopyKey calls the Security framework function SecTrustCopyKey.
 func SecTrustCopyKey(trust SecTrustRef) SecKeyRef {
+	defer runtime.KeepAlive(trust)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustCopyKey == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustCopyKey, _lib, "SecTrustCopyKey")
@@ -4156,6 +4305,7 @@ var _fnSecTrustCopyProperties func(objc.ID) objc.ID
 
 // SecTrustCopyProperties calls the Security framework function SecTrustCopyProperties.
 func SecTrustCopyProperties(trust SecTrustRef) corefoundation.CFArrayRef {
+	defer runtime.KeepAlive(trust)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustCopyProperties == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustCopyProperties, _lib, "SecTrustCopyProperties")
@@ -4168,6 +4318,7 @@ var _fnSecTrustCopyPublicKey func(objc.ID) objc.ID
 
 // SecTrustCopyPublicKey calls the Security framework function SecTrustCopyPublicKey.
 func SecTrustCopyPublicKey(trust SecTrustRef) SecKeyRef {
+	defer runtime.KeepAlive(trust)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustCopyPublicKey == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustCopyPublicKey, _lib, "SecTrustCopyPublicKey")
@@ -4180,6 +4331,7 @@ var _fnSecTrustCopyResult func(objc.ID) objc.ID
 
 // SecTrustCopyResult calls the Security framework function SecTrustCopyResult.
 func SecTrustCopyResult(trust SecTrustRef) corefoundation.CFDictionaryRef {
+	defer runtime.KeepAlive(trust)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustCopyResult == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustCopyResult, _lib, "SecTrustCopyResult")
@@ -4192,6 +4344,7 @@ var _fnSecTrustEvaluate func(objc.ID, unsafe.Pointer) int32
 
 // SecTrustEvaluate calls the Security framework function SecTrustEvaluate.
 func SecTrustEvaluate(trust SecTrustRef) (result int, result_ SecTrustResultType) {
+	defer runtime.KeepAlive(trust)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustEvaluate == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustEvaluate, _lib, "SecTrustEvaluate")
@@ -4205,6 +4358,7 @@ var _fnSecTrustGetCertificateAtIndex func(objc.ID, int) objc.ID
 
 // SecTrustGetCertificateAtIndex calls the Security framework function SecTrustGetCertificateAtIndex.
 func SecTrustGetCertificateAtIndex(trust SecTrustRef, ix int) SecCertificateRef {
+	defer runtime.KeepAlive(trust)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustGetCertificateAtIndex == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustGetCertificateAtIndex, _lib, "SecTrustGetCertificateAtIndex")
@@ -4217,6 +4371,7 @@ var _fnSecTrustGetCertificateCount func(objc.ID) int
 
 // SecTrustGetCertificateCount calls the Security framework function SecTrustGetCertificateCount.
 func SecTrustGetCertificateCount(trust SecTrustRef) int {
+	defer runtime.KeepAlive(trust)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustGetCertificateCount == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustGetCertificateCount, _lib, "SecTrustGetCertificateCount")
@@ -4228,6 +4383,7 @@ var _fnSecTrustGetCssmResult func(objc.ID, unsafe.Pointer) int32
 
 // SecTrustGetCssmResult calls the Security framework function SecTrustGetCssmResult.
 func SecTrustGetCssmResult(trust SecTrustRef, result unsafe.Pointer) int {
+	defer runtime.KeepAlive(trust)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustGetCssmResult == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustGetCssmResult, _lib, "SecTrustGetCssmResult")
@@ -4239,6 +4395,7 @@ var _fnSecTrustGetCssmResultCode func(objc.ID, unsafe.Pointer) int32
 
 // SecTrustGetCssmResultCode calls the Security framework function SecTrustGetCssmResultCode.
 func SecTrustGetCssmResultCode(trust SecTrustRef) (result int, resultCode int) {
+	defer runtime.KeepAlive(trust)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustGetCssmResultCode == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustGetCssmResultCode, _lib, "SecTrustGetCssmResultCode")
@@ -4252,6 +4409,7 @@ var _fnSecTrustGetNetworkFetchAllowed func(objc.ID, unsafe.Pointer) int32
 
 // SecTrustGetNetworkFetchAllowed calls the Security framework function SecTrustGetNetworkFetchAllowed.
 func SecTrustGetNetworkFetchAllowed(trust SecTrustRef) (result int, allowFetch uint8) {
+	defer runtime.KeepAlive(trust)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustGetNetworkFetchAllowed == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustGetNetworkFetchAllowed, _lib, "SecTrustGetNetworkFetchAllowed")
@@ -4265,6 +4423,7 @@ var _fnSecTrustGetResult func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Po
 
 // SecTrustGetResult calls the Security framework function SecTrustGetResult.
 func SecTrustGetResult(trustRef SecTrustRef, certChain unsafe.Pointer, statusChain unsafe.Pointer) (result int, result_ SecTrustResultType) {
+	defer runtime.KeepAlive(trustRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustGetResult == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustGetResult, _lib, "SecTrustGetResult")
@@ -4278,6 +4437,7 @@ var _fnSecTrustGetTPHandle func(objc.ID, unsafe.Pointer) int32
 
 // SecTrustGetTPHandle calls the Security framework function SecTrustGetTPHandle.
 func SecTrustGetTPHandle(trust SecTrustRef) (result int, handle int) {
+	defer runtime.KeepAlive(trust)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustGetTPHandle == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustGetTPHandle, _lib, "SecTrustGetTPHandle")
@@ -4291,6 +4451,7 @@ var _fnSecTrustGetTrustResult func(objc.ID, unsafe.Pointer) int32
 
 // SecTrustGetTrustResult calls the Security framework function SecTrustGetTrustResult.
 func SecTrustGetTrustResult(trust SecTrustRef) (result int, result_ SecTrustResultType) {
+	defer runtime.KeepAlive(trust)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustGetTrustResult == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustGetTrustResult, _lib, "SecTrustGetTrustResult")
@@ -4315,6 +4476,7 @@ var _fnSecTrustGetVerifyTime func(objc.ID) float64
 
 // SecTrustGetVerifyTime calls the Security framework function SecTrustGetVerifyTime.
 func SecTrustGetVerifyTime(trust SecTrustRef) float64 {
+	defer runtime.KeepAlive(trust)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustGetVerifyTime == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustGetVerifyTime, _lib, "SecTrustGetVerifyTime")
@@ -4326,6 +4488,8 @@ var _fnSecTrustSetExceptions func(objc.ID, objc.ID) bool
 
 // SecTrustSetExceptions calls the Security framework function SecTrustSetExceptions.
 func SecTrustSetExceptions(trust SecTrustRef, exceptions corefoundation.CFDataRef) bool {
+	defer runtime.KeepAlive(trust)
+	defer runtime.KeepAlive(exceptions)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustSetExceptions == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustSetExceptions, _lib, "SecTrustSetExceptions")
@@ -4409,6 +4573,7 @@ var _fnSecCertificateCreate func(objc.ID) unsafe.Pointer
 
 // SecCertificateCreate calls the Security framework function sec_certificate_create.
 func SecCertificateCreate(certificate SecCertificateRef) unsafe.Pointer {
+	defer runtime.KeepAlive(certificate)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCertificateCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCertificateCreate, _lib, "sec_certificate_create")
@@ -4455,6 +4620,8 @@ var _fnSecIdentityCreateWithCertificates func(objc.ID, objc.ID) unsafe.Pointer
 
 // SecIdentityCreateWithCertificates calls the Security framework function sec_identity_create_with_certificates.
 func SecIdentityCreateWithCertificates(identity SecIdentityRef, certificates corefoundation.CFArrayRef) unsafe.Pointer {
+	defer runtime.KeepAlive(identity)
+	defer runtime.KeepAlive(certificates)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecIdentityCreateWithCertificates == nil {
 		ebipurego.RegisterLibFunc(&_fnSecIdentityCreateWithCertificates, _lib, "sec_identity_create_with_certificates")
@@ -5050,6 +5217,7 @@ var _fnSecTrustCreate func(objc.ID) unsafe.Pointer
 
 // SecTrustCreate calls the Security framework function sec_trust_create.
 func SecTrustCreate(trust SecTrustRef) unsafe.Pointer {
+	defer runtime.KeepAlive(trust)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustCreate, _lib, "sec_trust_create")

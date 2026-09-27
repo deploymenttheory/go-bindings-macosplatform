@@ -5,6 +5,7 @@
 package iobluetoothui
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
@@ -39,6 +40,8 @@ var _fnIOBluetoothValidateHardwareWithDescription func(objc.ID, objc.ID) int32
 
 // IOBluetoothValidateHardwareWithDescription calls the IOBluetoothUI framework function IOBluetoothValidateHardwareWithDescription.
 func IOBluetoothValidateHardwareWithDescription(cancelButtonTitle corefoundation.CFStringRef, descriptionText corefoundation.CFStringRef) int {
+	defer runtime.KeepAlive(cancelButtonTitle)
+	defer runtime.KeepAlive(descriptionText)
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOBluetoothValidateHardwareWithDescription == nil {
 		ebipurego.RegisterLibFunc(&_fnIOBluetoothValidateHardwareWithDescription, _lib, "IOBluetoothValidateHardwareWithDescription")

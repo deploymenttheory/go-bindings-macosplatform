@@ -5,6 +5,7 @@
 package discrecording
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
@@ -30,6 +31,7 @@ var _fnDRAudioTrackCreateWithURL func(objc.ID) unsafe.Pointer
 
 // DRAudioTrackCreateWithURL calls the DiscRecording framework function DRAudioTrackCreateWithURL.
 func DRAudioTrackCreateWithURL(audioFileURL corefoundation.CFURLRef) unsafe.Pointer {
+	defer runtime.KeepAlive(audioFileURL)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRAudioTrackCreateWithURL == nil {
 		ebipurego.RegisterLibFunc(&_fnDRAudioTrackCreateWithURL, _lib, "DRAudioTrackCreateWithURL")
@@ -41,6 +43,7 @@ var _fnDRBurnAbort func(objc.ID)
 
 // DRBurnAbort calls the DiscRecording framework function DRBurnAbort.
 func DRBurnAbort(burn DRBurnRef) {
+	defer runtime.KeepAlive(burn)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRBurnAbort == nil {
 		ebipurego.RegisterLibFunc(&_fnDRBurnAbort, _lib, "DRBurnAbort")
@@ -52,6 +55,7 @@ var _fnDRBurnCopyStatus func(objc.ID) objc.ID
 
 // DRBurnCopyStatus calls the DiscRecording framework function DRBurnCopyStatus.
 func DRBurnCopyStatus(burn DRBurnRef) corefoundation.CFDictionaryRef {
+	defer runtime.KeepAlive(burn)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRBurnCopyStatus == nil {
 		ebipurego.RegisterLibFunc(&_fnDRBurnCopyStatus, _lib, "DRBurnCopyStatus")
@@ -64,6 +68,7 @@ var _fnDRBurnCreate func(objc.ID) objc.ID
 
 // DRBurnCreate calls the DiscRecording framework function DRBurnCreate.
 func DRBurnCreate(device DRDeviceRef) DRBurnRef {
+	defer runtime.KeepAlive(device)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRBurnCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnDRBurnCreate, _lib, "DRBurnCreate")
@@ -76,6 +81,7 @@ var _fnDRBurnGetDevice func(objc.ID) objc.ID
 
 // DRBurnGetDevice calls the DiscRecording framework function DRBurnGetDevice.
 func DRBurnGetDevice(burn DRBurnRef) DRDeviceRef {
+	defer runtime.KeepAlive(burn)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRBurnGetDevice == nil {
 		ebipurego.RegisterLibFunc(&_fnDRBurnGetDevice, _lib, "DRBurnGetDevice")
@@ -88,6 +94,7 @@ var _fnDRBurnGetProperties func(objc.ID) objc.ID
 
 // DRBurnGetProperties calls the DiscRecording framework function DRBurnGetProperties.
 func DRBurnGetProperties(burn DRBurnRef) corefoundation.CFDictionaryRef {
+	defer runtime.KeepAlive(burn)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRBurnGetProperties == nil {
 		ebipurego.RegisterLibFunc(&_fnDRBurnGetProperties, _lib, "DRBurnGetProperties")
@@ -111,6 +118,8 @@ var _fnDRBurnSetProperties func(objc.ID, objc.ID)
 
 // DRBurnSetProperties calls the DiscRecording framework function DRBurnSetProperties.
 func DRBurnSetProperties(burn DRBurnRef, properties corefoundation.CFDictionaryRef) {
+	defer runtime.KeepAlive(burn)
+	defer runtime.KeepAlive(properties)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRBurnSetProperties == nil {
 		ebipurego.RegisterLibFunc(&_fnDRBurnSetProperties, _lib, "DRBurnSetProperties")
@@ -122,6 +131,7 @@ var _fnDRCDTextBlockCreate func(objc.ID, int) objc.ID
 
 // DRCDTextBlockCreate calls the DiscRecording framework function DRCDTextBlockCreate.
 func DRCDTextBlockCreate(language corefoundation.CFStringRef, encoding int) DRCDTextBlockRef {
+	defer runtime.KeepAlive(language)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRCDTextBlockCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnDRCDTextBlockCreate, _lib, "DRCDTextBlockCreate")
@@ -134,6 +144,7 @@ var _fnDRCDTextBlockCreateArrayFromPackList func(objc.ID) objc.ID
 
 // DRCDTextBlockCreateArrayFromPackList calls the DiscRecording framework function DRCDTextBlockCreateArrayFromPackList.
 func DRCDTextBlockCreateArrayFromPackList(packs corefoundation.CFDataRef) corefoundation.CFArrayRef {
+	defer runtime.KeepAlive(packs)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRCDTextBlockCreateArrayFromPackList == nil {
 		ebipurego.RegisterLibFunc(&_fnDRCDTextBlockCreateArrayFromPackList, _lib, "DRCDTextBlockCreateArrayFromPackList")
@@ -146,6 +157,7 @@ var _fnDRCDTextBlockFlatten func(objc.ID) uint32
 
 // DRCDTextBlockFlatten calls the DiscRecording framework function DRCDTextBlockFlatten.
 func DRCDTextBlockFlatten(block DRCDTextBlockRef) int {
+	defer runtime.KeepAlive(block)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRCDTextBlockFlatten == nil {
 		ebipurego.RegisterLibFunc(&_fnDRCDTextBlockFlatten, _lib, "DRCDTextBlockFlatten")
@@ -157,6 +169,7 @@ var _fnDRCDTextBlockGetProperties func(objc.ID) objc.ID
 
 // DRCDTextBlockGetProperties calls the DiscRecording framework function DRCDTextBlockGetProperties.
 func DRCDTextBlockGetProperties(block DRCDTextBlockRef) corefoundation.CFDictionaryRef {
+	defer runtime.KeepAlive(block)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRCDTextBlockGetProperties == nil {
 		ebipurego.RegisterLibFunc(&_fnDRCDTextBlockGetProperties, _lib, "DRCDTextBlockGetProperties")
@@ -169,6 +182,7 @@ var _fnDRCDTextBlockGetTrackDictionaries func(objc.ID) objc.ID
 
 // DRCDTextBlockGetTrackDictionaries calls the DiscRecording framework function DRCDTextBlockGetTrackDictionaries.
 func DRCDTextBlockGetTrackDictionaries(block DRCDTextBlockRef) corefoundation.CFArrayRef {
+	defer runtime.KeepAlive(block)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRCDTextBlockGetTrackDictionaries == nil {
 		ebipurego.RegisterLibFunc(&_fnDRCDTextBlockGetTrackDictionaries, _lib, "DRCDTextBlockGetTrackDictionaries")
@@ -192,6 +206,8 @@ var _fnDRCDTextBlockGetValue func(objc.ID, int, objc.ID) objc.ID
 
 // DRCDTextBlockGetValue calls the DiscRecording framework function DRCDTextBlockGetValue.
 func DRCDTextBlockGetValue(block DRCDTextBlockRef, trackIndex int, key corefoundation.CFStringRef) obj.Object {
+	defer runtime.KeepAlive(block)
+	defer runtime.KeepAlive(key)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRCDTextBlockGetValue == nil {
 		ebipurego.RegisterLibFunc(&_fnDRCDTextBlockGetValue, _lib, "DRCDTextBlockGetValue")
@@ -204,6 +220,8 @@ var _fnDRCDTextBlockSetProperties func(objc.ID, objc.ID)
 
 // DRCDTextBlockSetProperties calls the DiscRecording framework function DRCDTextBlockSetProperties.
 func DRCDTextBlockSetProperties(block DRCDTextBlockRef, properties corefoundation.CFDictionaryRef) {
+	defer runtime.KeepAlive(block)
+	defer runtime.KeepAlive(properties)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRCDTextBlockSetProperties == nil {
 		ebipurego.RegisterLibFunc(&_fnDRCDTextBlockSetProperties, _lib, "DRCDTextBlockSetProperties")
@@ -215,6 +233,8 @@ var _fnDRCDTextBlockSetTrackDictionaries func(objc.ID, objc.ID)
 
 // DRCDTextBlockSetTrackDictionaries calls the DiscRecording framework function DRCDTextBlockSetTrackDictionaries.
 func DRCDTextBlockSetTrackDictionaries(block DRCDTextBlockRef, array corefoundation.CFArrayRef) {
+	defer runtime.KeepAlive(block)
+	defer runtime.KeepAlive(array)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRCDTextBlockSetTrackDictionaries == nil {
 		ebipurego.RegisterLibFunc(&_fnDRCDTextBlockSetTrackDictionaries, _lib, "DRCDTextBlockSetTrackDictionaries")
@@ -226,6 +246,9 @@ var _fnDRCDTextBlockSetValue func(objc.ID, int, objc.ID, objc.ID)
 
 // DRCDTextBlockSetValue calls the DiscRecording framework function DRCDTextBlockSetValue.
 func DRCDTextBlockSetValue(block DRCDTextBlockRef, trackIndex int, key corefoundation.CFStringRef, value obj.Object) {
+	defer runtime.KeepAlive(block)
+	defer runtime.KeepAlive(key)
+	defer runtime.KeepAlive(value)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRCDTextBlockSetValue == nil {
 		ebipurego.RegisterLibFunc(&_fnDRCDTextBlockSetValue, _lib, "DRCDTextBlockSetValue")
@@ -285,6 +308,7 @@ var _fnDRCopyLocalizedStringForValue func(objc.ID) objc.ID
 
 // DRCopyLocalizedStringForValue calls the DiscRecording framework function DRCopyLocalizedStringForValue.
 func DRCopyLocalizedStringForValue(value corefoundation.CFStringRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(value)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRCopyLocalizedStringForValue == nil {
 		ebipurego.RegisterLibFunc(&_fnDRCopyLocalizedStringForValue, _lib, "DRCopyLocalizedStringForValue")
@@ -297,6 +321,7 @@ var _fnDRDeviceAcquireMediaReservation func(objc.ID)
 
 // DRDeviceAcquireMediaReservation calls the DiscRecording framework function DRDeviceAcquireMediaReservation.
 func DRDeviceAcquireMediaReservation(device DRDeviceRef) {
+	defer runtime.KeepAlive(device)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRDeviceAcquireMediaReservation == nil {
 		ebipurego.RegisterLibFunc(&_fnDRDeviceAcquireMediaReservation, _lib, "DRDeviceAcquireMediaReservation")
@@ -308,6 +333,7 @@ var _fnDRDeviceCopyDeviceForBSDName func(objc.ID) objc.ID
 
 // DRDeviceCopyDeviceForBSDName calls the DiscRecording framework function DRDeviceCopyDeviceForBSDName.
 func DRDeviceCopyDeviceForBSDName(name corefoundation.CFStringRef) DRDeviceRef {
+	defer runtime.KeepAlive(name)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRDeviceCopyDeviceForBSDName == nil {
 		ebipurego.RegisterLibFunc(&_fnDRDeviceCopyDeviceForBSDName, _lib, "DRDeviceCopyDeviceForBSDName")
@@ -320,6 +346,7 @@ var _fnDRDeviceCopyDeviceForIORegistryEntryPath func(objc.ID) objc.ID
 
 // DRDeviceCopyDeviceForIORegistryEntryPath calls the DiscRecording framework function DRDeviceCopyDeviceForIORegistryEntryPath.
 func DRDeviceCopyDeviceForIORegistryEntryPath(path corefoundation.CFStringRef) DRDeviceRef {
+	defer runtime.KeepAlive(path)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRDeviceCopyDeviceForIORegistryEntryPath == nil {
 		ebipurego.RegisterLibFunc(&_fnDRDeviceCopyDeviceForIORegistryEntryPath, _lib, "DRDeviceCopyDeviceForIORegistryEntryPath")
@@ -332,6 +359,7 @@ var _fnDRDeviceCopyInfo func(objc.ID) objc.ID
 
 // DRDeviceCopyInfo calls the DiscRecording framework function DRDeviceCopyInfo.
 func DRDeviceCopyInfo(device DRDeviceRef) corefoundation.CFDictionaryRef {
+	defer runtime.KeepAlive(device)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRDeviceCopyInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnDRDeviceCopyInfo, _lib, "DRDeviceCopyInfo")
@@ -344,6 +372,7 @@ var _fnDRDeviceCopyStatus func(objc.ID) objc.ID
 
 // DRDeviceCopyStatus calls the DiscRecording framework function DRDeviceCopyStatus.
 func DRDeviceCopyStatus(device DRDeviceRef) corefoundation.CFDictionaryRef {
+	defer runtime.KeepAlive(device)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRDeviceCopyStatus == nil {
 		ebipurego.RegisterLibFunc(&_fnDRDeviceCopyStatus, _lib, "DRDeviceCopyStatus")
@@ -367,6 +396,7 @@ var _fnDRDeviceIsValid func(objc.ID) uint8
 
 // DRDeviceIsValid calls the DiscRecording framework function DRDeviceIsValid.
 func DRDeviceIsValid(device DRDeviceRef) uint8 {
+	defer runtime.KeepAlive(device)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRDeviceIsValid == nil {
 		ebipurego.RegisterLibFunc(&_fnDRDeviceIsValid, _lib, "DRDeviceIsValid")
@@ -389,6 +419,7 @@ var _fnDRDeviceReleaseExclusiveAccess func(objc.ID)
 
 // DRDeviceReleaseExclusiveAccess calls the DiscRecording framework function DRDeviceReleaseExclusiveAccess.
 func DRDeviceReleaseExclusiveAccess(device DRDeviceRef) {
+	defer runtime.KeepAlive(device)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRDeviceReleaseExclusiveAccess == nil {
 		ebipurego.RegisterLibFunc(&_fnDRDeviceReleaseExclusiveAccess, _lib, "DRDeviceReleaseExclusiveAccess")
@@ -400,6 +431,7 @@ var _fnDRDeviceReleaseMediaReservation func(objc.ID)
 
 // DRDeviceReleaseMediaReservation calls the DiscRecording framework function DRDeviceReleaseMediaReservation.
 func DRDeviceReleaseMediaReservation(device DRDeviceRef) {
+	defer runtime.KeepAlive(device)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRDeviceReleaseMediaReservation == nil {
 		ebipurego.RegisterLibFunc(&_fnDRDeviceReleaseMediaReservation, _lib, "DRDeviceReleaseMediaReservation")
@@ -422,6 +454,7 @@ var _fnDREraseCopyStatus func(objc.ID) objc.ID
 
 // DREraseCopyStatus calls the DiscRecording framework function DREraseCopyStatus.
 func DREraseCopyStatus(erase DREraseRef) corefoundation.CFDictionaryRef {
+	defer runtime.KeepAlive(erase)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDREraseCopyStatus == nil {
 		ebipurego.RegisterLibFunc(&_fnDREraseCopyStatus, _lib, "DREraseCopyStatus")
@@ -434,6 +467,7 @@ var _fnDREraseCreate func(objc.ID) objc.ID
 
 // DREraseCreate calls the DiscRecording framework function DREraseCreate.
 func DREraseCreate(device DRDeviceRef) DREraseRef {
+	defer runtime.KeepAlive(device)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDREraseCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnDREraseCreate, _lib, "DREraseCreate")
@@ -446,6 +480,7 @@ var _fnDREraseGetDevice func(objc.ID) objc.ID
 
 // DREraseGetDevice calls the DiscRecording framework function DREraseGetDevice.
 func DREraseGetDevice(erase DREraseRef) DRDeviceRef {
+	defer runtime.KeepAlive(erase)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDREraseGetDevice == nil {
 		ebipurego.RegisterLibFunc(&_fnDREraseGetDevice, _lib, "DREraseGetDevice")
@@ -458,6 +493,7 @@ var _fnDREraseGetProperties func(objc.ID) objc.ID
 
 // DREraseGetProperties calls the DiscRecording framework function DREraseGetProperties.
 func DREraseGetProperties(erase DREraseRef) corefoundation.CFDictionaryRef {
+	defer runtime.KeepAlive(erase)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDREraseGetProperties == nil {
 		ebipurego.RegisterLibFunc(&_fnDREraseGetProperties, _lib, "DREraseGetProperties")
@@ -481,6 +517,8 @@ var _fnDREraseSetProperties func(objc.ID, objc.ID)
 
 // DREraseSetProperties calls the DiscRecording framework function DREraseSetProperties.
 func DREraseSetProperties(erase DREraseRef, properties corefoundation.CFDictionaryRef) {
+	defer runtime.KeepAlive(erase)
+	defer runtime.KeepAlive(properties)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDREraseSetProperties == nil {
 		ebipurego.RegisterLibFunc(&_fnDREraseSetProperties, _lib, "DREraseSetProperties")
@@ -504,6 +542,7 @@ var _fnDRFSObjectCopyFilesystemProperties func(unsafe.Pointer, objc.ID, uint8) o
 
 // DRFSObjectCopyFilesystemProperties calls the DiscRecording framework function DRFSObjectCopyFilesystemProperties.
 func DRFSObjectCopyFilesystemProperties(object unsafe.Pointer, fsKey corefoundation.CFStringRef, coalesce uint8) corefoundation.CFDictionaryRef {
+	defer runtime.KeepAlive(fsKey)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRFSObjectCopyFilesystemProperties == nil {
 		ebipurego.RegisterLibFunc(&_fnDRFSObjectCopyFilesystemProperties, _lib, "DRFSObjectCopyFilesystemProperties")
@@ -516,6 +555,8 @@ var _fnDRFSObjectCopyFilesystemProperty func(unsafe.Pointer, objc.ID, objc.ID, u
 
 // DRFSObjectCopyFilesystemProperty calls the DiscRecording framework function DRFSObjectCopyFilesystemProperty.
 func DRFSObjectCopyFilesystemProperty(object unsafe.Pointer, fsKey corefoundation.CFStringRef, propertyKey corefoundation.CFStringRef, coalesce uint8) obj.Object {
+	defer runtime.KeepAlive(fsKey)
+	defer runtime.KeepAlive(propertyKey)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRFSObjectCopyFilesystemProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnDRFSObjectCopyFilesystemProperty, _lib, "DRFSObjectCopyFilesystemProperty")
@@ -528,6 +569,7 @@ var _fnDRFSObjectCopyMangledName func(unsafe.Pointer, objc.ID) objc.ID
 
 // DRFSObjectCopyMangledName calls the DiscRecording framework function DRFSObjectCopyMangledName.
 func DRFSObjectCopyMangledName(object unsafe.Pointer, fsKey corefoundation.CFStringRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(fsKey)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRFSObjectCopyMangledName == nil {
 		ebipurego.RegisterLibFunc(&_fnDRFSObjectCopyMangledName, _lib, "DRFSObjectCopyMangledName")
@@ -564,6 +606,7 @@ var _fnDRFSObjectCopySpecificName func(unsafe.Pointer, objc.ID) objc.ID
 
 // DRFSObjectCopySpecificName calls the DiscRecording framework function DRFSObjectCopySpecificName.
 func DRFSObjectCopySpecificName(object unsafe.Pointer, fsKey corefoundation.CFStringRef) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(fsKey)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRFSObjectCopySpecificName == nil {
 		ebipurego.RegisterLibFunc(&_fnDRFSObjectCopySpecificName, _lib, "DRFSObjectCopySpecificName")
@@ -636,6 +679,7 @@ var _fnDRFSObjectSetBaseName func(unsafe.Pointer, objc.ID)
 
 // DRFSObjectSetBaseName calls the DiscRecording framework function DRFSObjectSetBaseName.
 func DRFSObjectSetBaseName(object unsafe.Pointer, baseName corefoundation.CFStringRef) {
+	defer runtime.KeepAlive(baseName)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRFSObjectSetBaseName == nil {
 		ebipurego.RegisterLibFunc(&_fnDRFSObjectSetBaseName, _lib, "DRFSObjectSetBaseName")
@@ -658,6 +702,8 @@ var _fnDRFSObjectSetFilesystemProperties func(unsafe.Pointer, objc.ID, objc.ID)
 
 // DRFSObjectSetFilesystemProperties calls the DiscRecording framework function DRFSObjectSetFilesystemProperties.
 func DRFSObjectSetFilesystemProperties(object unsafe.Pointer, fsKey corefoundation.CFStringRef, properties corefoundation.CFDictionaryRef) {
+	defer runtime.KeepAlive(fsKey)
+	defer runtime.KeepAlive(properties)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRFSObjectSetFilesystemProperties == nil {
 		ebipurego.RegisterLibFunc(&_fnDRFSObjectSetFilesystemProperties, _lib, "DRFSObjectSetFilesystemProperties")
@@ -669,6 +715,9 @@ var _fnDRFSObjectSetFilesystemProperty func(unsafe.Pointer, objc.ID, objc.ID, ob
 
 // DRFSObjectSetFilesystemProperty calls the DiscRecording framework function DRFSObjectSetFilesystemProperty.
 func DRFSObjectSetFilesystemProperty(object unsafe.Pointer, fsKey corefoundation.CFStringRef, propertyKey corefoundation.CFStringRef, value obj.Object) {
+	defer runtime.KeepAlive(fsKey)
+	defer runtime.KeepAlive(propertyKey)
+	defer runtime.KeepAlive(value)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRFSObjectSetFilesystemProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnDRFSObjectSetFilesystemProperty, _lib, "DRFSObjectSetFilesystemProperty")
@@ -680,6 +729,8 @@ var _fnDRFSObjectSetSpecificName func(unsafe.Pointer, objc.ID, objc.ID)
 
 // DRFSObjectSetSpecificName calls the DiscRecording framework function DRFSObjectSetSpecificName.
 func DRFSObjectSetSpecificName(object unsafe.Pointer, fsKey corefoundation.CFStringRef, specificName corefoundation.CFStringRef) {
+	defer runtime.KeepAlive(fsKey)
+	defer runtime.KeepAlive(specificName)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRFSObjectSetSpecificName == nil {
 		ebipurego.RegisterLibFunc(&_fnDRFSObjectSetSpecificName, _lib, "DRFSObjectSetSpecificName")
@@ -691,6 +742,7 @@ var _fnDRFSObjectSetSpecificNames func(unsafe.Pointer, objc.ID)
 
 // DRFSObjectSetSpecificNames calls the DiscRecording framework function DRFSObjectSetSpecificNames.
 func DRFSObjectSetSpecificNames(object unsafe.Pointer, specificNames corefoundation.CFDictionaryRef) {
+	defer runtime.KeepAlive(specificNames)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRFSObjectSetSpecificNames == nil {
 		ebipurego.RegisterLibFunc(&_fnDRFSObjectSetSpecificNames, _lib, "DRFSObjectSetSpecificNames")
@@ -714,6 +766,7 @@ var _fnDRFileCreateRealWithURL func(objc.ID) objc.ID
 
 // DRFileCreateRealWithURL calls the DiscRecording framework function DRFileCreateRealWithURL.
 func DRFileCreateRealWithURL(urlRef corefoundation.CFURLRef) DRFileRef {
+	defer runtime.KeepAlive(urlRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRFileCreateRealWithURL == nil {
 		ebipurego.RegisterLibFunc(&_fnDRFileCreateRealWithURL, _lib, "DRFileCreateRealWithURL")
@@ -726,6 +779,7 @@ var _fnDRFileCreateVirtualLink func(unsafe.Pointer, int, objc.ID) objc.ID
 
 // DRFileCreateVirtualLink calls the DiscRecording framework function DRFileCreateVirtualLink.
 func DRFileCreateVirtualLink(original unsafe.Pointer, linkType int, fsKey corefoundation.CFStringRef) DRFileRef {
+	defer runtime.KeepAlive(fsKey)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRFileCreateVirtualLink == nil {
 		ebipurego.RegisterLibFunc(&_fnDRFileCreateVirtualLink, _lib, "DRFileCreateVirtualLink")
@@ -738,6 +792,7 @@ var _fnDRFileCreateVirtualWithCallback func(objc.ID, unsafe.Pointer, unsafe.Poin
 
 // DRFileCreateVirtualWithCallback calls the DiscRecording framework function DRFileCreateVirtualWithCallback.
 func DRFileCreateVirtualWithCallback(baseName corefoundation.CFStringRef, fileProc unsafe.Pointer, fileProcRefCon unsafe.Pointer) DRFileRef {
+	defer runtime.KeepAlive(baseName)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRFileCreateVirtualWithCallback == nil {
 		ebipurego.RegisterLibFunc(&_fnDRFileCreateVirtualWithCallback, _lib, "DRFileCreateVirtualWithCallback")
@@ -750,6 +805,7 @@ var _fnDRFileCreateVirtualWithData func(objc.ID, unsafe.Pointer, int) objc.ID
 
 // DRFileCreateVirtualWithData calls the DiscRecording framework function DRFileCreateVirtualWithData.
 func DRFileCreateVirtualWithData(baseName corefoundation.CFStringRef, fileData unsafe.Pointer, fileDataLength int) DRFileRef {
+	defer runtime.KeepAlive(baseName)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRFileCreateVirtualWithData == nil {
 		ebipurego.RegisterLibFunc(&_fnDRFileCreateVirtualWithData, _lib, "DRFileCreateVirtualWithData")
@@ -773,6 +829,7 @@ var _fnDRFilesystemTrackCreate func(objc.ID) unsafe.Pointer
 
 // DRFilesystemTrackCreate calls the DiscRecording framework function DRFilesystemTrackCreate.
 func DRFilesystemTrackCreate(rootFolder DRFolderRef) unsafe.Pointer {
+	defer runtime.KeepAlive(rootFolder)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRFilesystemTrackCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnDRFilesystemTrackCreate, _lib, "DRFilesystemTrackCreate")
@@ -795,6 +852,7 @@ var _fnDRFolderAddChild func(objc.ID, unsafe.Pointer)
 
 // DRFolderAddChild calls the DiscRecording framework function DRFolderAddChild.
 func DRFolderAddChild(parent DRFolderRef, newChild unsafe.Pointer) {
+	defer runtime.KeepAlive(parent)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRFolderAddChild == nil {
 		ebipurego.RegisterLibFunc(&_fnDRFolderAddChild, _lib, "DRFolderAddChild")
@@ -806,6 +864,7 @@ var _fnDRFolderConvertRealToVirtual func(objc.ID)
 
 // DRFolderConvertRealToVirtual calls the DiscRecording framework function DRFolderConvertRealToVirtual.
 func DRFolderConvertRealToVirtual(realFolder DRFolderRef) {
+	defer runtime.KeepAlive(realFolder)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRFolderConvertRealToVirtual == nil {
 		ebipurego.RegisterLibFunc(&_fnDRFolderConvertRealToVirtual, _lib, "DRFolderConvertRealToVirtual")
@@ -817,6 +876,7 @@ var _fnDRFolderCopyChildren func(objc.ID) objc.ID
 
 // DRFolderCopyChildren calls the DiscRecording framework function DRFolderCopyChildren.
 func DRFolderCopyChildren(folder DRFolderRef) corefoundation.CFArrayRef {
+	defer runtime.KeepAlive(folder)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRFolderCopyChildren == nil {
 		ebipurego.RegisterLibFunc(&_fnDRFolderCopyChildren, _lib, "DRFolderCopyChildren")
@@ -829,6 +889,7 @@ var _fnDRFolderCountChildren func(objc.ID) uint32
 
 // DRFolderCountChildren calls the DiscRecording framework function DRFolderCountChildren.
 func DRFolderCountChildren(folder DRFolderRef) int {
+	defer runtime.KeepAlive(folder)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRFolderCountChildren == nil {
 		ebipurego.RegisterLibFunc(&_fnDRFolderCountChildren, _lib, "DRFolderCountChildren")
@@ -852,6 +913,7 @@ var _fnDRFolderCreateRealWithURL func(objc.ID) objc.ID
 
 // DRFolderCreateRealWithURL calls the DiscRecording framework function DRFolderCreateRealWithURL.
 func DRFolderCreateRealWithURL(urlRef corefoundation.CFURLRef) DRFolderRef {
+	defer runtime.KeepAlive(urlRef)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRFolderCreateRealWithURL == nil {
 		ebipurego.RegisterLibFunc(&_fnDRFolderCreateRealWithURL, _lib, "DRFolderCreateRealWithURL")
@@ -864,6 +926,7 @@ var _fnDRFolderCreateVirtual func(objc.ID) objc.ID
 
 // DRFolderCreateVirtual calls the DiscRecording framework function DRFolderCreateVirtual.
 func DRFolderCreateVirtual(baseName corefoundation.CFStringRef) DRFolderRef {
+	defer runtime.KeepAlive(baseName)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRFolderCreateVirtual == nil {
 		ebipurego.RegisterLibFunc(&_fnDRFolderCreateVirtual, _lib, "DRFolderCreateVirtual")
@@ -887,6 +950,7 @@ var _fnDRFolderRemoveChild func(objc.ID, unsafe.Pointer)
 
 // DRFolderRemoveChild calls the DiscRecording framework function DRFolderRemoveChild.
 func DRFolderRemoveChild(parent DRFolderRef, child unsafe.Pointer) {
+	defer runtime.KeepAlive(parent)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRFolderRemoveChild == nil {
 		ebipurego.RegisterLibFunc(&_fnDRFolderRemoveChild, _lib, "DRFolderRemoveChild")
@@ -920,6 +984,8 @@ var _fnDRNotificationCenterAddObserver func(objc.ID, unsafe.Pointer, unsafe.Poin
 
 // DRNotificationCenterAddObserver calls the DiscRecording framework function DRNotificationCenterAddObserver.
 func DRNotificationCenterAddObserver(center DRNotificationCenterRef, observer unsafe.Pointer, callback unsafe.Pointer, name corefoundation.CFStringRef, object unsafe.Pointer) {
+	defer runtime.KeepAlive(center)
+	defer runtime.KeepAlive(name)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRNotificationCenterAddObserver == nil {
 		ebipurego.RegisterLibFunc(&_fnDRNotificationCenterAddObserver, _lib, "DRNotificationCenterAddObserver")
@@ -943,6 +1009,7 @@ var _fnDRNotificationCenterCreateRunLoopSource func(objc.ID) objc.ID
 
 // DRNotificationCenterCreateRunLoopSource calls the DiscRecording framework function DRNotificationCenterCreateRunLoopSource.
 func DRNotificationCenterCreateRunLoopSource(center DRNotificationCenterRef) corefoundation.CFRunLoopSourceRef {
+	defer runtime.KeepAlive(center)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRNotificationCenterCreateRunLoopSource == nil {
 		ebipurego.RegisterLibFunc(&_fnDRNotificationCenterCreateRunLoopSource, _lib, "DRNotificationCenterCreateRunLoopSource")
@@ -966,6 +1033,8 @@ var _fnDRNotificationCenterRemoveObserver func(objc.ID, unsafe.Pointer, objc.ID,
 
 // DRNotificationCenterRemoveObserver calls the DiscRecording framework function DRNotificationCenterRemoveObserver.
 func DRNotificationCenterRemoveObserver(center DRNotificationCenterRef, observer unsafe.Pointer, name corefoundation.CFStringRef, object unsafe.Pointer) {
+	defer runtime.KeepAlive(center)
+	defer runtime.KeepAlive(name)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRNotificationCenterRemoveObserver == nil {
 		ebipurego.RegisterLibFunc(&_fnDRNotificationCenterRemoveObserver, _lib, "DRNotificationCenterRemoveObserver")
@@ -988,6 +1057,7 @@ var _fnDRTrackCreate func(objc.ID, unsafe.Pointer) objc.ID
 
 // DRTrackCreate calls the DiscRecording framework function DRTrackCreate.
 func DRTrackCreate(properties corefoundation.CFDictionaryRef, callback unsafe.Pointer) DRTrackRef {
+	defer runtime.KeepAlive(properties)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRTrackCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnDRTrackCreate, _lib, "DRTrackCreate")
@@ -1000,6 +1070,7 @@ var _fnDRTrackEstimateLength func(objc.ID) uint64
 
 // DRTrackEstimateLength calls the DiscRecording framework function DRTrackEstimateLength.
 func DRTrackEstimateLength(track DRTrackRef) uint64 {
+	defer runtime.KeepAlive(track)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRTrackEstimateLength == nil {
 		ebipurego.RegisterLibFunc(&_fnDRTrackEstimateLength, _lib, "DRTrackEstimateLength")
@@ -1011,6 +1082,7 @@ var _fnDRTrackGetProperties func(objc.ID) objc.ID
 
 // DRTrackGetProperties calls the DiscRecording framework function DRTrackGetProperties.
 func DRTrackGetProperties(track DRTrackRef) corefoundation.CFDictionaryRef {
+	defer runtime.KeepAlive(track)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRTrackGetProperties == nil {
 		ebipurego.RegisterLibFunc(&_fnDRTrackGetProperties, _lib, "DRTrackGetProperties")
@@ -1034,6 +1106,8 @@ var _fnDRTrackSetProperties func(objc.ID, objc.ID)
 
 // DRTrackSetProperties calls the DiscRecording framework function DRTrackSetProperties.
 func DRTrackSetProperties(track DRTrackRef, properties corefoundation.CFDictionaryRef) {
+	defer runtime.KeepAlive(track)
+	defer runtime.KeepAlive(properties)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRTrackSetProperties == nil {
 		ebipurego.RegisterLibFunc(&_fnDRTrackSetProperties, _lib, "DRTrackSetProperties")
@@ -1045,6 +1119,7 @@ var _fnDRTrackSpeedTest func(objc.ID, int, int) float32
 
 // DRTrackSpeedTest calls the DiscRecording framework function DRTrackSpeedTest.
 func DRTrackSpeedTest(track DRTrackRef, howManyMilliseconds int, howManyBytes int) float32 {
+	defer runtime.KeepAlive(track)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRTrackSpeedTest == nil {
 		ebipurego.RegisterLibFunc(&_fnDRTrackSpeedTest, _lib, "DRTrackSpeedTest")

@@ -13,6 +13,7 @@ var _fnSecItemDelete func(objc.ID) int32
 
 // SecItemDelete reports an error if the Security framework function SecItemDelete fails.
 func SecItemDelete(query obj.Object) error {
+defer runtime.KeepAlive(query)
 _loadOnce.Do(_loadLibrary)
 if _fnSecItemDelete == nil {
 ebipurego.RegisterLibFunc(&_fnSecItemDelete, _lib, "SecItemDelete")
@@ -28,6 +29,7 @@ return nil
 var _fnCFBundlePreflightExecutable func(objc.ID, unsafe.Pointer) bool
 
 func CFBundlePreflightExecutable(bundle obj.Object) error {
+defer runtime.KeepAlive(bundle)
 _loadOnce.Do(_loadLibrary)
 if _fnCFBundlePreflightExecutable == nil {
 ebipurego.RegisterLibFunc(&_fnCFBundlePreflightExecutable, _lib, "CFBundlePreflightExecutable")

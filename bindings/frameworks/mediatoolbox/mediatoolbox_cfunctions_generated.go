@@ -5,6 +5,7 @@
 package mediatoolbox
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
@@ -19,6 +20,7 @@ var _fnMTAudioProcessingTapCreate func(objc.ID, unsafe.Pointer, uint32, unsafe.P
 
 // MTAudioProcessingTapCreate calls the MediaToolbox framework function MTAudioProcessingTapCreate.
 func MTAudioProcessingTapCreate(allocator corefoundation.CFAllocatorRef, callbacks unsafe.Pointer, flags uint32, tapOut unsafe.Pointer) int {
+	defer runtime.KeepAlive(allocator)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMTAudioProcessingTapCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnMTAudioProcessingTapCreate, _lib, "MTAudioProcessingTapCreate")
@@ -30,6 +32,7 @@ var _fnMTAudioProcessingTapCreateWithPreferredFormat func(objc.ID, unsafe.Pointe
 
 // MTAudioProcessingTapCreateWithPreferredFormat calls the MediaToolbox framework function MTAudioProcessingTapCreateWithPreferredFormat.
 func MTAudioProcessingTapCreateWithPreferredFormat(allocator corefoundation.CFAllocatorRef, callbacks unsafe.Pointer, flags uint32, preferredFormat unsafe.Pointer, tapOut unsafe.Pointer) int {
+	defer runtime.KeepAlive(allocator)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMTAudioProcessingTapCreateWithPreferredFormat == nil {
 		ebipurego.RegisterLibFunc(&_fnMTAudioProcessingTapCreateWithPreferredFormat, _lib, "MTAudioProcessingTapCreateWithPreferredFormat")
@@ -41,6 +44,7 @@ var _fnMTAudioProcessingTapGetSourceAudio func(objc.ID, int, unsafe.Pointer, uns
 
 // MTAudioProcessingTapGetSourceAudio calls the MediaToolbox framework function MTAudioProcessingTapGetSourceAudio.
 func MTAudioProcessingTapGetSourceAudio(tap MTAudioProcessingTapRef, numberFrames int, bufferListInOut unsafe.Pointer, timeRangeOut *coremedia.CMTimeRange) (result int, flagsOut uint32, numberFramesOut int) {
+	defer runtime.KeepAlive(tap)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMTAudioProcessingTapGetSourceAudio == nil {
 		ebipurego.RegisterLibFunc(&_fnMTAudioProcessingTapGetSourceAudio, _lib, "MTAudioProcessingTapGetSourceAudio")
@@ -55,6 +59,7 @@ var _fnMTAudioProcessingTapGetStorage func(objc.ID) unsafe.Pointer
 
 // MTAudioProcessingTapGetStorage calls the MediaToolbox framework function MTAudioProcessingTapGetStorage.
 func MTAudioProcessingTapGetStorage(tap MTAudioProcessingTapRef) unsafe.Pointer {
+	defer runtime.KeepAlive(tap)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMTAudioProcessingTapGetStorage == nil {
 		ebipurego.RegisterLibFunc(&_fnMTAudioProcessingTapGetStorage, _lib, "MTAudioProcessingTapGetStorage")

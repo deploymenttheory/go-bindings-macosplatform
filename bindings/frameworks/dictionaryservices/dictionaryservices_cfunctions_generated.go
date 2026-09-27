@@ -5,6 +5,8 @@
 package dictionaryservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -16,6 +18,8 @@ var _fnDCSCopyTextDefinition func(objc.ID, objc.ID, corefoundation.CFRange) objc
 
 // DCSCopyTextDefinition calls the DictionaryServices framework function DCSCopyTextDefinition.
 func DCSCopyTextDefinition(dictionary DCSDictionaryRef, textString corefoundation.CFStringRef, range_ corefoundation.CFRange) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(dictionary)
+	defer runtime.KeepAlive(textString)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDCSCopyTextDefinition == nil {
 		ebipurego.RegisterLibFunc(&_fnDCSCopyTextDefinition, _lib, "DCSCopyTextDefinition")
@@ -28,6 +32,8 @@ var _fnDCSGetTermRangeInString func(objc.ID, objc.ID, int) corefoundation.CFRang
 
 // DCSGetTermRangeInString calls the DictionaryServices framework function DCSGetTermRangeInString.
 func DCSGetTermRangeInString(dictionary DCSDictionaryRef, textString corefoundation.CFStringRef, offset int) corefoundation.CFRange {
+	defer runtime.KeepAlive(dictionary)
+	defer runtime.KeepAlive(textString)
 	_loadOnce.Do(_loadLibrary)
 	if _fnDCSGetTermRangeInString == nil {
 		ebipurego.RegisterLibFunc(&_fnDCSGetTermRangeInString, _lib, "DCSGetTermRangeInString")

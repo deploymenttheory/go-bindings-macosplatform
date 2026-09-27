@@ -2,14 +2,18 @@
 
 package purego
 
-import "github.com/ebitengine/purego/objc"
+import (
+	"sync"
+
+	"github.com/ebitengine/purego/objc"
+)
 
 var (
 	selCount          = objc.RegisterName("count")
 	selObjectAtIndex  = objc.RegisterName("objectAtIndex:")
 	selAddObject      = objc.RegisterName("addObject:")
 	selArray          = objc.RegisterName("array")
-	clsNSMutableArray = objc.GetClass("NSMutableArray")
+	clsNSMutableArray = sync.OnceValue(func() objc.Class { return FoundationClass("NSMutableArray") })
 )
 
 // NSArrayCount returns the number of elements in an NSArray. It sends -count
@@ -50,7 +54,7 @@ func NSArrayToSlice[T any](array objc.ID, conv func(objc.ID) T) []T {
 // each element to an id through conv. Retain the result if it must outlive the
 // current autorelease pool drain.
 func SliceToNSArray[T any](items []T, conv func(T) objc.ID) objc.ID {
-	arr := objc.Send[objc.ID](objc.ID(clsNSMutableArray), selArray)
+	arr := objc.Send[objc.ID](objc.ID(clsNSMutableArray()), selArray)
 	for _, item := range items {
 		arr.Send(selAddObject, conv(item))
 	}

@@ -5,6 +5,7 @@
 package metalkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -17,6 +18,7 @@ var _fnMTKMetalVertexDescriptorFromModelIO func(objc.ID) objc.ID
 
 // MTKMetalVertexDescriptorFromModelIO calls the MetalKit framework function MTKMetalVertexDescriptorFromModelIO.
 func MTKMetalVertexDescriptorFromModelIO(modelIODescriptor obj.Object) obj.Object {
+	defer runtime.KeepAlive(modelIODescriptor)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMTKMetalVertexDescriptorFromModelIO == nil {
 		ebipurego.RegisterLibFunc(&_fnMTKMetalVertexDescriptorFromModelIO, _lib, "MTKMetalVertexDescriptorFromModelIO")
@@ -29,6 +31,7 @@ var _fnMTKMetalVertexDescriptorFromModelIOWithError func(objc.ID, unsafe.Pointer
 
 // MTKMetalVertexDescriptorFromModelIOWithError calls the MetalKit framework function MTKMetalVertexDescriptorFromModelIOWithError.
 func MTKMetalVertexDescriptorFromModelIOWithError(modelIODescriptor obj.Object, err unsafe.Pointer) obj.Object {
+	defer runtime.KeepAlive(modelIODescriptor)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMTKMetalVertexDescriptorFromModelIOWithError == nil {
 		ebipurego.RegisterLibFunc(&_fnMTKMetalVertexDescriptorFromModelIOWithError, _lib, "MTKMetalVertexDescriptorFromModelIOWithError")
@@ -52,6 +55,7 @@ var _fnMTKModelIOVertexDescriptorFromMetal func(objc.ID) objc.ID
 
 // MTKModelIOVertexDescriptorFromMetal calls the MetalKit framework function MTKModelIOVertexDescriptorFromMetal.
 func MTKModelIOVertexDescriptorFromMetal(metalDescriptor obj.Object) obj.Object {
+	defer runtime.KeepAlive(metalDescriptor)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMTKModelIOVertexDescriptorFromMetal == nil {
 		ebipurego.RegisterLibFunc(&_fnMTKModelIOVertexDescriptorFromMetal, _lib, "MTKModelIOVertexDescriptorFromMetal")
@@ -64,6 +68,7 @@ var _fnMTKModelIOVertexDescriptorFromMetalWithError func(objc.ID, unsafe.Pointer
 
 // MTKModelIOVertexDescriptorFromMetalWithError calls the MetalKit framework function MTKModelIOVertexDescriptorFromMetalWithError.
 func MTKModelIOVertexDescriptorFromMetalWithError(metalDescriptor obj.Object, err unsafe.Pointer) obj.Object {
+	defer runtime.KeepAlive(metalDescriptor)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMTKModelIOVertexDescriptorFromMetalWithError == nil {
 		ebipurego.RegisterLibFunc(&_fnMTKModelIOVertexDescriptorFromMetalWithError, _lib, "MTKModelIOVertexDescriptorFromMetalWithError")

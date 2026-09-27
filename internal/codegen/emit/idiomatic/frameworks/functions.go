@@ -197,7 +197,7 @@ func emitGenericFunctionWrappers(
 		// whole function is left out and a diagnostic is recorded. Type imports are
 		// gathered per function and merged only once the wrapper is committed, so a
 		// skipped function never contributes an unused import.
-		var sigParts, abiParts, callArgs []string
+		var sigParts, abiParts, callArgs, keepAlive []string
 		var outs []view.DispatchOut
 		var outNames []string // readable return names for the signature (E7)
 		fnImports := map[string]string{}
@@ -299,6 +299,10 @@ func emitGenericFunctionWrappers(
 			sigParts = append(sigParts, pName+" "+sig)
 			abiParts = append(abiParts, cfuncABIType(sig, argExpr))
 			callArgs = append(callArgs, argExpr)
+			if passesWrapper(argExpr) {
+				keepAlive = append(keepAlive, pName)
+				fnImports["runtime"] = "runtime"
+			}
 		}
 		retType, kind, wrap, _, rimps, rok := idiomaticRet(
 			fn.Return.ObjCType,
@@ -358,6 +362,7 @@ func emitGenericFunctionWrappers(
 				sigParts:     sigParts,
 				abiParts:     abiParts,
 				callArgs:     callArgs,
+				keepAlive:    keepAlive,
 				outs:         outs,
 				outNames:     outNames,
 			}, mapper))
@@ -402,6 +407,7 @@ func emitGenericFunctionWrappers(
 			Call:      call,
 			Wrap:      wrap,
 			Outs:      outs,
+			KeepAlive: keepAlive,
 		})
 	}
 
@@ -757,7 +763,7 @@ func emitCFFunctionWrappers(
 			continue
 		}
 
-		var sigParams, abiParts, callArgs, preLines, outTypes, outReturns, zeros []string
+		var sigParams, abiParts, callArgs, keepAlive, preLines, outTypes, outReturns, zeros []string
 		fnImports := map[string]string{}
 		usedNames := map[string]int{}
 		outIdx := 0
@@ -776,9 +782,11 @@ func emitCFFunctionWrappers(
 				sigParams = append(sigParams, pName+" obj.Object")
 				callArgs = append(callArgs, "objref.IDOf("+pName+")")
 				abiParts = append(abiParts, "objc.ID")
+				keepAlive = append(keepAlive, pName)
 				fnImports["obj"] = objImportPath
 				fnImports["objref"] = objrefImportPath
 				fnImports["objc"] = objcImportPath
+				fnImports["runtime"] = "runtime"
 			case cfOutputRef:
 				outVar := fmt.Sprintf("_out%d", outIdx)
 				outIdx++
@@ -808,6 +816,10 @@ func emitCFFunctionWrappers(
 					sigParams = append(sigParams, pName+" "+sig)
 					callArgs = append(callArgs, argExpr)
 					abiParts = append(abiParts, cfuncABIType(sig, argExpr))
+					if passesWrapper(argExpr) {
+						keepAlive = append(keepAlive, pName)
+						fnImports["runtime"] = "runtime"
+					}
 				}
 			}
 			if !ok {
@@ -865,6 +877,7 @@ func emitCFFunctionWrappers(
 			Call:      fmt.Sprintf("%s(%s)", varName, strings.Join(callArgs, ", ")),
 			FailRet:   failRet,
 			OkRet:     okRet,
+			KeepAlive: keepAlive,
 		})
 	}
 
@@ -897,6 +910,7 @@ type statusCodeFuncInput struct {
 	sigParts     []string
 	abiParts     []string
 	callArgs     []string
+	keepAlive    []string
 	outs         []view.DispatchOut
 	outNames     []string
 }
@@ -953,6 +967,7 @@ func buildStatusCodeFunc(in statusCodeFuncInput, mapper *typemap.Mapper) view.Fu
 		Kind:      view.FuncStatusCode,
 		PreLines:  preLines,
 		Call:      fmt.Sprintf("%s(%s)", in.varName, strings.Join(in.callArgs, ", ")),
+		KeepAlive: in.keepAlive,
 		ErrExpr: fmt.Sprintf(
 			"errkit.FromCode(%q, int64(_rc), %d)",
 			in.statusDomain,

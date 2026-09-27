@@ -5,6 +5,8 @@
 package latentsemanticmapping
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -16,6 +18,7 @@ var _fnLSMMapAddCategory func(objc.ID) uint32
 
 // LSMMapAddCategory calls the LatentSemanticMapping framework function LSMMapAddCategory.
 func LSMMapAddCategory(mapref LSMMapRef) uint32 {
+	defer runtime.KeepAlive(mapref)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSMMapAddCategory == nil {
 		ebipurego.RegisterLibFunc(&_fnLSMMapAddCategory, _lib, "LSMMapAddCategory")
@@ -27,6 +30,7 @@ var _fnLSMMapCreate func(objc.ID, int) objc.ID
 
 // LSMMapCreate calls the LatentSemanticMapping framework function LSMMapCreate.
 func LSMMapCreate(alloc corefoundation.CFAllocatorRef, flags int) LSMMapRef {
+	defer runtime.KeepAlive(alloc)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSMMapCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnLSMMapCreate, _lib, "LSMMapCreate")
@@ -39,6 +43,9 @@ var _fnLSMMapCreateClusters func(objc.ID, objc.ID, objc.ID, int, int) objc.ID
 
 // LSMMapCreateClusters calls the LatentSemanticMapping framework function LSMMapCreateClusters.
 func LSMMapCreateClusters(alloc corefoundation.CFAllocatorRef, mapref LSMMapRef, subset corefoundation.CFArrayRef, numClusters int, flags int) corefoundation.CFArrayRef {
+	defer runtime.KeepAlive(alloc)
+	defer runtime.KeepAlive(mapref)
+	defer runtime.KeepAlive(subset)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSMMapCreateClusters == nil {
 		ebipurego.RegisterLibFunc(&_fnLSMMapCreateClusters, _lib, "LSMMapCreateClusters")
@@ -51,6 +58,8 @@ var _fnLSMMapCreateFromURL func(objc.ID, objc.ID, int) objc.ID
 
 // LSMMapCreateFromURL calls the LatentSemanticMapping framework function LSMMapCreateFromURL.
 func LSMMapCreateFromURL(alloc corefoundation.CFAllocatorRef, file corefoundation.CFURLRef, flags int) LSMMapRef {
+	defer runtime.KeepAlive(alloc)
+	defer runtime.KeepAlive(file)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSMMapCreateFromURL == nil {
 		ebipurego.RegisterLibFunc(&_fnLSMMapCreateFromURL, _lib, "LSMMapCreateFromURL")
@@ -63,6 +72,7 @@ var _fnLSMMapGetCategoryCount func(objc.ID) int
 
 // LSMMapGetCategoryCount calls the LatentSemanticMapping framework function LSMMapGetCategoryCount.
 func LSMMapGetCategoryCount(mapref LSMMapRef) int {
+	defer runtime.KeepAlive(mapref)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSMMapGetCategoryCount == nil {
 		ebipurego.RegisterLibFunc(&_fnLSMMapGetCategoryCount, _lib, "LSMMapGetCategoryCount")
@@ -74,6 +84,7 @@ var _fnLSMMapGetProperties func(objc.ID) objc.ID
 
 // LSMMapGetProperties calls the LatentSemanticMapping framework function LSMMapGetProperties.
 func LSMMapGetProperties(mapref LSMMapRef) corefoundation.CFDictionaryRef {
+	defer runtime.KeepAlive(mapref)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSMMapGetProperties == nil {
 		ebipurego.RegisterLibFunc(&_fnLSMMapGetProperties, _lib, "LSMMapGetProperties")
@@ -97,6 +108,8 @@ var _fnLSMMapSetProperties func(objc.ID, objc.ID)
 
 // LSMMapSetProperties calls the LatentSemanticMapping framework function LSMMapSetProperties.
 func LSMMapSetProperties(mapref LSMMapRef, properties corefoundation.CFDictionaryRef) {
+	defer runtime.KeepAlive(mapref)
+	defer runtime.KeepAlive(properties)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSMMapSetProperties == nil {
 		ebipurego.RegisterLibFunc(&_fnLSMMapSetProperties, _lib, "LSMMapSetProperties")
@@ -108,6 +121,7 @@ var _fnLSMResultCopyToken func(objc.ID, int) objc.ID
 
 // LSMResultCopyToken calls the LatentSemanticMapping framework function LSMResultCopyToken.
 func LSMResultCopyToken(result LSMResultRef, n int) corefoundation.CFDataRef {
+	defer runtime.KeepAlive(result)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSMResultCopyToken == nil {
 		ebipurego.RegisterLibFunc(&_fnLSMResultCopyToken, _lib, "LSMResultCopyToken")
@@ -120,6 +134,7 @@ var _fnLSMResultCopyTokenCluster func(objc.ID, int) objc.ID
 
 // LSMResultCopyTokenCluster calls the LatentSemanticMapping framework function LSMResultCopyTokenCluster.
 func LSMResultCopyTokenCluster(result LSMResultRef, n int) corefoundation.CFArrayRef {
+	defer runtime.KeepAlive(result)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSMResultCopyTokenCluster == nil {
 		ebipurego.RegisterLibFunc(&_fnLSMResultCopyTokenCluster, _lib, "LSMResultCopyTokenCluster")
@@ -132,6 +147,7 @@ var _fnLSMResultCopyWord func(objc.ID, int) objc.ID
 
 // LSMResultCopyWord calls the LatentSemanticMapping framework function LSMResultCopyWord.
 func LSMResultCopyWord(result LSMResultRef, n int) corefoundation.CFStringRef {
+	defer runtime.KeepAlive(result)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSMResultCopyWord == nil {
 		ebipurego.RegisterLibFunc(&_fnLSMResultCopyWord, _lib, "LSMResultCopyWord")
@@ -144,6 +160,7 @@ var _fnLSMResultCopyWordCluster func(objc.ID, int) objc.ID
 
 // LSMResultCopyWordCluster calls the LatentSemanticMapping framework function LSMResultCopyWordCluster.
 func LSMResultCopyWordCluster(result LSMResultRef, n int) corefoundation.CFArrayRef {
+	defer runtime.KeepAlive(result)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSMResultCopyWordCluster == nil {
 		ebipurego.RegisterLibFunc(&_fnLSMResultCopyWordCluster, _lib, "LSMResultCopyWordCluster")
@@ -156,6 +173,9 @@ var _fnLSMResultCreate func(objc.ID, objc.ID, objc.ID, int, int) objc.ID
 
 // LSMResultCreate calls the LatentSemanticMapping framework function LSMResultCreate.
 func LSMResultCreate(alloc corefoundation.CFAllocatorRef, mapref LSMMapRef, textref LSMTextRef, numResults int, flags int) LSMResultRef {
+	defer runtime.KeepAlive(alloc)
+	defer runtime.KeepAlive(mapref)
+	defer runtime.KeepAlive(textref)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSMResultCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnLSMResultCreate, _lib, "LSMResultCreate")
@@ -168,6 +188,7 @@ var _fnLSMResultGetCategory func(objc.ID, int) uint32
 
 // LSMResultGetCategory calls the LatentSemanticMapping framework function LSMResultGetCategory.
 func LSMResultGetCategory(result LSMResultRef, n int) uint32 {
+	defer runtime.KeepAlive(result)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSMResultGetCategory == nil {
 		ebipurego.RegisterLibFunc(&_fnLSMResultGetCategory, _lib, "LSMResultGetCategory")
@@ -179,6 +200,7 @@ var _fnLSMResultGetCount func(objc.ID) int
 
 // LSMResultGetCount calls the LatentSemanticMapping framework function LSMResultGetCount.
 func LSMResultGetCount(result LSMResultRef) int {
+	defer runtime.KeepAlive(result)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSMResultGetCount == nil {
 		ebipurego.RegisterLibFunc(&_fnLSMResultGetCount, _lib, "LSMResultGetCount")
@@ -190,6 +212,7 @@ var _fnLSMResultGetScore func(objc.ID, int) float32
 
 // LSMResultGetScore calls the LatentSemanticMapping framework function LSMResultGetScore.
 func LSMResultGetScore(result LSMResultRef, n int) float32 {
+	defer runtime.KeepAlive(result)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSMResultGetScore == nil {
 		ebipurego.RegisterLibFunc(&_fnLSMResultGetScore, _lib, "LSMResultGetScore")
@@ -212,6 +235,8 @@ var _fnLSMTextCreate func(objc.ID, objc.ID) objc.ID
 
 // LSMTextCreate calls the LatentSemanticMapping framework function LSMTextCreate.
 func LSMTextCreate(alloc corefoundation.CFAllocatorRef, mapref LSMMapRef) LSMTextRef {
+	defer runtime.KeepAlive(alloc)
+	defer runtime.KeepAlive(mapref)
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSMTextCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnLSMTextCreate, _lib, "LSMTextCreate")

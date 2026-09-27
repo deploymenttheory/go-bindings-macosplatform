@@ -5,6 +5,7 @@
 package audiotoolbox
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
@@ -66,6 +67,7 @@ var _fnAUGraphAddNode func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // AUGraphAddNode calls the AudioToolbox framework function AUGraphAddNode.
 func AUGraphAddNode(inGraph AUGraph, inDescription *AudioComponentDescription) (result int, outNode int) {
+	defer runtime.KeepAlive(inGraph)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAUGraphAddNode == nil {
 		ebipurego.RegisterLibFunc(&_fnAUGraphAddNode, _lib, "AUGraphAddNode")
@@ -79,6 +81,7 @@ var _fnAUGraphCountNodeConnections func(objc.ID, int, unsafe.Pointer) int32
 
 // AUGraphCountNodeConnections calls the AudioToolbox framework function AUGraphCountNodeConnections.
 func AUGraphCountNodeConnections(inGraph AUGraph, inNode int) (result int, outNumConnections int) {
+	defer runtime.KeepAlive(inGraph)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAUGraphCountNodeConnections == nil {
 		ebipurego.RegisterLibFunc(&_fnAUGraphCountNodeConnections, _lib, "AUGraphCountNodeConnections")
@@ -92,6 +95,7 @@ var _fnAUGraphCountNodeInteractions func(objc.ID, int, unsafe.Pointer) int32
 
 // AUGraphCountNodeInteractions calls the AudioToolbox framework function AUGraphCountNodeInteractions.
 func AUGraphCountNodeInteractions(inGraph AUGraph, inNode int) (result int, outNumInteractions int) {
+	defer runtime.KeepAlive(inGraph)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAUGraphCountNodeInteractions == nil {
 		ebipurego.RegisterLibFunc(&_fnAUGraphCountNodeInteractions, _lib, "AUGraphCountNodeInteractions")
@@ -105,6 +109,7 @@ var _fnAUGraphGetCPULoad func(objc.ID, unsafe.Pointer) int32
 
 // AUGraphGetCPULoad calls the AudioToolbox framework function AUGraphGetCPULoad.
 func AUGraphGetCPULoad(inGraph AUGraph) (result int, outAverageCPULoad float32) {
+	defer runtime.KeepAlive(inGraph)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAUGraphGetCPULoad == nil {
 		ebipurego.RegisterLibFunc(&_fnAUGraphGetCPULoad, _lib, "AUGraphGetCPULoad")
@@ -118,6 +123,7 @@ var _fnAUGraphGetConnectionInfo func(objc.ID, int, unsafe.Pointer, unsafe.Pointe
 
 // AUGraphGetConnectionInfo calls the AudioToolbox framework function AUGraphGetConnectionInfo.
 func AUGraphGetConnectionInfo(inGraph AUGraph, inConnectionIndex int) (result int, outSourceNode int, outSourceOutputNumber int, outDestNode int, outDestInputNumber int) {
+	defer runtime.KeepAlive(inGraph)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAUGraphGetConnectionInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnAUGraphGetConnectionInfo, _lib, "AUGraphGetConnectionInfo")
@@ -134,6 +140,7 @@ var _fnAUGraphGetIndNode func(objc.ID, int, unsafe.Pointer) int32
 
 // AUGraphGetIndNode calls the AudioToolbox framework function AUGraphGetIndNode.
 func AUGraphGetIndNode(inGraph AUGraph, inIndex int) (result int, outNode int) {
+	defer runtime.KeepAlive(inGraph)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAUGraphGetIndNode == nil {
 		ebipurego.RegisterLibFunc(&_fnAUGraphGetIndNode, _lib, "AUGraphGetIndNode")
@@ -147,6 +154,7 @@ var _fnAUGraphGetInteractionInfo func(objc.ID, int, unsafe.Pointer) int32
 
 // AUGraphGetInteractionInfo calls the AudioToolbox framework function AUGraphGetInteractionInfo.
 func AUGraphGetInteractionInfo(inGraph AUGraph, inInteractionIndex int, outInteraction unsafe.Pointer) int {
+	defer runtime.KeepAlive(inGraph)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAUGraphGetInteractionInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnAUGraphGetInteractionInfo, _lib, "AUGraphGetInteractionInfo")
@@ -158,6 +166,7 @@ var _fnAUGraphGetMaxCPULoad func(objc.ID, unsafe.Pointer) int32
 
 // AUGraphGetMaxCPULoad calls the AudioToolbox framework function AUGraphGetMaxCPULoad.
 func AUGraphGetMaxCPULoad(inGraph AUGraph) (result int, outMaxLoad float32) {
+	defer runtime.KeepAlive(inGraph)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAUGraphGetMaxCPULoad == nil {
 		ebipurego.RegisterLibFunc(&_fnAUGraphGetMaxCPULoad, _lib, "AUGraphGetMaxCPULoad")
@@ -171,6 +180,7 @@ var _fnAUGraphGetNodeConnections func(objc.ID, int, unsafe.Pointer, unsafe.Point
 
 // AUGraphGetNodeConnections calls the AudioToolbox framework function AUGraphGetNodeConnections.
 func AUGraphGetNodeConnections(inGraph AUGraph, inNode int) (result int, outConnections AudioUnitNodeConnection, ioNumConnections int) {
+	defer runtime.KeepAlive(inGraph)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAUGraphGetNodeConnections == nil {
 		ebipurego.RegisterLibFunc(&_fnAUGraphGetNodeConnections, _lib, "AUGraphGetNodeConnections")
@@ -185,6 +195,7 @@ var _fnAUGraphGetNodeCount func(objc.ID, unsafe.Pointer) int32
 
 // AUGraphGetNodeCount calls the AudioToolbox framework function AUGraphGetNodeCount.
 func AUGraphGetNodeCount(inGraph AUGraph) (result int, outNumberOfNodes int) {
+	defer runtime.KeepAlive(inGraph)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAUGraphGetNodeCount == nil {
 		ebipurego.RegisterLibFunc(&_fnAUGraphGetNodeCount, _lib, "AUGraphGetNodeCount")
@@ -198,6 +209,7 @@ var _fnAUGraphGetNodeInfo func(objc.ID, int, unsafe.Pointer, unsafe.Pointer, uns
 
 // AUGraphGetNodeInfo calls the AudioToolbox framework function AUGraphGetNodeInfo.
 func AUGraphGetNodeInfo(inGraph AUGraph, inNode int, outDescription *carboncore.ComponentDescription, outClassData unsafe.Pointer, outAudioUnit unsafe.Pointer) (result int, outClassDataSize int) {
+	defer runtime.KeepAlive(inGraph)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAUGraphGetNodeInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnAUGraphGetNodeInfo, _lib, "AUGraphGetNodeInfo")
@@ -211,6 +223,7 @@ var _fnAUGraphGetNodeInteractions func(objc.ID, int, unsafe.Pointer, unsafe.Poin
 
 // AUGraphGetNodeInteractions calls the AudioToolbox framework function AUGraphGetNodeInteractions.
 func AUGraphGetNodeInteractions(inGraph AUGraph, inNode int, outInteractions unsafe.Pointer) (result int, ioNumInteractions int) {
+	defer runtime.KeepAlive(inGraph)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAUGraphGetNodeInteractions == nil {
 		ebipurego.RegisterLibFunc(&_fnAUGraphGetNodeInteractions, _lib, "AUGraphGetNodeInteractions")
@@ -224,6 +237,7 @@ var _fnAUGraphGetNumberOfConnections func(objc.ID, unsafe.Pointer) int32
 
 // AUGraphGetNumberOfConnections calls the AudioToolbox framework function AUGraphGetNumberOfConnections.
 func AUGraphGetNumberOfConnections(inGraph AUGraph) (result int, outNumConnections int) {
+	defer runtime.KeepAlive(inGraph)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAUGraphGetNumberOfConnections == nil {
 		ebipurego.RegisterLibFunc(&_fnAUGraphGetNumberOfConnections, _lib, "AUGraphGetNumberOfConnections")
@@ -237,6 +251,7 @@ var _fnAUGraphGetNumberOfInteractions func(objc.ID, unsafe.Pointer) int32
 
 // AUGraphGetNumberOfInteractions calls the AudioToolbox framework function AUGraphGetNumberOfInteractions.
 func AUGraphGetNumberOfInteractions(inGraph AUGraph) (result int, outNumInteractions int) {
+	defer runtime.KeepAlive(inGraph)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAUGraphGetNumberOfInteractions == nil {
 		ebipurego.RegisterLibFunc(&_fnAUGraphGetNumberOfInteractions, _lib, "AUGraphGetNumberOfInteractions")
@@ -250,6 +265,7 @@ var _fnAUGraphIsInitialized func(objc.ID, unsafe.Pointer) int32
 
 // AUGraphIsInitialized calls the AudioToolbox framework function AUGraphIsInitialized.
 func AUGraphIsInitialized(inGraph AUGraph) (result int, outIsInitialized uint8) {
+	defer runtime.KeepAlive(inGraph)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAUGraphIsInitialized == nil {
 		ebipurego.RegisterLibFunc(&_fnAUGraphIsInitialized, _lib, "AUGraphIsInitialized")
@@ -263,6 +279,7 @@ var _fnAUGraphIsNodeSubGraph func(objc.ID, int, unsafe.Pointer) int32
 
 // AUGraphIsNodeSubGraph calls the AudioToolbox framework function AUGraphIsNodeSubGraph.
 func AUGraphIsNodeSubGraph(inGraph AUGraph, inNode int) (result int, outFlag uint8) {
+	defer runtime.KeepAlive(inGraph)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAUGraphIsNodeSubGraph == nil {
 		ebipurego.RegisterLibFunc(&_fnAUGraphIsNodeSubGraph, _lib, "AUGraphIsNodeSubGraph")
@@ -276,6 +293,7 @@ var _fnAUGraphIsOpen func(objc.ID, unsafe.Pointer) int32
 
 // AUGraphIsOpen calls the AudioToolbox framework function AUGraphIsOpen.
 func AUGraphIsOpen(inGraph AUGraph) (result int, outIsOpen uint8) {
+	defer runtime.KeepAlive(inGraph)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAUGraphIsOpen == nil {
 		ebipurego.RegisterLibFunc(&_fnAUGraphIsOpen, _lib, "AUGraphIsOpen")
@@ -289,6 +307,7 @@ var _fnAUGraphIsRunning func(objc.ID, unsafe.Pointer) int32
 
 // AUGraphIsRunning calls the AudioToolbox framework function AUGraphIsRunning.
 func AUGraphIsRunning(inGraph AUGraph) (result int, outIsRunning uint8) {
+	defer runtime.KeepAlive(inGraph)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAUGraphIsRunning == nil {
 		ebipurego.RegisterLibFunc(&_fnAUGraphIsRunning, _lib, "AUGraphIsRunning")
@@ -302,6 +321,7 @@ var _fnAUGraphNewNode func(objc.ID, unsafe.Pointer, int, unsafe.Pointer, unsafe.
 
 // AUGraphNewNode calls the AudioToolbox framework function AUGraphNewNode.
 func AUGraphNewNode(inGraph AUGraph, inDescription *carboncore.ComponentDescription, inClassDataSize int, inClassData unsafe.Pointer) (result int, outNode int) {
+	defer runtime.KeepAlive(inGraph)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAUGraphNewNode == nil {
 		ebipurego.RegisterLibFunc(&_fnAUGraphNewNode, _lib, "AUGraphNewNode")
@@ -315,6 +335,7 @@ var _fnAUGraphNewNodeSubGraph func(objc.ID, unsafe.Pointer) int32
 
 // AUGraphNewNodeSubGraph calls the AudioToolbox framework function AUGraphNewNodeSubGraph.
 func AUGraphNewNodeSubGraph(inGraph AUGraph) (result int, outNode int) {
+	defer runtime.KeepAlive(inGraph)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAUGraphNewNodeSubGraph == nil {
 		ebipurego.RegisterLibFunc(&_fnAUGraphNewNodeSubGraph, _lib, "AUGraphNewNodeSubGraph")
@@ -328,6 +349,7 @@ var _fnAUGraphNodeInfo func(objc.ID, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // AUGraphNodeInfo calls the AudioToolbox framework function AUGraphNodeInfo.
 func AUGraphNodeInfo(inGraph AUGraph, inNode int, outAudioUnit unsafe.Pointer) (result int, outDescription AudioComponentDescription) {
+	defer runtime.KeepAlive(inGraph)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAUGraphNodeInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnAUGraphNodeInfo, _lib, "AUGraphNodeInfo")
@@ -341,6 +363,7 @@ var _fnAUGraphSetNodeInputCallback func(objc.ID, int, int, unsafe.Pointer) int32
 
 // AUGraphSetNodeInputCallback calls the AudioToolbox framework function AUGraphSetNodeInputCallback.
 func AUGraphSetNodeInputCallback(inGraph AUGraph, inDestNode int, inDestInputNumber int, inInputCallback unsafe.Pointer) int {
+	defer runtime.KeepAlive(inGraph)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAUGraphSetNodeInputCallback == nil {
 		ebipurego.RegisterLibFunc(&_fnAUGraphSetNodeInputCallback, _lib, "AUGraphSetNodeInputCallback")
@@ -352,6 +375,7 @@ var _fnAUGraphUpdate func(objc.ID, unsafe.Pointer) int32
 
 // AUGraphUpdate calls the AudioToolbox framework function AUGraphUpdate.
 func AUGraphUpdate(inGraph AUGraph) (result int, outIsUpdated uint8) {
+	defer runtime.KeepAlive(inGraph)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAUGraphUpdate == nil {
 		ebipurego.RegisterLibFunc(&_fnAUGraphUpdate, _lib, "AUGraphUpdate")
@@ -365,6 +389,7 @@ var _fnAUListenerAddParameter func(objc.ID, unsafe.Pointer, unsafe.Pointer) int3
 
 // AUListenerAddParameter calls the AudioToolbox framework function AUListenerAddParameter.
 func AUListenerAddParameter(inListener AUParameterListenerRef, inObject unsafe.Pointer, inParameter unsafe.Pointer) int {
+	defer runtime.KeepAlive(inListener)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAUListenerAddParameter == nil {
 		ebipurego.RegisterLibFunc(&_fnAUListenerAddParameter, _lib, "AUListenerAddParameter")
@@ -387,6 +412,7 @@ var _fnAUListenerRemoveParameter func(objc.ID, unsafe.Pointer, unsafe.Pointer) i
 
 // AUListenerRemoveParameter calls the AudioToolbox framework function AUListenerRemoveParameter.
 func AUListenerRemoveParameter(inListener AUParameterListenerRef, inObject unsafe.Pointer, inParameter unsafe.Pointer) int {
+	defer runtime.KeepAlive(inListener)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAUListenerRemoveParameter == nil {
 		ebipurego.RegisterLibFunc(&_fnAUListenerRemoveParameter, _lib, "AUListenerRemoveParameter")
@@ -409,6 +435,7 @@ var _fnAUParameterListenerNotify func(objc.ID, unsafe.Pointer, unsafe.Pointer) i
 
 // AUParameterListenerNotify calls the AudioToolbox framework function AUParameterListenerNotify.
 func AUParameterListenerNotify(inSendingListener AUParameterListenerRef, inSendingObject unsafe.Pointer, inParameter unsafe.Pointer) int {
+	defer runtime.KeepAlive(inSendingListener)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAUParameterListenerNotify == nil {
 		ebipurego.RegisterLibFunc(&_fnAUParameterListenerNotify, _lib, "AUParameterListenerNotify")
@@ -420,6 +447,7 @@ var _fnAUParameterSet func(objc.ID, unsafe.Pointer, unsafe.Pointer, float32, int
 
 // AUParameterSet calls the AudioToolbox framework function AUParameterSet.
 func AUParameterSet(inSendingListener AUParameterListenerRef, inSendingObject unsafe.Pointer, inParameter unsafe.Pointer, inValue float32, inBufferOffsetInFrames int) int {
+	defer runtime.KeepAlive(inSendingListener)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAUParameterSet == nil {
 		ebipurego.RegisterLibFunc(&_fnAUParameterSet, _lib, "AUParameterSet")
@@ -537,6 +565,7 @@ var _fnAudioComponentCopyIcon func(objc.ID) objc.ID
 
 // AudioComponentCopyIcon calls the AudioToolbox framework function AudioComponentCopyIcon.
 func AudioComponentCopyIcon(comp AudioComponent) obj.Object {
+	defer runtime.KeepAlive(comp)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAudioComponentCopyIcon == nil {
 		ebipurego.RegisterLibFunc(&_fnAudioComponentCopyIcon, _lib, "AudioComponentCopyIcon")
@@ -560,6 +589,7 @@ var _fnAudioComponentFindNext func(objc.ID, unsafe.Pointer) objc.ID
 
 // AudioComponentFindNext calls the AudioToolbox framework function AudioComponentFindNext.
 func AudioComponentFindNext(inComponent AudioComponent, inDesc *AudioComponentDescription) AudioComponent {
+	defer runtime.KeepAlive(inComponent)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAudioComponentFindNext == nil {
 		ebipurego.RegisterLibFunc(&_fnAudioComponentFindNext, _lib, "AudioComponentFindNext")
@@ -572,6 +602,7 @@ var _fnAudioComponentGetIcon func(objc.ID) objc.ID
 
 // AudioComponentGetIcon calls the AudioToolbox framework function AudioComponentGetIcon.
 func AudioComponentGetIcon(comp AudioComponent) obj.Object {
+	defer runtime.KeepAlive(comp)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAudioComponentGetIcon == nil {
 		ebipurego.RegisterLibFunc(&_fnAudioComponentGetIcon, _lib, "AudioComponentGetIcon")
@@ -584,6 +615,7 @@ var _fnAudioComponentGetVersion func(objc.ID, unsafe.Pointer) int32
 
 // AudioComponentGetVersion calls the AudioToolbox framework function AudioComponentGetVersion.
 func AudioComponentGetVersion(inComponent AudioComponent) (result int, outVersion int) {
+	defer runtime.KeepAlive(inComponent)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAudioComponentGetVersion == nil {
 		ebipurego.RegisterLibFunc(&_fnAudioComponentGetVersion, _lib, "AudioComponentGetVersion")
@@ -620,6 +652,7 @@ var _fnAudioComponentInstanceNew func(objc.ID, unsafe.Pointer) int32
 
 // AudioComponentInstanceNew calls the AudioToolbox framework function AudioComponentInstanceNew.
 func AudioComponentInstanceNew(inComponent AudioComponent, outInstance unsafe.Pointer) int {
+	defer runtime.KeepAlive(inComponent)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAudioComponentInstanceNew == nil {
 		ebipurego.RegisterLibFunc(&_fnAudioComponentInstanceNew, _lib, "AudioComponentInstanceNew")
@@ -631,6 +664,7 @@ var _fnAudioComponentInstantiate func(objc.ID, AudioComponentInstantiationOption
 
 // AudioComponentInstantiate calls the AudioToolbox framework function AudioComponentInstantiate.
 func AudioComponentInstantiate(inComponent AudioComponent, inOptions AudioComponentInstantiationOptions, inCompletionHandler unsafe.Pointer) {
+	defer runtime.KeepAlive(inComponent)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAudioComponentInstantiate == nil {
 		ebipurego.RegisterLibFunc(&_fnAudioComponentInstantiate, _lib, "AudioComponentInstantiate")
@@ -642,6 +676,7 @@ var _fnAudioComponentRegister func(unsafe.Pointer, objc.ID, int, unsafe.Pointer)
 
 // AudioComponentRegister calls the AudioToolbox framework function AudioComponentRegister.
 func AudioComponentRegister(inDesc *AudioComponentDescription, inName corefoundation.CFStringRef, inVersion int, inFactory unsafe.Pointer) AudioComponent {
+	defer runtime.KeepAlive(inName)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAudioComponentRegister == nil {
 		ebipurego.RegisterLibFunc(&_fnAudioComponentRegister, _lib, "AudioComponentRegister")
@@ -654,6 +689,8 @@ var _fnAudioComponentValidate func(objc.ID, objc.ID, unsafe.Pointer) int32
 
 // AudioComponentValidate calls the AudioToolbox framework function AudioComponentValidate.
 func AudioComponentValidate(inComponent AudioComponent, inValidationParameters corefoundation.CFDictionaryRef) (result int, outValidationResult AudioComponentValidationResult) {
+	defer runtime.KeepAlive(inComponent)
+	defer runtime.KeepAlive(inValidationParameters)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAudioComponentValidate == nil {
 		ebipurego.RegisterLibFunc(&_fnAudioComponentValidate, _lib, "AudioComponentValidate")
@@ -667,6 +704,7 @@ var _fnAudioConverterConvertBuffer func(objc.ID, int, unsafe.Pointer, unsafe.Poi
 
 // AudioConverterConvertBuffer calls the AudioToolbox framework function AudioConverterConvertBuffer.
 func AudioConverterConvertBuffer(inAudioConverter AudioConverterRef, inInputDataSize int, inInputData unsafe.Pointer, outOutputData unsafe.Pointer) (result int, ioOutputDataSize int) {
+	defer runtime.KeepAlive(inAudioConverter)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAudioConverterConvertBuffer == nil {
 		ebipurego.RegisterLibFunc(&_fnAudioConverterConvertBuffer, _lib, "AudioConverterConvertBuffer")
@@ -680,6 +718,7 @@ var _fnAudioConverterConvertComplexBuffer func(objc.ID, int, unsafe.Pointer, uns
 
 // AudioConverterConvertComplexBuffer calls the AudioToolbox framework function AudioConverterConvertComplexBuffer.
 func AudioConverterConvertComplexBuffer(inAudioConverter AudioConverterRef, inNumberPCMFrames int, inInputData unsafe.Pointer, outOutputData unsafe.Pointer) int {
+	defer runtime.KeepAlive(inAudioConverter)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAudioConverterConvertComplexBuffer == nil {
 		ebipurego.RegisterLibFunc(&_fnAudioConverterConvertComplexBuffer, _lib, "AudioConverterConvertComplexBuffer")
@@ -691,6 +730,7 @@ var _fnAudioConverterFillBuffer func(objc.ID, unsafe.Pointer, unsafe.Pointer, un
 
 // AudioConverterFillBuffer calls the AudioToolbox framework function AudioConverterFillBuffer.
 func AudioConverterFillBuffer(inAudioConverter AudioConverterRef, inInputDataProc unsafe.Pointer, inInputDataProcUserData unsafe.Pointer, outOutputData unsafe.Pointer) (result int, ioOutputDataSize int) {
+	defer runtime.KeepAlive(inAudioConverter)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAudioConverterFillBuffer == nil {
 		ebipurego.RegisterLibFunc(&_fnAudioConverterFillBuffer, _lib, "AudioConverterFillBuffer")
@@ -704,6 +744,7 @@ var _fnAudioConverterFillComplexBuffer func(objc.ID, unsafe.Pointer, unsafe.Poin
 
 // AudioConverterFillComplexBuffer calls the AudioToolbox framework function AudioConverterFillComplexBuffer.
 func AudioConverterFillComplexBuffer(inAudioConverter AudioConverterRef, inInputDataProc unsafe.Pointer, inInputDataProcUserData unsafe.Pointer, outOutputData unsafe.Pointer, outPacketDescription *coreaudiotypes.AudioStreamPacketDescription) (result int, ioOutputDataPacketSize int) {
+	defer runtime.KeepAlive(inAudioConverter)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAudioConverterFillComplexBuffer == nil {
 		ebipurego.RegisterLibFunc(&_fnAudioConverterFillComplexBuffer, _lib, "AudioConverterFillComplexBuffer")
@@ -717,6 +758,7 @@ var _fnAudioConverterFillComplexBufferRealtimeSafe func(objc.ID, unsafe.Pointer,
 
 // AudioConverterFillComplexBufferRealtimeSafe calls the AudioToolbox framework function AudioConverterFillComplexBufferRealtimeSafe.
 func AudioConverterFillComplexBufferRealtimeSafe(inAudioConverter AudioConverterRef, inInputDataProc unsafe.Pointer, inInputDataProcUserData unsafe.Pointer, outOutputData unsafe.Pointer, outPacketDescription *coreaudiotypes.AudioStreamPacketDescription) (result int, ioOutputDataPacketSize int) {
+	defer runtime.KeepAlive(inAudioConverter)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAudioConverterFillComplexBufferRealtimeSafe == nil {
 		ebipurego.RegisterLibFunc(&_fnAudioConverterFillComplexBufferRealtimeSafe, _lib, "AudioConverterFillComplexBufferRealtimeSafe")
@@ -730,6 +772,7 @@ var _fnAudioConverterFillComplexBufferWithPacketDependencies func(objc.ID, unsaf
 
 // AudioConverterFillComplexBufferWithPacketDependencies calls the AudioToolbox framework function AudioConverterFillComplexBufferWithPacketDependencies.
 func AudioConverterFillComplexBufferWithPacketDependencies(inAudioConverter AudioConverterRef, inInputDataProc unsafe.Pointer, inInputDataProcUserData unsafe.Pointer, outOutputData unsafe.Pointer, outPacketDescriptions *coreaudiotypes.AudioStreamPacketDescription, outPacketDependencies *coreaudiotypes.AudioStreamPacketDependencyDescription) (result int, ioOutputDataPacketSize int) {
+	defer runtime.KeepAlive(inAudioConverter)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAudioConverterFillComplexBufferWithPacketDependencies == nil {
 		ebipurego.RegisterLibFunc(&_fnAudioConverterFillComplexBufferWithPacketDependencies, _lib, "AudioConverterFillComplexBufferWithPacketDependencies")
@@ -743,6 +786,7 @@ var _fnAudioConverterGetProperty func(objc.ID, int, unsafe.Pointer, unsafe.Point
 
 // AudioConverterGetProperty calls the AudioToolbox framework function AudioConverterGetProperty.
 func AudioConverterGetProperty(inAudioConverter AudioConverterRef, inPropertyID int, outPropertyData unsafe.Pointer) (result int, ioPropertyDataSize int) {
+	defer runtime.KeepAlive(inAudioConverter)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAudioConverterGetProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnAudioConverterGetProperty, _lib, "AudioConverterGetProperty")
@@ -756,6 +800,7 @@ var _fnAudioConverterGetPropertyInfo func(objc.ID, int, unsafe.Pointer, unsafe.P
 
 // AudioConverterGetPropertyInfo calls the AudioToolbox framework function AudioConverterGetPropertyInfo.
 func AudioConverterGetPropertyInfo(inAudioConverter AudioConverterRef, inPropertyID int) (result int, outSize int, outWritable uint8) {
+	defer runtime.KeepAlive(inAudioConverter)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAudioConverterGetPropertyInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnAudioConverterGetPropertyInfo, _lib, "AudioConverterGetPropertyInfo")
@@ -807,6 +852,7 @@ var _fnAudioFileComponentExtensionIsThisFormat func(unsafe.Pointer, objc.ID, uns
 
 // AudioFileComponentExtensionIsThisFormat calls the AudioToolbox framework function AudioFileComponentExtensionIsThisFormat.
 func AudioFileComponentExtensionIsThisFormat(inComponent *carboncore.ComponentInstanceRecord, inExtension corefoundation.CFStringRef) (result int, outResult int) {
+	defer runtime.KeepAlive(inExtension)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAudioFileComponentExtensionIsThisFormat == nil {
 		ebipurego.RegisterLibFunc(&_fnAudioFileComponentExtensionIsThisFormat, _lib, "AudioFileComponentExtensionIsThisFormat")
@@ -1177,6 +1223,7 @@ var _fnAudioFileStreamGetProperty func(objc.ID, int, unsafe.Pointer, unsafe.Poin
 
 // AudioFileStreamGetProperty calls the AudioToolbox framework function AudioFileStreamGetProperty.
 func AudioFileStreamGetProperty(inAudioFileStream AudioFileStreamID, inPropertyID int, outPropertyData unsafe.Pointer) (result int, ioPropertyDataSize int) {
+	defer runtime.KeepAlive(inAudioFileStream)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAudioFileStreamGetProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnAudioFileStreamGetProperty, _lib, "AudioFileStreamGetProperty")
@@ -1190,6 +1237,7 @@ var _fnAudioFileStreamGetPropertyInfo func(objc.ID, int, unsafe.Pointer, unsafe.
 
 // AudioFileStreamGetPropertyInfo calls the AudioToolbox framework function AudioFileStreamGetPropertyInfo.
 func AudioFileStreamGetPropertyInfo(inAudioFileStream AudioFileStreamID, inPropertyID int) (result int, outPropertyDataSize int, outWritable uint8) {
+	defer runtime.KeepAlive(inAudioFileStream)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAudioFileStreamGetPropertyInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnAudioFileStreamGetPropertyInfo, _lib, "AudioFileStreamGetPropertyInfo")
@@ -1204,6 +1252,7 @@ var _fnAudioFileStreamSeek func(objc.ID, int64, unsafe.Pointer, unsafe.Pointer) 
 
 // AudioFileStreamSeek calls the AudioToolbox framework function AudioFileStreamSeek.
 func AudioFileStreamSeek(inAudioFileStream AudioFileStreamID, inPacketOffset int64) (result int, outDataByteOffset int64, ioFlags AudioFileStreamSeekFlags) {
+	defer runtime.KeepAlive(inAudioFileStream)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAudioFileStreamSeek == nil {
 		ebipurego.RegisterLibFunc(&_fnAudioFileStreamSeek, _lib, "AudioFileStreamSeek")
@@ -1333,6 +1382,7 @@ var _fnAudioQueueAllocateBuffer func(objc.ID, int, unsafe.Pointer) int32
 
 // AudioQueueAllocateBuffer calls the AudioToolbox framework function AudioQueueAllocateBuffer.
 func AudioQueueAllocateBuffer(inAQ AudioQueueRef, inBufferByteSize int, outBuffer unsafe.Pointer) int {
+	defer runtime.KeepAlive(inAQ)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAudioQueueAllocateBuffer == nil {
 		ebipurego.RegisterLibFunc(&_fnAudioQueueAllocateBuffer, _lib, "AudioQueueAllocateBuffer")
@@ -1344,6 +1394,7 @@ var _fnAudioQueueAllocateBufferWithPacketDescriptions func(objc.ID, int, int, un
 
 // AudioQueueAllocateBufferWithPacketDescriptions calls the AudioToolbox framework function AudioQueueAllocateBufferWithPacketDescriptions.
 func AudioQueueAllocateBufferWithPacketDescriptions(inAQ AudioQueueRef, inBufferByteSize int, inNumberPacketDescriptions int, outBuffer unsafe.Pointer) int {
+	defer runtime.KeepAlive(inAQ)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAudioQueueAllocateBufferWithPacketDescriptions == nil {
 		ebipurego.RegisterLibFunc(&_fnAudioQueueAllocateBufferWithPacketDescriptions, _lib, "AudioQueueAllocateBufferWithPacketDescriptions")
@@ -1355,6 +1406,7 @@ var _fnAudioQueueEnqueueBuffer func(objc.ID, unsafe.Pointer, int, unsafe.Pointer
 
 // AudioQueueEnqueueBuffer calls the AudioToolbox framework function AudioQueueEnqueueBuffer.
 func AudioQueueEnqueueBuffer(inAQ AudioQueueRef, inBuffer unsafe.Pointer, inNumPacketDescs int, inPacketDescs *coreaudiotypes.AudioStreamPacketDescription) int {
+	defer runtime.KeepAlive(inAQ)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAudioQueueEnqueueBuffer == nil {
 		ebipurego.RegisterLibFunc(&_fnAudioQueueEnqueueBuffer, _lib, "AudioQueueEnqueueBuffer")
@@ -1366,6 +1418,7 @@ var _fnAudioQueueEnqueueBufferWithParameters func(objc.ID, unsafe.Pointer, int, 
 
 // AudioQueueEnqueueBufferWithParameters calls the AudioToolbox framework function AudioQueueEnqueueBufferWithParameters.
 func AudioQueueEnqueueBufferWithParameters(inAQ AudioQueueRef, inBuffer unsafe.Pointer, inNumPacketDescs int, inPacketDescs *coreaudiotypes.AudioStreamPacketDescription, inTrimFramesAtStart int, inTrimFramesAtEnd int, inNumParamValues int, inParamValues *AudioQueueParameterEvent, inStartTime *coreaudiotypes.AudioTimeStamp, outActualStartTime *coreaudiotypes.AudioTimeStamp) int {
+	defer runtime.KeepAlive(inAQ)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAudioQueueEnqueueBufferWithParameters == nil {
 		ebipurego.RegisterLibFunc(&_fnAudioQueueEnqueueBufferWithParameters, _lib, "AudioQueueEnqueueBufferWithParameters")
@@ -1377,6 +1430,7 @@ var _fnAudioQueueFreeBuffer func(objc.ID, unsafe.Pointer) int32
 
 // AudioQueueFreeBuffer calls the AudioToolbox framework function AudioQueueFreeBuffer.
 func AudioQueueFreeBuffer(inAQ AudioQueueRef, inBuffer unsafe.Pointer) int {
+	defer runtime.KeepAlive(inAQ)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAudioQueueFreeBuffer == nil {
 		ebipurego.RegisterLibFunc(&_fnAudioQueueFreeBuffer, _lib, "AudioQueueFreeBuffer")
@@ -1388,6 +1442,8 @@ var _fnAudioQueueGetCurrentTime func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Po
 
 // AudioQueueGetCurrentTime calls the AudioToolbox framework function AudioQueueGetCurrentTime.
 func AudioQueueGetCurrentTime(inAQ AudioQueueRef, inTimeline AudioQueueTimelineRef, outTimeStamp *coreaudiotypes.AudioTimeStamp) (result int, outTimelineDiscontinuity uint8) {
+	defer runtime.KeepAlive(inAQ)
+	defer runtime.KeepAlive(inTimeline)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAudioQueueGetCurrentTime == nil {
 		ebipurego.RegisterLibFunc(&_fnAudioQueueGetCurrentTime, _lib, "AudioQueueGetCurrentTime")
@@ -1401,6 +1457,7 @@ var _fnAudioQueueGetParameter func(objc.ID, int, unsafe.Pointer) int32
 
 // AudioQueueGetParameter calls the AudioToolbox framework function AudioQueueGetParameter.
 func AudioQueueGetParameter(inAQ AudioQueueRef, inParamID int) (result int, outValue float32) {
+	defer runtime.KeepAlive(inAQ)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAudioQueueGetParameter == nil {
 		ebipurego.RegisterLibFunc(&_fnAudioQueueGetParameter, _lib, "AudioQueueGetParameter")
@@ -1414,6 +1471,7 @@ var _fnAudioQueueGetProperty func(objc.ID, int, unsafe.Pointer, unsafe.Pointer) 
 
 // AudioQueueGetProperty calls the AudioToolbox framework function AudioQueueGetProperty.
 func AudioQueueGetProperty(inAQ AudioQueueRef, inID int, outData unsafe.Pointer) (result int, ioDataSize int) {
+	defer runtime.KeepAlive(inAQ)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAudioQueueGetProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnAudioQueueGetProperty, _lib, "AudioQueueGetProperty")
@@ -1427,6 +1485,7 @@ var _fnAudioQueueGetPropertySize func(objc.ID, int, unsafe.Pointer) int32
 
 // AudioQueueGetPropertySize calls the AudioToolbox framework function AudioQueueGetPropertySize.
 func AudioQueueGetPropertySize(inAQ AudioQueueRef, inID int) (result int, outDataSize int) {
+	defer runtime.KeepAlive(inAQ)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAudioQueueGetPropertySize == nil {
 		ebipurego.RegisterLibFunc(&_fnAudioQueueGetPropertySize, _lib, "AudioQueueGetPropertySize")
@@ -1462,6 +1521,7 @@ var _fnAudioQueueOfflineRender func(objc.ID, unsafe.Pointer, unsafe.Pointer, int
 
 // AudioQueueOfflineRender calls the AudioToolbox framework function AudioQueueOfflineRender.
 func AudioQueueOfflineRender(inAQ AudioQueueRef, inTimestamp *coreaudiotypes.AudioTimeStamp, ioBuffer unsafe.Pointer, inNumberFrames int) int {
+	defer runtime.KeepAlive(inAQ)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAudioQueueOfflineRender == nil {
 		ebipurego.RegisterLibFunc(&_fnAudioQueueOfflineRender, _lib, "AudioQueueOfflineRender")
@@ -1473,6 +1533,7 @@ var _fnAudioQueuePrime func(objc.ID, int, unsafe.Pointer) int32
 
 // AudioQueuePrime calls the AudioToolbox framework function AudioQueuePrime.
 func AudioQueuePrime(inAQ AudioQueueRef, inNumberOfFramesToPrepare int) (result int, outNumberOfFramesPrepared int) {
+	defer runtime.KeepAlive(inAQ)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAudioQueuePrime == nil {
 		ebipurego.RegisterLibFunc(&_fnAudioQueuePrime, _lib, "AudioQueuePrime")
@@ -1486,6 +1547,7 @@ var _fnAudioQueueProcessingTapGetQueueTime func(objc.ID, unsafe.Pointer, unsafe.
 
 // AudioQueueProcessingTapGetQueueTime calls the AudioToolbox framework function AudioQueueProcessingTapGetQueueTime.
 func AudioQueueProcessingTapGetQueueTime(inAQTap AudioQueueProcessingTapRef, outQueueSampleTime unsafe.Pointer) (result int, outQueueFrameCount int) {
+	defer runtime.KeepAlive(inAQTap)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAudioQueueProcessingTapGetQueueTime == nil {
 		ebipurego.RegisterLibFunc(&_fnAudioQueueProcessingTapGetQueueTime, _lib, "AudioQueueProcessingTapGetQueueTime")
@@ -1499,6 +1561,7 @@ var _fnAudioQueueProcessingTapGetSourceAudio func(objc.ID, int, unsafe.Pointer, 
 
 // AudioQueueProcessingTapGetSourceAudio calls the AudioToolbox framework function AudioQueueProcessingTapGetSourceAudio.
 func AudioQueueProcessingTapGetSourceAudio(inAQTap AudioQueueProcessingTapRef, inNumberFrames int, ioTimeStamp *coreaudiotypes.AudioTimeStamp, ioData unsafe.Pointer) (result int, outFlags AudioQueueProcessingTapFlags, outNumberFrames int) {
+	defer runtime.KeepAlive(inAQTap)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAudioQueueProcessingTapGetSourceAudio == nil {
 		ebipurego.RegisterLibFunc(&_fnAudioQueueProcessingTapGetSourceAudio, _lib, "AudioQueueProcessingTapGetSourceAudio")
@@ -1513,6 +1576,7 @@ var _fnAudioQueueProcessingTapNew func(objc.ID, unsafe.Pointer, unsafe.Pointer, 
 
 // AudioQueueProcessingTapNew calls the AudioToolbox framework function AudioQueueProcessingTapNew.
 func AudioQueueProcessingTapNew(inAQ AudioQueueRef, inCallback unsafe.Pointer, inClientData unsafe.Pointer, inFlags AudioQueueProcessingTapFlags, outProcessingFormat *coreaudiotypes.AudioStreamBasicDescription, outAQTap unsafe.Pointer) (result int, outMaxFrames int) {
+	defer runtime.KeepAlive(inAQ)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAudioQueueProcessingTapNew == nil {
 		ebipurego.RegisterLibFunc(&_fnAudioQueueProcessingTapNew, _lib, "AudioQueueProcessingTapNew")
@@ -1526,6 +1590,7 @@ var _fnAudioServicesCreateSystemSoundID func(objc.ID, unsafe.Pointer) int32
 
 // AudioServicesCreateSystemSoundID calls the AudioToolbox framework function AudioServicesCreateSystemSoundID.
 func AudioServicesCreateSystemSoundID(inFileURL corefoundation.CFURLRef) (result int, outSystemSoundID int) {
+	defer runtime.KeepAlive(inFileURL)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAudioServicesCreateSystemSoundID == nil {
 		ebipurego.RegisterLibFunc(&_fnAudioServicesCreateSystemSoundID, _lib, "AudioServicesCreateSystemSoundID")
@@ -1621,6 +1686,7 @@ var _fnAudioUnitExtensionCopyComponentList func(objc.ID) objc.ID
 
 // AudioUnitExtensionCopyComponentList calls the AudioToolbox framework function AudioUnitExtensionCopyComponentList.
 func AudioUnitExtensionCopyComponentList(extensionIdentifier corefoundation.CFStringRef) corefoundation.CFArrayRef {
+	defer runtime.KeepAlive(extensionIdentifier)
 	_loadOnce.Do(_loadLibrary)
 	if _fnAudioUnitExtensionCopyComponentList == nil {
 		ebipurego.RegisterLibFunc(&_fnAudioUnitExtensionCopyComponentList, _lib, "AudioUnitExtensionCopyComponentList")
@@ -1734,6 +1800,7 @@ var _fnCAClockBarBeatTimeToBeats func(objc.ID, unsafe.Pointer, unsafe.Pointer) i
 
 // CAClockBarBeatTimeToBeats calls the AudioToolbox framework function CAClockBarBeatTimeToBeats.
 func CAClockBarBeatTimeToBeats(inCAClock CAClockRef, inBarBeatTime *CABarBeatTime) (result int, outBeats float64) {
+	defer runtime.KeepAlive(inCAClock)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCAClockBarBeatTimeToBeats == nil {
 		ebipurego.RegisterLibFunc(&_fnCAClockBarBeatTimeToBeats, _lib, "CAClockBarBeatTimeToBeats")
@@ -1747,6 +1814,7 @@ var _fnCAClockGetCurrentTempo func(objc.ID, unsafe.Pointer, unsafe.Pointer) int3
 
 // CAClockGetCurrentTempo calls the AudioToolbox framework function CAClockGetCurrentTempo.
 func CAClockGetCurrentTempo(inCAClock CAClockRef, outTimestamp unsafe.Pointer) (result int, outTempo float64) {
+	defer runtime.KeepAlive(inCAClock)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCAClockGetCurrentTempo == nil {
 		ebipurego.RegisterLibFunc(&_fnCAClockGetCurrentTempo, _lib, "CAClockGetCurrentTempo")
@@ -1760,6 +1828,7 @@ var _fnCAClockGetCurrentTime func(objc.ID, CAClockTimeFormat, unsafe.Pointer) in
 
 // CAClockGetCurrentTime calls the AudioToolbox framework function CAClockGetCurrentTime.
 func CAClockGetCurrentTime(inCAClock CAClockRef, inTimeFormat CAClockTimeFormat, outTime unsafe.Pointer) int {
+	defer runtime.KeepAlive(inCAClock)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCAClockGetCurrentTime == nil {
 		ebipurego.RegisterLibFunc(&_fnCAClockGetCurrentTime, _lib, "CAClockGetCurrentTime")
@@ -1771,6 +1840,7 @@ var _fnCAClockGetPlayRate func(objc.ID, unsafe.Pointer) int32
 
 // CAClockGetPlayRate calls the AudioToolbox framework function CAClockGetPlayRate.
 func CAClockGetPlayRate(inCAClock CAClockRef) (result int, outPlayRate float64) {
+	defer runtime.KeepAlive(inCAClock)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCAClockGetPlayRate == nil {
 		ebipurego.RegisterLibFunc(&_fnCAClockGetPlayRate, _lib, "CAClockGetPlayRate")
@@ -1784,6 +1854,7 @@ var _fnCAClockGetProperty func(objc.ID, CAClockPropertyID, unsafe.Pointer, unsaf
 
 // CAClockGetProperty calls the AudioToolbox framework function CAClockGetProperty.
 func CAClockGetProperty(inCAClock CAClockRef, inPropertyID CAClockPropertyID, outPropertyData unsafe.Pointer) (result int, ioPropertyDataSize int) {
+	defer runtime.KeepAlive(inCAClock)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCAClockGetProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnCAClockGetProperty, _lib, "CAClockGetProperty")
@@ -1797,6 +1868,7 @@ var _fnCAClockGetPropertyInfo func(objc.ID, CAClockPropertyID, unsafe.Pointer, u
 
 // CAClockGetPropertyInfo calls the AudioToolbox framework function CAClockGetPropertyInfo.
 func CAClockGetPropertyInfo(inCAClock CAClockRef, inPropertyID CAClockPropertyID) (result int, outSize int, outWritable uint8) {
+	defer runtime.KeepAlive(inCAClock)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCAClockGetPropertyInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnCAClockGetPropertyInfo, _lib, "CAClockGetPropertyInfo")
@@ -1811,6 +1883,7 @@ var _fnCAClockGetStartTime func(objc.ID, CAClockTimeFormat, unsafe.Pointer) int3
 
 // CAClockGetStartTime calls the AudioToolbox framework function CAClockGetStartTime.
 func CAClockGetStartTime(inCAClock CAClockRef, inTimeFormat CAClockTimeFormat, outTime unsafe.Pointer) int {
+	defer runtime.KeepAlive(inCAClock)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCAClockGetStartTime == nil {
 		ebipurego.RegisterLibFunc(&_fnCAClockGetStartTime, _lib, "CAClockGetStartTime")
@@ -1822,6 +1895,7 @@ var _fnCAClockSMPTETimeToSeconds func(objc.ID, unsafe.Pointer, unsafe.Pointer) i
 
 // CAClockSMPTETimeToSeconds calls the AudioToolbox framework function CAClockSMPTETimeToSeconds.
 func CAClockSMPTETimeToSeconds(inCAClock CAClockRef, inSMPTETime *coreaudiotypes.SMPTETime) (result int, outSeconds float64) {
+	defer runtime.KeepAlive(inCAClock)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCAClockSMPTETimeToSeconds == nil {
 		ebipurego.RegisterLibFunc(&_fnCAClockSMPTETimeToSeconds, _lib, "CAClockSMPTETimeToSeconds")
@@ -1835,6 +1909,7 @@ var _fnCAClockSetCurrentTempo func(objc.ID, float64, unsafe.Pointer) int32
 
 // CAClockSetCurrentTempo calls the AudioToolbox framework function CAClockSetCurrentTempo.
 func CAClockSetCurrentTempo(inCAClock CAClockRef, inTempo float64, inTimestamp unsafe.Pointer) int {
+	defer runtime.KeepAlive(inCAClock)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCAClockSetCurrentTempo == nil {
 		ebipurego.RegisterLibFunc(&_fnCAClockSetCurrentTempo, _lib, "CAClockSetCurrentTempo")
@@ -1846,6 +1921,7 @@ var _fnCAClockSetCurrentTime func(objc.ID, unsafe.Pointer) int32
 
 // CAClockSetCurrentTime calls the AudioToolbox framework function CAClockSetCurrentTime.
 func CAClockSetCurrentTime(inCAClock CAClockRef, inTime unsafe.Pointer) int {
+	defer runtime.KeepAlive(inCAClock)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCAClockSetCurrentTime == nil {
 		ebipurego.RegisterLibFunc(&_fnCAClockSetCurrentTime, _lib, "CAClockSetCurrentTime")
@@ -1857,6 +1933,7 @@ var _fnCAClockTranslateTime func(objc.ID, unsafe.Pointer, CAClockTimeFormat, uns
 
 // CAClockTranslateTime calls the AudioToolbox framework function CAClockTranslateTime.
 func CAClockTranslateTime(inCAClock CAClockRef, inTime unsafe.Pointer, inOutputTimeFormat CAClockTimeFormat, outTime unsafe.Pointer) int {
+	defer runtime.KeepAlive(inCAClock)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCAClockTranslateTime == nil {
 		ebipurego.RegisterLibFunc(&_fnCAClockTranslateTime, _lib, "CAClockTranslateTime")
@@ -1890,6 +1967,7 @@ var _fnExtAudioFileGetProperty func(objc.ID, int, unsafe.Pointer, unsafe.Pointer
 
 // ExtAudioFileGetProperty calls the AudioToolbox framework function ExtAudioFileGetProperty.
 func ExtAudioFileGetProperty(inExtAudioFile ExtAudioFileRef, inPropertyID int, outPropertyData unsafe.Pointer) (result int, ioPropertyDataSize int) {
+	defer runtime.KeepAlive(inExtAudioFile)
 	_loadOnce.Do(_loadLibrary)
 	if _fnExtAudioFileGetProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnExtAudioFileGetProperty, _lib, "ExtAudioFileGetProperty")
@@ -1903,6 +1981,7 @@ var _fnExtAudioFileGetPropertyInfo func(objc.ID, int, unsafe.Pointer, unsafe.Poi
 
 // ExtAudioFileGetPropertyInfo calls the AudioToolbox framework function ExtAudioFileGetPropertyInfo.
 func ExtAudioFileGetPropertyInfo(inExtAudioFile ExtAudioFileRef, inPropertyID int) (result int, outSize int, outWritable uint8) {
+	defer runtime.KeepAlive(inExtAudioFile)
 	_loadOnce.Do(_loadLibrary)
 	if _fnExtAudioFileGetPropertyInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnExtAudioFileGetPropertyInfo, _lib, "ExtAudioFileGetPropertyInfo")
@@ -1917,6 +1996,7 @@ var _fnExtAudioFileRead func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // ExtAudioFileRead calls the AudioToolbox framework function ExtAudioFileRead.
 func ExtAudioFileRead(inExtAudioFile ExtAudioFileRef, ioData unsafe.Pointer) (result int, ioNumberFrames int) {
+	defer runtime.KeepAlive(inExtAudioFile)
 	_loadOnce.Do(_loadLibrary)
 	if _fnExtAudioFileRead == nil {
 		ebipurego.RegisterLibFunc(&_fnExtAudioFileRead, _lib, "ExtAudioFileRead")
@@ -1930,6 +2010,7 @@ var _fnExtAudioFileTell func(objc.ID, unsafe.Pointer) int32
 
 // ExtAudioFileTell calls the AudioToolbox framework function ExtAudioFileTell.
 func ExtAudioFileTell(inExtAudioFile ExtAudioFileRef) (result int, outFrameOffset int64) {
+	defer runtime.KeepAlive(inExtAudioFile)
 	_loadOnce.Do(_loadLibrary)
 	if _fnExtAudioFileTell == nil {
 		ebipurego.RegisterLibFunc(&_fnExtAudioFileTell, _lib, "ExtAudioFileTell")
@@ -1943,6 +2024,7 @@ var _fnExtAudioFileWrite func(objc.ID, int, unsafe.Pointer) int32
 
 // ExtAudioFileWrite calls the AudioToolbox framework function ExtAudioFileWrite.
 func ExtAudioFileWrite(inExtAudioFile ExtAudioFileRef, inNumberFrames int, ioData unsafe.Pointer) int {
+	defer runtime.KeepAlive(inExtAudioFile)
 	_loadOnce.Do(_loadLibrary)
 	if _fnExtAudioFileWrite == nil {
 		ebipurego.RegisterLibFunc(&_fnExtAudioFileWrite, _lib, "ExtAudioFileWrite")
@@ -1954,6 +2036,7 @@ var _fnExtAudioFileWriteAsync func(objc.ID, int, unsafe.Pointer) int32
 
 // ExtAudioFileWriteAsync calls the AudioToolbox framework function ExtAudioFileWriteAsync.
 func ExtAudioFileWriteAsync(inExtAudioFile ExtAudioFileRef, inNumberFrames int, ioData unsafe.Pointer) int {
+	defer runtime.KeepAlive(inExtAudioFile)
 	_loadOnce.Do(_loadLibrary)
 	if _fnExtAudioFileWriteAsync == nil {
 		ebipurego.RegisterLibFunc(&_fnExtAudioFileWriteAsync, _lib, "ExtAudioFileWriteAsync")
@@ -2000,6 +2083,7 @@ var _fnMusicEventIteratorGetEventInfo func(objc.ID, unsafe.Pointer, unsafe.Point
 
 // MusicEventIteratorGetEventInfo calls the AudioToolbox framework function MusicEventIteratorGetEventInfo.
 func MusicEventIteratorGetEventInfo(inIterator MusicEventIterator, outEventData unsafe.Pointer) (result int, outTimeStamp float64, outEventType int, outEventDataSize int) {
+	defer runtime.KeepAlive(inIterator)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMusicEventIteratorGetEventInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnMusicEventIteratorGetEventInfo, _lib, "MusicEventIteratorGetEventInfo")
@@ -2015,6 +2099,7 @@ var _fnMusicEventIteratorHasCurrentEvent func(objc.ID, unsafe.Pointer) int32
 
 // MusicEventIteratorHasCurrentEvent calls the AudioToolbox framework function MusicEventIteratorHasCurrentEvent.
 func MusicEventIteratorHasCurrentEvent(inIterator MusicEventIterator) (result int, outHasCurEvent uint8) {
+	defer runtime.KeepAlive(inIterator)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMusicEventIteratorHasCurrentEvent == nil {
 		ebipurego.RegisterLibFunc(&_fnMusicEventIteratorHasCurrentEvent, _lib, "MusicEventIteratorHasCurrentEvent")
@@ -2028,6 +2113,7 @@ var _fnMusicEventIteratorHasNextEvent func(objc.ID, unsafe.Pointer) int32
 
 // MusicEventIteratorHasNextEvent calls the AudioToolbox framework function MusicEventIteratorHasNextEvent.
 func MusicEventIteratorHasNextEvent(inIterator MusicEventIterator) (result int, outHasNextEvent uint8) {
+	defer runtime.KeepAlive(inIterator)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMusicEventIteratorHasNextEvent == nil {
 		ebipurego.RegisterLibFunc(&_fnMusicEventIteratorHasNextEvent, _lib, "MusicEventIteratorHasNextEvent")
@@ -2041,6 +2127,7 @@ var _fnMusicEventIteratorHasPreviousEvent func(objc.ID, unsafe.Pointer) int32
 
 // MusicEventIteratorHasPreviousEvent calls the AudioToolbox framework function MusicEventIteratorHasPreviousEvent.
 func MusicEventIteratorHasPreviousEvent(inIterator MusicEventIterator) (result int, outHasPrevEvent uint8) {
+	defer runtime.KeepAlive(inIterator)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMusicEventIteratorHasPreviousEvent == nil {
 		ebipurego.RegisterLibFunc(&_fnMusicEventIteratorHasPreviousEvent, _lib, "MusicEventIteratorHasPreviousEvent")
@@ -2054,6 +2141,7 @@ var _fnMusicPlayerGetBeatsForHostTime func(objc.ID, uint64, unsafe.Pointer) int3
 
 // MusicPlayerGetBeatsForHostTime calls the AudioToolbox framework function MusicPlayerGetBeatsForHostTime.
 func MusicPlayerGetBeatsForHostTime(inPlayer MusicPlayer, inHostTime uint64) (result int, outBeats float64) {
+	defer runtime.KeepAlive(inPlayer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMusicPlayerGetBeatsForHostTime == nil {
 		ebipurego.RegisterLibFunc(&_fnMusicPlayerGetBeatsForHostTime, _lib, "MusicPlayerGetBeatsForHostTime")
@@ -2067,6 +2155,7 @@ var _fnMusicPlayerGetHostTimeForBeats func(objc.ID, float64, unsafe.Pointer) int
 
 // MusicPlayerGetHostTimeForBeats calls the AudioToolbox framework function MusicPlayerGetHostTimeForBeats.
 func MusicPlayerGetHostTimeForBeats(inPlayer MusicPlayer, inBeats float64) (result int, outHostTime uint64) {
+	defer runtime.KeepAlive(inPlayer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMusicPlayerGetHostTimeForBeats == nil {
 		ebipurego.RegisterLibFunc(&_fnMusicPlayerGetHostTimeForBeats, _lib, "MusicPlayerGetHostTimeForBeats")
@@ -2080,6 +2169,7 @@ var _fnMusicPlayerGetPlayRateScalar func(objc.ID, unsafe.Pointer) int32
 
 // MusicPlayerGetPlayRateScalar calls the AudioToolbox framework function MusicPlayerGetPlayRateScalar.
 func MusicPlayerGetPlayRateScalar(inPlayer MusicPlayer) (result int, outScaleRate float64) {
+	defer runtime.KeepAlive(inPlayer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMusicPlayerGetPlayRateScalar == nil {
 		ebipurego.RegisterLibFunc(&_fnMusicPlayerGetPlayRateScalar, _lib, "MusicPlayerGetPlayRateScalar")
@@ -2093,6 +2183,7 @@ var _fnMusicPlayerGetTime func(objc.ID, unsafe.Pointer) int32
 
 // MusicPlayerGetTime calls the AudioToolbox framework function MusicPlayerGetTime.
 func MusicPlayerGetTime(inPlayer MusicPlayer) (result int, outTime float64) {
+	defer runtime.KeepAlive(inPlayer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMusicPlayerGetTime == nil {
 		ebipurego.RegisterLibFunc(&_fnMusicPlayerGetTime, _lib, "MusicPlayerGetTime")
@@ -2106,6 +2197,7 @@ var _fnMusicPlayerIsPlaying func(objc.ID, unsafe.Pointer) int32
 
 // MusicPlayerIsPlaying calls the AudioToolbox framework function MusicPlayerIsPlaying.
 func MusicPlayerIsPlaying(inPlayer MusicPlayer) (result int, outIsPlaying uint8) {
+	defer runtime.KeepAlive(inPlayer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMusicPlayerIsPlaying == nil {
 		ebipurego.RegisterLibFunc(&_fnMusicPlayerIsPlaying, _lib, "MusicPlayerIsPlaying")
@@ -2119,6 +2211,7 @@ var _fnMusicSequenceBarBeatTimeToBeats func(objc.ID, unsafe.Pointer, unsafe.Poin
 
 // MusicSequenceBarBeatTimeToBeats calls the AudioToolbox framework function MusicSequenceBarBeatTimeToBeats.
 func MusicSequenceBarBeatTimeToBeats(inSequence MusicSequence, inBarBeatTime *CABarBeatTime) (result int, outBeats float64) {
+	defer runtime.KeepAlive(inSequence)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMusicSequenceBarBeatTimeToBeats == nil {
 		ebipurego.RegisterLibFunc(&_fnMusicSequenceBarBeatTimeToBeats, _lib, "MusicSequenceBarBeatTimeToBeats")
@@ -2132,6 +2225,7 @@ var _fnMusicSequenceGetBeatsForSeconds func(objc.ID, float64, unsafe.Pointer) in
 
 // MusicSequenceGetBeatsForSeconds calls the AudioToolbox framework function MusicSequenceGetBeatsForSeconds.
 func MusicSequenceGetBeatsForSeconds(inSequence MusicSequence, inSeconds float64) (result int, outBeats float64) {
+	defer runtime.KeepAlive(inSequence)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMusicSequenceGetBeatsForSeconds == nil {
 		ebipurego.RegisterLibFunc(&_fnMusicSequenceGetBeatsForSeconds, _lib, "MusicSequenceGetBeatsForSeconds")
@@ -2145,6 +2239,7 @@ var _fnMusicSequenceGetInfoDictionary func(objc.ID) objc.ID
 
 // MusicSequenceGetInfoDictionary calls the AudioToolbox framework function MusicSequenceGetInfoDictionary.
 func MusicSequenceGetInfoDictionary(inSequence MusicSequence) corefoundation.CFDictionaryRef {
+	defer runtime.KeepAlive(inSequence)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMusicSequenceGetInfoDictionary == nil {
 		ebipurego.RegisterLibFunc(&_fnMusicSequenceGetInfoDictionary, _lib, "MusicSequenceGetInfoDictionary")
@@ -2171,6 +2266,7 @@ var _fnMusicSequenceGetSecondsForBeats func(objc.ID, float64, unsafe.Pointer) in
 
 // MusicSequenceGetSecondsForBeats calls the AudioToolbox framework function MusicSequenceGetSecondsForBeats.
 func MusicSequenceGetSecondsForBeats(inSequence MusicSequence, inBeats float64) (result int, outSeconds float64) {
+	defer runtime.KeepAlive(inSequence)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMusicSequenceGetSecondsForBeats == nil {
 		ebipurego.RegisterLibFunc(&_fnMusicSequenceGetSecondsForBeats, _lib, "MusicSequenceGetSecondsForBeats")
@@ -2184,6 +2280,7 @@ var _fnMusicSequenceGetSequenceType func(objc.ID, unsafe.Pointer) int32
 
 // MusicSequenceGetSequenceType calls the AudioToolbox framework function MusicSequenceGetSequenceType.
 func MusicSequenceGetSequenceType(inSequence MusicSequence) (result int, outType MusicSequenceType) {
+	defer runtime.KeepAlive(inSequence)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMusicSequenceGetSequenceType == nil {
 		ebipurego.RegisterLibFunc(&_fnMusicSequenceGetSequenceType, _lib, "MusicSequenceGetSequenceType")
@@ -2197,6 +2294,7 @@ var _fnMusicSequenceGetTrackCount func(objc.ID, unsafe.Pointer) int32
 
 // MusicSequenceGetTrackCount calls the AudioToolbox framework function MusicSequenceGetTrackCount.
 func MusicSequenceGetTrackCount(inSequence MusicSequence) (result int, outNumberOfTracks int) {
+	defer runtime.KeepAlive(inSequence)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMusicSequenceGetTrackCount == nil {
 		ebipurego.RegisterLibFunc(&_fnMusicSequenceGetTrackCount, _lib, "MusicSequenceGetTrackCount")
@@ -2210,6 +2308,8 @@ var _fnMusicSequenceGetTrackIndex func(objc.ID, objc.ID, unsafe.Pointer) int32
 
 // MusicSequenceGetTrackIndex calls the AudioToolbox framework function MusicSequenceGetTrackIndex.
 func MusicSequenceGetTrackIndex(inSequence MusicSequence, inTrack MusicTrack) (result int, outTrackIndex int) {
+	defer runtime.KeepAlive(inSequence)
+	defer runtime.KeepAlive(inTrack)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMusicSequenceGetTrackIndex == nil {
 		ebipurego.RegisterLibFunc(&_fnMusicSequenceGetTrackIndex, _lib, "MusicSequenceGetTrackIndex")
@@ -2234,6 +2334,7 @@ var _fnMusicTrackGetDestMIDIEndpoint func(objc.ID, unsafe.Pointer) int32
 
 // MusicTrackGetDestMIDIEndpoint calls the AudioToolbox framework function MusicTrackGetDestMIDIEndpoint.
 func MusicTrackGetDestMIDIEndpoint(inTrack MusicTrack) (result int, outEndpoint int) {
+	defer runtime.KeepAlive(inTrack)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMusicTrackGetDestMIDIEndpoint == nil {
 		ebipurego.RegisterLibFunc(&_fnMusicTrackGetDestMIDIEndpoint, _lib, "MusicTrackGetDestMIDIEndpoint")
@@ -2247,6 +2348,7 @@ var _fnMusicTrackGetDestNode func(objc.ID, unsafe.Pointer) int32
 
 // MusicTrackGetDestNode calls the AudioToolbox framework function MusicTrackGetDestNode.
 func MusicTrackGetDestNode(inTrack MusicTrack) (result int, outNode int) {
+	defer runtime.KeepAlive(inTrack)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMusicTrackGetDestNode == nil {
 		ebipurego.RegisterLibFunc(&_fnMusicTrackGetDestNode, _lib, "MusicTrackGetDestNode")
@@ -2260,6 +2362,7 @@ var _fnMusicTrackGetProperty func(objc.ID, int, unsafe.Pointer, unsafe.Pointer) 
 
 // MusicTrackGetProperty calls the AudioToolbox framework function MusicTrackGetProperty.
 func MusicTrackGetProperty(inTrack MusicTrack, inPropertyID int, outData unsafe.Pointer) (result int, ioLength int) {
+	defer runtime.KeepAlive(inTrack)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMusicTrackGetProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnMusicTrackGetProperty, _lib, "MusicTrackGetProperty")
@@ -2273,6 +2376,7 @@ var _fnMusicTrackNewAUPresetEvent func(objc.ID, float64, unsafe.Pointer) int32
 
 // MusicTrackNewAUPresetEvent calls the AudioToolbox framework function MusicTrackNewAUPresetEvent.
 func MusicTrackNewAUPresetEvent(inTrack MusicTrack, inTimeStamp float64, inPresetEvent unsafe.Pointer) int {
+	defer runtime.KeepAlive(inTrack)
 	_loadOnce.Do(_loadLibrary)
 	if _fnMusicTrackNewAUPresetEvent == nil {
 		ebipurego.RegisterLibFunc(&_fnMusicTrackNewAUPresetEvent, _lib, "MusicTrackNewAUPresetEvent")

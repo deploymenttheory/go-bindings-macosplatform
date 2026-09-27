@@ -14,6 +14,8 @@
 package obj
 
 import (
+	"runtime"
+
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -92,9 +94,19 @@ func WrapUnmanaged(id objc.ID) Object {
 	return &generic{Handle: objref.Wrap(id)}
 }
 
-func (g *generic) Description() string       { return rt.Description(objref.IDOf(g)) }
-func (g *generic) IsEqual(other Object) bool { return rt.IsEqual(objref.IDOf(g), objref.IDOf(other)) }
+func (g *generic) Description() string {
+	defer runtime.KeepAlive(g)
+	return rt.Description(objref.IDOf(g))
+}
+
+func (g *generic) IsEqual(other Object) bool {
+	defer runtime.KeepAlive(g)
+	defer runtime.KeepAlive(other)
+	return rt.IsEqual(objref.IDOf(g), objref.IDOf(other))
+}
+
 func (g *generic) IsKind(className string) bool {
+	defer runtime.KeepAlive(g)
 	return rt.IsKind(objref.IDOf(g), className)
 }
 
@@ -112,6 +124,7 @@ func As[T any](o Object, className string, fromID func(objc.ID) T) (T, bool) {
 	if o == nil || !o.IsKind(className) {
 		return zero, false
 	}
+	defer runtime.KeepAlive(o)
 	return fromID(objref.IDOf(o)), true
 }
 
@@ -122,6 +135,7 @@ func Bytes(o Object) []byte {
 	if o == nil {
 		return nil
 	}
+	defer runtime.KeepAlive(o)
 	return rt.NSDataToBytes(objref.IDOf(o))
 }
 

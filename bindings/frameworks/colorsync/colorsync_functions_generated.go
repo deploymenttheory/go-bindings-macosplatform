@@ -5,6 +5,7 @@
 package colorsync
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
@@ -19,6 +20,7 @@ import (
 var _fnColorSyncProfileCopyData func(objc.ID, unsafe.Pointer) objc.ID
 
 func ColorSyncProfileCopyData(prof ColorSyncProfileRef) (obj.Object, error) {
+	defer runtime.KeepAlive(prof)
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncProfileCopyData == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncProfileCopyData, _lib, "ColorSyncProfileCopyData")
@@ -35,6 +37,7 @@ func ColorSyncProfileCopyData(prof ColorSyncProfileRef) (obj.Object, error) {
 var _fnColorSyncProfileCreate func(objc.ID, unsafe.Pointer) objc.ID
 
 func ColorSyncProfileCreate(data corefoundation.CFDataRef) (obj.Object, error) {
+	defer runtime.KeepAlive(data)
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncProfileCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncProfileCreate, _lib, "ColorSyncProfileCreate")
@@ -51,6 +54,7 @@ func ColorSyncProfileCreate(data corefoundation.CFDataRef) (obj.Object, error) {
 var _fnColorSyncProfileCreateWithURL func(objc.ID, unsafe.Pointer) objc.ID
 
 func ColorSyncProfileCreateWithURL(url corefoundation.CFURLRef) (obj.Object, error) {
+	defer runtime.KeepAlive(url)
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncProfileCreateWithURL == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncProfileCreateWithURL, _lib, "ColorSyncProfileCreateWithURL")
@@ -67,6 +71,8 @@ func ColorSyncProfileCreateWithURL(url corefoundation.CFURLRef) (obj.Object, err
 var _fnColorSyncProfileCreateWithURLAndOptions func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
 func ColorSyncProfileCreateWithURLAndOptions(url corefoundation.CFURLRef, options corefoundation.CFDictionaryRef) (obj.Object, error) {
+	defer runtime.KeepAlive(url)
+	defer runtime.KeepAlive(options)
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncProfileCreateWithURLAndOptions == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncProfileCreateWithURLAndOptions, _lib, "ColorSyncProfileCreateWithURLAndOptions")
@@ -83,6 +89,7 @@ func ColorSyncProfileCreateWithURLAndOptions(url corefoundation.CFURLRef, option
 var _fnColorSyncProfileEstimateGamma func(objc.ID, unsafe.Pointer) objc.ID
 
 func ColorSyncProfileEstimateGamma(prof ColorSyncProfileRef) (obj.Object, error) {
+	defer runtime.KeepAlive(prof)
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncProfileEstimateGamma == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncProfileEstimateGamma, _lib, "ColorSyncProfileEstimateGamma")
@@ -115,6 +122,7 @@ func ColorSyncProfileEstimateGammaWithDisplayID(displayID int32) (obj.Object, er
 var _fnColorSyncProfileGetURL func(objc.ID, unsafe.Pointer) objc.ID
 
 func ColorSyncProfileGetURL(prof ColorSyncProfileRef) (obj.Object, error) {
+	defer runtime.KeepAlive(prof)
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncProfileGetURL == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncProfileGetURL, _lib, "ColorSyncProfileGetURL")
@@ -131,6 +139,9 @@ func ColorSyncProfileGetURL(prof ColorSyncProfileRef) (obj.Object, error) {
 var _fnColorSyncProfileInstall func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) bool
 
 func ColorSyncProfileInstall(profile ColorSyncProfileRef, domain corefoundation.CFStringRef, subpath corefoundation.CFStringRef) error {
+	defer runtime.KeepAlive(profile)
+	defer runtime.KeepAlive(domain)
+	defer runtime.KeepAlive(subpath)
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncProfileInstall == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncProfileInstall, _lib, "ColorSyncProfileInstall")
@@ -147,6 +158,7 @@ func ColorSyncProfileInstall(profile ColorSyncProfileRef, domain corefoundation.
 var _fnColorSyncProfileUninstall func(objc.ID, unsafe.Pointer) bool
 
 func ColorSyncProfileUninstall(profile ColorSyncProfileRef) error {
+	defer runtime.KeepAlive(profile)
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncProfileUninstall == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncProfileUninstall, _lib, "ColorSyncProfileUninstall")
@@ -163,6 +175,7 @@ func ColorSyncProfileUninstall(profile ColorSyncProfileRef) error {
 var _fnColorSyncProfileVerify func(objc.ID, unsafe.Pointer, unsafe.Pointer) bool
 
 func ColorSyncProfileVerify(prof ColorSyncProfileRef, errors_ unsafe.Pointer) error {
+	defer runtime.KeepAlive(prof)
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncProfileVerify == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncProfileVerify, _lib, "ColorSyncProfileVerify")

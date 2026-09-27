@@ -3,6 +3,8 @@
 package purego
 
 import (
+	"sync"
+
 	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -12,7 +14,7 @@ var (
 	_mainQueue    uintptr
 	_mainReady    bool
 
-	clsNSThread     = objc.GetClass("NSThread")
+	clsNSThread     = sync.OnceValue(func() objc.Class { return FoundationClass("NSThread") })
 	selIsMainThread = objc.RegisterName("isMainThread")
 )
 
@@ -34,7 +36,7 @@ func init() {
 
 // OnMainThread reports whether the caller is currently running on the main thread.
 func OnMainThread() bool {
-	return objc.Send[bool](objc.ID(clsNSThread), selIsMainThread)
+	return objc.Send[bool](objc.ID(clsNSThread()), selIsMainThread)
 }
 
 // Main runs fn on the main thread and blocks until it completes. AppKit/UIKit

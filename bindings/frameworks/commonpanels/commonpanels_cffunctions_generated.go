@@ -5,6 +5,7 @@
 package commonpanels
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -18,6 +19,7 @@ var _fnFCAddCollection func(objc.ID, int) int32
 
 // FCAddCollection reports an error if the CommonPanels framework function FCAddCollection fails.
 func FCAddCollection(iCollection obj.Object, iCollectionOptions int) error {
+	defer runtime.KeepAlive(iCollection)
 	_loadOnce.Do(_loadLibrary)
 	if _fnFCAddCollection == nil {
 		ebipurego.RegisterLibFunc(&_fnFCAddCollection, _lib, "FCAddCollection")
@@ -33,6 +35,8 @@ var _fnFCAddFontDescriptorToCollection func(objc.ID, objc.ID) int32
 
 // FCAddFontDescriptorToCollection reports an error if the CommonPanels framework function FCAddFontDescriptorToCollection fails.
 func FCAddFontDescriptorToCollection(iDescriptor FCFontDescriptorRef, iCollection obj.Object) error {
+	defer runtime.KeepAlive(iDescriptor)
+	defer runtime.KeepAlive(iCollection)
 	_loadOnce.Do(_loadLibrary)
 	if _fnFCAddFontDescriptorToCollection == nil {
 		ebipurego.RegisterLibFunc(&_fnFCAddFontDescriptorToCollection, _lib, "FCAddFontDescriptorToCollection")
@@ -48,6 +52,7 @@ var _fnFCRemoveCollection func(objc.ID) int32
 
 // FCRemoveCollection reports an error if the CommonPanels framework function FCRemoveCollection fails.
 func FCRemoveCollection(iCollection obj.Object) error {
+	defer runtime.KeepAlive(iCollection)
 	_loadOnce.Do(_loadLibrary)
 	if _fnFCRemoveCollection == nil {
 		ebipurego.RegisterLibFunc(&_fnFCRemoveCollection, _lib, "FCRemoveCollection")
@@ -63,6 +68,8 @@ var _fnFCRemoveFontDescriptorFromCollection func(objc.ID, objc.ID) int32
 
 // FCRemoveFontDescriptorFromCollection reports an error if the CommonPanels framework function FCRemoveFontDescriptorFromCollection fails.
 func FCRemoveFontDescriptorFromCollection(iDescriptor FCFontDescriptorRef, iCollection obj.Object) error {
+	defer runtime.KeepAlive(iDescriptor)
+	defer runtime.KeepAlive(iCollection)
 	_loadOnce.Do(_loadLibrary)
 	if _fnFCRemoveFontDescriptorFromCollection == nil {
 		ebipurego.RegisterLibFunc(&_fnFCRemoveFontDescriptorFromCollection, _lib, "FCRemoveFontDescriptorFromCollection")
@@ -93,6 +100,7 @@ var _fnSetFontInfoForSelection func(int, int, unsafe.Pointer, objc.ID) int32
 
 // SetFontInfoForSelection reports an error if the CommonPanels framework function SetFontInfoForSelection fails.
 func SetFontInfoForSelection(iStyleType int, iNumStyles int, iStyles unsafe.Pointer, iFPEventTarget obj.Object) error {
+	defer runtime.KeepAlive(iFPEventTarget)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSetFontInfoForSelection == nil {
 		ebipurego.RegisterLibFunc(&_fnSetFontInfoForSelection, _lib, "SetFontInfoForSelection")

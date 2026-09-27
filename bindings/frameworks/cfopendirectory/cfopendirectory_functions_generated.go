@@ -5,6 +5,7 @@
 package cfopendirectory
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
@@ -19,6 +20,9 @@ import (
 var _fnODNodeAddAccountPolicy func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) bool
 
 func ODNodeAddAccountPolicy(node ODNodeRef, policy corefoundation.CFDictionaryRef, category obj.Object) error {
+	defer runtime.KeepAlive(node)
+	defer runtime.KeepAlive(policy)
+	defer runtime.KeepAlive(category)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODNodeAddAccountPolicy == nil {
 		ebipurego.RegisterLibFunc(&_fnODNodeAddAccountPolicy, _lib, "ODNodeAddAccountPolicy")
@@ -35,6 +39,7 @@ func ODNodeAddAccountPolicy(node ODNodeRef, policy corefoundation.CFDictionaryRe
 var _fnODNodeCopyAccountPolicies func(objc.ID, unsafe.Pointer) objc.ID
 
 func ODNodeCopyAccountPolicies(node ODNodeRef) (obj.Object, error) {
+	defer runtime.KeepAlive(node)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODNodeCopyAccountPolicies == nil {
 		ebipurego.RegisterLibFunc(&_fnODNodeCopyAccountPolicies, _lib, "ODNodeCopyAccountPolicies")
@@ -51,6 +56,8 @@ func ODNodeCopyAccountPolicies(node ODNodeRef) (obj.Object, error) {
 var _fnODNodeCopyDetails func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
 func ODNodeCopyDetails(node ODNodeRef, keys corefoundation.CFArrayRef) (obj.Object, error) {
+	defer runtime.KeepAlive(node)
+	defer runtime.KeepAlive(keys)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODNodeCopyDetails == nil {
 		ebipurego.RegisterLibFunc(&_fnODNodeCopyDetails, _lib, "ODNodeCopyDetails")
@@ -67,6 +74,7 @@ func ODNodeCopyDetails(node ODNodeRef, keys corefoundation.CFArrayRef) (obj.Obje
 var _fnODNodeCopyPolicies func(objc.ID, unsafe.Pointer) objc.ID
 
 func ODNodeCopyPolicies(node ODNodeRef) (obj.Object, error) {
+	defer runtime.KeepAlive(node)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODNodeCopyPolicies == nil {
 		ebipurego.RegisterLibFunc(&_fnODNodeCopyPolicies, _lib, "ODNodeCopyPolicies")
@@ -83,6 +91,10 @@ func ODNodeCopyPolicies(node ODNodeRef) (obj.Object, error) {
 var _fnODNodeCopyRecord func(objc.ID, objc.ID, objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
 func ODNodeCopyRecord(node ODNodeRef, recordType obj.Object, recordName corefoundation.CFStringRef, attributes obj.Object) (obj.Object, error) {
+	defer runtime.KeepAlive(node)
+	defer runtime.KeepAlive(recordType)
+	defer runtime.KeepAlive(recordName)
+	defer runtime.KeepAlive(attributes)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODNodeCopyRecord == nil {
 		ebipurego.RegisterLibFunc(&_fnODNodeCopyRecord, _lib, "ODNodeCopyRecord")
@@ -99,6 +111,7 @@ func ODNodeCopyRecord(node ODNodeRef, recordType obj.Object, recordName corefoun
 var _fnODNodeCopySubnodeNames func(objc.ID, unsafe.Pointer) objc.ID
 
 func ODNodeCopySubnodeNames(node ODNodeRef) (obj.Object, error) {
+	defer runtime.KeepAlive(node)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODNodeCopySubnodeNames == nil {
 		ebipurego.RegisterLibFunc(&_fnODNodeCopySubnodeNames, _lib, "ODNodeCopySubnodeNames")
@@ -115,6 +128,8 @@ func ODNodeCopySubnodeNames(node ODNodeRef) (obj.Object, error) {
 var _fnODNodeCopySupportedAttributes func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
 func ODNodeCopySupportedAttributes(node ODNodeRef, recordType obj.Object) (obj.Object, error) {
+	defer runtime.KeepAlive(node)
+	defer runtime.KeepAlive(recordType)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODNodeCopySupportedAttributes == nil {
 		ebipurego.RegisterLibFunc(&_fnODNodeCopySupportedAttributes, _lib, "ODNodeCopySupportedAttributes")
@@ -131,6 +146,7 @@ func ODNodeCopySupportedAttributes(node ODNodeRef, recordType obj.Object) (obj.O
 var _fnODNodeCopySupportedPolicies func(objc.ID, unsafe.Pointer) objc.ID
 
 func ODNodeCopySupportedPolicies(node ODNodeRef) (obj.Object, error) {
+	defer runtime.KeepAlive(node)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODNodeCopySupportedPolicies == nil {
 		ebipurego.RegisterLibFunc(&_fnODNodeCopySupportedPolicies, _lib, "ODNodeCopySupportedPolicies")
@@ -147,6 +163,7 @@ func ODNodeCopySupportedPolicies(node ODNodeRef) (obj.Object, error) {
 var _fnODNodeCopySupportedRecordTypes func(objc.ID, unsafe.Pointer) objc.ID
 
 func ODNodeCopySupportedRecordTypes(node ODNodeRef) (obj.Object, error) {
+	defer runtime.KeepAlive(node)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODNodeCopySupportedRecordTypes == nil {
 		ebipurego.RegisterLibFunc(&_fnODNodeCopySupportedRecordTypes, _lib, "ODNodeCopySupportedRecordTypes")
@@ -163,6 +180,7 @@ func ODNodeCopySupportedRecordTypes(node ODNodeRef) (obj.Object, error) {
 var _fnODNodeCopyUnreachableSubnodeNames func(objc.ID, unsafe.Pointer) objc.ID
 
 func ODNodeCopyUnreachableSubnodeNames(node ODNodeRef) (obj.Object, error) {
+	defer runtime.KeepAlive(node)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODNodeCopyUnreachableSubnodeNames == nil {
 		ebipurego.RegisterLibFunc(&_fnODNodeCopyUnreachableSubnodeNames, _lib, "ODNodeCopyUnreachableSubnodeNames")
@@ -179,6 +197,8 @@ func ODNodeCopyUnreachableSubnodeNames(node ODNodeRef) (obj.Object, error) {
 var _fnODNodeCreateCopy func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
 func ODNodeCreateCopy(allocator corefoundation.CFAllocatorRef, node ODNodeRef) (obj.Object, error) {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(node)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODNodeCreateCopy == nil {
 		ebipurego.RegisterLibFunc(&_fnODNodeCreateCopy, _lib, "ODNodeCreateCopy")
@@ -195,6 +215,10 @@ func ODNodeCreateCopy(allocator corefoundation.CFAllocatorRef, node ODNodeRef) (
 var _fnODNodeCreateRecord func(objc.ID, objc.ID, objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
 func ODNodeCreateRecord(node ODNodeRef, recordType obj.Object, recordName corefoundation.CFStringRef, attributeDict corefoundation.CFDictionaryRef) (obj.Object, error) {
+	defer runtime.KeepAlive(node)
+	defer runtime.KeepAlive(recordType)
+	defer runtime.KeepAlive(recordName)
+	defer runtime.KeepAlive(attributeDict)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODNodeCreateRecord == nil {
 		ebipurego.RegisterLibFunc(&_fnODNodeCreateRecord, _lib, "ODNodeCreateRecord")
@@ -211,6 +235,9 @@ func ODNodeCreateRecord(node ODNodeRef, recordType obj.Object, recordName corefo
 var _fnODNodeCreateWithName func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
 func ODNodeCreateWithName(allocator corefoundation.CFAllocatorRef, session ODSessionRef, nodeName corefoundation.CFStringRef) (obj.Object, error) {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(session)
+	defer runtime.KeepAlive(nodeName)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODNodeCreateWithName == nil {
 		ebipurego.RegisterLibFunc(&_fnODNodeCreateWithName, _lib, "ODNodeCreateWithName")
@@ -227,6 +254,8 @@ func ODNodeCreateWithName(allocator corefoundation.CFAllocatorRef, session ODSes
 var _fnODNodeCreateWithNodeType func(objc.ID, objc.ID, uint32, unsafe.Pointer) objc.ID
 
 func ODNodeCreateWithNodeType(allocator corefoundation.CFAllocatorRef, session ODSessionRef, nodeType uint32) (obj.Object, error) {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(session)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODNodeCreateWithNodeType == nil {
 		ebipurego.RegisterLibFunc(&_fnODNodeCreateWithNodeType, _lib, "ODNodeCreateWithNodeType")
@@ -243,6 +272,8 @@ func ODNodeCreateWithNodeType(allocator corefoundation.CFAllocatorRef, session O
 var _fnODNodeCustomCall func(objc.ID, int, objc.ID, unsafe.Pointer) objc.ID
 
 func ODNodeCustomCall(node ODNodeRef, customCode int, data corefoundation.CFDataRef) (obj.Object, error) {
+	defer runtime.KeepAlive(node)
+	defer runtime.KeepAlive(data)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODNodeCustomCall == nil {
 		ebipurego.RegisterLibFunc(&_fnODNodeCustomCall, _lib, "ODNodeCustomCall")
@@ -259,6 +290,9 @@ func ODNodeCustomCall(node ODNodeRef, customCode int, data corefoundation.CFData
 var _fnODNodeCustomFunction func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
 func ODNodeCustomFunction(node ODNodeRef, function corefoundation.CFStringRef, payload obj.Object) (obj.Object, error) {
+	defer runtime.KeepAlive(node)
+	defer runtime.KeepAlive(function)
+	defer runtime.KeepAlive(payload)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODNodeCustomFunction == nil {
 		ebipurego.RegisterLibFunc(&_fnODNodeCustomFunction, _lib, "ODNodeCustomFunction")
@@ -275,6 +309,9 @@ func ODNodeCustomFunction(node ODNodeRef, function corefoundation.CFStringRef, p
 var _fnODNodePasswordContentCheck func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) bool
 
 func ODNodePasswordContentCheck(node ODNodeRef, password corefoundation.CFStringRef, recordName corefoundation.CFStringRef) error {
+	defer runtime.KeepAlive(node)
+	defer runtime.KeepAlive(password)
+	defer runtime.KeepAlive(recordName)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODNodePasswordContentCheck == nil {
 		ebipurego.RegisterLibFunc(&_fnODNodePasswordContentCheck, _lib, "ODNodePasswordContentCheck")
@@ -291,6 +328,9 @@ func ODNodePasswordContentCheck(node ODNodeRef, password corefoundation.CFString
 var _fnODNodeRemoveAccountPolicy func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) bool
 
 func ODNodeRemoveAccountPolicy(node ODNodeRef, policy corefoundation.CFDictionaryRef, category obj.Object) error {
+	defer runtime.KeepAlive(node)
+	defer runtime.KeepAlive(policy)
+	defer runtime.KeepAlive(category)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODNodeRemoveAccountPolicy == nil {
 		ebipurego.RegisterLibFunc(&_fnODNodeRemoveAccountPolicy, _lib, "ODNodeRemoveAccountPolicy")
@@ -307,6 +347,8 @@ func ODNodeRemoveAccountPolicy(node ODNodeRef, policy corefoundation.CFDictionar
 var _fnODNodeRemovePolicy func(objc.ID, objc.ID, unsafe.Pointer) bool
 
 func ODNodeRemovePolicy(node ODNodeRef, policyType obj.Object) error {
+	defer runtime.KeepAlive(node)
+	defer runtime.KeepAlive(policyType)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODNodeRemovePolicy == nil {
 		ebipurego.RegisterLibFunc(&_fnODNodeRemovePolicy, _lib, "ODNodeRemovePolicy")
@@ -323,6 +365,8 @@ func ODNodeRemovePolicy(node ODNodeRef, policyType obj.Object) error {
 var _fnODNodeSetAccountPolicies func(objc.ID, objc.ID, unsafe.Pointer) bool
 
 func ODNodeSetAccountPolicies(node ODNodeRef, policies corefoundation.CFDictionaryRef) error {
+	defer runtime.KeepAlive(node)
+	defer runtime.KeepAlive(policies)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODNodeSetAccountPolicies == nil {
 		ebipurego.RegisterLibFunc(&_fnODNodeSetAccountPolicies, _lib, "ODNodeSetAccountPolicies")
@@ -339,6 +383,10 @@ func ODNodeSetAccountPolicies(node ODNodeRef, policies corefoundation.CFDictiona
 var _fnODNodeSetCredentials func(objc.ID, objc.ID, objc.ID, objc.ID, unsafe.Pointer) bool
 
 func ODNodeSetCredentials(node ODNodeRef, recordType obj.Object, recordName corefoundation.CFStringRef, password corefoundation.CFStringRef) error {
+	defer runtime.KeepAlive(node)
+	defer runtime.KeepAlive(recordType)
+	defer runtime.KeepAlive(recordName)
+	defer runtime.KeepAlive(password)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODNodeSetCredentials == nil {
 		ebipurego.RegisterLibFunc(&_fnODNodeSetCredentials, _lib, "ODNodeSetCredentials")
@@ -355,6 +403,10 @@ func ODNodeSetCredentials(node ODNodeRef, recordType obj.Object, recordName core
 var _fnODNodeSetCredentialsExtended func(objc.ID, objc.ID, objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
 
 func ODNodeSetCredentialsExtended(node ODNodeRef, recordType obj.Object, authType obj.Object, authItems corefoundation.CFArrayRef, outAuthItems unsafe.Pointer, outContext unsafe.Pointer) error {
+	defer runtime.KeepAlive(node)
+	defer runtime.KeepAlive(recordType)
+	defer runtime.KeepAlive(authType)
+	defer runtime.KeepAlive(authItems)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODNodeSetCredentialsExtended == nil {
 		ebipurego.RegisterLibFunc(&_fnODNodeSetCredentialsExtended, _lib, "ODNodeSetCredentialsExtended")
@@ -371,6 +423,8 @@ func ODNodeSetCredentialsExtended(node ODNodeRef, recordType obj.Object, authTyp
 var _fnODNodeSetCredentialsUsingKerberosCache func(objc.ID, objc.ID, unsafe.Pointer) bool
 
 func ODNodeSetCredentialsUsingKerberosCache(node ODNodeRef, cacheName corefoundation.CFStringRef) error {
+	defer runtime.KeepAlive(node)
+	defer runtime.KeepAlive(cacheName)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODNodeSetCredentialsUsingKerberosCache == nil {
 		ebipurego.RegisterLibFunc(&_fnODNodeSetCredentialsUsingKerberosCache, _lib, "ODNodeSetCredentialsUsingKerberosCache")
@@ -387,6 +441,8 @@ func ODNodeSetCredentialsUsingKerberosCache(node ODNodeRef, cacheName corefounda
 var _fnODNodeSetPolicies func(objc.ID, objc.ID, unsafe.Pointer) bool
 
 func ODNodeSetPolicies(node ODNodeRef, policies corefoundation.CFDictionaryRef) error {
+	defer runtime.KeepAlive(node)
+	defer runtime.KeepAlive(policies)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODNodeSetPolicies == nil {
 		ebipurego.RegisterLibFunc(&_fnODNodeSetPolicies, _lib, "ODNodeSetPolicies")
@@ -403,6 +459,9 @@ func ODNodeSetPolicies(node ODNodeRef, policies corefoundation.CFDictionaryRef) 
 var _fnODNodeSetPolicy func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) bool
 
 func ODNodeSetPolicy(node ODNodeRef, policyType obj.Object, value obj.Object) error {
+	defer runtime.KeepAlive(node)
+	defer runtime.KeepAlive(policyType)
+	defer runtime.KeepAlive(value)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODNodeSetPolicy == nil {
 		ebipurego.RegisterLibFunc(&_fnODNodeSetPolicy, _lib, "ODNodeSetPolicy")
@@ -419,6 +478,7 @@ func ODNodeSetPolicy(node ODNodeRef, policyType obj.Object, value obj.Object) er
 var _fnODQueryCopyResults func(objc.ID, bool, unsafe.Pointer) objc.ID
 
 func ODQueryCopyResults(query ODQueryRef, allowPartialResults bool) (obj.Object, error) {
+	defer runtime.KeepAlive(query)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODQueryCopyResults == nil {
 		ebipurego.RegisterLibFunc(&_fnODQueryCopyResults, _lib, "ODQueryCopyResults")
@@ -435,6 +495,12 @@ func ODQueryCopyResults(query ODQueryRef, allowPartialResults bool) (obj.Object,
 var _fnODQueryCreateWithNode func(objc.ID, objc.ID, objc.ID, objc.ID, uint32, objc.ID, objc.ID, int, unsafe.Pointer) objc.ID
 
 func ODQueryCreateWithNode(allocator corefoundation.CFAllocatorRef, node ODNodeRef, recordTypeOrList obj.Object, attribute obj.Object, matchType uint32, queryValueOrList obj.Object, returnAttributeOrList obj.Object, maxResults int) (obj.Object, error) {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(node)
+	defer runtime.KeepAlive(recordTypeOrList)
+	defer runtime.KeepAlive(attribute)
+	defer runtime.KeepAlive(queryValueOrList)
+	defer runtime.KeepAlive(returnAttributeOrList)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODQueryCreateWithNode == nil {
 		ebipurego.RegisterLibFunc(&_fnODQueryCreateWithNode, _lib, "ODQueryCreateWithNode")
@@ -451,6 +517,11 @@ func ODQueryCreateWithNode(allocator corefoundation.CFAllocatorRef, node ODNodeR
 var _fnODQueryCreateWithNodeType func(objc.ID, uint32, objc.ID, objc.ID, uint32, objc.ID, objc.ID, int, unsafe.Pointer) objc.ID
 
 func ODQueryCreateWithNodeType(allocator corefoundation.CFAllocatorRef, nodeType uint32, recordTypeOrList obj.Object, attribute obj.Object, matchType uint32, queryValueOrList obj.Object, returnAttributeOrList obj.Object, maxResults int) (obj.Object, error) {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(recordTypeOrList)
+	defer runtime.KeepAlive(attribute)
+	defer runtime.KeepAlive(queryValueOrList)
+	defer runtime.KeepAlive(returnAttributeOrList)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODQueryCreateWithNodeType == nil {
 		ebipurego.RegisterLibFunc(&_fnODQueryCreateWithNodeType, _lib, "ODQueryCreateWithNodeType")
@@ -467,6 +538,9 @@ func ODQueryCreateWithNodeType(allocator corefoundation.CFAllocatorRef, nodeType
 var _fnODRecordAddAccountPolicy func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) bool
 
 func ODRecordAddAccountPolicy(record ODRecordRef, policy corefoundation.CFDictionaryRef, category obj.Object) error {
+	defer runtime.KeepAlive(record)
+	defer runtime.KeepAlive(policy)
+	defer runtime.KeepAlive(category)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordAddAccountPolicy == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordAddAccountPolicy, _lib, "ODRecordAddAccountPolicy")
@@ -483,6 +557,8 @@ func ODRecordAddAccountPolicy(record ODRecordRef, policy corefoundation.CFDictio
 var _fnODRecordAddMember func(objc.ID, objc.ID, unsafe.Pointer) bool
 
 func ODRecordAddMember(group ODRecordRef, member ODRecordRef) error {
+	defer runtime.KeepAlive(group)
+	defer runtime.KeepAlive(member)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordAddMember == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordAddMember, _lib, "ODRecordAddMember")
@@ -499,6 +575,9 @@ func ODRecordAddMember(group ODRecordRef, member ODRecordRef) error {
 var _fnODRecordAddValue func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) bool
 
 func ODRecordAddValue(record ODRecordRef, attribute obj.Object, value obj.Object) error {
+	defer runtime.KeepAlive(record)
+	defer runtime.KeepAlive(attribute)
+	defer runtime.KeepAlive(value)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordAddValue == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordAddValue, _lib, "ODRecordAddValue")
@@ -515,6 +594,7 @@ func ODRecordAddValue(record ODRecordRef, attribute obj.Object, value obj.Object
 var _fnODRecordAuthenticationAllowed func(objc.ID, unsafe.Pointer) bool
 
 func ODRecordAuthenticationAllowed(record ODRecordRef) error {
+	defer runtime.KeepAlive(record)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordAuthenticationAllowed == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordAuthenticationAllowed, _lib, "ODRecordAuthenticationAllowed")
@@ -531,6 +611,9 @@ func ODRecordAuthenticationAllowed(record ODRecordRef) error {
 var _fnODRecordChangePassword func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) bool
 
 func ODRecordChangePassword(record ODRecordRef, oldPassword corefoundation.CFStringRef, newPassword corefoundation.CFStringRef) error {
+	defer runtime.KeepAlive(record)
+	defer runtime.KeepAlive(oldPassword)
+	defer runtime.KeepAlive(newPassword)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordChangePassword == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordChangePassword, _lib, "ODRecordChangePassword")
@@ -547,6 +630,8 @@ func ODRecordChangePassword(record ODRecordRef, oldPassword corefoundation.CFStr
 var _fnODRecordContainsMember func(objc.ID, objc.ID, unsafe.Pointer) bool
 
 func ODRecordContainsMember(group ODRecordRef, member ODRecordRef) error {
+	defer runtime.KeepAlive(group)
+	defer runtime.KeepAlive(member)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordContainsMember == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordContainsMember, _lib, "ODRecordContainsMember")
@@ -563,6 +648,7 @@ func ODRecordContainsMember(group ODRecordRef, member ODRecordRef) error {
 var _fnODRecordCopyAccountPolicies func(objc.ID, unsafe.Pointer) objc.ID
 
 func ODRecordCopyAccountPolicies(record ODRecordRef) (obj.Object, error) {
+	defer runtime.KeepAlive(record)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordCopyAccountPolicies == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordCopyAccountPolicies, _lib, "ODRecordCopyAccountPolicies")
@@ -579,6 +665,8 @@ func ODRecordCopyAccountPolicies(record ODRecordRef) (obj.Object, error) {
 var _fnODRecordCopyDetails func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
 func ODRecordCopyDetails(record ODRecordRef, attributes corefoundation.CFArrayRef) (obj.Object, error) {
+	defer runtime.KeepAlive(record)
+	defer runtime.KeepAlive(attributes)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordCopyDetails == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordCopyDetails, _lib, "ODRecordCopyDetails")
@@ -595,6 +683,7 @@ func ODRecordCopyDetails(record ODRecordRef, attributes corefoundation.CFArrayRe
 var _fnODRecordCopyEffectivePolicies func(objc.ID, unsafe.Pointer) objc.ID
 
 func ODRecordCopyEffectivePolicies(record ODRecordRef) (obj.Object, error) {
+	defer runtime.KeepAlive(record)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordCopyEffectivePolicies == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordCopyEffectivePolicies, _lib, "ODRecordCopyEffectivePolicies")
@@ -611,6 +700,8 @@ func ODRecordCopyEffectivePolicies(record ODRecordRef) (obj.Object, error) {
 var _fnODRecordCopyPasswordPolicy func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
 func ODRecordCopyPasswordPolicy(allocator corefoundation.CFAllocatorRef, record ODRecordRef) (obj.Object, error) {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(record)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordCopyPasswordPolicy == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordCopyPasswordPolicy, _lib, "ODRecordCopyPasswordPolicy")
@@ -627,6 +718,7 @@ func ODRecordCopyPasswordPolicy(allocator corefoundation.CFAllocatorRef, record 
 var _fnODRecordCopyPolicies func(objc.ID, unsafe.Pointer) objc.ID
 
 func ODRecordCopyPolicies(record ODRecordRef) (obj.Object, error) {
+	defer runtime.KeepAlive(record)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordCopyPolicies == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordCopyPolicies, _lib, "ODRecordCopyPolicies")
@@ -643,6 +735,7 @@ func ODRecordCopyPolicies(record ODRecordRef) (obj.Object, error) {
 var _fnODRecordCopySupportedPolicies func(objc.ID, unsafe.Pointer) objc.ID
 
 func ODRecordCopySupportedPolicies(record ODRecordRef) (obj.Object, error) {
+	defer runtime.KeepAlive(record)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordCopySupportedPolicies == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordCopySupportedPolicies, _lib, "ODRecordCopySupportedPolicies")
@@ -659,6 +752,8 @@ func ODRecordCopySupportedPolicies(record ODRecordRef) (obj.Object, error) {
 var _fnODRecordCopyValues func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
 func ODRecordCopyValues(record ODRecordRef, attribute obj.Object) (obj.Object, error) {
+	defer runtime.KeepAlive(record)
+	defer runtime.KeepAlive(attribute)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordCopyValues == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordCopyValues, _lib, "ODRecordCopyValues")
@@ -675,6 +770,7 @@ func ODRecordCopyValues(record ODRecordRef, attribute obj.Object) (obj.Object, e
 var _fnODRecordDelete func(objc.ID, unsafe.Pointer) bool
 
 func ODRecordDelete(record ODRecordRef) error {
+	defer runtime.KeepAlive(record)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordDelete == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordDelete, _lib, "ODRecordDelete")
@@ -691,6 +787,8 @@ func ODRecordDelete(record ODRecordRef) error {
 var _fnODRecordPasswordChangeAllowed func(objc.ID, objc.ID, unsafe.Pointer) bool
 
 func ODRecordPasswordChangeAllowed(record ODRecordRef, newPassword corefoundation.CFStringRef) error {
+	defer runtime.KeepAlive(record)
+	defer runtime.KeepAlive(newPassword)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordPasswordChangeAllowed == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordPasswordChangeAllowed, _lib, "ODRecordPasswordChangeAllowed")
@@ -707,6 +805,9 @@ func ODRecordPasswordChangeAllowed(record ODRecordRef, newPassword corefoundatio
 var _fnODRecordRemoveAccountPolicy func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) bool
 
 func ODRecordRemoveAccountPolicy(record ODRecordRef, policy corefoundation.CFDictionaryRef, category obj.Object) error {
+	defer runtime.KeepAlive(record)
+	defer runtime.KeepAlive(policy)
+	defer runtime.KeepAlive(category)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordRemoveAccountPolicy == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordRemoveAccountPolicy, _lib, "ODRecordRemoveAccountPolicy")
@@ -723,6 +824,8 @@ func ODRecordRemoveAccountPolicy(record ODRecordRef, policy corefoundation.CFDic
 var _fnODRecordRemoveMember func(objc.ID, objc.ID, unsafe.Pointer) bool
 
 func ODRecordRemoveMember(group ODRecordRef, member ODRecordRef) error {
+	defer runtime.KeepAlive(group)
+	defer runtime.KeepAlive(member)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordRemoveMember == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordRemoveMember, _lib, "ODRecordRemoveMember")
@@ -739,6 +842,8 @@ func ODRecordRemoveMember(group ODRecordRef, member ODRecordRef) error {
 var _fnODRecordRemovePolicy func(objc.ID, objc.ID, unsafe.Pointer) bool
 
 func ODRecordRemovePolicy(record ODRecordRef, policy obj.Object) error {
+	defer runtime.KeepAlive(record)
+	defer runtime.KeepAlive(policy)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordRemovePolicy == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordRemovePolicy, _lib, "ODRecordRemovePolicy")
@@ -755,6 +860,9 @@ func ODRecordRemovePolicy(record ODRecordRef, policy obj.Object) error {
 var _fnODRecordRemoveValue func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) bool
 
 func ODRecordRemoveValue(record ODRecordRef, attribute obj.Object, value obj.Object) error {
+	defer runtime.KeepAlive(record)
+	defer runtime.KeepAlive(attribute)
+	defer runtime.KeepAlive(value)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordRemoveValue == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordRemoveValue, _lib, "ODRecordRemoveValue")
@@ -771,6 +879,8 @@ func ODRecordRemoveValue(record ODRecordRef, attribute obj.Object, value obj.Obj
 var _fnODRecordSetAccountPolicies func(objc.ID, objc.ID, unsafe.Pointer) bool
 
 func ODRecordSetAccountPolicies(record ODRecordRef, policies corefoundation.CFDictionaryRef) error {
+	defer runtime.KeepAlive(record)
+	defer runtime.KeepAlive(policies)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordSetAccountPolicies == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordSetAccountPolicies, _lib, "ODRecordSetAccountPolicies")
@@ -787,6 +897,9 @@ func ODRecordSetAccountPolicies(record ODRecordRef, policies corefoundation.CFDi
 var _fnODRecordSetNodeCredentials func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) bool
 
 func ODRecordSetNodeCredentials(record ODRecordRef, username corefoundation.CFStringRef, password corefoundation.CFStringRef) error {
+	defer runtime.KeepAlive(record)
+	defer runtime.KeepAlive(username)
+	defer runtime.KeepAlive(password)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordSetNodeCredentials == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordSetNodeCredentials, _lib, "ODRecordSetNodeCredentials")
@@ -803,6 +916,10 @@ func ODRecordSetNodeCredentials(record ODRecordRef, username corefoundation.CFSt
 var _fnODRecordSetNodeCredentialsExtended func(objc.ID, objc.ID, objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
 
 func ODRecordSetNodeCredentialsExtended(record ODRecordRef, recordType obj.Object, authType obj.Object, authItems corefoundation.CFArrayRef, outAuthItems unsafe.Pointer, outContext unsafe.Pointer) error {
+	defer runtime.KeepAlive(record)
+	defer runtime.KeepAlive(recordType)
+	defer runtime.KeepAlive(authType)
+	defer runtime.KeepAlive(authItems)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordSetNodeCredentialsExtended == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordSetNodeCredentialsExtended, _lib, "ODRecordSetNodeCredentialsExtended")
@@ -819,6 +936,8 @@ func ODRecordSetNodeCredentialsExtended(record ODRecordRef, recordType obj.Objec
 var _fnODRecordSetNodeCredentialsUsingKerberosCache func(objc.ID, objc.ID, unsafe.Pointer) bool
 
 func ODRecordSetNodeCredentialsUsingKerberosCache(record ODRecordRef, cacheName corefoundation.CFStringRef) error {
+	defer runtime.KeepAlive(record)
+	defer runtime.KeepAlive(cacheName)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordSetNodeCredentialsUsingKerberosCache == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordSetNodeCredentialsUsingKerberosCache, _lib, "ODRecordSetNodeCredentialsUsingKerberosCache")
@@ -835,6 +954,8 @@ func ODRecordSetNodeCredentialsUsingKerberosCache(record ODRecordRef, cacheName 
 var _fnODRecordSetPolicies func(objc.ID, objc.ID, unsafe.Pointer) bool
 
 func ODRecordSetPolicies(record ODRecordRef, policies corefoundation.CFDictionaryRef) error {
+	defer runtime.KeepAlive(record)
+	defer runtime.KeepAlive(policies)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordSetPolicies == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordSetPolicies, _lib, "ODRecordSetPolicies")
@@ -851,6 +972,9 @@ func ODRecordSetPolicies(record ODRecordRef, policies corefoundation.CFDictionar
 var _fnODRecordSetPolicy func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) bool
 
 func ODRecordSetPolicy(record ODRecordRef, policy obj.Object, value obj.Object) error {
+	defer runtime.KeepAlive(record)
+	defer runtime.KeepAlive(policy)
+	defer runtime.KeepAlive(value)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordSetPolicy == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordSetPolicy, _lib, "ODRecordSetPolicy")
@@ -867,6 +991,9 @@ func ODRecordSetPolicy(record ODRecordRef, policy obj.Object, value obj.Object) 
 var _fnODRecordSetValue func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) bool
 
 func ODRecordSetValue(record ODRecordRef, attribute obj.Object, valueOrValues obj.Object) error {
+	defer runtime.KeepAlive(record)
+	defer runtime.KeepAlive(attribute)
+	defer runtime.KeepAlive(valueOrValues)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordSetValue == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordSetValue, _lib, "ODRecordSetValue")
@@ -883,6 +1010,7 @@ func ODRecordSetValue(record ODRecordRef, attribute obj.Object, valueOrValues ob
 var _fnODRecordSynchronize func(objc.ID, unsafe.Pointer) bool
 
 func ODRecordSynchronize(record ODRecordRef) error {
+	defer runtime.KeepAlive(record)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordSynchronize == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordSynchronize, _lib, "ODRecordSynchronize")
@@ -899,6 +1027,8 @@ func ODRecordSynchronize(record ODRecordRef) error {
 var _fnODRecordVerifyPassword func(objc.ID, objc.ID, unsafe.Pointer) bool
 
 func ODRecordVerifyPassword(record ODRecordRef, password corefoundation.CFStringRef) error {
+	defer runtime.KeepAlive(record)
+	defer runtime.KeepAlive(password)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordVerifyPassword == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordVerifyPassword, _lib, "ODRecordVerifyPassword")
@@ -915,6 +1045,9 @@ func ODRecordVerifyPassword(record ODRecordRef, password corefoundation.CFString
 var _fnODRecordVerifyPasswordExtended func(objc.ID, objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
 
 func ODRecordVerifyPasswordExtended(record ODRecordRef, authType obj.Object, authItems corefoundation.CFArrayRef, outAuthItems unsafe.Pointer, outContext unsafe.Pointer) error {
+	defer runtime.KeepAlive(record)
+	defer runtime.KeepAlive(authType)
+	defer runtime.KeepAlive(authItems)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordVerifyPasswordExtended == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordVerifyPasswordExtended, _lib, "ODRecordVerifyPasswordExtended")
@@ -931,6 +1064,8 @@ func ODRecordVerifyPasswordExtended(record ODRecordRef, authType obj.Object, aut
 var _fnODSessionCopyNodeNames func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
 func ODSessionCopyNodeNames(allocator corefoundation.CFAllocatorRef, session ODSessionRef) (obj.Object, error) {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(session)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODSessionCopyNodeNames == nil {
 		ebipurego.RegisterLibFunc(&_fnODSessionCopyNodeNames, _lib, "ODSessionCopyNodeNames")
@@ -947,6 +1082,8 @@ func ODSessionCopyNodeNames(allocator corefoundation.CFAllocatorRef, session ODS
 var _fnODSessionCreate func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
 func ODSessionCreate(allocator corefoundation.CFAllocatorRef, options corefoundation.CFDictionaryRef) (obj.Object, error) {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(options)
 	_loadOnce.Do(_loadLibrary)
 	if _fnODSessionCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnODSessionCreate, _lib, "ODSessionCreate")

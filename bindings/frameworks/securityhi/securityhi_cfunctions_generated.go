@@ -5,6 +5,7 @@
 package securityhi
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
@@ -159,6 +160,7 @@ var _fnSecDisplayCertificateGroup func(unsafe.Pointer, objc.ID) int32
 
 // SecDisplayCertificateGroup calls the SecurityHI framework function SecDisplayCertificateGroup.
 func SecDisplayCertificateGroup(certificates unsafe.Pointer, keychainList corefoundation.CFArrayRef) int {
+	defer runtime.KeepAlive(keychainList)
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecDisplayCertificateGroup == nil {
 		ebipurego.RegisterLibFunc(&_fnSecDisplayCertificateGroup, _lib, "SecDisplayCertificateGroup")

@@ -41,14 +41,14 @@ func DialMachService(name string, privileged bool) XPCConn {
 	if privileged {
 		opts = NSXPCConnectionPrivileged
 	}
-	alloc := Send[ID](ID(GetClass("NSXPCConnection")), RegisterName("alloc"))
+	alloc := Send[ID](ID(FoundationClass("NSXPCConnection")), RegisterName("alloc"))
 	id := Send[ID](alloc, RegisterName("initWithMachServiceName:options:"), NSString(name), opts)
 	return XPCConn{id: id}
 }
 
 // DialService opens a connection to an XPC service bundle by name.
 func DialService(name string) XPCConn {
-	alloc := Send[ID](ID(GetClass("NSXPCConnection")), RegisterName("alloc"))
+	alloc := Send[ID](ID(FoundationClass("NSXPCConnection")), RegisterName("alloc"))
 	id := Send[ID](alloc, RegisterName("initWithServiceName:"), NSString(name))
 	return XPCConn{id: id}
 }
@@ -59,7 +59,7 @@ func interfaceForProtocol(p XPCProtocol) (ID, error) {
 	if err != nil {
 		return 0, err
 	}
-	iface := Send[ID](ID(GetClass("NSXPCInterface")), RegisterName("interfaceWithProtocol:"), unsafe.Pointer(proto))
+	iface := Send[ID](ID(FoundationClass("NSXPCInterface")), RegisterName("interfaceWithProtocol:"), unsafe.Pointer(proto))
 	return iface, nil
 }
 
@@ -185,7 +185,7 @@ type XPCListener struct{ id ID }
 
 // NewMachServiceListener creates a listener that vends a registered mach service.
 func NewMachServiceListener(name string) XPCListener {
-	alloc := Send[ID](ID(GetClass("NSXPCListener")), RegisterName("alloc"))
+	alloc := Send[ID](ID(FoundationClass("NSXPCListener")), RegisterName("alloc"))
 	id := Send[ID](alloc, RegisterName("initWithMachServiceName:"), NSString(name))
 	return XPCListener{id: id}
 }

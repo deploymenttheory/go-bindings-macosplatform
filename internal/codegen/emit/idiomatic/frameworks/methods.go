@@ -905,18 +905,25 @@ func recvVarOf(recv string) string {
 // wrapper — releasing the object — while the send is still executing.
 // Collection parameters are excluded: the Objective-C collection built from
 // them retains its elements.
+// passesWrapper reports whether an argument expression hands the callee the
+// object behind a Go wrapper, which must then stay reachable until the call
+// returns.
+func passesWrapper(argExpr string) bool {
+	return strings.HasPrefix(argExpr, "objref.IDOf(")
+}
+
 func keepAliveNames(recvVar string, method methodModel) []string {
 	var names []string
 	if recvVar != "" {
 		names = append(names, recvVar)
 	}
 	for _, p := range method.plainParams {
-		if !p.isOut && strings.HasPrefix(p.rawExpression, "objref.IDOf(") {
+		if !p.isOut && passesWrapper(p.rawExpression) {
 			names = append(names, p.goName)
 		}
 	}
 	for _, p := range method.asyncNonBlockParams {
-		if strings.HasPrefix(p.rawExpression, "objref.IDOf(") {
+		if passesWrapper(p.rawExpression) {
 			names = append(names, p.goName)
 		}
 	}

@@ -5,6 +5,7 @@
 package coregraphics
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
@@ -196,6 +197,7 @@ var _fnCGBitmapContextCreate func(unsafe.Pointer, int, int, int, int, objc.ID, C
 
 // CGBitmapContextCreate calls the CoreGraphics framework function CGBitmapContextCreate.
 func CGBitmapContextCreate(data unsafe.Pointer, width int, height int, bitsPerComponent int, bytesPerRow int, space CGColorSpaceRef, bitmapInfo CGBitmapInfo) CGContextRef {
+	defer runtime.KeepAlive(space)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGBitmapContextCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnCGBitmapContextCreate, _lib, "CGBitmapContextCreate")
@@ -208,6 +210,7 @@ var _fnCGBitmapContextCreateAdaptive func(int, int, objc.ID, unsafe.Pointer, uns
 
 // CGBitmapContextCreateAdaptive calls the CoreGraphics framework function CGBitmapContextCreateAdaptive.
 func CGBitmapContextCreateAdaptive(width int, height int, auxiliaryInfo obj.Object, onResolve unsafe.Pointer, onAllocate unsafe.Pointer, onFree unsafe.Pointer, onError unsafe.Pointer) CGContextRef {
+	defer runtime.KeepAlive(auxiliaryInfo)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGBitmapContextCreateAdaptive == nil {
 		ebipurego.RegisterLibFunc(&_fnCGBitmapContextCreateAdaptive, _lib, "CGBitmapContextCreateAdaptive")
@@ -220,6 +223,7 @@ var _fnCGBitmapContextCreateImage func(objc.ID) objc.ID
 
 // CGBitmapContextCreateImage calls the CoreGraphics framework function CGBitmapContextCreateImage.
 func CGBitmapContextCreateImage(context_ CGContextRef) CGImageRef {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGBitmapContextCreateImage == nil {
 		ebipurego.RegisterLibFunc(&_fnCGBitmapContextCreateImage, _lib, "CGBitmapContextCreateImage")
@@ -232,6 +236,7 @@ var _fnCGBitmapContextCreateWithData func(unsafe.Pointer, int, int, int, int, ob
 
 // CGBitmapContextCreateWithData calls the CoreGraphics framework function CGBitmapContextCreateWithData.
 func CGBitmapContextCreateWithData(data unsafe.Pointer, width int, height int, bitsPerComponent int, bytesPerRow int, space CGColorSpaceRef, bitmapInfo CGBitmapInfo, releaseCallback unsafe.Pointer, releaseInfo unsafe.Pointer) CGContextRef {
+	defer runtime.KeepAlive(space)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGBitmapContextCreateWithData == nil {
 		ebipurego.RegisterLibFunc(&_fnCGBitmapContextCreateWithData, _lib, "CGBitmapContextCreateWithData")
@@ -244,6 +249,7 @@ var _fnCGBitmapContextGetAlphaInfo func(objc.ID) CGImageAlphaInfo
 
 // CGBitmapContextGetAlphaInfo calls the CoreGraphics framework function CGBitmapContextGetAlphaInfo.
 func CGBitmapContextGetAlphaInfo(context_ CGContextRef) CGImageAlphaInfo {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGBitmapContextGetAlphaInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnCGBitmapContextGetAlphaInfo, _lib, "CGBitmapContextGetAlphaInfo")
@@ -255,6 +261,7 @@ var _fnCGBitmapContextGetBitmapInfo func(objc.ID) CGBitmapInfo
 
 // CGBitmapContextGetBitmapInfo calls the CoreGraphics framework function CGBitmapContextGetBitmapInfo.
 func CGBitmapContextGetBitmapInfo(context_ CGContextRef) CGBitmapInfo {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGBitmapContextGetBitmapInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnCGBitmapContextGetBitmapInfo, _lib, "CGBitmapContextGetBitmapInfo")
@@ -266,6 +273,7 @@ var _fnCGBitmapContextGetBitsPerComponent func(objc.ID) int
 
 // CGBitmapContextGetBitsPerComponent calls the CoreGraphics framework function CGBitmapContextGetBitsPerComponent.
 func CGBitmapContextGetBitsPerComponent(context_ CGContextRef) int {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGBitmapContextGetBitsPerComponent == nil {
 		ebipurego.RegisterLibFunc(&_fnCGBitmapContextGetBitsPerComponent, _lib, "CGBitmapContextGetBitsPerComponent")
@@ -277,6 +285,7 @@ var _fnCGBitmapContextGetBitsPerPixel func(objc.ID) int
 
 // CGBitmapContextGetBitsPerPixel calls the CoreGraphics framework function CGBitmapContextGetBitsPerPixel.
 func CGBitmapContextGetBitsPerPixel(context_ CGContextRef) int {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGBitmapContextGetBitsPerPixel == nil {
 		ebipurego.RegisterLibFunc(&_fnCGBitmapContextGetBitsPerPixel, _lib, "CGBitmapContextGetBitsPerPixel")
@@ -288,6 +297,7 @@ var _fnCGBitmapContextGetBytesPerRow func(objc.ID) int
 
 // CGBitmapContextGetBytesPerRow calls the CoreGraphics framework function CGBitmapContextGetBytesPerRow.
 func CGBitmapContextGetBytesPerRow(context_ CGContextRef) int {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGBitmapContextGetBytesPerRow == nil {
 		ebipurego.RegisterLibFunc(&_fnCGBitmapContextGetBytesPerRow, _lib, "CGBitmapContextGetBytesPerRow")
@@ -299,6 +309,7 @@ var _fnCGBitmapContextGetColorSpace func(objc.ID) objc.ID
 
 // CGBitmapContextGetColorSpace calls the CoreGraphics framework function CGBitmapContextGetColorSpace.
 func CGBitmapContextGetColorSpace(context_ CGContextRef) CGColorSpaceRef {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGBitmapContextGetColorSpace == nil {
 		ebipurego.RegisterLibFunc(&_fnCGBitmapContextGetColorSpace, _lib, "CGBitmapContextGetColorSpace")
@@ -311,6 +322,7 @@ var _fnCGBitmapContextGetData func(objc.ID) unsafe.Pointer
 
 // CGBitmapContextGetData calls the CoreGraphics framework function CGBitmapContextGetData.
 func CGBitmapContextGetData(context_ CGContextRef) unsafe.Pointer {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGBitmapContextGetData == nil {
 		ebipurego.RegisterLibFunc(&_fnCGBitmapContextGetData, _lib, "CGBitmapContextGetData")
@@ -322,6 +334,7 @@ var _fnCGBitmapContextGetHeight func(objc.ID) int
 
 // CGBitmapContextGetHeight calls the CoreGraphics framework function CGBitmapContextGetHeight.
 func CGBitmapContextGetHeight(context_ CGContextRef) int {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGBitmapContextGetHeight == nil {
 		ebipurego.RegisterLibFunc(&_fnCGBitmapContextGetHeight, _lib, "CGBitmapContextGetHeight")
@@ -333,6 +346,7 @@ var _fnCGBitmapContextGetWidth func(objc.ID) int
 
 // CGBitmapContextGetWidth calls the CoreGraphics framework function CGBitmapContextGetWidth.
 func CGBitmapContextGetWidth(context_ CGContextRef) int {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGBitmapContextGetWidth == nil {
 		ebipurego.RegisterLibFunc(&_fnCGBitmapContextGetWidth, _lib, "CGBitmapContextGetWidth")
@@ -355,6 +369,7 @@ var _fnCGCancelDisplayConfiguration func(objc.ID) CGError
 
 // CGCancelDisplayConfiguration calls the CoreGraphics framework function CGCancelDisplayConfiguration.
 func CGCancelDisplayConfiguration(config CGDisplayConfigRef) CGError {
+	defer runtime.KeepAlive(config)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGCancelDisplayConfiguration == nil {
 		ebipurego.RegisterLibFunc(&_fnCGCancelDisplayConfiguration, _lib, "CGCancelDisplayConfiguration")
@@ -388,6 +403,8 @@ var _fnCGColorConversionInfoConvertData func(objc.ID, int, int, unsafe.Pointer, 
 
 // CGColorConversionInfoConvertData calls the CoreGraphics framework function CGColorConversionInfoConvertData.
 func CGColorConversionInfoConvertData(info CGColorConversionInfoRef, width int, height int, dstData unsafe.Pointer, dstFormat CGColorBufferFormat, srcData unsafe.Pointer, srcFormat CGColorBufferFormat, options obj.Object) bool {
+	defer runtime.KeepAlive(info)
+	defer runtime.KeepAlive(options)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorConversionInfoConvertData == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorConversionInfoConvertData, _lib, "CGColorConversionInfoConvertData")
@@ -399,6 +416,8 @@ var _fnCGColorConversionInfoCreate func(objc.ID, objc.ID) objc.ID
 
 // CGColorConversionInfoCreate calls the CoreGraphics framework function CGColorConversionInfoCreate.
 func CGColorConversionInfoCreate(src CGColorSpaceRef, dst CGColorSpaceRef) CGColorConversionInfoRef {
+	defer runtime.KeepAlive(src)
+	defer runtime.KeepAlive(dst)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorConversionInfoCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorConversionInfoCreate, _lib, "CGColorConversionInfoCreate")
@@ -411,6 +430,8 @@ var _fnCGColorConversionInfoCreateFromListWithArguments func(objc.ID, objc.ID, C
 
 // CGColorConversionInfoCreateFromListWithArguments calls the CoreGraphics framework function CGColorConversionInfoCreateFromListWithArguments.
 func CGColorConversionInfoCreateFromListWithArguments(options obj.Object, arg CGColorSpaceRef, arg2 CGColorConversionInfoTransformType, arg3 CGColorRenderingIntent, arg4 string) CGColorConversionInfoRef {
+	defer runtime.KeepAlive(options)
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorConversionInfoCreateFromListWithArguments == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorConversionInfoCreateFromListWithArguments, _lib, "CGColorConversionInfoCreateFromListWithArguments")
@@ -423,6 +444,9 @@ var _fnCGColorConversionInfoCreateWithOptions func(objc.ID, objc.ID, objc.ID) ob
 
 // CGColorConversionInfoCreateWithOptions calls the CoreGraphics framework function CGColorConversionInfoCreateWithOptions.
 func CGColorConversionInfoCreateWithOptions(src CGColorSpaceRef, dst CGColorSpaceRef, options obj.Object) CGColorConversionInfoRef {
+	defer runtime.KeepAlive(src)
+	defer runtime.KeepAlive(dst)
+	defer runtime.KeepAlive(options)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorConversionInfoCreateWithOptions == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorConversionInfoCreateWithOptions, _lib, "CGColorConversionInfoCreateWithOptions")
@@ -446,6 +470,7 @@ var _fnCGColorCreate func(objc.ID, unsafe.Pointer) objc.ID
 
 // CGColorCreate calls the CoreGraphics framework function CGColorCreate.
 func CGColorCreate(space CGColorSpaceRef, components unsafe.Pointer) CGColorRef {
+	defer runtime.KeepAlive(space)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorCreate, _lib, "CGColorCreate")
@@ -458,6 +483,7 @@ var _fnCGColorCreateCopy func(objc.ID) objc.ID
 
 // CGColorCreateCopy calls the CoreGraphics framework function CGColorCreateCopy.
 func CGColorCreateCopy(color CGColorRef) CGColorRef {
+	defer runtime.KeepAlive(color)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorCreateCopy == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorCreateCopy, _lib, "CGColorCreateCopy")
@@ -470,6 +496,9 @@ var _fnCGColorCreateCopyByMatchingToColorSpace func(objc.ID, CGColorRenderingInt
 
 // CGColorCreateCopyByMatchingToColorSpace calls the CoreGraphics framework function CGColorCreateCopyByMatchingToColorSpace.
 func CGColorCreateCopyByMatchingToColorSpace(arg CGColorSpaceRef, intent CGColorRenderingIntent, color CGColorRef, options obj.Object) CGColorRef {
+	defer runtime.KeepAlive(arg)
+	defer runtime.KeepAlive(color)
+	defer runtime.KeepAlive(options)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorCreateCopyByMatchingToColorSpace == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorCreateCopyByMatchingToColorSpace, _lib, "CGColorCreateCopyByMatchingToColorSpace")
@@ -482,6 +511,7 @@ var _fnCGColorCreateCopyWithAlpha func(objc.ID, float64) objc.ID
 
 // CGColorCreateCopyWithAlpha calls the CoreGraphics framework function CGColorCreateCopyWithAlpha.
 func CGColorCreateCopyWithAlpha(color CGColorRef, alpha float64) CGColorRef {
+	defer runtime.KeepAlive(color)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorCreateCopyWithAlpha == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorCreateCopyWithAlpha, _lib, "CGColorCreateCopyWithAlpha")
@@ -554,6 +584,7 @@ var _fnCGColorCreateWithContentHeadroom func(float32, objc.ID, float64, float64,
 
 // CGColorCreateWithContentHeadroom calls the CoreGraphics framework function CGColorCreateWithContentHeadroom.
 func CGColorCreateWithContentHeadroom(headroom float32, space CGColorSpaceRef, red float64, green float64, blue float64, alpha float64) CGColorRef {
+	defer runtime.KeepAlive(space)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorCreateWithContentHeadroom == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorCreateWithContentHeadroom, _lib, "CGColorCreateWithContentHeadroom")
@@ -566,6 +597,8 @@ var _fnCGColorCreateWithPattern func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
 // CGColorCreateWithPattern calls the CoreGraphics framework function CGColorCreateWithPattern.
 func CGColorCreateWithPattern(space CGColorSpaceRef, pattern CGPatternRef, components unsafe.Pointer) CGColorRef {
+	defer runtime.KeepAlive(space)
+	defer runtime.KeepAlive(pattern)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorCreateWithPattern == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorCreateWithPattern, _lib, "CGColorCreateWithPattern")
@@ -578,6 +611,8 @@ var _fnCGColorEqualToColor func(objc.ID, objc.ID) bool
 
 // CGColorEqualToColor calls the CoreGraphics framework function CGColorEqualToColor.
 func CGColorEqualToColor(color1 CGColorRef, color2 CGColorRef) bool {
+	defer runtime.KeepAlive(color1)
+	defer runtime.KeepAlive(color2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorEqualToColor == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorEqualToColor, _lib, "CGColorEqualToColor")
@@ -589,6 +624,7 @@ var _fnCGColorGetAlpha func(objc.ID) float64
 
 // CGColorGetAlpha calls the CoreGraphics framework function CGColorGetAlpha.
 func CGColorGetAlpha(color CGColorRef) float64 {
+	defer runtime.KeepAlive(color)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorGetAlpha == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorGetAlpha, _lib, "CGColorGetAlpha")
@@ -600,6 +636,7 @@ var _fnCGColorGetColorSpace func(objc.ID) objc.ID
 
 // CGColorGetColorSpace calls the CoreGraphics framework function CGColorGetColorSpace.
 func CGColorGetColorSpace(color CGColorRef) CGColorSpaceRef {
+	defer runtime.KeepAlive(color)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorGetColorSpace == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorGetColorSpace, _lib, "CGColorGetColorSpace")
@@ -612,6 +649,7 @@ var _fnCGColorGetComponents func(objc.ID) unsafe.Pointer
 
 // CGColorGetComponents calls the CoreGraphics framework function CGColorGetComponents.
 func CGColorGetComponents(color CGColorRef) unsafe.Pointer {
+	defer runtime.KeepAlive(color)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorGetComponents == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorGetComponents, _lib, "CGColorGetComponents")
@@ -623,6 +661,7 @@ var _fnCGColorGetConstantColor func(objc.ID) objc.ID
 
 // CGColorGetConstantColor calls the CoreGraphics framework function CGColorGetConstantColor.
 func CGColorGetConstantColor(colorName obj.Object) CGColorRef {
+	defer runtime.KeepAlive(colorName)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorGetConstantColor == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorGetConstantColor, _lib, "CGColorGetConstantColor")
@@ -635,6 +674,7 @@ var _fnCGColorGetContentHeadroom func(objc.ID) float32
 
 // CGColorGetContentHeadroom calls the CoreGraphics framework function CGColorGetContentHeadroom.
 func CGColorGetContentHeadroom(color CGColorRef) float32 {
+	defer runtime.KeepAlive(color)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorGetContentHeadroom == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorGetContentHeadroom, _lib, "CGColorGetContentHeadroom")
@@ -646,6 +686,7 @@ var _fnCGColorGetNumberOfComponents func(objc.ID) int
 
 // CGColorGetNumberOfComponents calls the CoreGraphics framework function CGColorGetNumberOfComponents.
 func CGColorGetNumberOfComponents(color CGColorRef) int {
+	defer runtime.KeepAlive(color)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorGetNumberOfComponents == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorGetNumberOfComponents, _lib, "CGColorGetNumberOfComponents")
@@ -657,6 +698,7 @@ var _fnCGColorGetPattern func(objc.ID) objc.ID
 
 // CGColorGetPattern calls the CoreGraphics framework function CGColorGetPattern.
 func CGColorGetPattern(color CGColorRef) CGPatternRef {
+	defer runtime.KeepAlive(color)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorGetPattern == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorGetPattern, _lib, "CGColorGetPattern")
@@ -680,6 +722,7 @@ var _fnCGColorRelease func(objc.ID)
 
 // CGColorRelease calls the CoreGraphics framework function CGColorRelease.
 func CGColorRelease(color CGColorRef) {
+	defer runtime.KeepAlive(color)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorRelease == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorRelease, _lib, "CGColorRelease")
@@ -691,6 +734,7 @@ var _fnCGColorRetain func(objc.ID) objc.ID
 
 // CGColorRetain calls the CoreGraphics framework function CGColorRetain.
 func CGColorRetain(color CGColorRef) CGColorRef {
+	defer runtime.KeepAlive(color)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorRetain == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorRetain, _lib, "CGColorRetain")
@@ -703,6 +747,7 @@ var _fnCGColorSpaceCopyBaseColorSpace func(objc.ID) objc.ID
 
 // CGColorSpaceCopyBaseColorSpace calls the CoreGraphics framework function CGColorSpaceCopyBaseColorSpace.
 func CGColorSpaceCopyBaseColorSpace(space CGColorSpaceRef) CGColorSpaceRef {
+	defer runtime.KeepAlive(space)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorSpaceCopyBaseColorSpace == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorSpaceCopyBaseColorSpace, _lib, "CGColorSpaceCopyBaseColorSpace")
@@ -715,6 +760,7 @@ var _fnCGColorSpaceCopyICCData func(objc.ID) objc.ID
 
 // CGColorSpaceCopyICCData calls the CoreGraphics framework function CGColorSpaceCopyICCData.
 func CGColorSpaceCopyICCData(space CGColorSpaceRef) obj.Object {
+	defer runtime.KeepAlive(space)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorSpaceCopyICCData == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorSpaceCopyICCData, _lib, "CGColorSpaceCopyICCData")
@@ -727,6 +773,7 @@ var _fnCGColorSpaceCopyICCProfile func(objc.ID) objc.ID
 
 // CGColorSpaceCopyICCProfile calls the CoreGraphics framework function CGColorSpaceCopyICCProfile.
 func CGColorSpaceCopyICCProfile(space CGColorSpaceRef) obj.Object {
+	defer runtime.KeepAlive(space)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorSpaceCopyICCProfile == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorSpaceCopyICCProfile, _lib, "CGColorSpaceCopyICCProfile")
@@ -739,6 +786,7 @@ var _fnCGColorSpaceCopyName func(objc.ID) objc.ID
 
 // CGColorSpaceCopyName calls the CoreGraphics framework function CGColorSpaceCopyName.
 func CGColorSpaceCopyName(space CGColorSpaceRef) obj.Object {
+	defer runtime.KeepAlive(space)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorSpaceCopyName == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorSpaceCopyName, _lib, "CGColorSpaceCopyName")
@@ -751,6 +799,7 @@ var _fnCGColorSpaceCopyPropertyList func(objc.ID) objc.ID
 
 // CGColorSpaceCopyPropertyList calls the CoreGraphics framework function CGColorSpaceCopyPropertyList.
 func CGColorSpaceCopyPropertyList(space CGColorSpaceRef) obj.Object {
+	defer runtime.KeepAlive(space)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorSpaceCopyPropertyList == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorSpaceCopyPropertyList, _lib, "CGColorSpaceCopyPropertyList")
@@ -787,6 +836,7 @@ var _fnCGColorSpaceCreateCopyWithStandardRange func(objc.ID) objc.ID
 
 // CGColorSpaceCreateCopyWithStandardRange calls the CoreGraphics framework function CGColorSpaceCreateCopyWithStandardRange.
 func CGColorSpaceCreateCopyWithStandardRange(space CGColorSpaceRef) CGColorSpaceRef {
+	defer runtime.KeepAlive(space)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorSpaceCreateCopyWithStandardRange == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorSpaceCreateCopyWithStandardRange, _lib, "CGColorSpaceCreateCopyWithStandardRange")
@@ -835,6 +885,7 @@ var _fnCGColorSpaceCreateExtended func(objc.ID) objc.ID
 
 // CGColorSpaceCreateExtended calls the CoreGraphics framework function CGColorSpaceCreateExtended.
 func CGColorSpaceCreateExtended(space CGColorSpaceRef) CGColorSpaceRef {
+	defer runtime.KeepAlive(space)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorSpaceCreateExtended == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorSpaceCreateExtended, _lib, "CGColorSpaceCreateExtended")
@@ -847,6 +898,7 @@ var _fnCGColorSpaceCreateExtendedLinearized func(objc.ID) objc.ID
 
 // CGColorSpaceCreateExtendedLinearized calls the CoreGraphics framework function CGColorSpaceCreateExtendedLinearized.
 func CGColorSpaceCreateExtendedLinearized(space CGColorSpaceRef) CGColorSpaceRef {
+	defer runtime.KeepAlive(space)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorSpaceCreateExtendedLinearized == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorSpaceCreateExtendedLinearized, _lib, "CGColorSpaceCreateExtendedLinearized")
@@ -859,6 +911,8 @@ var _fnCGColorSpaceCreateICCBased func(int, unsafe.Pointer, objc.ID, objc.ID) ob
 
 // CGColorSpaceCreateICCBased calls the CoreGraphics framework function CGColorSpaceCreateICCBased.
 func CGColorSpaceCreateICCBased(nComponents int, range_ unsafe.Pointer, profile CGDataProviderRef, alternate CGColorSpaceRef) CGColorSpaceRef {
+	defer runtime.KeepAlive(profile)
+	defer runtime.KeepAlive(alternate)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorSpaceCreateICCBased == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorSpaceCreateICCBased, _lib, "CGColorSpaceCreateICCBased")
@@ -871,6 +925,7 @@ var _fnCGColorSpaceCreateIndexed func(objc.ID, int, unsafe.Pointer) objc.ID
 
 // CGColorSpaceCreateIndexed calls the CoreGraphics framework function CGColorSpaceCreateIndexed.
 func CGColorSpaceCreateIndexed(baseSpace CGColorSpaceRef, lastIndex int, colorTable unsafe.Pointer) CGColorSpaceRef {
+	defer runtime.KeepAlive(baseSpace)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorSpaceCreateIndexed == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorSpaceCreateIndexed, _lib, "CGColorSpaceCreateIndexed")
@@ -895,6 +950,7 @@ var _fnCGColorSpaceCreateLinearized func(objc.ID) objc.ID
 
 // CGColorSpaceCreateLinearized calls the CoreGraphics framework function CGColorSpaceCreateLinearized.
 func CGColorSpaceCreateLinearized(space CGColorSpaceRef) CGColorSpaceRef {
+	defer runtime.KeepAlive(space)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorSpaceCreateLinearized == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorSpaceCreateLinearized, _lib, "CGColorSpaceCreateLinearized")
@@ -907,6 +963,7 @@ var _fnCGColorSpaceCreatePattern func(objc.ID) objc.ID
 
 // CGColorSpaceCreatePattern calls the CoreGraphics framework function CGColorSpaceCreatePattern.
 func CGColorSpaceCreatePattern(baseSpace CGColorSpaceRef) CGColorSpaceRef {
+	defer runtime.KeepAlive(baseSpace)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorSpaceCreatePattern == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorSpaceCreatePattern, _lib, "CGColorSpaceCreatePattern")
@@ -919,6 +976,8 @@ var _fnCGColorSpaceCreateWithColorSyncProfile func(objc.ID, objc.ID) objc.ID
 
 // CGColorSpaceCreateWithColorSyncProfile calls the CoreGraphics framework function CGColorSpaceCreateWithColorSyncProfile.
 func CGColorSpaceCreateWithColorSyncProfile(arg obj.Object, options obj.Object) CGColorSpaceRef {
+	defer runtime.KeepAlive(arg)
+	defer runtime.KeepAlive(options)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorSpaceCreateWithColorSyncProfile == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorSpaceCreateWithColorSyncProfile, _lib, "CGColorSpaceCreateWithColorSyncProfile")
@@ -931,6 +990,7 @@ var _fnCGColorSpaceCreateWithICCData func(objc.ID) objc.ID
 
 // CGColorSpaceCreateWithICCData calls the CoreGraphics framework function CGColorSpaceCreateWithICCData.
 func CGColorSpaceCreateWithICCData(data obj.Object) CGColorSpaceRef {
+	defer runtime.KeepAlive(data)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorSpaceCreateWithICCData == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorSpaceCreateWithICCData, _lib, "CGColorSpaceCreateWithICCData")
@@ -943,6 +1003,7 @@ var _fnCGColorSpaceCreateWithICCProfile func(objc.ID) objc.ID
 
 // CGColorSpaceCreateWithICCProfile calls the CoreGraphics framework function CGColorSpaceCreateWithICCProfile.
 func CGColorSpaceCreateWithICCProfile(data obj.Object) CGColorSpaceRef {
+	defer runtime.KeepAlive(data)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorSpaceCreateWithICCProfile == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorSpaceCreateWithICCProfile, _lib, "CGColorSpaceCreateWithICCProfile")
@@ -955,6 +1016,7 @@ var _fnCGColorSpaceCreateWithName func(objc.ID) objc.ID
 
 // CGColorSpaceCreateWithName calls the CoreGraphics framework function CGColorSpaceCreateWithName.
 func CGColorSpaceCreateWithName(name obj.Object) CGColorSpaceRef {
+	defer runtime.KeepAlive(name)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorSpaceCreateWithName == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorSpaceCreateWithName, _lib, "CGColorSpaceCreateWithName")
@@ -979,6 +1041,7 @@ var _fnCGColorSpaceCreateWithPropertyList func(objc.ID) objc.ID
 
 // CGColorSpaceCreateWithPropertyList calls the CoreGraphics framework function CGColorSpaceCreateWithPropertyList.
 func CGColorSpaceCreateWithPropertyList(plist obj.Object) CGColorSpaceRef {
+	defer runtime.KeepAlive(plist)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorSpaceCreateWithPropertyList == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorSpaceCreateWithPropertyList, _lib, "CGColorSpaceCreateWithPropertyList")
@@ -991,6 +1054,7 @@ var _fnCGColorSpaceGetBaseColorSpace func(objc.ID) objc.ID
 
 // CGColorSpaceGetBaseColorSpace calls the CoreGraphics framework function CGColorSpaceGetBaseColorSpace.
 func CGColorSpaceGetBaseColorSpace(space CGColorSpaceRef) CGColorSpaceRef {
+	defer runtime.KeepAlive(space)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorSpaceGetBaseColorSpace == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorSpaceGetBaseColorSpace, _lib, "CGColorSpaceGetBaseColorSpace")
@@ -1003,6 +1067,7 @@ var _fnCGColorSpaceGetColorTable func(objc.ID, unsafe.Pointer)
 
 // CGColorSpaceGetColorTable calls the CoreGraphics framework function CGColorSpaceGetColorTable.
 func CGColorSpaceGetColorTable(space CGColorSpaceRef) (table uint8) {
+	defer runtime.KeepAlive(space)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorSpaceGetColorTable == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorSpaceGetColorTable, _lib, "CGColorSpaceGetColorTable")
@@ -1016,6 +1081,7 @@ var _fnCGColorSpaceGetColorTableCount func(objc.ID) int
 
 // CGColorSpaceGetColorTableCount calls the CoreGraphics framework function CGColorSpaceGetColorTableCount.
 func CGColorSpaceGetColorTableCount(space CGColorSpaceRef) int {
+	defer runtime.KeepAlive(space)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorSpaceGetColorTableCount == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorSpaceGetColorTableCount, _lib, "CGColorSpaceGetColorTableCount")
@@ -1027,6 +1093,7 @@ var _fnCGColorSpaceGetModel func(objc.ID) CGColorSpaceModel
 
 // CGColorSpaceGetModel calls the CoreGraphics framework function CGColorSpaceGetModel.
 func CGColorSpaceGetModel(space CGColorSpaceRef) CGColorSpaceModel {
+	defer runtime.KeepAlive(space)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorSpaceGetModel == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorSpaceGetModel, _lib, "CGColorSpaceGetModel")
@@ -1038,6 +1105,7 @@ var _fnCGColorSpaceGetName func(objc.ID) objc.ID
 
 // CGColorSpaceGetName calls the CoreGraphics framework function CGColorSpaceGetName.
 func CGColorSpaceGetName(space CGColorSpaceRef) obj.Object {
+	defer runtime.KeepAlive(space)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorSpaceGetName == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorSpaceGetName, _lib, "CGColorSpaceGetName")
@@ -1050,6 +1118,7 @@ var _fnCGColorSpaceGetNumberOfComponents func(objc.ID) int
 
 // CGColorSpaceGetNumberOfComponents calls the CoreGraphics framework function CGColorSpaceGetNumberOfComponents.
 func CGColorSpaceGetNumberOfComponents(space CGColorSpaceRef) int {
+	defer runtime.KeepAlive(space)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorSpaceGetNumberOfComponents == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorSpaceGetNumberOfComponents, _lib, "CGColorSpaceGetNumberOfComponents")
@@ -1072,6 +1141,7 @@ var _fnCGColorSpaceIsHDR func(objc.ID) bool
 
 // CGColorSpaceIsHDR calls the CoreGraphics framework function CGColorSpaceIsHDR.
 func CGColorSpaceIsHDR(arg CGColorSpaceRef) bool {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorSpaceIsHDR == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorSpaceIsHDR, _lib, "CGColorSpaceIsHDR")
@@ -1083,6 +1153,7 @@ var _fnCGColorSpaceIsHLGBased func(objc.ID) bool
 
 // CGColorSpaceIsHLGBased calls the CoreGraphics framework function CGColorSpaceIsHLGBased.
 func CGColorSpaceIsHLGBased(s CGColorSpaceRef) bool {
+	defer runtime.KeepAlive(s)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorSpaceIsHLGBased == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorSpaceIsHLGBased, _lib, "CGColorSpaceIsHLGBased")
@@ -1094,6 +1165,7 @@ var _fnCGColorSpaceIsPQBased func(objc.ID) bool
 
 // CGColorSpaceIsPQBased calls the CoreGraphics framework function CGColorSpaceIsPQBased.
 func CGColorSpaceIsPQBased(s CGColorSpaceRef) bool {
+	defer runtime.KeepAlive(s)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorSpaceIsPQBased == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorSpaceIsPQBased, _lib, "CGColorSpaceIsPQBased")
@@ -1105,6 +1177,7 @@ var _fnCGColorSpaceIsWideGamutRGB func(objc.ID) bool
 
 // CGColorSpaceIsWideGamutRGB calls the CoreGraphics framework function CGColorSpaceIsWideGamutRGB.
 func CGColorSpaceIsWideGamutRGB(arg CGColorSpaceRef) bool {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorSpaceIsWideGamutRGB == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorSpaceIsWideGamutRGB, _lib, "CGColorSpaceIsWideGamutRGB")
@@ -1116,6 +1189,7 @@ var _fnCGColorSpaceRelease func(objc.ID)
 
 // CGColorSpaceRelease calls the CoreGraphics framework function CGColorSpaceRelease.
 func CGColorSpaceRelease(space CGColorSpaceRef) {
+	defer runtime.KeepAlive(space)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorSpaceRelease == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorSpaceRelease, _lib, "CGColorSpaceRelease")
@@ -1127,6 +1201,7 @@ var _fnCGColorSpaceRetain func(objc.ID) objc.ID
 
 // CGColorSpaceRetain calls the CoreGraphics framework function CGColorSpaceRetain.
 func CGColorSpaceRetain(space CGColorSpaceRef) CGColorSpaceRef {
+	defer runtime.KeepAlive(space)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorSpaceRetain == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorSpaceRetain, _lib, "CGColorSpaceRetain")
@@ -1139,6 +1214,7 @@ var _fnCGColorSpaceSupportsOutput func(objc.ID) bool
 
 // CGColorSpaceSupportsOutput calls the CoreGraphics framework function CGColorSpaceSupportsOutput.
 func CGColorSpaceSupportsOutput(space CGColorSpaceRef) bool {
+	defer runtime.KeepAlive(space)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorSpaceSupportsOutput == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorSpaceSupportsOutput, _lib, "CGColorSpaceSupportsOutput")
@@ -1150,6 +1226,7 @@ var _fnCGColorSpaceUsesExtendedRange func(objc.ID) bool
 
 // CGColorSpaceUsesExtendedRange calls the CoreGraphics framework function CGColorSpaceUsesExtendedRange.
 func CGColorSpaceUsesExtendedRange(space CGColorSpaceRef) bool {
+	defer runtime.KeepAlive(space)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorSpaceUsesExtendedRange == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorSpaceUsesExtendedRange, _lib, "CGColorSpaceUsesExtendedRange")
@@ -1161,6 +1238,7 @@ var _fnCGColorSpaceUsesITUR_2100TF func(objc.ID) bool
 
 // CGColorSpaceUsesITUR_2100TF calls the CoreGraphics framework function CGColorSpaceUsesITUR_2100TF.
 func CGColorSpaceUsesITUR_2100TF(arg CGColorSpaceRef) bool {
+	defer runtime.KeepAlive(arg)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorSpaceUsesITUR_2100TF == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorSpaceUsesITUR_2100TF, _lib, "CGColorSpaceUsesITUR_2100TF")
@@ -1172,6 +1250,7 @@ var _fnCGCompleteDisplayConfiguration func(objc.ID, CGConfigureOption) CGError
 
 // CGCompleteDisplayConfiguration calls the CoreGraphics framework function CGCompleteDisplayConfiguration.
 func CGCompleteDisplayConfiguration(config CGDisplayConfigRef, option CGConfigureOption) CGError {
+	defer runtime.KeepAlive(config)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGCompleteDisplayConfiguration == nil {
 		ebipurego.RegisterLibFunc(&_fnCGCompleteDisplayConfiguration, _lib, "CGCompleteDisplayConfiguration")
@@ -1183,6 +1262,7 @@ var _fnCGConfigureDisplayFadeEffect func(objc.ID, float32, float32, float32, flo
 
 // CGConfigureDisplayFadeEffect calls the CoreGraphics framework function CGConfigureDisplayFadeEffect.
 func CGConfigureDisplayFadeEffect(config CGDisplayConfigRef, fadeOutSeconds float32, fadeInSeconds float32, fadeRed float32, fadeGreen float32, fadeBlue float32) CGError {
+	defer runtime.KeepAlive(config)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGConfigureDisplayFadeEffect == nil {
 		ebipurego.RegisterLibFunc(&_fnCGConfigureDisplayFadeEffect, _lib, "CGConfigureDisplayFadeEffect")
@@ -1194,6 +1274,7 @@ var _fnCGConfigureDisplayMirrorOfDisplay func(objc.ID, uint32, uint32) CGError
 
 // CGConfigureDisplayMirrorOfDisplay calls the CoreGraphics framework function CGConfigureDisplayMirrorOfDisplay.
 func CGConfigureDisplayMirrorOfDisplay(config CGDisplayConfigRef, display uint32, master uint32) CGError {
+	defer runtime.KeepAlive(config)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGConfigureDisplayMirrorOfDisplay == nil {
 		ebipurego.RegisterLibFunc(&_fnCGConfigureDisplayMirrorOfDisplay, _lib, "CGConfigureDisplayMirrorOfDisplay")
@@ -1205,6 +1286,8 @@ var _fnCGConfigureDisplayMode func(objc.ID, uint32, objc.ID) CGError
 
 // CGConfigureDisplayMode calls the CoreGraphics framework function CGConfigureDisplayMode.
 func CGConfigureDisplayMode(config CGDisplayConfigRef, display uint32, mode obj.Object) CGError {
+	defer runtime.KeepAlive(config)
+	defer runtime.KeepAlive(mode)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGConfigureDisplayMode == nil {
 		ebipurego.RegisterLibFunc(&_fnCGConfigureDisplayMode, _lib, "CGConfigureDisplayMode")
@@ -1216,6 +1299,7 @@ var _fnCGConfigureDisplayOrigin func(objc.ID, uint32, int32, int32) CGError
 
 // CGConfigureDisplayOrigin calls the CoreGraphics framework function CGConfigureDisplayOrigin.
 func CGConfigureDisplayOrigin(config CGDisplayConfigRef, display uint32, x int32, y int32) CGError {
+	defer runtime.KeepAlive(config)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGConfigureDisplayOrigin == nil {
 		ebipurego.RegisterLibFunc(&_fnCGConfigureDisplayOrigin, _lib, "CGConfigureDisplayOrigin")
@@ -1227,6 +1311,7 @@ var _fnCGConfigureDisplayStereoOperation func(objc.ID, uint32, int, int) CGError
 
 // CGConfigureDisplayStereoOperation calls the CoreGraphics framework function CGConfigureDisplayStereoOperation.
 func CGConfigureDisplayStereoOperation(config CGDisplayConfigRef, display uint32, stereo int, forceBlueLine int) CGError {
+	defer runtime.KeepAlive(config)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGConfigureDisplayStereoOperation == nil {
 		ebipurego.RegisterLibFunc(&_fnCGConfigureDisplayStereoOperation, _lib, "CGConfigureDisplayStereoOperation")
@@ -1238,6 +1323,9 @@ var _fnCGConfigureDisplayWithDisplayMode func(objc.ID, uint32, objc.ID, objc.ID)
 
 // CGConfigureDisplayWithDisplayMode calls the CoreGraphics framework function CGConfigureDisplayWithDisplayMode.
 func CGConfigureDisplayWithDisplayMode(config CGDisplayConfigRef, display uint32, mode CGDisplayModeRef, options obj.Object) CGError {
+	defer runtime.KeepAlive(config)
+	defer runtime.KeepAlive(mode)
+	defer runtime.KeepAlive(options)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGConfigureDisplayWithDisplayMode == nil {
 		ebipurego.RegisterLibFunc(&_fnCGConfigureDisplayWithDisplayMode, _lib, "CGConfigureDisplayWithDisplayMode")
@@ -1249,6 +1337,7 @@ var _fnCGContextAddArc func(objc.ID, float64, float64, float64, float64, float64
 
 // CGContextAddArc calls the CoreGraphics framework function CGContextAddArc.
 func CGContextAddArc(c CGContextRef, x float64, y float64, radius float64, startAngle float64, endAngle float64, clockwise int) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextAddArc == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextAddArc, _lib, "CGContextAddArc")
@@ -1260,6 +1349,7 @@ var _fnCGContextAddArcToPoint func(objc.ID, float64, float64, float64, float64, 
 
 // CGContextAddArcToPoint calls the CoreGraphics framework function CGContextAddArcToPoint.
 func CGContextAddArcToPoint(c CGContextRef, x1 float64, y1 float64, x2 float64, y2 float64, radius float64) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextAddArcToPoint == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextAddArcToPoint, _lib, "CGContextAddArcToPoint")
@@ -1271,6 +1361,7 @@ var _fnCGContextAddCurveToPoint func(objc.ID, float64, float64, float64, float64
 
 // CGContextAddCurveToPoint calls the CoreGraphics framework function CGContextAddCurveToPoint.
 func CGContextAddCurveToPoint(c CGContextRef, cp1x float64, cp1y float64, cp2x float64, cp2y float64, x float64, y float64) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextAddCurveToPoint == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextAddCurveToPoint, _lib, "CGContextAddCurveToPoint")
@@ -1282,6 +1373,7 @@ var _fnCGContextAddEllipseInRect func(objc.ID, corefoundation.CGRect)
 
 // CGContextAddEllipseInRect calls the CoreGraphics framework function CGContextAddEllipseInRect.
 func CGContextAddEllipseInRect(c CGContextRef, rect corefoundation.CGRect) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextAddEllipseInRect == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextAddEllipseInRect, _lib, "CGContextAddEllipseInRect")
@@ -1293,6 +1385,7 @@ var _fnCGContextAddLineToPoint func(objc.ID, float64, float64)
 
 // CGContextAddLineToPoint calls the CoreGraphics framework function CGContextAddLineToPoint.
 func CGContextAddLineToPoint(c CGContextRef, x float64, y float64) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextAddLineToPoint == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextAddLineToPoint, _lib, "CGContextAddLineToPoint")
@@ -1304,6 +1397,7 @@ var _fnCGContextAddLines func(objc.ID, unsafe.Pointer, int)
 
 // CGContextAddLines calls the CoreGraphics framework function CGContextAddLines.
 func CGContextAddLines(c CGContextRef, points unsafe.Pointer, count int) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextAddLines == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextAddLines, _lib, "CGContextAddLines")
@@ -1315,6 +1409,8 @@ var _fnCGContextAddPath func(objc.ID, objc.ID)
 
 // CGContextAddPath calls the CoreGraphics framework function CGContextAddPath.
 func CGContextAddPath(c CGContextRef, path CGPathRef) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(path)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextAddPath == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextAddPath, _lib, "CGContextAddPath")
@@ -1326,6 +1422,7 @@ var _fnCGContextAddQuadCurveToPoint func(objc.ID, float64, float64, float64, flo
 
 // CGContextAddQuadCurveToPoint calls the CoreGraphics framework function CGContextAddQuadCurveToPoint.
 func CGContextAddQuadCurveToPoint(c CGContextRef, cpx float64, cpy float64, x float64, y float64) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextAddQuadCurveToPoint == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextAddQuadCurveToPoint, _lib, "CGContextAddQuadCurveToPoint")
@@ -1337,6 +1434,7 @@ var _fnCGContextAddRect func(objc.ID, corefoundation.CGRect)
 
 // CGContextAddRect calls the CoreGraphics framework function CGContextAddRect.
 func CGContextAddRect(c CGContextRef, rect corefoundation.CGRect) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextAddRect == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextAddRect, _lib, "CGContextAddRect")
@@ -1348,6 +1446,7 @@ var _fnCGContextAddRects func(objc.ID, unsafe.Pointer, int)
 
 // CGContextAddRects calls the CoreGraphics framework function CGContextAddRects.
 func CGContextAddRects(c CGContextRef, rects unsafe.Pointer, count int) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextAddRects == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextAddRects, _lib, "CGContextAddRects")
@@ -1359,6 +1458,7 @@ var _fnCGContextBeginPage func(objc.ID, unsafe.Pointer)
 
 // CGContextBeginPage calls the CoreGraphics framework function CGContextBeginPage.
 func CGContextBeginPage(c CGContextRef, mediaBox *corefoundation.CGRect) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextBeginPage == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextBeginPage, _lib, "CGContextBeginPage")
@@ -1370,6 +1470,7 @@ var _fnCGContextBeginPath func(objc.ID)
 
 // CGContextBeginPath calls the CoreGraphics framework function CGContextBeginPath.
 func CGContextBeginPath(c CGContextRef) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextBeginPath == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextBeginPath, _lib, "CGContextBeginPath")
@@ -1381,6 +1482,8 @@ var _fnCGContextBeginTransparencyLayer func(objc.ID, objc.ID)
 
 // CGContextBeginTransparencyLayer calls the CoreGraphics framework function CGContextBeginTransparencyLayer.
 func CGContextBeginTransparencyLayer(c CGContextRef, auxiliaryInfo obj.Object) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(auxiliaryInfo)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextBeginTransparencyLayer == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextBeginTransparencyLayer, _lib, "CGContextBeginTransparencyLayer")
@@ -1392,6 +1495,8 @@ var _fnCGContextBeginTransparencyLayerWithRect func(objc.ID, corefoundation.CGRe
 
 // CGContextBeginTransparencyLayerWithRect calls the CoreGraphics framework function CGContextBeginTransparencyLayerWithRect.
 func CGContextBeginTransparencyLayerWithRect(c CGContextRef, rect corefoundation.CGRect, auxInfo obj.Object) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(auxInfo)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextBeginTransparencyLayerWithRect == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextBeginTransparencyLayerWithRect, _lib, "CGContextBeginTransparencyLayerWithRect")
@@ -1403,6 +1508,7 @@ var _fnCGContextClearRect func(objc.ID, corefoundation.CGRect)
 
 // CGContextClearRect calls the CoreGraphics framework function CGContextClearRect.
 func CGContextClearRect(c CGContextRef, rect corefoundation.CGRect) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextClearRect == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextClearRect, _lib, "CGContextClearRect")
@@ -1414,6 +1520,7 @@ var _fnCGContextClip func(objc.ID)
 
 // CGContextClip calls the CoreGraphics framework function CGContextClip.
 func CGContextClip(c CGContextRef) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextClip == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextClip, _lib, "CGContextClip")
@@ -1425,6 +1532,8 @@ var _fnCGContextClipToMask func(objc.ID, corefoundation.CGRect, objc.ID)
 
 // CGContextClipToMask calls the CoreGraphics framework function CGContextClipToMask.
 func CGContextClipToMask(c CGContextRef, rect corefoundation.CGRect, mask CGImageRef) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(mask)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextClipToMask == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextClipToMask, _lib, "CGContextClipToMask")
@@ -1436,6 +1545,7 @@ var _fnCGContextClipToRect func(objc.ID, corefoundation.CGRect)
 
 // CGContextClipToRect calls the CoreGraphics framework function CGContextClipToRect.
 func CGContextClipToRect(c CGContextRef, rect corefoundation.CGRect) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextClipToRect == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextClipToRect, _lib, "CGContextClipToRect")
@@ -1447,6 +1557,7 @@ var _fnCGContextClipToRects func(objc.ID, unsafe.Pointer, int)
 
 // CGContextClipToRects calls the CoreGraphics framework function CGContextClipToRects.
 func CGContextClipToRects(c CGContextRef, rects unsafe.Pointer, count int) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextClipToRects == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextClipToRects, _lib, "CGContextClipToRects")
@@ -1458,6 +1569,7 @@ var _fnCGContextClosePath func(objc.ID)
 
 // CGContextClosePath calls the CoreGraphics framework function CGContextClosePath.
 func CGContextClosePath(c CGContextRef) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextClosePath == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextClosePath, _lib, "CGContextClosePath")
@@ -1469,6 +1581,7 @@ var _fnCGContextConcatCTM func(objc.ID, corefoundation.CGAffineTransform)
 
 // CGContextConcatCTM calls the CoreGraphics framework function CGContextConcatCTM.
 func CGContextConcatCTM(c CGContextRef, transform corefoundation.CGAffineTransform) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextConcatCTM == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextConcatCTM, _lib, "CGContextConcatCTM")
@@ -1480,6 +1593,7 @@ var _fnCGContextConvertPointToDeviceSpace func(objc.ID, corefoundation.CGPoint) 
 
 // CGContextConvertPointToDeviceSpace calls the CoreGraphics framework function CGContextConvertPointToDeviceSpace.
 func CGContextConvertPointToDeviceSpace(c CGContextRef, point corefoundation.CGPoint) corefoundation.CGPoint {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextConvertPointToDeviceSpace == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextConvertPointToDeviceSpace, _lib, "CGContextConvertPointToDeviceSpace")
@@ -1491,6 +1605,7 @@ var _fnCGContextConvertPointToUserSpace func(objc.ID, corefoundation.CGPoint) co
 
 // CGContextConvertPointToUserSpace calls the CoreGraphics framework function CGContextConvertPointToUserSpace.
 func CGContextConvertPointToUserSpace(c CGContextRef, point corefoundation.CGPoint) corefoundation.CGPoint {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextConvertPointToUserSpace == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextConvertPointToUserSpace, _lib, "CGContextConvertPointToUserSpace")
@@ -1502,6 +1617,7 @@ var _fnCGContextConvertRectToDeviceSpace func(objc.ID, corefoundation.CGRect) co
 
 // CGContextConvertRectToDeviceSpace calls the CoreGraphics framework function CGContextConvertRectToDeviceSpace.
 func CGContextConvertRectToDeviceSpace(c CGContextRef, rect corefoundation.CGRect) corefoundation.CGRect {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextConvertRectToDeviceSpace == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextConvertRectToDeviceSpace, _lib, "CGContextConvertRectToDeviceSpace")
@@ -1513,6 +1629,7 @@ var _fnCGContextConvertRectToUserSpace func(objc.ID, corefoundation.CGRect) core
 
 // CGContextConvertRectToUserSpace calls the CoreGraphics framework function CGContextConvertRectToUserSpace.
 func CGContextConvertRectToUserSpace(c CGContextRef, rect corefoundation.CGRect) corefoundation.CGRect {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextConvertRectToUserSpace == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextConvertRectToUserSpace, _lib, "CGContextConvertRectToUserSpace")
@@ -1524,6 +1641,7 @@ var _fnCGContextConvertSizeToDeviceSpace func(objc.ID, corefoundation.CGSize) co
 
 // CGContextConvertSizeToDeviceSpace calls the CoreGraphics framework function CGContextConvertSizeToDeviceSpace.
 func CGContextConvertSizeToDeviceSpace(c CGContextRef, size corefoundation.CGSize) corefoundation.CGSize {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextConvertSizeToDeviceSpace == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextConvertSizeToDeviceSpace, _lib, "CGContextConvertSizeToDeviceSpace")
@@ -1535,6 +1653,7 @@ var _fnCGContextConvertSizeToUserSpace func(objc.ID, corefoundation.CGSize) core
 
 // CGContextConvertSizeToUserSpace calls the CoreGraphics framework function CGContextConvertSizeToUserSpace.
 func CGContextConvertSizeToUserSpace(c CGContextRef, size corefoundation.CGSize) corefoundation.CGSize {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextConvertSizeToUserSpace == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextConvertSizeToUserSpace, _lib, "CGContextConvertSizeToUserSpace")
@@ -1546,6 +1665,7 @@ var _fnCGContextCopyPath func(objc.ID) objc.ID
 
 // CGContextCopyPath calls the CoreGraphics framework function CGContextCopyPath.
 func CGContextCopyPath(c CGContextRef) CGPathRef {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextCopyPath == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextCopyPath, _lib, "CGContextCopyPath")
@@ -1558,6 +1678,8 @@ var _fnCGContextDrawConicGradient func(objc.ID, objc.ID, corefoundation.CGPoint,
 
 // CGContextDrawConicGradient calls the CoreGraphics framework function CGContextDrawConicGradient.
 func CGContextDrawConicGradient(c CGContextRef, gradient CGGradientRef, center corefoundation.CGPoint, angle float64) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(gradient)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextDrawConicGradient == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextDrawConicGradient, _lib, "CGContextDrawConicGradient")
@@ -1569,6 +1691,8 @@ var _fnCGContextDrawImage func(objc.ID, corefoundation.CGRect, objc.ID)
 
 // CGContextDrawImage calls the CoreGraphics framework function CGContextDrawImage.
 func CGContextDrawImage(c CGContextRef, rect corefoundation.CGRect, image CGImageRef) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(image)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextDrawImage == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextDrawImage, _lib, "CGContextDrawImage")
@@ -1580,6 +1704,9 @@ var _fnCGContextDrawImageApplyingToneMapping func(objc.ID, corefoundation.CGRect
 
 // CGContextDrawImageApplyingToneMapping calls the CoreGraphics framework function CGContextDrawImageApplyingToneMapping.
 func CGContextDrawImageApplyingToneMapping(c CGContextRef, r corefoundation.CGRect, image CGImageRef, method CGToneMapping, options obj.Object) bool {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(image)
+	defer runtime.KeepAlive(options)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextDrawImageApplyingToneMapping == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextDrawImageApplyingToneMapping, _lib, "CGContextDrawImageApplyingToneMapping")
@@ -1591,6 +1718,8 @@ var _fnCGContextDrawLayerAtPoint func(objc.ID, corefoundation.CGPoint, objc.ID)
 
 // CGContextDrawLayerAtPoint calls the CoreGraphics framework function CGContextDrawLayerAtPoint.
 func CGContextDrawLayerAtPoint(context_ CGContextRef, point corefoundation.CGPoint, layer CGLayerRef) {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(layer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextDrawLayerAtPoint == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextDrawLayerAtPoint, _lib, "CGContextDrawLayerAtPoint")
@@ -1602,6 +1731,8 @@ var _fnCGContextDrawLayerInRect func(objc.ID, corefoundation.CGRect, objc.ID)
 
 // CGContextDrawLayerInRect calls the CoreGraphics framework function CGContextDrawLayerInRect.
 func CGContextDrawLayerInRect(context_ CGContextRef, rect corefoundation.CGRect, layer CGLayerRef) {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(layer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextDrawLayerInRect == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextDrawLayerInRect, _lib, "CGContextDrawLayerInRect")
@@ -1613,6 +1744,8 @@ var _fnCGContextDrawLinearGradient func(objc.ID, objc.ID, corefoundation.CGPoint
 
 // CGContextDrawLinearGradient calls the CoreGraphics framework function CGContextDrawLinearGradient.
 func CGContextDrawLinearGradient(c CGContextRef, gradient CGGradientRef, startPoint corefoundation.CGPoint, endPoint corefoundation.CGPoint, options CGGradientDrawingOptions) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(gradient)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextDrawLinearGradient == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextDrawLinearGradient, _lib, "CGContextDrawLinearGradient")
@@ -1624,6 +1757,8 @@ var _fnCGContextDrawPDFDocument func(objc.ID, corefoundation.CGRect, objc.ID, in
 
 // CGContextDrawPDFDocument calls the CoreGraphics framework function CGContextDrawPDFDocument.
 func CGContextDrawPDFDocument(c CGContextRef, rect corefoundation.CGRect, document CGPDFDocumentRef, page int) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(document)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextDrawPDFDocument == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextDrawPDFDocument, _lib, "CGContextDrawPDFDocument")
@@ -1635,6 +1770,8 @@ var _fnCGContextDrawPDFPage func(objc.ID, objc.ID)
 
 // CGContextDrawPDFPage calls the CoreGraphics framework function CGContextDrawPDFPage.
 func CGContextDrawPDFPage(c CGContextRef, page CGPDFPageRef) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(page)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextDrawPDFPage == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextDrawPDFPage, _lib, "CGContextDrawPDFPage")
@@ -1646,6 +1783,7 @@ var _fnCGContextDrawPath func(objc.ID, CGPathDrawingMode)
 
 // CGContextDrawPath calls the CoreGraphics framework function CGContextDrawPath.
 func CGContextDrawPath(c CGContextRef, mode CGPathDrawingMode) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextDrawPath == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextDrawPath, _lib, "CGContextDrawPath")
@@ -1657,6 +1795,8 @@ var _fnCGContextDrawRadialGradient func(objc.ID, objc.ID, corefoundation.CGPoint
 
 // CGContextDrawRadialGradient calls the CoreGraphics framework function CGContextDrawRadialGradient.
 func CGContextDrawRadialGradient(c CGContextRef, gradient CGGradientRef, startCenter corefoundation.CGPoint, startRadius float64, endCenter corefoundation.CGPoint, endRadius float64, options CGGradientDrawingOptions) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(gradient)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextDrawRadialGradient == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextDrawRadialGradient, _lib, "CGContextDrawRadialGradient")
@@ -1668,6 +1808,8 @@ var _fnCGContextDrawShading func(objc.ID, objc.ID)
 
 // CGContextDrawShading calls the CoreGraphics framework function CGContextDrawShading.
 func CGContextDrawShading(c CGContextRef, shading CGShadingRef) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(shading)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextDrawShading == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextDrawShading, _lib, "CGContextDrawShading")
@@ -1679,6 +1821,8 @@ var _fnCGContextDrawTiledImage func(objc.ID, corefoundation.CGRect, objc.ID)
 
 // CGContextDrawTiledImage calls the CoreGraphics framework function CGContextDrawTiledImage.
 func CGContextDrawTiledImage(c CGContextRef, rect corefoundation.CGRect, image CGImageRef) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(image)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextDrawTiledImage == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextDrawTiledImage, _lib, "CGContextDrawTiledImage")
@@ -1690,6 +1834,7 @@ var _fnCGContextEOClip func(objc.ID)
 
 // CGContextEOClip calls the CoreGraphics framework function CGContextEOClip.
 func CGContextEOClip(c CGContextRef) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextEOClip == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextEOClip, _lib, "CGContextEOClip")
@@ -1701,6 +1846,7 @@ var _fnCGContextEOFillPath func(objc.ID)
 
 // CGContextEOFillPath calls the CoreGraphics framework function CGContextEOFillPath.
 func CGContextEOFillPath(c CGContextRef) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextEOFillPath == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextEOFillPath, _lib, "CGContextEOFillPath")
@@ -1712,6 +1858,7 @@ var _fnCGContextEndPage func(objc.ID)
 
 // CGContextEndPage calls the CoreGraphics framework function CGContextEndPage.
 func CGContextEndPage(c CGContextRef) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextEndPage == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextEndPage, _lib, "CGContextEndPage")
@@ -1723,6 +1870,7 @@ var _fnCGContextEndTransparencyLayer func(objc.ID)
 
 // CGContextEndTransparencyLayer calls the CoreGraphics framework function CGContextEndTransparencyLayer.
 func CGContextEndTransparencyLayer(c CGContextRef) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextEndTransparencyLayer == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextEndTransparencyLayer, _lib, "CGContextEndTransparencyLayer")
@@ -1734,6 +1882,7 @@ var _fnCGContextFillEllipseInRect func(objc.ID, corefoundation.CGRect)
 
 // CGContextFillEllipseInRect calls the CoreGraphics framework function CGContextFillEllipseInRect.
 func CGContextFillEllipseInRect(c CGContextRef, rect corefoundation.CGRect) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextFillEllipseInRect == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextFillEllipseInRect, _lib, "CGContextFillEllipseInRect")
@@ -1745,6 +1894,7 @@ var _fnCGContextFillPath func(objc.ID)
 
 // CGContextFillPath calls the CoreGraphics framework function CGContextFillPath.
 func CGContextFillPath(c CGContextRef) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextFillPath == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextFillPath, _lib, "CGContextFillPath")
@@ -1756,6 +1906,7 @@ var _fnCGContextFillRect func(objc.ID, corefoundation.CGRect)
 
 // CGContextFillRect calls the CoreGraphics framework function CGContextFillRect.
 func CGContextFillRect(c CGContextRef, rect corefoundation.CGRect) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextFillRect == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextFillRect, _lib, "CGContextFillRect")
@@ -1767,6 +1918,7 @@ var _fnCGContextFillRects func(objc.ID, unsafe.Pointer, int)
 
 // CGContextFillRects calls the CoreGraphics framework function CGContextFillRects.
 func CGContextFillRects(c CGContextRef, rects unsafe.Pointer, count int) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextFillRects == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextFillRects, _lib, "CGContextFillRects")
@@ -1778,6 +1930,7 @@ var _fnCGContextFlush func(objc.ID)
 
 // CGContextFlush calls the CoreGraphics framework function CGContextFlush.
 func CGContextFlush(c CGContextRef) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextFlush == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextFlush, _lib, "CGContextFlush")
@@ -1789,6 +1942,7 @@ var _fnCGContextGetCTM func(objc.ID) corefoundation.CGAffineTransform
 
 // CGContextGetCTM calls the CoreGraphics framework function CGContextGetCTM.
 func CGContextGetCTM(c CGContextRef) corefoundation.CGAffineTransform {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextGetCTM == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextGetCTM, _lib, "CGContextGetCTM")
@@ -1800,6 +1954,7 @@ var _fnCGContextGetClipBoundingBox func(objc.ID) corefoundation.CGRect
 
 // CGContextGetClipBoundingBox calls the CoreGraphics framework function CGContextGetClipBoundingBox.
 func CGContextGetClipBoundingBox(c CGContextRef) corefoundation.CGRect {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextGetClipBoundingBox == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextGetClipBoundingBox, _lib, "CGContextGetClipBoundingBox")
@@ -1811,6 +1966,7 @@ var _fnCGContextGetContentToneMappingInfo func(objc.ID) unsafe.Pointer
 
 // CGContextGetContentToneMappingInfo calls the CoreGraphics framework function CGContextGetContentToneMappingInfo.
 func CGContextGetContentToneMappingInfo(c CGContextRef) unsafe.Pointer {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextGetContentToneMappingInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextGetContentToneMappingInfo, _lib, "CGContextGetContentToneMappingInfo")
@@ -1822,6 +1978,7 @@ var _fnCGContextGetEDRTargetHeadroom func(objc.ID) float32
 
 // CGContextGetEDRTargetHeadroom calls the CoreGraphics framework function CGContextGetEDRTargetHeadroom.
 func CGContextGetEDRTargetHeadroom(c CGContextRef) float32 {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextGetEDRTargetHeadroom == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextGetEDRTargetHeadroom, _lib, "CGContextGetEDRTargetHeadroom")
@@ -1833,6 +1990,7 @@ var _fnCGContextGetInterpolationQuality func(objc.ID) CGInterpolationQuality
 
 // CGContextGetInterpolationQuality calls the CoreGraphics framework function CGContextGetInterpolationQuality.
 func CGContextGetInterpolationQuality(c CGContextRef) CGInterpolationQuality {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextGetInterpolationQuality == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextGetInterpolationQuality, _lib, "CGContextGetInterpolationQuality")
@@ -1844,6 +2002,7 @@ var _fnCGContextGetPathBoundingBox func(objc.ID) corefoundation.CGRect
 
 // CGContextGetPathBoundingBox calls the CoreGraphics framework function CGContextGetPathBoundingBox.
 func CGContextGetPathBoundingBox(c CGContextRef) corefoundation.CGRect {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextGetPathBoundingBox == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextGetPathBoundingBox, _lib, "CGContextGetPathBoundingBox")
@@ -1855,6 +2014,7 @@ var _fnCGContextGetPathCurrentPoint func(objc.ID) corefoundation.CGPoint
 
 // CGContextGetPathCurrentPoint calls the CoreGraphics framework function CGContextGetPathCurrentPoint.
 func CGContextGetPathCurrentPoint(c CGContextRef) corefoundation.CGPoint {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextGetPathCurrentPoint == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextGetPathCurrentPoint, _lib, "CGContextGetPathCurrentPoint")
@@ -1866,6 +2026,7 @@ var _fnCGContextGetTextMatrix func(objc.ID) corefoundation.CGAffineTransform
 
 // CGContextGetTextMatrix calls the CoreGraphics framework function CGContextGetTextMatrix.
 func CGContextGetTextMatrix(c CGContextRef) corefoundation.CGAffineTransform {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextGetTextMatrix == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextGetTextMatrix, _lib, "CGContextGetTextMatrix")
@@ -1877,6 +2038,7 @@ var _fnCGContextGetTextPosition func(objc.ID) corefoundation.CGPoint
 
 // CGContextGetTextPosition calls the CoreGraphics framework function CGContextGetTextPosition.
 func CGContextGetTextPosition(c CGContextRef) corefoundation.CGPoint {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextGetTextPosition == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextGetTextPosition, _lib, "CGContextGetTextPosition")
@@ -1899,6 +2061,7 @@ var _fnCGContextGetUserSpaceToDeviceSpaceTransform func(objc.ID) corefoundation.
 
 // CGContextGetUserSpaceToDeviceSpaceTransform calls the CoreGraphics framework function CGContextGetUserSpaceToDeviceSpaceTransform.
 func CGContextGetUserSpaceToDeviceSpaceTransform(c CGContextRef) corefoundation.CGAffineTransform {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextGetUserSpaceToDeviceSpaceTransform == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextGetUserSpaceToDeviceSpaceTransform, _lib, "CGContextGetUserSpaceToDeviceSpaceTransform")
@@ -1910,6 +2073,7 @@ var _fnCGContextIsPathEmpty func(objc.ID) bool
 
 // CGContextIsPathEmpty calls the CoreGraphics framework function CGContextIsPathEmpty.
 func CGContextIsPathEmpty(c CGContextRef) bool {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextIsPathEmpty == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextIsPathEmpty, _lib, "CGContextIsPathEmpty")
@@ -1921,6 +2085,7 @@ var _fnCGContextMoveToPoint func(objc.ID, float64, float64)
 
 // CGContextMoveToPoint calls the CoreGraphics framework function CGContextMoveToPoint.
 func CGContextMoveToPoint(c CGContextRef, x float64, y float64) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextMoveToPoint == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextMoveToPoint, _lib, "CGContextMoveToPoint")
@@ -1932,6 +2097,7 @@ var _fnCGContextPathContainsPoint func(objc.ID, corefoundation.CGPoint, CGPathDr
 
 // CGContextPathContainsPoint calls the CoreGraphics framework function CGContextPathContainsPoint.
 func CGContextPathContainsPoint(c CGContextRef, point corefoundation.CGPoint, mode CGPathDrawingMode) bool {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextPathContainsPoint == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextPathContainsPoint, _lib, "CGContextPathContainsPoint")
@@ -1943,6 +2109,7 @@ var _fnCGContextRelease func(objc.ID)
 
 // CGContextRelease calls the CoreGraphics framework function CGContextRelease.
 func CGContextRelease(c CGContextRef) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextRelease == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextRelease, _lib, "CGContextRelease")
@@ -1954,6 +2121,7 @@ var _fnCGContextReplacePathWithStrokedPath func(objc.ID)
 
 // CGContextReplacePathWithStrokedPath calls the CoreGraphics framework function CGContextReplacePathWithStrokedPath.
 func CGContextReplacePathWithStrokedPath(c CGContextRef) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextReplacePathWithStrokedPath == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextReplacePathWithStrokedPath, _lib, "CGContextReplacePathWithStrokedPath")
@@ -1965,6 +2133,7 @@ var _fnCGContextResetClip func(objc.ID)
 
 // CGContextResetClip calls the CoreGraphics framework function CGContextResetClip.
 func CGContextResetClip(c CGContextRef) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextResetClip == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextResetClip, _lib, "CGContextResetClip")
@@ -1976,6 +2145,7 @@ var _fnCGContextRestoreGState func(objc.ID)
 
 // CGContextRestoreGState calls the CoreGraphics framework function CGContextRestoreGState.
 func CGContextRestoreGState(c CGContextRef) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextRestoreGState == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextRestoreGState, _lib, "CGContextRestoreGState")
@@ -1987,6 +2157,7 @@ var _fnCGContextRetain func(objc.ID) objc.ID
 
 // CGContextRetain calls the CoreGraphics framework function CGContextRetain.
 func CGContextRetain(c CGContextRef) CGContextRef {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextRetain == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextRetain, _lib, "CGContextRetain")
@@ -1999,6 +2170,7 @@ var _fnCGContextRotateCTM func(objc.ID, float64)
 
 // CGContextRotateCTM calls the CoreGraphics framework function CGContextRotateCTM.
 func CGContextRotateCTM(c CGContextRef, angle float64) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextRotateCTM == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextRotateCTM, _lib, "CGContextRotateCTM")
@@ -2010,6 +2182,7 @@ var _fnCGContextSaveGState func(objc.ID)
 
 // CGContextSaveGState calls the CoreGraphics framework function CGContextSaveGState.
 func CGContextSaveGState(c CGContextRef) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextSaveGState == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextSaveGState, _lib, "CGContextSaveGState")
@@ -2021,6 +2194,7 @@ var _fnCGContextScaleCTM func(objc.ID, float64, float64)
 
 // CGContextScaleCTM calls the CoreGraphics framework function CGContextScaleCTM.
 func CGContextScaleCTM(c CGContextRef, sx float64, sy float64) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextScaleCTM == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextScaleCTM, _lib, "CGContextScaleCTM")
@@ -2032,6 +2206,7 @@ var _fnCGContextSelectFont func(objc.ID, unsafe.Pointer, float64, CGTextEncoding
 
 // CGContextSelectFont calls the CoreGraphics framework function CGContextSelectFont.
 func CGContextSelectFont(c CGContextRef, name unsafe.Pointer, size float64, textEncoding CGTextEncoding) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextSelectFont == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextSelectFont, _lib, "CGContextSelectFont")
@@ -2043,6 +2218,7 @@ var _fnCGContextSetAllowsAntialiasing func(objc.ID, bool)
 
 // CGContextSetAllowsAntialiasing calls the CoreGraphics framework function CGContextSetAllowsAntialiasing.
 func CGContextSetAllowsAntialiasing(c CGContextRef, allowsAntialiasing bool) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextSetAllowsAntialiasing == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextSetAllowsAntialiasing, _lib, "CGContextSetAllowsAntialiasing")
@@ -2054,6 +2230,7 @@ var _fnCGContextSetAllowsFontSmoothing func(objc.ID, bool)
 
 // CGContextSetAllowsFontSmoothing calls the CoreGraphics framework function CGContextSetAllowsFontSmoothing.
 func CGContextSetAllowsFontSmoothing(c CGContextRef, allowsFontSmoothing bool) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextSetAllowsFontSmoothing == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextSetAllowsFontSmoothing, _lib, "CGContextSetAllowsFontSmoothing")
@@ -2065,6 +2242,7 @@ var _fnCGContextSetAllowsFontSubpixelPositioning func(objc.ID, bool)
 
 // CGContextSetAllowsFontSubpixelPositioning calls the CoreGraphics framework function CGContextSetAllowsFontSubpixelPositioning.
 func CGContextSetAllowsFontSubpixelPositioning(c CGContextRef, allowsFontSubpixelPositioning bool) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextSetAllowsFontSubpixelPositioning == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextSetAllowsFontSubpixelPositioning, _lib, "CGContextSetAllowsFontSubpixelPositioning")
@@ -2076,6 +2254,7 @@ var _fnCGContextSetAllowsFontSubpixelQuantization func(objc.ID, bool)
 
 // CGContextSetAllowsFontSubpixelQuantization calls the CoreGraphics framework function CGContextSetAllowsFontSubpixelQuantization.
 func CGContextSetAllowsFontSubpixelQuantization(c CGContextRef, allowsFontSubpixelQuantization bool) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextSetAllowsFontSubpixelQuantization == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextSetAllowsFontSubpixelQuantization, _lib, "CGContextSetAllowsFontSubpixelQuantization")
@@ -2087,6 +2266,7 @@ var _fnCGContextSetAlpha func(objc.ID, float64)
 
 // CGContextSetAlpha calls the CoreGraphics framework function CGContextSetAlpha.
 func CGContextSetAlpha(c CGContextRef, alpha float64) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextSetAlpha == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextSetAlpha, _lib, "CGContextSetAlpha")
@@ -2098,6 +2278,7 @@ var _fnCGContextSetBlendMode func(objc.ID, CGBlendMode)
 
 // CGContextSetBlendMode calls the CoreGraphics framework function CGContextSetBlendMode.
 func CGContextSetBlendMode(c CGContextRef, mode CGBlendMode) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextSetBlendMode == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextSetBlendMode, _lib, "CGContextSetBlendMode")
@@ -2109,6 +2290,7 @@ var _fnCGContextSetCMYKFillColor func(objc.ID, float64, float64, float64, float6
 
 // CGContextSetCMYKFillColor calls the CoreGraphics framework function CGContextSetCMYKFillColor.
 func CGContextSetCMYKFillColor(c CGContextRef, cyan float64, magenta float64, yellow float64, black float64, alpha float64) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextSetCMYKFillColor == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextSetCMYKFillColor, _lib, "CGContextSetCMYKFillColor")
@@ -2120,6 +2302,7 @@ var _fnCGContextSetCMYKStrokeColor func(objc.ID, float64, float64, float64, floa
 
 // CGContextSetCMYKStrokeColor calls the CoreGraphics framework function CGContextSetCMYKStrokeColor.
 func CGContextSetCMYKStrokeColor(c CGContextRef, cyan float64, magenta float64, yellow float64, black float64, alpha float64) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextSetCMYKStrokeColor == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextSetCMYKStrokeColor, _lib, "CGContextSetCMYKStrokeColor")
@@ -2131,6 +2314,7 @@ var _fnCGContextSetCharacterSpacing func(objc.ID, float64)
 
 // CGContextSetCharacterSpacing calls the CoreGraphics framework function CGContextSetCharacterSpacing.
 func CGContextSetCharacterSpacing(c CGContextRef, spacing float64) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextSetCharacterSpacing == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextSetCharacterSpacing, _lib, "CGContextSetCharacterSpacing")
@@ -2142,6 +2326,7 @@ var _fnCGContextSetContentToneMappingInfo func(objc.ID, unsafe.Pointer)
 
 // CGContextSetContentToneMappingInfo calls the CoreGraphics framework function CGContextSetContentToneMappingInfo.
 func CGContextSetContentToneMappingInfo(c CGContextRef, info unsafe.Pointer) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextSetContentToneMappingInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextSetContentToneMappingInfo, _lib, "CGContextSetContentToneMappingInfo")
@@ -2153,6 +2338,7 @@ var _fnCGContextSetEDRTargetHeadroom func(objc.ID, float32) bool
 
 // CGContextSetEDRTargetHeadroom calls the CoreGraphics framework function CGContextSetEDRTargetHeadroom.
 func CGContextSetEDRTargetHeadroom(c CGContextRef, headroom float32) bool {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextSetEDRTargetHeadroom == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextSetEDRTargetHeadroom, _lib, "CGContextSetEDRTargetHeadroom")
@@ -2164,6 +2350,7 @@ var _fnCGContextSetFillColor func(objc.ID, unsafe.Pointer)
 
 // CGContextSetFillColor calls the CoreGraphics framework function CGContextSetFillColor.
 func CGContextSetFillColor(c CGContextRef, components unsafe.Pointer) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextSetFillColor == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextSetFillColor, _lib, "CGContextSetFillColor")
@@ -2175,6 +2362,8 @@ var _fnCGContextSetFillColorSpace func(objc.ID, objc.ID)
 
 // CGContextSetFillColorSpace calls the CoreGraphics framework function CGContextSetFillColorSpace.
 func CGContextSetFillColorSpace(c CGContextRef, space CGColorSpaceRef) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(space)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextSetFillColorSpace == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextSetFillColorSpace, _lib, "CGContextSetFillColorSpace")
@@ -2186,6 +2375,8 @@ var _fnCGContextSetFillColorWithColor func(objc.ID, objc.ID)
 
 // CGContextSetFillColorWithColor calls the CoreGraphics framework function CGContextSetFillColorWithColor.
 func CGContextSetFillColorWithColor(c CGContextRef, color CGColorRef) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(color)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextSetFillColorWithColor == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextSetFillColorWithColor, _lib, "CGContextSetFillColorWithColor")
@@ -2197,6 +2388,8 @@ var _fnCGContextSetFillPattern func(objc.ID, objc.ID, unsafe.Pointer)
 
 // CGContextSetFillPattern calls the CoreGraphics framework function CGContextSetFillPattern.
 func CGContextSetFillPattern(c CGContextRef, pattern CGPatternRef, components unsafe.Pointer) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(pattern)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextSetFillPattern == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextSetFillPattern, _lib, "CGContextSetFillPattern")
@@ -2208,6 +2401,7 @@ var _fnCGContextSetFlatness func(objc.ID, float64)
 
 // CGContextSetFlatness calls the CoreGraphics framework function CGContextSetFlatness.
 func CGContextSetFlatness(c CGContextRef, flatness float64) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextSetFlatness == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextSetFlatness, _lib, "CGContextSetFlatness")
@@ -2219,6 +2413,8 @@ var _fnCGContextSetFont func(objc.ID, objc.ID)
 
 // CGContextSetFont calls the CoreGraphics framework function CGContextSetFont.
 func CGContextSetFont(c CGContextRef, font CGFontRef) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(font)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextSetFont == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextSetFont, _lib, "CGContextSetFont")
@@ -2230,6 +2426,7 @@ var _fnCGContextSetFontSize func(objc.ID, float64)
 
 // CGContextSetFontSize calls the CoreGraphics framework function CGContextSetFontSize.
 func CGContextSetFontSize(c CGContextRef, size float64) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextSetFontSize == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextSetFontSize, _lib, "CGContextSetFontSize")
@@ -2241,6 +2438,7 @@ var _fnCGContextSetGrayFillColor func(objc.ID, float64, float64)
 
 // CGContextSetGrayFillColor calls the CoreGraphics framework function CGContextSetGrayFillColor.
 func CGContextSetGrayFillColor(c CGContextRef, gray float64, alpha float64) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextSetGrayFillColor == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextSetGrayFillColor, _lib, "CGContextSetGrayFillColor")
@@ -2252,6 +2450,7 @@ var _fnCGContextSetGrayStrokeColor func(objc.ID, float64, float64)
 
 // CGContextSetGrayStrokeColor calls the CoreGraphics framework function CGContextSetGrayStrokeColor.
 func CGContextSetGrayStrokeColor(c CGContextRef, gray float64, alpha float64) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextSetGrayStrokeColor == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextSetGrayStrokeColor, _lib, "CGContextSetGrayStrokeColor")
@@ -2263,6 +2462,7 @@ var _fnCGContextSetInterpolationQuality func(objc.ID, CGInterpolationQuality)
 
 // CGContextSetInterpolationQuality calls the CoreGraphics framework function CGContextSetInterpolationQuality.
 func CGContextSetInterpolationQuality(c CGContextRef, quality CGInterpolationQuality) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextSetInterpolationQuality == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextSetInterpolationQuality, _lib, "CGContextSetInterpolationQuality")
@@ -2274,6 +2474,7 @@ var _fnCGContextSetLineCap func(objc.ID, CGLineCap)
 
 // CGContextSetLineCap calls the CoreGraphics framework function CGContextSetLineCap.
 func CGContextSetLineCap(c CGContextRef, cap_ CGLineCap) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextSetLineCap == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextSetLineCap, _lib, "CGContextSetLineCap")
@@ -2285,6 +2486,7 @@ var _fnCGContextSetLineDash func(objc.ID, float64, unsafe.Pointer, int)
 
 // CGContextSetLineDash calls the CoreGraphics framework function CGContextSetLineDash.
 func CGContextSetLineDash(c CGContextRef, phase float64, lengths unsafe.Pointer, count int) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextSetLineDash == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextSetLineDash, _lib, "CGContextSetLineDash")
@@ -2296,6 +2498,7 @@ var _fnCGContextSetLineJoin func(objc.ID, CGLineJoin)
 
 // CGContextSetLineJoin calls the CoreGraphics framework function CGContextSetLineJoin.
 func CGContextSetLineJoin(c CGContextRef, join CGLineJoin) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextSetLineJoin == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextSetLineJoin, _lib, "CGContextSetLineJoin")
@@ -2307,6 +2510,7 @@ var _fnCGContextSetLineWidth func(objc.ID, float64)
 
 // CGContextSetLineWidth calls the CoreGraphics framework function CGContextSetLineWidth.
 func CGContextSetLineWidth(c CGContextRef, width float64) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextSetLineWidth == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextSetLineWidth, _lib, "CGContextSetLineWidth")
@@ -2318,6 +2522,7 @@ var _fnCGContextSetMiterLimit func(objc.ID, float64)
 
 // CGContextSetMiterLimit calls the CoreGraphics framework function CGContextSetMiterLimit.
 func CGContextSetMiterLimit(c CGContextRef, limit float64) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextSetMiterLimit == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextSetMiterLimit, _lib, "CGContextSetMiterLimit")
@@ -2329,6 +2534,7 @@ var _fnCGContextSetPatternPhase func(objc.ID, corefoundation.CGSize)
 
 // CGContextSetPatternPhase calls the CoreGraphics framework function CGContextSetPatternPhase.
 func CGContextSetPatternPhase(c CGContextRef, phase corefoundation.CGSize) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextSetPatternPhase == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextSetPatternPhase, _lib, "CGContextSetPatternPhase")
@@ -2340,6 +2546,7 @@ var _fnCGContextSetRGBFillColor func(objc.ID, float64, float64, float64, float64
 
 // CGContextSetRGBFillColor calls the CoreGraphics framework function CGContextSetRGBFillColor.
 func CGContextSetRGBFillColor(c CGContextRef, red float64, green float64, blue float64, alpha float64) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextSetRGBFillColor == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextSetRGBFillColor, _lib, "CGContextSetRGBFillColor")
@@ -2351,6 +2558,7 @@ var _fnCGContextSetRGBStrokeColor func(objc.ID, float64, float64, float64, float
 
 // CGContextSetRGBStrokeColor calls the CoreGraphics framework function CGContextSetRGBStrokeColor.
 func CGContextSetRGBStrokeColor(c CGContextRef, red float64, green float64, blue float64, alpha float64) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextSetRGBStrokeColor == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextSetRGBStrokeColor, _lib, "CGContextSetRGBStrokeColor")
@@ -2362,6 +2570,7 @@ var _fnCGContextSetRenderingIntent func(objc.ID, CGColorRenderingIntent)
 
 // CGContextSetRenderingIntent calls the CoreGraphics framework function CGContextSetRenderingIntent.
 func CGContextSetRenderingIntent(c CGContextRef, intent CGColorRenderingIntent) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextSetRenderingIntent == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextSetRenderingIntent, _lib, "CGContextSetRenderingIntent")
@@ -2373,6 +2582,7 @@ var _fnCGContextSetShadow func(objc.ID, corefoundation.CGSize, float64)
 
 // CGContextSetShadow calls the CoreGraphics framework function CGContextSetShadow.
 func CGContextSetShadow(c CGContextRef, offset corefoundation.CGSize, blur float64) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextSetShadow == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextSetShadow, _lib, "CGContextSetShadow")
@@ -2384,6 +2594,8 @@ var _fnCGContextSetShadowWithColor func(objc.ID, corefoundation.CGSize, float64,
 
 // CGContextSetShadowWithColor calls the CoreGraphics framework function CGContextSetShadowWithColor.
 func CGContextSetShadowWithColor(c CGContextRef, offset corefoundation.CGSize, blur float64, color CGColorRef) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(color)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextSetShadowWithColor == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextSetShadowWithColor, _lib, "CGContextSetShadowWithColor")
@@ -2395,6 +2607,7 @@ var _fnCGContextSetShouldAntialias func(objc.ID, bool)
 
 // CGContextSetShouldAntialias calls the CoreGraphics framework function CGContextSetShouldAntialias.
 func CGContextSetShouldAntialias(c CGContextRef, shouldAntialias bool) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextSetShouldAntialias == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextSetShouldAntialias, _lib, "CGContextSetShouldAntialias")
@@ -2406,6 +2619,7 @@ var _fnCGContextSetShouldSmoothFonts func(objc.ID, bool)
 
 // CGContextSetShouldSmoothFonts calls the CoreGraphics framework function CGContextSetShouldSmoothFonts.
 func CGContextSetShouldSmoothFonts(c CGContextRef, shouldSmoothFonts bool) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextSetShouldSmoothFonts == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextSetShouldSmoothFonts, _lib, "CGContextSetShouldSmoothFonts")
@@ -2417,6 +2631,7 @@ var _fnCGContextSetShouldSubpixelPositionFonts func(objc.ID, bool)
 
 // CGContextSetShouldSubpixelPositionFonts calls the CoreGraphics framework function CGContextSetShouldSubpixelPositionFonts.
 func CGContextSetShouldSubpixelPositionFonts(c CGContextRef, shouldSubpixelPositionFonts bool) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextSetShouldSubpixelPositionFonts == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextSetShouldSubpixelPositionFonts, _lib, "CGContextSetShouldSubpixelPositionFonts")
@@ -2428,6 +2643,7 @@ var _fnCGContextSetShouldSubpixelQuantizeFonts func(objc.ID, bool)
 
 // CGContextSetShouldSubpixelQuantizeFonts calls the CoreGraphics framework function CGContextSetShouldSubpixelQuantizeFonts.
 func CGContextSetShouldSubpixelQuantizeFonts(c CGContextRef, shouldSubpixelQuantizeFonts bool) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextSetShouldSubpixelQuantizeFonts == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextSetShouldSubpixelQuantizeFonts, _lib, "CGContextSetShouldSubpixelQuantizeFonts")
@@ -2439,6 +2655,7 @@ var _fnCGContextSetStrokeColor func(objc.ID, unsafe.Pointer)
 
 // CGContextSetStrokeColor calls the CoreGraphics framework function CGContextSetStrokeColor.
 func CGContextSetStrokeColor(c CGContextRef, components unsafe.Pointer) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextSetStrokeColor == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextSetStrokeColor, _lib, "CGContextSetStrokeColor")
@@ -2450,6 +2667,8 @@ var _fnCGContextSetStrokeColorSpace func(objc.ID, objc.ID)
 
 // CGContextSetStrokeColorSpace calls the CoreGraphics framework function CGContextSetStrokeColorSpace.
 func CGContextSetStrokeColorSpace(c CGContextRef, space CGColorSpaceRef) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(space)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextSetStrokeColorSpace == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextSetStrokeColorSpace, _lib, "CGContextSetStrokeColorSpace")
@@ -2461,6 +2680,8 @@ var _fnCGContextSetStrokeColorWithColor func(objc.ID, objc.ID)
 
 // CGContextSetStrokeColorWithColor calls the CoreGraphics framework function CGContextSetStrokeColorWithColor.
 func CGContextSetStrokeColorWithColor(c CGContextRef, color CGColorRef) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(color)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextSetStrokeColorWithColor == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextSetStrokeColorWithColor, _lib, "CGContextSetStrokeColorWithColor")
@@ -2472,6 +2693,8 @@ var _fnCGContextSetStrokePattern func(objc.ID, objc.ID, unsafe.Pointer)
 
 // CGContextSetStrokePattern calls the CoreGraphics framework function CGContextSetStrokePattern.
 func CGContextSetStrokePattern(c CGContextRef, pattern CGPatternRef, components unsafe.Pointer) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(pattern)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextSetStrokePattern == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextSetStrokePattern, _lib, "CGContextSetStrokePattern")
@@ -2483,6 +2706,7 @@ var _fnCGContextSetTextDrawingMode func(objc.ID, CGTextDrawingMode)
 
 // CGContextSetTextDrawingMode calls the CoreGraphics framework function CGContextSetTextDrawingMode.
 func CGContextSetTextDrawingMode(c CGContextRef, mode CGTextDrawingMode) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextSetTextDrawingMode == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextSetTextDrawingMode, _lib, "CGContextSetTextDrawingMode")
@@ -2494,6 +2718,7 @@ var _fnCGContextSetTextMatrix func(objc.ID, corefoundation.CGAffineTransform)
 
 // CGContextSetTextMatrix calls the CoreGraphics framework function CGContextSetTextMatrix.
 func CGContextSetTextMatrix(c CGContextRef, t corefoundation.CGAffineTransform) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextSetTextMatrix == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextSetTextMatrix, _lib, "CGContextSetTextMatrix")
@@ -2505,6 +2730,7 @@ var _fnCGContextSetTextPosition func(objc.ID, float64, float64)
 
 // CGContextSetTextPosition calls the CoreGraphics framework function CGContextSetTextPosition.
 func CGContextSetTextPosition(c CGContextRef, x float64, y float64) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextSetTextPosition == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextSetTextPosition, _lib, "CGContextSetTextPosition")
@@ -2516,6 +2742,7 @@ var _fnCGContextShowGlyphs func(objc.ID, unsafe.Pointer, int)
 
 // CGContextShowGlyphs calls the CoreGraphics framework function CGContextShowGlyphs.
 func CGContextShowGlyphs(c CGContextRef, g unsafe.Pointer, count int) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextShowGlyphs == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextShowGlyphs, _lib, "CGContextShowGlyphs")
@@ -2527,6 +2754,7 @@ var _fnCGContextShowGlyphsAtPoint func(objc.ID, float64, float64, unsafe.Pointer
 
 // CGContextShowGlyphsAtPoint calls the CoreGraphics framework function CGContextShowGlyphsAtPoint.
 func CGContextShowGlyphsAtPoint(c CGContextRef, x float64, y float64, glyphs unsafe.Pointer, count int) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextShowGlyphsAtPoint == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextShowGlyphsAtPoint, _lib, "CGContextShowGlyphsAtPoint")
@@ -2538,6 +2766,7 @@ var _fnCGContextShowGlyphsAtPositions func(objc.ID, unsafe.Pointer, unsafe.Point
 
 // CGContextShowGlyphsAtPositions calls the CoreGraphics framework function CGContextShowGlyphsAtPositions.
 func CGContextShowGlyphsAtPositions(c CGContextRef, glyphs unsafe.Pointer, lpositions unsafe.Pointer, count int) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextShowGlyphsAtPositions == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextShowGlyphsAtPositions, _lib, "CGContextShowGlyphsAtPositions")
@@ -2549,6 +2778,7 @@ var _fnCGContextShowGlyphsWithAdvances func(objc.ID, unsafe.Pointer, unsafe.Poin
 
 // CGContextShowGlyphsWithAdvances calls the CoreGraphics framework function CGContextShowGlyphsWithAdvances.
 func CGContextShowGlyphsWithAdvances(c CGContextRef, glyphs unsafe.Pointer, advances unsafe.Pointer, count int) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextShowGlyphsWithAdvances == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextShowGlyphsWithAdvances, _lib, "CGContextShowGlyphsWithAdvances")
@@ -2560,6 +2790,7 @@ var _fnCGContextShowText func(objc.ID, unsafe.Pointer, int)
 
 // CGContextShowText calls the CoreGraphics framework function CGContextShowText.
 func CGContextShowText(c CGContextRef, str unsafe.Pointer, length int) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextShowText == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextShowText, _lib, "CGContextShowText")
@@ -2571,6 +2802,7 @@ var _fnCGContextShowTextAtPoint func(objc.ID, float64, float64, unsafe.Pointer, 
 
 // CGContextShowTextAtPoint calls the CoreGraphics framework function CGContextShowTextAtPoint.
 func CGContextShowTextAtPoint(c CGContextRef, x float64, y float64, str unsafe.Pointer, length int) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextShowTextAtPoint == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextShowTextAtPoint, _lib, "CGContextShowTextAtPoint")
@@ -2582,6 +2814,7 @@ var _fnCGContextStrokeEllipseInRect func(objc.ID, corefoundation.CGRect)
 
 // CGContextStrokeEllipseInRect calls the CoreGraphics framework function CGContextStrokeEllipseInRect.
 func CGContextStrokeEllipseInRect(c CGContextRef, rect corefoundation.CGRect) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextStrokeEllipseInRect == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextStrokeEllipseInRect, _lib, "CGContextStrokeEllipseInRect")
@@ -2593,6 +2826,7 @@ var _fnCGContextStrokeLineSegments func(objc.ID, unsafe.Pointer, int)
 
 // CGContextStrokeLineSegments calls the CoreGraphics framework function CGContextStrokeLineSegments.
 func CGContextStrokeLineSegments(c CGContextRef, points unsafe.Pointer, count int) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextStrokeLineSegments == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextStrokeLineSegments, _lib, "CGContextStrokeLineSegments")
@@ -2604,6 +2838,7 @@ var _fnCGContextStrokePath func(objc.ID)
 
 // CGContextStrokePath calls the CoreGraphics framework function CGContextStrokePath.
 func CGContextStrokePath(c CGContextRef) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextStrokePath == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextStrokePath, _lib, "CGContextStrokePath")
@@ -2615,6 +2850,7 @@ var _fnCGContextStrokeRect func(objc.ID, corefoundation.CGRect)
 
 // CGContextStrokeRect calls the CoreGraphics framework function CGContextStrokeRect.
 func CGContextStrokeRect(c CGContextRef, rect corefoundation.CGRect) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextStrokeRect == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextStrokeRect, _lib, "CGContextStrokeRect")
@@ -2626,6 +2862,7 @@ var _fnCGContextStrokeRectWithWidth func(objc.ID, corefoundation.CGRect, float64
 
 // CGContextStrokeRectWithWidth calls the CoreGraphics framework function CGContextStrokeRectWithWidth.
 func CGContextStrokeRectWithWidth(c CGContextRef, rect corefoundation.CGRect, width float64) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextStrokeRectWithWidth == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextStrokeRectWithWidth, _lib, "CGContextStrokeRectWithWidth")
@@ -2637,6 +2874,7 @@ var _fnCGContextSynchronize func(objc.ID)
 
 // CGContextSynchronize calls the CoreGraphics framework function CGContextSynchronize.
 func CGContextSynchronize(c CGContextRef) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextSynchronize == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextSynchronize, _lib, "CGContextSynchronize")
@@ -2648,6 +2886,7 @@ var _fnCGContextSynchronizeAttributes func(objc.ID)
 
 // CGContextSynchronizeAttributes calls the CoreGraphics framework function CGContextSynchronizeAttributes.
 func CGContextSynchronizeAttributes(c CGContextRef) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextSynchronizeAttributes == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextSynchronizeAttributes, _lib, "CGContextSynchronizeAttributes")
@@ -2659,6 +2898,7 @@ var _fnCGContextTranslateCTM func(objc.ID, float64, float64)
 
 // CGContextTranslateCTM calls the CoreGraphics framework function CGContextTranslateCTM.
 func CGContextTranslateCTM(c CGContextRef, tx float64, ty float64) {
+	defer runtime.KeepAlive(c)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextTranslateCTM == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextTranslateCTM, _lib, "CGContextTranslateCTM")
@@ -2670,6 +2910,7 @@ var _fnCGConvertColorDataWithFormat func(int, int, unsafe.Pointer, unsafe.Pointe
 
 // CGConvertColorDataWithFormat calls the CoreGraphics framework function CGConvertColorDataWithFormat.
 func CGConvertColorDataWithFormat(width int, height int, dstData unsafe.Pointer, dstFormat unsafe.Pointer, srcData unsafe.Pointer, srcFormat unsafe.Pointer, options obj.Object) bool {
+	defer runtime.KeepAlive(options)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGConvertColorDataWithFormat == nil {
 		ebipurego.RegisterLibFunc(&_fnCGConvertColorDataWithFormat, _lib, "CGConvertColorDataWithFormat")
@@ -2715,6 +2956,7 @@ var _fnCGDataConsumerCreateWithCFData func(objc.ID) objc.ID
 
 // CGDataConsumerCreateWithCFData calls the CoreGraphics framework function CGDataConsumerCreateWithCFData.
 func CGDataConsumerCreateWithCFData(data obj.Object) CGDataConsumerRef {
+	defer runtime.KeepAlive(data)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGDataConsumerCreateWithCFData == nil {
 		ebipurego.RegisterLibFunc(&_fnCGDataConsumerCreateWithCFData, _lib, "CGDataConsumerCreateWithCFData")
@@ -2727,6 +2969,7 @@ var _fnCGDataConsumerCreateWithURL func(objc.ID) objc.ID
 
 // CGDataConsumerCreateWithURL calls the CoreGraphics framework function CGDataConsumerCreateWithURL.
 func CGDataConsumerCreateWithURL(url obj.Object) CGDataConsumerRef {
+	defer runtime.KeepAlive(url)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGDataConsumerCreateWithURL == nil {
 		ebipurego.RegisterLibFunc(&_fnCGDataConsumerCreateWithURL, _lib, "CGDataConsumerCreateWithURL")
@@ -2750,6 +2993,7 @@ var _fnCGDataConsumerRelease func(objc.ID)
 
 // CGDataConsumerRelease calls the CoreGraphics framework function CGDataConsumerRelease.
 func CGDataConsumerRelease(consumer CGDataConsumerRef) {
+	defer runtime.KeepAlive(consumer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGDataConsumerRelease == nil {
 		ebipurego.RegisterLibFunc(&_fnCGDataConsumerRelease, _lib, "CGDataConsumerRelease")
@@ -2761,6 +3005,7 @@ var _fnCGDataConsumerRetain func(objc.ID) objc.ID
 
 // CGDataConsumerRetain calls the CoreGraphics framework function CGDataConsumerRetain.
 func CGDataConsumerRetain(consumer CGDataConsumerRef) CGDataConsumerRef {
+	defer runtime.KeepAlive(consumer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGDataConsumerRetain == nil {
 		ebipurego.RegisterLibFunc(&_fnCGDataConsumerRetain, _lib, "CGDataConsumerRetain")
@@ -2773,6 +3018,7 @@ var _fnCGDataProviderCopyData func(objc.ID) objc.ID
 
 // CGDataProviderCopyData calls the CoreGraphics framework function CGDataProviderCopyData.
 func CGDataProviderCopyData(provider CGDataProviderRef) obj.Object {
+	defer runtime.KeepAlive(provider)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGDataProviderCopyData == nil {
 		ebipurego.RegisterLibFunc(&_fnCGDataProviderCopyData, _lib, "CGDataProviderCopyData")
@@ -2809,6 +3055,7 @@ var _fnCGDataProviderCreateWithCFData func(objc.ID) objc.ID
 
 // CGDataProviderCreateWithCFData calls the CoreGraphics framework function CGDataProviderCreateWithCFData.
 func CGDataProviderCreateWithCFData(data obj.Object) CGDataProviderRef {
+	defer runtime.KeepAlive(data)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGDataProviderCreateWithCFData == nil {
 		ebipurego.RegisterLibFunc(&_fnCGDataProviderCreateWithCFData, _lib, "CGDataProviderCreateWithCFData")
@@ -2845,6 +3092,7 @@ var _fnCGDataProviderCreateWithURL func(objc.ID) objc.ID
 
 // CGDataProviderCreateWithURL calls the CoreGraphics framework function CGDataProviderCreateWithURL.
 func CGDataProviderCreateWithURL(url obj.Object) CGDataProviderRef {
+	defer runtime.KeepAlive(url)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGDataProviderCreateWithURL == nil {
 		ebipurego.RegisterLibFunc(&_fnCGDataProviderCreateWithURL, _lib, "CGDataProviderCreateWithURL")
@@ -2857,6 +3105,7 @@ var _fnCGDataProviderGetInfo func(objc.ID) unsafe.Pointer
 
 // CGDataProviderGetInfo calls the CoreGraphics framework function CGDataProviderGetInfo.
 func CGDataProviderGetInfo(provider CGDataProviderRef) unsafe.Pointer {
+	defer runtime.KeepAlive(provider)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGDataProviderGetInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnCGDataProviderGetInfo, _lib, "CGDataProviderGetInfo")
@@ -2879,6 +3128,7 @@ var _fnCGDataProviderRelease func(objc.ID)
 
 // CGDataProviderRelease calls the CoreGraphics framework function CGDataProviderRelease.
 func CGDataProviderRelease(provider CGDataProviderRef) {
+	defer runtime.KeepAlive(provider)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGDataProviderRelease == nil {
 		ebipurego.RegisterLibFunc(&_fnCGDataProviderRelease, _lib, "CGDataProviderRelease")
@@ -2890,6 +3140,7 @@ var _fnCGDataProviderRetain func(objc.ID) objc.ID
 
 // CGDataProviderRetain calls the CoreGraphics framework function CGDataProviderRetain.
 func CGDataProviderRetain(provider CGDataProviderRef) CGDataProviderRef {
+	defer runtime.KeepAlive(provider)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGDataProviderRetain == nil {
 		ebipurego.RegisterLibFunc(&_fnCGDataProviderRetain, _lib, "CGDataProviderRetain")
@@ -2984,6 +3235,7 @@ var _fnCGDisplayCopyAllDisplayModes func(uint32, objc.ID) objc.ID
 
 // CGDisplayCopyAllDisplayModes calls the CoreGraphics framework function CGDisplayCopyAllDisplayModes.
 func CGDisplayCopyAllDisplayModes(display uint32, options obj.Object) obj.Object {
+	defer runtime.KeepAlive(options)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGDisplayCopyAllDisplayModes == nil {
 		ebipurego.RegisterLibFunc(&_fnCGDisplayCopyAllDisplayModes, _lib, "CGDisplayCopyAllDisplayModes")
@@ -3231,6 +3483,7 @@ var _fnCGDisplayModeCopyPixelEncoding func(objc.ID) objc.ID
 
 // CGDisplayModeCopyPixelEncoding calls the CoreGraphics framework function CGDisplayModeCopyPixelEncoding.
 func CGDisplayModeCopyPixelEncoding(mode CGDisplayModeRef) obj.Object {
+	defer runtime.KeepAlive(mode)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGDisplayModeCopyPixelEncoding == nil {
 		ebipurego.RegisterLibFunc(&_fnCGDisplayModeCopyPixelEncoding, _lib, "CGDisplayModeCopyPixelEncoding")
@@ -3243,6 +3496,7 @@ var _fnCGDisplayModeGetHeight func(objc.ID) int
 
 // CGDisplayModeGetHeight calls the CoreGraphics framework function CGDisplayModeGetHeight.
 func CGDisplayModeGetHeight(mode CGDisplayModeRef) int {
+	defer runtime.KeepAlive(mode)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGDisplayModeGetHeight == nil {
 		ebipurego.RegisterLibFunc(&_fnCGDisplayModeGetHeight, _lib, "CGDisplayModeGetHeight")
@@ -3254,6 +3508,7 @@ var _fnCGDisplayModeGetIODisplayModeID func(objc.ID) int32
 
 // CGDisplayModeGetIODisplayModeID calls the CoreGraphics framework function CGDisplayModeGetIODisplayModeID.
 func CGDisplayModeGetIODisplayModeID(mode CGDisplayModeRef) int32 {
+	defer runtime.KeepAlive(mode)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGDisplayModeGetIODisplayModeID == nil {
 		ebipurego.RegisterLibFunc(&_fnCGDisplayModeGetIODisplayModeID, _lib, "CGDisplayModeGetIODisplayModeID")
@@ -3265,6 +3520,7 @@ var _fnCGDisplayModeGetIOFlags func(objc.ID) uint32
 
 // CGDisplayModeGetIOFlags calls the CoreGraphics framework function CGDisplayModeGetIOFlags.
 func CGDisplayModeGetIOFlags(mode CGDisplayModeRef) uint32 {
+	defer runtime.KeepAlive(mode)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGDisplayModeGetIOFlags == nil {
 		ebipurego.RegisterLibFunc(&_fnCGDisplayModeGetIOFlags, _lib, "CGDisplayModeGetIOFlags")
@@ -3276,6 +3532,7 @@ var _fnCGDisplayModeGetPixelHeight func(objc.ID) int
 
 // CGDisplayModeGetPixelHeight calls the CoreGraphics framework function CGDisplayModeGetPixelHeight.
 func CGDisplayModeGetPixelHeight(mode CGDisplayModeRef) int {
+	defer runtime.KeepAlive(mode)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGDisplayModeGetPixelHeight == nil {
 		ebipurego.RegisterLibFunc(&_fnCGDisplayModeGetPixelHeight, _lib, "CGDisplayModeGetPixelHeight")
@@ -3287,6 +3544,7 @@ var _fnCGDisplayModeGetPixelWidth func(objc.ID) int
 
 // CGDisplayModeGetPixelWidth calls the CoreGraphics framework function CGDisplayModeGetPixelWidth.
 func CGDisplayModeGetPixelWidth(mode CGDisplayModeRef) int {
+	defer runtime.KeepAlive(mode)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGDisplayModeGetPixelWidth == nil {
 		ebipurego.RegisterLibFunc(&_fnCGDisplayModeGetPixelWidth, _lib, "CGDisplayModeGetPixelWidth")
@@ -3298,6 +3556,7 @@ var _fnCGDisplayModeGetRefreshRate func(objc.ID) float64
 
 // CGDisplayModeGetRefreshRate calls the CoreGraphics framework function CGDisplayModeGetRefreshRate.
 func CGDisplayModeGetRefreshRate(mode CGDisplayModeRef) float64 {
+	defer runtime.KeepAlive(mode)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGDisplayModeGetRefreshRate == nil {
 		ebipurego.RegisterLibFunc(&_fnCGDisplayModeGetRefreshRate, _lib, "CGDisplayModeGetRefreshRate")
@@ -3320,6 +3579,7 @@ var _fnCGDisplayModeGetWidth func(objc.ID) int
 
 // CGDisplayModeGetWidth calls the CoreGraphics framework function CGDisplayModeGetWidth.
 func CGDisplayModeGetWidth(mode CGDisplayModeRef) int {
+	defer runtime.KeepAlive(mode)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGDisplayModeGetWidth == nil {
 		ebipurego.RegisterLibFunc(&_fnCGDisplayModeGetWidth, _lib, "CGDisplayModeGetWidth")
@@ -3331,6 +3591,7 @@ var _fnCGDisplayModeIsUsableForDesktopGUI func(objc.ID) bool
 
 // CGDisplayModeIsUsableForDesktopGUI calls the CoreGraphics framework function CGDisplayModeIsUsableForDesktopGUI.
 func CGDisplayModeIsUsableForDesktopGUI(mode CGDisplayModeRef) bool {
+	defer runtime.KeepAlive(mode)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGDisplayModeIsUsableForDesktopGUI == nil {
 		ebipurego.RegisterLibFunc(&_fnCGDisplayModeIsUsableForDesktopGUI, _lib, "CGDisplayModeIsUsableForDesktopGUI")
@@ -3342,6 +3603,7 @@ var _fnCGDisplayModeRelease func(objc.ID)
 
 // CGDisplayModeRelease calls the CoreGraphics framework function CGDisplayModeRelease.
 func CGDisplayModeRelease(mode CGDisplayModeRef) {
+	defer runtime.KeepAlive(mode)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGDisplayModeRelease == nil {
 		ebipurego.RegisterLibFunc(&_fnCGDisplayModeRelease, _lib, "CGDisplayModeRelease")
@@ -3353,6 +3615,7 @@ var _fnCGDisplayModeRetain func(objc.ID) objc.ID
 
 // CGDisplayModeRetain calls the CoreGraphics framework function CGDisplayModeRetain.
 func CGDisplayModeRetain(mode CGDisplayModeRef) CGDisplayModeRef {
+	defer runtime.KeepAlive(mode)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGDisplayModeRetain == nil {
 		ebipurego.RegisterLibFunc(&_fnCGDisplayModeRetain, _lib, "CGDisplayModeRetain")
@@ -3497,6 +3760,8 @@ var _fnCGDisplaySetDisplayMode func(uint32, objc.ID, objc.ID) CGError
 
 // CGDisplaySetDisplayMode calls the CoreGraphics framework function CGDisplaySetDisplayMode.
 func CGDisplaySetDisplayMode(display uint32, mode CGDisplayModeRef, options obj.Object) CGError {
+	defer runtime.KeepAlive(mode)
+	defer runtime.KeepAlive(options)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGDisplaySetDisplayMode == nil {
 		ebipurego.RegisterLibFunc(&_fnCGDisplaySetDisplayMode, _lib, "CGDisplaySetDisplayMode")
@@ -3530,6 +3795,7 @@ var _fnCGDisplaySwitchToMode func(uint32, objc.ID) CGError
 
 // CGDisplaySwitchToMode calls the CoreGraphics framework function CGDisplaySwitchToMode.
 func CGDisplaySwitchToMode(display uint32, mode obj.Object) CGError {
+	defer runtime.KeepAlive(mode)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGDisplaySwitchToMode == nil {
 		ebipurego.RegisterLibFunc(&_fnCGDisplaySwitchToMode, _lib, "CGDisplaySwitchToMode")
@@ -3608,6 +3874,7 @@ var _fnCGEventCreate func(objc.ID) objc.ID
 
 // CGEventCreate calls the CoreGraphics framework function CGEventCreate.
 func CGEventCreate(source CGEventSourceRef) CGEventRef {
+	defer runtime.KeepAlive(source)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGEventCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnCGEventCreate, _lib, "CGEventCreate")
@@ -3620,6 +3887,7 @@ var _fnCGEventCreateCopy func(objc.ID) objc.ID
 
 // CGEventCreateCopy calls the CoreGraphics framework function CGEventCreateCopy.
 func CGEventCreateCopy(event CGEventRef) CGEventRef {
+	defer runtime.KeepAlive(event)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGEventCreateCopy == nil {
 		ebipurego.RegisterLibFunc(&_fnCGEventCreateCopy, _lib, "CGEventCreateCopy")
@@ -3632,6 +3900,8 @@ var _fnCGEventCreateData func(objc.ID, objc.ID) objc.ID
 
 // CGEventCreateData calls the CoreGraphics framework function CGEventCreateData.
 func CGEventCreateData(allocator obj.Object, event CGEventRef) obj.Object {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(event)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGEventCreateData == nil {
 		ebipurego.RegisterLibFunc(&_fnCGEventCreateData, _lib, "CGEventCreateData")
@@ -3644,6 +3914,8 @@ var _fnCGEventCreateFromData func(objc.ID, objc.ID) objc.ID
 
 // CGEventCreateFromData calls the CoreGraphics framework function CGEventCreateFromData.
 func CGEventCreateFromData(allocator obj.Object, data obj.Object) CGEventRef {
+	defer runtime.KeepAlive(allocator)
+	defer runtime.KeepAlive(data)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGEventCreateFromData == nil {
 		ebipurego.RegisterLibFunc(&_fnCGEventCreateFromData, _lib, "CGEventCreateFromData")
@@ -3656,6 +3928,7 @@ var _fnCGEventCreateKeyboardEvent func(objc.ID, uint16, bool) objc.ID
 
 // CGEventCreateKeyboardEvent calls the CoreGraphics framework function CGEventCreateKeyboardEvent.
 func CGEventCreateKeyboardEvent(source CGEventSourceRef, virtualKey uint16, keyDown bool) CGEventRef {
+	defer runtime.KeepAlive(source)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGEventCreateKeyboardEvent == nil {
 		ebipurego.RegisterLibFunc(&_fnCGEventCreateKeyboardEvent, _lib, "CGEventCreateKeyboardEvent")
@@ -3668,6 +3941,7 @@ var _fnCGEventCreateMouseEvent func(objc.ID, CGEventType, corefoundation.CGPoint
 
 // CGEventCreateMouseEvent calls the CoreGraphics framework function CGEventCreateMouseEvent.
 func CGEventCreateMouseEvent(source CGEventSourceRef, mouseType CGEventType, mouseCursorPosition corefoundation.CGPoint, mouseButton CGMouseButton) CGEventRef {
+	defer runtime.KeepAlive(source)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGEventCreateMouseEvent == nil {
 		ebipurego.RegisterLibFunc(&_fnCGEventCreateMouseEvent, _lib, "CGEventCreateMouseEvent")
@@ -3680,6 +3954,7 @@ var _fnCGEventCreateScrollWheelEvent2 func(objc.ID, CGScrollEventUnit, uint32, i
 
 // CGEventCreateScrollWheelEvent2 calls the CoreGraphics framework function CGEventCreateScrollWheelEvent2.
 func CGEventCreateScrollWheelEvent2(source CGEventSourceRef, units CGScrollEventUnit, wheelCount uint32, wheel1 int32, wheel2 int32, wheel3 int32) CGEventRef {
+	defer runtime.KeepAlive(source)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGEventCreateScrollWheelEvent2 == nil {
 		ebipurego.RegisterLibFunc(&_fnCGEventCreateScrollWheelEvent2, _lib, "CGEventCreateScrollWheelEvent2")
@@ -3692,6 +3967,7 @@ var _fnCGEventCreateSourceFromEvent func(objc.ID) objc.ID
 
 // CGEventCreateSourceFromEvent calls the CoreGraphics framework function CGEventCreateSourceFromEvent.
 func CGEventCreateSourceFromEvent(event CGEventRef) CGEventSourceRef {
+	defer runtime.KeepAlive(event)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGEventCreateSourceFromEvent == nil {
 		ebipurego.RegisterLibFunc(&_fnCGEventCreateSourceFromEvent, _lib, "CGEventCreateSourceFromEvent")
@@ -3704,6 +3980,7 @@ var _fnCGEventGetDoubleValueField func(objc.ID, CGEventField) float64
 
 // CGEventGetDoubleValueField calls the CoreGraphics framework function CGEventGetDoubleValueField.
 func CGEventGetDoubleValueField(event CGEventRef, field CGEventField) float64 {
+	defer runtime.KeepAlive(event)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGEventGetDoubleValueField == nil {
 		ebipurego.RegisterLibFunc(&_fnCGEventGetDoubleValueField, _lib, "CGEventGetDoubleValueField")
@@ -3715,6 +3992,7 @@ var _fnCGEventGetFlags func(objc.ID) CGEventFlags
 
 // CGEventGetFlags calls the CoreGraphics framework function CGEventGetFlags.
 func CGEventGetFlags(event CGEventRef) CGEventFlags {
+	defer runtime.KeepAlive(event)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGEventGetFlags == nil {
 		ebipurego.RegisterLibFunc(&_fnCGEventGetFlags, _lib, "CGEventGetFlags")
@@ -3726,6 +4004,7 @@ var _fnCGEventGetIntegerValueField func(objc.ID, CGEventField) int64
 
 // CGEventGetIntegerValueField calls the CoreGraphics framework function CGEventGetIntegerValueField.
 func CGEventGetIntegerValueField(event CGEventRef, field CGEventField) int64 {
+	defer runtime.KeepAlive(event)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGEventGetIntegerValueField == nil {
 		ebipurego.RegisterLibFunc(&_fnCGEventGetIntegerValueField, _lib, "CGEventGetIntegerValueField")
@@ -3737,6 +4016,7 @@ var _fnCGEventGetLocation func(objc.ID) corefoundation.CGPoint
 
 // CGEventGetLocation calls the CoreGraphics framework function CGEventGetLocation.
 func CGEventGetLocation(event CGEventRef) corefoundation.CGPoint {
+	defer runtime.KeepAlive(event)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGEventGetLocation == nil {
 		ebipurego.RegisterLibFunc(&_fnCGEventGetLocation, _lib, "CGEventGetLocation")
@@ -3748,6 +4028,7 @@ var _fnCGEventGetTimestamp func(objc.ID) uint64
 
 // CGEventGetTimestamp calls the CoreGraphics framework function CGEventGetTimestamp.
 func CGEventGetTimestamp(event CGEventRef) uint64 {
+	defer runtime.KeepAlive(event)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGEventGetTimestamp == nil {
 		ebipurego.RegisterLibFunc(&_fnCGEventGetTimestamp, _lib, "CGEventGetTimestamp")
@@ -3759,6 +4040,7 @@ var _fnCGEventGetType func(objc.ID) CGEventType
 
 // CGEventGetType calls the CoreGraphics framework function CGEventGetType.
 func CGEventGetType(event CGEventRef) CGEventType {
+	defer runtime.KeepAlive(event)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGEventGetType == nil {
 		ebipurego.RegisterLibFunc(&_fnCGEventGetType, _lib, "CGEventGetType")
@@ -3781,6 +4063,7 @@ var _fnCGEventGetUnflippedLocation func(objc.ID) corefoundation.CGPoint
 
 // CGEventGetUnflippedLocation calls the CoreGraphics framework function CGEventGetUnflippedLocation.
 func CGEventGetUnflippedLocation(event CGEventRef) corefoundation.CGPoint {
+	defer runtime.KeepAlive(event)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGEventGetUnflippedLocation == nil {
 		ebipurego.RegisterLibFunc(&_fnCGEventGetUnflippedLocation, _lib, "CGEventGetUnflippedLocation")
@@ -3792,6 +4075,7 @@ var _fnCGEventKeyboardGetUnicodeString func(objc.ID, int, unsafe.Pointer, unsafe
 
 // CGEventKeyboardGetUnicodeString calls the CoreGraphics framework function CGEventKeyboardGetUnicodeString.
 func CGEventKeyboardGetUnicodeString(event CGEventRef, maxStringLength int) (actualStringLength int, unicodeString uint16) {
+	defer runtime.KeepAlive(event)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGEventKeyboardGetUnicodeString == nil {
 		ebipurego.RegisterLibFunc(&_fnCGEventKeyboardGetUnicodeString, _lib, "CGEventKeyboardGetUnicodeString")
@@ -3806,6 +4090,7 @@ var _fnCGEventKeyboardSetUnicodeString func(objc.ID, int, unsafe.Pointer)
 
 // CGEventKeyboardSetUnicodeString calls the CoreGraphics framework function CGEventKeyboardSetUnicodeString.
 func CGEventKeyboardSetUnicodeString(event CGEventRef, stringLength int, unicodeString unsafe.Pointer) {
+	defer runtime.KeepAlive(event)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGEventKeyboardSetUnicodeString == nil {
 		ebipurego.RegisterLibFunc(&_fnCGEventKeyboardSetUnicodeString, _lib, "CGEventKeyboardSetUnicodeString")
@@ -3817,6 +4102,7 @@ var _fnCGEventPost func(CGEventTapLocation, objc.ID)
 
 // CGEventPost calls the CoreGraphics framework function CGEventPost.
 func CGEventPost(tap CGEventTapLocation, event CGEventRef) {
+	defer runtime.KeepAlive(event)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGEventPost == nil {
 		ebipurego.RegisterLibFunc(&_fnCGEventPost, _lib, "CGEventPost")
@@ -3828,6 +4114,7 @@ var _fnCGEventPostToPSN func(unsafe.Pointer, objc.ID)
 
 // CGEventPostToPSN calls the CoreGraphics framework function CGEventPostToPSN.
 func CGEventPostToPSN(processSerialNumber unsafe.Pointer, event CGEventRef) {
+	defer runtime.KeepAlive(event)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGEventPostToPSN == nil {
 		ebipurego.RegisterLibFunc(&_fnCGEventPostToPSN, _lib, "CGEventPostToPSN")
@@ -3839,6 +4126,7 @@ var _fnCGEventPostToPid func(int, objc.ID)
 
 // CGEventPostToPid calls the CoreGraphics framework function CGEventPostToPid.
 func CGEventPostToPid(pid int, event CGEventRef) {
+	defer runtime.KeepAlive(event)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGEventPostToPid == nil {
 		ebipurego.RegisterLibFunc(&_fnCGEventPostToPid, _lib, "CGEventPostToPid")
@@ -3850,6 +4138,7 @@ var _fnCGEventSetDoubleValueField func(objc.ID, CGEventField, float64)
 
 // CGEventSetDoubleValueField calls the CoreGraphics framework function CGEventSetDoubleValueField.
 func CGEventSetDoubleValueField(event CGEventRef, field CGEventField, value float64) {
+	defer runtime.KeepAlive(event)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGEventSetDoubleValueField == nil {
 		ebipurego.RegisterLibFunc(&_fnCGEventSetDoubleValueField, _lib, "CGEventSetDoubleValueField")
@@ -3861,6 +4150,7 @@ var _fnCGEventSetFlags func(objc.ID, CGEventFlags)
 
 // CGEventSetFlags calls the CoreGraphics framework function CGEventSetFlags.
 func CGEventSetFlags(event CGEventRef, flags CGEventFlags) {
+	defer runtime.KeepAlive(event)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGEventSetFlags == nil {
 		ebipurego.RegisterLibFunc(&_fnCGEventSetFlags, _lib, "CGEventSetFlags")
@@ -3872,6 +4162,7 @@ var _fnCGEventSetIntegerValueField func(objc.ID, CGEventField, int64)
 
 // CGEventSetIntegerValueField calls the CoreGraphics framework function CGEventSetIntegerValueField.
 func CGEventSetIntegerValueField(event CGEventRef, field CGEventField, value int64) {
+	defer runtime.KeepAlive(event)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGEventSetIntegerValueField == nil {
 		ebipurego.RegisterLibFunc(&_fnCGEventSetIntegerValueField, _lib, "CGEventSetIntegerValueField")
@@ -3883,6 +4174,7 @@ var _fnCGEventSetLocation func(objc.ID, corefoundation.CGPoint)
 
 // CGEventSetLocation calls the CoreGraphics framework function CGEventSetLocation.
 func CGEventSetLocation(event CGEventRef, location corefoundation.CGPoint) {
+	defer runtime.KeepAlive(event)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGEventSetLocation == nil {
 		ebipurego.RegisterLibFunc(&_fnCGEventSetLocation, _lib, "CGEventSetLocation")
@@ -3894,6 +4186,8 @@ var _fnCGEventSetSource func(objc.ID, objc.ID)
 
 // CGEventSetSource calls the CoreGraphics framework function CGEventSetSource.
 func CGEventSetSource(event CGEventRef, source CGEventSourceRef) {
+	defer runtime.KeepAlive(event)
+	defer runtime.KeepAlive(source)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGEventSetSource == nil {
 		ebipurego.RegisterLibFunc(&_fnCGEventSetSource, _lib, "CGEventSetSource")
@@ -3905,6 +4199,7 @@ var _fnCGEventSetTimestamp func(objc.ID, uint64)
 
 // CGEventSetTimestamp calls the CoreGraphics framework function CGEventSetTimestamp.
 func CGEventSetTimestamp(event CGEventRef, timestamp uint64) {
+	defer runtime.KeepAlive(event)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGEventSetTimestamp == nil {
 		ebipurego.RegisterLibFunc(&_fnCGEventSetTimestamp, _lib, "CGEventSetTimestamp")
@@ -3916,6 +4211,7 @@ var _fnCGEventSetType func(objc.ID, CGEventType)
 
 // CGEventSetType calls the CoreGraphics framework function CGEventSetType.
 func CGEventSetType(event CGEventRef, type_ CGEventType) {
+	defer runtime.KeepAlive(event)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGEventSetType == nil {
 		ebipurego.RegisterLibFunc(&_fnCGEventSetType, _lib, "CGEventSetType")
@@ -3972,6 +4268,7 @@ var _fnCGEventSourceGetKeyboardType func(objc.ID) uint32
 
 // CGEventSourceGetKeyboardType calls the CoreGraphics framework function CGEventSourceGetKeyboardType.
 func CGEventSourceGetKeyboardType(source CGEventSourceRef) uint32 {
+	defer runtime.KeepAlive(source)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGEventSourceGetKeyboardType == nil {
 		ebipurego.RegisterLibFunc(&_fnCGEventSourceGetKeyboardType, _lib, "CGEventSourceGetKeyboardType")
@@ -3983,6 +4280,7 @@ var _fnCGEventSourceGetLocalEventsFilterDuringSuppressionState func(objc.ID, CGE
 
 // CGEventSourceGetLocalEventsFilterDuringSuppressionState calls the CoreGraphics framework function CGEventSourceGetLocalEventsFilterDuringSuppressionState.
 func CGEventSourceGetLocalEventsFilterDuringSuppressionState(source CGEventSourceRef, state CGEventSuppressionState) CGEventFilterMask {
+	defer runtime.KeepAlive(source)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGEventSourceGetLocalEventsFilterDuringSuppressionState == nil {
 		ebipurego.RegisterLibFunc(&_fnCGEventSourceGetLocalEventsFilterDuringSuppressionState, _lib, "CGEventSourceGetLocalEventsFilterDuringSuppressionState")
@@ -3994,6 +4292,7 @@ var _fnCGEventSourceGetLocalEventsSuppressionInterval func(objc.ID) float64
 
 // CGEventSourceGetLocalEventsSuppressionInterval calls the CoreGraphics framework function CGEventSourceGetLocalEventsSuppressionInterval.
 func CGEventSourceGetLocalEventsSuppressionInterval(source CGEventSourceRef) float64 {
+	defer runtime.KeepAlive(source)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGEventSourceGetLocalEventsSuppressionInterval == nil {
 		ebipurego.RegisterLibFunc(&_fnCGEventSourceGetLocalEventsSuppressionInterval, _lib, "CGEventSourceGetLocalEventsSuppressionInterval")
@@ -4005,6 +4304,7 @@ var _fnCGEventSourceGetPixelsPerLine func(objc.ID) float64
 
 // CGEventSourceGetPixelsPerLine calls the CoreGraphics framework function CGEventSourceGetPixelsPerLine.
 func CGEventSourceGetPixelsPerLine(source CGEventSourceRef) float64 {
+	defer runtime.KeepAlive(source)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGEventSourceGetPixelsPerLine == nil {
 		ebipurego.RegisterLibFunc(&_fnCGEventSourceGetPixelsPerLine, _lib, "CGEventSourceGetPixelsPerLine")
@@ -4016,6 +4316,7 @@ var _fnCGEventSourceGetSourceStateID func(objc.ID) CGEventSourceStateID
 
 // CGEventSourceGetSourceStateID calls the CoreGraphics framework function CGEventSourceGetSourceStateID.
 func CGEventSourceGetSourceStateID(source CGEventSourceRef) CGEventSourceStateID {
+	defer runtime.KeepAlive(source)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGEventSourceGetSourceStateID == nil {
 		ebipurego.RegisterLibFunc(&_fnCGEventSourceGetSourceStateID, _lib, "CGEventSourceGetSourceStateID")
@@ -4038,6 +4339,7 @@ var _fnCGEventSourceGetUserData func(objc.ID) int64
 
 // CGEventSourceGetUserData calls the CoreGraphics framework function CGEventSourceGetUserData.
 func CGEventSourceGetUserData(source CGEventSourceRef) int64 {
+	defer runtime.KeepAlive(source)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGEventSourceGetUserData == nil {
 		ebipurego.RegisterLibFunc(&_fnCGEventSourceGetUserData, _lib, "CGEventSourceGetUserData")
@@ -4071,6 +4373,7 @@ var _fnCGEventSourceSetKeyboardType func(objc.ID, uint32)
 
 // CGEventSourceSetKeyboardType calls the CoreGraphics framework function CGEventSourceSetKeyboardType.
 func CGEventSourceSetKeyboardType(source CGEventSourceRef, keyboardType uint32) {
+	defer runtime.KeepAlive(source)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGEventSourceSetKeyboardType == nil {
 		ebipurego.RegisterLibFunc(&_fnCGEventSourceSetKeyboardType, _lib, "CGEventSourceSetKeyboardType")
@@ -4082,6 +4385,7 @@ var _fnCGEventSourceSetLocalEventsFilterDuringSuppressionState func(objc.ID, CGE
 
 // CGEventSourceSetLocalEventsFilterDuringSuppressionState calls the CoreGraphics framework function CGEventSourceSetLocalEventsFilterDuringSuppressionState.
 func CGEventSourceSetLocalEventsFilterDuringSuppressionState(source CGEventSourceRef, filter CGEventFilterMask, state CGEventSuppressionState) {
+	defer runtime.KeepAlive(source)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGEventSourceSetLocalEventsFilterDuringSuppressionState == nil {
 		ebipurego.RegisterLibFunc(&_fnCGEventSourceSetLocalEventsFilterDuringSuppressionState, _lib, "CGEventSourceSetLocalEventsFilterDuringSuppressionState")
@@ -4093,6 +4397,7 @@ var _fnCGEventSourceSetLocalEventsSuppressionInterval func(objc.ID, float64)
 
 // CGEventSourceSetLocalEventsSuppressionInterval calls the CoreGraphics framework function CGEventSourceSetLocalEventsSuppressionInterval.
 func CGEventSourceSetLocalEventsSuppressionInterval(source CGEventSourceRef, seconds float64) {
+	defer runtime.KeepAlive(source)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGEventSourceSetLocalEventsSuppressionInterval == nil {
 		ebipurego.RegisterLibFunc(&_fnCGEventSourceSetLocalEventsSuppressionInterval, _lib, "CGEventSourceSetLocalEventsSuppressionInterval")
@@ -4104,6 +4409,7 @@ var _fnCGEventSourceSetPixelsPerLine func(objc.ID, float64)
 
 // CGEventSourceSetPixelsPerLine calls the CoreGraphics framework function CGEventSourceSetPixelsPerLine.
 func CGEventSourceSetPixelsPerLine(source CGEventSourceRef, pixelsPerLine float64) {
+	defer runtime.KeepAlive(source)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGEventSourceSetPixelsPerLine == nil {
 		ebipurego.RegisterLibFunc(&_fnCGEventSourceSetPixelsPerLine, _lib, "CGEventSourceSetPixelsPerLine")
@@ -4115,6 +4421,7 @@ var _fnCGEventSourceSetUserData func(objc.ID, int64)
 
 // CGEventSourceSetUserData calls the CoreGraphics framework function CGEventSourceSetUserData.
 func CGEventSourceSetUserData(source CGEventSourceRef, userData int64) {
+	defer runtime.KeepAlive(source)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGEventSourceSetUserData == nil {
 		ebipurego.RegisterLibFunc(&_fnCGEventSourceSetUserData, _lib, "CGEventSourceSetUserData")
@@ -4162,6 +4469,7 @@ var _fnCGEventTapEnable func(objc.ID, bool)
 
 // CGEventTapEnable calls the CoreGraphics framework function CGEventTapEnable.
 func CGEventTapEnable(tap obj.Object, enable bool) {
+	defer runtime.KeepAlive(tap)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGEventTapEnable == nil {
 		ebipurego.RegisterLibFunc(&_fnCGEventTapEnable, _lib, "CGEventTapEnable")
@@ -4173,6 +4481,7 @@ var _fnCGEventTapIsEnabled func(objc.ID) bool
 
 // CGEventTapIsEnabled calls the CoreGraphics framework function CGEventTapIsEnabled.
 func CGEventTapIsEnabled(tap obj.Object) bool {
+	defer runtime.KeepAlive(tap)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGEventTapIsEnabled == nil {
 		ebipurego.RegisterLibFunc(&_fnCGEventTapIsEnabled, _lib, "CGEventTapIsEnabled")
@@ -4184,6 +4493,8 @@ var _fnCGEventTapPostEvent func(objc.ID, objc.ID)
 
 // CGEventTapPostEvent calls the CoreGraphics framework function CGEventTapPostEvent.
 func CGEventTapPostEvent(proxy CGEventTapProxy, event CGEventRef) {
+	defer runtime.KeepAlive(proxy)
+	defer runtime.KeepAlive(event)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGEventTapPostEvent == nil {
 		ebipurego.RegisterLibFunc(&_fnCGEventTapPostEvent, _lib, "CGEventTapPostEvent")
@@ -4195,6 +4506,7 @@ var _fnCGFontCanCreatePostScriptSubset func(objc.ID, CGFontPostScriptFormat) boo
 
 // CGFontCanCreatePostScriptSubset calls the CoreGraphics framework function CGFontCanCreatePostScriptSubset.
 func CGFontCanCreatePostScriptSubset(font CGFontRef, format CGFontPostScriptFormat) bool {
+	defer runtime.KeepAlive(font)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGFontCanCreatePostScriptSubset == nil {
 		ebipurego.RegisterLibFunc(&_fnCGFontCanCreatePostScriptSubset, _lib, "CGFontCanCreatePostScriptSubset")
@@ -4206,6 +4518,7 @@ var _fnCGFontCopyFullName func(objc.ID) objc.ID
 
 // CGFontCopyFullName calls the CoreGraphics framework function CGFontCopyFullName.
 func CGFontCopyFullName(font CGFontRef) obj.Object {
+	defer runtime.KeepAlive(font)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGFontCopyFullName == nil {
 		ebipurego.RegisterLibFunc(&_fnCGFontCopyFullName, _lib, "CGFontCopyFullName")
@@ -4218,6 +4531,7 @@ var _fnCGFontCopyGlyphNameForGlyph func(objc.ID, uint16) objc.ID
 
 // CGFontCopyGlyphNameForGlyph calls the CoreGraphics framework function CGFontCopyGlyphNameForGlyph.
 func CGFontCopyGlyphNameForGlyph(font CGFontRef, glyph uint16) obj.Object {
+	defer runtime.KeepAlive(font)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGFontCopyGlyphNameForGlyph == nil {
 		ebipurego.RegisterLibFunc(&_fnCGFontCopyGlyphNameForGlyph, _lib, "CGFontCopyGlyphNameForGlyph")
@@ -4230,6 +4544,7 @@ var _fnCGFontCopyPostScriptName func(objc.ID) objc.ID
 
 // CGFontCopyPostScriptName calls the CoreGraphics framework function CGFontCopyPostScriptName.
 func CGFontCopyPostScriptName(font CGFontRef) obj.Object {
+	defer runtime.KeepAlive(font)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGFontCopyPostScriptName == nil {
 		ebipurego.RegisterLibFunc(&_fnCGFontCopyPostScriptName, _lib, "CGFontCopyPostScriptName")
@@ -4242,6 +4557,7 @@ var _fnCGFontCopyTableForTag func(objc.ID, uint32) objc.ID
 
 // CGFontCopyTableForTag calls the CoreGraphics framework function CGFontCopyTableForTag.
 func CGFontCopyTableForTag(font CGFontRef, tag uint32) obj.Object {
+	defer runtime.KeepAlive(font)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGFontCopyTableForTag == nil {
 		ebipurego.RegisterLibFunc(&_fnCGFontCopyTableForTag, _lib, "CGFontCopyTableForTag")
@@ -4254,6 +4570,7 @@ var _fnCGFontCopyTableTags func(objc.ID) objc.ID
 
 // CGFontCopyTableTags calls the CoreGraphics framework function CGFontCopyTableTags.
 func CGFontCopyTableTags(font CGFontRef) obj.Object {
+	defer runtime.KeepAlive(font)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGFontCopyTableTags == nil {
 		ebipurego.RegisterLibFunc(&_fnCGFontCopyTableTags, _lib, "CGFontCopyTableTags")
@@ -4266,6 +4583,7 @@ var _fnCGFontCopyVariationAxes func(objc.ID) objc.ID
 
 // CGFontCopyVariationAxes calls the CoreGraphics framework function CGFontCopyVariationAxes.
 func CGFontCopyVariationAxes(font CGFontRef) obj.Object {
+	defer runtime.KeepAlive(font)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGFontCopyVariationAxes == nil {
 		ebipurego.RegisterLibFunc(&_fnCGFontCopyVariationAxes, _lib, "CGFontCopyVariationAxes")
@@ -4278,6 +4596,7 @@ var _fnCGFontCopyVariations func(objc.ID) objc.ID
 
 // CGFontCopyVariations calls the CoreGraphics framework function CGFontCopyVariations.
 func CGFontCopyVariations(font CGFontRef) obj.Object {
+	defer runtime.KeepAlive(font)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGFontCopyVariations == nil {
 		ebipurego.RegisterLibFunc(&_fnCGFontCopyVariations, _lib, "CGFontCopyVariations")
@@ -4290,6 +4609,8 @@ var _fnCGFontCreateCopyWithVariations func(objc.ID, objc.ID) objc.ID
 
 // CGFontCreateCopyWithVariations calls the CoreGraphics framework function CGFontCreateCopyWithVariations.
 func CGFontCreateCopyWithVariations(font CGFontRef, variations obj.Object) CGFontRef {
+	defer runtime.KeepAlive(font)
+	defer runtime.KeepAlive(variations)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGFontCreateCopyWithVariations == nil {
 		ebipurego.RegisterLibFunc(&_fnCGFontCreateCopyWithVariations, _lib, "CGFontCreateCopyWithVariations")
@@ -4302,6 +4623,7 @@ var _fnCGFontCreatePostScriptEncoding func(objc.ID, unsafe.Pointer) objc.ID
 
 // CGFontCreatePostScriptEncoding calls the CoreGraphics framework function CGFontCreatePostScriptEncoding.
 func CGFontCreatePostScriptEncoding(font CGFontRef, encoding unsafe.Pointer) obj.Object {
+	defer runtime.KeepAlive(font)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGFontCreatePostScriptEncoding == nil {
 		ebipurego.RegisterLibFunc(&_fnCGFontCreatePostScriptEncoding, _lib, "CGFontCreatePostScriptEncoding")
@@ -4314,6 +4636,8 @@ var _fnCGFontCreatePostScriptSubset func(objc.ID, objc.ID, CGFontPostScriptForma
 
 // CGFontCreatePostScriptSubset calls the CoreGraphics framework function CGFontCreatePostScriptSubset.
 func CGFontCreatePostScriptSubset(font CGFontRef, subsetName obj.Object, format CGFontPostScriptFormat, glyphs unsafe.Pointer, count int, encoding unsafe.Pointer) obj.Object {
+	defer runtime.KeepAlive(font)
+	defer runtime.KeepAlive(subsetName)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGFontCreatePostScriptSubset == nil {
 		ebipurego.RegisterLibFunc(&_fnCGFontCreatePostScriptSubset, _lib, "CGFontCreatePostScriptSubset")
@@ -4326,6 +4650,7 @@ var _fnCGFontCreateWithDataProvider func(objc.ID) objc.ID
 
 // CGFontCreateWithDataProvider calls the CoreGraphics framework function CGFontCreateWithDataProvider.
 func CGFontCreateWithDataProvider(provider CGDataProviderRef) CGFontRef {
+	defer runtime.KeepAlive(provider)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGFontCreateWithDataProvider == nil {
 		ebipurego.RegisterLibFunc(&_fnCGFontCreateWithDataProvider, _lib, "CGFontCreateWithDataProvider")
@@ -4338,6 +4663,7 @@ var _fnCGFontCreateWithFontName func(objc.ID) objc.ID
 
 // CGFontCreateWithFontName calls the CoreGraphics framework function CGFontCreateWithFontName.
 func CGFontCreateWithFontName(name obj.Object) CGFontRef {
+	defer runtime.KeepAlive(name)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGFontCreateWithFontName == nil {
 		ebipurego.RegisterLibFunc(&_fnCGFontCreateWithFontName, _lib, "CGFontCreateWithFontName")
@@ -4362,6 +4688,7 @@ var _fnCGFontGetAscent func(objc.ID) int32
 
 // CGFontGetAscent calls the CoreGraphics framework function CGFontGetAscent.
 func CGFontGetAscent(font CGFontRef) int {
+	defer runtime.KeepAlive(font)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGFontGetAscent == nil {
 		ebipurego.RegisterLibFunc(&_fnCGFontGetAscent, _lib, "CGFontGetAscent")
@@ -4373,6 +4700,7 @@ var _fnCGFontGetCapHeight func(objc.ID) int32
 
 // CGFontGetCapHeight calls the CoreGraphics framework function CGFontGetCapHeight.
 func CGFontGetCapHeight(font CGFontRef) int {
+	defer runtime.KeepAlive(font)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGFontGetCapHeight == nil {
 		ebipurego.RegisterLibFunc(&_fnCGFontGetCapHeight, _lib, "CGFontGetCapHeight")
@@ -4384,6 +4712,7 @@ var _fnCGFontGetDescent func(objc.ID) int32
 
 // CGFontGetDescent calls the CoreGraphics framework function CGFontGetDescent.
 func CGFontGetDescent(font CGFontRef) int {
+	defer runtime.KeepAlive(font)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGFontGetDescent == nil {
 		ebipurego.RegisterLibFunc(&_fnCGFontGetDescent, _lib, "CGFontGetDescent")
@@ -4395,6 +4724,7 @@ var _fnCGFontGetFontBBox func(objc.ID) corefoundation.CGRect
 
 // CGFontGetFontBBox calls the CoreGraphics framework function CGFontGetFontBBox.
 func CGFontGetFontBBox(font CGFontRef) corefoundation.CGRect {
+	defer runtime.KeepAlive(font)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGFontGetFontBBox == nil {
 		ebipurego.RegisterLibFunc(&_fnCGFontGetFontBBox, _lib, "CGFontGetFontBBox")
@@ -4406,6 +4736,7 @@ var _fnCGFontGetGlyphAdvances func(objc.ID, unsafe.Pointer, int, unsafe.Pointer)
 
 // CGFontGetGlyphAdvances calls the CoreGraphics framework function CGFontGetGlyphAdvances.
 func CGFontGetGlyphAdvances(font CGFontRef, glyphs unsafe.Pointer, count int) (ok bool, advances int32) {
+	defer runtime.KeepAlive(font)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGFontGetGlyphAdvances == nil {
 		ebipurego.RegisterLibFunc(&_fnCGFontGetGlyphAdvances, _lib, "CGFontGetGlyphAdvances")
@@ -4419,6 +4750,7 @@ var _fnCGFontGetGlyphBBoxes func(objc.ID, unsafe.Pointer, int, unsafe.Pointer) b
 
 // CGFontGetGlyphBBoxes calls the CoreGraphics framework function CGFontGetGlyphBBoxes.
 func CGFontGetGlyphBBoxes(font CGFontRef, glyphs unsafe.Pointer, count int, bboxes *corefoundation.CGRect) bool {
+	defer runtime.KeepAlive(font)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGFontGetGlyphBBoxes == nil {
 		ebipurego.RegisterLibFunc(&_fnCGFontGetGlyphBBoxes, _lib, "CGFontGetGlyphBBoxes")
@@ -4430,6 +4762,8 @@ var _fnCGFontGetGlyphWithGlyphName func(objc.ID, objc.ID) uint16
 
 // CGFontGetGlyphWithGlyphName calls the CoreGraphics framework function CGFontGetGlyphWithGlyphName.
 func CGFontGetGlyphWithGlyphName(font CGFontRef, name obj.Object) uint16 {
+	defer runtime.KeepAlive(font)
+	defer runtime.KeepAlive(name)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGFontGetGlyphWithGlyphName == nil {
 		ebipurego.RegisterLibFunc(&_fnCGFontGetGlyphWithGlyphName, _lib, "CGFontGetGlyphWithGlyphName")
@@ -4441,6 +4775,7 @@ var _fnCGFontGetItalicAngle func(objc.ID) float64
 
 // CGFontGetItalicAngle calls the CoreGraphics framework function CGFontGetItalicAngle.
 func CGFontGetItalicAngle(font CGFontRef) float64 {
+	defer runtime.KeepAlive(font)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGFontGetItalicAngle == nil {
 		ebipurego.RegisterLibFunc(&_fnCGFontGetItalicAngle, _lib, "CGFontGetItalicAngle")
@@ -4452,6 +4787,7 @@ var _fnCGFontGetLeading func(objc.ID) int32
 
 // CGFontGetLeading calls the CoreGraphics framework function CGFontGetLeading.
 func CGFontGetLeading(font CGFontRef) int {
+	defer runtime.KeepAlive(font)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGFontGetLeading == nil {
 		ebipurego.RegisterLibFunc(&_fnCGFontGetLeading, _lib, "CGFontGetLeading")
@@ -4463,6 +4799,7 @@ var _fnCGFontGetNumberOfGlyphs func(objc.ID) int
 
 // CGFontGetNumberOfGlyphs calls the CoreGraphics framework function CGFontGetNumberOfGlyphs.
 func CGFontGetNumberOfGlyphs(font CGFontRef) int {
+	defer runtime.KeepAlive(font)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGFontGetNumberOfGlyphs == nil {
 		ebipurego.RegisterLibFunc(&_fnCGFontGetNumberOfGlyphs, _lib, "CGFontGetNumberOfGlyphs")
@@ -4474,6 +4811,7 @@ var _fnCGFontGetStemV func(objc.ID) float64
 
 // CGFontGetStemV calls the CoreGraphics framework function CGFontGetStemV.
 func CGFontGetStemV(font CGFontRef) float64 {
+	defer runtime.KeepAlive(font)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGFontGetStemV == nil {
 		ebipurego.RegisterLibFunc(&_fnCGFontGetStemV, _lib, "CGFontGetStemV")
@@ -4496,6 +4834,7 @@ var _fnCGFontGetUnitsPerEm func(objc.ID) int32
 
 // CGFontGetUnitsPerEm calls the CoreGraphics framework function CGFontGetUnitsPerEm.
 func CGFontGetUnitsPerEm(font CGFontRef) int {
+	defer runtime.KeepAlive(font)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGFontGetUnitsPerEm == nil {
 		ebipurego.RegisterLibFunc(&_fnCGFontGetUnitsPerEm, _lib, "CGFontGetUnitsPerEm")
@@ -4507,6 +4846,7 @@ var _fnCGFontGetXHeight func(objc.ID) int32
 
 // CGFontGetXHeight calls the CoreGraphics framework function CGFontGetXHeight.
 func CGFontGetXHeight(font CGFontRef) int {
+	defer runtime.KeepAlive(font)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGFontGetXHeight == nil {
 		ebipurego.RegisterLibFunc(&_fnCGFontGetXHeight, _lib, "CGFontGetXHeight")
@@ -4518,6 +4858,7 @@ var _fnCGFontRelease func(objc.ID)
 
 // CGFontRelease calls the CoreGraphics framework function CGFontRelease.
 func CGFontRelease(font CGFontRef) {
+	defer runtime.KeepAlive(font)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGFontRelease == nil {
 		ebipurego.RegisterLibFunc(&_fnCGFontRelease, _lib, "CGFontRelease")
@@ -4529,6 +4870,7 @@ var _fnCGFontRetain func(objc.ID) objc.ID
 
 // CGFontRetain calls the CoreGraphics framework function CGFontRetain.
 func CGFontRetain(font CGFontRef) CGFontRef {
+	defer runtime.KeepAlive(font)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGFontRetain == nil {
 		ebipurego.RegisterLibFunc(&_fnCGFontRetain, _lib, "CGFontRetain")
@@ -4564,6 +4906,7 @@ var _fnCGFunctionRelease func(objc.ID)
 
 // CGFunctionRelease calls the CoreGraphics framework function CGFunctionRelease.
 func CGFunctionRelease(function CGFunctionRef) {
+	defer runtime.KeepAlive(function)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGFunctionRelease == nil {
 		ebipurego.RegisterLibFunc(&_fnCGFunctionRelease, _lib, "CGFunctionRelease")
@@ -4575,6 +4918,7 @@ var _fnCGFunctionRetain func(objc.ID) objc.ID
 
 // CGFunctionRetain calls the CoreGraphics framework function CGFunctionRetain.
 func CGFunctionRetain(function CGFunctionRef) CGFunctionRef {
+	defer runtime.KeepAlive(function)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGFunctionRetain == nil {
 		ebipurego.RegisterLibFunc(&_fnCGFunctionRetain, _lib, "CGFunctionRetain")
@@ -4715,6 +5059,7 @@ var _fnCGGradientCreateWithColorComponents func(objc.ID, unsafe.Pointer, unsafe.
 
 // CGGradientCreateWithColorComponents calls the CoreGraphics framework function CGGradientCreateWithColorComponents.
 func CGGradientCreateWithColorComponents(space CGColorSpaceRef, components unsafe.Pointer, locations unsafe.Pointer, count int) CGGradientRef {
+	defer runtime.KeepAlive(space)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGGradientCreateWithColorComponents == nil {
 		ebipurego.RegisterLibFunc(&_fnCGGradientCreateWithColorComponents, _lib, "CGGradientCreateWithColorComponents")
@@ -4727,6 +5072,8 @@ var _fnCGGradientCreateWithColors func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
 // CGGradientCreateWithColors calls the CoreGraphics framework function CGGradientCreateWithColors.
 func CGGradientCreateWithColors(space CGColorSpaceRef, colors obj.Object, locations unsafe.Pointer) CGGradientRef {
+	defer runtime.KeepAlive(space)
+	defer runtime.KeepAlive(colors)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGGradientCreateWithColors == nil {
 		ebipurego.RegisterLibFunc(&_fnCGGradientCreateWithColors, _lib, "CGGradientCreateWithColors")
@@ -4739,6 +5086,7 @@ var _fnCGGradientCreateWithContentHeadroom func(float32, objc.ID, unsafe.Pointer
 
 // CGGradientCreateWithContentHeadroom calls the CoreGraphics framework function CGGradientCreateWithContentHeadroom.
 func CGGradientCreateWithContentHeadroom(headroom float32, space CGColorSpaceRef, components unsafe.Pointer, locations unsafe.Pointer, count int) CGGradientRef {
+	defer runtime.KeepAlive(space)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGGradientCreateWithContentHeadroom == nil {
 		ebipurego.RegisterLibFunc(&_fnCGGradientCreateWithContentHeadroom, _lib, "CGGradientCreateWithContentHeadroom")
@@ -4751,6 +5099,7 @@ var _fnCGGradientGetContentHeadroom func(objc.ID) float32
 
 // CGGradientGetContentHeadroom calls the CoreGraphics framework function CGGradientGetContentHeadroom.
 func CGGradientGetContentHeadroom(gradient CGGradientRef) float32 {
+	defer runtime.KeepAlive(gradient)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGGradientGetContentHeadroom == nil {
 		ebipurego.RegisterLibFunc(&_fnCGGradientGetContentHeadroom, _lib, "CGGradientGetContentHeadroom")
@@ -4773,6 +5122,7 @@ var _fnCGGradientRelease func(objc.ID)
 
 // CGGradientRelease calls the CoreGraphics framework function CGGradientRelease.
 func CGGradientRelease(gradient CGGradientRef) {
+	defer runtime.KeepAlive(gradient)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGGradientRelease == nil {
 		ebipurego.RegisterLibFunc(&_fnCGGradientRelease, _lib, "CGGradientRelease")
@@ -4784,6 +5134,7 @@ var _fnCGGradientRetain func(objc.ID) objc.ID
 
 // CGGradientRetain calls the CoreGraphics framework function CGGradientRetain.
 func CGGradientRetain(gradient CGGradientRef) CGGradientRef {
+	defer runtime.KeepAlive(gradient)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGGradientRetain == nil {
 		ebipurego.RegisterLibFunc(&_fnCGGradientRetain, _lib, "CGGradientRetain")
@@ -4796,6 +5147,7 @@ var _fnCGImageCalculateContentAverageLightLevel func(objc.ID) float32
 
 // CGImageCalculateContentAverageLightLevel calls the CoreGraphics framework function CGImageCalculateContentAverageLightLevel.
 func CGImageCalculateContentAverageLightLevel(image CGImageRef) float32 {
+	defer runtime.KeepAlive(image)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageCalculateContentAverageLightLevel == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageCalculateContentAverageLightLevel, _lib, "CGImageCalculateContentAverageLightLevel")
@@ -4807,6 +5159,7 @@ var _fnCGImageCalculateContentHeadroom func(objc.ID) float32
 
 // CGImageCalculateContentHeadroom calls the CoreGraphics framework function CGImageCalculateContentHeadroom.
 func CGImageCalculateContentHeadroom(image CGImageRef) float32 {
+	defer runtime.KeepAlive(image)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageCalculateContentHeadroom == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageCalculateContentHeadroom, _lib, "CGImageCalculateContentHeadroom")
@@ -4818,6 +5171,7 @@ var _fnCGImageContainsImageSpecificToneMappingMetadata func(objc.ID) bool
 
 // CGImageContainsImageSpecificToneMappingMetadata calls the CoreGraphics framework function CGImageContainsImageSpecificToneMappingMetadata.
 func CGImageContainsImageSpecificToneMappingMetadata(image CGImageRef) bool {
+	defer runtime.KeepAlive(image)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageContainsImageSpecificToneMappingMetadata == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageContainsImageSpecificToneMappingMetadata, _lib, "CGImageContainsImageSpecificToneMappingMetadata")
@@ -4829,6 +5183,8 @@ var _fnCGImageCreate func(int, int, int, int, int, objc.ID, CGBitmapInfo, objc.I
 
 // CGImageCreate calls the CoreGraphics framework function CGImageCreate.
 func CGImageCreate(width int, height int, bitsPerComponent int, bitsPerPixel int, bytesPerRow int, space CGColorSpaceRef, bitmapInfo CGBitmapInfo, provider CGDataProviderRef, decode unsafe.Pointer, shouldInterpolate bool, intent CGColorRenderingIntent) CGImageRef {
+	defer runtime.KeepAlive(space)
+	defer runtime.KeepAlive(provider)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageCreate, _lib, "CGImageCreate")
@@ -4841,6 +5197,7 @@ var _fnCGImageCreateCopy func(objc.ID) objc.ID
 
 // CGImageCreateCopy calls the CoreGraphics framework function CGImageCreateCopy.
 func CGImageCreateCopy(image CGImageRef) CGImageRef {
+	defer runtime.KeepAlive(image)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageCreateCopy == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageCreateCopy, _lib, "CGImageCreateCopy")
@@ -4853,6 +5210,7 @@ var _fnCGImageCreateCopyWithCalculatedHDRStats func(objc.ID) objc.ID
 
 // CGImageCreateCopyWithCalculatedHDRStats calls the CoreGraphics framework function CGImageCreateCopyWithCalculatedHDRStats.
 func CGImageCreateCopyWithCalculatedHDRStats(image CGImageRef) CGImageRef {
+	defer runtime.KeepAlive(image)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageCreateCopyWithCalculatedHDRStats == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageCreateCopyWithCalculatedHDRStats, _lib, "CGImageCreateCopyWithCalculatedHDRStats")
@@ -4865,6 +5223,8 @@ var _fnCGImageCreateCopyWithColorSpace func(objc.ID, objc.ID) objc.ID
 
 // CGImageCreateCopyWithColorSpace calls the CoreGraphics framework function CGImageCreateCopyWithColorSpace.
 func CGImageCreateCopyWithColorSpace(image CGImageRef, space CGColorSpaceRef) CGImageRef {
+	defer runtime.KeepAlive(image)
+	defer runtime.KeepAlive(space)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageCreateCopyWithColorSpace == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageCreateCopyWithColorSpace, _lib, "CGImageCreateCopyWithColorSpace")
@@ -4877,6 +5237,7 @@ var _fnCGImageCreateCopyWithContentAverageLightLevel func(objc.ID, float32) objc
 
 // CGImageCreateCopyWithContentAverageLightLevel calls the CoreGraphics framework function CGImageCreateCopyWithContentAverageLightLevel.
 func CGImageCreateCopyWithContentAverageLightLevel(image CGImageRef, avll float32) CGImageRef {
+	defer runtime.KeepAlive(image)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageCreateCopyWithContentAverageLightLevel == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageCreateCopyWithContentAverageLightLevel, _lib, "CGImageCreateCopyWithContentAverageLightLevel")
@@ -4889,6 +5250,7 @@ var _fnCGImageCreateCopyWithContentHeadroom func(float32, objc.ID) objc.ID
 
 // CGImageCreateCopyWithContentHeadroom calls the CoreGraphics framework function CGImageCreateCopyWithContentHeadroom.
 func CGImageCreateCopyWithContentHeadroom(headroom float32, image CGImageRef) CGImageRef {
+	defer runtime.KeepAlive(image)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageCreateCopyWithContentHeadroom == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageCreateCopyWithContentHeadroom, _lib, "CGImageCreateCopyWithContentHeadroom")
@@ -4901,6 +5263,8 @@ var _fnCGImageCreateWithContentHeadroom func(float32, int, int, int, int, int, o
 
 // CGImageCreateWithContentHeadroom calls the CoreGraphics framework function CGImageCreateWithContentHeadroom.
 func CGImageCreateWithContentHeadroom(headroom float32, width int, height int, bitsPerComponent int, bitsPerPixel int, bytesPerRow int, space CGColorSpaceRef, bitmapInfo CGBitmapInfo, provider CGDataProviderRef, decode unsafe.Pointer, shouldInterpolate bool, intent CGColorRenderingIntent) CGImageRef {
+	defer runtime.KeepAlive(space)
+	defer runtime.KeepAlive(provider)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageCreateWithContentHeadroom == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageCreateWithContentHeadroom, _lib, "CGImageCreateWithContentHeadroom")
@@ -4913,6 +5277,7 @@ var _fnCGImageCreateWithImageInRect func(objc.ID, corefoundation.CGRect) objc.ID
 
 // CGImageCreateWithImageInRect calls the CoreGraphics framework function CGImageCreateWithImageInRect.
 func CGImageCreateWithImageInRect(image CGImageRef, rect corefoundation.CGRect) CGImageRef {
+	defer runtime.KeepAlive(image)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageCreateWithImageInRect == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageCreateWithImageInRect, _lib, "CGImageCreateWithImageInRect")
@@ -4925,6 +5290,7 @@ var _fnCGImageCreateWithJPEGDataProvider func(objc.ID, unsafe.Pointer, bool, CGC
 
 // CGImageCreateWithJPEGDataProvider calls the CoreGraphics framework function CGImageCreateWithJPEGDataProvider.
 func CGImageCreateWithJPEGDataProvider(source CGDataProviderRef, decode unsafe.Pointer, shouldInterpolate bool, intent CGColorRenderingIntent) CGImageRef {
+	defer runtime.KeepAlive(source)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageCreateWithJPEGDataProvider == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageCreateWithJPEGDataProvider, _lib, "CGImageCreateWithJPEGDataProvider")
@@ -4937,6 +5303,8 @@ var _fnCGImageCreateWithMask func(objc.ID, objc.ID) objc.ID
 
 // CGImageCreateWithMask calls the CoreGraphics framework function CGImageCreateWithMask.
 func CGImageCreateWithMask(image CGImageRef, mask CGImageRef) CGImageRef {
+	defer runtime.KeepAlive(image)
+	defer runtime.KeepAlive(mask)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageCreateWithMask == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageCreateWithMask, _lib, "CGImageCreateWithMask")
@@ -4949,6 +5317,7 @@ var _fnCGImageCreateWithMaskingColors func(objc.ID, unsafe.Pointer) objc.ID
 
 // CGImageCreateWithMaskingColors calls the CoreGraphics framework function CGImageCreateWithMaskingColors.
 func CGImageCreateWithMaskingColors(image CGImageRef, components unsafe.Pointer) CGImageRef {
+	defer runtime.KeepAlive(image)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageCreateWithMaskingColors == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageCreateWithMaskingColors, _lib, "CGImageCreateWithMaskingColors")
@@ -4961,6 +5330,7 @@ var _fnCGImageCreateWithPNGDataProvider func(objc.ID, unsafe.Pointer, bool, CGCo
 
 // CGImageCreateWithPNGDataProvider calls the CoreGraphics framework function CGImageCreateWithPNGDataProvider.
 func CGImageCreateWithPNGDataProvider(source CGDataProviderRef, decode unsafe.Pointer, shouldInterpolate bool, intent CGColorRenderingIntent) CGImageRef {
+	defer runtime.KeepAlive(source)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageCreateWithPNGDataProvider == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageCreateWithPNGDataProvider, _lib, "CGImageCreateWithPNGDataProvider")
@@ -4973,6 +5343,7 @@ var _fnCGImageGetAlphaInfo func(objc.ID) CGImageAlphaInfo
 
 // CGImageGetAlphaInfo calls the CoreGraphics framework function CGImageGetAlphaInfo.
 func CGImageGetAlphaInfo(image CGImageRef) CGImageAlphaInfo {
+	defer runtime.KeepAlive(image)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageGetAlphaInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageGetAlphaInfo, _lib, "CGImageGetAlphaInfo")
@@ -4984,6 +5355,7 @@ var _fnCGImageGetBitmapInfo func(objc.ID) CGBitmapInfo
 
 // CGImageGetBitmapInfo calls the CoreGraphics framework function CGImageGetBitmapInfo.
 func CGImageGetBitmapInfo(image CGImageRef) CGBitmapInfo {
+	defer runtime.KeepAlive(image)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageGetBitmapInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageGetBitmapInfo, _lib, "CGImageGetBitmapInfo")
@@ -4995,6 +5367,7 @@ var _fnCGImageGetBitsPerComponent func(objc.ID) int
 
 // CGImageGetBitsPerComponent calls the CoreGraphics framework function CGImageGetBitsPerComponent.
 func CGImageGetBitsPerComponent(image CGImageRef) int {
+	defer runtime.KeepAlive(image)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageGetBitsPerComponent == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageGetBitsPerComponent, _lib, "CGImageGetBitsPerComponent")
@@ -5006,6 +5379,7 @@ var _fnCGImageGetBitsPerPixel func(objc.ID) int
 
 // CGImageGetBitsPerPixel calls the CoreGraphics framework function CGImageGetBitsPerPixel.
 func CGImageGetBitsPerPixel(image CGImageRef) int {
+	defer runtime.KeepAlive(image)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageGetBitsPerPixel == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageGetBitsPerPixel, _lib, "CGImageGetBitsPerPixel")
@@ -5017,6 +5391,7 @@ var _fnCGImageGetByteOrderInfo func(objc.ID) CGImageByteOrderInfo
 
 // CGImageGetByteOrderInfo calls the CoreGraphics framework function CGImageGetByteOrderInfo.
 func CGImageGetByteOrderInfo(image CGImageRef) CGImageByteOrderInfo {
+	defer runtime.KeepAlive(image)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageGetByteOrderInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageGetByteOrderInfo, _lib, "CGImageGetByteOrderInfo")
@@ -5028,6 +5403,7 @@ var _fnCGImageGetBytesPerRow func(objc.ID) int
 
 // CGImageGetBytesPerRow calls the CoreGraphics framework function CGImageGetBytesPerRow.
 func CGImageGetBytesPerRow(image CGImageRef) int {
+	defer runtime.KeepAlive(image)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageGetBytesPerRow == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageGetBytesPerRow, _lib, "CGImageGetBytesPerRow")
@@ -5039,6 +5415,7 @@ var _fnCGImageGetColorSpace func(objc.ID) objc.ID
 
 // CGImageGetColorSpace calls the CoreGraphics framework function CGImageGetColorSpace.
 func CGImageGetColorSpace(image CGImageRef) CGColorSpaceRef {
+	defer runtime.KeepAlive(image)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageGetColorSpace == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageGetColorSpace, _lib, "CGImageGetColorSpace")
@@ -5051,6 +5428,7 @@ var _fnCGImageGetContentAverageLightLevel func(objc.ID) float32
 
 // CGImageGetContentAverageLightLevel calls the CoreGraphics framework function CGImageGetContentAverageLightLevel.
 func CGImageGetContentAverageLightLevel(image CGImageRef) float32 {
+	defer runtime.KeepAlive(image)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageGetContentAverageLightLevel == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageGetContentAverageLightLevel, _lib, "CGImageGetContentAverageLightLevel")
@@ -5062,6 +5440,7 @@ var _fnCGImageGetContentHeadroom func(objc.ID) float32
 
 // CGImageGetContentHeadroom calls the CoreGraphics framework function CGImageGetContentHeadroom.
 func CGImageGetContentHeadroom(image CGImageRef) float32 {
+	defer runtime.KeepAlive(image)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageGetContentHeadroom == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageGetContentHeadroom, _lib, "CGImageGetContentHeadroom")
@@ -5073,6 +5452,7 @@ var _fnCGImageGetDataProvider func(objc.ID) objc.ID
 
 // CGImageGetDataProvider calls the CoreGraphics framework function CGImageGetDataProvider.
 func CGImageGetDataProvider(image CGImageRef) CGDataProviderRef {
+	defer runtime.KeepAlive(image)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageGetDataProvider == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageGetDataProvider, _lib, "CGImageGetDataProvider")
@@ -5085,6 +5465,7 @@ var _fnCGImageGetDecode func(objc.ID) unsafe.Pointer
 
 // CGImageGetDecode calls the CoreGraphics framework function CGImageGetDecode.
 func CGImageGetDecode(image CGImageRef) unsafe.Pointer {
+	defer runtime.KeepAlive(image)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageGetDecode == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageGetDecode, _lib, "CGImageGetDecode")
@@ -5096,6 +5477,7 @@ var _fnCGImageGetHeight func(objc.ID) int
 
 // CGImageGetHeight calls the CoreGraphics framework function CGImageGetHeight.
 func CGImageGetHeight(image CGImageRef) int {
+	defer runtime.KeepAlive(image)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageGetHeight == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageGetHeight, _lib, "CGImageGetHeight")
@@ -5107,6 +5489,7 @@ var _fnCGImageGetPixelFormatInfo func(objc.ID) CGImagePixelFormatInfo
 
 // CGImageGetPixelFormatInfo calls the CoreGraphics framework function CGImageGetPixelFormatInfo.
 func CGImageGetPixelFormatInfo(image CGImageRef) CGImagePixelFormatInfo {
+	defer runtime.KeepAlive(image)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageGetPixelFormatInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageGetPixelFormatInfo, _lib, "CGImageGetPixelFormatInfo")
@@ -5118,6 +5501,7 @@ var _fnCGImageGetRenderingIntent func(objc.ID) CGColorRenderingIntent
 
 // CGImageGetRenderingIntent calls the CoreGraphics framework function CGImageGetRenderingIntent.
 func CGImageGetRenderingIntent(image CGImageRef) CGColorRenderingIntent {
+	defer runtime.KeepAlive(image)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageGetRenderingIntent == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageGetRenderingIntent, _lib, "CGImageGetRenderingIntent")
@@ -5129,6 +5513,7 @@ var _fnCGImageGetShouldInterpolate func(objc.ID) bool
 
 // CGImageGetShouldInterpolate calls the CoreGraphics framework function CGImageGetShouldInterpolate.
 func CGImageGetShouldInterpolate(image CGImageRef) bool {
+	defer runtime.KeepAlive(image)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageGetShouldInterpolate == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageGetShouldInterpolate, _lib, "CGImageGetShouldInterpolate")
@@ -5151,6 +5536,7 @@ var _fnCGImageGetUTType func(objc.ID) objc.ID
 
 // CGImageGetUTType calls the CoreGraphics framework function CGImageGetUTType.
 func CGImageGetUTType(image CGImageRef) obj.Object {
+	defer runtime.KeepAlive(image)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageGetUTType == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageGetUTType, _lib, "CGImageGetUTType")
@@ -5163,6 +5549,7 @@ var _fnCGImageGetWidth func(objc.ID) int
 
 // CGImageGetWidth calls the CoreGraphics framework function CGImageGetWidth.
 func CGImageGetWidth(image CGImageRef) int {
+	defer runtime.KeepAlive(image)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageGetWidth == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageGetWidth, _lib, "CGImageGetWidth")
@@ -5174,6 +5561,7 @@ var _fnCGImageIsMask func(objc.ID) bool
 
 // CGImageIsMask calls the CoreGraphics framework function CGImageIsMask.
 func CGImageIsMask(image CGImageRef) bool {
+	defer runtime.KeepAlive(image)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageIsMask == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageIsMask, _lib, "CGImageIsMask")
@@ -5185,6 +5573,7 @@ var _fnCGImageMaskCreate func(int, int, int, int, int, objc.ID, unsafe.Pointer, 
 
 // CGImageMaskCreate calls the CoreGraphics framework function CGImageMaskCreate.
 func CGImageMaskCreate(width int, height int, bitsPerComponent int, bitsPerPixel int, bytesPerRow int, provider CGDataProviderRef, decode unsafe.Pointer, shouldInterpolate bool) CGImageRef {
+	defer runtime.KeepAlive(provider)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageMaskCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageMaskCreate, _lib, "CGImageMaskCreate")
@@ -5197,6 +5586,7 @@ var _fnCGImageRelease func(objc.ID)
 
 // CGImageRelease calls the CoreGraphics framework function CGImageRelease.
 func CGImageRelease(image CGImageRef) {
+	defer runtime.KeepAlive(image)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageRelease == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageRelease, _lib, "CGImageRelease")
@@ -5208,6 +5598,7 @@ var _fnCGImageRetain func(objc.ID) objc.ID
 
 // CGImageRetain calls the CoreGraphics framework function CGImageRetain.
 func CGImageRetain(image CGImageRef) CGImageRef {
+	defer runtime.KeepAlive(image)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageRetain == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageRetain, _lib, "CGImageRetain")
@@ -5220,6 +5611,7 @@ var _fnCGImageShouldToneMap func(objc.ID) bool
 
 // CGImageShouldToneMap calls the CoreGraphics framework function CGImageShouldToneMap.
 func CGImageShouldToneMap(image CGImageRef) bool {
+	defer runtime.KeepAlive(image)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageShouldToneMap == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageShouldToneMap, _lib, "CGImageShouldToneMap")
@@ -5242,6 +5634,8 @@ var _fnCGLayerCreateWithContext func(objc.ID, corefoundation.CGSize, objc.ID) ob
 
 // CGLayerCreateWithContext calls the CoreGraphics framework function CGLayerCreateWithContext.
 func CGLayerCreateWithContext(context_ CGContextRef, size corefoundation.CGSize, auxiliaryInfo obj.Object) CGLayerRef {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(auxiliaryInfo)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGLayerCreateWithContext == nil {
 		ebipurego.RegisterLibFunc(&_fnCGLayerCreateWithContext, _lib, "CGLayerCreateWithContext")
@@ -5254,6 +5648,7 @@ var _fnCGLayerGetContext func(objc.ID) objc.ID
 
 // CGLayerGetContext calls the CoreGraphics framework function CGLayerGetContext.
 func CGLayerGetContext(layer CGLayerRef) CGContextRef {
+	defer runtime.KeepAlive(layer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGLayerGetContext == nil {
 		ebipurego.RegisterLibFunc(&_fnCGLayerGetContext, _lib, "CGLayerGetContext")
@@ -5266,6 +5661,7 @@ var _fnCGLayerGetSize func(objc.ID) corefoundation.CGSize
 
 // CGLayerGetSize calls the CoreGraphics framework function CGLayerGetSize.
 func CGLayerGetSize(layer CGLayerRef) corefoundation.CGSize {
+	defer runtime.KeepAlive(layer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGLayerGetSize == nil {
 		ebipurego.RegisterLibFunc(&_fnCGLayerGetSize, _lib, "CGLayerGetSize")
@@ -5288,6 +5684,7 @@ var _fnCGLayerRelease func(objc.ID)
 
 // CGLayerRelease calls the CoreGraphics framework function CGLayerRelease.
 func CGLayerRelease(layer CGLayerRef) {
+	defer runtime.KeepAlive(layer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGLayerRelease == nil {
 		ebipurego.RegisterLibFunc(&_fnCGLayerRelease, _lib, "CGLayerRelease")
@@ -5299,6 +5696,7 @@ var _fnCGLayerRetain func(objc.ID) objc.ID
 
 // CGLayerRetain calls the CoreGraphics framework function CGLayerRetain.
 func CGLayerRetain(layer CGLayerRef) CGLayerRef {
+	defer runtime.KeepAlive(layer)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGLayerRetain == nil {
 		ebipurego.RegisterLibFunc(&_fnCGLayerRetain, _lib, "CGLayerRetain")
@@ -5333,6 +5731,7 @@ var _fnCGPDFArrayApplyBlock func(objc.ID, objc.Block, unsafe.Pointer)
 
 // CGPDFArrayApplyBlock calls the CoreGraphics framework function CGPDFArrayApplyBlock.
 func CGPDFArrayApplyBlock(array CGPDFArrayRef, block func(int, unsafe.Pointer, unsafe.Pointer) bool, info unsafe.Pointer) {
+	defer runtime.KeepAlive(array)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFArrayApplyBlock == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFArrayApplyBlock, _lib, "CGPDFArrayApplyBlock")
@@ -5344,6 +5743,7 @@ var _fnCGPDFArrayGetArray func(objc.ID, int, unsafe.Pointer) bool
 
 // CGPDFArrayGetArray calls the CoreGraphics framework function CGPDFArrayGetArray.
 func CGPDFArrayGetArray(array CGPDFArrayRef, index int, value unsafe.Pointer) bool {
+	defer runtime.KeepAlive(array)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFArrayGetArray == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFArrayGetArray, _lib, "CGPDFArrayGetArray")
@@ -5355,6 +5755,7 @@ var _fnCGPDFArrayGetBoolean func(objc.ID, int, unsafe.Pointer) bool
 
 // CGPDFArrayGetBoolean calls the CoreGraphics framework function CGPDFArrayGetBoolean.
 func CGPDFArrayGetBoolean(array CGPDFArrayRef, index int) (ok bool, value uint8) {
+	defer runtime.KeepAlive(array)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFArrayGetBoolean == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFArrayGetBoolean, _lib, "CGPDFArrayGetBoolean")
@@ -5368,6 +5769,7 @@ var _fnCGPDFArrayGetCount func(objc.ID) int
 
 // CGPDFArrayGetCount calls the CoreGraphics framework function CGPDFArrayGetCount.
 func CGPDFArrayGetCount(array CGPDFArrayRef) int {
+	defer runtime.KeepAlive(array)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFArrayGetCount == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFArrayGetCount, _lib, "CGPDFArrayGetCount")
@@ -5379,6 +5781,7 @@ var _fnCGPDFArrayGetDictionary func(objc.ID, int, unsafe.Pointer) bool
 
 // CGPDFArrayGetDictionary calls the CoreGraphics framework function CGPDFArrayGetDictionary.
 func CGPDFArrayGetDictionary(array CGPDFArrayRef, index int, value unsafe.Pointer) bool {
+	defer runtime.KeepAlive(array)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFArrayGetDictionary == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFArrayGetDictionary, _lib, "CGPDFArrayGetDictionary")
@@ -5390,6 +5793,7 @@ var _fnCGPDFArrayGetInteger func(objc.ID, int, unsafe.Pointer) bool
 
 // CGPDFArrayGetInteger calls the CoreGraphics framework function CGPDFArrayGetInteger.
 func CGPDFArrayGetInteger(array CGPDFArrayRef, index int) (ok bool, value int) {
+	defer runtime.KeepAlive(array)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFArrayGetInteger == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFArrayGetInteger, _lib, "CGPDFArrayGetInteger")
@@ -5403,6 +5807,7 @@ var _fnCGPDFArrayGetName func(objc.ID, int, string) bool
 
 // CGPDFArrayGetName calls the CoreGraphics framework function CGPDFArrayGetName.
 func CGPDFArrayGetName(array CGPDFArrayRef, index int, value string) bool {
+	defer runtime.KeepAlive(array)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFArrayGetName == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFArrayGetName, _lib, "CGPDFArrayGetName")
@@ -5414,6 +5819,7 @@ var _fnCGPDFArrayGetNull func(objc.ID, int) bool
 
 // CGPDFArrayGetNull calls the CoreGraphics framework function CGPDFArrayGetNull.
 func CGPDFArrayGetNull(array CGPDFArrayRef, index int) bool {
+	defer runtime.KeepAlive(array)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFArrayGetNull == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFArrayGetNull, _lib, "CGPDFArrayGetNull")
@@ -5425,6 +5831,7 @@ var _fnCGPDFArrayGetNumber func(objc.ID, int, unsafe.Pointer) bool
 
 // CGPDFArrayGetNumber calls the CoreGraphics framework function CGPDFArrayGetNumber.
 func CGPDFArrayGetNumber(array CGPDFArrayRef, index int) (ok bool, value float64) {
+	defer runtime.KeepAlive(array)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFArrayGetNumber == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFArrayGetNumber, _lib, "CGPDFArrayGetNumber")
@@ -5438,6 +5845,7 @@ var _fnCGPDFArrayGetObject func(objc.ID, int, unsafe.Pointer) bool
 
 // CGPDFArrayGetObject calls the CoreGraphics framework function CGPDFArrayGetObject.
 func CGPDFArrayGetObject(array CGPDFArrayRef, index int, value unsafe.Pointer) bool {
+	defer runtime.KeepAlive(array)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFArrayGetObject == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFArrayGetObject, _lib, "CGPDFArrayGetObject")
@@ -5449,6 +5857,7 @@ var _fnCGPDFArrayGetStream func(objc.ID, int, unsafe.Pointer) bool
 
 // CGPDFArrayGetStream calls the CoreGraphics framework function CGPDFArrayGetStream.
 func CGPDFArrayGetStream(array CGPDFArrayRef, index int, value unsafe.Pointer) bool {
+	defer runtime.KeepAlive(array)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFArrayGetStream == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFArrayGetStream, _lib, "CGPDFArrayGetStream")
@@ -5460,6 +5869,7 @@ var _fnCGPDFArrayGetString func(objc.ID, int, unsafe.Pointer) bool
 
 // CGPDFArrayGetString calls the CoreGraphics framework function CGPDFArrayGetString.
 func CGPDFArrayGetString(array CGPDFArrayRef, index int, value unsafe.Pointer) bool {
+	defer runtime.KeepAlive(array)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFArrayGetString == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFArrayGetString, _lib, "CGPDFArrayGetString")
@@ -5471,6 +5881,7 @@ var _fnCGPDFContentStreamCreateWithPage func(objc.ID) objc.ID
 
 // CGPDFContentStreamCreateWithPage calls the CoreGraphics framework function CGPDFContentStreamCreateWithPage.
 func CGPDFContentStreamCreateWithPage(page CGPDFPageRef) CGPDFContentStreamRef {
+	defer runtime.KeepAlive(page)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFContentStreamCreateWithPage == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFContentStreamCreateWithPage, _lib, "CGPDFContentStreamCreateWithPage")
@@ -5483,6 +5894,9 @@ var _fnCGPDFContentStreamCreateWithStream func(objc.ID, objc.ID, objc.ID) objc.I
 
 // CGPDFContentStreamCreateWithStream calls the CoreGraphics framework function CGPDFContentStreamCreateWithStream.
 func CGPDFContentStreamCreateWithStream(stream CGPDFStreamRef, streamResources CGPDFDictionaryRef, parent CGPDFContentStreamRef) CGPDFContentStreamRef {
+	defer runtime.KeepAlive(stream)
+	defer runtime.KeepAlive(streamResources)
+	defer runtime.KeepAlive(parent)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFContentStreamCreateWithStream == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFContentStreamCreateWithStream, _lib, "CGPDFContentStreamCreateWithStream")
@@ -5495,6 +5909,7 @@ var _fnCGPDFContentStreamGetResource func(objc.ID, string, string) objc.ID
 
 // CGPDFContentStreamGetResource calls the CoreGraphics framework function CGPDFContentStreamGetResource.
 func CGPDFContentStreamGetResource(cs CGPDFContentStreamRef, category string, name string) CGPDFObjectRef {
+	defer runtime.KeepAlive(cs)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFContentStreamGetResource == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFContentStreamGetResource, _lib, "CGPDFContentStreamGetResource")
@@ -5507,6 +5922,7 @@ var _fnCGPDFContentStreamGetStreams func(objc.ID) objc.ID
 
 // CGPDFContentStreamGetStreams calls the CoreGraphics framework function CGPDFContentStreamGetStreams.
 func CGPDFContentStreamGetStreams(cs CGPDFContentStreamRef) obj.Object {
+	defer runtime.KeepAlive(cs)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFContentStreamGetStreams == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFContentStreamGetStreams, _lib, "CGPDFContentStreamGetStreams")
@@ -5519,6 +5935,7 @@ var _fnCGPDFContentStreamRelease func(objc.ID)
 
 // CGPDFContentStreamRelease calls the CoreGraphics framework function CGPDFContentStreamRelease.
 func CGPDFContentStreamRelease(cs CGPDFContentStreamRef) {
+	defer runtime.KeepAlive(cs)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFContentStreamRelease == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFContentStreamRelease, _lib, "CGPDFContentStreamRelease")
@@ -5530,6 +5947,7 @@ var _fnCGPDFContentStreamRetain func(objc.ID) objc.ID
 
 // CGPDFContentStreamRetain calls the CoreGraphics framework function CGPDFContentStreamRetain.
 func CGPDFContentStreamRetain(cs CGPDFContentStreamRef) CGPDFContentStreamRef {
+	defer runtime.KeepAlive(cs)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFContentStreamRetain == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFContentStreamRetain, _lib, "CGPDFContentStreamRetain")
@@ -5542,6 +5960,8 @@ var _fnCGPDFContextAddDestinationAtPoint func(objc.ID, objc.ID, corefoundation.C
 
 // CGPDFContextAddDestinationAtPoint calls the CoreGraphics framework function CGPDFContextAddDestinationAtPoint.
 func CGPDFContextAddDestinationAtPoint(context_ CGContextRef, name obj.Object, point corefoundation.CGPoint) {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(name)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFContextAddDestinationAtPoint == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFContextAddDestinationAtPoint, _lib, "CGPDFContextAddDestinationAtPoint")
@@ -5553,6 +5973,8 @@ var _fnCGPDFContextAddDocumentMetadata func(objc.ID, objc.ID)
 
 // CGPDFContextAddDocumentMetadata calls the CoreGraphics framework function CGPDFContextAddDocumentMetadata.
 func CGPDFContextAddDocumentMetadata(context_ CGContextRef, metadata obj.Object) {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(metadata)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFContextAddDocumentMetadata == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFContextAddDocumentMetadata, _lib, "CGPDFContextAddDocumentMetadata")
@@ -5564,6 +5986,7 @@ var _fnCGPDFContextBeginMarkedContentSequence func(objc.ID, CGPDFTagType) objc.I
 
 // CGPDFContextBeginMarkedContentSequence calls the CoreGraphics framework function CGPDFContextBeginMarkedContentSequence.
 func CGPDFContextBeginMarkedContentSequence(context_ CGContextRef, tagType CGPDFTagType) CGPDFMarkedContentItemRef {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFContextBeginMarkedContentSequence == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFContextBeginMarkedContentSequence, _lib, "CGPDFContextBeginMarkedContentSequence")
@@ -5576,6 +5999,7 @@ var _fnCGPDFContextBeginNonStructuralMarkedContentSequence func(objc.ID, CGPDFTa
 
 // CGPDFContextBeginNonStructuralMarkedContentSequence calls the CoreGraphics framework function CGPDFContextBeginNonStructuralMarkedContentSequence.
 func CGPDFContextBeginNonStructuralMarkedContentSequence(context_ CGContextRef, tagType CGPDFTagType) {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFContextBeginNonStructuralMarkedContentSequence == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFContextBeginNonStructuralMarkedContentSequence, _lib, "CGPDFContextBeginNonStructuralMarkedContentSequence")
@@ -5587,6 +6011,7 @@ var _fnCGPDFContextBeginObjectReference func(objc.ID) objc.ID
 
 // CGPDFContextBeginObjectReference calls the CoreGraphics framework function CGPDFContextBeginObjectReference.
 func CGPDFContextBeginObjectReference(context_ CGContextRef) CGPDFMarkedContentItemRef {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFContextBeginObjectReference == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFContextBeginObjectReference, _lib, "CGPDFContextBeginObjectReference")
@@ -5599,6 +6024,8 @@ var _fnCGPDFContextBeginPage func(objc.ID, objc.ID)
 
 // CGPDFContextBeginPage calls the CoreGraphics framework function CGPDFContextBeginPage.
 func CGPDFContextBeginPage(context_ CGContextRef, pageInfo obj.Object) {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(pageInfo)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFContextBeginPage == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFContextBeginPage, _lib, "CGPDFContextBeginPage")
@@ -5610,6 +6037,8 @@ var _fnCGPDFContextBeginTag func(objc.ID, CGPDFTagType, objc.ID)
 
 // CGPDFContextBeginTag calls the CoreGraphics framework function CGPDFContextBeginTag.
 func CGPDFContextBeginTag(context_ CGContextRef, tagType CGPDFTagType, tagProperties obj.Object) {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(tagProperties)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFContextBeginTag == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFContextBeginTag, _lib, "CGPDFContextBeginTag")
@@ -5621,6 +6050,7 @@ var _fnCGPDFContextClose func(objc.ID)
 
 // CGPDFContextClose calls the CoreGraphics framework function CGPDFContextClose.
 func CGPDFContextClose(context_ CGContextRef) {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFContextClose == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFContextClose, _lib, "CGPDFContextClose")
@@ -5632,6 +6062,8 @@ var _fnCGPDFContextCreate func(objc.ID, unsafe.Pointer, objc.ID) objc.ID
 
 // CGPDFContextCreate calls the CoreGraphics framework function CGPDFContextCreate.
 func CGPDFContextCreate(consumer CGDataConsumerRef, mediaBox *corefoundation.CGRect, auxiliaryInfo obj.Object) CGContextRef {
+	defer runtime.KeepAlive(consumer)
+	defer runtime.KeepAlive(auxiliaryInfo)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFContextCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFContextCreate, _lib, "CGPDFContextCreate")
@@ -5644,6 +6076,8 @@ var _fnCGPDFContextCreateWithURL func(objc.ID, unsafe.Pointer, objc.ID) objc.ID
 
 // CGPDFContextCreateWithURL calls the CoreGraphics framework function CGPDFContextCreateWithURL.
 func CGPDFContextCreateWithURL(url obj.Object, mediaBox *corefoundation.CGRect, auxiliaryInfo obj.Object) CGContextRef {
+	defer runtime.KeepAlive(url)
+	defer runtime.KeepAlive(auxiliaryInfo)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFContextCreateWithURL == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFContextCreateWithURL, _lib, "CGPDFContextCreateWithURL")
@@ -5656,6 +6090,7 @@ var _fnCGPDFContextEndMarkedContentSequence func(objc.ID)
 
 // CGPDFContextEndMarkedContentSequence calls the CoreGraphics framework function CGPDFContextEndMarkedContentSequence.
 func CGPDFContextEndMarkedContentSequence(context_ CGContextRef) {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFContextEndMarkedContentSequence == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFContextEndMarkedContentSequence, _lib, "CGPDFContextEndMarkedContentSequence")
@@ -5667,6 +6102,7 @@ var _fnCGPDFContextEndObjectReference func(objc.ID)
 
 // CGPDFContextEndObjectReference calls the CoreGraphics framework function CGPDFContextEndObjectReference.
 func CGPDFContextEndObjectReference(context_ CGContextRef) {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFContextEndObjectReference == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFContextEndObjectReference, _lib, "CGPDFContextEndObjectReference")
@@ -5678,6 +6114,7 @@ var _fnCGPDFContextEndPage func(objc.ID)
 
 // CGPDFContextEndPage calls the CoreGraphics framework function CGPDFContextEndPage.
 func CGPDFContextEndPage(context_ CGContextRef) {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFContextEndPage == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFContextEndPage, _lib, "CGPDFContextEndPage")
@@ -5689,6 +6126,7 @@ var _fnCGPDFContextEndTag func(objc.ID)
 
 // CGPDFContextEndTag calls the CoreGraphics framework function CGPDFContextEndTag.
 func CGPDFContextEndTag(context_ CGContextRef) {
+	defer runtime.KeepAlive(context_)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFContextEndTag == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFContextEndTag, _lib, "CGPDFContextEndTag")
@@ -5700,6 +6138,8 @@ var _fnCGPDFContextSetDestinationForRect func(objc.ID, objc.ID, corefoundation.C
 
 // CGPDFContextSetDestinationForRect calls the CoreGraphics framework function CGPDFContextSetDestinationForRect.
 func CGPDFContextSetDestinationForRect(context_ CGContextRef, name obj.Object, rect corefoundation.CGRect) {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(name)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFContextSetDestinationForRect == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFContextSetDestinationForRect, _lib, "CGPDFContextSetDestinationForRect")
@@ -5711,6 +6151,8 @@ var _fnCGPDFContextSetIDTree func(objc.ID, objc.ID)
 
 // CGPDFContextSetIDTree calls the CoreGraphics framework function CGPDFContextSetIDTree.
 func CGPDFContextSetIDTree(context_ CGContextRef, idTreeDictionary CGPDFDictionaryRef) {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(idTreeDictionary)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFContextSetIDTree == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFContextSetIDTree, _lib, "CGPDFContextSetIDTree")
@@ -5722,6 +6164,8 @@ var _fnCGPDFContextSetOutline func(objc.ID, objc.ID)
 
 // CGPDFContextSetOutline calls the CoreGraphics framework function CGPDFContextSetOutline.
 func CGPDFContextSetOutline(context_ CGContextRef, outline obj.Object) {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(outline)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFContextSetOutline == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFContextSetOutline, _lib, "CGPDFContextSetOutline")
@@ -5733,6 +6177,8 @@ var _fnCGPDFContextSetPageTagStructureTree func(objc.ID, objc.ID)
 
 // CGPDFContextSetPageTagStructureTree calls the CoreGraphics framework function CGPDFContextSetPageTagStructureTree.
 func CGPDFContextSetPageTagStructureTree(context_ CGContextRef, pageTagStructureTreeDictionary obj.Object) {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(pageTagStructureTreeDictionary)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFContextSetPageTagStructureTree == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFContextSetPageTagStructureTree, _lib, "CGPDFContextSetPageTagStructureTree")
@@ -5744,6 +6190,8 @@ var _fnCGPDFContextSetParentTree func(objc.ID, objc.ID)
 
 // CGPDFContextSetParentTree calls the CoreGraphics framework function CGPDFContextSetParentTree.
 func CGPDFContextSetParentTree(context_ CGContextRef, parentTreeDictionary CGPDFDictionaryRef) {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(parentTreeDictionary)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFContextSetParentTree == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFContextSetParentTree, _lib, "CGPDFContextSetParentTree")
@@ -5755,6 +6203,8 @@ var _fnCGPDFContextSetURLForRect func(objc.ID, objc.ID, corefoundation.CGRect)
 
 // CGPDFContextSetURLForRect calls the CoreGraphics framework function CGPDFContextSetURLForRect.
 func CGPDFContextSetURLForRect(context_ CGContextRef, url obj.Object, rect corefoundation.CGRect) {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(url)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFContextSetURLForRect == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFContextSetURLForRect, _lib, "CGPDFContextSetURLForRect")
@@ -5766,6 +6216,7 @@ var _fnCGPDFDictionaryApplyBlock func(objc.ID, objc.Block, unsafe.Pointer)
 
 // CGPDFDictionaryApplyBlock calls the CoreGraphics framework function CGPDFDictionaryApplyBlock.
 func CGPDFDictionaryApplyBlock(dict CGPDFDictionaryRef, block func(string, unsafe.Pointer, unsafe.Pointer) bool, info unsafe.Pointer) {
+	defer runtime.KeepAlive(dict)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFDictionaryApplyBlock == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFDictionaryApplyBlock, _lib, "CGPDFDictionaryApplyBlock")
@@ -5779,6 +6230,7 @@ var _fnCGPDFDictionaryApplyFunction func(objc.ID, unsafe.Pointer, unsafe.Pointer
 
 // CGPDFDictionaryApplyFunction calls the CoreGraphics framework function CGPDFDictionaryApplyFunction.
 func CGPDFDictionaryApplyFunction(dict CGPDFDictionaryRef, function unsafe.Pointer, info unsafe.Pointer) {
+	defer runtime.KeepAlive(dict)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFDictionaryApplyFunction == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFDictionaryApplyFunction, _lib, "CGPDFDictionaryApplyFunction")
@@ -5790,6 +6242,7 @@ var _fnCGPDFDictionaryGetArray func(objc.ID, string, unsafe.Pointer) bool
 
 // CGPDFDictionaryGetArray calls the CoreGraphics framework function CGPDFDictionaryGetArray.
 func CGPDFDictionaryGetArray(dict CGPDFDictionaryRef, key string, value unsafe.Pointer) bool {
+	defer runtime.KeepAlive(dict)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFDictionaryGetArray == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFDictionaryGetArray, _lib, "CGPDFDictionaryGetArray")
@@ -5801,6 +6254,7 @@ var _fnCGPDFDictionaryGetBoolean func(objc.ID, string, unsafe.Pointer) bool
 
 // CGPDFDictionaryGetBoolean calls the CoreGraphics framework function CGPDFDictionaryGetBoolean.
 func CGPDFDictionaryGetBoolean(dict CGPDFDictionaryRef, key string) (ok bool, value uint8) {
+	defer runtime.KeepAlive(dict)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFDictionaryGetBoolean == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFDictionaryGetBoolean, _lib, "CGPDFDictionaryGetBoolean")
@@ -5814,6 +6268,7 @@ var _fnCGPDFDictionaryGetCount func(objc.ID) int
 
 // CGPDFDictionaryGetCount calls the CoreGraphics framework function CGPDFDictionaryGetCount.
 func CGPDFDictionaryGetCount(dict CGPDFDictionaryRef) int {
+	defer runtime.KeepAlive(dict)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFDictionaryGetCount == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFDictionaryGetCount, _lib, "CGPDFDictionaryGetCount")
@@ -5825,6 +6280,7 @@ var _fnCGPDFDictionaryGetDictionary func(objc.ID, string, unsafe.Pointer) bool
 
 // CGPDFDictionaryGetDictionary calls the CoreGraphics framework function CGPDFDictionaryGetDictionary.
 func CGPDFDictionaryGetDictionary(dict CGPDFDictionaryRef, key string, value unsafe.Pointer) bool {
+	defer runtime.KeepAlive(dict)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFDictionaryGetDictionary == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFDictionaryGetDictionary, _lib, "CGPDFDictionaryGetDictionary")
@@ -5836,6 +6292,7 @@ var _fnCGPDFDictionaryGetInteger func(objc.ID, string, unsafe.Pointer) bool
 
 // CGPDFDictionaryGetInteger calls the CoreGraphics framework function CGPDFDictionaryGetInteger.
 func CGPDFDictionaryGetInteger(dict CGPDFDictionaryRef, key string) (ok bool, value int) {
+	defer runtime.KeepAlive(dict)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFDictionaryGetInteger == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFDictionaryGetInteger, _lib, "CGPDFDictionaryGetInteger")
@@ -5849,6 +6306,7 @@ var _fnCGPDFDictionaryGetName func(objc.ID, string, string) bool
 
 // CGPDFDictionaryGetName calls the CoreGraphics framework function CGPDFDictionaryGetName.
 func CGPDFDictionaryGetName(dict CGPDFDictionaryRef, key string, value string) bool {
+	defer runtime.KeepAlive(dict)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFDictionaryGetName == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFDictionaryGetName, _lib, "CGPDFDictionaryGetName")
@@ -5860,6 +6318,7 @@ var _fnCGPDFDictionaryGetNumber func(objc.ID, string, unsafe.Pointer) bool
 
 // CGPDFDictionaryGetNumber calls the CoreGraphics framework function CGPDFDictionaryGetNumber.
 func CGPDFDictionaryGetNumber(dict CGPDFDictionaryRef, key string) (ok bool, value float64) {
+	defer runtime.KeepAlive(dict)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFDictionaryGetNumber == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFDictionaryGetNumber, _lib, "CGPDFDictionaryGetNumber")
@@ -5873,6 +6332,7 @@ var _fnCGPDFDictionaryGetObject func(objc.ID, string, unsafe.Pointer) bool
 
 // CGPDFDictionaryGetObject calls the CoreGraphics framework function CGPDFDictionaryGetObject.
 func CGPDFDictionaryGetObject(dict CGPDFDictionaryRef, key string, value unsafe.Pointer) bool {
+	defer runtime.KeepAlive(dict)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFDictionaryGetObject == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFDictionaryGetObject, _lib, "CGPDFDictionaryGetObject")
@@ -5884,6 +6344,7 @@ var _fnCGPDFDictionaryGetStream func(objc.ID, string, unsafe.Pointer) bool
 
 // CGPDFDictionaryGetStream calls the CoreGraphics framework function CGPDFDictionaryGetStream.
 func CGPDFDictionaryGetStream(dict CGPDFDictionaryRef, key string, value unsafe.Pointer) bool {
+	defer runtime.KeepAlive(dict)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFDictionaryGetStream == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFDictionaryGetStream, _lib, "CGPDFDictionaryGetStream")
@@ -5895,6 +6356,7 @@ var _fnCGPDFDictionaryGetString func(objc.ID, string, unsafe.Pointer) bool
 
 // CGPDFDictionaryGetString calls the CoreGraphics framework function CGPDFDictionaryGetString.
 func CGPDFDictionaryGetString(dict CGPDFDictionaryRef, key string, value unsafe.Pointer) bool {
+	defer runtime.KeepAlive(dict)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFDictionaryGetString == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFDictionaryGetString, _lib, "CGPDFDictionaryGetString")
@@ -5906,6 +6368,7 @@ var _fnCGPDFDocumentAllowsCopying func(objc.ID) bool
 
 // CGPDFDocumentAllowsCopying calls the CoreGraphics framework function CGPDFDocumentAllowsCopying.
 func CGPDFDocumentAllowsCopying(document CGPDFDocumentRef) bool {
+	defer runtime.KeepAlive(document)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFDocumentAllowsCopying == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFDocumentAllowsCopying, _lib, "CGPDFDocumentAllowsCopying")
@@ -5917,6 +6380,7 @@ var _fnCGPDFDocumentAllowsPrinting func(objc.ID) bool
 
 // CGPDFDocumentAllowsPrinting calls the CoreGraphics framework function CGPDFDocumentAllowsPrinting.
 func CGPDFDocumentAllowsPrinting(document CGPDFDocumentRef) bool {
+	defer runtime.KeepAlive(document)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFDocumentAllowsPrinting == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFDocumentAllowsPrinting, _lib, "CGPDFDocumentAllowsPrinting")
@@ -5928,6 +6392,7 @@ var _fnCGPDFDocumentCreateWithProvider func(objc.ID) objc.ID
 
 // CGPDFDocumentCreateWithProvider calls the CoreGraphics framework function CGPDFDocumentCreateWithProvider.
 func CGPDFDocumentCreateWithProvider(provider CGDataProviderRef) CGPDFDocumentRef {
+	defer runtime.KeepAlive(provider)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFDocumentCreateWithProvider == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFDocumentCreateWithProvider, _lib, "CGPDFDocumentCreateWithProvider")
@@ -5940,6 +6405,7 @@ var _fnCGPDFDocumentCreateWithURL func(objc.ID) objc.ID
 
 // CGPDFDocumentCreateWithURL calls the CoreGraphics framework function CGPDFDocumentCreateWithURL.
 func CGPDFDocumentCreateWithURL(url obj.Object) CGPDFDocumentRef {
+	defer runtime.KeepAlive(url)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFDocumentCreateWithURL == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFDocumentCreateWithURL, _lib, "CGPDFDocumentCreateWithURL")
@@ -5952,6 +6418,7 @@ var _fnCGPDFDocumentGetAccessPermissions func(objc.ID) CGPDFAccessPermissions
 
 // CGPDFDocumentGetAccessPermissions calls the CoreGraphics framework function CGPDFDocumentGetAccessPermissions.
 func CGPDFDocumentGetAccessPermissions(document CGPDFDocumentRef) CGPDFAccessPermissions {
+	defer runtime.KeepAlive(document)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFDocumentGetAccessPermissions == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFDocumentGetAccessPermissions, _lib, "CGPDFDocumentGetAccessPermissions")
@@ -5963,6 +6430,7 @@ var _fnCGPDFDocumentGetArtBox func(objc.ID, int) corefoundation.CGRect
 
 // CGPDFDocumentGetArtBox calls the CoreGraphics framework function CGPDFDocumentGetArtBox.
 func CGPDFDocumentGetArtBox(document CGPDFDocumentRef, page int) corefoundation.CGRect {
+	defer runtime.KeepAlive(document)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFDocumentGetArtBox == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFDocumentGetArtBox, _lib, "CGPDFDocumentGetArtBox")
@@ -5974,6 +6442,7 @@ var _fnCGPDFDocumentGetBleedBox func(objc.ID, int) corefoundation.CGRect
 
 // CGPDFDocumentGetBleedBox calls the CoreGraphics framework function CGPDFDocumentGetBleedBox.
 func CGPDFDocumentGetBleedBox(document CGPDFDocumentRef, page int) corefoundation.CGRect {
+	defer runtime.KeepAlive(document)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFDocumentGetBleedBox == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFDocumentGetBleedBox, _lib, "CGPDFDocumentGetBleedBox")
@@ -5985,6 +6454,7 @@ var _fnCGPDFDocumentGetCatalog func(objc.ID) objc.ID
 
 // CGPDFDocumentGetCatalog calls the CoreGraphics framework function CGPDFDocumentGetCatalog.
 func CGPDFDocumentGetCatalog(document CGPDFDocumentRef) CGPDFDictionaryRef {
+	defer runtime.KeepAlive(document)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFDocumentGetCatalog == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFDocumentGetCatalog, _lib, "CGPDFDocumentGetCatalog")
@@ -5997,6 +6467,7 @@ var _fnCGPDFDocumentGetCropBox func(objc.ID, int) corefoundation.CGRect
 
 // CGPDFDocumentGetCropBox calls the CoreGraphics framework function CGPDFDocumentGetCropBox.
 func CGPDFDocumentGetCropBox(document CGPDFDocumentRef, page int) corefoundation.CGRect {
+	defer runtime.KeepAlive(document)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFDocumentGetCropBox == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFDocumentGetCropBox, _lib, "CGPDFDocumentGetCropBox")
@@ -6008,6 +6479,7 @@ var _fnCGPDFDocumentGetID func(objc.ID) objc.ID
 
 // CGPDFDocumentGetID calls the CoreGraphics framework function CGPDFDocumentGetID.
 func CGPDFDocumentGetID(document CGPDFDocumentRef) CGPDFArrayRef {
+	defer runtime.KeepAlive(document)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFDocumentGetID == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFDocumentGetID, _lib, "CGPDFDocumentGetID")
@@ -6020,6 +6492,7 @@ var _fnCGPDFDocumentGetInfo func(objc.ID) objc.ID
 
 // CGPDFDocumentGetInfo calls the CoreGraphics framework function CGPDFDocumentGetInfo.
 func CGPDFDocumentGetInfo(document CGPDFDocumentRef) CGPDFDictionaryRef {
+	defer runtime.KeepAlive(document)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFDocumentGetInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFDocumentGetInfo, _lib, "CGPDFDocumentGetInfo")
@@ -6032,6 +6505,7 @@ var _fnCGPDFDocumentGetMediaBox func(objc.ID, int) corefoundation.CGRect
 
 // CGPDFDocumentGetMediaBox calls the CoreGraphics framework function CGPDFDocumentGetMediaBox.
 func CGPDFDocumentGetMediaBox(document CGPDFDocumentRef, page int) corefoundation.CGRect {
+	defer runtime.KeepAlive(document)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFDocumentGetMediaBox == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFDocumentGetMediaBox, _lib, "CGPDFDocumentGetMediaBox")
@@ -6043,6 +6517,7 @@ var _fnCGPDFDocumentGetNumberOfPages func(objc.ID) int
 
 // CGPDFDocumentGetNumberOfPages calls the CoreGraphics framework function CGPDFDocumentGetNumberOfPages.
 func CGPDFDocumentGetNumberOfPages(document CGPDFDocumentRef) int {
+	defer runtime.KeepAlive(document)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFDocumentGetNumberOfPages == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFDocumentGetNumberOfPages, _lib, "CGPDFDocumentGetNumberOfPages")
@@ -6054,6 +6529,7 @@ var _fnCGPDFDocumentGetOutline func(objc.ID) objc.ID
 
 // CGPDFDocumentGetOutline calls the CoreGraphics framework function CGPDFDocumentGetOutline.
 func CGPDFDocumentGetOutline(document CGPDFDocumentRef) obj.Object {
+	defer runtime.KeepAlive(document)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFDocumentGetOutline == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFDocumentGetOutline, _lib, "CGPDFDocumentGetOutline")
@@ -6066,6 +6542,7 @@ var _fnCGPDFDocumentGetPage func(objc.ID, int) objc.ID
 
 // CGPDFDocumentGetPage calls the CoreGraphics framework function CGPDFDocumentGetPage.
 func CGPDFDocumentGetPage(document CGPDFDocumentRef, pageNumber int) CGPDFPageRef {
+	defer runtime.KeepAlive(document)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFDocumentGetPage == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFDocumentGetPage, _lib, "CGPDFDocumentGetPage")
@@ -6078,6 +6555,7 @@ var _fnCGPDFDocumentGetRotationAngle func(objc.ID, int) int32
 
 // CGPDFDocumentGetRotationAngle calls the CoreGraphics framework function CGPDFDocumentGetRotationAngle.
 func CGPDFDocumentGetRotationAngle(document CGPDFDocumentRef, page int) int {
+	defer runtime.KeepAlive(document)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFDocumentGetRotationAngle == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFDocumentGetRotationAngle, _lib, "CGPDFDocumentGetRotationAngle")
@@ -6089,6 +6567,7 @@ var _fnCGPDFDocumentGetTrimBox func(objc.ID, int) corefoundation.CGRect
 
 // CGPDFDocumentGetTrimBox calls the CoreGraphics framework function CGPDFDocumentGetTrimBox.
 func CGPDFDocumentGetTrimBox(document CGPDFDocumentRef, page int) corefoundation.CGRect {
+	defer runtime.KeepAlive(document)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFDocumentGetTrimBox == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFDocumentGetTrimBox, _lib, "CGPDFDocumentGetTrimBox")
@@ -6111,6 +6590,7 @@ var _fnCGPDFDocumentGetVersion func(objc.ID, unsafe.Pointer, unsafe.Pointer)
 
 // CGPDFDocumentGetVersion calls the CoreGraphics framework function CGPDFDocumentGetVersion.
 func CGPDFDocumentGetVersion(document CGPDFDocumentRef) (majorVersion int32, minorVersion int32) {
+	defer runtime.KeepAlive(document)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFDocumentGetVersion == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFDocumentGetVersion, _lib, "CGPDFDocumentGetVersion")
@@ -6125,6 +6605,7 @@ var _fnCGPDFDocumentIsEncrypted func(objc.ID) bool
 
 // CGPDFDocumentIsEncrypted calls the CoreGraphics framework function CGPDFDocumentIsEncrypted.
 func CGPDFDocumentIsEncrypted(document CGPDFDocumentRef) bool {
+	defer runtime.KeepAlive(document)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFDocumentIsEncrypted == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFDocumentIsEncrypted, _lib, "CGPDFDocumentIsEncrypted")
@@ -6136,6 +6617,7 @@ var _fnCGPDFDocumentIsUnlocked func(objc.ID) bool
 
 // CGPDFDocumentIsUnlocked calls the CoreGraphics framework function CGPDFDocumentIsUnlocked.
 func CGPDFDocumentIsUnlocked(document CGPDFDocumentRef) bool {
+	defer runtime.KeepAlive(document)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFDocumentIsUnlocked == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFDocumentIsUnlocked, _lib, "CGPDFDocumentIsUnlocked")
@@ -6147,6 +6629,7 @@ var _fnCGPDFDocumentRelease func(objc.ID)
 
 // CGPDFDocumentRelease calls the CoreGraphics framework function CGPDFDocumentRelease.
 func CGPDFDocumentRelease(document CGPDFDocumentRef) {
+	defer runtime.KeepAlive(document)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFDocumentRelease == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFDocumentRelease, _lib, "CGPDFDocumentRelease")
@@ -6158,6 +6641,7 @@ var _fnCGPDFDocumentRetain func(objc.ID) objc.ID
 
 // CGPDFDocumentRetain calls the CoreGraphics framework function CGPDFDocumentRetain.
 func CGPDFDocumentRetain(document CGPDFDocumentRef) CGPDFDocumentRef {
+	defer runtime.KeepAlive(document)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFDocumentRetain == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFDocumentRetain, _lib, "CGPDFDocumentRetain")
@@ -6170,6 +6654,7 @@ var _fnCGPDFDocumentUnlockWithPassword func(objc.ID, string) bool
 
 // CGPDFDocumentUnlockWithPassword calls the CoreGraphics framework function CGPDFDocumentUnlockWithPassword.
 func CGPDFDocumentUnlockWithPassword(document CGPDFDocumentRef, password string) bool {
+	defer runtime.KeepAlive(document)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFDocumentUnlockWithPassword == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFDocumentUnlockWithPassword, _lib, "CGPDFDocumentUnlockWithPassword")
@@ -6181,6 +6666,7 @@ var _fnCGPDFMarkedContentItemRelease func(objc.ID)
 
 // CGPDFMarkedContentItemRelease calls the CoreGraphics framework function CGPDFMarkedContentItemRelease.
 func CGPDFMarkedContentItemRelease(markedContentItem CGPDFMarkedContentItemRef) {
+	defer runtime.KeepAlive(markedContentItem)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFMarkedContentItemRelease == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFMarkedContentItemRelease, _lib, "CGPDFMarkedContentItemRelease")
@@ -6192,6 +6678,7 @@ var _fnCGPDFMarkedContentItemRetain func(objc.ID) objc.ID
 
 // CGPDFMarkedContentItemRetain calls the CoreGraphics framework function CGPDFMarkedContentItemRetain.
 func CGPDFMarkedContentItemRetain(markedContentItem CGPDFMarkedContentItemRef) CGPDFMarkedContentItemRef {
+	defer runtime.KeepAlive(markedContentItem)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFMarkedContentItemRetain == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFMarkedContentItemRetain, _lib, "CGPDFMarkedContentItemRetain")
@@ -6204,6 +6691,7 @@ var _fnCGPDFObjectGetType func(objc.ID) CGPDFObjectType
 
 // CGPDFObjectGetType calls the CoreGraphics framework function CGPDFObjectGetType.
 func CGPDFObjectGetType(object CGPDFObjectRef) CGPDFObjectType {
+	defer runtime.KeepAlive(object)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFObjectGetType == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFObjectGetType, _lib, "CGPDFObjectGetType")
@@ -6215,6 +6703,7 @@ var _fnCGPDFObjectGetValue func(objc.ID, CGPDFObjectType, unsafe.Pointer) bool
 
 // CGPDFObjectGetValue calls the CoreGraphics framework function CGPDFObjectGetValue.
 func CGPDFObjectGetValue(object CGPDFObjectRef, type_ CGPDFObjectType, value unsafe.Pointer) bool {
+	defer runtime.KeepAlive(object)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFObjectGetValue == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFObjectGetValue, _lib, "CGPDFObjectGetValue")
@@ -6238,6 +6727,7 @@ var _fnCGPDFOperatorTableRelease func(objc.ID)
 
 // CGPDFOperatorTableRelease calls the CoreGraphics framework function CGPDFOperatorTableRelease.
 func CGPDFOperatorTableRelease(table CGPDFOperatorTableRef) {
+	defer runtime.KeepAlive(table)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFOperatorTableRelease == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFOperatorTableRelease, _lib, "CGPDFOperatorTableRelease")
@@ -6249,6 +6739,7 @@ var _fnCGPDFOperatorTableRetain func(objc.ID) objc.ID
 
 // CGPDFOperatorTableRetain calls the CoreGraphics framework function CGPDFOperatorTableRetain.
 func CGPDFOperatorTableRetain(table CGPDFOperatorTableRef) CGPDFOperatorTableRef {
+	defer runtime.KeepAlive(table)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFOperatorTableRetain == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFOperatorTableRetain, _lib, "CGPDFOperatorTableRetain")
@@ -6261,6 +6752,7 @@ var _fnCGPDFOperatorTableSetCallback func(objc.ID, string, unsafe.Pointer)
 
 // CGPDFOperatorTableSetCallback calls the CoreGraphics framework function CGPDFOperatorTableSetCallback.
 func CGPDFOperatorTableSetCallback(table CGPDFOperatorTableRef, name string, callback unsafe.Pointer) {
+	defer runtime.KeepAlive(table)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFOperatorTableSetCallback == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFOperatorTableSetCallback, _lib, "CGPDFOperatorTableSetCallback")
@@ -6272,6 +6764,7 @@ var _fnCGPDFPageGetBoxRect func(objc.ID, CGPDFBox) corefoundation.CGRect
 
 // CGPDFPageGetBoxRect calls the CoreGraphics framework function CGPDFPageGetBoxRect.
 func CGPDFPageGetBoxRect(page CGPDFPageRef, box CGPDFBox) corefoundation.CGRect {
+	defer runtime.KeepAlive(page)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFPageGetBoxRect == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFPageGetBoxRect, _lib, "CGPDFPageGetBoxRect")
@@ -6283,6 +6776,7 @@ var _fnCGPDFPageGetDictionary func(objc.ID) objc.ID
 
 // CGPDFPageGetDictionary calls the CoreGraphics framework function CGPDFPageGetDictionary.
 func CGPDFPageGetDictionary(page CGPDFPageRef) CGPDFDictionaryRef {
+	defer runtime.KeepAlive(page)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFPageGetDictionary == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFPageGetDictionary, _lib, "CGPDFPageGetDictionary")
@@ -6295,6 +6789,7 @@ var _fnCGPDFPageGetDocument func(objc.ID) objc.ID
 
 // CGPDFPageGetDocument calls the CoreGraphics framework function CGPDFPageGetDocument.
 func CGPDFPageGetDocument(page CGPDFPageRef) CGPDFDocumentRef {
+	defer runtime.KeepAlive(page)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFPageGetDocument == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFPageGetDocument, _lib, "CGPDFPageGetDocument")
@@ -6307,6 +6802,7 @@ var _fnCGPDFPageGetDrawingTransform func(objc.ID, CGPDFBox, corefoundation.CGRec
 
 // CGPDFPageGetDrawingTransform calls the CoreGraphics framework function CGPDFPageGetDrawingTransform.
 func CGPDFPageGetDrawingTransform(page CGPDFPageRef, box CGPDFBox, rect corefoundation.CGRect, rotate int, preserveAspectRatio bool) corefoundation.CGAffineTransform {
+	defer runtime.KeepAlive(page)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFPageGetDrawingTransform == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFPageGetDrawingTransform, _lib, "CGPDFPageGetDrawingTransform")
@@ -6318,6 +6814,7 @@ var _fnCGPDFPageGetPageNumber func(objc.ID) int
 
 // CGPDFPageGetPageNumber calls the CoreGraphics framework function CGPDFPageGetPageNumber.
 func CGPDFPageGetPageNumber(page CGPDFPageRef) int {
+	defer runtime.KeepAlive(page)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFPageGetPageNumber == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFPageGetPageNumber, _lib, "CGPDFPageGetPageNumber")
@@ -6329,6 +6826,7 @@ var _fnCGPDFPageGetRotationAngle func(objc.ID) int32
 
 // CGPDFPageGetRotationAngle calls the CoreGraphics framework function CGPDFPageGetRotationAngle.
 func CGPDFPageGetRotationAngle(page CGPDFPageRef) int {
+	defer runtime.KeepAlive(page)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFPageGetRotationAngle == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFPageGetRotationAngle, _lib, "CGPDFPageGetRotationAngle")
@@ -6351,6 +6849,7 @@ var _fnCGPDFPageRelease func(objc.ID)
 
 // CGPDFPageRelease calls the CoreGraphics framework function CGPDFPageRelease.
 func CGPDFPageRelease(page CGPDFPageRef) {
+	defer runtime.KeepAlive(page)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFPageRelease == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFPageRelease, _lib, "CGPDFPageRelease")
@@ -6362,6 +6861,7 @@ var _fnCGPDFPageRetain func(objc.ID) objc.ID
 
 // CGPDFPageRetain calls the CoreGraphics framework function CGPDFPageRetain.
 func CGPDFPageRetain(page CGPDFPageRef) CGPDFPageRef {
+	defer runtime.KeepAlive(page)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFPageRetain == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFPageRetain, _lib, "CGPDFPageRetain")
@@ -6374,6 +6874,8 @@ var _fnCGPDFScannerCreate func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
 // CGPDFScannerCreate calls the CoreGraphics framework function CGPDFScannerCreate.
 func CGPDFScannerCreate(cs CGPDFContentStreamRef, table CGPDFOperatorTableRef, info unsafe.Pointer) CGPDFScannerRef {
+	defer runtime.KeepAlive(cs)
+	defer runtime.KeepAlive(table)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFScannerCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFScannerCreate, _lib, "CGPDFScannerCreate")
@@ -6386,6 +6888,7 @@ var _fnCGPDFScannerGetContentStream func(objc.ID) objc.ID
 
 // CGPDFScannerGetContentStream calls the CoreGraphics framework function CGPDFScannerGetContentStream.
 func CGPDFScannerGetContentStream(scanner CGPDFScannerRef) CGPDFContentStreamRef {
+	defer runtime.KeepAlive(scanner)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFScannerGetContentStream == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFScannerGetContentStream, _lib, "CGPDFScannerGetContentStream")
@@ -6398,6 +6901,7 @@ var _fnCGPDFScannerPopArray func(objc.ID, unsafe.Pointer) bool
 
 // CGPDFScannerPopArray calls the CoreGraphics framework function CGPDFScannerPopArray.
 func CGPDFScannerPopArray(scanner CGPDFScannerRef, value unsafe.Pointer) bool {
+	defer runtime.KeepAlive(scanner)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFScannerPopArray == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFScannerPopArray, _lib, "CGPDFScannerPopArray")
@@ -6409,6 +6913,7 @@ var _fnCGPDFScannerPopBoolean func(objc.ID, unsafe.Pointer) bool
 
 // CGPDFScannerPopBoolean calls the CoreGraphics framework function CGPDFScannerPopBoolean.
 func CGPDFScannerPopBoolean(scanner CGPDFScannerRef) (ok bool, value uint8) {
+	defer runtime.KeepAlive(scanner)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFScannerPopBoolean == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFScannerPopBoolean, _lib, "CGPDFScannerPopBoolean")
@@ -6422,6 +6927,7 @@ var _fnCGPDFScannerPopDictionary func(objc.ID, unsafe.Pointer) bool
 
 // CGPDFScannerPopDictionary calls the CoreGraphics framework function CGPDFScannerPopDictionary.
 func CGPDFScannerPopDictionary(scanner CGPDFScannerRef, value unsafe.Pointer) bool {
+	defer runtime.KeepAlive(scanner)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFScannerPopDictionary == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFScannerPopDictionary, _lib, "CGPDFScannerPopDictionary")
@@ -6433,6 +6939,7 @@ var _fnCGPDFScannerPopInteger func(objc.ID, unsafe.Pointer) bool
 
 // CGPDFScannerPopInteger calls the CoreGraphics framework function CGPDFScannerPopInteger.
 func CGPDFScannerPopInteger(scanner CGPDFScannerRef) (ok bool, value int) {
+	defer runtime.KeepAlive(scanner)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFScannerPopInteger == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFScannerPopInteger, _lib, "CGPDFScannerPopInteger")
@@ -6446,6 +6953,7 @@ var _fnCGPDFScannerPopName func(objc.ID, string) bool
 
 // CGPDFScannerPopName calls the CoreGraphics framework function CGPDFScannerPopName.
 func CGPDFScannerPopName(scanner CGPDFScannerRef, value string) bool {
+	defer runtime.KeepAlive(scanner)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFScannerPopName == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFScannerPopName, _lib, "CGPDFScannerPopName")
@@ -6457,6 +6965,7 @@ var _fnCGPDFScannerPopNumber func(objc.ID, unsafe.Pointer) bool
 
 // CGPDFScannerPopNumber calls the CoreGraphics framework function CGPDFScannerPopNumber.
 func CGPDFScannerPopNumber(scanner CGPDFScannerRef) (ok bool, value float64) {
+	defer runtime.KeepAlive(scanner)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFScannerPopNumber == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFScannerPopNumber, _lib, "CGPDFScannerPopNumber")
@@ -6470,6 +6979,7 @@ var _fnCGPDFScannerPopObject func(objc.ID, unsafe.Pointer) bool
 
 // CGPDFScannerPopObject calls the CoreGraphics framework function CGPDFScannerPopObject.
 func CGPDFScannerPopObject(scanner CGPDFScannerRef, value unsafe.Pointer) bool {
+	defer runtime.KeepAlive(scanner)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFScannerPopObject == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFScannerPopObject, _lib, "CGPDFScannerPopObject")
@@ -6481,6 +6991,7 @@ var _fnCGPDFScannerPopStream func(objc.ID, unsafe.Pointer) bool
 
 // CGPDFScannerPopStream calls the CoreGraphics framework function CGPDFScannerPopStream.
 func CGPDFScannerPopStream(scanner CGPDFScannerRef, value unsafe.Pointer) bool {
+	defer runtime.KeepAlive(scanner)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFScannerPopStream == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFScannerPopStream, _lib, "CGPDFScannerPopStream")
@@ -6492,6 +7003,7 @@ var _fnCGPDFScannerPopString func(objc.ID, unsafe.Pointer) bool
 
 // CGPDFScannerPopString calls the CoreGraphics framework function CGPDFScannerPopString.
 func CGPDFScannerPopString(scanner CGPDFScannerRef, value unsafe.Pointer) bool {
+	defer runtime.KeepAlive(scanner)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFScannerPopString == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFScannerPopString, _lib, "CGPDFScannerPopString")
@@ -6503,6 +7015,7 @@ var _fnCGPDFScannerRelease func(objc.ID)
 
 // CGPDFScannerRelease calls the CoreGraphics framework function CGPDFScannerRelease.
 func CGPDFScannerRelease(scanner CGPDFScannerRef) {
+	defer runtime.KeepAlive(scanner)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFScannerRelease == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFScannerRelease, _lib, "CGPDFScannerRelease")
@@ -6514,6 +7027,7 @@ var _fnCGPDFScannerRetain func(objc.ID) objc.ID
 
 // CGPDFScannerRetain calls the CoreGraphics framework function CGPDFScannerRetain.
 func CGPDFScannerRetain(scanner CGPDFScannerRef) CGPDFScannerRef {
+	defer runtime.KeepAlive(scanner)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFScannerRetain == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFScannerRetain, _lib, "CGPDFScannerRetain")
@@ -6526,6 +7040,7 @@ var _fnCGPDFScannerScan func(objc.ID) bool
 
 // CGPDFScannerScan calls the CoreGraphics framework function CGPDFScannerScan.
 func CGPDFScannerScan(scanner CGPDFScannerRef) bool {
+	defer runtime.KeepAlive(scanner)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFScannerScan == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFScannerScan, _lib, "CGPDFScannerScan")
@@ -6537,6 +7052,7 @@ var _fnCGPDFScannerStop func(objc.ID)
 
 // CGPDFScannerStop calls the CoreGraphics framework function CGPDFScannerStop.
 func CGPDFScannerStop(s CGPDFScannerRef) {
+	defer runtime.KeepAlive(s)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFScannerStop == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFScannerStop, _lib, "CGPDFScannerStop")
@@ -6548,6 +7064,7 @@ var _fnCGPDFStreamCopyData func(objc.ID, unsafe.Pointer) objc.ID
 
 // CGPDFStreamCopyData calls the CoreGraphics framework function CGPDFStreamCopyData.
 func CGPDFStreamCopyData(stream CGPDFStreamRef) (result obj.Object, format CGPDFDataFormat) {
+	defer runtime.KeepAlive(stream)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFStreamCopyData == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFStreamCopyData, _lib, "CGPDFStreamCopyData")
@@ -6561,6 +7078,7 @@ var _fnCGPDFStreamGetDictionary func(objc.ID) objc.ID
 
 // CGPDFStreamGetDictionary calls the CoreGraphics framework function CGPDFStreamGetDictionary.
 func CGPDFStreamGetDictionary(stream CGPDFStreamRef) CGPDFDictionaryRef {
+	defer runtime.KeepAlive(stream)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFStreamGetDictionary == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFStreamGetDictionary, _lib, "CGPDFStreamGetDictionary")
@@ -6573,6 +7091,7 @@ var _fnCGPDFStringCopyDate func(objc.ID) objc.ID
 
 // CGPDFStringCopyDate calls the CoreGraphics framework function CGPDFStringCopyDate.
 func CGPDFStringCopyDate(str CGPDFStringRef) obj.Object {
+	defer runtime.KeepAlive(str)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFStringCopyDate == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFStringCopyDate, _lib, "CGPDFStringCopyDate")
@@ -6585,6 +7104,7 @@ var _fnCGPDFStringCopyTextString func(objc.ID) objc.ID
 
 // CGPDFStringCopyTextString calls the CoreGraphics framework function CGPDFStringCopyTextString.
 func CGPDFStringCopyTextString(str CGPDFStringRef) obj.Object {
+	defer runtime.KeepAlive(str)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFStringCopyTextString == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFStringCopyTextString, _lib, "CGPDFStringCopyTextString")
@@ -6597,6 +7117,7 @@ var _fnCGPDFStringGetBytePtr func(objc.ID) unsafe.Pointer
 
 // CGPDFStringGetBytePtr calls the CoreGraphics framework function CGPDFStringGetBytePtr.
 func CGPDFStringGetBytePtr(str CGPDFStringRef) unsafe.Pointer {
+	defer runtime.KeepAlive(str)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFStringGetBytePtr == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFStringGetBytePtr, _lib, "CGPDFStringGetBytePtr")
@@ -6608,6 +7129,7 @@ var _fnCGPDFStringGetLength func(objc.ID) int
 
 // CGPDFStringGetLength calls the CoreGraphics framework function CGPDFStringGetLength.
 func CGPDFStringGetLength(str CGPDFStringRef) int {
+	defer runtime.KeepAlive(str)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFStringGetLength == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFStringGetLength, _lib, "CGPDFStringGetLength")
@@ -6631,6 +7153,7 @@ var _fnCGPDFStructureElementRelease func(objc.ID)
 
 // CGPDFStructureElementRelease calls the CoreGraphics framework function CGPDFStructureElementRelease.
 func CGPDFStructureElementRelease(structureElemnt CGPDFStructureElementRef) {
+	defer runtime.KeepAlive(structureElemnt)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFStructureElementRelease == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFStructureElementRelease, _lib, "CGPDFStructureElementRelease")
@@ -6642,6 +7165,7 @@ var _fnCGPDFStructureElementRetain func(objc.ID) objc.ID
 
 // CGPDFStructureElementRetain calls the CoreGraphics framework function CGPDFStructureElementRetain.
 func CGPDFStructureElementRetain(structureElemnt CGPDFStructureElementRef) CGPDFStructureElementRef {
+	defer runtime.KeepAlive(structureElemnt)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFStructureElementRetain == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFStructureElementRetain, _lib, "CGPDFStructureElementRetain")
@@ -6654,6 +7178,8 @@ var _fnCGPDFStructureElementSetActualText func(objc.ID, objc.ID)
 
 // CGPDFStructureElementSetActualText calls the CoreGraphics framework function CGPDFStructureElementSetActualText.
 func CGPDFStructureElementSetActualText(structureElement CGPDFStructureElementRef, actualText obj.Object) {
+	defer runtime.KeepAlive(structureElement)
+	defer runtime.KeepAlive(actualText)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFStructureElementSetActualText == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFStructureElementSetActualText, _lib, "CGPDFStructureElementSetActualText")
@@ -6665,6 +7191,8 @@ var _fnCGPDFStructureElementSetAlternativeText func(objc.ID, objc.ID)
 
 // CGPDFStructureElementSetAlternativeText calls the CoreGraphics framework function CGPDFStructureElementSetAlternativeText.
 func CGPDFStructureElementSetAlternativeText(structureElement CGPDFStructureElementRef, alternativeText obj.Object) {
+	defer runtime.KeepAlive(structureElement)
+	defer runtime.KeepAlive(alternativeText)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFStructureElementSetAlternativeText == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFStructureElementSetAlternativeText, _lib, "CGPDFStructureElementSetAlternativeText")
@@ -6676,6 +7204,8 @@ var _fnCGPDFStructureElementSetExpansionText func(objc.ID, objc.ID)
 
 // CGPDFStructureElementSetExpansionText calls the CoreGraphics framework function CGPDFStructureElementSetExpansionText.
 func CGPDFStructureElementSetExpansionText(structureElement CGPDFStructureElementRef, expansionText obj.Object) {
+	defer runtime.KeepAlive(structureElement)
+	defer runtime.KeepAlive(expansionText)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFStructureElementSetExpansionText == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFStructureElementSetExpansionText, _lib, "CGPDFStructureElementSetExpansionText")
@@ -6687,6 +7217,8 @@ var _fnCGPDFStructureElementSetLanguageIdentifier func(objc.ID, objc.ID)
 
 // CGPDFStructureElementSetLanguageIdentifier calls the CoreGraphics framework function CGPDFStructureElementSetLanguageIdentifier.
 func CGPDFStructureElementSetLanguageIdentifier(structureElement CGPDFStructureElementRef, languageID obj.Object) {
+	defer runtime.KeepAlive(structureElement)
+	defer runtime.KeepAlive(languageID)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFStructureElementSetLanguageIdentifier == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFStructureElementSetLanguageIdentifier, _lib, "CGPDFStructureElementSetLanguageIdentifier")
@@ -6698,6 +7230,8 @@ var _fnCGPDFStructureElementSetTitle func(objc.ID, objc.ID)
 
 // CGPDFStructureElementSetTitle calls the CoreGraphics framework function CGPDFStructureElementSetTitle.
 func CGPDFStructureElementSetTitle(structureElement CGPDFStructureElementRef, title obj.Object) {
+	defer runtime.KeepAlive(structureElement)
+	defer runtime.KeepAlive(title)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFStructureElementSetTitle == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFStructureElementSetTitle, _lib, "CGPDFStructureElementSetTitle")
@@ -6720,6 +7254,7 @@ var _fnCGPSConverterAbort func(objc.ID) bool
 
 // CGPSConverterAbort calls the CoreGraphics framework function CGPSConverterAbort.
 func CGPSConverterAbort(converter CGPSConverterRef) bool {
+	defer runtime.KeepAlive(converter)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPSConverterAbort == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPSConverterAbort, _lib, "CGPSConverterAbort")
@@ -6731,6 +7266,10 @@ var _fnCGPSConverterConvert func(objc.ID, objc.ID, objc.ID, objc.ID) bool
 
 // CGPSConverterConvert calls the CoreGraphics framework function CGPSConverterConvert.
 func CGPSConverterConvert(converter CGPSConverterRef, provider CGDataProviderRef, consumer CGDataConsumerRef, options obj.Object) bool {
+	defer runtime.KeepAlive(converter)
+	defer runtime.KeepAlive(provider)
+	defer runtime.KeepAlive(consumer)
+	defer runtime.KeepAlive(options)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPSConverterConvert == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPSConverterConvert, _lib, "CGPSConverterConvert")
@@ -6742,6 +7281,7 @@ var _fnCGPSConverterCreate func(unsafe.Pointer, unsafe.Pointer, objc.ID) objc.ID
 
 // CGPSConverterCreate calls the CoreGraphics framework function CGPSConverterCreate.
 func CGPSConverterCreate(info unsafe.Pointer, callbacks unsafe.Pointer, options obj.Object) CGPSConverterRef {
+	defer runtime.KeepAlive(options)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPSConverterCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPSConverterCreate, _lib, "CGPSConverterCreate")
@@ -6765,6 +7305,7 @@ var _fnCGPSConverterIsConverting func(objc.ID) bool
 
 // CGPSConverterIsConverting calls the CoreGraphics framework function CGPSConverterIsConverting.
 func CGPSConverterIsConverting(converter CGPSConverterRef) bool {
+	defer runtime.KeepAlive(converter)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPSConverterIsConverting == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPSConverterIsConverting, _lib, "CGPSConverterIsConverting")
@@ -6776,6 +7317,7 @@ var _fnCGPathAddArc func(objc.ID, unsafe.Pointer, float64, float64, float64, flo
 
 // CGPathAddArc calls the CoreGraphics framework function CGPathAddArc.
 func CGPathAddArc(path CGMutablePathRef, m *corefoundation.CGAffineTransform, x float64, y float64, radius float64, startAngle float64, endAngle float64, clockwise bool) {
+	defer runtime.KeepAlive(path)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPathAddArc == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPathAddArc, _lib, "CGPathAddArc")
@@ -6787,6 +7329,7 @@ var _fnCGPathAddArcToPoint func(objc.ID, unsafe.Pointer, float64, float64, float
 
 // CGPathAddArcToPoint calls the CoreGraphics framework function CGPathAddArcToPoint.
 func CGPathAddArcToPoint(path CGMutablePathRef, m *corefoundation.CGAffineTransform, x1 float64, y1 float64, x2 float64, y2 float64, radius float64) {
+	defer runtime.KeepAlive(path)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPathAddArcToPoint == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPathAddArcToPoint, _lib, "CGPathAddArcToPoint")
@@ -6798,6 +7341,7 @@ var _fnCGPathAddCurveToPoint func(objc.ID, unsafe.Pointer, float64, float64, flo
 
 // CGPathAddCurveToPoint calls the CoreGraphics framework function CGPathAddCurveToPoint.
 func CGPathAddCurveToPoint(path CGMutablePathRef, m *corefoundation.CGAffineTransform, cp1x float64, cp1y float64, cp2x float64, cp2y float64, x float64, y float64) {
+	defer runtime.KeepAlive(path)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPathAddCurveToPoint == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPathAddCurveToPoint, _lib, "CGPathAddCurveToPoint")
@@ -6809,6 +7353,7 @@ var _fnCGPathAddEllipseInRect func(objc.ID, unsafe.Pointer, corefoundation.CGRec
 
 // CGPathAddEllipseInRect calls the CoreGraphics framework function CGPathAddEllipseInRect.
 func CGPathAddEllipseInRect(path CGMutablePathRef, m *corefoundation.CGAffineTransform, rect corefoundation.CGRect) {
+	defer runtime.KeepAlive(path)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPathAddEllipseInRect == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPathAddEllipseInRect, _lib, "CGPathAddEllipseInRect")
@@ -6820,6 +7365,7 @@ var _fnCGPathAddLineToPoint func(objc.ID, unsafe.Pointer, float64, float64)
 
 // CGPathAddLineToPoint calls the CoreGraphics framework function CGPathAddLineToPoint.
 func CGPathAddLineToPoint(path CGMutablePathRef, m *corefoundation.CGAffineTransform, x float64, y float64) {
+	defer runtime.KeepAlive(path)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPathAddLineToPoint == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPathAddLineToPoint, _lib, "CGPathAddLineToPoint")
@@ -6831,6 +7377,7 @@ var _fnCGPathAddLines func(objc.ID, unsafe.Pointer, unsafe.Pointer, int)
 
 // CGPathAddLines calls the CoreGraphics framework function CGPathAddLines.
 func CGPathAddLines(path CGMutablePathRef, m *corefoundation.CGAffineTransform, points unsafe.Pointer, count int) {
+	defer runtime.KeepAlive(path)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPathAddLines == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPathAddLines, _lib, "CGPathAddLines")
@@ -6842,6 +7389,8 @@ var _fnCGPathAddPath func(objc.ID, unsafe.Pointer, objc.ID)
 
 // CGPathAddPath calls the CoreGraphics framework function CGPathAddPath.
 func CGPathAddPath(path1 CGMutablePathRef, m *corefoundation.CGAffineTransform, path2 CGPathRef) {
+	defer runtime.KeepAlive(path1)
+	defer runtime.KeepAlive(path2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPathAddPath == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPathAddPath, _lib, "CGPathAddPath")
@@ -6853,6 +7402,7 @@ var _fnCGPathAddQuadCurveToPoint func(objc.ID, unsafe.Pointer, float64, float64,
 
 // CGPathAddQuadCurveToPoint calls the CoreGraphics framework function CGPathAddQuadCurveToPoint.
 func CGPathAddQuadCurveToPoint(path CGMutablePathRef, m *corefoundation.CGAffineTransform, cpx float64, cpy float64, x float64, y float64) {
+	defer runtime.KeepAlive(path)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPathAddQuadCurveToPoint == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPathAddQuadCurveToPoint, _lib, "CGPathAddQuadCurveToPoint")
@@ -6864,6 +7414,7 @@ var _fnCGPathAddRect func(objc.ID, unsafe.Pointer, corefoundation.CGRect)
 
 // CGPathAddRect calls the CoreGraphics framework function CGPathAddRect.
 func CGPathAddRect(path CGMutablePathRef, m *corefoundation.CGAffineTransform, rect corefoundation.CGRect) {
+	defer runtime.KeepAlive(path)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPathAddRect == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPathAddRect, _lib, "CGPathAddRect")
@@ -6875,6 +7426,7 @@ var _fnCGPathAddRects func(objc.ID, unsafe.Pointer, unsafe.Pointer, int)
 
 // CGPathAddRects calls the CoreGraphics framework function CGPathAddRects.
 func CGPathAddRects(path CGMutablePathRef, m *corefoundation.CGAffineTransform, rects unsafe.Pointer, count int) {
+	defer runtime.KeepAlive(path)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPathAddRects == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPathAddRects, _lib, "CGPathAddRects")
@@ -6886,6 +7438,7 @@ var _fnCGPathAddRelativeArc func(objc.ID, unsafe.Pointer, float64, float64, floa
 
 // CGPathAddRelativeArc calls the CoreGraphics framework function CGPathAddRelativeArc.
 func CGPathAddRelativeArc(path CGMutablePathRef, matrix *corefoundation.CGAffineTransform, x float64, y float64, radius float64, startAngle float64, delta float64) {
+	defer runtime.KeepAlive(path)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPathAddRelativeArc == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPathAddRelativeArc, _lib, "CGPathAddRelativeArc")
@@ -6897,6 +7450,7 @@ var _fnCGPathAddRoundedRect func(objc.ID, unsafe.Pointer, corefoundation.CGRect,
 
 // CGPathAddRoundedRect calls the CoreGraphics framework function CGPathAddRoundedRect.
 func CGPathAddRoundedRect(path CGMutablePathRef, transform *corefoundation.CGAffineTransform, rect corefoundation.CGRect, cornerWidth float64, cornerHeight float64) {
+	defer runtime.KeepAlive(path)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPathAddRoundedRect == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPathAddRoundedRect, _lib, "CGPathAddRoundedRect")
@@ -6908,6 +7462,7 @@ var _fnCGPathApply func(objc.ID, unsafe.Pointer, unsafe.Pointer)
 
 // CGPathApply calls the CoreGraphics framework function CGPathApply.
 func CGPathApply(path CGPathRef, info unsafe.Pointer, function unsafe.Pointer) {
+	defer runtime.KeepAlive(path)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPathApply == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPathApply, _lib, "CGPathApply")
@@ -6919,6 +7474,7 @@ var _fnCGPathApplyWithBlock func(objc.ID, unsafe.Pointer)
 
 // CGPathApplyWithBlock calls the CoreGraphics framework function CGPathApplyWithBlock.
 func CGPathApplyWithBlock(path CGPathRef, block unsafe.Pointer) {
+	defer runtime.KeepAlive(path)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPathApplyWithBlock == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPathApplyWithBlock, _lib, "CGPathApplyWithBlock")
@@ -6930,6 +7486,7 @@ var _fnCGPathCloseSubpath func(objc.ID)
 
 // CGPathCloseSubpath calls the CoreGraphics framework function CGPathCloseSubpath.
 func CGPathCloseSubpath(path CGMutablePathRef) {
+	defer runtime.KeepAlive(path)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPathCloseSubpath == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPathCloseSubpath, _lib, "CGPathCloseSubpath")
@@ -6941,6 +7498,7 @@ var _fnCGPathContainsPoint func(objc.ID, unsafe.Pointer, corefoundation.CGPoint,
 
 // CGPathContainsPoint calls the CoreGraphics framework function CGPathContainsPoint.
 func CGPathContainsPoint(path CGPathRef, m *corefoundation.CGAffineTransform, point corefoundation.CGPoint, eoFill bool) bool {
+	defer runtime.KeepAlive(path)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPathContainsPoint == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPathContainsPoint, _lib, "CGPathContainsPoint")
@@ -6952,6 +7510,7 @@ var _fnCGPathCreateCopy func(objc.ID) objc.ID
 
 // CGPathCreateCopy calls the CoreGraphics framework function CGPathCreateCopy.
 func CGPathCreateCopy(path CGPathRef) CGPathRef {
+	defer runtime.KeepAlive(path)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPathCreateCopy == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPathCreateCopy, _lib, "CGPathCreateCopy")
@@ -6964,6 +7523,7 @@ var _fnCGPathCreateCopyByDashingPath func(objc.ID, unsafe.Pointer, float64, unsa
 
 // CGPathCreateCopyByDashingPath calls the CoreGraphics framework function CGPathCreateCopyByDashingPath.
 func CGPathCreateCopyByDashingPath(path CGPathRef, transform *corefoundation.CGAffineTransform, phase float64, lengths unsafe.Pointer, count int) CGPathRef {
+	defer runtime.KeepAlive(path)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPathCreateCopyByDashingPath == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPathCreateCopyByDashingPath, _lib, "CGPathCreateCopyByDashingPath")
@@ -6976,6 +7536,7 @@ var _fnCGPathCreateCopyByFlattening func(objc.ID, float64) objc.ID
 
 // CGPathCreateCopyByFlattening calls the CoreGraphics framework function CGPathCreateCopyByFlattening.
 func CGPathCreateCopyByFlattening(path CGPathRef, flatteningThreshold float64) CGPathRef {
+	defer runtime.KeepAlive(path)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPathCreateCopyByFlattening == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPathCreateCopyByFlattening, _lib, "CGPathCreateCopyByFlattening")
@@ -6988,6 +7549,8 @@ var _fnCGPathCreateCopyByIntersectingPath func(objc.ID, objc.ID, bool) objc.ID
 
 // CGPathCreateCopyByIntersectingPath calls the CoreGraphics framework function CGPathCreateCopyByIntersectingPath.
 func CGPathCreateCopyByIntersectingPath(path CGPathRef, maskPath CGPathRef, evenOddFillRule bool) CGPathRef {
+	defer runtime.KeepAlive(path)
+	defer runtime.KeepAlive(maskPath)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPathCreateCopyByIntersectingPath == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPathCreateCopyByIntersectingPath, _lib, "CGPathCreateCopyByIntersectingPath")
@@ -7000,6 +7563,7 @@ var _fnCGPathCreateCopyByNormalizing func(objc.ID, bool) objc.ID
 
 // CGPathCreateCopyByNormalizing calls the CoreGraphics framework function CGPathCreateCopyByNormalizing.
 func CGPathCreateCopyByNormalizing(path CGPathRef, evenOddFillRule bool) CGPathRef {
+	defer runtime.KeepAlive(path)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPathCreateCopyByNormalizing == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPathCreateCopyByNormalizing, _lib, "CGPathCreateCopyByNormalizing")
@@ -7012,6 +7576,7 @@ var _fnCGPathCreateCopyByStrokingPath func(objc.ID, unsafe.Pointer, float64, CGL
 
 // CGPathCreateCopyByStrokingPath calls the CoreGraphics framework function CGPathCreateCopyByStrokingPath.
 func CGPathCreateCopyByStrokingPath(path CGPathRef, transform *corefoundation.CGAffineTransform, lineWidth float64, lineCap CGLineCap, lineJoin CGLineJoin, miterLimit float64) CGPathRef {
+	defer runtime.KeepAlive(path)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPathCreateCopyByStrokingPath == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPathCreateCopyByStrokingPath, _lib, "CGPathCreateCopyByStrokingPath")
@@ -7024,6 +7589,8 @@ var _fnCGPathCreateCopyBySubtractingPath func(objc.ID, objc.ID, bool) objc.ID
 
 // CGPathCreateCopyBySubtractingPath calls the CoreGraphics framework function CGPathCreateCopyBySubtractingPath.
 func CGPathCreateCopyBySubtractingPath(path CGPathRef, maskPath CGPathRef, evenOddFillRule bool) CGPathRef {
+	defer runtime.KeepAlive(path)
+	defer runtime.KeepAlive(maskPath)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPathCreateCopyBySubtractingPath == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPathCreateCopyBySubtractingPath, _lib, "CGPathCreateCopyBySubtractingPath")
@@ -7036,6 +7603,8 @@ var _fnCGPathCreateCopyBySymmetricDifferenceOfPath func(objc.ID, objc.ID, bool) 
 
 // CGPathCreateCopyBySymmetricDifferenceOfPath calls the CoreGraphics framework function CGPathCreateCopyBySymmetricDifferenceOfPath.
 func CGPathCreateCopyBySymmetricDifferenceOfPath(path CGPathRef, maskPath CGPathRef, evenOddFillRule bool) CGPathRef {
+	defer runtime.KeepAlive(path)
+	defer runtime.KeepAlive(maskPath)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPathCreateCopyBySymmetricDifferenceOfPath == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPathCreateCopyBySymmetricDifferenceOfPath, _lib, "CGPathCreateCopyBySymmetricDifferenceOfPath")
@@ -7048,6 +7617,7 @@ var _fnCGPathCreateCopyByTransformingPath func(objc.ID, unsafe.Pointer) objc.ID
 
 // CGPathCreateCopyByTransformingPath calls the CoreGraphics framework function CGPathCreateCopyByTransformingPath.
 func CGPathCreateCopyByTransformingPath(path CGPathRef, transform *corefoundation.CGAffineTransform) CGPathRef {
+	defer runtime.KeepAlive(path)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPathCreateCopyByTransformingPath == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPathCreateCopyByTransformingPath, _lib, "CGPathCreateCopyByTransformingPath")
@@ -7060,6 +7630,8 @@ var _fnCGPathCreateCopyByUnioningPath func(objc.ID, objc.ID, bool) objc.ID
 
 // CGPathCreateCopyByUnioningPath calls the CoreGraphics framework function CGPathCreateCopyByUnioningPath.
 func CGPathCreateCopyByUnioningPath(path CGPathRef, maskPath CGPathRef, evenOddFillRule bool) CGPathRef {
+	defer runtime.KeepAlive(path)
+	defer runtime.KeepAlive(maskPath)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPathCreateCopyByUnioningPath == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPathCreateCopyByUnioningPath, _lib, "CGPathCreateCopyByUnioningPath")
@@ -7072,6 +7644,8 @@ var _fnCGPathCreateCopyOfLineByIntersectingPath func(objc.ID, objc.ID, bool) obj
 
 // CGPathCreateCopyOfLineByIntersectingPath calls the CoreGraphics framework function CGPathCreateCopyOfLineByIntersectingPath.
 func CGPathCreateCopyOfLineByIntersectingPath(path CGPathRef, maskPath CGPathRef, evenOddFillRule bool) CGPathRef {
+	defer runtime.KeepAlive(path)
+	defer runtime.KeepAlive(maskPath)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPathCreateCopyOfLineByIntersectingPath == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPathCreateCopyOfLineByIntersectingPath, _lib, "CGPathCreateCopyOfLineByIntersectingPath")
@@ -7084,6 +7658,8 @@ var _fnCGPathCreateCopyOfLineBySubtractingPath func(objc.ID, objc.ID, bool) objc
 
 // CGPathCreateCopyOfLineBySubtractingPath calls the CoreGraphics framework function CGPathCreateCopyOfLineBySubtractingPath.
 func CGPathCreateCopyOfLineBySubtractingPath(path CGPathRef, maskPath CGPathRef, evenOddFillRule bool) CGPathRef {
+	defer runtime.KeepAlive(path)
+	defer runtime.KeepAlive(maskPath)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPathCreateCopyOfLineBySubtractingPath == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPathCreateCopyOfLineBySubtractingPath, _lib, "CGPathCreateCopyOfLineBySubtractingPath")
@@ -7108,6 +7684,7 @@ var _fnCGPathCreateMutableCopy func(objc.ID) objc.ID
 
 // CGPathCreateMutableCopy calls the CoreGraphics framework function CGPathCreateMutableCopy.
 func CGPathCreateMutableCopy(path CGPathRef) CGMutablePathRef {
+	defer runtime.KeepAlive(path)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPathCreateMutableCopy == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPathCreateMutableCopy, _lib, "CGPathCreateMutableCopy")
@@ -7120,6 +7697,7 @@ var _fnCGPathCreateMutableCopyByTransformingPath func(objc.ID, unsafe.Pointer) o
 
 // CGPathCreateMutableCopyByTransformingPath calls the CoreGraphics framework function CGPathCreateMutableCopyByTransformingPath.
 func CGPathCreateMutableCopyByTransformingPath(path CGPathRef, transform *corefoundation.CGAffineTransform) CGMutablePathRef {
+	defer runtime.KeepAlive(path)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPathCreateMutableCopyByTransformingPath == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPathCreateMutableCopyByTransformingPath, _lib, "CGPathCreateMutableCopyByTransformingPath")
@@ -7132,6 +7710,7 @@ var _fnCGPathCreateSeparateComponents func(objc.ID, bool) objc.ID
 
 // CGPathCreateSeparateComponents calls the CoreGraphics framework function CGPathCreateSeparateComponents.
 func CGPathCreateSeparateComponents(path CGPathRef, evenOddFillRule bool) obj.Object {
+	defer runtime.KeepAlive(path)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPathCreateSeparateComponents == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPathCreateSeparateComponents, _lib, "CGPathCreateSeparateComponents")
@@ -7180,6 +7759,8 @@ var _fnCGPathEqualToPath func(objc.ID, objc.ID) bool
 
 // CGPathEqualToPath calls the CoreGraphics framework function CGPathEqualToPath.
 func CGPathEqualToPath(path1 CGPathRef, path2 CGPathRef) bool {
+	defer runtime.KeepAlive(path1)
+	defer runtime.KeepAlive(path2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPathEqualToPath == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPathEqualToPath, _lib, "CGPathEqualToPath")
@@ -7191,6 +7772,7 @@ var _fnCGPathGetBoundingBox func(objc.ID) corefoundation.CGRect
 
 // CGPathGetBoundingBox calls the CoreGraphics framework function CGPathGetBoundingBox.
 func CGPathGetBoundingBox(path CGPathRef) corefoundation.CGRect {
+	defer runtime.KeepAlive(path)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPathGetBoundingBox == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPathGetBoundingBox, _lib, "CGPathGetBoundingBox")
@@ -7202,6 +7784,7 @@ var _fnCGPathGetCurrentPoint func(objc.ID) corefoundation.CGPoint
 
 // CGPathGetCurrentPoint calls the CoreGraphics framework function CGPathGetCurrentPoint.
 func CGPathGetCurrentPoint(path CGPathRef) corefoundation.CGPoint {
+	defer runtime.KeepAlive(path)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPathGetCurrentPoint == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPathGetCurrentPoint, _lib, "CGPathGetCurrentPoint")
@@ -7213,6 +7796,7 @@ var _fnCGPathGetPathBoundingBox func(objc.ID) corefoundation.CGRect
 
 // CGPathGetPathBoundingBox calls the CoreGraphics framework function CGPathGetPathBoundingBox.
 func CGPathGetPathBoundingBox(path CGPathRef) corefoundation.CGRect {
+	defer runtime.KeepAlive(path)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPathGetPathBoundingBox == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPathGetPathBoundingBox, _lib, "CGPathGetPathBoundingBox")
@@ -7235,6 +7819,8 @@ var _fnCGPathIntersectsPath func(objc.ID, objc.ID, bool) bool
 
 // CGPathIntersectsPath calls the CoreGraphics framework function CGPathIntersectsPath.
 func CGPathIntersectsPath(path1 CGPathRef, path2 CGPathRef, evenOddFillRule bool) bool {
+	defer runtime.KeepAlive(path1)
+	defer runtime.KeepAlive(path2)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPathIntersectsPath == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPathIntersectsPath, _lib, "CGPathIntersectsPath")
@@ -7246,6 +7832,7 @@ var _fnCGPathIsEmpty func(objc.ID) bool
 
 // CGPathIsEmpty calls the CoreGraphics framework function CGPathIsEmpty.
 func CGPathIsEmpty(path CGPathRef) bool {
+	defer runtime.KeepAlive(path)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPathIsEmpty == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPathIsEmpty, _lib, "CGPathIsEmpty")
@@ -7257,6 +7844,7 @@ var _fnCGPathIsRect func(objc.ID, unsafe.Pointer) bool
 
 // CGPathIsRect calls the CoreGraphics framework function CGPathIsRect.
 func CGPathIsRect(path CGPathRef, rect *corefoundation.CGRect) bool {
+	defer runtime.KeepAlive(path)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPathIsRect == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPathIsRect, _lib, "CGPathIsRect")
@@ -7268,6 +7856,7 @@ var _fnCGPathMoveToPoint func(objc.ID, unsafe.Pointer, float64, float64)
 
 // CGPathMoveToPoint calls the CoreGraphics framework function CGPathMoveToPoint.
 func CGPathMoveToPoint(path CGMutablePathRef, m *corefoundation.CGAffineTransform, x float64, y float64) {
+	defer runtime.KeepAlive(path)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPathMoveToPoint == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPathMoveToPoint, _lib, "CGPathMoveToPoint")
@@ -7279,6 +7868,7 @@ var _fnCGPathRelease func(objc.ID)
 
 // CGPathRelease calls the CoreGraphics framework function CGPathRelease.
 func CGPathRelease(path CGPathRef) {
+	defer runtime.KeepAlive(path)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPathRelease == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPathRelease, _lib, "CGPathRelease")
@@ -7290,6 +7880,7 @@ var _fnCGPathRetain func(objc.ID) objc.ID
 
 // CGPathRetain calls the CoreGraphics framework function CGPathRetain.
 func CGPathRetain(path CGPathRef) CGPathRef {
+	defer runtime.KeepAlive(path)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPathRetain == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPathRetain, _lib, "CGPathRetain")
@@ -7325,6 +7916,7 @@ var _fnCGPatternRelease func(objc.ID)
 
 // CGPatternRelease calls the CoreGraphics framework function CGPatternRelease.
 func CGPatternRelease(pattern CGPatternRef) {
+	defer runtime.KeepAlive(pattern)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPatternRelease == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPatternRelease, _lib, "CGPatternRelease")
@@ -7336,6 +7928,7 @@ var _fnCGPatternRetain func(objc.ID) objc.ID
 
 // CGPatternRetain calls the CoreGraphics framework function CGPatternRetain.
 func CGPatternRetain(pattern CGPatternRef) CGPatternRef {
+	defer runtime.KeepAlive(pattern)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPatternRetain == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPatternRetain, _lib, "CGPatternRetain")
@@ -7393,6 +7986,7 @@ var _fnCGPointMakeWithDictionaryRepresentation func(objc.ID, unsafe.Pointer) boo
 
 // CGPointMakeWithDictionaryRepresentation calls the CoreGraphics framework function CGPointMakeWithDictionaryRepresentation.
 func CGPointMakeWithDictionaryRepresentation(dict obj.Object, point *corefoundation.CGPoint) bool {
+	defer runtime.KeepAlive(dict)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPointMakeWithDictionaryRepresentation == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPointMakeWithDictionaryRepresentation, _lib, "CGPointMakeWithDictionaryRepresentation")
@@ -7691,6 +8285,7 @@ var _fnCGRectMakeWithDictionaryRepresentation func(objc.ID, unsafe.Pointer) bool
 
 // CGRectMakeWithDictionaryRepresentation calls the CoreGraphics framework function CGRectMakeWithDictionaryRepresentation.
 func CGRectMakeWithDictionaryRepresentation(dict obj.Object, rect *corefoundation.CGRect) bool {
+	defer runtime.KeepAlive(dict)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGRectMakeWithDictionaryRepresentation == nil {
 		ebipurego.RegisterLibFunc(&_fnCGRectMakeWithDictionaryRepresentation, _lib, "CGRectMakeWithDictionaryRepresentation")
@@ -7779,6 +8374,7 @@ var _fnCGRenderingBufferLockBytePtr func(objc.ID) unsafe.Pointer
 
 // CGRenderingBufferLockBytePtr calls the CoreGraphics framework function CGRenderingBufferLockBytePtr.
 func CGRenderingBufferLockBytePtr(provider CGRenderingBufferProviderRef) unsafe.Pointer {
+	defer runtime.KeepAlive(provider)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGRenderingBufferLockBytePtr == nil {
 		ebipurego.RegisterLibFunc(&_fnCGRenderingBufferLockBytePtr, _lib, "CGRenderingBufferLockBytePtr")
@@ -7802,6 +8398,7 @@ var _fnCGRenderingBufferProviderCreateWithCFData func(objc.ID) objc.ID
 
 // CGRenderingBufferProviderCreateWithCFData calls the CoreGraphics framework function CGRenderingBufferProviderCreateWithCFData.
 func CGRenderingBufferProviderCreateWithCFData(data obj.Object) CGRenderingBufferProviderRef {
+	defer runtime.KeepAlive(data)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGRenderingBufferProviderCreateWithCFData == nil {
 		ebipurego.RegisterLibFunc(&_fnCGRenderingBufferProviderCreateWithCFData, _lib, "CGRenderingBufferProviderCreateWithCFData")
@@ -7814,6 +8411,7 @@ var _fnCGRenderingBufferProviderGetSize func(objc.ID) int
 
 // CGRenderingBufferProviderGetSize calls the CoreGraphics framework function CGRenderingBufferProviderGetSize.
 func CGRenderingBufferProviderGetSize(provider CGRenderingBufferProviderRef) int {
+	defer runtime.KeepAlive(provider)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGRenderingBufferProviderGetSize == nil {
 		ebipurego.RegisterLibFunc(&_fnCGRenderingBufferProviderGetSize, _lib, "CGRenderingBufferProviderGetSize")
@@ -7836,6 +8434,7 @@ var _fnCGRenderingBufferUnlockBytePtr func(objc.ID)
 
 // CGRenderingBufferUnlockBytePtr calls the CoreGraphics framework function CGRenderingBufferUnlockBytePtr.
 func CGRenderingBufferUnlockBytePtr(provider CGRenderingBufferProviderRef) {
+	defer runtime.KeepAlive(provider)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGRenderingBufferUnlockBytePtr == nil {
 		ebipurego.RegisterLibFunc(&_fnCGRenderingBufferUnlockBytePtr, _lib, "CGRenderingBufferUnlockBytePtr")
@@ -7980,6 +8579,8 @@ var _fnCGShadingCreateAxial func(objc.ID, corefoundation.CGPoint, corefoundation
 
 // CGShadingCreateAxial calls the CoreGraphics framework function CGShadingCreateAxial.
 func CGShadingCreateAxial(space CGColorSpaceRef, start corefoundation.CGPoint, end corefoundation.CGPoint, function CGFunctionRef, extendStart bool, extendEnd bool) CGShadingRef {
+	defer runtime.KeepAlive(space)
+	defer runtime.KeepAlive(function)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGShadingCreateAxial == nil {
 		ebipurego.RegisterLibFunc(&_fnCGShadingCreateAxial, _lib, "CGShadingCreateAxial")
@@ -7992,6 +8593,8 @@ var _fnCGShadingCreateAxialWithContentHeadroom func(float32, objc.ID, corefounda
 
 // CGShadingCreateAxialWithContentHeadroom calls the CoreGraphics framework function CGShadingCreateAxialWithContentHeadroom.
 func CGShadingCreateAxialWithContentHeadroom(headroom float32, space CGColorSpaceRef, start corefoundation.CGPoint, end corefoundation.CGPoint, function CGFunctionRef, extendStart bool, extendEnd bool) CGShadingRef {
+	defer runtime.KeepAlive(space)
+	defer runtime.KeepAlive(function)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGShadingCreateAxialWithContentHeadroom == nil {
 		ebipurego.RegisterLibFunc(&_fnCGShadingCreateAxialWithContentHeadroom, _lib, "CGShadingCreateAxialWithContentHeadroom")
@@ -8004,6 +8607,8 @@ var _fnCGShadingCreateRadial func(objc.ID, corefoundation.CGPoint, float64, core
 
 // CGShadingCreateRadial calls the CoreGraphics framework function CGShadingCreateRadial.
 func CGShadingCreateRadial(space CGColorSpaceRef, start corefoundation.CGPoint, startRadius float64, end corefoundation.CGPoint, endRadius float64, function CGFunctionRef, extendStart bool, extendEnd bool) CGShadingRef {
+	defer runtime.KeepAlive(space)
+	defer runtime.KeepAlive(function)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGShadingCreateRadial == nil {
 		ebipurego.RegisterLibFunc(&_fnCGShadingCreateRadial, _lib, "CGShadingCreateRadial")
@@ -8016,6 +8621,8 @@ var _fnCGShadingCreateRadialWithContentHeadroom func(float32, objc.ID, corefound
 
 // CGShadingCreateRadialWithContentHeadroom calls the CoreGraphics framework function CGShadingCreateRadialWithContentHeadroom.
 func CGShadingCreateRadialWithContentHeadroom(headroom float32, space CGColorSpaceRef, start corefoundation.CGPoint, startRadius float64, end corefoundation.CGPoint, endRadius float64, function CGFunctionRef, extendStart bool, extendEnd bool) CGShadingRef {
+	defer runtime.KeepAlive(space)
+	defer runtime.KeepAlive(function)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGShadingCreateRadialWithContentHeadroom == nil {
 		ebipurego.RegisterLibFunc(&_fnCGShadingCreateRadialWithContentHeadroom, _lib, "CGShadingCreateRadialWithContentHeadroom")
@@ -8028,6 +8635,7 @@ var _fnCGShadingGetContentHeadroom func(objc.ID) float32
 
 // CGShadingGetContentHeadroom calls the CoreGraphics framework function CGShadingGetContentHeadroom.
 func CGShadingGetContentHeadroom(shading CGShadingRef) float32 {
+	defer runtime.KeepAlive(shading)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGShadingGetContentHeadroom == nil {
 		ebipurego.RegisterLibFunc(&_fnCGShadingGetContentHeadroom, _lib, "CGShadingGetContentHeadroom")
@@ -8050,6 +8658,7 @@ var _fnCGShadingRelease func(objc.ID)
 
 // CGShadingRelease calls the CoreGraphics framework function CGShadingRelease.
 func CGShadingRelease(shading CGShadingRef) {
+	defer runtime.KeepAlive(shading)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGShadingRelease == nil {
 		ebipurego.RegisterLibFunc(&_fnCGShadingRelease, _lib, "CGShadingRelease")
@@ -8061,6 +8670,7 @@ var _fnCGShadingRetain func(objc.ID) objc.ID
 
 // CGShadingRetain calls the CoreGraphics framework function CGShadingRetain.
 func CGShadingRetain(shading CGShadingRef) CGShadingRef {
+	defer runtime.KeepAlive(shading)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGShadingRetain == nil {
 		ebipurego.RegisterLibFunc(&_fnCGShadingRetain, _lib, "CGShadingRetain")
@@ -8140,6 +8750,7 @@ var _fnCGSizeMakeWithDictionaryRepresentation func(objc.ID, unsafe.Pointer) bool
 
 // CGSizeMakeWithDictionaryRepresentation calls the CoreGraphics framework function CGSizeMakeWithDictionaryRepresentation.
 func CGSizeMakeWithDictionaryRepresentation(dict obj.Object, size *corefoundation.CGSize) bool {
+	defer runtime.KeepAlive(dict)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGSizeMakeWithDictionaryRepresentation == nil {
 		ebipurego.RegisterLibFunc(&_fnCGSizeMakeWithDictionaryRepresentation, _lib, "CGSizeMakeWithDictionaryRepresentation")
@@ -8247,6 +8858,7 @@ var _fnCGWindowListCreateDescriptionFromArray func(objc.ID) objc.ID
 
 // CGWindowListCreateDescriptionFromArray calls the CoreGraphics framework function CGWindowListCreateDescriptionFromArray.
 func CGWindowListCreateDescriptionFromArray(windowArray obj.Object) obj.Object {
+	defer runtime.KeepAlive(windowArray)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGWindowListCreateDescriptionFromArray == nil {
 		ebipurego.RegisterLibFunc(&_fnCGWindowListCreateDescriptionFromArray, _lib, "CGWindowListCreateDescriptionFromArray")
@@ -8271,6 +8883,7 @@ var _fnCGWindowListCreateImageFromArray func(corefoundation.CGRect, objc.ID, CGW
 
 // CGWindowListCreateImageFromArray calls the CoreGraphics framework function CGWindowListCreateImageFromArray.
 func CGWindowListCreateImageFromArray(screenBounds corefoundation.CGRect, windowArray obj.Object, imageOption CGWindowImageOption) CGImageRef {
+	defer runtime.KeepAlive(windowArray)
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGWindowListCreateImageFromArray == nil {
 		ebipurego.RegisterLibFunc(&_fnCGWindowListCreateImageFromArray, _lib, "CGWindowListCreateImageFromArray")
